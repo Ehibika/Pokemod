@@ -1,0 +1,178 @@
+
+#library "DB_DamageDisplay"
+#include "zcommon.acs"
+
+script "PKMNACS_DDINITIATE" RESPAWN
+{
+Delay(5);
+ACS_NamedExecuteAlways("PKMN_CV_DamageDisplay",0);
+}
+
+#DEFINE DDNUMTID 82000
+#DEFINE DDNUMDIST 25.0
+script "PKMN_CV_DamageDisplay" ENTER
+{
+	Delay(5);
+	int HPMax = GetActorProperty(0, APROP_Health);
+	int SpawnDivideZeroBug;
+	int DisplayReady = 1;
+	int Damagedigits = 0;
+		int PLN = Playernumber();
+		int ColorVal;
+		int HPP = 0; // "Health Point Past/Future"
+		int HPF = 0;
+		int HPC = 0; // "HP Calculation"
+		int HPCC = 0; // HP Carry
+		Int x;
+		int y;
+		int z;
+		//log(s:"start");
+		While((ClassifyActor(0) & ACTOR_ALIVE))
+		{
+			SpawnDivideZeroBug = GetActorProperty(0, APROP_SpawnHealth);
+			if(SpawnDivideZeroBug == 0)
+			{
+				HPP = GetActorProperty(0, APROP_Health);
+				delay(2); 
+				HPF = GetActorProperty(0, APROP_Health); 
+			}
+			else
+			{
+				HPP = GetActorProperty(0, APROP_Health);
+				delay(2); 
+				HPF = GetActorProperty(0, APROP_Health); 
+			}
+			HPC = HPP-HPF;
+			 
+				if(HPC != 0)
+				{
+				HPCC = HPC;
+				if(Checkinventory("DaDiBuffer")){HPCC = HPCC - Checkinventory("DaDiBuffer"); TakeInventory("DaDiBuffer",9999);}
+				HPC = 0;
+				
+					if(HPCC <= -1) // Healing Gained
+					{ Damagedigits = GetTotalDigits(-HPCC);
+						x = GetActorX(0) + random(-DDNUMDIST, DDNUMDIST);
+						y = GetActorY(0) + random(-DDNUMDIST, DDNUMDIST);
+						z = GetActorZ(0) + random(30.0, 64.0);
+						if(CheckInventory("OverHealValue")){ColorVal = 56;}
+						 Else{ColorVal = 404;}
+						SpawnForced("DNUM_POS",x,y,z,DDNUMTID+ColorVal,0);
+						Switch(Damagedigits)
+						{
+							Case 1: SpawnForced(StrParam(s:"DNUM1_",i:getNthDigit(-HPCC,10,1)),x,y,z,DDNUMTID+ColorVal,0);
+									break;
+							Case 2: SpawnForced(StrParam(s:"DNUM1_",i:getNthDigit(-HPCC,10,2)),x,y,z,DDNUMTID+ColorVal,0);
+									SpawnForced(StrParam(s:"DNUM2_",i:getNthDigit(-HPCC,10,1)),x,y,z,DDNUMTID+ColorVal,0);
+									
+									break;
+							Case 3: SpawnForced(StrParam(s:"DNUM1_",i:getNthDigit(-HPCC,10,3)),x,y,z,DDNUMTID+ColorVal,0);
+									SpawnForced(StrParam(s:"DNUM2_",i:getNthDigit(-HPCC,10,2)),x,y,z,DDNUMTID+ColorVal,0);
+									SpawnForced(StrParam(s:"DNUM3_",i:getNthDigit(-HPCC,10,1)),x,y,z,DDNUMTID+ColorVal,0);
+									break;
+						}
+					}
+					
+					if(HPCC >= 1) // Damage taken
+					{ Damagedigits = GetTotalDigits(HPCC);
+						if(HPCC > 999){HPCC = 999;}
+						SetUserVariable(0,"User_HitMemory",HPCC);
+						//log(s:"Got hurt,", i:getNthDigit(HPCC,10,3),i:getNthDigit(HPCC,10,2),i:getNthDigit(HPCC,10,1));
+						
+						x = GetActorX(0) + random(-DDNUMDIST, DDNUMDIST);
+						y = GetActorY(0) + random(-DDNUMDIST, DDNUMDIST);
+						z = GetActorZ(0) + random(30.0, 64.0);
+						if(CheckInventory("OverHealValue")){ColorVal = 177;}
+						 Else{ColorVal = 25;}
+						SpawnForced("DNUM_Neg",x,y,z,DDNUMTID+ColorVal,0);
+						Switch(Damagedigits)
+						{
+							Case 1: SpawnForced(StrParam(s:"DNUM1_",i:getNthDigit(HPCC,10,1)),x,y,z,DDNUMTID+ColorVal,0);
+									break;
+							Case 2: SpawnForced(StrParam(s:"DNUM1_",i:getNthDigit(HPCC,10,2)),x,y,z,DDNUMTID+ColorVal,0);
+									SpawnForced(StrParam(s:"DNUM2_",i:getNthDigit(HPCC,10,1)),x,y,z,DDNUMTID+ColorVal,0);
+									break;
+							Case 3: SpawnForced(StrParam(s:"DNUM1_",i:getNthDigit(HPCC,10,3)),x,y,z,DDNUMTID+ColorVal,0);
+									SpawnForced(StrParam(s:"DNUM2_",i:getNthDigit(HPCC,10,2)),x,y,z,DDNUMTID+ColorVal,0);
+									SpawnForced(StrParam(s:"DNUM3_",i:getNthDigit(HPCC,10,1)),x,y,z,DDNUMTID+ColorVal,0);
+									break;
+						}
+					}
+					
+					
+
+				}
+			}
+							//log(s:"Stop");
+}
+
+script "PKMNACS_DDTEXTCOL" (void) CLIENTSIDE
+{
+	int CPLN = consoleplayernumber();
+	bool ShowDamage = GetUserCVar(CPLN,"PKMN_CV_DamageDisplay");
+	//log(i:ShowDamage);
+	//PKMN_CV_DamageDisplay
+	
+	if(ShowDamage)
+		{
+		Thing_SetTranslation(0, ActivatorTID()-DDNUMTID);
+		SetActorProperty(0,APROP_ALPHA,0.8);
+		}
+	else{Thing_Remove(0);}
+}
+
+function int getNthDigit (int number, int base, int n)
+{
+int result = ((number / pow(base, n - 1)) % base);
+return result;
+}
+
+function int GetTotalDigits (int number)
+{
+int result;
+if (number >= 100) {result = 3;}
+else if (number >= 10) {result = 2;}
+else {result = 1;}
+return result;
+}
+
+function int pow (int x, int n)
+{
+	int y = 1;
+	while (n-- > 0) y *= x;
+	return y;
+}
+
+#define MATH_E 178145
+function int logN (int x, int base)
+{
+    if (!base) base = MATH_E;
+    int integer = 0;
+
+    if (x < 1.0 && base < 1.0) return 0;
+      
+    while (x < 1)
+    {
+        integer -= 1;
+        x = FixedMul (x, base);
+    }
+    while (x >= base)
+    {
+        integer += 1;
+        x = FixedDiv (x, base);
+    }
+    int partial = 0.5;
+    x = FixedMul (x, x);
+    int decimal = 0;
+    while (partial > 1) // Actually 0.0000152587890625
+    {
+        if (x >= base)
+        {
+            decimal += partial;
+            x = FixedDiv (x, base);
+        }
+        partial = FixedMul (partial, 0.5);
+        x = FixedMul (x, x);
+    }
+    return ((integer << 16) + decimal);
+}

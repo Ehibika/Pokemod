@@ -1,0 +1,115 @@
+PokePain/Normal HITNORM
+PokePain/Weak HITWEAK
+PokePain/Strong HITSTR
+
+Move/Basic TACKLE
+
+Move/ImbueOn IMBUUP
+Move/ImbueOff IMBUDOWN
+
+
+//BusterGuns
+weapon/HardBuster1 SKULSHOT
+weapon/HardBuster2 FMS
+weapon/HardBuster3 HRDBST2
+weapon/HardBuster4 DAR1SHOT
+weapon/HardBuster5 DAR3SHOT
+weapon/HardBuster6 DAR3SHO2
+
+weapon/RapidBuster NEDLSHOT
+weapon/RapidBuster2 BNSHOT
+weapon/RapidBuster3 RAPSHOT1
+
+weapon/BasherShot VULCAN1
+classes/SkullShieldBuzz SKULBAR4
+weapon/basshot BASSHOT
+
+weapon/AssaultBuster ABSHOT3
+weapon/GrenadeLauncher PROJLAN1
+
+weapon/Revup REVVING
+weapon/Revved REVREADY
+weapon/Rebound REBOUND
+
+$attenuation weapon/Revup 0.3
+$attenuation weapon/Revved 0.3
+$attenuation weapon/RapidBuster3 0.3
+
+weapon/Trigger BLIZBELL
+weapon/BeepCue 9STORSND
+
+weapon/BombAlarm Balarm
+
+weapon/BombCount BOMBTCKN
+weapon/BombTrigger BOMBDONE
+weapon/TimeBombSplode TIMEBOOM
+$attenuation weapon/TimeBombSplode 0.3
+
+weapon/Wrecker SPLODE
+$volume weapon/Wrecker 1.5
+
+weapon/OrbSpawn CRYSSHOT
+weapon/OrbBounce CRYSBIT
+
+Support/Heal1 Recov1 
+Support/Heal2 Recov2 
+$volume Support/Heal1 0.5
+Support/Barrier BARUP
+Support/Barrier2 BARRUP
+weapon/rollheal ROLLHEA1
+weapon/rollhealing ROLLHEA2
+weapon/rollheal2 HEAL01
+support/Negative NEGSTAT
+support/Healdiode1 HEALDIO1
+support/Healdiode2 HEALDIO2
+
+support/Ubercharge1 UBRCHR1
+support/Ubercharge2 UBRCHR2
+
+support/Statup STATUP
+support/StatDown STATDOWN
+support/LifeDew LIFEDEW
+support/HealPulse HEALPULS
+
+support/BarrierStart SHLDSTRT
+support/Reflect SHLDRFLC
+support/LightScreen SHLDLTSC
+
+weapon/Turretup FMR
+Body/ArmorPain ROCKHURT
+Body/CritHit Super2
+
+Countdown/Five FIVE
+Countdown/Four FOUR
+Countdown/Three THREE
+Countdown/Two TWO
+Countdown/One ONE
+
+Commute/Help BNSIREN
+Commute/Medic BOMBDONE
+
+weapon/Revolver REVOSHOT
+weapon/Revolver2 REVOSHT2
+weapon/Revolver3 REVOSHT3
+
+weapon/CrossBoltHit HITSOUND
+weapon/VoltSpear VOLTS
+weapon/Rebound REBOUND
+weapon/ObjectHit HARDHIT
+
+//Slick
+sprinkler/place SPRPUT
+sprinkler/shot SPRSHT
+
+Weapon/Trample MADWALK 
+class/ToadCroak S_M4TOA1 
+
+Move/Yawn YAWN 
+
+Misc/Levelup LEVELUP
+Misc/Evolution FANFARE1
+Misc/GetMove FANFARE2
+Misc/DeathSound DEADPOP
+
+Misc/GetItem PICKUP1
+Misc/GetCash PICKUP2

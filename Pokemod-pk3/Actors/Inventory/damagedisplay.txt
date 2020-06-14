@@ -1,0 +1,387 @@
+Actor DaDiBuffer : Inventory { inventory.amount 1 Inventory.MaxAmount 9999}
+
+
+actor DamageNumberBase
+{
+PROJECTILE
++NOINTERACTION
++CLIENTSIDEONLY
+//translation "192:192=4:4" 
+scale 2.5
+renderstyle "translucent"
+alpha 0.0
+var int user_Timer;
+Args 82000
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 //A_SetUserVar("user_Timer",35)
+TNT1 A 0 ACS_NamedExecuteAlways("PKMNACS_DDTEXTCOL",0)
+TNT1 A 0 A_ChangeVelocity(0,0,2)
+TNT1 A 0 A_Jump(256,"Spawn.Display")
+Goto Spawn.Display
+
+Spawn.Display:
+DMN1 AAA 1
+"####" "#" 0 A_Jump(256,"Spawn.AfterDisplay")
+Goto Spawn.AfterDisplay
+
+Spawn.AfterDisplay:
+"####" "#" 35 //A_SetUserVar("user_Timer",user_Timer-1)
+"####" "#" 0 //A_Jumpif (user_Timer >= 1,"Spawn.AfterDisplay")
+"####" "###################################" 1 A_Fadeout
+stop
+}
+}
+
+actor DNUM1_0 : DamageNumberBase 
+{
+States
+{
+Spawn.Display: 
+DMN1 AAA 1 
+"####" "#" 0 A_Jump(256,"Spawn.AfterDisplay")
+Goto Spawn.AfterDisplay
+}
+}
+
+actor DNUM1_1 : DamageNumberBase 
+{
+States
+{ 
+Spawn.Display: 
+DMN1 BBB 1 
+"####" "#" 0 A_Jump(256,"Spawn.AfterDisplay")
+Goto Spawn.AfterDisplay
+}
+}
+
+actor DNUM1_2 : DamageNumberBase {
+States
+{ 
+Spawn.Display: 
+DMN1 CCC 1 
+"####" "#" 0 A_Jump(256,"Spawn.AfterDisplay")
+Goto Spawn.AfterDisplay
+}
+}
+
+actor DNUM1_3 : DamageNumberBase 
+{
+States
+{ 
+Spawn.Display: 
+DMN1 DDD 1 
+"####" "#" 0 A_Jump(256,"Spawn.AfterDisplay")
+Goto Spawn.AfterDisplay
+}
+}
+
+actor DNUM1_4 : DamageNumberBase 
+{
+States
+{
+Spawn.Display: 
+DMN1 EEE 1 
+"####" "#" 0 A_Jump(256,"Spawn.AfterDisplay")
+Goto Spawn.AfterDisplay
+}
+}
+
+actor DNUM1_5 : DamageNumberBase 
+{
+States
+{ 
+Spawn.Display: 
+DMN1 FFF 1 
+"####" "#" 0 A_Jump(256,"Spawn.AfterDisplay")
+Goto Spawn.AfterDisplay
+}
+}
+
+actor DNUM1_6 : DamageNumberBase 
+{
+States
+{ 
+Spawn.Display: 
+DMN1 GGG 1 
+"####" "#" 0 A_Jump(256,"Spawn.AfterDisplay")
+Goto Spawn.AfterDisplay
+}
+}
+
+actor DNUM1_7 : DamageNumberBase 
+{
+States
+{ 
+Spawn.Display: 
+DMN1 HHH 1 
+"####" "#" 0 A_Jump(256,"Spawn.AfterDisplay")
+Goto Spawn.AfterDisplay
+}
+}
+
+actor DNUM1_8 : DamageNumberBase 
+{
+States
+{ 
+Spawn.Display: 
+DMN1 III 1 
+"####" "#" 0 A_Jump(256,"Spawn.AfterDisplay")
+Goto Spawn.AfterDisplay
+}
+}
+
+actor DNUM1_9 : DamageNumberBase 
+{
+States
+{ 
+Spawn.Display: 
+DMN1 JJJ 1 
+"####" "#" 0 A_Jump(256,"Spawn.AfterDisplay")
+Goto Spawn.AfterDisplay
+}
+}
+
+
+actor DNUM2_0 : DamageNumberBase 
+{
+States
+{
+Spawn.Display: 
+DMN2 AAA 1 
+"####" "#" 0 A_Jump(256,"Spawn.AfterDisplay")
+Goto Spawn.AfterDisplay
+}
+}
+
+actor DNUM2_1 : DamageNumberBase 
+{
+States
+{ 
+Spawn.Display: 
+DMN2 BBB 1 
+"####" "#" 0 A_Jump(256,"Spawn.AfterDisplay")
+Goto Spawn.AfterDisplay
+}
+}
+
+actor DNUM2_2 : DamageNumberBase {
+States
+{ 
+Spawn.Display: 
+DMN2 CCC 1 
+"####" "#" 0 A_Jump(256,"Spawn.AfterDisplay")
+Goto Spawn.AfterDisplay
+}
+}
+
+actor DNUM2_3 : DamageNumberBase 
+{
+States
+{ 
+Spawn.Display: 
+DMN2 DDD 1 
+"####" "#" 0 A_Jump(256,"Spawn.AfterDisplay")
+Goto Spawn.AfterDisplay
+}
+}
+
+actor DNUM2_4 : DamageNumberBase 
+{
+States
+{
+Spawn.Display: 
+DMN2 EEE 1 
+"####" "#" 0 A_Jump(256,"Spawn.AfterDisplay")
+Goto Spawn.AfterDisplay
+}
+}
+
+actor DNUM2_5 : DamageNumberBase 
+{
+States
+{ 
+Spawn.Display: 
+DMN2 FFF 1 
+"####" "#" 0 A_Jump(256,"Spawn.AfterDisplay")
+Goto Spawn.AfterDisplay
+}
+}
+
+actor DNUM2_6 : DamageNumberBase 
+{
+States
+{ 
+Spawn.Display: 
+DMN2 GGG 1 
+"####" "#" 0 A_Jump(256,"Spawn.AfterDisplay")
+Goto Spawn.AfterDisplay
+}
+}
+
+actor DNUM2_7 : DamageNumberBase 
+{
+States
+{ 
+Spawn.Display: 
+DMN2 HHH 1 
+"####" "#" 0 A_Jump(256,"Spawn.AfterDisplay")
+Goto Spawn.AfterDisplay
+}
+}
+
+actor DNUM2_8 : DamageNumberBase 
+{
+States
+{ 
+Spawn.Display: 
+DMN2 III 1 
+"####" "#" 0 A_Jump(256,"Spawn.AfterDisplay")
+Goto Spawn.AfterDisplay
+}
+}
+
+actor DNUM2_9 : DamageNumberBase 
+{
+States
+{ 
+Spawn.Display: 
+DMN2 JJJ 1 
+"####" "#" 0 A_Jump(256,"Spawn.AfterDisplay")
+Goto Spawn.AfterDisplay
+}
+}
+
+
+actor DNUM3_0 : DamageNumberBase 
+{
+States
+{
+Spawn.Display: 
+DMN3 AAA 1 
+"####" "#" 0 A_Jump(256,"Spawn.AfterDisplay")
+Goto Spawn.AfterDisplay
+}
+}
+
+actor DNUM3_1 : DamageNumberBase 
+{
+States
+{ 
+Spawn.Display: 
+DMN3 BBB 1 
+"####" "#" 0 A_Jump(256,"Spawn.AfterDisplay")
+Goto Spawn.AfterDisplay
+}
+}
+
+actor DNUM3_2 : DamageNumberBase {
+States
+{ 
+Spawn.Display: 
+DMN3 CCC 1 
+"####" "#" 0 A_Jump(256,"Spawn.AfterDisplay")
+Goto Spawn.AfterDisplay
+}
+}
+
+actor DNUM3_3 : DamageNumberBase 
+{
+States
+{ 
+Spawn.Display: 
+DMN3 DDD 1 
+"####" "#" 0 A_Jump(256,"Spawn.AfterDisplay")
+Goto Spawn.AfterDisplay
+}
+}
+
+actor DNUM3_4 : DamageNumberBase 
+{
+States
+{
+Spawn.Display: 
+DMN3 EEE 1 
+"####" "#" 0 A_Jump(256,"Spawn.AfterDisplay")
+Goto Spawn.AfterDisplay
+}
+}
+
+actor DNUM3_5 : DamageNumberBase 
+{
+States
+{ 
+Spawn.Display: 
+DMN3 FFF 1 
+"####" "#" 0 A_Jump(256,"Spawn.AfterDisplay")
+Goto Spawn.AfterDisplay
+}
+}
+
+actor DNUM3_6 : DamageNumberBase 
+{
+States
+{ 
+Spawn.Display: 
+DMN3 GGG 1 
+"####" "#" 0 A_Jump(256,"Spawn.AfterDisplay")
+Goto Spawn.AfterDisplay
+}
+}
+
+actor DNUM3_7 : DamageNumberBase 
+{
+States
+{ 
+Spawn.Display: 
+DMN3 HHH 1 
+"####" "#" 0 A_Jump(256,"Spawn.AfterDisplay")
+Goto Spawn.AfterDisplay
+}
+}
+
+actor DNUM3_8 : DamageNumberBase 
+{
+States
+{ 
+Spawn.Display: 
+DMN3 III 1 
+"####" "#" 0 A_Jump(256,"Spawn.AfterDisplay")
+Goto Spawn.AfterDisplay
+}
+}
+
+actor DNUM3_9 : DamageNumberBase 
+{
+States
+{ 
+Spawn.Display: 
+DMN3 JJJ 1 
+"####" "#" 0 A_Jump(256,"Spawn.AfterDisplay")
+Goto Spawn.AfterDisplay
+}
+}
+
+actor DNUM_Neg : DamageNumberBase 
+{
+States
+{ 
+Spawn.Display: 
+DMN4 AAA 1 
+"####" "#" 0 A_Jump(256,"Spawn.AfterDisplay")
+Goto Spawn.AfterDisplay
+}
+}
+
+actor DNUM_Pos : DamageNumberBase 
+{
+States
+{ 
+Spawn.Display: 
+DMN4 BBB 1 
+"####" "#" 0 A_Jump(256,"Spawn.AfterDisplay")
+Goto Spawn.AfterDisplay
+}
+}

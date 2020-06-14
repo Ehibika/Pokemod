@@ -1,0 +1,74 @@
+OptionMenu ZA_MultiplayerOptions
+{
+	Title "MULTIPLAYER OPTIONS"
+
+	SubMenu		"Offline Skirmish",			"ZA_SkirmishMenu"
+	SubMenu		"Network Options",			"ZA_NetworkOptions"
+	SubMenu		"Player Setup",				"PlayerMenu"
+	SubMenu		"Log in",					"ZA_LoginMenu"
+	//SubMenu		"Browse servers",			"ZA_Browser"
+	StaticText	" "
+	Command		"Spectate",					"menu_spectate"
+	Command		"Switch teams",				"menu_changeteam"
+	Command		"Disconnect",				"menu_disconnect"
+	StaticText	" "
+	SubMenu		"Call a vote",				"ZA_CallVote"
+	SubMenu		"Ignore a player",			"ZA_IgnoreMenu"
+	StaticText	" "
+	Option		"Start as spectator",		"cl_startasspectator",		"YesNo"
+	TextField	"Server password",			"cl_password"
+	TextField	"Server join password",		"cl_joinpassword"
+	Option		"Reset frags at join",		"cl_dontrestorefrags",		"YesNo"
+	Option		"Hide country",				"cl_hidecountry",			"YesNo"
+	Option		"Respawn using attack key",	"cl_respawnonfire",			"YesNo"
+	StaticText	" "
+	Option		"Skins",					"cl_skins",					"ZA_AllowSkins"
+	Option		"Taunts",					"cl_taunts",				"OnOff"
+	Option		"Icons",					"cl_icons",					"OnOff"
+	Option		"Identify players",			"cl_identifytarget",		"OnOff"
+	Option		"Show spawn spots",			"cl_showspawns",			"YesNo"
+	Slider		"Spectator move speed",		"cl_spectatormove",			0.1, 5.0, 0.1
+	Slider		"Camera Position",			"sv_CameraAng",			-1.0, 1.0, 0.1
+	Slider		"Camera Height",			"sv_CameraHeight",		-1.0, 1.0, 0.1
+	Slider		"Camera Angle",				"SV_CameraPitch",		0.0, 1.0, 0.1 
+	Slider		"Camera Zoom",				"sv_CameraZoom",			0, 130, 5
+	Option		"Toggle Reticule",			"sv_CamReticuleMode",			"OnOff"
+	Command		"Reset Camera to Default", "DefaultCam"
+	
+}
+
+OptionMenu "OptionsMenu"
+{
+	Title "OPTIONS"
+	// [Lego] These were moved to the main menu.
+	//Submenu "Multiplayer Options",		"ZA_MultiplayerOptions" // [TP]
+	//StaticText " " // [TP]
+	Submenu "Customize Controls",		"CustomizeControls"
+	Submenu "Mouse options",			"MouseOptions"
+	Submenu "Joystick options",			"JoystickOptions"
+	StaticText " "
+	Submenu "Message Options", 			"MessageOptions"
+	StaticText " "
+	Submenu "Sound Options",			"SoundOptions"
+	Submenu "Display Options",			"VideoOptions"
+	Submenu "Set video mode",			"VideoModeMenu"
+	Submenu "Advanced Options",			"8BDMAdvancedOptions"
+	
+	StaticText " "
+	
+	StaticText	"MM8BDM Options", 1
+	StaticText " "
+	Option "Display Health Number",			"mm8bdm_healthnumber", "OnOff"
+	Option "Display Ammo Number",			"mm8bdm_ammonumber", "OnOff"
+	Option "Pickup Weapon Colors",			"mm8bdm_noenergycolors", "OffOn"
+	Option "Show Map Creator Cards",		"mm8bdm_mapcards", "8BDM_MapCards"
+	Option "CTF Objective Compass",			"mm8bdm_noctfradar", "OffOn"
+	Slider		"Camera Position",			"sv_CameraAng",			-1.0, 1.0, 0.1
+	Slider		"Camera Height",			"sv_CameraHeight",		-1.0, 1.0, 0.1
+	Slider		"Camera Angle",				"SV_CameraPitch",		0.0, 1.0, 0.1 
+	Slider		"Camera Zoom",				"sv_CameraZoom",			0, 130, 5
+	Option		"Toggle Reticule",			"sv_CamReticuleMode",			"OnOff"
+	Command		"Reset Camera to Default", "DefaultCam"
+	//ColorPicker "Reticule Color", 			"sv_CamReticuleColor"
+
+}

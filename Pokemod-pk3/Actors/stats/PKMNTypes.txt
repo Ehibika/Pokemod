@@ -1,0 +1,862 @@
+actor TypeBase : PowerProtection
+{
+Powerup.Duration 0x7FFFFFFF
+
+damagefactor "Buster", 1.0
+damagefactor "ChargeBuster", 1.0
+damagefactor "ArrowBuster", 1.0
+damagefactor "LaserBuster", 1.0
+damagefactor "DuoFist1", 1.0
+damagefactor "DuoFist2", 1.0
+damagefactor "DuoFist3", 1.0
+damagefactor "ProtoBuster", 1.0
+damagefactor "ProtoBuster2", 1.0
+damagefactor "ProtoBuster3", 1.0
+damagefactor "BassBuster", 1.0
+damagefactor "SuperAdaptor", 1.0
+damagefactor "TrebleBoost", 1.0
+}
+
+actor STABBase : PowerDamage
+{
+Powerup.Duration 0x7FFFFFFF
+
+damagefactor "Buster", 1.0
+damagefactor "ChargeBuster", 1.0
+damagefactor "ArrowBuster", 1.0
+damagefactor "LaserBuster", 1.0
+damagefactor "DuoFist1", 1.0
+damagefactor "DuoFist2", 1.0
+damagefactor "DuoFist3", 1.0
+damagefactor "ProtoBuster", 1.0
+damagefactor "ProtoBuster2", 1.0
+damagefactor "ProtoBuster3", 1.0
+damagefactor "BassBuster", 1.0
+damagefactor "SuperAdaptor", 1.0
+damagefactor "TrebleBoost", 1.0
+
+damagefactor "LeechSeed", 1.0
+damagefactor "PoisonPowder", 1.0
+damagefactor "SleepPowder", 1.0
+damagefactor "Toxic", 1.0
+}
+
+actor T_Normal : Once {}
+actor T_Fighting : Once {}
+actor T_Flying : Once {}
+actor T_Poison : Once {}
+actor T_Ground : Once {}
+actor T_Rock : Once {}
+actor T_Bug : Once {}
+actor T_Ghost : Once {}
+actor T_Steel : Once {}
+actor T_Fire : Once {}
+actor T_Water : Once {}
+actor T_Grass : Once {}
+actor T_Electric : Once {}
+actor T_Psychic : Once {}
+actor T_Ice : Once {}
+actor T_Dragon : Once {}
+actor T_Dark : Once {}
+actor T_Fairy : Once {}
+
+//[+]========================================================================[+]
+//--------------------------------|Normal|--------------------------------
+//[+]========================================================================[+]
+actor NormalWeakness : TypeBase
+{
+damagefactor "Swift", 1.3
+damagefactor "QuickAttack", 1.3
+damagefactor "DoubleEdge", 1.3
+damagefactor "Slash", 1.3
+damagefactor "SkullBash", 1.3
+damagefactor "RapidSpin", 1.3
+}
+
+actor Normal2xWeakness : TypeBase
+{
+damagefactor "Swift", 1.6
+damagefactor "QuickAttack", 1.6
+damagefactor "DoubleEdge", 1.6
+damagefactor "Slash", 1.6
+damagefactor "SkullBash", 1.6
+damagefactor "RapidSpin", 1.6
+}
+
+actor NormalResistance : TypeBase
+{
+damagefactor "Swift", 0.7
+damagefactor "QuickAttack", 0.7
+damagefactor "DoubleEdge", 0.7
+damagefactor "Slash", 0.7
+damagefactor "SkullBash", 0.7
+damagefactor "RapidSpin", 0.7
+}
+
+actor Normal2xResistance : TypeBase
+{
+damagefactor "Swift", 0.4
+damagefactor "QuickAttack", 0.4
+damagefactor "DoubleEdge", 0.4
+damagefactor "Slash", 0.4
+damagefactor "SkullBash", 0.4
+damagefactor "RapidSpin", 0.4
+}
+
+actor NormalImmunity : TypeBase
+{
+damagefactor "Swift", 0.0
+damagefactor "QuickAttack", 0.0
+damagefactor "DoubleEdge", 0.0
+damagefactor "Slash", 0.0
+damagefactor "SkullBash", 0.0
+damagefactor "RapidSpin", 0.0
+}
+
+actor NormalSTAB : STABBase
+{
+damagefactor "Swift", 1.3
+damagefactor "QuickAttack", 1.3
+damagefactor "DoubleEdge", 1.3
+damagefactor "Slash", 1.3
+damagefactor "SkullBash", 1.3
+damagefactor "RapidSpin", 1.3
+}
+
+//[+]========================================================================[+]
+//--------------------------------|Fighting|--------------------------------
+//[+]========================================================================[+]
+actor FightingWeakness : TypeBase
+{
+
+}
+
+actor Fighting2xWeakness : TypeBase
+{
+
+}
+
+actor FightingResistance : TypeBase
+{
+
+}
+
+actor Fighting2xResistance : TypeBase
+{
+
+}
+
+actor FightingImmunity : TypeBase
+{
+
+}
+
+actor FightingSTAB : STABBase
+{
+
+}
+//[+]========================================================================[+]
+//--------------------------------|Flying|--------------------------------
+//[+]========================================================================[+]
+actor FlyingWeakness : TypeBase
+{
+
+}
+
+actor Flying2xWeakness : TypeBase
+{
+
+}
+
+actor FlyingResistance : TypeBase
+{
+
+}
+
+actor Flying2xResistance : TypeBase
+{
+
+}
+
+actor FlyingImmunity : TypeBase
+{
+
+}
+
+actor FlyingSTAB : STABBase
+{
+
+}
+//[+]========================================================================[+]
+//--------------------------------|Poison|--------------------------------
+//[+]========================================================================[+]
+actor PoisonWeakness : TypeBase
+{
+damagefactor "PoisonPowder", 1.0 //Static
+damagefactor "Toxic", 1.0 //Static
+
+}
+
+actor Poison2xWeakness : TypeBase
+{
+damagefactor "PoisonPowder", 1.0 //Static
+damagefactor "Toxic", 1.0 //Static
+
+}
+
+actor PoisonResistance : TypeBase
+{
+damagefactor "PoisonPowder", 0.0 //No Poison
+damagefactor "Toxic", 1.0 //Static
+
+}
+
+
+actor Poison2xResistance : TypeBase
+{
+damagefactor "PoisonPowder", 0.0 //No Poison
+damagefactor "Toxic", 1.0 //Static
+
+}
+
+actor PoisonImmunity : TypeBase
+{
+damagefactor "PoisonPowder", 0.0
+damagefactor "Toxic", 0.0
+
+}
+
+actor PoisonSTAB : STABBase
+{
+
+}
+
+//[+]========================================================================[+]
+//--------------------------------|Ground|--------------------------------
+//[+]========================================================================[+]
+actor GroundWeakness : TypeBase
+{
+
+}
+
+actor Ground2xWeakness : TypeBase
+{
+
+}
+
+actor GroundResistance : TypeBase
+{
+
+}
+
+actor Ground2xResistance : TypeBase
+{
+
+}
+
+actor GroundImmunity : TypeBase
+{
+
+}
+
+actor GroundSTAB : STABBase
+{
+
+}
+//[+]========================================================================[+]
+//--------------------------------|Rock|--------------------------------
+//[+]========================================================================[+]
+actor RockWeakness : TypeBase
+{
+
+}
+
+actor Rock2xWeakness : TypeBase
+{
+
+}
+
+actor RockResistance : TypeBase
+{
+
+}
+
+actor Rock2xResistance : TypeBase
+{
+
+}
+
+actor RockImmunity : TypeBase
+{
+
+}
+
+actor RockSTAB : STABBase
+{
+
+}
+//[+]========================================================================[+]
+//--------------------------------|Bug|--------------------------------
+//[+]========================================================================[+]
+actor BugWeakness : TypeBase
+{
+
+}
+
+actor Bug2xWeakness : TypeBase
+{
+
+}
+
+actor BugResistance : TypeBase
+{
+
+}
+
+actor Bug2xResistance : TypeBase
+{
+
+}
+
+actor BugImmunity : TypeBase
+{
+
+}
+
+actor BugSTAB : STABBase
+{
+
+}
+//[+]========================================================================[+]
+//--------------------------------|Ghost|--------------------------------
+//[+]========================================================================[+]
+actor GhostWeakness : TypeBase
+{
+
+}
+
+actor Ghost2xWeakness : TypeBase
+{
+
+}
+
+actor GhostResistance : TypeBase
+{
+
+}
+
+actor Ghost2xResistance : TypeBase
+{
+
+}
+
+actor GhostImmunity : TypeBase
+{
+
+}
+
+actor GhostSTAB : STABBase
+{
+
+}
+//[+]========================================================================[+]
+//--------------------------------|Steel|--------------------------------
+//[+]========================================================================[+]
+actor SteelWeakness : TypeBase
+{
+damagefactor "FlashCannon", 1.3
+damagefactor "MetalClaw", 1.3
+
+}
+
+actor Steel2xWeakness : TypeBase
+{
+    damagefactor "FlashCannon", 1.6
+    damagefactor "MetalClaw", 1.6
+}
+
+actor SteelResistance : TypeBase
+{
+    damagefactor "FlashCannon", 0.7
+    damagefactor "MetalClaw", 0.7
+}
+
+
+actor Steel2xResistance : TypeBase
+{
+    damagefactor "FlashCannon", 0.4
+    damagefactor "MetalClaw", 0.4
+}
+
+actor SteelImmunity : TypeBase
+{
+    damagefactor "FlashCannon", 0.0
+    damagefactor "MetalClaw", 0.0
+}
+
+actor SteelSTAB : STABBase
+{
+    damagefactor "FlashCannon", 1.3
+    damagefactor "MetalClaw", 1.3
+}
+//[+]========================================================================[+]
+//--------------------------------|Fire|--------------------------------
+//[+]========================================================================[+]
+actor FireWeakness : TypeBase
+{
+damagefactor "Ember", 1.3
+damagefactor "FireSpin", 1.3
+damagefactor "FlameThrower", 1.3
+damagefactor "FireFang", 1.3
+damagefactor "FlareBlitz", 1.3
+damagefactor "FireBlast", 1.3
+damagefactor "FlameBurst", 1.3
+
+}
+
+actor Fire2xWeakness : TypeBase
+{
+damagefactor "Ember", 1.6
+damagefactor "FireSpin", 1.6
+damagefactor "FlameThrower", 1.6
+damagefactor "FireFang", 1.6
+damagefactor "FlareBlitz", 1.6
+damagefactor "FireBlast", 1.6
+damagefactor "FlameBurst", 1.6
+
+}
+
+actor FireResistance : TypeBase
+{
+damagefactor "Ember", 0.7
+damagefactor "FireSpin", 0.7
+damagefactor "FlameThrower", 0.7
+damagefactor "FireFang", 0.7
+damagefactor "FlareBlitz", 0.7
+damagefactor "FireBlast", 0.7
+damagefactor "FlameBurst", 0.7
+
+}
+
+actor Fire2xResistance : TypeBase
+{
+damagefactor "Ember", 0.4
+damagefactor "FireSpin", 0.4
+damagefactor "FlameThrower", 0.4
+damagefactor "FireFang", 0.4
+damagefactor "FlareBlitz", 0.4
+damagefactor "FireBlast", 0.4
+damagefactor "FlameBurst", 0.4
+
+}
+
+actor FireImmunity : TypeBase
+{
+damagefactor "Ember", 0.0
+damagefactor "FireSpin", 0.0
+damagefactor "FlameThrower", 0.0
+damagefactor "FireFang", 0.0
+damagefactor "FlareBlitz", 0.0
+damagefactor "FireBlast", 0.0
+damagefactor "FlameBurst", 0.0
+
+}
+
+actor FireSTAB : STABBase
+{
+damagefactor "Ember", 1.3
+damagefactor "FireSpin", 1.3
+damagefactor "FlameThrower", 1.3
+damagefactor "FireFang", 1.3
+damagefactor "FlareBlitz", 1.3
+damagefactor "FireBlast", 1.3
+}
+//[+]========================================================================[+]
+//--------------------------------|Water|--------------------------------
+//[+]========================================================================[+]
+actor WaterWeakness : TypeBase
+{
+damagefactor "WaterGun", 1.3
+damagefactor "WaterPulse", 1.3
+damagefactor "HydroPump", 1.3
+damagefactor "BubbleBeam", 1.3
+}
+
+actor Water2xWeakness : TypeBase
+{
+damagefactor "WaterGun", 1.6
+damagefactor "WaterPulse", 1.6
+damagefactor "HydroPump", 1.6
+damagefactor "BubbleBeam", 1.6
+}
+
+actor WaterResistance : TypeBase
+{
+damagefactor "WaterGun", 0.7
+damagefactor "WaterPulse", 0.7
+damagefactor "HydroPump", 0.7
+damagefactor "BubbleBeam", 0.7
+}
+
+actor Water2xResistance : TypeBase
+{
+damagefactor "WaterGun", 0.4
+damagefactor "WaterPulse", 0.4
+damagefactor "HydroPump", 0.4
+damagefactor "BubbleBeam", 0.4
+}
+
+actor WaterImmunity : TypeBase
+{
+damagefactor "WaterGun", 0.0
+damagefactor "WaterPulse", 0.0
+damagefactor "HydroPump", 0.0
+damagefactor "BubbleBeam", 0.0
+}
+
+actor WaterSTAB : STABBase
+{
+damagefactor "WaterGun", 1.3
+damagefactor "WaterPulse", 1.3
+damagefactor "HydroPump", 1.3
+damagefactor "BubbleBeam", 1.3
+
+}
+//[+]========================================================================[+]
+//--------------------------------|Grass|--------------------------------
+//[+]========================================================================[+]
+actor GrassWeakness : TypeBase
+{
+damagefactor "LeechSeed", 1.3
+damagefactor "SleepPowder", 1.3
+damagefactor "VineWhip", 1.3
+damagefactor "EnergyBall", 1.3
+damagefactor "SolarBeam", 1.3
+damagefactor "PetalBlizzard", 1.3
+damagefactor "RazorLeaf", 1.3
+damagefactor "SeedBomb", 1.3
+}
+
+actor Grass2xWeakness : TypeBase
+{
+damagefactor "LeechSeed", 1.6
+damagefactor "SleepPowder", 1.6
+damagefactor "VineWhip", 1.6
+damagefactor "EnergyBall", 1.6
+damagefactor "SolarBeam", 1.6
+damagefactor "PetalBlizzard", 1.6
+damagefactor "RazorLeaf", 1.6
+damagefactor "SeedBomb", 1.6
+}
+
+actor GrassResistance : TypeBase
+{
+damagefactor "LeechSeed", 0.7
+damagefactor "SleepPowder", 0.7
+damagefactor "VineWhip", 0.7
+damagefactor "EnergyBall", 0.7
+damagefactor "SolarBeam", 0.7
+damagefactor "PetalBlizzard", 0.7
+damagefactor "RazorLeaf", 0.7
+damagefactor "SeedBomb", 0.7
+}
+
+actor Grass2xResistance : TypeBase
+{
+damagefactor "LeechSeed", 0.4
+damagefactor "SleepPowder", 0.4
+damagefactor "VineWhip", 0.4
+damagefactor "EnergyBall", 0.4
+damagefactor "SolarBeam", 0.4
+damagefactor "PetalBlizzard", 0.4
+damagefactor "RazorLeaf", 0.4
+damagefactor "SeedBomb", 0.4
+}
+
+actor GrassImmunity : TypeBase
+{
+damagefactor "LeechSeed", 0.0
+damagefactor "SleepPowder", 0.0
+damagefactor "VineWhip", 0.0
+damagefactor "EnergyBall", 0.0
+damagefactor "SolarBeam", 0.0
+damagefactor "PetalBlizzard", 0.0
+damagefactor "RazorLeaf", 0.0
+damagefactor "SeedBomb", 0.0
+}
+
+actor GrassSTAB : STABBase
+{
+damagefactor "LeechSeed", 1.3
+damagefactor "SleepPowder", 1.3
+damagefactor "VineWhip", 1.3
+damagefactor "EnergyBall", 1.3
+damagefactor "SolarBeam", 1.3
+damagefactor "PetalBlizzard", 1.3
+damagefactor "RazorLeaf", 1.3
+damagefactor "SeedBomb", 1.3
+}
+//[+]========================================================================[+]
+//--------------------------------|Electric|--------------------------------
+//[+]========================================================================[+]
+actor ElectricWeakness : TypeBase
+{
+damagefactor "ThunderShock", 1.3
+
+}
+
+actor Electric2xWeakness : TypeBase
+{
+damagefactor "ThunderShock", 1.6
+
+}
+
+actor ElectricResistance : TypeBase
+{
+damagefactor "ThunderShock", 0.7
+
+}
+
+actor Electric2xResistance : TypeBase
+{
+damagefactor "ThunderShock", 0.4
+
+}
+
+actor ElectricImmunity : TypeBase
+{
+damagefactor "ThunderShock", 0.0
+
+}
+
+actor ElectricSTAB : STABBase
+{
+damagefactor "ThunderShock", 1.3
+
+}
+//[+]========================================================================[+]
+//--------------------------------|Psychic|--------------------------------
+//[+]========================================================================[+]
+actor PsychicWeakness : TypeBase
+{
+
+}
+
+actor Psychic2xWeakness : TypeBase
+{
+
+}
+
+actor PsychicResistance : TypeBase
+{
+
+}
+
+actor Psychic2xResistance : TypeBase
+{
+
+}
+
+actor PsychicImmunity : TypeBase
+{
+
+}
+
+actor PsychicSTAB : STABBase
+{
+
+}
+//[+]========================================================================[+]
+//--------------------------------|Ice|--------------------------------
+//[+]========================================================================[+]
+actor IceWeakness : TypeBase
+{
+damagefactor "IcePunch", 1.3
+damagefactor "IceFang", 1.3
+damagefactor "PowderSnow", 1.3
+damagefactor "IcyWind", 1.3
+damagefactor "AuroraBeam", 1.3
+damagefactor "IceBeam", 1.3
+damagefactor "Blizzard", 1.3
+}
+
+actor Ice2xWeakness : TypeBase
+{
+    damagefactor "IcePunch", 1.6
+    damagefactor "IceFang", 1.6
+    damagefactor "PowderSnow", 1.6
+    damagefactor "IcyWind", 1.6
+    damagefactor "AuroraBeam", 1.6
+    damagefactor "IceBeam", 1.6
+    damagefactor "Blizzard", 1.6
+}
+
+actor Ice2xResistance : TypeBase
+{
+    damagefactor "IcePunch", 0.7
+    damagefactor "IceFang", 0.7
+    damagefactor "PowderSnow", 0.7
+    damagefactor "IcyWind", 0.7
+    damagefactor "AuroraBeam", 0.7
+    damagefactor "IceBeam", 0.7
+    damagefactor "Blizzard", 0.7
+}
+
+actor IceResistance : TypeBase
+{
+    damagefactor "IcePunch", 0.4
+    damagefactor "IceFang", 0.4
+    damagefactor "PowderSnow", 0.4
+    damagefactor "IcyWind", 0.4
+    damagefactor "AuroraBeam", 0.4
+    damagefactor "IceBeam", 0.4
+    damagefactor "Blizzard", 0.4
+}
+
+actor IceImmunity : TypeBase
+{
+    damagefactor "IcePunch", 0.0
+    damagefactor "IceFang", 0.0
+    damagefactor "PowderSnow", 0.0
+    damagefactor "IcyWind", 0.0
+    damagefactor "AuroraBeam", 0.0
+    damagefactor "IceBeam", 0.0
+    damagefactor "Blizzard", 0.0
+}
+
+actor IceSTAB : STABBase
+{
+    damagefactor "IcePunch", 1.3
+    damagefactor "IceFang", 1.3
+    damagefactor "PowderSnow", 1.3
+    damagefactor "IcyWind", 1.3
+    damagefactor "AuroraBeam", 1.3
+    damagefactor "IceBeam", 1.3
+    damagefactor "Blizzard", 1.3
+}
+//[+]========================================================================[+]
+//--------------------------------|Dragon|--------------------------------
+//[+]========================================================================[+]
+actor DragonWeakness : TypeBase
+{
+damagefactor "DragonPulse", 1.3
+damagefactor "DragonRush", 1.3
+damagefactor "DragonClaw", 1.3
+damagefactor "DragonRage", 1.0 //Static
+
+}
+
+actor Dragon2xWeakness : TypeBase
+{
+damagefactor "DragonPulse", 1.6
+damagefactor "DragonRush", 1.6
+damagefactor "DragonClaw", 1.6
+damagefactor "DragonRage", 1.0 //Static
+
+}
+
+actor DragonResistance : TypeBase
+{
+damagefactor "DragonPulse", 0.7
+damagefactor "DragonRush", 0.7
+damagefactor "DragonClaw", 0.7
+damagefactor "DragonRage", 1.0 //Static
+
+}
+
+actor Dragon2xResistance : TypeBase
+{
+damagefactor "DragonPulse", 0.4
+damagefactor "DragonRush", 0.4
+damagefactor "DragonClaw", 0.4
+damagefactor "DragonRage", 1.0 //Static
+
+}
+
+actor DragonImmunity : TypeBase
+{
+damagefactor "DragonPulse", 0.0
+damagefactor "DragonRush", 0.0
+damagefactor "DragonClaw", 0.0
+damagefactor "DragonRage", 1.0 //Static
+
+}
+
+actor DragonSTAB : STABBase
+{
+damagefactor "DragonPulse", 1.3
+damagefactor "DragonRush", 1.3
+damagefactor "DragonClaw", 1.3
+damagefactor "DragonRage", 1.0 //Static
+
+}
+//[+]========================================================================[+]
+//--------------------------------|Dark|--------------------------------
+//[+]========================================================================[+]
+actor DarkWeakness : TypeBase
+{
+damagefactor "Bite", 1.3
+
+}
+
+actor Dark2xWeakness : TypeBase
+{
+damagefactor "Bite", 1.6
+
+}
+
+actor DarkResistance : TypeBase
+{
+damagefactor "Bite", 0.7
+
+}
+
+actor Dark2xResistance : TypeBase
+{
+damagefactor "Bite", 0.4
+
+}
+
+actor DarkImmunity : TypeBase
+{
+damagefactor "Bite", 0.0
+
+}
+
+actor DarkSTAB : STABBase
+{
+damagefactor "Bite", 1.3
+
+}
+//[+]========================================================================[+]
+//--------------------------------|Fairy|--------------------------------
+//[+]========================================================================[+]
+actor FairyWeakness : TypeBase
+{
+
+}
+
+actor Fairy2xWeakness : TypeBase
+{
+
+}
+
+actor FairyResistance : TypeBase
+{
+
+}
+
+actor Fairy2xResistance : TypeBase
+{
+
+}
+
+actor FairyImmunity : TypeBase
+{
+
+}
+
+actor FairySTAB : STABBase
+{
+
+}

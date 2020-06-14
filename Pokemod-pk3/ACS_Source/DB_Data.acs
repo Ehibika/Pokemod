@@ -1,0 +1,253 @@
+/* -=- GameData Dadabase -=-
+ * Contains Functions made primarily for grabbing or processing gameplay data to use for various purposes
+ * 
+
+*/
+#library "DB_Data"
+#include "zcommon.acs"
+
+
+function void SyncInvisibleTo (int Player)
+{
+//if(CheckActorProperty(Player,APROP_Alpha,0.0)) { 
+if(GetActorProperty(Player,APROP_Alpha)<=0.0) { 
+	SetActorProperty(0,APROP_RenderStyle,STYLE_None);
+} else {
+	SetActorProperty(0,APROP_RenderStyle,STYLE_Translucent);
+}
+}
+
+Function int CSCCButtonCheck (int NewButtons, int OldButtons, int Which)
+{
+	int ButtonNow = NewButtons & Which;
+	int ButtonOld = OldButtons & Which;
+	If(ButtonNow > ButtonOld){Return 1;}
+	If(ButtonNow < ButtonOld){Return 2;}
+	If(ButtonNow > 0 &&  ButtonOld > 0){Return 3;}
+	Return 0;
+}
+
+Script "PKMNACS_ButtonCheck" (int theButton)
+{
+SetResultValue(PressingButton(theButton));
+}
+
+Script "PKMNACS_PressingBothAttack" (void)
+{
+int buttons = GetPlayerInput(-1, INPUT_BUTTONS);
+SetResultValue(PressingButton2(buttons,BT_ATTACK)&&PressingButton2(buttons,BT_ALTATTACK));
+}
+
+function bool PressingButton (int theButton)
+{
+return PressingButton2(GetPlayerInput(-1, INPUT_BUTTONS),theButton);
+}
+
+function bool PressingButton2 (int buttons, int theButton)
+{
+return ((buttons&theButton)>0);
+}
+
+Function int ButtonCheck (int Buttons, int OldButtons, int WhichButton)
+{
+int ButtonNow = Buttons & WhichButton;
+int ButtonOld = OldButtons & WhichButton;
+If(ButtonNow > ButtonOld){Return 1;}
+If(ButtonNow < ButtonOld){Return 2;}
+If(ButtonNow > 0 &&  ButtonOld > 0){Return 3;}
+Return 0;
+}
+
+
+/*
+Function int CurrentSpeedXYZ (int Target)
+{
+int VelX = GetActorVelX(Target) >> 16;
+int VelY = GetActorVelY(Target) >> 16;
+int VelZ = GetActorVelZ(Target) >> 16;
+int Travel = sqrt8(VelX*VelX + VelY*VelY + VelZ*VelZ);
+return Travel;
+}
+
+Function void LimitSpeed (int SpeedLimit)
+{
+int TheLimit;
+If(CurrentSpeedXYZ(ActivatorTID()) > SpeedLimit)
+	{
+	TheLimit = FixedDiv(SpeedLimit, CurrentSpeedXYZ(ActivatorTID()));	
+	SetActorVelocity(0, FixedMul(GetActorVelX(0), TheLimit), FixedMul(GetActorVelY(0), TheLimit), GetActorVelZ(0),FALSE, FALSE);
+	}
+
+}
+*/
+Function Int ValueMap (int Input, int InputHigh, int InputLow, int OutputHigh, int OutputLow)
+{
+
+int FinalOut;
+int A;
+int B;
+Int C;
+
+int AB;
+int ABC;
+
+A = (Input - InputLow)<<16;
+B = (InputHigh - InputLow)<<16;
+C = (OutputHigh - OutputLow);
+
+AB = fixedDiv(A,B);
+ABC = (AB * C) >> 16;
+FinalOut = ABC + OutputLow;
+//FinalOut = ( ((Input - InputLow)/(InputHigh - InputLow))*(OutputHigh - OutputLow) + OutputLow);
+
+return FinalOut;
+}
+
+
+// Returns integer value - Because Zandronum's rounding is stupid
+function int PKMNACS_round(int fixedNumber)
+{
+	return (fixedNumber + 0.5) >> 16;
+}
+
+function int fdistanceVal (int x, int y, int z)
+{
+	int len;
+
+	int ang = vectorangle(x,y);
+	if(((ang+0.125)%0.5) > 0.25) len = fixeddiv(y, sin(ang));
+	else len = fixeddiv(x, cos(ang));
+
+	ang = vectorangle(len, z);
+	if(((ang+0.125)%0.5) > 0.25) len = fixeddiv(z, sin(ang));
+	else len = fixeddiv(len, cos(ang));
+
+	return len;
+}
+
+
+
+script "PKMNACS_HitKnockback" (int force, int disabled, int type)
+{
+if(disabled == 0){GiveInventory("TempPitProtection",1);}
+int pusher = ACS_NamedExecuteWithResult("core_gettarget");
+if(type == 1){force*=CheckActorInventory(pusher,"ScriptCharge");}//ColdFusion
+int Vang = VectorAngle(GetActorX(0) - GetActorX(pusher), GetActorY(0) - GetActorY(pusher)) >> 8;
+ThrustThing(Vang, force, 1, 0);
+}
+
+script "PKMNACS_CheckPitProtect" (void)
+{
+SetResultValue(GetCvar("PKMN_SV_PitProtection"));
+}
+
+script "PKMNACS_PitchGrab" (Void)
+{
+int FiringPlayer= ACS_ExecuteWithResult(257, 0);
+int Output = 360 * (GetActorPitch(FiringPlayer));
+Setresultvalue(Output >> 16);
+//--
+}
+           
+Script "PKMNACS_GetTeamPointer" (int Pointer)
+{
+if(Pointer!=0){SetActivator(0,Pointer);}
+int Result = GetPlayerInfo(PlayerNumber(),PLAYERINFO_TEAM);
+//Log(i:Result);
+SetResultValue(Result);
+}
+   
+
+Script "PKMNACS_HealthPercent" (int TargTID, int Type, int perval)
+{
+int HealthPercent;
+int PlayerCurrentHealth;
+int PlayerMaxHealth;
+
+if(GetActorProperty(TargTID,APROP_HEALTH)<=0){PlayerCurrentHealth = 1; }
+else{PlayerCurrentHealth = GetActorProperty(TargTID,APROP_Health);}
+
+if(GetActorProperty(TargTID,APROP_SpawnHealth)<=0){PlayerMaxHealth = 1; }
+else{PlayerMaxHealth = GetActorProperty(TargTID,APROP_SpawnHealth);}
+
+// Type 0 = current percentage of health
+// Type 1 = Value of Health at that percentage
+
+Switch (Type)
+	{
+	default : HealthPercent = ((PlayerCurrentHealth*100)/PlayerMaxHealth); Break;
+	Case 1 : HealthPercent = (fixeddiv(PlayerMaxHealth,100)*perval) >> 16; Break;
+	}
+
+SetResultValue(HealthPercent);
+}
+
+
+Function void LMSAttendance (int P, int i)
+{
+SetCvar(StrParam(s:"PlayerInLMS_",i:p),i);
+}
+
+Function Int CheckLMSAttendance (int P)
+{
+int Output = GetCvar(StrParam(s:"PlayerInLMS_",i:p));
+
+return Output;
+}
+
+script "DisconnectLMSAttendance" (int p) DISCONNECT
+{
+ACS_NamedExecuteWithResult("CLEAR_LMS_ATTENDANCE",p);
+}
+
+script "CLEAR_LMS_ATTENDANCE" (int p)
+{
+	LMSAttendance(p,-1);
+}
+
+Script "PKMNACS_ActorClassifier" (int TID, int CheckType)
+{
+bool output;
+   
+switch(CheckType)
+	{
+	case 0: if ((ClassifyActor(TID) & ACTOR_NONE)){output = true;} break;
+	case 1: if ((ClassifyActor(TID) & ACTOR_WORLD)){output = true;} break;
+	case 2: if ((ClassifyActor(TID) & ACTOR_PLAYER)){output = true;} break;
+	case 3: if ((ClassifyActor(TID) & ACTOR_BOT)){output = true;} break;
+	case 4: if ((ClassifyActor(TID) & ACTOR_VOODOODOLL)){output = true;} break;
+	case 5: if ((ClassifyActor(TID) & ACTOR_MONSTER)){output = true;} break;
+	case 6: if ((ClassifyActor(TID) & ACTOR_ALIVE)){output = true;} break;
+	case 7: if ((ClassifyActor(TID) & ACTOR_DEAD)){output = true;} break;
+	case 8: if ((ClassifyActor(TID) & ACTOR_MISSILE)){output = true;} break;
+	case 9: if ((ClassifyActor(TID) & ACTOR_GENERIC)){output = true;} break;
+	}
+
+SetResultValue(output);
+}
+
+// Returns a number below 0 as 0
+Function int NoNeg (int Numb)
+{
+Int Output;
+
+if(Numb > 0){Output = Numb;}
+else{Output = 0;}
+return Output;
+}
+
+Script "ClampData" (int Data, int Min, int Max)
+{
+int output = Data;
+
+if(output < Min){output = Min;}
+if(output > Max){output = Max;}
+
+SetResultValue(output);
+}
+
+Script "TracerHeightGet" (void)
+{
+SetActivator(0,AAPTR_TRACER);
+SetResultValue(GetActorProperty(0,APROP_Height)>>16);
+}

@@ -1,0 +1,92 @@
+/* -=- Type Dex -=-
+ * Contains all data regarding pokemon types, the constant values that define each type, a string array containing the
+ * type names, as well as data for type interactions.
+ * 
+ * All arrays are to follow the order of the type constants.
+
+*/
+
+#library "Dex_Types"
+#include "zcommon.acs"
+//#region -=- Type Constants
+
+#region -=- Type Constants
+
+#LIBDEFINE Type_NULL -1
+#LIBDEFINE Type_Normal 0
+#LIBDEFINE Type_Fighting 1
+#LIBDEFINE Type_Flying 2
+#LIBDEFINE Type_Poison 3
+#LIBDEFINE Type_Ground 4
+#LIBDEFINE Type_Rock 5
+#LIBDEFINE Type_Bug 6
+#LIBDEFINE Type_Ghost 7
+#LIBDEFINE Type_Steel 8
+#LIBDEFINE Type_Fire 9
+#LIBDEFINE Type_Water 10
+#LIBDEFINE Type_Grass 11
+#LIBDEFINE Type_Electric 12
+#LIBDEFINE Type_Psychic 13
+#LIBDEFINE Type_Ice 14
+#LIBDEFINE Type_Dragon 15
+#LIBDEFINE Type_Dark 16
+#LIBDEFINE Type_Fairy 17
+#endregion
+//#endregion
+
+//#region -=- General Variables & Constants
+#region -=- General Variables & Constants
+
+#LIBDEFINE TYPECOUNT 18
+str PKMNTypeList [TYPECOUNT] = {
+"Normal",
+"Fighting",
+"Flying",
+"Poison",
+"Ground",
+"Rock",
+"Bug",
+"Ghost",
+"Steel",
+"Fire",
+"Water",
+"Grass",
+"Electric",
+"Psychic",
+"Ice",
+"Dragon",
+"Dark",
+"Fairy",
+};
+
+#LIBDEFINE T_WEA 3 //Weakness
+#LIBDEFINE T_RES 2	//Resistance
+#LIBDEFINE T_IMU 1	//Immunity
+#LIBDEFINE T_NEU 0	//Neutral
+
+#endregion
+//#endregion
+
+int PKMNTypeList2 [TYPECOUNT][TYPECOUNT] = {
+// Types are ordered by their constant
+
+//		  	 Nml  |Fgt  |Fly  |Psn  |Gnd  |Roc  |Bug  |Ght  |Ste  |Fir  |Wat  |Grs  |Elc  |Psy  |Ice  |Drg  |Drk  |Fry
+/*Normal*/	{T_NEU,T_WEA,T_NEU,T_NEU,T_NEU,T_NEU,T_NEU,T_IMU,T_NEU,T_NEU,T_NEU,T_NEU,T_NEU,T_NEU,T_NEU,T_NEU,T_NEU,T_NEU},//
+/*Fighting*/{T_NEU,T_NEU,T_WEA,T_RES,T_NEU,T_NEU,T_RES,T_NEU,T_NEU,T_NEU,T_NEU,T_NEU,T_NEU,T_WEA,T_NEU,T_NEU,T_RES,T_WEA},//
+/*Flying*/	{T_NEU,T_RES,T_NEU,T_NEU,T_IMU,T_WEA,T_RES,T_NEU,T_NEU,T_NEU,T_NEU,T_RES,T_WEA,T_NEU,T_WEA,T_NEU,T_NEU,T_NEU},//
+/*Poison*/	{T_NEU,T_RES,T_NEU,T_RES,T_WEA,T_NEU,T_RES,T_NEU,T_NEU,T_NEU,T_NEU,T_RES,T_NEU,T_WEA,T_NEU,T_NEU,T_NEU,T_RES},//
+/*Ground*/	{T_NEU,T_NEU,T_NEU,T_RES,T_NEU,T_RES,T_NEU,T_NEU,T_NEU,T_NEU,T_WEA,T_WEA,T_IMU,T_NEU,T_WEA,T_NEU,T_NEU,T_NEU},//
+/*Rock*/	{T_RES,T_WEA,T_RES,T_RES,T_WEA,T_NEU,T_NEU,T_NEU,T_WEA,T_RES,T_WEA,T_WEA,T_NEU,T_NEU,T_NEU,T_NEU,T_NEU,T_NEU},//
+/*Bug*/		{T_NEU,T_RES,T_WEA,T_NEU,T_RES,T_WEA,T_NEU,T_NEU,T_NEU,T_WEA,T_NEU,T_RES,T_NEU,T_NEU,T_NEU,T_NEU,T_NEU,T_NEU},//
+/*Ghost*/	{T_IMU,T_IMU,T_NEU,T_RES,T_NEU,T_NEU,T_RES,T_WEA,T_NEU,T_NEU,T_NEU,T_NEU,T_NEU,T_NEU,T_NEU,T_NEU,T_WEA,T_NEU},//
+/*Steel*/	{T_RES,T_WEA,T_RES,T_IMU,T_WEA,T_RES,T_RES,T_NEU,T_RES,T_WEA,T_NEU,T_RES,T_NEU,T_RES,T_RES,T_RES,T_NEU,T_RES},//
+/*Fire*/	{T_NEU,T_NEU,T_NEU,T_NEU,T_WEA,T_WEA,T_RES,T_NEU,T_RES,T_RES,T_WEA,T_RES,T_NEU,T_NEU,T_RES,T_NEU,T_NEU,T_RES},//
+/*Water*/	{T_NEU,T_NEU,T_NEU,T_NEU,T_NEU,T_NEU,T_NEU,T_NEU,T_RES,T_RES,T_RES,T_WEA,T_WEA,T_NEU,T_RES,T_NEU,T_NEU,T_NEU},//
+/*Grass*/	{T_NEU,T_NEU,T_WEA,T_WEA,T_RES,T_NEU,T_WEA,T_NEU,T_NEU,T_WEA,T_RES,T_RES,T_RES,T_NEU,T_WEA,T_NEU,T_NEU,T_NEU},//
+/*Electric*/{T_NEU,T_NEU,T_RES,T_NEU,T_WEA,T_NEU,T_NEU,T_NEU,T_RES,T_NEU,T_NEU,T_NEU,T_RES,T_NEU,T_NEU,T_NEU,T_NEU,T_NEU},//
+/*Psychic*/	{T_NEU,T_RES,T_NEU,T_NEU,T_NEU,T_NEU,T_WEA,T_WEA,T_NEU,T_NEU,T_NEU,T_NEU,T_NEU,T_NEU,T_NEU,T_NEU,T_WEA,T_NEU},//
+/*Ice*/		{T_NEU,T_WEA,T_NEU,T_NEU,T_NEU,T_WEA,T_NEU,T_NEU,T_WEA,T_WEA,T_NEU,T_NEU,T_NEU,T_NEU,T_RES,T_NEU,T_NEU,T_NEU},//
+/*Dragon*/	{T_NEU,T_NEU,T_NEU,T_NEU,T_NEU,T_NEU,T_NEU,T_NEU,T_NEU,T_RES,T_RES,T_RES,T_RES,T_NEU,T_WEA,T_WEA,T_NEU,T_WEA},
+/*Dark*/	{T_NEU,T_WEA,T_NEU,T_NEU,T_NEU,T_NEU,T_WEA,T_RES,T_NEU,T_NEU,T_NEU,T_NEU,T_NEU,T_IMU,T_NEU,T_NEU,T_RES,T_WEA},
+/*Fairy*/	{T_NEU,T_RES,T_NEU,T_WEA,T_NEU,T_NEU,T_RES,T_NEU,T_WEA,T_NEU,T_NEU,T_NEU,T_NEU,T_NEU,T_NEU,T_IMU,T_RES,T_NEU},
+};

@@ -1,0 +1,30 @@
+#library "PKMNACS"
+#import "WEPACS.acs"
+		  
+/* -=- Bika's Coding Structure -=-
+ *
+ * Mods of this nature typically involve a lot of code due in part to the ammount of databasing and number crunching
+ * present for gameplay, so I need to establish a good system for organizing code as efficiently as possible so
+ * that I and anyone else working on this mod can find what we need without too much hassle, I am using visual
+ * studio code with the scripts being interpreted as "typescript", I also use Slade, so most of my practices
+ * will be made in respect to those two editors
+ * 
+ * now one thing worth pointing out is the rather odd quirt that I as a mac user have to put up with, for some
+ * reason, I cannot compile scripts where a 'Continue;' break is called after a string array, if such a case is 
+ * present than the file won't compile properly, it's an oddly specific handicap but one that I have to deal with.
+ * 
+ * often I'll code things specifically to avoid having to use it, but if I have to, I'll sentence them to their own
+ * acs file where they can compile in peace.
+ * 
+ * that aside, I am also making use of russeel's/lego's doom compiler code, that basically autosaves and compiles
+ * doom archives for me, you'll have to ask him about it but long story short, scripts get compiled on the fly. 
+ * 
+ * So Right now, I'm looking to reference Shotgun Frenzy's coding structure in that it uses a number of small libraries
+ * and imports to handle it's scripting. each script will have a prefix followed by an underscore, the meaning of each are:
+ * 
+ * "Dex_" = pokemon related Database file
+ * "DB_" = General database file
+ * "A_" = Self contained ACS files with scripts and functiones all aimed at a specific task
+ * "Fc" = 
+ * "G_" files containing scripts and functions that are Gamestate and gameplay relevant
+*/

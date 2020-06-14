@@ -1,0 +1,44 @@
+/*
+[+]===================================[+]
+
+[+]===================================[+]
+*/
+
+Actor Leafeon : ClassBase 
+{
+Player.DisplayName "Leafeon"
+Player.SoundClass "Megaman"
+
+Player.StartItem "BasicBuster"
+
+//============|
+Player.StartItem "Base_HP", 65
+Player.StartItem "Base_PAttack", 110
+Player.StartItem "Base_PDefense", 130
+Player.StartItem "Base_SAttack", 60
+Player.StartItem "Base_SDefense", 65
+Player.StartItem "Base_Speed", 95
+//============|
+
+States
+{
+Spawn: 
+GLEA A 0
+GLEA B 1 
+GLEA A 1
+GoTo Spawn+2
+See:
+GLEA BCDE 5
+GoTo Spawn+1
+Missile:
+GLEA A 0 
+GLEA F 5 
+GLEA G 4
+GoTo Spawn+2
+
+PainFix:
+GLEA H 0 
+GoTo PainFrames
+}
+}
+

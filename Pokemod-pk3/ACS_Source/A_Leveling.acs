@@ -1,0 +1,323 @@
+/* -=- Leveling -=-
+ * Scripts that handle the function of EXP gaining, leveling up, and evolutions, everything to do with player
+ * advancement is found here.
+ * 
+
+*/
+
+#library "A_Leveling"
+#import "Dex_Pokemon.acs"
+#import "Dex_Evo.acs"
+#import "Dex_Types.acs"
+#import "Dex_Leveling.acs"
+#import "Dex_BaseStats.acs"
+#import "DB_Player.acs"
+#import "A_Shop.acs"
+#include "zcommon.acs"
+
+//#region -=- General Variables -=-
+#region -=- General Variables -=-
+Int TeamEXPAward [4] = {};
+
+#endregion
+//#endregion
+
+//#region -=- Experience And Levels -=-
+#region -=- Experience And Levels -=-
+
+Script "PKMN_EXPevents" (int type, int arg1, int arg2) EVENT
+{
+    switch(type)
+        {
+        Default: break;
+        Case 0: // -=- Player Elimination -=-
+            ACS_NamedExecuteAlways("FragEXPAward",0,arg1);
+        break;
+        Case 6: // -=- Round End -=-
+        ACS_NamedExecuteAlways("TeamEXPAward",0);
+        break;
+        }
+}
+
+script "TeamEXPAward" (Void)
+{
+    if(GetCvar("teamlms")!=1){Terminate;}
+    Log(s:"\cgBegin Team EXP");
+    int Gamestate = GetGamemodeState();
+    int PTeam;
+    Until(Gamestate == 1) {Gamestate = GetGamemodeState(); Delay(1);}
+    Log(s:"\cgAbout to distribute Team EXP");
+    Delay(35);
+    for(int i = 0; i < PlayerCount(); i++)
+    {
+        Pteam = GetPlayerInfo(i, PLAYERINFO_TEAM);
+        ACS_NamedExecuteAlways("GivePlayerEXP",0,i,TeamEXPAward[Pteam],1);
+    }
+    for(int j = 0; j < 4; j++)
+    {TeamEXPAward[j] = 0;}
+    Log(s:"\cgEnd Team EXP");
+}
+
+//#region -=- Depreciated -=-
+/* 
+
+{
+if(GetCvar("teamlms")!=1){Terminate;}
+Log(s:"\cgBegin Team EXP");
+int Gamestate;
+int PTeam;
+While(True)
+    {
+    Gamestate = GetGamemodeState();
+    switch(Gamestate)
+        {
+        Default: break;
+        Case 3://in result sequence
+        for(int i = 0; i < PlayerCount(); i++)
+            {
+                Pteam = GetPlayerInfo(i, PLAYERINFO_TEAM);
+                ACS_NamedExecuteAlways("GivePlayerEXP",0,i,TeamEXPAward[Pteam]);
+            }
+        for(int j = 0; j < 4; j++)
+            {TeamEXPAward[j] = 0;}
+        //Log(s:"\cgEnd Team EXP");
+        Terminate;
+        Break;
+
+        }
+        Delay(1);
+    }
+}
+*/
+//#endregion
+
+Script "GivePlayerEXP" (int Pnum, int EXPAward, int Override)
+{
+
+    SetActivator(Pnum+1000);
+    ACS_NamedExecuteAlways("GiveEXP",0,EXPAward,Override);
+}
+
+
+Script "GiveEXP" (int EXPAward, Int Override)
+{
+
+int p = Playernumber();
+int PlayerDexNum = GetCvar(StrParam(s:"PlayerDEXNum_",i:PlayerNumber()));
+Int LvlRate = StatDEX[PlayerDexNum][9];
+if(EXPTime() == 0 && Override == 0){Terminate;}
+
+While(PlayerIsSpectator(p) == 2){Delay(1);}
+if(PlayerIsSpectator(p) == 1){Terminate;}
+Bool LevelLoopDone;
+str PLAYER_EXPCV = StrParam(s:"PlayerEXP_",i:PlayerNumber());
+
+int PlayerLVL = GetCvar(StrParam(s:"PlayerLevel_",i:PlayerNumber()));
+int PlayerEXP = GetCvar(PLAYER_EXPCV);
+SetCvar(PLAYER_EXPCV,PlayerEXP+EXPAward);
+
+if(PlayerLVL >= 10){Terminate;}
+
+// check if this passes the next level threshold
+Until(LevelLoopDone)
+    {
+    if(GetCVar(PLAYER_EXPCV) >= LevelUpTable[LvlRate][PlayerLVL] && PlayerLVL < 10)
+        {
+            PlayerLVL++;
+            GiveInventory("LevelupCue",1);
+            Log(n:0,s:"\cf Grew to LVL ",i:PlayerLVL);
+
+        }
+    else
+        {
+        ACS_NamedExecuteAlways("SetPlayerLevel",0,PlayerLVL);
+        if(PlayerIsBot(p)){ACS_NamedExecuteAlways("EvolveTrigger",0);}
+        LevelLoopDone = true;
+        }
+
+    }
+
+
+}
+
+
+Script "GummiEXP" (int EXPAward, Int TypeMatch)
+{
+// -=- Script called by Gummy Pickups, gives EXP based on type matchup
+int PlayerDEXNum = GetPokeValue(POKEDEXNUM);
+int TypeA = StatDEX[PlayerDEXNum][7];
+int TypeB = StatDEX[PlayerDEXNum][8];
+int MatchVal;
+int EXPMult = 1.0;
+int EXPOutput;
+if(TypeA == TypeMatch || TypeB == TypeMatch){EXPMult = 2.0;}
+else 
+    {    
+        switch(PKMNTypeList2[TypeA][TypeMatch])
+        {
+        Case T_NEU: break;
+        Case T_WEA: MatchVal--; break;
+        Case T_RES: MatchVal++; break;
+        Case T_IMU: MatchVal++; break;
+        }
+
+        if(TypeB!=Type_NULL)
+        {
+        switch(PKMNTypeList2[TypeB][TypeMatch])
+        {
+            Case T_NEU: break;
+            Case T_WEA: MatchVal--; break;
+            Case T_RES: MatchVal++; break;
+            Case T_IMU: MatchVal++; break;
+            }  
+        }
+    }
+
+    if(MatchVal > 0){EXPMult = 1.5;}
+    if(MatchVal < 0){EXPMult = 0.5;}
+    EXPOutput = EXPAward*EXPMult >> 16;
+    ACS_NamedExecuteAlways("GiveEXP",0,EXPOutput,1);
+
+}
+
+Script "SetPlayerLevel" (int NewPlayerLevel, int SynchEXP)
+{
+        int CurLevel = GetCVar(StrParam(s:"PlayerLevel_",i:PlayerNumber()));
+        if(NewPlayerLevel > 10){NewPlayerLevel = 10;}
+        if(NewPlayerLevel < 1){NewPlayerLevel = 1;}
+        if(NewPlayerLevel != CurLevel)
+        {
+        SetCVar(StrParam(s:"PlayerLevel_",i:PlayerNumber()),NewPlayerLevel);
+        if(SynchEXP)
+        {
+            int PlayerDEXNum = GetCvar(StrParam(s:"PlayerDEXNum_",i:PlayerNumber()));
+            int EXPRate = StatDEX[PlayerDEXNum][9];
+            if(NewPlayerLevel>1){SetCvar(StrParam(s:"PlayerEXP_",i:PlayerNumber()),LevelUpTable[EXPRate][NewPlayerLevel-1]);}
+
+        }
+
+        ACS_NamedExecuteAlways("ActiveStatUpdate",0);
+        }
+        Else{ACS_NamedExecuteAlways("StatusMenuUpdate",0);}
+
+}
+
+Script "FragEXPAward" (int VictimPN)
+{
+if(EXPTime() == 0){Terminate;}
+//Int SelfTID = ActivatorTID();
+
+    int PlayerLVL = GetCvar(StrParam(s:"PlayerLevel_",i:VictimPN));
+    int PlayerDexNum = GetCvar(StrParam(s:"PlayerDEXNum_",i:VictimPN));
+    int VictimFrags = ACS_NamedExecuteWithResult("GetPlayerFrags",VictimPN);
+    int VictimBounty = StatDEX[PlayerDexNum][6];
+int EXPAward = VictimBounty*PlayerLVL;
+int CashAward = (PlayerLVL*10)+(VictimBounty*VictimFrags);
+
+// -=- Clamp Cash
+if(CashAward < 10){CashAward = 10;}
+if(CashAward > 500){CashAward = 500;}
+
+//SetActivatorToTarget(0);
+//int KillerTID = ActivatorTID();
+// --=- no exp if you kill yourself
+//if(VictimTID == KillerTID){Terminate;}
+
+ACS_NamedExecuteAlways("GiveEXP",0,EXPAward);
+ACS_NamedExecuteWithResult("GivePlayerCash",Playernumber(),CashAward);
+
+TeamEXPAward[PlayerTeam()] += EXPAward/2;
+//log(s:GetTeamProperty(PlayerTeam(),TPROP_Name), s:" Team EXP Award ", i:TeamEXPAward[PlayerTeam()]);
+}
+
+Function Int EXPTime (void)
+{
+//Returns when you are allowed to earn EXP
+int Output;
+
+if(GetCvar("lastmanstanding")==1||GetCvar("teamlms")==1)
+    {
+    if(GetGameModeState() == 2 ||GetGameModeState() == 3){output = 1;}
+    }
+else{output = 1;}
+
+return Output;
+}
+
+#endregion -=-=-=-=-=-=-=-
+//#endregion -=-=-=-=-=-=-=-
+
+//#region -=- Evolutions -=-
+#region -=- Evolutions -=-
+Script "SetDexNumber" (int Dexnum)
+{
+    SetCVar(StrParam(s:"PlayerDEXNum_",i:PlayerNumber()),Dexnum);
+    ACS_NamedExecuteAlways("SetPokeSkin",0,Dexnum);
+}
+
+
+Script "EvolveTrigger" (void)
+{
+if(StatusTime() == 0){print(s:"Unsafe to Evolve Right now"); Terminate;}
+
+
+//First, Check if you're Eevee, Run a different script if you are
+if(GetActorClass(0) == "Eevee")
+    {Terminate;}
+//Gather Data
+int PlayerDex = GetCVar(StrParam(s:"PlayerDEXNum_",i:PlayerNumber()));
+int PlayerLVL = GetCvar(StrParam(s:"PlayerLevel_",i:PlayerNumber()));
+int EvoPaths;
+//Check if you are capable of evolution
+if(EvoDEX[PlayerDex][0] == 0)
+    {
+        print(s:"No Further Evolutions");
+        Terminate;
+    }
+Else if (EvoDEX[PlayerDex][0] > 0){EvoPaths = EvoDEX[PlayerDex][0];}
+
+if(PlayerLVL >=  EvoDEX[PlayerDex][1])
+    {
+        //Evolution approved
+
+        If (EvoPaths > 1)
+            {
+            //If player has more than one path, Generate a small menu to denote the paths you can take
+
+            }
+        Else If (EvoPaths == 1)
+            {
+            //No paths to choose from, just evolve straight away.
+            ACS_NamedExecuteAlways("PlayerFormChange",0,EvoDEX[PlayerDex][2]);
+            GiveInventory("EvolutionFX",1);
+            print(s:"Evolved!");
+            }
+    }
+}
+
+Script "PlayerFormChange" (Int NextForm)
+{
+ACS_NamedExecuteAlways("ChangeBaseStat",0,NextForm);
+ACS_NamedExecuteAlways("SetDexNumber",0,NextForm);
+ACS_NamedExecuteAlways("SetPlayerType",0);
+}
+
+Function Int StatusTime (Void)
+{
+//Returns when you are allowed to perform status functions like
+//Evolutions or learning new moves
+int Output;
+
+if(CheckInventory("InSafeZone")){output = 1;}
+
+if(GetCvar("lastmanstanding")==1||GetCvar("teamlms")==1)
+    {
+    if(GetGameModeState() != 2){output = 1;}
+	}
+	
+	return Output;
+}
+
+#endregion
+//#endregion
+

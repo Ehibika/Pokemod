@@ -1,0 +1,119 @@
+actor DragonClawMove : WepMasterBase
+{
+Tag "DragonClaw"
+obituary "$OB_DRAGONCLAW"
+Weapon.AmmoUse 1
+Weapon.AmmoGive 35
+weapon.ammotype "DragonClawPP"
+scale 2.0
+Inventory.Pickupmessage "$PU_MEGABUSTER"
+States
+{
+Spawn:
+WEAP X 1
+stop
+
+Fire:
+"####" B 0 //A_Jumpif(CallACS("CheckWeaponFire",RC_B)==0,"NoAmmo")
+"####" B 0 A_Jump(256,"Fire.Initiate")
+Goto Fire.Initiate
+
+Fire.Initiate:
+"####" B 0 A_Jumpif(CallACS("CheckWeaponFire",RC_C)==0,"NoAmmo")
+"####" B 0 A_Jumpif(CallACS("ImbueSwitch",Move_DragonClaw) == True,"Fire.On")
+"####" B 0 A_Jump(256,"Fire.Off")
+Goto Fire.Off
+
+Fire.On:
+"####" B 0 A_SpawnitemEX("ImbueOnFX",0,0,0,0,0,0,0,1)
+"####" B 0 A_PlaySoundEx("Move/ImbueOn","Weapon")
+"####" B 0 A_Jump(256,"Hold")
+Goto Hold
+
+Fire.Off:
+"####" B 0 A_SpawnitemEX("ImbueOffFX",0,0,0,0,0,0,0,1)
+"####" B 0 A_PlaySoundEx("Move/ImbueOff","Weapon")
+"####" B 0 A_Jump(256,"Hold")
+Goto Hold
+
+Hold:
+"####" B 1
+"####" B 0 A_Refire
+"####" B 0 A_Jump(256,"Fire.After")
+Goto Fire.After
+
+Fire.After:
+"####" B 1 A_GiveInventory("Recovery_B",17)
+"####" B 0 A_GiveInventory("Recovery_C",17)
+"####" B 0 A_Jump(256,"Fire.End")
+Goto Fire.End
+}
+}
+
+actor DragonClawMove1 : DragonClawMove {Weapon.SlotNumber 1}
+actor DragonClawMove2 : DragonClawMove {Weapon.SlotNumber 2}
+actor DragonClawMove3 : DragonClawMove {Weapon.SlotNumber 3}
+actor DragonClawMove4 : DragonClawMove {Weapon.SlotNumber 4}
+
+actor DragonClawMove5 : DragonClawMove 
+{
+Weapon.SlotNumber 5
+States
+{
+Fire:
+TNT1 A 0 A_PlaySoundEx("weapon/flamesword","Weapon")
+TNT1 A 0 A_FireCustomMissile("DragonClawMelee",0,1,0,0)
+TNT1 A 15
+Goto Fire.End
+
+Fire.End:
+TNT1 A 0
+TNT1 A 0 A_TakeInventory("DragonClawMove5",9)
+TNT1 A 0 A_Jump(256,"Ready")
+Goto Ready
+}
+}
+
+//[+]========================================================================[+]
+//-----------------------------|Ammo & Inventory|------------------------------
+//[+]========================================================================[+]
+actor DragonClawPP : Ammo {inventory.amount 1 inventory.Maxamount 35}
+Actor Imbue_DragonClaw : Powerup{inventory.amount 1 powerup.duration 0x7FFFFFFF}
+//[+]========================================================================[+]
+//--------------------------------|Projectiles |--------------------------------
+//[+]========================================================================[+]
+
+actor DragonClawMelee : BasicMeleeAttack
+{
+DamageType "DragonClaw"
+Obituary "$OB_DRAGONCLAW"
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 1 
+TNT1 A 0 A_Stop
+Goto Death
+
+Death:
+MCLA A 1 A_Explode(25,80,0,0,80)
+TNT1 AAA 0 A_SpawnItemEx("FireFangParticle1", 0, 0, 28, 256/24, 256/24, random(2,5), random(0, 359))
+TNT1 AAA 0 A_SpawnItemEx("FireFangParticle2", 0, 0, 28, 256/24, 256/24, random(2,5), random(0, 359))
+MCLA A 1 
+TNT1 AAA 0 A_SpawnItemEx("FireFangParticle1", 0, 0, 20, 256/24, 256/24, random(2,5), random(0, 359))
+TNT1 AAA 0 A_SpawnItemEx("FireFangParticle2", 0, 0, 20, 256/24, 256/24, random(2,5), random(0, 359))
+MCLA B 1 
+TNT1 AAA 0 A_SpawnItemEx("FireFangParticle1", 0, 0, 12, 256/24, 256/24, random(2,5), random(0, 359))
+TNT1 AAA 0 A_SpawnItemEx("FireFangParticle2", 0, 0, 12, 256/24, 256/24, random(2,5), random(0, 359))
+MCLA C 1 
+TNT1 AAA 0 A_SpawnItemEx("FireFangParticle1", 0, 0, 6, 256/24, 256/24, random(2,5), random(0, 359))
+TNT1 AAA 0 A_SpawnItemEx("FireFangParticle2", 0, 0, 6, 256/24, 256/24, random(2,5), random(0, 359))
+MCLA D 1 
+TNT1 AAA 0 A_SpawnItemEx("FireFangParticle1", 0, 0, 0, 256/24, 256/24, random(2,5), random(0, 359))
+TNT1 AAA 0 A_SpawnItemEx("FireFangParticle2", 0, 0, 0, 256/24, 256/24, random(2,5), random(0, 359))
+MCLA E 1 
+MCLA E 5
+MCLA EZEZEZ 2
+stop
+}
+}

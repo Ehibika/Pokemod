@@ -1,0 +1,265 @@
+//#region -=- to be dealt with when itemization is started -=-
+/*
+
+actor SmallHealthCS : CustomInventory replaces SmallHealth
+{
+inventory.pickupmessage "$PU_SMALLHEALTH"
++COUNTITEM
+Scale 2.0
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 //A_JumpIf(CallACS("PKMNACS_HealthSpawnCheck")==0,"HeldReady")
+TNT1 A 0 //ACS_NamedExecuteAlways("PKMNACS_HealthSet",0)
+HBAL AB 6
+loop
+NormalSpawn:
+TNT1 A 0 A_SetTranslucent(1.0, 0)
+goto Spawn+3
+TranslucentSpawn:
+TNT1 A 0 A_SetTranslucent(0.5, 0)
+goto Spawn+3
+Pickup:
+TNT1 A 0 A_JumpIfInventory("CannotUseHealing",1,"No")
+TNT1 A 0 A_JumpIf(CallACS("PKMNACS_HealthPercent")>=100,"No")
+TNT1 A 0 ACS_NamedExecuteAlways("PKMNACS_HealthPickup",0,15)
+TNT1 A 0 A_PlaySound("item/energyup")
+stop
+No:
+TNT1 A 0
+fail
+HeldReady:
+TNT1 A 0 A_ChangeFlag("SPECIAL",0)
+TNT1 A 0 A_ChangeFlag("INVISIBLE",1) 
+goto Held
+}
+}
+
+actor BigHealthCS : CustomInventory replaces BigHealth
+{
+inventory.pickupmessage "$PU_LARGEHEALTH"
++COUNTITEM
+Scale 2.0
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 //A_JumpIf(CallACS("PKMNACS_HealthSpawnCheck")==0,"HeldReady")
+TNT1 A 0 //ACS_NamedExecuteAlways("PKMNACS_HealthSet",0)
+HBAL CD 6
+loop
+NormalSpawn:
+TNT1 A 0 A_SetTranslucent(1.0, 0)
+goto Spawn+3
+TranslucentSpawn:
+TNT1 A 0 A_SetTranslucent(0.5, 0)
+goto Spawn+3
+Pickup:
+TNT1 A 0 A_JumpIfInventory("CannotUseHealing",1,"No")
+TNT1 A 0 A_JumpIf(CallACS("PKMNACS_HealthPercent")>=100,"No")
+TNT1 A 0 ACS_NamedExecuteAlways("PKMNACS_HealthPickup",0,40)
+TNT1 A 0 A_PlaySound("item/energyup/large")
+stop
+No:
+TNT1 A 0
+fail
+HeldReady:
+TNT1 A 0 A_ChangeFlag("SPECIAL",0)
+TNT1 A 0 A_ChangeFlag("INVISIBLE",1) 
+goto Held
+}
+}
+
+actor MegaHealthCS : CustomInventory replaces MegaHealth
+{
+inventory.pickupmessage "Picked up a mega health capsule."
++COUNTITEM
+Scale 2.0
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 //A_JumpIf(CallACS("PKMNACS_HealthSpawnCheck")==0,"HeldReady")
+TNT1 A 0 //ACS_NamedExecuteAlways("PKMNACS_HealthSet",0)
+HBAL EF 6
+loop
+NormalSpawn:
+TNT1 A 0 A_SetTranslucent(1.0, 0)
+goto Spawn+3
+TranslucentSpawn:
+TNT1 A 0 A_SetTranslucent(0.5, 0)
+goto Spawn+3
+Pickup:
+TNT1 A 0 A_JumpIfInventory("CannotUseHealing",1,"No")
+TNT1 A 0 A_JumpIf(CallACS("PKMNACS_HealthPercent")>=100,"No")
+TNT1 A 0 ACS_NamedExecuteAlways("PKMNACS_HealthPickup",0,100)
+TNT1 A 0 A_PlaySound("item/energyup/large")
+stop
+No:
+TNT1 A 0
+fail
+HeldReady:
+TNT1 A 0 A_ChangeFlag("SPECIAL",0)
+TNT1 A 0 A_ChangeFlag("INVISIBLE",1) 
+goto Held
+}
+}
+
+
+actor WeaponEnergyCS : WeaponEnergy replaces WeaponEnergy
+{
+inventory.pickupmessage "Picked up a small ammo pickup."
+States
+{
+Spawn:
+EBAL A 0
+EBAL A 0 Thing_ChangeTID(0,999)
+EBAL A 1 //ACS_NamedExecuteAlways("PKMNACS_ItemSet", 0)
+DefaultSpawn:
+EBAL AB 6 A_SetTranslucent(1.0)
+EBAL B 0 //ACS_NamedExecuteAlways("PKMNACS_ItemSet", 0)
+loop
+TranslucentSpawn:
+EBAL AB 6 A_SetTranslucent(0.5)
+EBAL B 0 //ACS_NamedExecuteAlways("PKMNACS_ItemSet", 0)
+loop
+KorbySpawn:
+KMAG AB 6 A_SetTranslucent(1.0)
+EBAL B 0 //ACS_NamedExecuteAlways("PKMNACS_ItemSet", 0)
+loop
+Pickup:
+TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(984,0),"Success")
+fail
+}
+}
+
+actor BigWeaponEnergyCS : BigWeaponEnergy replaces BigWeaponEnergy
+{
+    inventory.pickupmessage "Picked up a large ammo pickup."
+States
+{
+Spawn:
+EBAL C 0
+EBAL C 0 Thing_ChangeTID(0,999)
+EBAL C 1 //ACS_NamedExecuteAlways("PKMNACS_ItemSet", 0)
+DefaultSpawn:
+EBAL CD 6 A_SetTranslucent(1.0)
+EBAL D 0 //ACS_NamedExecuteAlways("PKMNACS_ItemSet", 0)
+loop
+TranslucentSpawn:
+EBAL CD 6 A_SetTranslucent(0.5)
+EBAL C 0 //ACS_NamedExecuteAlways("PKMNACS_ItemSet", 0)
+loop
+KorbySpawn:
+KMAG CD 6 A_SetTranslucent(1.0)
+EBAL C 0 //ACS_NamedExecuteAlways("PKMNACS_ItemSet", 0)
+loop
+Pickup:
+TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(984,0),"Success")
+fail
+}
+}
+
+actor MegaWeaponEnergyCS : MegaWeaponEnergy replaces MegaWeaponEnergy
+{
+inventory.pickupmessage "Picked up a mega ammo pickup."
+States
+{
+Spawn:
+EBAL I 0
+EBAL I 0 Thing_ChangeTID(0,999)
+EBAL I 1 //ACS_NamedExecuteAlways("PKMNACS_ItemSet", 0)
+DefaultSpawn:
+EBAL IJ 6 A_SetTranslucent(1.0)
+EBAL J 0 //ACS_NamedExecuteAlways("PKMNACS_ItemSet", 0)
+loop
+TranslucentSpawn:
+EBAL IJ 6 A_SetTranslucent(0.5)
+EBAL J 0 //ACS_NamedExecuteAlways("PKMNACS_ItemSet", 0)
+loop
+KorbySpawn:
+EBAL IJ 6 A_SetTranslucent(1.0)
+EBAL J 0 //ACS_NamedExecuteAlways("PKMNACS_ItemSet", 0)
+loop
+Pickup:
+TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(984,0),"Success")
+fail
+}
+}
+
+*/
+//#endregion
+
+
+actor PokemoneySpawner replaces SmallHealth 
+{
+states
+{
+spawn:
+TNT1 A 0
+EBAL E 0 A_JumpIf(CallACS("ItemUseCheck")==1,"Spawn1")
+stop
+
+Spawn1:
+TNT1 A 0 A_Jump(Callacs("MoneySpawnRate"),"Spawn2")
+stop
+
+Spawn2:
+TNT1 A 0 A_SpawnItemEX("PokeMoney")
+stop
+}
+}
+
+actor PokemoneySpawner2 replaces BigHealth 
+{
+states
+{
+spawn:
+TNT1 A 0
+EBAL E 0 A_JumpIf(CallACS("ItemUseCheck")==1,"Spawn1")
+stop
+
+Spawn1:
+TNT1 A 0 A_Jump(256,"Spawn2")
+stop
+
+Spawn2:
+TNT1 A 0 A_SpawnItemEX("PokeMoney")
+stop
+}
+}
+
+actor PokemoneySpawner3 : PokemoneySpawner2 replaces MegaHealth {}
+
+actor PokemoneySpawner4 : PokemoneySpawner replaces WeaponEnergy {}
+actor PokemoneySpawner5 : PokemoneySpawner2 replaces BigWeaponEnergy {}
+actor PokemoneySpawner6 : PokemoneySpawner2 replaces MegaWeaponEnergy {}
+
+actor PokeMoney : CustomInventory 
+{
+inventory.amount 1
+inventory.maxamount 5
+inventory.pickupmessage "Picked Up some Cash"
+Tag "Cash Money"
+inventory.icon "BBERI"
+Inventory.PickupSound "Misc/GetCash"
++INVBAR
++COUNTITEM
+Translation "250:250=197:197", "192:192=75:75", "198:198=241:241"
+scale 2.0
+States
+{
+Spawn:
+PITM A 0 
+PITM H 6
+Goto Spawn
+Pickup:
+EBAL E 0 A_JumpIf(CallACS("ItemUseCheck")==1,"Pickup1")
+fail
+
+Pickup1:
+TNT1 A 0 ACS_NamedExecuteAlways("CashPickup",0)
+stop
+}
+}

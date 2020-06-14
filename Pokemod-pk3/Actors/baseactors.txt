@@ -1,0 +1,746 @@
+actor BasicTeamColorPickup : CustomInventory
+{
+states
+{
+Pickup:
+TNT1 A 0 A_JumpIfInventory("LightTeamFlag",1,"FireB")
+TNT1 A 0 A_JumpIfInventory("WilyTeamFlag",1,"FireR")
+TNT1 A 0 A_JumpIfInventory("CossackTeamFlag",1,"FireG")
+TNT1 A 0 A_JumpIfInventory("KingTeamFlag",1,"FireY")
+TNT1 A 0 A_JumpIfInventory("IsInGame",1,"FireX")
+TNT1 A 0
+Done:
+TNT1 A 0
+stop
+}
+}
+
+actor BasicProjectile
+{
+PROJECTILE
++MTHRUSPECIES
+Speed 40
+Damage (10)
+radius 5
+height 5
+States
+{
+Spawn:
+TNT1 A 0 
+BUST T 1 
+loop
+Death:
+TNT1 A 1 
+stop
+}
+}
+
+actor BasicFastProjectile : FastProjectile
+{
+PROJECTILE
++MTHRUSPECIES
+MissileHeight 8
+Speed 90
+Damage (0)
+radius 5
+height 5
+States
+{
+Spawn:
+TNT1 A 0 
+BUST A 1 
+loop
+Death:
+TNT1 A 1 
+stop
+}
+}
+
+actor BasicHitscanPuff : BulletPuff
+{
+scale 1
++PUFFONACTORS
++ALWAYSPUFF
++PUFFGETSOWNER
++MTHRUSPECIES
+alpha 1.0
+States
+{
+Spawn:
+TNT1 A 0 
+BUST A 1 
+stop
+}
+}
+
+actor BasicExplosion
+{
+Obituary "%o told %k they are OP and should be nerfed."
+DamageType "Normal"
+-SOLID
++DONTBLAST
++NOGRAVITY
++MISSILE
++RIPPER
++SKYEXPLODE
++NOINTERACTION
++DONTSPLASH
++THRUGHOST
++THRUACTORS
++DONTREFLECT
+height 1
+radius 1
+Damage(0)
+Speed 0
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 1 A_Explode(5000,32,0)
+stop
+}
+}
+
+Actor BasicHelper
+{
++NOINTERACTION
+-SOLID
++MISSILE
+radius 1
+height 1
++NOGRAVITY
++DONTBLAST
++DONTREFLECT
+renderstyle none
+States
+{
+Spawn:
+TNT1 A 1
+stop
+Death:
+TNT1 A 1
+stop
+}
+}
+
+actor BasicClientSide
+{
++CLIENTSIDEONLY
++NOINTERACTION
++NOGRAVITY
+-SOLID
+radius 2
+height 2
+scale 2.5
+}
+
+actor BasicNotClientSide : BasicClientSide
+{
+-CLIENTSIDEONLY
+}
+
+actor ReSolidifier : BasicHelper
+{
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_CheckFlag("SOLID","Spawn3",AAPTR_TARGET)
+TNT1 A 0 A_GiveToTarget("UnSolid",1)
+Spawn2:
+TNT1 A 0
+TNT1 A 0 A_GiveToTarget("ReSolidifierCheckPickup",1)
+TNT1 A 1
+TNT1 A 0 A_JumpIfInTargetInventory("UnSolid",1,"Spawn2a")
+TNT1 A 0 A_CheckFlag("SOLID","Spawn3",AAPTR_TARGET)
+goto SuperDeath
+Spawn2a:
+TNT1 A 0 A_JumpIfInTargetInventory("StaminaFlag",1,"Spawn2")
+TNT1 A 0 A_GiveInventory("WeaponCharge",1)
+TNT1 A 0 A_JumpIfInventory("WeaponCharge",10,"Spawn2H")
+goto Spawn2
+Spawn2H:
+TNT1 A 0 A_GiveToTarget("StopBeingUnSolidNoob",1)
+TNT1 A 0 A_TakeInventory("WeaponCharge",100)
+goto Spawn2
+Spawn3:
+TNT1 A 1 A_GiveToTarget("StaminaFlag",5)
+TNT1 A 0 A_JumpIfInTargetInventory("StaminaFlag",496,2)
+TNT1 A 0 A_CheckFlag("SOLID","Spawn3",AAPTR_TARGET)
+TNT1 A 0
+stop
+SuperDeath:
+TNT1 A 1
+stop
+Death:
+TNT1 A 1
+stop
+}
+}
+
+actor UnSolid : Inventory
+{
+inventory.amount 1
+inventory.maxamount 1
+}
+
+actor ReSolidifierCheckPickup : CustomInventory
+{
+states
+{
+Pickup:
+TNT1 A 0 A_SpawnItemEx("ReSolidifierCheck",0,0,0,momx,momy,momz,0,8,0)
+stop
+}
+}
+
+actor StopBeingUnSolidNoob : CustomInventory
+{
+states
+{
+Pickup:
+TNT1 A 0 DamageThing(1,15)
+stop
+}
+}
+
+actor ReSolidifierCheck
+{
+PROJECTILE
++DONTSPLASH
++SKYEXPLODE
++DONTBLAST
++DONTREFLECT
++THRUGHOST
+Damage (0)
+radius 24
+height 84
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 1
+TNT1 A 0 A_GiveToTarget("ReSolidify",1)
+stop
+Death:
+XDeath:
+TNT1 A 0 A_TakeFromTarget("StaminaFlag",2)
+stop
+}
+}
+
+actor ReSolidify : CustomInventory
+{
+states
+{
+Pickup:
+TNT1 A 0 A_JumpIfInventory("UnSolid",1,"Pickup2")
+stop
+Pickup2:
+TNT1 A 0 A_ChangeFlag("SOLID",1)
+TNT1 A 0 A_TakeInventory("UnSolid",1)
+stop
+}
+}
+
+Actor WallJumperX
+{
+-SOLID
++NOGRAVITY
++NOBLOCKMAP
++NOINTERACTION
++NOTARGETSWITCH
+Height 0
+Radius 0
+scale 2.5
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 1 A_JumpIfInTargetInventory("IsDead",1,"Death")
+TNT1 A 0 A_JumpIfInTargetInventory("WallJump",1,"Boost")
+TNT1 A 1 A_JumpIfInTargetInventory("AdaptorFlag",1,"Spawn")
+stop
+Boost:
+TNT1 A 0 A_TakeFromTarget("WallJump",1)
+Goto BoostLoop1
+BoostLoop1:
+TNT1 A 1 A_GiveToTarget("WallJumpGive")
+TNT1 A 1 A_GiveToTarget("NoWallJump",1)
+TNT1 A 0 A_JumpIfInTargetInventory("AdaptorFlag",1,"BoostLoop2")
+stop
+BoostLoop2:
+TNT1 A 0 A_GiveInventory("WallJumpCount",1)
+TNT1 A 0 A_JumpIfInventory("WallJumpCount",34,"BoostEnd")
+TNT1 A 1 A_TakeFromTarget("NoWallJump",999)
+TNT1 A 0 A_JumpIfInventory("WallJumpCount",9,"BoostLoop2")
+TNT1 A 0 A_JumpIfInTargetInventory("AdaptorFlag",1,"BoostLoop2")
+stop
+BoostEnd:
+TNT1 A 7 A_TakeInventory("WallJumpCount",999)
+TNT1 A 1 A_TakeFromTarget("NoWallJump",999)
+TNT1 A 0 A_TakeFromTarget("WallJump",1)
+GoTo Spawn
+Death:
+TNT1 A 0
+Stop
+}
+}
+
+actor WallJumpGive : CustomInventory
+{
+inventory.amount 1
+inventory.maxamount 1
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0
+TNT1 A 0 A_JumpIfInventory("WallN",1,"Jump1")
+TNT1 A 0 A_JumpIfInventory("WallE",1,"Jump2")
+TNT1 A 0 A_JumpIfInventory("WallW",1,"Jump3")
+TNT1 A 0 A_JumpIfInventory("WallS",1,"Jump4")
+stop
+Jump1:
+//TNT1 A 0 A_Recoil (5)
+TNT1 A 0 ACS_ExecuteAlways(160,0)
+TNT1 A 0 ThrustThingZ(0,40,0,0)
+stop
+Jump2:
+TNT1 A 0 
+TNT1 A 0 ACS_ExecuteAlways(160,0)
+TNT1 A 0 ThrustThingZ(0,40,0,0)
+stop
+Jump3:
+TNT1 A 0 
+TNT1 A 0 ACS_ExecuteAlways(160,0)
+TNT1 A 0 ThrustThingZ(0,40,0,0)
+stop
+Jump4:
+TNT1 A 0 ACS_ExecuteAlways(160,0)
+TNT1 A 0 ThrustThingZ(0,40,0,0)
+stop
+}
+}
+
+actor WallJumping : CustomInventory
+{
+inventory.amount 1
+inventory.maxamount 1
++INVENTORY.AUTOACTIVATE
+-INVBAR
+States
+{
+Spawn:
+TNT1 A 1
+//loop
+Use:
+TNT1 A 0 A_SpawnItemEx("WallCheckN",23,0,8,momx, momy, momz, 0, SXF_ABSOLUTEMOMENTUM, 0)
+TNT1 A 0 A_SpawnItemEx("WallCheckS",-23,0,8,momx, momy, momz, 0, SXF_ABSOLUTEMOMENTUM, 0)
+TNT1 A 0 A_SpawnItemEx("WallCheckE",0,23,8,momx, momy, momz, 0, SXF_ABSOLUTEMOMENTUM, 0)
+TNT1 A 0 A_SpawnItemEx("WallCheckW",0,-23,8,momx, momy, momz, 0, SXF_ABSOLUTEMOMENTUM, 0)
+TNT1 A 1
+TNT1 A 0 A_SpawnItemEx("WallJumpMan")
+TNT1 A 1
+//fail
+stop
+}
+}
+
+actor WallJumpMan
+{
+-SOLID
++NOGRAVITY
++MISSILE
++NOTARGETSWITCH
++NOBLOCKMAP
+Height 0
+Radius 0
+scale 2.5
++NOINTERACTION
+States
+{
+Spawn:
+TNT1 A 0 A_JumpIfInTargetInventory("WallJump",1,"Boost")
+Goto Boost
+Boost:
+TNT1 A 0 A_TakeFromTarget("WallJump",1)
+Goto BoostLoop1
+BoostLoop1:
+TNT1 A 1 A_GiveToTarget("WallJumpGive")
+TNT1 A 1 A_GiveToTarget("NoWallJump",1)
+TNT1 A 0 A_JumpIfInTargetInventory("AdaptorFlag",1,"BoostLoop2")
+stop
+BoostLoop2:
+TNT1 A 0 A_GiveInventory("WallJumpCount",1)
+TNT1 A 0 A_JumpIfInventory("WallJumpCount",34,"BoostEnd")
+TNT1 A 1 A_TakeFromTarget("NoWallJump",999)
+TNT1 A 0 A_JumpIfInventory("WallJumpCount",9,"BoostLoop2")
+TNT1 A 0 A_JumpIfInTargetInventory("AdaptorFlag",1,"BoostLoop2")
+stop
+BoostEnd:
+TNT1 A 0// A_Print("BoostEnd")
+TNT1 A 7 A_TakeInventory("WallJumpCount",999)
+TNT1 A 1 A_TakeFromTarget("NoWallJump",999)
+TNT1 A 1 A_TakeFromTarget("WallJumping",1)
+TNT1 A 0 A_TakeFromTarget("WallJump",1)
+stop
+Death:
+TNT1 A 0
+stop
+}
+}
+
+actor WallCheckN 
+{
+PROJECTILE
++RIPPER
++PAINLESS
+Height 10
+Radius 10
+Speed 0
+damage (0)
+States
+{
+Spawn:
+TNT1 A 0 
+TNT1 A 0 A_TakeFromTarget("WallN",1)
+TNT1 A 1
+stop
+Death:
+TNT1 A 0
+TNT1 A 0 A_GiveToTarget("WallN",1)
+TNT1 A 1
+stop
+}
+}
+
+actor WallCheckS : WallCheckN
+{
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_TakeFromTarget("WallS",1)
+TNT1 A 1
+stop
+Death:
+TNT1 A 0
+TNT1 A 0 A_GiveToTarget("WallS",1)
+TNT1 A 1
+stop
+}
+}
+
+actor WallCheckE : WallCheckN
+{
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_TakeFromTarget("WallE",1)
+TNT1 A 1
+stop
+Death:
+TNT1 A 0
+TNT1 A 0 A_GiveToTarget("WallE",1)
+TNT1 A 1
+stop
+}
+}
+
+actor WallCheckW : WallCheckN
+{
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_TakeFromTarget("WallW",1)
+TNT1 A 1
+stop
+Death:
+TNT1 A 0
+TNT1 A 0 A_GiveToTarget("WallW",1)
+TNT1 A 1
+stop
+}
+}
+
+actor WallN : Inventory
+{
+inventory.amount 1
+inventory.maxamount 1
+}
+
+actor WallS : WallN
+{
+}
+actor WallE : WallN
+{
+}
+actor WallW : WallN
+{
+}
+
+//a phony tracer round meant to acompany a hitscan attack to give some indication on it's direction. uses a script called pitchmatch
+//to grab the pitch of the shooter and set it to the actor for angular purposes.
+
+actor FakeBullet : BasicFastProjectile
+{
++CLIENTSIDEONLY
+Speed 175
+Damage (0)
+radius 8
+height 13
+scale 2
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_SetPitch(CallACS("PKMNACS_PitchGrab"))
+Spawn2:
+TNT1 A 0 A_SpawnItemEx("FakeBulletFx",cos(pitch)*-5,0,(sin(pitch)*5),momX,MomY,MomZ,0,SXF_TRANSFERPITCH|SXF_ABSOLUTEMOMENTUM|SXF_TRANSFERTRANSLATION)
+TNT1 A 0 A_SpawnItemEx("FakeBulletFx",cos(pitch)*-10,0,(sin(pitch)*10),momX,MomY,MomZ,0,SXF_TRANSFERPITCH|SXF_ABSOLUTEMOMENTUM|SXF_TRANSFERTRANSLATION)
+TNT1 A 0 A_SpawnItemEx("FakeBulletFx",cos(pitch)*-15,0,(sin(pitch)*15),momX,MomY,MomZ,0,SXF_TRANSFERPITCH|SXF_ABSOLUTEMOMENTUM|SXF_TRANSFERTRANSLATION)
+TNT1 A 0 A_SpawnItemEx("FakeBulletFx",cos(pitch)*-20,0,(sin(pitch)*20),momX,MomY,MomZ,0,SXF_TRANSFERPITCH|SXF_ABSOLUTEMOMENTUM|SXF_TRANSFERTRANSLATION)
+TNT1 A 0 A_SpawnItemEx("FakeBulletFx",cos(pitch)*-25,0,(sin(pitch)*25),momX,MomY,MomZ,0,SXF_TRANSFERPITCH|SXF_ABSOLUTEMOMENTUM|SXF_TRANSFERTRANSLATION)
+TNT1 A 0 A_SpawnItemEx("FakeBulletFx",cos(pitch)*-30,0,(sin(pitch)*30),momX,MomY,MomZ,0,SXF_TRANSFERPITCH|SXF_ABSOLUTEMOMENTUM|SXF_TRANSFERTRANSLATION)
+TNT1 A 0 A_SpawnItemEx("FakeBulletFx",cos(pitch)*-35,0,(sin(pitch)*35),momX,MomY,MomZ,0,SXF_TRANSFERPITCH|SXF_ABSOLUTEMOMENTUM|SXF_TRANSFERTRANSLATION)
+TNT1 A 0 A_SpawnItemEx("FakeBulletFx",cos(pitch)*-40,0,(sin(pitch)*40),momX,MomY,MomZ,0,SXF_TRANSFERPITCH|SXF_ABSOLUTEMOMENTUM|SXF_TRANSFERTRANSLATION)
+TNT1 A 0 A_SpawnItemEx("FakeBulletFx",cos(pitch)*-45,0,(sin(pitch)*45),momX,MomY,MomZ,0,SXF_TRANSFERPITCH|SXF_ABSOLUTEMOMENTUM|SXF_TRANSFERTRANSLATION)
+TNT1 A 0 A_SpawnItemEx("FakeBulletFx",cos(pitch)*-50,0,(sin(pitch)*50),momX,MomY,MomZ,0,SXF_TRANSFERPITCH|SXF_ABSOLUTEMOMENTUM|SXF_TRANSFERTRANSLATION)
+TNT1 A 0 A_SpawnItemEx("FakeBulletFx",cos(pitch)*-55,0,(sin(pitch)*55),momX,MomY,MomZ,0,SXF_TRANSFERPITCH|SXF_ABSOLUTEMOMENTUM|SXF_TRANSFERTRANSLATION)
+TNT1 A 0 A_SpawnItemEx("FakeBulletFx",cos(pitch)*-60,0,(sin(pitch)*60),momX,MomY,MomZ,0,SXF_TRANSFERPITCH|SXF_ABSOLUTEMOMENTUM|SXF_TRANSFERTRANSLATION)
+TNT1 A 0
+TNT1 A 1 
+Goto Spawn2
+Loop
+Death:
+TNT1 A 1 
+stop
+}
+}
+
+	actor FakeBullet_BLUE : FakeBullet
+    {//MissileType "FakeBulletFx"
+    translation "192:192=205:205", "198:198=74:74" , "196:196=196:196"
+	}
+
+	actor FakeBullet_RED : FakeBullet
+	{//MissileType "FakeBulletFx_RED"
+	translation "192:192=171:171", "198:198=41:41" , "196:196=170:170"
+	}
+
+
+    actor FakeBullet_GREEN : FakeBullet
+	{//MissileType "FakeBulletFx_RED"
+	translation "192:192=104:104", "198:198=128:128" , "196:196=138:138"
+    }
+    
+    actor FakeBullet_GOLD : FakeBullet
+	{//MissileType "FakeBulletFx_RED"
+	translation "192:192=229:229", "198:198=232:232" , "196:196=214:214"
+	}
+actor FakeBulletFx : BasicClientSide
+{
+scale 0.5
+Alpha 0.9
+Renderstyle "Add"
+States
+{
+Spawn:
+CRBM A 0
+BASH B 1
+BASH BBB 1 A_Fadeout
+stop
+}
+}
+
+
+actor HexBarrierBase  //for multipart hexagon barriers
+{
+  Radius 14
+  Height 12
+  Scale 0.5
+  RenderStyle None
+  Alpha 0.25
+  //Bloodtype "ShieldHit"
+  //Species "LightMember"
+  Health 900
+  Painchance 256
+  //Designatedteam 0
+  +MISSILE
+  +SHOOTABLE
+  +NOTARGETSWITCH
+  +NOGRAVITY
+  +NOTELEPORT
+  +NOTARGETSWITCH
+  +THRUSPECIES
+  +DONTRIP
+  +DONTSPLASH
+  +FLOORCLIP
+  //+REFLECTIVE
+  +DONTREFLECT
+  +NODAMAGETHRUST
+  //+DONTTHRUST 
+  +DONTBLAST
+  +GHOST	//Give projectiles that you wish to pass through the shield THRUGHOST flag
+  States
+  {
+  Spawn:
+	TNT1 A 0
+	TNT1 A 0 A_SpawnItemEx ("HexBitVisual", 0, 0, 16, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION)
+    HEXA A 2 
+    stop
+	Pain:
+	TNT1 A 0  A_PlaySoundEX ("item/protoreflect","Soundslot5")
+	stop
+  Death:
+    TNT1 A 2
+    stop
+  }
+}
+
+actor ShieldHit
+{
+  Radius 1
+  Height 1
+  Scale 0.5
+  Renderstyle Add
+  +NOGRAVITY
+  +NOINTERACTION
+  States
+  {
+  Spawn:
+    MMFX A 0 bright
+    MMFX A 1 bright A_Stop
+    MMFX A 0 bright A_PlaySound ("weapon/MirrorDeflect")
+    MMFX A 1 bright
+    stop
+  }
+}
+
+actor HexBitVisual
+{
+  Radius 8
+  Height 8
+  Scale 0.5
+  RenderStyle Add	//Fuzzy looks great in software mode
+  Alpha 0.35
+  +NOINTERACTION
+  //+CLIENTSIDEONLY
+  +FLOORCLIP
+  States
+  {
+  Spawn:
+  TNT1 A 0
+    HEXA AAAA 1 bright 
+    //HEXA AA 1 bright A_Fadeout(0.4)
+    stop
+  Death:
+    TNT1 A 2
+    stop
+  }
+}
+
+//Pit Protection
+actor TempPitProtection : CustomInventory
+{
+States
+{
+Pickup:
+TNT1 A 0 A_JumpIfInventory("IsBot",1,"Nope")
+TNT1 A 0 A_JumpIf(CallACS("PKMNACS_CheckPitProtect")==0,"Nope")
+TNT1 A 0 A_JumpIfInventory("TempPitProtectionPowerup",1,"Continue")
+TNT1 A 0 A_ChangeFlag("NOBLOCKMONST",0)
+TNT1 A 0 A_SpawnItemEx("TempPitProtectHelper")
+Continue:
+TNT1 A 0 A_GiveInventory("TempPitProtectionPowerup",1)
+stop
+Nope:
+TNT1 A 0
+stop
+}
+}
+
+actor TempPitProtectionPowerup : Powerup
+{
+Powerup.Duration 35
+}
+
+actor TempPitProtectHelper : BasicHelper
+{
+States
+{
+Spawn:
+TNT1 A 0
+SpawnLoop:
+TNT1 A 1
+TNT1 A 0 A_JumpIfInTargetInventory("TempPitProtectionPowerup",1,"SpawnLoop")
+TNT1 A 0 A_GiveToTarget("TempPitProtectionEnder",1)
+stop
+}
+}
+
+actor TempPitProtectionEnder : CustomInventory
+{
+States
+{
+Pickup:
+TNT1 A 0 A_ChangeFlag("NOBLOCKMONST",1)
+stop
+}
+}
+
+actor TeamTranslationItem : CustomInventory
+{
+inventory.amount 1
+inventory.maxamount 1
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_JumpIfInTargetInventory("LightTeamFlag",1,"BFire")
+TNT1 A 0 A_JumpIfInTargetInventory("WilyTeamFlag",1,"RFire")
+TNT1 A 0 A_JumpIfInTargetInventory("CossackTeamFlag",1,"GFire")
+TNT1 A 0 A_JumpIfInTargetInventory("KingTeamFlag",1,"YFire")
+stop
+BFire:
+TNT1 A 0 Thing_SetTranslation(0, 230)
+stop
+RFire:
+TNT1 A 0 Thing_SetTranslation(0, 231)
+stop
+GFire:
+TNT1 A 0 Thing_SetTranslation(0, 232)
+stop
+YFire:
+TNT1 A 0 Thing_SetTranslation(0, 233)
+stop
+}
+}
+
+
+actor BasicGuideDot
+{
++CLIENTSIDEONLY
++NOINTERACTION
++NOGRAVITY
+-SOLID
+radius 2
+height 2
+Scale 1.0
+Renderstyle Stencil
+StencilColor "#FBFF00"
+States
+{
+Spawn:
+BASB U 0
+BASB U 1
+stop
+}
+}

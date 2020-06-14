@@ -1,0 +1,30 @@
+
+actor SmallEXPCandy : CustomInventory
+{
+states
+{
+Pickup:
+TNT1 A 0 ACS_NamedExecuteAlways("GiveEXP",0,5,1)
+stop
+}
+}
+
+actor MediumEXPCandy : CustomInventory
+{
+states
+{
+Pickup:
+TNT1 A 0 ACS_NamedExecuteAlways("GiveEXP",0,50,1)
+stop
+}
+}
+
+actor LargeEXPCandy : CustomInventory
+{
+states
+{
+Pickup:
+TNT1 A 0 ACS_NamedExecuteAlways("GiveEXP",0,250,1)
+stop
+}
+}

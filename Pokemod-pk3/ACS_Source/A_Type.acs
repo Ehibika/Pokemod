@@ -1,0 +1,91 @@
+/* -=- Pokemon Type -=-
+ * Scripts that handle the adjustment of pokemon Type values
+ * 
+ * 
+
+*/
+
+#library "A_Type"
+#import "Dex_Pokemon.acs"
+#import "Dex_Types.acs"
+#import "Dex_Leveling.acs"
+#import "Dex_BaseStats.acs"
+#import "DB_Player.acs"
+#include "zcommon.acs"
+
+Function Void ClearTypeData (Void)
+{
+str Typename;
+For (int i; i < TYPECOUNT; i++)
+    {
+        Typename = PKMNTypeList[i];
+    TakeInventory(StrParam(s:Typename,s:"Weakness"),99);
+    TakeInventory(StrParam(s:Typename,s:"Resistance"),99);
+    TakeInventory(StrParam(s:Typename,s:"Immunity"),99);
+    TakeInventory(StrParam(s:Typename,s:"STAB"),99);
+    }
+ 
+}
+
+Function Void GiveTypeData (Int TypeNum)
+{
+str Typename = PKMNTypeList[TypeNum];
+GiveInventory(StrParam(s:Typename,s:"STAB"),1);
+
+For (int i; i < TYPECOUNT; i++)
+    {
+
+        switch(PKMNTypeList2[TypeNum][i])
+            {
+            Case T_NEU: break;
+            Case T_WEA: 
+                If(CheckInventory(StrParam(s:PKMNTypeList[i],s:"Weakness")))
+                    {GiveInventory(StrParam(s:PKMNTypeList[i],s:"2xWeakness"),1);
+                    TakeInventory(StrParam(s:PKMNTypeList[i],s:"Weakness"),99);
+                    }
+                Else if (CheckInventory(StrParam(s:PKMNTypeList[i],s:"Resistance")))
+                    {TakeInventory(StrParam(s:PKMNTypeList[i],s:"Resistance"),99);
+                    TakeInventory(StrParam(s:PKMNTypeList[i],s:"Weakness"),99);}
+                Else if (CheckInventory(StrParam(s:PKMNTypeList[i],s:"2xResistance")))
+                    {TakeInventory(StrParam(s:PKMNTypeList[i],s:"2xResistance"),99);
+                    GiveInventory(StrParam(s:PKMNTypeList[i],s:"Resistance"),1);}
+                Else{GiveInventory(StrParam(s:PKMNTypeList[i],s:"Weakness"),1);}
+                break;
+
+            Case T_RES: 
+                If(CheckInventory(StrParam(s:PKMNTypeList[i],s:"Resistance")))
+                {GiveInventory(StrParam(s:PKMNTypeList[i],s:"2xResistance"),1);
+                TakeInventory(StrParam(s:PKMNTypeList[i],s:"Resistance"),99);
+                }               
+                Else if (CheckInventory(StrParam(s:PKMNTypeList[i],s:"Weakness")))
+                {TakeInventory(StrParam(s:PKMNTypeList[i],s:"Resistance"),99);
+                TakeInventory(StrParam(s:PKMNTypeList[i],s:"Weakness"),99);}
+                Else if (CheckInventory(StrParam(s:PKMNTypeList[i],s:"2xWeakness")))
+                {TakeInventory(StrParam(s:PKMNTypeList[i],s:"2xWeakness"),99);
+                GiveInventory(StrParam(s:PKMNTypeList[i],s:"Weakness"),1);}
+                Else{GiveInventory(StrParam(s:PKMNTypeList[i],s:"Resistance"),1);}
+                break;
+            Case T_IMU: 
+                GiveInventory(StrParam(s:PKMNTypeList[i],s:"Immunity"),1); 
+                TakeInventory(StrParam(s:PKMNTypeList[i],s:"Weakness"),99);
+                TakeInventory(StrParam(s:PKMNTypeList[i],s:"Resistance"),99);
+                TakeInventory(StrParam(s:PKMNTypeList[i],s:"2xWeakness"),99);
+                TakeInventory(StrParam(s:PKMNTypeList[i],s:"2xResistance"),99);
+                break;
+            }
+    }
+}
+
+
+Script "SetPlayerType" (VOID)
+{
+    int PlayerDEXNum = GetPokeValue(POKEDEXNUM);
+    int TypeA = StatDEX[PlayerDEXNum][7];
+    int TypeB = StatDEX[PlayerDEXNum][8];
+    ClearTypeData();
+
+    if(TypeA > -1){GiveTypeData(TypeA);}
+    if(TypeB > -1){GiveTypeData(TypeB);}
+
+
+}

@@ -1,0 +1,221 @@
+/* -=- Third Person Camera -=-
+ * Code that handles the 3rd person camera for this mod
+ *
+ * Credit goes to solarsnowfall for the original build
+
+*/
+
+#library "A_3PCam"
+#include "zcommon.acs"
+
+
+#libdefine C_TID	9000	//Default camera tid
+#define MAX_R		190	//Maximum radius (or distance from the player) 128
+#define MAXCamDist		270	
+#define ADJUSTIN_R	2	//Amount to adjust the camera by
+#define ADJUST_R	8	//Amount to adjust the camera by
+#define VIEW_HEIGHT	72.0	//The approximate height of the player's view 41
+#define POFFSET 0.03 //Pitch offset
+
+#Define OFFSET_LEFT -0.08
+#Define OFFSET_RIGHT 0.08
+bool cam_mode[64];		//Variable for turning the camera on or off.
+	
+
+#define CAMANGLE_CLAMP 0.08
+#define CAMHEIGHT_CLAMP 20
+
+
+Script "3rdCameraEnter" ENTER 
+{
+	//log(s:"Enter");
+	//if(PlayerNumber() != ConsolePlayerNumber()){log(s:"Failed Console Check"); Terminate;}
+	//cam_mode[PlayerNumber ()] = ON;
+	if(PlayerIsBot(PlayerNumber())){Terminate;}
+	SetCVar(strparam(s:"PlayerCam_",i:PlayerNumber()),ON);
+	ACS_NamedExecuteAlways("ClientCameraToggle",0,ON);
+}
+
+
+
+Script "3rdCameraRespawn" RESPAWN 
+{
+	//log(s:"Reconnect");
+	//if(PlayerNumber() != ConsolePlayerNumber()){Terminate;}
+	if(PlayerIsBot(PlayerNumber())){Terminate;}
+		if(GetCVar(strparam(s:"PlayerCam_",i:PlayerNumber())) == ON)//(cam_mode[PlayerNumber ()] == ON)
+			{
+			//log(i:PlayerNumber());
+			//cam_mode[PlayerNumber ()] = OFF;
+			SetCVar(strparam(s:"PlayerCam_",i:PlayerNumber()),OFF);
+			ACS_NamedExecuteAlways("ClientCameraToggle",0,OFF);
+			Delay(1);
+			}
+	//cam_mode[PlayerNumber ()] = ON;
+	SetCVar(strparam(s:"PlayerCam_",i:PlayerNumber()),ON);
+	ACS_NamedExecuteAlways("ClientCameraToggle",0,ON);
+}
+
+Script "ClientCameraToggle" (int Toggle) ClientSide
+{
+if(PlayerNumber() != ConsolePlayerNumber()){Terminate;}
+Switch(Toggle)
+	{
+	Case ON:
+	//SetCvar("PlayerCamNum",ConsolePlayerNumber());
+	ACS_NamedExecuteAlways ("3rdCameraHandler", 0, PlayerNumber ());
+	Break;
+	Case OFF:
+	Thing_Remove (C_TID + PlayerNumber ());
+	Break;
+	}
+}
+
+
+Script "3rdCameraHandler" (int p_num) ClientSide
+{
+	Int Clamp_R = GetCvar("sv_CameraZoom");
+	int r = MAX_R-(Clamp_R);
+	//if (p_num != GetCvar("PlayerCamNum")){p_num = GetCvar("PlayerCamNum");}
+	//int test = 0.0;
+	while (GetCVar(strparam(s:"PlayerCam_",i:p_num)) == ON)//(cam_mode[p_num] == ON)
+	{	
+		//test += 0.01;
+		//if(test > 1.0){test = 0.0;}
+		int RoofDist = GetActorCeilingZ (0) - GetActorZ (0);
+		int PlayerHeight = 30.0;
+		int a = GetActorAngle (0);
+		int p = GetActorPitch (0) + Fixedmul(POFFSET,GetUserCvar(p_num,"SV_CameraPitch"));
+		int x = GetActorX (0) ;
+		int y = GetActorY (0) ;
+			int h = (CAMHEIGHT_CLAMP*GetCvar("sv_CameraHeight"));
+		int z = GetActorZ (0) + VIEW_HEIGHT + h;
+		int xyr = r * cos (p) >> 16;
+		
+		if (z > GetActorCeilingZ(0) - (PlayerHeight)){z = GetActorCeilingZ(0) - (PlayerHeight);}
+		//log(f:RoofDist);
+		//log(f:cos(a));
+		//log(f:test);
+		int Y_CamOffset =  Fixedmul(CAMANGLE_CLAMP,GetUserCvar(p_num,"SV_CameraAng"));//sin(a + 0.22) * 64;//Fixedmul(60.0,sin(a));
+		int X_CamOffset =  Fixedmul(CAMANGLE_CLAMP,GetUserCvar(p_num,"SV_CameraAng"));//cos(a + 0.22) * 64;//Fixedmul(60.0,cos(a));
+
+			//SetFont("SCSRC0");
+			//HudMessage(s:"A"; HUDMSG_FADEOUT, 700, CR_red,0.52, 0.52, 2.0,0.5);
+			//GiveInventory("ReticulePickup",1);
+		if (!ThingCountName ("ChaseCam", C_TID+p_num))
+		{
+			while (!Spawn ("ChaseCam", x-cos(a)*xyr, y-sin(a)*xyr, z+sin(p)*r, C_TID+p_num, a >> 8) && r > 0)
+			{
+				r -= ADJUSTIN_R;
+				xyr = cos (p) * r >> 16;
+			}
+			
+			if (ThingCountName ("ChaseCam", C_TID + p_num))
+				ChangeCamera (C_TID + p_num, 0, 0);
+			else
+			{
+				//cam_mode[p_num] = OFF;
+				SetCVar(strparam(s:"PlayerCam_",i:p_num),OFF);
+				print (s:"Camera script failed to initialize.");
+			}
+		}
+	        else
+		{
+			while (!SetActorPosition (C_TID+p_num, (x-cos(a + X_CamOffset)*xyr), (y-sin(a+Y_CamOffset)*xyr), z+sin(p)*r, 0) && r > 0)
+			{
+				r -= ADJUSTIN_R;
+				xyr = cos (p) * r >> 16;
+			}
+			
+			//if()
+			While(!CheckSight(C_TID+p_num,0,0) && r > 0)
+			{
+				if(Playernumber() == ConsolePlayerNumber())
+				{
+				r -= ADJUSTIN_R;
+				xyr = cos (p) * r >> 16;
+				}
+			}
+			/*
+			While(xyzDistance(C_TID,p_num+1000) > MAXCamDist && r > 0)
+			{
+				r -= ADJUST_R;
+				xyr = cos (p) * r >> 16;
+			}
+			*/
+			
+			SetActorAngle (C_TID + p_num, a);
+			SetActorPitch (C_TID + p_num, p);
+			
+			if (r < MAX_R-(Clamp_R))   r += ADJUST_R;
+			
+			if(Clamp_R != GetCvar("sv_CameraZoom"))
+				{
+				Clamp_R = GetCvar("sv_CameraZoom");;
+				r = MAX_R-(Clamp_R);
+				}
+		}
+		
+		if(CheckPlayerCamera(p_num) != C_TID + p_num &&  CheckPlayerCamera(p_num) != 0)
+		{
+		//Gimmie Back my Camera!
+		ChangeCamera (C_TID + p_num, 0, 0);
+		}
+		
+		delay (1);
+	}
+	//log(s:"Camera OFf");
+}
+
+Script "3rdCameraDisconnect" (int p_num) DISCONNECT
+{
+	//log(s:"Disconnect");
+       //cam_mode[p_num] = OFF;
+	   SetCVar(strparam(s:"PlayerCam_",i:p_num),OFF);
+       Thing_Remove (C_TID + p_num);
+}
+
+
+//script "S_Reticule" OPEN {
+script "S_Reticule_C" OPEN CLIENTSIDE {
+	if(PlayerIsBot(PlayerNumber())){Terminate;}
+	
+	int selfNumber = ConsolePlayerNumber();
+	int selfTID = selfNumber + 1000;
+	int ThirdCamNumber = C_TID + selfNumber;
+	int camNumber;
+	SetActorProperty(0,Aprop_renderstyle,STYLE_Translucent);
+	SetActorProperty(0,APROP_ALPHA,0.75); 
+	while(true) {
+		camNumber = CheckPlayerCamera(selfNumber);
+		if(!GetActorproperty(selfTID,Aprop_Invulnerable))
+			{
+			SetActorProperty(selfTID,Aprop_renderstyle,STYLE_Translucent);
+			SetActorProperty(selfTID,APROP_ALPHA,0.75);
+			}
+		//log(i:(camNumber-C_TID) + 1000);
+		if(IsPlayer(selfTID) && ThirdCamNumber == camNumber) 
+		{
+		if(GetUserCvar(selfNumber,"sv_CamReticuleMode")){ GiveActorInventory(selfTID,"ReticulePickup",1); }
+		}
+		delay(1);
+	}
+}
+
+function bool IsPlayer(int tid) {
+	return ((ClassifyActor(tid)&ACTOR_PLAYER)>0);
+}
+
+/*
+// -=- so much for this... -=-
+
+Script "ReticuleColorizer" (void)
+{
+int selfNumber = ConsolePlayerNumber();
+//
+//
+SetActorPRoperty(0,APROP_StencilColor,GetUserCVarString(selfNumber,"sv_CamReticuleColor"));
+//SetResultValue(GetUserCVarString(selfNumber,"sv_CamReticuleColor"));
+log(s:GetActorProperty(0,APROP_StencilColor));
+}
+*/

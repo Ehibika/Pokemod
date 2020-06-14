@@ -1,0 +1,44 @@
+/*
+[+]===================================[+]
+
+[+]===================================[+]
+*/
+
+Actor Jolteon : ClassBase 
+{
+Player.DisplayName "Jolteon"
+Player.SoundClass "Megaman"
+
+Player.StartItem "ThunderShockMove"
+
+//============|
+Player.StartItem "Base_HP", 65
+Player.StartItem "Base_PAttack", 65
+Player.StartItem "Base_PDefense", 60
+Player.StartItem "Base_SAttack", 110
+Player.StartItem "Base_SDefense", 95
+Player.StartItem "Base_Speed", 130
+//============|
+
+States
+{
+Spawn: 
+GJOL A 0
+GJOL B 1 
+GJOL A 1
+GoTo Spawn+2
+See:
+GJOL BCDE 5
+GoTo Spawn+1
+Missile:
+GJOL A 0 
+GJOL F 5 
+GJOL G 4
+GoTo Spawn+2
+
+PainFix:
+GJOL H 0 
+GoTo PainFrames
+}
+}
+

@@ -1,0 +1,116 @@
+{
+    name = "D_Bulbasaur"
+    sprite = P001
+    class = Ditto
+    dsnoway = LAND
+    dsoof = LAND
+    dspldeth = MEGADEAT
+    dspdiehi = MEGADEAT
+    dsplpain = MEGAPAIN
+    dstaunt = dsnone
+    gender = male
+    }
+    
+    {
+    name = "D_Ivysaur"
+    sprite = P002
+    class = Ditto
+    dsnoway = LAND
+    dsoof = LAND
+    dspldeth = MEGADEAT
+    dspdiehi = MEGADEAT
+    dsplpain = MEGAPAIN
+    dstaunt = dsnone
+    gender = male
+    }
+    
+    {
+    name = "D_Venusaur"
+    sprite = P003
+    class = Ditto
+    dsnoway = FATLAND
+    dsoof = FATLAND
+    dspldeth = MEGADEAT
+    dspdiehi = MEGADEAT
+    dsplpain = MEGAPAIN
+    dstaunt = dsnone
+    gender = male
+    }
+    
+    {
+    name = "D_Charmander"
+    sprite = P004
+    class = Ditto
+    dsnoway = LAND
+    dsoof = LAND
+    dspldeth = MEGADEAT
+    dspdiehi = MEGADEAT
+    dsplpain = MEGAPAIN
+    dstaunt = dsnone
+    gender = male
+    }
+    
+    {
+    name = "D_Charmeleon"
+    sprite = P005
+    class = Ditto
+    dsnoway = LAND
+    dsoof = LAND
+    dspldeth = MEGADEAT
+    dspdiehi = MEGADEAT
+    dsplpain = MEGAPAIN
+    dstaunt = dsnone
+    gender = male
+    }
+    
+    {
+    name = "D_Charizard"
+    sprite = P006
+    class = Ditto
+    dsnoway = FATLAND
+    dsoof = FATLAND
+    dspldeth = MEGADEAT
+    dspdiehi = MEGADEAT
+    dsplpain = MEGAPAIN
+    dstaunt = dsnone
+    gender = male
+    }
+    
+    {
+    name = "D_Squirtle"
+    sprite = P008
+    class = Ditto
+    dsnoway = LAND
+    dsoof = LAND
+    dspldeth = MEGADEAT
+    dspdiehi = MEGADEAT
+    dsplpain = MEGAPAIN
+    dstaunt = dsnone
+    gender = male
+    }
+    
+    {
+    name = "D_Wartortle"
+    sprite = P008
+    class = Ditto
+    dsnoway = LAND
+    dsoof = LAND
+    dspldeth = MEGADEAT
+    dspdiehi = MEGADEAT
+    dsplpain = MEGAPAIN
+    dstaunt = dsnone
+    gender = male
+    }
+    
+    {
+    name = "D_Blastoise"
+    sprite = P009
+    class = Ditto
+    dsnoway = FATLAND
+    dsoof = FATLAND
+    dspldeth = MEGADEAT
+    dspdiehi = MEGADEAT
+    dsplpain = MEGAPAIN
+    dstaunt = dsnone
+    gender = male
+    }

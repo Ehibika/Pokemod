@@ -1,0 +1,331 @@
+actor SetupShop : CustomInventory
+{
+States
+{
+Pickup:
+TNT1 A 0 //A_JumpIf(CallACS("CG_INSTAGIB_CHECK"),"PickupNo")
+TNT1 A 0 //A_JumpIf(CallACS("CG_LMS_CHECK"),"Pickup2")
+goto Pickup2
+PickupNo:
+TNT1 A 0
+stop
+Pickup2:
+TNT1 A 0 ACS_NamedExecuteAlways("SHOP_SETUP",0)
+stop
+
+}
+}
+
+actor LoadShopInventory : CustomInventory
+{
+States
+{
+Pickup:
+TNT1 A 0 ACS_NamedExecuteAlways("Read_Inventory",0)
+stop
+}
+}
+
+actor SaveShopInventory : CustomInventory
+{
+States
+{
+Pickup:
+TNT1 A 0 ACS_NamedExecuteAlways("Write_Inventory",0)
+stop
+}
+}
+
+actor Shop : CustomInventory
+{
+states
+{
+Pickup:
+TNT1 A 0 ACS_NamedExecuteAlways("ShopOpenMsg",0)
+TNT1 A 0 A_GiveInventory("CandyShop",1)
+TNT1 A 0 A_GiveInventory("BerryShop",1)
+TNT1 A 0 A_GiveInventory("SeedShop",1)
+stop
+}
+}
+
+actor ShopInvuln : PowerProtection
+{
+Powerup.Duration 0x7FFFFFFF
+damagefactor "Normal", 0.0
+}
+
+actor BuyThing : CustomInventory
+{
+inventory.amount 1
+inventory.maxamount 1
+inventory.pickupmessage "A Weapon Catalog Page."
+Tag "Weapon Catalog"
+Inventory.PickupSound "item/1up"
+scale 2.0
+states
+{
+Spawn:
+WEAP X 1
+loop
+Use:
+TNT1 A 0 //A_CheckFlag("PICKUP","Use1")
+TNT1 A 0 A_Jump(256,"Use1")
+FullCapacity:
+TNT1 A 0 ACS_NamedExecuteAlways("ShopBuyFailSpaceMsg",0)
+BuyFailSound:
+TNT1 A 0 ACS_NamedExecuteAlways("ShopFailSound",0)
+fail
+NoMoney:
+TNT1 A 0 ACS_NamedExecuteAlways("ShopBuyFailMoneyMsg",0)
+goto BuyFailSound
+Possessed:
+TNT1 A 0 ACS_NamedExecuteAlways("ShopBuyFailPossessMsg",0)
+goto BuyFailSound
+MaxLevel:
+TNT1 A 0 ACS_NamedExecuteAlways("ShopBuyFailLVLMsg",0)
+goto BuyFailSound
+BuySuccess:
+TNT1 A 0 ACS_NamedExecuteAlways("ShopBuyMsg",0)
+TNT1 A 0 ACS_NamedExecuteAlways("ShopSuccessSound",0)
+fail
+}
+}
+
+actor BuyThing25 : BuyThing
+{
+states
+{
+Use1:
+TNT1 A 0 A_JumpIf(CallACS("CashCheck",25),"Use2")
+goto NoMoney
+CostPay:
+TNT1 A 0 ACS_NamedExecuteWithResult("CashPay",25)
+goto BuySuccess
+}
+}
+
+actor BuyThing50 : BuyThing
+{
+states
+{
+Use1:
+TNT1 A 0 A_JumpIf(CallACS("CashCheck",50),"Use2")
+goto NoMoney
+CostPay:
+TNT1 A 0 ACS_NamedExecuteWithResult("CashPay",50)
+goto BuySuccess
+}
+}
+
+actor BuyThing75 : BuyThing
+{
+states
+{
+Use1:
+TNT1 A 0 A_JumpIf(CallACS("CashCheck",75),"Use2")
+goto NoMoney
+CostPay:
+TNT1 A 0 ACS_NamedExecuteWithResult("CashPay",75)
+goto BuySuccess
+}
+}
+
+actor BuyThing100 : BuyThing
+{
+states
+{
+Use1:
+TNT1 A 0 A_JumpIf(CallACS("CashCheck",100),"Use2")
+goto NoMoney
+CostPay:
+TNT1 A 0 ACS_NamedExecuteWithResult("CashPay",100)
+goto BuySuccess
+}
+}
+
+actor BuyThing125 : BuyThing
+{
+states
+{
+Use1:
+TNT1 A 0 A_JumpIf(CallACS("CashCheck",125),"Use2")
+goto NoMoney
+CostPay:
+TNT1 A 0 ACS_NamedExecuteWithResult("CashPay",125)
+goto BuySuccess
+}
+}
+
+actor BuyThing150 : BuyThing
+{
+states
+{
+Use1:
+TNT1 A 0 A_JumpIf(CallACS("CashCheck",150),"Use2")
+goto NoMoney
+CostPay:
+TNT1 A 0 ACS_NamedExecuteWithResult("CashPay",150)
+goto BuySuccess
+}
+}
+
+actor BuyThing175 : BuyThing
+{
+states
+{
+Use1:
+TNT1 A 0 A_JumpIf(CallACS("CashCheck",175),"Use2")
+goto NoMoney
+CostPay:
+TNT1 A 0 ACS_NamedExecuteWithResult("CashPay",175)
+goto BuySuccess
+}
+}
+
+actor BuyThing200 : BuyThing
+{
+states
+{
+Use1:
+TNT1 A 0 A_JumpIf(CallACS("CashCheck",200),"Use2")
+goto NoMoney
+CostPay:
+TNT1 A 0 ACS_NamedExecuteWithResult("CashPay",200)
+goto BuySuccess
+}
+}
+
+
+actor BuyThing250 : BuyThing
+{
+states
+{
+Use1:
+TNT1 A 0 A_JumpIf(CallACS("CashCheck",250),"Use2")
+goto NoMoney
+CostPay:
+TNT1 A 0 ACS_NamedExecuteWithResult("CashPay",250)
+goto BuySuccess
+}
+}
+
+actor BuyThing300 : BuyThing
+{
+states
+{
+Use1:
+TNT1 A 0 A_JumpIf(CallACS("CashCheck",300),"Use2")
+goto NoMoney
+CostPay:
+TNT1 A 0 ACS_NamedExecuteWithResult("CashPay",300)
+goto BuySuccess
+}
+}
+
+actor BuyThing350 : BuyThing
+{
+states
+{
+Use1:
+TNT1 A 0 A_JumpIf(CallACS("CashCheck",350),"Use2")
+goto NoMoney
+CostPay:
+TNT1 A 0 ACS_NamedExecuteWithResult("CashPay",350)
+goto BuySuccess
+}
+}
+
+actor BuyThing400 : BuyThing
+{
+states
+{
+Use1:
+TNT1 A 0 A_JumpIf(CallACS("CashCheck",400),"Use2")
+goto NoMoney
+CostPay:
+TNT1 A 0 ACS_NamedExecuteWithResult("CashPay",400)
+goto BuySuccess
+}
+}
+
+actor BuyThing450 : BuyThing
+{
+states
+{
+Use1:
+TNT1 A 0 A_JumpIf(CallACS("CashCheck",450),"Use2")
+goto NoMoney
+CostPay:
+TNT1 A 0 ACS_NamedExecuteWithResult("CashPay",450)
+goto BuySuccess
+}
+}
+
+actor BuyThing500 : BuyThing
+{
+states
+{
+Use1:
+TNT1 A 0 A_JumpIf(CallACS("CashCheck",500),"Use2")
+goto NoMoney
+CostPay:
+TNT1 A 0 ACS_NamedExecuteWithResult("CashPay",500)
+goto BuySuccess
+}
+}
+
+actor BuyThing750 : BuyThing
+{
+states
+{
+Use1:
+TNT1 A 0 A_JumpIf(CallACS("CashCheck",750),"Use2")
+goto NoMoney
+CostPay:
+TNT1 A 0 ACS_NamedExecuteWithResult("CashPay",750)
+goto BuySuccess
+}
+}
+
+actor BuyThing1000 : BuyThing
+{
+states
+{
+Use1:
+TNT1 A 0 A_JumpIf(CallACS("CashCheck",1000),"Use2")
+goto NoMoney
+CostPay:
+TNT1 A 0 ACS_NamedExecuteWithResult("CashPay",1000)
+goto BuySuccess
+}
+}
+
+
+actor ConsumeFX : BasicClientside
+{
+Scale 2.0
+States
+{
+Spawn:
+TNT1 A 0
+TCEX F 0 A_SetScale(Scalex-0.2)
+TCEX F 1 A_Warp(AAPTR_TARGET,16,0,22,0,WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE)
+TCEX E 0 A_SetScale(Scalex-0.2)
+TCEX E 1 A_Warp(AAPTR_TARGET,16,0,22,0,WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE)
+TCEX D 0 A_SetScale(Scalex-0.2)
+TCEX D 1 A_Warp(AAPTR_TARGET,16,0,22,0,WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE)
+TCEX C 0 A_SetScale(Scalex-0.2)
+TCEX C 1 A_Warp(AAPTR_TARGET,16,0,22,0,WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE)
+TCEX B 0 A_SetScale(Scalex-0.2)
+TCEX B 1 A_Warp(AAPTR_TARGET,16,0,22,0,WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE)
+TCEX A 0 A_SetScale(Scalex-0.2)
+TCEX A 1 A_Warp(AAPTR_TARGET,16,0,22,0,WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE)
+TNT1 A 0 A_Stop
+Goto Death
+
+Death:
+TNT1 A 1 
+stop
+}
+}

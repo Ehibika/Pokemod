@@ -1,0 +1,25 @@
+clearplayerclasses
+AddPlayerClass Smeargle 
+AddPlayerClass Bulbasaur 
+AddPlayerClass Charmander 
+AddPlayerClass Squirtle
+
+alias TriggerEvo "CloseMenu; Use EvoStartItem"
+alias MoveTutor "CloseMenu; Use MoveTutorStartItem"
+alias MoveShift "CloseMenu; Use MoveShiftStartItem"
+alias DefaultCam "sv_CameraAng 0.0; sv_CameraHeight 0.0; sv_CameraZoom 60; SV_CameraPitch 1.0; sv_CamReticuleMode 1;"
+
+//===|Shop
+alias BuySmallEXPCandy "CloseMenu; Use BuySmallEXPCandy"
+alias BuyMediumEXPCandy "CloseMenu; Use BuyMediumEXPCandy"
+alias BuyLargeEXPCandy "CloseMenu; Use BuyLargeEXPCandy"
+
+alias BuyHPBerry "CloseMenu; Use BuyHPBerry"
+alias BuyBigHPBerry "CloseMenu; Use BuyBigHPBerry"
+alias BuyPPBerry "CloseMenu; Use BuyPPBerry"
+alias BuyBigPPBerry "CloseMenu; Use BuyBigPPBerry"
+
+alias BuyClenseSeed "CloseMenu; Use BuyClenseSeed"
+alias BuyHasteSeed "CloseMenu; Use BuyHasteSeed"
+alias BuyPowerSeed "CloseMenu; Use BuyPowerSeed"
+alias BuyGuardSeed "CloseMenu; Use BuyGuardSeed"

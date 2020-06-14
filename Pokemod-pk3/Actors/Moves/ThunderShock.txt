@@ -1,0 +1,222 @@
+actor ThunderShockMove : WepMasterBase
+{
+Tag "Thunder Shock"
+Weapon.AmmoUse 1
+Weapon.AmmoGive 20
+weapon.ammotype "ThunderShockPP"
+scale 2.0
+Inventory.Pickupmessage "$PU_MEGABUSTER"
+States
+{
+Spawn:
+WEAP X 1
+stop
+
+
+Fire:
+"####" B 0 //A_Jumpif(CallACS("CheckWeaponFire",RC_A)==0,"NoAmmo")
+"####" B 0 A_Jump(256,"Fire.Aim")
+Goto Fire.Aim
+
+
+Fire.Aim:
+"####" B 1 A_FireCustomMissile("ThunderShockRingSpawner",0,0,0,Aim_OverHead)
+"####" C 0 A_REfire("Fire.Aim")
+"####" B 0 A_Jump(256,"Fire.Bullet")
+Goto Fire.Bullet
+
+Fire.Bullet:
+"####" B 0 A_PlaySoundEx("weapon/coilfire1","Weapon")
+"####" B 0 A_FireCustomMissile("ThunderShockSpawner",0,0,0,Aim_OverHead)
+"####" B 0 A_Jump(256,"Fire.After")
+Goto Fire.After
+
+Fire.After:
+"####" B 1 A_GiveInventory("Recovery_A",17)
+"####" C 0 A_REfire("Fire")
+"####" B 0 A_Jump(256,"Fire.End")
+Goto Fire.End
+
+
+
+
+
+}
+}
+
+actor ThunderShockMove1 : ThunderShockMove {Weapon.SlotNumber 1}
+actor ThunderShockMove2 : ThunderShockMove {Weapon.SlotNumber 2}
+actor ThunderShockMove3 : ThunderShockMove {Weapon.SlotNumber 3}
+actor ThunderShockMove4 : ThunderShockMove {Weapon.SlotNumber 4}
+
+actor ThunderShockMove5 : ThunderShockMove 
+{
+Weapon.SlotNumber 5
+States
+{
+Fire.End:
+TNT1 A 0
+TNT1 A 0 A_TakeInventory("ThunderShockMove5",9)
+TNT1 A 0 A_Jump(256,"Ready")
+Goto Ready
+}
+}
+
+//[+]========================================================================[+]
+//-----------------------------|Ammo & Inventory|------------------------------
+//[+]========================================================================[+]
+actor ThunderShockPP : Ammo {inventory.amount 1 inventory.Maxamount 20}
+
+//[+]========================================================================[+]
+//--------------------------------|Projectiles |--------------------------------
+//[+]========================================================================[+]
+actor ThunderShockRingGuide : BasicHelper
+{
+translation "198:198=220:220", "192:192=229:229"
+	reactiontime 15
+	var int user_angle;
+	States
+	{
+		Spawn:
+		TNT1 A 0
+		TNT1 A 0 //A_SetUserVar("user_angle", random(0, 30))
+		SpawnLoop:
+		TNT1 A 0 A_SpawnItemEx("ThunderShockGuideDot", 50, 0, -(z-floorz)+24, 0, 0, 0, user_angle, 1061)
+		TNT1 A 0 A_SpawnItemEx("ThunderShockGuideDot", -50, 0, -(z-floorz)+24, 0, 0, 0, user_angle, 1061)
+		TNT1 A 0 A_SetUserVar("user_angle", user_angle + 12)
+		TNT1 A 0 A_Countdown
+		loop
+		Death:
+		TNT1 A 0
+		stop
+	}
+}
+
+
+actor ThunderShockRingSpawner : FastProjectile
+{
+translation "198:198=220:220", "192:192=229:229"
++DONTBLAST
++SKYEXPLODE
++THRUACTORS
++CLIENTSIDEONLY
+reactiontime 5
+damage (0)
+radius 3
+height 3
+speed 500
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 1 A_CountDown
+loop
+Death:
+TNT1 A 0 A_SpawnItemEx("ThunderShockRingGuide",0,0,0,0,0,0,0,1)
+stop
+}
+}
+//actor ThunderShockSpawnerB : ThunderShockSpawner{translation "198:198=74:74"}
+//actor ThunderShockSpawnerR : ThunderShockSpawner{translation "198:198=41:41"}
+//actor ThunderShockSpawnerO : ThunderShockSpawner{translation "198:198=128:128"}
+//actor ThunderShockSpawnerP : ThunderShockSpawner{translation "198:198=232:232"}
+
+actor ThunderShockGuideDot : BasicGuideDot {}
+
+actor ThunderShockSpawner : FastProjectile
+{
++DONTBLAST
++SKYEXPLODE
++THRUACTORS
+reactiontime 5
+damage (0)
+radius 3
+height 3
+speed 1000
+States
+{
+Spawn:
+TNT1 A 0 
+TNT1 A 0 A_GiveInventory("ProjectileDCode",1)
+
+Spawn2:
+TNT1 A 0
+TNT1 A 1 A_CountDown
+loop
+Death:
+TNT1 A 0 A_SpawnItemEx("TShock_Bolt",0,0,0,0,0,0,0,1)
+stop
+}
+}
+
+actor TShock_Bolt : LightningBolt
+{
+ReactionTime 1
+DamageType "ThunderShock"
+obituary "$OB_ThunderShock"
+states
+{
+Spawn:
+Y_BC N 0
+TNT1 A 8
+Y_BC N 1 A_SpawnItemEx("TShock_Extend",0,0,355,0,0,0,0,1)
+Y_BC N 0 A_PlaySoundEx("weapon/lightningbolt","Weapon")
+Y_BC N 0 A_Jump(256,"Spawn2")
+Spawn2:
+Y_BC N 0 A_Explode(10,100,0,0,100)
+goto Spawn3
+Spawn2a:
+Y_BC N 0 A_SpawnItemEx("TShock_BoltFX2",0,0,8,0,0,0,0,1)
+goto Spawn3
+Spawn3:
+Y_BC O 1
+Y_BC P 0 A_SpawnItemEx("TShock_BoltFX",Random(32,96),Random(32,96),32,0,0,0,0,1)
+Y_BC P 0 A_SpawnItemEx("TShock_BoltFX",Random(-32,-96),Random(-32,-96),64,0,0,0,0,1)
+Y_BC P 0 A_SpawnItemEx("TShock_BoltFX",Random(32,96),Random(32,96),96,0,0,0,0,1)
+Y_BC P 0 A_SpawnItemEx("TShock_BoltFX",Random(-32,-96),Random(-32,-96),128,0,0,0,0,1)
+Y_BC P 0 A_SpawnItemEx("TShock_BoltFX",Random(32,96),Random(32,96),160,0,0,0,0,1)
+Y_BC P 0 A_SpawnItemEx("TShock_BoltFX",Random(-32,-96),Random(-32,-96),192,0,0,0,0,1)
+Y_BC PQR 1
+Y_BC O 0 A_CountDown
+Y_BC N 1 A_SpawnItemEx("TShock_Extend",0,0,355,0,0,0,0,1)
+goto Spawn+3
+}
+}
+
+
+
+Actor TShock_Extend : LightningExtend
+{
+States
+{
+Spawn:
+Y_BC S 0 
+Y_BC S 0 A_JumpIf(ceilingz-z <= 32,"Death")
+Y_BC S 0 A_SpawnItemEx("TShock_Extend",0,0,160,0,0,0,0,1)
+Y_BC SSTUV 1
+stop
+}
+}
+
+
+actor TShock_BoltFX : BasicClientSide
+{
+Scale 2.0
+States
+{
+Spawn:
+Y_BC K 0
+Y_BC KKLLMM 1 A_ScaleVelocity(frandom(1.025,1.100))
+stop
+}
+}
+
+actor TShock_BoltFX2 : BasicClientSide
+{
+States
+{
+Spawn:
+Y_BC DEFGHIJ 2
+stop
+}
+}

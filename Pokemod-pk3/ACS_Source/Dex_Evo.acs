@@ -1,0 +1,27 @@
+/* -=- Evolution Dex -=-
+ * Contains evolution data for each pokemon, the level in which that form can be reached, and
+ * what forms are available going forward.
+ * 
+ * 
+
+*/
+#library "Dex_Evo"
+#import "Dex_Pokemon.acs"
+#include "zcommon.acs"
+Int EvoDEX [MAXDEX][6] = {
+    //      Paths  |Level |1st |2nd |3rd 	|FamilyID
+    /*|0|*/{NULLEVO, 3,    NULLEVO,  NULLEVO, NULLEVO	,0},
+    //Eevee is a special case, he has his own array
+
+    /*|1|*/{1,      3,     IVYSAUR,  NULLEVO,     NULLEVO,1},
+    /*|2|*/{1,      7,     VENUSAUR,  NULLEVO,     NULLEVO,1},
+    /*|3|*/{0,      0,     NULLEVO,  NULLEVO,     NULLEVO,1},
+
+    /*|4|*/{1,      3,     CHARMELEON,  NULLEVO,     NULLEVO,2},
+    /*|5|*/{1,      7,     CHARIZARD,  NULLEVO,     NULLEVO,2},
+    /*|6|*/{0,      0,     NULLEVO,  NULLEVO,     NULLEVO,2},
+
+    /*|7|*/{1,      3,     WARTORTLE,  NULLEVO,     NULLEVO,3},
+    /*|8|*/{1,      7,     BLASTOISE,  NULLEVO,     NULLEVO,3},
+    /*|9|*/{0,      0,     NULLEVO,  NULLEVO,     NULLEVO,3},
+};

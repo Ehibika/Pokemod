@@ -1,0 +1,31 @@
+#include "Actors/stats/attackbase.txt"
+#include "Actors/stats/defensebase.txt"
+
+#include "Actors/stats/physicalattack.txt"
+#include "Actors/stats/specialattack.txt"
+#include "Actors/stats/physicaldefense.txt"
+#include "Actors/stats/specialdefense.txt"
+
+
+#include "Actors/stats/PKMNTypes.txt"
+
+Actor Base_Stat : Inventory {Inventory.amount 1 inventory.maxamount 250 }
+Actor Base_HP : Base_Stat {}
+Actor Base_PAttack : Base_Stat {}
+Actor Base_PDefense : Base_Stat {}
+Actor Base_SAttack : Base_Stat {}
+Actor Base_SDefense : Base_Stat {}
+Actor Base_Speed : Base_Stat {}
+
+
+Actor Active_Stat : Inventory {Inventory.amount 1 inventory.maxamount 999 }
+Actor Active_HP : Active_Stat {}
+Actor Active_PAttack : Active_Stat {}
+Actor Active_PDefense : Active_Stat {}
+Actor Active_SAttack : Active_Stat {}
+Actor Active_SDefense : Active_Stat {}
+Actor Active_Speed : Active_Stat {}
+
+
+Actor SBAR_HP : Active_Stat {}
+Actor SBAR_LVL : Active_Stat {}

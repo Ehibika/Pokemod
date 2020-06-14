@@ -1,0 +1,39 @@
+/* -=- BaseStats Dex -=-
+ * Contains pokemon specific statistical values, including base stats, which dictate stat growths,
+ * Bounty, which defines how much EXP this pokemon offers when eliminated, and the pokemon's types
+ * 
+ * 
+
+*/
+#library "Dex_BaseStats"
+#import "Dex_Pokemon.acs"
+#import "Dex_Types.acs"
+#import "Dex_Leveling.acs"
+#include "zcommon.acs"
+//#region -=- Base Stat Constants -=-
+#region -=- Base Stat Constants -=-
+#LIBDEFINE BASE_HP 0
+#LIBDEFINE BASE_PATK 1
+#LIBDEFINE BASE_PDEF 2
+#LIBDEFINE BASE_SATK 3
+#LIBDEFINE BASE_SDEF 4
+#LIBDEFINE BASE_SPD 5
+#endregion
+//#endregion
+
+Int StatDEX [MAXDEX][10] = {
+//      HP  |Atk |Def |S.Atk |S.Def |Speed |Bounty |Type1 |Type2    |Growth Speed
+/*|0|*/{55, 20,  35,  20,     45,    75,    10,		Type_Normal,Type_NULL,  LVLSPD_Swift},
+
+/*|1|*/{45, 49,  49,  65,     65,    45,    5,		Type_Grass,	Type_Poison,  LVLSPD_Normal},
+/*|2|*/{60, 62,  63,  80,     80,    60,    10,		Type_Grass,	Type_Poison,  LVLSPD_Normal},
+/*|3|*/{80, 82,  83,  100,    100,   80,    20,	Type_Grass,	Type_Poison,  LVLSPD_Normal},
+
+/*|4|*/{39, 52,  43,  60,     50,    65,    5,		Type_Fire,Type_NULL,  LVLSPD_Normal},
+/*|5|*/{58, 64,  58,  80,     65,    80,    10,		Type_Fire,Type_NULL,  LVLSPD_Normal},
+/*|6|*/{78, 84,  78,  109,    85,    100,   20,	Type_Fire,Type_Flying,  LVLSPD_Normal},
+
+/*|7|*/{55, 40,  65,  50,     66,    38,    5,		Type_Water,Type_NULL,  LVLSPD_Normal},
+/*|8|*/{70, 52,  84,  65,     84,    50,    10,		Type_Water,Type_NULL,  LVLSPD_Normal},
+/*|9|*/{100, 62,  105, 85,     105,   73,    20,	Type_Water,Type_NULL,  LVLSPD_Normal},
+};

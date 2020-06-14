@@ -1,0 +1,44 @@
+/*
+[+]===================================[+]
+
+[+]===================================[+]
+*/
+
+Actor Flareon : ClassBase 
+{
+Player.DisplayName "Flareon"
+Player.SoundClass "Megaman"
+
+Player.StartItem "EmberMove"
+
+//============|
+Player.StartItem "Base_HP", 65
+Player.StartItem "Base_PAttack", 130
+Player.StartItem "Base_PDefense", 65
+Player.StartItem "Base_SAttack", 95
+Player.StartItem "Base_SDefense", 110
+Player.StartItem "Base_Speed", 65
+//============|
+
+States
+{
+Spawn: 
+GFLA A 0
+GFLA B 1 
+GFLA A 1
+GoTo Spawn+2
+See:
+GFLA BCDE 5
+GoTo Spawn+1
+Missile:
+GFLA A 0 
+GFLA F 5 
+GFLA G 4
+GoTo Spawn+2
+
+PainFix:
+GFLA H 0 
+GoTo PainFrames
+}
+}
+

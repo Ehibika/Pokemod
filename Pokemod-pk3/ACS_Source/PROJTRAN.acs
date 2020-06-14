@@ -1,0 +1,61 @@
+#library "ProjTran"
+#include "zcommon.acs"
+
+#DEFINE WEP_TRANS_START 3000
+
+function bool ProjTeamColorCvar(void)
+{
+	//return (getCvar("PKMN_CV_ProjTeamColor")>0);
+	return (ProjTeamColorCvarServer()&&ProjTeamColorCvarClient());
+}
+
+function bool ProjTeamColorCvarClient(void)
+{
+	return (getUserCvar(ConsolePlayerNumber(),"PKMN_CV_ProjTeamColor")>0);
+}
+
+function bool ProjTeamColorCvarServer(void)
+{
+	return (getCvar("PKMN_sv_projteamcolor")>0);
+}
+
+script "Set_Projectile_Translation" (int i) CLIENTSIDE
+{
+//if(ProjTeamColorCvar()) {
+if(ProjTeamColorCvarClient()) {
+	Thing_SetTranslation(0,WEP_TRANS_START+i);
+	//Thing_SetTranslation(0,4000);
+}
+}
+
+/*
+script "Create_Test_Translation" OPEN CLIENTSIDE
+{
+Delay(25); // Fixes P_PlayerThink spam ?
+
+CreateTranslation(4000, 0:255=[255,0,0]:[255,0,0]);
+}
+*/
+
+script "Check_ProjectileColor_Server" (void)
+{
+SetResultValue(ProjTeamColorCvarServer());
+}
+
+script "Copy_Taget_Translation_Always" (void) CLIENTSIDE
+{
+	int o = ActivatorTid();
+	int u = UniqueTID();
+	
+	Thing_ChangeTID(0,u);
+	SetActivator(0,AAPTR_TARGET);
+	
+	Thing_SetTranslation(u, -1);
+	
+	Thing_ChangeTID(u,o);
+}
+
+script "SyncTargetToTID" (int tid) CLIENTSIDE
+{
+SetPointer(AAPTR_TARGET, tid);
+}

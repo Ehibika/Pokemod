@@ -1,0 +1,53 @@
+actor ConsumableBase : CustomInventory 
+{
+inventory.amount 1
+inventory.maxamount 5
+inventory.pickupmessage "$PU_ETANK"
+Tag "$TAG_ETANK"
+inventory.icon "ETANK"
+Inventory.PickupSound "Misc/GetItem"
++INVBAR
++COUNTITEM
++INVENTORY.UNDROPPABLE
+scale 2.0
+States
+{
+Spawn:
+EBAL F 0 
+EBAL FE 6
+Goto Spawn
+Drop:
+TNT1 A 0 ACS_NamedExecuteAlways("Write_Inventory",0,2)
+stop
+
+Pickup:
+TNT1 A 0 ACS_NamedExecuteAlways("Write_Inventory",0,0)
+stop
+Use:
+EBAL E 0 A_JumpIf(CallACS("ItemUseCheck")==1,"use1")
+Goto UseFail
+use1:
+EBAL F 0
+Goto UseFail
+use2:
+EBAL F 0
+Goto UseFail
+
+UseFail:
+EBAL E 0 ACS_Execute(979,0)
+fail
+
+Success:
+EBAL E 0 A_PlaySoundEx("item/refill","Voice")
+fail
+Death:
+TNT1 A 0
+stop
+}
+}
+
+
+
+#include "Actors/inventory/Shop/ShopInventory/Candies.txt"
+#include "Actors/inventory/Shop/ShopInventory/Berries.txt"
+#include "Actors/inventory/Shop/ShopInventory/Seeds.txt"

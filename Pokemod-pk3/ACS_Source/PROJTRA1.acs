@@ -1,0 +1,672 @@
+#library "ProjTran"
+#include "zcommon.acs"
+
+#DEFINE PALETTE_VAL 3 //r,g,b >_>
+
+#DEFINE ATK_COLOR_LIGHT 3000
+#DEFINE ATK_COLOR_WILY 3001
+#DEFINE ATK_COLOR_COSSACK 3002
+#DEFINE ATK_COLOR_KING 3003
+
+#DEFINE TEAM_COUNT 4
+#DEFINE COLORVALS_PER_TEAM 6
+
+/*
+56, 184, 248
+0, 112, 232
+
+255, 155, 155
+224, 0, 88
+
+184, 248, 24
+0, 168, 0
+
+248, 184, 0
+192, 112, 0
+*/
+
+int team_color_input[TEAM_COUNT][COLORVALS_PER_TEAM] = 
+{
+//lighter r, g, b, darker r, g, b
+{56, 184, 248, 0, 112, 232},
+{255, 155, 155, 224, 0, 88},
+{184, 248, 24, 0, 168, 0},
+{248, 184, 0, 192, 112, 0}
+};
+
+script "Create_Projectile_Translations" OPEN CLIENTSIDE
+{
+Delay(25); // Fixes P_PlayerThink spam ?
+
+InitializeColorData();
+CreateTotalTranslation(ATK_COLOR_LIGHT, 0);
+CreateTotalTranslation(ATK_COLOR_WILY, 1);
+CreateTotalTranslation(ATK_COLOR_COSSACK, 2);
+CreateTotalTranslation(ATK_COLOR_KING, 3);
+}
+
+function void InitializeColorData(void)
+{
+InitializeTeamColorData();
+InitializePaletteDataLum();
+}
+
+int team_color_light[TEAM_COUNT][PALETTE_VAL];
+int team_color_light_lum[TEAM_COUNT];
+int team_color_dark[TEAM_COUNT][PALETTE_VAL];
+int team_color_dark_lum[TEAM_COUNT];
+
+int team_color_lighter[TEAM_COUNT][PALETTE_VAL];
+int team_color_darker[TEAM_COUNT][PALETTE_VAL];
+
+function void InitializeTeamColorData(void)
+{
+int i;
+
+int a;
+int b;
+int c;
+for(i = 0; i<TEAM_COUNT; i++) {
+	a = team_color_input[i][0];
+	b = team_color_input[i][1];
+	c = team_color_input[i][2];
+	
+	team_color_light[i][0] = a;
+	team_color_light[i][1] = b;
+	team_color_light[i][2] = c;
+	
+	team_color_light_lum[i] = (a+b+c)/3;
+	
+	team_color_lighter[i][0] = (a+255)/2;
+	team_color_lighter[i][1] = (b+255)/2;
+	team_color_lighter[i][2] = (c+255)/2;
+
+	a = team_color_input[i][3];
+	b = team_color_input[i][4];
+	c = team_color_input[i][5];
+	
+	team_color_dark[i][0] = a;
+	team_color_dark[i][1] = b;
+	team_color_dark[i][2] = c;
+	
+	team_color_dark_lum[i] = (a+b+c)/3;
+	
+	team_color_darker[i][0] = a/8;
+	team_color_darker[i][1] = b/8;
+	team_color_darker[i][2] = c/8;
+}
+}
+
+#DEFINE PALETTE_SIZE 256
+
+int palette_data[PALETTE_SIZE][PALETTE_VAL] = 
+{
+{0, 0, 0}, 
+{31, 23, 11}, 
+{23, 15, 7}, 
+{75, 75, 75}, 
+{255, 255, 255}, 
+{27, 27, 27}, 
+{19, 19, 19}, 
+{11, 11, 11}, 
+{7, 7, 7}, 
+{47, 55, 31}, 
+{35, 43, 15}, 
+{23, 31, 7}, 
+{15, 23, 0}, 
+{79, 59, 43}, 
+{71, 51, 35}, 
+{63, 43, 27}, 
+{255, 183, 183}, 
+{247, 171, 171}, 
+{243, 163, 163}, 
+{235, 151, 151}, 
+{231, 143, 143}, 
+{223, 135, 135}, 
+{219, 123, 123}, 
+{211, 115, 115}, 
+{203, 107, 107}, 
+{199, 99, 99}, 
+{191, 91, 91}, 
+{187, 87, 87}, 
+{179, 79, 79}, 
+{175, 71, 71}, 
+{167, 63, 63}, 
+{163, 59, 59}, 
+{248, 216, 248}, 
+{248, 192, 248}, 
+{248, 184, 248}, 
+{255, 184, 232}, 
+{248, 192, 216}, 
+{248, 184, 176}, 
+{248, 112, 176}, 
+{255, 96, 176}, 
+{216, 64, 96}, 
+{224, 0, 88}, 
+{216, 40, 0}, 
+{176, 16, 48}, 
+{168, 0, 16}, 
+{160, 0, 0}, 
+{136, 20, 0}, 
+{120, 8, 0}, 
+{255, 235, 223}, 
+{255, 227, 211}, 
+{255, 219, 199}, 
+{255, 211, 187}, 
+{255, 207, 179}, 
+{255, 199, 167}, 
+{255, 191, 155}, 
+{255, 187, 147}, 
+{224, 176, 255}, 
+{160, 136, 248}, 
+{152, 120, 248}, 
+{160, 112, 255}, 
+{104, 68, 252}, 
+{144, 64, 240}, 
+{128, 0, 240}, 
+{96, 16, 160}, 
+{208, 200, 248}, 
+{216, 184, 248}, 
+{192, 176, 255}, 
+{184, 184, 248}, 
+{160, 184, 255}, 
+{96, 160, 255}, 
+{104, 136, 252}, 
+{88, 144, 248}, 
+{80, 128, 255}, 
+{64, 96, 248}, 
+{0, 112, 232}, 
+{0, 88, 248}, 
+{64, 64, 255}, 
+{48, 80, 128}, 
+{24, 56, 88}, 
+{64, 0, 152}, 
+{239, 239, 239}, 
+{231, 231, 231}, 
+{223, 223, 223}, 
+{219, 219, 219}, 
+{211, 211, 211}, 
+{203, 203, 203}, 
+{199, 199, 199}, 
+{191, 191, 191}, 
+{183, 183, 183}, 
+{179, 179, 179}, 
+{171, 171, 171}, 
+{167, 167, 167}, 
+{159, 159, 159}, 
+{124, 124, 124}, 
+{120, 120, 120}, 
+{112, 112, 112}, 
+{184, 248, 216}, 
+{176, 248, 200}, 
+{160, 255, 200}, 
+{168, 240, 184}, 
+{184, 248, 184}, 
+{160, 240, 160}, 
+{112, 224, 144}, 
+{88, 248, 152}, 
+{184, 248, 24}, 
+{152, 232, 0}, 
+{128, 208, 16}, 
+{112, 240, 64}, 
+{88, 216, 84}, 
+{72, 216, 72}, 
+{0, 184, 0}, 
+{72, 168, 16}, 
+{80, 160, 0}, 
+{56, 108, 0}, 
+{56, 104, 0}, 
+{72, 88, 0}, 
+{72, 160, 104}, 
+{0, 168, 68}, 
+{0, 144, 56}, 
+{48, 96, 64}, 
+{63, 131, 47}, 
+{55, 115, 43}, 
+{47, 99, 35}, 
+{39, 83, 27}, 
+{31, 67, 23}, 
+{23, 51, 15}, 
+{19, 35, 11}, 
+{11, 23, 7}, 
+{0, 168, 0}, 
+{0, 144, 0}, 
+{0, 120, 0}, 
+{0, 104, 0}, 
+{0, 88, 0}, 
+{0, 80, 0}, 
+{0, 64, 0}, 
+{0, 56, 16}, 
+{224, 248, 160}, 
+{200, 240, 128}, 
+{216, 248, 120}, 
+{136, 136, 0}, 
+{103, 83, 63}, 
+{95, 75, 55}, 
+{87, 67, 51}, 
+{83, 63, 47}, 
+{159, 131, 99}, 
+{143, 119, 83}, 
+{131, 107, 75}, 
+{119, 95, 63}, 
+{103, 83, 51}, 
+{91, 71, 43}, 
+{79, 59, 35}, 
+{67, 51, 27}, 
+{123, 127, 99}, 
+{111, 115, 87}, 
+{103, 107, 79}, 
+{91, 99, 71}, 
+{83, 87, 59}, 
+{71, 79, 51}, 
+{63, 71, 43}, 
+{55, 63, 39}, 
+{255, 255, 115}, 
+{235, 219, 87}, 
+{215, 187, 67}, 
+{195, 155, 47}, 
+{175, 123, 31}, 
+{155, 91, 19}, 
+{135, 67, 7}, 
+{115, 43, 0}, 
+{252, 252, 252}, 
+{255, 219, 219}, 
+{255, 187, 187}, 
+{255, 155, 155}, 
+{255, 123, 123}, 
+{255, 95, 95}, 
+{255, 63, 63}, 
+{255, 31, 31}, 
+{255, 0, 0}, 
+{239, 0, 0}, 
+{227, 0, 0}, 
+{215, 0, 0}, 
+{203, 0, 0}, 
+{191, 0, 0}, 
+{179, 0, 0}, 
+{167, 0, 0}, 
+{155, 0, 0}, 
+{139, 0, 0}, 
+{127, 0, 0}, 
+{115, 0, 0}, 
+{103, 0, 0}, 
+{91, 0, 0}, 
+{79, 0, 0}, 
+{67, 0, 0}, 
+{0, 248, 252}, 
+{0, 232, 228}, 
+{0, 136, 148}, 
+{0, 64, 88}, 
+{164, 232, 252}, 
+{56, 192, 252}, 
+{0, 120, 252}, 
+{0, 0, 252}, 
+{192, 208, 248}, 
+{168, 224, 248}, 
+{152, 248, 240}, 
+{144, 208, 255}, 
+{96, 208, 224}, 
+{56, 184, 248}, 
+{64, 144, 192}, 
+{0, 128, 136}, 
+{248, 248, 248}, 
+{255, 235, 219}, 
+{252, 224, 168}, 
+{248, 216, 168}, 
+{255, 216, 160}, 
+{248, 224, 160}, 
+{255, 240, 144}, 
+{248, 216, 120}, 
+{252, 160, 68}, 
+{248, 152, 56}, 
+{255, 160, 0}, 
+{255, 120, 48}, 
+{228, 92, 16}, 
+{224, 80, 0}, 
+{200, 72, 8}, 
+{160, 48, 0}, 
+{255, 200, 184}, 
+{248, 120, 88}, 
+{255, 120, 48}, 
+{248, 56, 0}, 
+{232, 208, 32}, 
+{248, 184, 0}, 
+{172, 124, 0}, 
+{136, 112, 0}, 
+{192, 112, 0}, 
+{120, 64, 0}, 
+{80, 48, 0}, 
+{64, 40, 0}, 
+{248, 120, 248}, 
+{240, 96, 255}, 
+{216, 64, 192}, 
+{216, 0, 204}, 
+{0, 128, 136}, 
+{0, 0, 188}, 
+{40, 0, 184}, 
+{32, 0, 176}, 
+{0, 0, 168}, 
+{32, 24, 136}, 
+{96, 32, 192}, 
+{0, 0, 0}, 
+{236, 184, 68}, 
+{68, 40, 188}, 
+{255, 123, 255}, 
+{184, 0, 184}, 
+{152, 32, 120}, 
+{148, 0, 132}, 
+{136, 0, 112}, 
+{167, 107, 107}
+};
+
+int palette_data_lum[PALETTE_SIZE];
+
+function void InitializePaletteDataLum(void)
+{
+int i;
+int j;
+int lum;
+for(i = 0; i<PALETTE_SIZE; i++) {
+	lum = 0;
+	for(j = 0; j<PALETTE_VAL; j++) lum += palette_data[i][j];
+	palette_data_lum[i] = lum/PALETTE_VAL;
+}
+}
+
+function void CreateTotalTranslation(int translationid, int team)
+{
+CreateTranslation(translationid,
+0:0=[TeamColorR(0,team),TeamColorG(0,team),TeamColorB(0,team)]:[TeamColorR(0,team),TeamColorG(0,team),TeamColorB(0,team)],
+1:1=[TeamColorR(1,team),TeamColorG(1,team),TeamColorB(1,team)]:[TeamColorR(1,team),TeamColorG(1,team),TeamColorB(1,team)],
+2:2=[TeamColorR(2,team),TeamColorG(2,team),TeamColorB(2,team)]:[TeamColorR(2,team),TeamColorG(2,team),TeamColorB(2,team)],
+3:3=[TeamColorR(3,team),TeamColorG(3,team),TeamColorB(3,team)]:[TeamColorR(3,team),TeamColorG(3,team),TeamColorB(3,team)],
+4:4=[TeamColorR(4,team),TeamColorG(4,team),TeamColorB(4,team)]:[TeamColorR(4,team),TeamColorG(4,team),TeamColorB(4,team)],
+5:5=[TeamColorR(5,team),TeamColorG(5,team),TeamColorB(5,team)]:[TeamColorR(5,team),TeamColorG(5,team),TeamColorB(5,team)],
+6:6=[TeamColorR(6,team),TeamColorG(6,team),TeamColorB(6,team)]:[TeamColorR(6,team),TeamColorG(6,team),TeamColorB(6,team)],
+7:7=[TeamColorR(7,team),TeamColorG(7,team),TeamColorB(7,team)]:[TeamColorR(7,team),TeamColorG(7,team),TeamColorB(7,team)],
+8:8=[TeamColorR(8,team),TeamColorG(8,team),TeamColorB(8,team)]:[TeamColorR(8,team),TeamColorG(8,team),TeamColorB(8,team)],
+9:9=[TeamColorR(9,team),TeamColorG(9,team),TeamColorB(9,team)]:[TeamColorR(9,team),TeamColorG(9,team),TeamColorB(9,team)],
+10:10=[TeamColorR(10,team),TeamColorG(10,team),TeamColorB(10,team)]:[TeamColorR(10,team),TeamColorG(10,team),TeamColorB(10,team)],
+11:11=[TeamColorR(11,team),TeamColorG(11,team),TeamColorB(11,team)]:[TeamColorR(11,team),TeamColorG(11,team),TeamColorB(11,team)],
+12:12=[TeamColorR(12,team),TeamColorG(12,team),TeamColorB(12,team)]:[TeamColorR(12,team),TeamColorG(12,team),TeamColorB(12,team)],
+13:13=[TeamColorR(13,team),TeamColorG(13,team),TeamColorB(13,team)]:[TeamColorR(13,team),TeamColorG(13,team),TeamColorB(13,team)],
+14:14=[TeamColorR(14,team),TeamColorG(14,team),TeamColorB(14,team)]:[TeamColorR(14,team),TeamColorG(14,team),TeamColorB(14,team)],
+15:15=[TeamColorR(15,team),TeamColorG(15,team),TeamColorB(15,team)]:[TeamColorR(15,team),TeamColorG(15,team),TeamColorB(15,team)],
+16:16=[TeamColorR(16,team),TeamColorG(16,team),TeamColorB(16,team)]:[TeamColorR(16,team),TeamColorG(16,team),TeamColorB(16,team)],
+17:17=[TeamColorR(17,team),TeamColorG(17,team),TeamColorB(17,team)]:[TeamColorR(17,team),TeamColorG(17,team),TeamColorB(17,team)],
+18:18=[TeamColorR(18,team),TeamColorG(18,team),TeamColorB(18,team)]:[TeamColorR(18,team),TeamColorG(18,team),TeamColorB(18,team)],
+19:19=[TeamColorR(19,team),TeamColorG(19,team),TeamColorB(19,team)]:[TeamColorR(19,team),TeamColorG(19,team),TeamColorB(19,team)],
+20:20=[TeamColorR(20,team),TeamColorG(20,team),TeamColorB(20,team)]:[TeamColorR(20,team),TeamColorG(20,team),TeamColorB(20,team)],
+21:21=[TeamColorR(21,team),TeamColorG(21,team),TeamColorB(21,team)]:[TeamColorR(21,team),TeamColorG(21,team),TeamColorB(21,team)],
+22:22=[TeamColorR(22,team),TeamColorG(22,team),TeamColorB(22,team)]:[TeamColorR(22,team),TeamColorG(22,team),TeamColorB(22,team)],
+23:23=[TeamColorR(23,team),TeamColorG(23,team),TeamColorB(23,team)]:[TeamColorR(23,team),TeamColorG(23,team),TeamColorB(23,team)],
+24:24=[TeamColorR(24,team),TeamColorG(24,team),TeamColorB(24,team)]:[TeamColorR(24,team),TeamColorG(24,team),TeamColorB(24,team)],
+25:25=[TeamColorR(25,team),TeamColorG(25,team),TeamColorB(25,team)]:[TeamColorR(25,team),TeamColorG(25,team),TeamColorB(25,team)],
+26:26=[TeamColorR(26,team),TeamColorG(26,team),TeamColorB(26,team)]:[TeamColorR(26,team),TeamColorG(26,team),TeamColorB(26,team)],
+27:27=[TeamColorR(27,team),TeamColorG(27,team),TeamColorB(27,team)]:[TeamColorR(27,team),TeamColorG(27,team),TeamColorB(27,team)],
+28:28=[TeamColorR(28,team),TeamColorG(28,team),TeamColorB(28,team)]:[TeamColorR(28,team),TeamColorG(28,team),TeamColorB(28,team)],
+29:29=[TeamColorR(29,team),TeamColorG(29,team),TeamColorB(29,team)]:[TeamColorR(29,team),TeamColorG(29,team),TeamColorB(29,team)],
+30:30=[TeamColorR(30,team),TeamColorG(30,team),TeamColorB(30,team)]:[TeamColorR(30,team),TeamColorG(30,team),TeamColorB(30,team)],
+31:31=[TeamColorR(31,team),TeamColorG(31,team),TeamColorB(31,team)]:[TeamColorR(31,team),TeamColorG(31,team),TeamColorB(31,team)],
+32:32=[TeamColorR(32,team),TeamColorG(32,team),TeamColorB(32,team)]:[TeamColorR(32,team),TeamColorG(32,team),TeamColorB(32,team)],
+33:33=[TeamColorR(33,team),TeamColorG(33,team),TeamColorB(33,team)]:[TeamColorR(33,team),TeamColorG(33,team),TeamColorB(33,team)],
+34:34=[TeamColorR(34,team),TeamColorG(34,team),TeamColorB(34,team)]:[TeamColorR(34,team),TeamColorG(34,team),TeamColorB(34,team)],
+35:35=[TeamColorR(35,team),TeamColorG(35,team),TeamColorB(35,team)]:[TeamColorR(35,team),TeamColorG(35,team),TeamColorB(35,team)],
+36:36=[TeamColorR(36,team),TeamColorG(36,team),TeamColorB(36,team)]:[TeamColorR(36,team),TeamColorG(36,team),TeamColorB(36,team)],
+37:37=[TeamColorR(37,team),TeamColorG(37,team),TeamColorB(37,team)]:[TeamColorR(37,team),TeamColorG(37,team),TeamColorB(37,team)],
+38:38=[TeamColorR(38,team),TeamColorG(38,team),TeamColorB(38,team)]:[TeamColorR(38,team),TeamColorG(38,team),TeamColorB(38,team)],
+39:39=[TeamColorR(39,team),TeamColorG(39,team),TeamColorB(39,team)]:[TeamColorR(39,team),TeamColorG(39,team),TeamColorB(39,team)],
+40:40=[TeamColorR(40,team),TeamColorG(40,team),TeamColorB(40,team)]:[TeamColorR(40,team),TeamColorG(40,team),TeamColorB(40,team)],
+41:41=[TeamColorR(41,team),TeamColorG(41,team),TeamColorB(41,team)]:[TeamColorR(41,team),TeamColorG(41,team),TeamColorB(41,team)],
+42:42=[TeamColorR(42,team),TeamColorG(42,team),TeamColorB(42,team)]:[TeamColorR(42,team),TeamColorG(42,team),TeamColorB(42,team)],
+43:43=[TeamColorR(43,team),TeamColorG(43,team),TeamColorB(43,team)]:[TeamColorR(43,team),TeamColorG(43,team),TeamColorB(43,team)],
+44:44=[TeamColorR(44,team),TeamColorG(44,team),TeamColorB(44,team)]:[TeamColorR(44,team),TeamColorG(44,team),TeamColorB(44,team)],
+45:45=[TeamColorR(45,team),TeamColorG(45,team),TeamColorB(45,team)]:[TeamColorR(45,team),TeamColorG(45,team),TeamColorB(45,team)],
+46:46=[TeamColorR(46,team),TeamColorG(46,team),TeamColorB(46,team)]:[TeamColorR(46,team),TeamColorG(46,team),TeamColorB(46,team)],
+47:47=[TeamColorR(47,team),TeamColorG(47,team),TeamColorB(47,team)]:[TeamColorR(47,team),TeamColorG(47,team),TeamColorB(47,team)],
+48:48=[TeamColorR(48,team),TeamColorG(48,team),TeamColorB(48,team)]:[TeamColorR(48,team),TeamColorG(48,team),TeamColorB(48,team)],
+49:49=[TeamColorR(49,team),TeamColorG(49,team),TeamColorB(49,team)]:[TeamColorR(49,team),TeamColorG(49,team),TeamColorB(49,team)],
+50:50=[TeamColorR(50,team),TeamColorG(50,team),TeamColorB(50,team)]:[TeamColorR(50,team),TeamColorG(50,team),TeamColorB(50,team)],
+51:51=[TeamColorR(51,team),TeamColorG(51,team),TeamColorB(51,team)]:[TeamColorR(51,team),TeamColorG(51,team),TeamColorB(51,team)],
+52:52=[TeamColorR(52,team),TeamColorG(52,team),TeamColorB(52,team)]:[TeamColorR(52,team),TeamColorG(52,team),TeamColorB(52,team)],
+53:53=[TeamColorR(53,team),TeamColorG(53,team),TeamColorB(53,team)]:[TeamColorR(53,team),TeamColorG(53,team),TeamColorB(53,team)],
+54:54=[TeamColorR(54,team),TeamColorG(54,team),TeamColorB(54,team)]:[TeamColorR(54,team),TeamColorG(54,team),TeamColorB(54,team)],
+55:55=[TeamColorR(55,team),TeamColorG(55,team),TeamColorB(55,team)]:[TeamColorR(55,team),TeamColorG(55,team),TeamColorB(55,team)],
+56:56=[TeamColorR(56,team),TeamColorG(56,team),TeamColorB(56,team)]:[TeamColorR(56,team),TeamColorG(56,team),TeamColorB(56,team)],
+57:57=[TeamColorR(57,team),TeamColorG(57,team),TeamColorB(57,team)]:[TeamColorR(57,team),TeamColorG(57,team),TeamColorB(57,team)],
+58:58=[TeamColorR(58,team),TeamColorG(58,team),TeamColorB(58,team)]:[TeamColorR(58,team),TeamColorG(58,team),TeamColorB(58,team)],
+59:59=[TeamColorR(59,team),TeamColorG(59,team),TeamColorB(59,team)]:[TeamColorR(59,team),TeamColorG(59,team),TeamColorB(59,team)],
+60:60=[TeamColorR(60,team),TeamColorG(60,team),TeamColorB(60,team)]:[TeamColorR(60,team),TeamColorG(60,team),TeamColorB(60,team)],
+61:61=[TeamColorR(61,team),TeamColorG(61,team),TeamColorB(61,team)]:[TeamColorR(61,team),TeamColorG(61,team),TeamColorB(61,team)],
+62:62=[TeamColorR(62,team),TeamColorG(62,team),TeamColorB(62,team)]:[TeamColorR(62,team),TeamColorG(62,team),TeamColorB(62,team)],
+63:63=[TeamColorR(63,team),TeamColorG(63,team),TeamColorB(63,team)]:[TeamColorR(63,team),TeamColorG(63,team),TeamColorB(63,team)],
+64:64=[TeamColorR(64,team),TeamColorG(64,team),TeamColorB(64,team)]:[TeamColorR(64,team),TeamColorG(64,team),TeamColorB(64,team)],
+65:65=[TeamColorR(65,team),TeamColorG(65,team),TeamColorB(65,team)]:[TeamColorR(65,team),TeamColorG(65,team),TeamColorB(65,team)],
+66:66=[TeamColorR(66,team),TeamColorG(66,team),TeamColorB(66,team)]:[TeamColorR(66,team),TeamColorG(66,team),TeamColorB(66,team)],
+67:67=[TeamColorR(67,team),TeamColorG(67,team),TeamColorB(67,team)]:[TeamColorR(67,team),TeamColorG(67,team),TeamColorB(67,team)],
+68:68=[TeamColorR(68,team),TeamColorG(68,team),TeamColorB(68,team)]:[TeamColorR(68,team),TeamColorG(68,team),TeamColorB(68,team)],
+69:69=[TeamColorR(69,team),TeamColorG(69,team),TeamColorB(69,team)]:[TeamColorR(69,team),TeamColorG(69,team),TeamColorB(69,team)],
+70:70=[TeamColorR(70,team),TeamColorG(70,team),TeamColorB(70,team)]:[TeamColorR(70,team),TeamColorG(70,team),TeamColorB(70,team)],
+71:71=[TeamColorR(71,team),TeamColorG(71,team),TeamColorB(71,team)]:[TeamColorR(71,team),TeamColorG(71,team),TeamColorB(71,team)],
+72:72=[TeamColorR(72,team),TeamColorG(72,team),TeamColorB(72,team)]:[TeamColorR(72,team),TeamColorG(72,team),TeamColorB(72,team)],
+73:73=[TeamColorR(73,team),TeamColorG(73,team),TeamColorB(73,team)]:[TeamColorR(73,team),TeamColorG(73,team),TeamColorB(73,team)],
+74:74=[TeamColorR(74,team),TeamColorG(74,team),TeamColorB(74,team)]:[TeamColorR(74,team),TeamColorG(74,team),TeamColorB(74,team)],
+75:75=[TeamColorR(75,team),TeamColorG(75,team),TeamColorB(75,team)]:[TeamColorR(75,team),TeamColorG(75,team),TeamColorB(75,team)],
+76:76=[TeamColorR(76,team),TeamColorG(76,team),TeamColorB(76,team)]:[TeamColorR(76,team),TeamColorG(76,team),TeamColorB(76,team)],
+77:77=[TeamColorR(77,team),TeamColorG(77,team),TeamColorB(77,team)]:[TeamColorR(77,team),TeamColorG(77,team),TeamColorB(77,team)],
+78:78=[TeamColorR(78,team),TeamColorG(78,team),TeamColorB(78,team)]:[TeamColorR(78,team),TeamColorG(78,team),TeamColorB(78,team)],
+79:79=[TeamColorR(79,team),TeamColorG(79,team),TeamColorB(79,team)]:[TeamColorR(79,team),TeamColorG(79,team),TeamColorB(79,team)],
+80:80=[TeamColorR(80,team),TeamColorG(80,team),TeamColorB(80,team)]:[TeamColorR(80,team),TeamColorG(80,team),TeamColorB(80,team)],
+81:81=[TeamColorR(81,team),TeamColorG(81,team),TeamColorB(81,team)]:[TeamColorR(81,team),TeamColorG(81,team),TeamColorB(81,team)],
+82:82=[TeamColorR(82,team),TeamColorG(82,team),TeamColorB(82,team)]:[TeamColorR(82,team),TeamColorG(82,team),TeamColorB(82,team)],
+83:83=[TeamColorR(83,team),TeamColorG(83,team),TeamColorB(83,team)]:[TeamColorR(83,team),TeamColorG(83,team),TeamColorB(83,team)],
+84:84=[TeamColorR(84,team),TeamColorG(84,team),TeamColorB(84,team)]:[TeamColorR(84,team),TeamColorG(84,team),TeamColorB(84,team)],
+85:85=[TeamColorR(85,team),TeamColorG(85,team),TeamColorB(85,team)]:[TeamColorR(85,team),TeamColorG(85,team),TeamColorB(85,team)],
+86:86=[TeamColorR(86,team),TeamColorG(86,team),TeamColorB(86,team)]:[TeamColorR(86,team),TeamColorG(86,team),TeamColorB(86,team)],
+87:87=[TeamColorR(87,team),TeamColorG(87,team),TeamColorB(87,team)]:[TeamColorR(87,team),TeamColorG(87,team),TeamColorB(87,team)],
+88:88=[TeamColorR(88,team),TeamColorG(88,team),TeamColorB(88,team)]:[TeamColorR(88,team),TeamColorG(88,team),TeamColorB(88,team)],
+89:89=[TeamColorR(89,team),TeamColorG(89,team),TeamColorB(89,team)]:[TeamColorR(89,team),TeamColorG(89,team),TeamColorB(89,team)],
+90:90=[TeamColorR(90,team),TeamColorG(90,team),TeamColorB(90,team)]:[TeamColorR(90,team),TeamColorG(90,team),TeamColorB(90,team)],
+91:91=[TeamColorR(91,team),TeamColorG(91,team),TeamColorB(91,team)]:[TeamColorR(91,team),TeamColorG(91,team),TeamColorB(91,team)],
+92:92=[TeamColorR(92,team),TeamColorG(92,team),TeamColorB(92,team)]:[TeamColorR(92,team),TeamColorG(92,team),TeamColorB(92,team)],
+93:93=[TeamColorR(93,team),TeamColorG(93,team),TeamColorB(93,team)]:[TeamColorR(93,team),TeamColorG(93,team),TeamColorB(93,team)],
+94:94=[TeamColorR(94,team),TeamColorG(94,team),TeamColorB(94,team)]:[TeamColorR(94,team),TeamColorG(94,team),TeamColorB(94,team)],
+95:95=[TeamColorR(95,team),TeamColorG(95,team),TeamColorB(95,team)]:[TeamColorR(95,team),TeamColorG(95,team),TeamColorB(95,team)],
+96:96=[TeamColorR(96,team),TeamColorG(96,team),TeamColorB(96,team)]:[TeamColorR(96,team),TeamColorG(96,team),TeamColorB(96,team)],
+97:97=[TeamColorR(97,team),TeamColorG(97,team),TeamColorB(97,team)]:[TeamColorR(97,team),TeamColorG(97,team),TeamColorB(97,team)],
+98:98=[TeamColorR(98,team),TeamColorG(98,team),TeamColorB(98,team)]:[TeamColorR(98,team),TeamColorG(98,team),TeamColorB(98,team)],
+99:99=[TeamColorR(99,team),TeamColorG(99,team),TeamColorB(99,team)]:[TeamColorR(99,team),TeamColorG(99,team),TeamColorB(99,team)],
+100:100=[TeamColorR(100,team),TeamColorG(100,team),TeamColorB(100,team)]:[TeamColorR(100,team),TeamColorG(100,team),TeamColorB(100,team)],
+101:101=[TeamColorR(101,team),TeamColorG(101,team),TeamColorB(101,team)]:[TeamColorR(101,team),TeamColorG(101,team),TeamColorB(101,team)],
+102:102=[TeamColorR(102,team),TeamColorG(102,team),TeamColorB(102,team)]:[TeamColorR(102,team),TeamColorG(102,team),TeamColorB(102,team)],
+103:103=[TeamColorR(103,team),TeamColorG(103,team),TeamColorB(103,team)]:[TeamColorR(103,team),TeamColorG(103,team),TeamColorB(103,team)],
+104:104=[TeamColorR(104,team),TeamColorG(104,team),TeamColorB(104,team)]:[TeamColorR(104,team),TeamColorG(104,team),TeamColorB(104,team)],
+105:105=[TeamColorR(105,team),TeamColorG(105,team),TeamColorB(105,team)]:[TeamColorR(105,team),TeamColorG(105,team),TeamColorB(105,team)],
+106:106=[TeamColorR(106,team),TeamColorG(106,team),TeamColorB(106,team)]:[TeamColorR(106,team),TeamColorG(106,team),TeamColorB(106,team)],
+107:107=[TeamColorR(107,team),TeamColorG(107,team),TeamColorB(107,team)]:[TeamColorR(107,team),TeamColorG(107,team),TeamColorB(107,team)],
+108:108=[TeamColorR(108,team),TeamColorG(108,team),TeamColorB(108,team)]:[TeamColorR(108,team),TeamColorG(108,team),TeamColorB(108,team)],
+109:109=[TeamColorR(109,team),TeamColorG(109,team),TeamColorB(109,team)]:[TeamColorR(109,team),TeamColorG(109,team),TeamColorB(109,team)],
+110:110=[TeamColorR(110,team),TeamColorG(110,team),TeamColorB(110,team)]:[TeamColorR(110,team),TeamColorG(110,team),TeamColorB(110,team)],
+111:111=[TeamColorR(111,team),TeamColorG(111,team),TeamColorB(111,team)]:[TeamColorR(111,team),TeamColorG(111,team),TeamColorB(111,team)],
+112:112=[TeamColorR(112,team),TeamColorG(112,team),TeamColorB(112,team)]:[TeamColorR(112,team),TeamColorG(112,team),TeamColorB(112,team)],
+113:113=[TeamColorR(113,team),TeamColorG(113,team),TeamColorB(113,team)]:[TeamColorR(113,team),TeamColorG(113,team),TeamColorB(113,team)],
+114:114=[TeamColorR(114,team),TeamColorG(114,team),TeamColorB(114,team)]:[TeamColorR(114,team),TeamColorG(114,team),TeamColorB(114,team)],
+115:115=[TeamColorR(115,team),TeamColorG(115,team),TeamColorB(115,team)]:[TeamColorR(115,team),TeamColorG(115,team),TeamColorB(115,team)],
+116:116=[TeamColorR(116,team),TeamColorG(116,team),TeamColorB(116,team)]:[TeamColorR(116,team),TeamColorG(116,team),TeamColorB(116,team)],
+117:117=[TeamColorR(117,team),TeamColorG(117,team),TeamColorB(117,team)]:[TeamColorR(117,team),TeamColorG(117,team),TeamColorB(117,team)],
+118:118=[TeamColorR(118,team),TeamColorG(118,team),TeamColorB(118,team)]:[TeamColorR(118,team),TeamColorG(118,team),TeamColorB(118,team)],
+119:119=[TeamColorR(119,team),TeamColorG(119,team),TeamColorB(119,team)]:[TeamColorR(119,team),TeamColorG(119,team),TeamColorB(119,team)],
+120:120=[TeamColorR(120,team),TeamColorG(120,team),TeamColorB(120,team)]:[TeamColorR(120,team),TeamColorG(120,team),TeamColorB(120,team)],
+121:121=[TeamColorR(121,team),TeamColorG(121,team),TeamColorB(121,team)]:[TeamColorR(121,team),TeamColorG(121,team),TeamColorB(121,team)],
+122:122=[TeamColorR(122,team),TeamColorG(122,team),TeamColorB(122,team)]:[TeamColorR(122,team),TeamColorG(122,team),TeamColorB(122,team)],
+123:123=[TeamColorR(123,team),TeamColorG(123,team),TeamColorB(123,team)]:[TeamColorR(123,team),TeamColorG(123,team),TeamColorB(123,team)],
+124:124=[TeamColorR(124,team),TeamColorG(124,team),TeamColorB(124,team)]:[TeamColorR(124,team),TeamColorG(124,team),TeamColorB(124,team)],
+125:125=[TeamColorR(125,team),TeamColorG(125,team),TeamColorB(125,team)]:[TeamColorR(125,team),TeamColorG(125,team),TeamColorB(125,team)],
+126:126=[TeamColorR(126,team),TeamColorG(126,team),TeamColorB(126,team)]:[TeamColorR(126,team),TeamColorG(126,team),TeamColorB(126,team)],
+127:127=[TeamColorR(127,team),TeamColorG(127,team),TeamColorB(127,team)]:[TeamColorR(127,team),TeamColorG(127,team),TeamColorB(127,team)],
+128:128=[TeamColorR(128,team),TeamColorG(128,team),TeamColorB(128,team)]:[TeamColorR(128,team),TeamColorG(128,team),TeamColorB(128,team)],
+129:129=[TeamColorR(129,team),TeamColorG(129,team),TeamColorB(129,team)]:[TeamColorR(129,team),TeamColorG(129,team),TeamColorB(129,team)],
+130:130=[TeamColorR(130,team),TeamColorG(130,team),TeamColorB(130,team)]:[TeamColorR(130,team),TeamColorG(130,team),TeamColorB(130,team)],
+131:131=[TeamColorR(131,team),TeamColorG(131,team),TeamColorB(131,team)]:[TeamColorR(131,team),TeamColorG(131,team),TeamColorB(131,team)],
+132:132=[TeamColorR(132,team),TeamColorG(132,team),TeamColorB(132,team)]:[TeamColorR(132,team),TeamColorG(132,team),TeamColorB(132,team)],
+133:133=[TeamColorR(133,team),TeamColorG(133,team),TeamColorB(133,team)]:[TeamColorR(133,team),TeamColorG(133,team),TeamColorB(133,team)],
+134:134=[TeamColorR(134,team),TeamColorG(134,team),TeamColorB(134,team)]:[TeamColorR(134,team),TeamColorG(134,team),TeamColorB(134,team)],
+135:135=[TeamColorR(135,team),TeamColorG(135,team),TeamColorB(135,team)]:[TeamColorR(135,team),TeamColorG(135,team),TeamColorB(135,team)],
+136:136=[TeamColorR(136,team),TeamColorG(136,team),TeamColorB(136,team)]:[TeamColorR(136,team),TeamColorG(136,team),TeamColorB(136,team)],
+137:137=[TeamColorR(137,team),TeamColorG(137,team),TeamColorB(137,team)]:[TeamColorR(137,team),TeamColorG(137,team),TeamColorB(137,team)],
+138:138=[TeamColorR(138,team),TeamColorG(138,team),TeamColorB(138,team)]:[TeamColorR(138,team),TeamColorG(138,team),TeamColorB(138,team)],
+139:139=[TeamColorR(139,team),TeamColorG(139,team),TeamColorB(139,team)]:[TeamColorR(139,team),TeamColorG(139,team),TeamColorB(139,team)],
+140:140=[TeamColorR(140,team),TeamColorG(140,team),TeamColorB(140,team)]:[TeamColorR(140,team),TeamColorG(140,team),TeamColorB(140,team)],
+141:141=[TeamColorR(141,team),TeamColorG(141,team),TeamColorB(141,team)]:[TeamColorR(141,team),TeamColorG(141,team),TeamColorB(141,team)],
+142:142=[TeamColorR(142,team),TeamColorG(142,team),TeamColorB(142,team)]:[TeamColorR(142,team),TeamColorG(142,team),TeamColorB(142,team)],
+143:143=[TeamColorR(143,team),TeamColorG(143,team),TeamColorB(143,team)]:[TeamColorR(143,team),TeamColorG(143,team),TeamColorB(143,team)],
+144:144=[TeamColorR(144,team),TeamColorG(144,team),TeamColorB(144,team)]:[TeamColorR(144,team),TeamColorG(144,team),TeamColorB(144,team)],
+145:145=[TeamColorR(145,team),TeamColorG(145,team),TeamColorB(145,team)]:[TeamColorR(145,team),TeamColorG(145,team),TeamColorB(145,team)],
+146:146=[TeamColorR(146,team),TeamColorG(146,team),TeamColorB(146,team)]:[TeamColorR(146,team),TeamColorG(146,team),TeamColorB(146,team)],
+147:147=[TeamColorR(147,team),TeamColorG(147,team),TeamColorB(147,team)]:[TeamColorR(147,team),TeamColorG(147,team),TeamColorB(147,team)],
+148:148=[TeamColorR(148,team),TeamColorG(148,team),TeamColorB(148,team)]:[TeamColorR(148,team),TeamColorG(148,team),TeamColorB(148,team)],
+149:149=[TeamColorR(149,team),TeamColorG(149,team),TeamColorB(149,team)]:[TeamColorR(149,team),TeamColorG(149,team),TeamColorB(149,team)],
+150:150=[TeamColorR(150,team),TeamColorG(150,team),TeamColorB(150,team)]:[TeamColorR(150,team),TeamColorG(150,team),TeamColorB(150,team)],
+151:151=[TeamColorR(151,team),TeamColorG(151,team),TeamColorB(151,team)]:[TeamColorR(151,team),TeamColorG(151,team),TeamColorB(151,team)],
+152:152=[TeamColorR(152,team),TeamColorG(152,team),TeamColorB(152,team)]:[TeamColorR(152,team),TeamColorG(152,team),TeamColorB(152,team)],
+153:153=[TeamColorR(153,team),TeamColorG(153,team),TeamColorB(153,team)]:[TeamColorR(153,team),TeamColorG(153,team),TeamColorB(153,team)],
+154:154=[TeamColorR(154,team),TeamColorG(154,team),TeamColorB(154,team)]:[TeamColorR(154,team),TeamColorG(154,team),TeamColorB(154,team)],
+155:155=[TeamColorR(155,team),TeamColorG(155,team),TeamColorB(155,team)]:[TeamColorR(155,team),TeamColorG(155,team),TeamColorB(155,team)],
+156:156=[TeamColorR(156,team),TeamColorG(156,team),TeamColorB(156,team)]:[TeamColorR(156,team),TeamColorG(156,team),TeamColorB(156,team)],
+157:157=[TeamColorR(157,team),TeamColorG(157,team),TeamColorB(157,team)]:[TeamColorR(157,team),TeamColorG(157,team),TeamColorB(157,team)],
+158:158=[TeamColorR(158,team),TeamColorG(158,team),TeamColorB(158,team)]:[TeamColorR(158,team),TeamColorG(158,team),TeamColorB(158,team)],
+159:159=[TeamColorR(159,team),TeamColorG(159,team),TeamColorB(159,team)]:[TeamColorR(159,team),TeamColorG(159,team),TeamColorB(159,team)],
+160:160=[TeamColorR(160,team),TeamColorG(160,team),TeamColorB(160,team)]:[TeamColorR(160,team),TeamColorG(160,team),TeamColorB(160,team)],
+161:161=[TeamColorR(161,team),TeamColorG(161,team),TeamColorB(161,team)]:[TeamColorR(161,team),TeamColorG(161,team),TeamColorB(161,team)],
+162:162=[TeamColorR(162,team),TeamColorG(162,team),TeamColorB(162,team)]:[TeamColorR(162,team),TeamColorG(162,team),TeamColorB(162,team)],
+163:163=[TeamColorR(163,team),TeamColorG(163,team),TeamColorB(163,team)]:[TeamColorR(163,team),TeamColorG(163,team),TeamColorB(163,team)],
+164:164=[TeamColorR(164,team),TeamColorG(164,team),TeamColorB(164,team)]:[TeamColorR(164,team),TeamColorG(164,team),TeamColorB(164,team)],
+165:165=[TeamColorR(165,team),TeamColorG(165,team),TeamColorB(165,team)]:[TeamColorR(165,team),TeamColorG(165,team),TeamColorB(165,team)],
+166:166=[TeamColorR(166,team),TeamColorG(166,team),TeamColorB(166,team)]:[TeamColorR(166,team),TeamColorG(166,team),TeamColorB(166,team)],
+167:167=[TeamColorR(167,team),TeamColorG(167,team),TeamColorB(167,team)]:[TeamColorR(167,team),TeamColorG(167,team),TeamColorB(167,team)],
+168:168=[TeamColorR(168,team),TeamColorG(168,team),TeamColorB(168,team)]:[TeamColorR(168,team),TeamColorG(168,team),TeamColorB(168,team)],
+169:169=[TeamColorR(169,team),TeamColorG(169,team),TeamColorB(169,team)]:[TeamColorR(169,team),TeamColorG(169,team),TeamColorB(169,team)],
+170:170=[TeamColorR(170,team),TeamColorG(170,team),TeamColorB(170,team)]:[TeamColorR(170,team),TeamColorG(170,team),TeamColorB(170,team)],
+171:171=[TeamColorR(171,team),TeamColorG(171,team),TeamColorB(171,team)]:[TeamColorR(171,team),TeamColorG(171,team),TeamColorB(171,team)],
+172:172=[TeamColorR(172,team),TeamColorG(172,team),TeamColorB(172,team)]:[TeamColorR(172,team),TeamColorG(172,team),TeamColorB(172,team)],
+173:173=[TeamColorR(173,team),TeamColorG(173,team),TeamColorB(173,team)]:[TeamColorR(173,team),TeamColorG(173,team),TeamColorB(173,team)],
+174:174=[TeamColorR(174,team),TeamColorG(174,team),TeamColorB(174,team)]:[TeamColorR(174,team),TeamColorG(174,team),TeamColorB(174,team)],
+175:175=[TeamColorR(175,team),TeamColorG(175,team),TeamColorB(175,team)]:[TeamColorR(175,team),TeamColorG(175,team),TeamColorB(175,team)],
+176:176=[TeamColorR(176,team),TeamColorG(176,team),TeamColorB(176,team)]:[TeamColorR(176,team),TeamColorG(176,team),TeamColorB(176,team)],
+177:177=[TeamColorR(177,team),TeamColorG(177,team),TeamColorB(177,team)]:[TeamColorR(177,team),TeamColorG(177,team),TeamColorB(177,team)],
+178:178=[TeamColorR(178,team),TeamColorG(178,team),TeamColorB(178,team)]:[TeamColorR(178,team),TeamColorG(178,team),TeamColorB(178,team)],
+179:179=[TeamColorR(179,team),TeamColorG(179,team),TeamColorB(179,team)]:[TeamColorR(179,team),TeamColorG(179,team),TeamColorB(179,team)],
+180:180=[TeamColorR(180,team),TeamColorG(180,team),TeamColorB(180,team)]:[TeamColorR(180,team),TeamColorG(180,team),TeamColorB(180,team)],
+181:181=[TeamColorR(181,team),TeamColorG(181,team),TeamColorB(181,team)]:[TeamColorR(181,team),TeamColorG(181,team),TeamColorB(181,team)],
+182:182=[TeamColorR(182,team),TeamColorG(182,team),TeamColorB(182,team)]:[TeamColorR(182,team),TeamColorG(182,team),TeamColorB(182,team)],
+183:183=[TeamColorR(183,team),TeamColorG(183,team),TeamColorB(183,team)]:[TeamColorR(183,team),TeamColorG(183,team),TeamColorB(183,team)],
+184:184=[TeamColorR(184,team),TeamColorG(184,team),TeamColorB(184,team)]:[TeamColorR(184,team),TeamColorG(184,team),TeamColorB(184,team)],
+185:185=[TeamColorR(185,team),TeamColorG(185,team),TeamColorB(185,team)]:[TeamColorR(185,team),TeamColorG(185,team),TeamColorB(185,team)],
+186:186=[TeamColorR(186,team),TeamColorG(186,team),TeamColorB(186,team)]:[TeamColorR(186,team),TeamColorG(186,team),TeamColorB(186,team)],
+187:187=[TeamColorR(187,team),TeamColorG(187,team),TeamColorB(187,team)]:[TeamColorR(187,team),TeamColorG(187,team),TeamColorB(187,team)],
+188:188=[TeamColorR(188,team),TeamColorG(188,team),TeamColorB(188,team)]:[TeamColorR(188,team),TeamColorG(188,team),TeamColorB(188,team)],
+189:189=[TeamColorR(189,team),TeamColorG(189,team),TeamColorB(189,team)]:[TeamColorR(189,team),TeamColorG(189,team),TeamColorB(189,team)],
+190:190=[TeamColorR(190,team),TeamColorG(190,team),TeamColorB(190,team)]:[TeamColorR(190,team),TeamColorG(190,team),TeamColorB(190,team)],
+191:191=[TeamColorR(191,team),TeamColorG(191,team),TeamColorB(191,team)]:[TeamColorR(191,team),TeamColorG(191,team),TeamColorB(191,team)],
+192:192=[TeamColorR(192,team),TeamColorG(192,team),TeamColorB(192,team)]:[TeamColorR(192,team),TeamColorG(192,team),TeamColorB(192,team)],
+193:193=[TeamColorR(193,team),TeamColorG(193,team),TeamColorB(193,team)]:[TeamColorR(193,team),TeamColorG(193,team),TeamColorB(193,team)],
+194:194=[TeamColorR(194,team),TeamColorG(194,team),TeamColorB(194,team)]:[TeamColorR(194,team),TeamColorG(194,team),TeamColorB(194,team)],
+195:195=[TeamColorR(195,team),TeamColorG(195,team),TeamColorB(195,team)]:[TeamColorR(195,team),TeamColorG(195,team),TeamColorB(195,team)],
+196:196=[TeamColorR(196,team),TeamColorG(196,team),TeamColorB(196,team)]:[TeamColorR(196,team),TeamColorG(196,team),TeamColorB(196,team)],
+197:197=[TeamColorR(197,team),TeamColorG(197,team),TeamColorB(197,team)]:[TeamColorR(197,team),TeamColorG(197,team),TeamColorB(197,team)],
+198:198=[TeamColorR(198,team),TeamColorG(198,team),TeamColorB(198,team)]:[TeamColorR(198,team),TeamColorG(198,team),TeamColorB(198,team)],
+199:199=[TeamColorR(199,team),TeamColorG(199,team),TeamColorB(199,team)]:[TeamColorR(199,team),TeamColorG(199,team),TeamColorB(199,team)],
+200:200=[TeamColorR(200,team),TeamColorG(200,team),TeamColorB(200,team)]:[TeamColorR(200,team),TeamColorG(200,team),TeamColorB(200,team)],
+201:201=[TeamColorR(201,team),TeamColorG(201,team),TeamColorB(201,team)]:[TeamColorR(201,team),TeamColorG(201,team),TeamColorB(201,team)],
+202:202=[TeamColorR(202,team),TeamColorG(202,team),TeamColorB(202,team)]:[TeamColorR(202,team),TeamColorG(202,team),TeamColorB(202,team)],
+203:203=[TeamColorR(203,team),TeamColorG(203,team),TeamColorB(203,team)]:[TeamColorR(203,team),TeamColorG(203,team),TeamColorB(203,team)],
+204:204=[TeamColorR(204,team),TeamColorG(204,team),TeamColorB(204,team)]:[TeamColorR(204,team),TeamColorG(204,team),TeamColorB(204,team)],
+205:205=[TeamColorR(205,team),TeamColorG(205,team),TeamColorB(205,team)]:[TeamColorR(205,team),TeamColorG(205,team),TeamColorB(205,team)],
+206:206=[TeamColorR(206,team),TeamColorG(206,team),TeamColorB(206,team)]:[TeamColorR(206,team),TeamColorG(206,team),TeamColorB(206,team)],
+207:207=[TeamColorR(207,team),TeamColorG(207,team),TeamColorB(207,team)]:[TeamColorR(207,team),TeamColorG(207,team),TeamColorB(207,team)],
+208:208=[TeamColorR(208,team),TeamColorG(208,team),TeamColorB(208,team)]:[TeamColorR(208,team),TeamColorG(208,team),TeamColorB(208,team)],
+209:209=[TeamColorR(209,team),TeamColorG(209,team),TeamColorB(209,team)]:[TeamColorR(209,team),TeamColorG(209,team),TeamColorB(209,team)],
+210:210=[TeamColorR(210,team),TeamColorG(210,team),TeamColorB(210,team)]:[TeamColorR(210,team),TeamColorG(210,team),TeamColorB(210,team)],
+211:211=[TeamColorR(211,team),TeamColorG(211,team),TeamColorB(211,team)]:[TeamColorR(211,team),TeamColorG(211,team),TeamColorB(211,team)],
+212:212=[TeamColorR(212,team),TeamColorG(212,team),TeamColorB(212,team)]:[TeamColorR(212,team),TeamColorG(212,team),TeamColorB(212,team)],
+213:213=[TeamColorR(213,team),TeamColorG(213,team),TeamColorB(213,team)]:[TeamColorR(213,team),TeamColorG(213,team),TeamColorB(213,team)],
+214:214=[TeamColorR(214,team),TeamColorG(214,team),TeamColorB(214,team)]:[TeamColorR(214,team),TeamColorG(214,team),TeamColorB(214,team)],
+215:215=[TeamColorR(215,team),TeamColorG(215,team),TeamColorB(215,team)]:[TeamColorR(215,team),TeamColorG(215,team),TeamColorB(215,team)],
+216:216=[TeamColorR(216,team),TeamColorG(216,team),TeamColorB(216,team)]:[TeamColorR(216,team),TeamColorG(216,team),TeamColorB(216,team)],
+217:217=[TeamColorR(217,team),TeamColorG(217,team),TeamColorB(217,team)]:[TeamColorR(217,team),TeamColorG(217,team),TeamColorB(217,team)],
+218:218=[TeamColorR(218,team),TeamColorG(218,team),TeamColorB(218,team)]:[TeamColorR(218,team),TeamColorG(218,team),TeamColorB(218,team)],
+219:219=[TeamColorR(219,team),TeamColorG(219,team),TeamColorB(219,team)]:[TeamColorR(219,team),TeamColorG(219,team),TeamColorB(219,team)],
+220:220=[TeamColorR(220,team),TeamColorG(220,team),TeamColorB(220,team)]:[TeamColorR(220,team),TeamColorG(220,team),TeamColorB(220,team)],
+221:221=[TeamColorR(221,team),TeamColorG(221,team),TeamColorB(221,team)]:[TeamColorR(221,team),TeamColorG(221,team),TeamColorB(221,team)],
+222:222=[TeamColorR(222,team),TeamColorG(222,team),TeamColorB(222,team)]:[TeamColorR(222,team),TeamColorG(222,team),TeamColorB(222,team)],
+223:223=[TeamColorR(223,team),TeamColorG(223,team),TeamColorB(223,team)]:[TeamColorR(223,team),TeamColorG(223,team),TeamColorB(223,team)],
+224:224=[TeamColorR(224,team),TeamColorG(224,team),TeamColorB(224,team)]:[TeamColorR(224,team),TeamColorG(224,team),TeamColorB(224,team)],
+225:225=[TeamColorR(225,team),TeamColorG(225,team),TeamColorB(225,team)]:[TeamColorR(225,team),TeamColorG(225,team),TeamColorB(225,team)],
+226:226=[TeamColorR(226,team),TeamColorG(226,team),TeamColorB(226,team)]:[TeamColorR(226,team),TeamColorG(226,team),TeamColorB(226,team)],
+227:227=[TeamColorR(227,team),TeamColorG(227,team),TeamColorB(227,team)]:[TeamColorR(227,team),TeamColorG(227,team),TeamColorB(227,team)],
+228:228=[TeamColorR(228,team),TeamColorG(228,team),TeamColorB(228,team)]:[TeamColorR(228,team),TeamColorG(228,team),TeamColorB(228,team)],
+229:229=[TeamColorR(229,team),TeamColorG(229,team),TeamColorB(229,team)]:[TeamColorR(229,team),TeamColorG(229,team),TeamColorB(229,team)],
+230:230=[TeamColorR(230,team),TeamColorG(230,team),TeamColorB(230,team)]:[TeamColorR(230,team),TeamColorG(230,team),TeamColorB(230,team)],
+231:231=[TeamColorR(231,team),TeamColorG(231,team),TeamColorB(231,team)]:[TeamColorR(231,team),TeamColorG(231,team),TeamColorB(231,team)],
+232:232=[TeamColorR(232,team),TeamColorG(232,team),TeamColorB(232,team)]:[TeamColorR(232,team),TeamColorG(232,team),TeamColorB(232,team)],
+233:233=[TeamColorR(233,team),TeamColorG(233,team),TeamColorB(233,team)]:[TeamColorR(233,team),TeamColorG(233,team),TeamColorB(233,team)],
+234:234=[TeamColorR(234,team),TeamColorG(234,team),TeamColorB(234,team)]:[TeamColorR(234,team),TeamColorG(234,team),TeamColorB(234,team)],
+235:235=[TeamColorR(235,team),TeamColorG(235,team),TeamColorB(235,team)]:[TeamColorR(235,team),TeamColorG(235,team),TeamColorB(235,team)],
+236:236=[TeamColorR(236,team),TeamColorG(236,team),TeamColorB(236,team)]:[TeamColorR(236,team),TeamColorG(236,team),TeamColorB(236,team)],
+237:237=[TeamColorR(237,team),TeamColorG(237,team),TeamColorB(237,team)]:[TeamColorR(237,team),TeamColorG(237,team),TeamColorB(237,team)],
+238:238=[TeamColorR(238,team),TeamColorG(238,team),TeamColorB(238,team)]:[TeamColorR(238,team),TeamColorG(238,team),TeamColorB(238,team)],
+239:239=[TeamColorR(239,team),TeamColorG(239,team),TeamColorB(239,team)]:[TeamColorR(239,team),TeamColorG(239,team),TeamColorB(239,team)],
+240:240=[TeamColorR(240,team),TeamColorG(240,team),TeamColorB(240,team)]:[TeamColorR(240,team),TeamColorG(240,team),TeamColorB(240,team)],
+241:241=[TeamColorR(241,team),TeamColorG(241,team),TeamColorB(241,team)]:[TeamColorR(241,team),TeamColorG(241,team),TeamColorB(241,team)],
+242:242=[TeamColorR(242,team),TeamColorG(242,team),TeamColorB(242,team)]:[TeamColorR(242,team),TeamColorG(242,team),TeamColorB(242,team)],
+243:243=[TeamColorR(243,team),TeamColorG(243,team),TeamColorB(243,team)]:[TeamColorR(243,team),TeamColorG(243,team),TeamColorB(243,team)],
+244:244=[TeamColorR(244,team),TeamColorG(244,team),TeamColorB(244,team)]:[TeamColorR(244,team),TeamColorG(244,team),TeamColorB(244,team)],
+245:245=[TeamColorR(245,team),TeamColorG(245,team),TeamColorB(245,team)]:[TeamColorR(245,team),TeamColorG(245,team),TeamColorB(245,team)],
+246:246=[TeamColorR(246,team),TeamColorG(246,team),TeamColorB(246,team)]:[TeamColorR(246,team),TeamColorG(246,team),TeamColorB(246,team)],
+247:247=[TeamColorR(247,team),TeamColorG(247,team),TeamColorB(247,team)]:[TeamColorR(247,team),TeamColorG(247,team),TeamColorB(247,team)],
+248:248=[TeamColorR(248,team),TeamColorG(248,team),TeamColorB(248,team)]:[TeamColorR(248,team),TeamColorG(248,team),TeamColorB(248,team)],
+249:249=[TeamColorR(249,team),TeamColorG(249,team),TeamColorB(249,team)]:[TeamColorR(249,team),TeamColorG(249,team),TeamColorB(249,team)],
+250:250=[TeamColorR(250,team),TeamColorG(250,team),TeamColorB(250,team)]:[TeamColorR(250,team),TeamColorG(250,team),TeamColorB(250,team)],
+251:251=[TeamColorR(251,team),TeamColorG(251,team),TeamColorB(251,team)]:[TeamColorR(251,team),TeamColorG(251,team),TeamColorB(251,team)],
+252:252=[TeamColorR(252,team),TeamColorG(252,team),TeamColorB(252,team)]:[TeamColorR(252,team),TeamColorG(252,team),TeamColorB(252,team)],
+253:253=[TeamColorR(253,team),TeamColorG(253,team),TeamColorB(253,team)]:[TeamColorR(253,team),TeamColorG(253,team),TeamColorB(253,team)],
+254:254=[TeamColorR(254,team),TeamColorG(254,team),TeamColorB(254,team)]:[TeamColorR(254,team),TeamColorG(254,team),TeamColorB(254,team)],
+255:255=[TeamColorR(255,team),TeamColorG(255,team),TeamColorB(255,team)]:[TeamColorR(255,team),TeamColorG(255,team),TeamColorB(255,team)]
+);
+}
+
+function int TeamColorR(int color, int team)
+{
+return TeamColor(color,team,0);
+}
+
+function int TeamColorG(int color, int team)
+{
+return TeamColor(color,team,1);
+}
+
+function int TeamColorB(int color, int team)
+{
+return TeamColor(color,team,2);
+}
+
+function int TeamColor(int color, int team, int rgb)
+{
+int lum = palette_data_lum[color];
+int lumlight = team_color_light_lum[team];
+int lumdark = team_color_dark_lum[team];
+
+if(lum>=lumlight) return GradientFunc(lum, lumlight, team_color_light[team][rgb], 255, team_color_lighter[team][rgb]);
+if(lum>=lumdark) return GradientFunc(lum, lumdark, team_color_dark[team][rgb], lumlight, team_color_light[team][rgb]);
+return GradientFunc(lum, 0, team_color_darker[team][rgb], lumdark, team_color_dark[team][rgb]);
+return 0;
+}
+
+function int GradientFunc(int lum, int lum1, int color1, int lum2, int color2)
+{
+int col1Amount = lum2-lum;
+int col2Amount = lum-lum1;
+int colRange = col1Amount+col2Amount;
+
+return (col1Amount*color1+col2Amount*color2)/colRange;
+}

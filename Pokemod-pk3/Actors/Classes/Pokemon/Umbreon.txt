@@ -1,0 +1,44 @@
+/*
+[+]===================================[+]
+
+[+]===================================[+]
+*/
+
+Actor Umbreon : ClassBase 
+{
+Player.DisplayName "Umbreon"
+Player.SoundClass "Megaman"
+
+Player.StartItem "BasicBuster"
+
+//============|
+Player.StartItem "Base_HP", 95
+Player.StartItem "Base_PAttack", 65
+Player.StartItem "Base_PDefense", 110
+Player.StartItem "Base_SAttack", 60
+Player.StartItem "Base_SDefense", 130
+Player.StartItem "Base_Speed", 65
+//============|
+
+States
+{
+Spawn: 
+GUMB A 0
+GUMB B 1 
+GUMB A 1
+GoTo Spawn+2
+See:
+GUMB BCDE 5
+GoTo Spawn+1
+Missile:
+GUMB A 0 
+GUMB F 5 
+GUMB G 4
+GoTo Spawn+2
+
+PainFix:
+GUMB H 0 
+GoTo PainFrames
+}
+}
+

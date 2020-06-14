@@ -1,0 +1,603 @@
+/* -=- ACS Menus -=-
+ * Code for ACS menus that handle functions such as move learning and move adjustments.
+ *
+
+*/
+
+#library "A_Menus"
+#include "zcommon.acs"
+#Import "WEPACS.acs"
+#Import "Dex_Pokemon.acs"
+#Import "Dex_Moves.acs"
+#Import "Dex_Movesets.acs"
+#Import "DB_Data.acs"
+#Import "A_Leveling.acs"
+
+//#region -=- Move Learning
+#region -=- Move Learning
+
+#define MNL 8.0 //menu line spacing
+#define MenuXOrigin 120.1
+#define MenuYOrigin 80.1
+
+Script "PromptMoveLearn" (int Moveid)
+{
+//==================[+]
+// - Pre Start Up -
+//==================[+]
+if(StatusTime() == 0){print(s:"Unsafe to Learn Moves now"); Terminate;}
+//if(!PlayerInGame(PlayerNumber())){Terminate;}
+//=======================[+]
+// - Define Variables -
+//=======================[+]
+if(Moveid<0 || Moveid>MAX_WEAPONS_GLOBAL){Terminate;}
+Int ChoiceID = 0;
+Int ChoiceWep;
+int Move1 = -1,Move2 = -1,Move3 = -1,Move4 = -1;
+int NewMove = Moveid;
+str Str1 = "----",Str2 = "----",Str3 = "----",Str4 = "----",Str5 = weapons_ammo[NewMove][2];
+str WepName;
+str WepTag;
+int MenuX = MenuXOrigin;
+int Menuy = MenuYOrigin;
+int slot;
+for(; slot<MAX_SLOTS+1; slot++) {
+		for(int i = 0; ((i<MAX_WEAPONS_GLOBAL)&& Slot<5); i++) 
+		{
+			WepName = StrParam(s:weapons_ammo[i][0],i:slot);
+			WepTag = weapons_ammo[i][2];
+			if(CheckInventory(WepName)>0) 
+			{
+				switch(slot)
+				{
+					Case 1: Move1 = i; Str1 = WepTag; break;
+					Case 2: Move2 = i; Str2 = WepTag; break;
+					Case 3: Move3 = i; Str3 = WepTag; break;
+					Case 4: Move4 = i; Str4 = WepTag; break;
+				}
+			}
+		}
+	}
+if (NewMove == Move1
+	||NewMove == Move2
+	||NewMove == Move3
+	||NewMove == Move4)
+	{print(s:"Move ",s:weapons_ammo[NewMove][2], s:" Already Known!"); setplayerproperty(0,0,4); Terminate;}
+
+// - Menu -
+int InputButtons;
+int InputOldButtons; 
+int UpInput;
+int DownInput;
+Int ConfirmInput;
+Int CancelInput;
+Int MenuStates = 0;
+Int MenuNextState; 
+Bool MenuUp = true;
+//=======================[+]
+// - Menu Loop Begin -
+//=======================[+]
+setplayerproperty(0,1,4);
+GiveInventory("SpawnSafeZone",1);
+DrawMenuFrame(MenuX-(8.0*3),MenuY-(8.0*0),15,10);
+while(MenuUp)
+	{
+	MenuStates = MenuNextState;
+	// #------------------
+	// # Begin Menustate 0
+	// #------------------
+	if(MenuStates == 0)
+	{
+	// - Print Menu -
+	SetHudSize(320,200,0);
+	SetFont("STCFN");
+	HudMessage(s:Str1; HUDMSG_FADEOUT, 500, 0, MenuX, Menuy, 0.1, 0);
+	HudMessage(s:Str2; HUDMSG_FADEOUT, 501, 0, MenuX, Menuy+(MNL*1), 0.1, 0);
+	HudMessage(s:Str3; HUDMSG_FADEOUT, 502, 0, MenuX, Menuy+(MNL*2), 0.1, 0);
+	HudMessage(s:Str4; HUDMSG_FADEOUT, 503, 0, MenuX, Menuy+(MNL*3), 0.1, 0);
+	HudMessage(s:Str5; HUDMSG_FADEOUT, 504, CR_Orange, MenuX, Menuy+(MNL*4), 0.1, 0);
+	HudMessage(s:">>"; HUDMSG_FADEOUT, 505, 0, MenuX-16.0, Menuy+(MNL*ChoiceID), 0.1, 0);
+
+	// #------------------
+	// # End Menustate 0
+	// #------------------
+	}
+	// #------------------
+	// # Begin Menustate 1
+	// #------------------
+	if(MenuStates == 1)
+	{ // - Complete menu action
+	switch(ChoiceID)
+	{
+		Case 0: ChoiceWep = Move1; break;
+		Case 1: ChoiceWep = Move2; break;
+		Case 2: ChoiceWep = Move3; break;
+		Case 3: ChoiceWep = Move4; break;
+	}
+
+	if(PlayerInGame(PlayerNumber()))
+	{
+	TakeInventory(StrParam(s:weapons_ammo[ChoiceWep][0],i:ChoiceID+1),99);
+	GiveInventory(StrParam(s:weapons_ammo[NewMove][0],i:ChoiceID+1),1);
+	}
+	else
+	{
+	SetCvar(StrParam(s:"PLAYER",i:PlayerNumber(),s:"_SLOT",i:ChoiceID+1),NewMove);
+	}
+	break;//MenuUp = False;
+	// #------------------
+	// # End Menustate 1
+	// #------------------
+	}
+
+	// - Grab Inputs -
+	InputButtons = GetPlayerInput(-1, INPUT_BUTTONS);
+	UpInput = ButtonCheck(InputButtons, InputOldButtons, BT_FORWARD);
+	DownInput = ButtonCheck(InputButtons, InputOldButtons, BT_BACK);
+	ConfirmInput = ButtonCheck(InputButtons, InputOldButtons, BT_ATTACK);
+	CancelInput = ButtonCheck(InputButtons, InputOldButtons, BT_AltATTACK);
+	if(UpInput != DownInput)
+		{
+			if(UpInput == 1){ChoiceID--;}
+			if(DownInput == 1){ChoiceID++;}
+		}
+	if(ChoiceID>4){ChoiceID = 0;}
+	if(ChoiceID<0){ChoiceID = 4;}
+	if(ConfirmInput)
+			{
+			if(ChoiceID<4)
+			{
+				until(MenuNextState == 1)
+				{
+				if(ChoiceID == 3 && Move3 == -1){ChoiceID--;}
+				else if(ChoiceID == 2 && Move2 == -1){ChoiceID--;}
+				else if(ChoiceID == 1 && Move1 == -1){ChoiceID--;}
+				else{MenuNextState = 1;}
+				}
+			}
+			Else if(ChoiceID == 4){break;} //MenuUp = False;
+		}
+	Delay(1);
+	InputOldButtons = InputButtons;
+	}
+//=======================[+]
+// - Menu Loop End -
+//=======================[+]
+ClearMenuFrame();
+InputButtons = GetPlayerInput(-1, INPUT_BUTTONS);
+While(ButtonCheck(InputButtons, InputOldButtons, BT_ATTACK)
+||ButtonCheck(InputButtons, InputOldButtons, BT_ALTATTACK))
+{InputButtons = GetPlayerInput(-1, INPUT_BUTTONS); Delay(1); InputOldButtons = InputButtons;}
+setplayerproperty(0,0,4);
+}
+
+#endregion
+//#endregion
+
+//#region -=- Move Repositioning
+#region -=- Move Repositioning
+Script "PromptMoveReposition" (Void)
+{
+//==================[+]
+// - Pre Start Up -
+//==================[+]
+if(StatusTime() == 0){print(s:"Unsafe Adjust moves right now"); Terminate;}
+//if(!PlayerInGame(PlayerNumber())){Terminate;}
+//=======================[+]
+// - Define Variables -
+//=======================[+]
+Int ChoiceID = 0;
+Int WepToMove;
+int WepRepo1;
+int WepRepo2;
+int MenuX = MenuXOrigin;
+int Menuy = MenuYOrigin;
+int slot;
+int Move1 = -1,Move2 = -1,Move3 = -1,Move4 = -1;
+str Str1 = "----",Str2 = "----",Str3 = "----",Str4 = "----";
+str WepName;
+str WepTag;
+for(; slot<MAX_SLOTS+1; slot++) {
+		for(int i = 0; ((i<MAX_WEAPONS_GLOBAL)&& Slot<5); i++) 
+		{
+			WepName = StrParam(s:weapons_ammo[i][0],i:slot);
+			WepTag = weapons_ammo[i][2];
+			if(CheckInventory(WepName)>0) 
+			{
+				switch(slot)
+				{
+					Case 1: Move1 = i; Str1 = WepTag; break;
+					Case 2: Move2 = i; Str2 = WepTag; break;
+					Case 3: Move3 = i; Str3 = WepTag; break;
+					Case 4: Move4 = i; Str4 = WepTag; break;
+				}
+			}
+		}
+	}
+
+// - Menu -
+int InputButtons;
+int InputOldButtons; 
+int UpInput;
+int DownInput;
+Int ConfirmInput;
+Int CancelInput;
+Int MenuStates = 0;
+Int MenuNextState; 
+Bool MenuUp = true;
+//=======================[+]
+// - Menu Loop Begin -
+//=======================[+]
+	setplayerproperty(0,1,4);
+	GiveInventory("SpawnSafeZone",1);
+while(MenuUp)
+{		
+	DrawMenuFrame(MenuX-(8.0*3),MenuY-(8.0*0),15,10);
+	SetHudSize(320,200,0);
+	SetFont("STCFN");
+	MenuStates = MenuNextState;
+	// #------------------
+	// # Begin Menustate 0
+	// #------------------
+	if(MenuStates == 0)
+	{
+	HudMessage(s:Str1; HUDMSG_FADEOUT, 500, 0, MenuX, Menuy, 0.1, 0);
+	HudMessage(s:Str2; HUDMSG_FADEOUT, 501, 0, MenuX, Menuy+(MNL*1), 0.1, 0);
+	HudMessage(s:Str3; HUDMSG_FADEOUT, 502, 0, MenuX, Menuy+(MNL*2), 0.1, 0);
+	HudMessage(s:Str4; HUDMSG_FADEOUT, 503, 0, MenuX, Menuy+(MNL*3), 0.1, 0);
+	HudMessage(s:"Exit"; HUDMSG_FADEOUT, 504, CR_ORANGE, MenuX, Menuy+(MNL*4), 0.1, 0);
+	HudMessage(s:">>"; HUDMSG_FADEOUT, 505, 0, MenuX-16.0, Menuy+(MNL*ChoiceID), 0.1, 0);
+	// - Check Inputs -
+	if(CancelInput == 1 || ConfirmInput == 1 && ChoiceID == 4){Break;} //MenuUp = false;
+	if(ConfirmInput == 1 && ChoiceID<4)
+		{	// - Check if the menu option even has value -
+			switch(ChoiceID)
+			{
+				Case 0: if(Move1 != -1){WepToMove = ChoiceID; MenuNextState = 1;} break;
+				Case 1: if(Move2 != -1){WepToMove = ChoiceID; MenuNextState = 1;} break;
+				Case 2: if(Move3 != -1){WepToMove = ChoiceID; MenuNextState = 1;} break;
+				Case 3: if(Move4 != -1){WepToMove = ChoiceID; MenuNextState = 1;} break;
+				default: ACS_Execute(979,0); break;
+			}
+			
+		}
+	// #------------------
+	// # End Menustate 0
+	// #------------------
+	}
+	// #------------------
+	// # Begin Menustate 1
+	// #------------------
+	if(MenuStates == 1)
+	{
+	HudMessage(s:Str1; HUDMSG_FADEOUT, 500, 0, MenuX, Menuy, 0.1, 0);
+	HudMessage(s:Str2; HUDMSG_FADEOUT, 501, 0, MenuX, Menuy+(MNL*1), 0.1, 0);
+	HudMessage(s:Str3; HUDMSG_FADEOUT, 502, 0, MenuX, Menuy+(MNL*2), 0.1, 0);
+	HudMessage(s:Str4; HUDMSG_FADEOUT, 503, 0, MenuX, Menuy+(MNL*3), 0.1, 0);
+	HudMessage(s:"Back"; HUDMSG_FADEOUT, 504, CR_ORANGE, MenuX, Menuy+(MNL*4), 0.1, 0);
+	HudMessage(s:">>"; HUDMSG_FADEOUT, 505, 0, MenuX-16.0, Menuy+(MNL*ChoiceID), 0.1, 0);
+	HudMessage(s:"!!"; HUDMSG_FADEOUT, 506, 0, MenuX-30.0, Menuy+(MNL*WepToMove), 0.1, 0);
+	// - Check Inputs -
+	if(CancelInput == 1 || ConfirmInput == 1 && ChoiceID == 4){MenuNextState = 0;}
+	if(ConfirmInput == 1 && ChoiceID<4 && WepToMove != ChoiceID)
+		{
+		// - Check if the menu option even has value -
+		switch(ChoiceID)
+		{
+			Case 0: if(Move1 != -1){MenuNextState = 2;} break;
+			Case 1: if(Move2 != -1){ MenuNextState = 2;} break;
+			Case 2: if(Move3 != -1){ MenuNextState = 2;} break;
+			Case 3: if(Move4 != -1){ MenuNextState = 2;} break;
+			default: ACS_Execute(979,0); break;
+		}
+	}
+	// #------------------
+	// # End Menustate 1
+	// #------------------
+	}
+	// #------------------
+	// # Begin Menustate 2
+	// #------------------
+	if(MenuStates == 2)
+	{
+	/* -=-=-=-=-=-=-
+	* Time to make the switch!
+	*
+	* Okay, so what I'm trying to do is take the weapon in slot "WepToMove", 
+	* and swap it with the weapon ID in slot
+	* "ChoiceID"
+	*
+	* WepToMove = first weapon choice
+	* ChoiceID = Second weapon Choice
+	*
+	* so to keep this straight, if WepToMove is "0" and ChoiceID is "2", then that means I'm trying to swap
+	* the values within "Move1" and "Move3"
+	*
+	* I'll store the appropriate Wep values in "WepRepo1" and "WepRepo2"
+	* -=-=-=-=-=-=-
+	*/ 
+	switch(WepToMove)
+	{
+		Case 0: WepRepo1 = Move1; TakeInventory(StrParam(s:weapons_ammo[Move1][0],i:WepToMove+1),99);break;
+		Case 1: WepRepo1 = Move2; TakeInventory(StrParam(s:weapons_ammo[Move2][0],i:WepToMove+1),99);break;
+		Case 2: WepRepo1 = Move3; TakeInventory(StrParam(s:weapons_ammo[Move3][0],i:WepToMove+1),99);break;
+		Case 3: WepRepo1 = Move4; TakeInventory(StrParam(s:weapons_ammo[Move4][0],i:WepToMove+1),99);break;
+	}
+	switch(ChoiceID)
+	{
+		Case 0: WepRepo2 = Move1; TakeInventory(StrParam(s:weapons_ammo[Move1][0],i:ChoiceID+1),99);break;
+		Case 1: WepRepo2 = Move2; TakeInventory(StrParam(s:weapons_ammo[Move2][0],i:ChoiceID+1),99);break;
+		Case 2: WepRepo2 = Move3; TakeInventory(StrParam(s:weapons_ammo[Move3][0],i:ChoiceID+1),99);break;
+		Case 3: WepRepo2 = Move4; TakeInventory(StrParam(s:weapons_ammo[Move4][0],i:ChoiceID+1),99);break;
+	}
+	// - Now to do the actual weapon swap -
+	switch(WepToMove)
+	{
+		Case 0: Move1 = WepRepo2; GiveInventory(StrParam(s:weapons_ammo[Move1][0],i:WepToMove+1),1);break;
+		Case 1: Move2 = WepRepo2; GiveInventory(StrParam(s:weapons_ammo[Move2][0],i:WepToMove+1),1);break;
+		Case 2: Move3 = WepRepo2; GiveInventory(StrParam(s:weapons_ammo[Move3][0],i:WepToMove+1),1);break;
+		Case 3: Move4 = WepRepo2; GiveInventory(StrParam(s:weapons_ammo[Move4][0],i:WepToMove+1),1);break;
+	}
+	switch(ChoiceID)
+	{
+		Case 0: Move1 = WepRepo1; GiveInventory(StrParam(s:weapons_ammo[Move1][0],i:ChoiceID+1),1);break;
+		Case 1: Move2 = WepRepo1; GiveInventory(StrParam(s:weapons_ammo[Move2][0],i:ChoiceID+1),1);break;
+		Case 2: Move3 = WepRepo1; GiveInventory(StrParam(s:weapons_ammo[Move3][0],i:ChoiceID+1),1);break;
+		Case 3: Move4 = WepRepo1; GiveInventory(StrParam(s:weapons_ammo[Move4][0],i:ChoiceID+1),1);break;
+	}
+	// - rescan moves for hud -
+		if(Move1 > 0){Str1 = weapons_ammo[Move1][2];}
+		if(Move2 > 0){Str2 = weapons_ammo[Move2][2];}
+		if(Move3 > 0){Str3 = weapons_ammo[Move3][2];}
+		if(Move4 > 0){Str4 = weapons_ammo[Move4][2];}
+
+	
+
+	MenuNextState = 0;
+	// #------------------
+	// # End Menustate 2
+	// #------------------
+	}
+		// - Grab Inputs -
+		InputButtons = GetPlayerInput(-1, INPUT_BUTTONS);
+		UpInput = ButtonCheck(InputButtons, InputOldButtons, BT_FORWARD);
+		DownInput = ButtonCheck(InputButtons, InputOldButtons, BT_BACK);
+		ConfirmInput = ButtonCheck(InputButtons, InputOldButtons, BT_ATTACK);
+		CancelInput = ButtonCheck(InputButtons, InputOldButtons, BT_AltATTACK);
+		if(UpInput != DownInput)
+			{
+			if(UpInput == 1){ChoiceID--;}
+			if(DownInput == 1){ChoiceID++;}
+			}
+		if(ChoiceID>4){ChoiceID = 0;}
+		if(ChoiceID<0){ChoiceID = 4;}
+
+	Delay(1);
+	InputOldButtons = InputButtons;
+	}
+ClearMenuFrame();
+Delay(17);
+setplayerproperty(0,0,4);
+//--
+}
+#endregion
+//#endregion
+
+//#region -=- Level up moves
+#region -=- Level up moves 
+Script "PromptLevelUpMove" (Void)
+{
+//==================[+]
+// - Pre Start Up -
+//==================[+]
+if(StatusTime() == 0){print(s:"Unsafe Adjust moves right now"); Terminate;}
+//if(!PlayerInGame(PlayerNumber())){Terminate;}
+//=======================[+]
+// - Define Variables -
+//=======================[+]
+int PlayerLVL = GetCvar(StrParam(s:"PlayerLevel_",i:PlayerNumber()));
+int PlayerDEXNum = GetCvar(StrParam(s:"PlayerDEXNum_",i:PlayerNumber()));
+Int StartMoves = 4;
+Int ChoiceID = 0;
+Int ChoiceCap = PlayerLVL;
+int MenuX = MenuXOrigin;
+int Menuy = MenuYOrigin;
+int MoveListVal;
+int MoveListCount;
+int LearnMove = -1;
+// - Menu -
+int InputButtons;
+int InputOldButtons; 
+int UpInput;
+int DownInput;
+Int ConfirmInput;
+Int CancelInput;
+Int MenuStates = 0;
+Int MenuNextState; 
+int i;
+int j;
+Bool MenuUp = true;
+Bool BGUp;
+//=======================[+]
+// - Menu Loop Begin -
+//=======================[+]
+setplayerproperty(0,1,4);
+GiveInventory("SpawnSafeZone",1);
+while (MenuUp) {
+	SetHudSize(320, 200, 0);
+	SetFont("STCFN");
+	MenuStates = MenuNextState;
+
+	// #------------------
+	// # Begin Menustate 0
+	// #------------------
+	if (MenuStates == 0) {
+
+		MoveListCount = 0;
+		j = 0;
+
+		// - Print the list of moves -
+		For(i = 0; i < PlayerLVL + StartMoves - 1; i++)
+		{
+			MoveListVal = MoveDex[PlayerDEXNum][i];
+			if (MoveListVal != -1) {
+				HudMessage(s: weapons_ammo[MoveListVal][2]; HUDMSG_FADEOUT, 500 + j, 0, MenuX, Menuy + (MNL * j), 0.1, 0);
+				j++;
+				MoveListCount++;
+			}
+
+		}
+
+		if (MoveListCount <= 0) {print(s: "No moves to learn"); break;} //MenuUp = false;
+		else {
+			if(!BGUp){DrawMenuFrame(MenuX-(8.0*3),MenuY-(8.0*0),15,6+MoveListCount); BGup = True;}
+			ChoiceCap = MoveListCount;
+			HudMessage(s: "Exit"; HUDMSG_FADEOUT, 514, CR_ORANGE, MenuX, Menuy + (MNL * ChoiceCap), 0.1, 0);
+			HudMessage(s: ">>"; HUDMSG_FADEOUT, 515, 0, MenuX - 16.0, Menuy + (MNL * ChoiceID), 0.1, 0);
+		}
+
+		// - Grab Inputs -
+		InputButtons = GetPlayerInput(-1, INPUT_BUTTONS);
+		UpInput = ButtonCheck(InputButtons, InputOldButtons, BT_FORWARD);
+		DownInput = ButtonCheck(InputButtons, InputOldButtons, BT_BACK);
+		ConfirmInput = ButtonCheck(InputButtons, InputOldButtons, BT_ATTACK);
+		CancelInput = ButtonCheck(InputButtons, InputOldButtons, BT_AltATTACK);
+		if (UpInput != DownInput) {
+			if (UpInput == 1) {
+				ChoiceID--;
+				While(MoveDex[PlayerDEXNum][ChoiceID] == -1){ ChoiceID--; }
+			}
+			if (DownInput == 1) {
+				ChoiceID++;
+				While(MoveDex[PlayerDEXNum][ChoiceID] == -1
+					&& ChoiceID != ChoiceCap)
+				{ ChoiceID++; }
+			}
+		}
+		if (ChoiceID > ChoiceCap) { ChoiceID = 0; }
+		if (ChoiceID < 0) { ChoiceID = ChoiceCap; }
+		if (CancelInput == 1 || ConfirmInput == 1 && ChoiceID == MoveListCount) {break;} //MenuUp = false;
+		if (ConfirmInput == 1 && ChoiceID < MoveListCount) { LearnMove = MoveDex[PlayerDEXNum][ChoiceID]; break;} //MenuUp = false;
+		// #------------------
+		// # End Menustate 0
+		// #------------------
+		Delay(1);
+		InputOldButtons = InputButtons;
+	}
+} 
+
+//=======================[+]
+// - Menu Loop End -
+//=======================[+]
+ClearMenuFrame();
+if(LearnMove > -1) 
+	{ 
+		InputButtons = GetPlayerInput(-1, INPUT_BUTTONS);
+		While(ButtonCheck(InputButtons, InputOldButtons, BT_ATTACK)
+		||ButtonCheck(InputButtons, InputOldButtons, BT_ALTATTACK))
+		{InputButtons = GetPlayerInput(-1, INPUT_BUTTONS); Delay(1); InputOldButtons = InputButtons;}
+		ACS_NamedExecuteAlways("PromptMoveLearn",0,LearnMove);
+	}
+else{Delay(17);setplayerproperty(0,0,4);}
+}
+#endregion
+//#endregion
+
+//#region -=- Menu Backing
+#region -=- Menu Backing 
+
+Str MenuFrames[1] = {
+	"MFRA",
+};
+
+Function Void DrawMenuFrame (Int Ox, int Oy, int h,int w)
+{
+/*
+ * Ox = Origin X
+ * Oy = Origin Y
+ * w = Width
+ * H = Height
+*/ 
+int Mid = 2000;
+int Ofs = 8.0;
+int k;
+str sprite;
+int SpriteDirA;
+int SpriteDirB;
+int HorBit;
+int VertBit;
+SetHudSize(320,240,0);
+for (int i = 0; i < h+1; i++)
+{// - Each Row -
+	if(i == 0){HorBit = 1<<2;}
+	else if(i == h){HorBit = 1<<4;}
+	else{HorBit = 1<<0;}
+	//-=-=-=-=
+	for(int j = 0; j < w+1; j++)
+	{// - We're going to get fancy and use a bitwise flag -
+	if(j == 0){VertBit = 1<<3;}		
+	else if(j == w){VertBit = 1<<1;}	
+	else{VertBit = 1<<0;}
+	// -=-=-=-=-
+	//SpriteDirA |= VertBit;
+	//SpriteDirA |= HorBit;
+	SpriteDirA = HorBit|VertBit;
+	SpriteDirB = MenuBitConvert(SpriteDirA);
+	// -=-=-=-=-
+	sprite = strparam(s:MenuFrames[0],i:SpriteDirB);
+	//log(i:SpriteDirA,s:" Became ",i:SpriteDirB,s:" :: ",s:sprite);
+	SetFont(sprite);
+	HudMessage(s:"A"; HUDMSG_PLAIN, Mid+k, CR_red,Ox+(Ofs*i), Oy+(Ofs*j), 0,0);
+	k++;
+	}
+j = 0;
+}
+
+}
+
+Function Void ClearMenuFrame (Void)
+{
+	int Mid = 2000;
+	for (int i = 0; i < 500; i++)
+{
+	HudMessage(s:""; HUDMSG_PLAIN, Mid+i, CR_red,0.0, 0.0, 2.0,0);
+}
+}
+
+
+Function int MenuBitConvert (int Val)
+{
+	int output;
+switch(Val)
+	{
+	Case 3: output = 1; break;
+	Case 6: output = 2; break;
+	Case 5: output = 3; break;
+	Case 12: output = 4; break;
+	Case 9: output = 5; break;
+	Case 24: output = 6; break;
+	Case 17: output = 7; break;
+	Case 18: output = 8; break;
+	}
+return output;
+}
+
+
+Script "PrintBitangle" (void)
+{
+
+log(s:"Down Is ",i:1<<1|(1<<0));
+log(s:"DownLeft Is ",i:(1<<1)|(1<<2));
+log(s:"Left Is ",i:1<<2|(1<<0));
+log(s:"UpLeft Is ",i:(1<<3)|(1<<2));
+log(s:"Up Is ",i:1<<3|(1<<0));
+log(s:"UpRight Is ",i:(1<<3)|(1<<4));
+log(s:"Right Is ",i:1<<4|(1<<0));
+log(s:"DownRight Is ",i:(1<<1)|(1<<4));
+
+//log(s:"DownLeft Is also ",i:(1<<1)^(1<<3));
+
+}
+
+#endregion
+//#endregion

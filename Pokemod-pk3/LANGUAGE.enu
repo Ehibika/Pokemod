@@ -1,0 +1,769 @@
+[enu default]
+
+
+//===| Shop
+
+SHOP_OPEN = "\c[MenuGreen]Shop's Open! Open the shop menu!";
+SHOP_BUY = "\c[MenuGreen]Purchase Success!";
+SHOP_BUYFAIL_MONEY = "\c[MenuRed]Purchase Fail! Not Enough Money!";
+SHOP_BUYFAIL_POSSESS = "\c[MenuRed]Purchase Fail! Already Possessed!";
+SHOP_BUYFAIL_SPACE = "\c[MenuRed]Purchase Fail! Can't carry any more!";
+SHOP_BUYFAIL_LVL = "\c[MenuRed]Purchase Fail! You are at max level!";
+
+SHOP_EMPTY= "\c[MenuWhite]Coming Soon";
+
+
+SHOP_CANDY= "\c[MenuGreen]Candies : \c[MenuWhite]Statistics";
+SHOP_BERRY= "\c[MenuGreen]Berries : \c[MenuWhite]Restoratives";
+SHOP_SEED = "\c[MenuGreen]Seeds : \c[MenuWhite]Consumables";
+SHOP_WAND = "\c[MenuGreen]Wands : \c[MenuWhite]Casting Effects";
+SHOP_ORB = "\c[MenuGreen]Orbs : \c[MenuWhite]Area of effect";
+SHOP_CHICLE = "\c[MenuGreen]Chicle : \c[MenuWhite]persistent effects";
+
+SHOP_SMALLEXPCANDY= "\c[MenuWhite]S EXPCandy   \c[MenuYellow]50 $P";
+SHOP_MEDIUMEXPCANDY= "\c[MenuWhite]M EXPCandy \c[MenuYellow]350 $P";
+SHOP_LARGEEXPCANDY= "\c[MenuWhite]L EXPCandy \c[MenuYellow]750 $P";
+
+SHOP_HPBERRY= "\c[MenuWhite]HP Berry  \c[MenuYellow]25 $P";
+SHOP_BIGHPBERRY= "\c[MenuWhite]Big HP Berry \c[MenuYellow]100 $P";
+SHOP_PPBERRY= "\c[MenuWhite]PP Berry  \c[MenuYellow]75 $P";
+SHOP_BIGPPBERRY= "\c[MenuWhite]Big PP Berry \c[MenuYellow]125 $P";
+
+SHOP_CLENSESEED= "\c[MenuWhite]Clense Seed  \c[MenuYellow]100 $P";
+SHOP_POWERSEED= "\c[MenuWhite]Power Seed  \c[MenuYellow]300 $P";
+SHOP_GUARDSEED= "\c[MenuWhite]Guard Seed  \c[MenuYellow]200 $P";
+SHOP_HASTESEED= "\c[MenuWhite]Haste Seed  \c[MenuYellow]200 $P";
+
+//===| Items
+
+PU_HPBERRY = "Picked up a HP Berry!";
+TAG_HPBERRY = "HP Berry : restores 20 HP";
+
+PU_BIGHPBERRY = "Picked up a Big HP Berry!";
+TAG_BIGHPBERRY = "Big HP Berry : restores 100 HP";
+
+PU_PPBERRY = "Picked up a PP Berry!";
+TAG_PPBERRY = "PP Berry : restores a little PP";
+
+PU_BIGPPBERRY = "Picked up a Big PP Berry!";
+TAG_BIGPPBERRY = "Big PP Berry : restores a lot of pp";
+
+PU_CLENSESEED = "Picked up a Clense Seed!";
+TAG_CLENSESEED = "Clense Seed : Removes negative effects";
+
+PU_POWERSEED = "Picked up a Power Seed!";
+TAG_POWERSEED = "Power Seed : Boosts Atk and S.Atk";
+
+PU_GUARDSEED = "Picked up a Guard Seed!";
+TAG_GUARDSEED = "Guard Seed : Boosts Def and S.Def";
+
+PU_HASTESEED = "Picked up a Haste Seed!";
+TAG_HASTESEED = "Haste Seed : Boosts Speed";
+
+
+PU_G_NORMAL = "Found a White Gummi!";
+TAG_G_NORMAL = "White Gummi";
+
+PU_G_FIGHTING = "Found a Crimson Gummi!";
+TAG_G_FIGHTING = "Crimson Gummi";
+
+PU_G_FLYING = "Found a sky Gummi!";
+TAG_G_FLYING = "sky Gummi";
+
+PU_G_POISON = "Found a Violet Gummi!";
+TAG_G_POISON = "Violet Gummi";
+
+PU_G_GROUND = "Found a peach Gummi!";
+TAG_G_GROUND = "peach Gummi";
+
+PU_G_ROCK = "Found a cocoa Gummi!";
+TAG_G_ROCK = "cocoa Gummi";
+
+PU_G_BUG = "Found a kiwi Gummi!";
+TAG_G_BUG = "kiwi Gummi";
+
+PU_G_GHOST = "Found a lavander Gummi!";
+TAG_G_GHOST = "lavander Gummi";
+
+PU_G_STEEL = "Found a cobalt Gummi!";
+TAG_G_STEEL = "cobalt Gummi";
+
+PU_G_FIRE = "Found a red Gummi!";
+TAG_G_FIRE = "red Gummi";
+
+PU_G_WATER = "Found a blue Gummi!";
+TAG_G_WATER = "blue Gummi";
+
+PU_G_GRASS = "Found a green Gummi!";
+TAG_G_GRASS = "green Gummi";
+
+PU_G_ELECTRIC = "Found a yellow Gummi!";
+TAG_G_ELECTRIC = "yellow Gummi";
+
+PU_G_PSYCHIC = "Found a magenta Gummi!";
+TAG_G_PSYCHIC = "magenta Gummi";
+
+PU_G_ICE = "Found a mint Gummi!";
+TAG_G_ICE = "mint Gummi";
+
+PU_G_DRAGON = "Found a royal Gummi!";
+TAG_G_DRAGON = "royal Gummi";
+
+PU_G_DARK = "Found a black Gummi!";
+TAG_G_DARK = "black Gummi";
+
+PU_G_FAIRY = "Found a pink Gummi!";
+TAG_G_FAIRY = "pink Gummi";
+
+//===|Move Obits
+OB_SWIFT = ";%k Defeated %o using Swift!";
+OB_EMBER = "%k Defeated %o using Ember!";
+OB_THUNDERSHOCK = "%k Defeated %o using ThunderShock!";
+OB_WATERGUN = "%k Defeated %o using Watergun!";
+OB_BITE = "%k Defeated %o using Bite!";
+OB_QUICKATTACK = "%k Defeated %o using QuickAttack!";
+OB_HELPINGHAND = "%k Defeated %o using HelpingHand!";
+OB_VINEWHIP = "%k Defeated %o using VineWhip!";
+OB_GROWTH = "%k Defeated %o using Growth!";
+OB_GROWL = "%k Defeated %o using Growl!";
+OB_TAILWHIP = "%k Defeated %o using TailWhip!";
+OB_LEECHSEED = "%k Defeated %o using LeechSeed!";
+OB_RAZORLEAF = "%k Defeated %o using RazorLeaf!";
+OB_SWEETSCENT = "%k Defeated %o using SweetScent!";
+OB_POISONPOWDER = "%k Defeated %o using PoisonPowder!";
+OB_SLEEPPOWDER = "%k Defeated %o using SleepPowder!";
+OB_SEEDBOMB = "%k Defeated %o using SeedBomb!";
+OB_SYNTHESIS = "%k Defeated %o using Synthesis!";
+OB_ENERGYBALL = "%k Defeated %o using EnergyBall!";
+OB_DOUBLEEDGE = "%k Defeated %o using DoubleEdge!";
+OB_TOXIC = "%k Defeated %o using Toxic!";
+OB_SOLARBEAM = "%k Defeated %o using SolarBeam!";
+OB_PETALBLIZZARD = "%k Defeated %o using PetalBlizzard!";
+OB_SMOKESCREEN = "%k Defeated %o using SmokeScreen!";
+OB_SCARYFACE = "%k Defeated %o using ScaryFace!";
+OB_SLASH = "%k Defeated %o using Slash!";
+OB_FIRESPIN = "%k Defeated %o using FireSpin!";
+OB_FIREFANG = "%k Defeated %o using FireFang!";
+OB_FLAMETHROWER = "%k Defeated %o using Flamethrower!";
+OB_DRAGONRUSH = "%k Defeated %o using DragonRush!";
+OB_DRAGONPULSE = "%k Defeated %o using DragonPulse!";
+OB_FLAREBLITZ = "%k Defeated %o using FlareBlitz!";
+OB_DRAGONDANCE = "%k Defeated %o using DragonDance!";
+OB_FIREBLAST = "%k Defeated %o using FireBlast!";
+OB_FLAMEBURST = "%k Defeated %o using FlameBurst!";
+OB_DRAGONRAGE = "%k Defeated %o using DragonRage!";
+OB_METALCLAW = "%k Defeated %o using MetalClaw!";
+OB_DRAGONCLAW = "%k Defeated %o using DragonClaw!";
+OB_WITHDRAW = "%k Defeated %o using Withdraw!";
+OB_PROTECT = "%k Defeated %o using Protect!";
+OB_AQUARING = "%k Defeated %o using AquaRing!";
+OB_WATERPULSE = "%k Defeated %o using WaterPulse!";
+OB_HAZE = "%k Defeated %o using Haze!";
+OB_IRONDEFENSE = "%k Defeated %o using IronDefense!";
+OB_LIFEDEW = "%k Defeated %o using LifeDew!";
+OB_HYDROPUMP = "%k Defeated %o using HydroPump!";
+OB_SKULLBASH = "%k Defeated %o using SkullBash!";
+OB_FLASHCANNON = "%k Defeated %o using FlashCannon!";
+OB_SHELLSMASH = "%k Defeated %o using ShellSmash!";
+OB_YAWN = "%k Defeated %o using Yawn!";
+OB_RAPIDSPIN = "%k Defeated %o using RapidSpin!";
+OB_BUBBLEBEAM = "%k Defeated %o using BubbleBeam!";
+OB_AMNESIA = "%k Defeated %o using Amnesia!";
+OB_SKETCH = "%k Defeated %o using Sketch!";
+
+
+//██████████████████████████████████████████Join Menu████████████████████████████████████████
+
+MNU_JOIN1 = "Choose your Pokemon!"; //This doesn't want to work for some reason
+MNU_JOIN11 = "\c[MenuGreen]Choose your \c[MenuRed]Pokemon!";
+MNU_JOIN2 = "\c[MenuCyan]Auto Select \c[MenuGreen]picks a team for you.";
+
+MNU_JOIN3 = "\c[MenuRed]Pokemon \c-Select";
+MNU_JOIN4 = "\c[MenuGreen]Starter Moves";
+MNU_JOIN5 = "\c[MenuRed]Pokemon \c[MenuGreen]Info";
+MNU_JOIN6 = "\c[MenuCyan]Auto Select";//"\c[MenuBlue]Auto\c--Select";
+MNU_JOIN7 = "\c[MenuCyan]Original Selection";
+//██████████████████████████████████████████Class Help████████████████████████████████████████
+
+PKMN_TITLE = "\cvPKMN Options";
+PKMN_INFO_TITLE = "\cvPKMN Information";
+PKMN_SETTINGS_TITLE = "\cvPKMN Settings";
+
+PKMN_CTRL_RELOAD = "\cvReload";
+PKMN_CTRL_USER1 = "\cvUser Key 1";
+PKMN_CTRL_USER2 = "\cvUser Key 2";
+PKMN_CTRL_USER3 = "\cvUser Key 3";
+PKMN_CTRL_USER4 = "\cvUser Key 4";
+
+PKMN_CH_TITLE = "\cvCHOOSE YOUR CLASS";
+
+PKMN_CH_MAINFIRES = "\cvMainfire : ";
+PKMN_CH_ALTFIRES = "\cvAltfire : ";
+PKMN_CH_RELOADS = "\cvReload : ";
+PKMN_CH_USER1S = "\cvUser Key 1 : ";
+PKMN_CH_USER2S = "\cvUser Key 2 : ";
+PKMN_CH_USER3S = "\cvUser Key 3 : ";
+PKMN_CH_USER4S = "\cvUser Key 4 : ";
+PKMN_CH_ITEMS = "\cvItem : ";
+PKMN_CH_PASSIVES = "\cvPassive : ";
+
+
+PKMN_STATUSTITLE = "\cvPKMN Status";
+
+STATUS_LEVEL = "\cfLevel: ";
+
+STATUS_PATK = "\cfAttack: ";
+STATUS_PDEF = "\cfDefense: ";
+STATUS_SATK = "\cfSpec.atk:: ";
+STATUS_SDEF = "\cfSpec.Def: ";
+STATUS_SPD = "\cfSpeed: ";
+STATUS_EXP = "\cfEXP: ";
+STATUS_NEXTEXP = "\cfTo Next Level: ";
+
+PKMN_DEXTITLE = "\cvPokeDex";
+
+PKMN_DEXNAME = "\cvName:";
+PKMN_DEXTYPE = "\cvType:";
+PKMN_DEXSTATS = "\cvBaseStats:";
+PKMN_DEXMOVES = "\cvMoveset:.";
+PKMN_DEXMOVES1 = "\cv-=- Starting moves -=-";
+PKMN_DEXMOVES2 = "\cv-=- Level Up Moves -=-";
+PKMN_DEXMOVES3 = "\cfLVL.1:\n-\n-\n-\nLVL.2:\nLVL.3:\nLVL.4:\nLVL.5:\nLVL.6:\nLVL.7:\nLVL.8:\nLVL.9:\nLVL.10:";
+
+
+//██████████████████████████████████████████Pokedex████████████████████████████████████████
+
+EXPSPD1 = "\cfGrowth Rate:\cj Rapid";
+EXPSPD2 = "\cfGrowth Rate:\cj Swift";
+EXPSPD3 = "\cfGrowth Rate:\cj Moderate";
+EXPSPD4 = "\cfGrowth Rate:\cj Slow";
+EXPSPD5 = "\cfGrowth Rate:\cj Trudging";
+
+//D000_EVO = "\cj Evolves into \cvSomeone \cf at \cfLVL.3";
+
+//#region -=- Smeargle -=-
+D000_NAME = "\cjSmeargle";
+D000_TYPE = "\cjNormal";
+D000_STATS1 = "\cfATK:\cj 20 \cfDEF:\cj 35";
+D000_STATS2 = "\cfSP.ATK:\cj 20 \cfSP.DEF:\cj 45";
+D000_STATS3 = "\cfSPD:\cj 75 \cfHP:\cj 55";
+D000_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+//#region -=- Bulbasaur -=-
+D001_NAME = "\cjBulbasaur";
+D001_TYPE = "\cjGrass\\Poison";
+D001_STATS1 = "\cfATK:\cj 49 \cfDEF:\cj 49";
+D001_STATS2 = "\cfSP.ATK:\cj 65 \cfSP.DEF:\cj 65";
+D001_STATS3 = "\cfSPD:\cj 45 \cfHP:\cj 45";
+D001_EVO = "\cj Evolves into \cvIvysaur \cf at \cfLVL.3";
+//#endregion
+
+//#region -=- Ivysaur -=-
+D002_NAME = "\cjIvysaur";
+D002_TYPE = "\cjGrass\\Poison";
+D002_STATS1 = "\cfATK:\cj 62 \cfDEF:\cj 63";
+D002_STATS2 = "\cfSP.ATK:\cj 80 \cfSP.DEF:\cj 80";
+D002_STATS3 = "\cfSPD:\cj 60 \cfHP:\cj 60";
+D002_EVO = "\cj Evolves into \cvVenusaur \cf at \cfLVL.7";
+//#endregion
+
+//#region -=- Venusaur -=-
+D003_NAME = "\cjVenusaur";
+D003_TYPE = "\cjGrass\\Poison";
+D003_STATS1 = "\cfATK:\cj 82 \cfDEF:\cj 83";
+D003_STATS2 = "\cfSP.ATK:\cj 100 \cfSP.DEF:\cj 100";
+D003_STATS3 = "\cfSPD:\cj 80 \cfHP:\cj 80";
+D003_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+//#region -=- Charmander -=-
+D004_NAME = "\cjCharmander";
+D004_TYPE = "\cjFire";
+D004_STATS1 = "\cfATK:\cj 52 \cfDEF:\cj 43";
+D004_STATS2 = "\cfSP.ATK:\cj 60 \cfSP.DEF:\cj 50";
+D004_STATS3 = "\cfSPD:\cj 65 \cfHP:\cj 39";
+D004_EVO = "\cj Evolves into \cvCharmeleon \cf at \cfLVL.3";
+//#endregion
+
+//#region -=- Charmeleon -=-
+D005_NAME = "\cjCharmeleon";
+D005_TYPE = "\cjFire";
+D005_STATS1 = "\cfATK:\cj 64 \cfDEF:\cj 58";
+D005_STATS2 = "\cfSP.ATK:\cj 80 \cfSP.DEF:\cj 65";
+D005_STATS3 = "\cfSPD:\cj 80 \cfHP:\cj 58";
+D005_EVO = "\cj Evolves into \cvCharizard \cf at \cfLVL.7";
+//#endregion
+
+//#region -=- Charizard -=-
+D006_NAME = "\cjCharizard";
+D006_TYPE = "\cjFire\\Flying";
+D006_STATS1 = "\cfATK:\cj 84 \cfDEF:\cj 78";
+D006_STATS2 = "\cfSP.ATK:\cj 109 \cfSP.DEF:\cj 85";
+D006_STATS3 = "\cfSPD:\cj 100 \cfHP:\cj 78";
+D006_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+//#region -=- Squirtle -=-
+D007_NAME = "\cjSquirtle";
+D007_TYPE = "\cjWater";
+D007_STATS1 = "\cfATK:\cj 48 \cfDEF:\cj 65";
+D007_STATS2 = "\cfSP.ATK:\cj 50 \cfSP.DEF:\cj 64";
+D007_STATS3 = "\cfSPD:\cj 43 \cfHP:\cj 44";
+D007_EVO = "\cj Evolves into \cvWartortle \cf at \cfLVL.7";
+//#endregion
+
+//#region -=- Wartortle -=-
+D008_NAME = "\cjWartortle";
+D008_TYPE = "\cjWater";
+D008_STATS1 = "\cfATK:\cj 63 \cfDEF:\cj 80";
+D008_STATS2 = "\cfSP.ATK:\cj 65 \cfSP.DEF:\cj 80";
+D008_STATS3 = "\cfSPD:\cj 58 \cfHP:\cj 59";
+D008_EVO = "\cj Evolves into \cvBlastoise \cf at \cfLVL.7";
+//#endregion
+
+//#region -=- Blastoise -=-
+D009_NAME = "\cjBlastoise";
+D009_TYPE = "\cjWater";
+D009_STATS1 = "\cfATK:\cj 83 \cfDEF:\cj 100";
+D009_STATS2 = "\cfSP.ATK:\cj 85 \cfSP.DEF:\cj 105";
+D009_STATS3 = "\cfSPD:\cj 78 \cfHP:\cj 79";
+D009_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+
+
+
+//██████████████████████████████████████████Movedex████████████████████████████████████████
+
+//#region -=- 000: Swift -=-
+M000_NAME = "\cj Swift";
+M000_TYPE = "\cj Normal";
+M000_CATEGORY = "\cf Special";
+M000_POWER = "\cfPower:\cj 10";
+M000_DESC = "\cfShot \cja volley of fast moving stars with \n slight homing.";
+//#endregion
+
+//#region -=- 001: Ember -=-
+M001_NAME = "\cj Ember";
+M001_TYPE = "\cj Normal";
+M001_CATEGORY = "\cf Special";
+M001_POWER = "\cfPower:\cj 15";
+M001_DESC = "\cfShot \cja Ball of fire.";
+//#endregion
+
+//#region -=- 002: ThunderShock -=-
+M002_NAME = "\cj ThunderShock";
+M002_TYPE = "\cj Electric";
+M002_CATEGORY = "\cf Special";
+M002_POWER = "\cfPower:\cj 30";
+M002_DESC = "\cjCall a small bolt of lightning to strike the \cfground \cj that you target";
+//#endregion
+
+//#region -=- 003: watergun -=-
+M003_NAME = "\cj watergun";
+M003_TYPE = "\cj Water";
+M003_CATEGORY = "\cf Physical";
+M003_POWER = "\cfPower:\cj 15";
+M003_DESC = "\cfShot \cja ball of water";
+//#endregion
+
+//#region -=- 004: Bite -=-
+M004_NAME = "\cj Bite";
+M004_TYPE = "\cj Dark";
+M004_CATEGORY = "\cf Physical";
+M004_POWER = "\cfPower:\cj 50";
+M004_DESC = "\cjbare your teeth down infront of you, a delayed \cfstrike.";
+//#endregion
+
+//#region -=- 005: QuickAttack -=-
+M005_NAME = "\cj QuickAttack";
+M005_TYPE = "\cj Normal";
+M005_CATEGORY = "\cf Physical";
+M005_POWER = "\cfPower:\cj 25";
+M005_DESC = "\cfRam \cjinto an opponent at high speed.";
+//#endregion
+
+//#region -=- 006: Helping Hand -=-
+M006_NAME = "\cj Helping Hand";
+M006_TYPE = "\cj Normal";
+M006_CATEGORY = "\cf Status";
+M006_POWER = "\cfPower:\cj --";
+M006_DESC = "\cfTarget an ally to Channel \cjSupportive energy \ninto them, increasing damage output by 50%";
+//#endregion
+
+//#region -=- 007: Vine Whip -=-
+M007_NAME = "\cj Vine Whip";
+M007_TYPE = "\cj Grass";
+M007_CATEGORY = "\cf Physical";
+M007_POWER = "\cfPower:\cj 30";
+M007_DESC = "\cfStrikes \cjFoes In Front of you";
+//#endregion
+
+//#region -=- 008: Growth -=-
+M008_NAME = "\cj Growth";
+M008_TYPE = "\cj Normal";
+M008_CATEGORY = "\cf Status";
+M008_POWER = "\cfPower:\cj --";
+M008_DESC = "\cjHold to channel a \cfSelf \cjBuff that \nboosts both ATK and SP.ATK";
+//#endregion
+
+//#region -=- 009: Growl -=-
+M009_NAME = "\cj Growl";
+M009_TYPE = "\cj Normal";
+M009_CATEGORY = "\cf Status";
+M009_POWER = "\cfPower:\cj 30";
+M009_DESC = "\cjreduce ATK against all foes in a \cfWave \cjin front of you.";
+//#endregion
+
+//#region -=- 010: Tail Whip -=-
+M010_NAME = "\cj Tail Whip";
+M010_TYPE = "\cj Normal";
+M010_CATEGORY = "\cf Status";
+M010_POWER = "\cfPower:\cj --";
+M010_DESC = "\cjreduce DEF against all foes in a \cfWave \cjin front of you.";
+//#endregion
+
+//#region -=- 011: Leech Seed -=-
+M011_NAME = "\cj Leech Seed";
+M011_TYPE = "\cj Grass";
+M011_CATEGORY = "\cf Status";
+M011_POWER = "\cfPower:\cj --";
+M011_DESC = "\cfShoot \cjMisletoe seeds that infest the opponent and \ndrains their health, transfering it to you. \neffect fades if the foe goes too far";
+//#endregion
+
+//#region -=- 012: Razor leaf -=-
+M012_NAME = "\cj RazorLeaf";
+M012_TYPE = "\cj Grass";
+M012_CATEGORY = "\cf Physical";
+M012_POWER = "\cfPower:\cj 15";
+M012_DESC = "\cfShoot \cjRazor Sharp Leaves.";
+//#endregion
+
+//#region -=- 013: SweetScent -=-
+M013_NAME = "\cj SweetScent";
+M013_TYPE = "\cj Grass";
+M013_CATEGORY = "\cf Status";
+M013_POWER = "\cfPower:\cj --";
+M013_DESC = "\cjCast an aromatic Field on the \cfGround \cjthat \nlowers the speed of enemies in it.";
+//#endregion
+
+//#region -=- 014: Poison Powder -=-
+M014_NAME = "\cj Poison Powder";
+M014_TYPE = "\cj Poison";
+M014_CATEGORY = "\cf Status";
+M014_POWER = "\cfPower:\cj --";
+M014_DESC = "\cjScatter Poisonous Pollen on the \cfGround \cjthat \nInflicts Poison";
+//#endregion
+
+//#region -=- 015: Sleep Powder -=-
+M015_NAME = "\cj Sleep Powder";
+M015_TYPE = "\cj Grass";
+M015_CATEGORY = "\cf Status";
+M015_POWER = "\cfPower:\cj --";
+M015_DESC = "\cjScatter Sleep Inducing Pollen on the \cfGround \cjthat \nInflicts Sleep";
+//#endregion
+
+//#region -=- 016: Seed Bomb -=-
+M016_NAME = "\cj Seed Bomb";
+M016_TYPE = "\cj Grass";
+M016_CATEGORY = "\cf Physical";
+M016_POWER = "\cfPower:\cj 70";
+M016_DESC = "\cfLob \cjan Exploding seed that deals \narea damage across a great distance";
+//#endregion
+
+//#region -=- 017: Synthesis -=-
+M017_NAME = "\cj Synthesis";
+M017_TYPE = "\cj Normal";
+M017_CATEGORY = "\cf Status";
+M017_POWER = "\cfPower:\cj --";
+M017_DESC = "\cjHold to Regenerate HP for \cfyourself, \n\cjrecovery rate is based on SP.ATK";
+//#endregion
+
+//#region -=- 018: Energy Ball -=-
+M018_NAME = "\cj Energy Ball";
+M018_TYPE = "\cj Grass";
+M018_CATEGORY = "\cf Special";
+M018_POWER = "\cfPower:\cj 60";
+M018_DESC = "\cfCharge to shoot \cja sphere of natural energy";
+//#endregion
+
+//#region -=- 019: DoubleEdge -=-
+M019_NAME = "\cj DoubleEdge";
+M019_TYPE = "\cj Normal";
+M019_CATEGORY = "\cf Physical";
+M019_POWER = "\cfPower:\cj 120";
+M019_DESC = "\cja dangerous and reckless \cfRamming \cjAttack, \nhas severe recoil damage";
+//#endregion
+
+//#region -=- 020: Toxic -=-
+M020_NAME = "\cj Toxic";
+M020_TYPE = "\cj Poison";
+M020_CATEGORY = "\cf Status";
+M020_POWER = "\cfPower:\cj --";
+M020_DESC = "\cfLob \cja sphere of Condensed toxins that \ncreate a damaging field that poisons and deals \nincreasing damage to foes within it";
+//#endregion
+
+//#region -=- 021: SolarBeam -=-
+M021_NAME = "\cj SolarBeam";
+M021_TYPE = "\cj Grass";
+M021_CATEGORY = "\cf Special";
+M021_POWER = "\cfPower:\cj 120";
+M021_DESC = "\cfCharge to shoot \cja long ranged beam of \nsunlight, partial charges work.";
+//#endregion
+
+//#region -=- 022: Petal Blizzard -=-
+M022_NAME = "\cj Petal Blizzard";
+M022_TYPE = "\cj Grass";
+M022_CATEGORY = "\cf Special";
+M022_POWER = "\cfPower:\cj --";
+M022_DESC = "--";
+//#endregion
+
+//#region -=- 023: SmokeScreen -=-
+M023_NAME = "\cj SmokeScreen";
+M023_TYPE = "\cj Normal";
+M023_CATEGORY = "\cf Status";
+M023_POWER = "\cfPower:\cj --";
+M023_DESC = "\cfLob \cja sphere of Condensed smoke that \nobscures vision";
+//#endregion
+
+//#region -=- 024: ScaryFace -=-
+M024_NAME = "\cj ScaryFace";
+M024_TYPE = "\cj Normal";
+M024_CATEGORY = "\cf Status";
+M024_POWER = "\cfPower:\cj --";
+M024_DESC = "\cjHarshly reduce Speed against all foes in a \cfWave \cjin front of you.";
+//#endregion
+
+//#region -=- 025: Slash -=-
+M025_NAME = "\cj Slash";
+M025_TYPE = "\cj Normal";
+M025_CATEGORY = "\cf Physical";
+M025_POWER = "\cfPower:\cj 30";
+M025_DESC = "\cfStrike \cjat foes with sharp claws";
+//#endregion
+
+//#region -=- 026: Fire Spin -=-
+M026_NAME = "\cj Fire Spin";
+M026_TYPE = "\cj Normal";
+M026_CATEGORY = "\cf Special";
+M026_POWER = "\cfPower:\cj 35 DPS";
+M026_DESC = "\cjSurround the immediate \cfArea \cja in a wall of impeding fire";
+//#endregion
+
+//#region -=- 027: Fire Fang -=-
+M027_NAME = "\cj Fire Fang";
+M027_TYPE = "\cj Normal";
+M027_CATEGORY = "\cf Physical";
+M027_POWER = "\cfPower:\cj 30";
+M027_DESC = "\cjbare Flame covered teeth down infront of you, a delayed \cfstrike.";
+//#endregion
+
+//#region -=- 028: Flamethrower -=-
+M028_NAME = "\cj Flamethrower";
+M028_TYPE = "\cj Normal";
+M028_CATEGORY = "\cf Special";
+M028_POWER = "\cfPower:\cj 20 DPS";
+M028_DESC = "\cfContinuously shoot \cjflames before you";
+//#endregion
+
+//#region -=- 029: Dragon Rush -=-
+M029_NAME = "\cj Dragon Rush";
+M029_TYPE = "\cj Normal";
+M029_CATEGORY = "\cf Physical";
+M029_POWER = "\cfPower:\cj 30";
+M029_DESC = "\cja Forcefull \cfRamming \cjAttack with increadible knockback.";
+//#endregion
+
+//#region -=- 030: Dragon Pulse -=-
+M030_NAME = "\cj Dragon Pulse";
+M030_TYPE = "\cj Normal";
+M030_CATEGORY = "\cf Special";
+M030_POWER = "\cfPower:\cj 35 DPS";
+M030_DESC = "\cfContinuously shoot \cj a volley of draconic projectiles";
+//#endregion
+
+//#region -=- 031: FlareBlitz -=-
+M031_NAME = "\cj FlareBlitz";
+M031_TYPE = "\cj Normal";
+M031_CATEGORY = "\cf Special";
+M031_POWER = "\cfPower:\cj 120";
+M031_DESC = "\cja dangerous and reckless Fiery \cfRamming \cjAttack \nthat defys gravity, has severe recoil damage";
+//#endregion
+
+//#region -=- 032: Dragon Dance -=-
+M032_NAME = "\cj Dragon Dance";
+M032_TYPE = "\cj Normal";
+M032_CATEGORY = "\cf Status";
+M032_POWER = "\cfPower:\cj --";
+M032_DESC = "\cjHold to channel a \cfSelf \cjBuff that \nBoosts ATK and SPD through a rigorous, ancient dance";
+//#endregion
+
+//#region -=- 033: Fire Blast -=-
+M033_NAME = "\cj Fire Blast";
+M033_TYPE = "\cj Fire";
+M033_CATEGORY = "\cf Special";
+M033_POWER = "\cfPower:\cj 160";
+M033_DESC = "\cfCharge to shoot \cjan explosive fire missile";
+//#endregion
+
+//#region -=- 034: Flame Burst -=-
+M034_NAME = "\cj Flame Burst";
+M034_TYPE = "\cj Normal";
+M034_CATEGORY = "\cf Special";
+M034_POWER = "\cfPower:\cj 25";
+M034_DESC = "\cfShot \cja ball of exploding fire that deals area damage";
+//#endregion
+
+//#region -=- 035: Dragon Rage -=-
+M035_NAME = "\cj Dragon Rage";
+M035_TYPE = "\cj Normal";
+M035_CATEGORY = "\cf Special";
+M035_POWER = "\cfPower:\cj 40~";
+M035_DESC = "\cfShot \cj a Blast of Draconic might, that deals vebatim damage, \npower increases with every other dragon move you have";
+//#endregion
+
+//#region -=- 036: Metal Claw -=-
+M036_NAME = "\cj Metal Claw";
+M036_TYPE = "\cj Normal";
+M036_CATEGORY = "\cf Physical";
+M036_POWER = "\cfPower:\cj 25";
+M036_DESC = "\cfImbue \cjyour claws with the power of steel, \cfgeneric melee becomes Metal Claw";
+//#endregion
+
+//#region -=- 037: Dragon Claw -=-
+M037_NAME = "\cj Dragon Claw";
+M037_TYPE = "\cj Normal";
+M037_CATEGORY = "\cf Physical";
+M037_POWER = "\cfPower:\cj 25";
+M037_DESC = "\cfImbue \cjyour claws with the Draconic Power, \cfgeneric melee becomes Dragon Claw";
+//#endregion
+
+//#region -=- 038: Withdraw -=-
+M038_NAME = "\cj Withdraw";
+M038_TYPE = "\cj Normal";
+M038_CATEGORY = "\cf Status";
+M038_POWER = "\cfPower:\cj --";
+M038_DESC = "\cjHold to channel a \cfSelf \cjBuff that \nboosts DEF";
+//#endregion
+
+//#region -=- 039: Protect -=-
+M039_NAME = "\cj Protect";
+M039_TYPE = "\cj Normal";
+M039_CATEGORY = "\cf Status";
+M039_POWER = "\cfPower:\cj --";
+M039_DESC = "\cjGuard \cfYourself \cjAgainst all harm but be briefly immobile afterwards, \n recovery time increases on successive use.";
+//#endregion
+
+//#region -=- 040: Aqua Ring -=-
+M040_NAME = "\cj Aqua Ring";
+M040_TYPE = "\cj Normal";
+M040_CATEGORY = "\cf Status";
+M040_POWER = "\cfPower:\cj --";
+M040_DESC = "\cjConjur a ring of healing water at the immediate \cfArea \n\cjthat Heals all water types indiscriminately";
+//#endregion
+
+//#region -=- 041: Water Pulse -=-
+M041_NAME = "\cj Water Pulse";
+M041_TYPE = "\cj Normal";
+M041_CATEGORY = "\cf Special";
+M041_POWER = "\cfPower:\cj 30";
+M041_DESC = "\cfShot \cja Blast of water, has considerable knockback";
+//#endregion
+
+//#region -=- 042: Haze -=-
+M042_NAME = "\cj Haze";
+M042_TYPE = "\cj Ice";
+M042_CATEGORY = "\cf Status";
+M042_POWER = "\cfPower:\cj --";
+M042_DESC = "\cfLob \cja sphere of Condensed Black Haze that \npurges boosts on enemies and debuffs on allies";
+//#endregion
+
+//#region -=- 043: IronDefense -=-
+M043_NAME = "\cj IronDefense";
+M043_TYPE = "\cj Normal";
+M043_CATEGORY = "\cf Status";
+M043_POWER = "\cfPower:\cj --";
+M043_DESC = "\cjHold to channel a \cfSelf \cjBuff that \nSharply Boosts DEF";
+//#endregion
+
+//#region -=- 044: Life Dew -=-
+M044_NAME = "\cj Life Dew";
+M044_TYPE = "\cj Normal";
+M044_CATEGORY = "\cf Status";
+M044_POWER = "\cfPower:\cj --";
+M044_DESC = "\cjSprinkle healing water on the \cfGround \cjyou target, healing is based on SP.ATK";
+//#endregion
+
+//#region -=- 045: Hydro Pump -=-
+M045_NAME = "\cj Hydro Pump";
+M045_TYPE = "\cj Normal";
+M045_CATEGORY = "\cf Special";
+M045_POWER = "\cfPower:\cj 110 DPS";
+M045_DESC = "\cfContinuously shoot \cja jetstream of water, has considerable range and knockback.";
+//#endregion
+
+//#region -=- 046: Skull Bash -=-
+M046_NAME = "\cj Skull Bash";
+M046_TYPE = "\cj Normal";
+M046_CATEGORY = "\cf Physical";
+M046_POWER = "\cfPower:\cj 50";
+M046_DESC = "---";
+//#endregion
+
+//#region -=- 047: Flash Cannon -=-
+M047_NAME = "\cj Flash Cannon";
+M047_TYPE = "\cj Steel";
+M047_CATEGORY = "\cf Special";
+M047_POWER = "\cfPower:\cj 50";
+M047_DESC = "\cfCharge to shoot \cja sphere of Radient Light energy";
+//#endregion
+
+//#region -=- 048: Shell Smash -=-
+M048_NAME = "\cj Shell Smash";
+M048_TYPE = "\cj Normal";
+M048_CATEGORY = "\cf Status";
+M048_POWER = "\cfPower:\cj --";
+M048_DESC = "\cjHold to channel a \cfSelf \cjBuff that \nBreaks your shell, trading Defenses for Offenses and speed.";
+//#endregion
+
+//#region -=- 049: Yawn -=-
+M049_NAME = "\cj Yawn";
+M049_TYPE = "\cj Normal";
+M049_CATEGORY = "\cf Status";
+M049_POWER = "\cfPower:\cj --";
+M049_DESC = "\cfTarget \cjan opponent with a contagious yawn, slows them down \nuntill they drift to sleep later.";
+//#endregion
+
+//#region -=- 050: Rapid Spin -=-
+M050_NAME = "\cj Rapid Spin";
+M050_TYPE = "\cj Normal";
+M050_CATEGORY = "\cf Physical";
+M050_POWER = "\cfPower:\cj 30";
+M050_DESC = "\cj Spin Rapidly to \cfCleave \cj surrounding opponents, knocking them away.\ncan also dispell hazards";
+//#endregion
+
+//#region -=- 051: Bubble Beam -=-
+M051_NAME = "\cj Bubble Beam";
+M051_TYPE = "\cj Normal";
+M051_CATEGORY = "\cf Special";
+M051_POWER = "\cfPower:\cj 35 DPS";
+M051_DESC = "\cfContinuously shoot \cja stream of exploding bubbles";
+//#endregion
+
+//#region -=- 052: Amnesia -=-
+M052_NAME = "\cj Amnesia";
+M052_TYPE = "\cj Normal";
+M052_CATEGORY = "\cf Status";
+M052_POWER = "\cfPower:\cj --";
+M052_DESC = "\cjHold to channel a \cfSelf \cjBuff that \nClears your thoughts and Sharply boosts SP.DEF";
+//#endregion
+
+//#region -=- 053: Sketch -=-
+M053_NAME = "\cj Sketch";
+M053_TYPE = "\cj Normal";
+M053_CATEGORY = "\cf Status";
+M053_POWER = "\cfPower:\cj --";
+M053_DESC = "\cfShot \cja volley of fast moving stars with \n slight homing.";
+//#endregion

@@ -1,0 +1,132 @@
+/* -=- Move Dex -=-
+ * Contains all the constants that define the ID number of every move in the mod,
+ *
+ * All arrays regarding moves are to follow the order of the constants.
+
+*/
+
+#library "Dex_Moves"
+#include "zcommon.acs"
+
+#LIBDEFINE NullMove -1
+#LIBDEFINE Swift 0
+#LIBDEFINE Ember 1
+#LIBDEFINE ThunderShock 2
+#LIBDEFINE Watergun 3
+#LIBDEFINE Bite 4
+#LIBDEFINE QuickAttack 5
+#LIBDEFINE HelpingHand 6
+#LIBDEFINE VineWhip 7
+#LIBDEFINE Growth 8
+#LIBDEFINE Growl 9
+#LIBDEFINE TailWhip 10
+#LIBDEFINE LeechSeed 11
+#LIBDEFINE RazorLeaf 12
+#LIBDEFINE SweetScent 13
+#LIBDEFINE PoisonPowder 14
+#LIBDEFINE SleepPowder 15
+#LIBDEFINE SeedBomb 16
+#LIBDEFINE Synthesis 17
+#LIBDEFINE EnergyBall 18
+#LIBDEFINE DoubleEdge 19
+#LIBDEFINE Toxic 20
+#LIBDEFINE SolarBeam 21
+#LIBDEFINE PetalBlizzard 22
+#LIBDEFINE SmokeScreen 23 
+#LIBDEFINE ScaryFace 24 
+#LIBDEFINE Slash 25 
+#LIBDEFINE FireSpin 26 
+#LIBDEFINE FireFang 27 
+#LIBDEFINE Flamethrower 28 
+#LIBDEFINE DragonRush 29 
+#LIBDEFINE DragonPulse 30 
+#LIBDEFINE FlareBlitz 31 
+#LIBDEFINE DragonDance 32 
+#LIBDEFINE FireBlast 33 
+#LIBDEFINE FlameBurst 34
+#LIBDEFINE DragonRage 35
+#LIBDEFINE MetalClaw 36
+#LIBDEFINE DragonClaw 37
+#LIBDEFINE Withdraw 38
+#LIBDEFINE Protect 39
+#LIBDEFINE AquaRing 40
+#LIBDEFINE WaterPulse 41
+#LIBDEFINE Haze 42
+#LIBDEFINE IronDefense 43
+#LIBDEFINE LifeDew 44
+#LIBDEFINE HydroPump 45
+#LIBDEFINE SkullBash 46
+#LIBDEFINE FlashCannon 47
+#LIBDEFINE ShellSmash 48
+#LIBDEFINE Yawn 49
+#LIBDEFINE RapidSpin 50
+#LIBDEFINE BubbleBeam 51
+#LIBDEFINE Amnesia 52
+#LIBDEFINE Sketch 53
+#LIBDEFINE PowderSnow  54
+#LIBDEFINE IcyWind  55
+#LIBDEFINE AuroraBeam  56
+#LIBDEFINE IcePunch  57
+#LIBDEFINE IceFang  58
+#LIBDEFINE IceBeam  59
+#LIBDEFINE FrostBreath  60
+#LIBDEFINE Blizzard  61
+#LIBDEFINE Reflect 62
+#LIBDEFINE MagicalLeaf 63
+#LIBDEFINE LightScreen 64
+#LIBDEFINE GrassWhistle 65
+#LIBDEFINE HealPulse 66
+#LIBDEFINE Aromatherapy 67
+#LIBDEFINE Safeguard 68
+#LIBDEFINE BulletSeed 69
+#LIBDEFINE Detect 70
+#LIBDEFINE Pursuit 71
+#LIBDEFINE LeafBlade 72
+#LIBDEFINE FalseSwipe 73
+#LIBDEFINE Agility 74
+#LIBDEFINE NightSlash 75
+#LIBDEFINE XScissor 76
+#LIBDEFINE SkyDrop 77
+#LIBDEFINE StealthRock 78
+#LIBDEFINE Curse 79
+#LIBDEFINE Earthquake 80
+#LIBDEFINE WideGuard 81
+#LIBDEFINE WoodHammer 82
+#LIBDEFINE DefenseCurl 83
+#LIBDEFINE Covet 84
+#LIBDEFINE FlameWheel 85
+#LIBDEFINE Mudslap 86
+#LIBDEFINE Rollout 87
+#LIBDEFINE Extrasensory 88
+#LIBDEFINE GyroBall 89
+#LIBDEFINE Eruption 90
+#LIBDEFINE Peck 91
+#LIBDEFINE DoubleKick 92
+#LIBDEFINE ThunderPunch 93
+#LIBDEFINE HeatWave 94
+#LIBDEFINE BlazeKick 95
+#LIBDEFINE SkyUppercut 96
+#LIBDEFINE BraveBird 97
+#LIBDEFINE HiJumpKick 98
+#LIBDEFINE Leer 99
+#LIBDEFINE Fakeout 100
+#LIBDEFINE Machpunch 101
+#LIBDEFINE Vacuumwave 102
+#LIBDEFINE NastyPlot 103
+#LIBDEFINE CloseCombat 104
+#LIBDEFINE Acrobatics 105
+#LIBDEFINE Rage 106
+#LIBDEFINE FakeTears 107
+#LIBDEFINE AquaTail 108
+#LIBDEFINE Crunch 109
+#LIBDEFINE Thrash 110
+#LIBDEFINE Refresh 111
+#LIBDEFINE MudBomb 112
+#LIBDEFINE HammerArm 113
+#LIBDEFINE RockSlide 114
+#LIBDEFINE Brine 115
+#LIBDEFINE SwordDance 116
+#LIBDEFINE AquaJet 117
+#LIBDEFINE DrillPeck 118
+
+int Blah2; //Needed to compile properly, can't have only LIBDEFINEs

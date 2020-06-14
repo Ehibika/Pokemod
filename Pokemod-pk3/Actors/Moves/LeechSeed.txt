@@ -1,0 +1,236 @@
+const Int LSSPRD = 12.6;
+const Int LSSPRD2 = 3.6;
+
+actor LeechSeedMove : WepMasterBase
+{
+Tag "LeechSeed"
+obituary "$OB_LEECHSEED"
+Weapon.AmmoUse 1
+Weapon.AmmoGive 10
+weapon.ammotype "LeechSeedPP"
+scale 2.0
+Inventory.Pickupmessage "$PU_MEGABUSTER"
+States
+{
+Spawn:
+WEAP X 1
+stop
+
+
+Fire:
+"####" B 0 //A_Jumpif(CallACS("CheckWeaponFire",RC_A)==0,"NoAmmo")
+"####" B 0 A_Jump(256,"Fire.Bullet")
+Goto Fire.Bullet
+
+Fire.Bullet:
+"####" B 0 A_Jumpif(CallACS("CheckWeaponFire",RC_A)==0,"NoAmmo")
+"####" B 0 A_PlaySoundEx("weapon/WaterBalloon","Weapon")
+"####" B 2 A_FireCustomMissile("LeechSeedShot",0,1,0,0)
+"####" BBBB 2 A_FireCustomMissile("LeechSeedShot",Frandom(-LSSPRD,LSSPRD),0,0,0,0,Frandom(-LSSPRD2,LSSPRD2))
+"####" B 0 A_Jump(256,"Fire.After")
+Goto Fire.After
+
+Fire.After:
+"####" B 1 A_GiveInventory("Recovery_A",35)
+"####" C 0 A_REfire("Fire")
+"####" B 0 A_Jump(256,"Fire.End")
+Goto Fire.End
+
+
+
+
+
+}
+}
+
+actor LeechSeedMove1 : LeechSeedMove {Weapon.SlotNumber 1}
+actor LeechSeedMove2 : LeechSeedMove {Weapon.SlotNumber 2}
+actor LeechSeedMove3 : LeechSeedMove {Weapon.SlotNumber 3}
+actor LeechSeedMove4 : LeechSeedMove {Weapon.SlotNumber 4}
+
+actor LeechSeedMove5 : LeechSeedMove 
+{
+Weapon.SlotNumber 5
+States
+{
+Fire.End:
+TNT1 A 0
+TNT1 A 0 A_TakeInventory("LeechSeedMove5",9)
+TNT1 A 0 A_Jump(256,"Ready")
+Goto Ready
+}
+}
+
+//[+]========================================================================[+]
+//-----------------------------|Ammo & Inventory|------------------------------
+//[+]========================================================================[+]
+actor LeechSeedPP : Ammo {inventory.amount 1 inventory.Maxamount 10}
+
+Actor Seeded : powerup
+{inventory.amount 1
+Powerup.duration -15
+//Powerup.Color "E74FC3", 0.5
+}
+
+actor TakeSeeded : CustomInventory
+{
+Inventory.amount 1
+Inventory.MaxAmount 1
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_TakeInventory("Seeded", 1)
+stop
+}
+}
+//[+]========================================================================[+]
+//--------------------------------|Projectiles |--------------------------------
+//[+]========================================================================[+]
+Const Int LSeedDamage = 5; //every 17 frames
+Const Int LSeedHPGain = 5; //every 17 frames
+
+actor LeechSeedShot : BasicProjectile
+{
+DamageType "LeechSeed"
+obituary "$OB_LeechSeed"
+-NOGRAVITY
++HITTRACER
+Speed 55
+Damage (0)
+radius 5
+height 5
+scale 2.5
+Gravity 2.5
+Args 15, 0, 0
+States
+{
+Spawn:
+TNT1 A 0 
+TNT1 A 0 A_GiveInventory("ProjectileDCode",1)
+HTST A 0 ThrustThingZ(0, 30, 0, 1)
+Spawn2:
+TNT1 A 0 
+BASB T 1 
+Goto Spawn2
+
+
+
+Crash:
+TNT1 A 1 
+TNT1 A 0 A_JumpIf(IsPointerEqual(AAPTR_TRACER,AAPTR_NULL) == False, "LSeedCheck")
+Goto Death
+
+LSeedCheck:
+TNT1 A 0 A_JumpIfInventory("Seeded",1,"Death",AAPTR_TRACER)
+TNT1 A 0 A_JumpIfInventory("GrassSTAB",1,"Death",AAPTR_TRACER)
+TNT1 A 0 A_JumpIfInventory("ProtectGuard",1,"Death",AAPTR_TRACER)
+Goto PreLSeed
+
+PreLSeed:
+TNT1 A 1 //A_GiveInventory("LSeed_SoundCue",1,AAPTR_TRACER)
+TNT1 A 0 A_ChangeFlag("NOINTERACTION",True)
+TNT1 A 0 A_ChangeFlag("NOCLIP",True)
+TNT1 A 0 A_SetArg(2,CallACS("LeechSeedHPGet",5))
+Goto LSeed
+
+LSeed:
+TNT1 A 0 A_GiveInventory("Seeded",1,AAPTR_TRACER)
+TNT1 AAA 0 A_SpawnItemEx("RazorLeafParticle", 0, 0, 28, 256/45, 256/45, random2(256/45), random(0, 359),SXF_TRANSFERTRANSLATION|SXF_NOCHECKPOSITION)
+TNT1 AAAAA 1 A_Warp(AAPTR_TRACER,0,0,28,0,WARPF_COPYINTERPOLATION)
+TNT1 A 0 A_JumpIfInventory("CutterFlag",999,"Death2",AAPTR_TRACER)
+TNT1 A 0 A_JumpIfInventory("IsDead",1,"Death2",AAPTR_TRACER)
+TNT1 A 0 A_SetArg(1,Args[1]+1)
+TNT1 A 0 A_JumpIf(Args[1] < 7, "LSeed")
+Goto LSeedLoop_1
+
+
+LSeedLoop_1:
+TNT1 A 0 A_JumpIfCloser(750,"LSeedLoop_3")
+Goto Death
+
+LSeedLoop_2:
+TNT1 A 0 A_JumpIfTargetInLOS("LSeedLoop_3",360)
+Goto LSeedloop_4
+
+LSeedLoop_3:
+TNT1 A 0 A_JumpIfInventory("CutterFlag",999,"Death2",AAPTR_TARGET)
+TNT1 A 0 A_JumpIfInventory("IsDead",1,"Death2",AAPTR_TARGET)
+
+TNT1 A 0 A_Warp(AAPTR_TRACER,0,0,28,0,WARPF_COPYINTERPOLATION)
+TNT1 A 0 A_Explode(Args[2],35,0,0,35)
+Goto LSeedloop_4
+LSeedloop_4: //No Damage if out of view
+TNT1 A 0 A_SetArg(1,0)
+TNT1 A 0 A_SetArg(0,Args[0]-1)
+TNT1 A 0 ACS_NamedExecuteAlways("PKMNACS_Basic(Over)Heal",0,AAPTR_TARGET,Args[2],0)
+TNT1 A 0 A_GiveToTarget("LSeedHeal",1)
+TNT1 A 0 A_JumpIf(Args[0] > 0, "LSeed")
+Goto Death
+
+Death:
+TNT1 A 0 A_Stop
+HARD BCDE 2
+stop
+
+Death2:
+TNT1 A 0 A_GiveInventory("TakeSeeded",1,AAPTR_TRACER)
+TNT1 A 17 
+stop
+
+
+}
+}
+
+actor LSeedParticleFX 
+{
+PROJECTILE
++NOINTERACTION
++DONTBLAST
++CLIENTSIDEONLY
+Speed 0
+radius 5
+height 5
+scale 1.0
+//Renderstyle "add"
+Alpha 0.9
+States
+{
+Spawn:
+TNT1 A 0 
+TNT1 A 4
+HARD CDEB 2 A_ScaleVelocity(0.8)
+stop
+}
+}
+
+
+actor LSeedHeal : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_JumpIf(CallACS("PKMNACS_HealthPercent",0)>=100,"Nope")
+LASH A 0 A_JumpIf(ACS_NamedExecuteWithResult("PKMNACS_ActorClassifier",0,2) == TRUE, "HealMe")
+
+
+HealMe:
+//TNT1 A 0 HealThing(LSeedHPGain)
+TNT1 A 0 A_Giveinventory("HealEffectSpawner",1)
+TNT1 A 0 A_PlaySoundEx("item/energyup","SoundSlot7")
+TNT1 A 0
+stop
+
+Nope:
+TNT1 A 0
+stop
+}
+}

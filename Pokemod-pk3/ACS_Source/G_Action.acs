@@ -1,0 +1,1013 @@
+/* -=- Action Scripts -=-
+ * Scripts intended for mid game use, generally through moves.
+ * 
+
+*/
+
+#library "G_Action"
+#import "tools.acs"
+#import "DB_Player.acs"
+#import "DB_Data.acs"
+#import "Dex_Pokemon.acs"
+#import "Dex_Types.acs"
+#import "WEPACS.acs"
+#import "A_Stats.acs"
+#import "Dex_Leveling.acs"
+#import "Dex_BaseStats.acs"
+#include "zcommon.acs"
+#include "8bdmlib.acs"
+
+//#region -=- EntiTID -=-
+#region -=- EntiTID -=-
+
+#DEFINE EntityTID 480000
+
+Script "GiveEntiTID" (Int EntityID)
+{
+/*
+I don't think puns make for good programming practices but why not? hopefully I won't pay for this
+
+anyways, this is for entities that you are only allowed one of per person, this gives them a TID
+formatted in the following way:
+
+EntiTID Tag | Player Number | Entity ID
+48|00|00
+*/
+int OwnerTID = ACS_NamedExecuteWithResult("core_gettarget");
+if(OwnerTID < 1000){Terminate;}
+
+Int P = (OwnerTID-1000)*100;
+int ETID = EntityTID+P+EntityID;
+
+/*
+Now, let's kill any actor that already has this ETID
+*/
+
+if (ThingCount(T_NONE,ETID)){Thing_Remove(ETID);}
+Thing_ChangeTID(0,EntityTID+P+EntityID);
+}
+
+#endregion
+//#endregion
+
+//#region -=- Radius Give -=-
+#region -=- Radius Give -=-
+
+#DEFINE RG_SELF 1
+#DEFINE RG_TEAM 2
+#DEFINE RG_ENEMY 4
+
+script "PKMNACS_RadiusGive" (int GiveID, int GiveRadius, int GiveType)
+{ 
+int Target_TID;
+int Target_Distance;
+int FiringPlayer;
+int PlayersTeam;
+int TeamGame = ACS_ExecuteWithResult(975, 1);
+Bool GiveClearance;
+
+//GiveType works like a bitwise flag
+
+If(ActivatorTID() <= 999)
+	{
+	FiringPlayer= ACS_ExecuteWithResult(257, 0); //Returns the target of the activator
+	}
+Else If(ActivatorTID() >= EntityTID && ActivatorTID() <= (EntityTID+6499))
+	{
+	FiringPlayer= ACS_ExecuteWithResult(257, 0); //Actor is a player spawed entity, Returns the target of the activator
+	}
+else
+	{
+	FiringPlayer=ActivatorTID();
+	}
+PlayersTeam = GetPlayerInfo(FiringPlayer-1000, PLAYERINFO_TEAM);
+For(int i = 0;i < ServerMax; i++)
+	{
+	Target_TID = i+1000;
+	GiveClearance = false;
+	If(PlayerInGame(i) && xyzDistance(0,Target_TID) < GiveRadius) // && FiringPlayer!=Target_TID
+		{
+			if((GiveType & RG_SELF) && FiringPlayer == Target_TID) {GiveClearance = True;}
+			if(TeamGame)
+			{
+				if((GiveType & RG_TEAM) && PlayersTeam == GetPlayerInfo(i, PLAYERINFO_TEAM) && FiringPlayer != Target_TID) {GiveClearance = True;}
+				if((GiveType & RG_ENEMY) && PlayersTeam != GetPlayerInfo(i, PLAYERINFO_TEAM)) {GiveClearance = True;}
+			}
+			else
+			{
+				if((GiveType & RG_TEAM) && FiringPlayer == Target_TID) {GiveClearance = True;}
+				if((GiveType & RG_ENEMY) && FiringPlayer != Target_TID) {GiveClearance = True;}				
+			}
+			if(GiveClearance)
+			{
+				GiveActorInventory(Target_TID,"PackageID", GiveID);
+				GiveActorInventory(Target_TID,"GivePackage", 1);
+			}
+
+		}
+	}
+}
+#endregion
+//#endregion
+
+//#region -=- Medivision -=-
+#region -=- Medivision -=-
+
+
+
+Str TinyBarSprite[21] = {
+    "TinyBar0",
+    "TinyBar1",
+    "TinyBar2",
+    "TinyBar3",
+    "TinyBar4",
+    "TinyBar5",
+    "TinyBar6",
+    "TinyBar7",
+    "TinyBar8",
+    "TinyBar9",
+    "TinyBar10",
+    "TinyBar11",
+    "TinyBar12",
+    "TinyBar13",
+    "TinyBar14",
+    "TinyBar15",
+    "TinyBar16",
+    "TinyBar17",
+    "TinyBar18",
+    "TinyBar19",
+    "TinyBar20",
+    };
+       
+    function str TinyBarHealth (int TargTID)
+    {
+    int output;
+    int HealthPercent;
+    int PlayerCurrentHealth;// = GetActorProperty(0,APROP_Health);
+    int PlayerMaxHealth;// = GetActorProperty(0,APROP_SpawnHealth);
+    int OverHealth;
+    
+        if(GetActorProperty(TargTID,APROP_HEALTH)<=0){PlayerCurrentHealth = 1; }
+            Else{PlayerCurrentHealth = GetActorProperty(TargTID,APROP_Health);}
+        if(GetActorProperty(TargTID,APROP_SpawnHealth)<=0){PlayerMaxHealth = 100; }
+            Else{PlayerMaxHealth = GetActorProperty(TargTID,APROP_SpawnHealth);}
+            
+    HealthPercent = ((PlayerCurrentHealth*100)/PlayerMaxHealth);
+    OverHealth = HealthPercent-100;
+     if(OverHealth < 0){OverHealth = 0;}
+      if(HealthPercent > 100){HealthPercent = 100;}
+    
+    HealthPercent = HealthPercent / 10;
+    OverHealth = OverHealth / 5;
+     
+    HealthPercent =  HealthPercent + OverHealth;
+    if(HealthPercent > 20){HealthPercent = 20;}
+    if(HealthPercent < 0){HealthPercent = 0;}
+    return (TinyBarSprite[HealthPercent]);
+    }
+     
+    script "PKMNACS_MedivisionScript" (int Weapon) CLIENTSIDE
+    { 
+    if(Weapon==1){str WeaponRequired = GetWeapon();}
+    int Target_TID;
+    int PlayersTeam;
+    str TeamTag; 
+    
+    if(ACS_ExecuteWithResult(975,1)!=1){terminate;}
+    
+    Switch(PlayerTeam())
+        {
+        Case 0: TeamTag = "_Light"; Break;
+        Case 1: TeamTag = "_Wily"; Break;
+        Case 2: TeamTag = "_Cossack"; Break;
+        Case 3: TeamTag = "_King"; Break;
+        }
+    
+    while(GetActorProperty(ActivatorTID(), APROP_HEALTH) > 0 && !CheckActorInventory(ActivatorTID(),"CopyRobotUnmorphed"))
+        {
+        Delay(1);
+        if(Weapon==1 && StrIcmp(GetWeapon(),WeaponRequired)!=0){terminate;}
+        PlayersTeam = GetPlayerInfo(ActivatorTID()-1000, PLAYERINFO_TEAM);
+        For(int p = 0; p < ServerMax; p++)
+            {
+            Target_TID = p+1000;
+            If(PlayerInGame(p)
+                && p+1000 != ActivatorTID()
+                && (xyzDistance(0,Target_TID) < 900) 
+                && PlayersTeam == GetPlayerInfo(p, PLAYERINFO_TEAM)
+                && Checksight(0,Target_TID,0))
+                {
+                if(CheckActorInventory(Target_TID,"CannotUseHealing")){SpawnForced(StrParam(s:TinyBarHealth(Target_TID),s:TeamTag,s:"_NoHeal"),GetActorX(Target_TID),GetActorY(Target_TID),GetActorZ(Target_TID) + (65 << 16));}
+                else{SpawnForced(StrParam(s:TinyBarHealth(Target_TID),s:TeamTag),GetActorX(Target_TID),GetActorY(Target_TID),GetActorZ(Target_TID) + (65 << 16));}
+                }
+            }
+        }
+    }
+
+#endregion
+//#endregion
+
+//#region -=- Sleep Handler -=-
+#region -=- Sleep Handler -=-
+
+script "PKMN_SleepHandler" (Void)
+{
+	int CurrentHP = GetActorProperty(0,APROP_Health);
+	int RegHP = GetActorProperty(0,APROP_Health);
+	
+	while(CurrentHP > 0) {
+		CurrentHP = GetActorProperty(0,APROP_Health);
+		if(CurrentHP < RegHP) {
+			GiveActorInventory(0,"SleepBreaker",1);
+			//Log(s:"UnSleeperTag given");
+			terminate;
+		}
+		Delay(1);
+		if(!CheckInventory("SleepMark")) {
+			GiveActorInventory(0,"SleepBreaker",1);
+			//Log(s:"UnSleeperTag given - timed");
+			terminate;
+		}
+		
+	}
+}
+
+
+#endregion
+//#endregion
+
+//#region -=- Damage Faloff Formula Script -=-
+#region -=- Damage Faloff Formula Script -=-
+
+Script "DamageRate" (int ModDamage, int DistStart, int RampRate) //DamageDropoff Script
+{
+int Damage = NoNeg(ModDamage - NoNeg(xyzdistance(0, ACS_ExecuteWithResult(257, 0))-DistStart)/RampRate);
+SetResultValue(Damage);
+}
+
+#endregion
+//#endregion
+
+//#region -=- Deployable Shield -=-
+#region -=- Deployable Shield -=-
+
+Script "LightScreenSyncher" (void) 
+{
+	//int Player = ACS_NamedExecuteWithResult("core_gettarget",0);
+	int BaseTID = ActivatorTID()-1000;
+	int Deduction;
+	// Loop if the base is active still
+	while(GetUserVariable(BaseTID, "User_ScreenHP")>0
+	&& ThingCount(T_NONE,BaseTID) > 0
+	){
+	if (GetActorProperty(0, APROP_HEALTH) != GetActorProperty(0, APROP_SPAWNHEALTH))
+		{
+		Deduction = GetActorProperty(0, APROP_SPAWNHEALTH) - GetActorProperty(0, APROP_HEALTH);
+		Healthing(9999);
+		SetUserVariable(BaseTID, "User_ScreenHP",GetUserVariable(BaseTID, "User_ScreenHP")-Deduction);
+		}
+		//TakeActorInventory(Player,"LightScreenHealth",999);
+		//GiveActorInventory(Player,"LightScreenHealth",GetUserVariable(BaseTID, "User_ScreenHP"));
+		Delay(1);
+	}
+	
+	// Remove
+	Thing_Remove(0);
+}
+
+Script "LightScreenKiller" (Void)
+{
+int Player = ACS_NamedExecuteWithResult("core_gettarget",0);
+
+	//While(ThingCount(T_NONE,4000+(Player))
+	//||ThingCount(T_NONE,5000+(Player))
+	//)
+	//{
+	SetActorState (4000+(Player), "Perish");
+	SetActorState (5000+(Player), "Perish");
+	//}
+}
+
+Script "ScreenHealthSynch" (VOID)
+{
+int BaseTID = ActivatorTID();
+int TargetTID = ACS_ExecuteWithResult(257,0);
+
+	while(GetUserVariable(BaseTID, "User_ScreenHP")>0
+	&& ThingCount(T_NONE,BaseTID) > 0
+	){
+		TakeActorInventory(TargetTID,"LightScreenHealth",999);
+		GiveActorInventory(TargetTID,"LightScreenHealth",GetUserVariable(BaseTID, "User_ScreenHP"));
+		Delay(1);
+	}
+}
+
+
+Script "Aegis_ShieldCheck" (int on_self)
+{
+int TargetTID;
+int TargShieldEnergy;
+int HealthReturn;
+// for the deploy shield, check how much shield energy the player has
+if(on_self > 0){TargetTID = ActivatorTID();}
+	Else{TargetTID = ACS_ExecuteWithResult(257,0);}
+
+	TargShieldEnergy = CheckActorInventory(TargetTID,"ShieldEnergy");
+	HealthReturn = ValueMap(TargShieldEnergy,150,1,250,1);
+	//log(i:TargShieldEnergy,s:" to ",i:HealthReturn); 
+SetResultValue(HealthReturn);
+}
+
+Script "Aegis_ShieldEnergySynch" (void)
+{
+
+int BaseTID = ActivatorTID();
+int TargetTID = ACS_ExecuteWithResult(257,0);
+int ScreenHealth = (GetUserVariable(BaseTID, "User_ScreenHP") ); //- 200
+
+int ShieldReturn; 
+
+TakeActorInventory(TargetTID,"LightScreenHealth",9999);
+TakeActorInventory(TargetTID,"ShieldEnergy",999);
+if (ScreenHealth > 0)
+	{
+		ShieldReturn = ValueMap(ScreenHealth,250,1,150,1);
+		GiveActorInventory(TargetTID,"ShieldEnergy",ShieldReturn);
+	}
+	Else{GiveActorInventory(TargetTID,"K_ShieldBreak",1);}
+}
+
+Script "Aegis_ShieldLifeSap" (void)
+{
+
+int BaseTID = ActivatorTID();
+int TargetTID = ACS_ExecuteWithResult(257,0);
+
+If(!PlayerInGame(TargetTID-1000)){SetUserVariable(BaseTID, "User_ScreenHP",GetUserVariable(BaseTID, "User_ScreenHP")-5);}
+
+}
+
+#endregion
+//#endregion
+
+//#region -=- Deployables -=-
+#region -=- Deployables -=-
+
+Script "OBJECTTALLY" (int BaseNum)
+{
+int MasterTID = ACS_ExecuteWithResult(257, 0);
+
+// objects work within the 3000's range, the playernumber being in the 100th place
+//Naturally this means a single player can only have up to 9 items
+if (BaseNum < 3000){BaseNum = 3000;}
+
+int ObjTIDBase = BaseNum + ((MasterTID-1000)*100);
+bool TIDset = false;
+int TIDCount;
+
+while(!TIDset)
+{
+if(ThingCount(T_NONE,ObjTIDBase+TIDCount))
+	{
+	//log(s:"Object with TID ",i:ObjTIDBase+TIDCount,s:" Already exists");
+	TIDCount++;
+	//continue;
+	}
+	Else
+	{
+	//log(s:"This object's TID is now ",i:ObjTIDBase+TIDCount,s:"!");
+	Thing_ChangeTID(0,ObjTIDBase+TIDCount);
+	//log(s:"This object's TID is now ",i:ActivatorTID(),s:"!");
+	TIDset = true;
+	}
+}
+
+for(int i; i < 9; i++)
+{
+SetUserVariable(ObjTIDBase+i,"User_Tally",GetUserVariable(ObjTIDBase+i,"User_Tally")+1);
+//log(s:"Object with TID ",i:ObjTIDBase+i,s:" Now has a tally of ",i:GetUserVariable(ObjTIDBase+i,"User_Tally"));
+}
+//--
+}
+
+Script "OBJECTDEATHTALLY" (VOID)
+{
+int MasterTID = ACS_ExecuteWithResult(257, 0);
+int ObjTIDBase = 3000 + ((MasterTID-1000)*100);
+
+// ment to be called when an object dies, this makes all objects drop their tally by 1. if their tally was above
+//the one that died. this is only for if the object was destroyed, not terminated due to being overtallied
+int ObjTID = ActivatorTID();
+int EmptyTally = GetUserVariable(ObjTID,"User_Tally");
+//log(s:"object ",i:ObjTID ,s:" was destroyed!");
+
+for(int i; i < 9; i++)
+{
+	if(GetUserVariable(ObjTIDBase+i,"User_Tally") > 1)
+	{
+	SetUserVariable(ObjTIDBase+i,"User_Tally",GetUserVariable(ObjTIDBase+i,"User_Tally")-1);
+	//log(s:"Object with TID ",i:ObjTIDBase+i,s:" Now has a new tally of ",i:GetUserVariable(ObjTIDBase+i,"User_Tally"));
+	}
+}
+
+}
+
+Script "DEPLPOYABLEDELETER" (int gone) DISCONNECT
+{
+//log(i:gone);
+int ObjTIDBase = 3000 + ((gone)*100);
+int ObjTIDBase2 = 4000 + ((gone)*100);
+int ObjTIDBase3 = 4000 + ((gone)+1000);
+int ObjTIDBase4 = 5000 + ((gone)+1000);
+for(int i; i < 9; i++)
+{
+	SetActorState (ObjTIDBase+i, "Perish");
+	SetActorState (ObjTIDBase2+i, "Perish");
+
+}
+
+	SetActorState (ObjTIDBase3, "Perish");
+	SetActorState (ObjTIDBase4, "Perish");
+}
+
+#endregion
+//#endregion
+
+//#region -=- Group Teleport -=-
+#region -=- Group Teleport -=-
+
+
+script "PKMNACS_AbraGroupTeleport" (int Range)
+{
+if(ACS_ExecuteWithResult(975,1)==1)
+	{
+	for(int i = 0; i<GetMaxPlayers(); i++)
+		{
+		if(PlayerInGame(i) && GetActorProperty(0,APROP_Health)>0 && i!=ActivatorTID()-1000)
+			{
+			if(GetPlayerInfo(ActivatorTID()-1000, PLAYERINFO_TEAM)==GetPlayerInfo(i, PLAYERINFO_TEAM))
+				{
+				if(xyzDistance(ActivatorTID(),i+1000)<=Range && CheckSight(ActivatorTID(),i+1000,0))
+					{
+					Thing_Move(i+1000,ActivatorTID()+5000,1);
+					}
+				}
+			}
+		}
+	}
+Delay(1);
+Thing_Move(ActivatorTID(),ActivatorTID()+5000,1);
+}
+
+#endregion
+//#endregion
+
+//#region -=- Blast Knockback -=-
+#region -=- Blast KnockBack -=-
+
+
+#DEFINE BASEBLASTMIN 120
+Script "BlastKnockback" (int BlastThrust, int ThrustForceH, int MaxRadius)
+{
+
+int userTID;
+int userTeam;
+Bool SelfThrustOnly = False;
+int ThrustForce = BlastThrust;
+	if(ThrustForce < 0) {SelfThrustOnly = true; ThrustForce = ThrustForce*-1;}
+int AdditiveForce;
+	if(MaxRadius < 0) {AdditiveForce = 1; MaxRadius = MaxRadius*-1;}
+
+	if(ActivatorTID() == 0)
+	{
+		userTID = ACS_ExecuteWithResult(257, 0);
+		userTeam = GetPlayerInfo(userTID - 1000, PLAYERINFO_TEAM);
+	}
+	else
+	{
+		userTID = ActivatorTID();
+	}
+	
+
+int ActX = GetActorX(0);
+int ActY = GetActorY(0);
+//int ActHeight = GetActorProperty(0,APROP_HEIGHT) >>16;
+int Dist;
+int distdiff;
+int ZThrust;
+int XYThrust;
+int targetTID;
+int PlayerX;
+int PlayerY;
+int pitch;
+
+int FinalForce;
+int FinalForceH;
+
+Bool CanThrust;
+//int ThrustDrop = NoNeg( (Dist/10) - MaxRadius) << 16;
+//SetActivatorToTarget(0);
+
+For(int q = 0;q < ServerMax; q++)
+	{
+        targetTID = q+1000;
+        CanThrust = True;
+		
+    if((userTID != targetTID) && (SelfThrustOnly == True)) {CanThrust = False;}
+    if(ACS_ExecuteWithResult(975, 1) == 1){CanThrust = False;}
+    if(PlayerInGame(q)) {CanThrust = False;} 
+    if(userTeam == GetPlayerInfo(q, PLAYERINFO_TEAM) && userTID != targetTID){CanThrust = False; }
+            
+        
+		
+		if(CanThrust)
+		{
+		//log(s:"distance is ",i:xyzDistance(0, targetTID));
+		if(xyzDistance(0, targetTID) < MaxRadius && checksight(0,targetTID,0) == True
+		|| xyzDistance(0, targetTID) <20)
+		{
+		 Dist = xyzDistance(0,targetTID);
+	
+		 distdiff = NoNeg(Dist - MaxRadius);
+		 pitch = GetTargetPitch(targetTID,0);
+		 //VectorAngle(xyDistance(0, targetTID), GetActorZ(0) - GetActorZ(targetTID) >> 16);
+		 //log(s:"pitch relative to player ",i:q,s:" is ", f:pitch);
+		 //log(s:"Height is  ",i:ActHeight);
+		 if(xyzDistance(0, targetTID) > BASEBLASTMIN)
+		 {
+		 FinalForce = ceil(FixedMul(ThrustForce << 16, 1.0 - FixedDiv(Dist, MaxRadius)));
+		 FinalForceH = ceil(FixedMul(ThrustForceH << 16, 1.0 - FixedDiv(Dist, MaxRadius)));
+		 }
+		 Else
+		 {
+		 FinalForce = ThrustForce;
+		 FinalForceH = ThrustForceH;
+		 }
+		 ZThrust = (sin(pitch)*-FinalForce); //GetActorPitch(targetTID)
+		 XYThrust = (cos(pitch)*-FinalForceH);
+		 
+		 if (GetActorZ(targetTID) - GetActorFloorZ (targetTID) == 0){XYThrust = FixedMul(XYThrust,1.0);}
+		 //log(i:GetActorZ(targetTID) - GetActorFloorZ (targetTID));
+		 //log(s:"horizontal thrust is is  ",i:(FixedMul(XYThrust , 1.0 - fixedDiv(distdiff,100)))>> 16);
+		 PlayerX = GetActorX(targetTID);
+		 PlayerY = GetActorY(targetTID);
+		 
+		ThrustThing(VectorAngle(ActX - PlayerX,ActY - PlayerY)>>8,(FixedMul(XYThrust , 1.0 - fixedDiv(distdiff,100)))>> 16,1,targetTID);
+        thrustthingz(targetTID,(FixedMul(ZThrust , 1.0 - fixedDiv(distdiff,100)))>> 16,1,AdditiveForce);
+        }
+	}
+}
+
+}
+
+
+//returns the relative pitch of a thing with tid2, from a thing with tid1.
+function int GetTargetPitch (int tid1, int tid2)
+{
+    int x, y, z, xy, a;
+    x = GetActorX(tid2) - GetActorX(tid1);
+    y = GetActorY(tid2) - GetActorY(tid1);
+    z = GetActorZ(tid2) - GetActorZ(tid1);
+    a = VectorAngle(x, y);
+
+    if ((a + 0.125) % 0.5 > 0.25)
+        xy = FixedDiv(y, sin(a));
+    else
+        xy = FixedDiv(x, cos(a));
+
+    return -VectorAngle(xy, z);
+}
+
+#endregion
+//#endregion
+
+//#region -=- Angle Shift -=-
+#region -=- Angle Shift -=-
+
+
+str user_variables[3] =
+{
+"user_wepangle",
+"user_weppitch",
+"user_wepangle2",
+};
+
+script "GRAB_MEMANGLE" (int num, int Swap)
+{
+	Switch(Swap)
+	{
+		Case 1:
+		SetResultValue(GetUserVariable(0,user_variables[num])>>16);
+		break;
+		Default:
+		Case 0:
+		SetResultValue(GetUserVariable(0,user_variables[num]));
+		break;
+	}
+}
+
+Script "SHIFT_MEMANGLE" (int currentAngle, int inputAngle, int angleChangeLimit)
+{
+//print(i:inputAngle);
+
+int angleDif = inputAngle-currentAngle;
+//print(i:angleDif);
+
+int returnAngle;
+
+if (angleDif>180) {
+	if ((angleDif-360)<-angleChangeLimit) {
+		returnAngle = currentAngle-angleChangeLimit;
+		if (returnAngle<0) returnAngle+=360;
+    } else {
+		returnAngle = inputAngle;
+	}
+} else if (angleDif<-180) {
+	if ((angleDif+360)>angleChangeLimit) {
+		returnAngle = currentAngle+angleChangeLimit;
+		if (returnAngle>=360) returnAngle-=360;
+    } else {
+		returnAngle = inputAngle;
+	}
+} else if (angleDif<-angleChangeLimit) {
+	returnAngle = currentAngle-angleChangeLimit;
+	if (returnAngle<0) returnAngle+=360;
+} else if (angleDif>angleChangeLimit) {
+	returnAngle = currentAngle+angleChangeLimit;
+	if (returnAngle>=360) returnAngle-=360;
+} else {
+	returnAngle = inputAngle;
+}
+
+//print(i:currentAngle);
+
+setResultValue(returnAngle);
+}
+
+#endregion
+//#endregion
+
+//#region -=- Player Status Scanner -=-
+#region -=- Player Status Scanner -=-
+
+
+
+Str StatIcons[7] = {
+	"STICO0",
+	"STICO2",
+	"STICO1",
+	"STICO3",
+	"STICO4",
+	"STICO5",
+	"STICO6",
+	};
+
+
+Script "PlayerScanner" Enter Clientside
+{
+if(PlayerIsBot(PlayerNumber())){Terminate;}
+int SightPlayer;
+int IconNum;
+int j;
+Int StatVal;
+while(GetActorProperty(0,APROP_HEALTH) > 0) {
+		SightPlayer = ACS_NamedExecuteWithResult("PlayerTarget_GetTID");
+		IconNum = checkActorInventory(SightPlayer,"PlayerIconFlag");
+			if(SightPlayer > 999 
+			&& SightPlayer < 1065
+			&& checksight(0,SightPlayer,0)) //
+			{
+				j = 0;
+				for (int i = 0; i < 5; i++)
+				{
+				ClearStatIcon(700+(10*i));
+				StatVal = GetStatMod(SightPlayer,i);
+				if(StatVal){DrawStatIcon(700+(10*j),j,i,StatVal,140.0,225.0); j++;}
+				}
+			}
+
+		//Self Scan
+		j = 0;
+		for (int k = 0; k < 5; k++)
+		{
+		ClearStatIcon(800+(10*k));
+		StatVal = GetStatMod(0,k);
+		if(StatVal){DrawStatIcon(800+(10*j),j,k,StatVal,20.0,165.0); j++;}
+		}
+
+		delay(1);
+	}
+}
+
+Script "PlayerTarget_GetTID" (Void)
+{
+//log(i:ActivatorTID());
+SetActivator(0,AAPTR_PLAYER_GETTARGET);
+//log(i:ActivatorTID());
+SetResultValue(ActivatorTID());
+}
+
+Function Void DrawStatIcon (int M_id, int M_Place, int StatID, int StatLevel, int HudX, int HudY)
+{
+Int j;
+Int Xpos = HudX + (15.0*M_Place);
+Int Ypos = HudY;
+Int StatDir = 6;
+if (StatLevel < 0)
+	{
+		StatDir = 5;
+		StatLevel = StatLevel*-1;
+	}
+
+	SetHudSize(320,240,0);
+	SetFont(StatIcons[StatID]);
+	HudMessage(s:"A"; HUDMSG_FADEOUT, M_id, CR_red,Xpos, Ypos, 2.0,1.0 / 35 + 5);
+
+	SetFont(StatIcons[StatDir]);
+	for (int t = 1; t < StatLevel+1; t++)
+    {
+	HudMessage(s:"A"; HUDMSG_FADEOUT, M_id-t, CR_red,Xpos, Ypos-(5.0*j), 2.0,1.0 / 35 + 5);
+	j++;
+    }
+}  
+
+
+Function Void ClearStatIcon (int M_id)
+{
+	for (int t = 0; t < 10; t++)
+    {
+	HudMessage(s:""; HUDMSG_PLAIN, M_id-t, CR_red,0.0, 0.0, 2.0,1.0 / 35 + 1);
+	}
+}
+
+#endregion
+//#endregion
+
+
+//#region -=- Miscellany -=-
+#region -=- Miscellany -=-
+
+
+Script "Tracer_GetTID" (Void)
+{
+//log(i:ActivatorTID());
+SetActivator(0,AAPTR_TRACER);
+//log(i:ActivatorTID());
+SetResultValue(ActivatorTID());
+}
+
+Script "LeechSeedHPGet" (int PerVal)
+{
+//Grabs the tracer victim's HP Percentage
+
+Int TracerTID = ACS_NamedExecuteWithResult("Tracer_GetTID",0);
+Int Output = ACS_NamedExecuteWithResult("PKMNACS_HealthPercent",TracerTID,1,PerVal);
+//log(i:Output);
+SetResultValue(Output);
+}
+
+//Damage Over Time Script
+script "DotDamager" (int damage, int TID)
+{
+setactivator(0,AAPTR_TARGET);
+thing_damage2(TID,damage,"PoisonDamage");
+}
+
+script "PKMN_RecoilDamager" (int PerVal)
+{
+	//log(s:"Bump");
+Int Damage;
+Int VictimHP = GetActorProperty(0,APROP_SPAWNHEALTH);
+
+Delay(2);
+Damage = GetUserVariable(0,"user_HitMemory");
+
+setactivator(0,AAPTR_TARGET);
+Int RecoilerHP = GetActorProperty(0,APROP_HEALTH);
+
+
+int Output = fixeddiv(damage,100)*PerVal >> 16;
+
+if(Output > VictimHP){Output = VictimHP;}
+if(Output >= RecoilerHP){Output = RecoilerHP-1;}
+thing_damage2(0,Output,"RecoilDamage");
+}
+
+
+Script "WepBloomStat" (void)
+{
+int FiringPlayer= ACS_ExecuteWithResult(257, 0);
+SetResultValue(checkactorinventory(FiringPlayer,"WepBloomItem"));
+}
+
+Script "PlayerSpeciesSynch" (VOID)
+{
+int TargetTID = ACS_ExecuteWithResult(257,0);
+SetActorProperty(0,APROP_SPECIES,GetActorProperty(TargetTID,APROP_SPECIES));
+}
+
+
+
+script "PitchGrab" (Void)
+{
+int FiringPlayer= ACS_ExecuteWithResult(257, 0);
+int Output = 360 * (GetActorPitch(FiringPlayer));
+
+Setresultvalue(Output >> 16);
+
+//--
+}
+
+
+
+script "PKMN_TEAMIDENT" (void)
+//Tiny script that returns team number, used for sticky bombs
+
+//Possibly redundant but could be handy ~Bika
+{
+If(PlayerTeam()==0){SetResultValue(1);}
+If(PlayerTeam()==1){SetResultValue(2);}
+If(PlayerTeam()==2){SetResultValue(3);}
+If(PlayerTeam()==3){SetResultValue(4);}
+}
+
+
+Script "PKMNACS_OverhealDrain" (Int Tick)
+{
+if(GetActorProperty(0,APROP_HEALTH) > Tick){SetActorProperty(0,APROP_HEALTH,(GetActorProperty(0,APROP_HEALTH)-Tick));
+	GiveInventory("DaDiBuffer",Tick);}
+}
+
+Script "PKMNACS_HealthPickup" (int Amount)
+{
+int PickupStyle = GetCvar("PKMN_SV_HPPickupStyle");
+int MaxHealth = GetActorProperty(0,APROP_SPAWNHEALTH);
+if(CheckInventory("IsSnatcher")){Amount = Amount/2;}
+switch(PickupStyle)
+	{
+	Case 1:
+	if(MaxHealth>100){Amount = (Amount*MaxHealth)/100;}
+	break;
+	Case 2:
+	if(MaxHealth<100){Amount = (Amount*MaxHealth)/100;}
+	break;
+	Case 3:
+	Amount = (Amount*MaxHealth)/100;
+	break;
+	}
+ACS_NamedExecuteAlways("PKMNACS_Basic(Over)Heal",0,0,Amount);
+}
+
+Script "PKMNACS_Basic(Over)Heal" (int Pointer, int HealAmount, int Overheal )
+{
+int OverhealMax = Overheal+100;
+if(OverhealMax<=100){OverhealMax=101;}
+if(OverhealMax>150){OverhealMax=150;}
+if(Pointer!=0){SetActivator(0,Pointer);}
+int MaxHealth = GetActorProperty(0,APROP_SPAWNHEALTH);
+if(MaxHealth==0){MaxHealth=100;}
+for(int g=1;g<=HealAmount;g++)
+    {
+    if(GetActorProperty(0,APROP_Health)<MaxHealth){HealThing(1,MaxHealth);}
+    else if(ACS_NamedExecuteWithResult("PKMNACS_HealthPercent",0)<OverhealMax && Overheal>=1){GiveInventory("BasicOverhealItem",1);}
+    }
+}
+    
+Script "PKMNACS_SetPointer" (int pointer, int TID)
+{
+SetPointer(pointer,TID);
+}
+  
+Script "PKMN_PainSound" (Int PainType)
+{
+//Detects the appropriate pain sound by weakness
+int PlayerDEXNum = GetPokeValue(POKEDEXNUM);
+int TypeA = StatDEX[PlayerDEXNum][7];
+int TypeB = StatDEX[PlayerDEXNum][8];
+str Typename;
+
+Int PainVal;
+Int OutPut;
+	switch(PKMNTypeList2[TypeA][PainType])
+	{
+	Case T_NEU: break;
+	Case T_WEA: PainVal++; break;
+	Case T_RES: PainVal--; break;
+	Case T_IMU: PainVal = 0; break;
+	}
+
+	switch(PKMNTypeList2[TypeB][PainType])
+	{
+	Case T_NEU: break;
+	Case T_WEA: PainVal++; break;
+	Case T_RES: PainVal--; break;
+	Case T_IMU: PainVal = 0; break;
+	}
+
+	If(PainVal > 0){PlaySound(0,"PokePain/Strong",CHAN_VOICE); OutPut = 2;}
+	If(PainVal == 0){PlaySound(0,"PokePain/Normal",CHAN_VOICE); OutPut = 1;}
+	If(PainVal < 0){PlaySound(0,"PokePain/Weak",CHAN_VOICE); OutPut = 0;}
+
+	SetResultValue(OutPut);
+}
+
+
+Script "PKMNACS_BlindFade" (int Power, int Dur, int Toggle) CLIENTSIDE
+{
+	int RC;
+	int BC;
+	int GC;
+	Switch(Toggle)
+	{
+		Case 3:
+			RC = 116;
+			BC = 52;
+			GC = 235;
+			break;
+		Case 2:
+			RC = 45;
+			BC = 45;
+			GC = 45;
+			break;
+		Case 1:
+			RC = 150;
+			BC = 150;
+			GC = 150;
+			break;
+		Case 0:
+			RC = random(0,255);
+			BC = random(0,255);
+			GC = random(0,255);
+			break;
+	}
+
+	CancelFade();
+	FadeRange(RC,BC,GC,((1.0)*Power)/100,RC,BC,GC,0.0,((1.0)*Dur)/100);
+}
+
+
+
+
+Script "MoveAreaHeal" (int Ammount, Int HealRadius, Int MoveID)
+{
+int Target_TID;
+int Target_Distance;
+int FiringPlayer;
+int PlayersTeam;
+int TeamGame = ACS_ExecuteWithResult(975, 1);
+Str MoveFX = strparam(s:weapons_ammo[MoveID][2],s:"HealFX");
+
+
+// - Returns the target of the activator -
+if(ActivatorTID() <= 999){FiringPlayer= ACS_ExecuteWithResult(257, 0); }
+// - Actor is a player spawed entity, Returns the target of the activator
+else If(ActivatorTID() >= EntityTID && ActivatorTID() <= (EntityTID+6499)){FiringPlayer= ACS_ExecuteWithResult(257, 0); }
+else{FiringPlayer=ActivatorTID();}
+
+PlayersTeam = GetPlayerInfo(FiringPlayer-1000, PLAYERINFO_TEAM);
+For(int i = 0;i < ServerMax; i++)
+	{
+	Target_TID = i+1000;
+	If(PlayerInGame(i) && xyzDistance(0,Target_TID) < HealRadius) // && FiringPlayer!=Target_TID
+		{
+		ACS_NamedExecuteAlways("PKMNACS_HealTID",0,Target_TID,Ammount);
+		GiveActorInventory(Target_TID,MoveFX, 1);
+		}
+	}
+
+
+}
+
+Script "PKMNACS_HealTID" (int TargTID, int HealAmount, int Overheal )
+{
+int OverhealMax = Overheal+100;
+if(OverhealMax<=100){OverhealMax=101;}
+if(OverhealMax>150){OverhealMax=150;}
+SetActivator(TargTID);
+int MaxHealth = GetActorProperty(0,APROP_SPAWNHEALTH);
+if(MaxHealth==0){MaxHealth=100;}
+for(int g=1;g<=HealAmount;g++)
+    {
+    if(GetActorProperty(0,APROP_Health)<MaxHealth){HealThing(1,MaxHealth);}
+    else if(ACS_NamedExecuteWithResult("PKMNACS_HealthPercent",0)<OverhealMax && Overheal>=1){GiveInventory("BasicOverhealItem",1);}
+    }
+}
+
+// Checks if the target is the client. Useful for FX you don't want to render for the creator of them.
+script "pkmn_istargetclient" (void) CLIENTSIDE
+{
+	SetActivatorToTarget(0);
+	if(consoleplayernumber() == playernumber()){
+		SetResultValue(1);
+	}
+	else
+	{
+		SetResultValue(0);
+	}
+}
+
+
+
+
+#endregion
+//#endregion

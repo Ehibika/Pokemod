@@ -1,0 +1,1624 @@
+// Core game/legacy scripts that should only be messed with if you know what you're doing.
+
+#library "global"
+#include "zcommon.acs"// [Lego] Always include this before 8bdmlib
+#include "8bdmlib.acs"// included with MM8BDM under acs_source.
+	 // See 8bdmlib.acs for details
+
+// Empty script, legacy
+Script 999 OPEN
+{
+Delay(5);
+//int levelnum = getLevelInfo(LEVELINFO_LEVELNUM);
+//int par = getLevelInfo(LEVELINFO_PAR_TIME);
+//PrintBold(s:"levelnum: ", i:levelnum, s:"\npar:", i:par);
+}
+
+// [Mike] Various per player scripts
+// On level enter/spawn
+//
+script 997 ENTER
+{
+int pln = playerNumber();
+// [Mike] Give Player a unique TID (tag)
+
+Thing_ChangeTID(0,pln+1000);
+
+// Sets the max number of clients for use in scripts later on.
+ServerMAX = GetMaxPlayers();
+	
+Switch(GetPlayerInfo(pln, PLAYERINFO_TEAM))
+	{
+	Case 0:
+	GiveInventory("LightTeamFlag", 1);
+	break;
+	Case 1:
+	GiveInventory("WilyTeamFlag", 1);
+	break;
+	Case 2:
+	GiveInventory("CossackTeamFlag", 1);
+	break;
+	Case 3:
+	GiveInventory("KingTeamFlag", 1);
+	break;
+	}
+	GiveInventory("IsInGame",1); //Trill
+
+	// [Mess] Spawns an object to spawn other items at (Terminator, Possession etc)
+	If(ThingCount(0,pln+2000)==0)
+	{
+	SpawnSpot("PlayerRespawnPoint",ActivatorTID(),pln+2000,0);
+	}
+	
+	// If a timestop is active, freeze the player
+	if(timestop>=0){
+	SetPlayerProperty(0,1,4);
+	}
+
+	// If instagib is enabled, give Instagib Blades
+	if(GetCvar("instagib")==1){
+	TakeInventory("MegaBuster",1);
+	GiveInventory("IGMetalBladeWep",1);
+	GiveInventory("IGMovement",1);
+	}
+
+	// If player is a bot, enable ledge blocking (Monster Cross Lines) 
+	// and give them an inventory item to identify them
+	if(PlayerIsBot(pln)){
+	GiveInventory("MonsterBlock",1);
+	GiveInventory("IsBot", 1);
+	
+		if(GameSkill()==1){
+		GiveInventory("BotEasyPower",1);
+		GiveInventory("BotEasySpeed",1);
+		}
+	}
+
+// Clear the HUD of any effects/messages etc
+HudMessage(s:""; HUDMSG_PLAIN,50,CR_UNTRANSLATED,0.0,0.0,0.1);
+
+//if(GetCvar("cl_stfullscreenhud")==true){ConsoleCommand("cl_stfullscreenhud false");}
+
+// Stores the players starting gravity on spawn
+PlayerGravity[pln] = GetActorProperty(0, APROP_Gravity);
+
+//Syncs Player colors
+for(int i=0; i<ServerMAX; i++)
+{
+	If(PlayerInGame(i) && CheckActorInventory(i + 1000,"NoTeamTranslation")==0)
+	{
+		Switch(GetPlayerInfo(i, PLAYERINFO_TEAM))
+		{
+			Case 0:
+				Thing_SetTranslation(i+1000, COLOR_LIGHT);
+				break;
+			Case 1:
+				Thing_SetTranslation(i+1000, COLOR_WILY);
+				break;
+			Case 2:
+				Thing_SetTranslation(i+1000, COLOR_COSSACK);
+				break;
+			Case 3:
+				Thing_SetTranslation(i+1000, COLOR_KING);
+				break;
+			default:
+				SetActivator(i+1000);
+				Thing_SetTranslation(i+1000, -1);
+				break;
+		}
+	}
+}
+
+}
+
+
+// [Mike] Player Translations
+int PlayerTranslation[64];
+
+//Color Translation script
+script 998 (int weap, int nosound) 
+{
+	if(nosound==0 && CheckInventory("NoWeaponSwitchSound")==0)
+	{
+		LocalAmbientSound("menu/cursor",127); // Play weapon switch noise
+	}
+
+	if(CheckInventory("NoWeaponTranslation")>0){
+	terminate;
+	}
+	
+	If(IsTeamGame==1 && CheckInventory("NoTeamTranslation")==0)
+		{
+		Switch(PlayerTeam())
+			{
+			Case 0:
+				weap = COLOR_LIGHT;
+				break;
+			Case 1:
+				weap = COLOR_WILY;
+				break;
+			Case 2:
+				weap = COLOR_COSSACK;
+				break;
+			Case 3:
+				weap = COLOR_KING;
+				break;
+			}
+		}
+	
+	If(IsTeamGame==0 && CheckInventory("MorphFlag")==1){terminate;}
+	else{Thing_SetTranslation(0, weap); PlayerTranslation[PlayerNumber()] = weap; SetCvar(StrParam(s:"SV_TRANSLATION",i:PlayerNumber()),weap);}
+}
+
+//Best colors ever
+Script "PKMNACS_COPYCOLORS" (int Unix)
+{
+
+Delay(1);
+Int CopyColor = 402;
+If(ACS_ExecuteWithResult(975, 1)==1){terminate;}
+While(GetActorProperty(0,APROP_HEALTH)>0 && !CheckInventory("IsDead"))
+	{
+	If(Unix==1)
+	{
+	If(CheckInventory("UnixKnife")&&!CheckInventory("UnixDisguiseFlag")){terminate;} 
+	else{Thing_SetTranslation(0, CopyColor); PlayerTranslation[PlayerNumber()] = CopyColor; SetCvar(StrParam(s:"SV_TRANSLATION",i:PlayerNumber()),CopyColor);}
+	}
+	else
+	{
+	If(!CheckInventory("NoColorFlag")){Thing_SetTranslation(0, CopyColor); PlayerTranslation[PlayerNumber()] = CopyColor; SetCvar(StrParam(s:"SV_TRANSLATION",i:PlayerNumber()),CopyColor);}
+	}
+	CopyColor++;
+	If(CopyColor>407){CopyColor = 401;}
+	Delay(4);
+	}
+}
+
+Script "PKMNACS_UnixColors" (int color)
+{
+Thing_SetTranslation(0,color);
+PlayerTranslation[PlayerNumber()] = color;
+SetCvar(StrParam(s:"SV_TRANSLATION",i:PlayerNumber()),color);
+}
+
+// Various per player scripts
+// On respawn
+//
+script 996 RESPAWN
+{
+PlayerTranslation[PlayerNumber()] = 0;
+
+ACS_NamedExecuteAlways("core_commonwater",0);
+
+ACS_ExecuteAlways(997,0);
+ACS_ExecuteAlways(983,0);
+ACS_ExecuteAlways(977,0);
+//ACS_ExecuteAlways(188, 0);
+if(PlayerIsBot(PlayerNumber()))
+	{
+	ACS_ExecuteAlways(252,0);
+	}
+}
+
+// [Mike] Force compat_clientssendfullbuttoninfo true (to enable jump cancel)
+// Possibly not needed anymore
+script 995 OPEN
+{
+// Check if the server has compat_clientssendfullbuttoninfo set to false
+IsTeamGame = ACS_ExecuteWithResult(975, 1);
+if(GetCVar("compat_clientssendfullbuttoninfo")==0)
+	{
+	ConsoleCommand("compat_clientssendfullbuttoninfo 1");
+	}
+}
+
+
+// [Mess] Ice Wall Script (Used because NOEXPLODEFLOOR is broken)
+Script 994 (int AngleToo)
+{
+int momx = GetActorVelX(0);
+int momy = GetActorVelY(0);
+int Angle = VectorAngle(momx, momy);
+While(CheckInventory("IceWallFlag") > 0){Delay(1);}
+SetActorVelocity(0, momx, momy, 0.0, 0, 0);
+If(AngleToo){SetActorAngle(0, Angle);}
+}
+
+Script 993 OPEN //Defines translations colors
+{
+	If(ACS_ExecuteWithResult(975, 1)==1)
+	{
+		IsTeamGame = 1; // If it's a team game, change the variable.
+	}
+}
+
+// Player Color (alternate, no sound)
+//
+script 991 (int weap)
+{
+ACS_ExecuteAlways(998, 0, weap, 1);
+}
+
+// Rotation scripts
+// Legacy, previously used for Power Stone and Top Spin.
+script 990 (int whichrotate)
+{
+	// Top Spin
+	if(whichrotate==1){
+	SetActorAngle (ActivatorTID(), GetActorAngle (ActivatorTID()) - 0.06);
+	}
+	// Power Stone
+	if(whichrotate==2){
+	SetActorAngle (ActivatorTID(), GetActorAngle (ActivatorTID()) - 0.05);
+	}
+}
+
+// [Mess] Aiming Script for Remote Mine & Copy Vision
+Script 989 (int AimTarget, int HeightAdjust)
+{
+if(AimTarget <= 0){Terminate;}
+If(!ThingCount(T_NONE, AimTarget)){terminate;}
+
+int AimX = GetActorX(0);
+int AimY = GetActorY(0);
+int TargetX = GetActorX(AimTarget);
+int TargetY = GetActorY(AimTarget);
+SetActorAngle(0, VectorAngle(TargetX - AimX, TargetY - AimY));
+SetActorPitch(ActivatorTID(),VectorPitch(ActivatorTID(), AimTarget, HeightAdjust));
+}
+
+// Time Stopper HUD FX
+//
+script 986 (void)
+{
+SetHudSize(256,224,0);
+SetFont("FLASHS1");
+HudMessageBold(s:"A"; HUDMSG_PLAIN,50,CR_UNTRANSLATED,128.0,112.0,0.0);
+Delay(4);
+SetFont("FLASHS2");
+HudMessageBold(s:"A"; HUDMSG_PLAIN,50,CR_UNTRANSLATED,128.0,112.0,0.0);
+Delay(4);
+SetFont("FLASHS3");
+HudMessageBold(s:"A"; HUDMSG_PLAIN,50,CR_UNTRANSLATED,128.0,112.0,0.0);
+Delay(4);
+SetFont("FLASHS4");
+HudMessageBold(s:"A"; HUDMSG_PLAIN,50,CR_UNTRANSLATED,128.0,112.0,0.0);
+Delay(4);
+SetFont("FLASHS5");
+HudMessageBold(s:"A"; HUDMSG_PLAIN,50,CR_UNTRANSLATED,128.0,112.0,0.0);
+Delay(4);
+SetFont("FLASHS6");
+HudMessageBold(s:"A"; HUDMSG_PLAIN,50,CR_UNTRANSLATED,128.0,112.0,0.0);
+Delay(4);
+SetFont("FLASHS7");
+HudMessageBold(s:"A"; HUDMSG_PLAIN,50,CR_UNTRANSLATED,128.0,112.0,0.0);
+Delay(4);
+SetFont("FLASHS8");
+HudMessageBold(s:"A"; HUDMSG_PLAIN,50,CR_UNTRANSLATED,128.0,112.0,0.0);
+Delay(4);
+SetFont("FLASHS9");
+HudMessageBold(s:"A"; HUDMSG_PLAIN,50,CR_UNTRANSLATED,128.0,112.0,0.0);
+Delay(4);
+Restart;
+}
+
+// [Mike] Some extra stuff to help bots
+//
+script 983 ENTER
+{
+Delay(2);
+
+	if(PlayerIsBot(PlayerNumber())){
+	
+		for(int i = 1; i<PlayerCount(); i++){
+		if(!PlayerIsBot(i)){GiveInventory("NoBotFix",1);break;}
+		}
+	
+		if(GetLevelInfo(LEVELINFO_LEVELNUM)>94){GiveInventory("BotDifficulty",1);} // If > MM9 increase the difficulty
+		while(timestop==-1 && GetActorProperty(ActivatorTID(), APROP_HEALTH)>0){
+		// Give the bot the special "stair checker" actor
+		GiveInventory("CreateBotBuddy",1);
+		int botX = GetActorX(ActivatorTID());
+		int botY = GetActorY(ActivatorTID());
+		//int botZ = GetActorZ(ActivatorTID());
+		int botKicker;
+		Delay(8);
+		// Kick them up the butt for not moving
+		if(CheckInventory("NoBotFix")==0){
+			if(GetGameModeState()==GAMESTATE_INRESULTSEQUENCE){terminate;}
+			if(botX == GetActorX(ActivatorTID()) && botY == GetActorY(ActivatorTID())){
+			botKicker++;
+				if(botKicker>20){
+				//PrintBold(s:"MOVE, LAZY BOLTS!");
+				Thing_Stop(ActivatorTID());
+				ThrustThing(random(0,256),10,0,0);
+				botKicker = 0;
+				}
+			}
+			else
+			{
+			botKicker = 0;
+			}
+			}
+		}
+	}
+}
+
+
+// Health checker for hit-based shields.
+// hits - the number of hits the shield can tank for the player
+// customProtect (true or false) - whether the shield uses the generic protection or its own
+script 982 (int hits, int customProtect)
+{
+	if(hits == 0)
+	{
+		hits = 1;
+	}
+	else if(hits > 999)
+	{
+		//Log(s:"\cgSCRIPT 982: SPECIFIED HITS VALUE TOO HIGH. TERMINATING.");
+		terminate;
+	}
+	
+	int health = GetActorProperty(0, APROP_HEALTH);
+	int maxHealth = GetActorProperty(0, APROP_SPAWNHEALTH);
+	int healCurrent = health;
+	bool loanHP = false;
+	
+	if(maxHealth == 0)
+	{
+		maxHealth = 100;
+	}
+	
+	TakeInventory("ShieldHits", 999);
+	GiveInventory("ShieldHits", hits);
+	
+	SetPlayerProperty(0, 1, PROP_BUDDHA);
+	
+	if(health < 2)
+	{
+		healCurrent = 2;
+		loanHP = true;
+		SetActorProperty(0, APROP_HEALTH, 2);
+	}
+	
+	while(CheckInventory("ShieldHits")>0 && CheckInventory("StopHitShield")==0)
+	{
+		Delay(1);
+		if(GetActorProperty(0, APROP_HEALTH) > health)
+		{
+			health = GetActorProperty(0, APROP_HEALTH);
+			healCurrent = GetActorProperty(0, APROP_HEALTH);
+		}
+		
+		if(healCurrent > GetActorProperty(0, APROP_HEALTH))
+		{
+			TakeInventory("ShieldHits", 1);
+			
+			if(CheckInventory("ShieldHits")>0)
+			{
+				SetActorProperty(0, APROP_HEALTH, healCurrent);
+			}
+			else
+			{
+				SetActorProperty(0, APROP_HEALTH, health);
+			}
+			
+			if(!customProtect)
+			{
+				GiveInventory("HitShieldProtection", 1);
+			}
+		}
+	}
+	
+	if(loanHP && GetActorProperty(0, APROP_HEALTH) < maxHealth)
+	{
+		SetActorProperty(0, APROP_HEALTH, GetActorProperty(0, APROP_HEALTH)-1);
+	}
+	
+	if(CheckInventory("ShieldCheck")==0 && CheckInventory("BasicArmor")==0 && !customProtect)
+	{
+		GiveInventory("HitShieldProtection", 1);
+	}
+	
+	SetPlayerProperty(0, 0, PROP_BUDDHA);
+}
+
+
+// Script that is executed everytime a weapon's NoAmmo state is called.
+script 979 (void)
+{
+
+if(CheckInventory("NoAmmoSoundCooldown")==0){
+	LocalAmbientSound("weapon/noammo",128);
+	GiveInventory("NoAmmoSoundCooldown", 1);
+}
+
+If(PlayerIsBot(PlayerNumber()))
+	{
+	/*
+	if(CheckInventory("TimeStopperWep")>0)
+		{
+		TakeInventory("TimeStopperWep",1);
+		GiveInventory("MegaBuster",1);
+		SetWeapon("MegaBuster");
+		}
+	*/
+	if(CheckInventory("SkullBarrierWep")>0)
+		{
+		TakeInventory("SkullBarrierWep",1);
+		GiveInventory("MegaBuster",1);
+		SetWeapon("MegaBuster");
+		}
+	SetPlayerProperty(0,1,4);
+	ACS_Execute(992, 0, 255);
+	Delay(15);
+	SetPlayerProperty(0,0,4);
+	}
+}
+
+// [Mike] Forces a bot to select its Mega Buster.
+//
+script 978 (void)
+{
+if(PlayerIsBot(PlayerNumber())){
+SetWeapon("MegaBuster");
+}
+}
+
+// [Mike]/[Mess] Jump Canceling script. 
+//
+script 977 ENTER 
+{
+int InputButtons; 
+int InputOldButtons; 
+int JumpState;
+int Grounded;
+if(PlayerIsBot(PlayerNumber())){terminate;}
+
+while (GetActorProperty(ActivatorTID(), APROP_HEALTH) > 0)
+	{
+	InputButtons = GetPlayerInput(-1, INPUT_BUTTONS);
+	//InputOldButtons = GetPlayerInput(-1, INPUT_OLDBUTTONS);
+	JumpState = JumpStatus(InputButtons, InputOldButtons);
+	Switch(JumpState)
+		{
+		Case 1: // [Mess] You pressed Jump
+		if(CheckWeapon("SuperAdaptorWep")==1)
+			{
+			if(CheckInventory("JumpCancler")==0)
+				{
+				if (CheckInventory("BoostFlag")==1 && CheckInventory("RushJetCounter")<1)
+					{
+					GiveInventory("Boosting",1);
+					TakeInventory("BoostFlag", 1);
+					}
+				}
+			}
+		//ColdFusion
+			if(CheckWeapon("FusionBombClassWep")==1)
+			{
+			if(CheckInventory("JumpCancler")==0)
+				{
+				if (CheckInventory("BoostFlag")==1 && CheckInventory("RushJetCounter")<1 && CheckInventory("FusionClassAmmo")>= 1)
+					{
+					TakeInventory("BoostFlag", 1);
+					GiveInventory("CFBoosting",1);
+					}
+				}
+			}
+		// Devion Doublejump
+			if(CheckInventory("IsDevion")==1) 
+			If (CheckInventory("JumpCancler")==0) {
+				If (CheckInventory("RushJetCounter")<1 && CheckInventory("NoDoubleJump")==0) {
+					{
+						GiveInventory("DevionDoubleJump",1);
+						While(GetActorZ(0)!=GetActorFloorZ(0)) {Delay(1);}
+						{
+							delay(1);
+						}
+					}
+				}
+			}
+		//Daveris Super Jump
+			if(CheckWeapon("DaverisClassWep")==1)
+			{
+			if(CheckInventory("DavSJ")>=8)
+				{
+				//GiveInventory("SuperJumping", 1);
+				ThrustThingZ(0, 1.75*CheckInventory("DavSJ") >> 16, 0, 1); //modular jumping
+				TakeInventory("DavSJ", 99);
+				}
+			}
+		//End
+		Grounded = 0;
+		break;
+		Case 2: // You Released Jump
+		if(CheckInventory("JumpCancler")>0)
+			{
+			TakeInventory("JumpCancler",1);
+				if(CheckInventory("NoJumpCancel")==0){
+				ThrustThingZ(0,0,0,0);
+				}
+			Grounded = 0;
+			}
+		break;
+		Case 3:
+		if(CheckWeapon("FusionBombClassWep")==1 && CheckInventory("HoverFlag")==1 && CheckInventory("RushJetCounter")<1 && CheckInventory("FusionClassAmmo")>= 1)
+			{
+			GiveInventory("CFSputtering",1);
+			TakeInventory("BoostFlag", 1);
+			Delay(4);
+			}
+		//break;
+		Default: //Holding Jump OR not holding Jump
+		if((GetActorZ (0) - GetActorFloorZ (0)==0.0) || Grounded == 3)
+			{
+			GiveInventory("JumpCancler",1);
+			GiveInventory("BoostFlag", 1);
+			TakeInventory("Hoverflag", 1);
+			TakeInventory("NoJump",999);
+			//print(s:"You're grounded!");
+			}
+		if(GetActorVelZ(0)==0.0 && Grounded < 3 && GetActorCeilingZ(0) - GetActorZ(0) > 64.0 ){Grounded++;}
+		
+		if(GetActorVelZ(0)<0.0)
+			{
+			TakeInventory("JumpCancler",1);
+			//print(s:"You're falling!");
+			Grounded = 0;
+			}
+			break;
+			}
+    delay(1);	
+	InputOldButtons = InputButtons; // More reliable than INPUT_OLDBUTTONS
+	}
+}
+
+// Quick flash script for Centaur Flash
+//
+script 976 (void) clientside
+{
+FadeTo(255,255,255,1.0,0.0);
+Delay(2);
+FadeTo(255,255,255,0.0,0.0);
+Delay(2);
+}
+
+// [Mike] Quickly freeze/unfreeze a bot. Used to force them to keep pressing the fire button
+//
+script 974 (void) clientside
+{
+if(PlayerIsBot(PlayerNumber()))
+	{
+	SetPlayerProperty(0,1,4);
+	Delay(5);
+	SetPlayerProperty(0,0,4);
+	}
+}
+
+// [Lego] Teleport script for two-way teleporters.
+script 973 (int dest)
+{
+if(CheckInventory("TeleportFlag")==0)
+    {
+    GiveInventory("TeleportFlag", 1);
+    Teleport(dest, 0, 0);
+    }
+}
+
+
+//[Mess]
+//Mode = 0
+//Returns state of the boss music.  
+//0 = Standard Music
+//1 = Boss Music playing
+//2 = Victory Music playing and round over
+
+//Mode = 1 
+//Sets BossMusic to value of Arg 2
+//Set to > 2 to disable boss music script
+
+//Mode = 2
+//Sets BossMusic to value of Arg 2
+//Set to > 2 to disable boss music script
+//Plays Music in addition to setting.
+
+Script 972 (int Mode, int MusicToValue)
+{
+Switch(Mode)
+	{
+	Case 0:
+	SetResultValue(BossMusic);
+	break;
+	Case 1:
+	BossMusic = MusicToValue;
+	break;
+	Case 2:
+	BossMusic = MusicToValue;
+	If(BossMusic == 0){SetMusic("*");}
+	If(BossMusic == 1){BossMusicSelect(GetLevelInfo(LEVELINFO_PAR_TIME), 0);}
+	If(BossMusic == 2){BossMusicSelect(GetLevelInfo(LEVELINFO_PAR_TIME), 1);}
+	If(BossMusic == 3){BossMusicSelect(GetLevelInfo(LEVELINFO_PAR_TIME), 2);}
+	break;
+	}
+}
+
+
+// [Mess] Beat Support Script
+script 300 (void)
+{
+GiveInventory("BeatSupportActivated",1);
+Delay(10);
+while(CheckInventory("BeatSupportActivated")!=0)
+	{
+	if(GetPlayerInput(-1,INPUT_BUTTONS) & (BT_ATTACK|BT_ALTATTACK) && CheckInventory("BeatSupportFired") == 0 && CheckInventory("BeatSupportRefresh") == 1)
+		{
+		GiveInventory("BeatSupportFire",1);
+		TakeInventory("BeatSupportRefresh",1);
+		Delay(5);
+		}
+	Delay(1);
+	}
+}
+
+// [Mess] Scripts to determine pitch or Angle of player on a projectile
+
+Script 259 (int PitchAngle)
+{
+int TargetPlayer=ACS_ExecuteWithResult(257);
+int PlayerPitch = GetActorPitch(TargetPlayer);
+int PlayerAngle = GetActorAngle(TargetPlayer);
+
+Switch(PitchAngle)
+	{
+	Case 0:
+	SetActorPitch(0, PlayerPitch);
+	break;
+	Case 1:
+	SetActorPitch(0, PlayerPitch);
+	SetActorAngle(0, PlayerAngle);
+	break;
+	Case 2:
+	SetActorAngle(0, PlayerAngle);
+	break;
+	}
+
+}
+
+// [Mess] Weapon Energy color script - "mm8bdm_noenergycolors true" to disable
+Script 255 ENTER CLIENTSIDE
+{
+	If(PlayerIsBot(PlayerNumber()))
+	{
+		terminate; //Since this is pointless for bots
+	}
+	Delay(10);
+	
+	If(GetCvar("mm8bdm_noenergycolors") == 0)
+	{
+		// Declare the console variable [old method]
+		SetUserCvar(PlayerNumber(), "mm8bdm_noenergycolors", 0);
+	}
+	
+	If(GetCvar("mm8bdm_noenergycolors") > 0)
+	{
+		SetUserCvar(PlayerNumber(), "mm8bdm_noenergycolors", 1);
+		terminate;
+	}
+	
+	While(PlayerInGame(ConsolePlayerNumber()))
+	{
+		If(PlayerNumber()!=ConsolePlayerNumber())
+		{
+			SetActivator(ConsolePlayerNumber()+1000);
+			restart;
+		}
+		Thing_SetTranslation(999, -1);
+		Delay(1);
+	}
+}
+
+// Wrapper for stickylifts
+script 253 (int radius, int height, int mode)
+{
+	log(s:"WARNING: Script 253 called by actor \"", s:GetActorClass(0), s:"\" with arguments radius: ", i:radius, s:", height: ", i:height, s:", mode: ", i: mode,
+		s:". Please notify the wad author to use named script \"core_stickyLifts\" instead.");
+	if(mode == 2) { mode = STICKYMODE_GUTSLIFT; }
+	ACS_NamedExecuteAlways("core_stickyLifts", 0, mode);
+}
+
+
+// Sticky lifts / moby
+int onPlat[64];
+
+script "core_stickyLifts" (int mode)
+{
+	int x, y, z, oldX, oldY, oldZ, velX, velY, velZ;
+	int playerX, playerY, playerZ;
+	int pVelX, pVelY, pVelZ;
+	int height = GetActorProperty(0, APROP_Height) >> 16;
+	int radius = GetActorProperty(0, APROP_Radius) >> 16;
+
+	SetInventory("CutterFlag", 1);
+	oldX = GetActorX(0);
+	oldY = GetActorY(0);
+	oldZ = GetActorZ(0);
+	
+	if(mode == STICKYMODE_GUTSLIFT)
+	{
+		while (CheckInventory("CutterFlag"))
+		{
+			delay(1);
+			x = GetActorX(0);
+			y = GetActorY(0);
+			z = GetActorZ(0);
+			velX = GetActorVelX(0);
+			velY = GetActorVelY(0);
+			velZ = GetActorVelZ(0);
+
+			for(int i = 0; i < ServerMAX; i++)
+			{
+				If(!PlayerInGame(i)) { continue; }
+				playerZ = GetActorZ(1000+i);
+				if(onPlatformZ(z,playerZ,height)) 
+				{
+					playerX = GetActorX(1000+i);
+					playerY = GetActorY(1000+i);
+					if (onPlatformXY(x,y,playerX,playerY,radius*2))
+					{
+						Warp(1000+i,
+							playerX + (x-oldx),
+							playerY + (y-oldy),
+							playerZ + (z-oldz),
+							0, WARPF_MOVEPTR|WARPF_ABSOLUTEPOSITION|WARPF_USECALLERANGLE);
+						SetUserArray(0, "user_playerRiding", i, true);
+					}
+				}
+				else
+				{
+					if(GetUserArray(0, "user_playerRiding", i))
+					{
+						pVelX = GetActorVelX(i+1000);
+						pVelY = GetActorVelY(i+1000);
+						pVelZ = GetActorVelZ(i+1000);
+						SetActorVelocity(i+1000, velX+pVelX, velY+pVelY, velZ+pVelZ, 0, 0);
+						SetUserArray(0, "user_playerRiding", i, false);
+					}
+				}
+			}
+			oldx = x;
+			oldy = y;
+			oldz = z;
+		}
+		
+		for(i = 0; i < ServerMAX; i++)
+		{
+			if(GetUserArray(0, "user_playerRiding", i))
+			{
+				pVelX = GetActorVelX(i+1000);
+				pVelY = GetActorVelY(i+1000);
+				pVelZ = GetActorVelZ(i+1000);
+				SetActorVelocity(i+1000, velX+pVelX, velY+pVelY, velZ+pVelZ, 0, 0);
+				SetUserArray(0, "user_playerRiding", i, false);
+			}
+		}
+	} // END STICKY MODE GUTSLIFT
+	
+	if(mode == STICKYMODE_MAGFLY)
+	{
+		while (CheckInventory("CutterFlag"))
+		{
+			x = GetActorX(0);
+			y = GetActorY(0);
+			z = GetActorZ(0);
+			for(i=0; i<ServerMAX; i++)
+			{
+				If(PlayerInGame(i))
+				{
+					playerX = GetActorX(1000+i);
+					playerY = GetActorY(1000+i);
+					playerZ = GetActorZ(1000+i);
+					if (onPlatformXY(x,y,playerX,playerY,radius+radius/2))
+					{
+						If(GetActorZ(i+1000) - GetActorFloorZ(i+1000) != 0)
+						{
+							Warp(1000+i,
+								playerX + (x-oldx),
+								playerY + (y-oldy),
+								playerZ,
+								0, WARPF_MOVEPTR|WARPF_ABSOLUTEPOSITION|WARPF_USECALLERANGLE);
+						}
+						Else
+						{
+							Warp(1000+i, x, y, PlayerZ, 0, WARPF_MOVEPTR|WARPF_ABSOLUTEPOSITION|WARPF_USECALLERANGLE);
+						}
+						
+						If(z - 72.0 > PlayerZ)
+						{
+							ThrustThingZ(i+1000, 48, 0, 0);
+						}
+						If(z - 72.0 <= PlayerZ)
+						{
+							ThrustThingZ(i+1000, 0, 0, 0);
+						}
+					}
+				}
+			}
+			oldx = x;
+			oldy = y;
+			oldz = z;
+			delay(1);
+		}
+	} // END OF STICKY MODE MAGFLY
+}
+
+
+// Flash Stopper Script
+Script 249 (void) 
+{
+int BrightBlindCount;
+FadeTo(150,150,150,1.0,0.05);
+Delay(10);
+While(CheckInventory("BrightBlind")>0)
+	{
+	BrightBlindCount=CheckInventory("BrightBlind");
+	if(BrightBlindCount>100){BrightBlindCount=100;}
+	FadeTo(150,150,150,FixedDiv(BrightBlindCount,100),0.0);
+	TakeInventory("BrightBlind",1);
+	Delay(1);
+	}
+FadeTo(150,150,150,0.0,0.0);
+}
+
+// Thunder Claw peg script
+Script 248 (int timeout)
+{
+	int TargetTID = ACS_ExecuteWithResult(257,0);
+
+	If(CheckActorInventory(TargetTID,"RushJetCounter") >= 5 || CheckActorInventory(TargetTID, "ThunderClawSwingWait") > 0) {
+		terminate;
+	}
+
+	GiveActorInventory(TargetTID, "ThunderClawSwingWait", 1);
+
+	int hookx = GetActorX(0);
+	int hooky = GetActorY(0);
+	int hookz = GetActorZ(0);
+	int playerx = GetActorX(TargetTID);
+	int playery = GetActorY(TargetTID);
+	int thrust;
+	int zthrust;
+	int ThrustTimeOut=0;
+
+	if(timeout > 0){ThrustTimeOut = timeout;}
+
+	TakeActorInventory(TargetTID,"JumpCancler",1);
+
+	If(GetActorZ(TargetTID) - GetActorFloorZ(TargetTID)<8)
+		{
+		ThrustThingZ(TargetTID,35,0,0);
+		Delay(2);//5
+		}
+	While(GetActorZ(TargetTID) >= (hookz-64.0) && ThrustTimeOut < 105)
+		{//Push down if above hook
+		ThrustThingZ(TargetTID,8,1,1);
+		ThrustThing(VectorAngle(hookx - playerx, hooky - playery)>>8,1,1,TargetTID);
+		playerx=GetActorX(TargetTID);
+		playery=GetActorY(TargetTID);
+		ThrustTimeOut++;
+		Delay(1);
+		}
+
+	thrust = xyDistance(0, TargetTID)/10;
+	zthrust = zDistance(0, TargetTID)/13;
+	if(thrust < 10){thrust=10;}
+	//if(thrust > 50){thrust=50;}
+	
+	//Log(s:"ThrustTimeOut = ",i:ThrustTimeOut,s:" thrust = ",i:thrust,s:" zthrust = ",i:zthrust);
+
+	ThrustThing(VectorAngle(hookx - playerx, hooky - playery)>>8,thrust,1,TargetTID);
+	ThrustThingZ(TargetTID,0,0,0);
+	ThrustThingZ(TargetTID,zthrust,0,1);
+	Delay(5);
+	ThrustThingZ(TargetTID,10,0,1);
+	TakeActorInventory(TargetTID, "WireFlag",1);
+	Delay(2);
+	ThrustThingZ(TargetTID,14,0,1);
+	Delay(2);
+	ThrustThingZ(TargetTID,18,0,1);
+	Delay(2);
+	ThrustThingZ(TargetTID,20,0,1);
+	Delay(2);
+	ThrustThingZ(TargetTID,22,0,1);
+}
+
+
+
+// [Mike] Beat Call Script
+// Activated on certain maps via sector actions (in pitfalls)
+script 205 (void)
+{
+ACS_NamedExecuteAlways("core_beatflight", 0, 0, 1);
+}
+
+// [Mike] Gravity altering script for certain maps with water (horrible method)
+//
+script 204 (int grav)
+{
+if(PlayerNumber() ==-1){terminate;}
+If(Timer() < 5){Delay(2);}
+Switch(grav)
+	{
+	Case 0:
+	SetActorProperty(0, APROP_Gravity, PlayerGravity[PlayerNumber()]);
+	break;
+	Case 1:
+	SetActorProperty(0, APROP_Gravity, FixedDiv(PlayerGravity[PlayerNumber()],3.2));
+	break;
+	}
+}
+// [Mike]
+// Also this script is activated via the "KilledMe" actor, which is given to the killer when a player dies.
+// Might be useful for other things, such as ingame achievements (GVH style)
+// (Boss music script moved to a core named script below)
+
+script 203 (void)
+{
+}
+
+// [Mike] Used to thrust a bot into the air, mimicing jump
+//
+Script 195 (void)
+{
+	if(PlayerIsBot(PlayerNumber())){
+	ThrustThingZ(0,50,0,1);
+	Delay(35);
+	}
+}
+
+// [Mike] Force a bot to use the Mega Buster (DUPLICATE???)
+//
+Script 194 (void)
+{
+if(PlayerIsBot(PlayerNumber()))
+	{
+	GiveInventory("MegaBuster",1);
+	SetWeapon("MegaBuster");
+	}
+}
+
+Script 190 (int ThrustForce)
+{
+int ActX = GetActorX(0);
+int ActY = GetActorY(0);
+SetActivatorToTarget(0);
+int PlayerX = GetActorX(0);
+int PlayerY = GetActorY(0);
+If(ActivatorTID() == 0){terminate;}
+ThrustThing(VectorAngle(ActX - PlayerX,ActY - PlayerY)>>8,-ThrustForce,1,0);
+ThrustThingZ(0, 20, 0 ,0);
+}
+
+
+// Game event script
+script "core_event" (int type, int arg1, int arg2) EVENT
+{
+	switch(type){
+		case GAMEEVENT_CAPTURES:
+		SpawnForced("ConfettiSpawner", GetActorX(0), GetActorY(0), GetActorZ(0)+ 64.0, 0);
+		break;
+	}
+}
+
+int WaterSectors[64];
+
+script "core_commonwater" ENTER
+{
+int WaterType = 0;
+int WaterGravity;
+	int w = 0;
+
+Delay(5);
+
+if(ThingCountName("MM8BDM_Water",0)==0){terminate;}
+
+while(GetActorProperty(ActivatorTID(),APROP_HEALTH)>0){
+
+	if(ThingCountName("MM8BDM_Water", -9999)>=1){
+			//PrintBold(s:"Global water activated! ", f:GetActorZ(-9999));
+			
+			If(GetActorZ(0) >= GetActorZ(-9999)){
+			//PrintBold(s:"Get Unwet!");
+			WaterType = 1;
+			}
+			if(GetActorZ(0) < GetActorZ(-9999)){
+			//PrintBold(s:"Get wet!");
+			WaterType = 2;
+			}
+	}
+	else
+	{
+		for(int i = 0; i<64; i++){
+			if(WaterSectors[i]==0){WaterType = 1; 
+			//PrintBold(s:"No more waters!");
+			break;
+			}
+			//PrintBold(i:WaterSectors[i]);
+			If(ThingCountSector(T_NONE, ActivatorTID(), WaterSectors[i]) == 1 && GetActorZ(0) >= GetActorZ(WaterSectors[i])){
+			//PrintBold(s:"Get Unwet!");
+			WaterType = 1; break;
+			}
+			if(ThingCountSector(T_NONE, ActivatorTID(), WaterSectors[i]) == 1 && GetActorZ(0) < GetActorZ(WaterSectors[i])){
+			//PrintBold(s:"Get wet!");
+			WaterType = 2; break;
+			}
+		}
+	}
+	
+	//PrintBold(s:"running");
+
+	Switch (WaterType)
+		{
+		Case 1:
+		If(WaterGravity == 1)
+			{
+			GiveInventory("NormalGravity",1);
+			WaterGravity = 0;
+			If(w<=0)
+				{
+				SpawnProjectile(0, "MMSplash",0,0,0,0,0);
+				w=20;
+				}
+			}
+		break;
+		Case 2:
+		If(WaterGravity == 0)
+			{
+			GiveInventory("LowGravity",1);
+			WaterGravity = 1;
+			If(w<=0)
+				{
+				SpawnProjectile(0, "MMSplash",0,0,0,0,0);
+				w=20;
+				}
+			}
+		break;
+		}
+	if(W > 0){w--;}
+	Delay(1);
+}
+}
+
+script "core_newwater" (void)
+{
+int i;
+
+	// Activate Global Mode (I can't think of a cool way to do it)
+	if(ActivatorTID()==0){
+	Thing_ChangeTID(0,-9999);
+	terminate;
+	}
+
+	while(WaterSectors[i]!=0){
+	i++;
+	}
+	
+	// To prevent the array from 
+	if(GetActorZ(0)==0){SetActorPosition(ActivatorTID(), GetActorX(0), GetActorY(0), GetActorZ(1), 0);}
+	
+	WaterSectors[i] = ActivatorTID();
+	//PrintBold(s:"Water Sector ", i:i, s:" now equals ", i:WaterSectors[i]);
+}
+
+
+// Music handling script. Boss music depends on the level's map card OR par setting (old method).
+
+script "core_musichandler" DEATH
+{
+If(BossMusic > 2){Terminate;}
+
+int modeofplay = ACS_ExecuteWithResult(975);
+int LevelParTime = GetLevelInfo(LEVELINFO_PAR_TIME);
+int fraglimit = GetCVar("fraglimit");
+int fragdiff = 5;
+
+SetActivatorToTarget(0);
+
+if(fraglimit <= 10){fragdiff = 3;}
+
+Bool MoreFrags = False;
+
+If(Timer() < 105 || GetGameModeState() == GAMESTATE_COUNTDOWN){terminate;}
+
+Switch(modeofplay)
+	{
+	Case 0: // DM / TDM
+	Case 5: // Terminator too!
+		if(fraglimit <= 0){terminate;}
+		If(IsTeamGame==0)
+		{
+			if(PlayerFrags() <= maxfrags){terminate;}
+			maxfrags = PlayerFrags();
+		}
+		If(IsTeamGame==1)
+		{
+			If(BlueScore() > maxfrags){maxfrags=BlueScore(); MoreFrags=true;}
+			If(RedScore() > maxfrags){maxfrags=RedScore(); MoreFrags=true;}
+			If(GetCvar("sv_maxteams")>=3)
+			{
+				If(OrangeFrags() > maxfrags){maxfrags=OrangeFrags();MoreFrags=true;}
+				If(PurpleFrags() > maxfrags){maxfrags=PurpleFrags();MoreFrags=true;}
+			}
+			If(MoreFrags == False){terminate;}
+		}
+		if((MaxFrags >= fraglimit - fragdiff && MaxFrags < fraglimit) && BossMusic==0)
+			{
+			BossMusic=1;
+			BossMusicSelect(LevelParTime, 0);
+			}
+		if(MaxFrags >= fraglimit&& BossMusic < 2)
+			{
+			BossMusic=2;
+			BossMusicSelect(LevelParTime, 1);
+			}
+		break;
+	Case 1: // Possession
+		break;
+	Case 2: // LMS / TLMS
+		int BlueAlive=0;
+		int RedAlive=0;
+		int OrangeAlive=0;
+		int PurpleAlive=0;
+		int AlivePlayers=0;
+		for(int i=0; i < ServerMAX; i++)
+			{
+			If(!PlayerInGame(i)){continue;}
+			//printbold(n:i+1, s:" - ", i:LivesLeft(i), s:" lives.");
+			If(GetActorProperty(i+1000, APROP_HEALTH) > 0 || LivesLeft(i) > 0)
+				{
+				Switch(GetPlayerInfo(i, PLAYERINFO_TEAM))
+					{
+					Case 0:
+					BlueAlive++;
+					break;
+					Case 1:
+					RedAlive++;
+					break;
+					Case 2:
+					OrangeAlive++;
+					break;
+					Case 3:
+					PurpleAlive++;
+					break;
+					Default:
+					AlivePlayers++;
+					break;
+					}
+				}
+			}
+		If(IsTeamGame == 0)
+			{
+			If(AlivePlayers <= 2 && BossMusic == 0)
+				{
+				BossMusic=1;
+				BossMusicSelect(LevelParTime, 0);
+				}
+			If(AlivePlayers == 1 && BossMusic == 1)
+				{
+				BossMusic=2;
+				BossMusicSelect(LevelParTime, 1);
+				Delay(35*6);
+				SetMusic("*");
+				BossMusic=0;
+				}
+			}
+		If(IsTeamGame == 1)
+			{
+			If(BossMusic==0)
+				{
+				If(LMSBossCheck(BlueAlive, RedAlive, OrangeAlive,PurpleAlive))
+					{
+					BossMusic=1;
+					BossMusicSelect(LevelParTime, 0);
+					}
+				}
+			If(BossMusic==1)
+				{
+				if(!intensePlaying && GetTeamProperty(0, TPROP_Score) == GetCVar("winlimit") - 1 && GetTeamProperty(1, TPROP_Score) == GetCVar("winlimit") - 1 ){
+					if(BlueAlive == 1 && RedAlive == 1){
+					BossMusicSelect(LevelParTime, 2);
+					intensePlaying = true;
+					}
+				}
+
+				If(((BlueAlive > 0) + (RedAlive > 0) + (OrangeAlive > 0) + (PurpleAlive > 0)) == 1)
+					{
+					BossMusic=2;
+					BossMusicSelect(LevelParTime, 1);
+					Delay(35*6);
+					SetMusic("*");
+					BossMusic=0;
+					}
+				}
+			}
+		break;
+	Case 3: // Duel
+		if(fraglimit <= 1 || PlayerFrags() <= maxfrags){terminate;}
+		maxfrags = PlayerFrags();
+		if((MaxFrags == fraglimit - 1 && MaxFrags < fraglimit) && BossMusic==0)
+			{
+			BossMusic=1;
+			BossMusicSelect(LevelParTime, 0);
+			}
+		if(MaxFrags >= fraglimit && BossMusic < 2)
+			{
+			BossMusic=2;
+			BossMusicSelect(LevelParTime, 1);
+			Delay(35*6);
+			SetMusic("*");
+			BossMusic=0;
+			}
+		break;
+	Case 4: // CTF
+		if(GetCVar("pointlimit")<=1){terminate;}
+		
+		if((BlueScore() == GetCVar("pointlimit") - 1 || RedScore() == GetCVar("pointlimit") - 1) && BossMusic==0)
+			{
+			BossMusic=1;
+			BossMusicSelect(LevelParTime, 0);
+			}
+		if((BlueScore() == GetCVar("pointlimit") || RedScore() == GetCVar("pointlimit")) && BossMusic < 2)
+			{
+			BossMusic=2;
+			BossMusicSelect(LevelParTime, 1);
+			}
+		break;
+	}
+}
+
+// [Lego] To keep Plug Ball from travelling across sky planes
+//
+script 206 (void)
+{
+	int checkDistance = false;
+	while(CheckInventory("Once")>0 && ThingCountName("PlugBall", T_NONE)>0)
+	{
+		if(CheckActorFloorTexture(0, "F_SKY1"))
+		{
+			if(GetActorVelZ(0) < 0)
+			{
+				checkDistance = true;
+			}
+			
+			if((GetActorZ(0) - GetActorFloorZ(0)) < 10.0 && checkDistance)
+			{
+				SetActorState(0, "Death");
+			}
+		}
+		else
+		{
+			checkDistance = false;
+		}
+		Delay(1);
+	}
+}
+
+// Script called by most shield warpers
+Script "core_shieldwarper" (int noshieldcheck) CLIENTSIDE
+{
+	int Player = ACS_NamedExecuteWithResult("core_gettarget",0);
+	int Weapon = ACS_NamedExecuteWithResult("core_getplayerweapon", Player - 1000);
+
+	// Loop if shield is active
+	while(GetActorProperty(Player, APROP_HEALTH)>0
+	&& ACS_NamedExecuteWithResult("core_getplayerweapon", Player - 1000) == Weapon
+	){
+		// Used for warpers using ShieldCheck
+		if(noshieldcheck == 0 && CheckActorInventory(Player, "ShieldCheck") == 0){
+		break;
+		}
+		Delay(1);
+	}
+	
+	// Remove
+	Thing_Remove(0);
+}
+
+// Script called by Skull Barrier
+Script "core_shieldwarper_skull" (void) CLIENTSIDE
+{
+	int Player = ACS_NamedExecuteWithResult("core_gettarget",0);
+	
+	// Loop if shield is active
+	while(GetActorProperty(Player, APROP_HEALTH)>0
+	&& CheckActorInventory(Player, "SkullShieldCheck") > 0
+	){
+		Delay(1);
+	}
+	
+	// Remove
+	Thing_Remove(0);
+}
+
+// Script called by Scorch Wheel
+Script "core_shieldwarper_scorch" (void) CLIENTSIDE
+{
+	int Player = ACS_NamedExecuteWithResult("core_gettarget",0);
+	
+	// Loop if shield is active
+	while(GetActorProperty(Player, APROP_HEALTH)>0
+	&& CheckActorInventory(Player, "ScorchWheelPowerup")>0
+	){
+		Delay(1);
+	}
+	
+	// Remove
+	Thing_Remove(0);
+}
+
+// Script called by Jewel Satellite
+Script "core_shieldwarper_jewel" (int jewelno) CLIENTSIDE
+{
+	int Player = ACS_NamedExecuteWithResult("core_gettarget",0);
+	int Weapon = ACS_NamedExecuteWithResult("core_getplayerweapon", Player - 1000);
+	
+	// Loop if shield is active
+	while(GetActorProperty(Player, APROP_HEALTH)>0
+	&& ACS_NamedExecuteWithResult("core_getplayerweapon", Player - 1000) == Weapon
+	&& CheckActorInventory(Player, "ShieldCheck") > 0
+	&& CheckActorInventory(Player, "JewelShieldCheck") > jewelno
+	){
+		Delay(1);
+	}
+	
+	// Remove
+	Thing_Remove(0);
+}
+
+// Return a player's current weapon
+Script "core_getplayerweapon" (int playerno)
+{
+	SetActivator(playerno + 1000);
+	SetResultValue(GetWeapon());
+}
+
+
+script "core_beatflight" (void)
+{
+	if(CheckInventory("BeatCallCheck")>0 && CheckInventory("BeatCounter")==0)
+	{
+		ThrustThingZ(0,25,0,0);
+		GiveInventory("BeatCounter",20);
+		ThingSound(ActivatorTID(),"item/beat",127);
+		SpawnProjectile(ActivatorTID(), "BeatWarper", 0, 0, 0, 0, 0);
+	}
+	else
+	{
+	terminate;
+	}
+
+	ACS_NamedExecuteAlways("core_flyplayer",0,0,2);
+	GiveInventory("BeatCallProtection",1);
+	
+	while(CheckInventory("BeatCounter")>0){
+	Delay(9);
+		if(CheckInventory("SpinTime")>0){TakeInventory("BeatCounter", 9999);}
+		TakeInventory("BeatCounter", 1);
+	}
+	
+	TakeInventory("BeatCallProtection",1);
+	TakeInventory("BeatCallCheck",1);
+	ACS_NamedExecuteAlways("core_flyplayer",0,0,0);
+}
+
+script "core_rushjetflight" (void)
+{
+	ACS_NamedExecuteAlways("core_flyplayer",0,0,2);
+	
+	while(CheckInventory("RushJetCounter")>0){
+	Delay(35);
+		if(CheckInventory("SpinTime")>0){TakeInventory("RushJetCounter", 9999);}
+		if(CheckInventory("InBoat")>0){TakeInventory("RushJetCounter", 9999);}
+		TakeInventory("RushJetCounter", 1);
+	}
+	ACS_NamedExecuteAlways("core_flyplayer",0,0,0);
+}
+
+script "core_trebleboostflight" (void)
+{
+	ACS_NamedExecuteAlways("core_flyplayer",0,0,2);
+	int counter;
+	
+	while(CheckInventory("TrebleBoostAmmo")>0 && CheckWeapon("TrebleBoost")){
+	Delay(1);
+		counter++;
+		if(CheckInventory("SpinTime")>0){break;}
+		if(CheckInventory("InBoat")>0){break;}
+		if(counter>=10){
+		counter = 0;
+		TakeInventory("TrebleBoostAmmo", 1);
+		}
+	}
+	TakeInventory("TrebleFlightFlag", 1);
+	ACS_NamedExecuteAlways("core_flyplayer",0,0,0);
+}
+
+script "core_rushmarineflight" (void)
+{
+bool watertoggle = false;
+
+	while(CheckInventory("RushMarineCounter")>0){
+	
+		if(CheckInventory("SpinTime")>0){TakeInventory("RushMarineCounter", 9999);}
+		if(CheckInventory("InBoat")>0){TakeInventory("RushMarineCounter", 9999);}
+		
+		if(CheckInventory("IsUnderWater")==1){
+		
+			TakeInventory("RushMarineCounter", 1);
+			if(watertoggle == false){
+			ACS_NamedExecuteAlways("core_flyplayer",0,0,2);
+			watertoggle = true;
+			
+			Delay(1);
+			}
+		}
+		
+		Delay(10);
+		
+		if(CheckInventory("IsUnderWater")==0 && watertoggle == true){
+			ACS_NamedExecuteAlways("core_flyplayer",0,0,0);
+			watertoggle = false;
+			
+			while(CheckInventory("IsUnderWater")==0){
+			Delay(1);
+			}
+		}
+	}
+	ACS_NamedExecuteAlways("core_flyplayer",0,0,0);
+}
+
+
+
+//A note for the next two scripts, these are from the following file "lod-addon1.2pk3"
+//It was used for the hookshot weapon for WitchHunter
+// By IjonTichy, modified by Ivan, modified for this mod by Celebi
+
+Script "core_hookshot" (int PlayerID, int Vel, int Moving)
+{
+    int myx, myy, myz;
+    int px, py, pz;
+    int vx, vy, vz, magnitude, nx, ny, nz;
+    myx = GetActorX(0);
+    myy = GetActorY(0);
+    myz = GetActorZ(0);
+    
+    px = GetActorX(PlayerID);
+    py = GetActorY(PlayerID);
+    pz = GetActorZ(PlayerID);
+
+    GiveActorInventory(PlayerID,"WireAdaptorDelay",1);
+    
+    while(true)
+    {
+        if(Moving > 0){//If the hook is set to move, the positions need to be updated.
+            myx = GetActorX(0);
+            myy = GetActorY(0);
+            myz = GetActorZ(0);
+        }
+        
+        px = GetActorX(PlayerID);
+        py = GetActorY(PlayerID);
+        pz = GetActorZ(PlayerID) + 32.0;
+        
+        vx = myx - px;
+        vy = myy - py;
+        vz = myz - pz;
+        
+
+        magnitude = magnitudeThree(vx >> 16, vy >> 16, vz >> 16);
+
+        if(magnitude != 0)
+        {
+            nx = vx / magnitude; ny = vy / magnitude; nz = vz / magnitude;
+        }
+        else {
+            nx = 0; ny = 0; nz = 0;
+        }
+        
+        SetActorVelocity(PlayerID, nx*Vel, ny*Vel, nz*Vel, false, true);
+
+        Delay(1);
+        
+        if(magnitude <= Vel)
+        {
+            break;
+        }
+        
+        if(CheckActorInventory(PlayerID,"WireAdaptorDelay") < 1 || CheckActorInventory(PlayerID,"IsDead"))
+        {
+            break;
+        }
+		
+		if(abs(px - GetActorX(PlayerID)) < 2.0 && abs(py - GetActorY(PlayerID)) < 2.0 && abs(pz - GetActorZ(PlayerID) - 32.0) < 2.0)
+		{
+            break;
+		}
+		
+    }
+    
+    Thing_Remove(0);//Remove Hook
+    Delay(1);
+    GiveActorInventory(PlayerID, "WireHookShotEnd",1);
+}
+
+//This spawns the sprite
+Script "core_drawhookshot" (int playerTid, int density) CLIENTSIDE
+{
+    int plX; int plY;  int plZ;
+    int grX; int grY;  int grZ;
+    int vX;  int vY;   int vZ;
+    int nX;  int nY;   int nZ;
+    int bX;  int bY;   int bZ;
+    int magnitude;
+    int pointCount;
+    int pointOffset;
+	
+	while(ClassifyActor(0) && GetActorProperty(playerTid, APROP_HEALTH)>0){
+
+    plX = GetActorX(playerTid); grX = GetActorX(0);
+    plY = GetActorY(playerTid); grY  = GetActorY(0);
+    plZ = GetActorZ(playerTid)+(28 << 16); grZ  = GetActorZ(0);
+//+28 to the spawn height of the ^player so the chain doesn't spawn from their feet.
+    vX = grX - plX;   vY = grY - plY;   vZ = grZ - plZ;
+
+    magnitude = magnitudeThree(vX >> 16, vY >> 16, vZ >> 16);
+
+    pointCount  = magnitude / density;
+    pointOffset = magnitude - (pointCount * density);
+
+	str SpawnName = "WireAdaptorHookFX";
+	
+	if(grX == 0 && grY == 0 && grZ == 0){terminate;} 
+
+    if (magnitude != 0)
+    {
+        nX = vX / magnitude; nY = vY / magnitude; nZ = vZ / magnitude;
+
+        int i; int j;
+        for (i = 0; i < pointCount; i++)
+        {
+            j = (i * density) + pointOffset;
+
+            bX = (nX * j) + plX;
+            bY = (nY * j) + plY;
+            bZ = (nZ * j) + plZ;// +(16 << 16);
+
+			if(i>0){
+			Spawn(SpawnName, bX, bY, bZ);
+			}
+		
+        }
+    }				
+	Delay(1);
+			
+	}
+}
+
+
+// Copy the translation of the target. Used by teleport FX. Probably limited use since SXF_TRANSFERTRANSLATION exists.
+Script "core_copytranslation" (void)
+{
+	SetActivatorToTarget(0);
+	SetResultValue(PlayerTranslation[ActivatorTID()-1000]);
+}
+
+
+// Disable monster blocking on lines specifically to prevent bot swarming.
+Script "core_clearbotline" (int line)
+{
+	if(GetCvar("mm8bdm_sv_nobotblocklines"))
+	{
+	Line_SetBlocking(line, 0, BLOCKF_MONSTERS);
+	}
+}

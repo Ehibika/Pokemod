@@ -1,0 +1,124 @@
+/* -=- Player Dadabase -=-
+ * Contains values mainly relevant to player stats
+ * 
+
+*/
+
+#library "DB_Player"
+#include "zcommon.acs"
+#import "Dex_Pokemon.acs"
+#import "Dex_Leveling.acs"
+#import "Dex_Types.acs"
+#import "Dex_BaseStats.acs"
+#import "Dex_Skin.acs"
+
+int PlayerJumpZ[64];
+int PlayerClassMem[64];
+int YourTrueForm;
+
+#LIBDEFINE POKEDEXNUM 0
+#LIBDEFINE POKELEVEL 1
+#LIBDEFINE POKEEXP 2
+#LIBDEFINE POKECASH 3
+
+#DEFINE THE_COOLDOWN 40
+
+
+script "SetPokeSkin" (int skin) CLIENTSIDE
+{
+if(PlayerNumber()==ConsolePlayerNumber()) YourTrueForm = skin;
+}
+
+
+Script "PokeSkinHandler" (void) CLIENTSIDE
+{
+if(PlayerNumber()==ConsolePlayerNumber()) {
+	int cooldown = THE_COOLDOWN;
+	YourTrueForm = -1;
+	int lastForm = YourTrueForm;
+	int skin = GetCVar("Skin");
+	int lastSkin;
+	int TrueFormSkin;
+	while(PlayerHealth()>0) {
+		lastSkin = skin;
+		skin = GetCVar("Skin");
+		if(skin!=lastSkin) cooldown = THE_COOLDOWN;
+		if((cooldown<1)&&(YourTrueForm>-1)) {
+			if(YourTrueForm!=lastForm) {
+				//log(s:"new disguise");
+				ConsoleCommand(strparam(s:"Skin ",s:SkinDEX[YourTrueForm][1]));
+				cooldown = THE_COOLDOWN;
+				skin = GetCVar("Skin");
+				TrueFormSkin = skin;
+				lastForm = YourTrueForm;
+			} else if(skin!=TrueFormSkin) {
+				//log(s:"new skin");
+				ConsoleCommand(strparam(s:"Skin ",s:SkinDEX[YourTrueForm][1]));
+				cooldown = THE_COOLDOWN;
+				skin = GetCVar("Skin");
+				TrueFormSkin = skin;
+			}
+		}
+		if(cooldown>0) cooldown--;
+		delay(1);
+	}
+}
+}
+
+Function Int GetPokeValue (Int Mode)
+{
+	int OutPut;
+	
+	switch(Mode)
+	{
+	Case POKEDEXNUM: OutPut = GetCvar(StrParam(s:"PlayerDEXNum_",i:PlayerNumber())); Break;
+	Case POKELEVEL: OutPut = GetCvar(StrParam(s:"PlayerLevel_",i:PlayerNumber())); Break;
+	Case POKEEXP: OutPut = GetCvar(StrParam(s:"PlayerEXP_",i:PlayerNumber())); Break;
+	Case POKECASH: OutPut = GetCvar(StrParam(s:"Player",i:PlayerNumber(),s:"_Cash")); Break;
+	}
+
+
+
+return OutPut;
+}
+
+Script "GetPokeValue" (Int Mode)
+{
+	int OutPut;
+	
+	switch(Mode)
+	{
+	Case POKEDEXNUM: OutPut = GetCvar(StrParam(s:"PlayerDEXNum_",i:PlayerNumber())); Break;
+	Case POKELEVEL: OutPut = GetCvar(StrParam(s:"PlayerLevel_",i:PlayerNumber())); Break;
+	Case POKEEXP: OutPut = GetCvar(StrParam(s:"PlayerEXP_",i:PlayerNumber())); Break;
+	Case POKECASH: OutPut = GetCvar(StrParam(s:"Player",i:PlayerNumber(),s:"_Cash")); Break;
+	}
+
+
+
+SetResultValue(OutPut);
+}
+
+Script "GetPlayerFrags" (int p)
+{
+SetActivator(p+1000,AAPTR_DEFAULT);
+SetResultValue(PlayerFrags());
+}
+
+Script "checkEXPtoMax" (void)
+{
+// -=- Checks if the player has reached their EXP maximum, returns the remaining exp to max -=-
+int output;
+
+int PlayerDEX = GetPokeValue(POKEDEXNUM);
+int Curexp = GetPokeValue(POKEEXP);
+int GrowthRate = StatDEX[PlayerDEX][9];
+int EXPCap = LevelUpTable[GrowthRate][9];
+int EXPDiff = EXPCap-Curexp;
+log(i:EXPDiff);
+if(EXPDiff < 0){EXPDiff = 0;}
+
+output = EXPDiff;
+
+SetResultValue(output);
+}

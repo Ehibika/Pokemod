@@ -1,0 +1,255 @@
+/* -=- Startup -=-
+ * Code that takes place upon a new player joining the game, handles all the initiation
+ * so they get everything they need to run.
+ * 
+
+*/
+
+#library "G_Startup"
+#import "WEPACS.acs"
+#import "A_Stats.acs"
+#import "DB_Player.acs"
+#import "DB_Data.acs"
+#import "Dex_Pokemon.acs"
+#import "Dex_Types.acs"
+#import "Dex_Evo.acs"
+#import "Dex_Leveling.acs"
+#import "Dex_BaseStats.acs"
+
+#include "zcommon.acs"
+
+Script "SafeZoneSpawnCheck" (void)
+{
+int output;
+if(GetCvar("lastmanstanding")==1||GetCvar("teamlms")==1) 
+	{
+		if(GetGameModeState() != 2 && !CheckInventory("InSafeZone")){output = 1;}
+	}
+else if(!CheckInventory("InSafeZone")) {output = 1;}
+SetResultValue(output);
+}
+
+Script "PKMN_Setup" ENTER
+{
+	//Log(s:"Entered");
+	//[PlayerNumber()] = PlayerClass(PlayerNumber());
+	//int PlayerDEXNum = GetCvar(StrParam(s:"PlayerDEXNum_",i:PlayerNumber()));
+
+GiveInventory(StrParam(s:GetActorClass(0),s:"SetupItem"),1);
+ACS_NamedExecuteAlways("MoveRecoveryHandler",0);
+GiveInventory("SetupShop",1);
+GiveInventory("SpawnInBuffer",1);
+//GiveInventory("MoveRecovery",1);
+GiveInventory("SpawnSafeZone",1);
+}   
+ 
+Function Void GiveStartingMoves (void)
+{
+	GiveInventory(StrParam(s:GetActorClass(0),s:"StarterMoves"),1);
+	//if(GetCvar("lastmanstanding")==1||GetCvar("teamlms")==1)
+   // {
+	//if(CheckLMSAttendance(PlayerNumber()) != 1){GiveInventory(StrParam(s:GetActorClass(0),s:"StarterMoves"),1);}
+	//}
+//Else{GiveInventory(StrParam(s:GetActorClass(0),s:"StarterMoves"),1);  }
+//LMSAttendance(PlayerNumber(),1);
+}
+
+    
+Script "PKMNACS_TeamSpecies" ENTER 
+{
+int pln = PlayerNumber();
+if(ACS_ExecuteWithResult(975,1)==1)
+	{
+	switch(GetPlayerInfo(PlayerNumber(), PLAYERINFO_TEAM))
+		{
+		Case 0:
+		SetActorProperty(0,APROP_SPECIES,"LightMember");
+		break;
+		Case 1:
+		SetActorProperty(0,APROP_SPECIES,"WilyMember");
+		break;
+		Case 2:
+		SetActorProperty(0,APROP_SPECIES,"CossackMember");
+		break;
+		Case 3:
+		SetActorProperty(0,APROP_SPECIES,"KingMember");
+		break;
+		}
+	}
+else{setactorproperty(0,APROP_SPECIES,StrParam(s:"Player_",i:pln));}
+ 
+// Stores the players starting Jump Height on spawn
+PlayerJumpZ[pln] = GetActorProperty(0, APROP_JumpZ);
+}
+        
+       
+Script "PKMNACS_StartupScript" (int BaseDex)
+{
+	/* 
+	This is the first script that a pokemon will run upon spawning, since
+	it requires a specific value per pokemon, it's triggered via a custominventory
+	unique to each pokemon.
+
+	First off, we will start by ensuring continuity with the Dexnumber, upon
+	spawning, we will compare the argument with the Dexnumber that we currently
+	have. if they are the same then we carry on, if they are different
+	then we need to check to make sure that the Dex number refers to
+	a valid evolution, if it is then we set up to spawn as that evolution
+	right away. otherwise something is amiss so we will start fresh again.
+
+	===|Edit 1|===
+	Rather than a set of If-else statements, we will be using a fixed state machine of sorts.
+	*/
+
+	Int CaseNum;
+
+	Int Base = 0; 	//Player respawned as the same pokemon Base class as before
+	Int Fresh = 1; 	//Player is totally brand new
+	Int Evolved = 2;//Player is of a valid evolutionary state (i.e: bulbasaur class as venusaur)
+	Int Changed = 3;//Player has changed classes, meaning they swapped from bulbasar to charmander.
+
+	Int PlayerDEXNum = GetPokeValue(POKEDEXNUM);
+
+
+	if(PlayerDEXNum == -1){CaseNum = Fresh;} //PlayerDexNum is -1, so we are fresh
+	Else if(BaseDex == PlayerDEXNum){CaseNum = Base;}//Everything is in order
+	Else if(BaseDex != PlayerDEXNum)
+		{
+		/*
+		They are different so let's check for a valid form. what we are going to do is
+		look at the EvoDex array starting at the element for the Base dexnumber. we will
+		compare the 6th item which is a number that reprents the ID for that family of
+		pokemon, Bulbasaur, Ivysaur, and Venusaur all have 1 in their familyID. so if
+		the family ID of the BaseDexnum and PlayerDexnum match, then we can verify that
+		they are valid forms
+		*/
+
+			if(EvoDEX[BaseDex][5] == EvoDEX[PlayerDEXNum][5])
+				{CaseNum = Evolved;}//So the player is in a valid latent state. we will set them there.
+			else{CaseNum = Changed;}//No match, back to your base form
+		}
+
+	switch(CaseNum)
+		{
+			Case 0: //Base
+			//Log(s:"Base");
+			ACS_NamedExecuteAlways("StatInitializer",0);
+			ACS_NamedExecuteAlways("SetPlayerType",0);
+			ACS_NamedExecuteAlways("SetPokeSkin",0,BaseDex);
+			GiveInventory("PersistentLoadout",1);
+				//For TLMS's map reset
+			if( (GetCvar("lastmanstanding")==1||GetCvar("teamlms")==1)
+				&& CheckLMSAttendance(PlayerNumber()) == 1)
+				{
+	
+				}
+			break;
+			Case 1: //Fresh
+			//Log(s:"Fresh");
+			ClearPlayerCVars(PlayerNumber(),1);
+			ClearPersistentLoadout(PlayerNumber());
+			GiveInventory("PersistentLoadout",1);
+			SetCvar(StrParam(s:"PlayerDEXNum_",i:PlayerNumber()),BaseDex);
+			ACS_NamedExecuteAlways("StatInitializer",0);
+			ACS_NamedExecuteAlways("SetPlayerType",0);
+			ACS_NamedExecuteAlways("SetPlayerLevel",0,GetCvar("PKMN_StartingLevel"),1);
+			ACS_NamedExecuteAlways("SetPokeSkin",0,BaseDex);
+			GiveStartingMoves();
+			Terminate;
+			break;
+			Case 2: //Evolved
+			//Log(s:"Evolved: Match Passed");  
+			ACS_NamedExecuteAlways("PlayerFormChange",0,PlayerDEXNum);
+			ACS_NamedExecuteAlways("StatInitializer",0);
+			ACS_NamedExecuteAlways("SetPlayerType",0);
+			GiveInventory("PersistentLoadout",1);
+			break;
+			Case 3: //Changed
+			//Log(s:"Changed: Match Failed"); 
+			ClearPlayerCVars(PlayerNumber(),1);
+			ClearPersistentLoadout(PlayerNumber());
+			SetCvar(StrParam(s:"PlayerDEXNum_",i:PlayerNumber()),BaseDex);
+			ACS_NamedExecuteAlways("StatInitializer",0);
+			ACS_NamedExecuteAlways("SetPlayerType",0);
+			ACS_NamedExecuteAlways("SetPlayerLevel",0,GetCvar("PKMN_StartingLevel"),1);
+			ACS_NamedExecuteAlways("SetPokeSkin",0,BaseDex);
+			GiveStartingMoves();
+			GiveInventory("PersistentLoadout",1);
+			break;
+		}
+
+		//ACS_NamedExecuteAlways("StatInitializer",0);
+		//ACS_NamedExecuteAlways("SetPlayerType",0);
+	//===
+
+
+
+	if(GetCvar("lastmanstanding")==1||GetCvar("teamlms")==1) {LMSAttendance(PlayerNumber(),1);}
+
+}
+
+script "PKMNACS_TSRespawn" RESPAWN
+{
+	
+	//ACS_NamedExecuteAlways("BusterPowerHandler",0);
+	//ACS_NamedExecuteAlways("StatInitializer",0);
+	//Log(s:"Respawned");
+	ACS_NamedExecuteAlways("PKMNACS_TeamSpecies",0); 
+	ACS_NamedExecuteAlways("PKMN_Setup",0); 
+	ACS_NamedExecuteAlways("PlayerScanner",0); 
+	
+	/*
+	log(i:PlayerClass(PlayerNumber()));
+	if(PlayerClass(PlayerNumber()) == PlayerClassMem[Playernumber()])
+		{
+		GiveInventory(StrParam(s:GetActorClass(0),s:"SetupItem"),1);
+		}
+	else
+		{
+		ClearPlayerCVars(PlayerNumber(),1);
+		PlayerClassMem[PlayerNumber()] = PlayerClass(PlayerNumber());
+		GiveInventory(StrParam(s:GetActorClass(0),s:"StarterMoves"),1);
+		GiveInventory(StrParam(s:GetActorClass(0),s:"SetupItem"),1);	
+		}
+	*/
+	
+}
+
+
+Script "StartingLevel" OPEN 
+{
+
+//log(s:"Initiated base level");
+
+if(GetCvar("lastmanstanding")==1||GetCvar("teamlms")==1) 
+	{if(GetCvar("StartingLevelSet") == true){Terminate;}}
+
+int BaseLevel = GetCvar("PKMN_StartingLevel");
+Int PlayerDEXNum;
+Int EXPRate;
+if(BaseLevel > 10)
+	{
+		BaseLevel = 10;
+		SetCvar("PKMN_StartingLevel",BaseLevel);
+	}
+else if(BaseLevel < 1)
+	{
+		BaseLevel = 1;
+		SetCvar("PKMN_StartingLevel",BaseLevel);
+	}
+/*
+	for(int i = 0; i < MAX_PLAYERS; i++)
+	{
+		PlayerDEXNum = GetCvar(StrParam(s:"PlayerDEXNum_",i:i));
+		EXPRate = StatDEX[PlayerDEXNum][9];
+		SetCvar(StrParam(s:"PlayerLevel_",i:i),BaseLevel);
+		if(BaseLevel>1){SetCvar(StrParam(s:"PlayerEXP_",i:i),LevelUpTable[EXPRate][BaseLevel-1]);}
+
+
+
+	}
+*/
+	log(s:"\cgStarting level set to ",i:BaseLevel);
+	SetCvar("StartingLevelSet",True);
+
+}

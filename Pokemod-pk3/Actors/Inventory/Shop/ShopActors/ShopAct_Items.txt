@@ -1,0 +1,191 @@
+//[+]========================================================================[+]
+//----------------------------------|Berries|-----------------------------------
+//[+]========================================================================[+]
+actor BerryShop : CustomInventory
+{
+states
+{
+Pickup:
+TNT1 A 0 A_GiveInventory("BuyHPBerry",1)
+TNT1 A 0 A_GiveInventory("BuyBigHPBerry",1)
+TNT1 A 0 A_GiveInventory("BuyPPBerry",1)
+TNT1 A 0 A_GiveInventory("BuyBigPPBerry",1)
+stop
+}
+}
+
+//#region -=- Buy Actors
+
+actor BuyHPBerry : BuyThing25
+{
+states
+{
+Use2:
+TNT1 A 0 A_JumpIfInventory("HPBerry",5,"FullCapacity")
+TNT1 A 0 A_GiveInventory("HPBerry",1)
+TNT1 A 0 ACS_NamedExecuteAlways("Write_Inventory",0)
+goto CostPay
+}
+}
+
+actor BuyBigHPBerry : BuyThing100
+{
+states
+{
+Use2:
+TNT1 A 0 A_JumpIfInventory("BigHPBerry",3,"FullCapacity")
+TNT1 A 0 A_GiveInventory("BigHPBerry",1)
+TNT1 A 0 ACS_NamedExecuteAlways("Write_Inventory",0)
+goto CostPay
+}
+}
+
+actor BuyPPBerry : BuyThing75
+{
+states
+{
+Use2:
+TNT1 A 0 A_JumpIfInventory("PPBerry",5,"FullCapacity")
+TNT1 A 0 A_GiveInventory("PPBerry",1)
+TNT1 A 0 ACS_NamedExecuteAlways("Write_Inventory",0)
+goto CostPay
+}
+}
+
+actor BuyBigPPBerry : BuyThing125
+{
+states
+{
+Use2:
+TNT1 A 0 A_JumpIfInventory("BigPPBerry",3,"FullCapacity")
+TNT1 A 0 A_GiveInventory("BigPPBerry",1)
+TNT1 A 0 ACS_NamedExecuteAlways("Write_Inventory",0)
+goto CostPay
+}
+}
+
+//#endregion
+
+//[+]========================================================================[+]
+//----------------------------------|Candies|-----------------------------------
+//[+]========================================================================[+]
+
+actor CandyShop : CustomInventory
+{
+states
+{
+Pickup:
+TNT1 A 0 A_GiveInventory("BuySmallEXPCandy",1)
+TNT1 A 0 A_GiveInventory("BuyMediumEXPCandy",1)
+TNT1 A 0 A_GiveInventory("BuyLargeEXPCandy",1)
+stop
+}
+}
+
+//#region -=- Buy Actors
+
+actor BuySmallEXPCandy : BuyThing50
+{
+states
+{
+Use2:
+TNT1 A 0 A_JumpIf(CallACS("checkEXPtoMax")==0,"MaxLevel")
+TNT1 A 0 A_GiveInventory("SmallEXPCandy",1)
+goto CostPay
+}
+}
+
+actor BuyMediumEXPCandy : BuyThing350
+{
+states
+{
+Use2:
+TNT1 A 0 A_JumpIf(CallACS("checkEXPtoMax")==0,"MaxLevel")
+TNT1 A 0 A_GiveInventory("MediumEXPCandy",1)
+goto CostPay
+}
+}
+
+actor BuyLargeEXPCandy : BuyThing750
+{
+states
+{
+Use2:
+TNT1 A 0 A_JumpIf(CallACS("checkEXPtoMax")==0,"MaxLevel")
+TNT1 A 0 A_GiveInventory("LargeEXPCandy",1)
+goto CostPay
+}
+}
+
+//#endregion
+
+//[+]========================================================================[+]
+//----------------------------------|Seeds|-----------------------------------
+//[+]========================================================================[+]
+
+
+actor SeedShop : CustomInventory
+{
+states
+{
+Pickup:
+TNT1 A 0 A_GiveInventory("BuyClenseSeed",1)
+TNT1 A 0 A_GiveInventory("BuyPowerSeed",1)
+TNT1 A 0 A_GiveInventory("BuyGuardSeed",1)
+TNT1 A 0 A_GiveInventory("BuyHasteSeed",1)
+stop
+}
+}
+
+//#region -=- Buy Actors
+
+actor BuyClenseSeed : BuyThing100
+{
+states
+{
+Use2:
+TNT1 A 0 A_JumpIfInventory("ClenseSeed",3,"FullCapacity")
+TNT1 A 0 A_GiveInventory("ClenseSeed",1)
+TNT1 A 0 ACS_NamedExecuteAlways("Write_Inventory",0)
+goto CostPay
+}
+}
+
+
+actor BuyPowerSeed : BuyThing300
+{
+states
+{
+Use2:
+TNT1 A 0 A_JumpIfInventory("PowerSeed",3,"FullCapacity")
+TNT1 A 0 A_GiveInventory("PowerSeed",1)
+TNT1 A 0 ACS_NamedExecuteAlways("Write_Inventory",0)
+goto CostPay
+}
+}
+
+actor BuyGuardSeed : BuyThing200
+{
+states
+{
+Use2:
+TNT1 A 0 A_JumpIfInventory("GuardSeed",3,"FullCapacity")
+TNT1 A 0 A_GiveInventory("GuardSeed",1)
+TNT1 A 0 ACS_NamedExecuteAlways("Write_Inventory",0)
+goto CostPay
+}
+}
+
+actor BuyHasteSeed : BuyThing200
+{
+states
+{
+Use2:
+TNT1 A 0 A_JumpIfInventory("HasteSeed",3,"FullCapacity")
+TNT1 A 0 A_GiveInventory("HasteSeed",1)
+TNT1 A 0 ACS_NamedExecuteAlways("Write_Inventory",0)
+goto CostPay
+}
+}
+//#endregion
+

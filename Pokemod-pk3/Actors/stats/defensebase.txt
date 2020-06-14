@@ -1,0 +1,127 @@
+actor Def : PowerProtection
+{
+Powerup.Duration 0x7FFFFFFF
+
+damagefactor "Buster", 1.0
+damagefactor "ChargeBuster", 1.0
+damagefactor "ArrowBuster", 1.0
+damagefactor "LaserBuster", 1.0
+damagefactor "DuoFist1", 1.0
+damagefactor "DuoFist2", 1.0
+damagefactor "DuoFist3", 1.0
+damagefactor "ProtoBuster", 1.0
+damagefactor "ProtoBuster2", 1.0
+damagefactor "ProtoBuster3", 1.0
+damagefactor "BassBuster", 1.0
+damagefactor "SuperAdaptor", 1.0
+damagefactor "TrebleBoost", 1.0
+
+damagefactor "PoisonDamage", 1.0
+damagefactor "RecoilDamage", 1.0
+
+damagefactor "LeechSeed", 1.0
+damagefactor "PoisonPowder", 1.0
+damagefactor "SleepPowder", 1.0
+damagefactor "Toxic", 1.0
+
+damagefactor "DragonRage", 1.0
+damagefactor "StealthRock", 1.0
+
+}
+
+actor PDef : Def
+{
+//Special Attacks go here
+damagefactor "Swift", 1.0
+damagefactor "Ember", 1.0
+damagefactor "ThunderShock", 1.0
+damagefactor "WaterGun", 1.0
+damagefactor "EnergyBall", 1.0
+damagefactor "SolarBeam", 1.0
+damagefactor "PetalBlizzard", 1.0
+
+damagefactor "FireSpin", 1.0
+damagefactor "FlameThrower", 1.0
+damagefactor "DragonPulse", 1.0
+damagefactor "FireBlast", 1.0
+
+damagefactor "FlameBurst", 1.0
+damagefactor "WaterPulse", 1.0
+damagefactor "HydroPump", 1.0
+damagefactor "FlashCannon", 1.0
+damagefactor "BubbleBeam", 1.0
+
+damagefactor "PowderSnow", 1.0
+damagefactor "IcyWind", 1.0
+damagefactor "AuroraBeam", 1.0
+damagefactor "IceBeam", 1.0
+damagefactor "Blizzard", 1.0
+
+damagefactor "MagicalLeaf", 1.0
+damagefactor "Mudslap", 1.0
+damagefactor "Extrasensory", 1.0
+damagefactor "Eruption", 1.0
+damagefactor "HeatWave", 1.0
+damagefactor "Vacuumwave", 1.0
+damagefactor "MudBomb", 1.0
+damagefactor "Brine", 1.0
+}
+
+actor SDef : Def
+{
+//Physical Attacks go here
+damagefactor "Melee", 1.0
+damagefactor "Bite", 1.0
+damagefactor "QuickAttack", 1.0
+damagefactor "VineWhip", 1.0
+damagefactor "RazorLeaf", 1.0
+damagefactor "SeedBomb", 1.0
+damagefactor "DoubleEdge", 1.0
+
+damagefactor "Slash", 1.0
+damagefactor "FireFang", 1.0
+damagefactor "DragonRush", 1.0
+damagefactor "FlareBlitz", 1.0
+
+damagefactor "MetalClaw", 1.0
+damagefactor "DragonClaw", 1.0
+damagefactor "SkullBash", 1.0
+damagefactor "RapidSpin", 1.0
+
+damagefactor "IcePunch", 1.0
+damagefactor "IceFang", 1.0
+
+damagefactor "BulletSeed", 1.0
+damagefactor "Pursuit", 1.0
+damagefactor "LeafBlade1", 1.0
+damagefactor "LeafBlade2", 1.0
+damagefactor "FalseSwipe", 1.0
+damagefactor "NightSlash1", 1.0
+damagefactor "NightSlash2", 1.0
+damagefactor "NightSlash3", 1.0
+damagefactor "XScissor", 1.0
+damagefactor "SkyDrop", 1.0
+damagefactor "Earthquake", 1.0
+damagefactor "WoodHammer", 1.0
+damagefactor "FlameWheel", 1.0
+damagefactor "Rollout", 1.0
+damagefactor "GyroBall", 1.0
+damagefactor "Peck", 1.0
+damagefactor "DoubleKick", 1.0
+damagefactor "ThunderPunch", 1.0
+damagefactor "BlazeKick", 1.0
+damagefactor "SkyUppercut", 1.0
+damagefactor "BraveBird", 1.0
+damagefactor "HiJumpKick", 1.0
+damagefactor "Fakeout", 1.0
+damagefactor "Machpunch", 1.0
+damagefactor "CloseCombat", 1.0
+damagefactor "Acrobatics", 1.0
+damagefactor "AquaTail", 1.0
+damagefactor "Crunch", 1.0
+damagefactor "Thrash", 1.0
+damagefactor "HammerArm", 1.0
+damagefactor "RockSlide", 1.0
+damagefactor "AquaJet", 1.0
+damagefactor "DrillPeck", 1.0
+}

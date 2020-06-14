@@ -1,0 +1,461 @@
+//[+]========================================================================[+]
+//------------------------------|Player Resources|---------------------------
+//[+]========================================================================[+]
+
+actor ShotCounter : Ammo
+{
+inventory.amount 1
+inventory.maxamount 5
++INVENTORY.IGNORESKILL
+}
+
+//100.0%
+actor BusterPower : Ammo
+{
+inventory.amount 1
+inventory.maxamount 1000
++INVENTORY.IGNORESKILL
+}
+
+actor AntiBusterPower : Inventory
+{
+inventory.amount 1
+inventory.maxamount 1000
+}
+
+actor ClassResource : Ammo
+{
+inventory.amount 1
+inventory.maxamount 1000
+}
+
+actor AmmoDelay : Inventory
+{
+inventory.amount 1
+inventory.maxamount 35
+}
+
+actor UseResource : Once{}
+//[+]========================================================================[+]
+//--------------------------------|Ultimates Script|---------------------------
+//[+]========================================================================[+]
+
+actor LevelupFX : BasicClientside
+{
+scale 2.5 
+Alpha 1.0
+States 
+{
+Spawn: 
+TNT1 A 0 
+HGEN MNMN 3
+TNT1 A 0 A_stop
+HGEN MNMN 3 
+HGEN MNMNMNMN 3 A_Fadeout
+stop
+}
+}
+
+Actor LeveLUpCue : CustomInventory
+{
++COUNTITEM
++INVBAR
++INVENTORY.AUTOACTIVATE
++INVENTORY.QUIET
+Inventory.Amount 1
+Inventory.MaxAmount 1
+inventory.icon "DWRASI"
+Inventory.PickUpSound "item/1up"
+Scale 2.0
+States
+{
+Spawn:
+WEAP Q 1
+Loop
+Use:
+TNT1 A 0 A_spawnitemEX("LevelupFX",0,0,40,0,0,3,0,1)
+TNT1 A 0 A_PlaySoundEX("Misc/Levelup","Soundslot8")
+stop
+}
+}
+
+//[+]========================================================================[+]
+
+actor IsInGame : Once {}
+
+actor AbnormalItemPosition : Once {}
+
+actor InvisibleFlag : Once {}
+actor CannotUseHealing : Once {}
+Actor JumpCanclerDisable : Once {}
+Actor StaminaFlag : Ammo {+INVENTORY.IGNORESKILL Inventory.MaxAmount 500}
+actor CanWallJump : Inventory
+{
+inventory.amount 1
+inventory.maxamount 1
+}
+actor NoJump : Inventory
+{
+inventory.amount 1
+inventory.maxamount 1
+}
+actor NoWallJump : Inventory
+{
+inventory.amount 1
+inventory.maxamount 1
+}
+actor WallJump : Inventory
+{
+inventory.amount 1
+inventory.maxamount 1
+}
+
+actor WallJumpCount : Inventory
+{
+inventory.amount 1
+inventory.maxamount 30
+}
+
+Actor NoArmorBar : Inventory
+{
+inventory.amount 1
+inventory.maxamount 1
+}
+
+
+Actor ScriptCharge : Inventory
+{
+inventory.amount 1
+inventory.maxamount 1000
+}
+
+Actor ClassToggleItem : Inventory
+{
+inventory.amount 1
+inventory.maxamount 100
+}
+//[+]========================================================================[+]
+//--------------------------------|Targeting Script|---------------------------
+//[+]========================================================================[+]
+actor TargetingFlag : Inventory{inventory.amount 1 inventory.maxamount 64}
+actor TargetingRangeFlag : Inventory{inventory.amount 1 inventory.maxamount 3000}
+Actor TargActive : Powerup{inventory.amount 1 powerup.duration 0x7FFFFFFF}
+Actor TargScriptActive : Powerup{inventory.amount 1 powerup.duration 3}
+Actor TargHolder : Powerup{inventory.amount 1 powerup.duration 7}
+//[+]========================================================================[+]
+
+
+
+
+
+//[+]========================================================================[+]
+//-------------------------|Projectile TRanslation Script|---------------------
+//[+]========================================================================[+]
+actor ProjectileCode : CustomInventory
+{
+states
+{
+Pickup:
+TNT1 A 0 A_GiveInventory("ProjectileSpawned",1)
+Pickup1:
+TNT1 A 0 A_JumpIf(CallACS("Check_ProjectileColor_Server"),"Pickup2")
+stop
+Pickup2:
+TNT1 A 0 A_Jumpifintargetinventory("LightTeamFlag",1,"TeamBlue")
+TNT1 A 0 A_Jumpifintargetinventory("WilyTeamFlag",1,"TeamRed")
+TNT1 A 0 A_Jumpifintargetinventory("CossackTeamFlag",1,"TeamGreen")
+TNT1 A 0 A_Jumpifintargetinventory("KingTeamFlag",1,"TeamGold")
+stop
+TeamBlue:
+TeamBlue1:
+TNT1 A 0 ACS_NamedExecuteWithResult("Set_Projectile_Translation",0)
+stop
+TeamRed:
+TeamRed1:
+TNT1 A 0 ACS_NamedExecuteWithResult("Set_Projectile_Translation",1)
+stop
+TeamGreen:
+TeamGreen1:
+TNT1 A 0 ACS_NamedExecuteWithResult("Set_Projectile_Translation",2)
+stop
+TeamGold:
+TeamGold1:
+TNT1 A 0 ACS_NamedExecuteWithResult("Set_Projectile_Translation",3)
+stop
+}
+}
+
+actor ProjectileSpawned : Inventory
+{
+inventory.amount 1
+inventory.maxamount 1
+}
+
+actor ProjectileDCode : ProjectileCode
+{
+states
+{
+Pickup:
+TNT1 A 0 A_Jumpifinventory("ProjectileSpawned",1,"PickupNo")
+goto Pickup1
+PickupNo:
+TNT1 A 0
+stop
+}
+}
+
+actor ProjectileCodeNo : CustomInventory
+{
+states
+{
+Pickup:
+TNT1 A 0
+stop
+}
+}
+
+actor SyncTarget : ProjectileCode
+{
+states
+{
+Pickup:
+TNT1 A 0
+goto Pickup1
+TeamBlue:
+TeamRed:
+TeamGreen:
+TeamGold:
+TNT1 A 0 ACS_NamedExecuteWithResult("SyncTargetToTID",CallACS("Core_GetTarget"))
+stop
+}
+}
+
+actor ProjectileCodeSyncTarget : ProjectileCode
+{
+states
+{
+TeamBlue:
+TNT1 A 0 ACS_NamedExecuteWithResult("SyncTargetToTID",CallACS("Core_GetTarget"))
+goto TeamBlue1
+TeamRed:
+TNT1 A 0 ACS_NamedExecuteWithResult("SyncTargetToTID",CallACS("Core_GetTarget"))
+goto TeamRed1
+TeamGreen:
+TNT1 A 0 ACS_NamedExecuteWithResult("SyncTargetToTID",CallACS("Core_GetTarget"))
+goto TeamGreen1
+TeamGold:
+TNT1 A 0 ACS_NamedExecuteWithResult("SyncTargetToTID",CallACS("Core_GetTarget"))
+goto TeamGold1
+}
+}
+
+actor ProjectileFXCode : ProjectileCode {}
+
+//[+]========================================================================[+]
+//-------------------------|Persistant Loadouts|---------------------
+//[+]========================================================================[+]
+actor PersistentLoadout : CustomInventory
+{
+States
+{
+Pickup:
+TNT1 A 0 A_JumpIf(CallACS("INSTAGIB_CHECK"),"PickupNo")
+TNT1 A 0 A_GiveInventory("Once",1)
+TNT1 A 0 ACS_NamedExecuteAlways("PERSISTENT_LOADOUT",0)
+stop
+PickupNo:
+TNT1 A 0
+stop
+}
+}
+
+actor PickupOn : CustomInventory
+{
+states
+{
+pickup:
+TNT1 A 0 A_ChangeFlag("PICKUP",1)
+stop
+}
+}
+
+actor PickupOff : CustomInventory
+{
+states
+{
+pickup:
+TNT1 A 0 A_ChangeFlag("PICKUP",0)
+stop
+}
+}
+
+//[+]========================================================================[+]
+//-------------------------|Safe Zone|---------------------
+//[+]========================================================================[+]
+const Int SafeZoneSize = 60;
+
+actor SpawnSafeZone : CustomInventory
+{
+states
+{
+Pickup:
+TNT1 A 0 A_JumpIf(CallACS("SafeZoneSpawnCheck") == 1,"Pickup2")
+stop
+Pickup2:
+TNT1 A 0 A_GiveInventory("inSafeZone",1)
+TNT1 A 0 A_SpawnItemEx("SafeZoneField",0,0,0,0,0,0,0,1)
+stop
+}
+}
+
+
+actor SafeZoneField : BasicHelper
+{
+states
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+Spawn2:
+TNT1 A 0 A_GiveToTarget("inSafeZone")
+TNT1 A 0 A_SpawnItemEx("SafeZoneRingFXSpawn",0,0,0,0,0,0,0,1)
+TNT1 A 10 
+TNT1 A 0 A_JumpIfCloser(SafeZoneSize,"Spawn2")
+TNT1 A 5
+stop 
+
+Death:
+TNT1 A 1 
+stop
+}
+}
+
+actor SafeZoneRingFXSpawn : BasicHelper
+{
+translation "198:198=220:220", "192:192=229:229"
++CLIENTSIDEONLY
+	reactiontime 15
+	var int user_angle;
+	States
+	{
+		Spawn:
+		TNT1 A 0
+		TNT1 A 0 A_GiveInventory("ProjectileCodeSyncTarget",1)
+		SpawnLoop:
+		TNT1 A 0 A_SpawnItemEx("SafeZoneRingFX", SafeZoneSize, 0, 24, 0, 0, 2, user_angle, 1)
+        TNT1 A 0 A_SpawnItemEx("SafeZoneRingFX", -SafeZoneSize, 0, 24, 0, 0, 2, user_angle, 1)
+		TNT1 A 0 A_SpawnItemEx("SafeZoneRingFX2", SafeZoneSize, 0, 12, 0, 0, 0, user_angle, 1)
+		TNT1 A 0 A_SpawnItemEx("SafeZoneRingFX2", -SafeZoneSize, 0, 12, 0, 0, 0, user_angle, 1)
+		TNT1 A 0 A_SetUserVar("user_angle", user_angle + 12)
+		TNT1 A 0 A_Countdown
+		loop
+		Death:
+		TNT1 A 0
+		stop
+	}
+}
+
+actor SafeZoneRingFX : BasicClientSide
+{
+Scale 1.0
+Renderstyle "Add"
+States
+{
+Spawn:
+BASB U 0
+BASB U 17
+BASB UUUUUUUU 2 A_Fadeout
+stop
+}
+}
+
+actor SafeZoneRingFX2 : BasicClientSide
+{
+Scale 1.5
+Renderstyle "Add"
+States
+{
+Spawn:
+BASB W 0
+BASB W 5
+BASB WWWWWWWWWW 2 A_Fadeout
+stop
+}
+}
+
+actor inSafeZone : PowerProtection {inventory.amount 1 Powerup.Duration 35 DamageFactor "Normal", 0}
+
+//[+]========================================================================[+]
+//-------------------------|Skins|---------------------
+//[+]========================================================================[+]
+
+actor PokeFormHandler : CustomInventory
+{
+states
+{
+Pickup:
+//TNT1 A 0 A_ChangeFlag("NOSKIN",1)
+TNT1 A 0 ACS_NamedExecuteAlways("PokeSkinHandler",0)
+stop
+}
+}
+
+//[+]========================================================================[+]
+//-------------------------|Menu Items|---------------------
+//[+]========================================================================[+]
+actor EvoStartItem : CustomInventory
+{
+inventory.amount 1
+inventory.maxamount 1
+inventory.pickupmessage "Evolution Stone"
+Tag "Evo Stone"
+Inventory.PickupSound "item/1up"
+scale 2.0
+states
+{
+Spawn:
+WEAP X 1
+loop
+Use:
+TNT1 A 0 ACS_NamedExecuteAlways("EvolveTrigger",0)
+fail
+}
+}
+
+actor MoveTutorStartItem : CustomInventory
+{
+inventory.amount 1
+inventory.maxamount 1
+inventory.pickupmessage "Move Tutor"
+Tag "Move Tutor"
+Inventory.PickupSound "item/1up"
+scale 2.0
+states
+{
+Spawn:
+WEAP X 1
+loop
+Use:
+TNT1 A 0 ACS_NamedExecuteAlways("PromptLevelUpMove",0)
+fail
+}
+}
+
+actor MoveShiftStartItem : CustomInventory
+{
+inventory.amount 1
+inventory.maxamount 1
+inventory.pickupmessage "Move Tutor"
+Tag "Move Tutor"
+Inventory.PickupSound "item/1up"
+scale 2.0
+states
+{
+Spawn:
+WEAP X 1
+loop
+Use:
+TNT1 A 0 ACS_NamedExecuteAlways("PromptMoveReposition",0)
+fail
+}
+}

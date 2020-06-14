@@ -1,0 +1,1703 @@
+// =================================================================================================
+//
+// Pokedex MENU
+//
+// =================================================================================================
+OptionMenu "PKMNInfo"
+{
+	
+	Title "$PKMN_DEXTITLE"
+    StaticText "===============================================================",1
+    Submenu "                           Smeargle .0", "Dex_D000"
+    Submenu "                           Bulbasaur .1", "Dex_D001"
+    Submenu "                           Ivysaur .2", "Dex_D002"
+    Submenu "                           Venusaur .3", "Dex_D003"
+    Submenu "                           Charmander .4", "Dex_D004"
+    Submenu "                           Charmeleon .5", "Dex_D005"
+    Submenu "                           Charizard .6", "Dex_D006"
+    Submenu "                           Squirtle .7", "Dex_D007"
+    Submenu "                           Wartortle .8", "Dex_D008"
+    Submenu "                           Blastoise .9", "Dex_D009"
+	StaticText"===============================================================",1
+}
+
+// =================================================================================================
+//
+// Pokemon Entry MENU
+//
+// =================================================================================================
+
+OptionMenu "Dex_D000"
+{
+	
+	Title "$D000_NAME"
+    StaticText "===============================================================",1
+    StaticText "$D000_TYPE"
+    StaticText "$D000_STATS1"
+    StaticText "$D000_STATS2"
+    StaticText "$D000_STATS3"
+    StaticText "$EXPSPD2"
+    StaticText ""
+    StaticText "$D000_EVO"
+    StaticText"===============================================================",1
+    StaticText "$PKMN_DEXMOVES1"
+    Submenu "                               Sketch", "MoveMenu_Blank"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText "$PKMN_DEXMOVES2"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText "===============================================================",1
+}
+
+OptionMenu "Dex_D001"
+{
+	
+	Title "$D001_NAME"
+    StaticText "===============================================================",1
+    StaticText "$D001_TYPE"
+    StaticText "$D001_STATS1"
+    StaticText "$D001_STATS2"
+    StaticText "$D001_STATS3"
+    StaticText "$EXPSPD3"
+    StaticText ""
+    StaticText "$D001_EVO"
+    StaticText"===============================================================",1
+    StaticText "$PKMN_DEXMOVES1"
+    Submenu "                   Vine Whip", "MoveMenu_VineWhip"
+    Submenu "                   LeechSeed", "MoveMenu_LeechSeed"
+    Submenu "                   Growth", "MoveMenu_Growth"
+    Submenu "                   RazorLeaf", "MoveMenu_RazorLeaf"
+    StaticText "$PKMN_DEXMOVES2"
+    Submenu "                   SweetScent lvl.2", "MoveMenu_SweetScent"
+    Submenu "                   PoisonPowder lvl.3", "MoveMenu_PoisonPowder"
+    Submenu "                   SleepPowder lvl.4", "MoveMenu_SleepPowder"
+    Submenu "                   SeedBomb lvl.5", "MoveMenu_SeedBomb"
+    Submenu "                   Synthesis lvl.6", "MoveMenu_Synthesis"
+    Submenu "                   EnergyBall lvl.7", "MoveMenu_EnergyBall"
+    Submenu "                   DoubleEdge lvl.8", "MoveMenu_DoubleEdge"
+    Submenu "                   Toxic lvl.9", "MoveMenu_Toxic"
+    Submenu "                   SolarBeam lvl.10", "MoveMenu_SolarBeam"
+    StaticText"===============================================================",1
+
+
+}
+
+OptionMenu "Dex_D002"
+{
+	
+	Title "$D002_NAME"
+    StaticText "===============================================================",1
+    StaticText "$D002_TYPE"
+    StaticText "$D002_STATS1"
+    StaticText "$D002_STATS2"
+    StaticText "$D002_STATS3"
+    StaticText "$EXPSPD3"
+    StaticText ""
+    StaticText "$D002_EVO"
+    StaticText"===============================================================",1
+    StaticText "$PKMN_DEXMOVES1"
+    Submenu "                   Vine Whip", "MoveMenu_VineWhip"
+    Submenu "                   LeechSeed", "MoveMenu_LeechSeed"
+    Submenu "                   Growth", "MoveMenu_Growth"
+    Submenu "                   RazorLeaf", "MoveMenu_RazorLeaf"
+    StaticText "$PKMN_DEXMOVES2"
+    Submenu "                   SweetScent lvl.2", "MoveMenu_SweetScent"
+    Submenu "                   PoisonPowder lvl.3", "MoveMenu_PoisonPowder"
+    Submenu "                   SleepPowder lvl.4", "MoveMenu_SleepPowder"
+    Submenu "                   SeedBomb lvl.5", "MoveMenu_SeedBomb"
+    Submenu "                   Synthesis lvl.6", "MoveMenu_Synthesis"
+    Submenu "                   EnergyBall lvl.7", "MoveMenu_EnergyBall"
+    Submenu "                   DoubleEdge lvl.8", "MoveMenu_DoubleEdge"
+    Submenu "                   Toxic lvl.9", "MoveMenu_Toxic"
+    Submenu "                   SolarBeam lvl.10", "MoveMenu_SolarBeam"
+    StaticText"===============================================================",1
+
+
+}
+
+OptionMenu "Dex_D003"
+{
+	
+	Title "$D003_NAME"
+    StaticText "===============================================================",1
+    StaticText "$D003_TYPE"
+    StaticText "$D003_STATS1"
+    StaticText "$D003_STATS2"
+    StaticText "$D003_STATS3"
+    StaticText "$EXPSPD3"
+    StaticText ""
+    StaticText "$D003_EVO"
+    StaticText"===============================================================",1
+    StaticText "$PKMN_DEXMOVES1"
+    Submenu "                   Vine Whip", "MoveMenu_VineWhip"
+    Submenu "                   LeechSeed", "MoveMenu_LeechSeed"
+    Submenu "                   Growth", "MoveMenu_Growth"
+    Submenu "                   RazorLeaf", "MoveMenu_RazorLeaf"
+    StaticText "$PKMN_DEXMOVES2"
+    Submenu "                   SweetScent lvl.2", "MoveMenu_SweetScent"
+    Submenu "                   PoisonPowder lvl.3", "MoveMenu_PoisonPowder"
+    Submenu "                   SleepPowder lvl.4", "MoveMenu_SleepPowder"
+    Submenu "                   SeedBomb lvl.5", "MoveMenu_SeedBomb"
+    Submenu "                   Synthesis lvl.6", "MoveMenu_Synthesis"
+    Submenu "                   EnergyBall lvl.7", "MoveMenu_EnergyBall"
+    Submenu "                   DoubleEdge lvl.8", "MoveMenu_DoubleEdge"
+    Submenu "                   Toxic lvl.9", "MoveMenu_Toxic"
+    Submenu "                   SolarBeam lvl.10", "MoveMenu_SolarBeam"
+    StaticText"===============================================================",1
+
+
+}
+
+OptionMenu "Dex_D004"
+{
+	
+	Title "$D004_NAME"
+    StaticText "===============================================================",1
+    StaticText "$D004_TYPE"
+    StaticText "$D004_STATS1"
+    StaticText "$D004_STATS2"
+    StaticText "$D004_STATS3"
+    StaticText "$EXPSPD3"
+    StaticText ""
+    StaticText "$D004_EVO"
+    StaticText"===============================================================",1
+    StaticText "$PKMN_DEXMOVES1"
+    Submenu "                   Growl", "MoveMenu_Growl"
+    Submenu "                   Ember", "MoveMenu_Ember"
+    Submenu "                   SmokeScreen", "MoveMenu_SmokeScreen"
+    Submenu "                   Metal Claw", "MoveMenu_MetalClaw"
+    StaticText "$PKMN_DEXMOVES2"
+    Submenu "                   Fire Spin lvl.2", "MoveMenu_FireSpin"
+    Submenu "                   Dragon Rage lvl.3", "MoveMenu_DragonRage"
+    Submenu "                   Flame Burst lvl.4", "MoveMenu_FlameBurst"
+    Submenu "                   Flamethrower lvl.5", "MoveMenu_Flamethrower"
+    Submenu "                   Dragon Claw lvl.6", "MoveMenu_DragonClaw"
+    Submenu "                   Dragon Pulse lvl.7", "MoveMenu_DragonPulse"
+    Submenu "                   Flare Blitz lvl.8", "MoveMenu_FlareBlitz"
+    Submenu "                   Dragon Dance lvl.9", "MoveMenu_DragonDance"
+    Submenu "                   Fire Blast lvl.10", "MoveMenu_FireBlast"
+    StaticText"===============================================================",1
+}
+
+OptionMenu "Dex_D005"
+{
+	
+	Title "$D005_NAME"
+    StaticText "===============================================================",1
+    StaticText "$D005_TYPE"
+    StaticText "$D005_STATS1"
+    StaticText "$D005_STATS2"
+    StaticText "$D005_STATS3"
+    StaticText "$EXPSPD3"
+    StaticText ""
+    StaticText "$D005_EVO"
+    StaticText"===============================================================",1
+    StaticText "$PKMN_DEXMOVES1"
+    Submenu "                   Growl", "MoveMenu_Growl"
+    Submenu "                   Ember", "MoveMenu_Ember"
+    Submenu "                   SmokeScreen", "MoveMenu_SmokeScreen"
+    Submenu "                   Metal Claw", "MoveMenu_MetalClaw"
+    StaticText "$PKMN_DEXMOVES2"
+    Submenu "                   Fire Spin lvl.2", "MoveMenu_FireSpin"
+    Submenu "                   Dragon Rage lvl.3", "MoveMenu_DragonRage"
+    Submenu "                   Flame Burst lvl.4", "MoveMenu_FlameBurst"
+    Submenu "                   Flamethrower lvl.5", "MoveMenu_Flamethrower"
+    Submenu "                   Dragon Claw lvl.6", "MoveMenu_DragonClaw"
+    Submenu "                   Dragon Pulse lvl.7", "MoveMenu_DragonPulse"
+    Submenu "                   Flare Blitz lvl.8", "MoveMenu_FlareBlitz"
+    Submenu "                   Dragon Dance lvl.9", "MoveMenu_DragonDance"
+    Submenu "                   Fire Blast lvl.10", "MoveMenu_FireBlast"
+    StaticText"===============================================================",1
+}
+
+OptionMenu "Dex_D006"
+{
+	
+	Title "$D006_NAME"
+    StaticText "===============================================================",1
+    StaticText "$D006_TYPE"
+    StaticText "$D006_STATS1"
+    StaticText "$D006_STATS2"
+    StaticText "$D006_STATS3"
+    StaticText "$EXPSPD3"
+    StaticText ""
+    StaticText "$D006_EVO"
+    StaticText"===============================================================",1
+    StaticText "$PKMN_DEXMOVES1"
+    Submenu "                   Growl", "MoveMenu_Growl"
+    Submenu "                   Ember", "MoveMenu_Ember"
+    Submenu "                   SmokeScreen", "MoveMenu_SmokeScreen"
+    Submenu "                   Metal Claw", "MoveMenu_MetalClaw"
+    StaticText "$PKMN_DEXMOVES2"
+    Submenu "                   Fire Spin lvl.2", "MoveMenu_FireSpin"
+    Submenu "                   Dragon Rage lvl.3", "MoveMenu_DragonRage"
+    Submenu "                   Flame Burst lvl.4", "MoveMenu_FlameBurst"
+    Submenu "                   Flamethrower lvl.5", "MoveMenu_Flamethrower"
+    Submenu "                   Dragon Claw lvl.6", "MoveMenu_DragonClaw"
+    Submenu "                   Dragon Pulse lvl.7", "MoveMenu_DragonPulse"
+    Submenu "                   Flare Blitz lvl.8", "MoveMenu_FlareBlitz"
+    Submenu "                   Dragon Dance lvl.9", "MoveMenu_DragonDance"
+    Submenu "                   Fire Blast lvl.10", "MoveMenu_FireBlast"
+    StaticText"===============================================================",1
+}
+
+OptionMenu "Dex_D007"
+{
+	
+	Title "$D007_NAME"
+    StaticText "===============================================================",1
+    StaticText "$D007_TYPE"
+    StaticText "$D007_STATS1"
+    StaticText "$D007_STATS2"
+    StaticText "$D007_STATS3"
+    StaticText "$EXPSPD3"
+    StaticText ""
+    StaticText "$D007_EVO"
+    StaticText"===============================================================",1
+    StaticText "$PKMN_DEXMOVES1"
+    Submenu "                   Water Gun", "MoveMenu_WaterGun"
+    Submenu "                   Yawn", "MoveMenu_Yawn"
+    Submenu "                   Rapid Spin", "MoveMenu_RapidSpin"
+    Submenu "                   Protect", "MoveMenu_Protect"
+    StaticText "$PKMN_DEXMOVES2"
+    Submenu "                   Aqua Ring lvl.2", "MoveMenu_AquaRing"
+    Submenu "                   Iron Defense lvl.3", "MoveMenu_IronDefense"
+    Submenu "                   BubbleBeam lvl.4", "MoveMenu_BubbleBeam"
+    Submenu "                   Haze lvl.5", "MoveMenu_Haze"
+    Submenu "                   Life Dew lvl.6", "MoveMenu_LifeDew"
+    Submenu "                   Hydro Pump lvl.7", "MoveMenu_HydroPump"
+    Submenu "                   Amnesia lvl.8", "MoveMenu_Amnesia"
+    Submenu "                   Flash Cannon lvl.9", "MoveMenu_FlashCannon"
+    Submenu "                   Shell Smash lvl.10", "MoveMenu_ShellSmash"
+    StaticText"===============================================================",1
+}
+
+OptionMenu "Dex_D008"
+{
+	
+	Title "$D008_NAME"
+    StaticText "===============================================================",1
+    StaticText "$D008_TYPE"
+    StaticText "$D008_STATS1"
+    StaticText "$D008_STATS2"
+    StaticText "$D008_STATS3"
+    StaticText "$EXPSPD3"
+    StaticText ""
+    StaticText "$D008_EVO"
+    StaticText"===============================================================",1
+    StaticText "$PKMN_DEXMOVES1"
+    Submenu "                   Water Gun", "MoveMenu_WaterGun"
+    Submenu "                   Yawn", "MoveMenu_Yawn"
+    Submenu "                   Rapid Spin", "MoveMenu_RapidSpin"
+    Submenu "                   Protect", "MoveMenu_Protect"
+    StaticText "$PKMN_DEXMOVES2"
+    Submenu "                   Aqua Ring lvl.2", "MoveMenu_AquaRing"
+    Submenu "                   Iron Defense lvl.3", "MoveMenu_IronDefense"
+    Submenu "                   BubbleBeam lvl.4", "MoveMenu_BubbleBeam"
+    Submenu "                   Haze lvl.5", "MoveMenu_Haze"
+    Submenu "                   Life Dew lvl.6", "MoveMenu_LifeDew"
+    Submenu "                   Hydro Pump lvl.7", "MoveMenu_HydroPump"
+    Submenu "                   Amnesia lvl.8", "MoveMenu_Amnesia"
+    Submenu "                   Flash Cannon lvl.9", "MoveMenu_FlashCannon"
+    Submenu "                   Shell Smash lvl.10", "MoveMenu_ShellSmash"
+    StaticText"===============================================================",1
+}
+
+OptionMenu "Dex_D009"
+{
+	
+	Title "$D009_NAME"
+    StaticText "===============================================================",1
+    StaticText "$D009_TYPE"
+    StaticText "$D009_STATS1"
+    StaticText "$D009_STATS2"
+    StaticText "$D009_STATS3"
+    StaticText "$EXPSPD3"
+    StaticText ""
+    StaticText "$D009_EVO"
+    StaticText"===============================================================",1
+    StaticText "$PKMN_DEXMOVES1"
+    Submenu "                   Water Gun", "MoveMenu_WaterGun"
+    Submenu "                   Yawn", "MoveMenu_Yawn"
+    Submenu "                   Rapid Spin", "MoveMenu_RapidSpin"
+    Submenu "                   Protect", "MoveMenu_Protect"
+    StaticText "$PKMN_DEXMOVES2"
+    Submenu "                   Aqua Ring lvl.2", "MoveMenu_AquaRing"
+    Submenu "                   Iron Defense lvl.3", "MoveMenu_IronDefense"
+    Submenu "                   BubbleBeam lvl.4", "MoveMenu_BubbleBeam"
+    Submenu "                   Haze lvl.5", "MoveMenu_Haze"
+    Submenu "                   Life Dew lvl.6", "MoveMenu_LifeDew"
+    Submenu "                   Hydro Pump lvl.7", "MoveMenu_HydroPump"
+    Submenu "                   Amnesia lvl.8", "MoveMenu_Amnesia"
+    Submenu "                   Flash Cannon lvl.9", "MoveMenu_FlashCannon"
+    Submenu "                   Shell Smash lvl.10", "MoveMenu_ShellSmash"
+    StaticText"===============================================================",1
+}
+
+/*
+
+    Submenu "$D001_M1_2", "MoveMenu_LeechSeed"
+    Submenu "$D001_M1_3", "MoveMenu_Growth"
+    Submenu "$D001_M1_4", "MoveMenu_RazorLeaf"
+
+    Submenu "$D001_M2", "MoveMenu_SweetScent"
+    Submenu "$D001_M3", "MoveMenu_PoisonPowder"
+    Submenu "$D001_M4", "MoveMenu_SleepPowder"
+    Submenu "$D001_M5", "MoveMenu_SeedBomb"
+    Submenu "$D001_M6", "MoveMenu_Synthesis"
+    Submenu "$D001_M7", "MoveMenu_EnergyBall"
+    Submenu "$D001_M8", "MoveMenu_DoubleEdge"
+    Submenu "$D001_M9", "MoveMenu_Toxic"
+    Submenu "$D001_M10", "MoveMenu_SolarBeam"
+*/
+
+// =================================================================================================
+//
+// Move Entries MENU
+//
+// =================================================================================================
+
+OptionMenu "MoveMenu_Blank"
+{
+	
+	Title "Entry Blank"
+    StaticText "===============================================================",1
+    StaticText ""
+    StaticText"===============================================================",1
+}
+
+OptionMenu "MoveMenu_Swift"
+{
+	
+	Title "$M000_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M000_TYPE"
+    StaticText "$M000_CATEGORY"
+    StaticText "$M000_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M000_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+}
+
+OptionMenu "MoveMenu_Ember"
+{
+	
+	Title "$M001_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M001_TYPE"
+    StaticText "$M001_CATEGORY"
+    StaticText "$M001_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M001_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+}
+
+OptionMenu "MoveMenu_ThunderShock"
+{
+	
+	Title "$M002_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M002_TYPE"
+    StaticText "$M002_CATEGORY"
+    StaticText "$M002_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M002_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+}
+
+OptionMenu "MoveMenu_Watergun"
+{
+	
+	Title "$M003_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M003_TYPE"
+    StaticText "$M003_CATEGORY"
+    StaticText "$M003_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M003_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+}
+
+OptionMenu "MoveMenu_Bite"
+{
+	
+	Title "$M004_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M004_TYPE"
+    StaticText "$M004_CATEGORY"
+    StaticText "$M004_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M004_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+}
+
+OptionMenu "MoveMenu_QuickAttack"
+{
+	
+	Title "$M005_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M005_TYPE"
+    StaticText "$M005_CATEGORY"
+    StaticText "$M005_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M005_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+}
+
+OptionMenu "MoveMenu_HelpingHand"
+{
+	
+	Title "$M006_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M006_TYPE"
+    StaticText "$M006_CATEGORY"
+    StaticText "$M006_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M006_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+}
+
+OptionMenu "MoveMenu_VineWhip"
+{
+	
+	Title "$M007_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M007_TYPE"
+    StaticText "$M007_CATEGORY"
+    StaticText "$M007_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M007_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+}
+
+OptionMenu "MoveMenu_Growth"
+{
+	
+	Title "$M008_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M008_TYPE"
+    StaticText "$M008_CATEGORY"
+    StaticText "$M008_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M008_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+}
+
+OptionMenu "MoveMenu_Growl"
+{
+	
+	Title "$M009_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M009_TYPE"
+    StaticText "$M009_CATEGORY"
+    StaticText "$M009_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M009_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+}
+
+OptionMenu "MoveMenu_VineWhip"
+{
+	
+	Title "$M007_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M007_TYPE"
+    StaticText "$M007_CATEGORY"
+    StaticText "$M007_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M007_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+}
+
+OptionMenu "MoveMenu_LeechSeed"
+{
+	
+	Title "$M011_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M011_TYPE"
+    StaticText "$M011_CATEGORY"
+    StaticText "$M011_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M011_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+}
+
+OptionMenu "MoveMenu_RazorLeaf"
+{
+	
+	Title "$M012_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M012_TYPE"
+    StaticText "$M012_CATEGORY"
+    StaticText "$M012_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M012_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+}
+
+OptionMenu "MoveMenu_SweetScent"
+{
+	
+	Title "$M013_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M013_TYPE"
+    StaticText "$M013_CATEGORY"
+    StaticText "$M013_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M013_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+}
+
+OptionMenu "MoveMenu_PoisonPowder"
+{
+	
+	Title "$M014_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M014_TYPE"
+    StaticText "$M014_CATEGORY"
+    StaticText "$M014_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M014_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+}
+
+OptionMenu "MoveMenu_SleepPowder"
+{
+	
+	Title "$M015_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M015_TYPE"
+    StaticText "$M015_CATEGORY"
+    StaticText "$M015_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M015_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+}
+
+OptionMenu "MoveMenu_SeedBomb"
+{
+	
+	Title "$M016_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M016_TYPE"
+    StaticText "$M016_CATEGORY"
+    StaticText "$M016_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M016_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+}
+
+OptionMenu "MoveMenu_Synthesis"
+{
+	
+	Title "$M017_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M017_TYPE"
+    StaticText "$M017_CATEGORY"
+    StaticText "$M017_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M017_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+}
+
+OptionMenu "MoveMenu_EnergyBall"
+{
+	
+	Title "$M018_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M018_TYPE"
+    StaticText "$M018_CATEGORY"
+    StaticText "$M018_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M018_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+}
+
+OptionMenu "MoveMenu_DoubleEdge"
+{
+	
+	Title "$M019_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M019_TYPE"
+    StaticText "$M019_CATEGORY"
+    StaticText "$M019_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M019_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+}
+
+OptionMenu "MoveMenu_Toxic"
+{
+	
+	Title "$M020_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M020_TYPE"
+    StaticText "$M020_CATEGORY"
+    StaticText "$M020_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M020_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+}
+
+OptionMenu "MoveMenu_SolarBeam"
+{
+	
+	Title "$M021_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M021_TYPE"
+    StaticText "$M021_CATEGORY"
+    StaticText "$M021_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M021_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+}
+
+OptionMenu "MoveMenu_Growth"
+{
+	
+	Title "$M008_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M008_TYPE"
+    StaticText "$M008_CATEGORY"
+    StaticText "$M008_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M008_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+}
+
+OptionMenu "MoveMenu_Growl"
+{
+	
+	Title "$M009_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M009_TYPE"
+    StaticText "$M009_CATEGORY"
+    StaticText "$M009_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M009_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+}
+
+OptionMenu "MoveMenu_TailWhip"
+{
+	
+	Title "$M010_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M010_TYPE"
+    StaticText "$M010_CATEGORY"
+    StaticText "$M010_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M010_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+}
+
+OptionMenu "MoveMenu_LeechSeed"
+{
+	
+	Title "$M011_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M011_TYPE"
+    StaticText "$M011_CATEGORY"
+    StaticText "$M011_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M011_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+}
+
+OptionMenu "MoveMenu_RazorLeaf"
+{
+	
+	Title "$M012_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M012_TYPE"
+    StaticText "$M012_CATEGORY"
+    StaticText "$M012_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M012_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+}
+
+OptionMenu "MoveMenu_SweetScent"
+{
+	
+	Title "$M013_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M013_TYPE"
+    StaticText "$M013_CATEGORY"
+    StaticText "$M013_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M013_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+}
+
+OptionMenu "MoveMenu_PoisonPowder"
+{
+	
+	Title "$M014_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M014_TYPE"
+    StaticText "$M014_CATEGORY"
+    StaticText "$M014_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M014_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+}
+
+OptionMenu "MoveMenu_SleepPowder"
+{
+	
+	Title "$M015_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M015_TYPE"
+    StaticText "$M015_CATEGORY"
+    StaticText "$M015_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M015_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+}
+
+OptionMenu "MoveMenu_SeedBomb"
+{
+	
+	Title "$M016_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M016_TYPE"
+    StaticText "$M016_CATEGORY"
+    StaticText "$M016_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M016_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+}
+
+OptionMenu "MoveMenu_Synthesis"
+{
+	
+	Title "$M017_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M017_TYPE"
+    StaticText "$M017_CATEGORY"
+    StaticText "$M017_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M017_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+}
+
+OptionMenu "MoveMenu_EnergyBall"
+{
+	
+	Title "$M018_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M018_TYPE"
+    StaticText "$M018_CATEGORY"
+    StaticText "$M018_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M018_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+}
+
+OptionMenu "MoveMenu_DoubleEdge"
+{
+	
+	Title "$M019_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M019_TYPE"
+    StaticText "$M019_CATEGORY"
+    StaticText "$M019_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M019_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+}
+
+OptionMenu "MoveMenu_Toxic"
+{
+	
+	Title "$M020_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M020_TYPE"
+    StaticText "$M020_CATEGORY"
+    StaticText "$M020_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M020_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+}
+
+OptionMenu "MoveMenu_SolarBeam"
+{
+	
+	Title "$M021_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M021_TYPE"
+    StaticText "$M021_CATEGORY"
+    StaticText "$M021_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M021_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+}
+
+OptionMenu "MoveMenu_PetalBlizzard"
+{
+	
+	Title "$M022_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M022_TYPE"
+    StaticText "$M022_CATEGORY"
+    StaticText "$M022_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M022_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+}
+
+OptionMenu "MoveMenu_SmokeScreen"
+{
+	
+	Title "$M023_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M023_TYPE"
+    StaticText "$M023_CATEGORY"
+    StaticText "$M023_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M023_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+}
+
+OptionMenu "MoveMenu_ScaryFace"
+{
+	
+	Title "$M024_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M024_TYPE"
+    StaticText "$M024_CATEGORY"
+    StaticText "$M024_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M024_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+}
+
+OptionMenu "MoveMenu_Slash"
+{
+	
+	Title "$M025_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M025_TYPE"
+    StaticText "$M025_CATEGORY"
+    StaticText "$M025_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M025_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+}
+
+OptionMenu "MoveMenu_FireSpin"
+{
+	
+	Title "$M026_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M026_TYPE"
+    StaticText "$M026_CATEGORY"
+    StaticText "$M026_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M026_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+}
+
+OptionMenu "MoveMenu_FireFang"
+{
+	
+	Title "$M027_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M027_TYPE"
+    StaticText "$M027_CATEGORY"
+    StaticText "$M027_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M027_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+}
+
+OptionMenu "MoveMenu_Flamethrower"
+{
+	
+	Title "$M028_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M028_TYPE"
+    StaticText "$M028_CATEGORY"
+    StaticText "$M028_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M028_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+}
+
+OptionMenu "MoveMenu_DragonRush"
+{
+	
+	Title "$M029_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M029_TYPE"
+    StaticText "$M029_CATEGORY"
+    StaticText "$M029_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M029_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+}
+
+OptionMenu "MoveMenu_DragonPulse"
+{
+	
+	Title "$M030_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M030_TYPE"
+    StaticText "$M030_CATEGORY"
+    StaticText "$M030_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M030_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+}
+
+OptionMenu "MoveMenu_FlareBlitz"
+{
+	
+	Title "$M031_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M031_TYPE"
+    StaticText "$M031_CATEGORY"
+    StaticText "$M031_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M031_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+}
+
+OptionMenu "MoveMenu_DragonDance"
+{
+	
+	Title "$M032_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M032_TYPE"
+    StaticText "$M032_CATEGORY"
+    StaticText "$M032_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M032_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+}
+
+OptionMenu "MoveMenu_FireBlast"
+{
+	
+	Title "$M033_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M033_TYPE"
+    StaticText "$M033_CATEGORY"
+    StaticText "$M033_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M033_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+}
+
+OptionMenu "MoveMenu_FlameBurst"
+{
+	
+	Title "$M034_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M034_TYPE"
+    StaticText "$M034_CATEGORY"
+    StaticText "$M034_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M034_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+}
+
+OptionMenu "MoveMenu_DragonRage"
+{
+	
+	Title "$M035_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M035_TYPE"
+    StaticText "$M035_CATEGORY"
+    StaticText "$M035_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M035_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+}
+
+OptionMenu "MoveMenu_MetalClaw"
+{
+	
+	Title "$M036_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M036_TYPE"
+    StaticText "$M036_CATEGORY"
+    StaticText "$M036_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M036_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+}
+
+OptionMenu "MoveMenu_DragonClaw"
+{
+	
+	Title "$M037_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M037_TYPE"
+    StaticText "$M037_CATEGORY"
+    StaticText "$M037_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M037_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+}
+
+OptionMenu "MoveMenu_Withdraw"
+{
+	
+	Title "$M038_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M038_TYPE"
+    StaticText "$M038_CATEGORY"
+    StaticText "$M038_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M038_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+}
+
+OptionMenu "MoveMenu_Protect"
+{
+	
+	Title "$M039_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M039_TYPE"
+    StaticText "$M039_CATEGORY"
+    StaticText "$M039_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M039_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+}
+
+OptionMenu "MoveMenu_AquaRing"
+{
+	
+	Title "$M040_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M040_TYPE"
+    StaticText "$M040_CATEGORY"
+    StaticText "$M040_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M040_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+}
+
+OptionMenu "MoveMenu_WaterPulse"
+{
+	
+	Title "$M041_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M041_TYPE"
+    StaticText "$M041_CATEGORY"
+    StaticText "$M041_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M041_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+}
+
+OptionMenu "MoveMenu_Haze"
+{
+	
+	Title "$M042_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M042_TYPE"
+    StaticText "$M042_CATEGORY"
+    StaticText "$M042_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M042_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+}
+
+OptionMenu "MoveMenu_IronDefense"
+{
+	
+	Title "$M043_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M043_TYPE"
+    StaticText "$M043_CATEGORY"
+    StaticText "$M043_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M043_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+}
+
+OptionMenu "MoveMenu_LifeDew"
+{
+	
+	Title "$M044_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M044_TYPE"
+    StaticText "$M044_CATEGORY"
+    StaticText "$M044_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M044_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+}
+
+OptionMenu "MoveMenu_HydroPump"
+{
+	
+	Title "$M045_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M045_TYPE"
+    StaticText "$M045_CATEGORY"
+    StaticText "$M045_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M045_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+}
+
+OptionMenu "MoveMenu_SkullBash"
+{
+	
+	Title "$M046_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M046_TYPE"
+    StaticText "$M046_CATEGORY"
+    StaticText "$M046_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M046_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+}
+
+OptionMenu "MoveMenu_FlashCannon"
+{
+	
+	Title "$M047_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M047_TYPE"
+    StaticText "$M047_CATEGORY"
+    StaticText "$M047_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M047_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+}
+
+OptionMenu "MoveMenu_ShellSmash"
+{
+	
+	Title "$M048_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M048_TYPE"
+    StaticText "$M048_CATEGORY"
+    StaticText "$M048_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M048_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+}
+
+OptionMenu "MoveMenu_Yawn"
+{
+	
+	Title "$M049_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M049_TYPE"
+    StaticText "$M049_CATEGORY"
+    StaticText "$M049_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M049_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+}
+
+OptionMenu "MoveMenu_RapidSpin"
+{
+	
+	Title "$M050_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M050_TYPE"
+    StaticText "$M050_CATEGORY"
+    StaticText "$M050_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M050_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+}
+
+OptionMenu "MoveMenu_BubbleBeam"
+{
+	
+	Title "$M051_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M051_TYPE"
+    StaticText "$M051_CATEGORY"
+    StaticText "$M051_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M051_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+}
+
+OptionMenu "MoveMenu_Amnesia"
+{
+	
+	Title "$M052_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M052_TYPE"
+    StaticText "$M052_CATEGORY"
+    StaticText "$M052_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M052_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+}
+
+OptionMenu "MoveMenu_Sketch"
+{
+	
+	Title "$M053_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M053_TYPE"
+    StaticText "$M053_CATEGORY"
+    StaticText "$M053_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M053_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+}
+//#region -=- depreciated -=-
+OptionMenu "PKMN_Dex"
+{
+	
+	Title "$PKMN_DEXTITLE"
+    StaticText "===============================================================",1
+    Option     "$PKMN_DEXNAME", "DexString", "PKMN_Name"
+	StaticText ""
+	Option     "$PKMN_DEXTYPE", "DexString", "PKMN_Type"
+	Option     "$PKMN_DEXSTATS", "DexString", "PKMN_BaseStats"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+    StaticText "$PKMN_DEXMOVES"
+    Option     "$PKMN_DEXMOVES2", "DexString", "PKMN_MoveSet"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+    Option     "$PKMN_DEXNAME", "DexString", "PKMN_Name"
+    StaticText"===============================================================",1
+}
+
+
+OptionString PKMN_Name
+{
+"Megaman", "Smeargle"
+"Bulbasaur", "Bulbasaur"
+"Ivysaur", "Ivysaur"
+"Venusaur", "Venusaur"
+"Charmander", "Charmander"
+"Charmeleon", "Charmeleon"
+"Charizard", "Charizard"
+"Squirtle", "Squirtle"
+"Wartortle", "Wartortle"
+"Blastoice", "Blastoice"
+}
+
+OptionString PKMN_Type
+{
+"Megaman", "Normal"
+"Bulbasaur", "Grass::Poison"
+"Ivysaur", "Grass::Poison"
+"Venusaur", "Grass::Poison"
+"Charmander", "Fire"
+"Charmeleon", "Fire"
+"Charizard", "Fire::Flying"
+"Squirtle", "Water"
+"Wartortle", "Water"
+"Blastoice", "Water"
+}
+
+OptionString PKMN_BaseStats
+{
+"Megaman", "\cfHP:\cj 80 \n\cfATK:\cj 80 \n\cfDEF:\cj 80 \n\cfSP.ATK:\cj 80 \n\cfSP.DEF:\cj 80 \n\cfSPD:\cj 80"
+
+"Bulbasaur", "\cfHP:\cj 70 \n\cfATK:\cj 100 \n\cfDEF:\cj 50 \n\cfSP.ATK:\cj 160 \n\cfSP.DEF:\cj 50 \n\cfSPD:\cj 50"
+"Ivysaur", "\cfHP:\cj 80 \n\cfATK:\cj 50 \n\cfDEF:\cj 110 \n\cfSP.ATK:\cj 70 \n\cfSP.DEF:\cj 110 \n\cfSPD:\cj 60"
+"Venusaur", "\cfHP:\cj 100 \n\cfATK:\cj 125 \n\cfDEF:\cj 120 \n\cfSP.ATK:\cj 30 \n\cfSP.DEF:\cj 45 \n\cfSPD:\cj 60"
+
+"Charmander", "\cfHP:\cj 90 \n\cfATK:\cj 80 \n\cfDEF:\cj 70 \n\cfSP.ATK:\cj 80 \n\cfSP.DEF:\cj 70 \n\cfSPD:\cj 90"
+"Charmeleon", "\cfHP:\cj 70 \n\cfATK:\cj 20 \n\cfDEF:\cj 30 \n\cfSP.ATK:\cj 180 \n\cfSP.DEF:\cj 80 \n\cfSPD:\cj 100"
+"Charizard", "\cfHP:\cj 80 \n\cfATK:\cj 100 \n\cfDEF:\cj 80 \n\cfSP.ATK:\cj 20 \n\cfSP.DEF:\cj 80 \n\cfSPD:\cj 100"
+
+"Squirtle", "\cfHP:\cj 80 \n\cfATK:\cj 40 \n\cfDEF:\cj 50 \n\cfSP.ATK:\cj 100 \n\cfSP.DEF:\cj 130 \n\cfSPD:\cj 80"
+"Wartortle", "\cfHP:\cj 100 \n\cfATK:\cj 80 \n\cfDEF:\cj 90 \n\cfSP.ATK:\cj 50 \n\cfSP.DEF:\cj 90 \n\cfSPD:\cj 70"
+"Blastoice", "\cfHP:\cj 80 \n\cfATK:\cj 80 \n\cfDEF:\cj 50 \n\cfSP.ATK:\cj 100 \n\cfSP.DEF:\cj 100 \n\cfSPD:\cj 70"
+}
+
+OptionString PKMN_MoveSet
+{
+"Megaman", "Sketch\n----\n----\n---- \n----\n----\n----\n----\n----\n----\n----\n----\n----"
+"Bulbasaur", "Vine Whip\nLeech Seed\nGrowth\nRazorLeaf \nSweetScent\nPoisonPowder\nSleepPowder\nSeedBomb\nSynthesis\nEnergyBall\nDoubleEdge\nToxic\nSolarBeam"
+"Ivysaur", "Vine Whip\nLeech Seed\nGrowth\nRazorLeaf \nSweetScent\nPoisonPowder\nSleepPowder\nSeedBomb\nSynthesis\nEnergyBall\nDoubleEdge\nToxic\nSolarBeam"
+"Venusaur", "Vine Whip\nLeech Seed\nGrowth\nRazorLeaf \nSweetScent\nPoisonPowder\nSleepPowder\nSeedBomb\nSynthesis\nEnergyBall\nDoubleEdge\nToxic\nSolarBeam"
+"Charmander", "Vine Whip\n____\n____\n____ \n____\n____\n____\n____\n____\n____\n____\n____\n____"
+"Charmeleon", "Fire"
+"Charizard", "Fire::Flying"
+"Squirtle", "Water"
+"Wartortle", "Water"
+"Blastoice", "Water"
+}
+
+//#endregion
+

@@ -1,0 +1,203 @@
+actor ClassDeathPickup : CustomInventory
+{
+States
+{
+Pickup:
+TNT1 A 0 SetPlayerProperty(0, 0, 4)
+TNT1 A 0 A_TakeInventory("WeaponCharge",999)
+TNT1 A 0 A_TakeInventory("ConcreteTime", 999)
+TNT1 A 0 A_NoBlocking
+TNT1 A 0 A_GiveInventory("CutterFlag",999)
+TNT1 A 0 A_GiveInventory("IsDead",1)
+TNT1 A 0 A_Stop
+TNT1 A 0 A_GiveToTarget("KilledMeStock",1)
+TNT1 A 0 A_GiveToTarget("KilledMe",1)
+stop
+}
+}
+
+actor PainPower : Powerup
+{
+powerup.duration 3
+}
+
+actor GravityHoldPainPower : PainPower {}
+actor WilyIcePainPower : PainPower {}
+
+actor TypeDeathFlag : Inventory
+{
+inventory.amount 1
+inventory.maxamount 1
+}
+
+actor ExplodeDeathFlag : TypeDeathFlag {}
+actor FallingDeathFlag : TypeDeathFlag {}
+actor RisingDeathFlag : TypeDeathFlag {}
+actor IceDeathFlag : TypeDeathFlag {}
+
+actor RiseMyMegamanFlag : Inventory
+{
+inventory.amount 1
+inventory.maxamount 35
+}
+
+actor GlassHealthBar : Inventory //1.5x or more
+{
+inventory.amount 1
+inventory.maxamount 1
+}
+actor ProtoHealthBar : GlassHealthBar //1.3 - 1.499
+{
+}
+actor LightHealthBar : GlassHealthBar //1.2 - 1.299
+{
+}
+actor MegaHealthBar : GlassHealthBar //1.1 - 1.199
+{
+}
+actor DuoHealthBar : GlassHealthBar //0.9 - 0.999
+{
+}
+actor SturdyHealthBar : GlassHealthBar //0.8 - 0.899
+{
+}
+actor DocToadHealthBar : GlassHealthBar //0.7 - 0.799
+{
+}
+actor ToadHealthBar : GlassHealthBar //.6 - .699
+{
+}
+actor HeavyHealthBar : GlassHealthBar //.55 - .6 most useful bar ever >_>
+{
+}
+actor HardHealthBar : GlassHealthBar //.5 nuff said
+{
+}
+
+
+actor NGS_DeathEffectActor
+{
+-SOLID
++NOGRAVITY
++NOINTERACTION
+Scale 4
+RENDERSTYLE "add"
+States
+{
+Spawn:
+ASEX A 0
+SPKH D 1
+ASEX A 0 A_SpawnItemEx("NGS_DeathFX1",0,0,0,0,0,0,0,SXF_TRANSFERTRANSLATION)
+TNT1 A 4
+ASEX A 0 A_PlaysoundEX("misc/DeathSound","soundslot6")
+CENF AAAAA 0 A_SpawnItemEx("NGS_DeathFX3", 0, 0, 0, 8, 8, random2(8), random(0, 359),SXF_TRANSFERTRANSLATION)
+CENF AAAAA 0 A_SpawnItemEx("NGS_DeathFX2", 0, 0, 0, 10, 10, random2(10), random(0, 359),SXF_TRANSFERTRANSLATION)
+SPKH D 0 A_Fadeout(0.5)
+SPKH D 1 A_setscale(ScaleX + 2.0) 
+TNT1 A 17
+stop
+Death:
+ASEX A 0
+stop
+}
+}
+
+actor NGS_DeathFX1  //These are decorative.
+{
+PROJECTILE
++THRUACTORS
++NOGRAVITY
++NOINTERACTION
+height 2
+Radius 2
+damage (0)
+reactiontime 1
+scale 1.0
+RENDERSTYLE "add"
+
+//RenderStyle "Translucent"
+//Alpha 0.5
+States
+{
+Spawn:
+TCEX A 0
+TCEX BBCCDD 1 A_setscale(ScaleX + 0.2) 
+TCEX E 1 A_setscale(ScaleX + 0.2) 
+TCEX E 0 A_Fadeout
+TCEX E 1 A_setscale(ScaleX + 0.2) 
+TCEX E 0 A_Fadeout
+TCEX E 1 A_setscale(ScaleX + 0.2) 
+TCEX E 0 A_Fadeout
+TCEX E 1 A_setscale(ScaleX + 0.2) 
+TCEX E 0 A_Fadeout
+TCEX F 1 A_setscale(ScaleX + 0.2) 
+TCEX E 0 A_Fadeout
+stop
+Death:
+ASEX A 0
+stop
+}
+}
+
+actor NGS_DeathFX2 : NGS_DeathFX1
+{
+RENDERSTYLE "add"
+scale 1.5
+Speed 20
+reactiontime 10
+States
+{
+Spawn:
+NDFX A 0 
+NDFX A 0 A_SetScale(Frandom(1.0,2.0))
+NDFX BCDE 1 A_ScaleVelocity(0.8) 
+Spawn2:
+NDFX BCDE 1
+NDFX A 0 A_CountDown
+NDFX A 0 A_Jumpif(reactiontime >= 5, "Spawn2")
+TCEX E 0 A_Fadeout(0.1)
+loop
+}
+}
+
+actor NGS_DeathFX3 : BasicFastProjectile  //These are decorative.
+{
+PROJECTILE
+RENDERSTYLE "add"
++THRUACTORS
++NOGRAVITY
+height 2
+Radius 2
+damage (0)
+reactiontime 1
+scale 1
+missiletype "NGS_DeathFX3Trail"
+Missileheight 8
+States
+{
+Spawn:
+MMFX A 0 
+CFL5 AB 1
+CFL5 AABB 1  A_SetScale(0.3)
+CFL5 CD 2
+stop
+Death:
+ASEX A 0
+stop
+}
+}
+
+actor NGS_DeathFX3Trail : BasicClientside
+{
+scale 1
+Renderstyle "add"
+height 0
+radius 0
+States
+{
+Spawn:
+TNT1 A 0
+CFL5 CD 1
+stop
+}
+}

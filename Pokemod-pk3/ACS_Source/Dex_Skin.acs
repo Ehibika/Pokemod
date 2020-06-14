@@ -1,0 +1,25 @@
+/* -=- Skin Dex -=-
+ * Contains Skin definitions for all of the pokemon
+ * moves while the following 9 are for moves for lvl 2-10.
+ * 
+ * 
+
+*/
+#library "Dex_Skin"
+#import "Dex_Pokemon.acs"
+#include "zcommon.acs"
+str SkinDEX [MAXDEX][2] = {
+    /*|0|*/{"Eevee","Base"},
+    
+    /*|1|*/{"Bulbasaur","Base"},
+    /*|2|*/{"Ivysaur","Ivysaur"},
+    /*|3|*/{"Venusaur","Venusaur"},
+    
+    /*|4|*/{"Charmander","Base"},
+    /*|5|*/{"Charmeleon","Charmeleon"},
+    /*|6|*/{"Charizard","Charizard"},
+    
+    /*|7|*/{"Squirtle","Base"},
+    /*|8|*/{"Wartortle","Wartortle"},
+    /*|9|*/{"Blastoise","Blastoise"},
+    };

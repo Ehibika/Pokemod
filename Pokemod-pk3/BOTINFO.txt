@@ -1,0 +1,187 @@
+{
+	name = "Bulbasaur"
+	accuracy = 3
+	intellect = 4
+	evade = 1
+	anticipation = 1
+	reactiontime = 1
+	perception = 1
+	color = "00 00 00"
+	gender = "male"
+	skin = "base"
+	class = "Bulbasaur"
+	revealed = true
+	script = "humanbot"
+	chatlump = "botchats/COPYBOT"
+	chatfrequency = 50
+	favoriteweapon = "RazorLeafMove1"
+}
+
+{
+	name = "Charmander"
+	accuracy = 3
+	intellect = 4
+	evade = 1
+	anticipation = 1
+	reactiontime = 1
+	perception = 1
+	color = "00 00 00"
+	gender = "male"
+	skin = "base"
+	class = "Charmander"
+	revealed = true
+	script = "humanbot"
+	chatlump = "botchats/COPYBOT"
+	chatfrequency = 50
+	favoriteweapon = "EmberMove1"
+}
+
+{
+	name = "Squirtle"
+	accuracy = 3
+	intellect = 4
+	evade = 1
+	anticipation = 1
+	reactiontime = 1
+	perception = 1
+	color = "00 00 00"
+	gender = "male"
+	skin = "base"
+	class = "Squirtle"
+	revealed = true
+	script = "humanbot"
+	chatlump = "botchats/COPYBOT"
+	chatfrequency = 50
+	favoriteweapon = "WaterGunMove1"
+}
+
+/*
+{
+	name = "Jolteon"
+	accuracy = 3
+	intellect = 4
+	evade = 1
+	anticipation = 1
+	reactiontime = 1
+	perception = 1
+	color = "00 00 00"
+	gender = "male"
+	skin = "base"
+	class = "Jolteon"
+	revealed = true
+	script = "humanbot"
+	chatlump = "botchats/COPYBOT"
+	chatfrequency = 50
+}
+
+
+{
+	name = "Flareon"
+	accuracy = 3
+	intellect = 4
+	evade = 1
+	anticipation = 1
+	reactiontime = 1
+	perception = 1
+	color = "00 00 00"
+	gender = "male"
+	skin = "base"
+	class = "Flareon"
+	revealed = true
+	script = "humanbot"
+	chatlump = "botchats/COPYBOT"
+	chatfrequency = 50
+}
+
+
+
+{
+	name = "Vaporeon"
+	accuracy = 3
+	intellect = 4
+	evade = 1
+	anticipation = 1
+	reactiontime = 1
+	perception = 1
+	color = "00 00 00"
+	gender = "male"
+	skin = "base"
+	class = "Vaporeon"
+	revealed = true
+	script = "humanbot"
+	chatlump = "botchats/COPYBOT"
+	chatfrequency = 50
+}
+
+{
+	name = "Espeon"
+	accuracy = 3
+	intellect = 4
+	evade = 1
+	anticipation = 1
+	reactiontime = 1
+	perception = 1
+	color = "00 00 00"
+	gender = "male"
+	skin = "base"
+	class = "Espeon"
+	revealed = true
+	script = "humanbot"
+	chatlump = "botchats/COPYBOT"
+	chatfrequency = 50
+}
+
+{
+	name = "Umbreon"
+	accuracy = 3
+	intellect = 4
+	evade = 1
+	anticipation = 1
+	reactiontime = 1
+	perception = 1
+	color = "00 00 00"
+	gender = "male"
+	skin = "base"
+	class = "Umbreon"
+	revealed = true
+	script = "humanbot"
+	chatlump = "botchats/COPYBOT"
+	chatfrequency = 50
+}
+
+{
+	name = "Leafeon"
+	accuracy = 3
+	intellect = 4
+	evade = 1
+	anticipation = 1
+	reactiontime = 1
+	perception = 1
+	color = "00 00 00"
+	gender = "male"
+	skin = "base"
+	class = "Leafeon"
+	revealed = true
+	script = "humanbot"
+	chatlump = "botchats/COPYBOT"
+	chatfrequency = 50
+}
+
+{
+	name = "Glaceon"
+	accuracy = 3
+	intellect = 4
+	evade = 1
+	anticipation = 1
+	reactiontime = 1
+	perception = 1
+	color = "00 00 00"
+	gender = "male"
+	skin = "base"
+	class = "Glaceon"
+	revealed = true
+	script = "humanbot"
+	chatlump = "botchats/COPYBOT"
+	chatfrequency = 50
+}
+*/

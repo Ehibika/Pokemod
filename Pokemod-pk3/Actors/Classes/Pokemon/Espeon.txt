@@ -1,0 +1,44 @@
+/*
+[+]===================================[+]
+
+[+]===================================[+]
+*/
+
+Actor Espeon : ClassBase 
+{
+Player.DisplayName "Espeon"
+Player.SoundClass "Megaman"
+
+Player.StartItem "BasicBuster"
+
+//============|
+Player.StartItem "Base_HP", 65
+Player.StartItem "Base_PAttack", 65
+Player.StartItem "Base_PDefense", 60
+Player.StartItem "Base_SAttack", 130
+Player.StartItem "Base_SDefense", 95
+Player.StartItem "Base_Speed", 110
+//============|
+
+States
+{
+Spawn: 
+GESP A 0
+GESP B 1 
+GESP A 1
+GoTo Spawn+2
+See:
+GESP BCDE 5
+GoTo Spawn+1
+Missile:
+GESP A 0 
+GESP F 5 
+GESP G 4
+GoTo Spawn+2
+
+PainFix:
+GESP H 0 
+GoTo PainFrames
+}
+}
+

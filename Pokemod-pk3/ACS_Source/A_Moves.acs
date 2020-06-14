@@ -1,0 +1,71 @@
+/* -=- Move Scripts -=-
+ * Specialized scripts made for specific moves within the game.
+ *
+
+*/
+
+#library "A_Moves"
+#include "zcommon.acs"
+#import "tools.acs"
+#import "DB_Player.acs"
+#import "DB_Data.acs"
+#import "Dex_Pokemon.acs"
+#import "Dex_Types.acs"
+#import "WEPACS.acs"
+#import "A_Stats.acs"
+#import "Dex_Leveling.acs"
+#import "Dex_BaseStats.acs"
+
+Script "SketchGrab" (Void)
+{
+
+// -=- meant to work with the targeter, grabs the move that your tracer currently has and replaces sketch with it -=-
+
+
+// -=- first, grab what slot this sketch is on -=-
+int ThisWeapon = WhichWeapon();
+int MyTID = ActivatorTID();
+Int TracerTID = ACS_NamedExecuteWithResult("Tracer_GetTID",0);
+Int SketchSlot;
+
+for(int i=1;i<=4;i++)
+    {
+    if(CheckInventory(StrParam(s:weapons_ammo[ThisWeapon][0],i:i))){SketchSlot = i; break;}
+    }
+
+SetActivator(TracerTID,AAPTR_DEFAULT);
+int SketchWeapon = WhichWeapon();
+SetActivator(MyTID,AAPTR_DEFAULT);
+
+// -=- check if you have this weapon already -=-
+
+for(i=1;i<=4;i++)
+    {
+    if(CheckInventory(StrParam(s:weapons_ammo[SketchWeapon][0],i:i)))
+        {
+        print(s:"You already know ",s:weapons_ammo[SketchWeapon][2],s:"!!"); 
+        Terminate;
+        }
+    }
+
+GiveInventory(StrParam(s:weapons_ammo[SketchWeapon][0],i:SketchSlot),1);
+SetWeapon(StrParam(s:SketchWeapon,i:SketchSlot));
+TakeInventory(StrParam(s:weapons_ammo[ThisWeapon][0],i:SketchSlot),99);
+}
+
+Script "ProtectBarrierWarper" (void) CLIENTSIDE
+{
+	int Player = ACS_NamedExecuteWithResult("core_gettarget",0);
+	
+	// Loop if shield is active
+	while(GetActorProperty(Player, APROP_HEALTH)>0
+	&& CheckActorInventory(Player, "ProtectGuard") > 0
+	){
+		Delay(1);
+	}
+	
+    // Remove
+    SetActorState(0,"Death");
+    Delay(17);
+	Thing_Remove(0);
+}

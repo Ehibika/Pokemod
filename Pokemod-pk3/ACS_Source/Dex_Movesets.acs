@@ -1,0 +1,27 @@
+/* -=- Moveset Dex -=-
+ * Contains the level up movesets for each pokemon within the mod first 4 are "lvl 1" 
+ * moves while the following 9 are for moves for lvl 2-10.
+ * 
+ * 
+
+*/
+#library "Dex_Movesets"
+#import "Dex_Pokemon.acs"
+#import "Dex_Moves.acs"
+#include "zcommon.acs"
+
+Int MoveDex [MAXDEX][14] = {
+	/*|0|*/{Sketch,NullMove,NullMove,NullMove,/**/ NullMove,NullMove,NullMove,NullMove,NullMove,NullMove,NullMove,NullMove,NullMove},
+	
+	/*|1|*/{RazorLeaf,VineWhip,LeechSeed,Growth,/**/ SweetScent,PoisonPowder,SleepPowder,SeedBomb,Synthesis,EnergyBall,DoubleEdge,Toxic,SolarBeam},
+	/*|2|*/{RazorLeaf,VineWhip,LeechSeed,Growth,/**/ SweetScent,PoisonPowder,SleepPowder,SeedBomb,Synthesis,EnergyBall,DoubleEdge,Toxic,SolarBeam},
+	/*|3|*/{RazorLeaf,VineWhip,LeechSeed,Growth,/**/ SweetScent,PoisonPowder,SleepPowder,SeedBomb,Synthesis,EnergyBall,DoubleEdge,Toxic,SolarBeam},
+	
+	/*|4|*/{Ember,Growl,SmokeScreen,MetalClaw,/**/ FireSpin,FlameBurst,Flamethrower,DragonRage,DragonClaw,DragonPulse,FlareBlitz,DragonDance,FireBlast},
+	/*|5|*/{Ember,Growl,SmokeScreen,MetalClaw,/**/ FireSpin,FlameBurst,Flamethrower,DragonRage,DragonClaw,DragonPulse,FlareBlitz,DragonDance,FireBlast},
+	/*|6|*/{Ember,Growl,SmokeScreen,MetalClaw,/**/ FireSpin,FlameBurst,Flamethrower,DragonRage,DragonClaw,DragonPulse,FlareBlitz,DragonDance,FireBlast},
+	
+	/*|7|*/{Watergun,Yawn,RapidSpin,Protect,/**/ LifeDew,BubbleBeam,IronDefense,Amnesia,AquaRing,HydroPump,FlashCannon,Haze,ShellSmash},
+	/*|8|*/{Watergun,Yawn,RapidSpin,Protect,/**/ LifeDew,BubbleBeam,IronDefense,Amnesia,AquaRing,HydroPump,FlashCannon,Haze,ShellSmash},
+	/*|9|*/{Watergun,Yawn,RapidSpin,Protect,/**/ LifeDew,BubbleBeam,IronDefense,Amnesia,AquaRing,HydroPump,FlashCannon,Haze,ShellSmash},
+	};

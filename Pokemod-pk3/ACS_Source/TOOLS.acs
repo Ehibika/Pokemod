@@ -1,0 +1,358 @@
+// Global scripts that are useful for everyone.
+
+#library "tools"
+#include "zcommon.acs"// [Lego] Always include this before 8bdmlib
+#include "8bdmlib.acs"// included with MM8BDM under acs_source.
+					  // See 8bdmlib.acs for details
+				 
+					 
+script "core_toolsopen" OPEN
+{
+Delay(1);
+ServerMAX = GetMaxPlayers();
+IsTeamGame = ACS_ExecuteWithResult(975, 1);
+}
+
+// [Mike] Return the current game mode. Used for checking if certain items should be available in these modes.
+// 0 = Deathmatch
+// 1 = Poessesion
+// 2 = LMS
+// 3 = Duel
+// 4 = CTF/team game
+script 975 (int checkmode)
+{
+Switch(CheckMode)
+	{
+	Case 0:
+	if(GetCvar("deathmatch")==1){SetResultValue(0);}
+	if(GetCvar("possession")==1){SetResultValue(1);}
+	if(GetCvar("teampossession")==1){SetResultValue(1);}
+	if(GetCvar("lastmanstanding")==1){SetResultValue(2);}
+	if(GetCvar("teamlms")==1){SetResultValue(2);}
+	if(GetCvar("duel")==1){SetResultValue(3);}
+	if(GetCvar("ctf")==1){SetResultValue(4);}
+	if(GetCvar("oneflagctf")==1){SetResultValue(4);}
+	if(GetCvar("teamgame")==1){SetResultValue(4);}
+	if(GetCvar("terminator")==1){SetResultValue(5);}
+	break;
+	
+	Case 1:
+	if(GetCvar("cooperative")==1){SetResultValue(1);}
+	if(GetCvar("survival")==1){SetResultValue(1);}
+	if(GetCvar("deathmatch")==1){SetResultValue(0);}
+	if(GetCvar("possession")==1){SetResultValue(0);}
+	if(GetCvar("teampossession")==1){SetResultValue(1);}
+	if(GetCvar("lastmanstanding")==1){SetResultValue(0);}
+	if(GetCvar("teamlms")==1){SetResultValue(1);}
+	if(GetCvar("duel")==1){SetResultValue(0);}
+	if(GetCvar("ctf")==1){SetResultValue(1);}
+	if(GetCvar("oneflagctf")==1){SetResultValue(1);}
+	if(GetCvar("teamgame")==1){SetResultValue(1);}
+	if(GetCvar("teamplay")==1){SetResultValue(1);}
+	if(GetCvar("terminator")==1){SetResultValue(0);}
+	break;
+	
+	Case 2:
+	int ReturnThis = 0;
+	if(GetCvar("instagib")==1){ReturnThis=1;}
+	if(GetCvar("buckshot")==1){ReturnThis=2;}
+	SetResultValue(ReturnThis);
+	break;
+	}
+
+}
+
+// [Mess] Returns the target of the activator
+Script 257 (int UseNumber)
+{
+SetActivatorToTarget(0);
+If(UseNumber == 1){SetResultValue(PlayerNumber());terminate;}
+SetResultValue(ActivatorTID());
+}
+
+// [Mess] Returns if player is a bot - Might deprecate due to new IsBot item.
+Script 254 (void)
+{
+If(PlayerIsBot(PlayerNumber()))
+	{SetResultValue(1);}
+Else
+	{SetResultValue(0);}
+}
+
+// Push / Pull Script. Force falls off with distance unless Linear is set to > 0. 
+// maxforce can be 0 to simply count players in a radius
+
+script 247 (int maxforce, int maxRange, int noFalloff)
+{
+	if(maxRange == 0){terminate;}
+
+	int targetTID;
+	int angle;
+	int finalforce;
+	int distance;
+	int userTID;
+	int userTeam = -1;
+	int userCount = 0;
+
+	if(ActivatorTID() == 0)
+	{
+		userTID = ACS_ExecuteWithResult(257, 0);
+		userTeam = GetPlayerInfo(userTID - 1000, PLAYERINFO_TEAM);
+	}
+	else
+	{
+		userTID = ActivatorTID();
+	}
+
+	for(int p = 0;p < ServerMax; p++)
+	{
+		if(!PlayerInGame(p))
+		{
+			continue;
+		}
+		if(isTeamGame)
+		{
+			if(userTeam == GetPlayerInfo(p, PLAYERINFO_TEAM))
+			{
+				continue;
+			}
+		}
+		
+		targetTID = p+1000;
+		if(xyzDistance(0, targetTID) < maxRange && userTID != targetTID)
+		{	
+			userCount++;
+			distance = xyzDistance(0,targetTID);
+			finalforce = ceil(FixedMul(maxforce << 16, 1.0 - FixedDiv(distance, maxRange)));
+			if(finalforce > maxforce || noFalloff > 0 )
+			{
+				finalforce = maxforce;
+			}
+			
+			angle = VectorAngle(GetActorX(0) - GetActorX(targetTID), GetActorY(0) - GetActorY(targetTID)) >> 8;
+			if(distance>40 || finalforce < 0)
+			{
+				ThrustThing(angle, finalforce, false, targetTID);
+			}
+		}
+		
+	}
+	SetResultValue(userCount); // Returns amount of players caught in the pull
+}// End script 247
+
+// Actor Property changer. Used for DECORATE (scorch wheel etc)
+//
+script 191 (int prop, int mult, int div)
+{
+SetActorProperty(0,prop,((1.0)*mult)/div);
+}
+
+// Actor Property Getter. Used for DECORATE
+script "core_getactorproperty" (int TID, int prop)
+{
+SetResultValue(GetActorProperty(TID,prop));
+}
+
+// Debugging script. Have actors call this to get all kinds of info on them. Press crouch to stop debugging.
+script "core_debug" (int tid, int who, int debugger)
+{
+	int caller = 1000 + debugger;
+
+	switch(who)
+	{
+		Case 1:
+		SetActivator(tid, AAPTR_TARGET);
+		break;
+		
+		Case 2:
+		SetActivator(tid, AAPTR_MASTER);
+		break;
+		
+		Case 3:
+		SetActivator(tid, AAPTR_TRACER);
+		break;
+		
+		Case 4:
+		SetActivator(tid, AAPTR_PLAYER_GETTARGET);
+		break;
+		
+		Case 5:
+		SetActivator(tid, AAPTR_FRIENDPLAYER);
+		break;
+	}
+	
+	while(true){
+	SetHudSize(800, 600, 0);
+	HudMessageBold(n:0, 
+	s:"\npos: x: ", f:GetActorX(0), s:" y: ", f:GetActorY(0), s:" z: ", f:GetActorZ(0),
+	s:"\nangle: ", f:GetActorAngle(0),
+	s:"\ntarget: ", i:ACS_NamedExecuteWithResult("core_gettarget"), 
+	s:"\ntracer: ", i:ACS_NamedExecuteWithResult("core_gettracer"),
+	s:"\nmaster: ", i:ACS_NamedExecuteWithResult("core_getmaster"),
+	s:"\nhealth: ", i:GetActorProperty(0, APROP_HEALTH),
+	s:"\nspeed: ", f:ACS_NamedExecuteWithResult("core_getspeed"); HUDMSG_PLAIN, -9999, CR_WHITE, 0.1, 450.1, 2.0);
+	
+	Delay(1);
+	
+	if(GetPlayerInput(caller- 1000 + debugger, INPUT_BUTTONS) & BT_CROUCH){break;}
+	}
+}
+
+// Get moving speed of an actor
+script "core_getspeed" (int l)
+{
+	int x, y, z, speed;
+	x = GetActorVelX(0);
+    y = GetActorVelY(0);
+    z = GetActorVelZ(0);
+    speed = FixedMul(x, x) + FixedMul(y, y) + FixedMul(z, z);
+	if(l){Log(s:"speed: ", f:speed);}
+	SetResultValue(speed);
+}
+
+// Return the actor's target
+Script "core_gettarget" (int l)
+{
+	SetActivator(0, AAPTR_TARGET);
+	if(l){Log(s:"target id: ", i:ActivatorTID(), s:" - ", n:0);}
+	SetResultValue(ActivatorTID());
+}
+
+// Return the actor's tracer
+Script "core_gettracer" (int l)
+{
+	SetActivator(0, AAPTR_TRACER);
+	if(l){Log(s:"tracer id: ", i:ActivatorTID(), s:" - ", n:0);}
+	SetResultValue(ActivatorTID());
+}
+
+// Return the actor's tracer
+Script "core_getmaster" (int l)
+{
+	SetActivator(0, AAPTR_MASTER);
+	if(l){Log(s:"master id: ", i:ActivatorTID(), s:" - ", n:0);}
+	SetResultValue(ActivatorTID());
+}
+
+// Check if boss music should be playing on player disconnecting (or spectating)
+script "core_disconnectmusic" (int player) DISCONNECT
+{
+	ACS_NamedExecuteAlways("core_musichandler", 0);
+}
+
+//Check if Target is out of commision
+script "core_targetexists" (int tracer, int IgnoreCopy)//This is for projectiles to check if their owner spectated, disconnected, or is dead.
+{
+	bool result = 1;
+	
+    if(tracer==0){SetActivatorToTarget(0);}
+	if(tracer==1){SetActivator(0, AAPTR_TRACER);}
+	
+	//log(s:"Player #? ",i:PlayerInGame(PlayerNumber()));
+	//log(s:"Is Dead? ",i:CheckInventory("IsDead"));
+	//log(s:"In Game? ",i:PlayerInGame(PlayerNumber()));
+	if(ClassifyActor(0) & ACTOR_PLAYER){
+		if(PlayerNumber() == -1 || CheckInventory("IsDead") || !PlayerInGame(PlayerNumber())){
+			result = 0; 
+		}
+		if(IgnoreCopy == 0 && CheckInventory("CopyRobotUnmorphed")){
+			result = 0; 
+		}
+	}
+	else
+	{
+		if(ClassifyActor(0) == 0){result = 0;}
+	}
+	SetResultValue(result);
+	
+}
+
+
+
+// Player freeze stacker
+// Set player to 0 for the activator or specify a player number
+script "core_freezeplayer" (int player, int toggle)
+{
+int tid = ActivatorTID();
+
+if(player>0){tid = player + 999;}
+
+	if(toggle >= 1){
+		GiveActorInventory(tid, "PlayerPropertyFrozen", 1);
+		SetActivator(tid);
+		SetPlayerProperty(0, 1, PROP_TOTALLYFROZEN);
+	}
+	if(toggle == 0){
+		if(CheckActorInventory(tid, "PlayerPropertyFrozen")>0){
+		TakeActorInventory(tid, "PlayerPropertyFrozen", 1);
+		
+			if(CheckActorInventory(tid, "PlayerPropertyFrozen")==0){
+			SetActivator(tid);
+			SetPlayerProperty(0, 0, PROP_TOTALLYFROZEN);
+			}
+		}
+	}
+}
+
+// Player Flight stacker
+// Set player to 0 for the activator or specify a player number
+script "core_flyplayer" (int player, int toggle)
+{
+int tid = ActivatorTID();
+
+if(player>0){tid = player + 999;}
+
+	//PrintBold(i:tid);
+	if(toggle >= 1){
+		GiveActorInventory(tid, "PlayerPropertyFlight", 1);
+		//SetActivator(tid);
+		GiveActorInventory(tid, "PlayerPropertyFlightOn",1);
+		if(toggle !=2){
+		Thing_Stop(tid);
+		}
+	}
+	if(toggle == 0){
+		if(CheckActorInventory(tid, "PlayerPropertyFlight")>0){
+		TakeActorInventory(tid, "PlayerPropertyFlight", 1);
+		
+			if(CheckActorInventory(tid, "PlayerPropertyFlight")==0){
+			//SetActivator(tid);
+			GiveActorInventory(tid, "PlayerPropertyFlightOff",1);//SetPlayerProperty(0, 0, PROP_FLIGHT);
+			}
+			
+		}
+	}
+
+}
+
+// Gets a player's team
+script "core_getplayerteam" (int player)
+{
+	if(player == -1){player = PlayerNumber();}
+	SetResultValue(GetPlayerInfo(player, PLAYERINFO_TEAM));
+}
+
+// Used for trailer recording. Press use to stop
+script "core_moveme" (int velx, int vely, int velz)
+{
+	while(!(GetPlayerInput(PlayerNumber(), INPUT_BUTTONS) & BT_USE)){
+	SetActorVelocity(0, velx<<16, vely<<16, velz<<16, 0, 0);
+	Delay(1);
+	}
+}
+
+// [Mess] Returns 1 if a player is within Distance
+Script 261 (int Distance)
+{
+int ReturnThis=0;
+For(int i = 0; i < ServerMax; i++)
+	{
+	If(PlayerInGame(i) && i != PlayerNumber())
+		{
+		If(xyzdistance(ActivatorTID(), i+1000) < Distance){ReturnThis=1;break;}
+		}
+	}
+SetResultValue(ReturnThis);
+}
+
+

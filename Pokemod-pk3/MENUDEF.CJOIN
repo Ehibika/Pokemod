@@ -1,0 +1,106 @@
+// =================================================================================================
+//
+// JOIN MENU
+//
+// =================================================================================================
+
+OptionMenu ZA_JoinMenu
+{
+	Title "JOIN GAME"
+
+	StaticText"You are spectating."
+	StaticText""
+	StaticText""
+	StaticText""
+	StaticText"$MNU_JOIN11"
+	StaticText""
+	StaticText""
+	StaticText""
+	StaticText""
+	Option "$MNU_JOIN3", "playerclass", "PKMN_JoinName"
+	Command "Join game", "menu_joingamewithclass"
+	StaticText "===============================================================",1
+	Option "$MNU_JOIN4", "playerclass", "PKMN_JoinMoves", "unselectable"
+	StaticText""
+	StaticText""		
+	StaticText""
+	StaticText""
+	Option "$MNU_JOIN5", "playerclass", "PKMN_JoinInfo", "unselectable"
+	StaticText""
+	StaticText""
+	StaticText""
+	StaticText""
+	StaticText""
+	StaticText""
+	
+}
+
+OptionMenu ZA_JoinTeamMenu
+{
+	Title "JOIN TEAMGAME"
+
+	StaticText""
+	StaticText""
+	StaticText""
+	StaticText"$MNU_JOIN11"
+	StaticText"$MNU_JOIN2"
+	StaticText""
+	StaticText""
+	Command "$MNU_JOIN6", "menu_autoselect"
+	StaticText""
+	JoinMenuTeamOption
+	Option "$MNU_JOIN3", "playerclass", "PKMN_JoinName"
+	Command "Join game", "menu_joingamewithclass"
+	StaticText "===============================================================",1
+	Option "$MNU_JOIN4", "playerclass", "PKMN_JoinMoves", "unselectable"
+	StaticText""
+	StaticText""		
+	StaticText""
+	StaticText""
+	Option "$MNU_JOIN5", "playerclass", "PKMN_JoinInfo", "unselectable"
+	StaticText""
+	StaticText""
+	StaticText""
+	StaticText""
+	StaticText""
+}
+
+OptionMenu ZA_SelectClassMenu
+{
+	Title "PLAYER CLASS SELECTION"
+
+	StaticText""
+	StaticText""
+	StaticText""
+	StaticText""
+	StaticText""
+	StaticText""
+	JoinMenuPlayerClassOption
+	StaticText""
+	Command "Join game", "menu_joingamewithclass"
+}
+
+
+OptionString PKMN_JoinName
+{
+"Megaman", "Smeargle"
+"Bulbasaur", "Bulbasaur"
+"Charmander", "Charmander"
+"Squirtle", "Squirtle"
+}
+
+OptionString PKMN_JoinMoves
+{
+"Megaman", "\c[MenuYellow]Sketch\n-----\n-----\n-----"
+"Bulbasaur", "\c[MenuYellow]VineWhip\nLeechSeed\nGrowth\nRazorLeaf"
+"Charmander", "\c[MenuYellow]Growl\nEmber\nSmokeScreen\nMetalClaw"
+"Squirtle", "\c[MenuYellow]WaterGun\nYawn\nRapidSpin\nProtect"
+}
+
+OptionString PKMN_JoinInfo
+{
+"Megaman", "Use Sketch to learn\nany move from any pokemon!"
+"Bulbasaur", "\c[HelpMenuCol]Diverse utilities ranging\nfrom recovery to statuses"
+"Charmander", "\c[HelpMenuCol]Packs an array of\ndamaging moves, and can\ngrow to fly!"
+"Squirtle", "\c[HelpMenuCol]Stocked with defensive boosts\nand long ranged water moves."
+}

@@ -1,0 +1,53 @@
+/* -=- Grid Placement -=-
+ * Code that handles the placement of actors along a fixed, invisible 3D grid, 
+ *
+ * 
+
+*/
+#library "A_Grid"
+#include "zcommon.acs"
+
+#DEFINE GRID_SQUARE 32
+#DEFINE X_OFFSET 16.0
+#DEFINE Y_OFFSET 16.0
+#DEFINE Z_OFFSET 0.0
+
+script "GridSnapper" (void)
+{
+int Self_x = getactorx(0);
+int Self_y = getactory(0);
+int Self_z = getactorz(0)-getactorproperty(0,APROP_Height);
+
+int final_x = GridSnapFunc(Self_x,X_OFFSET);
+int final_Y = GridSnapFunc(Self_y,Y_OFFSET);
+int final_Z = GridSnapFunc(Self_z,Z_OFFSET);
+
+if ((final_Z - getactorfloorz(0)) < GRID_SQUARE)
+{final_Z -= final_Z - getactorfloorz(0);}
+
+//log(s:"X:  ", f:Self_x, s:" to ", f:final_X);
+//log(s:"Y:  ", f:Self_y, s:" to ", f:final_Y);
+//log(s:"Z:  ", f:Self_z, s:" to ", f:final_Z);
+SetActorposition(0,final_X,final_y,final_z,0);
+}
+
+function int GridSnapFunc(int num, int offset) {
+    //log(s:"original: ", f:num);
+    num -= offset;
+    //log(s:"unoffsetted: ", f:num);
+    num /= GRID_SQUARE;
+    //log(s:"divided: ", f:num);
+    num = roundf(num);
+    //log(s:"rounded: ", f:num);
+    num *= GRID_SQUARE;
+    //log(s:"multiplied: ", f:num);
+    num += offset;
+    //log(s:"offsetted: ", f:num);
+    return num;
+}
+
+// Returns fixed value
+function int roundf(int fixedNumber)
+{
+    return (((fixedNumber + 0.5)>>16)<<16);
+}

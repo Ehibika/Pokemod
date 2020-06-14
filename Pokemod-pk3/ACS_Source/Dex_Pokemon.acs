@@ -1,0 +1,30 @@
+/* -=- Pokemon Dex -=-
+ * Contains constants that define each and every pokemon within this mod, these are meant to be consistent with 
+ * the DEXID of the player, a player that is currently venusaur will have the DEXID of 3, as shown below
+ * 
+ * All arrays are to follow this order as well, each numbered element referring to that pokemon.
+
+*/
+#library "Dex_Pokemon"
+#include "zcommon.acs"
+
+//#region -=- General Variables & Constants
+#region -=- General Variables & Constants
+#LIBDEFINE NULLEVO -1
+#LIBDEFINE MAXDEX 10
+
+int Blah; //Needed to compile properly, can't have only LIBDEFINEs
+#endregion
+//#endregion
+
+#LIBDEFINE EEVEE 0
+#LIBDEFINE BULBASAUR 1
+#LIBDEFINE IVYSAUR 2
+#LIBDEFINE VENUSAUR 3
+#LIBDEFINE CHARMANDER 4
+#LIBDEFINE CHARMELEON 5
+#LIBDEFINE CHARIZARD 6
+#LIBDEFINE SQUIRTLE 7
+#LIBDEFINE WARTORTLE 8
+#LIBDEFINE BLASTOISE 9
+

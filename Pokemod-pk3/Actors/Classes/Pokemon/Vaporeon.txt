@@ -1,0 +1,44 @@
+/*
+[+]===================================[+]
+
+[+]===================================[+]
+*/
+
+Actor Vaporeon : ClassBase 
+{
+Player.DisplayName "Vaporeon"
+Player.SoundClass "Megaman"
+
+Player.StartItem "WaterGunMove"
+
+//============|
+Player.StartItem "Base_HP", 130
+Player.StartItem "Base_PAttack", 65
+Player.StartItem "Base_PDefense", 60
+Player.StartItem "Base_SAttack", 110
+Player.StartItem "Base_SDefense", 95
+Player.StartItem "Base_Speed", 65
+//============|
+
+States
+{
+Spawn: 
+GVAP A 0
+GVAP B 1 
+GVAP A 1
+GoTo Spawn+2
+See:
+GVAP BCDE 5
+GoTo Spawn+1
+Missile:
+GVAP A 0 
+GVAP F 5 
+GVAP G 4
+GoTo Spawn+2
+
+PainFix:
+GVAP H 0 
+GoTo PainFrames
+}
+}
+

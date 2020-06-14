@@ -1,0 +1,42 @@
+
+OptionMenu "ShopMenu"
+{
+    Title "Shop"
+    StaticText "===============================================================",1
+	Submenu "Item Shop", "Item_Menu"
+	Submenu "TM Shop", "TM_Menu"
+    StaticText "===============================================================",1
+}
+
+OptionMenu "Item_Menu"
+{
+    Title "Item Shop"
+    StaticText "===============================================================",1
+    StaticText "$SHOP_CANDY"
+	Command "$SHOP_SMALLEXPCANDY", "BuySmallEXPCandy"
+	Command "$SHOP_MEDIUMEXPCANDY", "BuyMediumEXPCandy"
+	Command "$SHOP_LARGEEXPCANDY", "BuyLargeEXPCandy"
+    StaticText ""
+    StaticText "$SHOP_BERRY"
+	Command "$SHOP_HPBERRY", "BuyHPBerry"
+	Command "$SHOP_BIGHPBERRY", "BuyBigHPBerry"
+	Command "$SHOP_PPBERRY", "BuyPPBerry"
+    Command "$SHOP_BIGPPBERRY", "BuyBigPPBerry"
+    StaticText ""
+    StaticText "$SHOP_SEED"
+    Command "$SHOP_CLENSESEED", "BuyClenseSeed"
+    Command "$SHOP_HASTESEED", "BuyHasteSeed"
+    Command "$SHOP_POWERSEED", "BuyPowerSeed"
+    Command "$SHOP_GUARDSEED", "BuyGuardSeed"
+    StaticText ""
+    StaticText "$SHOP_WAND"
+     StaticText "$SHOP_EMPTY"
+    StaticText ""
+    StaticText "$SHOP_ORB"
+     StaticText "$SHOP_EMPTY"
+    StaticText ""
+    StaticText "$SHOP_CHICLE"
+     StaticText "$SHOP_EMPTY"
+    StaticText "===============================================================",1
+
+}
