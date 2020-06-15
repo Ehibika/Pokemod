@@ -110,7 +110,7 @@ Goto Ready
 //[+]========================================================================[+]
 //-----------------------------|Ammo & Inventory|------------------------------
 //[+]========================================================================[+]
-actor SkyDropPP : Ammo {inventory.amount 1 inventory.Maxamount 30}
+actor SkyDropPP : Ammo {inventory.amount 1 inventory.Maxamount 10}
 actor SkyDropGrabTimer : Powerup {inventory.amount 1 powerup.duration 17}
 
 Const int SkyDropRad = 120;

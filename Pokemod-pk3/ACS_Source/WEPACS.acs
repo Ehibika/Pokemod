@@ -900,6 +900,14 @@ if((RecoveryType & RC_B) && CheckInventory("Recovery_B")){Output = 0;}
 if((RecoveryType & RC_C) && CheckInventory("Recovery_C")){Output = 0;}
 
 
+// -=- Check if we are Grappled, only certain moves can be used in that state -=-
+if(CheckInventory("GrappledFlag"))
+	{switch(ThisWeapon)
+		{
+		/*RapidSpin*/Case 50: break;
+		default: Output = 0; break;
+		}
+	}
 // -=- Finally, check if you just spawned in -=-
 if(CheckInventory("SpawnInBuffer")){Output = 0;}
 

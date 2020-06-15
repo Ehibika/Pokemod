@@ -775,6 +775,7 @@ script "Grasp_TID" (int otherTID)
 	
 	if (VectorLength(VectorLength(xDiff,yDiff),zDiff) < (GRAB_DISTANCE_2<<16)) {
 		SetActorVelocity(otherTID, xDiff, yDiff, zDiff, 0, 0);
+		GiveActorInventory(otherTID,"GrappledFlag",1);
 		setResultValue(1);
 	} else {
 		setResultValue(0);
@@ -792,6 +793,7 @@ script "SuplexGrasp_TID" (int pitch, int angle, int target) //Pitch is given as 
 
 	if (VectorLength(VectorLength(xDiff,yDiff),zDiff) < (GRAB_DISTANCE_2<<16)) {
 		SetActorVelocity(target, xDiff, yDiff, zDiff, 0, 0);
+		GiveActorInventory(target,"GrappledFlag",1);
 		setResultValue(1);
 	} else {
 		setResultValue(0);
