@@ -30,6 +30,13 @@ Pain.RapidSpin:
 "----" H 0 A_GiveInventory("RapidSpinProtect",1)
 "----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,40)
 Goto NormalPain
+
+Pain.FalseSwipe:
+ "----" H 0 A_JumpIfHealthLower(2,"FalseAward")
+Goto NormalPain
+FalseAward:
+"----" H 0 ACS_NamedExecuteAlways("FalseEXPAward",0)
+Goto NormalPain
 //#endregion
 
 //#region -=- Fighting -=-
@@ -243,7 +250,7 @@ Goto Pain+1
 
 // -=-=-=- Death States -=-=-=-
 //#region -=- Normal -=-
-
+    Death.FalseSwipe: //should never happen but just in case
     Death.Swift:
     Death.RapidSpin:
     Death.SkullBash:

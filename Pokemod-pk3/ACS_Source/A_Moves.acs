@@ -13,6 +13,7 @@
 #import "Dex_Types.acs"
 #import "WEPACS.acs"
 #import "A_Stats.acs"
+#import "A_Leveling.acs"
 #import "Dex_Leveling.acs"
 #import "Dex_BaseStats.acs"
 
@@ -68,4 +69,40 @@ Script "ProtectBarrierWarper" (void) CLIENTSIDE
     SetActorState(0,"Death");
     Delay(17);
 	Thing_Remove(0);
+}
+
+Script "FalseSwipeDamage" (int Damage)
+{
+int TargTID = ACS_NamedExecuteWithResult("core_gettarget",0);
+int TracTID = ACS_NamedExecuteWithResult("core_gettracer",0);
+ACS_NamedExecuteAlways("FalseBuddha",0,TracTID,1);
+Delay(1);
+Thing_Damage2(TracTID,Damage,"FalseSwipe");
+ACS_NamedExecuteAlways("FalseBuddha",0,TracTID,0);
+}
+
+Script "FalseBuddha" (int TID, int State)
+{
+SetActivator(TID,AAPTR_DEFAULT);
+SetPlayerProperty(0, State, PROP_BUDDHA);
+}
+
+Script "FalseEXPAward" (void)
+{
+if(EXPTime() == 0){Terminate;}
+int TargTID = ACS_NamedExecuteWithResult("core_gettarget",0);
+int VictimPN = Playernumber();
+    int PlayerLVL = GetCvar(StrParam(s:"PlayerLevel_",i:VictimPN));
+    int PlayerDexNum = GetCvar(StrParam(s:"PlayerDEXNum_",i:VictimPN));
+    int VictimFrags = ACS_NamedExecuteWithResult("GetPlayerFrags",VictimPN);
+    int VictimBounty = StatDEX[PlayerDexNum][6];
+int EXPAward = VictimBounty*PlayerLVL;
+
+//SetActivatorToTarget(0);
+//int KillerTID = ActivatorTID();
+// --=- no exp if you kill yourself
+//if(VictimTID == KillerTID){Terminate;}
+
+ACS_NamedExecuteAlways("GivePlayerEXP",0,TargTID-1000,EXPAward);
+//log(s:GetTeamProperty(PlayerTeam(),TPROP_Name), s:" Team EXP Award ", i:TeamEXPAward[PlayerTeam()]);
 }

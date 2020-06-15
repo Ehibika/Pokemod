@@ -96,7 +96,7 @@
 #include "actors/Moves/Detect.txt"
 #include "actors/Moves/Pursuit.txt"
 #include "actors/Moves/LeafBlade.txt"
-//#include "actors/Moves/FalseSwipe.txt"
+#include "actors/Moves/FalseSwipe.txt"
 #include "actors/Moves/Agility.txt"
 #include "actors/Moves/NightSlash.txt"
 #include "actors/Moves/XScissor.txt"
