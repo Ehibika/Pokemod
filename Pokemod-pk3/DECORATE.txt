@@ -93,7 +93,7 @@
 #include "actors/Moves/Aromatherapy.txt"
 #include "actors/Moves/Safeguard.txt"
 #include "actors/Moves/BulletSeed.txt"
-//#include "actors/Moves/Detect.txt"
+#include "actors/Moves/Detect.txt"
 #include "actors/Moves/Pursuit.txt"
 #include "actors/Moves/LeafBlade.txt"
 //#include "actors/Moves/FalseSwipe.txt"
