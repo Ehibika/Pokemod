@@ -103,7 +103,7 @@
 #include "actors/Moves/SkyDrop.txt"
 //#include "actors/Moves/StealthRock.txt"
 //#include "actors/Moves/Curse.txt"
-//#include "actors/Moves/Earthquake.txt"
+#include "actors/Moves/Earthquake.txt"
 //#include "actors/Moves/WideGuard.txt"
 //#include "actors/Moves/WoodHammer.txt"
 //#include "actors/Moves/DefenseCurl.txt"

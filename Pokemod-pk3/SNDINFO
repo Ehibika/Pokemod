@@ -50,6 +50,7 @@ $volume weapon/Wrecker 1.5
 
 weapon/OrbSpawn CRYSSHOT
 weapon/OrbBounce CRYSBIT
+wep_L/commandowave COMEXP
 
 Support/Heal1 Recov1 
 Support/Heal2 Recov2 
