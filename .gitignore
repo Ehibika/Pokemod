@@ -1,0 +1,6 @@
+# Compiled pk3 files and anything in the distribution folder.
+dist/*.pk3
+dist/*.bak
+Pokemod-pk3/acs/*.o
+archive.properties
+**/.DS_Store
