@@ -159,7 +159,17 @@ Goto Ready
 //-----------------------------|Ammo & Inventory|------------------------------
 //[+]========================================================================[+]
 actor ProtectPP : Ammo {inventory.amount 1 inventory.Maxamount 10}
-actor ProtectGuard : PowerProtection {inventory.amount 1 Powerup.Duration 17 DamageFactor "Normal", 0}
+actor ProtectGuard : PowerProtection 
+{
+    +NOPAIN
+    inventory.amount 1 
+    Powerup.Duration 17
+    DamageFactor "Normal", 0
+    DamageFactor "Feint", 1.0
+    DamageFactor "SkyDrop1", 1.0
+    DamageFactor "SkyDrop2", 1.0
+}
+
 
 actor ProtectRecoveryFlag : Powerup {inventory.amount 1 Powerup.Duration -3}
 actor ProtectRecoveryCount : inventory {inventory.amount 1 inventory.Maxamount 5}
