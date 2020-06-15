@@ -3,7 +3,7 @@ actor IronDefenseMove : WepMasterBase
 Tag "IronDefense"
 obituary "$OB_IRONDEFENSE"
 Weapon.AmmoUse 1
-Weapon.AmmoGive 5
+Weapon.AmmoGive 25
 weapon.ammotype "IronDefensePP"
 scale 2.0
 Inventory.Pickupmessage "$PU_MEGABUSTER"
@@ -16,40 +16,30 @@ stop
 
 Fire:
 "####" B 0 A_Jumpif(CallACS("CheckWeaponFire",RC_C)==0,"NoAmmo")
-"####" B 0 A_JumpIfInventory("STF_IronDefense",1,"NoAmmo")
-"####" B 0 A_Jump(256,"Fire.Channel")
-Goto Fire.Channel
+"####" B 0 A_JumpIfInventory("STF_IronDefense",1,"Fire.Off")
+"####" B 0 A_Jump(256,"Fire.On")
+Goto Fire.On
 
-Fire.Channel:
-"####" B 0 A_GiveInventory("WeaponCharge",1)
-"####" B 0 A_GiveInventory("ChannelingSpeed")
-"####" B 0 A_GiveInventory("IronDefenseParticleSpawn")
-"####" B 0 A_JumpIfInventory("WeaponCharge",35,"Fire.Initiate")
-"####" B 0 A_PlaySoundEx("Weapon/Heat1","Soundslot6")
-"####" B 1
-"####" C 0 A_REfire("Fire.Channel")
-"####" B 0 A_Jump(256,"Fire.After")
-Goto Fire.After
-
-Fire.Initiate:
+Fire.On:
+"####" B 0 A_PlaySoundEx("Move/IronDefense","Soundslot6")
+"####" BBB 5 A_GiveInventory("IronDefenseParticleSpawn")
 "####" B 0 A_PlaySoundEx("Support/Statup","Soundslot7")
 "####" B 0 A_GiveInventory("IronDefenseBuffInitiate")
 "####" B 0 A_TakeInventory("IronDefensePP",1)
+"####" B 0 A_Jump(256,"Fire.After")
+Goto Fire.After
 
-//"####" B 0 A_FireCustomMissile("IronDefenseProjectile",0,1,4,4)
+Fire.Off:
+"####" B 0 A_TakeInventory("IronDefense_Active",99)
+"####" B 0 A_GiveInventory("Recovery_C",8)
 "####" B 0 A_Jump(256,"Fire.After")
 Goto Fire.After
 
 Fire.After:
-"####" B 1 A_GiveInventory("Recovery_C",20)
-"####" B 0 A_TakeInventory("ChannelingSpeed",9)
+"####" B 1 A_GiveInventory("Recovery_C",17)
 "####" C 0 A_REfire("Fire")
 "####" B 0 A_Jump(256,"Fire.End")
 Goto Fire.End
-
-
-
-
 
 }
 }
@@ -75,9 +65,9 @@ Goto Ready
 //[+]========================================================================[+]
 //-----------------------------|Ammo & Inventory|------------------------------
 //[+]========================================================================[+]
-actor IronDefensePP : Ammo {inventory.amount 1 inventory.Maxamount 5}
-
-actor STF_IronDefense : Powerup {inventory.amount 1 Powerup.Duration -15}
+actor IronDefensePP : Ammo {inventory.amount 1 inventory.Maxamount 25}
+actor STF_IronDefense : Powerup {inventory.amount 1 Powerup.Duration 40}
+actor IronDefense_Active : Inventory {inventory.amount 1 inventory.Maxamount 1}
 
 actor IronDefenseBuffInitiate : CustomInventory
 {
@@ -90,8 +80,8 @@ Spawn:
 TNT1 A 0
 stop
 Pickup:
-TNT1 A 0 A_Jumpifinventory("STF_IronDefense",1,"Sustain")
-TNT1 A 0 A_GiveInventory("STF_IronDefense",1)
+TNT1 A 0 A_Jumpifinventory("IronDefense_Active",1,"Sustain")
+TNT1 A 0 A_GiveInventory("IronDefense_Active",1)
 TNT1 A 0 A_SpawnitemEX("IronDefenseBuffWatcher")
 TNT1 A 0 A_GiveInventory("StatUpdator",1)
 stop
@@ -108,35 +98,48 @@ stop
 
 actor IronDefenseBuffWatcher : BasicHelper 
 {
-Var int user_DashTime;
+Var int user_TickTime;
 States
 {
 Spawn:
 TNT1 A 0
-TNT1 A 5 A_GiveToTarget("PdefUpFXSpawn")
-TNT1 A 0 A_JumpIfInTargetInventory("STF_IronDefense",1,"Spawn")
-TNT1 A 1 A_GiveToTarget("StatUpdator")
-TNT1 A 5
+TNT1 A 0 A_JumpIfInTargetInventory("CutterFlag",999,"Death")
+TNT1 A 0 A_JumpIfInTargetInventory("IsDead",1,"Death")
+TNT1 A 5 A_GiveToTarget("STF_IronDefense")
+TNT1 A 0 A_GiveToTarget("PDefUpFXSpawn")
+TNT1 A 0 A_SetUserVar("user_TickTime",user_TickTime+5)
+TNT1 A 0 A_JumpIf(user_TickTime>=35,"SpawnTick")
+TNT1 A 0 A_JumpIfInTargetInventory("IronDefense_Active",1,"Spawn")
+Goto Death
+
+SpawnTick:
+TNT1 A 0 A_SetUserVar("user_TickTime",0)
+TNT1 A 0 A_TakeFromTarget("IronDefensePP",1)
+TNT1 A 0 A_JumpIfInTargetInventory("IronDefensePP",1,"Spawn")
 Goto Death
 
 Death:
-TNT1 A 0 
+TNT1 A 0 A_GiveToTarget("StatUpdator")
+TNT1 A 0 A_GiveToTarget("BuffLossSoundCue")
+TNT1 A 0 A_TakeFromTarget("STF_IronDefense",9)
+TNT1 A 0 A_TakeFromTarget("IronDefense_Active",99)
+TNT1 A 2 
 stop
 }
 }
 
 
-actor IronDefenseParticle : Basicprojectile
+actor IronDefenseParticle : BasicClientside
 {
-scale 1.2
-+SeekerMissile
+scale 2.5
 speed 7
+renderstyle "add"
 States
 {
 Spawn:
 TNT1 A 0
-TNT1 A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
-TMPK DCCBBAAA 2 A_Seekermissile(90,90,SMF_PRECISE)
+TNT1 A 0 A_SetScale(Frandom(1.5,3.5))
+TMPK DDCCCBBA 2 A_ScaleVelocity(0.8)
 stop
 }
 }
@@ -152,7 +155,7 @@ Spawn:
 TNT1 A 0
 stop
 Pickup:
-TNT1 A 0 A_SpawnItemEx ("IronDefenseParticle", random(-90,90), random(-90,90), random(-90,90), momx, momy, momz, 0,SXF_NOCHECKPOSITION|SXF_ABSOLUTEMOMENTUM|SXF_TRANSFERTRANSLATION)
+TNT1 AAA 0 A_SpawnItemEx ("IronDefenseParticle", 0, 0, 24, random(5,10), 0, random(-2,2), random(0,360),SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION)
 stop
 Nope:
 TNT1 A 0

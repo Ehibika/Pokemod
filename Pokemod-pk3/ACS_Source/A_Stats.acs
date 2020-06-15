@@ -193,7 +193,7 @@ Str StatName2[7] = {
 };
 */
 
-#DEFINE STATITEMNUM 13
+#DEFINE STATITEMNUM 14
 
 Str StatEffectName[STATITEMNUM] = {
     "Growth",
@@ -209,6 +209,7 @@ Str StatEffectName[STATITEMNUM] = {
     "PowerSeed",
     "GuardSeed",
     "HasteSeed",
+    "Agility",
 };
 
 #define PATK_ID 0
@@ -232,6 +233,7 @@ Int StatEffectValue[STATITEMNUM][5] = {
 {   1,      1,      0,      0,      0}, 
 {   0,      0,      1,      1,      0}, 
 {   0,      0,      0,      0,      1}, 
+{   0,      0,      0,      0,      2}, 
 };
 
 Int StatMulti[13] = {

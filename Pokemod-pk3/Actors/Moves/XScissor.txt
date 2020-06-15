@@ -1,0 +1,204 @@
+const int XSC_Dist = 60;
+const int XSC_Ang = 20;
+
+actor XScissorMove : WepMasterBase
+{
+Tag "XScissor"
+obituary "$OB_XSCISSOR"
+Weapon.AmmoUse 1
+Weapon.AmmoGive 10
+weapon.ammotype "XScissorPP"
+scale 2.0
+Inventory.Pickupmessage "$PU_MEGABUSTER"
+States
+{
+Spawn:
+WEAP X 1
+stop
+
+Fire:
+"####" B 0 A_Jumpif(CallACS("CheckWeaponFire",RC_B)==0,"NoAmmo")
+"####" B 0 A_CheckFloor("Fire.PitchCheck")
+"####" B 0 A_Jump(256,"Fire.Blade")
+Goto Fire.Blade
+
+Fire.PitchCheck:
+"####" B 0 A_Jumpif(Pitch < 55,"Fire.Blade2")
+"####" B 0 A_Jump(256,"Fire.Blade")
+Goto Fire.Blade
+
+Fire.Blade:
+"####" B 0 A_FireCustomMissile("XScissorLeftStart",-XSC_Ang,1,-XSC_Dist,0,0,0)
+"####" B 0 A_FireCustomMissile("XScissorRightStart",XSC_Ang,0,XSC_Dist,0,0,0)
+"####" B 1 A_PlaySoundEx("weapon/SlashClaw","Weapon")
+"####" B 0 A_Jump(256,"Fire.After")
+Goto Fire.After
+
+Fire.Blade2: //Locked to lateral position
+"####" B 0 A_FireCustomMissile("XScissorLeftStart",-XSC_Ang,1,-XSC_Dist,0,0,pitch)
+"####" B 0 A_FireCustomMissile("XScissorRightStart",XSC_Ang,0,XSC_Dist,0,0,pitch)
+"####" B 1 A_PlaySoundEx("weapon/SlashClaw","Weapon")
+"####" B 0 A_Jump(256,"Fire.After")
+Goto Fire.After
+
+Fire.After:
+"####" B 1 A_GiveInventory("Recovery_B",15)
+"####" C 0 A_REfire("Fire")
+"####" B 0 A_Jump(256,"Fire.End")
+Goto Fire.End
+}
+}
+
+actor XScissorMove1 : XScissorMove {Weapon.SlotNumber 1}
+actor XScissorMove2 : XScissorMove {Weapon.SlotNumber 2}
+actor XScissorMove3 : XScissorMove {Weapon.SlotNumber 3}
+actor XScissorMove4 : XScissorMove {Weapon.SlotNumber 4}
+
+actor XScissorMove5 : XScissorMove 
+{
+Weapon.SlotNumber 5
+States
+{
+Fire.End:
+TNT1 A 0
+TNT1 A 0 A_TakeInventory("XScissorMove5",9)
+TNT1 A 0 A_Jump(256,"Ready")
+Goto Ready
+}
+}
+
+//[+]========================================================================[+]
+//-----------------------------|Ammo & Inventory|------------------------------
+//[+]========================================================================[+]
+actor XScissorPP : Ammo {inventory.amount 1 inventory.Maxamount 10}
+
+actor XScissor1Protect : PowerProtection
+{
+Powerup.Duration 10
+damagefactor "Normal", 1.0
+damagefactor "XScissor1", 0.0
+}
+
+actor XScissor2Protect : PowerProtection
+{
+Powerup.Duration 10
+damagefactor "Normal", 1.0
+damagefactor "XScissor2", 0.0
+}
+
+//[+]========================================================================[+]
+//--------------------------------|Projectiles |--------------------------------
+//[+]========================================================================[+]
+
+actor XScissorLeft 
+{
+PROJECTILE
++RIPPER
++NOEXPLODEFLOOR
+damagetype "XScissor1"
+damage (20)
+height 5
+radius 5
+Speed 20
+scale 2.5
+Args 0,0,0
+Var Int User_Step;
+states
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_Jumpif(pitch > 16,"Death")
+TNT1 A 0 A_setPitch(Pitch+1)
+TNT1 A 0 A_SetUserVar("User_Step",Pitch % 4)
+TNT1 A 0 A_Jumpif(User_Step == 0,"Spawn2")
+TNT1 A 0 A_SpawnItemEx("XScissorLeft",0,0,0,momx,momy,momz,0,SXF_ABSOLUTEMOMENTUM|SXF_TRANSFERPITCH)
+TNT1 A 1 A_SpawnItemEx("XScissorEdgeFX")
+Goto Death
+
+Spawn2:
+TNT1 A 0 A_SetArg(0,MomX)
+TNT1 A 0 A_SetArg(1,MomY)
+TNT1 A 0 A_SetArg(2,MomZ)
+TNT1 A 0 A_Stop
+BASB W 2 A_SpawnItemEx("XScissorEdgeFX")
+TNT1 A 0 A_SpawnItemEx("XScissorLeft",0,0,0,Args[0],Args[1],Args[2],0,SXF_ABSOLUTEMOMENTUM|SXF_TRANSFERPITCH)
+Goto Death
+
+Death:
+TNT1 A 0 
+stop
+}
+}
+
+actor XScissorRight : XScissorLeft
+{
+damagetype "XScissor2"
+states
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_Jumpif(pitch > 16,"Death")
+TNT1 A 0 A_setPitch(Pitch+1)
+TNT1 A 0 A_SetUserVar("User_Step",Pitch % 4)
+TNT1 A 0 A_Jumpif(User_Step == 0,"Spawn2")
+TNT1 A 0 A_SpawnItemEx("XScissorRight",0,0,0,momx,momy,momz,0,SXF_ABSOLUTEMOMENTUM|SXF_TRANSFERPITCH)
+TNT1 A 1 A_SpawnItemEx("XScissorEdgeFX")
+Goto Death
+
+Spawn2:
+TNT1 A 0 A_SetArg(0,MomX)
+TNT1 A 0 A_SetArg(1,MomY)
+TNT1 A 0 A_SetArg(2,MomZ)
+TNT1 A 0 A_Stop
+BASB W 2 A_SpawnItemEx("XScissorEdgeFX")
+TNT1 A 0 A_SpawnItemEx("XScissorRight",0,0,0,Args[0],Args[1],Args[2],0,SXF_ABSOLUTEMOMENTUM|SXF_TRANSFERPITCH)
+Goto Death
+}
+}
+
+actor XScissorLeftStart : XScissorLeft
+{
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_GiveInventory("ProjectileDCode",1)
+Goto "Super::Spawn"
+}
+}
+
+actor XScissorRightStart : XScissorRight
+{
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_GiveInventory("ProjectileDCode",1)
+Goto "Super::Spawn"
+}
+}
+
+actor XScissorEdgeFX : BasicClientside
+{
+scale 2.5
+XScale 4.0
+Alpha 0.9
+ReactionTime 8
+renderstyle "Add"
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_GiveInventory("ProjectileDCode",1)
+BASB U 3 
+BASB UU 1 A_Fadeout
+Spawn2:
+BASB V 1 A_Fadeout
+TNT1 A 0 A_CountDown
+loop
+
+Death:
+TNT1 A 0
+stop
+}
+}

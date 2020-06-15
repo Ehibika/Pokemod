@@ -105,6 +105,11 @@ Weapon/Trample MADWALK
 class/ToadCroak S_M4TOA1 
 
 Move/Yawn YAWN 
+Move/BulletSeed PTUEY 
+Move/Amnesia HUH 
+Move/IronDefense IRODEF 
+Move/DragonDance DRAGDANC 
+Move/Pursuit LUNGE 
 
 Misc/Levelup LEVELUP
 Misc/Evolution FANFARE1

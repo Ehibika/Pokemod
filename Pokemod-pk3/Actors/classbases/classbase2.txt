@@ -2,12 +2,8 @@ actor ClassBase2 : ClassBase1
 {
 States
 {
-
-    Pain.Melee:
-    "----" H 0
-   Goto NormalPain
-    //===|Normal
-
+// -=-=-=- Pain States -=-=-=-
+//#region -=- Normal -=-
 Pain.Swift:
  "----" H 0
 Goto NormalPain
@@ -34,7 +30,58 @@ Pain.RapidSpin:
 "----" H 0 A_GiveInventory("RapidSpinProtect",1)
 "----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,40)
 Goto NormalPain
+//#endregion
 
+//#region -=- Fighting -=-
+
+//#endregion
+
+//#region -=- Flying -=-
+
+Pain.SkyDrop1:
+"----" H 0 A_GiveInventory("SkyDropSuplexStart",1)
+goto FlyingPain
+Pain.SkyDrop2:
+"----" H 0 A_GiveInventory("SkyDropPushStart",1)
+goto FlyingPain
+
+//#endregion
+
+//#region -=- Poison -=-
+
+//#endregion
+
+//#region -=- Ground -=-
+
+//#endregion
+
+//#region -=- Rock -=-
+Pain.XScissor1:
+"----" H 0 A_GiveInventory("XScissor1Protect", 1)
+"----" H 0 A_Jumpifinventory("XScissor2Protect",1,"XScissorImpact")
+Goto BugPain
+Pain.XScissor2:
+"----" H 0 A_GiveInventory("XScissor2Protect", 1)
+"----" H 0 A_Jumpifinventory("XScissor1Protect",1,"XScissorImpact")
+Goto BugPain
+XScissorImpact:
+"----" H 0 A_SpawnItemEX("PowerStrikeFX2",0,0,28)
+Goto BugPain
+//#endregion
+
+//#region -=- Bug -=-
+
+//#endregion
+
+//#region -=- Ghost -=-
+
+//#endregion
+
+//#region -=- Steel -=-
+
+//#endregion
+
+//#region -=- Fire
     //===|Fire
 Pain.Ember:
 Pain.FireBlast:
@@ -70,7 +117,9 @@ Pain.FlareBlitz:
 "----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,40)
 "----" H 0 ThrustThingZ(0,15,0,0)
 Goto FirePain
+//#endregion
 
+//#region -=- Water -=-
     //===|Water
 Pain.WaterGun:
 Pain.WaterPulse:
@@ -85,13 +134,16 @@ Pain.HydroPump:
 "----" H 0 A_GiveInventory("HydroPumpProtect",1)
 "----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,5)
 Goto WaterPain
+//#endregion
 
+//#region -=- Grass -=-
     //===|Grass
 Pain.RazorLeaf:
 Pain.VineWhip:
 Pain.SeedBomb:
 Pain.EnergyBall:
 Pain.SolarBeam:
+Pain.BulletSeed:
 "----" H 0
 Goto GrassPain
 
@@ -102,7 +154,17 @@ Pain.LeafBlade2:
 "----" H 0 A_SpawnItemEX("PowerStrikeFX2",0,0,28)
 "----" H 0 A_GiveInventory("LeafBlade2Protect", 1)
 Goto GrassPain
+//#endregion
 
+//#region -=- Electric -=-
+
+//#endregion
+
+//#region -=- Psychic -=-
+
+//#endregion
+
+//#region -=- Ice -=-
 
     //===|Ice
     Pain.PowderSnow:
@@ -114,7 +176,9 @@ Goto GrassPain
     "----" H 0 A_GiveInventory("IcyWindNerfInitiate",1)
     Goto IcePain
 
-    //===|Dragon
+//#endregion
+
+//#region -=- Dragon -=-
 Pain.DragonPulse:
 Pain.DragonClaw:
 "----" H 0
@@ -132,8 +196,13 @@ Goto DragonPain
 Pain.DragonRage:
 "----" H 0
 Goto NormalPain
-   
-    //===|Dark
+//#endregion
+
+//#region -=- Dark -=-
+    Pain.Pursuit:
+    Pain.Bite:
+    "----" H 0
+    Goto DarkPain
     Pain.NightSlash1:
     "----" H 0 A_GiveInventory("NightSlash1Protect", 1)
     "----" H 0 A_GiveInventory("FlameSwordBackstabItem",1)
@@ -146,24 +215,34 @@ Goto NormalPain
     Pain.NightSlash3:
     "----" H 0
     Goto DarkPain
+//#endregion
 
-    //===|Typeless
-    Pain.Toxic:
-    "----" H 0 A_Giveinventory("ToxicStacker")
-    Pain.PoisonPowder:
-    "----" H 0 A_jumpifinventory("PoisonProof",1,5)
-    "----" H 0 A_jumpifinventory("TempPoisonProof",1,4)
-    "----" H 0 A_jumpifinventory("PoisonMark",1,3)
-    "----" H 0 A_SpawnItemEX("PoisonWatcher",1)
-    "----" H 0 A_Playsoundex("support/Negative","Soundslot5")
-    "----" H 0 A_Giveinventory("PoisonMark")
-    "----" H 0
-    Goto Pain+1
+//#region -=- Fairy -=-
+
+//#endregion
+
+//#region -=- Typeless -=-
+
+Pain.Melee:
+"----" H 0
+Goto NormalPain
+
+Pain.Toxic:
+"----" H 0 A_Giveinventory("ToxicStacker")
+Pain.PoisonPowder:
+"----" H 0 A_jumpifinventory("PoisonProof",1,5)
+"----" H 0 A_jumpifinventory("TempPoisonProof",1,4)
+"----" H 0 A_jumpifinventory("PoisonMark",1,3)
+"----" H 0 A_SpawnItemEX("PoisonWatcher",1)
+"----" H 0 A_Playsoundex("support/Negative","Soundslot5")
+"----" H 0 A_Giveinventory("PoisonMark")
+"----" H 0
+Goto Pain+1
+//#endregion
 
 
-
-//============|Death|========
-    //===|Normal
+// -=-=-=- Death States -=-=-=-
+//#region -=- Normal -=-
 
     Death.Swift:
     Death.RapidSpin:
@@ -190,8 +269,48 @@ Goto NormalPain
     "----" H 0 ThrustThingZ(0,35,0,0)
     "----" H 5
     Goto Death
+//#endregion
 
-    //===|Fire
+//#region -=- Fighting -=-
+
+//#endregion
+
+//#region -=- Flying -=-
+
+
+Death.SkyDrop:
+"----" H 0 
+goto FlyingDeath
+Death.SkyDrop2:
+"----" H 0 A_GiveInventory("SkyDropPushStart",1)
+goto FlyingDeath
+//#endregion
+
+//#region -=- Poison -=-
+
+//#endregion
+
+//#region -=- Ground -=-
+
+//#endregion
+
+//#region -=- Rock -=-
+
+//#endregion
+
+//#region -=- Bug -=-
+
+//#endregion
+
+//#region -=- Ghost -=-
+
+//#endregion
+
+//#region -=- Steel -=-
+
+//#endregion
+
+//#region -=- Fire -=-
     Death.Ember:
     Death.FireBlast:
     Death.FireSpin:
@@ -209,8 +328,9 @@ Goto NormalPain
     "----" H 0 ThrustThingZ(0,35,0,0)
     "----" H 5
     Goto Death
+//#endregion
 
-    //===|Water
+//#region -=- Water -=-
     Death.WaterGun:
     Death.WaterPulse:
     Death.AquaTail:
@@ -218,13 +338,15 @@ Goto NormalPain
     Death.BubbleBeam:
     "----" H 0
     Goto WaterDeath
-    
-    //===|Grass
+//#endregion
+
+//#region -=- Grass -=-
     Death.RazorLeaf:
     Death.VineWhip:
     Death.SeedBomb:
     Death.EnergyBall:
     Death.SolarBeam:
+    Death.Bulletseed:
     "----" H 0
     Goto GrassDeath
 
@@ -235,14 +357,24 @@ Goto NormalPain
     "----" H 0 A_SpawnItemEX("PowerStrikeFX2",0,0,28)
     "----" H 0 A_GiveInventory("LeafBlade2Protect", 1)
     Goto GrassDeath
-    
-    //===|Ice
+//#endregion
+
+//#region -=- Electric -=-
+
+//#endregion
+
+//#region -=- Psychic -=-
+
+//#endregion
+
+//#region -=- Ice -=-
     Death.PowderSnow:
     Death.IcyWind:
     "----" H 0
     Goto IceDeath
+//#endregion
 
-    //===|Dragon
+//#region -=- Dragon -=-
     Death.DragonRush:
     "----" A 0 ACS_NamedExecuteAlways("PKMN_PainSound",0,Type_Dragon) 
     "----" H 0 A_GiveToTarget("DragonRushCollision",1)
@@ -260,9 +392,17 @@ Goto NormalPain
     Death.DragonRage:
     "----" H 0
     Goto Death
+//#endregion
 
+//#region -=- Fairy -=-
 
-    //===|Dark
+//#endregion
+
+//#region -=- Dark -=-
+    Death.Pursuit:
+    Death.Bite:
+    "----" H 0
+    Goto DarkDeath
     Death.NightSlash1:
     "----" H 0 A_GiveInventory("NightSlash1Protect", 1)
     "----" H 0 A_GiveInventory("FlameSwordBackstabItem",1)
@@ -275,6 +415,7 @@ Goto NormalPain
     Death.NightSlash3:
     "----" H 0
     Goto DarkDeath
+//#endregion
 
 }
 }

@@ -1,0 +1,313 @@
+actor SkyDropMove : WepMasterBase
+{
+Tag "SkyDrop"
+obituary "$OB_SKYDROP"
+Weapon.AmmoUse 1
+Weapon.AmmoGive 10
+weapon.ammotype "SkyDropPP"
+scale 2.0
+Inventory.Pickupmessage "$PU_MEGABUSTER"
+States
+{
+Spawn:
+WEAP X 1
+stop
+
+Fire:
+"####" B 0 A_Jumpif(CallACS("CheckWeaponFire",RC_B)==0,"NoAmmo")
+"####" B 0 A_Jump(256,"Fire.GrabStart")
+Goto Fire.GrabStart
+
+Fire.GrabStart:
+JARM F 0 A_TakeInventory("SkyDropPP",1)
+TNT1 A 1 A_GiveInventory("SkydropGroundGuardFunc",1)
+JARM F 0 A_GiveInventory("SkyDropGrabTimer",1)
+FSTO D 0 A_TakeInventory("SuplexID",999)
+SAKH C 0 ThrustThingZ(0,45,0,1)
+SkyDropWalk:
+JARM F 0 A_GiveInventory("SkyDropWalkThrust",1)
+TNT1 A 1 A_GiveInventory("SkydropGroundGuardFunc",1)
+JARM F 1 A_GiveInventory("SkyDropGrabFunc",1)
+JARM F 0 A_JumpIfInventory("SuplexID",1,"SkyDrop")
+JARM F 0 A_JumpIfInventory("SkyDropGrabTimer",1,"SkyDropWalk")
+"####" B 0 A_Jump(256,"Fire.After")
+Goto Fire.After
+
+SkyDrop:
+TNT1 A 0 A_PlaySound("weapon/crashland")
+TNT1 A 0 SetPlayerProperty(0,1,4)
+TNT1 A 0 A_TakeInventory("ZangiefAngle",255)
+TNT1 A 0 A_GiveInventory("ZangiefAngle",CallACS("GetAngleToTid",CallACS("Get_SuplexID_TID")))
+TNT1 A 0 A_SetAngle(CallACS("GetAngleToTid",CallACS("Get_SuplexID_TID"))*360/256)
+TOPH A 0 A_ChangeFlag("SHOOTABLE",0)
+TNT1 A 0 A_ChangeFlag("SOLID",0)
+TNT1 A 0 A_SetPitch(0)
+JARM E 1 ACS_NamedExecuteWithResult("Grasp_TID",CallACS("Get_SuplexID_TID"))
+SAKH C 0 ThrustThingZ(0,15,0,0)
+JARM E 1
+TNT1 A 0 A_JumpIf(momz<0,"GoingDownSpin")
+goto GoingUpSpin
+
+GoingUpSpin:
+SAKH C 0 ThrustThingZ(0,1,1,1)
+TNT1 A 0 A_SetAngle(angle+20.0)
+JARM E 1 A_Jumpif(!CallACS("Grasp_TID",CallACS("Get_SuplexID_TID")),"SkyDropSlam")
+TNT1 A 0 A_CheckFloor("SkyDropSlam")
+TNT1 A 0 A_JumpIf(momz>0,"GoingUpSpin")
+GoingDownSpin:
+SAKH C 0 ThrustThingZ(0,1,1,1)
+TNT1 A 0 A_SetAngle(angle+20.0)
+JARM E 1 A_Jumpif(!CallACS("Grasp_TID",CallACS("Get_SuplexID_TID")),"SkyDropSlam")
+TNT1 A 0 A_CheckFloor("SkyDropSlam")
+TNT1 A 0 A_JumpIf(momz<0,"GoingDownSpin")
+goto SkyDropSlamJump
+
+SkyDropSlamJump:
+TNT1 A 0 
+TNT1 A 1 A_Jump(256, "SkyDropSlam")
+wait
+
+SkyDropSlam:
+TOPH A 0 A_ChangeFlag("SHOOTABLE",1)
+TOPH A 0 A_ChangeFlag("INVULNERABLE",1)
+TNT1 A 0 ACS_NamedExecuteWithResult("Give_AntiInvincible_ToTID",CallACS("Get_SuplexID_TID"))
+TNT1 A 0 A_SpawnItemEX("SkyDrop", 0,0,0, 0,0,0, 0, SXF_ABSOLUTEMOMENTUM|SXF_NOCHECKPOSITION, 0)
+goto SkyDropSlamEnd
+
+SkyDropSlamEnd:
+TOPH A 0 A_ChangeFlag("INVULNERABLE",0)
+TNT1 A 0 SetPlayerProperty(0,0,4)
+TOPH A 0 A_ChangeFlag("SOLID",1) //More elegant solution later
+"####" B 0 A_Jump(256,"Fire.After")
+Goto Fire.After
+
+Fire.After:
+"####" B 1 A_GiveInventory("Recovery_B",15)
+"####" C 0 A_REfire("Fire")
+"####" B 0 A_Jump(256,"Fire.End")
+Goto Fire.End
+}
+}
+
+actor SkyDropMove1 : SkyDropMove {Weapon.SlotNumber 1}
+actor SkyDropMove2 : SkyDropMove {Weapon.SlotNumber 2}
+actor SkyDropMove3 : SkyDropMove {Weapon.SlotNumber 3}
+actor SkyDropMove4 : SkyDropMove {Weapon.SlotNumber 4}
+
+actor SkyDropMove5 : SkyDropMove 
+{
+Weapon.SlotNumber 5
+States
+{
+Fire.End:
+TNT1 A 0
+TNT1 A 0 A_TakeInventory("SkyDropMove5",9)
+TNT1 A 0 A_Jump(256,"Ready")
+Goto Ready
+}
+}
+
+//[+]========================================================================[+]
+//-----------------------------|Ammo & Inventory|------------------------------
+//[+]========================================================================[+]
+actor SkyDropPP : Ammo {inventory.amount 1 inventory.Maxamount 30}
+actor SkyDropGrabTimer : Powerup {inventory.amount 1 powerup.duration 17}
+
+Const int SkyDropRad = 120;
+Const int SkyDrop_Item = 14;
+
+actor SkyDropWalkThrust : CustomInventory
+{
+states
+{
+pickup:
+TNT1 A 0 A_GiveInventory("SkyDropWalkSlow",1)
+TNT1 A 0 A_CheckFloor("Ground")
+TNT1 A 0 A_Recoil(-2)
+TNT1 A 0
+//TNT1 A 0 A_JumpIf(momz>0, "GoDown")
+TNT1 A 0 ThrustThingZ(0,2,1,1)
+stop
+GoDown:
+TNT1 A 0 ThrustThingZ(0,2,1,0)
+stop
+Ground:
+TNT1 A 0 A_Recoil(-2)
+stop
+}
+}
+
+actor SkyDropWalkSlow : PowerSpeed
+{
+Speed 0.25
+Powerup.Duration 25
+}
+
+actor SkyDropGrabFunc : CustomInventory
+{
+states
+{
+pickup:
+TNT1 A 0 A_JumpIf(pitch<350 && pitch>=270, "UpLimit")
+goto Pickup2
+UpLimit:
+TNT1 A 0 A_SetPitch(350)
+Pickup2:
+TNT1 A 0 A_FireCustomMissile("SkyDropGrab",0,0,0,0)
+stop
+}
+}
+
+
+actor SkydropGroundGuardFunc : CustomInventory
+{
+states
+{
+pickup:
+TNT1 A 0 ACS_NamedExecuteAlways("PKMNACS_RadiusGive",0,SkyDrop_Item,SkyDropRad,RG_ENEMY)
+stop
+}
+}
+
+actor SkydropGroundGuard : CustomInventory
+{
+states
+{
+pickup:
+TNT1 A 0 A_CheckFloor("Ground")
+stop
+Ground:
+TNT1 A 0 A_GiveInventory("SkydropProtect")
+stop
+}
+}
+
+actor SkydropProtect : PowerProtection 
+{
+    inventory.amount 1 
+    powerup.duration 3
+    DamageFactor "SkyDrop1", 0.0
+
+}
+
+//[+]========================================================================[+]
+//--------------------------------|Projectiles |--------------------------------
+//[+]========================================================================[+]
+
+actor SkyDropGrab
+{
+PROJECTILE
+Radius 20
+Height 20
+scale 2.5
+Obituary "$OB_SKYDROP"
+speed 55
+damage (10)
+reactiontime 1
+damagetype "SkyDrop1"
+States
+{
+Spawn:
+MMFX C 0
+MMFX C 1 A_CountDown
+goto Spawn+1
+Death:
+MMFX C 0 A_Explode(10,40,0)
+goto XDeath
+XDeath:
+MMFX C 0 A_Stop
+MMFX CBCD 2
+stop
+}
+}
+
+
+actor SkyDrop
+{
+PROJECTILE
+scale 5.0
+Obituary "$OB_SKYDROP"
+damagetype "SkyDrop2"
+Speed 0
++DONTBLAST
+height 0
+radius 0
+
++NOINTERACTION
++NOCLIP
++NOTARGETSWITCH
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 Thing_Move(0,CallACS("Get_Target_SuplexID_TID"),1)
+TNT1 A 0 A_Explode(35, 300, 0)
+goto Spawn2
+Spawn2:
+TNT1 A 0 A_PlaySoundEx("weapon/crackerexplode", "Weapon")
+NAPA EFGHIJKLMNOPQRS 1
+stop
+}
+}
+
+actor SkyDropSuplexStart : CustomInventory
+{
+states
+{
+pickup:
+TNT1 A 0 A_SpawnItemEx("SkyDropSuplexHit")
+stop
+}
+}
+
+actor SkyDropHitBase
+{
+Height 0
+Radius 0
++NOINTERACTION
+-SOLID
++NOGRAVITY
++MISSILE
+}
+
+actor SkyDropSuplexHit : SkyDropHitBase
+{
+states
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_TransferPointer(AAPTR_TARGET,AAPTR_DEFAULT,AAPTR_TARGET,AAPTR_TRACER) //target's target to self's tracer
+TNT1 A 0 A_RearrangePointers(AAPTR_TRACER,AAPTR_DEFAULT,AAPTR_TARGET) //target <-> tracer
+TNT1 A 0 A_JumpIfInTargetInventory("SuplexID",1,"SpawnNo")
+TNT1 A 0 A_GiveToTarget("SuplexID",CallACS("core_gettracer",0)-1000+1)
+TNT1 A 1
+stop
+SpawnNo:
+TNT1 A 1
+stop
+}
+}
+
+actor SkyDropPushStart : CustomInventory
+{
+states
+{
+pickup:
+TNT1 A 0 A_SpawnItemEx("SkyDropPusher")
+stop
+}
+}
+
+actor SkyDropPusher : SkyDropHitBase
+{
+states
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_TransferPointer(AAPTR_TARGET,AAPTR_DEFAULT,AAPTR_TARGET,AAPTR_TRACER) //target's target to self's tracer
+TNT1 A 0 A_FaceTracer
+TNT1 A 0 //A_GiveToTarget("TempPitProtect",1)
+TNT1 A 0 ThrustThing(angle*256/360,-20,0,ACS_ExecuteWithResult(257,0))
+stop
+}
+}

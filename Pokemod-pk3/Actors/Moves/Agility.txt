@@ -1,0 +1,163 @@
+actor AgilityMove : WepMasterBase
+{
+Tag "Agility"
+obituary "$OB_AGILITY"
+Weapon.AmmoUse 1
+Weapon.AmmoGive 25
+weapon.ammotype "AgilityPP"
+scale 2.0
+Inventory.Pickupmessage "$PU_MEGABUSTER"
+States
+{
+Spawn:
+WEAP X 1
+stop
+
+
+Fire:
+"####" B 0 A_Jumpif(CallACS("CheckWeaponFire",RC_C)==0,"NoAmmo")
+"####" B 0 A_JumpIfInventory("STF_Agility",1,"Fire.Off")
+"####" B 0 A_Jump(256,"Fire.On")
+Goto Fire.On
+
+Fire.On:
+"####" B 0 A_PlaySoundEx("Move/DragonDance","Soundslot6")
+"####" BBBBBB 3 A_GiveInventory("AgilityParticleSpawn")
+"####" B 0 A_PlaySoundEx("Support/Statup","Soundslot7")
+"####" B 0 A_GiveInventory("AgilityBuffInitiate")
+"####" B 0 A_TakeInventory("AgilityPP",1)
+"####" B 0 A_Jump(256,"Fire.After")
+Goto Fire.After
+
+Fire.Off:
+"####" B 0 A_TakeInventory("Agility_Active",99)
+"####" B 0 A_GiveInventory("Recovery_C",8)
+"####" B 0 A_Jump(256,"Fire.After")
+Goto Fire.After
+
+Fire.After:
+"####" B 1 A_GiveInventory("Recovery_C",17)
+"####" C 0 A_REfire("Fire")
+"####" B 0 A_Jump(256,"Fire.End")
+Goto Fire.End
+
+}
+}
+
+actor AgilityMove1 : AgilityMove {Weapon.SlotNumber 1}
+actor AgilityMove2 : AgilityMove {Weapon.SlotNumber 2}
+actor AgilityMove3 : AgilityMove {Weapon.SlotNumber 3}
+actor AgilityMove4 : AgilityMove {Weapon.SlotNumber 4}
+
+actor AgilityMove5 : AgilityMove 
+{
+Weapon.SlotNumber 5
+States
+{
+Fire.End:
+TNT1 A 0
+TNT1 A 0 A_TakeInventory("AgilityMove5",9)
+TNT1 A 0 A_Jump(256,"Ready")
+Goto Ready
+}
+}
+
+//[+]========================================================================[+]
+//-----------------------------|Ammo & Inventory|------------------------------
+//[+]========================================================================[+]
+actor AgilityPP : Ammo {inventory.amount 1 inventory.Maxamount 25}
+actor STF_Agility : Powerup {inventory.amount 1 Powerup.Duration 40}
+actor Agility_Active : Inventory {inventory.amount 1 inventory.Maxamount 1}
+
+actor AgilityBuffInitiate : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_Jumpifinventory("Agility_Active",1,"Sustain")
+TNT1 A 0 A_GiveInventory("Agility_Active",1)
+TNT1 A 0 A_SpawnitemEX("AgilityBuffWatcher")
+TNT1 A 0 A_GiveInventory("StatUpdator",1)
+stop
+
+Sustain:
+TNT1 A 0 A_GiveInventory("STF_Agility",1)
+stop
+Nope:
+TNT1 A 0
+stop
+}
+}
+
+
+actor AgilityBuffWatcher : BasicHelper 
+{
+Var int user_TickTime;
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_JumpIfInTargetInventory("CutterFlag",999,"Death")
+TNT1 A 0 A_JumpIfInTargetInventory("IsDead",1,"Death")
+TNT1 A 5 A_GiveToTarget("STF_Agility")
+TNT1 A 0 A_GiveToTarget("SPDUpFXSpawn")
+TNT1 A 0 A_SetUserVar("user_TickTime",user_TickTime+5)
+TNT1 A 0 A_JumpIf(user_TickTime>=35,"SpawnTick")
+TNT1 A 0 A_JumpIfInTargetInventory("Agility_Active",1,"Spawn")
+Goto Death
+
+SpawnTick:
+TNT1 A 0 A_SetUserVar("user_TickTime",0)
+TNT1 A 0 A_TakeFromTarget("AgilityPP",1)
+TNT1 A 0 A_JumpIfInTargetInventory("AgilityPP",1,"Spawn")
+Goto Death
+
+Death:
+TNT1 A 0 A_GiveToTarget("StatUpdator")
+TNT1 A 0 A_GiveToTarget("BuffLossSoundCue")
+TNT1 A 0 A_TakeFromTarget("STF_Agility",9)
+TNT1 A 0 A_TakeFromTarget("Agility_Active",99)
+TNT1 A 2 
+stop
+}
+}
+
+
+actor AgilityParticle : BasicClientside
+{
+scale 3.5
+speed 7
+States
+{
+Spawn:
+TNT1 A 0
+GHOL A 5
+GHOL AAAA 2 A_Fadeout(3.0)
+stop
+}
+}
+
+actor AgilityParticleSpawn : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 AAA 0 A_SpawnItemEx ("AgilityParticle", 40, 0, 0, 0, 0, 20, random(0,360),SXF_NOCHECKPOSITION|SXF_ABSOLUTEMOMENTUM|SXF_TRANSFERTRANSLATION)
+stop
+Nope:
+TNT1 A 0
+stop
+}
+}

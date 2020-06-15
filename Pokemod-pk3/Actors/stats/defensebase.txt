@@ -99,8 +99,10 @@ damagefactor "FalseSwipe", 1.0
 damagefactor "NightSlash1", 1.0
 damagefactor "NightSlash2", 1.0
 damagefactor "NightSlash3", 1.0
-damagefactor "XScissor", 1.0
-damagefactor "SkyDrop", 1.0
+damagefactor "XScissor1", 1.0
+damagefactor "XScissor2", 1.0
+damagefactor "SkyDrop1", 1.0
+damagefactor "SkyDrop2", 1.0
 damagefactor "Earthquake", 1.0
 damagefactor "WoodHammer", 1.0
 damagefactor "FlameWheel", 1.0

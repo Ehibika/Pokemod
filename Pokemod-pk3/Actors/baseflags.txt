@@ -135,6 +135,34 @@ inventory.amount 1
 inventory.maxamount 100
 }
 //[+]========================================================================[+]
+//--------------------------------|Zangief Script|---------------------------
+//[+]========================================================================[+]
+actor SuplexID : Inventory
+{
+inventory.amount 1
+inventory.maxamount 64
+}
+actor ZangiefAngle : Inventory
+{
+inventory.amount 1
+inventory.maxamount 255
+}
+
+actor AntiInvincible : CustomInventory
+{
+States
+{
+Pickup:
+TNT1 A 0 A_JumpIf(Health>0,"InGame")
+stop
+InGame:
+TNT1 A 0 A_ChangeFlag("INVULNERABLE",0)
+TNT1 A 0 A_ChangeFlag("SHOOTABLE",1)
+stop
+}
+}
+
+//[+]========================================================================[+]
 //--------------------------------|Targeting Script|---------------------------
 //[+]========================================================================[+]
 actor TargetingFlag : Inventory{inventory.amount 1 inventory.maxamount 64}
