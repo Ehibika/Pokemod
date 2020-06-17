@@ -116,6 +116,7 @@ Misc/Levelup LEVELUP
 Misc/Evolution FANFARE1
 Misc/GetMove FANFARE2
 Misc/DeathSound DEADPOP
+Misc/Poked POKED
 
 Misc/GetItem PICKUP1
 Misc/GetCash PICKUP2

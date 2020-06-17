@@ -101,7 +101,7 @@
 #include "actors/Moves/NightSlash.txt"
 #include "actors/Moves/XScissor.txt"
 #include "actors/Moves/SkyDrop.txt"
-//#include "actors/Moves/StealthRock.txt"
+#include "actors/Moves/StealthRock.txt"
 //#include "actors/Moves/Curse.txt"
 #include "actors/Moves/Earthquake.txt"
 //#include "actors/Moves/WideGuard.txt"
@@ -142,6 +142,8 @@
 //#include "actors/Moves/SwordDance.txt"
 //#include "actors/Moves/AquaJet.txt"
 //#include "actors/Moves/DrillPeck.txt"
+#include "actors/Moves/Spikes.txt"
+#include "actors/Moves/ToxicSpikes.txt"
 
 #include "Actors/Classes/Pokemon/Ditto.txt"
 

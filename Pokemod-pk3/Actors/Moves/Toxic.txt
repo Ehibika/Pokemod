@@ -70,7 +70,7 @@ actor ToxicPP : Ammo {inventory.amount 1 inventory.Maxamount 10}
 actor ToxFieldUp : Powerup {inventory.amount 1 Powerup.Duration -8}
 
 
-actor ToxicStack : PowerProtection {inventory.amount 1 Powerup.Duration 20 DamageFactor "Toxic", 1.2}
+actor ToxicStack : PowerProtection {inventory.amount 1 Powerup.Duration 20 DamageFactor "Toxic", 1.2 DamageFactor "ToxicSpikes", 1.5}
 actor ToxicStack1 : ToxicStack{}
 actor ToxicStack2 : ToxicStack{}
 actor ToxicStack3 : ToxicStack{}

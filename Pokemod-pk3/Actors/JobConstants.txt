@@ -141,7 +141,8 @@ const int Move_Brine = 115;
 const int Move_SwordDance = 116;
 const int Move_AquaJet = 117;
 const int Move_DrillPeck = 118;
-
+const int Move_Spikes = 119;
+const int Move_ToxicSpikes = 120;
 //=======|weapon Constants|==========
 const int Aim_OverHead = 35;
 

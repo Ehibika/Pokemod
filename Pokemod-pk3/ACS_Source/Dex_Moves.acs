@@ -128,5 +128,6 @@
 #LIBDEFINE SwordDance 116
 #LIBDEFINE AquaJet 117
 #LIBDEFINE DrillPeck 118
-
+#LIBDEFINE Spikes 119
+#LIBDEFINE ToxicSpikes 120
 int Blah2; //Needed to compile properly, can't have only LIBDEFINEs

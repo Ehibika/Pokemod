@@ -25,7 +25,8 @@ damagefactor "SleepPowder", 1.0
 damagefactor "Toxic", 1.0
 damagefactor "DragonRage", 1.0
 damagefactor "StealthRock", 1.0
-
+damagefactor "Spikes", 1.0
+damagefactor "ToxicSpikes", 1.0
 }
 
 actor PAtk : Atk

@@ -277,6 +277,9 @@ str weapons_ammo[MAX_WEAPONS_GLOBAL][7] =
 {"SwordDanceMove", "SwordDancePP", "SwordDance", 1.0, "NO", "NO", "SLOT_NONE"},
 {"AquaJetMove", "AquaJetPP", "AquaJet", 1.0, "NO", "NO", "SLOT_NONE"},
 {"DrillPeckMove", "DrillPeckPP", "DrillPeck", 1.0, "NO", "NO", "SLOT_NONE"},
+
+{"SpikesMove", "SpikesPP", "Spikes", 1.0, "NO", "NO", "SLOT_NONE"},
+{"ToxicSpikesMove", "ToxicSpikesPP", "ToxicSpikes", 1.0, "NO", "NO", "SLOT_NONE"},
 };
 #endregion
 //#endregion
