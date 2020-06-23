@@ -156,7 +156,7 @@ int Result = GetPlayerInfo(PlayerNumber(),PLAYERINFO_TEAM);
 //Log(i:Result);
 SetResultValue(Result);
 }
-   
+
 
 Script "PKMNACS_HealthPercent" (int TargTID, int Type, int perval)
 {
