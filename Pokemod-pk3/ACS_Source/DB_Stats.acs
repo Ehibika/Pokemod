@@ -1,0 +1,243 @@
+#library "DB_Stats"
+#include "zcommon.acs"
+
+//#region -=- General Constants & Variables
+#LIBDEFINE HPVAL1 10
+#LIBDEFINE HPVAL2 250
+#LIBDEFINE HPVAL3 999
+
+#LIBDEFINE ATKVAL1 1
+#LIBDEFINE ATKVAL2 100
+#LIBDEFINE ATKVAL3 400
+
+#LIBDEFINE DEFVAL1 1
+#LIBDEFINE DEFVAL2 100
+#LIBDEFINE DEFVAL3 400
+
+#LIBDEFINE STATMIN 1
+#LIBDEFINE STATBASELINE 80
+#LIBDEFINE STATMAX 999
+
+#LIBDEFINE SPDVAL1 75
+#LIBDEFINE SPDVAL2 125
+
+#LIBDEFINE TestLevel 10
+
+
+Int SpeedTable[10][2] = {
+{32,90},
+{34,150},
+{36,210},
+{38,270},
+{40,330},
+{42,390},
+{44,450},
+{46,510},
+{48,570},
+{50,630},
+};
+//#endregion
+
+
+
+Function Int ActStatCalc (int inputStat, int inputLevel)
+{
+
+int a ,b ,c ,d;
+
+a = inputStat*4;
+b = a * inputLevel;
+c = (b / 10);
+d = c + 30;
+
+Return (d);
+
+}
+
+
+Function Void StatClear (Int Mode)
+{
+    str a ,b ,c ,d;
+    if(Mode == 1)
+    {
+    TakeInventory("Active_PAttack",999);
+    TakeInventory("Active_SAttack",999);
+    TakeInventory("Active_PDefense",999);
+    TakeInventory("Active_SDefense",999);
+    TakeInventory("Active_HP",999);
+    TakeInventory("Active_Speed",999);
+    }
+
+    For (int s = 1; s < 1001; s++)
+    {
+        a = StrParam(s:"PATK",i:s);
+        b = StrParam(s:"SATK",i:s);
+        c = StrParam(s:"PDEF",i:s);
+        d = StrParam(s:"SDEF",i:s);
+        if(CheckInventory(a)){TakeInventory(a,9);}
+        if(CheckInventory(b)){TakeInventory(b,9);}
+        if(CheckInventory(c)){TakeInventory(c,9);}
+        if(CheckInventory(d)){TakeInventory(d,9);}
+
+    }
+}
+
+Function Void GetActiveStats (Int PLevel)
+{
+    GiveInventory("Active_PAttack",ActStatCalc(CheckInventory("Base_PAttack"),PLevel));
+    GiveInventory("Active_SAttack",ActStatCalc(CheckInventory("Base_SAttack"),PLevel));
+    GiveInventory("Active_PDefense",ActStatCalc(CheckInventory("Base_PDefense"),PLevel));
+    GiveInventory("Active_SDefense",ActStatCalc(CheckInventory("Base_SDefense"),PLevel));
+
+    GiveInventory("Active_HP",ActStatCalc(CheckInventory("Base_HP"),PLevel));
+    GiveInventory("Active_Speed",ActStatCalc(CheckInventory("Base_Speed"),PLevel));
+}
+
+/*
+Str StatName[5] = {
+"PATK",
+"SATK",
+"PDEF",
+"SDEF",
+"SPD",
+};
+
+Str StatName2[7] = {
+    "UP3",
+    "UP2",
+    "UP1",
+    "Null",
+    "DOWN1",
+    "DOWN2",
+    "DOWN3",
+};
+*/
+
+#LIBDEFINE STATITEMNUM 15
+
+Str StatEffectName[STATITEMNUM] = {
+    "Growth",
+    "Growl",
+    "Tailwhip",
+    "ScaryFace",
+    "Amnesia",
+    "IronDefense",
+    "DragonDance",
+    "ShellSmash",
+    "Yawn",
+    "IcyWind",
+    "PowerSeed",
+    "GuardSeed",
+    "HasteSeed",
+    "Agility",
+    "Curse",
+};
+
+#LIBDEFINE PATK_ID 0
+#LIBDEFINE SATK_ID 1
+#LIBDEFINE PDEF_ID 2
+#LIBDEFINE SDEF_ID 3
+#LIBDEFINE SPD_ID 4
+
+Int StatEffectValue[STATITEMNUM][5] = {
+//Patk  Satk    PDef    SDef        Spd
+{   1,      1,      0,      0,       0}, 
+{   -1,      0,      0,      0,      0}, 
+{   0,      0,      -1,      0,      0}, 
+{   0,      0,      0,      0,      -2}, 
+{   0,      0,      0,      2,      0}, 
+{   0,      0,      2,      0,      0}, 
+{   1,      0,      0,      0,      1}, 
+{   2,      2,      -1,      -1,      2},
+{   0,      0,      0,      0,      -1}, 
+{   0,      0,      0,      0,      -1}, 
+{   1,      1,      0,      0,      0}, 
+{   0,      0,      1,      1,      0}, 
+{   0,      0,      0,      0,      1}, 
+{   0,      0,      0,      0,      2}, 
+{   1,      0,      1,      0,      -1}, 
+};
+
+Int StatMulti[13] = {
+0.25,
+0.28,
+0.33,
+0.40,
+0.50,
+0.66,
+1.0,
+1.5,
+2.0,
+2.5,
+3.0,
+3.5,
+4.0,
+};
+
+Function int StatModifier (int ModStat, int StatID)
+{
+
+int Output = ModStat;
+str Flagname;
+int ModLevel = 6;
+/*
+Here, this checks for any flag items that would serve as modifiers to your active stats
+*/
+int t;
+int v;
+
+for (t = 0; t < STATITEMNUM; t++)
+    {
+        Flagname = StrParam(s:"STF_",s:StatEffectName[t]);
+        if(CheckInventory(Flagname)){ModLevel += StatEffectValue[t][StatID];}
+            /*
+        for (v = 0; v < 7; v++)
+            {
+            Flagname = StrParam(s:StatName[StatID],s:StatName2[v],s:"_ID",i:t);
+            log(s:Flagname);
+                if(CheckInventory(Flagname)){ModLevel += (3-v);}
+            }
+        v = 0;
+        */
+    }
+
+    if(ModLevel > 13){ModLevel = 13;}
+    if(ModLevel < 0){ModLevel = 0;}
+
+
+    Output = (Output*StatMulti[ModLevel]) >> 16;
+    //Log(i:Output);
+Return Output;
+}
+
+
+Function Void ClearPlayerCVars(int PlayerNum, int NewLevel)
+{
+    SetCvar(StrParam(s:"PlayerLevel_",i:PlayerNum),NewLevel);
+    SetCvar(StrParam(s:"PlayerEXP_",i:PlayerNum),0);
+    SetCvar(StrParam(s:"PlayerDEXNum_",i:PlayerNum),-1);
+    //SetCvar(StrParam(s:"Player",i:PlayerNum,s:"_Cash"),0);
+    SetCvarString(StrParam(s:"Player",i:PlayerNum,s:"_INV"),"0000");
+
+    ACS_NamedExecuteAlways("StatusMenuClear",0);
+}
+
+Function Void ClearAllPlayerCVars(void)
+{
+    For (int i; i < 37; i++) {ClearPlayerCVars(i,0);}
+}
+
+Function int GetStatMod (int TID, int StatID)
+{
+Int Output;
+str Flagname;
+
+    for (int t = 0; t < STATITEMNUM; t++)
+    {
+        Flagname = StrParam(s:"STF_",s:StatEffectName[t]);
+        if(TID>0){if(CheckActorInventory(TID,Flagname)){Output += StatEffectValue[t][StatID];}}
+        Else{if(CheckInventory(Flagname)){Output += StatEffectValue[t][StatID];}}
+    }
+    //if(Output != 0){log(i:Output);}
+Return Output;
+}

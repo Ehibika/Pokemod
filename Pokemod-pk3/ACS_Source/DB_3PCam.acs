@@ -1,0 +1,18 @@
+#library "DB_3PCam"
+#include "zcommon.acs"
+
+#LIBDEFINE C_TID	9000	//Default camera tid
+#LIBDEFINE MAX_R		190	//Maximum radius (or distance from the player) 128
+#LIBDEFINE MAXCamDist		270	
+#LIBDEFINE ADJUSTIN_R	2	//Amount to adjust the camera by
+#LIBDEFINE ADJUST_R	8	//Amount to adjust the camera by
+#LIBDEFINE VIEW_HEIGHT	72.0	//The approximate height of the player's view 41
+#LIBDEFINE POFFSET 0.03 //Pitch offset
+
+#LIBDEFINE OFFSET_LEFT -0.08
+#LIBDEFINE OFFSET_RIGHT 0.08
+bool cam_mode[64];		//Variable for turning the camera on or off.
+	
+
+#LIBDEFINE CAMANGLE_CLAMP 0.08
+#LIBDEFINE CAMHEIGHT_CLAMP 20

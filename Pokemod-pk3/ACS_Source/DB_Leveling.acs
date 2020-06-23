@@ -1,0 +1,39 @@
+#library "DB_Leveling"
+#include "zcommon.acs"
+
+//#region -=- General Variables -=-
+#region -=- General Variables -=-
+Int TeamEXPAward [4] = {};
+
+#endregion
+//#endregion
+
+Function Int StatusTime (Void)
+{
+//Returns when you are allowed to perform status functions like
+//Evolutions or learning new moves
+int Output;
+
+if(CheckInventory("InSafeZone")){output = 1;}
+
+if(GetCvar("lastmanstanding")==1||GetCvar("teamlms")==1)
+    {
+    if(GetGameModeState() != 2){output = 1;}
+	}
+	
+	return Output;
+}
+
+Function Int EXPTime (void)
+{
+//Returns when you are allowed to earn EXP
+int Output;
+
+if(GetCvar("lastmanstanding")==1||GetCvar("teamlms")==1)
+    {
+    if(GetGameModeState() == 2 ||GetGameModeState() == 3){output = 1;}
+    }
+else{output = 1;}
+
+return Output;
+}

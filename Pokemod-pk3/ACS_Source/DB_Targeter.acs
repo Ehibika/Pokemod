@@ -1,0 +1,19 @@
+#library "DB_Targeter"
+#include "zcommon.acs"
+
+// - Targeter Constants -
+#LIBDEFINE TG_TEAM 1
+#LIBDEFINE TG_ENEMY 2
+//MAX_TARGET_ANGLE (0.0 - 0.5) i think
+#LIBDEFINE MAX_TARGET_ANGLE 0.005
+#LIBDEFINE MAX_TARGET_ANGLE2 0.0005
+#LIBDEFINE TEAM_NONE -1
+#LIBDEFINE TEAM_COOP -2
+
+#LIBDEFINE LOSAMMO_MAX 300
+
+//just using this until GetActorProperty(0,APROP_Height)/2 works
+#LIBDEFINE PLAYER_CENTER 28.0
+
+int targetRegister; //replaced with User_STargTID
+int angleDistRegister; // replaced with User_angleDistRegister

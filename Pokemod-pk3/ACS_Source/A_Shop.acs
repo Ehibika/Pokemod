@@ -1,26 +1,7 @@
 #library "A_Shop"
 #include "zcommon.acs"
+#import "DB_Shop.acs"
 #import "A_3pcam.acs"
-
-#DEFINE MAX_PLAYERS 64
-#DEFINE MAX_SLOTS 10
-#DEFINE MAX_TEAMS 4
-#LIBDEFINE MAX_SHOP 8
-
-bool thePlayerPlayed[MAX_PLAYERS];
-int thePlayerTeam[MAX_PLAYERS];
-bool theTeamPlayed[MAX_TEAMS];
-
-str ShopItemList[MAX_SHOP] = {
-    "HPBerry",
-    "BigHPBerry",
-    "PPBerry",
-    "BigPPBerry",
-    "ClenseSeed",
-    "PowerSeed",
-    "GuardSeed",
-    "HasteSeed",
-};
 
 script "ShopEvents" (int type, int arg1, int arg2) EVENT
 {
@@ -35,6 +16,7 @@ Switch(type)
 
 //#region -=- Shop Display -=-
 #region -=- Shop Display -=-
+
 Script "DisplayCashAndSlots" OPEN CLIENTSIDE
 {
 int conP = ConsolePlayerNumber();
@@ -44,54 +26,12 @@ while(true) {
 }
 }
 
-function int getConPlayerView(int conP)
-{
-	int camera = CheckPlayerCamera(conP);
-	if(camera>999&&camera<(1000+MAX_PLAYERS)) return (camera-1000);
-	return conP;
-}
-
-#DEFINE MSGID 1000
-
-//#DEFINE XHUDSIZE 320
-//#DEFINE YHUDSIZE 240
-//#DEFINE XOFFSET 20.0
-//#DEFINE YOFFSET 180.0
-
-//#DEFINE XHUDSIZE 640
-//#DEFINE YHUDSIZE 480
-
-#DEFINE XHUDSIZE 480
-#DEFINE YHUDSIZE 360
-#DEFINE XOFFSET 24.0
-#DEFINE YOFFSET 240.0
-
-function void DisplayCashAndSlotsFunc(int conP) {
-	SetHudSize(XHUDSIZE, YHUDSIZE, 0);
-	SetFont("CONFONT");
-	int camP = getConPlayerView(conP);
-	//HudMessage(s:"Cash: ", i:GetPlayerCash(camP); HUDMSG_PLAIN, 77, CR_WHITE, 0.5, 0.75, 0.1);
-	HudMessage(s:"Cash: ", i:GetPlayerCash(camP); HUDMSG_PLAIN, MSGID, CR_WHITE, XOFFSET+0.1, YOFFSET+0.1, 0.1);
-	//HudMessage(s:"Slots: ", i:GetSlotCount(camP),s:"/",i:MAX_SLOTS; HUDMSG_PLAIN, MSGID+1, CR_WHITE, XOFFSET+0.1, YOFFSET+0.1, 0.1);
-}
-
-function int GetPlayerCash(int p)
-{
-return GetCvar(StrParam(s:"PLAYER",i:p,s:"_CASH"));
-}
-
-function int GetSlotCount(int p)
-{
-int slotCount = 0;
-for(int i = 0; i<MAX_SLOTS; i++) if(GetCvar(StrParam(s:"PLAYER",i:p,s:"_SLOT",i:i))!=-1) slotCount++;
-return slotCount;
-}
-
 #endregion
 //#endregion
 
 //#region  -=- Shop Functions
 #region  -=- Shop Functions
+
 script "InitializeCash" OPEN
 {
 if(!GetCVar("CASH_INIT")) {
@@ -110,16 +50,6 @@ script "RESET_PLAYER_CASH" (int p)
 ResetPlayerCash(p);
 }
 
-function void ResetAllCash(void)
-{
-for(int i = 0; i < MAX_PLAYERS; i++) ResetPlayerCash(i);
-}
-
-function void ResetPlayerCash(int p)
-{
-SetCvar(StrParam(s:"PLAYER",i:p,s:"_CASH"),100);
-}
-
 script "CashCheck" (int cost)
 {
 SetResultValue(GetCvar(StrParam(s:"PLAYER",i:PlayerNumber(),s:"_CASH"))>=cost);
@@ -128,11 +58,6 @@ SetResultValue(GetCvar(StrParam(s:"PLAYER",i:PlayerNumber(),s:"_CASH"))>=cost);
 script "CashPay" (int cost)
 {
 AdjustCvar(StrParam(s:"PLAYER",i:PlayerNumber(),s:"_CASH"),-cost);
-}
-
-function void AdjustCvar(str cvar, int amount)
-{
-SetCvar(cvar,GetCvar(cvar)+amount);
 }
 
 script "GivePlayerCash" (int p, int wage)
@@ -188,69 +113,6 @@ while(GetGameModeState()!=GAMESTATE_INRESULTSEQUENCE) delay(1);
 int theMaxPlayers = MAX_PLAYERS;
 int v = FindVictor(theMaxPlayers);
 if(v>-1) SoloFunc(v,theMaxPlayers);
-}
-
-function int FindVictorTeam (int theMaxTeams)  {
-for(int i = 0; i<theMaxTeams; i++) if(GetTeamProperty(i,TPROP_NumLivePlayers)>0) return i;
-return -1;
-}
-
-function void TeamFunc(int v, int theMaxPlayers, int theMaxTeams)  {
-for(int i = 0; i<theMaxPlayers; i++) {
-	if(thePlayerPlayed[i]) {
-		if(thePlayerTeam[i]==v) WinnerFunc(i);
-		else LoserFunc(i);
-	}
-}
-}
-
-function int FindVictor (int theMaxPlayers)  {
-for(int i = 0; i<theMaxPlayers; i++) if(thePlayerPlayed[i]&&GetActorProperty(1000+i,APROP_HEALTH)>0) return i;
-return -1;
-}
-
-function void SoloFunc(int v, int theMaxPlayers)  {
-int i;
-for(i = 0; i<v; i++) if(thePlayerPlayed[i]) LoserFunc(i);
-WinnerFunc(v);
-for(i=v+1; i<theMaxPlayers; i++) if(thePlayerPlayed[i]) LoserFunc(i);
-}
-
-function void LoserFunc(int p)  {
-    //PrintBold(s:"loser ",i:p);
-    
-    int MyTeam = GetPlayerInfo(p, PLAYERINFO_TEAM);
-    int MyTeamWins = GetTeamProperty(MyTeam,TPROP_WinCount);
-    int LoserBonus;
-    int LeadTeamWins;
-    int WinDiff;
-    for(int i = 0; i<MAX_TEAMS; i++) 
-        {
-        if(GetTeamProperty(i,TPROP_WinCount)>LeadTeamWins) 
-            {
-                LeadTeamWins = GetTeamProperty(i,TPROP_WinCount);
-            }
-        }
-        WinDiff = LeadTeamWins-MyTeamWins;
-        if(WinDiff>0)
-        {
-            LoserBonus = 15*WinDiff;
-            ACS_NamedExecuteWithResult("GivePlayerCash",p,LoserBonus);
-        }
-    
-	ParticipantFunc(p);
-}
-
-function void WinnerFunc(int p)  {
-    //PrintBold(s:"winner ",i:p);
-    
-    ACS_NamedExecuteWithResult("GivePlayerCash",p,50);
-	ParticipantFunc(p);
-}
-
-function void ParticipantFunc(int p)  {
-	ACS_NamedExecuteWithResult("GivePlayerCash",p,50);
-	//if(GetActorProperty(1000+p,APROP_HEALTH)<1) ACS_NamedExecuteWithResult("CLEAR_PERSISTENT_LOADOUT",p);
 }
 
 Script "CashPickup" (void)
@@ -488,75 +350,6 @@ int ItemQ;
     }
 
 }
-
-
-function void LoadAllPlayerInventory(void)
-{
-for(int i = 0; i < MAX_PLAYERS; i++) GiveActorInventory(i+1000,"LoadShopInventory",1);
-}
-
-function void SaveAllPlayerInventory(void)
-{
-for(int i = 0; i < MAX_PLAYERS; i++) GiveActorInventory(i+1000,"SaveShopInventory",1);
-}
-
-str HexArray[16] = {
-    "0",
-    "1",
-    "2",
-    "3",
-    "4",
-    "5",
-    "6",
-    "7",
-    "8",
-    "9",
-    "A",
-    "B",
-    "C",
-    "D",
-    "E",
-    "F",
-    };
-    
-    Function int HextoInt (str HexVal)
-    {
-    int len = StrLen(HexVal);
-    int base = 1;
-    int output;
-    int Hex;
-    for (int i=len-1; i>=0; i--) 
-        { 
-            Hex = HexCharToInt(strparam(c:GetChar(HexVal,i)));
-            output += Hex*base;
-            base = base*16;
-            //log(i:Hex);
-            //log(i:output);
-        }
-    
-    return output;
-    }
-    
-    
-    Function int HexCharToInt (str HexChar)
-    {
-    int output;
-    for(Int i;i<16;i++)
-        {
-        if(HexArray[i] == HexChar){output = i; break;}    
-        }
-    return output;
-    }
-    
-    
-    Script "HexTest" (int A)
-    
-    {
-    log(x:A);
-    log(i:HextoInt("A"));
-    log(i:HextoInt("AB"));
-    log(i:HextoInt("0A02"));
-    }
 
 #endregion
 //#endregion

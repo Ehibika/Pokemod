@@ -2,25 +2,7 @@
 #library "A_Targeter"
 #include "zcommon.acs"
 #include "8bdmlib.acs"
-
-// - Targeter Constants -
-#LIBDEFINE TG_TEAM 1
-#LIBDEFINE TG_ENEMY 2
-//MAX_TARGET_ANGLE (0.0 - 0.5) i think
-#DEFINE MAX_TARGET_ANGLE 0.005
-#DEFINE MAX_TARGET_ANGLE2 0.0005
-#DEFINE TEAM_NONE -1
-#DEFINE TEAM_COOP -2
-
-#DEFINE LOSAMMO_MAX 300
-
-//just using this until GetActorProperty(0,APROP_Height)/2 works
-#DEFINE PLAYER_CENTER 28.0
-
-int targetRegister; //replaced with User_STargTID
-int angleDistRegister; // replaced with User_angleDistRegister
-
-
+#import "DB_Targeter.acs"
 
 script "TracerTargeter" (int TargType, int TargRange) {
 	int ownerNumber = PlayerNumber();

@@ -4,7 +4,7 @@
 #include "zcommon.acs"// [Lego] Always include this before 8bdmlib
 #include "8bdmlib.acs"// included with MM8BDM under acs_source.
 					  // See 8bdmlib.acs for details.
-#import "A_Targeter.acs"
+#import "DB_Targeter.acs"
 //#Include "CSCCLib.acs" //for StatusTime()
 
 //#region -=- Constants and Variables
@@ -560,7 +560,7 @@ Script 256 (void)
 	Thing_ChangeTID(tempTID, 0);
 }
 
-/*
+
 Script 252 ENTER
 {
 if(PlayerIsBot(PlayerNumber()))
@@ -609,7 +609,7 @@ if(PlayerIsBot(PlayerNumber()))
 		}
 	}
 }
-*/
+
 
 
 // [Mess] Energy Balancer Functions
@@ -680,6 +680,8 @@ Return(-1);
 script "PERSISTENT_LOADOUT" (void)
 {
 LoadLoadout();
+if(PlayerIsBot(PlayerNumber())){SaveLoadout(); Terminate;}
+
 while(PlayerHealth()>0) {
 	SaveLoadout();
 	delay(1);

@@ -12,15 +12,10 @@
 #import "Dex_Leveling.acs"
 #import "Dex_BaseStats.acs"
 #import "DB_Player.acs"
-#import "A_Shop.acs"
+#import "DB_Shop.acs"
+#import "DB_Leveling.acs"
 #include "zcommon.acs"
 
-//#region -=- General Variables -=-
-#region -=- General Variables -=-
-Int TeamEXPAward [4] = {};
-
-#endregion
-//#endregion
 
 //#region -=- Experience And Levels -=-
 #region -=- Experience And Levels -=-
@@ -230,20 +225,6 @@ TeamEXPAward[PlayerTeam()] += EXPAward/2;
 //log(s:GetTeamProperty(PlayerTeam(),TPROP_Name), s:" Team EXP Award ", i:TeamEXPAward[PlayerTeam()]);
 }
 
-Function Int EXPTime (void)
-{
-//Returns when you are allowed to earn EXP
-int Output;
-
-if(GetCvar("lastmanstanding")==1||GetCvar("teamlms")==1)
-    {
-    if(GetGameModeState() == 2 ||GetGameModeState() == 3){output = 1;}
-    }
-else{output = 1;}
-
-return Output;
-}
-
 #endregion -=-=-=-=-=-=-=-
 //#endregion -=-=-=-=-=-=-=-
 
@@ -302,21 +283,7 @@ ACS_NamedExecuteAlways("SetDexNumber",0,NextForm);
 ACS_NamedExecuteAlways("SetPlayerType",0);
 }
 
-Function Int StatusTime (Void)
-{
-//Returns when you are allowed to perform status functions like
-//Evolutions or learning new moves
-int Output;
 
-if(CheckInventory("InSafeZone")){output = 1;}
-
-if(GetCvar("lastmanstanding")==1||GetCvar("teamlms")==1)
-    {
-    if(GetGameModeState() != 2){output = 1;}
-	}
-	
-	return Output;
-}
 
 #endregion
 //#endregion

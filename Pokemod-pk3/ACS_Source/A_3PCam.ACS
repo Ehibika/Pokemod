@@ -7,23 +7,7 @@
 
 #library "A_3PCam"
 #include "zcommon.acs"
-
-
-#libdefine C_TID	9000	//Default camera tid
-#define MAX_R		190	//Maximum radius (or distance from the player) 128
-#define MAXCamDist		270	
-#define ADJUSTIN_R	2	//Amount to adjust the camera by
-#define ADJUST_R	8	//Amount to adjust the camera by
-#define VIEW_HEIGHT	72.0	//The approximate height of the player's view 41
-#define POFFSET 0.03 //Pitch offset
-
-#Define OFFSET_LEFT -0.08
-#Define OFFSET_RIGHT 0.08
-bool cam_mode[64];		//Variable for turning the camera on or off.
-	
-
-#define CAMANGLE_CLAMP 0.08
-#define CAMHEIGHT_CLAMP 20
+#import "DB_3PCam.acs"
 
 
 Script "3rdCameraEnter" ENTER 

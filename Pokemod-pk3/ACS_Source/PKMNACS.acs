@@ -20,8 +20,8 @@
  * and imports to handle it's scripting. each script will have a prefix followed by an underscore, the meaning of each are:
  * 
  * "Dex_" = pokemon related Database file
- * "DB_" = General database file
- * "A_" = Self contained ACS files with scripts and functiones all aimed at a specific task
+ * "DB_" = DataBase Files containing Functions, variables, and constants to be used by other ACS files
+ * "A_" = ACS Files that contain scripts for a specific function, typically has it's own DB_File.
  * "Fc" = 
  * "G_" files containing scripts and functions that are Gamestate and gameplay relevant
 */

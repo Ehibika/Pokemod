@@ -6,52 +6,16 @@
 */
 
 #library "A_Stats"
-#Import "A_Leveling.acs"
+#Import "DB_Leveling.acs"
 #Import "DB_Player.acs"
 #Import "DB_Data.acs"
 #Import "Dex_Pokemon.acs"
 #import "Dex_Types.acs"
 #import "Dex_Leveling.acs"
 #Import "Dex_Basestats.acs"
+#import "DB_Stats.acs"
 #include "zcommon.acs"
 
-
-//#region -=- General Constants & Variables
-#DEFINE HPVAL1 10
-#DEFINE HPVAL2 250
-#DEFINE HPVAL3 999
-
-#DEFINE ATKVAL1 1
-#DEFINE ATKVAL2 100
-#DEFINE ATKVAL3 400
-
-#DEFINE DEFVAL1 1
-#DEFINE DEFVAL2 100
-#DEFINE DEFVAL3 400
-
-#DEFINE STATMIN 1
-#DEFINE STATBASELINE 80
-#DEFINE STATMAX 999
-
-#DEFINE SPDVAL1 75
-#DEFINE SPDVAL2 125
-
-#DEFINE TestLevel 10
-
-
-Int SpeedTable[10][2] = {
-{32,90},
-{34,150},
-{36,210},
-{38,270},
-{40,330},
-{42,390},
-{44,450},
-{46,510},
-{48,570},
-{50,630},
-};
-//#endregion
 
 Script "StatInitializer" (Void) 
 {
@@ -65,19 +29,6 @@ Script "StatInitializer" (Void)
     ACS_NamedExecuteAlways("ActiveStat_Handler",0);
 }
 
-Function Int ActStatCalc (int inputStat, int inputLevel)
-{
-
-int a ,b ,c ,d;
-
-a = inputStat*4;
-b = a * inputLevel;
-c = (b / 10);
-d = c + 30;
-
-Return (d);
-
-}
 
 Script "ActiveStatUpdate" (VOID) //for level ups
 {
@@ -133,161 +84,6 @@ SetUserCvar(pln,"YOUR_SPD",0);
 SetUserCvar(pln,"YOUR_LEVEL",0);
 SetUserCvar(pln,"YOUR_EXP",0);
 SetUserCvar(pln,"YOUR_NEXTEXP",0);
-}
-
-Function Void StatClear (Int Mode)
-{
-    str a ,b ,c ,d;
-    if(Mode == 1)
-    {
-    TakeInventory("Active_PAttack",999);
-    TakeInventory("Active_SAttack",999);
-    TakeInventory("Active_PDefense",999);
-    TakeInventory("Active_SDefense",999);
-    TakeInventory("Active_HP",999);
-    TakeInventory("Active_Speed",999);
-    }
-
-    For (int s = 1; s < 1001; s++)
-    {
-        a = StrParam(s:"PATK",i:s);
-        b = StrParam(s:"SATK",i:s);
-        c = StrParam(s:"PDEF",i:s);
-        d = StrParam(s:"SDEF",i:s);
-        if(CheckInventory(a)){TakeInventory(a,9);}
-        if(CheckInventory(b)){TakeInventory(b,9);}
-        if(CheckInventory(c)){TakeInventory(c,9);}
-        if(CheckInventory(d)){TakeInventory(d,9);}
-
-    }
-}
-
-Function Void GetActiveStats (Int PLevel)
-{
-    GiveInventory("Active_PAttack",ActStatCalc(CheckInventory("Base_PAttack"),PLevel));
-    GiveInventory("Active_SAttack",ActStatCalc(CheckInventory("Base_SAttack"),PLevel));
-    GiveInventory("Active_PDefense",ActStatCalc(CheckInventory("Base_PDefense"),PLevel));
-    GiveInventory("Active_SDefense",ActStatCalc(CheckInventory("Base_SDefense"),PLevel));
-
-    GiveInventory("Active_HP",ActStatCalc(CheckInventory("Base_HP"),PLevel));
-    GiveInventory("Active_Speed",ActStatCalc(CheckInventory("Base_Speed"),PLevel));
-}
-
-/*
-Str StatName[5] = {
-"PATK",
-"SATK",
-"PDEF",
-"SDEF",
-"SPD",
-};
-
-Str StatName2[7] = {
-    "UP3",
-    "UP2",
-    "UP1",
-    "Null",
-    "DOWN1",
-    "DOWN2",
-    "DOWN3",
-};
-*/
-
-#DEFINE STATITEMNUM 15
-
-Str StatEffectName[STATITEMNUM] = {
-    "Growth",
-    "Growl",
-    "Tailwhip",
-    "ScaryFace",
-    "Amnesia",
-    "IronDefense",
-    "DragonDance",
-    "ShellSmash",
-    "Yawn",
-    "IcyWind",
-    "PowerSeed",
-    "GuardSeed",
-    "HasteSeed",
-    "Agility",
-    "Curse",
-};
-
-#define PATK_ID 0
-#define SATK_ID 1
-#define PDEF_ID 2
-#define SDEF_ID 3
-#define SPD_ID 4
-
-Int StatEffectValue[STATITEMNUM][5] = {
-//Patk  Satk    PDef    SDef        Spd
-{   1,      1,      0,      0,       0}, 
-{   -1,      0,      0,      0,      0}, 
-{   0,      0,      -1,      0,      0}, 
-{   0,      0,      0,      0,      -2}, 
-{   0,      0,      0,      2,      0}, 
-{   0,      0,      2,      0,      0}, 
-{   1,      0,      0,      0,      1}, 
-{   2,      2,      -1,      -1,      2},
-{   0,      0,      0,      0,      -1}, 
-{   0,      0,      0,      0,      -1}, 
-{   1,      1,      0,      0,      0}, 
-{   0,      0,      1,      1,      0}, 
-{   0,      0,      0,      0,      1}, 
-{   0,      0,      0,      0,      2}, 
-{   1,      0,      1,      0,      -1}, 
-};
-
-Int StatMulti[13] = {
-0.25,
-0.28,
-0.33,
-0.40,
-0.50,
-0.66,
-1.0,
-1.5,
-2.0,
-2.5,
-3.0,
-3.5,
-4.0,
-};
-
-Function int StatModifier (int ModStat, int StatID)
-{
-
-int Output = ModStat;
-str Flagname;
-int ModLevel = 6;
-/*
-Here, this checks for any flag items that would serve as modifiers to your active stats
-*/
-int t;
-int v;
-
-for (t = 0; t < STATITEMNUM; t++)
-    {
-        Flagname = StrParam(s:"STF_",s:StatEffectName[t]);
-        if(CheckInventory(Flagname)){ModLevel += StatEffectValue[t][StatID];}
-            /*
-        for (v = 0; v < 7; v++)
-            {
-            Flagname = StrParam(s:StatName[StatID],s:StatName2[v],s:"_ID",i:t);
-            log(s:Flagname);
-                if(CheckInventory(Flagname)){ModLevel += (3-v);}
-            }
-        v = 0;
-        */
-    }
-
-    if(ModLevel > 13){ModLevel = 13;}
-    if(ModLevel < 0){ModLevel = 0;}
-
-
-    Output = (Output*StatMulti[ModLevel]) >> 16;
-    //Log(i:Output);
-Return Output;
 }
 
 Script "ChangeBaseStat" (int DexNum)
@@ -498,22 +294,6 @@ StatValue = ValueMap(input,250,80,300,25);
 //Log(s:"Stat Value is ",i:StatValue);
 }
 
-Function Void ClearPlayerCVars(int PlayerNum, int NewLevel)
-{
-    SetCvar(StrParam(s:"PlayerLevel_",i:PlayerNum),NewLevel);
-    SetCvar(StrParam(s:"PlayerEXP_",i:PlayerNum),0);
-    SetCvar(StrParam(s:"PlayerDEXNum_",i:PlayerNum),-1);
-    //SetCvar(StrParam(s:"Player",i:PlayerNum,s:"_Cash"),0);
-    SetCvarString(StrParam(s:"Player",i:PlayerNum,s:"_INV"),"0000");
-
-    ACS_NamedExecuteAlways("StatusMenuClear",0);
-}
-
-Function Void ClearAllPlayerCVars(void)
-{
-    For (int i; i < 37; i++) {ClearPlayerCVars(i,0);}
-}
-
 script "StatusVarsGameOver" UNLOADING
 {
 ACS_NamedExecuteWithResult("CLEAR_ALL_STATUSVARS"); //must be executewithresult for unloading
@@ -533,20 +313,4 @@ script "CLEAR_ALL_STATUSVARS" (void)
 script "CLEAR_STATUSVARS" (int p)
 {
     ClearPlayerCVars(p,0);
-}
-
-
-Function int GetStatMod (int TID, int StatID)
-{
-Int Output;
-str Flagname;
-
-    for (int t = 0; t < STATITEMNUM; t++)
-    {
-        Flagname = StrParam(s:"STF_",s:StatEffectName[t]);
-        if(TID>0){if(CheckActorInventory(TID,Flagname)){Output += StatEffectValue[t][StatID];}}
-        Else{if(CheckInventory(Flagname)){Output += StatEffectValue[t][StatID];}}
-    }
-    //if(Output != 0){log(i:Output);}
-Return Output;
 }
