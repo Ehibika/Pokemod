@@ -24,4 +24,9 @@ Int MoveDex [MAXDEX][14] = {
 	/*|7|*/{Watergun,Yawn,RapidSpin,Protect,/**/ LifeDew,BubbleBeam,IronDefense,Amnesia,AquaRing,HydroPump,FlashCannon,Haze,ShellSmash},
 	/*|8|*/{Watergun,Yawn,RapidSpin,Protect,/**/ LifeDew,BubbleBeam,IronDefense,Amnesia,AquaRing,HydroPump,FlashCannon,Haze,ShellSmash},
 	/*|9|*/{Watergun,Yawn,RapidSpin,Protect,/**/ LifeDew,BubbleBeam,IronDefense,Amnesia,AquaRing,HydroPump,FlashCannon,Haze,ShellSmash},
-	};
+	
+	/*|10|*/{Growl,RazorLeaf,PoisonPowder,Synthesis,/**/ Reflect,MagicalLeaf,LightScreen,GrassWhistle,HealPulse,AromaTherapy,SeedBomb,Safeguard,SolarBeam},
+	/*|11|*/{Growl,RazorLeaf,PoisonPowder,Synthesis,/**/ Reflect,MagicalLeaf,LightScreen,GrassWhistle,HealPulse,AromaTherapy,SeedBomb,Safeguard,SolarBeam},
+	/*|12|*/{Growl,RazorLeaf,PoisonPowder,Synthesis,/**/ Reflect,MagicalLeaf,LightScreen,GrassWhistle,HealPulse,AromaTherapy,SeedBomb,Safeguard,SolarBeam},
+
+};

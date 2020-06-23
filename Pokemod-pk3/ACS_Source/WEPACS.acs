@@ -560,7 +560,7 @@ Script 256 (void)
 	Thing_ChangeTID(tempTID, 0);
 }
 
-
+/*
 Script 252 ENTER
 {
 if(PlayerIsBot(PlayerNumber()))
@@ -609,7 +609,7 @@ if(PlayerIsBot(PlayerNumber()))
 		}
 	}
 }
-
+*/
 
 
 // [Mess] Energy Balancer Functions

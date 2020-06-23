@@ -36,4 +36,8 @@ Int StatDEX [MAXDEX][10] = {
 /*|7|*/{55, 40,  65,  50,     66,    38,    5,		Type_Water,Type_NULL,  LVLSPD_Normal},
 /*|8|*/{70, 52,  84,  65,     84,    50,    10,		Type_Water,Type_NULL,  LVLSPD_Normal},
 /*|9|*/{100, 62,  105, 85,     105,   73,    20,	Type_Water,Type_NULL,  LVLSPD_Normal},
+
+/*|10|*/{45, 49,  65,  49,     65,    45,    5,		Type_Grass,Type_NULL,  LVLSPD_Normal},
+/*|11|*/{60, 62,  80,  63,     80,    60,    10,		Type_Grass,Type_NULL,  LVLSPD_Normal},
+/*|12|*/{80, 82,  100, 83,     100,   80,    20,	Type_Grass,Type_NULL,  LVLSPD_Normal},
 };

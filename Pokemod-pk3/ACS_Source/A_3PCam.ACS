@@ -178,7 +178,7 @@ Script "3rdCameraDisconnect" (int p_num) DISCONNECT
 
 //script "S_Reticule" OPEN {
 script "S_Reticule_C" OPEN CLIENTSIDE {
-	if(PlayerIsBot(PlayerNumber())){Terminate;}
+	//if(PlayerIsBot(PlayerNumber())){log(s:"none for ",n:PlayerNumber()); Terminate;}
 	
 	int selfNumber = ConsolePlayerNumber();
 	int selfTID = selfNumber + 1000;

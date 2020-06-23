@@ -4,6 +4,9 @@ AddPlayerClass Bulbasaur
 AddPlayerClass Charmander 
 AddPlayerClass Squirtle
 
+AddPlayerClass Chikorita
+
+
 alias TriggerEvo "CloseMenu; Use EvoStartItem"
 alias MoveTutor "CloseMenu; Use MoveTutorStartItem"
 alias MoveShift "CloseMenu; Use MoveShiftStartItem"

@@ -1,6 +1,3 @@
-#library "PKMNACS"
-#import "WEPACS.acs"
-		  
 /* -=- Bika's Coding Structure -=-
  *
  * Mods of this nature typically involve a lot of code due in part to the ammount of databasing and number crunching

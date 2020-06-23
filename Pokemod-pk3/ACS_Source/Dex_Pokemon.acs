@@ -11,7 +11,7 @@
 //#region -=- General Variables & Constants
 #region -=- General Variables & Constants
 #LIBDEFINE NULLEVO -1
-#LIBDEFINE MAXDEX 10
+#LIBDEFINE MAXDEX 13
 
 int Blah; //Needed to compile properly, can't have only LIBDEFINEs
 #endregion
@@ -27,4 +27,6 @@ int Blah; //Needed to compile properly, can't have only LIBDEFINEs
 #LIBDEFINE SQUIRTLE 7
 #LIBDEFINE WARTORTLE 8
 #LIBDEFINE BLASTOISE 9
-
+#LIBDEFINE CHIKORITA 10
+#LIBDEFINE BAYLEEF 11
+#LIBDEFINE MEGANIUM 12

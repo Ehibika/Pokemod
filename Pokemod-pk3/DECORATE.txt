@@ -160,3 +160,5 @@
 #include "Actors/Classes/Pokemon/Bulbasaur.txt"
 #include "Actors/Classes/Pokemon/Charmander.txt"
 #include "Actors/Classes/Pokemon/Squirtle.txt"
+
+#include "Actors/Classes/Pokemon/Chikorita.txt"
