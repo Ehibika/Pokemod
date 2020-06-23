@@ -131,7 +131,7 @@ Until(LevelLoopDone)
     else
         {
         ACS_NamedExecuteAlways("SetPlayerLevel",0,PlayerLVL);
-        if(PlayerIsBot(p)){ACS_NamedExecuteAlways("EvolveTrigger",0);}
+        //if(PlayerIsBot(p)){ACS_NamedExecuteAlways("EvolveTrigger",0);}
         LevelLoopDone = true;
         }
 

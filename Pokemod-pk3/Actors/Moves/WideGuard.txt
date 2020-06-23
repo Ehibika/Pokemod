@@ -1,0 +1,1032 @@
+actor WideGuardMove : WepMasterBase
+{
+Tag "WideGuard"
+Weapon.AmmoUse 1
+Weapon.AmmoGive 30
+weapon.ammotype "WideGuardPP"
+scale 2.0
+Inventory.Pickupmessage "$PU_MEGABUSTER"
+States
+{
+Spawn:
+WEAP X 1
+stop
+
+
+Fire:
+"####" B 0 A_Jumpif(CallACS("CheckWeaponFire",RC_C)==0,"NoAmmo")
+"####" B 0 A_JumpIfInventory("WideScreenActive",1,"Fire.ScreenKill")
+"####" B 0 A_Jump(256,"Fire.Aim")
+Goto Fire.Aim
+
+
+Fire.Aim:
+"####" B 1 A_FireCustomMissile("WideGuardRingSpawner",0,0,0,Aim_OverHead)
+"####" B 0 A_FireCustomMissile("WideGuardGraphicSpawner",0,0,0,Aim_OverHead)
+"####" C 0 A_REfire("Fire.Aim")
+"####" B 0 A_Jump(256,"Fire.ScreenSpawn")
+Goto Fire.ScreenSpawn
+
+Fire.ScreenSpawn:
+"####" B 0 A_PlaySoundEx("weapon/SlashClaw","Weapon")
+"####" B 0 A_FireCustomMissile("WideGuardSpawner",0,1,0,Aim_OverHead)
+"####" B 0 A_Jump(256,"Fire.After")
+Goto Fire.After
+
+Fire.ScreenKill:
+"####" B 0 A_PlaySoundEx("weapon/SlashClaw","Weapon")
+"####" B 0 A_SpawnItemEX("WideGuardKiller")
+"####" B 1 A_GiveInventory("HalfRecovery_C")
+"####" B 0 A_Jump(256,"Fire.End")
+Goto Fire.End
+
+Fire.After:
+"####" B 1 A_GiveInventory("FullRecovery_C")
+"####" C 0 //A_REfire("Fire")
+"####" B 0 A_Jump(256,"Fire.End")
+Goto Fire.End
+
+
+
+
+
+}
+}
+
+actor WideGuardMove1 : WideGuardMove {Weapon.SlotNumber 1}
+actor WideGuardMove2 : WideGuardMove {Weapon.SlotNumber 2}
+actor WideGuardMove3 : WideGuardMove {Weapon.SlotNumber 3}
+actor WideGuardMove4 : WideGuardMove {Weapon.SlotNumber 4}
+
+actor WideGuardMove5 : WideGuardMove 
+{
+Weapon.SlotNumber 5
+States
+{
+Fire.End:
+TNT1 A 0
+TNT1 A 0 A_TakeInventory("WideGuardMove5",9)
+TNT1 A 0 A_Jump(256,"Ready")
+Goto Ready
+}
+}
+
+//[+]========================================================================[+]
+//-----------------------------|Ammo & Inventory|------------------------------
+//[+]========================================================================[+]
+actor WideGuardPP : Ammo {inventory.amount 1 inventory.Maxamount 30}
+
+
+Const int WideGuardRad = 120;
+//[+]========================================================================[+]
+//--------------------------------|Projectiles |--------------------------------
+//[+]========================================================================[+]
+actor WideGuardRingGuide : BasicHelper
+{
+translation "198:198=220:220", "192:192=229:229"
+	reactiontime 15
+	var int user_angle;
+	States
+	{
+		Spawn:
+		TNT1 A 0
+		TNT1 A 0 A_SetUserVar("user_angle", 270)
+		SpawnLoop:
+		TNT1 A 0 A_SpawnItemEx("WideGuardGuideDot", WideGuardRad, 0, -(z-floorz)+24, 0, 0, 0, user_angle, SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION) //1061
+		TNT1 A 0 A_SpawnItemEx("WideGuardGuideDot", WideGuardRad, 0, -(z-floorz)+96, 0, 0, 0, user_angle, SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION)
+		TNT1 A 0 A_SetUserVar("user_angle", user_angle + 12)
+		TNT1 A 0 A_Countdown
+		loop
+		Death:
+		TNT1 A 0
+		stop
+	}
+}
+
+
+actor WideGuardRingSpawner : FastProjectile
+{
+translation "198:198=220:220", "192:192=229:229"
++DONTBLAST
++SKYEXPLODE
++THRUACTORS
++CLIENTSIDEONLY
+reactiontime 1
+damage (0)
+radius 3
+height 3
+speed 250
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 1 A_CountDown
+loop
+Death:
+TNT1 A 0 A_Jumpif(z-floorz > 175,"Terminate")
+TNT1 A 0 A_SpawnItemEx("WideGuardRingGuide",-WideGuardRad,0,0,0,0,0,0,1)
+stop
+
+Terminate:
+TNT1 A 0 
+stop
+}
+}
+
+actor WideGuardGuideDot : BasicGuideDot {}
+
+actor WideGuardSpawner : FastProjectile
+{
++DONTBLAST
++SKYEXPLODE
++THRUACTORS
+reactiontime 1
+damage (0)
+radius 3
+height 3
+speed 250
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+TNT1 A 1 A_CountDown
+loop
+Death:
+TNT1 A 0 A_Jumpif(z-floorz > 175,"Terminate")
+TNT1 A 0 A_GiveInventory("ProjectileDCode",1)
+SCBL A 0 A_PlaySoundEx("weapon/Crashland","Weapon")
+SCBL A 2 ACS_NamedExecuteAlways("WideScreenKiller",0)//
+TNT1 A 0 A_Givetotarget("WideScreenActive")
+TNT1 A 0 A_SpawnitemEx("ScreenSpawnBallStationary",0,0,-(z-floorz),0,0,0,0,SXF_TRANSFERTRANSLATION)
+stop
+
+Terminate:
+TNT1 A 0 
+stop
+}
+}
+
+actor WideGuardKiller : BasicHelper
+{
++MISSILE
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_TakeFromTarget("WideScreenActive",99)
+TNT1 A 5 ACS_NamedExecuteAlways("WideScreenKiller",0)//
+stop
+}
+}
+
+
+//[+]========================================================================[+]
+//--------------------------------|Shield Inventories|---------------------------
+//[+]========================================================================[+]
+
+actor WideScreenHealth : inventory {inventory.amount 1 inventory.maxamount 500}
+actor WideScreenActive : inventory {inventory.amount 1 inventory.maxamount 1}
+actor WideScreenKiller : powerup {inventory.amount 1 inventory.maxamount 1 Powerup.duration 5}
+
+Actor WideScreenFlag : inventory {inventory.amount 1 inventory.maxamount 2}
+Actor ProjectorCount : inventory {inventory.amount 1 inventory.maxamount 50}
+
+/*
+Actor ShieldHitBuffer : Powerup
+{
+inventory.amount 1
+inventory.maxamount 1
+powerup.duration 3
+}
+*/
+//[+]========================================================================[+]
+//--------------------------------|Shield Actors|---------------------------
+//[+]========================================================================[+]
+Actor WideScreenPart : HexBarrierBase
+{
+DamageFactor "Normal" , 0.2
+  Health 9999
+  //+THRUSPECIES
+  Var int User_HitDrain;
+  Var int User_TargTID;
+    RenderStyle "TRANSLUCENT"
+  Alpha 0.7
+  States
+  {
+  Spawn:
+	TNT1 A 0
+	TNT1 A 0 
+	//TNT1 A 0 ACS_NamedExecuteAlways("WideScreenSyncher",0)
+	TNT1 A 0 ACS_NamedExecuteAlways("PlayerSpeciesSynch",0)
+	TNT1 A 1// A_Logint(tid)
+	Shield:
+    WGUA ABCB 4 A_Stop
+	TNT1 A 0 
+    TNT1 A 0 A_JumpifinTargetInventory("WideScreenKiller",1,"Death")
+    TNT1 A 0 A_JumpifinTargetInventory("WideGuardPP",6,"Shield")
+    Goto WeakShield
+    WeakShield:
+    TNT1 A 4 A_Stop
+    WGUA B 4 A_Stop
+	TNT1 A 0 
+    TNT1 A 0 A_JumpifinTargetInventory("WideScreenKiller",1,"Death")
+    TNT1 A 0 A_JumpifinTargetInventory("WideGuardPP",6,"Shield")
+    Goto WeakShield
+	Pain:
+	TNT1 A 0 A_Stop
+	TNT1 A 0 A_PlaySoundEX ("item/protoreflect","Soundslot5")
+    TNT1 A 0 A_SpawnItemEx("CentaurFlashFX", 0, 0, 28, 256/24, 256/24, random2(256/24), random(0, 359))
+    TNT1 A 0 HealThing(9999)
+	HEXA BB 1 A_Stop
+	Goto Shield
+	Perish:
+  Death:
+    TNT1 A 2
+    stop
+  }
+}
+
+Actor WideScreenPart1 : WideScreenPart{+NORADIUSDMG}
+Actor WideScreenPart_B : WideScreenPart{Designatedteam 0 Species "LightMember" +NORADIUSDMG}
+Actor WideScreenPart_R : WideScreenPart{Designatedteam 1 Species "WilyMember" +NORADIUSDMG}
+Actor WideScreenPart_G : WideScreenPart{Designatedteam 2 Species "CossackMember" +NORADIUSDMG}
+Actor WideScreenPart_O : WideScreenPart{Designatedteam 3 Species "KingMember" +NORADIUSDMG}
+
+Actor WideScreenPart2 : WideScreenPart{+NORADIUSDMG Alpha 0.95}
+Actor WideScreenPart2_B : WideScreenPart{Designatedteam 0 Species "LightMember" +NORADIUSDMG Alpha 0.95}
+Actor WideScreenPart2_R : WideScreenPart{Designatedteam 1 Species "WilyMember" +NORADIUSDMG Alpha 0.95}
+Actor WideScreenPart2_G : WideScreenPart{Designatedteam 2 Species "CossackMember" +NORADIUSDMG Alpha 0.95}
+Actor WideScreenPart2_O : WideScreenPart{Designatedteam 3 Species "KingMember" +NORADIUSDMG Alpha 0.95}
+
+Actor WideScreenPartCore : WideScreenPart{}
+Actor WideScreenPartCore_B : WideScreenPart{Designatedteam 0 Species "LightMember" }
+Actor WideScreenPartCore_R : WideScreenPart{Designatedteam 1 Species "WilyMember" }
+Actor WideScreenPartCore_G : WideScreenPart{Designatedteam 2 Species "CossackMember" }
+Actor WideScreenPartCore_O : WideScreenPart{Designatedteam 3 Species "KingMember" }
+
+
+//[+]==================================[+]
+//[+]==================================[+]
+//#region -=- screen spawn actors -=-
+actor ScreenSpawner5up
+{
+  Radius 1
+  Height 1
+  +NOGRAVITY
+  +NOINTERACTION
+  States
+  {
+  Spawn:
+    TNT1 A 0
+    TNT1 A 0
+    TNT1 A 0 A_SpawnItemEx ("WideScreenPart2", 0, 0, 0, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("WideScreenPart1", 0, 0, 16, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("WideScreenPart1", 0, 0, 32, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("WideScreenPart1", 0, 0, 48, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("WideScreenPart1", 0, 0, 64, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("WideScreenPart2", 0, 0, 80, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    stop
+  }
+}
+
+actor ScreenSpawner5up_B
+{
+  Radius 1
+  Height 1
+  +NOGRAVITY
+  +NOINTERACTION
+  States
+  {
+  Spawn:
+    TNT1 A 0
+    TNT1 A 0
+    TNT1 A 0 A_SpawnItemEx ("WideScreenPart2_B", 0, 0, 0, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("WideScreenPart_B", 0, 0, 16, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("WideScreenPart_B", 0, 0, 32, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("WideScreenPart_B", 0, 0, 48, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("WideScreenPart_B", 0, 0, 64, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("WideScreenPart2_B", 0, 0, 80, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    stop
+  }
+}
+
+actor ScreenSpawner5up_R
+{
+  Radius 1
+  Height 1
+  +NOGRAVITY
+  +NOINTERACTION
+  States
+  {
+  Spawn:
+    TNT1 A 0
+    TNT1 A 0
+    TNT1 A 0 A_SpawnItemEx ("WideScreenPart2_R", 0, 0, 0, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("WideScreenPart_R", 0, 0, 16, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("WideScreenPart_R", 0, 0, 32, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("WideScreenPart_R", 0, 0, 48, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("WideScreenPart_R", 0, 0, 64, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("WideScreenPart2_R", 0, 0, 80, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    stop
+  }
+}
+
+actor ScreenSpawner5up_G
+{
+  Radius 1
+  Height 1
+  +NOGRAVITY
+  +NOINTERACTION
+  States
+  {
+  Spawn:
+    TNT1 A 0
+    TNT1 A 0
+    TNT1 A 0 A_SpawnItemEx ("WideScreenPart2_G", 0, 0, 0, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("WideScreenPart_G", 0, 0, 16, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("WideScreenPart_G", 0, 0, 32, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("WideScreenPart_G", 0, 0, 48, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("WideScreenPart_G", 0, 0, 64, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("WideScreenPart2_G", 0, 0, 80, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    stop
+  }
+}
+
+actor ScreenSpawner5up_O
+{
+  Radius 1
+  Height 1
+  +NOGRAVITY
+  +NOINTERACTION
+  States
+  {
+  Spawn:
+    TNT1 A 0
+    TNT1 A 0
+    TNT1 A 0 A_SpawnItemEx ("WideScreenPart2_O", 0, 0, 0, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("WideScreenPart_O", 0, 0, 16, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("WideScreenPart_O", 0, 0, 32, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("WideScreenPart_O", 0, 0, 48, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("WideScreenPart_O", 0, 0, 64, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("WideScreenPart2_O", 0, 0, 80, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    stop
+  }
+}
+//[+]==================================[+]
+//[+]==================================[+]
+actor ScreenSpawner4up
+{
+  Radius 1
+  Height 1
+  +NOGRAVITY
+  +NOINTERACTION
+  States
+  {
+  Spawn:
+    TNT1 A 0
+    TNT1 A 0
+    TNT1 A 0 A_SpawnItemEx ("WideScreenPart2", 0, 0, 8, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("WideScreenPart1", 0, 0, 24, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("WideScreenPart1", 0, 0, 40, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("WideScreenPart1", 0, 0, 56, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("WideScreenPart2", 0, 0, 72, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    stop
+  }
+}
+
+actor ScreenSpawner4up_B
+{
+  Radius 1
+  Height 1
+  +NOGRAVITY
+  +NOINTERACTION
+  States
+  {
+  Spawn:
+    TNT1 A 0
+    TNT1 A 0
+    TNT1 A 0 A_SpawnItemEx ("WideScreenPart2_B", 0, 0, 8, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("WideScreenPart_B", 0, 0, 24, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("WideScreenPart_B", 0, 0, 40, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("WideScreenPart_B", 0, 0, 56, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("WideScreenPart2_B", 0, 0, 72, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    stop
+  }
+}
+
+
+actor ScreenSpawner4up_R
+{
+  Radius 1
+  Height 1
+  +NOGRAVITY
+  +NOINTERACTION
+  States
+  {
+  Spawn:
+    TNT1 A 0
+    TNT1 A 1
+    TNT1 A 0 A_SpawnItemEx ("WideScreenPart2_R", 0, 0, 8, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("WideScreenPart_R", 0, 0, 24, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("WideScreenPart_R", 0, 0, 40, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("WideScreenPart_R", 0, 0, 56, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("WideScreenPart2_R", 0, 0, 72, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    stop
+  }
+}
+
+
+actor ScreenSpawner4up_G
+{
+  Radius 1
+  Height 1
+  +NOGRAVITY
+  +NOINTERACTION
+  States
+  {
+  Spawn:
+    TNT1 A 0
+    TNT1 A 1
+    TNT1 A 0 A_SpawnItemEx ("WideScreenPart2_G", 0, 0, 8, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("WideScreenPart_G", 0, 0, 24, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("WideScreenPart_G", 0, 0, 40, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("WideScreenPart_G", 0, 0, 56, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("WideScreenPart2_G", 0, 0, 72, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    stop
+  }
+}
+
+actor ScreenSpawner4up_O
+{
+  Radius 1
+  Height 1
+  +NOGRAVITY
+  +NOINTERACTION
+  States
+  {
+  Spawn:
+    TNT1 A 0
+    TNT1 A 1
+    TNT1 A 0 A_SpawnItemEx ("WideScreenPart2_O", 0, 0, 8, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("WideScreenPart_O", 0, 0, 24, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("WideScreenPart_O", 0, 0, 40, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("WideScreenPart_O", 0, 0, 56, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("WideScreenPart2_O", 0, 0, 72, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    stop
+  }
+}
+//[+]==================================[+]
+//[+]==================================[+]
+actor ScreenSpawnerCore
+{
+  Radius 1
+  Height 1
+  +NOGRAVITY
+  +NOINTERACTION
+  States
+  {
+  Spawn:
+    TNT1 A 0
+    TNT1 A 0
+    TNT1 A 0 A_SpawnItemEx ("WideScreenPart2", 0, 0, 8, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("WideScreenPart1", 0, 0, 24, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("WideScreenPartCore", 0, 0, 40, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("WideScreenPart1", 0, 0, 56, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("WideScreenPart2", 0, 0, 72, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    stop
+  }
+}
+
+actor ScreenSpawnerCore_B
+{
+  Radius 1
+  Height 1
+  +NOGRAVITY
+  +NOINTERACTION
+  States
+  {
+  Spawn:
+    TNT1 A 0
+    TNT1 A 0
+    TNT1 A 0 A_SpawnItemEx ("WideScreenPart2_B", 0, 0, 8, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("WideScreenPart_B", 0, 0, 24, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("WideScreenPartCore_B", 0, 0, 40, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("WideScreenPart_B", 0, 0, 56, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("WideScreenPart2_B", 0, 0, 72, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    stop
+  }
+}
+
+
+actor ScreenSpawnerCore_R
+{
+  Radius 1
+  Height 1
+  +NOGRAVITY
+  +NOINTERACTION
+  States
+  {
+  Spawn:
+    TNT1 A 0
+    TNT1 A 1
+    TNT1 A 0 A_SpawnItemEx ("WideScreenPart2_R", 0, 0, 8, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("WideScreenPart_R", 0, 0, 24, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("WideScreenPartCore_R", 0, 0, 40, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("WideScreenPart_R", 0, 0, 56, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("WideScreenPart2_R", 0, 0, 72, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    stop
+  }
+}
+
+actor ScreenSpawnerCore_G
+{
+  Radius 1
+  Height 1
+  +NOGRAVITY
+  +NOINTERACTION
+  States
+  {
+  Spawn:
+    TNT1 A 0
+    TNT1 A 1
+    TNT1 A 0 A_SpawnItemEx ("WideScreenPart2_G", 0, 0, 8, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("WideScreenPart_G", 0, 0, 24, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("WideScreenPartCore_G", 0, 0, 40, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("WideScreenPart_G", 0, 0, 56, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("WideScreenPart2_G", 0, 0, 72, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    stop
+  }
+}
+
+actor ScreenSpawnerCore_O
+{
+  Radius 1
+  Height 1
+  +NOGRAVITY
+  +NOINTERACTION
+  States
+  {
+  Spawn:
+    TNT1 A 0
+    TNT1 A 1
+    TNT1 A 0 A_SpawnItemEx ("WideScreenPart2_O", 0, 0, 8, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("WideScreenPart_O", 0, 0, 24, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("WideScreenPartCore_O", 0, 0, 40, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("WideScreenPart_O", 0, 0, 56, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("WideScreenPart2_O", 0, 0, 72, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    stop
+  }
+}
+
+//#endregion
+//[+]========================================================================[+]
+//--------------------------------|Projectile Actors|---------------------------
+//[+]========================================================================[+]
+//#region -=-depreciated-=-
+actor ScreenSpawnBall : BasicProjectile
+{
++THRUACTORS
++BOUNCEONWALLS
++BOUNCEONCEILINGS
++SKYEXPLODE
++NOTARGETSWITCH
+//-NOGRAVITY
+Damage (0)
+Translation "198:198=194:194"," 192:192=96:96"
+speed 30
+Scale 1.6
+Gravity 2.3
+WallBounceFactor 0.35
+States
+{
+Spawn:
+TNT1 A 0 
+TNT1 A 0 
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+SCBL AA 2 A_SpawnitemEx("MinibombTrail",0,0,0,0,0,0,0,SXF_TRANSFERTRANSLATION)
+TNT1 A 0 A_Changeflag("NOGRAVITY",0)
+SCBL A 2 A_SpawnitemEx("MinibombTrail",0,0,0,0,0,0,0,SXF_TRANSFERTRANSLATION)
+wait
+Death:
+TNT1 A 0 A_GiveInventory("ProjectileDCode",1)
+SCBL A 2 A_Checkfloor("Deploy")
+TNT1 A 0
+stop
+Deploy:
+//SCBL A 0 A_JumpifinTargetInventory("WideScreenActive",1,"Replace")
+SCBL A 0 A_PlaySoundEx("weapon/Crashland","Weapon")
+SCBL A 5 ACS_NamedExecuteAlways("WideScreenKiller",0)//
+TNT1 A 0 A_Givetotarget("WideScreenActive")
+TNT1 A 0 A_SpawnitemEx("ScreenSpawnBallStationary",0,0,0,0,0,0,0,SXF_TRANSFERTRANSLATION)
+stop
+Replace:
+SCBL A 5 ACS_NamedExecuteAlways("WideScreenKiller",0)//
+//SCBL A 3 A_Givetotarget("WideScreenKiller")
+TNT1 A 0 A_SpawnitemEx("ScreenSpawnBallStationary",0,0,0,0,0,0,0,SXF_TRANSFERTRANSLATION)
+stop
+}
+}
+
+Actor ScreenSpawnBall_B : ScreenSpawnBall{Designatedteam 0 Species "LightMember" translation "192:192=205:205", "198:198=74:74"}
+Actor ScreenSpawnBall_R : ScreenSpawnBall{Designatedteam 1 Species "WilyMember" Translation "192:192=171:171", "198:198=41:41"}
+Actor ScreenSpawnBall_G : ScreenSpawnBall{Designatedteam 1 Species "CossackMember" Translation "192:192=104:104", "198:198=128:128"}
+Actor ScreenSpawnBall_O : ScreenSpawnBall{Designatedteam 1 Species "KingMember"  Translation "192:192=229:229", "198:198=232:232"}
+//#endregion
+
+
+actor ScreenSpawnBallStationary //: BasicProjectile
+{
++MISSILE
++NOINTERACTION
++NOTARGETSWITCH
+Damage (0)
+//Missiletype "RepidifierTrail"
+speed 0
+Var Int User_Tick;
+Var Int User_TargTID;
+Var Int User_ScreenHP;
+Scale 1.6
+States
+{
+Spawn:
+SCBL A 0 
+TNT1 A 0 A_SetUserVar("User_TargTID",ACS_ExecuteWithResult(257,0))
+TNT1 A 0 thing_ChangeTID(0,User_TargTID+4000)
+TNT1 A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_TARGET,AAPTR_DEFAULT)
+SCBL A 3 
+SCBL A 0 A_Jump(256,"Screen")
+Goto Screen
+
+Screen:
+SCBL A 1 A_SetUserVar("User_ScreenHP",500)//A_GiveToTarget("WideScreenHealth",500)
+TNT1 A 0 //ACS_NamedExecuteAlways("ScreenHealthSynch",0)
+TNT1 A 0 A_PlaySoundEx("misc/astroplatformappear","SoundSlot6")
+
+BLTR C 0 A_Jumpifintargetinventory("LightTeamFlag",1,"ScreenBLUE")
+BLTR C 0 A_Jumpifintargetinventory("WilyTeamFlag",1,"ScreenRED")
+BLTR C 0 A_Jumpifintargetinventory("CossackTeamFlag",1,"ScreenGREEN")
+BLTR C 0 A_Jumpifintargetinventory("KingTeamFlag",1,"ScreenGOLD")
+//---
+SCBL A 0 A_SpawnitemEX("Screenprojector",-110,0,0,0,0,0,0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,User_TargTID+5000)
+SCBL A 8
+Goto Spawn1
+
+ScreenBLUE:
+SCBL A 0 A_SpawnitemEX("Screenprojector_BLUE",-110,0,0,0,0,0,0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,User_TargTID+5000)
+SCBL A 8
+Goto Spawn1
+
+ScreenRED:
+SCBL A 0 A_SpawnitemEX("Screenprojector_RED",-110,0,0,0,0,0,0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,User_TargTID+5000)
+SCBL A 8
+Goto Spawn1
+
+ScreenGREEN:
+SCBL A 0 A_SpawnitemEX("Screenprojector_GREEN",-110,0,0,0,0,0,0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,User_TargTID+5000)
+SCBL A 8
+Goto Spawn1
+
+ScreenGOLD:
+SCBL A 0 A_SpawnitemEX("Screenprojector_GOLD",-110,0,0,0,0,0,0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,User_TargTID+5000)
+SCBL A 8
+Goto Spawn1
+//=====
+
+Spawn1:
+SCBL A 0 A_RearrangePointers(AAPTR_MASTER,AAPTR_DEFAULT,AAPTR_DEFAULT)
+Goto IdleLoop
+
+IdleLoop:
+SCBL A 0 A_JumpifInventory("WideScreenKiller",1,"Terminate",AAPTR_TARGET)
+SCBL A 0 A_SetUserVar("User_Tick",User_Tick+1)
+SCBL A 0 A_Jumpif(User_Tick >= 35,"PPTake")
+Goto DeathCheck
+
+PPTake:
+TNT1 A 0 A_TakeFromTarget("WideGuardPP",1)
+SCBL A 0 A_SetUserVar("User_Tick",0)
+Goto DeathCheck
+
+/*
+Spawn1:
+SCBL A 0 A_RearrangePointers(AAPTR_MASTER,AAPTR_DEFAULT,AAPTR_DEFAULT)
+SCBL A 0 A_JumpifInventory("WideScreenKiller",1,"Terminate",AAPTR_TARGET)
+SCBL A 0 A_Jumpif(User_ScreenHP > 250,3)
+SCBL A 0 A_SetUserVar("User_Tick",User_Tick+1)
+SCBL A 0 A_Jumpif(User_Tick >= 5,"SparkFx")
+SCBL A 0 
+SCBL AA 1
+SCBL A 1 A_JumpifInventory("WideGuardPP",1,"Terminate",AAPTR_TARGET)//A_Jumpif(User_ScreenHP > 0,"Spawn1")
+SCBL A 2
+Goto DeathCheck
+
+SparkFx:
+SCBL A 0 A_Jumpif(User_ScreenHP > 125,2)//A_JumpifinTargetInventory("WideScreenHealth",175,2)
+SCBL A 0 A_Jump(256,"SparkFx2")
+SCBL A 0
+
+SCBL AA 0 A_SpawnItemEx("WideScreenSpark", 0, random(-100,100), 48, random2(256/48), random2(256/48), random2(256/48), 0)
+SCBL A 0 A_SetUserVar("User_Tick",0)
+SCBL A 1 
+SCBL A 1 A_Jumpif(User_ScreenHP > 0,"Spawn1")//A_Jumpifintargetinventory("WideScreenHealth",1,"Spawn1")
+SCBL A 2
+Goto DeathCheck
+
+SparkFx2:
+SCBL AAA 0 A_SpawnItemEx("WideScreenSpark", 0, random(-100,100), 48, random2(256/48), random2(256/48), random2(256/48), 0)
+SCBL AA 0 A_SpawnItemEx("WideScreenSpark", 0, random(-200,200), 48, random2(256/48), random2(256/48), random2(256/48), 0)
+SCBL A 0 A_SetUserVar("User_Tick",0)
+SCBL A 1 
+SCBL A 1 A_Jumpif(User_ScreenHP > 0,"Spawn1")//A_Jumpifintargetinventory("WideScreenHealth",1,"Spawn1")
+SCBL A 2
+Goto DeathCheck
+*/
+DeathCheck:   //intended to be a defense against desynch
+SCBL A 1 
+SCBL A 0 A_Jumpifintargetinventory("WideGuardPP",1,"IdleLoop")
+Goto Death
+Death:
+TNT1 A 1 A_TakeFromTarget("WideScreenActive",99)
+	TNT1 A 1 A_PlaySoundEx("weapon/CentaurFlash","Weapon")
+    TNT1 AAAAAAAAAA 0 A_SpawnItemEx("WideScreenSpark", 0, 0, 28, 256/24, 256/24, random2(256/24), random(0, 359))
+    TNT1 A 0 A_SpawnItemEX("WideGuardKiller")
+Terminate:
+Perish:
+TNT1 A 0
+stop
+}
+}
+
+//[+]=======================================
+actor Screenprojector
+{
++MISSILE
++NOINTERACTION
++NOTARGETSWITCH
+radius 8
+height 8
+Damage (0)
+scale 5.0
+Reactiontime 13
+Renderstyle "ADD"
+Alpha 0.8
+var int user_Rot;
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 2 //ACS_ExecuteAlways(723,0, 1, 250, 1)
+TNT1 A 0 A_setuservar("user_Rot",6)
+spawn2:
+SCBL A 0 A_SpawnItemEx ("ScreenSpawner5up", 0, 120, 16, 0, 0, 0, user_Rot,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+TNT1 A 0 A_setuservar("user_Rot",user_Rot+12)
+TNT1 A 0 A_jumpif(user_Rot == 90,"Core") //84
+TNT1 A 0 A_CountDown//A_jumpif(user_Rot >= 186,"Death")
+TNT1 A 0 A_GiveInventory("ProjectorCount",1)
+TNT1 A 0 A_Jumpifinventory("ProjectorCount",14,"Death")
+
+SCBL A 0 A_SpawnItemEx ("ScreenSpawner4up", 0, 120, 16, 0, 0, 0, user_Rot,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+TNT1 A 0 A_setuservar("user_Rot",user_Rot+12)
+TNT1 A 0 A_jumpif(user_Rot == 90,"Core")
+TNT1 A 0 A_CountDown//A_jumpif(user_Rot >= 186,"Death")
+TNT1 A 0 A_GiveInventory("ProjectorCount",1)
+TNT1 A 0 A_Jumpifinventory("ProjectorCount",14,"Death")
+TNT1 A 1
+Goto Spawn2
+
+Core:
+SCBL A 0 A_SpawnItemEx ("ScreenSpawnerCore", 0, 120, 16, 0, 0, 0, user_Rot,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+TNT1 A 0 A_setuservar("user_Rot",user_Rot+12)
+Goto Spawn2
+Death:
+TNT1 A 0
+stop
+}
+}
+
+
+actor Screenprojector_BLUE
+{
++MISSILE
++NOINTERACTION
++NOTARGETSWITCH
+radius 8
+height 8
+Damage (0)
+scale 5.0
+Reactiontime 13
+Renderstyle "ADD"
+Alpha 0.8
+var int user_Rot;
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 2 //ACS_ExecuteAlways(723,0, 1, 250, 1)
+TNT1 A 0 A_setuservar("user_Rot",6)
+spawn2:
+SCBL A 0 A_SpawnItemEx ("ScreenSpawner5up_B", 0, 120, 16, 0, 0, 0, user_Rot,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+TNT1 A 0 A_setuservar("user_Rot",user_Rot+12)
+TNT1 A 0 A_jumpif(user_Rot == 90,"Core") //84
+TNT1 A 0 A_CountDown//A_jumpif(user_Rot >= 186,"Death")
+TNT1 A 0 A_GiveInventory("ProjectorCount",1)
+TNT1 A 0 A_Jumpifinventory("ProjectorCount",14,"Death")
+
+SCBL A 0 A_SpawnItemEx ("ScreenSpawner4up_B", 0, 120, 16, 0, 0, 0, user_Rot,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+TNT1 A 0 A_setuservar("user_Rot",user_Rot+12)
+TNT1 A 0 A_jumpif(user_Rot == 90,"Core")
+TNT1 A 0 A_CountDown//A_jumpif(user_Rot >= 186,"Death")
+TNT1 A 0 A_GiveInventory("ProjectorCount",1)
+TNT1 A 0 A_Jumpifinventory("ProjectorCount",14,"Death")
+TNT1 A 1
+Goto Spawn2
+
+Core:
+SCBL A 0 A_SpawnItemEx ("ScreenSpawnerCore_B", 0, 120, 16, 0, 0, 0, user_Rot,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+TNT1 A 0 A_setuservar("user_Rot",user_Rot+12)
+Goto Spawn2
+Death:
+TNT1 A 0
+stop
+}
+}
+
+actor Screenprojector_RED
+{
++MISSILE
++NOINTERACTION
++NOTARGETSWITCH
+radius 8
+height 8
+Damage (0)
+scale 5.0
+Reactiontime 13
+Renderstyle "ADD"
+Alpha 0.8
+var int user_Rot;
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 2 //ACS_ExecuteAlways(723,0, 1, 250, 1)
+TNT1 A 0 A_setuservar("user_Rot",6)
+spawn2:
+SCBL A 0 A_SpawnItemEx ("ScreenSpawner5up_R", 0, 120, 16, 0, 0, 0, user_Rot,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+TNT1 A 0 A_setuservar("user_Rot",user_Rot+12)
+TNT1 A 0 A_jumpif(user_Rot == 90,"Core") //84
+TNT1 A 0 A_CountDown//A_jumpif(user_Rot >= 186,"Death")
+TNT1 A 0 A_GiveInventory("ProjectorCount",1)
+TNT1 A 0 A_Jumpifinventory("ProjectorCount",14,"Death")
+
+SCBL A 0 A_SpawnItemEx ("ScreenSpawner4up_R", 0, 120, 16, 0, 0, 0, user_Rot,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+TNT1 A 0 A_setuservar("user_Rot",user_Rot+12)
+TNT1 A 0 A_jumpif(user_Rot == 90,"Core")
+TNT1 A 0 A_CountDown//A_jumpif(user_Rot >= 186,"Death")
+TNT1 A 0 A_GiveInventory("ProjectorCount",1)
+TNT1 A 0 A_Jumpifinventory("ProjectorCount",14,"Death")
+TNT1 A 1
+Goto Spawn2
+
+Core:
+SCBL A 0 A_SpawnItemEx ("ScreenSpawnerCore_R", 0, 120, 16, 0, 0, 0, user_Rot,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+TNT1 A 0 A_setuservar("user_Rot",user_Rot+12)
+Goto Spawn2
+
+Death:
+TNT1 A 0
+stop
+}
+}
+
+actor Screenprojector_GREEN
+{
++MISSILE
++NOINTERACTION
++NOTARGETSWITCH
+radius 8
+height 8
+Damage (0)
+scale 5.0
+Reactiontime 13
+Renderstyle "ADD"
+Alpha 0.8
+var int user_Rot;
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 2 //ACS_ExecuteAlways(723,0, 1, 250, 1)
+TNT1 A 0 A_setuservar("user_Rot",6)
+spawn2:
+SCBL A 0 A_SpawnItemEx ("ScreenSpawner5up_G", 0, 120, 16, 0, 0, 0, user_Rot,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+TNT1 A 0 A_setuservar("user_Rot",user_Rot+12)
+TNT1 A 0 A_jumpif(user_Rot == 90,"Core") //84
+TNT1 A 0 A_CountDown//A_jumpif(user_Rot >= 186,"Death")
+TNT1 A 0 A_GiveInventory("ProjectorCount",1)
+TNT1 A 0 A_Jumpifinventory("ProjectorCount",14,"Death")
+
+SCBL A 0 A_SpawnItemEx ("ScreenSpawner4up_G", 0, 120, 16, 0, 0, 0, user_Rot,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+TNT1 A 0 A_setuservar("user_Rot",user_Rot+12)
+TNT1 A 0 A_jumpif(user_Rot == 90,"Core")
+TNT1 A 0 A_CountDown//A_jumpif(user_Rot >= 186,"Death")
+TNT1 A 0 A_GiveInventory("ProjectorCount",1)
+TNT1 A 0 A_Jumpifinventory("ProjectorCount",14,"Death")
+TNT1 A 1
+Goto Spawn2
+
+Core:
+SCBL A 0 A_SpawnItemEx ("ScreenSpawnerCore_G", 0, 120, 16, 0, 0, 0, user_Rot,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+TNT1 A 0 A_setuservar("user_Rot",user_Rot+12)
+Goto Spawn2
+
+Death:
+TNT1 A 0
+stop
+}
+}
+
+actor Screenprojector_GOLD
+{
++MISSILE
++NOINTERACTION
++NOTARGETSWITCH
+radius 8
+height 8
+Damage (0)
+scale 5.0
+Reactiontime 13
+Renderstyle "ADD"
+Alpha 0.8
+var int user_Rot;
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 2 //ACS_ExecuteAlways(723,0, 1, 250, 1)
+TNT1 A 0 A_setuservar("user_Rot",6)
+spawn2:
+SCBL A 0 A_SpawnItemEx ("ScreenSpawner5up_O", 0, 120, 16, 0, 0, 0, user_Rot,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+TNT1 A 0 A_setuservar("user_Rot",user_Rot+12)
+TNT1 A 0 A_jumpif(user_Rot == 90,"Core") //84
+TNT1 A 0 A_CountDown//A_jumpif(user_Rot >= 186,"Death")
+TNT1 A 0 A_GiveInventory("ProjectorCount",1)
+TNT1 A 0 A_Jumpifinventory("ProjectorCount",14,"Death")
+
+SCBL A 0 A_SpawnItemEx ("ScreenSpawner4up_O", 0, 120, 16, 0, 0, 0, user_Rot,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+TNT1 A 0 A_setuservar("user_Rot",user_Rot+12)
+TNT1 A 0 A_jumpif(user_Rot == 90,"Core")
+TNT1 A 0 A_CountDown//A_jumpif(user_Rot >= 186,"Death")
+TNT1 A 0 A_GiveInventory("ProjectorCount",1)
+TNT1 A 0 A_Jumpifinventory("ProjectorCount",14,"Death")
+TNT1 A 1
+Goto Spawn2
+
+Core:
+SCBL A 0 A_SpawnItemEx ("ScreenSpawnerCore_O", 0, 120, 16, 0, 0, 0, user_Rot,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+TNT1 A 0 A_setuservar("user_Rot",user_Rot+12)
+Goto Spawn2
+
+Death:
+TNT1 A 0
+stop
+}
+}
+//[+]========================================================================[+]
+//--------------------------------|Effect Actors|------------------------------
+//[+]========================================================================[+]
+actor WideScreenSpark
+{
++NOINTERACTION
++NOGRAVITY
++CLIENTSIDEONLY
++FORCEXYBILLBOARD
+-SOLID
+scale 1.3
+height 0
+radius 0
+States
+{
+Spawn:
+TNT1 A 0
+CFL5 ABCD 2
+CFL5 ABCD 2
+
+stop
+}
+}
+
+actor MiniBombTrail : BasicClientside
+{
+scale 1.5
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 2
+MINB IIIIII 1
+MINB IIIIII 1 A_Fadeout
+stop
+}
+}
+

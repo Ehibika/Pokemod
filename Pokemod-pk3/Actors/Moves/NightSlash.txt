@@ -62,7 +62,7 @@ Fire.Blade2: //Locked to lateral position
 Goto Fire.After
 
 Fire.After:
-"####" B 1 A_GiveInventory("Recovery_B",15)
+"####" B 1 A_GiveInventory("HalfRecovery_B")
 "####" C 0 A_REfire("Fire")
 "####" B 0 A_Jump(256,"Fire.End")
 Goto Fire.End

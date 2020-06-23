@@ -30,7 +30,7 @@ goto Fire.DashEnd
 
 Fire.DashEnd:
 "####" B 0 SetPlayerProperty(0,0,4)
-"####" B 1 A_GiveInventory("Recovery_B",35)
+"####" B 1 A_GiveInventory("FullRecovery_B")
 "####" B 0 A_Jump(256,"Fire.End")
 Goto Fire.End
 

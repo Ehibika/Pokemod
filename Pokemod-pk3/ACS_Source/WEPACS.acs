@@ -887,6 +887,37 @@ Script "CheckWeaponFire" (int RecoveryType)
  * or not this weapon is in a fire-ready state
  * 
 */
+SetResultValue(CheckWeaponFireFunc(RecoveryType));
+}
+
+Function bool CheckWeaponFireFunc(int RecoveryType)
+{
+if(CheckInventory("SpawnInBuffer")>0) return false;
+
+if(((RecoveryType&RC_A)>0) && (CheckInventory("Recovery_A")>0)) return false;
+if(((RecoveryType&RC_B)>0) && (CheckInventory("Recovery_B")>0)) return false;
+if(((RecoveryType&RC_C)>0) && (CheckInventory("Recovery_C")>0)) return false;
+
+int ThisWeapon = WhichWeapon();
+str WepAmmoName = weapons_ammo[ThisWeapon][1];
+
+if(CheckInventory(WepAmmoName)<1) return false;
+
+if(CheckInventory("GrappledFlag"))
+    {switch(ThisWeapon) {
+        /*RapidSpin*/Case 50: break;
+        default: return false; break;
+    }
+}
+
+return true;
+}
+
+//#region -=- depreciated -=-
+/*
+Script "CheckWeaponFire" (int RecoveryType)
+{
+
 
 int Output = 0;
 int ThisWeapon = WhichWeapon();
@@ -907,7 +938,7 @@ if((RecoveryType & RC_C) && CheckInventory("Recovery_C")){Output = 0;}
 if(CheckInventory("GrappledFlag"))
 	{switch(ThisWeapon)
 		{
-		/*RapidSpin*/Case 50: break;
+		Case 50: break; //rapidspin
 		default: Output = 0; break;
 		}
 	}
@@ -929,3 +960,6 @@ Script "MoveRecoveryHandler" (void)
 	}
 
 }
+*/
+//#endregion
+

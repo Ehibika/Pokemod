@@ -20,7 +20,7 @@
 //#region -=- EntiTID -=-
 #region -=- EntiTID -=-
 
-#DEFINE EntityTID 480000
+#LIBDEFINE EntityTID 480000
 
 Script "GiveEntiTID" (Int EntityID)
 {
@@ -251,7 +251,7 @@ SetResultValue(Damage);
 //#region -=- Deployable Shield -=-
 #region -=- Deployable Shield -=-
 
-Script "LightScreenSyncher" (void) 
+Script "WideScreenSyncher" (void) 
 {
 	//int Player = ACS_NamedExecuteWithResult("core_gettarget",0);
 	int BaseTID = ActivatorTID()-1000;
@@ -266,8 +266,8 @@ Script "LightScreenSyncher" (void)
 		Healthing(9999);
 		SetUserVariable(BaseTID, "User_ScreenHP",GetUserVariable(BaseTID, "User_ScreenHP")-Deduction);
 		}
-		//TakeActorInventory(Player,"LightScreenHealth",999);
-		//GiveActorInventory(Player,"LightScreenHealth",GetUserVariable(BaseTID, "User_ScreenHP"));
+		//TakeActorInventory(Player,"WideScreenHealth",999);
+		//GiveActorInventory(Player,"WideScreenHealth",GetUserVariable(BaseTID, "User_ScreenHP"));
 		Delay(1);
 	}
 	
@@ -275,7 +275,7 @@ Script "LightScreenSyncher" (void)
 	Thing_Remove(0);
 }
 
-Script "LightScreenKiller" (Void)
+Script "WideScreenKiller" (Void)
 {
 int Player = ACS_NamedExecuteWithResult("core_gettarget",0);
 
@@ -296,8 +296,8 @@ int TargetTID = ACS_ExecuteWithResult(257,0);
 	while(GetUserVariable(BaseTID, "User_ScreenHP")>0
 	&& ThingCount(T_NONE,BaseTID) > 0
 	){
-		TakeActorInventory(TargetTID,"LightScreenHealth",999);
-		GiveActorInventory(TargetTID,"LightScreenHealth",GetUserVariable(BaseTID, "User_ScreenHP"));
+		TakeActorInventory(TargetTID,"WideScreenHealth",999);
+		GiveActorInventory(TargetTID,"WideScreenHealth",GetUserVariable(BaseTID, "User_ScreenHP"));
 		Delay(1);
 	}
 }
@@ -327,7 +327,7 @@ int ScreenHealth = (GetUserVariable(BaseTID, "User_ScreenHP") ); //- 200
 
 int ShieldReturn; 
 
-TakeActorInventory(TargetTID,"LightScreenHealth",9999);
+TakeActorInventory(TargetTID,"WideScreenHealth",9999);
 TakeActorInventory(TargetTID,"ShieldEnergy",999);
 if (ScreenHealth > 0)
 	{
@@ -606,6 +606,21 @@ script "GRAB_MEMANGLE" (int num, int Swap)
 	}
 }
 
+script "GRAB_TIDMEMANGLE" (int num, int Swap, int TID)
+{
+	Switch(Swap)
+	{
+		Case 1:
+		SetResultValue(GetUserVariable(TID,user_variables[num])>>16);
+		break;
+		Default:
+		Case 0:
+		SetResultValue(GetUserVariable(TID,user_variables[num]));
+		break;
+	}
+}
+
+
 Script "SHIFT_MEMANGLE" (int currentAngle, int inputAngle, int angleChangeLimit)
 {
 //print(i:inputAngle);
@@ -813,6 +828,66 @@ SetResultValue(CheckInventory("ZangiefAngle"));
 
 //#endregion
 
+//#region -=- Projectile Port -=-
+
+script "ProjectilePort" (int maxDist)
+{
+int target = ACS_ExecuteWithResult(257);
+
+if(getActorProperty(0,APROP_HEALTH) <= 0 || getActorProperty(target,APROP_HEALTH) <= 0) {
+	terminate;
+}
+
+maxDist = maxDist << 16;
+
+int xDiff = getActorX(0) - getActorX(target);
+int yDiff = getActorY(0) - getActorY(target);
+int zDiff = getActorZ(0) - getActorZ(target);
+
+if(fdistanceVal(xDiff,yDiff,zDiff) > maxDist) {
+	terminate;
+}
+
+while (true) {
+	xDiff += getActorVelX(0);
+	yDiff += getActorVelY(0);
+	zDiff += getActorVelZ(0);
+	SetActorVelocity(target, xDiff, yDiff, zDiff, 0, 0);
+	//Log(s:"MOVED");
+	//GiveActorInventory(target,"ProjectilePorting",1);
+
+	delay(1);
+
+	if(getActorProperty(0,APROP_HEALTH) <= 0 || getActorProperty(target,APROP_HEALTH) <= 0 || CheckInventory("ProjectilePortDead")) {
+		//Log(s:"Someone is Dead");
+		GiveActorInventory(target,"ProjectilePortDead",1);
+		//TakeActorInventory(target,"ProjectilePorting",1);
+		terminate;
+	}
+	xDiff = getActorX(0) - getActorX(target);
+	yDiff = getActorY(0) - getActorY(target);
+	zDiff = getActorZ(0) - getActorZ(target);
+	if(fdistanceVal(xDiff,yDiff,zDiff) > maxDist) {
+		//Log(s:"Someone is too far");
+		SetActorState(0,"Death",1);
+		GiveActorInventory(target,"ProjectilePortDead",1);
+		//TakeActorInventory(target,"ProjectilePorting",1);
+		terminate;
+	}
+	if(CheckActorInventory(target,"FlightDisableFlag")>=1 || CheckActorInventory(target,"TimeStoppedTFFlag")>=1) {
+		//Log(s:"Someone is suffering");
+		SetActorState(0,"Death",1);
+		GiveActorInventory(target,"ProjectilePortDead",1);
+		//TakeActorInventory(target,"ProjectilePorting",1);
+		terminate;
+	}
+	
+
+}
+
+}
+
+//#endregion
 
 //#region -=- Miscellany -=-
 #region -=- Miscellany -=-

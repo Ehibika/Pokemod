@@ -36,7 +36,7 @@ Script "PKMN_Setup" ENTER
 	//int PlayerDEXNum = GetCvar(StrParam(s:"PlayerDEXNum_",i:PlayerNumber()));
 
 GiveInventory(StrParam(s:GetActorClass(0),s:"SetupItem"),1);
-ACS_NamedExecuteAlways("MoveRecoveryHandler",0);
+//ACS_NamedExecuteAlways("MoveRecoveryHandler",0);
 GiveInventory("SetupShop",1);
 GiveInventory("SpawnInBuffer",1);
 //GiveInventory("MoveRecovery",1);

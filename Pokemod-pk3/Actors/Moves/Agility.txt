@@ -31,12 +31,12 @@ Goto Fire.After
 
 Fire.Off:
 "####" B 0 A_TakeInventory("Agility_Active",99)
-"####" B 0 A_GiveInventory("Recovery_C",8)
+"####" B 0 A_GiveInventory("PartRecovery_C")
 "####" B 0 A_Jump(256,"Fire.After")
 Goto Fire.After
 
 Fire.After:
-"####" B 1 A_GiveInventory("Recovery_C",17)
+"####" B 1 A_GiveInventory("HalfRecovery_C")
 "####" C 0 A_REfire("Fire")
 "####" B 0 A_Jump(256,"Fire.End")
 Goto Fire.End

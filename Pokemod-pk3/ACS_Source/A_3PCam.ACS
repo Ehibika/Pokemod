@@ -188,7 +188,8 @@ script "S_Reticule_C" OPEN CLIENTSIDE {
 	SetActorProperty(0,APROP_ALPHA,0.75); 
 	while(true) {
 		camNumber = CheckPlayerCamera(selfNumber);
-		if(!GetActorproperty(selfTID,Aprop_Invulnerable))
+		if(!GetActorproperty(selfTID,Aprop_Invulnerable)
+			&& GetActorproperty(selfTID,APROP_ALPHA) > 0.75)
 			{
 			SetActorProperty(selfTID,Aprop_renderstyle,STYLE_Translucent);
 			SetActorProperty(selfTID,APROP_ALPHA,0.75);

@@ -16,6 +16,7 @@
 #import "A_Leveling.acs"
 #import "Dex_Leveling.acs"
 #import "Dex_BaseStats.acs"
+#import "G_Action.acs"
 
 Script "SketchGrab" (Void)
 {
@@ -105,4 +106,23 @@ int EXPAward = VictimBounty*PlayerLVL;
 
 ACS_NamedExecuteAlways("GivePlayerEXP",0,TargTID-1000,EXPAward);
 //log(s:GetTeamProperty(PlayerTeam(),TPROP_Name), s:" Team EXP Award ", i:TeamEXPAward[PlayerTeam()]);
+}
+
+Script "GrabMoveCount" (int WepID)
+{
+// grabs generic count inventories for Various moves
+int FiringPlayer;
+str CountActor = StrParam(s:weapons_ammo[WepID][2],s:"Count");
+int Output;
+
+if(ActivatorTID() <= 999)
+	{FiringPlayer= ACS_ExecuteWithResult(257, 0); }//Returns the target of the activator
+else if(ActivatorTID() >= EntityTID && ActivatorTID() <= (EntityTID+6499))
+	{FiringPlayer= ACS_ExecuteWithResult(257, 0);} //Actor is a player spawed entity, Returns the target of the activator
+else{FiringPlayer=ActivatorTID();}
+
+if(FiringPlayer == 0){Output = CheckInventory(CountActor);}
+else {Output = CheckActorInventory(FiringPlayer,CountActor);}
+
+SetResultValue(Output);
 }

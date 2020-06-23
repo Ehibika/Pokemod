@@ -30,12 +30,12 @@ Fire.Quake:
 "####" B 5 A_Quake(2,5,0,300)
 "####" B 5 A_Quake(4,5,0,300)
 "####" B 5 A_Quake(6,5,0,300)
-"####" B 0 A_FireCustomMissile("CommandoLeapExplosion",0,1,0,0)
+"####" B 0 A_FireCustomMissile("EarthquakeExplosion",0,1,0,0)
 "####" B 0 A_Jump(256,"Fire.After")
 Goto Fire.After
 
 Fire.After:
-"####" B 1 A_GiveInventory("Recovery_B",35)
+"####" B 1 A_GiveInventory("FullRecovery_B")
 "####" A 0 SetPlayerProperty(0,0,4)
 "####" C 0 A_REfire("Fire")
 "####" B 0 A_Jump(256,"Fire.End")
@@ -79,11 +79,11 @@ Damagefactor "Earthquake", 0
 //[+]========================================================================[+]
 //--------------------------------|Projectiles |--------------------------------
 //[+]========================================================================[+]
-actor CommandoLeapExplosion : BasicExplosion
+actor EarthquakeExplosion : BasicExplosion
 {
 translation "202:202=210:210"//90
 Damagetype "Earthquake"
-Obituary "$OB_COMMANDOQUAKE"
+Obituary "$OB_EARTHQUAKE"
 scale 2.5
 Var int user_angle;
 Reactiontime 20
@@ -114,7 +114,7 @@ Damagetype "Earthquake"
 Obituary "$OB_EARTHQUAKE"
 +DONTBLAST
 +DONTREFLECT
-+THRUACTORS
++RIPPER
 //+FLOORHUGGER
 +STEPMISSILE
 +NOEXPLODEFLOOR

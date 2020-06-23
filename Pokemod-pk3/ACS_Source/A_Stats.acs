@@ -18,7 +18,7 @@
 
 //#region -=- General Constants & Variables
 #DEFINE HPVAL1 10
-#DEFINE HPVAL2 100
+#DEFINE HPVAL2 250
 #DEFINE HPVAL3 999
 
 #DEFINE ATKVAL1 1
@@ -193,7 +193,7 @@ Str StatName2[7] = {
 };
 */
 
-#DEFINE STATITEMNUM 14
+#DEFINE STATITEMNUM 15
 
 Str StatEffectName[STATITEMNUM] = {
     "Growth",
@@ -210,6 +210,7 @@ Str StatEffectName[STATITEMNUM] = {
     "GuardSeed",
     "HasteSeed",
     "Agility",
+    "Curse",
 };
 
 #define PATK_ID 0
@@ -234,6 +235,7 @@ Int StatEffectValue[STATITEMNUM][5] = {
 {   0,      0,      1,      1,      0}, 
 {   0,      0,      0,      0,      1}, 
 {   0,      0,      0,      0,      2}, 
+{   1,      0,      1,      0,      -1}, 
 };
 
 Int StatMulti[13] = {

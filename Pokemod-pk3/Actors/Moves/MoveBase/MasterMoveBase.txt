@@ -58,9 +58,9 @@ TNT1 A 0 A_Jump(256,"AltFire.After")
 Goto AltFire.After
 
 AltFire.After:
-TNT1 A 1 A_GiveInventory("Recovery_A",7) 
-TNT1 A 0 A_GiveInventory("Recovery_B",20) 
-TNT1 A 0 A_GiveInventory("Recovery_C",7) 
+TNT1 A 1 A_GiveInventory("PartRecovery_A") 
+TNT1 A 0 A_GiveInventory("SemiRecovery_B") 
+TNT1 A 0 A_GiveInventory("PartRecovery_C") 
 TNT1 A 0 A_REfire("AltFire")
 TNT1 A 0 A_Jump(256,"Ready")
 Goto Ready
@@ -146,10 +146,54 @@ stop
 actor SpawnInBuffer : Powerup {inventory.amount 1 Powerup.Duration 17}
 
 
-actor Recovery_A : inventory {inventory.amount 1 inventory.Maxamount 35}
+actor Recovery_A : Powerup {inventory.amount 1 Powerup.Duration 35}
 actor Recovery_B : Recovery_A {}
 actor Recovery_C : Recovery_A {}
 
+
+actor FullRecovery_A : PowerupGiver
+{
+//inventory.maxamount 0
++INVENTORY.AUTOACTIVATE
+Powerup.Duration 35
+powerup.type "Recovery_A"
+}
+
+actor 3Recovery_A : FullRecovery_A{Powerup.Duration 3}
+actor 5Recovery_A : FullRecovery_A{Powerup.Duration 5}
+actor SemiRecovery_A : FullRecovery_A{Powerup.Duration 20}
+actor HalfRecovery_A : FullRecovery_A{Powerup.Duration 17}
+actor PartRecovery_A : FullRecovery_A{Powerup.Duration 7}
+
+actor FullRecovery_B : PowerupGiver
+{
+//inventory.maxamount 0
++INVENTORY.AUTOACTIVATE
+Powerup.Duration 35
+powerup.type "Recovery_B"
+}
+
+actor 3Recovery_B : FullRecovery_B{Powerup.Duration 3}
+actor 5Recovery_B : FullRecovery_B{Powerup.Duration 5}
+actor SemiRecovery_B : FullRecovery_B{Powerup.Duration 20}
+actor HalfRecovery_B : FullRecovery_B{Powerup.Duration 17}
+actor PartRecovery_B : FullRecovery_B{Powerup.Duration 7}
+
+actor FullRecovery_C : PowerupGiver
+{
+//inventory.maxamount 0
++INVENTORY.AUTOACTIVATE
+Powerup.Duration 35
+powerup.type "Recovery_C"
+}
+
+actor 3Recovery_C : FullRecovery_C{Powerup.Duration 3}
+actor 5Recovery_C : FullRecovery_C{Powerup.Duration 5}
+actor SemiRecovery_C : FullRecovery_C{Powerup.Duration 20}
+actor HalfRecovery_C : FullRecovery_C{Powerup.Duration 17}
+actor PartRecovery_C : FullRecovery_C{Powerup.Duration 7}
+
+/*
 actor MoveRecoveryHandler : BasicHelper 
 {
 +MISSILE
@@ -189,11 +233,14 @@ Spawn:
 TNT1 A 0
 stop
 Pickup:
-TNT1 A 0 A_SpawnitemEX("MoveRecoveryHandler")
+TNT1 A 0 //A_SpawnitemEX("MoveRecoveryHandler")
+TNT1 A 1 //a_log("Recovery checking in")
 stop
 
 }
 }
+
+*/
 //[+]========================================================================[+]
 //-----------------------------|Status Changes|------------------------------
 //[+]========================================================================[+]

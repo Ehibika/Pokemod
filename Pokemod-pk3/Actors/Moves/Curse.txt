@@ -1,0 +1,165 @@
+actor CurseMove : WepMasterBase
+{
+Tag "Curse"
+obituary "$OB_CURSE"
+Weapon.AmmoUse 1
+Weapon.AmmoGive 25
+weapon.ammotype "CursePP"
+scale 2.0
+Inventory.Pickupmessage "$PU_MEGABUSTER"
+States
+{
+Spawn:
+WEAP X 1
+stop
+
+
+Fire:
+"####" B 0 A_Jumpif(CallACS("CheckWeaponFire",RC_C)==0,"NoAmmo")
+"####" B 0 A_JumpIfInventory("GhostSTAB",1,"Fire.Ghost") //Ghost curse
+"####" B 0 A_JumpIfInventory("STF_Curse",1,"Fire.Off")
+"####" B 0 A_Jump(256,"Fire.On")
+Goto Fire.On
+
+Fire.On:
+"####" B 0 A_PlaySoundEx("Move/Curse1","Soundslot6")
+"####" BBBBBB 3 A_GiveInventory("CurseParticleSpawn")
+"####" B 0 A_PlaySoundEx("Support/Statup","Soundslot7")
+"####" B 0 A_GiveInventory("CurseBuffInitiate")
+"####" B 0 A_TakeInventory("CursePP",1)
+"####" B 0 A_Jump(256,"Fire.After")
+Goto Fire.After
+
+Fire.Off:
+"####" B 0 A_TakeInventory("Curse_Active",99)
+"####" B 0 A_GiveInventory("PartRecovery_C")
+"####" B 0 A_Jump(256,"Fire.After")
+Goto Fire.After
+
+Fire.After:
+"####" B 1 A_GiveInventory("HalfRecovery_C")
+"####" C 0 A_REfire("Fire")
+"####" B 0 A_Jump(256,"Fire.End")
+Goto Fire.End
+
+}
+}
+
+actor CurseMove1 : CurseMove {Weapon.SlotNumber 1}
+actor CurseMove2 : CurseMove {Weapon.SlotNumber 2}
+actor CurseMove3 : CurseMove {Weapon.SlotNumber 3}
+actor CurseMove4 : CurseMove {Weapon.SlotNumber 4}
+
+actor CurseMove5 : CurseMove 
+{
+Weapon.SlotNumber 5
+States
+{
+Fire.End:
+TNT1 A 0
+TNT1 A 0 A_TakeInventory("CurseMove5",9)
+TNT1 A 0 A_Jump(256,"Ready")
+Goto Ready
+}
+}
+
+//[+]========================================================================[+]
+//-----------------------------|Ammo & Inventory|------------------------------
+//[+]========================================================================[+]
+actor CursePP : Ammo {inventory.amount 1 inventory.Maxamount 25}
+actor STF_Curse : Powerup {inventory.amount 1 Powerup.Duration 40}
+actor Curse_Active : Inventory {inventory.amount 1 inventory.Maxamount 1}
+
+actor CurseBuffInitiate : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_Jumpifinventory("Curse_Active",1,"Sustain")
+TNT1 A 0 A_GiveInventory("Curse_Active",1)
+TNT1 A 0 A_SpawnitemEX("CurseBuffWatcher")
+TNT1 A 0 A_GiveInventory("StatUpdator",1)
+stop
+
+Sustain:
+TNT1 A 0 A_GiveInventory("STF_Curse",1)
+stop
+Nope:
+TNT1 A 0
+stop
+}
+}
+
+
+actor CurseBuffWatcher : BasicHelper 
+{
+Var int user_TickTime;
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_JumpIfInTargetInventory("CutterFlag",999,"Death")
+TNT1 A 0 A_JumpIfInTargetInventory("IsDead",1,"Death")
+TNT1 A 5 A_GiveToTarget("STF_Curse")
+TNT1 A 0 A_GiveToTarget("SPDUpFXSpawn")
+TNT1 A 0 A_SetUserVar("user_TickTime",user_TickTime+5)
+TNT1 A 0 A_JumpIf(user_TickTime>=35,"SpawnTick")
+TNT1 A 0 A_JumpIfInTargetInventory("Curse_Active",1,"Spawn")
+Goto Death
+
+SpawnTick:
+TNT1 A 0 A_SetUserVar("user_TickTime",0)
+TNT1 A 0 A_TakeFromTarget("CursePP",1)
+TNT1 A 0 A_JumpIfInTargetInventory("CursePP",1,"Spawn")
+Goto Death
+
+Death:
+TNT1 A 0 A_GiveToTarget("StatUpdator")
+TNT1 A 0 A_GiveToTarget("BuffLossSoundCue")
+TNT1 A 0 A_TakeFromTarget("STF_Curse",9)
+TNT1 A 0 A_TakeFromTarget("Curse_Active",99)
+TNT1 A 2 
+stop
+}
+}
+
+
+actor CurseParticle : BasicClientside
+{
+scale 3.5
+speed 7
+States
+{
+Spawn:
+TNT1 A 0
+GHOL A 5
+GHOL AAAA 2 A_Fadeout(3.0)
+stop
+}
+}
+
+actor CurseParticleSpawn : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 AA 0 A_SpawnItemEx ("CurseParticle", 40, 0, 0, 0, 0, 20, random(0,360),SXF_NOCHECKPOSITION|SXF_ABSOLUTEMOMENTUM|SXF_TRANSFERTRANSLATION)
+TNT1 AA 0 A_SpawnItemEx ("CurseParticle", 40, 0, 120, 0, 0, -20, random(0,360),SXF_NOCHECKPOSITION|SXF_ABSOLUTEMOMENTUM|SXF_TRANSFERTRANSLATION)
+stop
+Nope:
+TNT1 A 0
+stop
+}
+}

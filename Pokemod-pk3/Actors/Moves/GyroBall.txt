@@ -1,0 +1,342 @@
+const int GYROBALL_TURNSPD = 9;
+
+actor GyroBallMove : WepMasterBase
+{
+Tag "GyroBall"
+obituary "$OB_GYROBALL"
+Weapon.AmmoUse 1
+Weapon.AmmoGive 10
+weapon.ammotype "GyroBallPP"
+scale 2.0
+Inventory.Pickupmessage "$PU_MEGABUSTER"
+States
+{
+Spawn:
+WEAP X 1
+stop
+
+
+Fire:
+"####" B 0 A_Jumpif(CallACS("CheckWeaponFire",RC_B)==0,"NoAmmo")
+"####" B 0 A_Jump(256,"Fire.DashWarmup")
+Goto Fire.DashWarmup
+
+Fire.DashWarmup:
+"####" A 0 ACS_NamedExecuteAlways("TakePP",0,Move_GyroBall,1)
+"####" A 0 A_GiveInventory("GyroBallSpaceCheck")
+"####" A 0 A_GiveInventory("GyroBallWarmupTimer")
+"####" A 0 A_GiveInventory("GyroBallCount",15)
+"####" A 0 A_PlaySoundEx("Misc/spin","Weapon")
+"####" A 0 SetPlayerProperty(0,1,0)
+"####" A 0 A_SetTranslucent(0.0,0)
+"####" A 0 A_SpawnItemEx("GyroBallPreFX", 0, 0, 0, 0, 0, 0, 0,1)
+Goto Fire.DashWarmup2
+
+Fire.DashWarmup1: //Spindash Loop ReStart
+"####" A 0 A_GiveInventory("GyroBallWarmupTimer")
+"####" A 0 A_Jumpifinventory("GyroBallCount",55,"Fire.DashWarmup2")
+"####" A 0 A_GiveInventory("GyroBallCount",5)
+"####" A 0 A_PlaySoundEx("Misc/spindash","Weapon")
+Fire.DashWarmup2:
+"####" A 5 A_SpawnItemEX("GroundDustFX",-25,0,-(z-floorz),-5,random2(5),3)
+"####" A 0 A_Refire("Fire.DashWarmup1")
+"####" A 0 A_Jumpifinventory("GyroBallWarmupTimer",1,"Fire.DashWarmup2")
+"####" B 0 A_Jump(256,"Fire.DashStart")
+Goto Fire.DashStart
+
+Fire.DashStart:
+"####" A 0 //SetPlayerProperty(0,1,4)
+"####" A 0 //A_ChangeFlag("NOGRAVITY",0)
+"####" A 0 A_GiveInventory("GyroBallTimer")
+"####" A 0 A_GiveInventory("GyroBallInitiate")
+"####" A 0 A_SetUserVar("user_wepangle",angle)
+"####" A 0 A_PlaySoundEx("Misc/release","Weapon")
+Fire.Dash:
+TNT1 A 1
+TNT1 A 0 A_SetUserVar("user_wepangle", CallACS("SHIFT_MEMANGLE",CallACS("GRAB_MEMANGLE",0),angle,GYROBALL_TURNSPD))
+TNT1 A 0 A_SpawnItemEX("GroundDustFX",-25,0,-(z-floorz),0)
+TNT1 A 0 A_Jumpifinventory("DashBreaker",1,"Fire.DashEnd")
+TNT1 A 0 A_Jumpifinventory("GyroBallTimer",1,"Fire.Dash")
+goto Fire.DashEnd
+
+Fire.DashEnd:
+"####" A 0 A_TakeInventory("GyroBallCount",999)
+"####" A 0 A_TakeInventory("GyroBallTimer",99)
+"####" B 0 A_ScaleVelocity(0.2)
+"####" B 0 //SetPlayerProperty(0,0,4)
+"####" A 0 A_SetTranslucent(1.0,0)
+"####" A 0 SetPlayerProperty(0,0,0)
+"####" B 1 A_GiveInventory("HalfRecovery_B")
+"####" B 0 A_Jump(256,"Fire.End")
+Goto Fire.End
+
+}
+}
+
+actor GyroBallMove1 : GyroBallMove {Weapon.SlotNumber 1}
+actor GyroBallMove2 : GyroBallMove {Weapon.SlotNumber 2}
+actor GyroBallMove3 : GyroBallMove {Weapon.SlotNumber 3}
+actor GyroBallMove4 : GyroBallMove {Weapon.SlotNumber 4}
+
+actor GyroBallMove5 : GyroBallMove 
+{
+Weapon.SlotNumber 5
+States
+{
+Fire.End:
+TNT1 A 0
+TNT1 A 0 A_TakeInventory("GyroBallMove5",9)
+TNT1 A 0 A_Jump(256,"Ready")
+Goto Ready
+}
+}
+
+//[+]========================================================================[+]
+//-----------------------------|Ammo & Inventory|------------------------------
+//[+]========================================================================[+]
+actor GyroBallPP : Ammo {inventory.amount 1 inventory.Maxamount 10}
+
+actor GyroBallCount : Inventory {inventory.amount 1 inventory.Maxamount 55}
+
+
+actor GyroBallWarmupTimer : Powerup {inventory.amount 1 powerup.duration 10 }
+actor GyroBallTimer : Powerup {inventory.amount 1 powerup.duration -10 }
+
+Actor GyroBallProtect : powerprotection
+{
+Powerup.duration 7
+Damagefactor "GyroBall", 0
+}
+
+
+//[+]========================================================================[+]
+//--------------------------------|Projectiles |--------------------------------
+//[+]========================================================================[+]
+actor GyroBallBall : BasicProjectile
+{
+Obituary "$OB_GYROBALL"
+Damagetype "GyroBall"
++BOUNCEONWALLS
++USEBOUNCESTATE
+-NOGRAVITY
++MBFBOUNCER
++NOEXPLODEFLOOR
++STEPMISSILE
++RIPPER
++SKYEXPLODE
+maxstepheight 35
+BounceFactor 0.9
+Gravity 1.55
+damage (0)
+Radius 26
+Height 55
+speed 10
+Scale 2.5
+Args 10
+ReactionTime 70
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 1 ACS_namedExecuteAlways("ProjectilePort",0,150)
+TNT1 A 0 A_SetArg(0,CallACS("GrabMoveCount",Move_GyroBall))
+TNT1 A 0 A_SetArg(1,ACS_ExecuteWithResult(257,0))
+TNT1 A 0 A_SetArg(2,z)
+Spawn2:
+
+
+ROLO R 0 A_GiveInventory("GyroBallSpeedHandler")
+ROLO R 0 A_SetArg(2,z)
+
+ROLO R 0 A_SetAngle(CallACS("GRAB_TIDMEMANGLE",0,0,Args[1]))
+ROLO R 1 A_GiveInventory("GyroBallThrust")
+ROLO R 0 A_SpawnItemEx("GyroBallDamager")
+TNT1 AAA 0 A_SpawnItemEx("GyroBallFX",45+Args[0],random(-60,60),random(-60,60),0,0,0,0,1)
+TNT1 A 0 A_JumpifinTargetInventory("ProjectilePortDead",1,"Death")
+
+ROLO S 0 A_SetAngle(CallACS("GRAB_TIDMEMANGLE",0,0,Args[1]))
+ROLO S 1 A_GiveInventory("GyroBallThrust")
+ROLO S 0 A_SpawnItemEx("GyroBallDamager")
+TNT1 AAA 0 A_SpawnItemEx("GyroBallFX",45+Args[0],random(-60,60),random(-60,60),0,0,0,0,1)
+TNT1 A 0 A_JumpifinTargetInventory("ProjectilePortDead",1,"Death")
+
+ROLO T 0 A_SetAngle(CallACS("GRAB_TIDMEMANGLE",0,0,Args[1]))
+ROLO T 1 A_GiveInventory("GyroBallThrust")
+ROLO T 0 A_SpawnItemEx("GyroBallDamager")
+TNT1 AAA 0 A_SpawnItemEx("GyroBallFX",45+Args[0],random(-60,60),random(-60,60),0,0,0,0,1)
+TNT1 A 0 A_JumpifinTargetInventory("ProjectilePortDead",1,"Death")
+
+TNT1 A 0 A_JumpifinTargetInventory("GyroBallTimer",1,"Spawn2")
+
+stop
+Bounce.Wall:
+TNT1 A 0 A_PlaySoundEx("Move/RolloutImpact","SoundSlot5")
+ROLO R 1 A_SpawnItemEx("BasicMeleeFX",25,0,0,0,0,0,0,1)
+Goto Death
+
+Death:
+AQBA C 0 
+ROLO R 0 A_GiveToTarget("DashBreaker")
+stop
+}
+}
+
+actor GyroBallWallBumper : BasicProjectile
+{
+speed 35
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 1
+stop
+
+Death:
+TNT1 A 3 ThrustThing(angle-180,15,1,ACS_ExecuteWithResult(257,0))
+stop
+}
+}
+
+actor GyroBallDamager : BasicProjectile
+{
+Obituary "$OB_GYROBALL"
+Damagetype "GyroBall"
++RIPPER
++DONTSPLASH
++DONTBLAST
++THRUGHOST
+Damage (15)
+Radius 26
+Height 55
+States
+{
+Spawn:
+TNT1 A 1
+stop
+}
+}
+
+
+//[+]========================================================================[+]
+//--------------------------------|Special Actors|------------------------------
+//[+]========================================================================[+]
+
+actor GyroBallThrust : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+//TNT1 A 0 A_ChangeVelocity(Args[0]*cos(CallACS("GRAB_TIDMEMANGLE",0,0,Args[1])),Args[0]*Sin(CallACS("GRAB_TIDMEMANGLE",0,0,Args[1])), velz,CVF_RELATIVE|CVF_REPLACE)
+TNT1 A 0 A_ChangeVelocity(Args[0],0, velz,CVF_RELATIVE|CVF_REPLACE)
+stop
+}
+}
+
+
+actor GyroBallSpeedHandler : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+ROLO R 0 A_Jumpif(z-Args[2] < -1,"DownHill")
+ROLO R 0 A_Jumpif(z-Args[2] > 1,"UpHill")
+
+ROLO R 0 A_Jumpif(Args[0] <= 0,"SpinStop")
+ROLO R 0 A_Jumpif(Args[0] < 5,"LowCap")
+ROLO R 0 A_SetArg(0,Args[0]-2)
+stop
+
+UpHill:
+ROLO R 0 A_Jumpif(Args[0] <= 0,"SpinStop")
+ROLO R 0 A_SetArg(0,Args[0]-3)
+ROLO R 0
+stop
+
+DownHill:
+ROLO R 0 A_Jumpif(Args[0] > 55,2)
+ROLO R 0 A_SetArg(0,Args[0]+2)
+ROLO R 0
+stop
+
+LowCap:
+ROLO R 0 A_SetArg(0,Args[0]-1)
+stop
+
+SpinStop:
+ROLO R 0 A_GiveToTarget("HaltPlayer")//A_SetArg(0,55)
+ROLO R 0  //A_LogInt(args[0])
+stop
+}
+}
+
+
+actor GyroBallSpaceCheck : CustomInventory
+{
+states
+{
+Pickup:
+TNT1 A 0 A_FireCustomMissile("GyroBallWallBumper",0,0,0,45,0,Pitch)
+TNT1 A 0 A_FireCustomMissile("GyroBallWallBumper",90,0,0,45,0,Pitch)
+TNT1 A 0 A_FireCustomMissile("GyroBallWallBumper",180,0,0,45,0,Pitch)
+TNT1 A 0 A_FireCustomMissile("GyroBallWallBumper",270,0,0,45,0,Pitch)
+stop
+}
+}
+
+actor GyroBallInitiate : CustomInventory
+{
+states
+{
+Pickup:
+TNT1 A 0 A_SpawnItemEX("GyroBallBall",0,0,0,0,0,0,0,1)
+stop
+}
+}
+
+
+actor GyroBallPreFX : BasicClientside
+{
+scale 2.5
+speed 7
+States
+{
+Spawn:
+TNT1 A 0
+Spawn2:
+ROLO RST 1 A_Warp(AAPTR_TARGET,0,0,0,0,WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE)
+KBAR F 0 A_Jumpifintargetinventory("GyroBallWarmupTimer",1,"Spawn2")
+Goto Death
+Death:
+ROLO RST 1 A_Warp(AAPTR_TARGET,0,0,0,0,WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE)
+KBAR F 0 
+stop
+}
+}
+
+actor GyroBallFX : BasicClientside
+{
+scale 3.2
+ReactionTime 2
+Renderstyle "Translucent"
+Alpha 0.9
+States
+{
+Spawn:
+TNT1 A 0
+TMPK CCBBAA 2 
+TNT1 A 5
+stop
+}
+}

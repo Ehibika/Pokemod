@@ -111,6 +111,9 @@ Move/Amnesia HUH
 Move/IronDefense IRODEF 
 Move/DragonDance DRAGDANC 
 Move/Pursuit LUNGE 
+Move/Curse1 NGCURSE 
+Move/Rollout BLIZBOWL
+Move/RolloutImpact BLIZSTRI
 
 Misc/Levelup LEVELUP
 Misc/Evolution FANFARE1
@@ -120,3 +123,8 @@ Misc/Poked POKED
 
 Misc/GetItem PICKUP1
 Misc/GetCash PICKUP2
+
+Misc/spin			DSSPIN
+Misc/spindash		DSSPNDSH
+Misc/release		DSZOOM
+Misc/thok			DSTHOK

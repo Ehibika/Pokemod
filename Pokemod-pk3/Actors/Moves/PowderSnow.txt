@@ -39,7 +39,7 @@ Fire.Bullet2:
 Goto Fire.After
 
 Fire.After:
-"####" B 1 A_GiveInventory("Recovery_A",5)
+"####" B 1 A_GiveInventory("5Recovery_A")
 "####" C 0 A_REfire("Fire")
 "####" B 0 A_TakeInventory("ConShotTimer",99)
 "####" B 0 A_Jump(256,"Fire.End")

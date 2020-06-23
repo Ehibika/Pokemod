@@ -174,9 +174,18 @@ Actor TargScriptActive : Powerup{inventory.amount 1 powerup.duration 3}
 Actor TargHolder : Powerup{inventory.amount 1 powerup.duration 7}
 //[+]========================================================================[+]
 
+actor ProjectilePortDead : Powerup{powerup.duration 17}
 
-
-
+actor HaltPlayer : CustomInventory //Interrupts movement states
+{
+states
+{
+pickup:
+TNT1 A 0 A_GiveInventory("ProjectilePortDead",1)
+TNT1 A 0 A_GiveInventory("DashBreaker",1)
+stop
+}
+}
 
 //[+]========================================================================[+]
 //-------------------------|Projectile TRanslation Script|---------------------

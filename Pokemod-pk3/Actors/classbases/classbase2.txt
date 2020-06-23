@@ -72,6 +72,13 @@ Goto GroundPain
 //#region -=- Rock -=-
 Pain.StealthRock:
 "----" H 0 A_Stop
+"----" H 0 A_GiveInventory("HaltPlayer")
+Goto RockPain
+
+Pain.Rollout:
+"----" H 0 A_GiveInventory("RolloutProtect")
+"----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,15)
+"----" H 0 ThrustThingZ(0,15,0,0)
 Goto RockPain
 
 //#endregion
@@ -97,6 +104,15 @@ Goto BugPain
 //#endregion
 
 //#region -=- Steel -=-
+Pain.MetalClaw:
+"----" H 0
+Goto SteelPain
+
+Pain.GyroBall:
+"----" H 0 A_GiveInventory("GyroBallProtect")
+"----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,15)
+"----" H 0 ThrustThingZ(0,15,0,0)
+Goto SteelPain
 
 //#endregion
 
@@ -136,6 +152,13 @@ Pain.FlareBlitz:
 "----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,40)
 "----" H 0 ThrustThingZ(0,15,0,0)
 Goto FirePain
+
+Pain.FlameWheel:
+"----" H 0 A_GiveInventory("FlameWheelProtect")
+"----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,30)
+"----" H 0 ThrustThingZ(0,15,0,0)
+Goto FirePain
+
 //#endregion
 
 //#region -=- Water -=-
@@ -173,6 +196,13 @@ Pain.LeafBlade2:
 "----" H 0 A_SpawnItemEX("PowerStrikeFX2",0,0,28)
 "----" H 0 A_GiveInventory("LeafBlade2Protect", 1)
 Goto GrassPain
+
+Pain.WoodHammer:
+"----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,40)
+"----" H 0 ACS_NamedExecuteAlways("PKMN_RecoilDamager",0,30)
+"----" H 0 ThrustThingZ(0,15,0,0)
+Goto GrassPain
+
 //#endregion
 
 //#region -=- Electric -=-
@@ -260,6 +290,7 @@ Goto Pain+1
 
 Pain.Spikes:
 "----" H 0 A_Stop
+"----" H 0 A_GiveInventory("HaltPlayer")
 Goto PainNormal
 Pain.ToxicSpikes:
 "----" H 0 A_jumpifinventory("PoisonProof",1,5)
@@ -269,6 +300,7 @@ Pain.ToxicSpikes:
 "----" H 0 A_Playsoundex("support/Negative","Soundslot5")
 "----" H 0 A_Giveinventory("PoisonMark")
 "----" H 0 A_Giveinventory("ToxicStacker")
+"----" H 0 A_GiveInventory("HaltPlayer")
 "----" H 0 A_Stop
 Goto PainNormal
 //#endregion
@@ -333,8 +365,13 @@ Goto GroundDeath
 
 //#region -=- Rock -=-
 
-Pain.StealthRock:
+Death.StealthRock:
 "----" H 0 A_Stop
+Goto RockDeath
+
+Death.Rollout:
+"----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,15)
+"----" H 0 ThrustThingZ(0,15,0,0)
 Goto RockDeath
 
 //#endregion
@@ -348,6 +385,15 @@ Goto RockDeath
 //#endregion
 
 //#region -=- Steel -=-
+
+Death.MetalClaw:
+"----" H 0
+Goto SteelDeath
+
+Death.GyroBall:
+"----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,15)
+"----" H 0 ThrustThingZ(0,15,0,0)
+Goto SteelDeath
 
 //#endregion
 
@@ -369,6 +415,12 @@ Goto RockDeath
     "----" H 0 ThrustThingZ(0,35,0,0)
     "----" H 5
     Goto Death
+
+    Death.FlameWheel:
+    "----" H 0 A_GiveInventory("FlameWheelProtect")
+    "----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,30)
+    "----" H 0 ThrustThingZ(0,15,0,0)
+    Goto FireDeath
 //#endregion
 
 //#region -=- Water -=-
@@ -397,6 +449,12 @@ Goto RockDeath
     Death.LeafBlade2:
     "----" H 0 A_SpawnItemEX("PowerStrikeFX2",0,0,28)
     "----" H 0 A_GiveInventory("LeafBlade2Protect", 1)
+    Goto GrassDeath
+
+    Death.WoodHammer:
+    "----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,40)
+    "----" H 0 ACS_NamedExecuteAlways("PKMN_RecoilDamager",0,30)
+    "----" H 0 ThrustThingZ(0,15,0,0)
     Goto GrassDeath
 //#endregion
 
