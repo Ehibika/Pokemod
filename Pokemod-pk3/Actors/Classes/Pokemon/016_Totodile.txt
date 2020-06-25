@@ -1,0 +1,88 @@
+/*
+[+]===================================[+]
+
+[+]===================================[+]
+*/
+
+Actor Totodile : ClassBase 
+{
+Player.DisplayName "Totodile"
+Player.SoundClass "Megaman"
+
+//player.startitem "PersistentLoadout"
+player.startitem "PokeFormHandler"
+player.startitem "EvoStartItem"
+player.startitem "MoveTutorStartItem"
+player.startitem "MoveShiftStartItem"
+
+//============|
+Player.StartItem "Base_HP", 44
+Player.StartItem "Base_PAttack", 48
+Player.StartItem "Base_PDefense", 65 
+Player.StartItem "Base_SAttack", 50
+Player.StartItem "Base_SDefense", 64 
+Player.StartItem "Base_Speed", 43
+//============|
+
+States
+{
+Spawn: 
+P007 A 0
+P007 B 1 
+P007 A 1
+GoTo Spawn+2
+See:
+P007 BCDE 5
+GoTo Spawn+1
+Missile:
+P007 A 0 
+P007 F 5 
+P007 G 4
+GoTo Spawn+2
+
+PainFix:
+P007 H 0 
+GoTo PainFrames
+}
+}
+
+actor TotodileStarterMoves : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_JumpIfInventory("isbot",1,"BotWep")
+
+TNT1 A 0 A_GiveInventory("WaterGunMove1")
+TNT1 A 0 A_GiveInventory("ProtectMove2")
+TNT1 A 0 A_GiveInventory("YawnMove3")
+TNT1 A 0 A_GiveInventory("RapidSpinMove4")
+stop
+
+BotWep:
+TNT1 A 0 A_GiveInventory("WaterGunMove1")
+stop
+}
+}
+
+actor TotodileSetupItem : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 ACS_NamedExecuteAlways("PKMNACS_StartupScript",0,Dex_Totodile)
+stop
+}
+}

@@ -77,3 +77,82 @@ dsplpain = MEGAPAIN
 dstaunt = dsnone
 gender = male
 }
+
+{
+name = "Bayleef"
+sprite = P011
+class = Chikorita
+dsnoway = LAND
+dsoof = LAND
+dspldeth = MEGADEAT
+dspdiehi = MEGADEAT
+dsplpain = MEGAPAIN
+dstaunt = dsnone
+gender = male
+}
+
+{
+name = "Meganium"
+sprite = P012
+class = Chikorita
+dsnoway = FATLAND
+dsoof = FATLAND
+dspldeth = MEGADEAT
+dspdiehi = MEGADEAT
+dsplpain = MEGAPAIN
+dstaunt = dsnone
+gender = male
+}
+
+{
+name = "Grovyle"
+sprite = P020
+class = Treecko
+dsnoway = LAND
+dsoof = LAND
+dspldeth = MEGADEAT
+dspdiehi = MEGADEAT
+dsplpain = MEGAPAIN
+dstaunt = dsnone
+gender = male
+}
+
+{
+name = "Sceptile"
+sprite = P021
+class = Treecko
+dsnoway = FATLAND
+dsoof = FATLAND
+dspldeth = MEGADEAT
+dspdiehi = MEGADEAT
+dsplpain = MEGAPAIN
+dstaunt = dsnone
+gender = male
+}
+
+
+{
+    name = "Grotle"
+    sprite = P029
+    class = Turtwig
+    dsnoway = LAND
+    dsoof = LAND
+    dspldeth = MEGADEAT
+    dspdiehi = MEGADEAT
+    dsplpain = MEGAPAIN
+    dstaunt = dsnone
+    gender = male
+    }
+    
+    {
+    name = "Torterra"
+    sprite = P030
+    class = Turtwig
+    dsnoway = FATLAND
+    dsoof = FATLAND
+    dspldeth = MEGADEAT
+    dspdiehi = MEGADEAT
+    dsplpain = MEGAPAIN
+    dstaunt = dsnone
+    gender = male
+    }

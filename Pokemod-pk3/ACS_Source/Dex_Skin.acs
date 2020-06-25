@@ -1,6 +1,6 @@
 /* -=- Skin Dex -=-
  * Contains Skin definitions for all of the pokemon
- * moves while the following 9 are for moves for lvl 2-10.
+ * 
  * 
  * 
 
@@ -22,4 +22,40 @@ str SkinDEX [MAXDEX][2] = {
     /*|7|*/{"Squirtle","Base"},
     /*|8|*/{"Wartortle","Wartortle"},
     /*|9|*/{"Blastoise","Blastoise"},
+
+    /*|10|*/{"Chikorita","Base"},
+    /*|11|*/{"Bayleef","Bayleef"},
+    /*|12|*/{"Meganium","Meganium"},
+
+    /*|13|*/{"Cyndaquil","Base"},
+    /*|14|*/{"Quilava","Quilava"},
+    /*|15|*/{"Typhlosion","Typhlosion"},
+    
+    /*|16|*/{"Totodile","Base"},
+    /*|17|*/{"Croconaw","Croconaw"},
+    /*|18|*/{"Feraligatr","Feraligatr"},
+
+    /*|19|*/{"Treecko","Base"},
+    /*|20|*/{"Grovyle","Grovyle"},
+    /*|21|*/{"Sceptile","Sceptile"},
+
+    /*|22|*/{"Torchic","Base"},
+    /*|23|*/{"Combusken","Combusken"},
+    /*|24|*/{"Blaziken","Blaziken"},
+    
+    /*|25|*/{"Mudkip","Base"},
+    /*|26|*/{"Marshtomp","Marshtomp"},
+    /*|27|*/{"Swampert","Swampert"},
+
+    /*|19|*/{"Turtwig","Base"},
+    /*|20|*/{"Grotle","Grotle"},
+    /*|21|*/{"Torterra","Torterra"},
+
+    /*|22|*/{"Chimchar","Base"},
+    /*|23|*/{"Monferno","Monferno"},
+    /*|24|*/{"Infernape","Infernape"},
+    
+    /*|25|*/{"Piplup","Base"},
+    /*|26|*/{"Prinplup","Prinplup"},
+    /*|27|*/{"Empoleon","Empoleon"},
     };

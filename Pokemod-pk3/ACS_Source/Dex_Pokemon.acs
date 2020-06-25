@@ -17,7 +17,7 @@ int Blah; //Needed to compile properly, can't have only LIBDEFINEs
 #endregion
 //#endregion
 
-#LIBDEFINE EEVEE 0
+#LIBDEFINE SMEARGLE 0
 
 #LIBDEFINE BULBASAUR 1
 #LIBDEFINE IVYSAUR 2

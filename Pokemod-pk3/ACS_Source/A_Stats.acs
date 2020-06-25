@@ -18,7 +18,7 @@
 
 //#region -=- General Constants & Variables
 #DEFINE HPVAL1 10
-#DEFINE HPVAL2 250
+#DEFINE HPVAL2 100
 #DEFINE HPVAL3 999
 
 #DEFINE ATKVAL1 1

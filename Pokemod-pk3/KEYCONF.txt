@@ -6,6 +6,10 @@ AddPlayerClass Squirtle
 
 AddPlayerClass Chikorita
 
+AddPlayerClass Treecko
+
+AddPlayerClass TurTwig
+
 
 alias TriggerEvo "CloseMenu; Use EvoStartItem"
 alias MoveTutor "CloseMenu; Use MoveTutorStartItem"

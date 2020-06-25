@@ -168,6 +168,7 @@ InputButtons = GetPlayerInput(-1, INPUT_BUTTONS);
 While(ButtonCheck(InputButtons, InputOldButtons, BT_ATTACK)
 ||ButtonCheck(InputButtons, InputOldButtons, BT_ALTATTACK))
 {InputButtons = GetPlayerInput(-1, INPUT_BUTTONS); Delay(1); InputOldButtons = InputButtons;}
+GiveInventory("SaveMovesetFlag",1);
 setplayerproperty(0,0,4);
 }
 
@@ -376,6 +377,7 @@ while(MenuUp)
 	InputOldButtons = InputButtons;
 	}
 ClearMenuFrame();
+GiveInventory("SaveMovesetFlag",1);
 Delay(17);
 setplayerproperty(0,0,4);
 //--
@@ -497,6 +499,7 @@ if(LearnMove > -1)
 		||ButtonCheck(InputButtons, InputOldButtons, BT_ALTATTACK))
 		{InputButtons = GetPlayerInput(-1, INPUT_BUTTONS); Delay(1); InputOldButtons = InputButtons;}
 		ACS_NamedExecuteAlways("PromptMoveLearn",0,LearnMove);
+		GiveInventory("SaveMovesetFlag",1);
 	}
 else{Delay(17);setplayerproperty(0,0,4);}
 }

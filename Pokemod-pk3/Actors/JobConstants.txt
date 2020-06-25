@@ -143,6 +143,49 @@ const int Move_AquaJet = 117;
 const int Move_DrillPeck = 118;
 const int Move_Spikes = 119;
 const int Move_ToxicSpikes = 120;
+//=======|Pokedex Constants|==========
+const int Dex_SMEARGLE = 0;
+
+const int Dex_BULBASAUR = 1;
+const int Dex_IVYSAUR = 2;
+const int Dex_VENUSAUR = 3;
+const int Dex_CHARMANDER = 4;
+const int Dex_CHARMELEON = 5;
+const int Dex_CHARIZARD = 6;
+const int Dex_SQUIRTLE = 7;
+const int Dex_WARTORTLE = 8;
+const int Dex_BLASTOISE = 9;
+
+const int Dex_CHIKORITA = 10;
+const int Dex_BAYLEEF = 11;
+const int Dex_MEGANIUM = 12;
+const int Dex_CYNDAQUIL = 13;
+const int Dex_QUILAVA = 14;
+const int Dex_TYPHLOSION = 15;
+const int Dex_TOTODILE = 16;
+const int Dex_CROCONAW = 17;
+const int Dex_FERALIGATR = 18;
+
+const int Dex_TREECKO = 19;
+const int Dex_GROVYLE = 20;
+const int Dex_SCEPTILE = 21;
+const int Dex_TORCHIC = 22;
+const int Dex_COMBUSKEN = 23;
+const int Dex_BLAZIKEN = 24;
+const int Dex_MUDKIP = 25;
+const int Dex_MARSHTOMP = 26;
+const int Dex_SWAMPERT = 27;
+
+const int Dex_TURTWIG = 28;
+const int Dex_GROTLE = 29;
+const int Dex_TORTERRA = 30;
+const int Dex_CHIMCHAR = 31;
+const int Dex_MONFERNO = 32;
+const int Dex_INFERNAPE = 33;
+const int Dex_PIPLUP = 34;
+const int Dex_PRINPLUP = 35;
+const int Dex_EMPOLEON = 36;
+
 //=======|weapon Constants|==========
 const int Aim_OverHead = 35;
 

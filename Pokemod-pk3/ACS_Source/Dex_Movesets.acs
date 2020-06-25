@@ -29,4 +29,35 @@ Int MoveDex [MAXDEX][14] = {
 	/*|11|*/{Growl,RazorLeaf,PoisonPowder,Synthesis,/**/ Reflect,MagicalLeaf,LightScreen,GrassWhistle,HealPulse,AromaTherapy,SeedBomb,Safeguard,SolarBeam},
 	/*|12|*/{Growl,RazorLeaf,PoisonPowder,Synthesis,/**/ Reflect,MagicalLeaf,LightScreen,GrassWhistle,HealPulse,AromaTherapy,SeedBomb,Safeguard,SolarBeam},
 
+	/*|13|*/{Ember,Growl,SmokeScreen,MetalClaw,/**/ FireSpin,FlameBurst,Flamethrower,DragonRage,DragonClaw,DragonPulse,FlareBlitz,DragonDance,FireBlast},
+	/*|14|*/{Ember,Growl,SmokeScreen,MetalClaw,/**/ FireSpin,FlameBurst,Flamethrower,DragonRage,DragonClaw,DragonPulse,FlareBlitz,DragonDance,FireBlast},
+	/*|15|*/{Ember,Growl,SmokeScreen,MetalClaw,/**/ FireSpin,FlameBurst,Flamethrower,DragonRage,DragonClaw,DragonPulse,FlareBlitz,DragonDance,FireBlast},
+	
+	/*|16|*/{Watergun,Yawn,RapidSpin,Protect,/**/ LifeDew,BubbleBeam,IronDefense,Amnesia,AquaRing,HydroPump,FlashCannon,Haze,ShellSmash},
+	/*|17|*/{Watergun,Yawn,RapidSpin,Protect,/**/ LifeDew,BubbleBeam,IronDefense,Amnesia,AquaRing,HydroPump,FlashCannon,Haze,ShellSmash},
+	/*|18|*/{Watergun,Yawn,RapidSpin,Protect,/**/ LifeDew,BubbleBeam,IronDefense,Amnesia,AquaRing,HydroPump,FlashCannon,Haze,ShellSmash},
+
+	/*|19|*/{BulletSeed,QuickAttack,Detect,LeechSeed,/**/ Pursuit,LeafBlade,FalseSwipe,Agility,NightSlash,EnergyBall,Xscissor,DragonPulse,SkyDrop},
+	/*|20|*/{BulletSeed,QuickAttack,Detect,LeechSeed,/**/ Pursuit,LeafBlade,FalseSwipe,Agility,NightSlash,EnergyBall,Xscissor,DragonPulse,SkyDrop},
+	/*|21|*/{BulletSeed,QuickAttack,Detect,LeechSeed,/**/ Pursuit,LeafBlade,FalseSwipe,Agility,NightSlash,EnergyBall,Xscissor,DragonPulse,SkyDrop},
+
+	/*|22|*/{Ember,Growl,SmokeScreen,MetalClaw,/**/ FireSpin,FlameBurst,Flamethrower,DragonRage,DragonClaw,DragonPulse,FlareBlitz,DragonDance,FireBlast},
+	/*|23|*/{Ember,Growl,SmokeScreen,MetalClaw,/**/ FireSpin,FlameBurst,Flamethrower,DragonRage,DragonClaw,DragonPulse,FlareBlitz,DragonDance,FireBlast},
+	/*|24|*/{Ember,Growl,SmokeScreen,MetalClaw,/**/ FireSpin,FlameBurst,Flamethrower,DragonRage,DragonClaw,DragonPulse,FlareBlitz,DragonDance,FireBlast},
+	
+	/*|25|*/{Watergun,Yawn,RapidSpin,Protect,/**/ LifeDew,BubbleBeam,IronDefense,Amnesia,AquaRing,HydroPump,FlashCannon,Haze,ShellSmash},
+	/*|26|*/{Watergun,Yawn,RapidSpin,Protect,/**/ LifeDew,BubbleBeam,IronDefense,Amnesia,AquaRing,HydroPump,FlashCannon,Haze,ShellSmash},
+	/*|27|*/{Watergun,Yawn,RapidSpin,Protect,/**/ LifeDew,BubbleBeam,IronDefense,Amnesia,AquaRing,HydroPump,FlashCannon,Haze,ShellSmash},
+
+	/*|28|*/{Razorleaf,Bite,Protect,LeechSeed,/**/ Growth,Stealthrock,Curse,SeedBomb,Synthesis,Earthquake,DoubleEdge,WideGuard,WoodHammer},
+	/*|29|*/{Razorleaf,Bite,Protect,LeechSeed,/**/ Growth,Stealthrock,Curse,SeedBomb,Synthesis,Earthquake,DoubleEdge,WideGuard,WoodHammer},
+	/*|30|*/{Razorleaf,Bite,Protect,LeechSeed,/**/ Growth,Stealthrock,Curse,SeedBomb,Synthesis,Earthquake,DoubleEdge,WideGuard,WoodHammer},
+
+	/*|31|*/{Razorleaf,Bite,Protect,LeechSeed,/**/ Growth,Stealthrock,Curse,SeedBomb,Synthesis,Earthquake,DoubleEdge,WideGuard,WoodHammer},
+	/*|32|*/{Razorleaf,Bite,Protect,LeechSeed,/**/ Growth,Stealthrock,Curse,SeedBomb,Synthesis,Earthquake,DoubleEdge,WideGuard,WoodHammer},
+	/*|33|*/{Razorleaf,Bite,Protect,LeechSeed,/**/ Growth,Stealthrock,Curse,SeedBomb,Synthesis,Earthquake,DoubleEdge,WideGuard,WoodHammer},
+	
+	/*|34|*/{Watergun,Yawn,RapidSpin,Protect,/**/ LifeDew,BubbleBeam,IronDefense,Amnesia,AquaRing,HydroPump,FlashCannon,Haze,ShellSmash},
+	/*|35|*/{Watergun,Yawn,RapidSpin,Protect,/**/ LifeDew,BubbleBeam,IronDefense,Amnesia,AquaRing,HydroPump,FlashCannon,Haze,ShellSmash},
+	/*|36|*/{Watergun,Yawn,RapidSpin,Protect,/**/ LifeDew,BubbleBeam,IronDefense,Amnesia,AquaRing,HydroPump,FlashCannon,Haze,ShellSmash},
 };

@@ -1,0 +1,92 @@
+/*
+[+]===================================[+]
+
+[+]===================================[+]
+*/
+
+
+Actor Bulbasaur : ClassBase 
+{
+Player.DisplayName "Bulbasaur"
+Player.SoundClass "Megaman"
+
+DamageFactor "PoisonPowder", 0.0
+
+//Player.StartItem "BulbasaurStarterMoves"
+//player.startitem "PersistentLoadout"
+player.startitem "PokeFormHandler"
+player.startitem "EvoStartItem"
+player.startitem "MoveTutorStartItem"
+player.startitem "MoveShiftStartItem"
+
+//============|
+Player.StartItem "Base_HP", 45
+Player.StartItem "Base_PAttack", 49
+Player.StartItem "Base_PDefense", 49 
+Player.StartItem "Base_SAttack", 65
+Player.StartItem "Base_SDefense", 65 
+Player.StartItem "Base_Speed", 45
+//============|
+
+States
+{
+Spawn: 
+P001 A 0
+P001 B 1 
+P001 A 1
+GoTo Spawn+2
+See:
+P001 BCDE 5
+GoTo Spawn+1
+Missile:
+P001 A 0 
+P001 F 5 
+P001 G 4
+GoTo Spawn+2
+
+PainFix:
+P001 H 0 
+GoTo PainFrames
+}
+}
+
+actor BulbasaurStarterMoves : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_JumpIfInventory("isbot",1,"BotWep")
+
+TNT1 A 0 A_GiveInventory("RazorleafMove1")
+TNT1 A 0 A_GiveInventory("VineWhipMove2")
+TNT1 A 0 A_GiveInventory("LeechSeedMove3")
+TNT1 A 0 A_GiveInventory("GrowthMove4")
+stop
+
+BotWep:
+TNT1 A 0 A_GiveInventory("RazorleafMove1")
+stop
+}
+}
+
+actor BulbasaurSetupItem : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 ACS_NamedExecuteAlways("PKMNACS_StartupScript",0,Dex_Bulbasaur)
+stop
+}
+}

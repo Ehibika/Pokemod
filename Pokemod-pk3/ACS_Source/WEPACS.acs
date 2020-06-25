@@ -560,7 +560,7 @@ Script 256 (void)
 	Thing_ChangeTID(tempTID, 0);
 }
 
-/*
+
 Script 252 ENTER
 {
 if(PlayerIsBot(PlayerNumber()))
@@ -609,7 +609,7 @@ if(PlayerIsBot(PlayerNumber()))
 		}
 	}
 }
-*/
+
 
 
 // [Mess] Energy Balancer Functions
@@ -680,8 +680,9 @@ Return(-1);
 script "PERSISTENT_LOADOUT" (void)
 {
 LoadLoadout();
+SaveLoadout();
 while(PlayerHealth()>0) {
-	SaveLoadout();
+	if(CheckInventory("SaveMovesetFlag")){SaveLoadout(); TakeInventory("SaveMovesetFlag",99);}
 	delay(1);
 }
 }

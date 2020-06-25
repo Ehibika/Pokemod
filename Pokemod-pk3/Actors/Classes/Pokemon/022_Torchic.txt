@@ -1,0 +1,88 @@
+/*
+[+]===================================[+]
+
+[+]===================================[+]
+*/
+
+Actor Torchic : ClassBase 
+{
+Player.DisplayName "Torchic"
+Player.SoundClass "Megaman"
+
+//player.startitem "PersistentLoadout"
+player.startitem "PokeFormHandler"
+player.startitem "EvoStartItem"
+player.startitem "MoveTutorStartItem"
+player.startitem "MoveShiftStartItem"
+
+//============|
+Player.StartItem "Base_HP", 39
+Player.StartItem "Base_PAttack", 52
+Player.StartItem "Base_PDefense", 43 
+Player.StartItem "Base_SAttack", 60
+Player.StartItem "Base_SDefense", 50 
+Player.StartItem "Base_Speed", 65
+//============|
+
+States
+{
+Spawn: 
+P022 A 0
+P022 B 1 
+P022 A 1
+GoTo Spawn+2
+See:
+P022 BCDE 5
+GoTo Spawn+1
+Missile:
+P022 A 0 
+P022 F 5 
+P022 G 4
+GoTo Spawn+2
+
+PainFix:
+P022 H 0 
+GoTo PainFrames
+}
+}
+
+actor TorchicStarterMoves : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_JumpIfInventory("isbot",1,"BotWep")
+
+TNT1 A 0 A_GiveInventory("EmberMove1")
+TNT1 A 0 A_GiveInventory("GrowlMove2")
+TNT1 A 0 A_GiveInventory("SmokeScreenMove3")
+TNT1 A 0 A_GiveInventory("MetalClawMove4")
+stop
+
+BotWep:
+TNT1 A 0 A_GiveInventory("EmberMove1")
+stop
+}
+}
+
+actor TorchicSetupItem : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 ACS_NamedExecuteAlways("PKMNACS_StartupScript",0,Dex_Torchic)
+stop
+}
+}

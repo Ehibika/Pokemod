@@ -1,0 +1,89 @@
+/*
+[+]===================================[+]
+
+[+]===================================[+]
+*/
+
+Actor Chikorita : ClassBase 
+{
+Player.DisplayName "Chikorita"
+Player.SoundClass "Megaman"
+
+//Player.StartItem "ChikoritaStarterMoves"
+//player.startitem "PersistentLoadout"
+player.startitem "PokeFormHandler"
+player.startitem "EvoStartItem"
+player.startitem "MoveTutorStartItem"
+player.startitem "MoveShiftStartItem"
+
+//============|
+Player.StartItem "Base_HP", 45
+Player.StartItem "Base_PAttack", 49
+Player.StartItem "Base_PDefense", 65 
+Player.StartItem "Base_SAttack", 49
+Player.StartItem "Base_SDefense", 65 
+Player.StartItem "Base_Speed", 45
+//============|
+
+States
+{
+Spawn: 
+P010 A 0
+P010 B 1 
+P010 A 1
+GoTo Spawn+2
+See:
+P010 BCDE 5
+GoTo Spawn+1
+Missile:
+P010 A 0 
+P010 F 5 
+P010 G 4
+GoTo Spawn+2
+
+PainFix:
+P010 H 0 
+GoTo PainFrames
+}
+}
+
+actor ChikoritaStarterMoves : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_JumpIfInventory("isbot",1,"BotWep")
+
+TNT1 A 0 A_GiveInventory("GrowlMove1")
+TNT1 A 0 A_GiveInventory("RazorleafMove2")
+TNT1 A 0 A_GiveInventory("PoisonPowderMove3")
+TNT1 A 0 A_GiveInventory("SynthesisMove4")
+stop
+
+BotWep:
+TNT1 A 0 A_GiveInventory("RazorleafMove1")
+stop
+}
+}
+
+actor ChikoritaSetupItem : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 ACS_NamedExecuteAlways("PKMNACS_StartupScript",0,Dex_CHIKORITA)
+stop
+}
+}
