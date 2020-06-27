@@ -108,15 +108,20 @@ States
 {
 Spawn:
 TNT1 A 0 
+HAZA D 1 ACS_NAmedExecuteAlways("HazardTID",0)
 HAZA D random(1,5)
 HAZA D 17 A_SpawnItemEx("PoisonedFX1",random(-24,24),random(-32,32),random(30,34),0,0,Random(1,4))
 wait
 
 Crash:
 TNT1 A 0 A_SetPitch(Pitch+1)
-TNT1 A 0 A_SpawnItemEX("ToxicSpikesRespawn",0,0,0,0,0,0,0,SXF_TRANSFERTRANSLATION|SXF_NOCHECKPOSITION|SXF_TRANSFERPITCH)
+TNT1 A 0 A_SpawnItemEX("ToxicSpikesRespawn",0,0,0,0,0,0,0,SXF_TRANSFERTRANSLATION|SXF_NOCHECKPOSITION|SXF_TRANSFERPITCH,0,tid)
 TNT1 A 1
 stop
+
+Purge:
+TNT1 A 1 A_SpawnItemEX("HazardPurgeFX")
+stop 
 }
 }
 
@@ -144,7 +149,7 @@ TNT1 A 0 A_Jumpif(args[0] >= 35,"Respawn")
 loop
 
 Respawn:
-TNT1 A 0 A_SpawnItemEX("ToxicSpikesHazard",0,0,0,0,0,0,0,SXF_TRANSFERTRANSLATION|SXF_NOCHECKPOSITION|SXF_TRANSFERPITCH)
+TNT1 A 0 A_SpawnItemEX("ToxicSpikesHazard",0,0,0,0,0,0,0,SXF_TRANSFERTRANSLATION|SXF_NOCHECKPOSITION|SXF_TRANSFERPITCH,0,tid)
 TNT1 A 1
 stop
 

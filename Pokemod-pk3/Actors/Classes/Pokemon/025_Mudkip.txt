@@ -7,7 +7,7 @@
 Actor Mudkip : ClassBase 
 {
 Player.DisplayName "Mudkip"
-Player.SoundClass "Megaman"
+Player.SoundClass "Mudkip"
 
 //player.startitem "PersistentLoadout"
 player.startitem "PokeFormHandler"

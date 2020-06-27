@@ -7,7 +7,7 @@
 Actor Totodile : ClassBase 
 {
 Player.DisplayName "Totodile"
-Player.SoundClass "Megaman"
+Player.SoundClass "Totodile"
 
 //player.startitem "PersistentLoadout"
 player.startitem "PokeFormHandler"

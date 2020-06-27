@@ -286,7 +286,7 @@ Pain.PoisonPowder:
 "----" H 0 A_Playsoundex("support/Negative","Soundslot5")
 "----" H 0 A_Giveinventory("PoisonMark")
 "----" H 0
-Goto Pain+1
+goto SuperSpawn
 
 Pain.Spikes:
 "----" H 0 A_Stop

@@ -115,7 +115,7 @@ int Curexp = GetPokeValue(POKEEXP);
 int GrowthRate = StatDEX[PlayerDEX][9];
 int EXPCap = LevelUpTable[GrowthRate][9];
 int EXPDiff = EXPCap-Curexp;
-log(i:EXPDiff);
+//log(i:EXPDiff);
 if(EXPDiff < 0){EXPDiff = 0;}
 
 output = EXPDiff;

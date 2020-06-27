@@ -17,6 +17,7 @@ OptionMenu ZA_JoinMenu
 	StaticText""
 	StaticText""
 	StaticText""
+	JoinMenuPlayerClassOption
 	Option "$MNU_JOIN3", "playerclass", "PKMN_JoinName"
 	Command "Join game", "menu_joingamewithclass"
 	StaticText "===============================================================",1
@@ -46,6 +47,7 @@ OptionMenu ZA_JoinTeamMenu
 	StaticText"$MNU_JOIN2"
 	StaticText""
 	StaticText""
+	JoinMenuPlayerClassOption
 	Command "$MNU_JOIN6", "menu_autoselect"
 	StaticText""
 	JoinMenuTeamOption
@@ -87,6 +89,9 @@ OptionString PKMN_JoinName
 "Bulbasaur", "Bulbasaur"
 "Charmander", "Charmander"
 "Squirtle", "Squirtle"
+"Chikorita", "Chikorita"
+"Treecko", "Treecko"
+"Turtwig", "Turtwig"
 }
 
 OptionString PKMN_JoinMoves
@@ -95,6 +100,9 @@ OptionString PKMN_JoinMoves
 "Bulbasaur", "\c[MenuYellow]VineWhip\nLeechSeed\nGrowth\nRazorLeaf"
 "Charmander", "\c[MenuYellow]Growl\nEmber\nSmokeScreen\nMetalClaw"
 "Squirtle", "\c[MenuYellow]WaterGun\nYawn\nRapidSpin\nProtect"
+"Chikorita", "\c[MenuYellow]Razorleaf\nGrowl\nPoisonpowder\nSynthesis"
+"Treecko", "\c[MenuYellow]BulletSeed\nQuickAttack\nDetect\nLeechSeed"
+"Turtwig", "\c[MenuYellow]RazorLeaf\nBite\nProtect\nLeechSeed"
 }
 
 OptionString PKMN_JoinInfo
@@ -103,4 +111,7 @@ OptionString PKMN_JoinInfo
 "Bulbasaur", "\c[HelpMenuCol]Diverse utilities ranging\nfrom recovery to statuses"
 "Charmander", "\c[HelpMenuCol]Packs an array of\ndamaging moves, and can\ngrow to fly!"
 "Squirtle", "\c[HelpMenuCol]Stocked with defensive boosts\nand long ranged water moves."
+"Chikorita", "\c[HelpMenuCol]A Mean, Green supporter with \na clerical moveset full of \nhealing and buffs"
+"Treecko", "\c[HelpMenuCol]Very Mobile, and equipped with \nlethal close ranged attacks"
+"Turtwig", "\c[HelpMenuCol]Physical Heavy Hitter with \ntools for Space Control"
 }

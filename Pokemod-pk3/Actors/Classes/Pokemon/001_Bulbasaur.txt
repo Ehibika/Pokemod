@@ -8,7 +8,7 @@
 Actor Bulbasaur : ClassBase 
 {
 Player.DisplayName "Bulbasaur"
-Player.SoundClass "Megaman"
+Player.SoundClass "Bulbasaur"
 
 DamageFactor "PoisonPowder", 0.0
 

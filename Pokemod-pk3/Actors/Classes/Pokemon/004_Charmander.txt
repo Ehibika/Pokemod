@@ -7,7 +7,7 @@
 Actor Charmander : ClassBase 
 {
 Player.DisplayName "Charmander"
-Player.SoundClass "Megaman"
+Player.SoundClass "Charmander"
 
 //player.startitem "PersistentLoadout"
 player.startitem "PokeFormHandler"

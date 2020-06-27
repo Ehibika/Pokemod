@@ -7,7 +7,7 @@
 Actor Torchic : ClassBase 
 {
 Player.DisplayName "Torchic"
-Player.SoundClass "Megaman"
+Player.SoundClass "Torchic"
 
 //player.startitem "PersistentLoadout"
 player.startitem "PokeFormHandler"

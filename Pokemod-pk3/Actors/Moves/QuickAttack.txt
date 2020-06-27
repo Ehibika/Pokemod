@@ -22,6 +22,7 @@ Goto Fire.Dash
 Fire.Dash:
 "####" A 0 SetPlayerProperty(0,1,4)
 "####" A 0 ACS_NamedExecuteAlways("TakePP",0,Move_QuickAttack,1)
+"####" B 0 A_PlaySoundEx("weapon/ChargeKick","Soundslot6")
 "####" A 0 A_GiveInventory("QuickAttackInitiate")
 "####" A 0 A_FireCustomMissile("GroundDustFX",-25,0,z-Floorz,0)
 "####" AAAAAAA 1 A_Jumpifinventory("DashBreaker",1,"Fire.DashEnd")
@@ -86,7 +87,7 @@ Spawn:
 TNT1 A 0 
 TNT1 A 0 A_JumpIfInTargetInventory("DashBreaker",1,"Terminate")
 TNT1 A 1 
-TNT1 A 1 A_Explode(45,80,0,0,80)
+TNT1 A 1 A_Explode(15,80,0,0,80)
 stop
 Death:
 XDeath:

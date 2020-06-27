@@ -7,7 +7,7 @@
 Actor Treecko : ClassBase 
 {
 Player.DisplayName "Treecko"
-Player.SoundClass "Megaman"
+Player.SoundClass "Treecko"
 
 //Player.StartItem "TreeckoStarterMoves"
 //player.startitem "PersistentLoadout"

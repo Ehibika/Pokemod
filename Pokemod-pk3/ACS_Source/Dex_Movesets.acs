@@ -25,9 +25,9 @@ Int MoveDex [MAXDEX][14] = {
 	/*|8|*/{Watergun,Yawn,RapidSpin,Protect,/**/ LifeDew,BubbleBeam,IronDefense,Amnesia,AquaRing,HydroPump,FlashCannon,Haze,ShellSmash},
 	/*|9|*/{Watergun,Yawn,RapidSpin,Protect,/**/ LifeDew,BubbleBeam,IronDefense,Amnesia,AquaRing,HydroPump,FlashCannon,Haze,ShellSmash},
 	
-	/*|10|*/{Growl,RazorLeaf,PoisonPowder,Synthesis,/**/ Reflect,MagicalLeaf,LightScreen,GrassWhistle,HealPulse,AromaTherapy,SeedBomb,Safeguard,SolarBeam},
-	/*|11|*/{Growl,RazorLeaf,PoisonPowder,Synthesis,/**/ Reflect,MagicalLeaf,LightScreen,GrassWhistle,HealPulse,AromaTherapy,SeedBomb,Safeguard,SolarBeam},
-	/*|12|*/{Growl,RazorLeaf,PoisonPowder,Synthesis,/**/ Reflect,MagicalLeaf,LightScreen,GrassWhistle,HealPulse,AromaTherapy,SeedBomb,Safeguard,SolarBeam},
+	/*|10|*/{RazorLeaf,Growl,PoisonPowder,Synthesis,/**/ Reflect,MagicalLeaf,LightScreen,GrassWhistle,HealPulse,AromaTherapy,SeedBomb,Safeguard,SolarBeam},
+	/*|11|*/{RazorLeaf,Growl,PoisonPowder,Synthesis,/**/ Reflect,MagicalLeaf,LightScreen,GrassWhistle,HealPulse,AromaTherapy,SeedBomb,Safeguard,SolarBeam},
+	/*|12|*/{RazorLeaf,Growl,PoisonPowder,Synthesis,/**/ Reflect,MagicalLeaf,LightScreen,GrassWhistle,HealPulse,AromaTherapy,SeedBomb,Safeguard,SolarBeam},
 
 	/*|13|*/{Ember,Growl,SmokeScreen,MetalClaw,/**/ FireSpin,FlameBurst,Flamethrower,DragonRage,DragonClaw,DragonPulse,FlareBlitz,DragonDance,FireBlast},
 	/*|14|*/{Ember,Growl,SmokeScreen,MetalClaw,/**/ FireSpin,FlameBurst,Flamethrower,DragonRage,DragonClaw,DragonPulse,FlareBlitz,DragonDance,FireBlast},

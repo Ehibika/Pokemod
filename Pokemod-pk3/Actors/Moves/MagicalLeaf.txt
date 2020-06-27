@@ -96,7 +96,16 @@ MLEF A 0 A_Countdown
 
 TNT1 A 0 A_JumpIf(IsPointerEqual(AAPTR_TRACER, AAPTR_NULL) == TRUE, "Spawn2")
 Goto Spawn3
-Spawn3: // -=- target acquired -=-
+
+Spawn3: // -=- ExamineTarget -=-
+TNT1 A 0 A_JumpifInventory("SafeguardPower",1,"TargClear",AAPTR_TRACER)
+Goto Spawn4
+
+TargClear:
+MLEF A 0 A_RearrangePointers(AAPTR_DEFAULT, AAPTR_DEFAULT, AAPTR_NULL)
+Goto Spawn4
+
+Spawn4: // -=- target acquired -=-
 TNT1 A 0 A_SeekerMissile (2, 10, SMF_PRECISE)
 MLEF B 2 A_SpawnItemEx("AquaRingSparkle",random(-10,10),random(-10,10),random(-10,10),0,0,0,0,1)
 TNT1 A 0 A_SeekerMissile (2, 10, SMF_PRECISE)

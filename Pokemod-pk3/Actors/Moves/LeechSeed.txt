@@ -127,6 +127,8 @@ LSeedCheck:
 TNT1 A 0 A_JumpIfInventory("Seeded",1,"Death",AAPTR_TRACER)
 TNT1 A 0 A_JumpIfInventory("GrassSTAB",1,"Death",AAPTR_TRACER)
 TNT1 A 0 A_JumpIfInventory("ProtectGuard",1,"Death",AAPTR_TRACER)
+TNT1 A 0 A_JumpIfInventory("DetectGuard",1,"Death",AAPTR_TRACER)
+TNT1 A 0 A_JumpIfInventory("SafeguardPower",1,"Death",AAPTR_TRACER)
 Goto PreLSeed
 
 PreLSeed:

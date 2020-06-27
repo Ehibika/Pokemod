@@ -7,7 +7,7 @@
 Actor Squirtle : ClassBase 
 {
 Player.DisplayName "Squirtle"
-Player.SoundClass "Megaman"
+Player.SoundClass "Squirtle"
 
 //player.startitem "PersistentLoadout"
 player.startitem "PokeFormHandler"

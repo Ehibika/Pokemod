@@ -73,7 +73,7 @@ support/LifeDew LIFEDEW
 support/HealPulse HEALPULS
 
 support/BarrierStart SHLDSTRT
-support/Reflect SHLDRFLC
+support/Reflect SHLDRFCT
 support/LightScreen SHLDLTSC
 
 weapon/Turretup FMR

@@ -153,7 +153,6 @@ actor PoisonPowderField : BasicExplosion
 ReactionTime 25
 DamageType "PoisonPowder"
 obituary "$OB_PoisonPowder"
-//+FORCEPAIN
 states
 {
 Spawn:

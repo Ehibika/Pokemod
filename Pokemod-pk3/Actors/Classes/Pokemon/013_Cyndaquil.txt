@@ -7,7 +7,7 @@
 Actor Cyndaquil : ClassBase 
 {
 Player.DisplayName "Cyndaquil"
-Player.SoundClass "Megaman"
+Player.SoundClass "Cyndaquil"
 
 //player.startitem "PersistentLoadout"
 player.startitem "PokeFormHandler"

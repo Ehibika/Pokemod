@@ -373,30 +373,274 @@ D006_EVO = "\c[MenuRed]Does not evolve";
 //#region -=- Squirtle -=-
 D007_NAME = "\cjSquirtle";
 D007_TYPE = "\cjWater";
-D007_STATS1 = "\cfATK:\cj 48 \cfDEF:\cj 65";
-D007_STATS2 = "\cfSP.ATK:\cj 50 \cfSP.DEF:\cj 64";
-D007_STATS3 = "\cfSPD:\cj 43 \cfHP:\cj 44";
+D007_STATS1 = "\cfATK:\cj 40 \cfDEF:\cj 65";
+D007_STATS2 = "\cfSP.ATK:\cj 50 \cfSP.DEF:\cj 66";
+D007_STATS3 = "\cfSPD:\cj 38 \cfHP:\cj 55";
 D007_EVO = "\cj Evolves into \cvWartortle \cf at \cfLVL.7";
 //#endregion
 
 //#region -=- Wartortle -=-
 D008_NAME = "\cjWartortle";
 D008_TYPE = "\cjWater";
-D008_STATS1 = "\cfATK:\cj 63 \cfDEF:\cj 80";
-D008_STATS2 = "\cfSP.ATK:\cj 65 \cfSP.DEF:\cj 80";
-D008_STATS3 = "\cfSPD:\cj 58 \cfHP:\cj 59";
+D008_STATS1 = "\cfATK:\cj 52 \cfDEF:\cj 84";
+D008_STATS2 = "\cfSP.ATK:\cj 65 \cfSP.DEF:\cj 84";
+D008_STATS3 = "\cfSPD:\cj 50 \cfHP:\cj 70";
 D008_EVO = "\cj Evolves into \cvBlastoise \cf at \cfLVL.7";
 //#endregion
 
 //#region -=- Blastoise -=-
 D009_NAME = "\cjBlastoise";
 D009_TYPE = "\cjWater";
-D009_STATS1 = "\cfATK:\cj 83 \cfDEF:\cj 100";
+D009_STATS1 = "\cfATK:\cj 62 \cfDEF:\cj 105";
 D009_STATS2 = "\cfSP.ATK:\cj 85 \cfSP.DEF:\cj 105";
-D009_STATS3 = "\cfSPD:\cj 78 \cfHP:\cj 79";
+D009_STATS3 = "\cfSPD:\cj 73 \cfHP:\cj 100";
 D009_EVO = "\c[MenuRed]Does not evolve";
 //#endregion
 
+//#region -=- CHIKORITA -=-
+D010_NAME = "\cjCHIKORITA";
+D010_TYPE = "\cjGrass";
+D010_STATS1 = "\cfATK:\cj 49 \cfDEF:\cj 65";
+D010_STATS2 = "\cfSP.ATK:\cj 49 \cfSP.DEF:\cj 65";
+D010_STATS3 = "\cfSPD:\cj 45 \cfHP:\cj 45";
+D010_EVO = "\cj Evolves into \cvBayleef \cf at \cfLVL.3";
+//#endregion
+
+//#region -=- BAYLEEF -=-
+D011_NAME = "\cjBAYLEEF";
+D011_TYPE = "\cjGrass";
+D011_STATS1 = "\cfATK:\cj 62 \cfDEF:\cj 80";
+D011_STATS2 = "\cfSP.ATK:\cj 63 \cfSP.DEF:\cj 80";
+D011_STATS3 = "\cfSPD:\cj 60 \cfHP:\cj 60";
+D011_EVO = "\cj Evolves into \cvMeganium \cf at \cfLVL.7";
+//#endregion
+
+//#region -=- MEGANIUM -=-
+D012_NAME = "\cjMEGANIUM";
+D012_TYPE = "\cjGrass";
+D012_STATS1 = "\cfATK:\cj 82 \cfDEF:\cj 100";
+D012_STATS2 = "\cfSP.ATK:\cj 83 \cfSP.DEF:\cj 100";
+D012_STATS3 = "\cfSPD:\cj 80 \cfHP:\cj 80";
+D012_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+//#region -=- CYNDAQUIL -=-
+D013_NAME = "\cjCYNDAQUIL";
+D013_TYPE = "\cjFire";
+D013_STATS1 = "\cfATK:\cj <00> \cfDEF:\cj <00>";
+D013_STATS2 = "\cfSP.ATK:\cj <00> \cfSP.DEF:\cj <00>";
+D013_STATS3 = "\cfSPD:\cj <00> \cfHP:\cj <00>";
+D013_EVO = "\cj Evolves into \cvQuilava \cf at \cfLVL.3";
+//#endregion
+
+//#region -=- QUILAVA -=-
+D014_NAME = "\cjQUILAVA";
+D014_TYPE = "\cjFire";
+D014_STATS1 = "\cfATK:\cj <00> \cfDEF:\cj <00>";
+D014_STATS2 = "\cfSP.ATK:\cj <00> \cfSP.DEF:\cj <00>";
+D014_STATS3 = "\cfSPD:\cj <00> \cfHP:\cj <00>";
+D014_EVO = "\cj Evolves into \cvTyphlosion \cf at \cfLVL.7";
+//#endregion
+
+//#region -=- TYPHLOSION -=-
+D015_NAME = "\cjTYPHLOSION";
+D015_TYPE = "\cjFire";
+D015_STATS1 = "\cfATK:\cj <00> \cfDEF:\cj <00>";
+D015_STATS2 = "\cfSP.ATK:\cj <00> \cfSP.DEF:\cj <00>";
+D015_STATS3 = "\cfSPD:\cj <00> \cfHP:\cj <00>";
+D015_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+//#region -=- TOTODILE -=-
+D016_NAME = "\cjTOTODILE";
+D016_TYPE = "\cjWater";
+D016_STATS1 = "\cfATK:\cj <00> \cfDEF:\cj <00>";
+D016_STATS2 = "\cfSP.ATK:\cj <00> \cfSP.DEF:\cj <00>";
+D016_STATS3 = "\cfSPD:\cj <00> \cfHP:\cj <00>";
+D016_EVO = "\cj Evolves into \cvCroconaw \cf at \cfLVL.3";
+//#endregion
+
+//#region -=- CROCONAW -=-
+D017_NAME = "\cjCROCONAW";
+D017_TYPE = "\cjWater";
+D017_STATS1 = "\cfATK:\cj <00> \cfDEF:\cj <00>";
+D017_STATS2 = "\cfSP.ATK:\cj <00> \cfSP.DEF:\cj <00>";
+D017_STATS3 = "\cfSPD:\cj <00> \cfHP:\cj <00>";
+D017_EVO = "\cj Evolves into \cvFeraligatr \cf at \cfLVL.7";
+//#endregion
+
+//#region -=- FERALIGATR -=-
+D018_NAME = "\cjFERALIGATR";
+D018_TYPE = "\cjWater";
+D018_STATS1 = "\cfATK:\cj <00> \cfDEF:\cj <00>";
+D018_STATS2 = "\cfSP.ATK:\cj <00> \cfSP.DEF:\cj <00>";
+D018_STATS3 = "\cfSPD:\cj <00> \cfHP:\cj <00>";
+D018_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+
+//#region -=- TREECKO -=-
+D019_NAME = "\cjTREECKO";
+D019_TYPE = "\cjGrass";
+D019_STATS1 = "\cfATK:\cj 45 \cfDEF:\cj 35";
+D019_STATS2 = "\cfSP.ATK:\cj 65 \cfSP.DEF:\cj 55";
+D019_STATS3 = "\cfSPD:\cj 70 \cfHP:\cj 40";
+D019_EVO = "\cj Evolves into \cvGrovyle \cf at \cfLVL.3";
+//#endregion
+
+//#region -=- GROVYLE -=-
+D020_NAME = "\cjGROVYLE";
+D020_TYPE = "\cjGrass";
+D020_STATS1 = "\cfATK:\cj 65 \cfDEF:\cj 45";
+D020_STATS2 = "\cfSP.ATK:\cj 85 \cfSP.DEF:\cj 65";
+D020_STATS3 = "\cfSPD:\cj 95 \cfHP:\cj 50";
+D020_EVO = "\cj Evolves into \cvSceptile \cf at \cfLVL.7";
+//#endregion
+
+//#region -=- SCEPTILE -=-
+D021_NAME = "\cjSCEPTILE";
+D021_TYPE = "\cjGrass";
+D021_STATS1 = "\cfATK:\cj 85 \cfDEF:\cj 65";
+D021_STATS2 = "\cfSP.ATK:\cj 105 \cfSP.DEF:\cj 85";
+D021_STATS3 = "\cfSPD:\cj 120 \cfHP:\cj 70";
+D021_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+//#region -=- TORCHIC -=-
+D022_NAME = "\cjTORCHIC";
+D022_TYPE = "\cjFire";
+D022_STATS1 = "\cfATK:\cj <00> \cfDEF:\cj <00>";
+D022_STATS2 = "\cfSP.ATK:\cj <00> \cfSP.DEF:\cj <00>";
+D022_STATS3 = "\cfSPD:\cj <00> \cfHP:\cj <00>";
+D022_EVO = "\cj Evolves into \cvCombusken \cf at \cfLVL.3";
+//#endregion
+
+//#region -=- COMBUSKEN -=-
+D023_NAME = "\cjCOMBUSKEN";
+D023_TYPE = "\cjFire";
+D023_STATS1 = "\cfATK:\cj <00> \cfDEF:\cj <00>";
+D023_STATS2 = "\cfSP.ATK:\cj <00> \cfSP.DEF:\cj <00>";
+D023_STATS3 = "\cfSPD:\cj <00> \cfHP:\cj <00>";
+D023_EVO = "\cj Evolves into \cvBlaziken \cf at \cfLVL.7";
+//#endregion
+
+//#region -=- BLAZIKEN -=-
+D024_NAME = "\cjBLAZIKEN";
+D024_TYPE = "\cjFire/Fighting";
+D024_STATS1 = "\cfATK:\cj <00> \cfDEF:\cj <00>";
+D024_STATS2 = "\cfSP.ATK:\cj <00> \cfSP.DEF:\cj <00>";
+D024_STATS3 = "\cfSPD:\cj <00> \cfHP:\cj <00>";
+D024_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+//#region -=- MUDKIP -=-
+D025_NAME = "\cjMUDKIP";
+D025_TYPE = "\cjWater";
+D025_STATS1 = "\cfATK:\cj <00> \cfDEF:\cj <00>";
+D025_STATS2 = "\cfSP.ATK:\cj <00> \cfSP.DEF:\cj <00>";
+D025_STATS3 = "\cfSPD:\cj <00> \cfHP:\cj <00>";
+D025_EVO = "\cj Evolves into \cvMarshtomp \cf at \cfLVL.3";
+//#endregion
+
+//#region -=- MARSHTOMP -=-
+D026_NAME = "\cjMARSHTOMP";
+D026_TYPE = "\cjWater/Ground";
+D026_STATS1 = "\cfATK:\cj <00> \cfDEF:\cj <00>";
+D026_STATS2 = "\cfSP.ATK:\cj <00> \cfSP.DEF:\cj <00>";
+D026_STATS3 = "\cfSPD:\cj <00> \cfHP:\cj <00>";
+D026_EVO = "\cj Evolves into \cvSwampert \cf at \cfLVL.7";
+//#endregion
+
+//#region -=- SWAMPERT -=-
+D027_NAME = "\cjSWAMPERT";
+D027_TYPE = "\cjWater/Ground";
+D027_STATS1 = "\cfATK:\cj <00> \cfDEF:\cj <00>";
+D027_STATS2 = "\cfSP.ATK:\cj <00> \cfSP.DEF:\cj <00>";
+D027_STATS3 = "\cfSPD:\cj <00> \cfHP:\cj <00>";
+D027_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+
+//#region -=- TURTWIG -=-
+D028_NAME = "\cjTURTWIG";
+D028_TYPE = "\cjGrass";
+D028_STATS1 = "\cfATK:\cj 68 \cfDEF:\cj 64";
+D028_STATS2 = "\cfSP.ATK:\cj 45 \cfSP.DEF:\cj 53";
+D028_STATS3 = "\cfSPD:\cj 31 \cfHP:\cj 55";
+D028_EVO = "\cj Evolves into \cvGrotle \cf at \cfLVL.3";
+//#endregion
+
+//#region -=- GROTLE -=-
+D029_NAME = "\cjGROTLE";
+D029_TYPE = "\cjGrass";
+D029_STATS1 = "\cfATK:\cj 89 \cfDEF:\cj 85";
+D029_STATS2 = "\cfSP.ATK:\cj 55 \cfSP.DEF:\cj 65";
+D029_STATS3 = "\cfSPD:\cj 36 \cfHP:\cj 75";
+D029_EVO = "\cj Evolves into \cvTorterra \cf at \cfLVL.7";
+//#endregion
+
+//#region -=- TORTERRA -=-
+D030_NAME = "\cjTORTERRA";
+D030_TYPE = "\cjGrass/Ground";
+D030_STATS1 = "\cfATK:\cj 109 \cfDEF:\cj 105";
+D030_STATS2 = "\cfSP.ATK:\cj 75 \cfSP.DEF:\cj 85";
+D030_STATS3 = "\cfSPD:\cj 56 \cfHP:\cj 95";
+D030_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+//#region -=- CHIMCHAR -=-
+D031_NAME = "\cjCHIMCHAR";
+D031_TYPE = "\cjFire";
+D031_STATS1 = "\cfATK:\cj <00> \cfDEF:\cj <00>";
+D031_STATS2 = "\cfSP.ATK:\cj <00> \cfSP.DEF:\cj <00>";
+D031_STATS3 = "\cfSPD:\cj <00> \cfHP:\cj <00>";
+D031_EVO = "\cj Evolves into \cvMonferno \cf at \cfLVL.3";
+//#endregion
+
+//#region -=- MONFERNO -=-
+D032_NAME = "\cjMONFERNO";
+D032_TYPE = "\cjFire";
+D032_STATS1 = "\cfATK:\cj <00> \cfDEF:\cj <00>";
+D032_STATS2 = "\cfSP.ATK:\cj <00> \cfSP.DEF:\cj <00>";
+D032_STATS3 = "\cfSPD:\cj <00> \cfHP:\cj <00>";
+D032_EVO = "\cj Evolves into \cvInferape \cf at \cfLVL.7";
+//#endregion
+
+//#region -=- INFERNAPE -=-
+D033_NAME = "\cjINFERNAPE";
+D033_TYPE = "\cjFire/Fighting";
+D033_STATS1 = "\cfATK:\cj <00> \cfDEF:\cj <00>";
+D033_STATS2 = "\cfSP.ATK:\cj <00> \cfSP.DEF:\cj <00>";
+D033_STATS3 = "\cfSPD:\cj <00> \cfHP:\cj <00>";
+D033_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+//#region -=- PIPLUP -=-
+D034_NAME = "\cjPIPLUP";
+D034_TYPE = "\cjWater";
+D034_STATS1 = "\cfATK:\cj <00> \cfDEF:\cj <00>";
+D034_STATS2 = "\cfSP.ATK:\cj <00> \cfSP.DEF:\cj <00>";
+D034_STATS3 = "\cfSPD:\cj <00> \cfHP:\cj <00>";
+D034_EVO = "\cj Evolves into \cvPrinplup \cf at \cfLVL.3";
+//#endregion
+
+//#region -=- PRINPLUP -=-
+D035_NAME = "\cjPRINPLUP";
+D035_TYPE = "\cjWater";
+D035_STATS1 = "\cfATK:\cj <00> \cfDEF:\cj <00>";
+D035_STATS2 = "\cfSP.ATK:\cj <00> \cfSP.DEF:\cj <00>";
+D035_STATS3 = "\cfSPD:\cj <00> \cfHP:\cj <00>";
+D035_EVO = "\cj Evolves into \cvEmpoleon \cf at \cfLVL.7";
+//#endregion
+
+//#region -=- EMPOLEON -=-
+D036_NAME = "\cjEMPOLEON";
+D036_TYPE = "\cjWater/Steel";
+D036_STATS1 = "\cfATK:\cj <00> \cfDEF:\cj <00>";
+D036_STATS2 = "\cfSP.ATK:\cj <00> \cfSP.DEF:\cj <00>";
+D036_STATS3 = "\cfSPD:\cj <00> \cfHP:\cj <00>";
+D036_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
 
 
 
@@ -471,7 +715,7 @@ M008_NAME = "\cj Growth";
 M008_TYPE = "\cj Normal";
 M008_CATEGORY = "\cf Status";
 M008_POWER = "\cfPower:\cj --";
-M008_DESC = "\cjHold to channel a \cfSelf \cjBuff that \nboosts both ATK and SP.ATK";
+M008_DESC = "\cjCast a \cfSelf \cjBuff that \nboosts both ATK and SP.ATK";
 //#endregion
 
 //#region -=- 009: Growl -=-
@@ -663,7 +907,7 @@ M032_NAME = "\cj Dragon Dance";
 M032_TYPE = "\cj Normal";
 M032_CATEGORY = "\cf Status";
 M032_POWER = "\cfPower:\cj --";
-M032_DESC = "\cjHold to channel a \cfSelf \cjBuff that \nBoosts ATK and SPD through a rigorous, ancient dance";
+M032_DESC = "\cjCast a \cfSelf \cjBuff that \nBoosts ATK and SPD through a rigorous, ancient dance";
 //#endregion
 
 //#region -=- 033: Fire Blast -=-
@@ -711,7 +955,7 @@ M038_NAME = "\cj Withdraw";
 M038_TYPE = "\cj Normal";
 M038_CATEGORY = "\cf Status";
 M038_POWER = "\cfPower:\cj --";
-M038_DESC = "\cjHold to channel a \cfSelf \cjBuff that \nboosts DEF";
+M038_DESC = "\cjCast a \cfSelf \cjBuff that \nboosts DEF";
 //#endregion
 
 //#region -=- 039: Protect -=-
@@ -719,7 +963,7 @@ M039_NAME = "\cj Protect";
 M039_TYPE = "\cj Normal";
 M039_CATEGORY = "\cf Status";
 M039_POWER = "\cfPower:\cj --";
-M039_DESC = "\cjGuard \cfYourself \cjAgainst all harm but be briefly immobile afterwards, \n recovery time increases on successive use.";
+M039_DESC = "\cjGuard \cfYourself \cjAgainst all harm \nwhile held, movement is slowed while \nactive.";
 //#endregion
 
 //#region -=- 040: Aqua Ring -=-
@@ -751,7 +995,7 @@ M043_NAME = "\cj IronDefense";
 M043_TYPE = "\cj Normal";
 M043_CATEGORY = "\cf Status";
 M043_POWER = "\cfPower:\cj --";
-M043_DESC = "\cjHold to channel a \cfSelf \cjBuff that \nSharply Boosts DEF";
+M043_DESC = "\cjCast a \cfSelf \cjBuff that \nSharply Boosts DEF";
 //#endregion
 
 //#region -=- 044: Life Dew -=-
@@ -759,7 +1003,7 @@ M044_NAME = "\cj Life Dew";
 M044_TYPE = "\cj Normal";
 M044_CATEGORY = "\cf Status";
 M044_POWER = "\cfPower:\cj --";
-M044_DESC = "\cjSprinkle healing water on the \cfGround \cjyou target, healing is based on SP.ATK";
+M044_DESC = "\cjSprinkle healing water on the \cfGround \n\cjyou target, healing is based on SP.ATK";
 //#endregion
 
 //#region -=- 045: Hydro Pump -=-
@@ -767,7 +1011,7 @@ M045_NAME = "\cj Hydro Pump";
 M045_TYPE = "\cj Normal";
 M045_CATEGORY = "\cf Special";
 M045_POWER = "\cfPower:\cj 110 DPS";
-M045_DESC = "\cfContinuously shoot \cja jetstream of water, has considerable range and knockback.";
+M045_DESC = "\cfContinuously shoot \cja jetstream of \nwater, has considerable range and \nknockback.";
 //#endregion
 
 //#region -=- 046: Skull Bash -=-
@@ -791,7 +1035,7 @@ M048_NAME = "\cj Shell Smash";
 M048_TYPE = "\cj Normal";
 M048_CATEGORY = "\cf Status";
 M048_POWER = "\cfPower:\cj --";
-M048_DESC = "\cjHold to channel a \cfSelf \cjBuff that \nBreaks your shell, trading Defenses for Offenses and speed.";
+M048_DESC = "\cjCast a \cfSelf \cjBuff that Breaks your \nshell, trading Defenses for Offenses and \nspeed.";
 //#endregion
 
 //#region -=- 049: Yawn -=-
@@ -823,7 +1067,7 @@ M052_NAME = "\cj Amnesia";
 M052_TYPE = "\cj Normal";
 M052_CATEGORY = "\cf Status";
 M052_POWER = "\cfPower:\cj --";
-M052_DESC = "\cjHold to channel a \cfSelf \cjBuff that \nClears your thoughts and Sharply boosts SP.DEF";
+M052_DESC = "\cjCast a \cfSelf \cjBuff that \nClears your thoughts and Sharply boosts SP.DEF";
 //#endregion
 
 //#region -=- 053: Sketch -=-
@@ -831,5 +1075,541 @@ M053_NAME = "\cj Sketch";
 M053_TYPE = "\cj Normal";
 M053_CATEGORY = "\cf Status";
 M053_POWER = "\cfPower:\cj --";
-M053_DESC = "\cfShot \cja volley of fast moving stars with \n slight homing.";
+M053_DESC = "\cfTarget \cjan ally or enemy to \npermanently replicate the move they \ncurrently have on.";
+//#endregion
+
+//#region -=- 054: PowderSnow -=-
+M054_NAME = "\cj PowderSnow";
+M054_TYPE = "\cj <Type>";
+M054_CATEGORY = "\cf <Category>";
+M054_POWER = "\cfPower:\cj --";
+M054_DESC = "<Desc>";
+//#endregion
+
+//#region -=- 055: IcyWind -=-
+M055_NAME = "\cj IcyWind";
+M055_TYPE = "\cj <Type>";
+M055_CATEGORY = "\cf <Category>";
+M055_POWER = "\cfPower:\cj --";
+M055_DESC = "<Desc>";
+//#endregion
+
+//#region -=- 056: AuroraBeam -=-
+M056_NAME = "\cj AuroraBeam";
+M056_TYPE = "\cj <Type>";
+M056_CATEGORY = "\cf <Category>";
+M056_POWER = "\cfPower:\cj --";
+M056_DESC = "<Desc>";
+//#endregion
+
+//#region -=- 057: IcePunch -=-
+M057_NAME = "\cj IcePunch";
+M057_TYPE = "\cj <Type>";
+M057_CATEGORY = "\cf <Category>";
+M057_POWER = "\cfPower:\cj --";
+M057_DESC = "<Desc>";
+//#endregion
+
+//#region -=- 058: IceFang -=-
+M058_NAME = "\cj IceFang";
+M058_TYPE = "\cj <Type>";
+M058_CATEGORY = "\cf <Category>";
+M058_POWER = "\cfPower:\cj --";
+M058_DESC = "<Desc>";
+//#endregion
+
+//#region -=- 059: IceBeam -=-
+M059_NAME = "\cj IceBeam";
+M059_TYPE = "\cj <Type>";
+M059_CATEGORY = "\cf <Category>";
+M059_POWER = "\cfPower:\cj --";
+M059_DESC = "<Desc>";
+//#endregion
+
+//#region -=- 060: FrostBreath -=-
+M060_NAME = "\cj FrostBreath";
+M060_TYPE = "\cj <Type>";
+M060_CATEGORY = "\cf <Category>";
+M060_POWER = "\cfPower:\cj --";
+M060_DESC = "<Desc>";
+//#endregion
+
+//#region -=- 061: Blizzard -=-
+M061_NAME = "\cj Blizzard";
+M061_TYPE = "\cj <Type>";
+M061_CATEGORY = "\cf <Category>";
+M061_POWER = "\cfPower:\cj --";
+M061_DESC = "<Desc>";
+//#endregion
+
+//#region -=- 062: Reflect -=-
+M062_NAME = "\cj Reflect";
+M062_TYPE = "\cj Psychic";
+M062_CATEGORY = "\cf Status";
+M062_POWER = "\cfPower:\cj --";
+M062_DESC = "\cfTarget the ground\cj and cast a protective \nbarrier onto oneself and all teammates in \nthe area that cuts physical damage in \nhalf";
+//#endregion
+
+//#region -=- 063: MagicalLeaf -=-
+M063_NAME = "\cj MagicalLeaf";
+M063_TYPE = "\cj Grass";
+M063_CATEGORY = "\cf Special";
+M063_POWER = "\cfPower:\cj --";
+M063_DESC = "\cfShoot\cj a mystical leaf that chases after \ntargets.";
+//#endregion
+
+//#region -=- 064: LightScreen -=-
+M064_NAME = "\cj LightScreen";
+M064_TYPE = "\cj Psychic";
+M064_CATEGORY = "\cf Status";
+M064_POWER = "\cfPower:\cj --";
+M064_DESC = "\cfTarget the ground\cj and cast a protective \nbarrier onto oneself and all teammates in \nthe area that cuts Special damage in \nhalf";
+//#endregion
+
+//#region -=- 065: GrassWhistle -=-
+M065_NAME = "\cj GrassWhistle";
+M065_TYPE = "\cj Grass";
+M065_CATEGORY = "\cf Status";
+M065_POWER = "\cfPower:\cj --";
+M065_DESC = "\cfShoot\cj a serene melody that lulls enemies to \nsleep, ineffective on grass types.";
+//#endregion
+
+//#region -=- 066: HealPulse -=-
+M066_NAME = "\cj HealPulse";
+M066_TYPE = "\cj Psychic";
+M066_CATEGORY = "\cf Status";
+M066_POWER = "\cfPower:\cj --";
+M066_DESC = "\cfTarget an ally\cj and unleash healing energies \nonto them, can be used from a great \ndistance.";
+//#endregion
+
+//#region -=- 067: Aromatherapy -=-
+M067_NAME = "\cj Aromatherapy";
+M067_TYPE = "\cj Grass";
+M067_CATEGORY = "\cf Status";
+M067_POWER = "\cfPower:\cj --";
+M067_DESC = "\cfTarget the ground\cj to cast a status curing \naroma around the target area. ";
+//#endregion
+
+//#region -=- 068: Safeguard -=-
+M068_NAME = "\cj Safeguard";
+M068_TYPE = "\cj Normal";
+M068_CATEGORY = "\cf Status";
+M068_POWER = "\cfPower:\cj --";
+M068_DESC = "\cfTarget the ground\cj to cast a mystical \nforcefield that protects teammates from \nstatuses and makes them undetectable by \nhoming projectiles.";
+//#endregion
+
+//#region -=- 069: BulletSeed -=-
+M069_NAME = "\cj BulletSeed";
+M069_TYPE = "\cj Grass";
+M069_CATEGORY = "\cf Physical";
+M069_POWER = "\cfPower:\cj --";
+M069_DESC = "\cfContinuously Shoot\cj a barrage of seeds";
+//#endregion
+
+//#region -=- 070: Detect -=-
+M070_NAME = "\cj Detect";
+M070_TYPE = "\cj Fighting";
+M070_CATEGORY = "\cf Status";
+M070_POWER = "\cfPower:\cj --";
+M070_DESC = "\cfan evasive dash that allows the user to \nescape from harm.";
+//#endregion
+
+//#region -=- 071: Pursuit -=-
+M071_NAME = "\cj Pursuit";
+M071_TYPE = "\cj Dark";
+M071_CATEGORY = "\cf Physical";
+M071_POWER = "\cfPower:\cj --";
+M071_DESC = "\cfShoot\cj a strange projectile that seeks out \nfoes, if it connects, it will warp you to \nit’s location.";
+//#endregion
+
+//#region -=- 072: LeafBlade -=-
+M072_NAME = "\cj LeafBlade";
+M072_TYPE = "\cj Grass";
+M072_CATEGORY = "\cf Physical";
+M072_POWER = "\cfPower:\cj --";
+M072_DESC = "\cfCleave\cj foes with a blade of leaves, deals \nthe most damage at it’s tip.";
+//#endregion
+
+//#region -=- 073: FalseSwipe -=-
+M073_NAME = "\cj FalseSwipe";
+M073_TYPE = "\cj Normal";
+M073_CATEGORY = "\cf Physical";
+M073_POWER = "\cfPower:\cj --";
+M073_DESC = "\cftrain your claws by \cfstriking\cj at an \nopponent, damage is nonlethal but would-\nbe lethal hits reward exp";
+//#endregion
+
+//#region -=- 074: Agility -=-
+M074_NAME = "\cj Agility";
+M074_TYPE = "\cj Psychic";
+M074_CATEGORY = "\cf Status";
+M074_POWER = "\cfPower:\cj --";
+M074_DESC = "\cjCast a \cfSelf \cjBuff that \nSharply boosts SPEED";
+//#endregion
+
+//#region -=- 075: NightSlash -=-
+M075_NAME = "\cj NightSlash";
+M075_TYPE = "\cj Dark";
+M075_CATEGORY = "\cf Physical";
+M075_POWER = "\cfPower:\cj --";
+M075_DESC = "\cfCleave\cj opponents with an unexpected blade, \nstrongest at it’s tip and from behind the \nfoe.";
+//#endregion
+
+//#region -=- 076: XScissor -=-
+M076_NAME = "\cj XScissor";
+M076_TYPE = "\cj Bug";
+M076_CATEGORY = "\cf Physical";
+M076_POWER = "\cfPower:\cj --";
+M076_DESC = "\cfCleave\cj opponents by crossing blades in an X \nshape. deals the most damage at the \nepicenter.";
+//#endregion
+
+//#region -=- 077: SkyDrop -=-
+M077_NAME = "\cj SkyDrop";
+M077_TYPE = "\cj Flying";
+M077_CATEGORY = "\cf Physical";
+M077_POWER = "\cfPower:\cj --";
+M077_DESC = "Leap high and \cfgrab\cj airborne foes to slam \nthem back onto the ground.";
+//#endregion
+
+//#region -=- 078: StealthRock -=-
+M078_NAME = "\cj StealthRock";
+M078_TYPE = "\cj Rock";
+M078_CATEGORY = "\cf Misc";
+M078_POWER = "\cfPower:\cj --";
+M078_DESC = "Deploy sharp, floating rocks that deal \nrock-type damage on contact.";
+//#endregion
+
+//#region -=- 079: Curse -=-
+M079_NAME = "\cj Curse";
+M079_TYPE = "\cj Ghost";
+M079_CATEGORY = "\cf Status";
+M079_POWER = "\cfPower:\cj --";
+M079_DESC = "\cfon regular pokemon:\n\cjCasts a \cfSelf \cjBuff that exchanges \nSPEED for ATK and DEF.\non Ghost Types:\n \n\cftarget’s an opponent\cj and lays a deadly \ncurse on them, draining health until you \nor they fall.";
+//#endregion
+
+//#region -=- 080: Earthquake -=-
+M080_NAME = "\cj Earthquake";
+M080_TYPE = "\cj Ground";
+M080_CATEGORY = "\cf Physical";
+M080_POWER = "\cfPower:\cj --";
+M080_DESC = "\cfunleash a powerful shockwave across the \n\cfsurrounding area.\cj might miss airborne \nfoes.";
+//#endregion
+
+//#region -=- 081: WideGuard -=-
+M081_NAME = "\cj WideGuard";
+M081_TYPE = "\cj Rock";
+M081_CATEGORY = "\cf Misc";
+M081_POWER = "\cfPower:\cj --";
+M081_DESC = "\cfTarget the ground\cj and Deploy a shield that \nblocks all projectiles. use again to drop \nthe shield and save PP.";
+//#endregion
+
+//#region -=- 082: WoodHammer -=-
+M082_NAME = "\cj WoodHammer";
+M082_TYPE = "\cj Grass";
+M082_CATEGORY = "\cf Physical";
+M082_POWER = "\cfPower:\cj --";
+M082_DESC = "\cfPound the ground\cj near you with a wooden \nhammer. a portion of damage dealt will be \nreturned as recoil.";
+//#endregion
+
+//#region -=- 083: DefenseCurl -=-
+M083_NAME = "\cj DefenseCurl";
+M083_TYPE = "\cj <Type>";
+M083_CATEGORY = "\cf <Category>";
+M083_POWER = "\cfPower:\cj --";
+M083_DESC = "<Desc>";
+//#endregion
+
+//#region -=- 084: Covet -=-
+M084_NAME = "\cj Covet";
+M084_TYPE = "\cj <Type>";
+M084_CATEGORY = "\cf <Category>";
+M084_POWER = "\cfPower:\cj --";
+M084_DESC = "<Desc>";
+//#endregion
+
+//#region -=- 085: FlameWheel -=-
+M085_NAME = "\cj FlameWheel";
+M085_TYPE = "\cj <Type>";
+M085_CATEGORY = "\cf <Category>";
+M085_POWER = "\cfPower:\cj --";
+M085_DESC = "<Desc>";
+//#endregion
+
+//#region -=- 086: Mudslap -=-
+M086_NAME = "\cj Mudslap";
+M086_TYPE = "\cj <Type>";
+M086_CATEGORY = "\cf <Category>";
+M086_POWER = "\cfPower:\cj --";
+M086_DESC = "<Desc>";
+//#endregion
+
+//#region -=- 087: Rollout -=-
+M087_NAME = "\cj Rollout";
+M087_TYPE = "\cj <Type>";
+M087_CATEGORY = "\cf <Category>";
+M087_POWER = "\cfPower:\cj --";
+M087_DESC = "<Desc>";
+//#endregion
+
+//#region -=- 088: Extrasensory -=-
+M088_NAME = "\cj Extrasensory";
+M088_TYPE = "\cj <Type>";
+M088_CATEGORY = "\cf <Category>";
+M088_POWER = "\cfPower:\cj --";
+M088_DESC = "<Desc>";
+//#endregion
+
+//#region -=- 089: GyroBall -=-
+M089_NAME = "\cj GyroBall";
+M089_TYPE = "\cj <Type>";
+M089_CATEGORY = "\cf <Category>";
+M089_POWER = "\cfPower:\cj --";
+M089_DESC = "<Desc>";
+//#endregion
+
+//#region -=- 090: Eruption -=-
+M090_NAME = "\cj Eruption";
+M090_TYPE = "\cj <Type>";
+M090_CATEGORY = "\cf <Category>";
+M090_POWER = "\cfPower:\cj --";
+M090_DESC = "<Desc>";
+//#endregion
+
+//#region -=- 091: Peck -=-
+M091_NAME = "\cj Peck";
+M091_TYPE = "\cj <Type>";
+M091_CATEGORY = "\cf <Category>";
+M091_POWER = "\cfPower:\cj --";
+M091_DESC = "<Desc>";
+//#endregion
+
+//#region -=- 092: DoubleKick -=-
+M092_NAME = "\cj DoubleKick";
+M092_TYPE = "\cj <Type>";
+M092_CATEGORY = "\cf <Category>";
+M092_POWER = "\cfPower:\cj --";
+M092_DESC = "<Desc>";
+//#endregion
+
+//#region -=- 093: ThunderPunch -=-
+M093_NAME = "\cj ThunderPunch";
+M093_TYPE = "\cj <Type>";
+M093_CATEGORY = "\cf <Category>";
+M093_POWER = "\cfPower:\cj --";
+M093_DESC = "<Desc>";
+//#endregion
+
+//#region -=- 094: HeatWave -=-
+M094_NAME = "\cj HeatWave";
+M094_TYPE = "\cj <Type>";
+M094_CATEGORY = "\cf <Category>";
+M094_POWER = "\cfPower:\cj --";
+M094_DESC = "<Desc>";
+//#endregion
+
+//#region -=- 095: BlazeKick -=-
+M095_NAME = "\cj BlazeKick";
+M095_TYPE = "\cj <Type>";
+M095_CATEGORY = "\cf <Category>";
+M095_POWER = "\cfPower:\cj --";
+M095_DESC = "<Desc>";
+//#endregion
+
+//#region -=- 096: SkyUppercut -=-
+M096_NAME = "\cj SkyUppercut";
+M096_TYPE = "\cj <Type>";
+M096_CATEGORY = "\cf <Category>";
+M096_POWER = "\cfPower:\cj --";
+M096_DESC = "<Desc>";
+//#endregion
+
+//#region -=- 097: BraveBird -=-
+M097_NAME = "\cj BraveBird";
+M097_TYPE = "\cj <Type>";
+M097_CATEGORY = "\cf <Category>";
+M097_POWER = "\cfPower:\cj --";
+M097_DESC = "<Desc>";
+//#endregion
+
+//#region -=- 098: HiJumpKick -=-
+M098_NAME = "\cj HiJumpKick";
+M098_TYPE = "\cj <Type>";
+M098_CATEGORY = "\cf <Category>";
+M098_POWER = "\cfPower:\cj --";
+M098_DESC = "<Desc>";
+//#endregion
+
+//#region -=- 099: Leer -=-
+M099_NAME = "\cj Leer";
+M099_TYPE = "\cj <Type>";
+M099_CATEGORY = "\cf <Category>";
+M099_POWER = "\cfPower:\cj --";
+M099_DESC = "<Desc>";
+//#endregion
+
+//#region -=- 0100: Fakeout -=-
+M100_NAME = "\cj Fakeout";
+M100_TYPE = "\cj <Type>";
+M100_CATEGORY = "\cf <Category>";
+M100_POWER = "\cfPower:\cj --";
+M100_DESC = "<Desc>";
+//#endregion
+
+//#region -=- 0101: Machpunch -=-
+M101_NAME = "\cj Machpunch";
+M101_TYPE = "\cj <Type>";
+M101_CATEGORY = "\cf <Category>";
+M101_POWER = "\cfPower:\cj --";
+M101_DESC = "<Desc>";
+//#endregion
+
+//#region -=- 0102: Vacuumwave -=-
+M102_NAME = "\cj Vacuumwave";
+M102_TYPE = "\cj <Type>";
+M102_CATEGORY = "\cf <Category>";
+M102_POWER = "\cfPower:\cj --";
+M102_DESC = "<Desc>";
+//#endregion
+
+//#region -=- 0103: NastyPlot -=-
+M103_NAME = "\cj NastyPlot";
+M103_TYPE = "\cj <Type>";
+M103_CATEGORY = "\cf <Category>";
+M103_POWER = "\cfPower:\cj --";
+M103_DESC = "<Desc>";
+//#endregion
+
+//#region -=- 0104: CloseCombat -=-
+M104_NAME = "\cj CloseCombat";
+M104_TYPE = "\cj <Type>";
+M104_CATEGORY = "\cf <Category>";
+M104_POWER = "\cfPower:\cj --";
+M104_DESC = "<Desc>";
+//#endregion
+
+//#region -=- 0105: Acrobatics -=-
+M105_NAME = "\cj Acrobatics";
+M105_TYPE = "\cj <Type>";
+M105_CATEGORY = "\cf <Category>";
+M105_POWER = "\cfPower:\cj --";
+M105_DESC = "<Desc>";
+//#endregion
+
+//#region -=- 0106: Rage -=-
+M106_NAME = "\cj Rage";
+M106_TYPE = "\cj <Type>";
+M106_CATEGORY = "\cf <Category>";
+M106_POWER = "\cfPower:\cj --";
+M106_DESC = "<Desc>";
+//#endregion
+
+//#region -=- 0107: FakeTears -=-
+M107_NAME = "\cj FakeTears";
+M107_TYPE = "\cj <Type>";
+M107_CATEGORY = "\cf <Category>";
+M107_POWER = "\cfPower:\cj --";
+M107_DESC = "<Desc>";
+//#endregion
+
+//#region -=- 0108: AquaTail -=-
+M108_NAME = "\cj AquaTail";
+M108_TYPE = "\cj <Type>";
+M108_CATEGORY = "\cf <Category>";
+M108_POWER = "\cfPower:\cj --";
+M108_DESC = "<Desc>";
+//#endregion
+
+//#region -=- 0109: Crunch -=-
+M109_NAME = "\cj Crunch";
+M109_TYPE = "\cj <Type>";
+M109_CATEGORY = "\cf <Category>";
+M109_POWER = "\cfPower:\cj --";
+M109_DESC = "<Desc>";
+//#endregion
+
+//#region -=- 0110: Thrash -=-
+M110_NAME = "\cj Thrash";
+M110_TYPE = "\cj <Type>";
+M110_CATEGORY = "\cf <Category>";
+M110_POWER = "\cfPower:\cj --";
+M110_DESC = "<Desc>";
+//#endregion
+
+//#region -=- 0111: Refresh -=-
+M111_NAME = "\cj Refresh";
+M111_TYPE = "\cj <Type>";
+M111_CATEGORY = "\cf <Category>";
+M111_POWER = "\cfPower:\cj --";
+M111_DESC = "<Desc>";
+//#endregion
+
+//#region -=- 0112: MudBomb -=-
+M112_NAME = "\cj MudBomb";
+M112_TYPE = "\cj <Type>";
+M112_CATEGORY = "\cf <Category>";
+M112_POWER = "\cfPower:\cj --";
+M112_DESC = "<Desc>";
+//#endregion
+
+//#region -=- 0113: HammerArm -=-
+M113_NAME = "\cj HammerArm";
+M113_TYPE = "\cj <Type>";
+M113_CATEGORY = "\cf <Category>";
+M113_POWER = "\cfPower:\cj --";
+M113_DESC = "<Desc>";
+//#endregion
+
+//#region -=- 0114: RockSlide -=-
+M114_NAME = "\cj RockSlide";
+M114_TYPE = "\cj <Type>";
+M114_CATEGORY = "\cf <Category>";
+M114_POWER = "\cfPower:\cj --";
+M114_DESC = "<Desc>";
+//#endregion
+
+//#region -=- 0115: Brine -=-
+M115_NAME = "\cj Brine";
+M115_TYPE = "\cj <Type>";
+M115_CATEGORY = "\cf <Category>";
+M115_POWER = "\cfPower:\cj --";
+M115_DESC = "<Desc>";
+//#endregion
+
+//#region -=- 0116: SwordDance -=-
+M116_NAME = "\cj SwordDance";
+M116_TYPE = "\cj <Type>";
+M116_CATEGORY = "\cf <Category>";
+M116_POWER = "\cfPower:\cj --";
+M116_DESC = "<Desc>";
+//#endregion
+
+//#region -=- 0117: AquaJet -=-
+M117_NAME = "\cj AquaJet";
+M117_TYPE = "\cj <Type>";
+M117_CATEGORY = "\cf <Category>";
+M117_POWER = "\cfPower:\cj --";
+M117_DESC = "<Desc>";
+//#endregion
+
+//#region -=- 0118: DrillPeck -=-
+M118_NAME = "\cj DrillPeck";
+M118_TYPE = "\cj <Type>";
+M118_CATEGORY = "\cf <Category>";
+M118_POWER = "\cfPower:\cj --";
+M118_DESC = "<Desc>";
+//#endregion
+
+//#region -=- 0119: Spikes -=-
+M119_NAME = "\cj Spikes";
+M119_TYPE = "\cj <Type>";
+M119_CATEGORY = "\cf <Category>";
+M119_POWER = "\cfPower:\cj --";
+M119_DESC = "<Desc>";
+//#endregion
+
+//#region -=- 0120: ToxicSpikes -=-
+M120_NAME = "\cj ToxicSpikes";
+M120_TYPE = "\cj <Type>";
+M120_CATEGORY = "\cf <Category>";
+M120_POWER = "\cfPower:\cj --";
+M120_DESC = "<Desc>";
 //#endregion

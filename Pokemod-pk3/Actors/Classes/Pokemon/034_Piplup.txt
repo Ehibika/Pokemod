@@ -7,7 +7,7 @@
 Actor Piplup : ClassBase 
 {
 Player.DisplayName "Piplup"
-Player.SoundClass "Megaman"
+Player.SoundClass "Piplup"
 
 //player.startitem "PersistentLoadout"
 player.startitem "PokeFormHandler"

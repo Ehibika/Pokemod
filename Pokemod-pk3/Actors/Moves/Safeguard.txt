@@ -76,7 +76,6 @@ actor SafeguardPower : PowerProtection
 {
 inventory.amount 1
 Powerup.duration 35
-Damagefactor "PoisonPowder", 0.0
 }
 
 

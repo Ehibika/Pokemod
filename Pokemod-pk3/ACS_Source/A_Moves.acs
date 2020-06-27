@@ -6,6 +6,7 @@
 
 #library "A_Moves"
 #include "zcommon.acs"
+#include "8bdmlib.acs"
 #import "tools.acs"
 #import "DB_Player.acs"
 #import "DB_Data.acs"
@@ -125,4 +126,48 @@ if(FiringPlayer == 0){Output = CheckInventory(CountActor);}
 else {Output = CheckActorInventory(FiringPlayer,CountActor);}
 
 SetResultValue(Output);
+}
+
+#DEFINE HAZTID 37000 // 37| TeamNum | Hazard num
+#DEFINE HAZMAX 50
+int HazTIDRecord[4];
+
+Script "HazardTID" (Void)
+{
+
+if(activatorTID() != 0){Terminate;}
+
+int FiringPlayer = ACS_NamedExecuteWithResult("core_gettarget",0);
+Int TeamNum = ACS_NamedExecuteWithResult("core_getplayerteam",FiringPlayer-1000);
+
+int newHazTID = HazTIDRecord[TeamNum];
+int MaxHazTID = HAZTID+(TeamNum*100)+HAZMAX;
+
+if(!newHazTID){newHazTID = HAZTID+(TeamNum*100);}
+else if(newHazTID > MaxHazTID){newHazTID = newHazTID-HAZMAX;}
+until(!IsTIDUsed(newHazTID)){Thing_remove(newHazTID);}
+Thing_ChangeTID(0,newHazTID);
+HazTIDRecord[TeamNum] = newHazTID+1;
+
+}
+
+Script "HazardScrub" (int ScrubRange)
+{
+    int FiringPlayer = ACS_NamedExecuteWithResult("core_gettarget",0);
+    Int TeamNum = ACS_NamedExecuteWithResult("core_getplayerteam",FiringPlayer-1000);
+int MaxTeams = GetCvar("sv_maxteams");
+int CheckTID;
+
+For(int i; i<HAZMAX;i++)
+    {
+    for(int j; j < MaxTeams; j++)
+    {
+    CheckTID = HAZTID + (j*100)+ i;
+        if(IsTIDUsed(CheckTID) 
+            && xyzDistance(0,CheckTID) <= ScrubRange
+            && j != TeamNum){SetActorState(CheckTID,"Purge");}
+    }
+    j = 0;
+    }
+
 }

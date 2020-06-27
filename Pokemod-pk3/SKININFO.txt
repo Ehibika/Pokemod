@@ -9,7 +9,7 @@ dsoof = LAND
 dspldeth = MEGADEAT
 dspdiehi = MEGADEAT
 dsplpain = MEGAPAIN
-dstaunt = dsnone
+dstaunt = CRY002
 gender = male
 }
 
@@ -22,7 +22,7 @@ dsoof = FATLAND
 dspldeth = MEGADEAT
 dspdiehi = MEGADEAT
 dsplpain = MEGAPAIN
-dstaunt = dsnone
+dstaunt = Cry003
 gender = male
 }
 
@@ -35,7 +35,7 @@ dsoof = LAND
 dspldeth = MEGADEAT
 dspdiehi = MEGADEAT
 dsplpain = MEGAPAIN
-dstaunt = dsnone
+dstaunt = cry005
 gender = male
 }
 
@@ -48,7 +48,7 @@ dsoof = FATLAND
 dspldeth = MEGADEAT
 dspdiehi = MEGADEAT
 dsplpain = MEGAPAIN
-dstaunt = dsnone
+dstaunt = cry006
 gender = male
 }
 
@@ -61,7 +61,7 @@ dsoof = LAND
 dspldeth = MEGADEAT
 dspdiehi = MEGADEAT
 dsplpain = MEGAPAIN
-dstaunt = dsnone
+dstaunt = cry008
 gender = male
 }
 
@@ -74,7 +74,7 @@ dsoof = FATLAND
 dspldeth = MEGADEAT
 dspdiehi = MEGADEAT
 dsplpain = MEGAPAIN
-dstaunt = dsnone
+dstaunt = cry009
 gender = male
 }
 
@@ -87,7 +87,7 @@ dsoof = LAND
 dspldeth = MEGADEAT
 dspdiehi = MEGADEAT
 dsplpain = MEGAPAIN
-dstaunt = dsnone
+dstaunt = cry011
 gender = male
 }
 
@@ -100,7 +100,7 @@ dsoof = FATLAND
 dspldeth = MEGADEAT
 dspdiehi = MEGADEAT
 dsplpain = MEGAPAIN
-dstaunt = dsnone
+dstaunt = cry012
 gender = male
 }
 
@@ -113,7 +113,7 @@ dsoof = LAND
 dspldeth = MEGADEAT
 dspdiehi = MEGADEAT
 dsplpain = MEGAPAIN
-dstaunt = dsnone
+dstaunt = cry020
 gender = male
 }
 
@@ -126,7 +126,7 @@ dsoof = FATLAND
 dspldeth = MEGADEAT
 dspdiehi = MEGADEAT
 dsplpain = MEGAPAIN
-dstaunt = dsnone
+dstaunt = cry021
 gender = male
 }
 
@@ -140,7 +140,7 @@ gender = male
     dspldeth = MEGADEAT
     dspdiehi = MEGADEAT
     dsplpain = MEGAPAIN
-    dstaunt = dsnone
+    dstaunt = cry029
     gender = male
     }
     
@@ -153,6 +153,6 @@ gender = male
     dspldeth = MEGADEAT
     dspdiehi = MEGADEAT
     dsplpain = MEGAPAIN
-    dstaunt = dsnone
+    dstaunt = cry030
     gender = male
     }

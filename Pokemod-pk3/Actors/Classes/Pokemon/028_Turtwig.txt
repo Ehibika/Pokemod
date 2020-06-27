@@ -7,7 +7,7 @@
 Actor Turtwig : ClassBase 
 {
 Player.DisplayName "Turtwig"
-Player.SoundClass "Megaman"
+Player.SoundClass "Turtwig"
 
 //Player.StartItem "TurtwigStarterMoves"
 //player.startitem "PersistentLoadout"

@@ -7,7 +7,7 @@
 Actor Chimchar : ClassBase 
 {
 Player.DisplayName "Chimchar"
-Player.SoundClass "Megaman"
+Player.SoundClass "Chimchar"
 
 //player.startitem "PersistentLoadout"
 player.startitem "PokeFormHandler"
