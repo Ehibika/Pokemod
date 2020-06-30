@@ -15,6 +15,7 @@ player.startitem "PokeFormHandler"
 player.startitem "EvoStartItem"
 player.startitem "MoveTutorStartItem"
 player.startitem "MoveShiftStartItem"
+player.startitem "PlayerStatusItem"
 
 //============|
 Player.StartItem "Base_HP", 40

@@ -29,9 +29,9 @@ Int MoveDex [MAXDEX][14] = {
 	/*|11|*/{RazorLeaf,Growl,PoisonPowder,Synthesis,/**/ Reflect,MagicalLeaf,LightScreen,GrassWhistle,HealPulse,AromaTherapy,SeedBomb,Safeguard,SolarBeam},
 	/*|12|*/{RazorLeaf,Growl,PoisonPowder,Synthesis,/**/ Reflect,MagicalLeaf,LightScreen,GrassWhistle,HealPulse,AromaTherapy,SeedBomb,Safeguard,SolarBeam},
 
-	/*|13|*/{Ember,Growl,SmokeScreen,MetalClaw,/**/ FireSpin,FlameBurst,Flamethrower,DragonRage,DragonClaw,DragonPulse,FlareBlitz,DragonDance,FireBlast},
-	/*|14|*/{Ember,Growl,SmokeScreen,MetalClaw,/**/ FireSpin,FlameBurst,Flamethrower,DragonRage,DragonClaw,DragonPulse,FlareBlitz,DragonDance,FireBlast},
-	/*|15|*/{Ember,Growl,SmokeScreen,MetalClaw,/**/ FireSpin,FlameBurst,Flamethrower,DragonRage,DragonClaw,DragonPulse,FlareBlitz,DragonDance,FireBlast},
+	/*|13|*/{Ember,SmokeScreen,FlameWheel,DefenseCurl,/**/ Mudslap,Swift,FlameBurst,GyroBall,Rollout,Flamethrower,Curse,FlareBlitz,FireBlast},
+	/*|14|*/{Ember,SmokeScreen,FlameWheel,DefenseCurl,/**/ Mudslap,Swift,FlameBurst,GyroBall,Rollout,Flamethrower,Curse,FlareBlitz,FireBlast},
+	/*|15|*/{Ember,SmokeScreen,FlameWheel,DefenseCurl,/**/ Mudslap,Swift,FlameBurst,GyroBall,Rollout,Flamethrower,Curse,FlareBlitz,FireBlast},
 	
 	/*|16|*/{Watergun,Yawn,RapidSpin,Protect,/**/ LifeDew,BubbleBeam,IronDefense,Amnesia,AquaRing,HydroPump,FlashCannon,Haze,ShellSmash},
 	/*|17|*/{Watergun,Yawn,RapidSpin,Protect,/**/ LifeDew,BubbleBeam,IronDefense,Amnesia,AquaRing,HydroPump,FlashCannon,Haze,ShellSmash},
@@ -41,7 +41,7 @@ Int MoveDex [MAXDEX][14] = {
 	/*|20|*/{BulletSeed,QuickAttack,Detect,LeechSeed,/**/ Pursuit,LeafBlade,FalseSwipe,Agility,NightSlash,EnergyBall,Xscissor,DragonPulse,SkyDrop},
 	/*|21|*/{BulletSeed,QuickAttack,Detect,LeechSeed,/**/ Pursuit,LeafBlade,FalseSwipe,Agility,NightSlash,EnergyBall,Xscissor,DragonPulse,SkyDrop},
 
-	/*|22|*/{Ember,Growl,SmokeScreen,MetalClaw,/**/ FireSpin,FlameBurst,Flamethrower,DragonRage,DragonClaw,DragonPulse,FlareBlitz,DragonDance,FireBlast},
+	/*|22|*/{Ember,SmokeScreen,FlameWheel,Growl,/**/ FireSpin,Swift,FlameBurst,GyroBall,Rollout,Flamethrower,Curse,FlareBlitz,FireBlast},
 	/*|23|*/{Ember,Growl,SmokeScreen,MetalClaw,/**/ FireSpin,FlameBurst,Flamethrower,DragonRage,DragonClaw,DragonPulse,FlareBlitz,DragonDance,FireBlast},
 	/*|24|*/{Ember,Growl,SmokeScreen,MetalClaw,/**/ FireSpin,FlameBurst,Flamethrower,DragonRage,DragonClaw,DragonPulse,FlareBlitz,DragonDance,FireBlast},
 	

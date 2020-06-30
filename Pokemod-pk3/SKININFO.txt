@@ -105,6 +105,32 @@ gender = male
 }
 
 {
+    name = "Quilava"
+    sprite = P014
+    class = Cyndaquil
+    dsnoway = LAND
+    dsoof = LAND
+    dspldeth = MEGADEAT
+    dspdiehi = MEGADEAT
+    dsplpain = MEGAPAIN
+    dstaunt = cry011
+    gender = male
+    }
+    
+    {
+    name = "Typhlosion"
+    sprite = P015
+    class = Cyndaquil
+    dsnoway = FATLAND
+    dsoof = FATLAND
+    dspldeth = MEGADEAT
+    dspdiehi = MEGADEAT
+    dsplpain = MEGAPAIN
+    dstaunt = cry012
+    gender = male
+    }
+
+{
 name = "Grovyle"
 sprite = P020
 class = Treecko

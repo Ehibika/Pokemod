@@ -9,6 +9,7 @@ SHOP_BUYFAIL_MONEY = "\c[MenuRed]Purchase Fail! Not Enough Money!";
 SHOP_BUYFAIL_POSSESS = "\c[MenuRed]Purchase Fail! Already Possessed!";
 SHOP_BUYFAIL_SPACE = "\c[MenuRed]Purchase Fail! Can't carry any more!";
 SHOP_BUYFAIL_LVL = "\c[MenuRed]Purchase Fail! You are at max level!";
+SHOP_BUYFAIL_TM = "\c[MenuRed]Purchase Fail! TM Incompatible!";
 
 SHOP_EMPTY= "\c[MenuWhite]Coming Soon";
 
@@ -20,19 +21,65 @@ SHOP_WAND = "\c[MenuGreen]Wands : \c[MenuWhite]Casting Effects";
 SHOP_ORB = "\c[MenuGreen]Orbs : \c[MenuWhite]Area of effect";
 SHOP_CHICLE = "\c[MenuGreen]Chicle : \c[MenuWhite]persistent effects";
 
-SHOP_SMALLEXPCANDY= "\c[MenuWhite]S EXPCandy   \c[MenuYellow]50 $P";
-SHOP_MEDIUMEXPCANDY= "\c[MenuWhite]M EXPCandy \c[MenuYellow]350 $P";
-SHOP_LARGEEXPCANDY= "\c[MenuWhite]L EXPCandy \c[MenuYellow]750 $P";
+SHOP_SHOPS = "\c[MenuGreen]Shops";
+SHOP_SERVICES = "\c[MenuGreen]Services";
+
+
+SHOP_SMALLEXPCANDY= "\c[MenuWhite]S EXPCandy   \c[MenuYellow]25 $P";
+SHOP_MEDIUMEXPCANDY= "\c[MenuWhite]M EXPCandy \c[MenuYellow]200 $P";
+SHOP_LARGEEXPCANDY= "\c[MenuWhite]L EXPCandy \c[MenuYellow]350 $P";
 
 SHOP_HPBERRY= "\c[MenuWhite]HP Berry  \c[MenuYellow]25 $P";
-SHOP_BIGHPBERRY= "\c[MenuWhite]Big HP Berry \c[MenuYellow]100 $P";
-SHOP_PPBERRY= "\c[MenuWhite]PP Berry  \c[MenuYellow]75 $P";
-SHOP_BIGPPBERRY= "\c[MenuWhite]Big PP Berry \c[MenuYellow]125 $P";
+SHOP_BIGHPBERRY= "\c[MenuWhite]Big HP Berry \c[MenuYellow]75 $P";
+SHOP_PPBERRY= "\c[MenuWhite]PP Berry  \c[MenuYellow]50 $P";
+SHOP_BIGPPBERRY= "\c[MenuWhite]Big PP Berry \c[MenuYellow]100 $P";
 
-SHOP_CLENSESEED= "\c[MenuWhite]Clense Seed  \c[MenuYellow]100 $P";
-SHOP_POWERSEED= "\c[MenuWhite]Power Seed  \c[MenuYellow]300 $P";
-SHOP_GUARDSEED= "\c[MenuWhite]Guard Seed  \c[MenuYellow]200 $P";
-SHOP_HASTESEED= "\c[MenuWhite]Haste Seed  \c[MenuYellow]200 $P";
+SHOP_CLENSESEED= "\c[MenuWhite]Clense Seed  \c[MenuYellow]25 $P";
+SHOP_POWERSEED= "\c[MenuWhite]Power Seed  \c[MenuYellow]125 $P";
+SHOP_GUARDSEED= "\c[MenuWhite]Guard Seed  \c[MenuYellow]100 $P";
+SHOP_HASTESEED= "\c[MenuWhite]Haste Seed  \c[MenuYellow]100 $P";
+
+SHOP_QBUYTM6= "\cjTM6 : FalseSwipe \c[MenuYellow]50 $P\cj";
+SHOP_QBUYTM14= "\cjTM14 : Reflect \c[MenuYellow]100 $P\cj";
+SHOP_QBUYTM15= "\cjTM15 : LightScreen \c[MenuYellow]100 $P\cj";
+SHOP_QBUYTM16= "\cjTM16 : Safeguard \c[MenuYellow]100 $P\cj";
+SHOP_QBUYTM19= "\cjTM19 : Toxic \c[MenuYellow]250 $P\cj";
+SHOP_QBUYTM20= "\cjTM20 : Protect \c[MenuYellow]150 $P\cj";
+SHOP_QBUYTM40= "\cjTM40 : BulletSeed \c[MenuYellow]50 $P\cj";
+SHOP_QBUYTM44= "\cjTM44 : MagicalLeaf \c[MenuYellow]100 $P\cj";
+SHOP_QBUYTM45= "\cjTM45 : FlameThrower \c[MenuYellow]150 $P\cj";
+SHOP_QBUYTM50= "\cjTM50 : IcyWind \c[MenuYellow]50 $P\cj";
+SHOP_QBUYTM51= "\cjTM51 : EnergyBall \c[MenuYellow]150 $P\cj";
+SHOP_QBUYTM58= "\cjTM58 : SolarBeam \c[MenuYellow]300 $P\cj";
+SHOP_QBUYTM59= "\cjTM59 : Earthquake \c[MenuYellow]300 $P\cj";
+
+SHOP_BUYTM16= "\cjBuy TM6 : FalseSwipe for  \c[MenuYellow]50 $P\cj ?";
+SHOP_BUYTM14= "\cjBuy TM14 : Reflect for  \c[MenuYellow]100 $P\cj ?";
+SHOP_BUYTM15= "\cjBuy TM15 : LightScreen for  \c[MenuYellow]100 $P\cj ?";
+SHOP_BUYTM16= "\cjBuy TM16 : Safeguard for  \c[MenuYellow]100 $P\cj ?";
+SHOP_BUYTM19= "\cjBuy TM19 : Toxic for  \c[MenuYellow]250 $P\cj ?";
+SHOP_BUYTM20= "\cjBuy TM20 : Protect for  \c[MenuYellow]150 $P\cj ?";
+SHOP_BUYTM40= "\cjBuy TM40 : BulletSeed for  \c[MenuYellow]50 $P\cj ?";
+SHOP_BUYTM44= "\cjBuy TM44 : MagicalLeaf for  \c[MenuYellow]100 $P\cj ?";
+SHOP_BUYTM45= "\cjBuy TM45 : FlameThrower for  \c[MenuYellow]150 $P\cj ?";
+SHOP_BUYTM50= "\cjBuy TM50 : IcyWind for  \c[MenuYellow]50 $P\cj ?";
+SHOP_BUYTM51= "\cjBuy TM51 : EnergyBall for  \c[MenuYellow]150 $P\cj ?";
+SHOP_BUYTM58= "\cjBuy TM58 : SolarBeam for  \c[MenuYellow]300 $P\cj ?";
+SHOP_BUYTM59= "\cjBuy TM59 : Earthquake for  \c[MenuYellow]300 $P\cj ?";
+
+SHOP_LEARNTM6= "\cjTeach to \cfAny \cjPokemon.";
+SHOP_LEARNTM14= "\cjTeach to \cfAny \cjPokemon.";
+SHOP_LEARNTM15= "\cjTeach to \cfAny \cjPokemon.";
+SHOP_LEARNTM16= "\cjTeach to \cfAny \cjPokemon.";
+SHOP_LEARNTM19= "\cjTeach to \cfAny \cjPokemon.";
+SHOP_LEARNTM20= "\cjTeach to \cfAny \cjPokemon.";
+SHOP_LEARNTM40= "\cjTeach to \cfGrass \cjTypes and \n\cfGluttonous \cjPokemon.";
+SHOP_LEARNTM44= "\cjTeach to \cfGrass \cjTypes and \n\cfSupernatural \cjPokemon.";
+SHOP_LEARNTM45= "\cjTeach to \cfFire \cjTypes and \cfMonsterous,Draconic, \nor Hazardous \cjPokemon";
+SHOP_LEARNTM50= "\cjTeach to \cfWater \cjand \cfIce \cjTypes";
+SHOP_LEARNTM51= "\cjTeach to \cfGrass \cjTypes and \n\cfEnergy Wielding \cjPokemon.";
+SHOP_LEARNTM58= "\cjTeach to \cfGrass \cjTypes and \n\cfFinal Stage \cjFire Types.";
+SHOP_LEARNTM59= "\cjTeach to \cfFinal Stage \cjPokemon.";
 
 //===| Items
 
@@ -427,27 +474,27 @@ D012_EVO = "\c[MenuRed]Does not evolve";
 //#region -=- CYNDAQUIL -=-
 D013_NAME = "\cjCYNDAQUIL";
 D013_TYPE = "\cjFire";
-D013_STATS1 = "\cfATK:\cj <00> \cfDEF:\cj <00>";
-D013_STATS2 = "\cfSP.ATK:\cj <00> \cfSP.DEF:\cj <00>";
-D013_STATS3 = "\cfSPD:\cj <00> \cfHP:\cj <00>";
+D013_STATS1 = "\cfATK:\cj 58 \cfDEF:\cj 54";
+D013_STATS2 = "\cfSP.ATK:\cj 50 \cfSP.DEF:\cj 50";
+D013_STATS3 = "\cfSPD:\cj 35 \cfHP:\cj 61";
 D013_EVO = "\cj Evolves into \cvQuilava \cf at \cfLVL.3";
 //#endregion
 
 //#region -=- QUILAVA -=-
 D014_NAME = "\cjQUILAVA";
 D014_TYPE = "\cjFire";
-D014_STATS1 = "\cfATK:\cj <00> \cfDEF:\cj <00>";
-D014_STATS2 = "\cfSP.ATK:\cj <00> \cfSP.DEF:\cj <00>";
-D014_STATS3 = "\cfSPD:\cj <00> \cfHP:\cj <00>";
+D014_STATS1 = "\cfATK:\cj 70 \cfDEF:\cj 69";
+D014_STATS2 = "\cfSP.ATK:\cj 70 \cfSP.DEF:\cj 65";
+D014_STATS3 = "\cfSPD:\cj 50 \cfHP:\cj 80";
 D014_EVO = "\cj Evolves into \cvTyphlosion \cf at \cfLVL.7";
 //#endregion
 
 //#region -=- TYPHLOSION -=-
 D015_NAME = "\cjTYPHLOSION";
 D015_TYPE = "\cjFire";
-D015_STATS1 = "\cfATK:\cj <00> \cfDEF:\cj <00>";
-D015_STATS2 = "\cfSP.ATK:\cj <00> \cfSP.DEF:\cj <00>";
-D015_STATS3 = "\cfSPD:\cj <00> \cfHP:\cj <00>";
+D015_STATS1 = "\cfATK:\cj 90 \cfDEF:\cj 89";
+D015_STATS2 = "\cfSP.ATK:\cj 90 \cfSP.DEF:\cj 85";
+D015_STATS3 = "\cfSPD:\cj 70 \cfHP:\cj 110";
 D015_EVO = "\c[MenuRed]Does not evolve";
 //#endregion
 
@@ -650,7 +697,7 @@ D036_EVO = "\c[MenuRed]Does not evolve";
 M000_NAME = "\cj Swift";
 M000_TYPE = "\cj Normal";
 M000_CATEGORY = "\cf Special";
-M000_POWER = "\cfPower:\cj 10";
+M000_POWER = "\cfPower:\cj 3";
 M000_DESC = "\cfShot \cja volley of fast moving stars with \n slight homing.";
 //#endregion
 
@@ -1088,10 +1135,10 @@ M054_DESC = "<Desc>";
 
 //#region -=- 055: IcyWind -=-
 M055_NAME = "\cj IcyWind";
-M055_TYPE = "\cj <Type>";
-M055_CATEGORY = "\cf <Category>";
-M055_POWER = "\cfPower:\cj --";
-M055_DESC = "<Desc>";
+M055_TYPE = "\cj Ice";
+M055_CATEGORY = "\cf Special";
+M055_POWER = "\cfPower:\cj 10";
+M055_DESC = "\cjExpell a \cfwave \cjof cold air that slows foes down";
 //#endregion
 
 //#region -=- 056: AuroraBeam -=-
@@ -1291,7 +1338,7 @@ M080_NAME = "\cj Earthquake";
 M080_TYPE = "\cj Ground";
 M080_CATEGORY = "\cf Physical";
 M080_POWER = "\cfPower:\cj --";
-M080_DESC = "\cfunleash a powerful shockwave across the \n\cfsurrounding area.\cj might miss airborne \nfoes.";
+M080_DESC = "\cjunleash a powerful shockwave across the \n\cfsurrounding area.\cj might miss airborne \nfoes.";
 //#endregion
 
 //#region -=- 081: WideGuard -=-
@@ -1312,10 +1359,10 @@ M082_DESC = "\cfPound the ground\cj near you with a wooden \nhammer. a portion o
 
 //#region -=- 083: DefenseCurl -=-
 M083_NAME = "\cj DefenseCurl";
-M083_TYPE = "\cj <Type>";
-M083_CATEGORY = "\cf <Category>";
+M083_TYPE = "\cj Normal";
+M083_CATEGORY = "\cf Status";
 M083_POWER = "\cfPower:\cj --";
-M083_DESC = "<Desc>";
+M083_DESC = "\cjCast a \cfSelf \cjBuff that boosts DEF and \ndouble the power of \cfRolling moves.";
 //#endregion
 
 //#region -=- 084: Covet -=-
@@ -1328,26 +1375,26 @@ M084_DESC = "<Desc>";
 
 //#region -=- 085: FlameWheel -=-
 M085_NAME = "\cj FlameWheel";
-M085_TYPE = "\cj <Type>";
-M085_CATEGORY = "\cf <Category>";
-M085_POWER = "\cfPower:\cj --";
-M085_DESC = "<Desc>";
+M085_TYPE = "\cj Fire";
+M085_CATEGORY = "\cf Physical";
+M085_POWER = "\cfPower:\cj 15";
+M085_DESC = "\cjEnter a \cfrolling \cjstate that Allows for \njumping and braking, ends upon impact.";
 //#endregion
 
 //#region -=- 086: Mudslap -=-
 M086_NAME = "\cj Mudslap";
-M086_TYPE = "\cj <Type>";
-M086_CATEGORY = "\cf <Category>";
-M086_POWER = "\cfPower:\cj --";
-M086_DESC = "<Desc>";
+M086_TYPE = "\cj Ground";
+M086_CATEGORY = "\cf Special";
+M086_POWER = "\cfPower:\cj ~6";
+M086_DESC = "\cfShoot \cja volley of mud blobs that slow \nenemies down on impact.";
 //#endregion
 
 //#region -=- 087: Rollout -=-
 M087_NAME = "\cj Rollout";
-M087_TYPE = "\cj <Type>";
-M087_CATEGORY = "\cf <Category>";
-M087_POWER = "\cfPower:\cj --";
-M087_DESC = "<Desc>";
+M087_TYPE = "\cj Rock";
+M087_CATEGORY = "\cf Physical";
+M087_POWER = "\cfPower:\cj 15";
+M087_DESC = "\cjEnter a \cfrolling \cjstate that gains speed \nover time, plowing through anything in \nyour path.";
 //#endregion
 
 //#region -=- 088: Extrasensory -=-
@@ -1360,10 +1407,10 @@ M088_DESC = "<Desc>";
 
 //#region -=- 089: GyroBall -=-
 M089_NAME = "\cj GyroBall";
-M089_TYPE = "\cj <Type>";
-M089_CATEGORY = "\cf <Category>";
-M089_POWER = "\cfPower:\cj --";
-M089_DESC = "<Desc>";
+M089_TYPE = "\cj Steel";
+M089_CATEGORY = "\cf Physical";
+M089_POWER = "\cfPower:\cj 15";
+M089_DESC = "\cjHold to charge up a \cfrolling \cjstate, the \nlonger you hold, the further you roll. \nrolling up or down inclines effects \ntravel.";
 //#endregion
 
 //#region -=- 090: Eruption -=-

@@ -1,0 +1,175 @@
+Const int MudslapSPD = 5.5;
+
+actor MudslapMove : WepMasterBase
+{
+Tag "Mudslap"
+obituary "$OB_Mudslap"
+Weapon.AmmoUse 1
+Weapon.AmmoGive 20
+weapon.ammotype "MudslapPP"
+scale 2.0
+Inventory.Pickupmessage "$PU_MEGABUSTER"
+States
+{
+Spawn:
+WEAP X 1
+stop
+
+
+Fire:
+"####" B 1 A_Jumpif(CallACS("CheckWeaponFire",RC_A)==0,"NoAmmo")
+"####" B 0 A_Jump(256,"Fire.Bullet")
+Goto Fire.Bullet
+
+Fire.Bullet:
+"####" B 0 A_PlaySoundEx("weapon/concreteshot","Weapon")
+"####" B 1 A_FireCustomMissile("MudslapProjectile",0,1,0,0)
+"####" BBB 1 A_FireCustomMissile("MudslapProjectile",FRandom(-MudslapSPD,MudslapSPD),0,0,0,0,FRandom(-MudslapSPD,MudslapSPD))
+"####" B 0 A_Jump(256,"Fire.After")
+Goto Fire.After
+
+Fire.After:
+"####" B 1 A_GiveInventory("HalfRecovery_A")
+"####" C 0 A_REfire("Fire")
+"####" B 0 A_Jump(256,"Fire.End")
+Goto Fire.End
+}
+}
+
+actor MudslapMove1 : MudslapMove {Weapon.SlotNumber 1}
+actor MudslapMove2 : MudslapMove {Weapon.SlotNumber 2}
+actor MudslapMove3 : MudslapMove {Weapon.SlotNumber 3}
+actor MudslapMove4 : MudslapMove {Weapon.SlotNumber 4}
+
+actor MudslapMove5 : MudslapMove 
+{
+Weapon.SlotNumber 5
+States
+{
+Fire.End:
+TNT1 A 0
+TNT1 A 0 A_TakeInventory("MudslapMove5",9)
+TNT1 A 0 A_Jump(256,"Ready")
+Goto Ready
+}
+}
+
+//[+]========================================================================[+]
+//-----------------------------|Ammo & Inventory|------------------------------
+//[+]========================================================================[+]
+actor MudslapPP : Ammo {inventory.amount 1 inventory.Maxamount 20}
+
+actor STF_Mudslap : Powerup {inventory.amount 1 Powerup.Duration -6}
+
+actor MudslapNerfInitiate : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_Jumpifinventory("STF_Mudslap",1,"Sustain")
+TNT1 A 0 A_GiveInventory("STF_Mudslap",1)
+TNT1 A 0 A_SpawnItemEX("MudslapNerfWatcher")
+TNT1 A 0 A_GiveInventory("StatUpdator",1)
+stop
+
+Sustain:
+TNT1 A 0 A_GiveInventory("STF_Mudslap",1)
+stop
+Nope:
+TNT1 A 0
+stop
+}
+}
+//[+]========================================================================[+]
+//--------------------------------|Projectiles |--------------------------------
+//[+]========================================================================[+]
+actor MudslapProjectile : BasicProjectile
+{
+DamageType "Mudslap"
+obituary "$OB_Mudslap"
++SEEKERMISSILE
++SCREENSEEKER
+Speed 40
+Damage (5)
+radius 5
+height 5
+ReactionTime 12
+Gravity 1.8
+scale 2.5
+States
+{
+Spawn:
+TNT1 A 0 
+TNT1 A 0 A_GiveInventory("ProjectileDCode",1)
+TNT1 A 0 A_Spawnitemex("MudslapSounder")
+CONC BC 2 
+TNT1 A 0 A_ChangeFlag("NOGRAVITY",0)
+Spawn2: // -=- Seeking Target -=-
+CONC BC 2
+loop
+Death:
+TNT1 A 0 A_PlaySoundEx("weapon/solarshoot","Weapon")
+TNT1 A 2 A_Spawnitemex("MudslapPuff",0,0,0,0,0,0,0,SXF_TRANSFERTRANSLATION)
+stop
+}
+}
+
+//[+]========================================================================[+]
+//--------------------------------|Effect Actors|------------------------------
+//[+]========================================================================[+]
+
+actor MudslapParticle : BasicProjectile
+{
+scale 2.5
+gravity 1.8
+-NOGRAVITY
++BOUNCEONWALLS
++THRUACTORS
++CLIENTSIDEONLY
+States
+{
+Spawn:
+STAP A 0
+MMFX HHHH 2 A_SetScale(Scalex-0.3)
+stop
+}
+}
+
+
+actor MudslapPuff : BasicClientside
+{
+scale 1.5
+States
+{
+Spawn:
+MMFX A 0
+MMFX AAAA 1 A_Spawnitemex("MudslapParticle",0,0,0,random2(15),random2(15),random2(15),0,SXF_TRANSFERTRANSLATION)
+stop
+}
+}
+
+actor MudslapNerfWatcher : BasicHelper 
+{
+Var int user_DashTime;
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 5 A_GiveToTarget("SpdDownFXSpawn")
+TNT1 A 0 A_JumpIfInTargetInventory("STF_Mudslap",1,"Spawn")
+TNT1 A 1 A_GiveToTarget("StatUpdator")
+TNT1 A 5
+Goto Death
+
+Death:
+TNT1 A 0 
+stop
+}
+}
+

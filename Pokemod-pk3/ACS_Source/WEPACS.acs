@@ -5,6 +5,7 @@
 #include "8bdmlib.acs"// included with MM8BDM under acs_source.
 					  // See 8bdmlib.acs for details.
 #import "A_Targeter.acs"
+#import "Dex_Moves.acs"
 //#Include "CSCCLib.acs" //for StatusTime()
 
 //#region -=- Constants and Variables
@@ -156,7 +157,7 @@ str weapons_ammo[MAX_WEAPONS_GLOBAL][7] =
 //#endregion Can't put a zandro region here.
 {"SwiftMove", "SwiftPP", "Swift", 1.0, "NO", "NO", "SLOT_NONE"},
 {"EmberMove", "EmberPP", "Ember", 1.0, "NO", "NO", "SLOT_NONE"},
-{"ThunderBoltMove", "ThunderBoltPP", "ThunderBolt", 1.0, "NO", "NO", "SLOT_NONE"},
+{"ThunderShockMove", "ThunderShockPP", "ThunderShock", 1.0, "NO", "NO", "SLOT_NONE"},
 {"WaterGunMove", "WaterGunPP", "WaterGun", 1.0, "NO", "NO", "SLOT_NONE"},
 {"BiteMove", "BitePP", "Bite", 1.0, "NO", "NO", "SLOT_NONE"},
 {"QuickAttackMove", "QuickAttackPP", "QuickAttack", 1.0, "NO", "NO", "SLOT_NONE"},
@@ -904,9 +905,24 @@ str WepAmmoName = weapons_ammo[ThisWeapon][1];
 
 if(CheckInventory(WepAmmoName)<1) return false;
 
+if(CheckInventory("HazedFlagEnemy"))
+    {switch(ThisWeapon) {
+		Case GROWTH: return false; break;
+		Case AMNESIA: return false; break;
+		Case IRONDEFENSE: return false; break;
+		Case DRAGONDANCE: return false; break;
+		Case SHELLSMASH: return false; break;
+		Case AGILITY: return false; break;
+		Case CURSE: return false; break;
+		Case MUDSLAP: return false; break;
+		Case DEFENSECURL: return false; break;
+        default: break;
+    }
+}
+
 if(CheckInventory("GrappledFlag"))
     {switch(ThisWeapon) {
-        /*RapidSpin*/Case 50: break;
+        Case RAPIDSPIN: break;
         default: return false; break;
     }
 }

@@ -1,10 +1,16 @@
 
 OptionMenu "ShopMenu"
 {
-    Title "Shop"
+    Title "Setup Services"
     StaticText "===============================================================",1
-	Submenu "Item Shop", "Item_Menu"
-	Submenu "TM Shop", "TM_Menu"
+    StaticText "$SHOP_SHOPS"
+	Submenu "		   		   		   Item Shop", "Item_Menu"
+	Submenu "		   		   		   TM Shop", "TM_Menu"
+    StaticText "$SHOP_SERVICES"
+    Command "		   		  		    View Status", "ShowStatusScreen"
+    Command "		   		   		   Trigger Evolution", "TriggerEvo"
+	Command "		   		   		   Learn Levelup Move", "MoveTutor"
+	Command "		   		   		   Change Move Order", "MoveShift"
     StaticText "===============================================================",1
 }
 
@@ -45,7 +51,391 @@ OptionMenu "TM_Menu"
 {
     Title "TM Shop"
     StaticText "===============================================================",1
-    StaticText "Coming Soon!"
+    Submenu "                                      TM Catalogue","TM_Catalogue"
+    StaticText ""
+    Command "$SHOP_QBUYTM6", "BuyTM6"
+
+    Command "$SHOP_QBUYTM14", "BuyTM14"
+    Command "$SHOP_QBUYTM15", "BuyTM15"
+    Command "$SHOP_QBUYTM16", "BuyTM16"
+
+    Command "$SHOP_QBUYTM19", "BuyTM19"
+    Command "$SHOP_QBUYTM20", "BuyTM20"
+
+    Command "$SHOP_QBUYTM40", "BuyTM40"
+    Command "$SHOP_QBUYTM44", "BuyTM44"
+    Command "$SHOP_QBUYTM45", "BuyTM45"
+    Command "$SHOP_QBUYTM50", "BuyTM50"
+    Command "$SHOP_QBUYTM51", "BuyTM51"
+
+    Command "$SHOP_QBUYTM58", "BuyTM58"
+    Command "$SHOP_QBUYTM59", "BuyTM59"
     StaticText "===============================================================",1
 
     }
+
+OptionMenu "TM_Catalogue"
+{
+    Title "TM Catalogue"
+    StaticText "===============================================================",1
+    Submenu "                   TM6 : FalseSwipe", "TMList_FalseSwipe"
+
+    Submenu "                   TM14 : Reflect", "TMList_Reflect"
+    Submenu "                   TM15 : LightScreen", "TMList_LightScreen"
+    Submenu "                   TM16 : Safeguard", "TMList_Safeguard"
+
+    Submenu "                   TM19 : Toxic", "TMList_Toxic"
+    Submenu "                   TM20 : Protect", "TMList_Protect"
+
+
+    Submenu "                   TM40 : BulletSeed", "TMList_BulletSeed"
+    Submenu "                   TM44 : MagicalLeaf", "TMList_MagicalLeaf"
+    Submenu "                   TM45 : FlameThrower", "TMList_Flamethrower"
+    Submenu "                   TM50 : Icy Wind  ", "TMList_IcyWind"
+    Submenu "                   TM51 : EnergyBall", "TMList_EnergyBall"
+
+
+    Submenu "                   TM58 : SolarBeam", "TMList_SolarBeam"
+    Submenu "                   TM59 : Earthquake", "TMList_Earthquake"
+    StaticText "===============================================================",1
+
+    }
+
+OptionMenu "TMList_FalseSwipe"
+{
+	
+	Title "$M073_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M073_TYPE"
+    StaticText "$M073_CATEGORY"
+    StaticText "$M073_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M073_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+    StaticText "$SHOP_LEARNTM6"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+    StaticText "$SHOP_BUYTM6"
+    Command "                                      Buy", "BuyTM6"
+    StaticText"===============================================================",1
+}
+
+OptionMenu "TMList_Reflect"
+{
+	
+	Title "$M062_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M062_TYPE"
+    StaticText "$M062_CATEGORY"
+    StaticText "$M062_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M062_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+    StaticText "$SHOP_LEARNTM14"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+    StaticText "$SHOP_BUYTM14"
+    Command "                                      Buy", "BuyTM14"
+    StaticText"===============================================================",1
+}
+
+
+OptionMenu "TMList_LightScreen"
+{
+	
+	Title "$M064_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M064_TYPE"
+    StaticText "$M064_CATEGORY"
+    StaticText "$M064_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M064_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+    StaticText "$SHOP_LEARNTM15"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+    StaticText "$SHOP_BUYTM15"
+    Command "                                      Buy", "BuyTM15"
+    StaticText"===============================================================",1
+}
+
+OptionMenu "TMList_Safeguard"
+{
+	
+	Title "$M068_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M068_TYPE"
+    StaticText "$M068_CATEGORY"
+    StaticText "$M068_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M068_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+    StaticText "$SHOP_LEARNTM16"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+    StaticText "$SHOP_BUYTM16"
+    Command "                                      Buy", "BuyTM16"
+    StaticText"===============================================================",1
+}
+
+OptionMenu "TMList_Toxic"
+{
+	
+	Title "$M020_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M020_TYPE"
+    StaticText "$M020_CATEGORY"
+    StaticText "$M020_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M020_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+    StaticText "$SHOP_LEARNTM19"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+    StaticText "$SHOP_BUYTM19"
+    Command "                                      Buy", "BuyTM19"
+    StaticText"===============================================================",1
+}
+
+OptionMenu "TMList_Protect"
+{
+	
+	Title "$M039_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M039_TYPE"
+    StaticText "$M039_CATEGORY"
+    StaticText "$M039_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M039_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+    StaticText "$SHOP_LEARNTM20"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+    StaticText "$SHOP_BUYTM20"
+    Command "                                      Buy", "BuyTM20"
+    StaticText"===============================================================",1
+}
+
+OptionMenu "TMList_BulletSeed"
+{
+	
+	Title "$M069_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M069_TYPE"
+    StaticText "$M069_CATEGORY"
+    StaticText "$M069_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M069_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+    StaticText "$SHOP_LEARNTM40"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+    StaticText "$SHOP_BUYTM40"
+    Command "                                      Buy", "BuyTM40"
+    StaticText"===============================================================",1
+}
+
+OptionMenu "TMList_MagicalLeaf"
+{
+	
+	Title "$M063_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M063_TYPE"
+    StaticText "$M063_CATEGORY"
+    StaticText "$M063_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M063_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+    StaticText "$SHOP_LEARNTM44"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+    StaticText "$SHOP_BUYTM44"
+    Command "                                      Buy", "BuyTM44"
+    StaticText"===============================================================",1
+}
+
+OptionMenu "TMList_FlameThrower"
+{
+	
+	Title "$M028_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M028_TYPE"
+    StaticText "$M028_CATEGORY"
+    StaticText "$M028_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M028_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+    StaticText "$SHOP_LEARNTM45"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+    StaticText "$SHOP_BUYTM45"
+    Command "                                      Buy", "BuyTM45"
+    StaticText"===============================================================",1
+}
+
+OptionMenu "TMList_IcyWind"
+{
+	
+	Title "$M055_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M055_TYPE"
+    StaticText "$M055_CATEGORY"
+    StaticText "$M055_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M055_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+    StaticText "$SHOP_LEARNTM50"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+    StaticText "$SHOP_BUYTM50"
+    Command "                                      Buy", "BuyTM50"
+    StaticText"===============================================================",1
+}
+
+OptionMenu "TMList_EnergyBall"
+{
+	
+	Title "$M018_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M018_TYPE"
+    StaticText "$M018_CATEGORY"
+    StaticText "$M018_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M018_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+    StaticText "$SHOP_LEARNTM51"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+    StaticText "$SHOP_BUYTM51"
+    Command "                                      Buy", "BuyTM51"
+    StaticText"===============================================================",1
+}
+
+OptionMenu "TMList_SolarBeam"
+{
+	
+	Title "$M021_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M021_TYPE"
+    StaticText "$M021_CATEGORY"
+    StaticText "$M021_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M021_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+    StaticText "$SHOP_LEARNTM58"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+    StaticText "$SHOP_BUYTM58"
+    Command "                                      Buy", "BuyTM58"
+    StaticText"===============================================================",1
+}
+
+OptionMenu "TMList_Earthquake"
+{
+	
+	Title "$M080_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M080_TYPE"
+    StaticText "$M080_CATEGORY"
+    StaticText "$M080_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M080_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+    StaticText "$SHOP_LEARNTM59"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+    StaticText "$SHOP_BUYTM59"
+    Command "                                      Buy", "BuyTM59"
+    StaticText"===============================================================",1
+}

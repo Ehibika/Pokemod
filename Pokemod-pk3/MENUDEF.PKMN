@@ -2,7 +2,7 @@ LISTMENU "PKMNMainMenu"
 {
 Position 97, 72
 Font "DBIGFONT", "MenuBlue" //[Trill]
-TextItem "Status", "c", "PKMNStatus"
+//TextItem "Status", "c", "PKMNStatus"
 TextItem "PokeDex", "D", "PKMNInfo"
 
 }

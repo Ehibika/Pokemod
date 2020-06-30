@@ -5,28 +5,46 @@ AddPlayerClass Charmander
 AddPlayerClass Squirtle
 
 AddPlayerClass Chikorita
+AddPlayerClass Cyndaquil
 
 AddPlayerClass Treecko
 
 AddPlayerClass TurTwig
 
 
-alias TriggerEvo "CloseMenu; Use EvoStartItem"
+alias TriggerEvo "CloseMenu; Use EvoStartItem" 
 alias MoveTutor "CloseMenu; Use MoveTutorStartItem"
 alias MoveShift "CloseMenu; Use MoveShiftStartItem"
+alias ShowStatusScreen "CloseMenu; Use PlayerStatusItem" 
+
 alias DefaultCam "sv_CameraAng 0.0; sv_CameraHeight 0.0; sv_CameraZoom 60; SV_CameraPitch 1.0; sv_CamReticuleMode 1;"
 
 //===|Shop
-alias BuySmallEXPCandy "CloseMenu; Use BuySmallEXPCandy"
-alias BuyMediumEXPCandy "CloseMenu; Use BuyMediumEXPCandy"
-alias BuyLargeEXPCandy "CloseMenu; Use BuyLargeEXPCandy"
+alias BuySmallEXPCandy "CloseMenu; Use BuySmallEXPCandy; Openmenu Item_Menu"
+alias BuyMediumEXPCandy "CloseMenu; Use BuyMediumEXPCandy; Openmenu Item_Menu"
+alias BuyLargeEXPCandy "CloseMenu; Use BuyLargeEXPCandy; Openmenu Item_Menu"
 
-alias BuyHPBerry "CloseMenu; Use BuyHPBerry"
-alias BuyBigHPBerry "CloseMenu; Use BuyBigHPBerry"
-alias BuyPPBerry "CloseMenu; Use BuyPPBerry"
-alias BuyBigPPBerry "CloseMenu; Use BuyBigPPBerry"
+alias BuyHPBerry "CloseMenu; Use BuyHPBerry; Openmenu Item_Menu"
+alias BuyBigHPBerry "CloseMenu; Use BuyBigHPBerry; Openmenu Item_Menu"
+alias BuyPPBerry "CloseMenu; Use BuyPPBerry; Openmenu Item_Menu"
+alias BuyBigPPBerry "CloseMenu; Use BuyBigPPBerry; Openmenu Item_Menu"
 
-alias BuyClenseSeed "CloseMenu; Use BuyClenseSeed"
-alias BuyHasteSeed "CloseMenu; Use BuyHasteSeed"
-alias BuyPowerSeed "CloseMenu; Use BuyPowerSeed"
-alias BuyGuardSeed "CloseMenu; Use BuyGuardSeed"
+alias BuyClenseSeed "CloseMenu; Use BuyClenseSeed; Openmenu Item_Menu"
+alias BuyHasteSeed "CloseMenu; Use BuyHasteSeed; Openmenu Item_Menu"
+alias BuyPowerSeed "CloseMenu; Use BuyPowerSeed; Openmenu Item_Menu"
+alias BuyGuardSeed "CloseMenu; Use BuyGuardSeed; Openmenu Item_Menu"
+
+
+alias BuyTM6 "CloseMenu; Use BuyTM6;"
+alias BuyTM14 "CloseMenu; Use BuyTM14;"
+alias BuyTM15 "CloseMenu; Use BuyTM15;"
+alias BuyTM16 "CloseMenu; Use BuyTM16;"
+alias BuyTM19 "CloseMenu; Use BuyTM19;"
+alias BuyTM20 "CloseMenu; Use BuyTM20;"
+alias BuyTM40 "CloseMenu; Use BuyTM40;"
+alias BuyTM44 "CloseMenu; Use BuyTM44;"
+alias BuyTM45 "CloseMenu; Use BuyTM45;"
+alias BuyTM50 "CloseMenu; Use BuyTM50;"
+alias BuyTM51 "CloseMenu; Use BuyTM51;"
+alias BuyTM58 "CloseMenu; Use BuyTM58;"
+alias BuyTM59 "CloseMenu; Use BuyTM59;"

@@ -28,7 +28,7 @@ goto CostPay
 }
 }
 
-actor BuyBigHPBerry : BuyThing100
+actor BuyBigHPBerry : BuyThing75
 {
 states
 {
@@ -40,7 +40,7 @@ goto CostPay
 }
 }
 
-actor BuyPPBerry : BuyThing75
+actor BuyPPBerry : BuyThing50
 {
 states
 {
@@ -52,7 +52,7 @@ goto CostPay
 }
 }
 
-actor BuyBigPPBerry : BuyThing125
+actor BuyBigPPBerry : BuyThing100
 {
 states
 {
@@ -84,7 +84,7 @@ stop
 
 //#region -=- Buy Actors
 
-actor BuySmallEXPCandy : BuyThing50
+actor BuySmallEXPCandy : BuyThing25
 {
 states
 {
@@ -95,7 +95,7 @@ goto CostPay
 }
 }
 
-actor BuyMediumEXPCandy : BuyThing350
+actor BuyMediumEXPCandy : BuyThing200
 {
 states
 {
@@ -106,7 +106,7 @@ goto CostPay
 }
 }
 
-actor BuyLargeEXPCandy : BuyThing750
+actor BuyLargeEXPCandy : BuyThing350
 {
 states
 {
@@ -139,7 +139,7 @@ stop
 
 //#region -=- Buy Actors
 
-actor BuyClenseSeed : BuyThing100
+actor BuyClenseSeed : BuyThing25
 {
 states
 {
@@ -152,7 +152,7 @@ goto CostPay
 }
 
 
-actor BuyPowerSeed : BuyThing300
+actor BuyPowerSeed : BuyThing125
 {
 states
 {
@@ -164,7 +164,7 @@ goto CostPay
 }
 }
 
-actor BuyGuardSeed : BuyThing200
+actor BuyGuardSeed : BuyThing100
 {
 states
 {
@@ -176,7 +176,7 @@ goto CostPay
 }
 }
 
-actor BuyHasteSeed : BuyThing200
+actor BuyHasteSeed : BuyThing100
 {
 states
 {

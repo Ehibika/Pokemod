@@ -13,6 +13,7 @@
 #import "Dex_Types.acs"
 #import "Dex_Leveling.acs"
 #Import "Dex_Basestats.acs"
+#Import "WEPACS.acs"
 #include "zcommon.acs"
 
 
@@ -97,7 +98,7 @@ Script "StatUpdate" (VOID)  //for general stat modifications
     StatClear(0);
     ACS_NamedExecuteAlways("ActiveStat_Handler",0,1);
 }
-
+/* -=- Depreciated
 Script "StatusMenuUpdate" (void) CLIENTSIDE
 {
 if(PlayerIsBot(PlayerNumber())){Terminate;}
@@ -114,9 +115,9 @@ SetUserCvar(pln,"YOUR_PDEF",CheckInventory("Active_PDefense"));
 SetUserCvar(pln,"YOUR_SDEF",CheckInventory("Active_SDefense"));
 SetUserCvar(pln,"YOUR_SPD",CheckInventory("Active_Speed"));
 
-SetUserCvar(pln,"YOUR_LEVEL",PlayerLCV);
-SetUserCvar(pln,"YOUR_EXP",PlayerECV);
-SetUserCvar(pln,"YOUR_NEXTEXP",LevelUpTable[LvlRate][PlayerLCV]);
+//SetUserCvar(pln,"YOUR_LEVEL",PlayerLCV);
+//SetUserCvar(pln,"YOUR_EXP",PlayerECV);
+//SetUserCvar(pln,"YOUR_NEXTEXP",LevelUpTable[LvlRate][PlayerLCV]);
 }
 
 Script "StatusMenuClear" (void) CLIENTSIDE
@@ -134,6 +135,7 @@ SetUserCvar(pln,"YOUR_LEVEL",0);
 SetUserCvar(pln,"YOUR_EXP",0);
 SetUserCvar(pln,"YOUR_NEXTEXP",0);
 }
+*/
 
 Function Void StatClear (Int Mode)
 {
@@ -193,7 +195,7 @@ Str StatName2[7] = {
 };
 */
 
-#DEFINE STATITEMNUM 15
+#DEFINE STATITEMNUM 17
 
 Str StatEffectName[STATITEMNUM] = {
     "Growth",
@@ -211,6 +213,8 @@ Str StatEffectName[STATITEMNUM] = {
     "HasteSeed",
     "Agility",
     "Curse",
+    "Mudslap",
+    "DefenseCurl",
 };
 
 #define PATK_ID 0
@@ -236,6 +240,8 @@ Int StatEffectValue[STATITEMNUM][5] = {
 {   0,      0,      0,      0,      1}, 
 {   0,      0,      0,      0,      2}, 
 {   1,      0,      1,      0,      -1}, 
+{   0,      0,      0,      0,      -1}, 
+{   0,      0,      1,      0,      0}, 
 };
 
 Int StatMulti[13] = {
@@ -441,7 +447,7 @@ if(SpeedValue < 1){SpeedValue = 1;}
 //log(i:SpeedValue,s:"  ",f:SpeedValue*0.01);
 SetActorPRoperty(0,APROP_SPEED,SpeedValue*0.01);
 
-ACS_NamedExecuteAlways("StatusMenuUpdate",0);
+//ACS_NamedExecuteAlways("StatusMenuUpdate",0);
 }
 
 
@@ -498,6 +504,16 @@ StatValue = ValueMap(input,250,80,300,25);
 //Log(s:"Stat Value is ",i:StatValue);
 }
 
+script "InitializePlayers" OPEN
+{
+if(!GetCVar("Player_INIT")) {
+    ClearAllPlayerCVars();
+    ClearAllPersistentLoadouts();
+    log(s:"Players initialized");
+	SetCvar("Player_INIT",true);
+}
+}
+
 Function Void ClearPlayerCVars(int PlayerNum, int NewLevel)
 {
     SetCvar(StrParam(s:"PlayerLevel_",i:PlayerNum),NewLevel);
@@ -506,7 +522,7 @@ Function Void ClearPlayerCVars(int PlayerNum, int NewLevel)
     //SetCvar(StrParam(s:"Player",i:PlayerNum,s:"_Cash"),0);
     SetCvarString(StrParam(s:"Player",i:PlayerNum,s:"_INV"),"0000");
 
-    ACS_NamedExecuteAlways("StatusMenuClear",0);
+    //ACS_NamedExecuteAlways("StatusMenuClear",0);
 }
 
 Function Void ClearAllPlayerCVars(void)

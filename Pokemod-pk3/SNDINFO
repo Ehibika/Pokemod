@@ -2,6 +2,10 @@ PokePain/Normal HITNORM
 PokePain/Weak HITWEAK
 PokePain/Strong HITSTR
 
+$attenuation PokePain/Normal 0.5
+$attenuation PokePain/Weak 0.5
+$attenuation PokePain/Strong 0.5
+
 Move/Basic TACKLE
 
 Move/ImbueOn IMBUUP
@@ -103,6 +107,7 @@ sprinkler/place SPRPUT
 sprinkler/shot SPRSHT
 
 Weapon/Trample MADWALK 
+Weapon/WindBlow WINDBLOW 
 class/ToadCroak S_M4TOA1 
 
 Move/Yawn YAWN 
@@ -114,6 +119,7 @@ Move/Pursuit LUNGE
 Move/Curse1 NGCURSE 
 Move/Rollout BLIZBOWL
 Move/RolloutImpact BLIZSTRI
+Move/Swift SWIFT
 
 Misc/Levelup LEVELUP
 Misc/Evolution FANFARE1

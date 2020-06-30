@@ -171,3 +171,15 @@ For(int i; i<HAZMAX;i++)
     }
 
 }
+
+// Make's Smoke less Opaque for teams
+script "TeamSmoke"  (VOID) CLIENTSIDE
+{
+
+    int cln = consolePlayerNumber();
+	int FiringPlayer= ACS_ExecuteWithResult(257, 0) - 1000;
+    if( GetPlayerInfo(cln, PLAYERINFO_TEAM) == GetPlayerInfo(FiringPlayer, PLAYERINFO_TEAM))//(PlayerClass((consolePlayerNumber() >= SUPPORTSTART) && PlayerClass((consolePlayerNumber()) <= SUPPORTEND)))
+    {
+       SetActorProperty(0,APROP_ALPHA,0.05);
+    }
+}

@@ -15,7 +15,7 @@ stop
 
 
 Fire:
-"####" B 0 A_Jumpif(CallACS("CheckWeaponFire",RC_C)==0,"NoAmmo")
+"####" B 1 A_Jumpif(CallACS("CheckWeaponFire",RC_C)==0,"NoAmmo")
 "####" B 0 A_JumpIfInventory("STF_IronDefense",1,"Fire.Off")
 "####" B 0 A_Jump(256,"Fire.On")
 Goto Fire.On

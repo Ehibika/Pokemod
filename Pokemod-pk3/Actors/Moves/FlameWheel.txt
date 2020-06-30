@@ -17,8 +17,8 @@ stop
 
 
 Fire:
-"####" B 0 A_Jumpif(CallACS("CheckWeaponFire",RC_B)==0,"NoAmmo")
-"####" B 0 A_Jump(256,"Fire.DashWarmup")
+"####" B 1 A_Jumpif(CallACS("CheckWeaponFire",RC_B)==0,"NoAmmo")
+"####" B 1 A_Jump(256,"Fire.DashWarmup")
 Goto Fire.DashWarmup
 
 Fire.DashWarmup:
@@ -35,7 +35,7 @@ Fire.DashWarmup1:
 "####" A 3
 "####" A 0 //A_PlaySoundEx("weapon/Heat2","Weapon")
 "####" A 0 A_Jumpifinventory("FlameWheelWarmupTimer",1,"Fire.DashWarmup1")
-"####" B 0 A_Jump(256,"Fire.DashStart")
+"####" B 1 A_Jump(256,"Fire.DashStart")
 Goto Fire.DashStart
 
 Fire.DashStart:
@@ -53,13 +53,14 @@ TNT1 A 0 A_SpawnItemEX("GroundDustFX",-25,0,-(z-floorz),0)
 TNT1 A 0 A_Jumpifinventory("DashBreaker",1,"Fire.DashEnd")
 //TNT1 A 0 A_Jumpifinventory("FlameWheelTimer",1,"Fire.Dash")
 TNT1 A 0 A_Jumpifinventory("FlameWheelPPTimer",1,"Fire.Dash")
+TNT1 A 0 A_Jumpifinventory("FlameWheelBrakeCue",1,"Fire.Dash")
 goto Fire.Dash1
 
 Fire.Dash1:
 TNT1 A 0 ACS_NamedExecuteAlways("TakePP",0,Move_FlameWheel,1)
 TNT1 A 0 A_GiveInventory("FlameWheelPPTimer")
 TNT1 A 0 A_Jumpifinventory("DashBreaker",1,"Fire.DashEnd")
-TNT1 A 0 A_JumpIFNoAmmo("Fire.DashEnd")
+TNT1 A 1 A_JumpIFNoAmmo("Fire.DashEnd")
 goto Fire.Dash
 
 Fire.DashEnd:
@@ -154,30 +155,31 @@ Spawn2:
 
 ROLO R 0 A_GiveInventory("FlameWheelSpeedHandler")
 ROLO R 0 A_SetAngle(CallACS("GRAB_TIDMEMANGLE",0,0,Args[1]))
-ROLO R 1 A_GiveInventory("FlameWheelThrust")
+ROLO R 0 A_GiveInventory("FlameWheelThrust")
 ROLO R 0 A_GiveToTarget("FlameWheelBrakeSensor")
 ROLO R 0 A_GiveToTarget("FlameWheelJumpSensor")
 TNT1 AAA 0 A_SpawnItemEx("HeatSprayFx",random(15,35),random(-30,30),random(5,30),momx/3,momy/3,momz/3,0,SXF_ABSOLUTEMOMENTUM|SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION) 
-TNT1 A 0 A_JumpifinTargetInventory("ProjectilePortDead",1,"Death")
+ROLO R 1 A_JumpifinTargetInventory("ProjectilePortDead",1,"Death")
 
 ROLO S 0 A_GiveInventory("FlameWheelSpeedHandler")
 ROLO S 0 A_SetAngle(CallACS("GRAB_TIDMEMANGLE",0,0,Args[1]))
-ROLO S 1 A_GiveInventory("FlameWheelThrust")
+ROLO S 0 A_GiveInventory("FlameWheelThrust")
 ROLO S 0 A_GiveToTarget("FlameWheelBrakeSensor")
 ROLO S 0 A_GiveToTarget("FlameWheelJumpSensor")
 TNT1 AAA 0 A_SpawnItemEx("HeatSprayFx",random(15,35),random(-30,30),random(5,30),momx/3,momy/3,momz/3,0,SXF_ABSOLUTEMOMENTUM|SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION) 
-TNT1 A 0 A_JumpifinTargetInventory("ProjectilePortDead",1,"Death")
+ROLO S 1 A_JumpifinTargetInventory("ProjectilePortDead",1,"Death")
 
 ROLO T 0 A_GiveInventory("FlameWheelSpeedHandler")
 ROLO T 0 A_SetAngle(CallACS("GRAB_TIDMEMANGLE",0,0,Args[1]))
-ROLO T 1 A_GiveInventory("FlameWheelThrust")
+ROLO T 0 A_GiveInventory("FlameWheelThrust")
 ROLO T 0 A_GiveToTarget("FlameWheelBrakeSensor")
 ROLO T 0 A_GiveToTarget("FlameWheelJumpSensor")
+FWVE W 0 A_SpawnItemEx("OilPitIgnite",0,0,8)
 TNT1 AAA 0 A_SpawnItemEx("HeatSprayFx",random(15,35),random(-30,30),random(5,30),momx/3,momy/3,momz/3,0,SXF_ABSOLUTEMOMENTUM|SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION) 
-TNT1 A 0 A_JumpifinTargetInventory("ProjectilePortDead",1,"Death")
+ROLO T 1 A_JumpifinTargetInventory("ProjectilePortDead",1,"Death")
 
-TNT1 A 0 A_JumpifinTargetInventory("FlameWheelPP",1,"Spawn2")
-TNT1 A 0 A_JumpifinTargetInventory("FlameWheelPPTimer",1,"Spawn2")
+ROLO T 2 A_JumpifinTargetInventory("FlameWheelPP",1,"Spawn2")
+ROLO T 2 A_JumpifinTargetInventory("FlameWheelPPTimer",1,"Spawn2")
 
 stop
 Bounce.Wall:
@@ -190,7 +192,7 @@ Goto Death
 
 Death:
 AQBA C 0 
-ROLO R 0 A_GiveToTarget("DashBreaker")
+ROLO R 1 A_GiveToTarget("DashBreaker")
 stop
 }
 }

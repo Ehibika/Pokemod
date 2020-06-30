@@ -129,6 +129,8 @@ Script "PKMNACS_StartupScript" (int BaseDex)
 			else{CaseNum = Changed;}//No match, back to your base form
 		}
 
+		if(!GetCVar("Player_INIT")) {CaseNum = Fresh;}
+
 	switch(CaseNum)
 		{
 			Case 0: //Base
@@ -154,6 +156,7 @@ Script "PKMNACS_StartupScript" (int BaseDex)
 			ACS_NamedExecuteAlways("SetPlayerType",0);
 			ACS_NamedExecuteAlways("SetPlayerLevel",0,GetCvar("PKMN_StartingLevel"),1);
 			ACS_NamedExecuteAlways("SetPokeSkin",0,BaseDex);
+			ACS_NamedExecuteAlways("GiveStartingFund",0);
 			GiveStartingMoves();
 			Terminate;
 			break;
@@ -213,6 +216,38 @@ script "PKMNACS_TSRespawn" RESPAWN
 		}
 	*/
 	
+}
+
+Script "GiveStartingFund" (void)
+{
+
+int TotalGames;
+	for(int h = 0; h<4; h++) 
+	{
+			TotalGames += GetTeamProperty(h,TPROP_WinCount);
+	}
+
+	if(!TotalGames){Terminate;}
+
+int EXPSum;
+int CashSum;
+
+int OutputEXP;
+int OutputCash;
+int PlayerTotal;
+	for(int i = 0; i < MAX_PLAYERS; i++)
+	{
+	if(PlayerInGame(i))
+		{
+			EXPSum = GetPlayerPokeValue(i,POKEEXP);
+			CashSum = GetPlayerPokeValue(i,POKECASH);
+			PlayerTotal++;
+		}
+		OutputEXP = EXPSum/PlayerTotal;
+		OutputCash = CashSum/PlayerTotal;
+	}
+	ACS_NamedExecuteAlways("GiveEXP",0,OutputEXP,1);
+	ACS_NamedExecuteAlways("GivePlayerCash",0,PlayerNumber(),OutputCash);
 }
 
 

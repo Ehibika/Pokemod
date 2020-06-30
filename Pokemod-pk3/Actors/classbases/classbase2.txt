@@ -67,6 +67,11 @@ pain.Earthquake:
 "----" H 0 
 Goto GroundPain
 
+pain.Mudslap:
+"----" H 0 
+"----" H 0 A_GiveInventory("MudslapNerfInitiate",1)
+Goto GroundPain
+
 //#endregion
 
 //#region -=- Rock -=-
@@ -181,6 +186,7 @@ Goto WaterPain
 //#region -=- Grass -=-
     //===|Grass
 Pain.RazorLeaf:
+Pain.MagicalLeaf:
 Pain.VineWhip:
 Pain.SeedBomb:
 Pain.EnergyBall:
@@ -357,6 +363,7 @@ goto FlyingDeath
 
 //#region -=- Ground -=-
 
+Death.Mudslap:
 Death.Earthquake:
 "----" H 0 
 Goto GroundDeath
@@ -435,6 +442,7 @@ Goto SteelDeath
 
 //#region -=- Grass -=-
     Death.RazorLeaf:
+    Death.MagicalLeaf:
     Death.VineWhip:
     Death.SeedBomb:
     Death.EnergyBall:

@@ -198,7 +198,7 @@ Script "SetPlayerLevel" (int NewPlayerLevel, int SynchEXP)
 
         ACS_NamedExecuteAlways("ActiveStatUpdate",0);
         }
-        Else{ACS_NamedExecuteAlways("StatusMenuUpdate",0);}
+        //Else{ACS_NamedExecuteAlways("StatusMenuUpdate",0);}
 
 }
 

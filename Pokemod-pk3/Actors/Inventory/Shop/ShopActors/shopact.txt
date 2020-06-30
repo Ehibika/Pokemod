@@ -45,6 +45,7 @@ TNT1 A 0 ACS_NamedExecuteAlways("ShopOpenMsg",0)
 TNT1 A 0 A_GiveInventory("CandyShop",1)
 TNT1 A 0 A_GiveInventory("BerryShop",1)
 TNT1 A 0 A_GiveInventory("SeedShop",1)
+TNT1 A 0 A_GiveInventory("TMShop",1)
 stop
 }
 }
@@ -84,6 +85,9 @@ TNT1 A 0 ACS_NamedExecuteAlways("ShopBuyFailPossessMsg",0)
 goto BuyFailSound
 MaxLevel:
 TNT1 A 0 ACS_NamedExecuteAlways("ShopBuyFailLVLMsg",0)
+goto BuyFailSound
+BadTM:
+TNT1 A 0 ACS_NamedExecuteAlways("ShopBuyFailTMMsg",0)
 goto BuyFailSound
 BuySuccess:
 TNT1 A 0 ACS_NamedExecuteAlways("ShopBuyMsg",0)

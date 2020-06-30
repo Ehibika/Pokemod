@@ -1,6 +1,11 @@
 #library "A_Shop"
 #include "zcommon.acs"
 #import "A_3pcam.acs"
+#Import "Dex_Pokemon.acs"
+#import "Dex_Types.acs"
+#import "Dex_Leveling.acs"
+#Import "Dex_Basestats.acs"
+#import "Dex_TM.acs"
 
 #DEFINE MAX_PLAYERS 64
 #DEFINE MAX_SLOTS 10
@@ -69,10 +74,12 @@ function int getConPlayerView(int conP)
 function void DisplayCashAndSlotsFunc(int conP) {
 	SetHudSize(XHUDSIZE, YHUDSIZE, 0);
 	SetFont("CONFONT");
-	int camP = getConPlayerView(conP);
+    int camP = getConPlayerView(conP);
+
+    //LevelUpTable[LvlRate][PlayerLCV]
 	//HudMessage(s:"Cash: ", i:GetPlayerCash(camP); HUDMSG_PLAIN, 77, CR_WHITE, 0.5, 0.75, 0.1);
 	HudMessage(s:"Cash: ", i:GetPlayerCash(camP); HUDMSG_PLAIN, MSGID, CR_WHITE, XOFFSET+0.1, YOFFSET+0.1, 0.1);
-	//HudMessage(s:"Slots: ", i:GetSlotCount(camP),s:"/",i:MAX_SLOTS; HUDMSG_PLAIN, MSGID+1, CR_WHITE, XOFFSET+0.1, YOFFSET+0.1, 0.1);
+	HudMessage(s:"Exp: ", i:GetNowEXP(camP),s:"/",i:GetNextEXP(camP); HUDMSG_PLAIN, MSGID+1, CR_WHITE, XOFFSET+0.1, YOFFSET+0.2, 0.1);
 }
 
 function int GetPlayerCash(int p)
@@ -85,6 +92,20 @@ function int GetSlotCount(int p)
 int slotCount = 0;
 for(int i = 0; i<MAX_SLOTS; i++) if(GetCvar(StrParam(s:"PLAYER",i:p,s:"_SLOT",i:i))!=-1) slotCount++;
 return slotCount;
+}
+
+function int GetNowEXP(int p)
+{
+int PlayerEXP = GetCvar(StrParam(s:"PlayerEXP_",i:p));
+return PlayerEXP;
+}
+
+function int GetNextEXP(int p)
+{
+int PlayerDexNum = GetCvar(StrParam(s:"PlayerDEXNum_",i:p));
+int PlayerLVL = GetCvar(StrParam(s:"PlayerLevel_",i:p));
+Int LvlRate = StatDEX[PlayerDexNum][9];
+return LevelUpTable[LvlRate][PlayerLVL];
 }
 
 #endregion
@@ -149,6 +170,7 @@ script "CashPlayerSpec" (int p) DISCONNECT
 {
 ACS_NamedExecuteWithResult("RESET_PLAYER_CASH",p);
 }
+
 
 #endregion
 //#endregion
@@ -372,6 +394,12 @@ Script "ShopBuyFailLVLMsg" (void) CLIENTSIDE
 {
 if(ActivatorTID()==CheckPlayerCamera(ConsolePlayerNumber())
     || (ActivatorTID()-1000+C_TID)==CheckPlayerCamera(ConsolePlayerNumber()) ) {Log(l:"SHOP_BUYFAIL_LVL");}
+}
+
+Script "ShopBuyFailTMMsg" (void) CLIENTSIDE
+{
+if(ActivatorTID()==CheckPlayerCamera(ConsolePlayerNumber())
+    || (ActivatorTID()-1000+C_TID)==CheckPlayerCamera(ConsolePlayerNumber()) ) {Log(l:"SHOP_BUYFAIL_TM");}
 }
 
 #endregion

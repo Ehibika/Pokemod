@@ -19,7 +19,8 @@ int YourTrueForm;
 #LIBDEFINE POKEDEXNUM 0
 #LIBDEFINE POKELEVEL 1
 #LIBDEFINE POKEEXP 2
-#LIBDEFINE POKECASH 3
+#LIBDEFINE POKENEXTEXP 3
+#LIBDEFINE POKECASH 4
 
 #DEFINE THE_COOLDOWN 40
 
@@ -68,13 +69,29 @@ if(PlayerNumber()==ConsolePlayerNumber()) {
 Function Int GetPokeValue (Int Mode)
 {
 	int OutPut;
-	
 	switch(Mode)
 	{
 	Case POKEDEXNUM: OutPut = GetCvar(StrParam(s:"PlayerDEXNum_",i:PlayerNumber())); Break;
 	Case POKELEVEL: OutPut = GetCvar(StrParam(s:"PlayerLevel_",i:PlayerNumber())); Break;
 	Case POKEEXP: OutPut = GetCvar(StrParam(s:"PlayerEXP_",i:PlayerNumber())); Break;
 	Case POKECASH: OutPut = GetCvar(StrParam(s:"Player",i:PlayerNumber(),s:"_Cash")); Break;
+	}
+
+
+
+return OutPut;
+}
+
+
+Function Int GetPlayerPokeValue (Int P, Int Mode)
+{
+	int OutPut;
+	switch(Mode)
+	{
+	Case POKEDEXNUM: OutPut = GetCvar(StrParam(s:"PlayerDEXNum_",i:P)); Break;
+	Case POKELEVEL: OutPut = GetCvar(StrParam(s:"PlayerLevel_",i:P)); Break;
+	Case POKEEXP: OutPut = GetCvar(StrParam(s:"PlayerEXP_",i:P)); Break;
+	Case POKECASH: OutPut = GetCvar(StrParam(s:"Player",i:P,s:"_Cash")); Break;
 	}
 
 

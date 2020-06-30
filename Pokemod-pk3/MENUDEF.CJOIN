@@ -47,8 +47,8 @@ OptionMenu ZA_JoinTeamMenu
 	StaticText"$MNU_JOIN2"
 	StaticText""
 	StaticText""
-	JoinMenuPlayerClassOption
 	Command "$MNU_JOIN6", "menu_autoselect"
+	JoinMenuPlayerClassOption
 	StaticText""
 	JoinMenuTeamOption
 	Option "$MNU_JOIN3", "playerclass", "PKMN_JoinName"
@@ -90,6 +90,7 @@ OptionString PKMN_JoinName
 "Charmander", "Charmander"
 "Squirtle", "Squirtle"
 "Chikorita", "Chikorita"
+"Cyndaquil", "Cyndaquil"
 "Treecko", "Treecko"
 "Turtwig", "Turtwig"
 }
@@ -101,6 +102,7 @@ OptionString PKMN_JoinMoves
 "Charmander", "\c[MenuYellow]Growl\nEmber\nSmokeScreen\nMetalClaw"
 "Squirtle", "\c[MenuYellow]WaterGun\nYawn\nRapidSpin\nProtect"
 "Chikorita", "\c[MenuYellow]Razorleaf\nGrowl\nPoisonpowder\nSynthesis"
+"Cyndaquil", "\c[MenuYellow]Ember\nFlameWheel\nSmokeScreen\nDefenseCurl"
 "Treecko", "\c[MenuYellow]BulletSeed\nQuickAttack\nDetect\nLeechSeed"
 "Turtwig", "\c[MenuYellow]RazorLeaf\nBite\nProtect\nLeechSeed"
 }
@@ -112,6 +114,7 @@ OptionString PKMN_JoinInfo
 "Charmander", "\c[HelpMenuCol]Packs an array of\ndamaging moves, and can\ngrow to fly!"
 "Squirtle", "\c[HelpMenuCol]Stocked with defensive boosts\nand long ranged water moves."
 "Chikorita", "\c[HelpMenuCol]A Mean, Green supporter with \na clerical moveset full of \nhealing and buffs"
+"Cyndaquil", "\c[HelpMenuCol]A Durable Fire Type that can \na Get around with rolling moves"
 "Treecko", "\c[HelpMenuCol]Very Mobile, and equipped with \nlethal close ranged attacks"
 "Turtwig", "\c[HelpMenuCol]Physical Heavy Hitter with \ntools for Space Control"
 }
