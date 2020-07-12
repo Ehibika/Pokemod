@@ -12,11 +12,11 @@ Player.SoundClass "Totodile"
 player.startitem "PKMNStarterKit"
 
 //============|
-Player.StartItem "Base_HP", 44
-Player.StartItem "Base_PAttack", 48
-Player.StartItem "Base_PDefense", 65 
-Player.StartItem "Base_SAttack", 50
-Player.StartItem "Base_SDefense", 64 
+Player.StartItem "Base_HP", 50
+Player.StartItem "Base_PAttack", 65
+Player.StartItem "Base_PDefense", 64 
+Player.StartItem "Base_SAttack", 44
+Player.StartItem "Base_SDefense", 48 
 Player.StartItem "Base_Speed", 43
 //============|
 

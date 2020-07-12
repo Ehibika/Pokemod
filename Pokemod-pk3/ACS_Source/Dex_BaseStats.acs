@@ -45,9 +45,9 @@ Int StatDEX [MAXDEX][10] = {
 /*|14|*/{80, 70,  69,  70,     65,    50,    10,	Type_Fire,Type_NULL,  LVLSPD_Normal},
 /*|15|*/{110, 90,  89, 90,     85,   70,    20,	    Type_Fire,Type_NULL,  LVLSPD_Normal},
 
-/*|16|*/{45, 49,  65,  49,     65,    45,    5,		Type_Water,Type_NULL,  LVLSPD_Normal},
-/*|17|*/{60, 62,  80,  63,     80,    60,    10,	Type_Water,Type_NULL,  LVLSPD_Normal},
-/*|18|*/{80, 82,  100, 83,     100,   80,    20,	Type_Water,Type_NULL,  LVLSPD_Normal},
+/*|16|*/{50, 65,  64,  44,	   48,	  43,    5,		Type_Water,Type_NULL,  LVLSPD_Normal},
+/*|17|*/{65, 80,  80,  59,	   63,	  58,    10,	Type_Water,Type_NULL,  LVLSPD_Normal},
+/*|18|*/{85, 105, 100, 79,	   83,	  78,    20,	Type_Water,Type_NULL,  LVLSPD_Normal},
 
 /*|19|*/{40, 45,  35,  65,     55,    70,    5,		Type_Grass,Type_NULL,  LVLSPD_Normal},
 /*|20|*/{50, 65,  45,  85,     65,    95,    10,	Type_Grass,Type_NULL,  LVLSPD_Normal},
@@ -57,19 +57,19 @@ Int StatDEX [MAXDEX][10] = {
 /*|23|*/{60, 85,  60,  85,     60,    55,    10,	Type_Fire,Type_Fighting,  LVLSPD_Normal},
 /*|24|*/{80, 120,  70, 110,    70,   80,    20,	    Type_Fire,Type_Fighting,  LVLSPD_Normal},
 
-/*|25|*/{45, 49,  65,  49,     65,    45,    5,		Type_Water,Type_NULL,  LVLSPD_Normal},
-/*|26|*/{60, 62,  80,  63,     80,    60,    10,	Type_Water,Type_Ground,  LVLSPD_Normal},
-/*|27|*/{80, 82,  100, 83,     100,   80,    20,	Type_Water,Type_Ground,  LVLSPD_Normal},
+/*|25|*/{50,  70,	50,	50,	    50,	40,    5,		Type_Water,Type_NULL,  LVLSPD_Normal},
+/*|26|*/{70,  85,	70,	60,	    70,	50,    10,	    Type_Water,Type_Ground,  LVLSPD_Normal},
+/*|27|*/{100, 110,	90,	85,	    90,	60,    20,	    Type_Water,Type_Ground,  LVLSPD_Normal},
 
-/*|28|*/{55, 68,  64,  45,     55,    31,    5,		Type_Grass,Type_NULL,  LVLSPD_Normal},
-/*|29|*/{75, 89,  85,  55,     65,    36,    10,	Type_Grass,Type_NULL,  LVLSPD_Normal},
-/*|30|*/{95, 109,  105, 75,     85,   56,    20,	Type_Grass,Type_Ground,  LVLSPD_Normal},
+/*|28|*/{55, 68,  64,   45,     55,    31,    5,    Type_Grass,Type_NULL,  LVLSPD_Normal},
+/*|29|*/{75, 89,  85,   55,     65,    36,    10,	Type_Grass,Type_NULL,  LVLSPD_Normal},
+/*|30|*/{95, 109,  105, 75,     85,    56,    20,	Type_Grass,Type_Ground,  LVLSPD_Normal},
 
-/*|31|*/{45, 49,  65,  49,     65,    45,    5,		Type_Fire,Type_NULL,  LVLSPD_Normal},
-/*|32|*/{60, 62,  80,  63,     80,    60,    10,	Type_Fire,Type_Fighting,  LVLSPD_Normal},
-/*|33|*/{80, 82,  100, 83,     100,   80,    20,	Type_Fire,Type_Fighting,  LVLSPD_Normal},
+/*|31|*/{44, 58, 44, 58,	    44,	    61,    5,   Type_Fire,Type_NULL,  LVLSPD_Normal},
+/*|32|*/{64, 78, 52, 78,	    52,	    81,    10,	Type_Fire,Type_Fighting,  LVLSPD_Normal},
+/*|33|*/{76, 104, 71, 104,	    71,	    108,    20,	Type_Fire,Type_Fighting,  LVLSPD_Normal},
 
-/*|34|*/{45, 49,  65,  49,     65,    45,    5,		Type_Water,Type_NULL,  LVLSPD_Normal},
-/*|35|*/{60, 62,  80,  63,     80,    60,    10,	Type_Water,Type_NULL,  LVLSPD_Normal},
-/*|36|*/{80, 82,  100, 83,     100,   80,    20,	Type_Water,Type_Steel,  LVLSPD_Normal},
+/*|34|*/{53, 51, 53, 61,	    56,	    40,    5,	Type_Water,Type_NULL,  LVLSPD_Normal},
+/*|35|*/{64, 66, 68, 81,	    76,	    50,    10,	Type_Water,Type_NULL,  LVLSPD_Normal},
+/*|36|*/{84, 86, 88, 111,	    101,    60,    20,	Type_Water,Type_Steel,  LVLSPD_Normal},
 };

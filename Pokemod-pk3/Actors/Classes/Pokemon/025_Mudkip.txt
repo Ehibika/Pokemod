@@ -12,12 +12,12 @@ Player.SoundClass "Mudkip"
 player.startitem "PKMNStarterKit"
 
 //============|
-Player.StartItem "Base_HP", 44
-Player.StartItem "Base_PAttack", 48
-Player.StartItem "Base_PDefense", 65 
+Player.StartItem "Base_HP", 50
+Player.StartItem "Base_PAttack", 70
+Player.StartItem "Base_PDefense", 50 
 Player.StartItem "Base_SAttack", 50
-Player.StartItem "Base_SDefense", 64 
-Player.StartItem "Base_Speed", 43
+Player.StartItem "Base_SDefense", 50 
+Player.StartItem "Base_Speed", 40
 //============|
 
 States

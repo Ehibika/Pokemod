@@ -12,12 +12,12 @@ Player.SoundClass "Piplup"
 player.startitem "PKMNStarterKit"
 
 //============|
-Player.StartItem "Base_HP", 44
-Player.StartItem "Base_PAttack", 48
-Player.StartItem "Base_PDefense", 65 
-Player.StartItem "Base_SAttack", 50
-Player.StartItem "Base_SDefense", 64 
-Player.StartItem "Base_Speed", 43
+Player.StartItem "Base_HP", 53
+Player.StartItem "Base_PAttack", 51
+Player.StartItem "Base_PDefense", 53 
+Player.StartItem "Base_SAttack", 61
+Player.StartItem "Base_SDefense", 56 
+Player.StartItem "Base_Speed", 40
 //============|
 
 States
