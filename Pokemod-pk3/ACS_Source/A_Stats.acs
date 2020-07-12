@@ -197,24 +197,24 @@ Str StatName2[7] = {
 
 #DEFINE STATITEMNUM 17
 
-Str StatEffectName[STATITEMNUM] = {
-    "Growth",
-    "Growl",
-    "Tailwhip",
-    "ScaryFace",
-    "Amnesia",
-    "IronDefense",
-    "DragonDance",
-    "ShellSmash",
-    "Yawn",
-    "IcyWind",
-    "PowerSeed",
-    "GuardSeed",
-    "HasteSeed",
-    "Agility",
-    "Curse",
-    "Mudslap",
-    "DefenseCurl",
+Str StatEffectName[STATITEMNUM][2] = {
+    {"Growth","GOOD"},
+    {"Growl","BAD"},
+    {"Tailwhip","BAD"},
+    {"ScaryFace","BAD"},
+    {"Amnesia","GOOD"},
+    {"IronDefense","GOOD"},
+    {"DragonDance","GOOD"},
+    {"ShellSmash","GOOD"},
+    {"Yawn","BAD"},
+    {"IcyWind","BAD"},
+    {"PowerSeed","GOOD"},
+    {"GuardSeed","GOOD"},
+    {"HasteSeed","GOOD"},
+    {"Agility","GOOD"},
+    {"Curse","GOOD"},
+    {"Mudslap","BAD"},
+    {"DefenseCurl","GOOD"},
 };
 
 #define PATK_ID 0
@@ -274,7 +274,7 @@ int v;
 
 for (t = 0; t < STATITEMNUM; t++)
     {
-        Flagname = StrParam(s:"STF_",s:StatEffectName[t]);
+        Flagname = StrParam(s:"STF_",s:StatEffectName[t][0]);
         if(CheckInventory(Flagname)){ModLevel += StatEffectValue[t][StatID];}
             /*
         for (v = 0; v < 7; v++)
@@ -318,6 +318,17 @@ GiveInventory("Base_Speed",StatDEX[DexNum][BASE_SPD]);
 ACS_NamedExecuteAlways("ActiveStatUpdate",0);
 }
 
+#LIBDEFINE SB_BAD 1
+#LIBDEFINE SB_GOOD 2
+
+Script "StatItemNuke" (int ItemType)
+{
+    for (int t = 0; t < STATITEMNUM; t++)
+    {
+        if((ItemType & SB_GOOD) && (StatEffectName[t][1] == "GOOD")){TakeInventory(StrParam(s:"STF_",s:StatEffectName[t][0]),999);}
+        else if((ItemType & SB_BAD) && (StatEffectName[t][1] == "BAD")){TakeInventory(StrParam(s:"STF_",s:StatEffectName[t][0]),999);}
+    }  
+}
 
 Script "ActiveStat_Handler" (Int Mode)
 {
@@ -559,7 +570,7 @@ str Flagname;
 
     for (int t = 0; t < STATITEMNUM; t++)
     {
-        Flagname = StrParam(s:"STF_",s:StatEffectName[t]);
+        Flagname = StrParam(s:"STF_",s:StatEffectName[t][0]);
         if(TID>0){if(CheckActorInventory(TID,Flagname)){Output += StatEffectValue[t][StatID];}}
         Else{if(CheckInventory(Flagname)){Output += StatEffectValue[t][StatID];}}
     }

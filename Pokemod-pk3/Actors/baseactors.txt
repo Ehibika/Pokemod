@@ -744,3 +744,35 @@ BASB U 1
 stop
 }
 }
+
+
+Actor VisibilityWatcher
+{
++NOINTERACTION
+-SOLID
++MISSILE
+radius 1
+height 1
++NOGRAVITY
++DONTBLAST
++DONTREFLECT
+renderstyle none
+ReactionTime 70
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 1 A_CountDown
+TNT1 A 1 A_Jump(256,"CheckInv")
+Goto CheckInv
+
+CheckInv:
+TNT1 A 1 A_JumpIfInTargetInventory("Once",1,"Spawn")
+Goto Death
+
+Death:
+TNT1 A 1 A_GiveToTarget("ForceVisible")
+TNT1 A 5
+stop
+}
+}

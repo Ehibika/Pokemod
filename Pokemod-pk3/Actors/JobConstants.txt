@@ -210,6 +210,9 @@ const int RG_ENEMY = 4;
 //=======|Targeting Constants|==========
 const int TG_TEAM = 1;
 const int TG_ENEMY = 2;
+//=======|Stat Buff Constants|==========
+const int SB_BAD = 1;
+const int SB_GOOD = 2;
 //=======|Input Constants|==========
 const int BT_ATTACK	= 1;
 const int BT_USE = 2;

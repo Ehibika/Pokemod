@@ -6,10 +6,15 @@ AddPlayerClass Squirtle
 
 AddPlayerClass Chikorita
 AddPlayerClass Cyndaquil
+AddPlayerClass Totodile
 
 AddPlayerClass Treecko
+AddPlayerClass Torchic
+AddPlayerClass Mudkip
 
 AddPlayerClass TurTwig
+AddPlayerClass Chimchar
+AddPlayerClass Piplup
 
 
 alias TriggerEvo "CloseMenu; Use EvoStartItem" 

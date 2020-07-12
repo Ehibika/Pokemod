@@ -9,12 +9,7 @@ Actor Chimchar : ClassBase
 Player.DisplayName "Chimchar"
 Player.SoundClass "Chimchar"
 
-//player.startitem "PersistentLoadout"
-player.startitem "PokeFormHandler"
-player.startitem "EvoStartItem"
-player.startitem "MoveTutorStartItem"
-player.startitem "MoveShiftStartItem"
-player.startitem "PlayerStatusItem"
+player.startitem "PKMNStarterKit"
 
 //============|
 Player.StartItem "Base_HP", 39

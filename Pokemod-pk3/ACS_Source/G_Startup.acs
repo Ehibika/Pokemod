@@ -134,7 +134,7 @@ Script "PKMNACS_StartupScript" (int BaseDex)
 	switch(CaseNum)
 		{
 			Case 0: //Base
-			//Log(s:"Base");
+			Log(s:"Base");
 			ACS_NamedExecuteAlways("StatInitializer",0);
 			ACS_NamedExecuteAlways("SetPlayerType",0);
 			ACS_NamedExecuteAlways("SetPokeSkin",0,BaseDex);
@@ -147,7 +147,7 @@ Script "PKMNACS_StartupScript" (int BaseDex)
 				}
 			break;
 			Case 1: //Fresh
-			//Log(s:"Fresh");
+			Log(s:"Fresh");
 			ClearPlayerCVars(PlayerNumber(),1);
 			ClearPersistentLoadout(PlayerNumber());
 			GiveInventory("PersistentLoadout",1);

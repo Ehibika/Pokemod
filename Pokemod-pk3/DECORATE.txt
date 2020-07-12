@@ -165,12 +165,12 @@
 
 #include "Actors/Classes/Pokemon/010_Chikorita.txt"
 #include "Actors/Classes/Pokemon/013_Cyndaquil.txt"
-//#include "Actors/Classes/Pokemon/016_Totodile.txt"
+#include "Actors/Classes/Pokemon/016_Totodile.txt"
 
 #include "Actors/Classes/Pokemon/019_Treecko.txt"
-//#include "Actors/Classes/Pokemon/022_Torchic.txt"
-//#include "Actors/Classes/Pokemon/025_MudKip.txt"
+#include "Actors/Classes/Pokemon/022_Torchic.txt"
+#include "Actors/Classes/Pokemon/025_MudKip.txt"
 
 #include "Actors/Classes/Pokemon/028_Turtwig.txt"
-//#include "Actors/Classes/Pokemon/031_Chimchar.txt"
-//#include "Actors/Classes/Pokemon/034_Piplup.txt"
+#include "Actors/Classes/Pokemon/031_Chimchar.txt"
+#include "Actors/Classes/Pokemon/034_Piplup.txt"

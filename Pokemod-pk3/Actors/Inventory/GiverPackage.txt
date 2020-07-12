@@ -39,7 +39,7 @@ TNT1 A 0 A_Giveinventory("SkydropGroundGuard")
 Goto Pickup.After
 
 Safeguard:
-TNT1 A 0 A_Giveinventory("SafeguardPower")
+TNT1 A 0 A_Giveinventory("SafeGuardInitiate")
 Goto Pickup.After
 
 Aromatherapy:
@@ -71,13 +71,13 @@ TNT1 A 0 A_Giveinventory("ScaryFaceNerfInitiate")
 Goto Pickup.After
 
 SleepPowder:
-TNT1 A 0 A_Jumpifinventory("GrassSTAB",1,"Pickup.After") //No Powders on Grass
+TNT1 A 0 A_Jumpifinventory("GrassGuard",1,"Pickup.After") //No Powders on Grass
 TNT1 A 0 A_Jumpifinventory("ProtectGuard",1,"Pickup.After") //Blocked by protect
 TNT1 A 0 A_Giveinventory("SleepStatusProc")
 Goto Pickup.After
 
 PoisonPowder:
-TNT1 A 0 A_Jumpifinventory("GrassSTAB",1,"Pickup.After") //No Powders on Grass
+TNT1 A 0 A_Jumpifinventory("GrassGuard",1,"Pickup.After") //No Powders on Grass
 TNT1 A 0 A_Jumpifinventory("ProtectGuard",1,"Pickup.After") //Blocked by protect
 TNT1 A 0 A_Giveinventory("PoisonStatusProc")
 Goto Pickup.After

@@ -9,20 +9,15 @@ Actor Cyndaquil : ClassBase
 Player.DisplayName "Cyndaquil"
 Player.SoundClass "Cyndaquil"
 
-//player.startitem "PersistentLoadout"
-player.startitem "PokeFormHandler"
-player.startitem "EvoStartItem"
-player.startitem "MoveTutorStartItem"
-player.startitem "MoveShiftStartItem"
-player.startitem "PlayerStatusItem"
+player.startitem "PKMNStarterKit"
 
 //============|
-Player.StartItem "Base_HP", 39
-Player.StartItem "Base_PAttack", 52
-Player.StartItem "Base_PDefense", 43 
-Player.StartItem "Base_SAttack", 60
+Player.StartItem "Base_HP", 61
+Player.StartItem "Base_PAttack", 58
+Player.StartItem "Base_PDefense", 54 
+Player.StartItem "Base_SAttack", 50
 Player.StartItem "Base_SDefense", 50 
-Player.StartItem "Base_Speed", 65
+Player.StartItem "Base_Speed", 35
 //============|
 
 States

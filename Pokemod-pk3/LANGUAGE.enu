@@ -810,7 +810,7 @@ M014_NAME = "\cj Poison Powder";
 M014_TYPE = "\cj Poison";
 M014_CATEGORY = "\cf Status";
 M014_POWER = "\cfPower:\cj --";
-M014_DESC = "\cjScatter Poisonous Pollen on the \cfGround \cjthat \nInflicts Poison";
+M014_DESC = "\cjScatter Poisonous Pollen on the \cfGround \cjthat \nInflicts Poison, ineffective on grass types.";
 //#endregion
 
 //#region -=- 015: Sleep Powder -=-
@@ -818,7 +818,7 @@ M015_NAME = "\cj Sleep Powder";
 M015_TYPE = "\cj Grass";
 M015_CATEGORY = "\cf Status";
 M015_POWER = "\cfPower:\cj --";
-M015_DESC = "\cjScatter Sleep Inducing Pollen on the \cfGround \cjthat \nInflicts Sleep";
+M015_DESC = "\cjScatter Sleep Inducing Pollen on the \cfGround \cjthat \nInflicts Sleep, ineffective on grass types.";
 //#endregion
 
 //#region -=- 016: Seed Bomb -=-
@@ -1218,7 +1218,7 @@ M065_NAME = "\cj GrassWhistle";
 M065_TYPE = "\cj Grass";
 M065_CATEGORY = "\cf Status";
 M065_POWER = "\cfPower:\cj --";
-M065_DESC = "\cfShoot\cj a serene melody that lulls enemies to \nsleep, ineffective on grass types.";
+M065_DESC = "\cfShoot\cj a serene melody that lulls enemies to \nsleep.";
 //#endregion
 
 //#region -=- 066: HealPulse -=-

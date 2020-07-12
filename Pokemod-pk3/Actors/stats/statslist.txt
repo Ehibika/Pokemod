@@ -8,6 +8,7 @@
 
 
 #include "Actors/stats/PKMNTypes.txt"
+#include "Actors/stats/PKMNTypeSpecials.txt"
 
 Actor Base_Stat : Inventory {Inventory.amount 1 inventory.maxamount 250 }
 Actor Base_HP : Base_Stat {}

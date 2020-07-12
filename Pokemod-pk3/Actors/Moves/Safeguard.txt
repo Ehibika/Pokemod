@@ -14,7 +14,12 @@ stop
 
 
 Fire:
-"####" B 1 A_Jumpif(CallACS("CheckWeaponFire",RC_C)==0,"NoAmmo")
+"####" BBB 1 A_Jumpif(CallACS("CheckWeaponFire",RC_C)==1,"Fire.Begin")
+"####" B 0 A_Jump(256,"NoAmmo")
+Goto NoAmmo
+
+Fire.Begin:
+"####" B 0
 "####" B 0 A_Jump(256,"Fire.Aim")
 Goto Fire.Aim
 
@@ -72,12 +77,61 @@ Const int SafeGuardRad = 200;
 Const int SafeGuard_Item = 13;
 Const int SafeGuardEntiTID = 5;
 
-actor SafeguardPower : PowerProtection
+actor SafeguardPower : PowerUp
 {
 inventory.amount 1
 Powerup.duration 35
-+CANTSEEK
 }
+
+
+actor AntiSeekOn : CustomInventory
+{
+states
+{
+pickup:
+TNT1 A 0 A_ChangeFlag("CANTSEEK",1)
+stop
+}
+}
+
+actor AntiSeekOff : CustomInventory
+{
+states
+{
+pickup:
+TNT1 A 0 A_ChangeFlag("CANTSEEK",0)
+stop
+}
+}
+
+
+
+actor SafeGuardInitiate : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_Jumpifinventory("SafeguardPower",1,"Sustain")
+TNT1 A 0 A_GiveInventory("SafeguardPower",1)
+TNT1 A 0 A_SpawnitemEX("SafeGuardWatcher")
+TNT1 A 0 A_GiveInventory("AntiSeekOn",1)
+stop
+
+Sustain:
+TNT1 A 0 A_GiveInventory("SafeguardPower",1)
+stop
+Nope:
+TNT1 A 0
+stop
+}
+}
+
 
 
 //[+]========================================================================[+]
@@ -238,7 +292,7 @@ translation "198:198=220:220", "192:192=229:229"
 actor SafeguardRingFX : BasicClientSide
 {
 Scale 1.0
-Renderstyle "Add"
+Renderstyle "Translucent"
 States
 {
 Spawn:
@@ -257,7 +311,7 @@ stop
 actor SafeguardRingFX2 : BasicClientSide
 {
 Scale 1.5
-Renderstyle "Add"
+Renderstyle "Translucent"
 Alpha 0.0
 States
 {
@@ -266,6 +320,28 @@ BASB W 0
 TCEX AAAAA 2 A_Fadein
 TCEX A 10
 TCEX AAAAA 2 A_Fadeout
+stop
+}
+}
+
+
+actor SafeGuardWatcher : BasicHelper 
+{
+Var int user_TickTime;
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_JumpIfInTargetInventory("CutterFlag",999,"Death")
+TNT1 A 0 A_JumpIfInTargetInventory("IsDead",1,"Death")
+TNT1 A 5 
+TNT1 A 0 A_JumpIfInTargetInventory("SafeguardPower",1,"Spawn")
+Goto Death
+
+Death:
+TNT1 A 0 A_GiveToTarget("AntiSeekOff")
+TNT1 A 0 A_TakeFromTarget("SafeguardPower",9)
+TNT1 A 2 
 stop
 }
 }

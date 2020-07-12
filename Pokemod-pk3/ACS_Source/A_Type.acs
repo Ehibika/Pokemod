@@ -23,6 +23,7 @@ For (int i; i < TYPECOUNT; i++)
     TakeInventory(StrParam(s:Typename,s:"Resistance"),99);
     TakeInventory(StrParam(s:Typename,s:"Immunity"),99);
     TakeInventory(StrParam(s:Typename,s:"STAB"),99);
+    GiveInventory(StrParam(s:PKMNTypeList[i],s:"TypeSpecial"),1);
     }
  
 }
@@ -84,8 +85,8 @@ Script "SetPlayerType" (VOID)
     int TypeB = StatDEX[PlayerDEXNum][8];
     ClearTypeData();
 
-    if(TypeA > -1){GiveTypeData(TypeA);}
-    if(TypeB > -1){GiveTypeData(TypeB);}
+    if(TypeA > -1){GiveTypeData(TypeA); GiveInventory(StrParam(s:PKMNTypeList[TypeA],s:"TypeSpecial"),1);}
+    if(TypeB > -1){GiveTypeData(TypeB); GiveInventory(StrParam(s:PKMNTypeList[TypeB],s:"TypeSpecial"),1);}
 
 
 }

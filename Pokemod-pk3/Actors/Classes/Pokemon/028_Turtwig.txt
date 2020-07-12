@@ -9,13 +9,7 @@ Actor Turtwig : ClassBase
 Player.DisplayName "Turtwig"
 Player.SoundClass "Turtwig"
 
-//Player.StartItem "TurtwigStarterMoves"
-//player.startitem "PersistentLoadout"
-player.startitem "PokeFormHandler"
-player.startitem "EvoStartItem"
-player.startitem "MoveTutorStartItem"
-player.startitem "MoveShiftStartItem"
-player.startitem "PlayerStatusItem"
+player.startitem "PKMNStarterKit"
 
 //============|
 Player.StartItem "Base_HP", 55

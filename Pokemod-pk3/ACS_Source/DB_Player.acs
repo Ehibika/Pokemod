@@ -30,21 +30,30 @@ script "SetPokeSkin" (int skin) CLIENTSIDE
 if(PlayerNumber()==ConsolePlayerNumber()) YourTrueForm = skin;
 }
 
+Script "Wait_PokeSkinHandler" (void)
+{
+delay(5);
+Acs_NamedExecuteAlways("PokeSkinHandler",0);
+}
 
 Script "PokeSkinHandler" (void) CLIENTSIDE
 {
-if(PlayerNumber()==ConsolePlayerNumber()) {
+if(PlayerNumber()==ConsolePlayerNumber()) { log(s:"Console Player Verified");
 	int cooldown = THE_COOLDOWN;
-	YourTrueForm = -1;
+	YourTrueForm = GetPokeValue(POKEDEXNUM);//-1;
 	int lastForm = YourTrueForm;
 	int skin = GetCVar("Skin");
 	int lastSkin;
 	int TrueFormSkin;
 	while(PlayerHealth()>0) {
 		lastSkin = skin;
+		//log(s:"\cgLast Skin is at ", i:lastSkin);
 		skin = GetCVar("Skin");
+		//log(s:"\cgCurrent Skin is at ", i:skin);
 		if(skin!=lastSkin) cooldown = THE_COOLDOWN;
 		if((cooldown<1)&&(YourTrueForm>-1)) {
+			//log(s:"True form is at", i:YourTrueForm);
+			//log(s:"Last form is at", i:lastForm);
 			if(YourTrueForm!=lastForm) {
 				//log(s:"new disguise");
 				ConsoleCommand(strparam(s:"Skin ",s:SkinDEX[YourTrueForm][1]));

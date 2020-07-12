@@ -92,7 +92,10 @@ OptionString PKMN_JoinName
 "Chikorita", "Chikorita"
 "Cyndaquil", "Cyndaquil"
 "Treecko", "Treecko"
+"Torchic", "Torchic"
 "Turtwig", "Turtwig"
+"Chimchar", "Chimchar"
+
 }
 
 OptionString PKMN_JoinMoves
@@ -104,7 +107,10 @@ OptionString PKMN_JoinMoves
 "Chikorita", "\c[MenuYellow]Razorleaf\nGrowl\nPoisonpowder\nSynthesis"
 "Cyndaquil", "\c[MenuYellow]Ember\nFlameWheel\nSmokeScreen\nDefenseCurl"
 "Treecko", "\c[MenuYellow]BulletSeed\nQuickAttack\nDetect\nLeechSeed"
+"Torchic", "\c[MenuYellow]Growl\nEmber\nSmokeScreen\nMetalClaw"
 "Turtwig", "\c[MenuYellow]RazorLeaf\nBite\nProtect\nLeechSeed"
+"Chimchar", "\c[MenuYellow]Growl\nEmber\nSmokeScreen\nMetalClaw"
+
 }
 
 OptionString PKMN_JoinInfo
@@ -116,5 +122,8 @@ OptionString PKMN_JoinInfo
 "Chikorita", "\c[HelpMenuCol]A Mean, Green supporter with \na clerical moveset full of \nhealing and buffs"
 "Cyndaquil", "\c[HelpMenuCol]A Durable Fire Type that can \na Get around with rolling moves"
 "Treecko", "\c[HelpMenuCol]Very Mobile, and equipped with \nlethal close ranged attacks"
+"Torchic", "\c[HelpMenuCol]Powerful up-close fighter \nwith excellent maneuverability"
 "Turtwig", "\c[HelpMenuCol]Physical Heavy Hitter with \ntools for Space Control"
+"Chimchar", "\c[HelpMenuCol]Variable Trickster good at \nOffense and disruption"
+
 }

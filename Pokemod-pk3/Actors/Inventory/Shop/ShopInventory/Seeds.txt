@@ -56,7 +56,6 @@ PITM B 0
 PITM B 6
 Goto Spawn
 use1:
-TNT1 A 0 A_PlaySoundEx("Support/Statup","Soundslot7")
 TNT1 A 0 A_GiveInventory("PowerSeedBuffInitiate")
 TNT1 A 0 A_SpawnitemEX("ConsumeFX",0,0,0,0,0,0,0,1)
 stop
@@ -76,6 +75,8 @@ Spawn:
 TNT1 A 0
 stop
 Pickup:
+TNT1 A 0 A_JumpIfInventory("HazedFlagEnemy",1,"Nope")
+TNT1 A 0 A_PlaySoundEx("Support/Statup","Soundslot7")
 TNT1 A 0 A_Jumpifinventory("STF_PowerSeed",1,"Sustain")
 TNT1 A 0 A_GiveInventory("STF_PowerSeed",1)
 TNT1 A 0 A_SpawnitemEX("PowerSeedBuffWatcher")
@@ -131,7 +132,6 @@ PITM B 0
 PITM B 6
 Goto Spawn
 use1:
-TNT1 A 0 A_PlaySoundEx("Support/Statup","Soundslot7")
 TNT1 A 0 A_GiveInventory("GuardSeedBuffInitiate")
 TNT1 A 0 A_SpawnitemEX("ConsumeFX",0,0,0,0,0,0,0,1)
 stop
@@ -151,6 +151,8 @@ Spawn:
 TNT1 A 0
 stop
 Pickup:
+TNT1 A 0 A_JumpIfInventory("HazedFlagEnemy",1,"Nope")
+TNT1 A 0 A_PlaySoundEx("Support/Statup","Soundslot7")
 TNT1 A 0 A_Jumpifinventory("STF_GuardSeed",1,"Sustain")
 TNT1 A 0 A_GiveInventory("STF_GuardSeed",1)
 TNT1 A 0 A_SpawnitemEX("GuardSeedBuffWatcher")
@@ -206,7 +208,6 @@ PITM B 0
 PITM B 6
 Goto Spawn
 use1:
-TNT1 A 0 A_PlaySoundEx("Support/Statup","Soundslot7")
 TNT1 A 0 A_GiveInventory("HasteSeedBuffInitiate")
 TNT1 A 0 A_SpawnitemEX("ConsumeFX",0,0,0,0,0,0,0,1)
 stop
@@ -226,6 +227,8 @@ Spawn:
 TNT1 A 0
 stop
 Pickup:
+TNT1 A 0 A_JumpIfInventory("HazedFlagEnemy",1,"Nope")
+TNT1 A 0 A_PlaySoundEx("Support/Statup","Soundslot7")
 TNT1 A 0 A_Jumpifinventory("STF_HasteSeed",1,"Sustain")
 TNT1 A 0 A_GiveInventory("STF_HasteSeed",1)
 TNT1 A 0 A_SpawnitemEX("HasteSeedBuffWatcher")

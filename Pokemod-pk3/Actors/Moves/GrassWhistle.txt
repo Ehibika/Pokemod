@@ -16,12 +16,16 @@ stop
 
 
 Fire:
-"####" B 0 //A_Jumpif(CallACS("CheckWeaponFire",RC_A)==0,"NoAmmo")
+"####" BBB 1 A_Jumpif(CallACS("CheckWeaponFire",RC_A)==1,"Fire.Begin")
+"####" B 0 A_Jump(256,"NoAmmo")
+Goto NoAmmo
+
+Fire.Begin:
+"####" B 0
 "####" B 0 A_Jump(256,"Fire.Bullet")
 Goto Fire.Bullet
 
 Fire.Bullet:
-"####" B 1 A_Jumpif(CallACS("CheckWeaponFire",RC_A)==0,"NoAmmo")
 "####" B 0 A_PlaySoundEx("misc/trainwhistle","Weapon")
 
 "####" B 0 A_FireCustomMissile("GrassWhistleShot",0,1,0,0)
@@ -125,7 +129,7 @@ Goto Death
 
 GWCheck:
 TNT1 A 0 A_JumpIfInventory("SleepMark",1,"Death",AAPTR_TRACER)
-TNT1 A 0 A_JumpIfInventory("GrassSTAB",1,"Death",AAPTR_TRACER)
+//TNT1 A 0 A_JumpIfInventory("GrassGuard",1,"Death",AAPTR_TRACER)
 TNT1 A 0 A_JumpIfInventory("ProtectGuard",1,"Death",AAPTR_TRACER)
 TNT1 A 0 A_JumpIfInventory("SafeguardPower",1,"Death",AAPTR_TRACER)
 TNT1 A 0 A_GiveInventory("SleepStatusProc",1,AAPTR_TRACER)

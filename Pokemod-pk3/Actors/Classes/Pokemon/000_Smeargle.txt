@@ -9,12 +9,7 @@ Actor Smeargle : ClassBase //replaces Megaman
 Player.DisplayName "Megaman"
 Player.SoundClass "Megaman"
 +NOSKIN
-//player.startitem "PersistentLoadout"
-player.startitem "PokeFormHandler"
-player.startitem "EvoStartItem"
-player.startitem "MoveTutorStartItem"
-player.startitem "MoveShiftStartItem"
-player.startitem "PlayerStatusItem"
+player.startitem "PKMNStarterKit"
 //============|
 Player.StartItem "Base_HP", 65
 Player.StartItem "Base_PAttack", 75

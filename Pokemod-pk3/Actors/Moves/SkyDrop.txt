@@ -14,7 +14,12 @@ WEAP X 1
 stop
 
 Fire:
-"####" B 1 A_Jumpif(CallACS("CheckWeaponFire",RC_B)==0,"NoAmmo")
+"####" BBB 1 A_Jumpif(CallACS("CheckWeaponFire",RC_B)==1,"Fire.Begin")
+"####" B 0 A_Jump(256,"NoAmmo")
+Goto NoAmmo
+
+Fire.Begin:
+"####" B 0
 "####" B 0 A_Jump(256,"Fire.GrabStart")
 Goto Fire.GrabStart
 

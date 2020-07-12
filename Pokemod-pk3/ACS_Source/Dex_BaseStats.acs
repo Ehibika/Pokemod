@@ -43,7 +43,7 @@ Int StatDEX [MAXDEX][10] = {
 
 /*|13|*/{61, 58,  54,  50,     50,    35,    5,		Type_Fire,Type_NULL,  LVLSPD_Normal},
 /*|14|*/{80, 70,  69,  70,     65,    50,    10,	Type_Fire,Type_NULL,  LVLSPD_Normal},
-/*|15|*/{110, 90,  89, 90,     85,   70,    20,	Type_Fire,Type_NULL,  LVLSPD_Normal},
+/*|15|*/{110, 90,  89, 90,     85,   70,    20,	    Type_Fire,Type_NULL,  LVLSPD_Normal},
 
 /*|16|*/{45, 49,  65,  49,     65,    45,    5,		Type_Water,Type_NULL,  LVLSPD_Normal},
 /*|17|*/{60, 62,  80,  63,     80,    60,    10,	Type_Water,Type_NULL,  LVLSPD_Normal},
@@ -53,9 +53,9 @@ Int StatDEX [MAXDEX][10] = {
 /*|20|*/{50, 65,  45,  85,     65,    95,    10,	Type_Grass,Type_NULL,  LVLSPD_Normal},
 /*|21|*/{70, 85,  65, 105,     85,   120,    20,	Type_Grass,Type_NULL,  LVLSPD_Normal},
 
-/*|22|*/{45, 49,  65,  49,     65,    45,    5,		Type_Fire,Type_NULL,  LVLSPD_Normal},
-/*|23|*/{60, 62,  80,  63,     80,    60,    10,	Type_Fire,Type_Fighting,  LVLSPD_Normal},
-/*|24|*/{80, 82,  100, 83,     100,   80,    20,	Type_Fire,Type_Fighting,  LVLSPD_Normal},
+/*|22|*/{45, 60,  40,  70,     50,    45,    5,		Type_Fire,Type_NULL,  LVLSPD_Normal},
+/*|23|*/{60, 85,  60,  85,     60,    55,    10,	Type_Fire,Type_Fighting,  LVLSPD_Normal},
+/*|24|*/{80, 120,  70, 110,    70,   80,    20,	    Type_Fire,Type_Fighting,  LVLSPD_Normal},
 
 /*|25|*/{45, 49,  65,  49,     65,    45,    5,		Type_Water,Type_NULL,  LVLSPD_Normal},
 /*|26|*/{60, 62,  80,  63,     80,    60,    10,	Type_Water,Type_Ground,  LVLSPD_Normal},

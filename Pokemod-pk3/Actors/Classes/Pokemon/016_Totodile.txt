@@ -9,12 +9,7 @@ Actor Totodile : ClassBase
 Player.DisplayName "Totodile"
 Player.SoundClass "Totodile"
 
-//player.startitem "PersistentLoadout"
-player.startitem "PokeFormHandler"
-player.startitem "EvoStartItem"
-player.startitem "MoveTutorStartItem"
-player.startitem "MoveShiftStartItem"
-player.startitem "PlayerStatusItem"
+player.startitem "PKMNStarterKit"
 
 //============|
 Player.StartItem "Base_HP", 44
@@ -28,21 +23,21 @@ Player.StartItem "Base_Speed", 43
 States
 {
 Spawn: 
-P007 A 0
-P007 B 1 
-P007 A 1
+P016 A 0
+P016 B 1 
+P016 A 1
 GoTo Spawn+2
 See:
-P007 BCDE 5
+P016 BCDE 5
 GoTo Spawn+1
 Missile:
-P007 A 0 
-P007 F 5 
-P007 G 4
+P016 A 0 
+P016 F 5 
+P016 G 4
 GoTo Spawn+2
 
 PainFix:
-P007 H 0 
+P016 H 0 
 GoTo PainFrames
 }
 }

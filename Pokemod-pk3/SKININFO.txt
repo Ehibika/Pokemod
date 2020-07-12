@@ -105,30 +105,56 @@ gender = male
 }
 
 {
-    name = "Quilava"
-    sprite = P014
-    class = Cyndaquil
-    dsnoway = LAND
-    dsoof = LAND
-    dspldeth = MEGADEAT
-    dspdiehi = MEGADEAT
-    dsplpain = MEGAPAIN
-    dstaunt = cry011
-    gender = male
-    }
-    
-    {
-    name = "Typhlosion"
-    sprite = P015
-    class = Cyndaquil
-    dsnoway = FATLAND
-    dsoof = FATLAND
-    dspldeth = MEGADEAT
-    dspdiehi = MEGADEAT
-    dsplpain = MEGAPAIN
-    dstaunt = cry012
-    gender = male
-    }
+name = "Quilava"
+sprite = P014
+class = Cyndaquil
+dsnoway = LAND
+dsoof = LAND
+dspldeth = MEGADEAT
+dspdiehi = MEGADEAT
+dsplpain = MEGAPAIN
+dstaunt = cry014
+gender = male
+}
+
+{
+name = "Typhlosion"
+sprite = P015
+class = Cyndaquil
+dsnoway = FATLAND
+dsoof = FATLAND
+dspldeth = MEGADEAT
+dspdiehi = MEGADEAT
+dsplpain = MEGAPAIN
+dstaunt = cry015
+gender = male
+}
+
+{
+name = "Croconaw"
+sprite = P017
+class = totodile
+dsnoway = LAND
+dsoof = LAND
+dspldeth = MEGADEAT
+dspdiehi = MEGADEAT
+dsplpain = MEGAPAIN
+dstaunt = cry017
+gender = male
+}
+
+{
+name = "Feraligatr"
+sprite = P018
+class = totodile
+dsnoway = FATLAND
+dsoof = FATLAND
+dspldeth = MEGADEAT
+dspdiehi = MEGADEAT
+dsplpain = MEGAPAIN
+dstaunt = cry018
+gender = male
+}
 
 {
 name = "Grovyle"
@@ -156,29 +182,133 @@ dstaunt = cry021
 gender = male
 }
 
+{
+name = "Combusken"
+sprite = P023
+class = Torchic
+dsnoway = LAND
+dsoof = LAND
+dspldeth = MEGADEAT
+dspdiehi = MEGADEAT
+dsplpain = MEGAPAIN
+dstaunt = cry023
+gender = male
+}
 
 {
-    name = "Grotle"
-    sprite = P029
-    class = Turtwig
-    dsnoway = LAND
-    dsoof = LAND
-    dspldeth = MEGADEAT
-    dspdiehi = MEGADEAT
-    dsplpain = MEGAPAIN
-    dstaunt = cry029
-    gender = male
-    }
-    
-    {
-    name = "Torterra"
-    sprite = P030
-    class = Turtwig
-    dsnoway = FATLAND
-    dsoof = FATLAND
-    dspldeth = MEGADEAT
-    dspdiehi = MEGADEAT
-    dsplpain = MEGAPAIN
-    dstaunt = cry030
-    gender = male
-    }
+name = "Blaziken"
+sprite = P024
+class = Torchic
+dsnoway = FATLAND
+dsoof = FATLAND
+dspldeth = MEGADEAT
+dspdiehi = MEGADEAT
+dsplpain = MEGAPAIN
+dstaunt = cry024
+gender = male
+}
+
+{
+name = "Marshtomp"
+sprite = P026
+class = mudkip
+dsnoway = LAND
+dsoof = LAND
+dspldeth = MEGADEAT
+dspdiehi = MEGADEAT
+dsplpain = MEGAPAIN
+dstaunt = cry026
+gender = male
+}
+
+{
+name = "Swampert"
+sprite = P027
+class = mudkip
+dsnoway = FATLAND
+dsoof = FATLAND
+dspldeth = MEGADEAT
+dspdiehi = MEGADEAT
+dsplpain = MEGAPAIN
+dstaunt = cry027
+gender = male
+}
+
+{
+name = "Grotle"
+sprite = P029
+class = mudkip
+dsnoway = LAND
+dsoof = LAND
+dspldeth = MEGADEAT
+dspdiehi = MEGADEAT
+dsplpain = MEGAPAIN
+dstaunt = cry029
+gender = male
+}
+
+{
+name = "Torterra"
+sprite = P030
+class = Turtwig
+dsnoway = FATLAND
+dsoof = FATLAND
+dspldeth = MEGADEAT
+dspdiehi = MEGADEAT
+dsplpain = MEGAPAIN
+dstaunt = cry030
+gender = male
+}
+
+
+{
+name = "Monferno"
+sprite = P032
+class = chimchar
+dsnoway = LAND
+dsoof = LAND
+dspldeth = MEGADEAT
+dspdiehi = MEGADEAT
+dsplpain = MEGAPAIN
+dstaunt = cry032
+gender = male
+}
+
+{
+name = "Infernape"
+sprite = P033
+class = chimchar
+dsnoway = FATLAND
+dsoof = FATLAND
+dspldeth = MEGADEAT
+dspdiehi = MEGADEAT
+dsplpain = MEGAPAIN
+dstaunt = cry033
+gender = male
+}
+
+{
+name = "Prinplup"
+sprite = P035
+class = piplup
+dsnoway = LAND
+dsoof = LAND
+dspldeth = MEGADEAT
+dspdiehi = MEGADEAT
+dsplpain = MEGAPAIN
+dstaunt = cry035
+gender = male
+}
+
+{
+name = "Empoleon"
+sprite = P036
+class = piplup
+dsnoway = FATLAND
+dsoof = FATLAND
+dspldeth = MEGADEAT
+dspdiehi = MEGADEAT
+dsplpain = MEGAPAIN
+dstaunt = cry036
+gender = male
+}

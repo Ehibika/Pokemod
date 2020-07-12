@@ -1,0 +1,498 @@
+//#region -=- Normal special -=-
+
+actor NormalTypeSpecial : CustomInventory
+{
+states
+{
+pickup:
+TNT1 A 0 //A_GiveInventory("",1)
+stop
+}
+}
+
+
+actor NormalTypeSpecialClear : CustomInventory
+{
+states
+{
+pickup:
+TNT1 A 0 //A_TakeInventory("",99) 
+stop
+}
+}
+
+//====
+
+//#endregion
+
+//#region -=- Fighting special -=-
+
+actor FightingTypeSpecial : CustomInventory
+{
+states
+{
+pickup:
+TNT1 A 0 //A_GiveInventory("",1)
+stop
+}
+}
+
+
+actor FightingTypeSpecialClear : CustomInventory
+{
+states
+{
+pickup:
+TNT1 A 0 //A_TakeInventory("",99) 
+stop
+}
+}
+
+//====
+
+//#endregion
+
+//#region -=- Flying special -=-
+
+actor FlyingTypeSpecial : CustomInventory
+{
+states
+{
+pickup:
+TNT1 A 0 //A_GiveInventory("",1)
+stop
+}
+}
+
+
+actor FlyingTypeSpecialClear : CustomInventory
+{
+states
+{
+pickup:
+TNT1 A 0 //A_TakeInventory("",99) 
+stop
+}
+}
+
+//====
+
+//#endregion
+
+//#region -=- Poison special -=-
+
+actor PoisonTypeSpecial : CustomInventory
+{
+states
+{
+pickup:
+TNT1 A 0 A_GiveInventory("PoisonProof",1)
+stop
+}
+}
+
+
+actor PoisonTypeSpecialClear : CustomInventory
+{
+states
+{
+pickup:
+TNT1 A 0 A_TakeInventory("PoisonProof",99)
+stop
+}
+}
+
+actor PoisonProof : TypeBase 
+{
+    damagefactor "Toxic", 0.0
+    damagefactor "PoisonPowder", 0.0
+    damagefactor "ToxicSpikes", 0.0
+}
+
+//====
+
+//#endregion
+
+//#region -=- Ground special -=-
+
+actor GroundTypeSpecial : CustomInventory
+{
+states
+{
+pickup:
+TNT1 A 0 //A_GiveInventory("",1)
+stop
+}
+}
+
+
+actor GroundTypeSpecialClear : CustomInventory
+{
+states
+{
+pickup:
+TNT1 A 0 //A_TakeInventory("",99) 
+stop
+}
+}
+
+//====
+
+//#endregion
+
+//#region -=- Rock special -=-
+
+actor RockTypeSpecial : CustomInventory
+{
+states
+{
+pickup:
+TNT1 A 0 //A_GiveInventory("",1)
+stop
+}
+}
+
+
+actor RockTypeSpecialClear : CustomInventory
+{
+states
+{
+pickup:
+TNT1 A 0 //A_TakeInventory("",99) 
+stop
+}
+}
+
+//====
+
+//#endregion
+
+//#region -=- Bug special -=-
+
+actor BugTypeSpecial : CustomInventory
+{
+states
+{
+pickup:
+TNT1 A 0 //A_GiveInventory("",1)
+stop
+}
+}
+
+
+actor BugTypeSpecialClear : CustomInventory
+{
+states
+{
+pickup:
+TNT1 A 0 //A_TakeInventory("",99) 
+stop
+}
+}
+
+//====
+
+//#endregion
+
+//#region -=- Ghost special -=-
+
+actor GhostTypeSpecial : CustomInventory
+{
+states
+{
+pickup:
+TNT1 A 0 //A_GiveInventory("",1)
+stop
+}
+}
+
+
+actor GhostTypeSpecialClear : CustomInventory
+{
+states
+{
+pickup:
+TNT1 A 0 //A_TakeInventory("",99) 
+stop
+}
+}
+
+//====
+
+//#endregion
+
+//#region -=- Steel special -=-
+
+actor SteelTypeSpecial : CustomInventory
+{
+states
+{
+pickup:
+TNT1 A 0 //A_GiveInventory("",1)
+stop
+}
+}
+
+
+actor SteelTypeSpecialClear : CustomInventory
+{
+states
+{
+pickup:
+TNT1 A 0 //A_TakeInventory("",99) 
+stop
+}
+}
+
+//====
+
+//#endregion
+
+//#region -=- Fire special -=-
+
+actor FireTypeSpecial : CustomInventory
+{
+states
+{
+pickup:
+TNT1 A 0 A_GiveInventory("BurnProof",1)
+stop
+}
+}
+
+
+actor FireTypeSpecialClear : CustomInventory
+{
+states
+{
+pickup:
+TNT1 A 0 A_TakeInventory("BurnProof",99)
+stop
+}
+}
+
+//====
+
+actor BurnProof : TypeBase {}
+
+//#endregion
+
+//#region -=- Water special -=-
+
+actor WaterTypeSpecial : CustomInventory
+{
+states
+{
+pickup:
+TNT1 A 0 //A_GiveInventory("",1)
+stop
+}
+}
+
+
+actor WaterTypeSpecialClear : CustomInventory
+{
+states
+{
+pickup:
+TNT1 A 0 //A_TakeInventory("",99) 
+stop
+}
+}
+
+//====
+
+//#endregion
+
+//#region -=- Grass special -=-
+
+actor GrassTypeSpecial : CustomInventory
+{
+states
+{
+pickup:
+TNT1 A 0 A_GiveInventory("GrassGuard",1)
+stop
+}
+}
+
+
+actor GrassTypeSpecialClear : CustomInventory
+{
+states
+{
+pickup:
+TNT1 A 0 A_TakeInventory("GrassGuard",99)
+stop
+}
+}
+
+actor GrassGuard : Once {} // Blocks powder moves and leechSeed
+
+//====
+
+//#endregion
+
+//#region -=- Electric special -=-
+
+actor ElectricTypeSpecial : CustomInventory
+{
+states
+{
+pickup:
+TNT1 A 0 A_GiveInventory("ParalyzeProof",1)
+stop
+}
+}
+
+
+actor ElectricTypeSpecialClear : CustomInventory
+{
+states
+{
+pickup:
+TNT1 A 0 A_TakeInventory("ParalyzeProof",99)
+stop
+}
+}
+
+//====
+actor ParalyzeProof : Once {}
+
+//#endregion
+
+//#region -=- Psychic special -=-
+
+actor PsychicTypeSpecial : CustomInventory
+{
+states
+{
+pickup:
+TNT1 A 0 //A_GiveInventory("",1)
+stop
+}
+}
+
+
+actor PsychicTypeSpecialClear : CustomInventory
+{
+states
+{
+pickup:
+TNT1 A 0 //A_TakeInventory("",99) 
+stop
+}
+}
+
+//====
+
+//#endregion
+
+//#region -=- Ice special -=-
+
+actor IceTypeSpecial : CustomInventory
+{
+states
+{
+pickup:
+TNT1 A 0 A_GiveInventory("FreezeProof",1)
+stop
+}
+}
+
+
+actor IceTypeSpecialClear : CustomInventory
+{
+states
+{
+pickup:
+TNT1 A 0 A_TakeInventory("FreezeProof",99) 
+stop
+}
+}
+
+//====
+actor FreezeProof : Once {}
+
+//#endregion
+
+//#region -=- Dragon special -=-
+
+actor DragonTypeSpecial : CustomInventory
+{
+states
+{
+pickup:
+TNT1 A 0 //A_GiveInventory("",1)
+stop
+}
+}
+
+
+actor DragonTypeSpecialClear : CustomInventory
+{
+states
+{
+pickup:
+TNT1 A 0 //A_TakeInventory("",99) 
+stop
+}
+}
+
+//====
+
+//#endregion
+
+//#region -=- Dark special -=-
+
+actor DarkTypeSpecial : CustomInventory
+{
+states
+{
+pickup:
+TNT1 A 0 //A_GiveInventory("",1)
+stop
+}
+}
+
+
+actor DarkTypeSpecialClear : CustomInventory
+{
+states
+{
+pickup:
+TNT1 A 0 //A_TakeInventory("",99) 
+stop
+}
+}
+
+//====
+
+//#endregion
+
+//#region -=- Fairy special -=-
+
+actor FairyTypeSpecial : CustomInventory
+{
+states
+{
+pickup:
+TNT1 A 0 //A_GiveInventory("",1)
+stop
+}
+}
+
+
+actor FairyTypeSpecialClear : CustomInventory
+{
+states
+{
+pickup:
+TNT1 A 0 //A_TakeInventory("",99) 
+stop
+}
+}
+
+//====
+
+//#endregion
