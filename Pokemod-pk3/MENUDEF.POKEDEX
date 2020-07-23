@@ -3771,6 +3771,26 @@ OptionMenu "MoveMenu_ToxicSpikes"
 }
 
 
+OptionMenu "MoveMenu_Taunt"
+{
+	
+	Title "$M120_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M121_TYPE"
+    StaticText "$M121_CATEGORY"
+    StaticText "$M121_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M121_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+}
+
+//--[NewMove]--
+
 OptionMenu "MoveMenu_Sketch"
 {
 	

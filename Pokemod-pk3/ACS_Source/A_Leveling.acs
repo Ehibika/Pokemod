@@ -18,6 +18,7 @@
 //#region -=- General Variables -=-
 #region -=- General Variables -=-
 Int TeamEXPAward [4] = {};
+Int TeamCASHAward [4] = {};
 
 #endregion
 //#endregion
@@ -34,12 +35,12 @@ Script "PKMN_EXPevents" (int type, int arg1, int arg2) EVENT
             ACS_NamedExecuteAlways("FragEXPAward",0,arg1);
         break;
         Case 6: // -=- Round End -=-
-        ACS_NamedExecuteAlways("TeamEXPAward",0);
+        ACS_NamedExecuteAlways("TeamAward",0);
         break;
         }
 }
 
-script "TeamEXPAward" (Void)
+script "TeamAward" (Void)
 {
     if(GetCvar("teamlms")!=1){Terminate;}
     Log(s:"\cgBegin Team EXP");
@@ -52,9 +53,10 @@ script "TeamEXPAward" (Void)
     {
         Pteam = GetPlayerInfo(i, PLAYERINFO_TEAM);
         ACS_NamedExecuteAlways("GivePlayerEXP",0,i,TeamEXPAward[Pteam],1);
+        ACS_NamedExecuteAlways("GivePlayerCash",0,i,TeamCASHAward[Pteam],1);
     }
     for(int j = 0; j < 4; j++)
-    {TeamEXPAward[j] = 0;}
+    {TeamEXPAward[j] = 0; TeamCASHAward[j] = 0;}
     Log(s:"\cgEnd Team EXP");
 }
 
@@ -90,6 +92,11 @@ While(True)
 }
 */
 //#endregion
+
+Script "AddToCashAward" (int ammount)
+{
+    TeamCASHAward[PlayerTeam()] += ammount;
+}
 
 Script "GivePlayerEXP" (int Pnum, int EXPAward, int Override)
 {
@@ -227,6 +234,7 @@ ACS_NamedExecuteAlways("GiveEXP",0,EXPAward);
 ACS_NamedExecuteWithResult("GivePlayerCash",Playernumber(),CashAward);
 
 TeamEXPAward[PlayerTeam()] += EXPAward/2;
+TeamCASHAward[PlayerTeam()] += CashAward/2;
 //log(s:GetTeamProperty(PlayerTeam(),TPROP_Name), s:" Team EXP Award ", i:TeamEXPAward[PlayerTeam()]);
 }
 

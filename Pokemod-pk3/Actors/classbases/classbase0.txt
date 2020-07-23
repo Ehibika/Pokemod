@@ -79,6 +79,10 @@ PainStrong:
 goto SuperSpawn
 //---
 
+BonkDeath:
+"----" H 0 A_SpawnitemEX("SkyUppercutCeilingBonk")//
+Goto Death
+
 MegamanDeath:
 "----" A 5
 MegamanExplode:
@@ -88,6 +92,7 @@ TNT1 A 0 A_SpawnItemEx("NGS_DeathEffectActor", 0, 0, 32, 0, 0, 0, 0, SXF_TRANSFE
 MegamanErase:
 TNT1 A 1 A_CheckPlayerDone
 wait
+
 
 // SINGLEPLAYER STUFF
 TheEnd: // Used in the original ending

@@ -1,0 +1,243 @@
+actor MachpunchMove : WepMasterBase
+{
+Tag "Machpunch"
+obituary "$OB_MACHPUNCH"
+Weapon.AmmoUse 1
+Weapon.AmmoGive 10
+weapon.ammotype "MachpunchPP"
+scale 2.0
+Inventory.Pickupmessage "$PU_MEGABUSTER"
+States
+{
+Spawn:
+WEAP X 1
+stop
+
+
+Fire:
+"####" BBB 1 A_Jumpif(CallACS("CheckWeaponFire",RC_C)==1,"Fire.Begin")
+"####" B 0 A_Jump(256,"NoAmmo")
+Goto NoAmmo
+
+Fire.Begin:
+"####" B 0
+"####" B 0 A_Jump(256,"Fire.Dash")
+Goto Fire.Dash
+
+Fire.Dash:
+"####" A 0 SetPlayerProperty(0,1,4)
+"####" A 0 ACS_NamedExecuteAlways("TakePP",0,Move_Machpunch,1)
+"####" B 0 A_PlaySoundEx("weapon/ChargeKick","Soundslot6")
+"####" A 0 A_GiveInventory("MachpunchInitiate")
+"####" A 0 A_FireCustomMissile("GroundDustFX",-25,0,z-Floorz,0)
+"####" AAAAAAA 1 A_Jumpifinventory("DashBreaker",1,"Fire.DashEnd")
+"####" B 0 A_ScaleVelocity(0.2)
+goto Fire.DashEnd
+
+Fire.DashEnd:
+"####" B 0 SetPlayerProperty(0,0,4)
+"####" B 1 A_GiveInventory("FullRecovery_C")
+"####" B 0 A_Jump(256,"Fire.End")
+Goto Fire.End
+
+}
+}
+
+actor MachpunchMove1 : MachpunchMove {Weapon.SlotNumber 1}
+actor MachpunchMove2 : MachpunchMove {Weapon.SlotNumber 2}
+actor MachpunchMove3 : MachpunchMove {Weapon.SlotNumber 3}
+actor MachpunchMove4 : MachpunchMove {Weapon.SlotNumber 4}
+
+actor MachpunchMove5 : MachpunchMove 
+{
+Weapon.SlotNumber 5
+States
+{
+Fire.End:
+TNT1 A 0
+TNT1 A 0 A_TakeInventory("MachpunchMove5",9)
+TNT1 A 0 A_Jump(256,"Ready")
+Goto Ready
+}
+}
+
+//[+]========================================================================[+]
+//-----------------------------|Ammo & Inventory|------------------------------
+//[+]========================================================================[+]
+actor MachpunchPP : Ammo {inventory.amount 1 inventory.Maxamount 10}
+
+Actor MachpunchDelay : powerprotection
+{
+Powerup.duration 5
+Damagefactor "Machpunch", 0
+}
+//[+]========================================================================[+]
+//--------------------------------|Projectiles |--------------------------------
+//[+]========================================================================[+]
+actor MachpunchBumper : BasicProjectile
+{
+Speed 55
+Damage (0)
+radius 12
+height 12
+DamageType "Machpunch"
+Obituary "$OB_MACHPUNCH"
+scale 1.5
++NOINTERACTION
+States
+{
+Spawn:
+TNT1 A 0 
+TNT1 A 0 A_JumpIfInTargetInventory("DashBreaker",1,"Terminate")
+TNT1 A 1 A_SpawnItemEX("MachpunchDamager",0,0,0,Momx,Momy,MomZ,0,SXF_ABSOLUTEMOMENTUM)
+TNT1 A 1 
+stop
+Death:
+XDeath:
+Crash:
+TNT1 A 1 A_GiveToTarget("MachpunchCollision2",1)
+Terminate:
+TNT1 A 1
+stop
+}
+}
+
+actor MachpunchDamager : BasicProjectile
+{
+Speed 0
+Damage (15)
+radius 12
+height 12
+DamageType "Machpunch"
+Obituary "$OB_MACHPUNCH"
+scale 1.5
++RIPPER
++SERVERSIDEONLY
+States
+{
+Spawn:
+TNT1 A 0 
+TNT1 AA 1 
+stop
+}
+}
+//[+]========================================================================[+]
+//--------------------------------|Special Actors|------------------------------
+//[+]========================================================================[+]
+
+actor MachpunchFist
+{
+PROJECTILE
++FLOORCLIP
++THRUGHOST
++MTHRUSPECIES
++NOEXPLODEFLOOR
+Radius 5
+Height 5
+scale 2.0
+damage (0)
+reactiontime 5
+DamageType "Machpunch"
+obituary "$OB_Machpunch"
+speed 0
+States
+{
+Spawn:
+HITG E 0
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+
+Spawn2:
+HITG E 1 A_Fadeout
+HITG E 0 A_Countdown
+HITG E 0 A_SetScale(ScaleX+0.3)
+loop
+
+Death:
+BEWA A 0
+stop
+}
+}
+
+
+actor MachpunchCollision : CustomInventory
+{
+states
+{
+Pickup:
+TNT1 A 0 A_JumpIfInventory("DashBreaker",1,"Nope")
+TNT1 A 1 A_GiveInventory("DashBreaker",1)
+TNT1 A 0 A_Stop
+TNT1 A 0 A_ChangeVelocity(cos(-pitch)*-5,0,sin(pitch)*5,CVF_RELATIVE)
+TNT1 A 0 ThrustThingZ(0,5,1,1)
+stop
+Nope:
+TNT1 A 0
+stop
+}
+}
+
+actor MachpunchCollision2 : CustomInventory
+{
+states
+{
+Pickup:
+TNT1 A 0 A_JumpIfInventory("DashBreaker",1,"Nope")
+TNT1 A 1 A_GiveInventory("DashBreaker",1)
+TNT1 A 0 A_Stop
+stop
+Nope:
+TNT1 A 0
+stop
+}
+}
+
+actor MachpunchThrust : CustomInventory
+{
+states
+{
+Pickup:
+TNT1 A 0 A_JumpIfInventory("CutterFlag",999,"Nope")
+TNT1 A 0 A_JumpIfInventory("DashBreaker",1,"Nope")
+TNT1 A 0 A_ChangeVelocity(cos(-pitch)*80,0,sin(-pitch)*80,CVF_RELATIVE|CVF_REPLACE)
+TNT1 A 1 A_FireCustomMissile("MachpunchBumper",0,0,0,15)
+BASB A 1 A_SpawnitemEx("MachpunchFist",cos(-pitch)*55,0,(25)+(sin(pitch)*40),0,0,0,0)
+stop
+Nope:
+TNT1 A 0
+stop
+}
+}
+
+actor MachpunchInitiate : CustomInventory
+{
+states
+{
+Pickup:
+TNT1 A 0 A_Spawnitemex("MachpunchWatcher")
+stop
+}
+}
+
+actor MachpunchWatcher : BasicHelper 
+{
+Var int user_DashTime;
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0
+TNT1 A 0 A_JumpIfInTargetInventory("DashBreaker",1,"Death")
+TNT1 A 0 A_SetUserVar("user_DashTime",user_DashTime+1)
+TNT1 A 0 A_JumpIfInTargetInventory("CutterFlag",999,"DeathTake")
+TNT1 A 1 A_GiveToTarget("MachpunchThrust")
+TNT1 A 0 A_Jumpif(user_DashTime <= 6,"Spawn")
+Goto Death
+Check2:
+TNT1 A 0 A_JumpIfInTargetInventory("DashBreaker",1,"Spawn")
+Goto Death
+Death:
+DeathTake:
+TNT1 A 0 //A_TakeFromTarget("MachpunchActive",1)
+stop
+}
+}

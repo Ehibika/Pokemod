@@ -3,7 +3,7 @@ actor LeafBladeMove : WepMasterBase
 Tag "LeafBlade"
 obituary "$OB_LeafBlade"
 Weapon.AmmoUse 1
-Weapon.AmmoGive 10
+Weapon.AmmoGive 25
 weapon.ammotype "LeafBladePP"
 scale 2.0
 Inventory.Pickupmessage "$PU_MEGABUSTER"
@@ -100,7 +100,7 @@ Goto Ready
 //[+]========================================================================[+]
 //-----------------------------|Ammo & Inventory|------------------------------
 //[+]========================================================================[+]
-actor LeafBladePP : Ammo {inventory.amount 1 inventory.Maxamount 10}
+actor LeafBladePP : Ammo {inventory.amount 1 inventory.Maxamount 25}
 
 actor LeafBlade1Protect : PowerProtection
 {
@@ -125,7 +125,7 @@ actor LeafBladeStart
 PROJECTILE
 +RIPPER
 damagetype "LeafBlade1"
-damage (20)
+damage (35)
 height 5
 radius 5
 Speed 25

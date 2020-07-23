@@ -56,9 +56,9 @@ Pickup:
 TNT1 A 0 A_JumpIfInventory("isbot",1,"BotWep")
 
 TNT1 A 0 A_GiveInventory("EmberMove1")
-TNT1 A 0 A_GiveInventory("GrowlMove2")
-TNT1 A 0 A_GiveInventory("SmokeScreenMove3")
-TNT1 A 0 A_GiveInventory("MetalClawMove4")
+TNT1 A 0 A_GiveInventory("TauntMove2")
+TNT1 A 0 A_GiveInventory("LeerMove3")
+TNT1 A 0 A_GiveInventory("FakeoutMove4")
 stop
 
 BotWep:

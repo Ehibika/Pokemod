@@ -27,7 +27,7 @@ Goto Fire.Aim
 
 Fire.Aim:
 "####" B 1 A_FireCustomMissile("WideGuardRingSpawner",0,0,0,Aim_OverHead)
-"####" B 0 A_FireCustomMissile("WideGuardGraphicSpawner",0,0,0,Aim_OverHead)
+"####" B 0 //A_FireCustomMissile("WideGuardGraphicSpawner",0,0,0,Aim_OverHead)
 "####" C 0 A_REfire("Fire.Aim")
 "####" B 0 A_Jump(256,"Fire.ScreenSpawn")
 Goto Fire.ScreenSpawn

@@ -1,0 +1,205 @@
+actor NastyPlotMove : WepMasterBase
+{
+Tag "NastyPlot"
+obituary "$OB_AMNESIA"
+Weapon.AmmoUse 1
+Weapon.AmmoGive 25
+weapon.ammotype "NastyPlotPP"
+scale 2.0
+Inventory.Pickupmessage "$PU_MEGABUSTER"
+States
+{
+Spawn:
+WEAP X 1
+stop
+
+
+Fire:
+"####" BBB 1 A_Jumpif(CallACS("CheckWeaponFire",RC_C)==1,"Fire.Begin")
+"####" B 0 A_Jump(256,"NoAmmo")
+Goto NoAmmo
+
+Fire.Begin:
+"####" B 0
+"####" B 0 A_JumpIfInventory("STF_NastyPlot",1,"Fire.Off")
+"####" B 0 A_Jump(256,"Fire.On")
+Goto Fire.On
+
+Fire.On:
+"####" BBBBBBB 3 A_GiveInventory("NastyPlotParticleSpawn1")
+"####" B 5 
+"####" B 5 A_GiveInventory("NastyPlotParticleSpawn2")
+"####" B 0 A_PlaySoundEx("Support/Statup","Soundslot7")
+"####" B 0 A_GiveInventory("NastyPlotBuffInitiate")
+"####" B 0 A_TakeInventory("NastyPlotPP",1)
+"####" B 0 A_Jump(256,"Fire.After")
+Goto Fire.After
+
+Fire.Off:
+"####" B 0 A_TakeInventory("NastyPlot_Active",99)
+"####" B 0 A_GiveInventory("PartRecovery_C")
+"####" B 0 A_Jump(256,"Fire.After")
+Goto Fire.After
+
+Fire.After:
+"####" B 1 A_GiveInventory("HalfRecovery_C")
+"####" C 0 A_REfire("Fire")
+"####" B 0 A_Jump(256,"Fire.End")
+Goto Fire.End
+
+}
+}
+
+actor NastyPlotMove1 : NastyPlotMove {Weapon.SlotNumber 1}
+actor NastyPlotMove2 : NastyPlotMove {Weapon.SlotNumber 2}
+actor NastyPlotMove3 : NastyPlotMove {Weapon.SlotNumber 3}
+actor NastyPlotMove4 : NastyPlotMove {Weapon.SlotNumber 4}
+
+actor NastyPlotMove5 : NastyPlotMove 
+{
+Weapon.SlotNumber 5
+States
+{
+Fire.End:
+TNT1 A 0
+TNT1 A 0 A_TakeInventory("NastyPlotMove5",9)
+TNT1 A 0 A_Jump(256,"Ready")
+Goto Ready
+}
+}
+
+//[+]========================================================================[+]
+//-----------------------------|Ammo & Inventory|------------------------------
+//[+]========================================================================[+]
+actor NastyPlotPP : Ammo {inventory.amount 1 inventory.Maxamount 25}
+actor STF_NastyPlot : Powerup {inventory.amount 1 Powerup.Duration 40}
+actor NastyPlot_Active : Inventory {inventory.amount 1 inventory.Maxamount 1}
+
+actor NastyPlotBuffInitiate : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_Jumpifinventory("NastyPlot_Active",1,"Sustain")
+TNT1 A 0 A_GiveInventory("NastyPlot_Active",1)
+TNT1 A 0 A_SpawnitemEX("NastyPlotBuffWatcher")
+TNT1 A 0 A_GiveInventory("StatUpdator",1)
+stop
+
+Sustain:
+TNT1 A 0 A_GiveInventory("STF_NastyPlot",1)
+stop
+Nope:
+TNT1 A 0
+stop
+}
+}
+
+
+actor NastyPlotBuffWatcher : BasicHelper 
+{
+Var int user_TickTime;
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_JumpIfInTargetInventory("CutterFlag",999,"Death")
+TNT1 A 0 A_JumpIfInTargetInventory("IsDead",1,"Death")
+TNT1 A 0 A_JumpIfInTargetInventory("HazedFlagEnemy",1,"Death")
+TNT1 A 5 A_GiveToTarget("STF_NastyPlot")
+TNT1 A 0 A_GiveToTarget("SATKUpFXSpawn")
+TNT1 A 0 A_SetUserVar("user_TickTime",user_TickTime+5)
+TNT1 A 0 A_JumpIf(user_TickTime>=35,"SpawnTick")
+TNT1 A 0 A_JumpIfInTargetInventory("NastyPlot_Active",1,"Spawn")
+Goto Death
+
+SpawnTick:
+TNT1 A 0 A_SetUserVar("user_TickTime",0)
+TNT1 A 0 A_TakeFromTarget("NastyPlotPP",1)
+TNT1 A 0 A_JumpIfInTargetInventory("NastyPlotPP",1,"Spawn")
+Goto Death
+
+Death:
+TNT1 A 0 A_GiveToTarget("StatUpdator")
+TNT1 A 0 A_GiveToTarget("BuffLossSoundCue")
+TNT1 A 0 A_TakeFromTarget("STF_NastyPlot",9)
+TNT1 A 0 A_TakeFromTarget("NastyPlot_Active",99)
+TNT1 A 2 
+stop
+}
+}
+
+
+actor NastyPlotParticle1 : BasicClientside
+{
+scale 1.5
+speed 7
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_PlaySoundEx("Move/Amnesia","Soundslot6")
+AMNI ABCDEE 2 
+AMNI EZEZE 1 
+stop
+}
+}
+
+actor NastyPlotParticle2 : BasicClientside
+{
+scale 4.5
+speed 7
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_PlaySoundEx("weapon/Trigger","Soundslot6")
+ALRT AABBCCDDEEDDCCBBAA 1 A_Warp(AAPTR_TARGET,0,0,54,0,WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE)
+ALRT AAAZZZAAAZZZAAAZZZ 1 A_Warp(AAPTR_TARGET,0,0,54,0,WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE)
+stop
+}
+}
+
+actor NastyPlotParticleSpawn1 : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_SpawnItemEx ("NastyPlotParticle1", random2(30), random2(30), 54+random2(30), 0, 0, 0, 0,SXF_NOCHECKPOSITION)
+stop
+Nope:
+TNT1 A 0
+stop
+}
+}
+
+actor NastyPlotParticleSpawn2 : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_SpawnItemEx ("NastyPlotParticle2", 0, 0, 54, momx, momy, momz, 0,SXF_NOCHECKPOSITION|SXF_ABSOLUTEMOMENTUM)
+stop
+Nope:
+TNT1 A 0
+stop
+}
+}

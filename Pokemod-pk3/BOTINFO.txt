@@ -1,3 +1,4 @@
+
 {
 	name = "Bulbasaur"
 	accuracy = 3

@@ -1,3 +1,6 @@
+addkeysection "Extra Controls" PKMNKeys
+addmenukey "PP Recover" +Reload
+
 clearplayerclasses
 AddPlayerClass Smeargle 
 AddPlayerClass Bulbasaur 

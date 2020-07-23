@@ -1,3 +1,5 @@
+Server noarchive bool sv_RentalsMode = false;
+
 user int YOUR_LEVEL;
 user int YOUR_EXP;
 user int YOUR_NEXTEXP;

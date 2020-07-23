@@ -143,6 +143,8 @@ const int Move_AquaJet = 117;
 const int Move_DrillPeck = 118;
 const int Move_Spikes = 119;
 const int Move_ToxicSpikes = 120;
+const int Move_Taunt = 120;
+//--[NewMove]--
 //=======|Pokedex Constants|==========
 const int Dex_SMEARGLE = 0;
 

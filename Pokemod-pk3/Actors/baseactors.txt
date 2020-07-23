@@ -758,17 +758,23 @@ height 1
 +DONTREFLECT
 renderstyle none
 ReactionTime 70
+args 70
 States
 {
 Spawn:
 TNT1 A 0
-TNT1 A 1 A_CountDown
-TNT1 A 1 A_Jump(256,"CheckInv")
-Goto CheckInv
+TNT1 A 0 A_ChangeFlag("MISSILE",0)
+Spawn1:
+TNT1 A 1 A_CountdownArg(0,"CheckInv")
+Loop
 
 CheckInv:
-TNT1 A 1 A_JumpIfInTargetInventory("Once",1,"Spawn")
+TNT1 A 1 A_JumpIfInTargetInventory("Once",1,"Reloop")
 Goto Death
+
+Reloop:
+TNT1 A 0 A_SetArg(0,ReactionTime)
+Goto Spawn
 
 Death:
 TNT1 A 1 A_GiveToTarget("ForceVisible")

@@ -2,7 +2,7 @@ actor PoisonPowderMove : WepMasterBase
 {
 Tag "Poison Powder"
 Weapon.AmmoUse 1
-Weapon.AmmoGive 5
+Weapon.AmmoGive 10
 weapon.ammotype "PoisonPowderPP"
 scale 2.0
 Inventory.Pickupmessage "$PU_MEGABUSTER"
@@ -70,7 +70,7 @@ Goto Ready
 //[+]========================================================================[+]
 //-----------------------------|Ammo & Inventory|------------------------------
 //[+]========================================================================[+]
-actor PoisonPowderPP : Ammo {inventory.amount 1 inventory.Maxamount 5}
+actor PoisonPowderPP : Ammo {inventory.amount 1 inventory.Maxamount 10}
 
 
 Const int PsnPwdRad = 100;

@@ -1,0 +1,286 @@
+const int Leer_Range = 32;
+
+actor LeerMove : WepMasterBase
+{
+Tag "Leer"
+obituary "$OB_Leer"
+Weapon.AmmoUse 1
+Weapon.AmmoGive 35
+weapon.ammotype "LeerPP"
+scale 2.0
+Inventory.Pickupmessage "$PU_MEGABUSTER"
+States
+{
+Spawn:
+WEAP X 1
+stop
+
+Fire:
+"####" BBB 1 A_Jumpif(CallACS("CheckWeaponFire",RC_C)==1,"Fire.Begin")
+"####" B 0 A_Jump(256,"NoAmmo")
+Goto NoAmmo
+
+Fire.Begin:
+"####" B 0
+"####" B 0 A_Jump(256,"Fire.Melee")
+Goto Fire.Melee
+
+Fire.Melee:
+TNT1 A 0 A_PlaySoundEx("weapon/Gemini","Weapon")
+TNT1 A 0 A_FireCustomMissile("LeerRay1_S",0,0,8,0)
+TNT1 A 0 A_FireCustomMissile("LeerRay1_ST",0,0,8,0)
+//--
+TNT1 A 0 A_FireCustomMissile("LeerRay1_S",0,0,-8,0)
+TNT1 A 0 A_FireCustomMissile("LeerRay1_ST",0,0,-8,0)
+//--
+TNT1 A 0 A_FireCustomMissile("LeerEffectRay",0,1,0,0)
+Goto Fire.After
+
+Fire.After:
+"####" B 1 A_GiveInventory("HalfRecovery_C")
+"####" B 0 A_Jump(256,"Fire.End")
+Goto Fire.End
+}
+}
+
+actor LeerMove1 : LeerMove {Weapon.SlotNumber 1}
+actor LeerMove2 : LeerMove {Weapon.SlotNumber 2}
+actor LeerMove3 : LeerMove {Weapon.SlotNumber 3}
+actor LeerMove4 : LeerMove {Weapon.SlotNumber 4}
+
+actor LeerMove5 : LeerMove 
+{
+Weapon.SlotNumber 5
+States
+{
+Fire.End:
+TNT1 A 0
+TNT1 A 0 A_TakeInventory("LeerMove5",9)
+TNT1 A 0 A_Jump(256,"Ready")
+Goto Ready
+}
+}
+
+//[+]========================================================================[+]
+//-----------------------------|Ammo & Inventory|------------------------------
+//[+]========================================================================[+]
+actor LeerPP : Ammo {inventory.amount 1 inventory.Maxamount 35}
+
+actor STF_Leer : Powerup {inventory.amount 1 Powerup.Duration -6}
+
+actor LeerNerfInitiate : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_Jumpifinventory("STF_Leer",1,"Sustain")
+TNT1 A 0 A_GiveInventory("STF_Leer",1)
+TNT1 A 0 A_SpawnItemEX("LeerNerfWatcher")
+TNT1 A 0 A_GiveInventory("StatUpdator",1)
+stop
+
+Sustain:
+TNT1 A 0 A_GiveInventory("STF_Leer",1)
+stop
+Nope:
+TNT1 A 0
+stop
+}
+}
+//[+]========================================================================[+]
+//--------------------------------|Projectiles |--------------------------------
+//[+]========================================================================[+]
+
+actor LeerEffectRay
+{
+PROJECTILE
+Obituary "$OB_LEER"
+DamageType "Leer"
++THRUGHOST
++DONTBLAST
++DONTREFLECT
++SERVERSIDEONLY
++HITTRACER
+renderstyle none
+damage (0)
+Radius 11
+Height 11
+speed 25
+states
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_SetPitch(pitch+1)
+TNT1 A 0 A_JumpIf(pitch>Leer_Range,"Death")
+TNT1 A 0 A_SpawnItemEx("LeerEffectRay",0,0,0,momx,momy,momz,0,552)
+TNT1 A 0 A_Stop
+TNT1 A 1 
+stop
+Death:
+TNT1 A 0 
+stop
+
+XDeath:
+Crash:
+TNT1 A 1 
+FWVE W 0 A_GiveInventory("LeerNerfInitiate",1,AAPTR_TRACER)
+TNT1 A 1
+stop
+}
+}
+
+actor LeerPuff : BasicClientside//BulletPuff
+{
+scale 2.5
+//+PUFFONACTORS
+//+PUFFGETSOWNER
+//+MTHRUSPECIES
+//+NOINTERACTION
+//+DONTSPLASH
+DamageType "Leer"
+obituary "$OB_Leer"
+
+alpha 1.0
+States
+{
+Spawn:
+CRBM A 0
+CRBM A 0 //A_Explode(50,10,0,0,10)
+TNT1 A 0 A_PlaySoundEx("weapon/Mirrordeflect","Weapon")
+Hard BBCCDDEE 1 
+stop
+}
+}
+
+
+actor LeerRay1
+{
+PROJECTILE
+Obituary "$OB_LEER"
+DamageType "Leer"
++DONTBLAST
++DONTREFLECT
++CLIENTSIDEONLY
++MTHRUSPECIES
++PAINLESS
+damage (0)
+Radius 11
+Height 11
+speed 20
+scale 2.0
+renderstyle "add"
+states
+{
+Spawn:
+TNT1 A 0
+SpawnBeam:
+TNT1 A 0
+MBEA A 0 A_SetPitch(pitch+1)
+MBEA A 0 A_JumpIf(pitch>Leer_Range,"Death")
+MBEA A 0 A_SpawnItemEx("LeerRay1",0,0,0,momx,momy,momz,0,553)
+MBEA A 0 A_SpawnItemEx("LearBeamFX",0,0,0,0,0,0,0,33)
+MBEA A 1 A_JumpIf(CallACS("pkmn_istargetclient")!=1,"Death2")//A_Stop
+MBEA A 0 A_ChangeFlag("THRUACTORS",1)
+MBEA A 0 A_Stop
+stop
+Death2:
+TNT1 A 0 
+stop
+Death:
+TNT1 A 0 A_SpawnItemEx("LeerPuff",0,0,0,0,0,0,0,33)
+stop
+}
+}
+
+actor LeerRay1_S : LeerRay1
+{
++INVISIBLE
+states
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+TNT1 A 0 A_Jump(256,"SpawnBeam")
+goto SpawnBeam
+}
+}
+
+
+actor LeerRay1_T : LeerRay1
+{
+states
+{
+Spawn:
+TNT1 A 0
+SpawnBeam:
+TNT1 A 0
+MBEA A 0 A_SetPitch(pitch+1)
+MBEA A 0 A_JumpIf(pitch>Leer_Range,"Death")
+MBEA A 0 A_SpawnItemEx("LeerRay1_T",0,0,0,momx,momy,momz,0,553)
+MBEA A 1 A_JumpIf(CallACS("pkmn_istargetclient")!=1,"Death2")//A_Stop
+TNT1 A 0 
+stop
+Death2:
+MBEA A 0 A_SpawnItemEx("LearBeamFX",0,0,0,0,0,0,0,33)
+stop
+Death:
+TNT1 A 0 A_SpawnItemEx("LeerPuff",0,0,0,0,0,0,0,33)
+stop
+}
+}
+
+actor LeerRay1_ST : LeerRay1_T
+{
++INVISIBLE
+-CLIENTSIDEONLY
++NONETID
+states
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+TNT1 A 0 A_Jump(256,"SpawnBeam")
+goto SpawnBeam
+}
+}
+
+actor LearBeamFX : BasicClientside
+{
+scale 2.5
+speed 7
+States
+{
+Spawn:
+TNT1 A 0
+MBEA A 3
+MBEA AAAAA 2 A_Fadeout
+stop
+}
+}
+
+
+actor LeerNerfWatcher : BasicHelper 
+{
+Var int user_DashTime;
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 5 A_GiveToTarget("PdefDownFXSpawn")
+TNT1 A 0 A_JumpIfInTargetInventory("STF_Leer",1,"Spawn")
+TNT1 A 1 A_GiveToTarget("StatUpdator")
+TNT1 A 5
+Goto Death
+
+Death:
+TNT1 A 0 
+stop
+}
+}
+

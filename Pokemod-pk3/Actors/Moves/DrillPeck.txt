@@ -1,0 +1,145 @@
+actor DrillPeckMove : WepMasterBase
+{
+Tag "DrillPeck"
+obituary "$OB_DrillPeck"
+Weapon.AmmoUse 1
+Weapon.AmmoGive 20
+weapon.ammotype "DrillPeckPP"
+scale 2.0
+Inventory.Pickupmessage "$PU_MEGABUSTER"
+States
+{
+Spawn:
+WEAP X 1
+stop
+
+Fire:
+"####" BBB 1 A_Jumpif(CallACS("CheckWeaponFire",RC_B)==1,"Fire.Begin")
+"####" B 0 A_Jump(256,"NoAmmo")
+Goto NoAmmo
+
+Fire.Begin:
+"####" B 0
+"####" B 0 A_Jump(256,"Fire.Melee")
+Goto Fire.Melee
+
+Fire.Melee:
+TNT1 A 0 A_PlaySoundEx("Move/DrillPeck","Weapon")
+TNT1 A 0 A_FireCustomMissile("DrillPeckStart",0,1,0,0)
+Goto Fire.After
+
+Fire.After:
+"####" B 1 A_GiveInventory("HalfRecovery_B")
+"####" B 0 A_Jump(256,"Fire.End")
+Goto Fire.End
+}
+}
+
+actor DrillPeckMove1 : DrillPeckMove {Weapon.SlotNumber 1}
+actor DrillPeckMove2 : DrillPeckMove {Weapon.SlotNumber 2}
+actor DrillPeckMove3 : DrillPeckMove {Weapon.SlotNumber 3}
+actor DrillPeckMove4 : DrillPeckMove {Weapon.SlotNumber 4}
+
+actor DrillPeckMove5 : DrillPeckMove 
+{
+Weapon.SlotNumber 5
+States
+{
+Fire.End:
+TNT1 A 0
+TNT1 A 0 A_TakeInventory("DrillPeckMove5",9)
+TNT1 A 0 A_Jump(256,"Ready")
+Goto Ready
+}
+}
+
+//[+]========================================================================[+]
+//-----------------------------|Ammo & Inventory|------------------------------
+//[+]========================================================================[+]
+actor DrillPeckPP : Ammo {inventory.amount 1 inventory.Maxamount 20}
+
+actor DrillPeckProtect : PowerProtection
+{
+Powerup.Duration 10
+damagefactor "DrillPeck", 0.0
+}
+
+//[+]========================================================================[+]
+//--------------------------------|Projectiles |--------------------------------
+//[+]========================================================================[+]
+
+actor DrillPeckStart 
+{
+PROJECTILE
++RIPPER
++NOINTERACTION
++NOCLIP
+damagetype "DrillPeck"
+damage (0)
+height 5
+radius 5
+Speed 25
+scale 5.5
+XScale 7.0
+states
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_Jumpif(pitch > 8,"Death")
+TNT1 A 0 A_setPitch(Pitch+1)
+TNT1 A 0 A_setScale(ScaleX-0.5,ScaleY-0.5)
+TNT1 A 0 A_SpawnItemEx("DrillPeckStart",0,0,0,momx,momy,momz,0,SXF_ABSOLUTEMOMENTUM|SXF_TRANSFERPITCH|SXF_TRANSFERSCALE)
+TNT1 A 1 A_SpawnItemEx("DrillPeckDamager",0,0,0,0,0,0,0,SXF_TRANSFERSCALE)
+TNT1 A 0 A_SpawnItemEx("DrillPeckEdgeFX",0,0,0,0,0,0,0,SXF_TRANSFERSCALE)
+Goto Death
+
+Death:
+TNT1 A 0
+stop
+}
+}
+
+actor DrillPeckDamager : BasicProjectile
+{
+Speed 0
+Damage (35)
+radius 15
+height 10
+DamageType "DrillPeck"
+Obituary "$OB_DRILLPECK"
+scale 1.5
++RIPPER
++SERVERSIDEONLY
+States
+{
+Spawn:
+TNT1 A 0 
+TNT1 AA 1 
+stop
+}
+}
+
+actor DrillPeckEdgeFX : BasicClientside
+{
+scale 2.5
+XScale 4.0
+Alpha 1.0
+ReactionTime 4
+renderstyle "Translucent"
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_GiveInventory("ProjectileDCode",1)
+DRLP ABCD 1
+Spawn2:
+DRLP ABCD 1 A_Fadeout(0.2)
+TNT1 A 1  A_CountDown
+loop
+
+Death:
+TNT1 A 0
+stop
+}
+}
+

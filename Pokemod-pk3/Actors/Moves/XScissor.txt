@@ -6,7 +6,7 @@ actor XScissorMove : WepMasterBase
 Tag "XScissor"
 obituary "$OB_XSCISSOR"
 Weapon.AmmoUse 1
-Weapon.AmmoGive 10
+Weapon.AmmoGive 25
 weapon.ammotype "XScissorPP"
 scale 2.0
 Inventory.Pickupmessage "$PU_MEGABUSTER"
@@ -75,7 +75,7 @@ Goto Ready
 //[+]========================================================================[+]
 //-----------------------------|Ammo & Inventory|------------------------------
 //[+]========================================================================[+]
-actor XScissorPP : Ammo {inventory.amount 1 inventory.Maxamount 10}
+actor XScissorPP : Ammo {inventory.amount 1 inventory.Maxamount 25}
 
 actor XScissor1Protect : PowerProtection
 {
@@ -101,7 +101,7 @@ PROJECTILE
 +RIPPER
 +NOEXPLODEFLOOR
 damagetype "XScissor1"
-damage (20)
+damage (35)
 height 5
 radius 5
 Speed 20

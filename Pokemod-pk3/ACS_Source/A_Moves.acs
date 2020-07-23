@@ -12,6 +12,7 @@
 #import "DB_Data.acs"
 #import "Dex_Pokemon.acs"
 #import "Dex_Types.acs"
+#import "Dex_Moves.acs"
 #import "WEPACS.acs"
 #import "A_Stats.acs"
 #import "A_Leveling.acs"
@@ -52,8 +53,20 @@ for(i=1;i<=4;i++)
     }
 
 GiveInventory(StrParam(s:weapons_ammo[SketchWeapon][0],i:SketchSlot),1);
-SetWeapon(StrParam(s:SketchWeapon,i:SketchSlot));
 TakeInventory(StrParam(s:weapons_ammo[ThisWeapon][0],i:SketchSlot),99);
+
+//now if the player has less than 4 weapons, let's relearn sketch on the
+//next empty slot
+if(SketchSlot<4)
+    {
+        GiveInventory(StrParam(s:weapons_ammo[SKETCH][0],i:SketchSlot+1),1);
+
+        /* Now this is assuming that since most pokemon always have 4 moves, and there is no
+         * way to delete moves at all, since smeargle starts with only sketch, the next slot
+         * will always be empty since smeargle is also barred from learning TMs
+        */
+    }
+    SetWeapon(StrParam(s:weapons_ammo[SketchWeapon][0],i:SketchSlot));
 }
 
 Script "ProtectBarrierWarper" (void) CLIENTSIDE
@@ -63,6 +76,23 @@ Script "ProtectBarrierWarper" (void) CLIENTSIDE
 	// Loop if shield is active
 	while(GetActorProperty(Player, APROP_HEALTH)>0
 	&& CheckActorInventory(Player, "ProtectGuard") > 0
+	){
+		Delay(1);
+	}
+	
+    // Remove
+    SetActorState(0,"Death");
+    Delay(17);
+	Thing_Remove(0);
+}
+
+Script "AlertFXWarper" (void) CLIENTSIDE
+{
+	int Player = ACS_NamedExecuteWithResult("core_gettarget",0);
+	
+	// Loop if shield is active
+	while(GetActorProperty(Player, APROP_HEALTH)>0
+	&& CheckActorInventory(Player, "CringeGuard") > 0
 	){
 		Delay(1);
 	}

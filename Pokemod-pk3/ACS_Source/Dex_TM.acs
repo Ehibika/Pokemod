@@ -89,8 +89,13 @@ int output = 0;
     case BLASTOISE: output = 1; break;
     case MEGANIUM: output = 1; break;
     case TYPHLOSION: output = 1; break;
+    case FERALIGATR: output = 1; break;
     case SCEPTILE: output = 1; break;
+    case BLAZIKEN: output = 1; break;
+    case SWAMPERT: output = 1; break;
     case TORTERRA: output = 1; break;
+    case INFERNAPE: output = 1; break;
+    case EMPOLEON: output = 1; break;
     }
 return output;
 }
@@ -155,6 +160,9 @@ int output = 0;
     case QUILAVA: output = 1; break;
     case TYPHLOSION: output = 1; break;
     case SCEPTILE: output = 1; break;
+    case TORCHIC: output = 1; break;
+    case COMBUSKEN: output = 1; break;
+    case BLAZIKEN: output = 1; break;
     }
 return output;
 }
@@ -169,6 +177,15 @@ int output = 0;
     case SQUIRTLE: output = 1; break;
     case WARTORTLE: output = 1; break;
     case BLASTOISE: output = 1; break;
+    case TOTODILE: output = 1; break;
+    case CROCONAW: output = 1; break;
+    case FERALIGATR: output = 1; break;
+    case MUDKIP: output = 1; break;
+    case MARSHTOMP: output = 1; break;
+    case SWAMPERT: output = 1; break;
+    case PIPLUP: output = 1; break;
+    case PRINPLUP: output = 1; break;
+    case EMPOLEON: output = 1; break;
     }
 return output;
 }
@@ -217,6 +234,7 @@ int output = 0;
     case TURTWIG: output = 1; break;
     case GROTLE: output = 1; break;
     case TORTERRA: output = 1; break;
+    case BLAZIKEN: output = 1; break;
     }
 return output;
 }

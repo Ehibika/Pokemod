@@ -29,8 +29,18 @@ else if(!CheckInventory("InSafeZone")) {output = 1;}
 SetResultValue(output);
 }
 
-Script "PKMN_Setup" ENTER
+Script "PKMN_Setup" (Void)//ENTER
 {
+/* -=-=-=-
+ * Rather than being an ENTER Script, This is called by the PkmnStarterKit Custominventory,
+ * which every pokemon class starts with.
+ * 
+ * This is primarily intended for compatibility with the rentals mod, as rental pokemon can
+ * omit it, and in turn all the starting scripts in favor of a different set of them.
+ * 
+*/
+
+
 	//Log(s:"Entered");
 	//[PlayerNumber()] = PlayerClass(PlayerNumber());
 	//int PlayerDEXNum = GetCvar(StrParam(s:"PlayerDEXNum_",i:PlayerNumber()));
@@ -41,6 +51,9 @@ GiveInventory("SetupShop",1);
 GiveInventory("SpawnInBuffer",1);
 //GiveInventory("MoveRecovery",1);
 GiveInventory("SpawnSafeZone",1);
+
+if(PlayerIsBot(PlayerNumber())){GiveInventory("InSafeZone",1); ACS_NamedExecuteAlways("EvolveTrigger",0);}
+
 }   
  
 Function Void GiveStartingMoves (void)
@@ -134,7 +147,7 @@ Script "PKMNACS_StartupScript" (int BaseDex)
 	switch(CaseNum)
 		{
 			Case 0: //Base
-			Log(s:"Base");
+			//Log(s:"Base");
 			ACS_NamedExecuteAlways("StatInitializer",0);
 			ACS_NamedExecuteAlways("SetPlayerType",0);
 			ACS_NamedExecuteAlways("SetPokeSkin",0,BaseDex);
@@ -147,7 +160,7 @@ Script "PKMNACS_StartupScript" (int BaseDex)
 				}
 			break;
 			Case 1: //Fresh
-			Log(s:"Fresh");
+			//Log(s:"Fresh");
 			ClearPlayerCVars(PlayerNumber(),1);
 			ClearPersistentLoadout(PlayerNumber());
 			GiveInventory("PersistentLoadout",1);
@@ -198,7 +211,7 @@ script "PKMNACS_TSRespawn" RESPAWN
 	//ACS_NamedExecuteAlways("StatInitializer",0);
 	//Log(s:"Respawned");
 	ACS_NamedExecuteAlways("PKMNACS_TeamSpecies",0); 
-	ACS_NamedExecuteAlways("PKMN_Setup",0); 
+	//ACS_NamedExecuteAlways("PKMN_Setup",0); 
 	ACS_NamedExecuteAlways("PlayerScanner",0); 
 	
 	/*

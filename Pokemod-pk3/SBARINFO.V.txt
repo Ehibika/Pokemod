@@ -28,6 +28,10 @@ statusbar fullscreen, forcescaled
 			DrawString "CBMF",yellow,"pp:", 15, 147,0,alignment(left);
 			DrawNumber 3, "CBMF", Green, Ammo1, alignment(right), 42, 147;
 			DrawNumber 3, "CBMF", white, Ammo1Capacity, alignment(left)|prefix("", "/"), 42, 147;
+
+			DrawImage "PKMNPP", 16, 155;
+			Drawbar "PKMNHPB", "PKMNHPE", PPRecoveryMeter, horizontal, 32, 155;
+			InInventory PPRecoveryMeter, 100{ DrawImage "PKMNRELO", 40, 155;}
 		}
 	//}
 	

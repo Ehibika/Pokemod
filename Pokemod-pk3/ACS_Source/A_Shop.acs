@@ -44,7 +44,7 @@ Script "DisplayCashAndSlots" OPEN CLIENTSIDE
 {
 int conP = ConsolePlayerNumber();
 while(true) {
-	DisplayCashAndSlotsFunc(conP);
+	if(GetCvar("sv_RentalsMode") == 0){DisplayCashAndSlotsFunc(conP);}
 	delay(1);
 }
 }
@@ -241,6 +241,7 @@ for(i=v+1; i<theMaxPlayers; i++) if(thePlayerPlayed[i]) LoserFunc(i);
 function void LoserFunc(int p)  {
     //PrintBold(s:"loser ",i:p);
     
+    /*
     int MyTeam = GetPlayerInfo(p, PLAYERINFO_TEAM);
     int MyTeamWins = GetTeamProperty(MyTeam,TPROP_WinCount);
     int LoserBonus;
@@ -259,19 +260,19 @@ function void LoserFunc(int p)  {
             LoserBonus = 15*WinDiff;
             ACS_NamedExecuteWithResult("GivePlayerCash",p,LoserBonus);
         }
-    
+    */
 	ParticipantFunc(p);
 }
 
 function void WinnerFunc(int p)  {
     //PrintBold(s:"winner ",i:p);
     
-    ACS_NamedExecuteWithResult("GivePlayerCash",p,50);
+    //ACS_NamedExecuteWithResult("GivePlayerCash",p,50);
 	ParticipantFunc(p);
 }
 
 function void ParticipantFunc(int p)  {
-	ACS_NamedExecuteWithResult("GivePlayerCash",p,50);
+	ACS_NamedExecuteWithResult("GivePlayerCash",p,100);
 	//if(GetActorProperty(1000+p,APROP_HEALTH)<1) ACS_NamedExecuteWithResult("CLEAR_PERSISTENT_LOADOUT",p);
 }
 
@@ -292,6 +293,7 @@ int BaseMoney = 5;
 int Payout = BaseMoney+(5*TotalGames);
 
 ACS_NamedExecuteAlways("GivePlayerCash",0,playernumber(),Payout);
+ACS_NamedExecuteAlways("AddToCashAward",0,Payout);
 }
 
 #endregion 
@@ -318,7 +320,7 @@ SetResultValue(Output);
 
 Script "ItemSpew" DEATH
 {
-    if(GetGameModeState()!=GAMESTATE_INPROGRESS)
+    if(GetGameModeState()!=GAMESTATE_INPROGRESS){terminate;}
     Int InvCount;
 
     for (int i=0; i<MAX_SHOP; i++) 
@@ -346,8 +348,16 @@ Script "ItemSpew" DEATH
 
 script "SHOP_SETUP" (void)
 {
-while(GetGameModeState()==GAMESTATE_INPROGRESS&&PlayerHealth()>0) delay(1);
+while(ShopDelay()==1) delay(1);
 if(PlayerHealth()>0) GiveInventory("Shop",1);
+}
+
+Function int ShopDelay (void)
+{
+int output;
+if(GetCvar("lastmanstanding")==1||GetCvar("teamlms")==1)
+    {if(GetGameModeState()==GAMESTATE_INPROGRESS&&PlayerHealth()>0){Output = 1;}}
+return output;
 }
 
 script "ShopFailSound" (void)
@@ -416,7 +426,8 @@ int Output = 1;
 if(CheckInventory("SleepMark")
     ||CheckInventory("EmbargoFlag")){Output = 0;}
 
-if(GetGameModeState()!=GAMESTATE_INPROGRESS){Output = 0;}
+    if(GetCvar("lastmanstanding")==1||GetCvar("teamlms")==1)
+    {if(GetGameModeState()!=GAMESTATE_INPROGRESS){Output = 0;}}
 
 setresultvalue(Output);
 }

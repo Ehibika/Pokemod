@@ -320,8 +320,8 @@ Actor Rollout_VWatcher : VisibilityWatcher
 ReactionTime 70
 States
 {CheckInv:
-TNT1 A 1 A_JumpIfInTargetInventory("RolloutWarmupTimer",1,"Spawn")
-TNT1 A 1 A_JumpIfInTargetInventory("RolloutTimer",1,"Spawn")
+TNT1 A 1 A_JumpIfInTargetInventory("RolloutWarmupTimer",1,"Reloop")
+TNT1 A 1 A_JumpIfInTargetInventory("RolloutTimer",1,"Reloop")
 Goto Death
 }
 }

@@ -70,7 +70,7 @@ Goto Ready
 //[+]========================================================================[+]
 //-----------------------------|Ammo & Inventory|------------------------------
 //[+]========================================================================[+]
-actor DefenseCurlPP : Ammo {inventory.amount 1 inventory.Maxamount 35}
+actor DefenseCurlPP : Ammo {inventory.amount 1 inventory.Maxamount 25}
 actor STF_DefenseCurl : PowerDamage 
 {
     inventory.amount 1 Powerup.Duration 40

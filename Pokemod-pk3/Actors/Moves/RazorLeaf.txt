@@ -117,6 +117,7 @@ loop
 }
 }
 
+/*
 actor RazorLeafParticle : BasicClientside
 {
 -NOINTERACTION
@@ -137,6 +138,32 @@ TNT1 A 2 A_ScaleVelocity (0.8)
 WOOB Y 2 A_ScaleVelocity (0.8)
 TNT1 A 2 A_ScaleVelocity (0.8)
 WOOB W 2 A_ScaleVelocity (0.8)
+TNT1 A 2 A_ScaleVelocity (0.8)
+stop
+}
+}
+*/
+
+actor RazorLeafParticle : BasicClientside
+{
+-NOINTERACTION
+-NOGRAVITY
+scale 2
+Gravity 0.5
+States
+{
+Spawn:
+RLEA ABCDEF 2 A_ScaleVelocity (0.6)
+RLEA ABCDEF 2 A_ScaleVelocity (0.8)
+RLEA A 2 A_ScaleVelocity (0.8)
+TNT1 A 2 A_ScaleVelocity (0.8)
+RLEA B 2 A_ScaleVelocity (0.8)
+TNT1 A 2 A_ScaleVelocity (0.8)
+RLEA C 2 A_ScaleVelocity (0.8)
+TNT1 A 2 A_ScaleVelocity (0.8)
+RLEA D 2 A_ScaleVelocity (0.8)
+TNT1 A 2 A_ScaleVelocity (0.8)
+RLEA E 2 A_ScaleVelocity (0.8)
 TNT1 A 2 A_ScaleVelocity (0.8)
 stop
 }

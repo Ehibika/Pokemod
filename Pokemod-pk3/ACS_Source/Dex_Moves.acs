@@ -130,4 +130,6 @@
 #LIBDEFINE DrillPeck 118
 #LIBDEFINE Spikes 119
 #LIBDEFINE ToxicSpikes 120
+#LIBDEFINE Taunt 121
+//--[NewMove]--
 int Blah2; //Needed to compile properly, can't have only LIBDEFINEs

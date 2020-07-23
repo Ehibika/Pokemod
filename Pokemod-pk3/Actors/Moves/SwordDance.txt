@@ -1,0 +1,199 @@
+actor SwordDanceMove : WepMasterBase
+{
+Tag "SwordDance"
+obituary "$OB_SWORDDANCE"
+Weapon.AmmoUse 1
+Weapon.AmmoGive 25
+weapon.ammotype "SwordDancePP"
+scale 2.0
+Inventory.Pickupmessage "$PU_MEGABUSTER"
+States
+{
+Spawn:
+WEAP X 1
+stop
+
+
+Fire:
+"####" BBB 1 A_Jumpif(CallACS("CheckWeaponFire",RC_C)==1,"Fire.Begin")
+"####" B 0 A_Jump(256,"NoAmmo")
+Goto NoAmmo
+
+Fire.Begin:
+"####" B 0
+"####" B 0 A_JumpIfInventory("STF_SwordDance",1,"Fire.Off")
+"####" B 0 A_Jump(256,"Fire.On")
+Goto Fire.On
+
+Fire.On:
+"####" B 0 A_PlaySoundEx("Move/SwordDance","Soundslot6")
+"####" B 0 A_GiveInventory("SwordDanceFXSpawn")
+"####" B 35 
+"####" B 0 A_PlaySoundEx("Support/Statup","Soundslot7")
+"####" B 0 A_GiveInventory("SwordDanceBuffInitiate")
+"####" B 0 A_TakeInventory("SwordDancePP",1)
+"####" B 0 A_Jump(256,"Fire.After")
+Goto Fire.After
+
+Fire.Off:
+"####" B 0 A_TakeInventory("SwordDance_Active",99)
+"####" B 0 A_GiveInventory("PartRecovery_C")
+"####" B 0 A_Jump(256,"Fire.After")
+Goto Fire.After
+
+Fire.After:
+"####" B 1 A_GiveInventory("HalfRecovery_C")
+"####" C 0 A_REfire("Fire")
+"####" B 0 A_Jump(256,"Fire.End")
+Goto Fire.End
+
+}
+}
+
+actor SwordDanceMove1 : SwordDanceMove {Weapon.SlotNumber 1}
+actor SwordDanceMove2 : SwordDanceMove {Weapon.SlotNumber 2}
+actor SwordDanceMove3 : SwordDanceMove {Weapon.SlotNumber 3}
+actor SwordDanceMove4 : SwordDanceMove {Weapon.SlotNumber 4}
+
+actor SwordDanceMove5 : SwordDanceMove 
+{
+Weapon.SlotNumber 5
+States
+{
+Fire.End:
+TNT1 A 0
+TNT1 A 0 A_TakeInventory("SwordDanceMove5",9)
+TNT1 A 0 A_Jump(256,"Ready")
+Goto Ready
+}
+}
+
+//[+]========================================================================[+]
+//-----------------------------|Ammo & Inventory|------------------------------
+//[+]========================================================================[+]
+actor SwordDancePP : Ammo {inventory.amount 1 inventory.Maxamount 25}
+actor STF_SwordDance : Powerup {inventory.amount 1 Powerup.Duration 40}
+actor SwordDance_Active : Inventory {inventory.amount 1 inventory.Maxamount 1}
+
+actor SwordDanceBuffInitiate : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_Jumpifinventory("SwordDance_Active",1,"Sustain")
+TNT1 A 0 A_GiveInventory("SwordDance_Active",1)
+TNT1 A 0 A_SpawnitemEX("SwordDanceBuffWatcher")
+TNT1 A 0 A_GiveInventory("StatUpdator",1)
+stop
+
+Sustain:
+TNT1 A 0 A_GiveInventory("STF_SwordDance",1)
+stop
+Nope:
+TNT1 A 0
+stop
+}
+}
+
+
+actor SwordDanceBuffWatcher : BasicHelper 
+{
+Var int user_TickTime;
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_JumpIfInTargetInventory("CutterFlag",999,"Death")
+TNT1 A 0 A_JumpIfInTargetInventory("IsDead",1,"Death")
+TNT1 A 0 A_JumpIfInTargetInventory("HazedFlagEnemy",1,"Death")
+TNT1 A 5 A_GiveToTarget("STF_SwordDance")
+TNT1 A 0 A_GiveToTarget("PATKUpFXSpawn")
+TNT1 A 0 A_SetUserVar("user_TickTime",user_TickTime+5)
+TNT1 A 0 A_JumpIf(user_TickTime>=35,"SpawnTick")
+TNT1 A 0 A_JumpIfInTargetInventory("SwordDance_Active",1,"Spawn")
+Goto Death
+
+SpawnTick:
+TNT1 A 0 A_SetUserVar("user_TickTime",0)
+TNT1 A 0 A_TakeFromTarget("SwordDancePP",1)
+TNT1 A 0 A_JumpIfInTargetInventory("SwordDancePP",1,"Spawn")
+Goto Death
+
+Death:
+TNT1 A 0 A_GiveToTarget("StatUpdator")
+TNT1 A 0 A_GiveToTarget("BuffLossSoundCue")
+TNT1 A 0 A_TakeFromTarget("STF_SwordDance",9)
+TNT1 A 0 A_TakeFromTarget("SwordDance_Active",99)
+TNT1 A 2 
+stop
+}
+}
+
+actor SwordDanceFXSpawn : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_SpawnItemEX("SwordDanceFX1")
+TNT1 A 0 A_SpawnItemEX("SwordDanceFX2")
+TNT1 A 0 A_SpawnItemEX("SwordDanceFX3")
+TNT1 A 0 A_SpawnItemEX("SwordDanceFX4")
+TNT1 A 0 A_SpawnItemEX("SwordDanceFX5")
+stop
+Nope:
+TNT1 A 0
+stop
+}
+}
+
+actor SwordDanceFX1 : BasicClientside
+{
+args 0, 16
+ReactionTime 35
+Scale 1.5
+States
+{
+Spawn:
+DUST C 0
+DUST C 0 
+SWDA ABCDE 1 A_Warp(AAPTR_TARGET,70*cos(Args[0]),70*sin(Args[0]),Args[1])
+SWDA EEEEEEE 1 A_Warp(AAPTR_TARGET,70*cos(Args[0]),70*sin(Args[0]),Args[1])
+Goto Spawn1
+Spawn1:
+SWDA E 0 A_SetArg(0,360/35+Args[0])
+SWDA E 1 A_Warp(AAPTR_TARGET,70*cos(Args[0]),70*sin(Args[0]),Args[1])
+SWDA E 0 A_CountDown
+SWDA E 0 A_JumpIf(reactionTime < 17,"Spawn2")
+goto Spawn1
+
+Spawn2:
+SWDA E 0 A_SetArg(0,360/35+Args[0])
+SWDA E 0 A_SetArg(1,Args[1]+16)
+SWDA E 1 A_Warp(AAPTR_TARGET,70*cos(Args[0]),70*sin(Args[0]),Args[1])
+SWDA E 0 A_CountDown
+SWDA E 0 A_Fadeout
+goto Spawn2
+
+Death:
+TNT1 A 0
+stop
+}
+}
+
+
+actor SwordDanceFX2 : SwordDanceFX1 {Args 74}
+actor SwordDanceFX3 : SwordDanceFX1 {Args 144}
+actor SwordDanceFX4 : SwordDanceFX1 {Args 216}
+actor SwordDanceFX5 : SwordDanceFX1 {Args 288}

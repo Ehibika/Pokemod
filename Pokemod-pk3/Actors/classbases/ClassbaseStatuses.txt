@@ -24,6 +24,7 @@ TNT1 A 0 A_Jumpifinventory("BurnMark",1,"Nope")
 TNT1 A 0 A_Jumpifinventory("PoisonMark",1,"Sustain")
 TNT1 A 0 A_GiveInventory("PoisonMark",1)
 TNT1 A 0 A_SpawnItemEX("PoisonWatcher")
+TNT1 A 0 A_Playsoundex("support/Negative","Soundslot5")
 stop
 
 Sustain:
@@ -61,32 +62,32 @@ LASH A 0 A_Setuservar("user_TickDamage",CallACS("PKMNACS_HealthPercent",user_Own
 Spawn2:
 
 TNT1 A 1 A_JumpIfInTargetInventory("CutterFlag",999,"DeathTake")
-TNT1 A 0 A_JumpIfInTargetInventory("TempPoisonProof",1,"DeathTake")
+TNT1 A 0 A_JumpIfInTargetInventory("TempPoisonGuard",1,"DeathTake")
 TNT1 A 0 A_JumpIfInTargetInventory("CureAll",1,"DeathTake")
 TNT1 A 0 A_GiveToTarget("PoisonedEffect",1)
 
 TNT1 A 1 A_JumpIfInTargetInventory("CutterFlag",999,"DeathTake")
-TNT1 A 0 A_JumpIfInTargetInventory("TempPoisonProof",1,"DeathTake")
+TNT1 A 0 A_JumpIfInTargetInventory("TempPoisonGuard",1,"DeathTake")
 TNT1 A 0 A_JumpIfInTargetInventory("CureAll",1,"DeathTake")
 //TNT1 A 0 A_GiveToTarget("PoisonedEffect",1)
 
 TNT1 A 1 A_JumpIfInTargetInventory("CutterFlag",999,"DeathTake")
-TNT1 A 0 A_JumpIfInTargetInventory("TempPoisonProof",1,"DeathTake")
+TNT1 A 0 A_JumpIfInTargetInventory("TempPoisonGuard",1,"DeathTake")
 TNT1 A 0 A_JumpIfInTargetInventory("CureAll",1,"DeathTake")
 TNT1 A 0 A_GiveToTarget("PoisonedEffect",1)
 
 TNT1 A 1 A_JumpIfInTargetInventory("CutterFlag",999,"DeathTake")
-TNT1 A 0 A_JumpIfInTargetInventory("TempPoisonProof",1,"DeathTake")
+TNT1 A 0 A_JumpIfInTargetInventory("TempPoisonGuard",1,"DeathTake")
 TNT1 A 0 A_JumpIfInTargetInventory("CureAll",1,"DeathTake")
 //TNT1 A 0 A_GiveToTarget("PoisonedEffect",1)
 
 TNT1 A 1 A_JumpIfInTargetInventory("CutterFlag",999,"DeathTake")
-TNT1 A 0 A_JumpIfInTargetInventory("TempPoisonProof",1,"DeathTake")
+TNT1 A 0 A_JumpIfInTargetInventory("TempPoisonGuard",1,"DeathTake")
 TNT1 A 0 A_JumpIfInTargetInventory("CureAll",1,"DeathTake")
 TNT1 A 0 A_GiveToTarget("PoisonedEffect",1)
 
 TNT1 A 1 A_JumpIfInTargetInventory("CutterFlag",999,"DeathTake")
-TNT1 A 0 A_JumpIfInTargetInventory("TempPoisonProof",1,"DeathTake")
+TNT1 A 0 A_JumpIfInTargetInventory("TempPoisonGuard",1,"DeathTake")
 TNT1 A 0 A_JumpIfInTargetInventory("CureAll",1,"DeathTake")
 
 TNT1 A 0 A_SetuserVar("user_LoopCount", user_LoopCount+1)
@@ -171,8 +172,8 @@ DamageFactor "PoisonPowder", 0
 actor PoisonStackDelay : powerup
 {powerup.duration 5}
 
-Actor PoisonProof : Powerup{inventory.amount 1 powerup.duration 0x7FFFFFFF}
-Actor TempPoisonProof : Powerup{inventory.amount 1 powerup.duration 17}
+Actor PoisonGuard : Powerup{inventory.amount 1 powerup.duration 0x7FFFFFFF}
+Actor TempPoisonGuard : Powerup{inventory.amount 1 powerup.duration 17}
 
 //[+]=========================[+]
 //----------|Sleep|-------------
@@ -199,6 +200,7 @@ TNT1 A 0 A_GiveInventory("SleepMark",1)
 TNT1 A 0 SetPlayerProperty(0,1,4)
 TNT1 A 0 ACS_NamedExecuteAlways("PKMN_SleepHandler",0)
 TNT1 A 0 A_SpawnItemEX("SleepWatcher")
+TNT1 A 0 A_Playsoundex("support/Negative","Soundslot5")
 stop
 
 Sustain:
@@ -328,4 +330,315 @@ actor FreezeMark : Powerup
 {
 powerup.duration -5
 //Powerup.Color Green, 0.15
+}
+
+
+//[+]=========================[+]
+//----------|Cringe|-------------
+//[+]=========================[+]
+
+actor CringeStatusProc : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_Jumpifinventory("SafeguardPower",1,"Nope")
+
+TNT1 A 0 A_Jumpifinventory("CringeMark",1,"Nope")
+TNT1 A 0 A_Jumpifinventory("CringeGuard",1,"Nope")
+//==
+TNT1 A 0 A_PlaySoundEX("Move/Fakeout2","SoundSlot8")
+TNT1 A 0 A_GiveInventory("CringeMark",1)
+TNT1 A 0 A_GiveInventory("HaltPlayer",1)
+TNT1 A 0 SetPlayerProperty(0,1,4)
+TNT1 A 0 A_SpawnItemEX("CringeWatcher")
+stop
+
+Sustain:
+TNT1 A 0 //A_GiveInventory("CringeMark",1)
+stop
+
+Nope:
+TNT1 A 0
+stop
+}
+}
+
+
+actor CringeWatcher //: CustomInventory
+{
++MISSILE
++RIPPER
++NOGRAVITY
++NOINTERACTION
+Reactiontime 5
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 3 
+TNT1 A 0 A_GiveToTarget("CringeSetter") //just in case
+
+Spawn2:
+TNT1 A 0 A_JumpIfInTargetInventory("CutterFlag",999,"DeathTake")
+TNT1 A 5 //A_GiveToTarget("CringingTagPickup")
+TNT1 A 0 A_JumpIfInTargetInventory("CringeMark",1,"Spawn2")
+Goto Death
+
+Death:
+DeathTake:
+TNT1 A 0
+TNT1 A 1 A_TakefromTarget("CringeMark",999)
+TNT1 A 1 A_GiveToTarget("CringeBreaker")
+stop
+}
+}
+
+actor CringeMark : Powerup
+{
+powerup.duration 55
+//Powerup.Color Green, 0.15
+}
+
+actor CringeGuard : Powerup
+{
+powerup.duration 55
+//Powerup.Color Green, 0.15
+}
+
+
+actor CringingTagPickup : CustomInventory
+{
+States
+{
+Pickup:
+TNT1 A 0
+TNT1 A 0 A_SpawnItemEx("CentaurFlashFX", random2(256/24), random2(256/24), 45, 2, 2, 2, random(0, 359))
+stop
+}
+}
+
+
+actor CringeSetter : CustomInventory
+{
+States
+{
+Pickup:
+TNT1 A 0
+TNT1 A 0 A_Stop
+TNT1 A 0 SetPlayerProperty(0,1,4)
+TNT1 A 0 A_SpawnItemEX("FrightFX",0,0,40)
+TNT1 A 0 A_SpawnItemEX("FrightFX2",0,0,40)
+stop
+}
+}
+
+actor CringeBreaker : CustomInventory
+{
+States
+{
+Pickup:
+TNT1 A 0
+TNT1 A 0 A_TakeInventory("CringeMark", 999)
+TNT1 A 1 A_GiveInventory("CringeGuard")
+TNT1 A 0 A_SpawnItemEX("AlertFX")
+TNT1 A 0 SetPlayerProperty(0,0,4)
+stop
+}
+}
+
+actor FrightFX : BasicClientside
+{
+scale 2.5
+States
+{
+Spawn:
+TNT1 A 0 
+TNT1 A 0 A_PlaySoundEX("Move/Fakeout2","SoundSlot7")
+FRIT AB 2
+FRIT A 1 A_SetScale(ScaleX+0.5)
+FRIT A 0 A_Fadeout(0.3)
+FRIT A 1 A_SetScale(ScaleX+0.5)
+FRIT A 0 A_Fadeout(0.3)
+FRIT A 1 A_SetScale(ScaleX+0.5)
+FRIT A 0 A_Fadeout(0.3)
+TNT1 A 6
+stop
+}
+}
+
+
+actor FrightFX2 : BasicClientside
+{
+scale 2.5
+speed 7
+States
+{
+Spawn:
+TNT1 A 0
+Spawn2:
+FRIT CCDDEEFFGGHH 1 A_Warp(AAPTR_TARGET,0,0,60,0,WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE)
+TNT1 A 0 A_JumpIfInTargetInventory("CringeMark",1,"Spawn2")
+Goto Death
+Death:
+FRIT IIJJKKLLMMNNOO 1 A_Warp(AAPTR_TARGET,0,0,60,0,WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE)
+stop
+}
+}
+
+
+actor AlertFX : BasicClientside
+{
+scale 3.5
+Translation "192:192=104:104", "198:198=110:110", "195:195=130:130"
+speed 7
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 ACS_NamedExecuteAlways("AlertFXWarper",0)
+TNT1 A 0 A_GiveInventory("ProjectileFXCode",1)
+Spawn2:
+ALRT ABCDEDCBA 1 A_Warp(AAPTR_TARGET,0,0,60,0,WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE)
+loop
+Death:
+ALRT A 1 A_Warp(AAPTR_TARGET,0,0,60,0,WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE)
+ALRT A 0 A_Fadeout
+ALRT B 1 A_Warp(AAPTR_TARGET,0,0,60,0,WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE)
+ALRT B 0 A_Fadeout
+ALRT C 1 A_Warp(AAPTR_TARGET,0,0,60,0,WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE)
+ALRT C 0 A_Fadeout
+ALRT D 1 A_Warp(AAPTR_TARGET,0,0,60,0,WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE)
+ALRT D 0 A_Fadeout
+ALRT E 1 A_Warp(AAPTR_TARGET,0,0,60,0,WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE)
+ALRT E 0 A_Fadeout
+ALRT D 1 A_Warp(AAPTR_TARGET,0,0,60,0,WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE)
+ALRT D 0 A_Fadeout
+stop
+}
+}
+
+
+//[+]=========================[+]
+//----------|Fatigue|-------------
+//[+]=========================[+]
+
+actor FatigueStatusProc : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_Jumpifinventory("FatigueMark",1,"Nope")
+//==
+TNT1 A 0 A_PlaySoundEX("support/Negative","SoundSlot8")
+TNT1 A 0 A_GiveInventory("FatigueMark",1)
+TNT1 A 0 A_SpawnItemEX("FatigueWatcher")
+stop
+
+Sustain:
+TNT1 A 0 //A_GiveInventory("FatigueMark",1)
+stop
+
+Nope:
+TNT1 A 0
+stop
+}
+}
+
+
+actor FatigueWatcher //: CustomInventory
+{
++MISSILE
++RIPPER
++NOGRAVITY
++NOINTERACTION
+Reactiontime 5
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 3 
+TNT1 A 0 A_GiveToTarget("FatigueSetter") //just in case
+
+Spawn2:
+TNT1 A 0 A_JumpIfInTargetInventory("CutterFlag",999,"DeathTake")
+TNT1 A 5 A_GiveToTarget("FatigueTagPickup")
+TNT1 A 0 A_JumpIfInTargetInventory("FatigueMark",1,"Spawn2")
+Goto Death
+
+Death:
+DeathTake:
+TNT1 A 0
+TNT1 A 1 A_TakefromTarget("FatigueMark",999)
+TNT1 A 1 A_GiveToTarget("FatigueBreaker")
+stop
+}
+}
+
+actor FatigueMark : Powerup
+{
+powerup.duration -5
+//Powerup.Color Green, 0.15
+}
+
+actor FatigueSetter : CustomInventory
+{
+States
+{
+Pickup:
+TNT1 A 0
+stop
+}
+}
+
+actor FatigueBreaker : CustomInventory
+{
+States
+{
+Pickup:
+TNT1 A 0
+TNT1 A 0 A_TakeInventory("FatigueMark", 999)
+TNT1 A 1 //A_GiveInventory("FatigueGuard")
+TNT1 A 0 A_PlaySoundEX("support/Heal3","SoundSlot8")
+stop
+}
+}
+
+actor FatigueTagPickup : CustomInventory
+{
+States
+{
+Pickup:
+TNT1 A 0
+TNT1 A 0 A_SpawnItemEx("FatigueParticle", random2(256/24), random2(256/24), 45, 2, 2, 2, random(0, 359))
+stop
+}
+}
+
+actor FatigueParticle : BasicClientside
+{
+scale 3.0
+Renderstyle "Translucent"
+alpha 0.8
+speed 7
+States
+{
+Spawn:
+TNT1 A 0
+TAUN ABCCCCBA 3
+TAUN AAA 2 A_SetScale(Scalex-0.5) 
+stop
+}
 }

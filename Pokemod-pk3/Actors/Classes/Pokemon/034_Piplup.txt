@@ -56,9 +56,9 @@ Pickup:
 TNT1 A 0 A_JumpIfInventory("isbot",1,"BotWep")
 
 TNT1 A 0 A_GiveInventory("WaterGunMove1")
-TNT1 A 0 A_GiveInventory("ProtectMove2")
-TNT1 A 0 A_GiveInventory("YawnMove3")
-TNT1 A 0 A_GiveInventory("RapidSpinMove4")
+TNT1 A 0 A_GiveInventory("PeckMove2")
+TNT1 A 0 A_GiveInventory("GrowlMove3")
+TNT1 A 0 A_GiveInventory("YawnMove4")
 stop
 
 BotWep:

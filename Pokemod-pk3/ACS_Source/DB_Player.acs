@@ -38,7 +38,7 @@ Acs_NamedExecuteAlways("PokeSkinHandler",0);
 
 Script "PokeSkinHandler" (void) CLIENTSIDE
 {
-if(PlayerNumber()==ConsolePlayerNumber()) { log(s:"Console Player Verified");
+if(PlayerNumber()==ConsolePlayerNumber()) { //log(s:"Console Player Verified");
 	int cooldown = THE_COOLDOWN;
 	YourTrueForm = GetPokeValue(POKEDEXNUM);//-1;
 	int lastForm = YourTrueForm;

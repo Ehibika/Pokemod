@@ -3,7 +3,7 @@ actor RapidSpinMove : WepMasterBase
 Tag "RapidSpin"
 obituary "$OB_RAPIDSPIN"
 Weapon.AmmoUse 1
-Weapon.AmmoGive 10
+Weapon.AmmoGive 20
 weapon.ammotype "RapidSpinPP"
 scale 2.0
 Inventory.Pickupmessage "$PU_MEGABUSTER"
@@ -64,7 +64,7 @@ Goto Ready
 //[+]========================================================================[+]
 //-----------------------------|Ammo & Inventory|------------------------------
 //[+]========================================================================[+]
-actor RapidSpinPP : Ammo {inventory.amount 1 inventory.Maxamount 10}
+actor RapidSpinPP : Ammo {inventory.amount 1 inventory.Maxamount 20}
 
 
 Actor RapidSpinProtect : powerprotection

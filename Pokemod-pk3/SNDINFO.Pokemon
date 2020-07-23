@@ -10,7 +10,7 @@ $playersound	megaman	male	*land		LAND
 $playersound	megaman	male	*jump		dsnone
 $playersound	megaman	male	*fist		dsnone
 $playersound	megaman	male	*usefail	LAND
-$playersound	megaman	male	*taunt		dsnone
+$playersound	megaman	male	*taunt		CRY000
 
 
 $playersound	bulbasaur	male	*death		MEGADEAT

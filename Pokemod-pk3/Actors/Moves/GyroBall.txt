@@ -353,8 +353,8 @@ ReactionTime 70
 States
 {
 CheckInv:
-TNT1 A 1 A_JumpIfInTargetInventory("GyroBallWarmupTimer",1,"Spawn")
-TNT1 A 1 A_JumpIfInTargetInventory("GyroBallTimer",1,"Spawn")
+TNT1 A 1 A_JumpIfInTargetInventory("GyroBallWarmupTimer",1,"Reloop")
+TNT1 A 1 A_JumpIfInTargetInventory("GyroBallTimer",1,"Reloop")
 Goto Death
 }
 }

@@ -104,7 +104,7 @@ OptionString PKMN_JoinMoves
 "Bulbasaur", "\c[MenuYellow]VineWhip\nLeechSeed\nGrowth\nRazorLeaf"
 "Charmander", "\c[MenuYellow]Growl\nEmber\nSmokeScreen\nMetalClaw"
 "Squirtle", "\c[MenuYellow]WaterGun\nYawn\nRapidSpin\nProtect"
-"Chikorita", "\c[MenuYellow]Razorleaf\nGrowl\nPoisonpowder\nSynthesis"
+"Chikorita", "\c[MenuYellow]Razorleaf\nLifeDew\nPoisonpowder\nSynthesis"
 "Cyndaquil", "\c[MenuYellow]Ember\nFlameWheel\nSmokeScreen\nDefenseCurl"
 "Treecko", "\c[MenuYellow]BulletSeed\nQuickAttack\nDetect\nLeechSeed"
 "Torchic", "\c[MenuYellow]Growl\nEmber\nSmokeScreen\nMetalClaw"

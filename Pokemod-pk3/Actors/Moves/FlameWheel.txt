@@ -430,7 +430,7 @@ ReactionTime 70
 States
 {
 CheckInv:
-TNT1 AAAA 1 A_JumpIfInTargetInventory("FlameWheelPPTimer",1,"Spawn")
+TNT1 AAAA 1 A_JumpIfInTargetInventory("FlameWheelPPTimer",1,"Reloop")
 Goto Death
 }
 }

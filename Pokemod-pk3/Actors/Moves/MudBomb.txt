@@ -1,0 +1,288 @@
+Const int MUDBOMB_AREA1 = 128;
+Const int MUDBOMB_AREA2 = 64;
+
+actor MudBombMove : WepMasterBase
+{
+Tag "MudBomb"
+Weapon.AmmoUse 1
+Weapon.AmmoGive 15
+weapon.ammotype "MudBombPP"
+scale 2.0
+Inventory.Pickupmessage "$PU_MEGABUSTER"
+States
+{
+Spawn:
+WEAP X 1
+stop
+
+
+Fire:
+"####" BBB 1 A_Jumpif(CallACS("CheckWeaponFire",RC_A)==1,"Fire.Begin")
+"####" B 0 A_Jump(256,"NoAmmo")
+Goto NoAmmo
+
+Fire.Begin:
+"####" B 0
+"####" B 0 A_Jump(256,"Fire.Aim")
+Goto Fire.Aim
+
+
+Fire.Aim:
+"####" B 1 A_FireCustomMissile("MudBombAimPath",0,0,0,0,0,Aim_OverHead)
+"####" C 0 A_REfire("Fire.Aim")
+"####" B 0 A_Jump(256,"Fire.Bullet")
+Goto Fire.Bullet
+
+Fire.Bullet:
+"####" B 0 A_PlaySoundEx("weapon/GrenadeLauncher","Weapon")
+"####" B 0 A_FireCustomMissile("MudBombShot",0,1,0,0,0,Aim_OverHead)
+"####" B 0 A_Jump(256,"Fire.After")
+Goto Fire.After
+
+Fire.After:
+"####" B 1 A_GiveInventory("HalfRecovery_A")
+"####" C 0 A_REfire("Fire")
+"####" B 0 A_Jump(256,"Fire.End")
+Goto Fire.End
+
+
+
+
+
+}
+}
+
+actor MudBombMove1 : MudBombMove {Weapon.SlotNumber 1}
+actor MudBombMove2 : MudBombMove {Weapon.SlotNumber 2}
+actor MudBombMove3 : MudBombMove {Weapon.SlotNumber 3}
+actor MudBombMove4 : MudBombMove {Weapon.SlotNumber 4}
+
+actor MudBombMove5 : MudBombMove 
+{
+Weapon.SlotNumber 5
+States
+{
+Fire.End:
+TNT1 A 0
+TNT1 A 0 A_TakeInventory("MudBombMove5",9)
+TNT1 A 0 A_Jump(256,"Ready")
+Goto Ready
+}
+}
+
+//[+]========================================================================[+]
+//-----------------------------|Ammo & Inventory|------------------------------
+//[+]========================================================================[+]
+actor MudBombPP : Ammo {inventory.amount 1 inventory.Maxamount 15}
+
+
+actor STF_MudBomb : Powerup {inventory.amount 1 Powerup.Duration -6}
+
+actor MudBombNerfInitiate : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_Jumpifinventory("STF_MudBomb",1,"Sustain")
+TNT1 A 0 A_GiveInventory("STF_MudBomb",1)
+TNT1 A 0 A_SpawnItemEX("MudBombNerfWatcher")
+TNT1 A 0 A_GiveInventory("StatUpdator",1)
+stop
+
+Sustain:
+TNT1 A 0 A_GiveInventory("STF_MudBomb",1)
+stop
+Nope:
+TNT1 A 0
+stop
+}
+}
+//[+]========================================================================[+]
+//--------------------------------|Projectiles |--------------------------------
+//[+]========================================================================[+]
+
+actor MudBombShot : BasicProjectile
+{
+DamageType "MudBomb"
+obituary "$OB_MudBomb"
+-NoGravity
+Gravity 1.5
+damage (5)
+Radius 8
+Height 8
+speed 35
+Scale 3.0
+ReactionTime 4
+States
+{
+Spawn:
+TNT1 A 0 
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+
+Spawn2:
+TNT1 A 0
+MUDB ABCD 1 A_SpawnItemEx("MudBombShotTrail",0,0,8,0,0,0,0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION)
+loop
+Death:
+TNT1 A 0 A_GiveInventory("ProjectileDCode",1)
+TNT1 A 0 A_Stop
+TNT1 A 0 A_SpawnItemEx("MudBombBlast",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION)
+stop
+}
+}
+
+
+actor MudBombAimPath : GolfBallAimInstantStarter { Speed 35 Gravity 1.5}
+
+
+actor MudBombBlast : BasicExplosion
+{
+DamageType "MudBomb"
+obituary "$OB_MudBomb"
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+TNT1 A 0 A_Explode(45,MUDBOMB_AREA1,0,0,MUDBOMB_AREA2)
+NAPC A 0 A_PlaySoundEx("weapon/napalm", "Weapon")
+TNT1 AAAAAAAAA 0 A_SpawnItemEx("MudBombFx1",0,0,35,random(5,10),0,random(10,20),Random(1,360),SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION)
+TNT1 A 0 A_SpawnItemEx("MudBombImpactFX",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION)
+TNT1 A 0 A_SpawnItemEx("MudBombImpactFX2",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION)
+stop
+}
+}
+
+actor MudBombImpactFX : BasicClientside
+{
+scale 4.5
+States
+{
+Spawn:
+TNT1 A 0 
+TNT1 A 0 A_Quake(4,12,0,250)
+HITG FGH 1
+HITG H 1 A_SetScale(ScaleX+0.5)
+HITG H 0 A_Fadeout(0.3)
+HITG H 1 A_SetScale(ScaleX+0.5)
+HITG H 0 A_Fadeout(0.3)
+HITG H 1 A_SetScale(ScaleX+0.5)
+HITG H 0 A_Fadeout(0.3)
+TNT1 A 6
+stop
+}
+}
+
+actor MudBombShotTrail : BasicClientside
+{
+translation "192:192=218:218", "198:198=221:221"
+scale 2.5
+Alpha 0.6
+States
+{
+Spawn:
+AQBA A 0
+BASB UUUU 2 A_Fadeout(0.1)
+stop
+}
+}
+
+actor MudBombFx1 : BasicClientside
+{
+-NOINTERACTION
+-NOGRAVITY
+scale 2.5
+Gravity 1.0
+RenderStyle "Translucent"
+Alpha 0.9
+States
+{
+Spawn:
+TNT1 A 0 
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+MUDB DDDEEEFFFGGGHHHIIIIJJJ 1 A_SpawnItemEX("MudBombFx1_Trail",0,0,0,0,0,0,0,1)
+stop
+}
+}
+
+actor MudBombFx1_Trail : BasicClientside
+{
+scale 2.5
+RenderStyle "Translucent"
+Alpha 1.0
+States
+{
+Spawn:
+TNT1 A 0 
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+MUDB KL 3 
+stop
+}
+}
+
+actor MudBombImpactFX2 : BasicHelper
+{
+	reactiontime 15
+	var int user_angle;
+	+CLIENTSIDEONLY
+	States
+	{
+		Spawn:
+		TNT1 A 0
+		TNT1 A 0 A_GiveInventory("ProjectileCodeSyncTarget",1)
+		TNT1 A 1
+		SpawnLoop:
+		TNT1 A 0 A_SpawnItemEx("MudBombFx2", MUDBOMB_AREA1, 0, 24, random(5,8), 0, 0, user_angle, 1)
+		TNT1 A 0 A_SpawnItemEx("MudBombFx2", -MUDBOMB_AREA1, 0, 24, -random(5,8), 0, 0, user_angle, 1)
+		TNT1 A 0 A_SetUserVar("user_angle", user_angle + 12)
+		TNT1 A 0 A_Countdown
+		loop
+		Death:
+		TNT1 A 0 
+		stop
+	}
+}
+
+actor MudBombFx2 : BasicClientside
+{
+scale 3.5
+RenderStyle "Translucent"
+Alpha 0.6
+States
+{
+Spawn:
+TNT1 A 0 
+TNT1 A random(1,3)
+MUDB MMNOP random(1,3) A_ScaleVelocity(0.6)
+stop
+}
+}
+
+//[+]========================================================================[+]
+
+
+actor MudBombNerfWatcher : BasicHelper 
+{
+Var int user_DashTime;
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 5 A_GiveToTarget("SpdDownFXSpawn")
+TNT1 A 0 A_JumpIfInTargetInventory("STF_MudBomb",1,"Spawn")
+TNT1 A 1 A_GiveToTarget("StatUpdator")
+TNT1 A 5
+Goto Death
+
+Death:
+TNT1 A 0 
+stop
+}
+}
+

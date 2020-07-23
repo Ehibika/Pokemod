@@ -259,7 +259,7 @@ str weapons_ammo[MAX_WEAPONS_GLOBAL][7] =
 {"BraveBirdMove", "BraveBirdPP", "BraveBird", 1.0, "NO", "NO", "SLOT_NONE"},
 {"HiJumpKickMove", "HiJumpKickPP", "HiJumpKick", 1.0, "NO", "NO", "SLOT_NONE"},
 {"LeerMove", "LeerPP", "Leer", 1.0, "NO", "NO", "SLOT_NONE"},
-{"FakeoutMove", "FakeoutPP", "Fakeout", 1.0, "YES", "NO", "SLOT_NONE"},
+{"FakeoutMove", "FakeoutPP", "Fakeout", 1.0, "NO", "NO", "SLOT_NONE"},
 {"MachpunchMove", "MachpunchPP", "Machpunch", 1.0, "NO", "NO", "SLOT_NONE"},
 {"VacuumwaveMove", "VacuumwavePP", "Vacuumwave", 1.0, "NO", "NO", "SLOT_NONE"},
 {"NastyPlotMove", "NastyPlotPP", "NastyPlot", 1.0, "NO", "NO", "SLOT_NONE"},
@@ -281,6 +281,9 @@ str weapons_ammo[MAX_WEAPONS_GLOBAL][7] =
 
 {"SpikesMove", "SpikesPP", "Spikes", 1.0, "NO", "NO", "SLOT_NONE"},
 {"ToxicSpikesMove", "ToxicSpikesPP", "ToxicSpikes", 1.0, "NO", "NO", "SLOT_NONE"},
+{"TauntMove", "TauntPP", "Taunt", 1.0, "YES", "NO", "SLOT_NONE"},
+
+//--[NewMove]--
 };
 #endregion
 //#endregion
@@ -796,10 +799,11 @@ Script "MoveSetup" (void)
 			//Each TargeterMove has it's own Rules:
 			switch(ThisWeapon)
 			{
-				/*HelpingHand*/Case 6: ACS_NamedExecuteAlways("TracerTargeter",0,TG_TEAM,630); break;
-				/*Yawn*/Case 49: ACS_NamedExecuteAlways("TracerTargeter",0,TG_ENEMY,630); break;
-				/*Sketch*/Case 53: ACS_NamedExecuteAlways("TracerTargeter",0,TG_ENEMY|TG_TEAM,630); break;
-				/*HealPulse*/Case 66: ACS_NamedExecuteAlways("TracerTargeter",0,TG_TEAM,1500); break;
+				Case HELPINGHAND: ACS_NamedExecuteAlways("TracerTargeter",0,TG_TEAM,630); break;
+				Case YAWN: ACS_NamedExecuteAlways("TracerTargeter",0,TG_ENEMY,630); break;
+				Case SKETCH: ACS_NamedExecuteAlways("TracerTargeter",0,TG_ENEMY|TG_TEAM,630); break;
+				Case HEALPULSE: ACS_NamedExecuteAlways("TracerTargeter",0,TG_TEAM,1500); break;
+				Case TAUNT: ACS_NamedExecuteAlways("TracerTargeter",0,TG_ENEMY,630); break;
 				default: ACS_NamedExecuteAlways("TracerTargeter",0,TG_TEAM,630); break;
 			}
 			
@@ -894,7 +898,8 @@ SetResultValue(CheckWeaponFireFunc(RecoveryType));
 
 Function bool CheckWeaponFireFunc(int RecoveryType)
 {
-if(CheckInventory("SpawnInBuffer")>0) return false;
+	if(CheckInventory("SpawnInBuffer")>0) return false;
+	if(CheckInventory("FatigueMark")>0) return false;
 
 if(((RecoveryType&RC_A)>0) && (CheckInventory("Recovery_A")>0)) return false;
 if(((RecoveryType&RC_B)>0) && (CheckInventory("Recovery_B")>0)) return false;
@@ -924,6 +929,57 @@ if(CheckInventory("GrappledFlag"))
     {switch(ThisWeapon) {
         Case RAPIDSPIN: break;
         default: return false; break;
+    }
+}
+
+if(CheckInventory("TauntFlag"))
+    {switch(ThisWeapon) {
+	Case HELPINGHAND: return false; break; 
+	Case GROWTH: return false; break; 
+	Case GROWL: return false; break; 
+	Case TAILWHIP: return false; break; 
+	Case LEECHSEED: return false; break; 
+	Case SWEETSCENT: return false; break; 
+	Case POISONPOWDER: return false; break; 
+	Case SLEEPPOWDER: return false; break; 
+	Case SYNTHESIS: return false; break; 
+	Case TOXIC: return false; break; 
+	Case SMOKESCREEN: return false; break; 
+	Case SCARYFACE: return false; break; 
+	Case FIRESPIN: return false; break; 
+	Case DRAGONDANCE: return false; break; 
+	Case WITHDRAW: return false; break; 
+	Case PROTECT: return false; break; 
+	Case AQUARING: return false; break; 
+	Case HAZE: return false; break; 
+	Case IRONDEFENSE: return false; break; 
+	Case LIFEDEW: return false; break; 
+	Case SHELLSMASH: return false; break; 
+	Case YAWN: return false; break; 
+	Case AMNESIA: return false; break; 
+	Case SKETCH: return false; break; 
+	Case REFLECT: return false; break;
+	Case LIGHTSCREEN: return false; break;
+	Case GRASSWHISTLE: return false; break;
+	Case HEALPULSE: return false; break;
+	Case AROMATHERAPY: return false; break;
+	Case SAFEGUARD: return false; break;
+	Case DETECT: return false; break;
+	Case AGILITY: return false; break;
+	Case STEALTHROCK: return false; break;
+	Case CURSE: return false; break;
+	Case DEFENSECURL: return false; break;
+	Case COVET: return false; break;
+	Case LEER: return false; break;
+	Case NASTYPLOT: return false; break;
+	Case RAGE: return false; break;
+	Case FAKETEARS: return false; break;
+	Case REFRESH: return false; break;
+	Case SWORDDANCE: return false; break;
+	Case SPIKES: return false; break;
+	Case TOXICSPIKES: return false; break;
+	Case LEER: return false; break;
+	Case TAUNT: return false; break;
     }
 }
 

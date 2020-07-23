@@ -284,6 +284,8 @@ OB_AQUAJET = "%k Defeated %o using AQUAJET!";
 OB_DRILLPECK = "%k Defeated %o using DRILLPECK!";
 OB_SPIKES = "%k Defeated %o using SPIKES!";
 OB_TOXICSPIKES = "%k Defeated %o using TOXICSPIKES!";
+OB_TAUNT = "%k Defeated %o using TAUNT!";
+//--[NewMove]--
 
 //██████████████████████████████████████████Join Menu████████████████████████████████████████
 
@@ -1660,3 +1662,13 @@ M120_CATEGORY = "\cf <Category>";
 M120_POWER = "\cfPower:\cj --";
 M120_DESC = "<Desc>";
 //#endregion
+
+//#region -=- 099: Taunt -=-
+M121_NAME = "\cj Taunt";
+M121_TYPE = "\cj <Type>";
+M121_CATEGORY = "\cf <Category>";
+M121_POWER = "\cfPower:\cj --";
+M121_DESC = "<Desc>";
+//#endregion
+
+//--[NewMove]--

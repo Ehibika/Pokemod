@@ -72,7 +72,7 @@ actor LeechSeedPP : Ammo {inventory.amount 1 inventory.Maxamount 10}
 
 Actor Seeded : powerup
 {inventory.amount 1
-Powerup.duration -15
+Powerup.duration 70
 //Powerup.Color "E74FC3", 0.5
 }
 
@@ -102,13 +102,19 @@ DamageType "LeechSeed"
 obituary "$OB_LeechSeed"
 -NOGRAVITY
 +HITTRACER
-Speed 55
++DOOMBOUNCE
++MBFBOUNCER
+
+ReactionTime 35
+Speed 45
 Damage (0)
 radius 5
 height 5
-scale 2.5
-Gravity 2.5
+scale 3.5
+Gravity 1.5
 Args 15, 0, 0
+BounceFactor 0.3
+WallBounceFactor 0.8
 States
 {
 Spawn:
@@ -116,8 +122,14 @@ TNT1 A 0
 TNT1 A 0 A_GiveInventory("ProjectileDCode",1)
 HTST A 0 ThrustThingZ(0, 30, 0, 1)
 Spawn2:
-TNT1 A 0 
-BASB T 1 
+LECD A 2 A_CountDown
+LECD A 0 A_GiveInventory("BouncerGroundSlow",1)
+LECD B 2 A_CountDown
+LECD B 0 A_GiveInventory("BouncerGroundSlow",1)
+LECD C 2 A_CountDown
+LECD C 0 A_GiveInventory("BouncerGroundSlow",1)
+LECD D 2 A_CountDown
+LECD D 0 A_GiveInventory("BouncerGroundSlow",1)
 Goto Spawn2
 
 
@@ -136,20 +148,20 @@ TNT1 A 0 A_JumpIfInventory("SafeguardPower",1,"Death",AAPTR_TRACER)
 Goto PreLSeed
 
 PreLSeed:
-TNT1 A 1 //A_GiveInventory("LSeed_SoundCue",1,AAPTR_TRACER)
+LECD E 1 //A_GiveInventory("LSeed_SoundCue",1,AAPTR_TRACER)
 TNT1 A 0 A_ChangeFlag("NOINTERACTION",True)
 TNT1 A 0 A_ChangeFlag("NOCLIP",True)
+TNT1 A 0 A_ChangeFlag("DOOMBOUNCE",False)
 TNT1 A 0 A_SetArg(2,CallACS("LeechSeedHPGet",5))
 Goto LSeed
 
 LSeed:
 TNT1 A 0 A_GiveInventory("Seeded",1,AAPTR_TRACER)
-TNT1 AAA 0 A_SpawnItemEx("RazorLeafParticle", 0, 0, 28, 256/45, 256/45, random2(256/45), random(0, 359),SXF_TRANSFERTRANSLATION|SXF_NOCHECKPOSITION)
-TNT1 AAAAA 1 A_Warp(AAPTR_TRACER,0,0,28,0,WARPF_COPYINTERPOLATION)
+LECD EEEEFFFFEEEEFFFF 1 A_Warp(AAPTR_TRACER,1,0,45,0,WARPF_COPYINTERPOLATION)
 TNT1 A 0 A_JumpIfInventory("CutterFlag",999,"Death2",AAPTR_TRACER)
 TNT1 A 0 A_JumpIfInventory("IsDead",1,"Death2",AAPTR_TRACER)
-TNT1 A 0 A_SetArg(1,Args[1]+1)
-TNT1 A 0 A_JumpIf(Args[1] < 7, "LSeed")
+//TNT1 A 0 A_SetArg(1,Args[1]+1)
+//TNT1 A 0 A_JumpIf(Args[1] < 2, "LSeed")
 Goto LSeedLoop_1
 
 
@@ -165,7 +177,7 @@ LSeedLoop_3:
 TNT1 A 0 A_JumpIfInventory("CutterFlag",999,"Death2",AAPTR_TARGET)
 TNT1 A 0 A_JumpIfInventory("IsDead",1,"Death2",AAPTR_TARGET)
 
-TNT1 A 0 A_Warp(AAPTR_TRACER,0,0,28,0,WARPF_COPYINTERPOLATION)
+TNT1 A 0 A_Warp(AAPTR_TRACER,1,0,45,0,WARPF_COPYINTERPOLATION)
 TNT1 A 0 A_Explode(Args[2],35,0,0,35)
 Goto LSeedloop_4
 LSeedloop_4: //No Damage if out of view
@@ -183,6 +195,7 @@ stop
 
 Death2:
 TNT1 A 0 A_GiveInventory("TakeSeeded",1,AAPTR_TRACER)
+TNT1 AAA 0 A_SpawnItemEx("RazorLeafParticle", 0, 0, 0, 256/45, 256/45, random2(256/45), random(0, 359),SXF_TRANSFERTRANSLATION|SXF_NOCHECKPOSITION)
 TNT1 A 17 
 stop
 
@@ -233,6 +246,32 @@ HealMe:
 TNT1 A 0 A_Giveinventory("HealEffectSpawner",1)
 TNT1 A 0 A_PlaySoundEx("item/energyup","SoundSlot7")
 TNT1 A 0
+stop
+
+Nope:
+TNT1 A 0
+stop
+}
+}
+
+
+actor BouncerGroundSlow : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0
+TNT1 A 0 A_CheckFloor("Slowdown")
+stop
+
+Slowdown:
+TNT1 A 0 A_ScaleVelocity(0.6)
 stop
 
 Nope:

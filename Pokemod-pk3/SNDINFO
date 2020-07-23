@@ -58,6 +58,8 @@ wep_L/commandowave COMEXP
 
 Support/Heal1 Recov1 
 Support/Heal2 Recov2 
+Support/Heal3 Recov3 
+Support/Heal4 Recov4 
 $volume Support/Heal1 0.5
 Support/Barrier BARUP
 Support/Barrier2 BARRUP
@@ -120,12 +122,21 @@ Move/Curse1 NGCURSE
 Move/Rollout BLIZBOWL
 Move/RolloutImpact BLIZSTRI
 Move/Swift SWIFT
+Move/Fakeout1 FAKEOUT1
+Move/Fakeout2 FAKEOUT2
+Move/Crunch CRUNCH
+Move/DrillPeck DRILPECK
+Move/SwordDance SWRDDANC
 
+Misc/UseMove MOVEUSE
 Misc/Levelup LEVELUP
 Misc/Evolution FANFARE1
 Misc/GetMove FANFARE2
 Misc/DeathSound DEADPOP
 Misc/Poked POKED
+Misc/CeilingBonk BONK1
+Misc/Clap HANDCLAP
+Misc/HardDrop HARDDROP
 
 Misc/GetItem PICKUP1
 Misc/GetCash PICKUP2
@@ -134,3 +145,4 @@ Misc/spin			DSSPIN
 Misc/spindash		DSSPNDSH
 Misc/release		DSZOOM
 Misc/thok			DSTHOK
+Misc/Windloop		WINDLOOP

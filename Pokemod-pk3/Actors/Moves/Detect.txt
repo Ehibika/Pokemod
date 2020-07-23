@@ -89,8 +89,8 @@ ReactionTime 70
 States
 {
 CheckInv:
-TNT1 A 1 A_JumpIfInTargetInventory("DetectGuard",1,"Spawn")
-TNT1 A 1 A_JumpIfInTargetInventory("DetectDashTimer",1,"Spawn")
+TNT1 A 1 A_JumpIfInTargetInventory("DetectGuard",1,"Reloop")
+TNT1 A 1 A_JumpIfInTargetInventory("DetectDashTimer",1,"Reloop")
 Goto Death
 }
 }

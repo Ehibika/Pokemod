@@ -49,9 +49,9 @@ Int StatDEX [MAXDEX][10] = {
 /*|17|*/{65, 80,  80,  59,	   63,	  58,    10,	Type_Water,Type_NULL,  LVLSPD_Normal},
 /*|18|*/{85, 105, 100, 79,	   83,	  78,    20,	Type_Water,Type_NULL,  LVLSPD_Normal},
 
-/*|19|*/{40, 45,  35,  65,     55,    70,    5,		Type_Grass,Type_NULL,  LVLSPD_Normal},
-/*|20|*/{50, 65,  45,  85,     65,    95,    10,	Type_Grass,Type_NULL,  LVLSPD_Normal},
-/*|21|*/{70, 85,  65, 105,     85,   120,    20,	Type_Grass,Type_NULL,  LVLSPD_Normal},
+/*|19|*/{40, 55,  35,  55,     55,    70,    5,		Type_Grass,Type_NULL,  LVLSPD_Normal},
+/*|20|*/{50, 75,  45,  75,     65,    95,    10,	Type_Grass,Type_NULL,  LVLSPD_Normal},
+/*|21|*/{70, 95,  65, 95,     85,   120,    20,	Type_Grass,Type_NULL,  LVLSPD_Normal},
 
 /*|22|*/{45, 60,  40,  70,     50,    45,    5,		Type_Fire,Type_NULL,  LVLSPD_Normal},
 /*|23|*/{60, 85,  60,  85,     60,    55,    10,	Type_Fire,Type_Fighting,  LVLSPD_Normal},
