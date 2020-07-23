@@ -77,6 +77,7 @@ Spawn:
 TNT1 A 0
 stop
 Pickup:
+TNT1 A 0 A_JumpIfInventory("SafeguardPower",1,"Nope")
 TNT1 A 0 A_PlaySoundEX("misc/train","SoundSlot7")
 TNT1 A 0 A_Jumpifinventory("TauntFlag",1,"Sustain")
 TNT1 A 0 A_GiveInventory("TauntFlag",1)

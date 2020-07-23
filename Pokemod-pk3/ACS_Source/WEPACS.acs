@@ -921,6 +921,8 @@ if(CheckInventory("HazedFlagEnemy"))
 		Case CURSE: return false; break;
 		Case MUDSLAP: return false; break;
 		Case DEFENSECURL: return false; break;
+		Case SWORDDANCE: return false; break;
+		Case NASTYPLOT: return false; break;
         default: break;
     }
 }

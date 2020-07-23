@@ -112,7 +112,8 @@ States
 Spawn:
 TNT1 A 0 
 TNT1 A 0 A_GiveInventory("ProjectileCode",1)
-POWS A 1 ACS_NAmedExecuteAlways("HazardTID",0)
+POWS A 0 ACS_NAmedExecuteAlways("HazardTID",0)
+POWS A 1 A_JumpIf(CallACS("core_targetexists") == 0,"Death")
 wait
 
 Crash:

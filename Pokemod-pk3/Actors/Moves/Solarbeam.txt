@@ -272,11 +272,10 @@ TNT1 A 0
 MBEA A 0 A_SetPitch(pitch+1)
 MBEA A 0 A_JumpIf(pitch>SolBea_Range,"Death")
 MBEA A 0 A_SpawnItemEx("SolarBeamRay1",0,0,0,momx,momy,momz,0,553)
+MBEA A 0 A_SpawnItemEx("SolarBeamRayFX",0,0,0,0,0,0,0,1)
 MBEA A 1 A_JumpIf(CallACS("pkmn_istargetclient")!=1,"Death2")//A_Stop
 MBEA A 0 A_ChangeFlag("THRUACTORS",1)
 MBEA A 0 A_Stop
-MBEA A 3
-MBEA AAAAA 2 A_Fadeout
 stop
 Death2:
 TNT1 A 0 
@@ -316,10 +315,7 @@ MBEA A 1 A_JumpIf(CallACS("pkmn_istargetclient")!=1,"Death2")//A_Stop
 TNT1 A 0 
 stop
 Death2:
-MBEA A 0 A_ChangeFlag("THRUACTORS",1)
-MBEA A 0 A_Stop
-MBEA A 3
-MBEA AAAAA 2 A_Fadeout
+MBEA A 0 A_SpawnItemEx("SolarBeamRayFX",0,0,0,0,0,0,0,1)
 stop
 Death:
 TNT1 A 0 A_SpawnItemEx("SolarBeamPuff",0,0,0,0,0,0,0,33)
@@ -356,25 +352,19 @@ SpawnBeam:
 TNT1 A 0
 MBEA A 0 A_SetPitch(pitch+1)
 MBEA A 0 A_JumpIf(pitch>SolBea_Range,"Death")
+MBEA A 0 A_SpawnItemEx("SolarBeamRayFX2",0,0,0,0,0,0,0,1)
 MBEA A 0 A_SpawnItemEx("SolarBeamRay2",0,0,0,momx,momy,momz,0,553)
 MBEA A 1 A_JumpIf(CallACS("pkmn_istargetclient")!=1,"Death2")//A_Stop
-MBEA A 0 A_ChangeFlag("THRUACTORS",1)
 MBEA A 0 A_Stop
-MBEA A 3
-MBEA AAAAA 2 A_SetScale(ScaleX-0.5)
-FXLoop:
-MBEA A 2 A_SetScale(ScaleX-0.5)
-MBEA A 0 A_Fadeout
-MBEA A 0 A_CountDown
-loop
-Death2:
+stop
+Death:
 TNT1 A 0 
 TNT1 A 0 A_SpawnItemEx("SolarBeamMAXPuff",0,0,0,0,0,0,0,33)
 stop
 Crash:
 TNT1 A 0 A_SpawnItemEx("PowerStrikeFX",0,0,0,0,0,0,0,33)
-Death:
-MBEA A 0 A_JumpIf(ReactionTime > 0,"Death2")
+Death2:
+MBEA A 0 
 stop
 }
 }
@@ -402,29 +392,22 @@ TNT1 A 0
 SpawnBeam:
 TNT1 A 0
 MBEA A 0 A_SetPitch(pitch+1)
-MBEA A 0 A_JumpIf(pitch>SolBea_Range,"Death")
+MBEA A 0 A_JumpIf(pitch>SolBea_Range,"Death2")
 MBEA A 0 A_SpawnItemEx("SolarBeamRay2_T",0,0,0,momx,momy,momz,0,553)
 MBEA A 1 A_JumpIf(CallACS("pkmn_istargetclient")!=1,"Spawn2")//A_Stop
 TNT1 A 0 
 stop
 Spawn2:
-MBEA A 0 A_ChangeFlag("THRUACTORS",1)
-MBEA A 0 A_Stop
-MBEA A 3
-MBEA AAAAA 2 A_SetScale(ScaleX-0.5)
-FXLoop:
-MBEA A 2 A_SetScale(ScaleX-0.5)
-MBEA A 0 A_Fadeout
-MBEA A 0 A_CountDown
-loop
+MBEA A 0 A_SpawnItemEx("SolarBeamRayFX2",0,0,0,0,0,0,0,1)
+stop
 Crash:
 TNT1 A 0 A_SpawnItemEx("PowerStrikeFX",0,0,0,0,0,0,0,33)
 Death:
-MBEA A 0 A_JumpIf(ReactionTime > 0,"Death2")
+MBEA A 0 
+TNT1 A 0 A_SpawnItemEx("SolarBeamMAXPuff",0,0,0,0,0,0,0,33)
 stop
 Death2:
 TNT1 A 0
-TNT1 A 0 A_SpawnItemEx("SolarBeamMAXPuff",0,0,0,0,0,0,0,33)
 stop
 }
 }
@@ -453,6 +436,7 @@ DamageType "SolarBeam"
 +DONTBLAST
 +DONTREFLECT
 +SERVERSIDEONLY
++MTHRUSPECIES
 renderstyle none
 damage (0)
 Radius 11
@@ -599,5 +583,43 @@ TNT1 A 0 A_GiveInventory("ProjectileCode",1)
 TNT1 A random(0,3)
 HARD CCDDEE 2 A_ScaleVelocity(0.8)
 stop
+}
+}
+
+actor SolarBeamRayFX : BasicClientside
+{
+scale 2.0
+renderstyle "add"
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+MBEA A 3
+MBEA AAAAA 2 A_Fadeout
+stop
+}
+}
+
+
+
+actor SolarBeamRayFX2 : BasicClientside
+{
+ReactionTime 6
+renderstyle "add"
+speed 25
+scale 5.5
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+MBEA A 3
+MBEA AAAAA 2 A_SetScale(ScaleX-0.5)
+FXLoop:
+MBEA A 2 A_SetScale(ScaleX-0.5)
+MBEA A 0 A_Fadeout
+MBEA A 0 A_CountDown
+loop
 }
 }

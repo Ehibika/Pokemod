@@ -102,7 +102,7 @@ stop
 }
 }
 
-actor MachpunchDamager : BasicProjectile
+actor MachpunchDamager : BasicFastProjectile
 {
 Speed 0
 Damage (15)

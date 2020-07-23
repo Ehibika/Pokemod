@@ -33,15 +33,15 @@ Fire.PitchCheck:
 Goto Fire.Blade
 
 Fire.Blade:
-"####" B 0 A_FireCustomMissile("XScissorLeftStart",-XSC_Ang,1,-XSC_Dist,0,0,0)
-"####" B 0 A_FireCustomMissile("XScissorRightStart",XSC_Ang,0,XSC_Dist,0,0,0)
+"####" B 0 A_FireCustomMissile("XScissorLeft",-XSC_Ang,1,-XSC_Dist,0,0,0)
+"####" B 0 A_FireCustomMissile("XScissorRight",XSC_Ang,0,XSC_Dist,0,0,0)
 "####" B 1 A_PlaySoundEx("weapon/SlashClaw","Weapon")
 "####" B 0 A_Jump(256,"Fire.After")
 Goto Fire.After
 
 Fire.Blade2: //Locked to lateral position
-"####" B 0 A_FireCustomMissile("XScissorLeftStart",-XSC_Ang,1,-XSC_Dist,0,0,pitch)
-"####" B 0 A_FireCustomMissile("XScissorRightStart",XSC_Ang,0,XSC_Dist,0,0,pitch)
+"####" B 0 A_FireCustomMissile("XScissorLeft",-XSC_Ang,1,-XSC_Dist,0,0,pitch)
+"####" B 0 A_FireCustomMissile("XScissorRight",XSC_Ang,0,XSC_Dist,0,0,pitch)
 "####" B 1 A_PlaySoundEx("weapon/SlashClaw","Weapon")
 "####" B 0 A_Jump(256,"Fire.After")
 Goto Fire.After
@@ -112,6 +112,7 @@ states
 {
 Spawn:
 TNT1 A 0
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
 TNT1 A 0 A_Jumpif(pitch > 16,"Death")
 TNT1 A 0 A_setPitch(Pitch+1)
 TNT1 A 0 A_SetUserVar("User_Step",Pitch % 4)
@@ -142,6 +143,7 @@ states
 {
 Spawn:
 TNT1 A 0
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
 TNT1 A 0 A_Jumpif(pitch > 16,"Death")
 TNT1 A 0 A_setPitch(Pitch+1)
 TNT1 A 0 A_SetUserVar("User_Step",Pitch % 4)

@@ -312,6 +312,7 @@ states
 {
 pickup:
 TNT1 A 0 A_GiveInventory("GrassGuard",1)
+TNT1 A 0 A_GiveInventory("GrassGuard2",1)
 stop
 }
 }
@@ -323,12 +324,16 @@ states
 {
 pickup:
 TNT1 A 0 A_TakeInventory("GrassGuard",99)
+TNT1 A 0 A_TakeInventory("GrassGuard2",99)
 stop
 }
 }
 
 actor GrassGuard : Once {} // Blocks powder moves and leechSeed
-
+actor GrassGuard2 : TypeBase 
+{
+    damagefactor "PoisonPowder", 0.0
+}
 //====
 
 //#endregion

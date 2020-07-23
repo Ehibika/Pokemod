@@ -202,6 +202,7 @@ For(int i; i<HAZMAX;i++)
 
 }
 
+
 // Make's Smoke less Opaque for teams
 script "TeamSmoke"  (VOID) CLIENTSIDE
 {

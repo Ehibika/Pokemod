@@ -115,8 +115,10 @@ TNT1 A 0
 TNT1 A 0 A_GiveInventory("ProjectileCode",1)
 HAZA D 1 ACS_NAmedExecuteAlways("HazardTID",0)
 HAZA D random(1,5)
-HAZA D 17 A_SpawnItemEx("PoisonedFX1",random(-24,24),random(-32,32),random(30,34),0,0,Random(1,4))
-wait
+Spawn2:
+HAZA D 0 A_SpawnItemEx("PoisonedFX1",random(-24,24),random(-32,32),random(30,34),0,0,Random(1,4))
+HAZA DDDDDDDDDDDDDDDDD 1 A_JumpIf(CallACS("core_targetexists") == 0,"Death")
+loop
 
 Crash:
 TNT1 A 0 A_SetPitch(Pitch+1)

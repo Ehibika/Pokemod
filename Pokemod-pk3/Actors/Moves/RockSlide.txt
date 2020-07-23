@@ -161,6 +161,7 @@ States
 {
 Spawn:
 BROK B 0
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
 BROK B 0 A_SetScale(FRandom(1.5,3.0))
 BROK B 0 
 BROK A 1 A_JumpIf(ceilingz-z>8, "Spawn2")
@@ -193,6 +194,7 @@ States
 {
 Spawn:
 BROK B 0
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
 POWS A 1 A_JumpIf(ceilingz-z>8, "Spawn2")
 BROK B 0 A_JumpIf(momz==0,"Death")
 BROK B 0 A_CountDown
@@ -223,6 +225,7 @@ States
 {
 Spawn:
 TNT1 A 0 
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
 POWS A 7 
 POWS AZAZAZA 2
 stop

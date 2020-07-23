@@ -69,7 +69,7 @@ if(PlayerNumber()==ConsolePlayerNumber()) { //log(s:"Console Player Verified");
 				TrueFormSkin = skin;
 			}
 		}
-		if(cooldown>0) cooldown--;
+		if(cooldown>0 && skin == lastSkin) cooldown--;
 		delay(1);
 	}
 }

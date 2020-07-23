@@ -90,13 +90,16 @@ Pickup:
 TNT1 A 0 A_JumpifInventory("ProtectGuard",1,"Nope")
 TNT1 A 0 A_JumpifInventory("DetectGuard",1,"Nope")
 TNT1 A 0 A_JumpifInventory("SafeGuardPower",1,"Nope")
-TNT1 A 0 A_JumpifInventory("BrineBooster",1,"Nope")
+TNT1 A 0 A_JumpifInventory("BrineBooster",1,"BrineBoost2")
 TNT1 A 0 A_Jumpif(CallACS("PKMNACS_HealthPercent") <= 50,"BrineBoost")
 stop
 
 BrineBoost:
-TNT1 A 0 A_GiveInventory("BrineBooster",1)
 TNT1 A 0 A_SpawnItemEX("PowerStrikeFX2",0,0,28)
+goto BrineBoost2
+
+BrineBoost2:
+TNT1 A 0 A_GiveInventory("BrineBooster",1)
 stop
 Nope:
 TNT1 A 0
@@ -165,7 +168,7 @@ States
 Spawn:
 TNT1 A 0
 TNT1 A 0 A_GiveInventory("ProjectileCode",1)
-TNT1 A 0 A_RadiusGive("BrineCheck",BRINE_AREA1,RGF_PLAYERS|RGF_OBJECTS)
+TNT1 A 1 A_RadiusGive("BrineCheck",BRINE_AREA1,RGF_PLAYERS|RGF_OBJECTS)
 TNT1 A 0 A_Explode(45,BRINE_AREA1,0,0,BRINE_AREA2)
 NAPC A 0 A_PlaySoundEx("misc/splash", "Weapon")
 TNT1 A 0 A_SpawnItemEx("BrineImpactFX",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION)

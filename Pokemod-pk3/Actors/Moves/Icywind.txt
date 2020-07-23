@@ -150,6 +150,7 @@ States
 Spawn:
 TNT1 A 0
 TNT1 A 0 //A_SpawnItemEx("IcyWindWaveFX",0,0,0,0,0,0,0,16385)
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
 TNT1 A 0 A_SetPitch(Pitch+1)
 TNT1 A 0 A_SetScale(ScaleX+0.5)
 TNT1 A 0 A_SetUserVar("User_Step",Pitch % 3)
@@ -180,6 +181,7 @@ States
 {
 Spawn:
 TNT1 A 0
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
 TNT1 A 0 A_SpawnItemEx("IcyWindWaveFX",0,0,0,0,0,0,0,16385)
 TNT1 A 0 A_SetPitch(Pitch+1)
 TNT1 A 0 A_SetScale(ScaleX+0.5)
@@ -199,7 +201,7 @@ Alpha 0.5
 States
 {
 Spawn:
-TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+TNT1 A 0 A_GiveInventory("ProjectileFXCode",1)
 PSMS ABC 3 A_SetScale(ScaleX+0.2)
 PSMS DEF 3 A_SetScale(ScaleX+0.2)
 NCRU E 0 A_Fadeout
@@ -219,7 +221,7 @@ Scale 1.0
 States
 {
 Spawn:
-TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+TNT1 A 0 A_GiveInventory("ProjectileFXCode",1)
 BLIZ ABC 2 
 Spawn2:
 BLIZ C 2 

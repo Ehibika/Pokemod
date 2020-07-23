@@ -86,44 +86,65 @@ OptionMenu ZA_SelectClassMenu
 OptionString PKMN_JoinName
 {
 "Megaman", "Smeargle"
+
 "Bulbasaur", "Bulbasaur"
 "Charmander", "Charmander"
 "Squirtle", "Squirtle"
+
 "Chikorita", "Chikorita"
 "Cyndaquil", "Cyndaquil"
+"Totodile", "Totodile"
+
 "Treecko", "Treecko"
 "Torchic", "Torchic"
+"Mudkip", "Mudkip"
+
 "Turtwig", "Turtwig"
 "Chimchar", "Chimchar"
+"Piplup", "Piplup"
 
 }
 
 OptionString PKMN_JoinMoves
 {
 "Megaman", "\c[MenuYellow]Sketch\n-----\n-----\n-----"
+
 "Bulbasaur", "\c[MenuYellow]VineWhip\nLeechSeed\nGrowth\nRazorLeaf"
 "Charmander", "\c[MenuYellow]Growl\nEmber\nSmokeScreen\nMetalClaw"
 "Squirtle", "\c[MenuYellow]WaterGun\nYawn\nRapidSpin\nProtect"
+
 "Chikorita", "\c[MenuYellow]Razorleaf\nLifeDew\nPoisonpowder\nSynthesis"
 "Cyndaquil", "\c[MenuYellow]Ember\nFlameWheel\nSmokeScreen\nDefenseCurl"
+"Totodile", "\c[MenuYellow]WaterGun\nBite\nLeer\nRage"
+
 "Treecko", "\c[MenuYellow]BulletSeed\nQuickAttack\nDetect\nLeechSeed"
 "Torchic", "\c[MenuYellow]Growl\nEmber\nSmokeScreen\nMetalClaw"
+"Mudkip", "\c[MenuYellow]WaterGun\nMudslap\nYawn\nBite"
+
 "Turtwig", "\c[MenuYellow]RazorLeaf\nBite\nProtect\nLeechSeed"
 "Chimchar", "\c[MenuYellow]Growl\nEmber\nSmokeScreen\nMetalClaw"
+"Piplup", "\c[MenuYellow]WaterGun\nPeck\nGrowl\nBite"
 
 }
 
 OptionString PKMN_JoinInfo
 {
 "Megaman", "Use Sketch to learn\nany move from any pokemon!"
+
 "Bulbasaur", "\c[HelpMenuCol]Diverse utilities ranging\nfrom recovery to statuses"
 "Charmander", "\c[HelpMenuCol]Packs an array of\ndamaging moves, and can\ngrow to fly!"
 "Squirtle", "\c[HelpMenuCol]Stocked with defensive boosts\nand long ranged water moves."
+
 "Chikorita", "\c[HelpMenuCol]A Mean, Green supporter with \na clerical moveset full of \nhealing and buffs"
 "Cyndaquil", "\c[HelpMenuCol]A Durable Fire Type that can \na Get around with rolling moves"
+"Totodile", "\c[HelpMenuCol]A physical Powerhouse with \nStat lowering moves"
+
 "Treecko", "\c[HelpMenuCol]Very Mobile, and equipped with \nlethal close ranged attacks"
 "Torchic", "\c[HelpMenuCol]Powerful up-close fighter \nwith excellent maneuverability"
+"Mudkip", "\c[HelpMenuCol]Defensive bruiser with large \nscale attacks"
+
 "Turtwig", "\c[HelpMenuCol]Physical Heavy Hitter with \ntools for Space Control"
 "Chimchar", "\c[HelpMenuCol]Variable Trickster good at \nOffense and disruption"
+"Piplup", "\c[HelpMenuCol]Sturdy and equipped with movement \nSkills to outlast and outmaneuver."
 
 }
