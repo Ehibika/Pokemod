@@ -138,7 +138,7 @@ for(int i = 0; i < MAX_PLAYERS; i++) ResetPlayerCash(i);
 
 function void ResetPlayerCash(int p)
 {
-SetCvar(StrParam(s:"PLAYER",i:p,s:"_CASH"),100);
+SetCvar(StrParam(s:"PLAYER",i:p,s:"_CASH"),GetCvar("PKMN_StartingCash"));
 }
 
 script "CashCheck" (int cost)
