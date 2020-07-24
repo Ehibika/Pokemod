@@ -129,22 +129,22 @@ OptionString PKMN_JoinMoves
 
 OptionString PKMN_JoinInfo
 {
-"Megaman", "Use Sketch to learn\nany move from any pokemon!"
+"Megaman", "Doesn't use TMs"
 
-"Bulbasaur", "\c[HelpMenuCol]Diverse utilities ranging\nfrom recovery to statuses"
-"Charmander", "\c[HelpMenuCol]Packs an array of\ndamaging moves, and can\ngrow to fly!"
-"Squirtle", "\c[HelpMenuCol]Stocked with defensive boosts\nand long ranged water moves."
+"Bulbasaur", "\c[HelpMenuCol]Terrestrial"
+"Charmander", "\c[HelpMenuCol]--\n++Slasher\n+++Draconic"
+"Squirtle", "\c[HelpMenuCol]Defensive\n--\n+++Artillery"
 
-"Chikorita", "\c[HelpMenuCol]A Mean, Green supporter with \na clerical moveset full of \nhealing and buffs"
-"Cyndaquil", "\c[HelpMenuCol]A Durable Fire Type that can \na Get around with rolling moves"
-"Totodile", "\c[HelpMenuCol]A physical Powerhouse with \nStat lowering moves"
+"Chikorita", "\c[HelpMenuCol]Defensive::Succor::Terrestrial"
+"Cyndaquil", "\c[HelpMenuCol]Terrestrial"
+"Totodile", "\c[HelpMenuCol]--\n--\n+++Slasher"
 
-"Treecko", "\c[HelpMenuCol]Very Mobile, and equipped with \nlethal close ranged attacks"
-"Torchic", "\c[HelpMenuCol]Powerful up-close fighter \nwith excellent maneuverability"
-"Mudkip", "\c[HelpMenuCol]Defensive bruiser with large \nscale attacks"
+"Treecko", "\c[HelpMenuCol]--\n++Slasher\n+++Draconic"
+"Torchic", "\c[HelpMenuCol]--\n++Pugilist"
+"Mudkip", "\c[HelpMenuCol]Terrestrial\n++Pugilist"
 
-"Turtwig", "\c[HelpMenuCol]Physical Heavy Hitter with \ntools for Space Control"
-"Chimchar", "\c[HelpMenuCol]Variable Trickster good at \nOffense and disruption"
-"Piplup", "\c[HelpMenuCol]Sturdy and equipped with movement \nSkills to outlast and outmaneuver."
+"Turtwig", "\c[HelpMenuCol]Defensive::Terrestrial"
+"Chimchar", "\c[HelpMenuCol]Prankster::Pugilist"
+"Piplup", "\c[HelpMenuCol]Defensive\n--\n+++Slasher"
 
 }

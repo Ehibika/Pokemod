@@ -44,15 +44,43 @@ alias BuyGuardSeed "CloseMenu; Use BuyGuardSeed; Openmenu Item_Menu"
 
 
 alias BuyTM6 "CloseMenu; Use BuyTM6;"
+alias BuyTM7 "CloseMenu; Use BuyTM7;"
+alias BuyTM8 "CloseMenu; Use BuyTM8;"
 alias BuyTM14 "CloseMenu; Use BuyTM14;"
 alias BuyTM15 "CloseMenu; Use BuyTM15;"
 alias BuyTM16 "CloseMenu; Use BuyTM16;"
+alias BuyTM18 "CloseMenu; Use BuyTM18;"
 alias BuyTM19 "CloseMenu; Use BuyTM19;"
 alias BuyTM20 "CloseMenu; Use BuyTM20;"
+
+alias BuyTM22 "CloseMenu; Use BuyTM22;"
+alias BuyTM23 "CloseMenu; Use BuyTM23;"
+alias BuyTM24 "CloseMenu; Use BuyTM24;"
+alias BuyTM25 "CloseMenu; Use BuyTM25;"
+alias BuyTM26 "CloseMenu; Use BuyTM26;"
+alias BuyTM27 "CloseMenu; Use BuyTM27;"
+
+alias BuyTM29 "CloseMenu; Use BuyTM29;"
+alias BuyTM30 "CloseMenu; Use BuyTM30;"
+alias BuyTM31 "CloseMenu; Use BuyTM31;"
+alias BuyTM32 "CloseMenu; Use BuyTM32;"
+alias BuyTM33 "CloseMenu; Use BuyTM33;"
+alias BuyTM34 "CloseMenu; Use BuyTM34;"
+
 alias BuyTM40 "CloseMenu; Use BuyTM40;"
+
+alias BuyTM41 "CloseMenu; Use BuyTM41;"
+
 alias BuyTM44 "CloseMenu; Use BuyTM44;"
 alias BuyTM45 "CloseMenu; Use BuyTM45;"
+
+alias BuyTM48 "CloseMenu; Use BuyTM48;"
+
 alias BuyTM50 "CloseMenu; Use BuyTM50;"
 alias BuyTM51 "CloseMenu; Use BuyTM51;"
+
+alias BuyTM54 "CloseMenu; Use BuyTM54;"
+alias BuyTM55 "CloseMenu; Use BuyTM55;"
+
 alias BuyTM58 "CloseMenu; Use BuyTM58;"
 alias BuyTM59 "CloseMenu; Use BuyTM59;"

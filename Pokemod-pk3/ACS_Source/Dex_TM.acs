@@ -16,6 +16,44 @@
 #include "zcommon.acs"
 
 #import "Dex_Pokemon.acs"
+#import "Dex_Types.acs"
+#import "Dex_Leveling.acs"
+#import "Dex_BaseStats.acs"
+//#region -=- constants -=-
+
+#LIBDEFINE TMT_NULL 0
+#LIBDEFINE TMT_NORMAL 1
+#LIBDEFINE TMT_FIGHTING 2
+#LIBDEFINE TMT_FLYING 4
+#LIBDEFINE TMT_POISON 8
+#LIBDEFINE TMT_GROUND 16
+#LIBDEFINE TMT_ROCK 32
+#LIBDEFINE TMT_BUG 64
+#LIBDEFINE TMT_GHOST 128
+#LIBDEFINE TMT_STEEL 256
+#LIBDEFINE TMT_FIRE 512
+#LIBDEFINE TMT_WATER 1024
+#LIBDEFINE TMT_GRASS 2048
+#LIBDEFINE TMT_ELECTRIC 4096
+#LIBDEFINE TMT_PSYCHIC 8192
+#LIBDEFINE TMT_ICE 16384
+#LIBDEFINE TMT_DRAGON 32768
+#LIBDEFINE TMT_DARK 65536
+#LIBDEFINE TMT_FAIRY 131072
+
+
+#LIBDEFINE TMA_Null 0
+#LIBDEFINE TMA_Mature 1
+#LIBDEFINE TMA_Prankster 2
+#LIBDEFINE TMA_Defensive 4
+#LIBDEFINE TMA_Succor	8
+#LIBDEFINE TMA_Pugilist 16
+#LIBDEFINE TMA_Terrestrial 32
+#LIBDEFINE TMA_Artillery 64
+#LIBDEFINE TMA_Draconic 128
+#LIBDEFINE TMA_Spikey 256
+#LIBDEFINE TMA_Slasher 512
+//#endregion
 
 //#region -=- TM Reference -=-
 /*
@@ -33,7 +71,308 @@
 */
 //#endregion
 
-script "CheckTM" (int TMNum)
+script "CheckTM" (int TM_TYPE, int TM_ARCH1)
+{
+int output; 
+int PlayerDexNum = GetCvar(StrParam(s:"PlayerDEXNum_",i:PlayerNumber()));
+int PlayerTypeA = StatDEX[PlayerDexNum][7];
+int PlayerTypeB = StatDEX[PlayerDexNum][8];
+Int CheckType;
+
+
+if(TM_TYPE != TMT_NULL){CheckType = 1;}
+if(TM_ARCH1 != 0){CheckType = 2;}
+
+//First, Check for a matching Type
+    if(CheckType>=1)
+    {
+        if(TM_TYPE & GrabTMType(PlayerTypeA)
+        || TM_TYPE & GrabTMType(PlayerTypeB)){output = 1; CheckType = -1;}
+    }
+
+
+if(CheckType>=2)
+    {
+    //If type doesn't match, then we check for archetypes
+
+    if(!output && TM_ARCH1 & TMA_Mature) output = TMArch_Mature(PlayerDexNum);
+    if(!output && TM_ARCH1 & TMA_Prankster) output = TMArch_Prankster(PlayerDexNum);
+    if(!output && TM_ARCH1 & TMA_Defensive) output = TMArch_Defensive(PlayerDexNum);
+    if(!output && TM_ARCH1 & TMA_Succor) output = TMArch_Succor(PlayerDexNum);
+    if(!output && TM_ARCH1 & TMA_Pugilist) output = TMArch_Pugilist(PlayerDexNum);
+    if(!output && TM_ARCH1 & TMA_Terrestrial) output = TMArch_Terrestrial(PlayerDexNum);
+    if(!output && TM_ARCH1 & TMA_Artillery) output = TMArch_Artillery(PlayerDexNum);
+    if(!output && TM_ARCH1 & TMA_Draconic) output = TMArch_Draconic(PlayerDexNum);
+    if(!output && TM_ARCH1 & TMA_Spikey) output = TMArch_Spikey(PlayerDexNum);
+    if(!output && TM_ARCH1 & TMA_Slasher) output = TMArch_Slasher(PlayerDexNum);
+    }
+
+
+    // When all values are 0, the TM is considered semi-universal, thus it works on everyone except
+    //The Following pokemon. this is always checked in the end as it can also act as a dequalifier.
+    if(!Semi_UniversalTM(PlayerDexNum))Output = 0;
+
+SetResultValue(output);
+}
+
+//#region Grab TM Type function
+
+Function int GrabTMType (int TMType)
+{
+int output = 0;
+// Evolved TM's are learnable by any pokemon that is at their final stage;
+
+
+    Switch (TMType)
+    {
+        case Type_NORMAL: output = TMT_Normal; break;
+        case Type_FIGHTING: output = TMT_Fighting; break;
+        case Type_FLYING: output = TMT_Flying; break;
+        case Type_POISON: output = TMT_Poison; break;
+        case Type_GROUND: output = TMT_Ground; break;
+        case Type_ROCK: output = TMT_Rock; break;
+        case Type_BUG: output = TMT_Bug; break;
+        case Type_GHOST: output = TMT_Ghost; break;
+        case Type_STEEL: output = TMT_Steel; break;
+        case Type_FIRE: output = TMT_Fire; break;
+        case Type_WATER: output = TMT_Water; break;
+        case Type_GRASS: output = TMT_Grass; break;
+        case Type_ELECTRIC: output = TMT_Electric; break;
+        case Type_PSYCHIC: output = TMT_Psychic; break;
+        case Type_ICE: output = TMT_Ice; break;
+        case Type_DRAGON: output = TMT_Dragon; break;
+        case Type_DARK: output = TMT_Dark; break;
+        case Type_FAIRY: output = TMT_Fairy; break;
+    }
+return output;
+}
+
+//#endregion
+
+//#region -=- Semi Universal TMs
+Function int Semi_UniversalTM (int Dexnum)
+{
+int output = 1;
+// Semi universal TM's wor for nearly everyone, excluding smeargle who learns no TM's and
+// deliberately weak pokemon like Magicarp
+
+    Switch (Dexnum)
+    {
+    case SMEARGLE: output = 0;
+    }
+return output;
+}
+//#endregion 
+
+//#region -=- Archetype : Mature
+Function int TMArch_Mature (int Dexnum)
+{
+int output = 0;
+// Semi universal TM's wor for nearly everyone, excluding smeargle who learns no TM's and
+// deliberately weak pokemon like Magicarp
+
+    Switch (Dexnum)
+    {
+        case VENUSAUR: output = 1; break;
+        case CHARIZARD: output = 1; break;
+        case BLASTOISE: output = 1; break;
+        case MEGANIUM: output = 1; break;
+        case TYPHLOSION: output = 1; break;
+        case FERALIGATR: output = 1; break;
+        case SCEPTILE: output = 1; break;
+        case BLAZIKEN: output = 1; break;
+        case SWAMPERT: output = 1; break;
+        case TORTERRA: output = 1; break;
+        case INFERNAPE: output = 1; break;
+        case EMPOLEON: output = 1; break;
+        }
+return output;
+}
+//#endregion 
+
+//#region -=- Archetype : Prankster
+Function int TMArch_Prankster (int Dexnum)
+{
+int output = 0;
+// Prankster archetype favors mischevous and/or status oriented pokemon
+
+    Switch (Dexnum)
+    {
+        case CHIMCHAR: output = 1; break;
+        case MONFERNO: output = 1; break;
+        case INFERNAPE: output = 1; break;
+    }
+return output;
+}
+//#endregion 
+
+//#region -=- Archetype : Defensive
+Function int TMArch_Defensive (int Dexnum)
+{
+int output = 0;
+// Prankster archetype favors Pokemon naturally built for more defensive playstyles, this favors recovery moves,
+// protective moves, and some zone control moves.
+
+    Switch (Dexnum)
+    {
+        case SQUIRTLE: output = 1; break;
+        case WARTORTLE: output = 1; break;
+        case BLASTOISE: output = 1; break;
+        case CHIKORITA: output = 1; break;
+        case BAYLEEF: output = 1; break;
+        case MEGANIUM: output = 1; break;
+        case TURTWIG: output = 1; break;
+        case GROTLE: output = 1; break;
+        case TORTERRA: output = 1; break;
+    }
+return output;
+}
+//#endregion 
+
+//#region -=- Archetype : Succor
+Function int TMArch_Succor (int Dexnum)
+{
+int output = 0;
+    /* Succor archetype Favors pokemon naturally disposed to team support through healing and buffing, also
+     * favors some protective abilities
+
+    */
+    Switch (Dexnum)
+        {
+        case CHIKORITA: output = 1; break;
+        case BAYLEEF: output = 1; break;
+        case MEGANIUM: output = 1; break;
+        }
+return output;
+}
+//#endregion 
+
+//#region -=- Archetype : Pugilist
+Function int TMArch_Pugilist (int Dexnum)
+{
+int output = 0;
+    /* Pugilist archetype favors pokemon that mainly fight through punches and kicks, thus can learn TM's based around
+     * Punches, kicks, and other physical maneuvers.
+
+    */
+    Switch (Dexnum)
+        {        
+            case COMBUSKEN: output = 1; break;
+            case BLAZIKEN: output = 1; break;
+            case MARSHTOMP: output = 1; break;
+            case SWAMPERT: output = 1; break;
+            case CHIMCHAR: output = 1; break;
+            case MONFERNO: output = 1; break;
+            case INFERNAPE: output = 1; break;    
+        }
+return output;
+}
+//#endregion 
+
+//#region -=- Archetype : Terrestrial
+Function int TMArch_Terrestrial (int Dexnum)
+{
+int output = 0;
+    /* Terrestrial archetype involves pokemon that are largely land based, and can learn many 
+     * ground and rock moves as a result.
+
+    */
+    Switch (Dexnum)
+        {
+            case BULBASAUR: output = 1; break;
+            case IVYSAUR: output = 1; break;
+            case VENUSAUR: output = 1; break;
+            case CHIKORITA: output = 1; break;
+            case BAYLEEF: output = 1; break;
+            case MEGANIUM: output = 1; break;
+            case MUDKIP: output = 1; break;
+            case MARSHTOMP: output = 1; break;
+            case SWAMPERT: output = 1; break;
+            case TURTWIG: output = 1; break;
+            case GROTLE: output = 1; break;
+            case TORTERRA: output = 1; break;
+        }
+return output;
+}
+//#endregion 
+
+//#region -=- Archetype : Artillery
+Function int TMArch_Artillery (int Dexnum)
+{
+int output = 0;
+    /* Artillery archetype Favors largely projectile oriented pokemon, typically those with natural cannons on them,
+    moves for this archetype are usually lob move, beam moves, or moves with words like "Bullet" or "Cannon" in their
+    name
+
+    */
+    Switch (Dexnum)
+        {
+        case BLASTOISE: output = 1; break;   
+        }
+return output;
+}
+//#endregion 
+
+//#region -=- Archetype : Draconic
+Function int TMArch_Draconic (int Dexnum)
+{
+int output = 0;
+    /* Draconic archetype favors Dragon type and dragon like pokemon, allowing the use of dragon moves, and moves
+     * that resemble dragon breath.
+
+    */
+    Switch (Dexnum)
+        {
+        case CHARIZARD: output = 1; break;
+        case SCEPTILE: output = 1; break;
+
+        }
+return output;
+}
+//#endregion 
+
+//#region -=- Archetype : Spikey
+Function int TMArch_Spikey (int Dexnum)
+{
+int output = 0;
+    /* Spikey archetype
+
+    */
+    Switch (Dexnum)
+        {
+            
+        }
+return output;
+}
+//#endregion 
+
+//#region -=- Archetype : Slasher
+Function int TMArch_Slasher (int Dexnum)
+{
+int output = 0;
+    /* Slasher archetype involves pokemon that possess sharp claws, or blades, thus they can learn slashing moves.
+
+    */
+    Switch (Dexnum)
+        {
+        case CHARMELEON: output = 1; break;
+        case CHARIZARD: output = 1; break;
+        case FERALIGATR: output = 1; break;
+        case GROVYLE: output = 1; break;
+        case SCEPTILE: output = 1; break; 
+        case EMPOLEON: output = 1; break;
+        }
+return output;
+}
+//#endregion 
+
+//======
+
+
+//#region -=-=-= Depreciated -=-=-=
+
+//#region -=- old TM check -=-
+script "CheckTM_Old" (int TMNum)
 {
 int output; 
 int PlayerDexNum = GetCvar(StrParam(s:"PlayerDEXNum_",i:PlayerNumber()));
@@ -61,20 +400,7 @@ Switch (TMNum)
 SetResultValue(output);
 }
 
-//#region -=- Semi Universal TMs
-Function int Semi_UniversalTM (int Dexnum)
-{
-int output = 1;
-// Semi universal TM's wor for nearly everyone, excluding smeargle who learns no TM's and
-// deliberately weak pokemon like Magicarp
-
-    Switch (Dexnum)
-    {
-    case SMEARGLE: output = 0;
-    }
-return output;
-}
-//#endregion 
+//#endregion
 
 //#region -=- evolved pokemon only TMs -=-
 Function int EvolvedTM (int Dexnum)
@@ -240,7 +566,7 @@ return output;
 }
 //#endregion
 
-
+//#endregion
 
 //#region -=- the big, fat, array
 

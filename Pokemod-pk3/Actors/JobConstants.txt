@@ -143,7 +143,7 @@ const int Move_AquaJet = 117;
 const int Move_DrillPeck = 118;
 const int Move_Spikes = 119;
 const int Move_ToxicSpikes = 120;
-const int Move_Taunt = 120;
+const int Move_Taunt = 121;
 //--[NewMove]--
 //=======|Pokedex Constants|==========
 const int Dex_SMEARGLE = 0;
@@ -187,6 +187,58 @@ const int Dex_INFERNAPE = 33;
 const int Dex_PIPLUP = 34;
 const int Dex_PRINPLUP = 35;
 const int Dex_EMPOLEON = 36;
+
+//=======|TM Type Flags|==========
+const int TMT_NULL = 0;
+const int TMT_Normal = 1;
+const int TMT_Fighting = 2;
+const int TMT_Flying = 4;
+const int TMT_Poison = 8;
+const int TMT_Ground = 16;
+const int TMT_Rock = 32;
+const int TMT_Bug = 64;
+const int TMT_Ghost = 128;
+const int TMT_Steel = 256;
+const int TMT_Fire = 512;
+const int TMT_Water = 1024;
+const int TMT_Grass = 2048;
+const int TMT_Electric = 4096;
+const int TMT_Psychic = 8192;
+const int TMT_Ice = 16384;
+const int TMT_Dragon = 32768;
+const int TMT_Dark = 65536;
+const int TMT_Fairy = 131072;
+
+
+const int TMA_Null = 0;
+const int TMA_Mature = 1;
+const int TMA_Prankster = 2;
+const int TMA_Defensive = 4;
+const int TMA_Succor	= 8;
+const int TMA_Pugilist = 16;
+const int TMA_Terrestrial = 32;
+const int TMA_Artillery	= 64;
+const int TMA_Draconic = 128;
+const int TMA_Spikey = 256;
+const int TMA_Slasher	= 512;
+/*
+
+const int BT_MOVERIGHT = 1024;
+const int BT_MOVELEFT = 2048;
+const int BT_BACK = 4096;
+const int BT_FORWARD = 8192;
+const int BT_RIGHT = 16384;
+const int BT_LEFT = 32768;
+const int BT_LOOKUP	= 65536;
+const int BT_LOOKDOWN = 131072;
+const int BT_MOVEUP	= 262144;
+const int BT_MOVEDOWN = 524288;
+const int BT_SHOWSCORES	= 1048576;
+const int BT_USER1 = 2097152;
+const int BT_USER2 = 4194304;
+const int BT_USER3 = 8388608;
+const int BT_USER4 = 16777216;
+*/
 
 //=======|weapon Constants|==========
 const int Aim_OverHead = 35;
