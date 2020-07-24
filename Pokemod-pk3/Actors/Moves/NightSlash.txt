@@ -133,7 +133,7 @@ actor NightSlashStart
 PROJECTILE
 +RIPPER
 damagetype "NightSlash1"
-damage (20)
+damage (MBP_NightSlash1)
 height 5
 radius 5
 Speed 25
@@ -165,7 +165,7 @@ actor NightSlashTip
 PROJECTILE
 +RIPPER
 damagetype "NightSlash2"
-damage (30)
+damage (MBP_NightSlash2)
 height 5
 radius 5
 Speed 26

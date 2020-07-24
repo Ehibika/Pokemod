@@ -107,7 +107,7 @@ actor SpikesHazard : BasicProjectile
 DamageType "Spikes"
 obituary "$OB_Spikes"
 Speed 0
-Damage (15)
+Damage (MBP_Spikes)
 radius 10
 height 10
 scale 1.5

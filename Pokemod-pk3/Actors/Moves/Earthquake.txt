@@ -161,7 +161,7 @@ TNT1 A 0
 TNT1 A 0 A_GiveInventory("ProjectileCode",1)
 TNT1 A 0 A_SpawnItemEX("Earthquake_WaveFX",0,0,0,0,0,0,0,1)
 TNT1 A 1
-TNT1 A 1 A_Explode(100,32,0,0,32)
+TNT1 A 1 A_Explode(MBP_Earthquake,32,0,0,32)
 Goto Death
 Death:
 TNT1 A 0 

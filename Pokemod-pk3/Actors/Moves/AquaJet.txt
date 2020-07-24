@@ -123,7 +123,7 @@ stop
 actor AquaJetDamager : BasicProjectile
 {
 Speed 0
-Damage (15)
+Damage (MBP_AquaJet)
 radius 12
 height 12
 DamageType "AquaJet"

@@ -86,7 +86,7 @@ DamageType "SeedBomb"
 obituary "$OB_SeedBomb"
 -NoGravity
 Gravity 1.5
-damage (5)
+damage (1)
 Radius 8
 Height 8
 speed 35
@@ -123,7 +123,7 @@ States
 Spawn:
 TNT1 A 0
 TNT1 A 0 A_GiveInventory("ProjectileCode",1)
-TNT1 A 0 A_Explode(45,SEEDBOMB_AREA1,0,0,SEEDBOMB_AREA2)
+TNT1 A 0 A_Explode(MBP_SeedBomb,SEEDBOMB_AREA1,0,0,SEEDBOMB_AREA2)
 NAPC A 0 A_PlaySoundEx("weapon/napalm", "Weapon")
 TNT1 A 0 A_SpawnItemEx("SeedBombImpactFX",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION)
 stop

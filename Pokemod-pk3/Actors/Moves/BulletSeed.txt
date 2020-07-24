@@ -85,7 +85,7 @@ powerup.type "ConShotTimer"
 actor BulletSeedShot : BasicProjectile
 {
 Speed 80
-Damage (5)
+Damage (MBP_BulletSeed)
 DamageType "BulletSeed"
 obituary "$OB_BulletSeed"
 radius 4

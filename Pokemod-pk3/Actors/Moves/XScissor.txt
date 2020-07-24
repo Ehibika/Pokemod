@@ -101,7 +101,7 @@ PROJECTILE
 +RIPPER
 +NOEXPLODEFLOOR
 damagetype "XScissor1"
-damage (35)
+damage (MBP_XScissor)
 height 5
 radius 5
 Speed 20

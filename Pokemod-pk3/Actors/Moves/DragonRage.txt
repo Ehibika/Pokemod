@@ -118,7 +118,7 @@ States
 Spawn:
 TNT1 A 0
 TNT1 A 0 A_GiveInventory("ProjectileCode",1)
-TNT1 A 0 A_Explode (40,64,0,0,64)
+TNT1 A 0 A_Explode (MBP_DragonRage,64,0,0,64)
 FWVE W 0 A_SpawnItemEx("OilPitIgnite",0,0,8)
 NAPC A 0 A_PlaySoundEx("weapon/napalm", "Weapon")
 TNT1 A 0 A_SpawnItemEx("DragonRageImpactFX",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION)

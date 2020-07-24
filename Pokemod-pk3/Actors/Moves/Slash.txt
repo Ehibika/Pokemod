@@ -85,7 +85,7 @@ speed 15
 States
 {
 Spawn:
-SCLA HIJKL 1 A_Explode(5,80,0,0,40)
+SCLA HIJKL 1 A_Explode(MBP_Slash,80,0,0,40)
 stop
 }
 }

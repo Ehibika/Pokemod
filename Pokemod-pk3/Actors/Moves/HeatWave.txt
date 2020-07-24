@@ -133,7 +133,7 @@ Obituary "$OB_HeatWave"
 Radius 12
 Height 12
 scale 2.5
-damage (15)
+damage (MBP_HeatWave)
 speed 0
 States
 {

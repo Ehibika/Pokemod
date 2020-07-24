@@ -70,7 +70,7 @@ Speed 80
 Scale 5.0
 DamageType "BlazeKick"
 Obituary "$OB_BlazeKick"
-Damage(45)
+Damage(MBP_BlazeKick)
 States
 {
 Spawn:

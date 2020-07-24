@@ -90,7 +90,7 @@ Speed 80
 Scale 2.0
 DamageType "SkyUppercut"
 Obituary "$OB_SkyUppercut"
-Damage(45)
+Damage(MBP_SkyUppercut)
 States
 {
 Spawn:

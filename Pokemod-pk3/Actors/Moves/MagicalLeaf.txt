@@ -72,7 +72,7 @@ actor MagicalLeafPP : Ammo {inventory.amount 1 inventory.Maxamount 20}
 actor MagicalLeafShot : BasicProjectile
 {
 Speed 35
-Damage (15)
+Damage (MBP_MagicalLeaf)
 DamageType "MagicalLeaf"
 obituary "$OB_MagicalLeaf"
 +SEEKERMISSILE

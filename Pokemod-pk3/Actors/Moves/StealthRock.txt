@@ -103,7 +103,7 @@ DamageType "StealthRock"
 obituary "$OB_StealthRock"
 +FLOATBOB
 Speed 0
-Damage (5)
+Damage (MBP_StealthRock)
 radius 5
 height 5
 scale 2.5

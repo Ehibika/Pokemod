@@ -125,7 +125,7 @@ actor LeafBladeStart
 PROJECTILE
 +RIPPER
 damagetype "LeafBlade1"
-damage (35)
+damage (MBP_LeafBlade1)
 height 5
 radius 5
 Speed 25
@@ -157,7 +157,7 @@ actor LeafBladeTip
 PROJECTILE
 +RIPPER
 damagetype "LeafBlade2"
-damage (30)
+damage (MBP_LeafBlade2)
 height 5
 radius 5
 Speed 26

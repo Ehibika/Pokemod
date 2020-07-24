@@ -139,7 +139,7 @@ DamageType "FireSpin"
 +FLOORHUGGER
 Radius 20
 Height 26
-Damage (5)
+Damage (MBP_FireSpin)
 Speed 0
 Scale 3.5
 reactiontime 35

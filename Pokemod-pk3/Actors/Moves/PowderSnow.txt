@@ -112,7 +112,7 @@ stop
 
 actor PowderSnowProjectile : basicProjectile
 {
-Damage (5)
+Damage (MBP_PowderSnow)
 damagetype "PowderSnow"
 Obituary "$OB_POWDERSNOW"
 Scale 2.5

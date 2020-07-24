@@ -153,7 +153,7 @@ LECD E 1 //A_GiveInventory("LSeed_SoundCue",1,AAPTR_TRACER)
 TNT1 A 0 A_ChangeFlag("NOINTERACTION",True)
 TNT1 A 0 A_ChangeFlag("NOCLIP",True)
 TNT1 A 0 A_ChangeFlag("DOOMBOUNCE",False)
-TNT1 A 0 A_SetArg(2,CallACS("LeechSeedHPGet",5))
+TNT1 A 0 A_SetArg(2,CallACS("LeechSeedHPGet",MBP_LeechSeed))
 Goto LSeed
 
 LSeed:

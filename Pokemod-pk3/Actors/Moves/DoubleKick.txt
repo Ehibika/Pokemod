@@ -93,7 +93,7 @@ Speed 65
 Scale 5.0
 DamageType "DoubleKick"
 Obituary "$OB_DoubleKick"
-Damage(25)
+Damage(MBP_DoubleKick)
 States
 {
 Spawn:

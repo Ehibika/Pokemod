@@ -163,7 +163,7 @@ Y_BC N 1 A_SpawnItemEx("TShock_Extend",0,0,355,0,0,0,0,1)
 Y_BC N 0 A_PlaySoundEx("weapon/lightningbolt","Weapon")
 Y_BC N 0 A_Jump(256,"Spawn2")
 Spawn2:
-Y_BC N 0 A_Explode(10,100,0,0,100)
+Y_BC N 0 A_Explode(MBP_ThunderShock,100,0,0,100)
 goto Spawn3
 Spawn2a:
 Y_BC N 0 A_SpawnItemEx("TShock_BoltFX2",0,0,8,0,0,0,0,1)

@@ -121,7 +121,7 @@ stop
 actor AquaTailDamager : BasicProjectile
 {
 Speed 0
-Damage (35)
+Damage (MBP_AquaTail)
 radius 15
 height 10
 DamageType "AquaTail"

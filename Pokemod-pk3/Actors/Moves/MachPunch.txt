@@ -105,7 +105,7 @@ stop
 actor MachpunchDamager : BasicFastProjectile
 {
 Speed 0
-Damage (15)
+Damage (MBP_Machpunch)
 radius 12
 height 12
 DamageType "Machpunch"

@@ -101,7 +101,7 @@ obituary "$OB_Mudslap"
 +SEEKERMISSILE
 +SCREENSEEKER
 Speed 40
-Damage (5)
+Damage (MBP_Mudslap)
 radius 5
 height 5
 ReactionTime 12

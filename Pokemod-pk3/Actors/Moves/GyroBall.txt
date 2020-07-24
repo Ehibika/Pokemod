@@ -213,7 +213,7 @@ Damagetype "GyroBall"
 +DONTSPLASH
 +DONTBLAST
 +THRUGHOST
-Damage (15)
+Damage (MBP_GyroBall)
 Radius 26
 Height 55
 States

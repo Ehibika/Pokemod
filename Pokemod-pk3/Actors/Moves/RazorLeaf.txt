@@ -72,7 +72,7 @@ actor RazorLeafPP : Ammo {inventory.amount 1 inventory.Maxamount 40}
 actor RazorLeafShot : BasicProjectile
 {
 Speed 65
-Damage (15)
+Damage (MBP_RazorLeaf)
 DamageType "RazorLeaf"
 obituary "$OB_RazorLeaf"
 radius 5

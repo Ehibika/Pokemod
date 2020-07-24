@@ -94,7 +94,7 @@ Speed 45
 Scale 5.0
 DamageType "Thrash"
 Obituary "$OB_Thrash"
-Damage(15)
+Damage(MBP_Thrash)
 States
 {
 Spawn:

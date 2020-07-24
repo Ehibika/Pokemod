@@ -72,7 +72,7 @@ Speed 44
 Scale 5.0
 DamageType "Peck"
 Obituary "$OB_Peck"
-Damage(25)
+Damage(MBP_Peck)
 States
 {
 Spawn:

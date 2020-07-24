@@ -92,7 +92,7 @@ Goto Death
 Death:
 TNT1 A 0 A_Stop
 TNT1 A 0 A_ChangeFlag("THRUACTORS",false)
-TNT1 A 1 ACS_NamedExecuteAlways("FalseSwipeDamage",0,10)
+TNT1 A 1 ACS_NamedExecuteAlways("FalseSwipeDamage",0,MBP_FalseSwipe)
 SCLA HIJKL 1 
 stop
 }

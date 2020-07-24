@@ -96,7 +96,7 @@ powerup.type "ConShotTimer"
 actor BubbleBeamBubble : BasicProjectile
 {
 Speed 45
-Damage (10)
+Damage (MBP_BubbleBeam)
 DamageType "BubbleBeam"
 obituary "$OB_BubbleBeam"
 radius 16

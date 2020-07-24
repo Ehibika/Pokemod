@@ -217,7 +217,7 @@ Damagetype "Rollout"
 +DONTSPLASH
 +DONTBLAST
 +THRUGHOST
-Damage (15)
+Damage (MBP_Rollout)
 Radius 26
 Height 55
 States

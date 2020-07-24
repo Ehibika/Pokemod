@@ -72,7 +72,7 @@ actor EmberPP : Ammo {inventory.amount 1 inventory.Maxamount 40}
 actor EmberFireball : BasicProjectile
 {
 Speed 65
-Damage (15)
+Damage (MBP_Ember)
 DamageType "Ember"
 obituary "$OB_EMBER"
 radius 16
@@ -103,7 +103,7 @@ stop
 actor EmberFireball : BasicProjectile
 {
 Speed 25
-Damage (10)
+Damage (MBP_Ember)
 DamageType "Ember"
 obituary "$OB_Ember"
 +NOEXPLODEFLOOR

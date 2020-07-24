@@ -248,7 +248,7 @@ States
 {
 Spawn:
 TNT1 A 0
-TNT1 A 1 A_Explode(65,75,0,0,75) 
+TNT1 A 1 A_Explode(MBP_Acrobatics,75,0,0,75) 
 stop
 }
 }

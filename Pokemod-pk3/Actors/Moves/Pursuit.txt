@@ -75,7 +75,7 @@ actor PursuitProjectile : BasicProjectile
 Radius 20
 Height 20
 scale 2.5
-damage (5 + Args[0])
+damage (MBP_Pursuit + Args[0])
 +DONTBLAST
 +SEEKERMISSILE
 +SCREENSEEKER

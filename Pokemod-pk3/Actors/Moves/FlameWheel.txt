@@ -232,7 +232,7 @@ States
 {
 Spawn:
 TNT1 A 0
-TNT1 A 1 A_Explode(15,75,0,0,75) 
+TNT1 A 1 A_Explode(MBP_FlameWheel,75,0,0,75) 
 stop
 }
 }

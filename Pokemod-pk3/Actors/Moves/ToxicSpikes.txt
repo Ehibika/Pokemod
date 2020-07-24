@@ -104,7 +104,7 @@ actor ToxicSpikesHazard : BasicProjectile
 DamageType "ToxicSpikes"
 obituary "$OB_ToxicSpikes"
 Speed 0
-Damage (5)
+Damage (MBP_ToxicSpikes)
 radius 10
 height 10
 scale 1.5

@@ -95,7 +95,7 @@ Speed 55
 Scale 5.0
 DamageType "CloseCombat"
 Obituary "$OB_CloseCombat"
-Damage(15)
+Damage(MBP_CloseCombat)
 States
 {
 Spawn:

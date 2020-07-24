@@ -207,7 +207,7 @@ Height 20
 scale 2.5
 Obituary "$OB_SKYDROP"
 speed 55
-damage (10)
+damage (MBP_SkyDrop1)
 reactiontime 1
 damagetype "SkyDrop1"
 States
@@ -217,7 +217,7 @@ MMFX C 0
 MMFX C 1 A_CountDown
 goto Spawn+1
 Death:
-MMFX C 0 A_Explode(10,40,0)
+MMFX C 0 A_Explode(MBP_SkyDrop1,40,0)
 goto XDeath
 XDeath:
 MMFX C 0 A_Stop
@@ -246,7 +246,7 @@ States
 Spawn:
 TNT1 A 0
 TNT1 A 0 Thing_Move(0,CallACS("Get_Target_SuplexID_TID"),1)
-TNT1 A 0 A_Explode(35, 300, 0)
+TNT1 A 0 A_Explode(MBP_SkyDrop2, 300, 0,0,300)
 goto Spawn2
 Spawn2:
 TNT1 A 0 A_PlaySoundEx("weapon/crackerexplode", "Weapon")

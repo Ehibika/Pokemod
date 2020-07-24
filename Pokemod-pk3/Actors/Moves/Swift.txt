@@ -79,7 +79,7 @@ obituary "$OB_Swift"
 +SEEKERMISSILE
 +SCREENSEEKER
 Speed 40
-Damage (4)
+Damage (MBP_Swift)
 radius 5
 height 5
 ReactionTime 12

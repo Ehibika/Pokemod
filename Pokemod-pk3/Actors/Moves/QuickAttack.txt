@@ -92,7 +92,7 @@ Spawn:
 TNT1 A 0 
 TNT1 A 0 A_JumpIfInTargetInventory("DashBreaker",1,"Terminate")
 TNT1 A 1 
-TNT1 A 1 A_Explode(15,80,0,0,80)
+TNT1 A 1 A_Explode(MBP_QuickAttack,80,0,0,80)
 stop
 Death:
 XDeath:

@@ -67,7 +67,7 @@ Speed 125
 Scale 5.0
 DamageType "Vacuumwave"
 Obituary "$OB_Vacuumwave"
-Damage(15)
+Damage(MBP_Vacuumwave)
 States
 {
 Spawn:
