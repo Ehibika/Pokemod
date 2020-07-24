@@ -48,6 +48,7 @@ Fire.DashStart:
 "####" A 0 //A_ChangeFlag("NOGRAVITY",0)
 "####" A 0 A_GiveInventory("RolloutTimer")
 "####" A 0 A_GiveInventory("RolloutInitiate")
+"####" A 0 A_SpawnItemEx("RolloutRollingFX", 0, 0, 0, 0, 0, 0, 0,1)
 "####" A 0 A_SetUserVar("user_wepangle",angle)
 "####" A 0 A_PlaySoundEx("Misc/release","Weapon")
 "####" A 0 A_GunFlash("Sound.Rollout")
@@ -125,6 +126,7 @@ Damagetype "Rollout"
 +STEPMISSILE
 +RIPPER
 +SKYEXPLODE
++SERVERSIDEONLY
 maxstepheight 35
 BounceFactor 0.9
 Gravity 1.55
@@ -147,46 +149,46 @@ Spawn2:
 ROLO R 0 A_GiveInventory("RolloutSpeedHandler")
 
 ROLO R 0 A_SetAngle(CallACS("GRAB_TIDMEMANGLE",0,0,Args[1]))
-ROLO R 1 A_GiveInventory("RolloutThrust")
+TNT1 A 1 A_GiveInventory("RolloutThrust")
 ROLO R 0 A_SpawnItemEx("RolloutDamager")
 ROLO R 0 A_JumpifinTargetInventory("ProjectilePortDead",1,"Death")
 
 ROLO S 0 A_SetAngle(CallACS("GRAB_TIDMEMANGLE",0,0,Args[1]))
-ROLO S 1 A_GiveInventory("RolloutThrust")
+TNT1 A 1 A_GiveInventory("RolloutThrust")
 ROLO S 0 A_SpawnItemEx("RolloutDamager")
 ROLO S 0 A_JumpifinTargetInventory("ProjectilePortDead",1,"Death")
 
 ROLO T 0 A_SetAngle(CallACS("GRAB_TIDMEMANGLE",0,0,Args[1]))
-ROLO T 1 A_GiveInventory("RolloutThrust")
+TNT1 A 1 A_GiveInventory("RolloutThrust")
 ROLO T 0 A_SpawnItemEx("RolloutDamager")
 ROLO T 0 A_JumpifinTargetInventory("ProjectilePortDead",1,"Death")
 
 ROLO R 0 A_SetAngle(CallACS("GRAB_TIDMEMANGLE",0,0,Args[1]))
-ROLO R 1 A_GiveInventory("RolloutThrust")
+TNT1 A 1 A_GiveInventory("RolloutThrust")
 ROLO R 0 A_SpawnItemEx("RolloutDamager")
 ROLO R 0 A_JumpifinTargetInventory("ProjectilePortDead",1,"Death")
 
 ROLO S 0 A_SetAngle(CallACS("GRAB_TIDMEMANGLE",0,0,Args[1]))
-ROLO S 1 A_GiveInventory("RolloutThrust")
+TNT1 A 1 A_GiveInventory("RolloutThrust")
 ROLO S 0 A_SpawnItemEx("RolloutDamager")
 ROLO S 0 A_JumpifinTargetInventory("ProjectilePortDead",1,"Death")
 
 ROLO T 0 A_SetAngle(CallACS("GRAB_TIDMEMANGLE",0,0,Args[1]))
-ROLO T 1 A_GiveInventory("RolloutThrust")
+TNT1 A 1 A_GiveInventory("RolloutThrust")
 ROLO T 0 A_SpawnItemEx("RolloutDamager")
 ROLO T 0 A_JumpifinTargetInventory("ProjectilePortDead",1,"Death")
 
-ROLO T 1 A_JumpifinTargetInventory("RolloutTimer",1,"Spawn2")
+TNT1 A 1 A_JumpifinTargetInventory("RolloutTimer",1,"Spawn2")
 
 stop
 Bounce.Wall:
 TNT1 A 0 A_PlaySoundEx("Move/RolloutImpact","SoundSlot5")
-ROLO R 1 A_SpawnItemEx("BasicMeleeFX",25,0,0,0,0,0,0,1)
+TNT1 A 1 a_GiveToTarget("RolloutCollideFX")
 Goto Death
 
 Death:
 AQBA C 0 
-ROLO R 1 A_GiveToTarget("DashBreaker")
+TNT1 A 1 A_GiveToTarget("DashBreaker")
 stop
 }
 }
@@ -285,6 +287,16 @@ stop
 }
 }
 
+actor RolloutCollideFX : CustomInventory
+{
+states
+{
+Pickup:
+TNT1 A 0 A_SpawnItemEx("BasicMeleeFX",25,0,0,0,0,0,0,1)
+stop
+}
+}
+
 actor RolloutInitiate : CustomInventory
 {
 states
@@ -310,6 +322,24 @@ KBAR F 0 A_Jumpifintargetinventory("RolloutWarmupTimer",1,"Spawn2")
 Goto Death
 Death:
 ROLO RST 1 A_Warp(AAPTR_TARGET,0,0,0,0,WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE)
+KBAR F 0 
+stop
+}
+}
+
+actor RolloutRollingFX : BasicClientside
+{
+scale 2.5
+speed 7
+States
+{
+Spawn:
+TNT1 A 0
+Spawn2:
+ROLO RST 1 A_Warp(AAPTR_TARGET,0,0,0,0,WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE)
+TNT1 AAAA 1 A_JumpIfInTargetInventory("RolloutTimer",1,"Spawn2")
+Goto Death
+Death:
 KBAR F 0 
 stop
 }
