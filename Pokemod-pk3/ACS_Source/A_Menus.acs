@@ -91,12 +91,12 @@ while(MenuUp)
 	// - Print Menu -
 	SetHudSize(320,200,0);
 	SetFont("STCFN");
-	HudMessage(s:Str1; HUDMSG_FADEOUT, 500, 0, MenuX, Menuy, 0.1, 0);
-	HudMessage(s:Str2; HUDMSG_FADEOUT, 501, 0, MenuX, Menuy+(MNL*1), 0.1, 0);
-	HudMessage(s:Str3; HUDMSG_FADEOUT, 502, 0, MenuX, Menuy+(MNL*2), 0.1, 0);
-	HudMessage(s:Str4; HUDMSG_FADEOUT, 503, 0, MenuX, Menuy+(MNL*3), 0.1, 0);
-	HudMessage(s:Str5; HUDMSG_FADEOUT, 504, CR_Orange, MenuX, Menuy+(MNL*4), 0.1, 0);
-	HudMessage(s:">>"; HUDMSG_FADEOUT, 505, 0, MenuX-16.0, Menuy+(MNL*ChoiceID), 0.1, 0);
+	HudMessage(s:Str1; HUDMSG_FADEOUT, 500, 0, MenuX, Menuy, 0.2, 0);
+	HudMessage(s:Str2; HUDMSG_FADEOUT, 501, 0, MenuX, Menuy+(MNL*1), 0.2, 0);
+	HudMessage(s:Str3; HUDMSG_FADEOUT, 502, 0, MenuX, Menuy+(MNL*2), 0.2, 0);
+	HudMessage(s:Str4; HUDMSG_FADEOUT, 503, 0, MenuX, Menuy+(MNL*3), 0.2, 0);
+	HudMessage(s:Str5; HUDMSG_FADEOUT, 504, CR_Orange, MenuX, Menuy+(MNL*4), 0.2, 0);
+	HudMessage(s:">>"; HUDMSG_FADEOUT, 505, 0, MenuX-16.0, Menuy+(MNL*ChoiceID), 0.2, 0);
 
 	// #------------------
 	// # End Menustate 0
@@ -244,12 +244,12 @@ while(MenuUp)
 	// #------------------
 	if(MenuStates == 0)
 	{
-	HudMessage(s:Str1; HUDMSG_FADEOUT, 500, 0, MenuX, Menuy, 0.1, 0);
-	HudMessage(s:Str2; HUDMSG_FADEOUT, 501, 0, MenuX, Menuy+(MNL*1), 0.1, 0);
-	HudMessage(s:Str3; HUDMSG_FADEOUT, 502, 0, MenuX, Menuy+(MNL*2), 0.1, 0);
-	HudMessage(s:Str4; HUDMSG_FADEOUT, 503, 0, MenuX, Menuy+(MNL*3), 0.1, 0);
-	HudMessage(s:"Exit"; HUDMSG_FADEOUT, 504, CR_ORANGE, MenuX, Menuy+(MNL*4), 0.1, 0);
-	HudMessage(s:">>"; HUDMSG_FADEOUT, 505, 0, MenuX-16.0, Menuy+(MNL*ChoiceID), 0.1, 0);
+	HudMessage(s:Str1; HUDMSG_FADEOUT, 500, 0, MenuX, Menuy, 0.2, 0);
+	HudMessage(s:Str2; HUDMSG_FADEOUT, 501, 0, MenuX, Menuy+(MNL*1), 0.2, 0);
+	HudMessage(s:Str3; HUDMSG_FADEOUT, 502, 0, MenuX, Menuy+(MNL*2), 0.2, 0);
+	HudMessage(s:Str4; HUDMSG_FADEOUT, 503, 0, MenuX, Menuy+(MNL*3), 0.2, 0);
+	HudMessage(s:"Exit"; HUDMSG_FADEOUT, 504, CR_ORANGE, MenuX, Menuy+(MNL*4), 0.2, 0);
+	HudMessage(s:">>"; HUDMSG_FADEOUT, 505, 0, MenuX-16.0, Menuy+(MNL*ChoiceID), 0.2, 0);
 	// - Check Inputs -
 	if(CancelInput == 1 || ConfirmInput == 1 && ChoiceID == 4){Break;} //MenuUp = false;
 	if(ConfirmInput == 1 && ChoiceID<4)
@@ -273,13 +273,13 @@ while(MenuUp)
 	// #------------------
 	if(MenuStates == 1)
 	{
-	HudMessage(s:Str1; HUDMSG_FADEOUT, 500, 0, MenuX, Menuy, 0.1, 0);
-	HudMessage(s:Str2; HUDMSG_FADEOUT, 501, 0, MenuX, Menuy+(MNL*1), 0.1, 0);
-	HudMessage(s:Str3; HUDMSG_FADEOUT, 502, 0, MenuX, Menuy+(MNL*2), 0.1, 0);
-	HudMessage(s:Str4; HUDMSG_FADEOUT, 503, 0, MenuX, Menuy+(MNL*3), 0.1, 0);
-	HudMessage(s:"Back"; HUDMSG_FADEOUT, 504, CR_ORANGE, MenuX, Menuy+(MNL*4), 0.1, 0);
-	HudMessage(s:">>"; HUDMSG_FADEOUT, 505, 0, MenuX-16.0, Menuy+(MNL*ChoiceID), 0.1, 0);
-	HudMessage(s:"!!"; HUDMSG_FADEOUT, 506, 0, MenuX-30.0, Menuy+(MNL*WepToMove), 0.1, 0);
+	HudMessage(s:Str1; HUDMSG_FADEOUT, 500, 0, MenuX, Menuy, 0.2, 0);
+	HudMessage(s:Str2; HUDMSG_FADEOUT, 501, 0, MenuX, Menuy+(MNL*1), 0.2, 0);
+	HudMessage(s:Str3; HUDMSG_FADEOUT, 502, 0, MenuX, Menuy+(MNL*2), 0.2, 0);
+	HudMessage(s:Str4; HUDMSG_FADEOUT, 503, 0, MenuX, Menuy+(MNL*3), 0.2, 0);
+	HudMessage(s:"Back"; HUDMSG_FADEOUT, 504, CR_ORANGE, MenuX, Menuy+(MNL*4), 0.2, 0);
+	HudMessage(s:">>"; HUDMSG_FADEOUT, 505, 0, MenuX-16.0, Menuy+(MNL*ChoiceID), 0.2, 0);
+	HudMessage(s:"!!"; HUDMSG_FADEOUT, 506, 0, MenuX-30.0, Menuy+(MNL*WepToMove), 0.2, 0);
 	// - Check Inputs -
 	if(CancelInput == 1 || ConfirmInput == 1 && ChoiceID == 4){MenuNextState = 0;}
 	if(ConfirmInput == 1 && ChoiceID<4 && WepToMove != ChoiceID)
@@ -445,7 +445,7 @@ while (MenuUp) {
 		{
 			MoveListVal = MoveDex[PlayerDEXNum][i];
 			if (MoveListVal != -1) {
-				HudMessage(s: weapons_ammo[MoveListVal][2]; HUDMSG_FADEOUT, 500 + j, 0, MenuX, Menuy + (MNL * j), 0.1, 0);
+				HudMessage(s: weapons_ammo[MoveListVal][2]; HUDMSG_FADEOUT, 500 + j, 0, MenuX, Menuy + (MNL * j), 0.2, 0);
 				j++;
 				MoveListCount++;
 			}
@@ -456,8 +456,8 @@ while (MenuUp) {
 		else {
 			if(!BGUp){DrawMenuFrame(MenuX-(8.0*3),MenuY-(8.0*0),15,6+MoveListCount); BGup = True;}
 			ChoiceCap = MoveListCount;
-			HudMessage(s: "Exit"; HUDMSG_FADEOUT, 514, CR_ORANGE, MenuX, Menuy + (MNL * ChoiceCap), 0.1, 0);
-			HudMessage(s: ">>"; HUDMSG_FADEOUT, 515, 0, MenuX - 16.0, Menuy + (MNL * ChoiceID), 0.1, 0);
+			HudMessage(s: "Exit"; HUDMSG_FADEOUT, 514, CR_ORANGE, MenuX, Menuy + (MNL * ChoiceCap), 0.2, 0);
+			HudMessage(s: ">>"; HUDMSG_FADEOUT, 515, 0, MenuX - 16.0, Menuy + (MNL * ChoiceID), 0.2, 0);
 		}
 
 		// - Grab Inputs -
@@ -562,18 +562,18 @@ while (MenuUp) {
 
 		// - Print the list of stats -
 			if(!BGUp){DrawMenuFrame(MenuX-(8.0*3),MenuY-(8.0*0),20,10); BGup = True;}
-			HudMessage(s: "HP:"; HUDMSG_FADEOUT, 500, CR_WHITE, MenuX, Menuy + (MNL * 0), 0.1, 0);
-			HudMessage(s: "Attack:"; HUDMSG_FADEOUT, 502, CR_WHITE, MenuX, Menuy + (MNL * 1), 0.1, 0);
-			HudMessage(s: "Defense:"; HUDMSG_FADEOUT, 504, CR_WHITE, MenuX, Menuy + (MNL * 2), 0.1, 0);
-			HudMessage(s: "Sp.Attack:"; HUDMSG_FADEOUT, 506, CR_WHITE, MenuX, Menuy + (MNL * 3), 0.1, 0);
-			HudMessage(s: "Sp.Defense:"; HUDMSG_FADEOUT, 508, CR_WHITE, MenuX, Menuy + (MNL * 4), 0.1, 0);
-			HudMessage(s: "Speed:"; HUDMSG_FADEOUT, 510, CR_WHITE, MenuX, Menuy + (MNL * 5), 0.1, 0);
-				HudMessage(i:Player_HP; HUDMSG_FADEOUT, 501, CR_ORANGE, MenuX2, Menuy + (MNL * 0), 0.1, 0);
-				HudMessage(i:Player_PATK; HUDMSG_FADEOUT, 503, CR_ORANGE, MenuX2, Menuy + (MNL * 1), 0.1, 0);
-				HudMessage(i:Player_PDEF; HUDMSG_FADEOUT, 505, CR_ORANGE, MenuX2, Menuy + (MNL * 2), 0.1, 0);
-				HudMessage(i:Player_SATK; HUDMSG_FADEOUT, 507, CR_ORANGE, MenuX2, Menuy + (MNL * 3), 0.1, 0);
-				HudMessage(i:Player_SDEF; HUDMSG_FADEOUT, 509, CR_ORANGE, MenuX2, Menuy + (MNL * 4), 0.1, 0);
-				HudMessage(i:Player_SPD; HUDMSG_FADEOUT, 511, CR_ORANGE, MenuX2, Menuy + (MNL * 5), 0.1, 0);
+			HudMessage(s: "HP:"; HUDMSG_FADEOUT, 500, CR_WHITE, MenuX, Menuy + (MNL * 0), 0.2, 0);
+			HudMessage(s: "Attack:"; HUDMSG_FADEOUT, 502, CR_WHITE, MenuX, Menuy + (MNL * 1), 0.2, 0);
+			HudMessage(s: "Defense:"; HUDMSG_FADEOUT, 504, CR_WHITE, MenuX, Menuy + (MNL * 2), 0.2, 0);
+			HudMessage(s: "Sp.Attack:"; HUDMSG_FADEOUT, 506, CR_WHITE, MenuX, Menuy + (MNL * 3), 0.2, 0);
+			HudMessage(s: "Sp.Defense:"; HUDMSG_FADEOUT, 508, CR_WHITE, MenuX, Menuy + (MNL * 4), 0.2, 0);
+			HudMessage(s: "Speed:"; HUDMSG_FADEOUT, 510, CR_WHITE, MenuX, Menuy + (MNL * 5), 0.2, 0);
+				HudMessage(i:Player_HP; HUDMSG_FADEOUT, 501, CR_ORANGE, MenuX2, Menuy + (MNL * 0), 0.2, 0);
+				HudMessage(i:Player_PATK; HUDMSG_FADEOUT, 503, CR_ORANGE, MenuX2, Menuy + (MNL * 1), 0.2, 0);
+				HudMessage(i:Player_PDEF; HUDMSG_FADEOUT, 505, CR_ORANGE, MenuX2, Menuy + (MNL * 2), 0.2, 0);
+				HudMessage(i:Player_SATK; HUDMSG_FADEOUT, 507, CR_ORANGE, MenuX2, Menuy + (MNL * 3), 0.2, 0);
+				HudMessage(i:Player_SDEF; HUDMSG_FADEOUT, 509, CR_ORANGE, MenuX2, Menuy + (MNL * 4), 0.2, 0);
+				HudMessage(i:Player_SPD; HUDMSG_FADEOUT, 511, CR_ORANGE, MenuX2, Menuy + (MNL * 5), 0.2, 0);
 
 
 		// - Grab Inputs -

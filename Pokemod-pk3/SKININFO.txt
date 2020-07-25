@@ -237,7 +237,7 @@ gender = male
 {
 name = "Grotle"
 sprite = P029
-class = mudkip
+class = Turtwig
 dsnoway = LAND
 dsoof = LAND
 dspldeth = MEGADEAT

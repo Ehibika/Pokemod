@@ -89,7 +89,7 @@ actor BuyTM14 : BuyThing100
 states
 {
 Use2:
-TNT1 A 0 A_JumpIf(!CallACS("CheckTM",TMT_NULL,TMA_Succor|TMA_Defensive),"BadTM")
+TNT1 A 0 A_JumpIf(!CallACS("CheckTM",TMT_Psychic,TMA_Succor|TMA_Defensive),"BadTM")
 TNT1 A 0 ACS_NamedExecuteAlways("PromptMoveLearn",0,Move_Reflect,100)
 goto BuySuccess
 }
@@ -100,7 +100,7 @@ actor BuyTM15 : BuyThing100
 states
 {
 Use2:
-TNT1 A 0 A_JumpIf(!CallACS("CheckTM",TMT_NULL,TMA_Succor|TMA_Defensive),"BadTM")
+TNT1 A 0 A_JumpIf(!CallACS("CheckTM",TMT_Psychic,TMA_Succor|TMA_Defensive),"BadTM")
 TNT1 A 0 ACS_NamedExecuteAlways("PromptMoveLearn",0,Move_LightScreen,100)
 goto BuySuccess
 }
@@ -111,7 +111,7 @@ actor BuyTM16 : BuyThing100
 states
 {
 Use2:
-TNT1 A 0 A_JumpIf(!CallACS("CheckTM",TMT_NULL,TMA_Succor|TMA_Defensive),"BadTM")
+TNT1 A 0 A_JumpIf(!CallACS("CheckTM",TMT_Normal,TMA_Succor|TMA_Defensive),"BadTM")
 TNT1 A 0 ACS_NamedExecuteAlways("PromptMoveLearn",0,Move_SafeGuard,100)
 goto BuySuccess
 }

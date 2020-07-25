@@ -83,6 +83,11 @@ Int CheckType;
 if(TM_TYPE != TMT_NULL){CheckType = 1;}
 if(TM_ARCH1 != 0){CheckType = 2;}
 
+if(CheckType==0)
+    {//if both are 0, this TM is Semi-universal
+        output = 1;
+    }
+
 //First, Check for a matching Type
     if(CheckType>=1)
     {
@@ -107,10 +112,8 @@ if(CheckType>=2)
     if(!output && TM_ARCH1 & TMA_Slasher) output = TMArch_Slasher(PlayerDexNum);
     }
 
-
-    // When all values are 0, the TM is considered semi-universal, thus it works on everyone except
-    //The Following pokemon. this is always checked in the end as it can also act as a dequalifier.
-    if(!Semi_UniversalTM(PlayerDexNum))Output = 0;
+    //if the pokemon is on the no-TM list, then auto reject
+    if(TM_Exclusion(PlayerDexNum) == 1)Output = 0;
 
 SetResultValue(output);
 }
@@ -159,6 +162,20 @@ int output = 1;
     Switch (Dexnum)
     {
     case SMEARGLE: output = 0;
+    }
+return output;
+}
+//#endregion 
+
+//#region -=- Semi Universal TMs
+Function int TM_Exclusion (int Dexnum)
+{
+int output = 0;
+// Following pokemon cannot use TM's at all
+
+    Switch (Dexnum)
+    {
+    case SMEARGLE: output = 1;
     }
 return output;
 }

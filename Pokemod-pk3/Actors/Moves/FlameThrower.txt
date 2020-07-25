@@ -74,7 +74,6 @@ Goto Ready
 //-----------------------------|Ammo & Inventory|------------------------------
 //[+]========================================================================[+]
 actor FlamethrowerPP : Ammo {inventory.amount 1 inventory.Maxamount 10}
-actor ConShotTimer : Powerup {inventory.amount 1 Powerup.Duration 35}
 
 
 Actor FlameThrowerProtect : powerprotection
