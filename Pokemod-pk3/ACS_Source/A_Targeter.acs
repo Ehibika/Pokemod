@@ -247,7 +247,7 @@ script 405 ENTER CLIENTSIDE {
 			}
 			
 			//apparently these two for loops are done in a way that excludes the
-			//script activator. possibly for potential desynch maybe?
+			//script activator. possibly for potential desynch maybe? -Bika
 			
 			for(i=0;i<ownerNumber;i++) {
 				if(CheckActorInventory(1000+i,"Discorded")) {
@@ -280,7 +280,7 @@ script 409 ENTER { //So joining players see stuff right
 function void HudMessageOnActorZPlusAllign(int tid, int ZPlus, int msgID, int hudX, int hudY, int xOffset, int yOffset, int range, str sprite, str text, int holdTime, str colour)
 {
 		
-	int dist, angle, vang, pitch, x, y;
+	int dist, PDist, angle, Pangle, vang, Pvang, pitch, x, y, px, py;
 	
 	int CamTID = ConsolePlayerNumber () + 9000;
 
@@ -299,21 +299,31 @@ function void HudMessageOnActorZPlusAllign(int tid, int ZPlus, int msgID, int hu
 	SetHudSize(hudX, hudY, 1);
 	x = GetActorX(tid) - GetActorX(CamTID);
 	y = GetActorY(tid) - GetActorY(CamTID);
+
+	px = GetActorX(tid) - GetActorX(0);
+	py = GetActorY(tid) - GetActorY(0);
 	
 	vang = VectorAngle(x,y);
 	angle = (vang - GetActorAngle(CamTID) + 1.0) % 1.0;
 	
 	if(((vang+0.125)%0.5) > 0.25) dist = FixedDiv(y, sin(vang));
 	else dist = FixedDiv(x, cos(vang));
+
+	Pvang = VectorAngle(px,py);
+	Pangle = (Pvang - GetActorAngle(0) + 1.0) % 1.0;
+
+	if(((vang+0.125)%0.5) > 0.25) PDist = FixedDiv(py, sin(Pvang));
+	else PDist = FixedDiv(px, cos(Pvang));
 	
-	if ((angle < 0.23 || angle > 0.85) && (dist >> 16) < range)
+
+	if ((angle < 0.23 || angle > 0.85) && (PDist >> 16) < range)
 	{
 		
 		if (GetActorPitch(CamTID) >= -0.5 && GetActorPitch(CamTID) <= 0.5)
 		{
  
 			pitch = VectorAngle(dist, GetActorZ(tid) + ZPlus - (GetActorZ(CamTID) + GetActorViewHeight(CamTID)));
-			pitch += FixedMul(GetActorPitch(CamTID), 1.2) % 1.0;
+			pitch += FixedMul(GetActorPitch(CamTID), 1.0) % 1.0; //1.2
  
 			if ((hudX/2) * sin(angle) != 0 && cos(angle) != 0 && (hudX/2) * sin(pitch) != 0 && cos(pitch) != 0)
 			{
@@ -336,7 +346,7 @@ function void HudMessageOnActorZPlusAllign(int tid, int ZPlus, int msgID, int hu
 
 
 
-
+//#region -=- Depreciated -=-
 function void hudmessageonactor(int tid, int msgID, int hudX, int hudY, int xOffset, int yOffset, int range, str sprite, str text, int holdTime, str colour, int swap)
 {
 	int dist, angle, vang, pitch, x, y;
@@ -380,3 +390,4 @@ function void hudmessageonactor(int tid, int msgID, int hudX, int hudY, int xOff
 		}
 	}
 }
+//#endregion

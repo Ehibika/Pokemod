@@ -143,7 +143,7 @@ DamageType "Haze"
 +BOUNCEONCEILINGS
 +ALLOWBOUNCEONACTORS
 +BOUNCEONACTORS
-Bouncefactor 0.1
+Bouncefactor 1.0
 Gravity 1.5
 damage (0)
 Radius 8
@@ -174,7 +174,7 @@ stop
 }
 
 
-actor HazeAimPath : GolfBallAimInstantStarter { Speed 25 Gravity 1.5}
+actor HazeAimPath : GolfBallAimInstantStarter3 { Speed 25 Gravity 1.5}
 
 actor HazeField : BasicHelper
 {

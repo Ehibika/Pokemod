@@ -193,7 +193,8 @@ states
 {
 Pickup:
 TNT1 A 0 A_PlaySoundEx("weapon/Rebound","SoundSlot5")
-TNT1 A 0 DamageThing(100*(CallACS("StatValueRamp",STAT_PATK,1,400)*0.01))
+TNT1 A 0 ACS_NamedExecuteAlways("PKMN_CollisionDamager",0,MBP_HiJumpKick)
+//TNT1 A 0 DamageThing(MBP_HiJumpKick*(CallACS("StatValueRamp",STAT_PATK,1,400)*0.01))
 TNT1 A 0 A_JumpIfInventory("DashBreaker",1,"Nope")
 TNT1 A 1 A_GiveInventory("DashBreaker",1)
 TNT1 A 0 A_Stop

@@ -127,6 +127,7 @@ actor BrineShot : BasicProjectile
 DamageType "Brine"
 obituary "$OB_Brine"
 -NOGRAVITY
++BOUNCEONCEILINGS
 +RIPPER
 Gravity 1.5
 Renderstyle "Translucent"
@@ -156,7 +157,7 @@ stop
 }
 
 
-actor BrineAimPath : GolfBallAimInstantStarter { Speed 35 Gravity 1.5}
+actor BrineAimPath : GolfBallAimInstantStarter2 { Speed 35 Gravity 1.5}
 
 
 actor BrineBlast : BasicExplosion

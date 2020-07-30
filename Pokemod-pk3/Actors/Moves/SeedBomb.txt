@@ -84,6 +84,7 @@ actor SeedBombShot : BasicProjectile
 {
 DamageType "SeedBomb"
 obituary "$OB_SeedBomb"
++BOUNCEONCEILINGS
 -NoGravity
 Gravity 1.5
 damage (1)
@@ -111,7 +112,7 @@ stop
 }
 
 
-actor SeedBombAimPath : GolfBallAimInstantStarter { Speed 35 Gravity 1.5}
+actor SeedBombAimPath : GolfBallAimInstantStarter2 { Speed 35 Gravity 1.5}
 
 
 actor SeedBombBlast : BasicExplosion

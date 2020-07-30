@@ -28,7 +28,8 @@ Spawn:
 WEAP X 1
 stop
 Ready:
-TNT1 A 1 A_WeaponReady(WRF_ALLOWRELOAD)
+TNT1 A 1 A_WeaponReady(WRF_ALLOWRELOAD|WRF_NOSECONDARY)
+TNT1 A 0 A_Jumpif(CallACS("PKMNACS_ButtonCheck",BT_ALTATTACK) == 1,"Altfire")
 Goto Ready
 Deselect:
 TNT1 A 0 ACS_NamedExecuteAlways("MoveSwap",0)
@@ -61,7 +62,8 @@ AltFire.After:
 TNT1 A 1 A_GiveInventory("PartRecovery_A") 
 TNT1 A 0 A_GiveInventory("SemiRecovery_B") 
 TNT1 A 0 A_GiveInventory("PartRecovery_C") 
-TNT1 A 0 A_REfire("AltFire")
+TNT1 A 0 A_Jumpif(CallACS("PKMNACS_ButtonCheck",BT_ALTATTACK) == 1,"Altfire")
+//TNT1 A 0 A_REfire("AltFire")
 TNT1 A 0 A_Jump(256,"Ready")
 Goto Ready
 

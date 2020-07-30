@@ -213,25 +213,57 @@ Str TinyBarSprite[21] = {
 script "PKMN_SleepHandler" (Void)
 {
 	int CurrentHP = GetActorProperty(0,APROP_Health);
-	int RegHP = GetActorProperty(0,APROP_Health);
+	int PrevHP = CurrentHP;
+	int WakeHP = CurrentHP/2;
+	int HitDiff;
+	int WakeHitDiff = GetActorProperty(0,APROP_SpawnHealth)/4;
+	Bool Awaken;
 	
-	while(CurrentHP > 0) {
+	while(CheckInventory("SleepMark")) {
 		CurrentHP = GetActorProperty(0,APROP_Health);
-		if(CurrentHP < RegHP) {
-			GiveActorInventory(0,"SleepBreaker",1);
-			//Log(s:"UnSleeperTag given");
-			terminate;
-		}
 		Delay(1);
-		if(!CheckInventory("SleepMark")) {
-			GiveActorInventory(0,"SleepBreaker",1);
-			//Log(s:"UnSleeperTag given - timed");
-			terminate;
-		}
-		
+		HitDiff = CurrentHP-PrevHP;
+		PrevHP = CurrentHP;
+
+		if(CurrentHP < WakeHP) {Awaken = True;}
+		if(HitDiff > WakeHitDiff){Awaken = True;}
+		if(CheckInventory("CringeMark")) {Awaken = True;}
+		if(!CheckInventory("SleepMark")) {Awaken = True;}
+
+		if(Awaken){GiveActorInventory(0,"SleepBreaker",1);}
 	}
 }
 
+
+#endregion
+//#endregion
+
+//#region -=- Collision Damage -=-
+#region -=- Sleep Handler -=-
+
+script "PKMN_CollisionDamager" (int Damage)
+{
+	//log(s:"Bump"); 
+Int SelfHP = GetActorProperty(0,APROP_HEALTH);
+
+Damage = GetUserVariable(0,"user_HitMemory");
+
+// -=- calculate damage for self damage
+int ModStat = StatModifier(CheckInventory("Active_PAttack"),PATK_ID);
+int Output;
+if(ModStat >= STATBASELINE)
+    {
+		Output = ValueMap(ModStat,STATMAX,STATBASELINE,ATKVAL3,ATKVAL2);
+    }
+else
+    {
+		Output = Noneg(ValueMap(ModStat,STATBASELINE,STATMIN,ATKVAL2,ATKVAL1));    
+	}
+	
+if(SelfHP > 1){SetPlayerProperty(0, 1, PROP_BUDDHA);}
+thing_damage2(0,Output,"RecoilDamage");
+SetPlayerProperty(0, 0, PROP_BUDDHA);
+}
 
 #endregion
 //#endregion
@@ -892,6 +924,15 @@ while (true) {
 //#region -=- Miscellany -=-
 #region -=- Miscellany -=-
 
+Script "PlayerState" (int State)
+{
+switch(State)
+	{
+	Case 1: SetActorState(0,"Missile");
+	}
+
+}
+
 script 147 (int Swap)
 {
 	Switch(Swap) {
@@ -1014,7 +1055,7 @@ int Output = fixeddiv(damage,100)*PerVal >> 16;
 
 if(Output > VictimHP){Output = VictimHP;}
 if(Output >= RecoilerHP){Output = RecoilerHP-1;}
-thing_damage2(0,Output,"RecoilDamage");
+thing_damage2(0,Output,"RecoilDamage"); 
 }
 
 

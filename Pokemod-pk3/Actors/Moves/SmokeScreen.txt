@@ -88,7 +88,7 @@ DamageType "SmokeScreen"
 +BOUNCEONCEILINGS
 +ALLOWBOUNCEONACTORS
 +BOUNCEONACTORS
-Bouncefactor 0.1
+Bouncefactor 1.0
 Gravity 1.5
 damage (0)
 Radius 8
@@ -120,7 +120,7 @@ stop
 }
 
 
-actor SmokeScreenAimPath : GolfBallAimInstantStarter { Speed 25 Gravity 1.5}
+actor SmokeScreenAimPath : GolfBallAimInstantStarter3 { Speed 25 Gravity 1.5}
 
 actor SmokeScreenField //: BasicHelper
 {

@@ -21,9 +21,9 @@ Int MoveDex [MAXDEX][14] = {
 	/*|5|*/{Ember,Growl,SmokeScreen,MetalClaw,/**/ FireSpin,FlameBurst,Flamethrower,DragonRage,DragonClaw,DragonPulse,FlareBlitz,DragonDance,FireBlast},
 	/*|6|*/{Ember,Growl,SmokeScreen,MetalClaw,/**/ FireSpin,FlameBurst,Flamethrower,DragonRage,DragonClaw,DragonPulse,FlareBlitz,DragonDance,FireBlast},
 	
-	/*|7|*/{Watergun,Yawn,RapidSpin,Protect,/**/ LifeDew,BubbleBeam,IronDefense,Amnesia,AquaRing,HydroPump,FlashCannon,Haze,ShellSmash},
-	/*|8|*/{Watergun,Yawn,RapidSpin,Protect,/**/ LifeDew,BubbleBeam,IronDefense,Amnesia,AquaRing,HydroPump,FlashCannon,Haze,ShellSmash},
-	/*|9|*/{Watergun,Yawn,RapidSpin,Protect,/**/ LifeDew,BubbleBeam,IronDefense,Amnesia,AquaRing,HydroPump,FlashCannon,Haze,ShellSmash},
+	/*|7|*/{Watergun,Yawn,RapidSpin,Protect,/**/ LifeDew,BubbleBeam,IronDefense,AquaTail,AquaRing,HydroPump,FlashCannon,Fakeout,ShellSmash},
+	/*|8|*/{Watergun,Yawn,RapidSpin,Protect,/**/ LifeDew,BubbleBeam,IronDefense,AquaTail,AquaRing,HydroPump,FlashCannon,Fakeout,ShellSmash},
+	/*|9|*/{Watergun,Yawn,RapidSpin,Protect,/**/ LifeDew,BubbleBeam,IronDefense,AquaTail,AquaRing,HydroPump,FlashCannon,Fakeout,ShellSmash},
 	
 	/*|10|*/{RazorLeaf,LifeDew,PoisonPowder,Synthesis,/**/ Reflect,MagicalLeaf,LightScreen,GrassWhistle,HealPulse,AromaTherapy,SeedBomb,Safeguard,SolarBeam},
 	/*|11|*/{RazorLeaf,LifeDew,PoisonPowder,Synthesis,/**/ Reflect,MagicalLeaf,LightScreen,GrassWhistle,HealPulse,AromaTherapy,SeedBomb,Safeguard,SolarBeam},

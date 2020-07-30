@@ -206,7 +206,7 @@ str weapons_ammo[MAX_WEAPONS_GLOBAL][7] =
 {"SkullBashMove", "SkullBashPP", "SkullBash", 1.0, "NO", "NO", "SLOT_NONE"},
 {"FlashCannonMove", "FlashCannonPP", "FlashCannon", 1.0, "NO", "NO", "SLOT_NONE"},
 {"ShellSmashMove", "ShellSmashPP", "ShellSmash", 1.0, "NO", "NO", "SLOT_NONE"},
-{"YawnMove", "YawnPP", "Yawn", 1.0, "YES", "NO", "SLOT_NONE"},
+{"YawnMove", "YawnPP", "Yawn", 1.0, "NO", "NO", "SLOT_NONE"},
 {"RapidSpinMove", "RapidSpinPP", "RapidSpin", 1.0, "NO", "NO", "SLOT_NONE"},
 {"BubbleBeamMove", "BubbleBeamPP", "BubbleBeam", 1.0, "NO", "NO", "SLOT_NONE"},
 {"AmnesiaMove", "AmnesiaPP", "Amnesia", 1.0, "NO", "NO", "SLOT_NONE"},
@@ -800,10 +800,9 @@ Script "MoveSetup" (void)
 			switch(ThisWeapon)
 			{
 				Case HELPINGHAND: ACS_NamedExecuteAlways("TracerTargeter",0,TG_TEAM,630); break;
-				Case YAWN: ACS_NamedExecuteAlways("TracerTargeter",0,TG_ENEMY,630); break;
 				Case SKETCH: ACS_NamedExecuteAlways("TracerTargeter",0,TG_ENEMY|TG_TEAM,630); break;
 				Case HEALPULSE: ACS_NamedExecuteAlways("TracerTargeter",0,TG_TEAM,1500); break;
-				Case TAUNT: ACS_NamedExecuteAlways("TracerTargeter",0,TG_ENEMY,630); break;
+				Case TAUNT: ACS_NamedExecuteAlways("TracerTargeter",0,TG_ENEMY,350); break;
 				default: ACS_NamedExecuteAlways("TracerTargeter",0,TG_TEAM,630); break;
 			}
 			

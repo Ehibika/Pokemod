@@ -27,6 +27,9 @@ alias ShowStatusScreen "CloseMenu; Use PlayerStatusItem"
 
 alias DefaultCam "sv_CameraAng 0.0; sv_CameraHeight 0.0; sv_CameraZoom 60; SV_CameraPitch 1.0; sv_CamReticuleMode 1;"
 
+alias OpenItemShop "Use ShopGuardItem; Openmenu Item_Menu"
+alias OpenTMShop "Use ShopGuardItem; Openmenu TM_Menu"
+
 //===|Shop
 alias BuySmallEXPCandy "CloseMenu; Use BuySmallEXPCandy; Openmenu Item_Menu"
 alias BuyMediumEXPCandy "CloseMenu; Use BuyMediumEXPCandy; Openmenu Item_Menu"

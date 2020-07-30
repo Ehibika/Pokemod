@@ -64,7 +64,7 @@ Goto Ready
 //[+]========================================================================[+]
 actor TauntPP : Ammo {inventory.amount 1 inventory.Maxamount 10}
 
-actor TauntFlag : Powerup {inventory.amount 1 powerup.duration -15 }
+actor TauntFlag : Powerup {inventory.amount 1 powerup.duration -7 }
 
 actor TauntNerfInitiate : CustomInventory
 {

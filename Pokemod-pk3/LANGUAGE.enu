@@ -354,7 +354,7 @@ MNU_JOIN2 = "\c[MenuCyan]Auto Select \c[MenuGreen]picks a team for you.";
 
 MNU_JOIN3 = "\c[MenuRed]Pokemon \c-Select";
 MNU_JOIN4 = "\c[MenuGreen]Starter Moves";
-MNU_JOIN5 = "\c[MenuRed]Pokemon \c[MenuGreen]Archetypes";
+MNU_JOIN5 = "\c[MenuGreen]Archetypes";
 MNU_JOIN6 = "\c[MenuCyan]Auto Select";//"\c[MenuBlue]Auto\c--Select";
 MNU_JOIN7 = "\c[MenuCyan]Original Selection";
 //██████████████████████████████████████████Class Help████████████████████████████████████████
@@ -1188,7 +1188,9 @@ M049_NAME = "\cj Yawn";
 M049_TYPE = "\cj Normal";
 M049_CATEGORY = "\cf Status";
 M049_POWER = "\cfPower:\cj --";
-M049_DESC = "\cfTarget \cjan opponent with a contagious yawn, slows them down \nuntill they drift to sleep later.";
+M049_DESC = "\cjUnleash a contagious yawn in a \cfwave\cj\n" 
+            "Ahead of you that slows enemies down \n"
+            "untill they drift to sleep later.";
 //#endregion
 
 //#region -=- 050: Rapid Spin -=-

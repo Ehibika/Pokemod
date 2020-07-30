@@ -4,108 +4,144 @@ States
 {
 //===|Type Pains
 NormalPain:
+PLY1 H 0
+"####" H 0
 "----" A 0 A_JumpIf(CallACS("PKMN_PainSound",Type_Normal) == 2 ,"PainStrong")
 "----" A 0 A_JumpIf(CallACS("PKMN_PainSound",Type_Normal) == 1 ,"PainNormal")
 "----" A 0 A_JumpIf(CallACS("PKMN_PainSound",Type_Normal) == 0 ,"PainWeak")
 Goto PainNormal
 
 FightingPain:
+PLY1 H 0
+"####" H 0
 "----" A 0 A_JumpIf(CallACS("PKMN_PainSound",Type_Fighting) == 2 ,"PainStrong")
 "----" A 0 A_JumpIf(CallACS("PKMN_PainSound",Type_Fighting) == 1 ,"PainNormal")
 "----" A 0 A_JumpIf(CallACS("PKMN_PainSound",Type_Fighting) == 0 ,"PainWeak")
 Goto PainNormal
 
 FlyingPain:
+PLY1 H 0
+"####" H 0
 "----" A 0 A_JumpIf(CallACS("PKMN_PainSound",Type_Flying) == 2 ,"PainStrong")
 "----" A 0 A_JumpIf(CallACS("PKMN_PainSound",Type_Flying) == 1 ,"PainNormal")
 "----" A 0 A_JumpIf(CallACS("PKMN_PainSound",Type_Flying) == 0 ,"PainWeak")
 Goto PainNormal
 
 PoisonPain:
+PLY1 H 0
+"####" H 0
 "----" A 0 A_JumpIf(CallACS("PKMN_PainSound",Type_Poison) == 2 ,"PainStrong")
 "----" A 0 A_JumpIf(CallACS("PKMN_PainSound",Type_Poison) == 1 ,"PainNormal")
 "----" A 0 A_JumpIf(CallACS("PKMN_PainSound",Type_Poison) == 0 ,"PainWeak")
 Goto PainNormal
 
 GroundPain:
+PLY1 H 0
+"####" H 0
 "----" A 0 A_JumpIf(CallACS("PKMN_PainSound",Type_Ground) == 2 ,"PainStrong")
 "----" A 0 A_JumpIf(CallACS("PKMN_PainSound",Type_Ground) == 1 ,"PainNormal")
 "----" A 0 A_JumpIf(CallACS("PKMN_PainSound",Type_Ground) == 0 ,"PainWeak")
 Goto PainNormal
 
 RockPain:
+PLY1 H 0
+"####" H 0
 "----" A 0 A_JumpIf(CallACS("PKMN_PainSound",Type_Rock) == 2 ,"PainStrong")
 "----" A 0 A_JumpIf(CallACS("PKMN_PainSound",Type_Rock) == 1 ,"PainNormal")
 "----" A 0 A_JumpIf(CallACS("PKMN_PainSound",Type_Rock) == 0 ,"PainWeak")
 Goto PainNormal
 
 BugPain:
+PLY1 H 0
+"####" H 0
 "----" A 0 A_JumpIf(CallACS("PKMN_PainSound",Type_Bug) == 2 ,"PainStrong")
 "----" A 0 A_JumpIf(CallACS("PKMN_PainSound",Type_Bug) == 1 ,"PainNormal")
 "----" A 0 A_JumpIf(CallACS("PKMN_PainSound",Type_Bug) == 0 ,"PainWeak")
 Goto PainNormal
 
 GhostPain:
+PLY1 H 0
+"####" H 0
 "----" A 0 A_JumpIf(CallACS("PKMN_PainSound",Type_Ghost) == 2 ,"PainStrong")
 "----" A 0 A_JumpIf(CallACS("PKMN_PainSound",Type_Ghost) == 1 ,"PainNormal")
 "----" A 0 A_JumpIf(CallACS("PKMN_PainSound",Type_Ghost) == 0 ,"PainWeak")
 Goto PainNormal
 
 SteelPain:
+PLY1 H 0
+"####" H 0
 "----" A 0 A_JumpIf(CallACS("PKMN_PainSound",Type_Steel) == 2 ,"PainStrong")
 "----" A 0 A_JumpIf(CallACS("PKMN_PainSound",Type_Steel) == 1 ,"PainNormal")
 "----" A 0 A_JumpIf(CallACS("PKMN_PainSound",Type_Steel) == 0 ,"PainWeak")
 Goto PainNormal
 
 FirePain:
+PLY1 H 0
+"####" H 0
 "----" A 0 A_JumpIf(CallACS("PKMN_PainSound",Type_Fire) == 2 ,"PainStrong")
 "----" A 0 A_JumpIf(CallACS("PKMN_PainSound",Type_Fire) == 1 ,"PainNormal")
 "----" A 0 A_JumpIf(CallACS("PKMN_PainSound",Type_Fire) == 0 ,"PainWeak")
 Goto PainNormal
 
 WaterPain:
+PLY1 H 0
+"####" H 0
 "----" A 0 A_JumpIf(CallACS("PKMN_PainSound",Type_Water) == 2 ,"PainStrong")
 "----" A 0 A_JumpIf(CallACS("PKMN_PainSound",Type_Water) == 1 ,"PainNormal")
 "----" A 0 A_JumpIf(CallACS("PKMN_PainSound",Type_Water) == 0 ,"PainWeak")
 Goto PainNormal
 
 GrassPain:
+PLY1 H 0
+"####" H 0
 "----" A 0 A_JumpIf(CallACS("PKMN_PainSound",Type_Grass) == 2 ,"PainStrong")
 "----" A 0 A_JumpIf(CallACS("PKMN_PainSound",Type_Grass) == 1 ,"PainNormal")
 "----" A 0 A_JumpIf(CallACS("PKMN_PainSound",Type_Grass) == 0 ,"PainWeak")
 Goto PainNormal
 
 ElectricPain:
+PLY1 H 0
+"####" H 0
 "----" A 0 A_JumpIf(CallACS("PKMN_PainSound",Type_Electric) == 2 ,"PainStrong")
 "----" A 0 A_JumpIf(CallACS("PKMN_PainSound",Type_Electric) == 1 ,"PainNormal")
 "----" A 0 A_JumpIf(CallACS("PKMN_PainSound",Type_Electric) == 0 ,"PainWeak")
 Goto PainNormal
 
 PsychicPain:
+PLY1 H 0
+"####" H 0
 "----" A 0 A_JumpIf(CallACS("PKMN_PainSound",Type_Psychic) == 2 ,"PainStrong")
 "----" A 0 A_JumpIf(CallACS("PKMN_PainSound",Type_Psychic) == 1 ,"PainNormal")
 "----" A 0 A_JumpIf(CallACS("PKMN_PainSound",Type_Psychic) == 0 ,"PainWeak")
 Goto PainNormal
 
 IcePain:
+PLY1 H 0
+"####" H 0
 "----" A 0 A_JumpIf(CallACS("PKMN_PainSound",Type_Ice) == 2 ,"PainStrong")
 "----" A 0 A_JumpIf(CallACS("PKMN_PainSound",Type_Ice) == 1 ,"PainNormal")
 "----" A 0 A_JumpIf(CallACS("PKMN_PainSound",Type_Ice) == 0 ,"PainWeak")
 Goto PainNormal
 
 DragonPain:
+PLY1 H 0
+"####" H 0
 "----" A 0 A_JumpIf(CallACS("PKMN_PainSound",Type_Dragon) == 2 ,"PainStrong")
 "----" A 0 A_JumpIf(CallACS("PKMN_PainSound",Type_Dragon) == 1 ,"PainNormal")
 "----" A 0 A_JumpIf(CallACS("PKMN_PainSound",Type_Dragon) == 0 ,"PainWeak")
 Goto PainNormal
 
 DarkPain:
+PLY1 H 0
+"####" H 0
 "----" A 0 A_JumpIf(CallACS("PKMN_PainSound",Type_Dark) == 2 ,"PainStrong")
 "----" A 0 A_JumpIf(CallACS("PKMN_PainSound",Type_Dark) == 1 ,"PainNormal")
 "----" A 0 A_JumpIf(CallACS("PKMN_PainSound",Type_Dark) == 0 ,"PainWeak")
 Goto PainNormal
 
 FairyPain:
+PLY1 H 0
+"####" H 0
 "----" A 0 A_JumpIf(CallACS("PKMN_PainSound",Type_Fairy) == 2 ,"PainStrong")
 "----" A 0 A_JumpIf(CallACS("PKMN_PainSound",Type_Fairy) == 1 ,"PainNormal")
 "----" A 0 A_JumpIf(CallACS("PKMN_PainSound",Type_Fairy) == 0 ,"PainWeak")
@@ -197,6 +233,7 @@ Death:
 goto SuperClassDeath
 
 ClassPain:
+PLY1 H 0
 "####" H 0
 MegamanPain:
 "----" A 0 A_JumpIfInventory("GravityHoldPainPower",1,"GravityHoldWait")

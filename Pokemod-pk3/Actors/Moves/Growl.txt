@@ -39,11 +39,6 @@ Fire.After:
 "####" C 0 A_REfire("Fire")
 "####" B 0 A_Jump(256,"Fire.End")
 Goto Fire.End
-
-
-
-
-
 }
 }
 

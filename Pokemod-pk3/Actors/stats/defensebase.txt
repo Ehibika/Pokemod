@@ -17,7 +17,7 @@ damagefactor "SuperAdaptor", 1.0
 damagefactor "TrebleBoost", 1.0
 
 damagefactor "PoisonDamage", 1.0
-damagefactor "RecoilDamage", 1.0
+//damagefactor "RecoilDamage", 1.0
 
 damagefactor "LeechSeed", 1.0
 damagefactor "PoisonPowder", 1.0

@@ -1,0 +1,90 @@
+/* -=-=-=-=-=-=-=-=-=-=
+ *
+ * [===]Gameplay Changes[===]
+ * Added a warmup timer for non TLMS modes, this essentially makes it so status functions can be performed during
+ * the first 30-45 seconds of the round
+ * 
+ * Entering shops during periods where status adjustments are allowed will spawn a safezone around you, protecting you
+ * from getting fragged while shopping.
+ * 
+ * Increased the range of effect of speed adjustments from 0.25 to 0.50
+ * 
+ * -=- Sleep Status -=-
+ * New rules for awakening, rather than upon any instance of damage, sleeping players will awaken if:
+ *  ~You health is reduced by half, relative of when you fell asleep
+ *  ~You take more than 1/4 of your max health in a single hit
+ *  ~You take Super effective damage
+ * 
+ * Cringe will also awaken a player, and the alert state after cringe will block sleep
+ * 
+ * Collision damage from missed recoil moves have had their damage calculations changed, they are more properly scaled by
+ * physical attack, and now also respect physical defense. meaning high defense can reduce collission damage. collision damage
+ * will now always leave you with 1 HP if you are above 1 hp
+ * 
+ * Recoil damage is now scaled by physical defense as well.
+ * 
+ * 
+ * Aim paths for lob moves now reflect their bouncing trajectories
+ * 
+ * Tweaked the targeter position for targeting moves
+ * 
+ * 
+ * adjusted sprite animations, now pokemon show their pain sprite, and use their last frame for continuous fire moves (charizard won's breath fire through his neck anymore)
+ * 
+ * [===]Move Changes[===]
+ * -=- Taunt -=-
+ * Range reduced from 630 to 350
+ * Duration reduced from 15 seconds to 7
+ * 
+ * -=- Life Dew -=-
+ * Adjusted animation speed so the move would take effect sooner, making it easier to land on
+ * teammates.
+ * 
+ * -=- Hi Jump Kick -=-
+ * Recoil scaled to moves actual base damage
+ * 
+ * -=- Vacuum Wave -=-
+ * Reduced recovery frames from 35 - 17
+ * 
+ * -=-Toxic-=-
+ * Fixed the lack of toxic damage scaling due to a zandro rounding bug
+ * reduced PP from 10 to 5
+ * increased Radius from 100 to 150
+ * Visuals for projectile was changed
+ * Toxic field has a 5 frame delay before initiating
+ * 
+ * -=-RockSlide-=-
+ * Reduced warning time from 1 second to 0.5 second
+ * Consecutive hit damage reduction set from 0.10 to 0.25
+ * 
+ * -=-Yawn-=-
+ * Recoded to work like a wave move, similar to growl
+ * if drowsy victims are afflicted by another status, it will cure the drowsiness and prevent sleep
+ * if the slowdown is purged by haze, it will cure drowsiness and prevent sleep
+ * if the victim is alert after cringe, they will be immune to yawn
+ * 
+ * -=-RapidSpin-=-
+ * is now a continuous fire move
+ * raises speed by 1 stage while active
+ * 
+ * -=-Brine-=-
+ * Projectiles bounce off ceilings
+ * 
+ * -=-SeedBomb-=-
+ * Projectiles bounce off ceilings
+ * 
+ * -=-MudBomb-=-
+ * Projectiles bounce off ceilings
+ * 
+ * -=-LightScreen-=-
+ * Given an expiration effect
+ * 
+ * -=-Reflect-=-
+ * Given an expiration effect
+
+ * [===]Pokemon Changes[===]
+ *
+ * -=- squirtle -=-
+ * Swapped Amnesia in moveset with Aqua tail
+ * Swapped haze in moveset with Fakeout
+*/

@@ -194,6 +194,7 @@ TNT1 A 0 A_Jumpifinventory("SafeguardPower",1,"Nope")
 TNT1 A 0 A_Jumpifinventory("PoisonMark",1,"Nope")
 TNT1 A 0 A_Jumpifinventory("ParalysisMark",1,"Nope")
 TNT1 A 0 A_Jumpifinventory("BurnMark",1,"Nope")
+TNT1 A 0 A_Jumpifinventory("CringeGuard",1,"Nope")
 //==
 TNT1 A 0 A_Jumpifinventory("SleepMark",1,"Sustain")
 TNT1 A 0 A_GiveInventory("SleepMark",1)
@@ -295,8 +296,22 @@ States
 {
 Pickup:
 TNT1 A 0
+TNT1 A 0 A_Jumpifinventory("CringeMark",1,"Cringed")
+TNT1 A 0 A_Jumpifinventory("SleepMark",1,"Spook")
+goto EndSleed
+
+Spook:
 TNT1 A 0 A_TakeInventory("SleepMark", 999)
+TNT1 A 0 A_SpawnItemEX("FrightFX",0,0,40)
+goto EndSleed
+
+EndSleed:
 TNT1 A 0 SetPlayerProperty(0,0,4)
+stop
+
+Cringed:
+TNT1 A 0
+TNT1 A 0 A_TakeInventory("SleepMark", 999)
 stop
 }
 }

@@ -12,6 +12,7 @@
 #import "Dex_Leveling.acs"
 #import "Dex_BaseStats.acs"
 #import "DB_Player.acs"
+#import "G_Startup.acs"
 #import "A_Shop.acs"
 #include "zcommon.acs"
 
@@ -317,7 +318,7 @@ Function Int StatusTime (Void)
 int Output;
 
 if(CheckInventory("InSafeZone")){output = 1;}
-
+if(InWarmup){output = 1;}
 if(GetCvar("lastmanstanding")==1||GetCvar("teamlms")==1)
     {
     if(GetGameModeState() != 2){output = 1;}

@@ -29,6 +29,8 @@ server noarchive bool PKMN_SV_ProJTeamColor = true;
 user bool PKMN_CV_DamageDisplay = true;
 user bool PKMN_CV_ProjTeamColor = true;
 
+server noarchive int PKMN_WarmupTime = 45;
+
 server noarchive int PKMN_StartingLevel = 1;
 server noarchive Bool StartingLevelSet = false;
 

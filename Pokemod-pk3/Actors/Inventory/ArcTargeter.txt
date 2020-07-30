@@ -408,3 +408,107 @@ actor GolfBallAimMediumInstant : GolfBallAimInstant { Speed 25 }
 actor GolfBallAimHeavyInstantStarter : GolfBallAimInstantStarter { Speed 35 }
 actor GolfBallAimHeavyInstantBuffer : GolfBallAimInstantBuffer { Speed 35 }
 actor GolfBallAimHeavyInstant : GolfBallAimInstant { Speed 35 }
+
+
+//===|Version that bounces off Ceilings
+
+actor GolfBallAimInstantStarter2 : GolfBallAim
+{
+    +CLIENTSIDEONLY
+    translation "198:198=220:220", "192:192=229:229"
+	States
+    {
+    Spawn:
+        TNT1 A 0
+        TNT1 A 0 //ACS_NamedExecuteWithResult("GOLF_CLIENT",6,0,0,0)
+		TNT1 A 0 A_SpawnItemEx("GolfBallAimInstantBuffer2",0,0,0,momx,momy,momz,0,SXF_TRANSFERTRANSLATION | SXF_ABSOLUTEVELOCITY)
+		TNT1 A 1
+        stop
+	}
+}
+actor GolfBallAimInstantBuffer2 : GolfBallAim
+{
+    +CLIENTSIDEONLY
+	States
+    {
+    Spawn:
+        TNT1 A 0
+        TNT1 A 0 //ACS_NamedExecuteWithResult("GOLF_CLIENT",6,0,0,0)
+		TNT1 A 0 A_SpawnItemEx("GolfBallAimInstant2",0,0,0,momx,momy,momz,0,SXF_TRANSFERTRANSLATION | SXF_ABSOLUTEVELOCITY)
+		TNT1 A 1
+        stop
+	}
+}
+
+actor GolfBallAimInstant2 : GolfBallAim
+{
+    +CLIENTSIDEONLY
+    +BOUNCEONCEILINGS
+	States
+    {
+    Spawn:
+        TNT1 A 0
+        TNT1 A 0 //A_JumpIfInTargetInventory("BetweenShots",1,"Nope")
+        TNT1 A 0 //ACS_NamedExecuteWithResult("GOLF_CLIENT",6,0,0,0)
+		TNT1 A 0 A_SpawnItemEx("BallTrailAim",(10*momx)/-20.0,-(10*momy)/-20.0,(10*momz)/-20.0,0,0,0,0,SXF_ABSOLUTEANGLE | SXF_NOCHECKPOSITION | SXF_TRANSFERTRANSLATION)
+        TNT1 A 0 A_SpawnItemEx("BallTrailAim",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION | SXF_TRANSFERTRANSLATION )
+		TNT1 A 0 A_SpawnItemEx("GolfBallAimInstant2",0,0,0,momx,momy,momz,0,SXF_TRANSFERTRANSLATION | SXF_ABSOLUTEVELOCITY)
+		TNT1 A 1
+        stop
+    Nope:
+        TNT1 A 1
+        stop
+	}
+}
+
+//===|Version that bounces off Walls and Ceilings
+
+actor GolfBallAimInstantStarter3 : GolfBallAim
+{
+    +CLIENTSIDEONLY
+    translation "198:198=220:220", "192:192=229:229"
+	States
+    {
+    Spawn:
+        TNT1 A 0
+        TNT1 A 0 //ACS_NamedExecuteWithResult("GOLF_CLIENT",6,0,0,0)
+		TNT1 A 0 A_SpawnItemEx("GolfBallAimInstantBuffer3",0,0,0,momx,momy,momz,0,SXF_TRANSFERTRANSLATION | SXF_ABSOLUTEVELOCITY)
+		TNT1 A 1
+        stop
+	}
+}
+actor GolfBallAimInstantBuffer3 : GolfBallAim
+{
+    +CLIENTSIDEONLY
+	States
+    {
+    Spawn:
+        TNT1 A 0
+        TNT1 A 0 //ACS_NamedExecuteWithResult("GOLF_CLIENT",6,0,0,0)
+		TNT1 A 0 A_SpawnItemEx("GolfBallAimInstant3",0,0,0,momx,momy,momz,0,SXF_TRANSFERTRANSLATION | SXF_ABSOLUTEVELOCITY)
+		TNT1 A 1
+        stop
+	}
+}
+
+actor GolfBallAimInstant3 : GolfBallAim
+{
+    +CLIENTSIDEONLY
+    +BOUNCEONCEILINGS
+    +BOUNCEONWALLS
+	States
+    {
+    Spawn:
+        TNT1 A 0
+        TNT1 A 0 //A_JumpIfInTargetInventory("BetweenShots",1,"Nope")
+        TNT1 A 0 //ACS_NamedExecuteWithResult("GOLF_CLIENT",6,0,0,0)
+		TNT1 A 0 A_SpawnItemEx("BallTrailAim",(10*momx)/-20.0,-(10*momy)/-20.0,(10*momz)/-20.0,0,0,0,0,SXF_ABSOLUTEANGLE | SXF_NOCHECKPOSITION | SXF_TRANSFERTRANSLATION)
+        TNT1 A 0 A_SpawnItemEx("BallTrailAim",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION | SXF_TRANSFERTRANSLATION )
+		TNT1 A 0 A_SpawnItemEx("GolfBallAimInstant3",0,0,0,momx,momy,momz,0,SXF_TRANSFERTRANSLATION | SXF_ABSOLUTEVELOCITY)
+		TNT1 A 1
+        stop
+    Nope:
+        TNT1 A 1
+        stop
+	}
+}

@@ -251,3 +251,8 @@ Script "TracerHeightGet" (void)
 SetActivator(0,AAPTR_TRACER);
 SetResultValue(GetActorProperty(0,APROP_Height)>>16);
 }
+
+Script "GetStartinglevel" (Void)
+{
+	SetResultValue(GetCvar("PKMN_StartingLevel"));
+}

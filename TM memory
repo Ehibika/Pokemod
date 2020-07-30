@@ -1,0 +1,45 @@
+1 ???
+2 coaching
+3 swagger
+4 belly drum
+5 pay day
+
+9 snatch
+10 torment
+11 substitute
+12 rest
+13 ???
+
+17 dig
+
+21 mist
+
+28 block
+
+35 fire pledge
+36 water pledge
+37 grass pledge
+38 incinerate
+39 water pulse
+
+42 giga drain
+43 rock tomb
+
+46 bulldoze
+47 ice beam
+
+49 pollen puff
+
+52 aura sphere
+53 focus blast
+
+56 blizzard
+57 ???
+
+60 metronome
+
+^(\d+) ([^\s]+)
+
+
+StaticText ""
+(StaticText ")(\$D\d+)(_ARC")

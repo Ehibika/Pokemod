@@ -82,7 +82,7 @@ damagefactor "RockSlide", 0.0
 actor RockSlideProtect2 : PowerProtection
 {
 Powerup.Duration 17
-damagefactor "RockSlide", 0.1
+damagefactor "RockSlide", 0.25
 }
 
 actor RockSlideBuffer : Powerup
@@ -261,7 +261,7 @@ stop
 
 actor RockSlideField : BasicExplosion
 {
-ReactionTime 70
+ReactionTime 52
 DamageType "RockSlide"
 obituary "$OB_RockSlide"
 states

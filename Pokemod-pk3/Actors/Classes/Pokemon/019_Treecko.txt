@@ -31,7 +31,7 @@ See:
 P019 BCDE 5
 GoTo Spawn+1
 Missile:
-P019 A 0 
+P019 A 0 A_JumpIfInventory("ConshotTimer",1,2)
 P019 F 5 
 P019 G 4
 GoTo Spawn+2

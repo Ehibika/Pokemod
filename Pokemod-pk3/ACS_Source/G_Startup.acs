@@ -18,16 +18,7 @@
 
 #include "zcommon.acs"
 
-Script "SafeZoneSpawnCheck" (void)
-{
-int output;
-if(GetCvar("lastmanstanding")==1||GetCvar("teamlms")==1) 
-	{
-		if(GetGameModeState() != 2 && !CheckInventory("InSafeZone")){output = 1;}
-	}
-else if(!CheckInventory("InSafeZone")) {output = 1;}
-SetResultValue(output);
-}
+
 
 Script "PKMN_Setup" (Void)//ENTER
 {
@@ -300,4 +291,63 @@ else if(BaseLevel < 1)
 	log(s:"\cgStarting level set to ",i:BaseLevel);
 	SetCvar("StartingLevelSet",True);
 
+}
+
+Bool InWarmup = true;
+
+Script "GameTimer" OPEN 
+{
+if(GetCvar("lastmanstanding")==1||GetCvar("teamlms")==1) {Terminate;}
+int timelimit = timelimit*35;//GetCVar("PKMN_WarmupTime");
+int time;
+int timelimittics;
+int timeleftsecs;
+int timeleftmin;
+	
+	While(GetCVar("PKMN_WarmupTime")>0 && InWarmup)
+	{
+	 timelimit = GetCVar("PKMN_WarmupTime");
+	 time = Timer();
+	 timelimittics = timelimit*35;//((timelimit * 60 * 35)>>16);
+	 timeleftsecs = (timelimittics-time)/35;
+	 timeleftmin = (timelimittics-time)/2100;
+	
+	if(timelimittics <= time){InWarmup = false; }
+	SetFont("STCFN");
+		SetHudSize(320,240,0);
+		HudMessage(s:"Setup Time!"; HUDMSG_PLAIN, 267, CR_White,160.0, 25.0, 0,0.1);
+		HudMessage(s:"Check the esc menu"; HUDMSG_PLAIN, 268, CR_White,160.0, 35.0, 0,0.1);
+		if(timeleftmin < 1){
+			HudMessage(i:timeleftmin, s:":", i:((timeleftsecs)%60)/10, i:(timeleftsecs)%10; HUDMSG_PLAIN, 266, CR_ORANGE,160.0, 10.0, 0,0.1); //220.0
+			}
+			else
+			{
+			HudMessage(i:timeleftmin, s:":", i:((timeleftsecs)%60)/10, i:(timeleftsecs)%10; HUDMSG_PLAIN, 266, CR_white,160.0, 10.0, 0,0.1);
+			}
+	delay(1);
+	}
+	HudMessage(s:""; HUDMSG_PLAIN, 266, CR_White,160.0, 20.0, 0,0.1);
+	HudMessage(s:""; HUDMSG_PLAIN, 267, CR_White,160.0, 20.0, 0,0.1);
+	HudMessage(s:""; HUDMSG_PLAIN, 268, CR_White,160.0, 20.0, 0,0.1);
+}
+
+Script "SafeZoneSpawnCheck" (int MenuSpawn)
+{
+int output;
+if(MenuSpawn == 1)
+{
+	if(InWarmup && !CheckInventory("InSafeZone")) {output = 1;}
+}
+
+if(MenuSpawn == 0)
+{
+	if(GetCvar("lastmanstanding")==1||GetCvar("teamlms")==1) 
+	{
+		if(GetGameModeState() != 2 && !CheckInventory("InSafeZone")){output = 1;}
+	}
+	else if(!CheckInventory("InSafeZone")) {output = 1;}
+
+}
+
+SetResultValue(output);
 }
