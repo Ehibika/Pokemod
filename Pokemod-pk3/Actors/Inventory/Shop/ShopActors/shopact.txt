@@ -101,10 +101,10 @@ actor BuyThing25 : BuyThing
 states
 {
 Use1:
-TNT1 A 0 A_JumpIf(CallACS("CashCheck",25),"Use2")
+TNT1 A 0 A_JumpIf(CallACS("BPCheck",25),"Use2")
 goto NoMoney
 CostPay:
-TNT1 A 0 ACS_NamedExecuteWithResult("CashPay",25)
+TNT1 A 0 ACS_NamedExecuteWithResult("BPPay",25)
 goto BuySuccess
 }
 }
@@ -114,10 +114,10 @@ actor BuyThing50 : BuyThing
 states
 {
 Use1:
-TNT1 A 0 A_JumpIf(CallACS("CashCheck",50),"Use2")
+TNT1 A 0 A_JumpIf(CallACS("BPCheck",50),"Use2")
 goto NoMoney
 CostPay:
-TNT1 A 0 ACS_NamedExecuteWithResult("CashPay",50)
+TNT1 A 0 ACS_NamedExecuteWithResult("BPPay",50)
 goto BuySuccess
 }
 }
@@ -127,10 +127,10 @@ actor BuyThing75 : BuyThing
 states
 {
 Use1:
-TNT1 A 0 A_JumpIf(CallACS("CashCheck",75),"Use2")
+TNT1 A 0 A_JumpIf(CallACS("BPCheck",75),"Use2")
 goto NoMoney
 CostPay:
-TNT1 A 0 ACS_NamedExecuteWithResult("CashPay",75)
+TNT1 A 0 ACS_NamedExecuteWithResult("BPPay",75)
 goto BuySuccess
 }
 }
@@ -140,10 +140,10 @@ actor BuyThing100 : BuyThing
 states
 {
 Use1:
-TNT1 A 0 A_JumpIf(CallACS("CashCheck",100),"Use2")
+TNT1 A 0 A_JumpIf(CallACS("BPCheck",100),"Use2")
 goto NoMoney
 CostPay:
-TNT1 A 0 ACS_NamedExecuteWithResult("CashPay",100)
+TNT1 A 0 ACS_NamedExecuteWithResult("BPPay",100)
 goto BuySuccess
 }
 }
@@ -153,10 +153,10 @@ actor BuyThing125 : BuyThing
 states
 {
 Use1:
-TNT1 A 0 A_JumpIf(CallACS("CashCheck",125),"Use2")
+TNT1 A 0 A_JumpIf(CallACS("BPCheck",125),"Use2")
 goto NoMoney
 CostPay:
-TNT1 A 0 ACS_NamedExecuteWithResult("CashPay",125)
+TNT1 A 0 ACS_NamedExecuteWithResult("BPPay",125)
 goto BuySuccess
 }
 }
@@ -166,10 +166,10 @@ actor BuyThing150 : BuyThing
 states
 {
 Use1:
-TNT1 A 0 A_JumpIf(CallACS("CashCheck",150),"Use2")
+TNT1 A 0 A_JumpIf(CallACS("BPCheck",150),"Use2")
 goto NoMoney
 CostPay:
-TNT1 A 0 ACS_NamedExecuteWithResult("CashPay",150)
+TNT1 A 0 ACS_NamedExecuteWithResult("BPPay",150)
 goto BuySuccess
 }
 }
@@ -179,10 +179,10 @@ actor BuyThing175 : BuyThing
 states
 {
 Use1:
-TNT1 A 0 A_JumpIf(CallACS("CashCheck",175),"Use2")
+TNT1 A 0 A_JumpIf(CallACS("BPCheck",175),"Use2")
 goto NoMoney
 CostPay:
-TNT1 A 0 ACS_NamedExecuteWithResult("CashPay",175)
+TNT1 A 0 ACS_NamedExecuteWithResult("BPPay",175)
 goto BuySuccess
 }
 }
@@ -192,10 +192,10 @@ actor BuyThing200 : BuyThing
 states
 {
 Use1:
-TNT1 A 0 A_JumpIf(CallACS("CashCheck",200),"Use2")
+TNT1 A 0 A_JumpIf(CallACS("BPCheck",200),"Use2")
 goto NoMoney
 CostPay:
-TNT1 A 0 ACS_NamedExecuteWithResult("CashPay",200)
+TNT1 A 0 ACS_NamedExecuteWithResult("BPPay",200)
 goto BuySuccess
 }
 }
@@ -206,10 +206,10 @@ actor BuyThing250 : BuyThing
 states
 {
 Use1:
-TNT1 A 0 A_JumpIf(CallACS("CashCheck",250),"Use2")
+TNT1 A 0 A_JumpIf(CallACS("BPCheck",250),"Use2")
 goto NoMoney
 CostPay:
-TNT1 A 0 ACS_NamedExecuteWithResult("CashPay",250)
+TNT1 A 0 ACS_NamedExecuteWithResult("BPPay",250)
 goto BuySuccess
 }
 }
@@ -219,10 +219,10 @@ actor BuyThing300 : BuyThing
 states
 {
 Use1:
-TNT1 A 0 A_JumpIf(CallACS("CashCheck",300),"Use2")
+TNT1 A 0 A_JumpIf(CallACS("BPCheck",300),"Use2")
 goto NoMoney
 CostPay:
-TNT1 A 0 ACS_NamedExecuteWithResult("CashPay",300)
+TNT1 A 0 ACS_NamedExecuteWithResult("BPPay",300)
 goto BuySuccess
 }
 }
@@ -232,10 +232,10 @@ actor BuyThing350 : BuyThing
 states
 {
 Use1:
-TNT1 A 0 A_JumpIf(CallACS("CashCheck",350),"Use2")
+TNT1 A 0 A_JumpIf(CallACS("BPCheck",350),"Use2")
 goto NoMoney
 CostPay:
-TNT1 A 0 ACS_NamedExecuteWithResult("CashPay",350)
+TNT1 A 0 ACS_NamedExecuteWithResult("BPPay",350)
 goto BuySuccess
 }
 }
@@ -245,10 +245,10 @@ actor BuyThing400 : BuyThing
 states
 {
 Use1:
-TNT1 A 0 A_JumpIf(CallACS("CashCheck",400),"Use2")
+TNT1 A 0 A_JumpIf(CallACS("BPCheck",400),"Use2")
 goto NoMoney
 CostPay:
-TNT1 A 0 ACS_NamedExecuteWithResult("CashPay",400)
+TNT1 A 0 ACS_NamedExecuteWithResult("BPPay",400)
 goto BuySuccess
 }
 }
@@ -258,10 +258,10 @@ actor BuyThing450 : BuyThing
 states
 {
 Use1:
-TNT1 A 0 A_JumpIf(CallACS("CashCheck",450),"Use2")
+TNT1 A 0 A_JumpIf(CallACS("BPCheck",450),"Use2")
 goto NoMoney
 CostPay:
-TNT1 A 0 ACS_NamedExecuteWithResult("CashPay",450)
+TNT1 A 0 ACS_NamedExecuteWithResult("BPPay",450)
 goto BuySuccess
 }
 }
@@ -271,10 +271,10 @@ actor BuyThing500 : BuyThing
 states
 {
 Use1:
-TNT1 A 0 A_JumpIf(CallACS("CashCheck",500),"Use2")
+TNT1 A 0 A_JumpIf(CallACS("BPCheck",500),"Use2")
 goto NoMoney
 CostPay:
-TNT1 A 0 ACS_NamedExecuteWithResult("CashPay",500)
+TNT1 A 0 ACS_NamedExecuteWithResult("BPPay",500)
 goto BuySuccess
 }
 }
@@ -284,10 +284,10 @@ actor BuyThing750 : BuyThing
 states
 {
 Use1:
-TNT1 A 0 A_JumpIf(CallACS("CashCheck",750),"Use2")
+TNT1 A 0 A_JumpIf(CallACS("BPCheck",750),"Use2")
 goto NoMoney
 CostPay:
-TNT1 A 0 ACS_NamedExecuteWithResult("CashPay",750)
+TNT1 A 0 ACS_NamedExecuteWithResult("BPPay",750)
 goto BuySuccess
 }
 }
@@ -297,10 +297,10 @@ actor BuyThing1000 : BuyThing
 states
 {
 Use1:
-TNT1 A 0 A_JumpIf(CallACS("CashCheck",1000),"Use2")
+TNT1 A 0 A_JumpIf(CallACS("BPCheck",1000),"Use2")
 goto NoMoney
 CostPay:
-TNT1 A 0 ACS_NamedExecuteWithResult("CashPay",1000)
+TNT1 A 0 ACS_NamedExecuteWithResult("BPPay",1000)
 goto BuySuccess
 }
 }

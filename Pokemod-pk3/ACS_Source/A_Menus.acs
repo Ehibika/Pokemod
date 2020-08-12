@@ -119,12 +119,12 @@ while(MenuUp)
 	{
 	TakeInventory(StrParam(s:weapons_ammo[ChoiceWep][0],i:ChoiceID+1),99);
 	GiveInventory(StrParam(s:weapons_ammo[NewMove][0],i:ChoiceID+1),1);
-	ACS_NamedExecuteAlways("CashPay",0,Movecost);
+	ACS_NamedExecuteAlways("BPPay",0,Movecost);
 	}
 	else
 	{
 	SetCvar(StrParam(s:"PLAYER",i:PlayerNumber(),s:"_SLOT",i:ChoiceID+1),NewMove);
-	ACS_NamedExecuteAlways("CashPay",0,Movecost);
+	ACS_NamedExecuteAlways("BPPay",0,Movecost);
 	}
 	break;//MenuUp = False;
 	// #------------------

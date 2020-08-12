@@ -558,7 +558,7 @@ Function Void ClearPlayerCVars(int PlayerNum, int NewLevel)
     SetCvar(StrParam(s:"PlayerLevel_",i:PlayerNum),NewLevel);
     SetCvar(StrParam(s:"PlayerEXP_",i:PlayerNum),0);
     SetCvar(StrParam(s:"PlayerDEXNum_",i:PlayerNum),-1);
-    //SetCvar(StrParam(s:"Player",i:PlayerNum,s:"_Cash"),0);
+    //SetCvar(StrParam(s:"Player",i:PlayerNum,s:"_BP"),0);
     SetCvarString(StrParam(s:"Player",i:PlayerNum,s:"_INV"),"0000");
 
     //ACS_NamedExecuteAlways("StatusMenuClear",0);

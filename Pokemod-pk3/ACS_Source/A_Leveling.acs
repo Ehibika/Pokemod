@@ -19,7 +19,7 @@
 //#region -=- General Variables -=-
 #region -=- General Variables -=-
 Int TeamEXPAward [4] = {};
-Int TeamCASHAward [4] = {};
+Int TeamBPAward [4] = {};
 
 #endregion
 //#endregion
@@ -54,10 +54,10 @@ script "TeamAward" (Void)
     {
         Pteam = GetPlayerInfo(i, PLAYERINFO_TEAM);
         ACS_NamedExecuteAlways("GivePlayerEXP",0,i,TeamEXPAward[Pteam],1);
-        ACS_NamedExecuteAlways("GivePlayerCash",0,i,TeamCASHAward[Pteam],1);
+        ACS_NamedExecuteAlways("GivePlayerBP",0,i,TeamBPAward[Pteam],1);
     }
     for(int j = 0; j < 4; j++)
-    {TeamEXPAward[j] = 0; TeamCASHAward[j] = 0;}
+    {TeamEXPAward[j] = 0; TeamBPAward[j] = 0;}
     Log(s:"\cgEnd Team EXP");
 }
 
@@ -94,9 +94,9 @@ While(True)
 */
 //#endregion
 
-Script "AddToCashAward" (int ammount)
+Script "AddToBPAward" (int ammount)
 {
-    TeamCASHAward[PlayerTeam()] += ammount;
+    TeamBPAward[PlayerTeam()] += ammount;
 }
 
 Script "GivePlayerEXP" (int Pnum, int EXPAward, int Override)
@@ -224,11 +224,11 @@ if(EXPTime() == 0){Terminate;}
     int VictimFrags = ACS_NamedExecuteWithResult("GetPlayerFrags",VictimPN);
     int VictimBounty = StatDEX[PlayerDexNum][6];
 int EXPAward = VictimBounty*PlayerLVL;
-int CashAward = (PlayerLVL*10)+(VictimBounty*VictimFrags);
+int BPAward = (PlayerLVL*10)+(VictimBounty*VictimFrags);
 
-// -=- Clamp Cash
-if(CashAward < 10){CashAward = 10;}
-if(CashAward > 500){CashAward = 500;}
+// -=- Clamp BP
+if(BPAward < 10){BPAward = 10;}
+if(BPAward > 500){BPAward = 500;}
 
 //SetActivatorToTarget(0);
 //int KillerTID = ActivatorTID();
@@ -236,10 +236,10 @@ if(CashAward > 500){CashAward = 500;}
 //if(VictimTID == KillerTID){Terminate;}
 
 ACS_NamedExecuteAlways("GiveEXP",0,EXPAward);
-ACS_NamedExecuteWithResult("GivePlayerCash",Playernumber(),CashAward);
+ACS_NamedExecuteWithResult("GivePlayerBP",Playernumber(),BPAward);
 
 TeamEXPAward[PlayerTeam()] += EXPAward/2;
-TeamCASHAward[PlayerTeam()] += CashAward/2;
+TeamBPAward[PlayerTeam()] += BPAward/2;
 //log(s:GetTeamProperty(PlayerTeam(),TPROP_Name), s:" Team EXP Award ", i:TeamEXPAward[PlayerTeam()]);
 }
 

@@ -256,24 +256,24 @@ int TotalGames;
 	if(!TotalGames){Terminate;}
 
 int EXPSum;
-int CashSum;
+int BPSum;
 
 int OutputEXP;
-int OutputCash;
+int OutputBP;
 int PlayerTotal;
 	for(int i = 0; i < MAX_PLAYERS; i++)
 	{
 	if(PlayerInGame(i))
 		{
 			EXPSum = GetPlayerPokeValue(i,POKEEXP);
-			CashSum = GetPlayerPokeValue(i,POKECASH);
+			BPSum = GetPlayerPokeValue(i,POKEBP);
 			PlayerTotal++;
 		}
 		OutputEXP = EXPSum/PlayerTotal;
-		OutputCash = CashSum/PlayerTotal;
+		OutputBP = BPSum/PlayerTotal;
 	}
 	ACS_NamedExecuteAlways("GiveEXP",0,OutputEXP,1);
-	ACS_NamedExecuteAlways("GivePlayerCash",0,PlayerNumber(),OutputCash);
+	ACS_NamedExecuteAlways("GivePlayerBP",0,PlayerNumber(),OutputBP);
 }
 
 
