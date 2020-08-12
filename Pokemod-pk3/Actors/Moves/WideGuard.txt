@@ -213,6 +213,8 @@ Actor WideScreenPart : HexBarrierBase
 DamageFactor "Normal" , 0.2
   Health 9999
   //+THRUSPECIES
+  +MTHRUSPECIES
+  //+SERVERSIDEONLY
   Var int User_HitDrain;
   Var int User_TargTID;
     RenderStyle "TRANSLUCENT"
@@ -222,18 +224,21 @@ DamageFactor "Normal" , 0.2
   Spawn:
 	TNT1 A 0
 	TNT1 A 0 
-	//TNT1 A 0 ACS_NamedExecuteAlways("WideScreenSyncher",0)
+  //TNT1 A 0 ACS_NamedExecuteAlways("WideScreenSyncher",0)
+  TNT1 A 0 A_GiveInventory("ProjectileCodeSyncTarget",1)
 	TNT1 A 0 ACS_NamedExecuteAlways("PlayerSpeciesSynch",0)
 	TNT1 A 1// A_Logint(tid)
-	Shield:
-    WGUA ABCB 4 A_Stop
+  Shield:
+    TNT1 A 0 A_SpawnItemEX("WideScreenGraphic_A",0,0,0,0,0,0,0,SXF_TRANSFERTRANSLATION|SXF_CLIENTSIDE)
+    TNT1 AAAA 4 A_Stop
 	TNT1 A 0 
     TNT1 A 0 A_JumpifinTargetInventory("WideScreenKiller",1,"Death")
     TNT1 A 0 A_JumpifinTargetInventory("WideGuardPP",6,"Shield")
     Goto WeakShield
     WeakShield:
+    TNT1 A 0 A_SpawnItemEX("WideScreenGraphic_B",0,0,0,0,0,0,0,SXF_TRANSFERTRANSLATION|SXF_CLIENTSIDE)
     TNT1 A 4 A_Stop
-    WGUA B 4 A_Stop
+    TNT1 A 4 A_Stop
 	TNT1 A 0 
     TNT1 A 0 A_JumpifinTargetInventory("WideScreenKiller",1,"Death")
     TNT1 A 0 A_JumpifinTargetInventory("WideGuardPP",6,"Shield")
@@ -645,6 +650,7 @@ actor ScreenSpawnBallStationary //: BasicProjectile
 +MISSILE
 +NOINTERACTION
 +NOTARGETSWITCH
+//+SERVERSIDEONLY
 Damage (0)
 //Missiletype "RepidifierTrail"
 speed 0
@@ -769,6 +775,7 @@ actor Screenprojector
 +MISSILE
 +NOINTERACTION
 +NOTARGETSWITCH
+//+SERVERSIDEONLY
 radius 8
 height 8
 Damage (0)
@@ -816,6 +823,7 @@ actor Screenprojector_BLUE
 +MISSILE
 +NOINTERACTION
 +NOTARGETSWITCH
+//+SERVERSIDEONLY
 radius 8
 height 8
 Damage (0)
@@ -862,6 +870,7 @@ actor Screenprojector_RED
 +MISSILE
 +NOINTERACTION
 +NOTARGETSWITCH
+//+SERVERSIDEONLY
 radius 8
 height 8
 Damage (0)
@@ -909,6 +918,7 @@ actor Screenprojector_GREEN
 +MISSILE
 +NOINTERACTION
 +NOTARGETSWITCH
+//+SERVERSIDEONLY
 radius 8
 height 8
 Damage (0)
@@ -956,6 +966,7 @@ actor Screenprojector_GOLD
 +MISSILE
 +NOINTERACTION
 +NOTARGETSWITCH
+//+SERVERSIDEONLY
 radius 8
 height 8
 Damage (0)
@@ -1035,3 +1046,28 @@ stop
 }
 }
 
+actor WideScreenGraphic_A : BasicClientside
+{
+scale 0.5
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_GiveInventory("ProjectileFXCode",1)
+WGUA ABCB 4
+stop
+}
+}
+
+actor WideScreenGraphic_B : BasicClientside
+{
+scale 0.5
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_GiveInventory("ProjectileFXCode",1)
+WGUA AZBZCZBZ 2
+stop
+}
+}

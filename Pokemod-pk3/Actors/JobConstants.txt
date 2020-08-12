@@ -144,6 +144,14 @@ const int Move_DrillPeck = 118;
 const int Move_Spikes = 119;
 const int Move_ToxicSpikes = 120;
 const int Move_Taunt = 121;
+const int Move_Whirlpool = 122;
+const int Move_Surf = 123;
+const int Move_MuddyWater = 124;
+const int Move_Waterfall = 125;
+const int Move_Liquidation = 126;
+const int Move_Scald = 127;
+const int Move_Dive = 128;
+const int Move_Bubble = 129;
 //--[NewMove]--
 //=======|Pokedex Constants|==========
 const int Dex_SMEARGLE = 0;
@@ -242,6 +250,7 @@ const int BT_USER4 = 16777216;
 
 //=======|weapon Constants|==========
 const int Aim_OverHead = 35;
+const int Aim_BodyCheck = 17;
 
 const int Cost_1 = 200;
 const int Cost_2 = 400;

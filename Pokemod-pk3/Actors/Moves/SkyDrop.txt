@@ -40,7 +40,7 @@ Goto Fire.After
 
 SkyDrop:
 TNT1 A 0 A_PlaySound("weapon/crashland")
-TNT1 A 0 SetPlayerProperty(0,1,4)
+TNT1 A 0 A_GiveInventory("DashSet_B")
 TNT1 A 0 A_TakeInventory("ZangiefAngle",255)
 TNT1 A 0 A_GiveInventory("ZangiefAngle",CallACS("GetAngleToTid",CallACS("Get_SuplexID_TID")))
 TNT1 A 0 A_SetAngle(CallACS("GetAngleToTid",CallACS("Get_SuplexID_TID"))*360/256)
@@ -81,7 +81,7 @@ goto SkyDropSlamEnd
 
 SkyDropSlamEnd:
 TOPH A 0 A_ChangeFlag("INVULNERABLE",0)
-TNT1 A 0 SetPlayerProperty(0,0,4)
+TNT1 A 0 A_GiveInventory("DashSetOff")
 TOPH A 0 A_ChangeFlag("SOLID",1) //More elegant solution later
 "####" B 0 A_Jump(256,"Fire.After")
 Goto Fire.After

@@ -9,7 +9,7 @@
 #import "Dex_Pokemon.acs"
 #include "zcommon.acs"
 Int EvoDEX [MAXDEX][6] = {
-    //      Paths  |Level |1st |2nd |3rd 	|FamilyID
+    //      Paths  |Level |1st      |2nd      |3rd 	    |FamilyID   |Form Number
     /*|0|*/{NULLEVO, 3,    NULLEVO,  NULLEVO, NULLEVO	,0},
     //Eevee is a special case, he has his own array
 

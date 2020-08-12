@@ -30,7 +30,7 @@ Fire.GroundCheck:
 Goto NoAmmo2
 
 Fire.Quake:
-"####" A 0 SetPlayerProperty(0,1,4)
+"####" A 0 A_GiveInventory("DashSet_B")
 "####" B 0 A_PlaySoundEx("Misc/Quake","Weapon")
 "####" B 5 A_Quake(2,5,0,300)
 "####" B 5 A_Quake(4,5,0,300)
@@ -41,7 +41,7 @@ Goto Fire.After
 
 Fire.After:
 "####" B 1 A_GiveInventory("FullRecovery_B")
-"####" A 0 SetPlayerProperty(0,0,4)
+"####" A 0 A_GiveInventory("DashSetOff")
 "####" C 0 A_REfire("Fire")
 "####" B 0 A_Jump(256,"Fire.End")
 Goto Fire.End

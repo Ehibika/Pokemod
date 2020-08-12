@@ -102,10 +102,10 @@ actor LeerEffectRay
 PROJECTILE
 Obituary "$OB_LEER"
 DamageType "Leer"
-+THRUGHOST
+//+THRUGHOST
 +DONTBLAST
 +DONTREFLECT
-+SERVERSIDEONLY
+//+SERVERSIDEONLY
 +HITTRACER
 renderstyle none
 damage (0)
@@ -181,13 +181,13 @@ Spawn:
 TNT1 A 0
 SpawnBeam:
 TNT1 A 0
-MBEA A 0 A_SetPitch(pitch+1)
-MBEA A 0 A_JumpIf(pitch>Leer_Range,"Death")
-MBEA A 0 A_SpawnItemEx("LeerRay1",0,0,0,momx,momy,momz,0,553)
-MBEA A 0 A_SpawnItemEx("LearBeamFX",0,0,0,0,0,0,0,33)
-MBEA A 1 A_JumpIf(CallACS("pkmn_istargetclient")!=1,"Death2")//A_Stop
-MBEA A 0 A_ChangeFlag("THRUACTORS",1)
-MBEA A 0 A_Stop
+TNT1 A 0 A_SetPitch(pitch+1)
+TNT1 A 0 A_JumpIf(pitch>Leer_Range,"Death")
+TNT1 A 0 A_JumpIf(CallACS("pkmn_istargetclient")!=1,"Death2")//A_Stop
+TNT1 A 0 A_SpawnItemEx("LeerRay1",0,0,0,momx,momy,momz,0,553)
+TNT1 A 0 A_SpawnItemEx("LearBeamFX",0,0,0,0,0,0,0,33)
+TNT1 A 0 A_ChangeFlag("THRUACTORS",1)
+TNT1 A 1 A_Stop
 stop
 Death2:
 TNT1 A 0 
@@ -220,14 +220,14 @@ Spawn:
 TNT1 A 0
 SpawnBeam:
 TNT1 A 0
-MBEA A 0 A_SetPitch(pitch+1)
-MBEA A 0 A_JumpIf(pitch>Leer_Range,"Death")
-MBEA A 0 A_SpawnItemEx("LeerRay1_T",0,0,0,momx,momy,momz,0,553)
-MBEA A 1 A_JumpIf(CallACS("pkmn_istargetclient")!=1,"Death2")//A_Stop
-TNT1 A 0 
+TNT1 A 0 A_SetPitch(pitch+1)
+TNT1 A 0 A_JumpIf(pitch>Leer_Range,"Death")
+TNT1 A 0 A_SpawnItemEx("LeerRay1_T",0,0,0,momx,momy,momz,0,553)
+TNT1 A 1 A_JumpIf(CallACS("pkmn_istargetclient")!=1,"Death2")//A_Stop
+TNT1 A 1 
 stop
 Death2:
-MBEA A 0 A_SpawnItemEx("LearBeamFX",0,0,0,0,0,0,0,33)
+TNT1 A 0 A_SpawnItemEx("LearBeamFX",0,0,0,0,0,0,0,33)
 stop
 Death:
 TNT1 A 0 A_SpawnItemEx("LeerPuff",0,0,0,0,0,0,0,33)

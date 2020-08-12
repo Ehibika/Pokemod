@@ -78,7 +78,7 @@ actor HammerArmPP : Ammo {inventory.amount 1 inventory.Maxamount 10}
 
 Const int HammerArmRad = 75;
 
-actor STF_HammerArm : Powerup {inventory.amount 1 Powerup.Duration -6}
+actor STF_HammerArm : Powerup {inventory.amount 1 Powerup.Duration -2}
 
 actor HammerArmNerfInitiate : CustomInventory
 {

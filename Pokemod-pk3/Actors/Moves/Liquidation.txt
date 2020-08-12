@@ -1,0 +1,259 @@
+Const int LIQUIDATION_AREA1 = 128;
+Const int LIQUIDATION_AREA2 = 64;
+Const int LIQ_FX1 = 45;
+
+actor LiquidationMove : WepMasterBase
+{
+Tag "Liquidation"
+Weapon.AmmoUse 1
+Weapon.AmmoGive 15
+weapon.ammotype "LiquidationPP"
+scale 2.0
+Inventory.Pickupmessage "$PU_MEGABUSTER"
+States
+{
+Spawn:
+WEAP X 1
+stop
+
+
+Fire:
+"####" BBB 1 A_Jumpif(CallACS("CheckWeaponFire",RC_C)==1,"Fire.Begin")
+"####" B 0 A_Jump(256,"NoAmmo")
+Goto NoAmmo
+
+Fire.Begin:
+"####" B 0
+"####" B 0 A_Jump(256,"Fire.Aim")
+Goto Fire.Aim
+
+
+Fire.Aim:
+"####" B 1 A_FireCustomMissile("LiquidationAimPath",0,0,0,0,0,Aim_BodyCheck)
+"####" C 0 A_REfire("Fire.Aim")
+"####" B 0 A_Jump(256,"Fire.BodyCheckStart")
+Goto Fire.BodyCheckStart
+
+Fire.BodyCheckStart:
+"####" B 0 A_PlaySoundEx("weapon/GrenadeLauncher","Weapon")
+"####" B 0 A_FireCustomMissile("Liquidation_BodyCheck",0,1,0,0,0,Aim_BodyCheck)
+"####" BBB 2 A_SpawnItemEx("LiquidationSplashFX",20,Random(-LIQ_FX1,LIQ_FX1),Random(-LIQ_FX1,LIQ_FX1),0,0,0,0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION)
+Fire.BodyCheckLoop:
+"####" B 2 
+"####" BBB 0 A_SpawnItemEx("LiquidationSplashFX",20,Random(-LIQ_FX1,LIQ_FX1),Random(-LIQ_FX1,LIQ_FX1),0,0,0,0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION)
+"####" B 0 A_JumpifInventory("BodyCheckFlag",1,"Fire.BodyCheckLoop")
+"####" B 15
+"####" B 0 A_Jump(256,"Fire.After")
+Goto Fire.After
+
+Fire.After:
+"####" B 1 A_GiveInventory("FullRecovery_C")
+"####" C 0 A_REfire("Fire")
+"####" B 0 A_Jump(256,"Fire.End")
+Goto Fire.End
+}
+}
+
+actor LiquidationMove1 : LiquidationMove {Weapon.SlotNumber 1}
+actor LiquidationMove2 : LiquidationMove {Weapon.SlotNumber 2}
+actor LiquidationMove3 : LiquidationMove {Weapon.SlotNumber 3}
+actor LiquidationMove4 : LiquidationMove {Weapon.SlotNumber 4}
+
+actor LiquidationMove5 : LiquidationMove 
+{
+Weapon.SlotNumber 5
+States
+{
+Fire.End:
+TNT1 A 0
+TNT1 A 0 A_TakeInventory("LiquidationMove5",9)
+TNT1 A 0 A_Jump(256,"Ready")
+Goto Ready
+}
+}
+
+//[+]========================================================================[+]
+//-----------------------------|Ammo & Inventory|------------------------------
+//[+]========================================================================[+]
+actor LiquidationPP : Ammo {inventory.amount 1 inventory.Maxamount 15}
+
+actor BodyCheckFlag : Powerup{powerup.duration 35}
+
+actor BodyCheckStopper : CustomInventory 
+{
+states
+{
+pickup:
+TNT1 A 0 A_TakeInventory("BodyCheckFlag",999)
+TNT1 A 0 A_Stop
+stop
+}
+}
+
+
+actor STF_Liquidation : Powerup {inventory.amount 1 Powerup.Duration -6}
+
+actor LiquidationNerfInitiate : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_Jumpifinventory("STF_Liquidation",1,"Sustain")
+TNT1 A 0 A_GiveInventory("STF_Liquidation",1)
+TNT1 A 0 A_SpawnItemEX("LiquidationNerfWatcher")
+TNT1 A 0 A_GiveInventory("StatUpdator",1)
+stop
+
+Sustain:
+TNT1 A 0 A_GiveInventory("STF_Liquidation",1)
+stop
+Nope:
+TNT1 A 0
+stop
+}
+}
+//[+]========================================================================[+]
+//--------------------------------|Projectiles |--------------------------------
+//[+]========================================================================[+]
+
+actor Liquidation_BodyCheck : BasicProjectile
+{
+DamageType "Liquidation"
+obituary "$OB_Liquidation"
++BOUNCEONCEILINGS
++SERVERSIDEONLY
++SkyExplode
+-NoGravity
+Gravity 0.6
+damage (1)
+Radius 18
+Height 60
+speed 25
+Scale 3.0
+ReactionTime 4
+States
+{
+Spawn:
+TNT1 A 0 
+TNT1 A 1 ACS_namedExecuteAlways("ProjectilePort",0,150)
+
+Spawn2:
+TNT1 A 0
+AQBA C 0 A_GiveToTarget("BodyCheckFlag")
+TNT1 A  1 
+loop
+Death:
+AQBA C 0 A_Stop
+AQBA C 0 A_GiveToTarget("BodyCheckStopper")
+AQBA C 0 A_GiveToTarget("Liquidation_Slam")
+stop
+}
+}
+
+
+actor LiquidationAimPath : GolfBallAimInstantStarter4 { Speed 25 }
+
+
+actor Liquidation_Slam : CustomInventory 
+{
+states
+{
+pickup:
+TNT1 A 0 A_SpawnItemEx("LiquidationBlast",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION)
+TNT1 A 0 A_Stop
+stop
+}
+}
+
+actor LiquidationBlast : BasicExplosion
+{
+DamageType "Liquidation"
+obituary "$OB_Liquidation"
+ReactionTime 5
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+TNT1 A 0 A_Explode(MBP_Liquidation,LIQUIDATION_AREA1,0,0,LIQUIDATION_AREA2)
+TNT1 A 0 A_PlaySoundEx("Move/RolloutImpact","SoundSlot5")
+TNT1 A 0 A_SpawnItemEx("LiquidationImpactFX",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION)
+Spawn2:
+TNT1 A 2 A_CountDown
+TNT1 AAAA 0 A_SpawnItemEx("WaterfallFX1", Random(-LIQUIDATION_AREA1,LIQUIDATION_AREA1), 0, Random(0,LIQUIDATION_AREA2), 0, 0, 0, random(0,360),1)
+loop
+
+Death:
+TNT1 A 5
+stop
+}
+}
+
+actor LiquidationSplashFX : BasicClientside
+{
++MISSILE
+translation "192:192=218:218", "198:198=221:221"
+scale 2.0
+Alpha 1.0
+States
+{
+Spawn:
+AQBA A 0
+AQBA A 0 A_Jump(256,"Spawn1","Spawn2")
+Goto Spawn1
+Spawn1:
+AQBA DEFG 2 A_SpawnItemEx("WaterGunDripFX",0,0,0,random(2,5),0,random(2,8),random(1,360),SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION)
+stop
+Spawn2:
+AQBA DHIJ 2 A_SpawnItemEx("WaterGunDripFX",0,0,0,random(2,5),0,random(2,8),random(1,360),SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION)
+stop
+}
+}
+
+
+actor LiquidationImpactFX : BasicClientside
+{
+scale 4.5
+States
+{
+Spawn:
+TNT1 A 0 
+TNT1 A 0 A_Quake(4,12,0,250)
+WHIT ABC 1 
+HITG H 1 A_SetScale(ScaleX+0.5)
+HITG H 0 A_Fadeout(0.3)
+HITG H 1 A_SetScale(ScaleX+0.5)
+HITG H 0 A_Fadeout(0.3)
+HITG H 1 A_SetScale(ScaleX+0.5)
+HITG H 0 A_Fadeout(0.3)
+TNT1 A 6
+stop
+}
+}
+
+
+actor LiquidationNerfWatcher : BasicHelper 
+{
+Var int user_DashTime;
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 5 A_GiveToTarget("PDefDownFXSpawn")
+TNT1 A 0 A_JumpIfInTargetInventory("STF_Liquidation",1,"Spawn")
+TNT1 A 1 A_GiveToTarget("StatUpdator")
+TNT1 A 5
+Goto Death
+
+Death:
+TNT1 A 0 
+stop
+}
+}
+

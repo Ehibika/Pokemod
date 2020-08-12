@@ -27,7 +27,7 @@ Goto Fire.DashWarmup
 Fire.DashWarmup:
 "####" A 0 ACS_NamedExecuteAlways("TakePP",0,Move_FlareBlitz,1)
 "####" A 0 A_GiveInventory("FlareBlitzWarmupTimer")
-"####" A 0 SetPlayerProperty(0,1,0)
+"####" A 0 A_GiveInventory("DashSet_A")
 "####" A 0 A_ChangeFlag("NOGRAVITY",1)
 "####" A 0 A_Stop
 Fire.DashWarmup1:
@@ -39,7 +39,7 @@ Fire.DashWarmup1:
 Goto Fire.DashWarmup
 
 Fire.DashStart:
-"####" A 0 SetPlayerProperty(0,1,4)
+"####" A 0 A_GiveInventory("DashSet_B")
 "####" A 0 A_ChangeFlag("NOGRAVITY",0)
 "####" A 0 A_GiveInventory("FlareBlitzTimer")
 "####" A 0 A_GiveInventory("FlareBlitzInitiate")
@@ -52,8 +52,8 @@ goto Fire.DashEnd
 
 Fire.DashEnd:
 "####" B 0 A_ScaleVelocity(0.2)
-"####" B 0 SetPlayerProperty(0,0,4)
-"####" A 0 SetPlayerProperty(0,0,0)
+"####" B 0 A_GiveInventory("DashSetOff")
+"####" A 0 A_GiveInventory("DashSetOff")
 "####" B 1 A_GiveInventory("HalfRecovery_B")
 "####" B 0 A_Jump(256,"Fire.End")
 Goto Fire.End

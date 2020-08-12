@@ -111,6 +111,8 @@ sprinkler/shot SPRSHT
 
 Weapon/Trample MADWALK 
 Weapon/WindBlow WINDBLOW 
+weapon/Bounce1	coil1a
+weapon/Bounce2	coil2a
 class/ToadCroak S_M4TOA1 
 
 Move/Yawn YAWN 

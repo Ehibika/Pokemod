@@ -1,0 +1,20 @@
+/* -=-=-=-=-=-=-=-=-=-=
+ * 
+ *
+ * [===]Move Changes[===]
+ * -=- Yawn -=-
+ * Range was reduced
+ * 
+ * -=- Waterfall -=-
+ * Base power reduced from 40 > 20
+ * hits now knock foes away.
+ * 
+ * -=-Dive-=-
+ * 
+ * -=-Hydro Pump-=-
+ * Frames per PP reduced from 70 > 35
+ * 
+ * -=- Hammer Arm -=-
+ * Speed debuff reduced from 6 seconds to 2
+ * 
+*/ 

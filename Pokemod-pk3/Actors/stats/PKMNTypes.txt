@@ -628,6 +628,15 @@ damagefactor "BubbleBeam", 1.3 //W
 damagefactor "AquaTail", 1.3 //W
 damagefactor "Brine", 1.3 //W
 damagefactor "AquaJet", 1.3 //W
+
+damagefactor "Whirlpool", 1.3 //W
+damagefactor "Surf", 1.3 //W
+damagefactor "MuddyWater", 1.3 //W
+damagefactor "Waterfall", 1.3 //W
+damagefactor "Liquidation", 1.3 //W
+damagefactor "Scald", 1.3 //W
+damagefactor "Dive", 1.3 //W
+damagefactor "Bubble", 1.3 //W
 }
 
 actor Water2xWeakness : TypeBase
@@ -639,6 +648,15 @@ damagefactor "BubbleBeam", 1.6 //2W
 damagefactor "AquaTail", 1.6 //2W
 damagefactor "Brine", 1.6 //2W
 damagefactor "AquaJet", 1.6 //2W
+
+damagefactor "Whirlpool", 1.6 //2W
+damagefactor "Surf", 1.6 //2W
+damagefactor "MuddyWater", 1.6 //2W
+damagefactor "Waterfall", 1.6 //2W
+damagefactor "Liquidation", 1.6 //2W
+damagefactor "Scald", 1.6 //2W
+damagefactor "Dive", 1.6 //2W
+damagefactor "Bubble", 1.6 //2W
 }
 
 actor WaterResistance : TypeBase
@@ -650,6 +668,15 @@ damagefactor "BubbleBeam", 0.7 //R
 damagefactor "AquaTail", 0.7 //R
 damagefactor "Brine", 0.7 //R
 damagefactor "AquaJet", 0.7 //R
+
+damagefactor "Whirlpool", 0.7 //R
+damagefactor "Surf", 0.7 //R
+damagefactor "MuddyWater", 0.7 //R
+damagefactor "Waterfall", 0.7 //R
+damagefactor "Liquidation", 0.7 //R
+damagefactor "Scald", 0.7 //R
+damagefactor "Dive", 0.7 //R
+damagefactor "Bubble", 0.7 //R
 }
 
 actor Water2xResistance : TypeBase
@@ -661,6 +688,15 @@ damagefactor "BubbleBeam", 0.4 //2R
 damagefactor "AquaTail", 0.4 //2R
 damagefactor "Brine", 0.4 //2R
 damagefactor "AquaJet", 0.4 //2R
+
+damagefactor "Whirlpool", 0.4 //2R
+damagefactor "Surf", 0.4 //2R
+damagefactor "MuddyWater", 0.4 //2R
+damagefactor "Waterfall", 0.4 //2R
+damagefactor "Liquidation", 0.4 //2R
+damagefactor "Scald", 0.4 //2R
+damagefactor "Dive", 0.4 //2R
+damagefactor "Bubble", 0.4 //2R
 }
 
 actor WaterImmunity : TypeBase
@@ -672,6 +708,15 @@ damagefactor "BubbleBeam", 0.0 //I
 damagefactor "AquaTail", 0.0 //I
 damagefactor "Brine", 0.0 //I
 damagefactor "AquaJet", 0.0 //I
+
+damagefactor "Whirlpool", 0.0 //I
+damagefactor "Surf", 0.0 //I
+damagefactor "MuddyWater", 0.0 //I
+damagefactor "Waterfall", 0.0 //I
+damagefactor "Liquidation", 0.0 //I
+damagefactor "Scald", 0.0 //I
+damagefactor "Dive", 0.0 //I
+damagefactor "Bubble", 0.0 //I
 }
 
 actor WaterSTAB : STABBase
@@ -684,6 +729,14 @@ damagefactor "AquaTail", 1.15 //S
 damagefactor "Brine", 1.15 //S
 damagefactor "AquaJet", 1.15 //S
 
+damagefactor "Whirlpool", 1.15 //S
+damagefactor "Surf", 1.15 //S
+damagefactor "MuddyWater", 1.15 //S
+damagefactor "Waterfall", 1.15 //S
+damagefactor "Liquidation", 1.15 //S
+damagefactor "Scald", 1.15 //S
+damagefactor "Dive", 1.15 //S
+damagefactor "Bubble", 1.15 //S
 }
 //[+]========================================================================[+]
 //--------------------------------|Grass|--------------------------------

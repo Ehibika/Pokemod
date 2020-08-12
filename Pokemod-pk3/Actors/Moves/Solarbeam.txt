@@ -432,10 +432,10 @@ actor SolarBeamRayDamager1
 PROJECTILE
 Obituary "$OB_SOLARBEAM"
 DamageType "SolarBeam"
-+THRUGHOST
+//+THRUGHOST
 +DONTBLAST
 +DONTREFLECT
-+SERVERSIDEONLY
+//+SERVERSIDEONLY
 +MTHRUSPECIES
 renderstyle none
 damage (0)

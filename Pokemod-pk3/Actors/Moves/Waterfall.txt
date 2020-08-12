@@ -1,0 +1,248 @@
+const int WATFALL_Spin = 35;
+
+
+actor WaterfallMove : WepMasterBase
+{
+Tag "Waterfall"
+obituary "$OB_Waterfall"
+Weapon.AmmoUse 1
+Weapon.AmmoGive 10
+weapon.ammotype "WaterfallPP"
+scale 2.0
+Inventory.Pickupmessage "$PU_MEGABUSTER"
+States
+{
+Spawn:
+WEAP X 1
+stop
+
+Fire:
+"####" BBB 1 A_Jumpif(CallACS("CheckWeaponFire",RC_C)==1,"Fire.Begin")
+"####" B 0 A_Jump(256,"NoAmmo")
+Goto NoAmmo
+
+Fire.Begin:
+"####" B 0
+"####" B 1 A_Jump(256,"Fire.Melee")//A_CheckFloor("Fire.Melee")
+Goto Fire.Melee
+
+Fire.Melee:
+TNT1 A 0 ACS_NamedExecuteAlways("TakePP",0,Move_Waterfall,1)
+TNT1 A 0 A_PlaySoundEx("weapon/ChargeKick","Weapon")
+TNT1 B 5 ThrustThing(angle * 256 / 360, 25, 0, 0)
+TNT1 B 0 A_GiveInventory("WaterfallBuffer")
+TNT1 A 0 A_PlaySoundEx("weapon/SlashClaw","SoundSlot6")
+TNT1 A 0 A_SetUserVar("user_wepangle",angle)
+TNT1 B 0 A_GiveInventory("WaterfallLifter")
+TNT1 A 0 A_Jumpif(z-floorz > 75,"Fire.Melee2")
+TNT1 A 0 A_SpawnItemEX("WaterfallBoostGeyser",0,0,-(z-floorz),0,0,0,0)
+//TNT1 A 0 ThrustThingZ(0,55,0,1)
+Fire.Melee2:
+TNT1 A 0 A_SpawnItemEX("WaterfallMelee",80,0,0,0,0,0,CallACS("GRAB_MEMANGLE",0))
+TNT1 A 0 A_SpawnItemEX("WaterfallMelee",80,0,0,0,0,0,(CallACS("GRAB_MEMANGLE",0)+120))
+TNT1 A 0 A_SpawnItemEX("WaterfallMelee",80,0,0,0,0,0,(CallACS("GRAB_MEMANGLE",0)+240))
+TNT1 A 0 A_SetUserVar("user_wepangle", CallACS("GRAB_MEMANGLE",0)+WATFALL_Spin)
+TNT1 A 2 A_PlaySoundEx("misc/waterslide","Soundslot6")
+TNT1 A 0 A_CheckFloor(2)
+TNT1 A 0 A_JumpifInventory("WaterfallBuffer",1,"Fire.Melee2")
+//===
+TNT1 A 0
+TNT1 B 0 A_GiveInventory("WaterfallBuffer2")
+Fire.Melee3:
+TNT1 A 0 ThrustThingZ(0,-25,0,1)
+TNT1 A 1 A_JumpIf(MomZ <=0 || Z-FloorZ == 0, "Fire.After")
+TNT1 A 0 A_JumpifInventory("WaterfallBuffer2",1,"Fire.Melee3")
+Goto Fire.After
+
+Fire.After:
+"####" B 1 A_GiveInventory("FullRecovery_C") //Sky Uppercut uses C recovery so it can combo with other moves
+"####" B 0 A_Jump(256,"Fire.End")
+Goto Fire.End
+}
+}
+
+actor WaterfallMove1 : WaterfallMove {Weapon.SlotNumber 1}
+actor WaterfallMove2 : WaterfallMove {Weapon.SlotNumber 2}
+actor WaterfallMove3 : WaterfallMove {Weapon.SlotNumber 3}
+actor WaterfallMove4 : WaterfallMove {Weapon.SlotNumber 4}
+
+actor WaterfallMove5 : WaterfallMove 
+{
+Weapon.SlotNumber 5
+States
+{
+Fire.End:
+TNT1 A 0
+TNT1 A 0 A_TakeInventory("WaterfallMove5",9)
+TNT1 A 0 A_Jump(256,"Ready")
+Goto Ready
+}
+}
+
+
+//[+]========================================================================[+]
+//-----------------------------|Ammo & Inventory|------------------------------
+//[+]========================================================================[+]
+actor WaterfallPP : Ammo {inventory.amount 1 inventory.Maxamount 10}
+
+Actor WaterfallBuffer : Powerup {inventory.amount 1 Powerup.duration 70}
+Actor WaterfallBuffer2 : Powerup {inventory.amount 1 Powerup.duration 35}
+
+Actor WaterfallBoostBuffer : Powerup {inventory.amount 1 Powerup.duration 17}
+
+
+Actor WaterfallProtect : powerprotection
+{
+Powerup.duration 5
+Damagefactor "Waterfall", 0
+}
+//[+]========================================================================[+]
+//--------------------------------|Projectiles |--------------------------------
+//[+]========================================================================[+]
+
+actor WaterfallMelee : BasicMeleeAttack
+{
+Speed 90
+Scale 2.0
+DamageType "Waterfall"
+Obituary "$OB_Waterfall"
+Damage(0)
+States
+{
+Spawn:
+TNT1 A 0 
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+Spawn2:
+TNT1 A 0 A_Explode(MBP_Waterfall,64,0,0,64)
+TNT1 A 1 A_SpawnItemEx("WaterfallFX1", 0, 0, 0, 0, 0, 0, 0,1)
+stop
+
+Death:
+TNT1 A 0 A_Stop
+TNT1 A 0 A_GiveInventory("ProjectileDCode",1)
+TNT1 A 0 A_SpawnItemEx("WaterfallFX1", 0, 0, 0, 0, 0, 0, 0,1)
+TNT1 A 5
+stop
+}
+}
+
+actor WaterfallBoostGeyser
+{
+scale 1.5
+Xscale 1.0
++MISSILE
++RIPPER
++NOGRAVITY
++DONTBLAST
++NOEXPLODEFLOOR
++THRUACTORS
++FLOORHUGGER
+DamageType "Waterfall"
+Damage (0)
+Height 15
+Radius 15
+Speed 40
+ReactionTime 35
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+Grounder:
+TNT1 A 1 A_ChangeVelocity(0, 0, -5, CVF_RELATIVE|CVF_REPLACE)
+TNT1 A 0 A_CheckFloor("Spawn1")
+loop
+Spawn1:
+SURF AEI 2
+Spawn2:
+SURF JKL 2 A_GiveInventory("BoostGeyserFunction")
+SURF A 0 A_CountDown
+Loop
+Death:
+TNT1 A 0 A_GiveInventory("ProjectileDCode",1)
+SURF B 0 A_Stop
+SURF GEA 2
+stop
+}
+}
+
+
+actor WaterfallFXTrail : BasicClientside
+{
+scale 2.5
+States
+{
+Spawn:
+TNT1 A 0 
+HARD CDE 1
+HARD EEE 1 A_Fadeout(0.3)
+stop
+}
+}
+
+
+actor WaterfallFX1 : BasicClientside
+{
+scale 2.5
+States
+{
+Spawn:
+TNT1 A 0 
+WHIT ABC 2 A_SpawnItemEx("WaterGunDripFX",0,0,0,random(2,5),0,random(2,8),random(1,360),SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION)
+HITG HHHH 1 A_Fadeout(0.3)
+stop
+}
+}
+
+actor WaterfallCeilingBonk : BasicClientside
+{
+scale 4.5
+States
+{
+Spawn:
+TNT1 A 0 
+TNT1 A 0 A_PlaySoundEX("Misc/CeilingBonk","SoundSlot8")
+TNT1 A 0 A_Quake(4,12,0,250)
+HITG FGH 1
+HITG H 1 A_SetScale(ScaleX+0.5)
+HITG H 0 A_Fadeout(0.3)
+HITG H 1 A_SetScale(ScaleX+0.5)
+HITG H 0 A_Fadeout(0.3)
+HITG H 1 A_SetScale(ScaleX+0.5)
+HITG H 0 A_Fadeout(0.3)
+TNT1 A 6
+stop
+}
+}
+
+
+actor BoostGeyserFunction : CustomInventory
+{
+states
+{
+Pickup:
+TNT1 A 1 A_CheckRange(100,"Nope")
+TNT1 A 1 A_RadiusGive("WaterfallLifter",SurfRad2,RGF_PLAYERS|RGF_OBJECTS)
+stop
+Nope:
+TNT1 A 0
+Stop
+}
+}
+
+actor WaterfallLifter : CustomInventory
+{
+states
+{
+Pickup:
+TNT1 A 1 A_JumpifInventory("WaterfallBoostBuffer",1,"Nope")
+TNT1 A 0 ThrustThingZ(0,75,0,0)
+TNT1 A 0 A_GiveInventory("WaterfallBoostBuffer")
+TNT1 A 0 A_PlaySoundEx("misc/waterslide","Soundslot6")
+stop
+
+Nope:
+TNT1 A 0
+Stop
+}
+}

@@ -15,6 +15,7 @@
 #import "Dex_Evo.acs"
 #import "Dex_Leveling.acs"
 #import "Dex_BaseStats.acs"
+#import "A_Skins.acs"
 
 #include "zcommon.acs"
 
@@ -79,11 +80,32 @@ if(ACS_ExecuteWithResult(975,1)==1)
 		SetActorProperty(0,APROP_SPECIES,"KingMember");
 		break;
 		}
+	ACS_NamedExecuteAlways("SetClientSpecies",0,GetPlayerInfo(PlayerNumber(), PLAYERINFO_TEAM));
 	}
 else{setactorproperty(0,APROP_SPECIES,StrParam(s:"Player_",i:pln));}
  
 // Stores the players starting Jump Height on spawn
 PlayerJumpZ[pln] = GetActorProperty(0, APROP_JumpZ);
+}
+
+Script "SetClientSpecies" (int Num) Clientside
+{
+	switch(Num)
+		{
+		Case 0:
+		SetActorProperty(0,APROP_SPECIES,"LightMember");
+		break;
+		Case 1:
+		SetActorProperty(0,APROP_SPECIES,"WilyMember");
+		break;
+		Case 2:
+		SetActorProperty(0,APROP_SPECIES,"CossackMember");
+		break;
+		Case 3:
+		SetActorProperty(0,APROP_SPECIES,"KingMember");
+		break;
+		}
+
 }
         
        

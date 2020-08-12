@@ -60,6 +60,11 @@ SHOP_QBUYTM31= "\cgTM31 : \caHealPulse \c[MenuYellow]250 $P\cj";
 SHOP_QBUYTM32= "\cgTM32 : \ceStealthRock \c[MenuYellow]150 $P\cj";
 SHOP_QBUYTM33= "\cgTM33 : \cbSpikes \c[MenuYellow]150 $P\cj";
 SHOP_QBUYTM34= "\cgTM34 : \ctToxicSpikes \c[MenuYellow]250 $P\cj";
+SHOP_QBUYTM35= "\cgTM35 : \chSurf \c[MenuYellow]250 $P\cj";
+SHOP_QBUYTM36= "\cgTM36 : \chWaterfall \c[MenuYellow]250 $P\cj";
+SHOP_QBUYTM37= "\cgTM37 : \chDive \c[MenuYellow]250 $P\cj";
+SHOP_QBUYTM38= "\cgTM38 : \chScald \c[MenuYellow]150 $P\cj";
+SHOP_QBUYTM39= "\cgTM39 : \chwaterpulse \c[MenuYellow]150 $P\cj";
 SHOP_QBUYTM40= "\cgTM40 : \cdBulletSeed \c[MenuYellow]50 $P\cj";
 SHOP_QBUYTM41= "\cgTM41 : \chBrine \c[MenuYellow]150 $P\cj";
 SHOP_QBUYTM44= "\cgTM44 : \cdMagicalLeaf \c[MenuYellow]100 $P\cj";
@@ -93,6 +98,11 @@ SHOP_BUYTM31= "\cjBuy TM31 : HealPulse for  \c[MenuYellow]250 $P\cj ?";
 SHOP_BUYTM32= "\cjBuy TM32 : StealthRock for  \c[MenuYellow]150 $P\cj ?";
 SHOP_BUYTM33= "\cjBuy TM33 : Spikes for  \c[MenuYellow]150 $P\cj ?";
 SHOP_BUYTM34= "\cjBuy TM34 : ToxicSpikes for  \c[MenuYellow]250 $P\cj ?";
+SHOP_BUYTM35= "\cjBuy TM35 : Surf for  \c[MenuYellow]250 $P\cj ?";
+SHOP_BUYTM36= "\cjBuy TM36 : Waterfall for  \c[MenuYellow]250 $P\cj ?";
+SHOP_BUYTM37= "\cjBuy TM37 : Dive for  \c[MenuYellow]250 $P\cj ?";
+SHOP_BUYTM38= "\cjBuy TM38 : Scald for  \c[MenuYellow]250 $P\cj ?";
+SHOP_BUYTM39= "\cjBuy TM39 : waterpulse for  \c[MenuYellow]250 $P\cj ?";
 SHOP_BUYTM40= "\cjBuy TM40 : BulletSeed for  \c[MenuYellow]50 $P\cj ?";
 SHOP_BUYTM41= "\cjBuy TM41 : Brine for  \c[MenuYellow]150 $P\cj ?";
 SHOP_BUYTM44= "\cjBuy TM44 : MagicalLeaf for  \c[MenuYellow]100 $P\cj ?";
@@ -128,6 +138,11 @@ SHOP_LEARNTM31= "\cfTypes: \cjPsychic, Fairy \n\cfArchetypes: \cjSuccor, Defensi
 SHOP_LEARNTM32= "\cfTypes: \cjRock, Ground, Steel \n\cfArchetypes: \cjDefensive, Terrestrial "; //StealthRock
 SHOP_LEARNTM33= "\cfTypes: \cjRock, Ground, Steel \n\cfArchetypes: \cjDefensive, Terrestrial "; //Spikes
 SHOP_LEARNTM34= "\cfTypes: \cjPoison \n\cfArchetypes: \cjDefensive "; //ToxicSpikes
+SHOP_LEARNTM35= "\cfTypes: \cjWater \n\cfArchetypes: \cj— "; //Surf
+SHOP_LEARNTM36= "\cfTypes: \cjWater \n\cfArchetypes: \cj— "; //Waterfall
+SHOP_LEARNTM37= "\cfTypes: \cjWater \n\cfArchetypes: \cj— "; //Dive
+SHOP_LEARNTM38= "\cfTypes: \cjWater \n\cfArchetypes: \cj— "; //Scald
+SHOP_LEARNTM39= "\cfTypes: \cjWater \n\cfArchetypes: \cj— "; //waterpulse
 SHOP_LEARNTM40= "\cfTypes: \cjGrass \n\cfArchetypes: \cjArtillery ";
 SHOP_LEARNTM41= "\cfTypes: \cjWater \n\cfArchetypes: \cjArtillery "; //Brine
 SHOP_LEARNTM44= "\cfTypes: \cjGrass,Psychic,Fairy";
@@ -344,6 +359,14 @@ OB_DRILLPECK = "%k Defeated %o using DRILLPECK!";
 OB_SPIKES = "%k Defeated %o using SPIKES!";
 OB_TOXICSPIKES = "%k Defeated %o using TOXICSPIKES!";
 OB_TAUNT = "%k Defeated %o using TAUNT!";
+OB_WHIRLPOOL = "%k Defeated %o using WHIRLPOOL!";
+OB_SURF = "%k Defeated %o using SURF!";
+OB_MUDDYWATER = "%k Defeated %o using MUDDYWATER!";
+OB_WATERFALL = "%k Defeated %o using WATERFALL!";
+OB_LIQUIDATION = "%k Defeated %o using LIQUIDATION!";
+OB_SCALD = "%k Defeated %o using SCALD!";
+OB_DIVE = "%k Defeated %o using DIVE!";
+OB_BUBBLE = "%k Defeated %o using BUBBLE!";
 //--[NewMove]--
 
 //██████████████████████████████████████████Join Menu████████████████████████████████████████
@@ -1767,6 +1790,70 @@ M121_TYPE = "\cj Dark";
 M121_CATEGORY = "\cf Status";
 M121_POWER = "\cfPower:\cj --";
 M121_DESC = "\cfTarget an opponent to Taunt them out of \nusing non-damaging moves.";
+//#endregion
+
+//#region -=- 122: WHIRLPOOL -=-
+M122_NAME = "\cj Taunt";
+M122_TYPE = "\cj <Type>";
+M122_CATEGORY = "\cf <Category>";
+M122_POWER = "\cfPower:\cj --";
+M122_DESC = "\cf<Desc>";
+//#endregion
+
+//#region -=- 123: SURF -=-
+M123_NAME = "\cj Taunt";
+M123_TYPE = "\cj <Type>";
+M123_CATEGORY = "\cf <Category>";
+M123_POWER = "\cfPower:\cj --";
+M123_DESC = "\cf<Desc>";
+//#endregion
+
+//#region -=- 124: MUDDYWATER -=-
+M124_NAME = "\cj Taunt";
+M124_TYPE = "\cj <Type>";
+M124_CATEGORY = "\cf <Category>";
+M124_POWER = "\cfPower:\cj --";
+M124_DESC = "\cf<Desc>";
+//#endregion
+
+//#region -=- 125: WATERFALL -=-
+M125_NAME = "\cj Taunt";
+M125_TYPE = "\cj <Type>";
+M125_CATEGORY = "\cf <Category>";
+M125_POWER = "\cfPower:\cj --";
+M125_DESC = "\cf<Desc>";
+//#endregion
+
+//#region -=- 126: LIQUIDATION -=-
+M126_NAME = "\cj Taunt";
+M126_TYPE = "\cj <Type>";
+M126_CATEGORY = "\cf <Category>";
+M126_POWER = "\cfPower:\cj --";
+M126_DESC = "\cf<Desc>";
+//#endregion
+
+//#region -=- 127: SCALD -=-
+M127_NAME = "\cj Taunt";
+M127_TYPE = "\cj <Type>";
+M127_CATEGORY = "\cf <Category>";
+M127_POWER = "\cfPower:\cj --";
+M127_DESC = "\cf<Desc>";
+//#endregion
+
+//#region -=- 128: DIVE -=-
+M128_NAME = "\cj Taunt";
+M128_TYPE = "\cj <Type>";
+M128_CATEGORY = "\cf <Category>";
+M128_POWER = "\cfPower:\cj --";
+M128_DESC = "\cf<Desc>";
+//#endregion
+
+//#region -=- 129: BUBBLE -=-
+M129_NAME = "\cj Taunt";
+M129_TYPE = "\cj <Type>";
+M129_CATEGORY = "\cf <Category>";
+M129_POWER = "\cfPower:\cj --";
+M129_DESC = "\cf<Desc>";
 //#endregion
 
 //--[NewMove]--

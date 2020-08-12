@@ -9,7 +9,7 @@
 #import "Dex_Pokemon.acs"
 #include "zcommon.acs"
 str SkinDEX [MAXDEX][2] = {
-    /*|0|*/{"Eevee","Base"},
+    /*|0|*/{"Smeargle","Base"},
     
     /*|1|*/{"Bulbasaur","Base"},
     /*|2|*/{"Ivysaur","Ivysaur"},

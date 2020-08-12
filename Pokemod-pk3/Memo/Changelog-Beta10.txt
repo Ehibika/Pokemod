@@ -1,0 +1,82 @@
+/* -=-=-=-=-=-=-=-=-=-=
+ * 
+ *
+ * [===]BugFixes[===]
+ * Found an invincibility bug caused by raising defenses using irondefense/amnesia on already defensively strong
+ * pokemon.
+ * 
+ * [===]Gameplay Changes[===]
+ * Implemented a new skin system made by jax that allowes for player independant timers and reduced 
+ * 
+ * increased skinchange cooldown so as to be a little less aggressive and reduce userinfo floods
+ * 
+ * Removed the hitstun and knockback on weakness hits as it interfeared with some move functions
+ * 
+ * [=]New Moves[=]
+ * Whirlpool
+ * Surf
+ * MuddyWater
+ * Waterfall
+ * Liquidation
+ * Scald
+ * Water Pulse
+ * Dive
+ * 
+ * Implemented the burn status, lasts for 20 seconds and does 2% of HP per tick, but also halves physical damage dealt
+ * 
+ *  * [===]Move Changes[===]
+ * -=- Ember -=-
+ * Can now inflict a burn
+ * 
+ * -=- Flamethrower -=-
+ * Can now inflict a burn
+ * 
+ * -=- HeatWave -=-
+ * Can now inflict a burn
+ * 
+ * -=- BlazeKick -=-
+ * Can now inflict a burn
+ * 
+ * -=- Flame Burst -=-
+ * Can now inflict a burn
+ * Range was increased by 135 mu
+ * 
+ * -=- Bite -=-
+ * Has a chance to cause cringe
+ * 
+ * -=- Crunch -=-
+ * Has a chance to cause cringe
+ * 
+ * -=-Wide Guard-=-
+ * Fixed Translation Issue
+ * 
+ * -=- hydro pump -=-
+ * addressed the beam code to try and reduce lag
+ * 
+ * -=- leer -=-
+ * addressed visual bug of there being 2 pairs of lasers
+ * 
+ * [===]Pokemon Changes[===]
+ *
+ * -=- squirtle -=-
+ * Swapped Bubblebeam with Water Pulse
+ * 
+ * -=- Totodile -=-
+ * Swapped ScaryFace with Liquidation
+ * Swapped DragonPulse with Thrash
+ * Placed Dive in Thrash's original spot
+ * Swapped HydroPump with Whirlpool
+ * 
+ * -=- Mudkip -=-
+ * Swapped Ice Punch with MudBomb
+ * Set Muddy Water as lvl 6 move
+ * Set Mudbomb's as lvl 3 move
+ * Set Waterfall as lvl 5 move
+ * Swapped Hydro Pump with Dive
+ * 
+ * -=- Piplup -=-
+ * Swapped Growl with Aqua jet
+ * Swapped SwordDance with Dive
+ * Set Drillpeck as lvl 7 move
+ * Set Whirlpool as lvl 9 move
+/* 

@@ -69,7 +69,11 @@ alias BuyTM31 "CloseMenu; Use BuyTM31;"
 alias BuyTM32 "CloseMenu; Use BuyTM32;"
 alias BuyTM33 "CloseMenu; Use BuyTM33;"
 alias BuyTM34 "CloseMenu; Use BuyTM34;"
-
+alias BuyTM35 "CloseMenu; Use BuyTM35;"
+alias BuyTM36 "CloseMenu; Use BuyTM36;"
+alias BuyTM37 "CloseMenu; Use BuyTM37;"
+alias BuyTM38 "CloseMenu; Use BuyTM38;"
+alias BuyTM39 "CloseMenu; Use BuyTM39;"
 alias BuyTM40 "CloseMenu; Use BuyTM40;"
 
 alias BuyTM41 "CloseMenu; Use BuyTM41;"

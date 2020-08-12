@@ -94,6 +94,12 @@ stop
 
 actor IsInGame : Once {}
 
+actor OnceC : Inventory
+{
+inventory.amount 1
+inventory.maxamount 1
+}
+
 actor AbnormalItemPosition : Once {}
 
 actor InvisibleFlag : Once {}
@@ -197,6 +203,120 @@ TNT1 A 0 A_GiveInventory("DashBreaker",1)
 stop
 }
 }
+
+
+actor DashSet_A : CustomInventory 
+{
+states
+{
+pickup:
+TNT1 A 0 A_Jumpifintargetinventory("SleepMark",1,"Nope")
+TNT1 A 0 A_Jumpifintargetinventory("CringeMark",1,"Nope")
+Goto Pickup2
+
+Pickup2:
+TNT1 A 0 SetPlayerProperty(0,1,0)
+stop
+
+Nope:
+TNT1 A 0 
+Stop
+}
+}
+
+actor DashSet_B : CustomInventory 
+{
+states
+{
+pickup:
+TNT1 A 0 A_Jumpifintargetinventory("SleepMark",1,"Nope")
+TNT1 A 0 A_Jumpifintargetinventory("CringeMark",1,"Nope")
+Goto Pickup2
+
+Pickup2:
+TNT1 A 0 SetPlayerProperty(0,1,4)
+stop
+
+Nope:
+TNT1 A 0 
+Stop
+}
+}
+
+actor DashSetOff : CustomInventory 
+{
+states
+{
+pickup:
+TNT1 A 0 SetPlayerProperty(0,0,0)
+TNT1 A 0 A_Jumpifintargetinventory("SleepMark",1,"Nope")
+TNT1 A 0 A_Jumpifintargetinventory("CringeMark",1,"Nope")
+Goto Pickup2
+
+Pickup2:
+TNT1 A 0 SetPlayerProperty(0,0,4)
+stop
+
+Nope:
+TNT1 A 0 
+Stop
+}
+}
+
+actor IsInvunFlag : OnceC{}
+
+
+actor InvulnerableOn_Pickup : CustomInventory
+{
+States
+{
+Pickup:
+TNT1 A 0 A_GiveInventory("IsInvunFlag",1)
+TNT1 A 0 A_ChangeFlag("INVULNERABLE",1)
+stop
+}
+}
+actor InvulnerableOff_Pickup : CustomInventory
+{
+States
+{
+Pickup:
+TNT1 A 0 A_TakeInventory("IsInvunFlag",9)
+TNT1 A 0 A_ChangeFlag("INVULNERABLE",0)
+stop
+}
+}
+
+actor UnhittableOn_Pickup : CustomInventory
+{
+States
+{
+Pickup:
+TNT1 A 0 A_GiveInventory("IsInvunFlag",1)
+TNT1 A 0 A_GiveInventory("UnhittableProtect",1)
+TNT1 A 0 A_ChangeFlag("NONSHOOTABLE",1)
+TNT1 A 0 A_ChangeFlag("NORADIUSDMG",1)
+stop
+}
+}
+actor UnhittableOff_Pickup : CustomInventory
+{
+States
+{
+Pickup:
+TNT1 A 0 A_TakeInventory("IsInvunFlag",9)
+TNT1 A 0 A_TakeInventory("UnhittableProtect",9)
+TNT1 A 0 A_ChangeFlag("NONSHOOTABLE",0)
+TNT1 A 0 A_ChangeFlag("NORADIUSDMG",0)
+stop
+}
+}
+actor UnhittableProtect : PowerProtection
+{
+Powerup.Duration -60
+//damagefactor "InsertRailGunHere", 0.0
+}
+
 
 //[+]========================================================================[+]
 //-------------------------|Projectile TRanslation Script|---------------------
@@ -312,7 +432,7 @@ states
 Pickup:
 TNT1 A 0 ACS_NamedExecuteAlways("PKMN_Setup",0)
 
-TNT1 A 0 A_GiveInventory("PokeFormHandler",1)
+TNT1 A 0 //A_GiveInventory("PokeFormHandler",1)
 TNT1 A 0 A_GiveInventory("EvoStartItem",1)
 TNT1 A 0 A_GiveInventory("MoveTutorStartItem",1)
 TNT1 A 0 A_GiveInventory("MoveShiftStartItem",1)

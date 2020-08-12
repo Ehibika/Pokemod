@@ -150,7 +150,7 @@ Function Void StatClear (Int Mode)
     TakeInventory("Active_Speed",999);
     }
 
-    For (int s = 1; s < 1001; s++)
+    For (int s = 0; s < 1000; s++)
     {
         a = StrParam(s:"PATK",i:s);
         b = StrParam(s:"SATK",i:s);
@@ -195,7 +195,7 @@ Str StatName2[7] = {
 };
 */
 
-#LIBDEFINE STATITEMNUM 27
+#LIBDEFINE STATITEMNUM 30
 
 Str StatEffectName[STATITEMNUM][2] = {
     {"Growth","GOOD"},
@@ -225,6 +225,9 @@ Str StatEffectName[STATITEMNUM][2] = {
     {"HammerArm","BAD"},
     {"SwordDance","GOOD"},
     {"RapidSpin","GOOD"},
+    {"MuddyWater","BAD"},
+    {"Liquidation","BAD"},
+    {"Dive","GOOD"},
 
 };
 
@@ -262,6 +265,9 @@ Int StatEffectValue[STATITEMNUM][5] = {
 {   0,      0,      0,      0,      -2}, 
 {   0,      0,      0,      0,      -1}, 
 {   2,      0,      0,      0,      0}, 
+{   0,      0,      0,      0,      1}, 
+{   0,      0,      0,      0,      -1}, 
+{   0,      0,      -1,      0,      0}, 
 {   0,      0,      0,      0,      1}, 
 };
 
@@ -429,6 +435,7 @@ else
     {
     StatValue = Noneg(ValueMap(ModStat,STATBASELINE,STATMIN,DEFVAL2,DEFVAL3));    
     }
+if(StatValue < 10){StatValue = 10;}
 GiveInventory(StrParam(s:"PDEF",i:StatValue),1);
 
 ModStat = StatModifier(CheckInventory("Active_SDefense"),SDEF_ID);
@@ -441,7 +448,7 @@ if(ModStat >= STATBASELINE)
     {
     StatValue = Noneg(ValueMap(ModStat,STATBASELINE,STATMIN,DEFVAL2,DEFVAL3));    
     }
-
+if(StatValue < 10){StatValue = 10;}
 GiveInventory(StrParam(s:"SDEF",i:StatValue),1);
 
 /*

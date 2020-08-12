@@ -299,7 +299,7 @@ OptionMenu "Dex_D007"
     Submenu "                   Protect", "MoveMenu_Protect"
     StaticText "$PKMN_DEXMOVES2"
     Submenu "                   Life Dew lvl.1", "MoveMenu_LifeDew"
-    Submenu "                   BubbleBeam lvl.2", "MoveMenu_BubbleBeam"
+    Submenu "                   WaterPulse lvl.2", "MoveMenu_waterpulse"
     Submenu "                   Iron Defense lvl.3", "MoveMenu_IronDefense"
     Submenu "                   Aqua Tail lvl.4", "MoveMenu_AquaTail"
     Submenu "                   Aqua Ring lvl.5", "MoveMenu_AquaRing"
@@ -330,7 +330,7 @@ OptionMenu "Dex_D008"
     Submenu "                   Protect", "MoveMenu_Protect"
     StaticText "$PKMN_DEXMOVES2"
     Submenu "                   Life Dew lvl.1", "MoveMenu_LifeDew"
-    Submenu "                   BubbleBeam lvl.2", "MoveMenu_BubbleBeam"
+    Submenu "                   WaterPulse lvl.2", "MoveMenu_waterpulse"
     Submenu "                   Iron Defense lvl.3", "MoveMenu_IronDefense"
     Submenu "                   Aqua Tail lvl.4", "MoveMenu_AquaTail"
     Submenu "                   Aqua Ring lvl.5", "MoveMenu_AquaRing"
@@ -361,7 +361,7 @@ OptionMenu "Dex_D009"
     Submenu "                   Protect", "MoveMenu_Protect"
     StaticText "$PKMN_DEXMOVES2"
     Submenu "                   Life Dew lvl.1", "MoveMenu_LifeDew"
-    Submenu "                   BubbleBeam lvl.2", "MoveMenu_BubbleBeam"
+    Submenu "                   WaterPulse lvl.2", "MoveMenu_waterpulse"
     Submenu "                   Iron Defense lvl.3", "MoveMenu_IronDefense"
     Submenu "                   Aqua Tail lvl.4", "MoveMenu_AquaTail"
     Submenu "                   Aqua Ring lvl.5", "MoveMenu_AquaRing"
@@ -579,13 +579,13 @@ OptionMenu "Dex_D016"
     StaticText "$PKMN_DEXMOVES2"
     Submenu "                   Fake Tears lvl.2", "MoveMenu_FakeTears"
     Submenu "                   Ice Fang lvl.3", "MoveMenu_IceFang"
-    Submenu "                   Scary Face lvl.4", "MoveMenu_ScaryFace"
+    Submenu "                   Liquidation lvl.4", "MoveMenu_Liquidation"
     Submenu "                   Aqua Tail lvl.5", "MoveMenu_AquaTail"
     Submenu "                   Crunch lvl.6", "MoveMenu_Crunch"
-    Submenu "                   Thrash lvl.7", "MoveMenu_Thrash"
-    Submenu "                   Dragon Pulse lvl.8", "MoveMenu_DragonPulse"
+    Submenu "                   Dive lvl.7", "MoveMenu_Dive"
+    Submenu "                   Thrash lvl.8", "MoveMenu_Thrash"
     Submenu "                   Dragon Dance lvl.9", "MoveMenu_DragonDance"
-    Submenu "                   Hydro Pump lvl.10", "MoveMenu_HydroPump"
+    Submenu "                   Whirlpoop lvl.10", "MoveMenu_Whirlpool"
     StaticText"===============================================================",1
 }
 
@@ -610,13 +610,13 @@ OptionMenu "Dex_D017"
     StaticText "$PKMN_DEXMOVES2"
     Submenu "                   Fake Tears lvl.2", "MoveMenu_FakeTears"
     Submenu "                   Ice Fang lvl.3", "MoveMenu_IceFang"
-    Submenu "                   Scary Face lvl.4", "MoveMenu_ScaryFace"
+    Submenu "                   Liquidation lvl.4", "MoveMenu_Liquidation"
     Submenu "                   Aqua Tail lvl.5", "MoveMenu_AquaTail"
     Submenu "                   Crunch lvl.6", "MoveMenu_Crunch"
-    Submenu "                   Thrash lvl.7", "MoveMenu_Thrash"
-    Submenu "                   Dragon Pulse lvl.8", "MoveMenu_DragonPulse"
+    Submenu "                   Dive lvl.7", "MoveMenu_Dive"
+    Submenu "                   Thrash lvl.8", "MoveMenu_Thrash"
     Submenu "                   Dragon Dance lvl.9", "MoveMenu_DragonDance"
-    Submenu "                   Hydro Pump lvl.10", "MoveMenu_HydroPump"
+    Submenu "                   Whirlpoop lvl.10", "MoveMenu_Whirlpool"
     StaticText"===============================================================",1
 }
 
@@ -641,13 +641,13 @@ OptionMenu "Dex_D018"
     StaticText "$PKMN_DEXMOVES2"
     Submenu "                   Fake Tears lvl.2", "MoveMenu_FakeTears"
     Submenu "                   Ice Fang lvl.3", "MoveMenu_IceFang"
-    Submenu "                   Scary Face lvl.4", "MoveMenu_ScaryFace"
+    Submenu "                   Liquidation lvl.4", "MoveMenu_Liquidation"
     Submenu "                   Aqua Tail lvl.5", "MoveMenu_AquaTail"
     Submenu "                   Crunch lvl.6", "MoveMenu_Crunch"
-    Submenu "                   Thrash lvl.7", "MoveMenu_Thrash"
-    Submenu "                   Dragon Pulse lvl.8", "MoveMenu_DragonPulse"
+    Submenu "                   Dive lvl.7", "MoveMenu_Dive"
+    Submenu "                   Thrash lvl.8", "MoveMenu_Thrash"
     Submenu "                   Dragon Dance lvl.9", "MoveMenu_DragonDance"
-    Submenu "                   Hydro Pump lvl.10", "MoveMenu_HydroPump"
+    Submenu "                   Whirlpoop lvl.10", "MoveMenu_Whirlpool"
     StaticText"===============================================================",1
 }
 
@@ -858,14 +858,14 @@ OptionMenu "Dex_D025"
     Submenu "                   Bite", "MoveMenu_Bite"
     StaticText "$PKMN_DEXMOVES2"
     Submenu "                   Protect lvl.2", "MoveMenu_Protect"
-    Submenu "                   ice punch lvl.3", "MoveMenu_IcePunch"
+    Submenu "                   Mud Bomb lvl.3", "MoveMenu_MudBomb"
     Submenu "                   Curse lvl.4", "MoveMenu_Curse"
-    Submenu "                   Refresh lvl.5", "MoveMenu_Refresh"
-    Submenu "                   Mud Bomb lvl.6", "MoveMenu_MudBomb"
+    Submenu "                   Waterfall lvl.5", "MoveMenu_Waterfall"
+    Submenu "                   MuddyWater lvl.6", "MoveMenu_MuddyWater"
     Submenu "                   Earthquake lvl.7", "MoveMenu_Earthquake"
     Submenu "                   Hammer Arm lvl.8", "MoveMenu_HammerArm"
     Submenu "                   Rock Slide lvl.9", "MoveMenu_RockSlide"
-    Submenu "                   Hydro Pump lvl.10", "MoveMenu_HydroPump"
+    Submenu "                   Dive lvl.10", "MoveMenu_Dive"
     StaticText"===============================================================",1
 }
 
@@ -889,14 +889,14 @@ OptionMenu "Dex_D026"
     Submenu "                   Bite", "MoveMenu_Bite"
     StaticText "$PKMN_DEXMOVES2"
     Submenu "                   Protect lvl.2", "MoveMenu_Protect"
-    Submenu "                   ice punch lvl.3", "MoveMenu_IcePunch"
+    Submenu "                   Mud Bomb lvl.3", "MoveMenu_MudBomb"
     Submenu "                   Curse lvl.4", "MoveMenu_Curse"
-    Submenu "                   Refresh lvl.5", "MoveMenu_Refresh"
-    Submenu "                   Mud Bomb lvl.6", "MoveMenu_MudBomb"
+    Submenu "                   Waterfall lvl.5", "MoveMenu_Waterfall"
+    Submenu "                   MuddyWater lvl.6", "MoveMenu_MuddyWater"
     Submenu "                   Earthquake lvl.7", "MoveMenu_Earthquake"
     Submenu "                   Hammer Arm lvl.8", "MoveMenu_HammerArm"
     Submenu "                   Rock Slide lvl.9", "MoveMenu_RockSlide"
-    Submenu "                   Hydro Pump lvl.10", "MoveMenu_HydroPump"
+    Submenu "                   Dive lvl.10", "MoveMenu_Dive"
     StaticText"===============================================================",1
 }
 
@@ -920,14 +920,14 @@ OptionMenu "Dex_D027"
     Submenu "                   Bite", "MoveMenu_Bite"
     StaticText "$PKMN_DEXMOVES2"
     Submenu "                   Protect lvl.2", "MoveMenu_Protect"
-    Submenu "                   ice punch lvl.3", "MoveMenu_IcePunch"
+    Submenu "                   Mud Bomb lvl.3", "MoveMenu_MudBomb"
     Submenu "                   Curse lvl.4", "MoveMenu_Curse"
-    Submenu "                   Refresh lvl.5", "MoveMenu_Refresh"
-    Submenu "                   Mud Bomb lvl.6", "MoveMenu_MudBomb"
+    Submenu "                   Waterfall lvl.5", "MoveMenu_Waterfall"
+    Submenu "                   MuddyWater lvl.6", "MoveMenu_MuddyWater"
     Submenu "                   Earthquake lvl.7", "MoveMenu_Earthquake"
     Submenu "                   Hammer Arm lvl.8", "MoveMenu_HammerArm"
     Submenu "                   Rock Slide lvl.9", "MoveMenu_RockSlide"
-    Submenu "                   Hydro Pump lvl.10", "MoveMenu_HydroPump"
+    Submenu "                   Dive lvl.10", "MoveMenu_Dive"
     StaticText"===============================================================",1
 }
 
@@ -1134,17 +1134,17 @@ OptionMenu "Dex_D034"
     StaticText "$PKMN_DEXMOVES1"
     Submenu "                   Water gun", "MoveMenu_Watergun"
     Submenu "                   Peck", "MoveMenu_Peck"
-    Submenu "                   Growl", "MoveMenu_Growl"
+    Submenu "                   Aqua Jet", "MoveMenu_AquaJet"
     Submenu "                   Yawn", "MoveMenu_Yawn"
     StaticText "$PKMN_DEXMOVES2"
     Submenu "                   Aqua Ring lvl.2", "MoveMenu_AquaRing"
     Submenu "                   Metal Claw lvl.3", "MoveMenu_MetalClaw"
     Submenu "                   Icy Wind lvl.4", "MoveMenu_IcyWind"
     Submenu "                   Brine lvl.5", "MoveMenu_Brine"
-    Submenu "                   Sword Dance lvl.6", "MoveMenu_SwordDance"
-    Submenu "                   Aqua Jet lvl.7", "MoveMenu_AquaJet"
+    Submenu "                   Dive lvl.6", "MoveMenu_Dive"
+    Submenu "                   Drill Peck lvl.7", "MoveMenu_DrillPeck"
     Submenu "                   Agility lvl.8", "MoveMenu_Agility"
-    Submenu "                   Drill Peck lvl.9", "MoveMenu_DrillPeck"
+    Submenu "                   Whirlpool lvl.9", "MoveMenu_Whirlpool"
     Submenu "                   Hydro Pump lvl.10", "MoveMenu_HydroPump"
     StaticText"===============================================================",1
 }
@@ -1172,10 +1172,10 @@ OptionMenu "Dex_D035"
     Submenu "                   Metal Claw lvl.3", "MoveMenu_MetalClaw"
     Submenu "                   Icy Wind lvl.4", "MoveMenu_IcyWind"
     Submenu "                   Brine lvl.5", "MoveMenu_Brine"
-    Submenu "                   Sword Dance lvl.6", "MoveMenu_SwordDance"
-    Submenu "                   Aqua Jet lvl.7", "MoveMenu_AquaJet"
+    Submenu "                   Dive lvl.6", "MoveMenu_Dive"
+    Submenu "                   Drill Peck lvl.7", "MoveMenu_DrillPeck"
     Submenu "                   Agility lvl.8", "MoveMenu_Agility"
-    Submenu "                   Drill Peck lvl.9", "MoveMenu_DrillPeck"
+    Submenu "                   Whirlpool lvl.9", "MoveMenu_Whirlpool"
     Submenu "                   Hydro Pump lvl.10", "MoveMenu_HydroPump"
     StaticText"===============================================================",1
 }
@@ -1203,10 +1203,10 @@ OptionMenu "Dex_D036"
     Submenu "                   Metal Claw lvl.3", "MoveMenu_MetalClaw"
     Submenu "                   Icy Wind lvl.4", "MoveMenu_IcyWind"
     Submenu "                   Brine lvl.5", "MoveMenu_Brine"
-    Submenu "                   Sword Dance lvl.6", "MoveMenu_SwordDance"
-    Submenu "                   Aqua Jet lvl.7", "MoveMenu_AquaJet"
+    Submenu "                   Dive lvl.6", "MoveMenu_Dive"
+    Submenu "                   Drill Peck lvl.7", "MoveMenu_DrillPeck"
     Submenu "                   Agility lvl.8", "MoveMenu_Agility"
-    Submenu "                   Drill Peck lvl.9", "MoveMenu_DrillPeck"
+    Submenu "                   Whirlpool lvl.9", "MoveMenu_Whirlpool"
     Submenu "                   Hydro Pump lvl.10", "MoveMenu_HydroPump"
     StaticText"===============================================================",1
 }
@@ -3774,13 +3774,157 @@ OptionMenu "MoveMenu_ToxicSpikes"
 OptionMenu "MoveMenu_Taunt"
 {
 	
-	Title "$M120_NAME"
+	Title "$M121_NAME"
     StaticText "===============================================================",1
     StaticText "$M121_TYPE"
     StaticText "$M121_CATEGORY"
     StaticText "$M121_POWER"
     StaticText"===============================================================",1
     StaticText "$M121_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+}
+
+OptionMenu "MoveMenu_Whirlpool"
+{
+	
+	Title "$M122_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M122_TYPE"
+    StaticText "$M122_CATEGORY"
+    StaticText "$M122_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M122_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+}
+
+OptionMenu "MoveMenu_Surf"
+{
+	
+	Title "$M123_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M123_TYPE"
+    StaticText "$M123_CATEGORY"
+    StaticText "$M123_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M123_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+}
+
+OptionMenu "MoveMenu_MuddyWater"
+{
+	
+	Title "$M124_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M124_TYPE"
+    StaticText "$M124_CATEGORY"
+    StaticText "$M124_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M124_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+}
+
+OptionMenu "MoveMenu_Waterfall"
+{
+	
+	Title "$M125_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M125_TYPE"
+    StaticText "$M125_CATEGORY"
+    StaticText "$M125_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M125_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+}
+
+OptionMenu "MoveMenu_Liquidation"
+{
+	
+	Title "$M126_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M126_TYPE"
+    StaticText "$M126_CATEGORY"
+    StaticText "$M126_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M126_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+}
+
+OptionMenu "MoveMenu_Scald"
+{
+	
+	Title "$M127_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M127_TYPE"
+    StaticText "$M127_CATEGORY"
+    StaticText "$M127_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M127_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+}
+
+OptionMenu "MoveMenu_Dive"
+{
+	
+	Title "$M128_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M128_TYPE"
+    StaticText "$M128_CATEGORY"
+    StaticText "$M128_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M128_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+}
+
+OptionMenu "MoveMenu_Bubble"
+{
+	
+	Title "$M129_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M129_TYPE"
+    StaticText "$M129_CATEGORY"
+    StaticText "$M129_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M129_DESC"
     StaticText ""
     StaticText ""
     StaticText ""

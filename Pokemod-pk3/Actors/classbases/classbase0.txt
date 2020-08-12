@@ -63,17 +63,17 @@ goto SuperSpawn
 
 PainNormal:
 "----" A 0 //A_PlaySoundEx("PokePain/Normal","Voice")
-"----" A 0 A_ScaleVelocity(0.75)
-"----" A 1 ACS_NamedExecuteAlways("PKMNACS_HitKnockback",0,1,1)
+"----" A 0 //A_ScaleVelocity(0.75)
+"----" A 1 //ACS_NamedExecuteAlways("PKMNACS_HitKnockback",0,5,1)
 "----" HHHHHHHHH 2 A_SpawnItemEx("PainFX",-5,0,3,0,0,0)
 "----" A 1
 goto SuperSpawn
 
 PainStrong:
 "----" A 0 //A_PlaySoundEx("PokePain/Strong","Voice")
-"----" A 0 A_ScaleVelocity(0.4)
+"----" A 0 //A_ScaleVelocity(0.4)
 "----" A 0 A_GiveInventory("SleepBreaker")
-"----" A 1 ACS_NamedExecuteAlways("PKMNACS_HitKnockback",0,3,1)
+"----" A 1 //ACS_NamedExecuteAlways("PKMNACS_HitKnockback",0,15,1) 
 "----" HHHHHHHHH 0 A_SpawnItemEx("CentaurFlashFX", 0, 0, 28, 256/24, 256/24, random2(256/24), random(0, 359))
 "----" HHHHHHHHH 2 A_SpawnItemEx("PainFX",-5,0,3,0,0,0)
 "----" A 1

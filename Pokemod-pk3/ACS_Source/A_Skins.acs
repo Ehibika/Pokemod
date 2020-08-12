@@ -1,0 +1,335 @@
+/* -=- Pokemon Skins -=-
+ * Scripts that handle Skin changes for pokemon across their various forms
+ * 
+
+*/
+
+#library "A_Skins"
+#import "Dex_Pokemon.acs"
+#import "Dex_Leveling.acs"
+#import "Dex_Types.acs"
+#import "Dex_BaseStats.acs"
+#import "Dex_Skin.acs"
+#import "DB_Player.acs"
+#include "zcommon.acs"
+
+
+int YourTrueForm;
+/*
+script "SetPokeSkin" (int Skin, int update) CLIENTSIDE
+{
+//if(PlayerNumber()==ConsolePlayerNumber()) YourTrueForm = skin;
+
+playerDisguised[p] = true;
+playerDisguise[p] = GetSkinNum(EnemyInfo[wep][1]);
+}
+*/
+
+#DEFINE THE_COOLDOWN 50 //40
+
+Script "Wait_PokeSkinHandler" (void)
+{
+delay(5);
+Acs_NamedExecuteAlways("PokeSkinHandler",0);
+}
+
+Script "PokeSkinHandler" (void) CLIENTSIDE
+{
+if(PlayerNumber()==ConsolePlayerNumber()) { //log(s:"Console Player Verified");
+	int cooldown = THE_COOLDOWN;
+	YourTrueForm = GetPokeValue(POKEDEXNUM);//-1;
+	int lastForm = YourTrueForm;
+	int skin = GetCVar("Skin");
+	int lastSkin;
+	int TrueFormSkin;
+	while(PlayerHealth()>0) {
+		lastSkin = skin;
+		//log(s:"\cgLast Skin is at ", i:lastSkin);
+		skin = GetCVar("Skin");
+		//log(s:"\cgCurrent Skin is at ", i:skin);
+		if(skin!=lastSkin) cooldown = THE_COOLDOWN;
+		if((cooldown<1)&&(YourTrueForm>-1)) {
+			//log(s:"True form is at", i:YourTrueForm);
+			//log(s:"Last form is at", i:lastForm);
+			if(YourTrueForm!=lastForm) {
+				//log(s:"new disguise");
+				ConsoleCommand(strparam(s:"Skin ",s:SkinDEX[YourTrueForm][1]));
+				cooldown = THE_COOLDOWN;
+				skin = GetCVar("Skin");
+				TrueFormSkin = skin;
+				lastForm = YourTrueForm;
+			} else if(skin!=TrueFormSkin) {
+				//log(s:"new skin");
+				ConsoleCommand(strparam(s:"Skin ",s:SkinDEX[YourTrueForm][1]));
+				cooldown = THE_COOLDOWN;
+				skin = GetCVar("Skin");
+				TrueFormSkin = skin;
+			}
+		}
+		if(cooldown>0 && skin == lastSkin) cooldown--;
+		delay(1);
+	}
+}
+}
+
+//#region -=- failure -=-
+/*
+#DEFINE S_MAX_PLAYERS 64
+#DEFINE P_LASTSKINMEMORY 0
+#DEFINE P_LASTDEXMEMORY 1
+Int P_SkinMemory[S_MAX_PLAYERS][2];
+
+Script "SkinMaster" OPEN
+{
+
+    Int WaitTime = THE_COOLDOWN;
+    int p;
+
+    int P_TrueForm;
+    int P_CurrentForm;
+    int P_DexNum;
+    while(True)
+    {
+    Delay(WaitTime);
+    for(p = 0; p<PlayerCount(); P++)
+    {
+        if(PlayerInGame(p))
+
+        {        
+            P_DexNum = GetPlayerPokeValue(p,POKEDEXNUM);
+            P_CurrentForm = GetUserCVar(p,"Skin");//
+            //P_TrueForm = //SkinDEX[P_DexNum][1];
+
+            if(P_DexNum != P_SkinMemory[p][P_LASTDEXMEMORY])
+            {
+                ACS_NamedExecuteAlways("SetPlayerPokeSkin",0,p,P_DexNum,1);
+                
+                P_SkinMemory[p][P_LASTDEXMEMORY] = P_DexNum;
+                //log(n:p+1,s:"'s skin was changed from ", i:P_CurrentForm, s:" to ", i:P_SkinMemory[p][P_LASTSKINMEMORY]);
+                //SetUserCVarString(p,"skin",P_TrueForm);
+            }
+            else if(P_CurrentForm != P_SkinMemory[p][P_LASTSKINMEMORY])
+            {
+            log(n:p+1,s:"'s skin was Restored from ", i:P_CurrentForm, s:" to ", i:P_SkinMemory[p][P_LASTSKINMEMORY]);
+            //SetUserCVar(p,"Skin",P_SkinMemory[p][P_LASTSKINMEMORY]);
+            ACS_NamedExecuteAlways("SetPlayerPokeSkin",0,p,P_DexNum);
+            }
+        }
+
+    }
+
+    }
+
+
+}
+
+
+Script "UpdatePokeSkin" (void)
+{
+//Updates skin to the player's current DexNumber
+int P_DexNum = GetPlayerPokeValue(playernumber(),POKEDEXNUM);
+Acs_NamedExecuteAlways("SetPokeSkin",0,P_DexNum);
+
+}
+
+script "SetPokeSkin" (int SkinID, int update) //CLIENTSIDE
+{
+//if(PlayerNumber()==ConsolePlayerNumber()) YourTrueForm = skin;
+
+if(PlayerNumber()==ConsolePlayerNumber()) 
+    {
+    ConsoleCommand(strparam(s:"Skin ",s:SkinDEX[SkinID][1]));
+    Delay(1);
+    if(update)
+        {
+        P_SkinMemory[PlayerNumber()][P_LASTSKINMEMORY] = GetCVar("Skin");
+        log(n:PlayerNumber()+1,s:"'s skin was changed to ", i:P_SkinMemory[PlayerNumber()][P_LASTSKINMEMORY]);
+        }
+    }
+//SetUserCvarString(PlayerNumber(),"Skin",SkinDEX[SkinID][1]);
+}
+
+Script "SetPlayerPokeSkin" (int Player, int SkinID, int update)
+{
+
+    SetActivator(Player+1000);
+    Acs_NamedExecuteAlways("SetPokeSkin",0,SkinID,update);
+}
+*/
+//#endregion
+
+/*
+Script "SkinWatch_S" OPEN
+{
+int skinInt;
+int SkinDexNum = GetPokeValue(POKEDEXNUM);
+while(true) {
+	skinInt = GetUserCVar(0,"skin");
+	PrintBold(s:"skin ",i:skinInt,s:" ",s:SkinDEX[SkinDexNum][1]);
+	delay(1);
+}
+}
+*/
+
+#DEFINE S_MAX_PLAYERS 64
+
+int playerCooldown[S_MAX_PLAYERS];
+
+bool playerDisguised[S_MAX_PLAYERS];
+int playerDisguise[S_MAX_PLAYERS];
+int playerCurrentSkin[S_MAX_PLAYERS];
+
+#DEFINE SKIN_OFFSET 127//115
+
+script "SetPokeSkin" (int Skin, int update) //CLIENTSIDE
+{
+//if(PlayerNumber()==ConsolePlayerNumber()) YourTrueForm = skin;
+
+ConsoleCommand(strParam(s:"set theDisguise ",s:SkinDEX[Skin][0]));
+ACS_NamedExecuteWithResult("SetDisguise",PlayerNumber());
+}
+
+
+script "SetDisguise" (int p)
+{
+	playerDisguised[p] = true;
+    playerDisguise[p] = GetSkinNum(GetCvarString("theDisguise"));
+    //log(i:GetSkinNum(GetCvarString("theDisguise")));
+	//SetCvarString("theDisguise","");
+}
+
+script "SetUnDisguise" (int p)
+{
+	playerDisguised[p] = false;
+}
+
+function str GetSkinNum(str skinName) {
+	//for(int i = 0; i<MAXDEX; i++) if(skinName==SkinDEX[i]) return (i+SKIN_OFFSET);
+	for(int i = 0; i<MAXDEX; i++) if(StrIcmp(skinName,SkinDEX[i][0])==0) return (i+SKIN_OFFSET);
+	return 0;
+}
+
+function str GetSkinName(int theSkin) {
+	if(theSkin == 0) return "Base";
+	theSkin -= SKIN_OFFSET;
+	if(theSkin>-1&&theSkin<MAXDEX) return SkinDEX[theSkin][0];
+	return "unlisted";
+}
+
+/*
+function str GetSkinNum(str skinName) {
+    //for(int i = 0; i<MAXDEX; i++) if(skinName==SkinDEX[i]) return (i+SKIN_OFFSET);
+    int Dexnum = GetPokeValue(POKEDEXNUM);
+    int baseCount;
+    int FormCount;
+    int output;
+    //if(StrIcmp("Base",SkinDEX[Dexnum][1])==0) skinName = SkinDEX[Dexnum][0];
+
+    for(int i = 0; i<MAXDEX; i++) 
+        {
+            if(StrIcmp("Base",SkinDEX[i][1])==0) 
+                {
+                    if(i==Dexnum) {return baseCount;}
+                    else {baseCount++;}
+                }
+            
+            if(StrIcmp(skinName,SkinDEX[i][0])==0) 
+            {
+                output = FormNumber(i)+SKIN_OFFSET;
+                log(s:"form count: ",i:FormNumber(i));
+                log(s:"OutPut: ",i:output);
+                return (output);
+            }
+        }
+	return 0;
+}
+
+Function int FormNumber(Int Cap)
+{
+    int output;
+    for(int i = 0; i<Cap+1; i++) 
+        {
+        if(StrIcmp("Base",SkinDEX[i][1])!=0) output++;
+        }
+        return output;
+}
+
+function str GetSkinName(int theSkin) {
+    log(s:"Skin number for name : ",i:theSkin);
+	if(theSkin<SKIN_OFFSET) return "Base";
+    theSkin -= SKIN_OFFSET;
+    theSkin += FormNumber(theSkin);
+	if(theSkin>-1&&theSkin<MAXDEX) return SkinDEX[theSkin][0];
+	return "unlisted";
+}
+*/
+
+Script "Disguise_O" OPEN
+{
+if(GetCvar("sv_RentalsMode") == 1){Terminate;}
+
+DisguiseFuncStart();
+while(true) {
+	DisguiseFunc();
+	delay(1);
+}
+}
+
+function void DisguiseFuncStart(void)
+{
+for(int i = 0; i<S_MAX_PLAYERS; i++) playerCooldown[i] = THE_COOLDOWN;
+}
+
+function void DisguiseFunc(void)
+{
+for(int i = 0; i<S_MAX_PLAYERS; i++) DisguiseFunc2(i);
+}
+
+function void DisguiseFunc2(int i)
+{
+DisguiseFunc2b(i);
+if(playerCooldown[i]<1) {
+	if(playerDisguised[i]) DisguiseFunc2c(i);
+} else {
+	playerCooldown[i]--;
+}
+}
+
+function void DisguiseFunc2b(int i)
+{
+int currentSkin = GetUserCVar(i,"skin");
+if(currentSkin!=playerCurrentSkin[i]) playerCooldown[i] = THE_COOLDOWN;
+playerCurrentSkin[i] = currentSkin;
+}
+
+function void DisguiseFunc2c(int i)
+{
+int disguise = playerDisguise[i];
+if(disguise!=playerCurrentSkin[i]) {
+    //log(i:disguise,s:" ",i:playerCurrentSkin[i]);
+	ACS_NamedExecuteAlways("DisguisePlayer",0,disguise,i);
+	playerCooldown[i] = THE_COOLDOWN;
+}
+}
+
+script "DisguisePlayer" (int skin, int i) CLIENTSIDE
+{
+if(ConsolePlayerNumber()==i) ConsoleCommandP(strparam(s:"Skin ",s:GetSkinName(skin)));
+}
+
+function void ConsoleCommandP(str cmd)
+{
+ConsoleCommand(cmd);
+Log(s:cmd);
+}
+
+Script "ForceSkins" OPEN CLIENTSIDE
+{
+while(true) {
+	if(!GetCvar("CL_Skins")) {
+		ConsoleCommand("CL_Skins 1");
+		Log(s:"CL_Skins forced to 1 due to disguise class");
+	}
+	delay(1);
+}
+}

@@ -151,7 +151,7 @@ Damagefactor "HydroPump", 0
 actor HydroPumpCST : PowerupGiver
 {
 +INVENTORY.AUTOACTIVATE
-Powerup.Duration 70
+Powerup.Duration 35
 powerup.type "ConShotTimer"
 }
 //[+]========================================================================[+]

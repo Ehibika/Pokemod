@@ -33,7 +33,7 @@ Fire.Initiate:
 "####" A 0 A_SpawnItemEx("Detect_VWatcher")
 "####" B 0 A_TakeInventory("DetectPP",1)
 "####" B 0 A_Jump(256,"Fire.Dash")
-"####" A 0 SetPlayerProperty(0,1,4)
+"####" A 0 A_GiveInventory("DashSet_B")
 "####" A 0 A_SetTranslucent(0.5,0)
 Goto Fire.Dash
 
@@ -49,7 +49,7 @@ Fire.DashEnd:
 "####" B 0 A_TakeInventory("AfterImageFX",9)
 "####" B 0 A_TakeInventory("DetectGuard",99)
 "####" A 0 A_SetTranslucent(1.0,0)
-"####" B 0 SetPlayerProperty(0,0,4)
+"####" B 0 A_GiveInventory("DashSetOff")
 "####" B 0 A_Jump(256,"Fire.End")
 Goto Fire.End
 

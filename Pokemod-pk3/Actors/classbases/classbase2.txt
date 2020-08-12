@@ -204,10 +204,16 @@ Pain.Ember:
 Pain.FireBlast:
 Pain.FlameBurst:
 "----" H 0
+"----" H 0 A_Jump(230,2)
+"----" H 0 A_GiveInventory("BurnStatusProc")
+"----" H 0 
 Goto FirePain
 
 Pain.BlazeKick:
 "----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,6)
+"----" H 0 A_Jump(230,2)
+"----" H 0 A_GiveInventory("BurnStatusProc")
+"----" H 0 
 Goto FirePain
 
 Pain.FireSpin:
@@ -217,12 +223,18 @@ Goto FirePain
 
 Pain.HeatWave:
 "----" H 0 A_Giveinventory("HeatWaveProtect")
+"----" H 0 A_Jump(230,2)
+"----" H 0 A_GiveInventory("BurnStatusProc")
+"----" H 0 
 Goto FirePain
 
 
 pain.FlameThrower:
 "----" H 0 A_jumpifinventory("FlameThrowerProtect",1,2)
 "----" H 0 A_GiveInventory("FlameThrowerProtect",1)
+"----" H 0 
+"----" H 0 A_Jump(230,2)
+"----" H 0 A_GiveInventory("BurnStatusProc")
 "----" H 0 
 Goto FirePain
 
@@ -233,6 +245,9 @@ pain.FireFang:
 //"----" H 0 A_Giveinventory("BurnMark")
 "----" H 0
 "----" H 0
+"----" H 0 A_Jump(230,2)
+"----" H 0 A_GiveInventory("BurnStatusProc")
+"----" H 0 
 Goto FirePain
 
 Pain.FlareBlitz:
@@ -258,7 +273,17 @@ Pain.WaterGun:
 Pain.WaterPulse:
 Pain.AquaTail:
 Pain.BubbleBeam:
+Pain.Whirlpool:
 "----" H 0
+Goto WaterPain
+
+Pain.Surf:
+"----" H 0 ThrustThingZ(0,55,0,0)
+"----" H 0 A_GiveInventory("SurfProtect",1)
+Goto WaterPain
+
+Pain.Dive:
+"----" H 0 ThrustThingZ(0,55,0,0)
 Goto WaterPain
 
 Pain.Brine:
@@ -285,7 +310,31 @@ Pain.AquaJet:
 "----" H 0 A_PlaySoundEx("weapon/Rebound","SoundSlot5")
 "----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,10)
 "----" H 0 ThrustThingZ(0,15,0,0)
-Goto NormalPain
+Goto WaterPain
+
+Pain.Waterfall:
+"----" H 0 A_GiveInventory("WaterfallProtect",1)
+"----" H 0 ThrustThingZ(0,35,0,0)
+"----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,15)
+Goto WaterPain
+
+Pain.Liquidation:
+"----" H 0 A_GiveInventory("LiquidationNerfInitiate",1)
+"----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,15)
+Goto WaterPain
+
+Pain.MuddyWater:
+"----" H 0 A_GiveInventory("MuddyWaterNerfInitiate",1)
+"----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,8)
+Goto WaterPain
+
+Pain.Scald:
+"----" H 0 A_GiveInventory("RockSlideProtect")
+"----" H 0 A_GiveInventory("RockSlideProtect2")
+"----" H 0 A_Jump(230,2)
+"----" H 0 A_GiveInventory("BurnStatusProc")
+"----" H 0 
+Goto WaterPain
 
 //#endregion
 
@@ -363,8 +412,6 @@ Goto NormalPain
 
 //#region -=- Dark -=-
     Pain.Pursuit:
-    Pain.Bite:
-    Pain.Crunch:
     "----" H 0
     Goto DarkPain
     Pain.NightSlash1:
@@ -378,6 +425,13 @@ Goto NormalPain
     Goto DarkPain
     Pain.NightSlash3:
     "----" H 0
+    Goto DarkPain
+
+    Pain.Crunch:
+    Pain.Bite:
+    "----" H 0 A_Jump(230,2)
+    "----" H 0 A_GiveInventory("CringeStatusProc")
+    "----" H 0 
     Goto DarkPain
 //#endregion
 
@@ -598,6 +652,10 @@ Goto SteelDeath
     Death.HydroPump:
     Death.BubbleBeam:
     Death.Brine:
+    Death.Surf:
+    Death.Liquidation:
+    Death.MuddyWater:
+    Death.WhirlPool:
     "----" H 0
     Goto WaterDeath
 
@@ -612,6 +670,17 @@ Goto SteelDeath
     "----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,35)
     "----" H 0 ThrustThingZ(0,35,0,0)
     "----" H 5
+    Goto Death
+
+    Death.Waterfall:
+    Death.Dive:
+    "----" A 0 ACS_NamedExecuteAlways("PKMN_PainSound",0,Type_Water) 
+    "----" H 0 ThrustThingZ(0,120,0,0)
+    "----" HHHHHHHHHHHHHHHHH 1 A_JumpIf(MomZ <=0 || CeilingZ-Z <= height, "WaterfallDeath2")
+    Goto Death
+    WaterfallDeath2:
+    "----" H 1 A_JumpIf(CeilingZ-Z > height, "Death")
+    "----" H 0 A_SpawnitemEX("WaterfallCeilingBonk")//
     Goto Death
 
 //#endregion

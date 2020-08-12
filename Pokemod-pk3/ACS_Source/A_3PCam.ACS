@@ -120,8 +120,8 @@ Script "3rdCameraHandler" (int p_num) ClientSide
 			}
 		}
 	        else
-		{
-			while (!SetActorPosition (C_TID+p_num, (x-cos(a + X_CamOffset)*xyr), (y-sin(a+Y_CamOffset)*xyr), z+sin(p)*r, 0) && r > 0)
+		{ //Warp(1000+i, x, y, PlayerZ, 0, WARPF_MOVEPTR|WARPF_ABSOLUTEPOSITION|WARPF_USECALLERANGLE);
+			while (!Warp(C_TID+p_num, (x-cos(a + X_CamOffset)*xyr), (y-sin(a+Y_CamOffset)*xyr), z+sin(p)*r, 0, WARPF_MOVEPTR|WARPF_ABSOLUTEPOSITION|WARPF_USECALLERANGLE|WARPF_INTERPOLATE) && r > 0)
 			{
 				r -= ADJUSTIN_R;
 				xyr = cos (p) * r >> 16;

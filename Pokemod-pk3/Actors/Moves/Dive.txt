@@ -1,0 +1,285 @@
+Const int DIVE_AREA1 = 128;
+Const int DIVE_AREA2 = 64;
+
+actor DiveMove : WepMasterBase
+{
+Tag "Dive"
+obituary "$OB_Dive"
+Weapon.AmmoUse 1
+Weapon.AmmoGive 20
+weapon.ammotype "DivePP"
+scale 2.0
+Inventory.Pickupmessage "$PU_MEGABUSTER"
+States
+{
+Spawn:
+WEAP X 1
+stop
+
+
+Fire:
+"####" BBB 1 A_Jumpif(CallACS("CheckWeaponFire",RC_A)==1,"Fire.Begin")
+"####" B 0 A_Jump(256,"NoAmmo")
+Goto NoAmmo
+
+Fire.Begin:
+"####" B 0
+"####" B 1 
+Goto Fire.DiveInitiate
+
+Fire.DiveInitiate:
+TNT1 A 0 A_PlaySoundEx("weapon/Bounce2","Weapon")
+TNT1 A 0 A_ChangeFlag("THRUACTORS",1)
+TNT1 A 0 A_GiveInventory("NoJumpCancel",1)
+TNT1 A 0 ThrustThingZ(0,55,0,0)
+TNT1 A 0 A_TakeInventory("JumpCancler",2)
+Goto Fire.DiveInitiate1
+
+Fire.DiveInitiate1:
+TNT1 A 5 
+TNT1 AAAAA 2 A_JumpIf(z-floorz==0,"Fire.Dive") 
+Goto Fire.DiveInitiate2
+
+Fire.DiveInitiate2:
+TNT1 A 0 ThrustThingZ(0,55,1,1)
+TNT1 A 0 A_GiveInventory("AfterImageFX")
+TNT1 A 0 A_PlaySoundEx("weapon/Chargekick","Weapon")
+TNT1 A 2 A_JumpIf(z-floorz==0,"Fire.Dive") 
+loop
+
+Fire.Dive:
+TNT1 A 0 A_TakeInventory("DivePP",1)
+TNT1 A 0 A_GiveInventory("DivePPTimer",1)
+TNT1 A 0 A_PlaySoundEx("misc/splash","Voice")
+TNT1 A 0 A_SpawnItemEx("DiveSplash",0,0,0,0,0,0,0,1)
+//===
+TNT1 A 0 A_ChangeFlag("THRUACTORS",0)
+TNT1 A 0 A_GiveInventory("InvulnerableOn_Pickup",1)
+TNT1 A 0 A_SpawnItemEx("DrillVisualHelper")
+TNT1 A 0 A_TakeInventory("UnSolid",1)
+TNT1 A 0 A_ChangeFlag("NONSHOOTABLE",1)
+TNT1 A 0 A_ChangeFlag("SOLID",0)
+TNT1 A 0 A_ChangeFlag("PICKUP",0)
+TNT1 A 0 A_ChangeFlag("FLOORHUGGER",1)
+TNT1 A 0 A_SetTranslucent(0.0,0)
+TNT1 A 0 ThrustThingZ(0,40,1,0)
+TNT1 A 0 ACS_NamedExecuteAlways("PKMN_JumpToggle",0,0)
+TNT1 A 0 A_GiveInventory("DiveBuffer",1)
+goto Fire.DiveHold
+Fire.DiveHold:
+TNT1 A 0 A_JumpIfInventory("DivePPTimer",1,3)
+TNT1 A 0 A_TakeInventory("DivePP",1)
+TNT1 A 0 A_GiveInventory("DivePPTimer",1)
+TNT1 A 0
+TNT1 A 0 A_GiveInventory("DiveMoveSplasher")
+TNT1 A 0 A_GiveInventory("DiveBuffInitiate")
+TNT1 A 2 ThrustThingZ(0,0,1,0)//Fix running over fans/bubbles
+TNT1 A 0 A_JumpIfInventory("DivePP",1,"DiveCheck")
+goto Fire.DiveRelease
+DiveCheck:
+TNT1 A 0 A_JumpIfInventory("DiveBuffer",1,"Fire.DiveHold")
+TNT1 A 0 A_Jumpif(CallACS("PKMNACS_ButtonCheck",BT_ATTACK) == 1,"Fire.DiveRelease")
+goto Fire.DiveHold
+
+Fire.DiveRelease:
+TNT1 A 0 A_SpawnItemEx("DiveBlast",0,0,0,0,0,0,0,1)
+TNT1 A 0 A_ClearRefire
+TNT1 A 0 A_SetTranslucent(1.0,0)
+TNT1 A 0 A_ChangeFlag("FLOORHUGGER",0)
+TNT1 A 0 A_ChangeFlag("PICKUP",1)
+TNT1 A 0 ACS_NamedExecuteAlways("PKMN_JumpToggle",0,1)
+TNT1 A 0 A_ChangeFlag("THRUACTORS",1)
+TNT1 A 4 ThrustThingZ(0,55,0,0)
+TNT1 A 0 A_ChangeFlag("NONSHOOTABLE",0)
+TNT1 A 0 A_ChangeFlag("THRUACTORS",0)
+TNT1 A 0 A_SpawnItemEx("ReSolidifier")
+TNT1 A 0 A_GiveInventory("InvulnerableOff_Pickup",1)
+TNT1 A 0 A_TakeInventory("NoJumpCancel",1)
+Goto Fire.DiveRelease2
+
+Fire.DiveRelease2:
+TNT1 A 2 
+TNT1 A 2 A_JumpIf(z-floorz==0,"Fire.After") 
+Goto Fire.DiveRelease2
+
+Fire.After:
+"####" B 1 A_GiveInventory("FullRecovery_A")
+"####" C 0 A_REfire("Fire")
+"####" B 0 A_Jump(256,"Fire.End")
+Goto Fire.End
+
+}
+}
+
+actor DiveMove1 : DiveMove {Weapon.SlotNumber 1}
+actor DiveMove2 : DiveMove {Weapon.SlotNumber 2}
+actor DiveMove3 : DiveMove {Weapon.SlotNumber 3}
+actor DiveMove4 : DiveMove {Weapon.SlotNumber 4}
+
+actor DiveMove5 : DiveMove 
+{
+Weapon.SlotNumber 5
+States
+{
+Fire.End:
+TNT1 A 0
+TNT1 A 0 A_TakeInventory("DiveMove5",9)
+TNT1 A 0 A_Jump(256,"Ready")
+Goto Ready
+}
+}
+
+//[+]========================================================================[+]
+//-----------------------------|Ammo & Inventory|------------------------------
+//[+]========================================================================[+]
+actor DivePP : Ammo {inventory.amount 1 inventory.Maxamount 20}
+
+actor DiveBuffer : Powerup {inventory.amount 1 Powerup.Duration 30}
+actor DivePPTimer : Powerup {inventory.amount 1 Powerup.Duration 35}
+actor DiveFXBuffer : Powerup {inventory.amount 1 Powerup.Duration 7}
+
+actor STF_Dive : Powerup {inventory.amount 1 Powerup.Duration 17}
+
+actor DiveBuffInitiate : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_Jumpifinventory("STF_Dive",1,"Sustain")
+TNT1 A 0 A_GiveInventory("STF_Dive",1)
+TNT1 A 0 A_SpawnItemEX("DiveBuffWatcher")
+TNT1 A 0 A_GiveInventory("StatUpdator",1)
+stop
+
+Sustain:
+TNT1 A 0 A_GiveInventory("STF_Dive",1)
+stop
+Nope:
+TNT1 A 0
+stop
+}
+}
+//[+]========================================================================[+]
+//--------------------------------|Projectiles |--------------------------------
+//[+]========================================================================[+]
+
+actor DiveBlast : BasicExplosion
+{
+DamageType "Dive"
+obituary "$OB_Dive"
+ReactionTime 5
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+TNT1 A 0 A_Explode(MBP_Dive,DIVE_AREA1,0,0,DIVE_AREA2)
+TNT1 A 0 A_PlaySoundEx("weapon/watershieldburst","SoundSlot5")
+TNT1 A 0 A_SpawnItemEx("DiveResurfaceFX",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION)
+Spawn2:
+TNT1 A 2 A_CountDown
+TNT1 AAAA 0 A_SpawnItemEx("WaterfallFX1", Random(-DIVE_AREA1,DIVE_AREA1), 0, Random(0,DIVE_AREA2), 0, 0, 0, random(0,360),1)
+loop
+
+Death:
+TNT1 A 5
+stop
+}
+}
+
+actor DiveSplash : BasicClientside
+{
+States
+{
+Spawn:
+HITG E 0
+DOLP B 0 A_PlaySoundEx("misc/waterslide","Voice")
+TNT1 A 0 A_GiveInventory("ProjectileFXCode",1)
+Spawn2:
+AQJT ABCDEFGHI 2 
+Goto Death
+
+Death:
+BEWA A 0
+stop
+}
+}
+
+actor DiveMoveSplasher : CustomInventory
+{
+states
+{
+Pickup:
+TNT1 A 0 A_JumpIfInventory("DiveFXBuffer",1,"Nope")
+TNT1 A 0 A_GiveInventory("DiveFXBuffer",1)
+TNT1 A 0 A_JumpIf(CallACS("core_getspeed") > (22*65536),"Moving")
+TNT1 A 0 A_SpawnItemEx("DiveBubbleFX",random(-30,30),0,8,0,0,random(3,8),random(0,359),1)
+stop
+Moving:
+TNT1 A 0 A_SpawnItemEx("DiveSplash",0,0,0,0,0,0,0,1)
+stop
+
+Nope:
+TNT1 A 0
+stop
+}
+}
+
+actor DiveResurfaceFX : BasicClientside
+{
+scale 4.5
+States
+{
+Spawn:
+TNT1 A 0 
+DVSP ABCDEFGH 1 
+stop
+}
+}
+
+actor DiveBubbleFX
+{
++NOINTERACTION
++NOGRAVITY
++CLIENTSIDEONLY
++FORCEXYBILLBOARD
+-SOLID
+scale 0.5
+height 0
+radius 0
+States
+{
+Spawn:
+TNT1 A 0
+BMBU B 0 A_SetScale(scaleX+Frandom(0.0,0.5))
+BMBU BBBBBBBBBBBB 2 A_ScaleVelocity(0.9)
+stop
+}
+}
+
+
+actor DiveBuffWatcher : BasicHelper 
+{
+Var int user_DashTime;
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 5 //A_GiveToTarget("SpdUpFXSpawn")
+TNT1 A 0 A_JumpIfInTargetInventory("STF_MuddyWater",1,"Spawn")
+TNT1 A 1 A_GiveToTarget("StatUpdator")
+TNT1 A 5
+Goto Death
+
+Death:
+TNT1 A 0 
+stop
+}
+}
+

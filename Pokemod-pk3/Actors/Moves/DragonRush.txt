@@ -25,7 +25,7 @@ Fire.Begin:
 Goto Fire.DashStart
 
 Fire.DashStart:
-"####" A 0 SetPlayerProperty(0,1,4)
+"####" A 0 A_GiveInventory("DashSet_B")
 "####" A 0 ACS_NamedExecuteAlways("TakePP",0,Move_DragonRush,1)
 "####" A 0 A_GiveInventory("DragonRushTimer")
 "####" A 0 A_GiveInventory("DragonRushInitiate")
@@ -38,7 +38,7 @@ goto Fire.DashEnd
 
 Fire.DashEnd:
 "####" B 0 A_ScaleVelocity(0.2)
-"####" B 0 SetPlayerProperty(0,0,4)
+"####" B 0 A_GiveInventory("DashSetOff")
 "####" B 1 A_GiveInventory("HalfRecovery_B")
 "####" B 0 A_Jump(256,"Fire.End")
 Goto Fire.End

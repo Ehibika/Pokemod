@@ -120,4 +120,12 @@ DrillPeck
 Spikes
 ToxicSpikes
 Leer
+Whirlpool
+Surf
+MuddyWater
+Waterfall
+Liquidation
+Scald
+Dive
+Bubble
 //--[NewMove]--

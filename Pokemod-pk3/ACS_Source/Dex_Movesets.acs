@@ -21,9 +21,9 @@ Int MoveDex [MAXDEX][14] = {
 	/*|5|*/{Ember,Growl,SmokeScreen,MetalClaw,/**/ FireSpin,FlameBurst,Flamethrower,DragonRage,DragonClaw,DragonPulse,FlareBlitz,DragonDance,FireBlast},
 	/*|6|*/{Ember,Growl,SmokeScreen,MetalClaw,/**/ FireSpin,FlameBurst,Flamethrower,DragonRage,DragonClaw,DragonPulse,FlareBlitz,DragonDance,FireBlast},
 	
-	/*|7|*/{Watergun,Yawn,RapidSpin,Protect,/**/ LifeDew,BubbleBeam,IronDefense,AquaTail,AquaRing,HydroPump,FlashCannon,Fakeout,ShellSmash},
-	/*|8|*/{Watergun,Yawn,RapidSpin,Protect,/**/ LifeDew,BubbleBeam,IronDefense,AquaTail,AquaRing,HydroPump,FlashCannon,Fakeout,ShellSmash},
-	/*|9|*/{Watergun,Yawn,RapidSpin,Protect,/**/ LifeDew,BubbleBeam,IronDefense,AquaTail,AquaRing,HydroPump,FlashCannon,Fakeout,ShellSmash},
+	/*|7|*/{Watergun,Yawn,RapidSpin,Protect,/**/ LifeDew,WaterPulse,IronDefense,AquaTail,AquaRing,HydroPump,FlashCannon,Fakeout,ShellSmash},
+	/*|8|*/{Watergun,Yawn,RapidSpin,Protect,/**/ LifeDew,WaterPulse,IronDefense,AquaTail,AquaRing,HydroPump,FlashCannon,Fakeout,ShellSmash},
+	/*|9|*/{Watergun,Yawn,RapidSpin,Protect,/**/ LifeDew,WaterPulse,IronDefense,AquaTail,AquaRing,HydroPump,FlashCannon,Fakeout,ShellSmash},
 	
 	/*|10|*/{RazorLeaf,LifeDew,PoisonPowder,Synthesis,/**/ Reflect,MagicalLeaf,LightScreen,GrassWhistle,HealPulse,AromaTherapy,SeedBomb,Safeguard,SolarBeam},
 	/*|11|*/{RazorLeaf,LifeDew,PoisonPowder,Synthesis,/**/ Reflect,MagicalLeaf,LightScreen,GrassWhistle,HealPulse,AromaTherapy,SeedBomb,Safeguard,SolarBeam},
@@ -33,9 +33,9 @@ Int MoveDex [MAXDEX][14] = {
 	/*|14|*/{Ember,SmokeScreen,FlameWheel,DefenseCurl,/**/ Mudslap,Swift,FlameBurst,GyroBall,Rollout,Flamethrower,Curse,FlareBlitz,FireBlast},
 	/*|15|*/{Ember,SmokeScreen,FlameWheel,DefenseCurl,/**/ Mudslap,Swift,FlameBurst,GyroBall,Rollout,Flamethrower,Curse,FlareBlitz,FireBlast},
 	
-	/*|16|*/{Watergun,Bite,Leer,Rage,/**/ FakeTears,IceFang,ScaryFace,AquaTail,Crunch,Thrash,DragonPulse,DragonDance,HydroPump},
-	/*|17|*/{Watergun,Bite,Leer,Rage,/**/ FakeTears,IceFang,ScaryFace,AquaTail,Crunch,Thrash,DragonPulse,DragonDance,HydroPump},
-	/*|18|*/{Watergun,Bite,Leer,Rage,/**/ FakeTears,IceFang,ScaryFace,AquaTail,Crunch,Thrash,DragonPulse,DragonDance,HydroPump},
+	/*|16|*/{Watergun,Bite,Leer,Rage,/**/ FakeTears,IceFang,Liquidation,AquaTail,Crunch,Dive,Thrash,DragonDance,Whirlpool},
+	/*|17|*/{Watergun,Bite,Leer,Rage,/**/ FakeTears,IceFang,Liquidation,AquaTail,Crunch,Dive,Thrash,DragonDance,Whirlpool},
+	/*|18|*/{Watergun,Bite,Leer,Rage,/**/ FakeTears,IceFang,Liquidation,AquaTail,Crunch,Dive,Thrash,DragonDance,Whirlpool},
 
 	/*|19|*/{BulletSeed,QuickAttack,Detect,LeechSeed,/**/ Pursuit,LeafBlade,FalseSwipe,Agility,NightSlash,EnergyBall,Xscissor,DragonPulse,SkyDrop},
 	/*|20|*/{BulletSeed,QuickAttack,Detect,LeechSeed,/**/ Pursuit,LeafBlade,FalseSwipe,Agility,NightSlash,EnergyBall,Xscissor,DragonPulse,SkyDrop},
@@ -45,9 +45,9 @@ Int MoveDex [MAXDEX][14] = {
 	/*|23|*/{Ember,Growl,Peck,FireSpin,/**/ QuickAttack,DoubleKick,HeatWave,SkyUppercut,HiJumpKick,BlazeKick,Agility,FlareBlitz,BraveBird},
 	/*|24|*/{Ember,Growl,Peck,FireSpin,/**/ QuickAttack,DoubleKick,HeatWave,SkyUppercut,HiJumpKick,BlazeKick,Agility,FlareBlitz,BraveBird},
 	
-	/*|25|*/{Watergun,MudSlap,Yawn,Bite,/**/ Protect,IcePunch,Curse,Refresh,MudBomb,Earthquake,HammerArm,RockSlide,HydroPump},
-	/*|26|*/{Watergun,MudSlap,Yawn,Bite,/**/ Protect,IcePunch,Curse,Refresh,MudBomb,Earthquake,HammerArm,RockSlide,HydroPump},
-	/*|27|*/{Watergun,MudSlap,Yawn,Bite,/**/ Protect,IcePunch,Curse,Refresh,MudBomb,Earthquake,HammerArm,RockSlide,HydroPump},
+	/*|25|*/{Watergun,MudSlap,Yawn,Bite,/**/ Protect,MudBomb,Curse,Waterfall,MuddyWater,Earthquake,HammerArm,RockSlide,Dive},
+	/*|26|*/{Watergun,MudSlap,Yawn,Bite,/**/ Protect,MudBomb,Curse,Waterfall,MuddyWater,Earthquake,HammerArm,RockSlide,Dive},
+	/*|27|*/{Watergun,MudSlap,Yawn,Bite,/**/ Protect,MudBomb,Curse,Waterfall,MuddyWater,Earthquake,HammerArm,RockSlide,Dive},
 
 	/*|28|*/{Razorleaf,Bite,Protect,LeechSeed,/**/ Growth,Stealthrock,Curse,SeedBomb,Synthesis,Earthquake,DoubleEdge,WideGuard,WoodHammer},
 	/*|29|*/{Razorleaf,Bite,Protect,LeechSeed,/**/ Growth,Stealthrock,Curse,SeedBomb,Synthesis,Earthquake,DoubleEdge,WideGuard,WoodHammer},
@@ -57,7 +57,7 @@ Int MoveDex [MAXDEX][14] = {
 	/*|32|*/{Ember,Taunt,Leer,Fakeout,/**/ FlameWheel,Machpunch,Vacuumwave,Blazekick,Flamethrower,NastyPlot,CloseCombat,Acrobatics,FlareBlitz},
 	/*|33|*/{Ember,Taunt,Leer,Fakeout,/**/ FlameWheel,Machpunch,Vacuumwave,Blazekick,Flamethrower,NastyPlot,CloseCombat,Acrobatics,FlareBlitz},
 	
-	/*|34|*/{Watergun,Peck,Growl,Yawn,/**/ AquaRing,MetalClaw,IcyWind,Brine,SwordDance,AquaJet,Agility,DrillPeck,HydroPump},
-	/*|35|*/{Watergun,Peck,Growl,Yawn,/**/ AquaRing,MetalClaw,IcyWind,Brine,SwordDance,AquaJet,Agility,DrillPeck,HydroPump},
-	/*|36|*/{Watergun,Peck,Growl,Yawn,/**/ AquaRing,MetalClaw,IcyWind,Brine,SwordDance,AquaJet,Agility,DrillPeck,HydroPump},
+	/*|34|*/{Watergun,Peck,AquaJet,Yawn,/**/ AquaRing,MetalClaw,IcyWind,Brine,Dive,DrillPeck,Agility,Whirlpool,HydroPump},
+	/*|35|*/{Watergun,Peck,AquaJet,Yawn,/**/ AquaRing,MetalClaw,IcyWind,Brine,Dive,DrillPeck,Agility,Whirlpool,HydroPump},
+	/*|36|*/{Watergun,Peck,AquaJet,Yawn,/**/ AquaRing,MetalClaw,IcyWind,Brine,Dive,DrillPeck,Agility,Whirlpool,HydroPump},
 };

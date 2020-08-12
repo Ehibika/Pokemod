@@ -31,6 +31,12 @@ TNT1 A 0 A_GiveInventory("BuyTM32",1)
 TNT1 A 0 A_GiveInventory("BuyTM33",1)
 TNT1 A 0 A_GiveInventory("BuyTM34",1)
 
+TNT1 A 0 A_GiveInventory("BuyTM35",1)
+TNT1 A 0 A_GiveInventory("BuyTM36",1)
+TNT1 A 0 A_GiveInventory("BuyTM37",1)
+TNT1 A 0 A_GiveInventory("BuyTM38",1)
+TNT1 A 0 A_GiveInventory("BuyTM39",1)
+
 TNT1 A 0 A_GiveInventory("BuyTM41",1)
 
 TNT1 A 0 A_GiveInventory("BuyTM40",1)
@@ -280,6 +286,61 @@ states
 Use2:
 TNT1 A 0 A_JumpIf(!CallACS("CheckTM",TMT_Poison,TMA_Defensive),"BadTM")
 TNT1 A 0 ACS_NamedExecuteAlways("PromptMoveLearn",0,Move_ToxicSpikes,250)
+goto BuySuccess
+}
+}
+
+actor BuyTM35 : BuyThing250
+{ //-=- Surf -=-
+states
+{
+Use2:
+TNT1 A 0 A_JumpIf(!CallACS("CheckTM",TMT_Water),"BadTM")
+TNT1 A 0 ACS_NamedExecuteAlways("PromptMoveLearn",0,Move_Surf,250)
+goto BuySuccess
+}
+}
+
+actor BuyTM36 : BuyThing250
+{ //-=- Waterfall -=-
+states
+{
+Use2:
+TNT1 A 0 A_JumpIf(!CallACS("CheckTM",TMT_Water),"BadTM")
+TNT1 A 0 ACS_NamedExecuteAlways("PromptMoveLearn",0,Move_Waterfall,250)
+goto BuySuccess
+}
+}
+
+actor BuyTM37 : BuyThing250
+{ //-=- Dive -=-
+states
+{
+Use2:
+TNT1 A 0 A_JumpIf(!CallACS("CheckTM",TMT_Water),"BadTM")
+TNT1 A 0 ACS_NamedExecuteAlways("PromptMoveLearn",0,Move_Dive,250)
+goto BuySuccess
+}
+}
+
+actor BuyTM38 : BuyThing150
+{ //-=- Scald -=-
+states
+{
+Use2:
+TNT1 A 0 A_JumpIf(!CallACS("CheckTM",TMT_Water),"BadTM")
+TNT1 A 0 ACS_NamedExecuteAlways("PromptMoveLearn",0,Move_Scald,150)
+goto BuySuccess
+}
+}
+
+actor BuyTM39 : BuyThing150
+{ //-=- waterpulse -=-
+states
+{
+Use2:
+TNT1 A 0 A_JumpIf(!CallACS("CheckTM",TMT_Water),"BadTM")
+TNT1 A 0 ACS_NamedExecuteAlways("PromptMoveLearn",0,Move_waterpulse,150)
 goto BuySuccess
 }
 }

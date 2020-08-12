@@ -2,6 +2,7 @@
 #include "actors/MovePower.txt"
 #include "actors/baseactors.txt"
 #include "actors/baseflags.txt"
+#include "Actors/stats/statslist.txt"
 #include "actors/classbases.txt"
 
 #include "actors/inventory/CustomRecover.txt"
@@ -18,9 +19,6 @@
 #include "Actors/inventory/Shop/ShopActors/shopact_TMs.txt"
 
 #include "Actors/inventory/Shop/ShopInventory/ShopItems.txt"
-
-
-#include "Actors/stats/statslist.txt"
 
 #include "actors/Moves/MoveBase/MasterMoveBase.txt"
 #include "actors/Moves/MoveBase/ImbueMoveBase.txt"
@@ -147,6 +145,14 @@
 #include "actors/Moves/Spikes.txt"
 #include "actors/Moves/ToxicSpikes.txt"
 #include "actors/Moves/Taunt.txt"
+#include "actors/Moves/Whirlpool.txt"
+#include "actors/Moves/Surf.txt"
+#include "actors/Moves/MuddyWater.txt"
+#include "actors/Moves/Waterfall.txt"
+#include "actors/Moves/Liquidation.txt"
+#include "actors/Moves/Scald.txt"
+#include "actors/Moves/Dive.txt"
+//#include "actors/Moves/Bubble.txt"
 
 // #include "Actors/Classes/Pokemon/Ditto.txt"
 

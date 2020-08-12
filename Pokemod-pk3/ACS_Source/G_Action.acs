@@ -567,8 +567,8 @@ For(int q = 0;q < ServerMax; q++)
 		 //log(s:"Height is  ",i:ActHeight);
 		 if(xyzDistance(0, targetTID) > BASEBLASTMIN)
 		 {
-		 FinalForce = ceil(FixedMul(ThrustForce << 16, 1.0 - FixedDiv(Dist, MaxRadius)));
-		 FinalForceH = ceil(FixedMul(ThrustForceH << 16, 1.0 - FixedDiv(Dist, MaxRadius)));
+		 FinalForce = ceil_cscc(FixedMul(ThrustForce << 16, 1.0 - FixedDiv(Dist, MaxRadius)));
+		 FinalForceH = ceil_cscc(FixedMul(ThrustForceH << 16, 1.0 - FixedDiv(Dist, MaxRadius)));
 		 }
 		 Else
 		 {
@@ -923,6 +923,31 @@ while (true) {
 
 //#region -=- Miscellany -=-
 #region -=- Miscellany -=-
+
+Script "BeamHitCheck" (void)
+{
+	Int TracerTID = ACS_NamedExecuteWithResult("Tracer_GetTID",0);
+	int targetTID = ACS_ExecuteWithResult(257,0);
+
+	Str TracerSpecies = GetActorProperty(TracerTID,APROP_SPECIES);
+	str TargetSpecies = GetActorProperty(targetTID,APROP_SPECIES);
+	int Output;
+	if(CheckActorProperty(TracerTID, APROP_SPECIES, "LightMember"))
+		{Output = 1;}
+
+		log(i:Output);
+		SetResultValue(Output);
+}
+
+//Turns Jumping On or Off
+script "PKMN_JumpToggle" (Int Toggle)
+{
+
+int pln = ActivatorTID() - 1000;
+
+if (Toggle >= 1){SetActorProperty(ActivatorTID(),APROP_JUMPZ,PlayerJumpZ[pln]);}
+Else {SetActorProperty(ActivatorTID(),APROP_JUMPZ,0);}
+}
 
 Script "PlayerState" (int State)
 {

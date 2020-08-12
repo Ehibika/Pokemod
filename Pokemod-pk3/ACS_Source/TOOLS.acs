@@ -4,7 +4,7 @@
 #include "zcommon.acs"// [Lego] Always include this before 8bdmlib
 #include "8bdmlib.acs"// included with MM8BDM under acs_source.
 					  // See 8bdmlib.acs for details
-				 
+#import "G_Action.acs"				 
 					 
 script "core_toolsopen" OPEN
 {
@@ -94,7 +94,12 @@ script 247 (int maxforce, int maxRange, int noFalloff)
 	int userTeam = -1;
 	int userCount = 0;
 
-	if(ActivatorTID() == 0)
+	if(ActivatorTID() < 999)
+	{
+		userTID = ACS_ExecuteWithResult(257, 0);
+		userTeam = GetPlayerInfo(userTID - 1000, PLAYERINFO_TEAM);
+	}
+	else If(ActivatorTID() >= EntityTID && ActivatorTID() <= (EntityTID+6499))
 	{
 		userTID = ACS_ExecuteWithResult(257, 0);
 		userTeam = GetPlayerInfo(userTID - 1000, PLAYERINFO_TEAM);
@@ -123,7 +128,7 @@ script 247 (int maxforce, int maxRange, int noFalloff)
 		{	
 			userCount++;
 			distance = xyzDistance(0,targetTID);
-			finalforce = ceil(FixedMul(maxforce << 16, 1.0 - FixedDiv(distance, maxRange)));
+			finalforce = ceil_cscc(FixedMul(maxforce << 16, 1.0 - FixedDiv(distance, maxRange)));
 			if(finalforce > maxforce || noFalloff > 0 )
 			{
 				finalforce = maxforce;

@@ -65,6 +65,13 @@ damagefactor "HeatWave", 1.0
 damagefactor "Vacuumwave", 1.0
 damagefactor "MudBomb", 1.0
 damagefactor "Brine", 1.0
+
+damagefactor "Whirlpool", 1.0
+damagefactor "Surf", 1.0
+damagefactor "MuddyWater", 1.0
+damagefactor "Scald", 1.0
+damagefactor "Bubble", 1.0
+
 }
 
 actor SAtk : Atk
@@ -126,4 +133,8 @@ damagefactor "HammerArm", 1.0
 damagefactor "RockSlide", 1.0
 damagefactor "AquaJet", 1.0
 damagefactor "DrillPeck", 1.0
+
+damagefactor "Waterfall", 1.0
+damagefactor "Liquidation", 1.0
+damagefactor "Dive", 1.0
 }

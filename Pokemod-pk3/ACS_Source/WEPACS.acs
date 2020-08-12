@@ -283,6 +283,14 @@ str weapons_ammo[MAX_WEAPONS_GLOBAL][7] =
 {"ToxicSpikesMove", "ToxicSpikesPP", "ToxicSpikes", 1.0, "NO", "NO", "SLOT_NONE"},
 {"TauntMove", "TauntPP", "Taunt", 1.0, "YES", "NO", "SLOT_NONE"},
 
+{"WhirlpoolMove", "WhirlpoolPP", "Whirlpool", 1.0, "YES", "NO", "SLOT_NONE"},
+{"SurfMove", "SurfPP", "Surf", 1.0, "YES", "NO", "SLOT_NONE"},
+{"MuddyWaterMove", "MuddyWaterPP", "MuddyWater", 1.0, "YES", "NO", "SLOT_NONE"},
+{"WaterfallMove", "WaterfallPP", "Waterfall", 1.0, "YES", "NO", "SLOT_NONE"},
+{"LiquidationMove", "LiquidationPP", "Liquidation", 1.0, "YES", "NO", "SLOT_NONE"},
+{"ScaldMove", "ScaldPP", "Scald", 1.0, "YES", "NO", "SLOT_NONE"},
+{"DiveMove", "DivePP", "Dive", 1.0, "YES", "NO", "SLOT_NONE"},
+{"BubbleMove", "BubblePP", "Bubble", 1.0, "YES", "NO", "SLOT_NONE"},
 //--[NewMove]--
 };
 #endregion

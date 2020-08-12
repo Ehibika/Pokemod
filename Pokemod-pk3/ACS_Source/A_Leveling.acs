@@ -122,10 +122,14 @@ str PLAYER_EXPCV = StrParam(s:"PlayerEXP_",i:PlayerNumber());
 
 int PlayerLVL = GetCvar(StrParam(s:"PlayerLevel_",i:PlayerNumber()));
 int PlayerEXP = GetCvar(PLAYER_EXPCV);
+
+if(PlayerLVL >= 10){LevelLoopDone = true; Terminate;}
+
+//Just in case
+if(GetCVar(PLAYER_EXPCV) >= LevelUpTable[LvlRate][9]){LevelLoopDone = true; Terminate;}
+
+
 SetCvar(PLAYER_EXPCV,PlayerEXP+EXPAward);
-
-if(PlayerLVL >= 10){Terminate;}
-
 // check if this passes the next level threshold
 Until(LevelLoopDone)
     {
