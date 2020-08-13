@@ -32,9 +32,13 @@ user bool PKMN_CV_ProjTeamColor = true;
 server noarchive int PKMN_WarmupTime = 45;
 
 server noarchive int PKMN_StartingLevel = 1;
+server noarchive int PKMN_RoundLevel = 0;
 server noarchive Bool StartingLevelSet = false;
 
-server noarchive int PKMN_StartingBP = 100;
+server noarchive int PKMN_StartingBP = 30;
+server noarchive int PKMN_BPAward = 10;
+server noarchive int PKMN_BPWinAward = 10;
+server noarchive int PKMN_BPLoseAward = 5;
 user noarchive bool auto_false = false;
 server noarchive bool BP_INIT = false;
 server noarchive bool Player_INIT = false;

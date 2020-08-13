@@ -180,7 +180,7 @@ Script "PKMNACS_StartupScript" (int BaseDex)
 			SetCvar(StrParam(s:"PlayerDEXNum_",i:PlayerNumber()),BaseDex);
 			ACS_NamedExecuteAlways("StatInitializer",0);
 			ACS_NamedExecuteAlways("SetPlayerType",0);
-			ACS_NamedExecuteAlways("SetPlayerLevel",0,GetCvar("PKMN_StartingLevel"),1);
+			ACS_NamedExecuteAlways("SetPKMNLevel",0,GetSpawnLevel(),1);
 			ACS_NamedExecuteAlways("SetPokeSkin",0,BaseDex);
 			ACS_NamedExecuteAlways("GiveStartingFund",0);
 			GiveStartingMoves();
@@ -200,7 +200,7 @@ Script "PKMNACS_StartupScript" (int BaseDex)
 			SetCvar(StrParam(s:"PlayerDEXNum_",i:PlayerNumber()),BaseDex);
 			ACS_NamedExecuteAlways("StatInitializer",0);
 			ACS_NamedExecuteAlways("SetPlayerType",0);
-			ACS_NamedExecuteAlways("SetPlayerLevel",0,GetCvar("PKMN_StartingLevel"),1);
+			ACS_NamedExecuteAlways("SetPKMNLevel",0,GetSpawnLevel(),1);
 			ACS_NamedExecuteAlways("SetPokeSkin",0,BaseDex);
 			GiveStartingMoves();
 			GiveInventory("PersistentLoadout",1);
@@ -276,6 +276,21 @@ int PlayerTotal;
 	ACS_NamedExecuteAlways("GivePlayerBP",0,PlayerNumber(),OutputBP);
 }
 
+
+Function int GetSpawnLevel (Void)
+{
+int Output;
+
+if(GetCvar("lastmanstanding")==1||GetCvar("teamlms")==1) 
+	{
+		Output = GetCvar("PKMN_StartingLevel") + GetCvar("PKMN_RoundLevel");
+		if(Output > 10) Output = 10;
+		if(Output < 0) Output = 0;
+
+	}
+else{Output = GetCvar("PKMN_StartingLevel");}
+Return Output;
+}
 
 Script "StartingLevel" OPEN 
 {

@@ -33,10 +33,12 @@ Script "PKMN_EXPevents" (int type, int arg1, int arg2) EVENT
         {
         Default: break;
         Case 0: // -=- Player Elimination -=-
-            ACS_NamedExecuteAlways("FragEXPAward",0,arg1);
+            //ACS_NamedExecuteAlways("FragEXPAward",0,arg1);
         break;
         Case 6: // -=- Round End -=-
-        ACS_NamedExecuteAlways("TeamAward",0);
+        //ACS_NamedExecuteAlways("TeamAward",0);
+        ACS_NamedExecuteAlways("PKMN_MassLevelup",0);
+        ACS_NamedExecuteAlways("IncrementRoundLevel",0);
         break;
         }
 }
@@ -142,7 +144,7 @@ Until(LevelLoopDone)
         }
     else
         {
-        ACS_NamedExecuteAlways("SetPlayerLevel",0,PlayerLVL);
+        ACS_NamedExecuteAlways("SetPKMNLevel",0,PlayerLVL);
         //if(PlayerIsBot(p)){ACS_NamedExecuteAlways("EvolveTrigger",0);}
         LevelLoopDone = true;
         }
@@ -192,7 +194,14 @@ else
 
 }
 
-Script "SetPlayerLevel" (int NewPlayerLevel, int SynchEXP)
+Script "SetPlayerPKMNLevel" (int Pnum, int NewPlayerLevel, int SynchEXP)
+{
+    SetActivator(Pnum+1000);
+    ACS_NamedExecuteAlways("SetPKMNLevel",0,NewPlayerLevel,SynchEXP);
+
+}
+
+Script "SetPKMNLevel" (int NewPlayerLevel, int SynchEXP)
 {
         int CurLevel = GetCVar(StrParam(s:"PlayerLevel_",i:PlayerNumber()));
         if(NewPlayerLevel > 10){NewPlayerLevel = 10;}
@@ -208,10 +217,49 @@ Script "SetPlayerLevel" (int NewPlayerLevel, int SynchEXP)
 
         }
 
-        ACS_NamedExecuteAlways("ActiveStatUpdate",0);
+        if(PlayerInGame(PlayerNumber()))ACS_NamedExecuteAlways("ActiveStatUpdate",0);
         }
         //Else{ACS_NamedExecuteAlways("StatusMenuUpdate",0);}
 
+}
+
+Script "PKMN_MassLevelup" (Void)
+{
+    int PlayerDEXNum;
+    int EXPRate;
+    int CurLevel;
+    int Gamestate;
+
+    Until(Gamestate == 1) {Gamestate = GetGamemodeState(); Delay(1);}
+
+    for(int i = 0; i < 64; i++)
+    {
+        if(ClassifyActor(i+1000) & ACTOR_ALIVE) {ACS_NamedExecuteAlways("PKMN_PlayerLevelup",0,i);}
+        else{
+            PlayerDEXNum = GetCvar(StrParam(s:"PlayerDEXNum_",i:i));
+            EXPRate = StatDEX[PlayerDEXNum][9];
+            CurLevel = GetCVar(StrParam(s:"PlayerLevel_",i:i));
+            SetCVar(StrParam(s:"PlayerLevel_",i:i),CurLevel+1);
+            if(CurLevel+1 < 10){SetCvar(StrParam(s:"PlayerEXP_",i:i),LevelUpTable[EXPRate][CurLevel+1]);}
+        }
+    }    
+}
+
+Script "PKMN_PlayerLevelup" (int Pnum)
+{
+    SetActivator(Pnum+1000);
+    ACS_NamedExecuteAlways("PKMN_Levelup",0);
+}
+
+Script "PKMN_Levelup" (void)
+{
+int CurLevel = GetCVar(StrParam(s:"PlayerLevel_",i:PlayerNumber()));
+
+if(CurLevel<10)
+    {
+    ACS_NamedExecuteAlways("SetPKMNLevel",0,CurLevel+1,1);
+    if(PlayerInGame(PlayerNumber()))GiveInventory("LevelupCue",1);
+    }
 }
 
 Script "FragEXPAward" (int VictimPN)
@@ -242,6 +290,22 @@ TeamEXPAward[PlayerTeam()] += EXPAward/2;
 TeamBPAward[PlayerTeam()] += BPAward/2;
 //log(s:GetTeamProperty(PlayerTeam(),TPROP_Name), s:" Team EXP Award ", i:TeamEXPAward[PlayerTeam()]);
 }
+
+script "ResetRoundLevel1" OPEN
+{
+    SetCVar("PKMN_RoundLevel",0);
+}
+
+script "ResetRoundLevel2" UNLOADING
+{
+    SetCVar("PKMN_RoundLevel",0);
+}
+
+script "IncrementRoundLevel" (Void)
+{
+    SetCVar("PKMN_RoundLevel",GetCvar("PKMN_RoundLevel")+1);
+}
+
 
 Function Int EXPTime (void)
 {

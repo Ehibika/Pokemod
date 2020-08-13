@@ -240,8 +240,8 @@ actor PokeMoney : CustomInventory
 {
 inventory.amount 1
 inventory.maxamount 5
-inventory.pickupmessage "Picked Up some BP and"
-Tag "BP Money"
+inventory.pickupmessage "Picked Up some BP"
+Tag "Battle Points"
 inventory.icon "BBERI"
 Inventory.PickupSound "Misc/GetBP"
 +INVBAR

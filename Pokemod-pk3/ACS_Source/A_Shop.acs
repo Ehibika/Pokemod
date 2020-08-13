@@ -261,18 +261,19 @@ function void LoserFunc(int p)  {
             ACS_NamedExecuteWithResult("GivePlayerBP",p,LoserBonus);
         }
     */
+    ACS_NamedExecuteWithResult("GivePlayerBP",p,GetCVar("PKMN_BPLoseAward"));
 	ParticipantFunc(p);
 }
 
 function void WinnerFunc(int p)  {
     //PrintBold(s:"winner ",i:p);
     
-    //ACS_NamedExecuteWithResult("GivePlayerBP",p,50);
+    ACS_NamedExecuteWithResult("GivePlayerBP",p,GetCVar("PKMN_BPWinAward"));
 	ParticipantFunc(p);
 }
 
 function void ParticipantFunc(int p)  {
-	ACS_NamedExecuteWithResult("GivePlayerBP",p,100);
+	ACS_NamedExecuteWithResult("GivePlayerBP",p,GetCVar("PKMN_BPAward"));
 	//if(GetActorProperty(1000+p,APROP_HEALTH)<1) ACS_NamedExecuteWithResult("CLEAR_PERSISTENT_LOADOUT",p);
 }
 
