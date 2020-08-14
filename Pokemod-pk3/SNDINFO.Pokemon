@@ -27,6 +27,33 @@ $playersound	bulbasaur	male	*fist		dsnone
 $playersound	bulbasaur	male	*usefail	LAND
 $playersound	bulbasaur	male	*taunt		CRY001
 
+$playersound	Ivysaur	male	*death		MEGADEAT
+$playersound	Ivysaur	male	*xdeath		MEGADEAT
+$playersound	Ivysaur	male	*gibbed		MEGADEAT
+$playersound	Ivysaur	male	*pain100	MEGAPAIN
+$playersound	Ivysaur	male	*pain75		MEGAPAIN
+$playersound	Ivysaur	male	*pain50		MEGAPAIN
+$playersound	Ivysaur	male	*pain25		MEGAPAIN
+$playersound	Ivysaur	male	*grunt		LAND
+$playersound	Ivysaur	male	*land		LAND
+$playersound	Ivysaur	male	*jump		dsnone
+$playersound	Ivysaur	male	*fist		dsnone
+$playersound	Ivysaur	male	*usefail	LAND
+$playersound	Ivysaur	male	*taunt		CRY002
+
+$playersound	Venusaur	male	*death		MEGADEAT
+$playersound	Venusaur	male	*xdeath		MEGADEAT
+$playersound	Venusaur	male	*gibbed		MEGADEAT
+$playersound	Venusaur	male	*pain100	MEGAPAIN
+$playersound	Venusaur	male	*pain75		MEGAPAIN
+$playersound	Venusaur	male	*pain50		MEGAPAIN
+$playersound	Venusaur	male	*pain25		MEGAPAIN
+$playersound	Venusaur	male	*grunt		FATLAND
+$playersound	Venusaur	male	*land		FATLAND
+$playersound	Venusaur	male	*jump		dsnone
+$playersound	Venusaur	male	*fist		dsnone
+$playersound	Venusaur	male	*usefail	FATLAND
+$playersound	Venusaur	male	*taunt		CRY003
 
 $playersound	charmander	male	*death		MEGADEAT
 $playersound	charmander	male	*xdeath		MEGADEAT
@@ -42,6 +69,34 @@ $playersound	charmander	male	*fist		dsnone
 $playersound	charmander	male	*usefail	LAND
 $playersound	charmander	male	*taunt		CRY004
 
+$playersound	Charmeleon	male	*death		MEGADEAT
+$playersound	Charmeleon	male	*xdeath		MEGADEAT
+$playersound	Charmeleon	male	*gibbed		MEGADEAT
+$playersound	Charmeleon	male	*pain100	MEGAPAIN
+$playersound	Charmeleon	male	*pain75		MEGAPAIN
+$playersound	Charmeleon	male	*pain50		MEGAPAIN
+$playersound	Charmeleon	male	*pain25		MEGAPAIN
+$playersound	Charmeleon	male	*grunt		LAND
+$playersound	Charmeleon	male	*land		LAND
+$playersound	Charmeleon	male	*jump		dsnone
+$playersound	Charmeleon	male	*fist		dsnone
+$playersound	Charmeleon	male	*usefail	LAND
+$playersound	Charmeleon	male	*taunt		CRY005
+
+$playersound	Charizard	male	*death		MEGADEAT
+$playersound	Charizard	male	*xdeath		MEGADEAT
+$playersound	Charizard	male	*gibbed		MEGADEAT
+$playersound	Charizard	male	*pain100	MEGAPAIN
+$playersound	Charizard	male	*pain75		MEGAPAIN
+$playersound	Charizard	male	*pain50		MEGAPAIN
+$playersound	Charizard	male	*pain25		MEGAPAIN
+$playersound	Charizard	male	*grunt		FATLAND
+$playersound	Charizard	male	*land		FATLAND
+$playersound	Charizard	male	*jump		dsnone
+$playersound	Charizard	male	*fist		dsnone
+$playersound	Charizard	male	*usefail	FATLAND
+$playersound	Charizard	male	*taunt		CRY006
+
 $playersound	squirtle	male	*death		MEGADEAT
 $playersound	squirtle	male	*xdeath		MEGADEAT
 $playersound	squirtle	male	*gibbed		MEGADEAT
@@ -55,6 +110,34 @@ $playersound	squirtle	male	*jump		dsnone
 $playersound	squirtle	male	*fist		dsnone
 $playersound	squirtle	male	*usefail	LAND
 $playersound	squirtle	male	*taunt		CRY007
+
+$playersound	Wartortle	male	*death		MEGADEAT
+$playersound	Wartortle	male	*xdeath		MEGADEAT
+$playersound	Wartortle	male	*gibbed		MEGADEAT
+$playersound	Wartortle	male	*pain100	MEGAPAIN
+$playersound	Wartortle	male	*pain75		MEGAPAIN
+$playersound	Wartortle	male	*pain50		MEGAPAIN
+$playersound	Wartortle	male	*pain25		MEGAPAIN
+$playersound	Wartortle	male	*grunt		LAND
+$playersound	Wartortle	male	*land		LAND
+$playersound	Wartortle	male	*jump		dsnone
+$playersound	Wartortle	male	*fist		dsnone
+$playersound	Wartortle	male	*usefail	LAND
+$playersound	Wartortle	male	*taunt		CRY008
+
+$playersound	Blastoise	male	*death		MEGADEAT
+$playersound	Blastoise	male	*xdeath		MEGADEAT
+$playersound	Blastoise	male	*gibbed		MEGADEAT
+$playersound	Blastoise	male	*pain100	MEGAPAIN
+$playersound	Blastoise	male	*pain75		MEGAPAIN
+$playersound	Blastoise	male	*pain50		MEGAPAIN
+$playersound	Blastoise	male	*pain25		MEGAPAIN
+$playersound	Blastoise	male	*grunt		FATLAND
+$playersound	Blastoise	male	*land		FATLAND
+$playersound	Blastoise	male	*jump		dsnone
+$playersound	Blastoise	male	*fist		dsnone
+$playersound	Blastoise	male	*usefail	FATLAND
+$playersound	Blastoise	male	*taunt		CRY009
 
 $playersound	chikorita	male	*death		MEGADEAT
 $playersound	chikorita	male	*xdeath		MEGADEAT
@@ -70,6 +153,35 @@ $playersound	chikorita	male	*fist		dsnone
 $playersound	chikorita	male	*usefail	LAND
 $playersound	chikorita	male	*taunt		CRY010
 
+$playersound	Bayleef	male	*death		MEGADEAT
+$playersound	Bayleef	male	*xdeath		MEGADEAT
+$playersound	Bayleef	male	*gibbed		MEGADEAT
+$playersound	Bayleef	male	*pain100	MEGAPAIN
+$playersound	Bayleef	male	*pain75		MEGAPAIN
+$playersound	Bayleef	male	*pain50		MEGAPAIN
+$playersound	Bayleef	male	*pain25		MEGAPAIN
+$playersound	Bayleef	male	*grunt		LAND
+$playersound	Bayleef	male	*land		LAND
+$playersound	Bayleef	male	*jump		dsnone
+$playersound	Bayleef	male	*fist		dsnone
+$playersound	Bayleef	male	*usefail	LAND
+$playersound	Bayleef	male	*taunt		CRY011
+
+$playersound	Meganium	male	*death		MEGADEAT
+$playersound	Meganium	male	*xdeath		MEGADEAT
+$playersound	Meganium	male	*gibbed		MEGADEAT
+$playersound	Meganium	male	*pain100	MEGAPAIN
+$playersound	Meganium	male	*pain75		MEGAPAIN
+$playersound	Meganium	male	*pain50		MEGAPAIN
+$playersound	Meganium	male	*pain25		MEGAPAIN
+$playersound	Meganium	male	*grunt		FATLAND
+$playersound	Meganium	male	*land		FATLAND
+$playersound	Meganium	male	*jump		dsnone
+$playersound	Meganium	male	*fist		dsnone
+$playersound	Meganium	male	*usefail	FATLAND
+$playersound	Meganium	male	*taunt		CRY012
+
+
 $playersound	cyndaquil	male	*death		MEGADEAT
 $playersound	cyndaquil	male	*xdeath		MEGADEAT
 $playersound	cyndaquil	male	*gibbed		MEGADEAT
@@ -83,6 +195,35 @@ $playersound	cyndaquil	male	*jump		dsnone
 $playersound	cyndaquil	male	*fist		dsnone
 $playersound	cyndaquil	male	*usefail	LAND
 $playersound	cyndaquil	male	*taunt		CRY013
+
+$playersound	Quilava	male	*death		MEGADEAT
+$playersound	Quilava	male	*xdeath		MEGADEAT
+$playersound	Quilava	male	*gibbed		MEGADEAT
+$playersound	Quilava	male	*pain100	MEGAPAIN
+$playersound	Quilava	male	*pain75		MEGAPAIN
+$playersound	Quilava	male	*pain50		MEGAPAIN
+$playersound	Quilava	male	*pain25		MEGAPAIN
+$playersound	Quilava	male	*grunt		LAND
+$playersound	Quilava	male	*land		LAND
+$playersound	Quilava	male	*jump		dsnone
+$playersound	Quilava	male	*fist		dsnone
+$playersound	Quilava	male	*usefail	LAND
+$playersound	Quilava	male	*taunt		CRY014
+
+$playersound	Typhlosion	male	*death		MEGADEAT
+$playersound	Typhlosion	male	*xdeath		MEGADEAT
+$playersound	Typhlosion	male	*gibbed		MEGADEAT
+$playersound	Typhlosion	male	*pain100	MEGAPAIN
+$playersound	Typhlosion	male	*pain75		MEGAPAIN
+$playersound	Typhlosion	male	*pain50		MEGAPAIN
+$playersound	Typhlosion	male	*pain25		MEGAPAIN
+$playersound	Typhlosion	male	*grunt		FATLAND
+$playersound	Typhlosion	male	*land		FATLAND
+$playersound	Typhlosion	male	*jump		dsnone
+$playersound	Typhlosion	male	*fist		dsnone
+$playersound	Typhlosion	male	*usefail	FATLAND
+$playersound	Typhlosion	male	*taunt		CRY015
+
 
 $playersound	totodile	male	*death		MEGADEAT
 $playersound	totodile	male	*xdeath		MEGADEAT
@@ -98,6 +239,35 @@ $playersound	totodile	male	*fist		dsnone
 $playersound	totodile	male	*usefail	LAND
 $playersound	totodile	male	*taunt		CRY016
 
+$playersound	Croconaw	male	*death		MEGADEAT
+$playersound	Croconaw	male	*xdeath		MEGADEAT
+$playersound	Croconaw	male	*gibbed		MEGADEAT
+$playersound	Croconaw	male	*pain100	MEGAPAIN
+$playersound	Croconaw	male	*pain75		MEGAPAIN
+$playersound	Croconaw	male	*pain50		MEGAPAIN
+$playersound	Croconaw	male	*pain25		MEGAPAIN
+$playersound	Croconaw	male	*grunt		LAND
+$playersound	Croconaw	male	*land		LAND
+$playersound	Croconaw	male	*jump		dsnone
+$playersound	Croconaw	male	*fist		dsnone
+$playersound	Croconaw	male	*usefail	LAND
+$playersound	Croconaw	male	*taunt		CRY017
+
+$playersound	Feraligatr	male	*death		MEGADEAT
+$playersound	Feraligatr	male	*xdeath		MEGADEAT
+$playersound	Feraligatr	male	*gibbed		MEGADEAT
+$playersound	Feraligatr	male	*pain100	MEGAPAIN
+$playersound	Feraligatr	male	*pain75		MEGAPAIN
+$playersound	Feraligatr	male	*pain50		MEGAPAIN
+$playersound	Feraligatr	male	*pain25		MEGAPAIN
+$playersound	Feraligatr	male	*grunt		FATLAND
+$playersound	Feraligatr	male	*land		FATLAND
+$playersound	Feraligatr	male	*jump		dsnone
+$playersound	Feraligatr	male	*fist		dsnone
+$playersound	Feraligatr	male	*usefail	FATLAND
+$playersound	Feraligatr	male	*taunt		CRY018
+
+
 $playersound	treecko	male	*death		MEGADEAT
 $playersound	treecko	male	*xdeath		MEGADEAT
 $playersound	treecko	male	*gibbed		MEGADEAT
@@ -111,6 +281,35 @@ $playersound	treecko	male	*jump		dsnone
 $playersound	treecko	male	*fist		dsnone
 $playersound	treecko	male	*usefail	LAND
 $playersound	treecko	male	*taunt		CRY019
+
+$playersound	Grovyle	male	*death		MEGADEAT
+$playersound	Grovyle	male	*xdeath		MEGADEAT
+$playersound	Grovyle	male	*gibbed		MEGADEAT
+$playersound	Grovyle	male	*pain100	MEGAPAIN
+$playersound	Grovyle	male	*pain75		MEGAPAIN
+$playersound	Grovyle	male	*pain50		MEGAPAIN
+$playersound	Grovyle	male	*pain25		MEGAPAIN
+$playersound	Grovyle	male	*grunt		LAND
+$playersound	Grovyle	male	*land		LAND
+$playersound	Grovyle	male	*jump		dsnone
+$playersound	Grovyle	male	*fist		dsnone
+$playersound	Grovyle	male	*usefail	LAND
+$playersound	Grovyle	male	*taunt		CRY020
+
+$playersound	Sceptile	male	*death		MEGADEAT
+$playersound	Sceptile	male	*xdeath		MEGADEAT
+$playersound	Sceptile	male	*gibbed		MEGADEAT
+$playersound	Sceptile	male	*pain100	MEGAPAIN
+$playersound	Sceptile	male	*pain75		MEGAPAIN
+$playersound	Sceptile	male	*pain50		MEGAPAIN
+$playersound	Sceptile	male	*pain25		MEGAPAIN
+$playersound	Sceptile	male	*grunt		FATLAND
+$playersound	Sceptile	male	*land		FATLAND
+$playersound	Sceptile	male	*jump		dsnone
+$playersound	Sceptile	male	*fist		dsnone
+$playersound	Sceptile	male	*usefail	FATLAND
+$playersound	Sceptile	male	*taunt		CRY021
+
 
 $playersound	torchic	male	*death		MEGADEAT
 $playersound	torchic	male	*xdeath		MEGADEAT
@@ -126,6 +325,35 @@ $playersound	torchic	male	*fist		dsnone
 $playersound	torchic	male	*usefail	LAND
 $playersound	torchic	male	*taunt		CRY022
 
+$playersound	Combusken	male	*death		MEGADEAT
+$playersound	Combusken	male	*xdeath		MEGADEAT
+$playersound	Combusken	male	*gibbed		MEGADEAT
+$playersound	Combusken	male	*pain100	MEGAPAIN
+$playersound	Combusken	male	*pain75		MEGAPAIN
+$playersound	Combusken	male	*pain50		MEGAPAIN
+$playersound	Combusken	male	*pain25		MEGAPAIN
+$playersound	Combusken	male	*grunt		LAND
+$playersound	Combusken	male	*land		LAND
+$playersound	Combusken	male	*jump		dsnone
+$playersound	Combusken	male	*fist		dsnone
+$playersound	Combusken	male	*usefail	LAND
+$playersound	Combusken	male	*taunt		CRY023
+
+$playersound	Blaziken	male	*death		MEGADEAT
+$playersound	Blaziken	male	*xdeath		MEGADEAT
+$playersound	Blaziken	male	*gibbed		MEGADEAT
+$playersound	Blaziken	male	*pain100	MEGAPAIN
+$playersound	Blaziken	male	*pain75		MEGAPAIN
+$playersound	Blaziken	male	*pain50		MEGAPAIN
+$playersound	Blaziken	male	*pain25		MEGAPAIN
+$playersound	Blaziken	male	*grunt		FATLAND
+$playersound	Blaziken	male	*land		FATLAND
+$playersound	Blaziken	male	*jump		dsnone
+$playersound	Blaziken	male	*fist		dsnone
+$playersound	Blaziken	male	*usefail	FATLAND
+$playersound	Blaziken	male	*taunt		CRY024
+
+
 $playersound	mudkip	male	*death		MEGADEAT
 $playersound	mudkip	male	*xdeath		MEGADEAT
 $playersound	mudkip	male	*gibbed		MEGADEAT
@@ -139,6 +367,35 @@ $playersound	mudkip	male	*jump		dsnone
 $playersound	mudkip	male	*fist		dsnone
 $playersound	mudkip	male	*usefail	LAND
 $playersound	mudkip	male	*taunt		CRY025
+
+$playersound	Marshtomp	male	*death		MEGADEAT
+$playersound	Marshtomp	male	*xdeath		MEGADEAT
+$playersound	Marshtomp	male	*gibbed		MEGADEAT
+$playersound	Marshtomp	male	*pain100	MEGAPAIN
+$playersound	Marshtomp	male	*pain75		MEGAPAIN
+$playersound	Marshtomp	male	*pain50		MEGAPAIN
+$playersound	Marshtomp	male	*pain25		MEGAPAIN
+$playersound	Marshtomp	male	*grunt		LAND
+$playersound	Marshtomp	male	*land		LAND
+$playersound	Marshtomp	male	*jump		dsnone
+$playersound	Marshtomp	male	*fist		dsnone
+$playersound	Marshtomp	male	*usefail	LAND
+$playersound	Marshtomp	male	*taunt		CRY026
+
+$playersound	Swampert	male	*death		MEGADEAT
+$playersound	Swampert	male	*xdeath		MEGADEAT
+$playersound	Swampert	male	*gibbed		MEGADEAT
+$playersound	Swampert	male	*pain100	MEGAPAIN
+$playersound	Swampert	male	*pain75		MEGAPAIN
+$playersound	Swampert	male	*pain50		MEGAPAIN
+$playersound	Swampert	male	*pain25		MEGAPAIN
+$playersound	Swampert	male	*grunt		FATLAND
+$playersound	Swampert	male	*land		FATLAND
+$playersound	Swampert	male	*jump		dsnone
+$playersound	Swampert	male	*fist		dsnone
+$playersound	Swampert	male	*usefail	FATLAND
+$playersound	Swampert	male	*taunt		CRY027
+
 
 $playersound	turtwig	male	*death		MEGADEAT
 $playersound	turtwig	male	*xdeath		MEGADEAT
@@ -154,6 +411,35 @@ $playersound	turtwig	male	*fist		dsnone
 $playersound	turtwig	male	*usefail	LAND
 $playersound	turtwig	male	*taunt		CRY028
 
+$playersound	Grotle	male	*death		MEGADEAT
+$playersound	Grotle	male	*xdeath		MEGADEAT
+$playersound	Grotle	male	*gibbed		MEGADEAT
+$playersound	Grotle	male	*pain100	MEGAPAIN
+$playersound	Grotle	male	*pain75		MEGAPAIN
+$playersound	Grotle	male	*pain50		MEGAPAIN
+$playersound	Grotle	male	*pain25		MEGAPAIN
+$playersound	Grotle	male	*grunt		LAND
+$playersound	Grotle	male	*land		LAND
+$playersound	Grotle	male	*jump		dsnone
+$playersound	Grotle	male	*fist		dsnone
+$playersound	Grotle	male	*usefail	LAND
+$playersound	Grotle	male	*taunt		CRY029
+
+$playersound	Torterra	male	*death		MEGADEAT
+$playersound	Torterra	male	*xdeath		MEGADEAT
+$playersound	Torterra	male	*gibbed		MEGADEAT
+$playersound	Torterra	male	*pain100	MEGAPAIN
+$playersound	Torterra	male	*pain75		MEGAPAIN
+$playersound	Torterra	male	*pain50		MEGAPAIN
+$playersound	Torterra	male	*pain25		MEGAPAIN
+$playersound	Torterra	male	*grunt		FATLAND
+$playersound	Torterra	male	*land		FATLAND
+$playersound	Torterra	male	*jump		dsnone
+$playersound	Torterra	male	*fist		dsnone
+$playersound	Torterra	male	*usefail	FATLAND
+$playersound	Torterra	male	*taunt		CRY030
+
+
 $playersound	chimchar	male	*death		MEGADEAT
 $playersound	chimchar	male	*xdeath		MEGADEAT
 $playersound	chimchar	male	*gibbed		MEGADEAT
@@ -168,6 +454,35 @@ $playersound	chimchar	male	*fist		dsnone
 $playersound	chimchar	male	*usefail	LAND
 $playersound	chimchar	male	*taunt		CRY031
 
+$playersound	Monferno	male	*death		MEGADEAT
+$playersound	Monferno	male	*xdeath		MEGADEAT
+$playersound	Monferno	male	*gibbed		MEGADEAT
+$playersound	Monferno	male	*pain100	MEGAPAIN
+$playersound	Monferno	male	*pain75		MEGAPAIN
+$playersound	Monferno	male	*pain50		MEGAPAIN
+$playersound	Monferno	male	*pain25		MEGAPAIN
+$playersound	Monferno	male	*grunt		LAND
+$playersound	Monferno	male	*land		LAND
+$playersound	Monferno	male	*jump		dsnone
+$playersound	Monferno	male	*fist		dsnone
+$playersound	Monferno	male	*usefail	LAND
+$playersound	Monferno	male	*taunt		CRY032
+
+$playersound	Infernape	male	*death		MEGADEAT
+$playersound	Infernape	male	*xdeath		MEGADEAT
+$playersound	Infernape	male	*gibbed		MEGADEAT
+$playersound	Infernape	male	*pain100	MEGAPAIN
+$playersound	Infernape	male	*pain75		MEGAPAIN
+$playersound	Infernape	male	*pain50		MEGAPAIN
+$playersound	Infernape	male	*pain25		MEGAPAIN
+$playersound	Infernape	male	*grunt		FATLAND
+$playersound	Infernape	male	*land		FATLAND
+$playersound	Infernape	male	*jump		dsnone
+$playersound	Infernape	male	*fist		dsnone
+$playersound	Infernape	male	*usefail	FATLAND
+$playersound	Infernape	male	*taunt		CRY033
+
+
 $playersound	piplup	male	*death		MEGADEAT
 $playersound	piplup	male	*xdeath		MEGADEAT
 $playersound	piplup	male	*gibbed		MEGADEAT
@@ -181,3 +496,31 @@ $playersound	piplup	male	*jump		dsnone
 $playersound	piplup	male	*fist		dsnone
 $playersound	piplup	male	*usefail	LAND
 $playersound	piplup	male	*taunt		CRY034
+
+$playersound	Prinplup	male	*death		MEGADEAT
+$playersound	Prinplup	male	*xdeath		MEGADEAT
+$playersound	Prinplup	male	*gibbed		MEGADEAT
+$playersound	Prinplup	male	*pain100	MEGAPAIN
+$playersound	Prinplup	male	*pain75		MEGAPAIN
+$playersound	Prinplup	male	*pain50		MEGAPAIN
+$playersound	Prinplup	male	*pain25		MEGAPAIN
+$playersound	Prinplup	male	*grunt		LAND
+$playersound	Prinplup	male	*land		LAND
+$playersound	Prinplup	male	*jump		dsnone
+$playersound	Prinplup	male	*fist		dsnone
+$playersound	Prinplup	male	*usefail	LAND
+$playersound	Prinplup	male	*taunt		CRY035
+
+$playersound	Empoleon	male	*death		MEGADEAT
+$playersound	Empoleon	male	*xdeath		MEGADEAT
+$playersound	Empoleon	male	*gibbed		MEGADEAT
+$playersound	Empoleon	male	*pain100	MEGAPAIN
+$playersound	Empoleon	male	*pain75		MEGAPAIN
+$playersound	Empoleon	male	*pain50		MEGAPAIN
+$playersound	Empoleon	male	*pain25		MEGAPAIN
+$playersound	Empoleon	male	*grunt		FATLAND
+$playersound	Empoleon	male	*land		FATLAND
+$playersound	Empoleon	male	*jump		dsnone
+$playersound	Empoleon	male	*fist		dsnone
+$playersound	Empoleon	male	*usefail	FATLAND
+$playersound	Empoleon	male	*taunt		CRY036

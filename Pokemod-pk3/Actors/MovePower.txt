@@ -55,7 +55,7 @@ const int MBP_IceBeam = MBP_MidPower3;
 const int MBP_FrostBreath = MBP_MidPower1;
 const int MBP_Blizzard = MBP_Low3;
 
-const int MBP_MagicalLeaf = MBP_Low3;
+const int MBP_MagicalLeaf = MBP_MidPower1;
 const int MBP_BulletSeed = MBP_Low1;
 const int MBP_Pursuit = MBP_Low1;
 const int MBP_LeafBlade1 = MBP_MidPower2;

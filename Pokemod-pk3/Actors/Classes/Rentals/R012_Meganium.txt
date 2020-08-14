@@ -1,0 +1,86 @@
+/*
+[+]===================================[+]
+
+[+]===================================[+]
+*/
+
+
+Actor R_Meganium : ClassBaseRentals 
+{
+Player.DisplayName "Meganium"
+Player.SoundClass "Meganium"
+
+Player.StartItem "PKMNRentalKit"
+//============|
+Player.StartItem "MeganiumRentalSetupItem"
+//============|
+Player.StartItem "Base_HP", 80
+Player.StartItem "Base_PAttack", 82
+Player.StartItem "Base_PDefense", 100 
+Player.StartItem "Base_SAttack", 83
+Player.StartItem "Base_SDefense", 100 
+Player.StartItem "Base_Speed", 80
+//============|
+
+States
+{
+Spawn: 
+P012 A 0
+P012 B 1 
+P012 A 1
+GoTo Spawn+2
+See:
+P012 BCDE 5
+GoTo Spawn+1
+Missile:
+P012 A 0 A_JumpIfInventory("ConshotTimer",1,2) 
+P012 F 5 
+P012 G 4
+GoTo Spawn+2
+
+PainFix:
+P012 H 0 
+GoTo PainFrames
+}
+}
+
+actor MeganiumRentalMoves : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_JumpIf(CallACS("RentalBotCheck") == 1,"BotWep")
+
+TNT1 A 0 A_GiveInventory("SeedBombMove1")
+TNT1 A 0 A_GiveInventory("LifeDewMove2")
+TNT1 A 0 A_GiveInventory("WideGuardMove3")
+TNT1 A 0 A_GiveInventory("EarthquakeMove4")
+stop
+
+BotWep:
+TNT1 A 0 A_GiveInventory("MagicalleafMove1")
+stop
+}
+}
+
+ actor MeganiumRentalSetupItem : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 ACS_NamedExecuteAlways("PKMN_RentalsSetup",0,Dex_Meganium)
+stop
+}
+}

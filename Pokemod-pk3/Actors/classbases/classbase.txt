@@ -1,1 +1,3 @@
 actor ClassBase : ClassBase2 {}
+
+actor ClassBaseRentals : ClassBase Replaces ClassBase {+NOSKIN}

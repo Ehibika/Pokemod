@@ -1,4 +1,5 @@
 Server noarchive bool sv_RentalsMode = false;
+Server noarchive bool sv_EnableShop = true;
 
 user int YOUR_LEVEL;
 user int YOUR_EXP;

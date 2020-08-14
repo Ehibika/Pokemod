@@ -1,0 +1,83 @@
+/*
+[+]===================================[+]
+
+[+]===================================[+]
+*/
+
+Actor R_Smeargle : ClassBaseRentals //replaces Megaman 
+{
+Player.DisplayName "Megaman"
+Player.SoundClass "Megaman"
++NOSKIN
+
+Player.StartItem "PKMNRentalKit"
+//============|
+Player.StartItem "SmeargleRentalSetupItem"
+//============|
+Player.StartItem "Base_HP", 55
+Player.StartItem "Base_PAttack", 20
+Player.StartItem "Base_PDefense", 35
+Player.StartItem "Base_SAttack", 20
+Player.StartItem "Base_SDefense", 45
+Player.StartItem "Base_Speed", 75
+//============|
+
+States
+{
+Spawn: 
+P000 A 0
+P000 B 1 
+P000 A 1
+GoTo Spawn+2
+See:
+P000 BCDE 5
+GoTo Spawn+1
+Missile:
+P000 A 0 A_JumpIfInventory("ConshotTimer",1,2)
+P000 F 5 
+P000 G 4
+GoTo Spawn+2
+
+PainFix:
+P000 H 0 
+GoTo PainFrames
+}
+}
+
+actor SmeargleRentalMoves : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_JumpIf(CallACS("RentalBotCheck") == 1,"BotWep")
+
+TNT1 A 0 A_GiveInventory("SketchMove1")
+stop
+
+BotWep:
+TNT1 A 0 A_GiveInventory("SketchMove1")
+stop
+}
+}
+
+ actor SmeargleRentalSetupItem : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 ACS_NamedExecuteAlways("PKMN_RentalsSetup",0,Dex_Smeargle)
+stop
+}
+}

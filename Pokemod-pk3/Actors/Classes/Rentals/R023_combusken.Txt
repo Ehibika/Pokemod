@@ -1,0 +1,86 @@
+/*
+[+]===================================[+]
+
+[+]===================================[+]
+*/
+
+
+Actor R_Combusken : ClassBaseRentals 
+{
+Player.DisplayName "Combusken"
+Player.SoundClass "Combusken"
+
+Player.StartItem "PKMNRentalKit"
+//============|
+Player.StartItem "CombuskenRentalSetupItem"
+//============|
+Player.StartItem "Base_HP", 60
+Player.StartItem "Base_PAttack", 85
+Player.StartItem "Base_PDefense", 60
+Player.StartItem "Base_SAttack", 85
+Player.StartItem "Base_SDefense", 60
+Player.StartItem "Base_Speed", 55
+//============|
+
+States
+{
+Spawn: 
+P023 A 0
+P023 B 1 
+P023 A 1
+GoTo Spawn+2
+See:
+P023 BCDE 5
+GoTo Spawn+1
+Missile:
+P023 A 0 A_JumpIfInventory("ConshotTimer",1,2) 
+P023 F 5 
+P023 G 4
+GoTo Spawn+2
+
+PainFix:
+P023 H 0 
+GoTo PainFrames
+}
+}
+
+actor CombuskenRentalMoves : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_JumpIf(CallACS("RentalBotCheck") == 1,"BotWep")
+
+TNT1 A 0 A_GiveInventory("BlazeKickMove1")
+TNT1 A 0 A_GiveInventory("DoubleKickMove2")
+TNT1 A 0 A_GiveInventory("MachPunchMove3")
+TNT1 A 0 A_GiveInventory("SkyUppercutMove4")
+stop
+
+BotWep:
+TNT1 A 0 A_GiveInventory("BlazeKickMove1")
+stop
+}
+}
+
+ actor CombuskenRentalSetupItem : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 ACS_NamedExecuteAlways("PKMN_RentalsSetup",0,Dex_Combusken)
+stop
+}
+}

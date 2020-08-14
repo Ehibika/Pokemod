@@ -1,0 +1,86 @@
+/*
+[+]===================================[+]
+
+[+]===================================[+]
+*/
+
+
+Actor R_Torchic : ClassBaseRentals 
+{
+Player.DisplayName "Torchic"
+Player.SoundClass "Torchic"
+
+Player.StartItem "PKMNRentalKit"
+//============|
+Player.StartItem "TorchicRentalSetupItem"
+//============|
+Player.StartItem "Base_HP", 45
+Player.StartItem "Base_PAttack", 60
+Player.StartItem "Base_PDefense", 40
+Player.StartItem "Base_SAttack", 70
+Player.StartItem "Base_SDefense", 50
+Player.StartItem "Base_Speed", 45
+//============|
+
+States
+{
+Spawn: 
+P022 A 0
+P022 B 1 
+P022 A 1
+GoTo Spawn+2
+See:
+P022 BCDE 5
+GoTo Spawn+1
+Missile:
+P022 A 0 A_JumpIfInventory("ConshotTimer",1,2) 
+P022 F 5 
+P022 G 4
+GoTo Spawn+2
+
+PainFix:
+P022 H 0 
+GoTo PainFrames
+}
+}
+
+actor TorchicRentalMoves : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_JumpIf(CallACS("RentalBotCheck") == 1,"BotWep")
+
+TNT1 A 0 A_GiveInventory("FlameBurstMove1")
+TNT1 A 0 A_GiveInventory("DrillPeckMove2")
+TNT1 A 0 A_GiveInventory("FireSpinMove3")
+TNT1 A 0 A_GiveInventory("GrowlMove4")
+stop
+
+BotWep:
+TNT1 A 0 A_GiveInventory("FlameBurstMove1")
+stop
+}
+}
+
+ actor TorchicRentalSetupItem : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 ACS_NamedExecuteAlways("PKMN_RentalsSetup",0,Dex_Torchic)
+stop
+}
+}

@@ -1,0 +1,86 @@
+/*
+[+]===================================[+]
+
+[+]===================================[+]
+*/
+
+
+Actor R_Mudkip : ClassBaseRentals 
+{
+Player.DisplayName "Mudkip"
+Player.SoundClass "Mudkip"
+
+Player.StartItem "PKMNRentalKit"
+//============|
+Player.StartItem "MudkipRentalSetupItem"
+//============|
+Player.StartItem "Base_HP", 50
+Player.StartItem "Base_PAttack", 70
+Player.StartItem "Base_PDefense", 50
+Player.StartItem "Base_SAttack", 50
+Player.StartItem "Base_SDefense", 50
+Player.StartItem "Base_Speed", 40
+//============|
+
+States
+{
+Spawn: 
+P025 A 0
+P025 B 1 
+P025 A 1
+GoTo Spawn+2
+See:
+P025 BCDE 5
+GoTo Spawn+1
+Missile:
+P025 A 0 A_JumpIfInventory("ConshotTimer",1,2) 
+P025 F 5 
+P025 G 4
+GoTo Spawn+2
+
+PainFix:
+P025 H 0 
+GoTo PainFrames
+}
+}
+
+actor MudkipRentalMoves : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_JumpIf(CallACS("RentalBotCheck") == 1,"BotWep")
+
+TNT1 A 0 A_GiveInventory("MudBombMove1")
+TNT1 A 0 A_GiveInventory("WaterPulseMove2")
+TNT1 A 0 A_GiveInventory("RefreshMove3")
+TNT1 A 0 A_GiveInventory("DiveMove4")
+stop
+
+BotWep:
+TNT1 A 0 A_GiveInventory("FireBlastMove1")
+stop
+}
+}
+
+ actor MudkipRentalSetupItem : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 ACS_NamedExecuteAlways("PKMN_RentalsSetup",0,Dex_Mudkip)
+stop
+}
+}
