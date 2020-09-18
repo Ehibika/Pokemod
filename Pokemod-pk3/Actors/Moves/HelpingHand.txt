@@ -31,14 +31,14 @@ TNT1 A 0 A_Jump(256,"Fire.Bullet")
 Goto Fire.Bullet
 
 Fire.Bullet:
-TNT1 A 3 A_GiveInventory("HelpingHandPowerGive",1,AAPTR_TRACER)
+TNT1 A 3 //A_GiveInventory("HelpingHandPowerGive",1,AAPTR_TRACER)
 TNT1 A 0 ACS_NamedExecuteAlways("TakePP",0,Move_HelpingHand,1)
 TNT1 A 0 A_GiveInventory("HelpingHandCST",1)
 TNT1 A 0 A_Jump(256,"Fire.After")
 Goto Fire.After
 
 Fire.Bullet2:
-TNT1 A 3 A_GiveInventory("HelpingHandPowerGive",1,AAPTR_TRACER)
+TNT1 A 3 //A_GiveInventory("HelpingHandPowerGive",1,AAPTR_TRACER)
 TNT1 A 0 A_Jump(256,"Fire.After")
 Goto Fire.After
 
@@ -55,7 +55,7 @@ TNT1 A 0 A_Jump(256,"Ready")
 Goto Ready
 
 Flash.Tether:
-TNT1 A 1 A_FireCustomMissile("HelpingHandLinkBeamFirst",0,0,0,0)
+TNT1 A 1 A_FireCustomMissile("HealBeam",0,0,0,0)
 TNT1 A 0 A_PlaySoundEx("Weapon/RollHeal","Weapon")
 TNT1 A 0 A_Jumpifinventory("HelpingHandShotLoop",1,"Flash.Tether")
 stop
@@ -122,6 +122,199 @@ powerup.type "ConShotTimer"
 //[+]========================================================================[+]
 //-----------------------------|Effect Actors|------------------------------
 //[+]========================================================================[+]
+
+actor HealBeam
+{
+PROJECTILE
++DONTBLAST
+//+LOOKALLAROUND
++SEEKERMISSILE
++NOCLIP
++NOINTERACTION
+Renderstyle "Translucent"
+Alpha 0.95
+radius 8
+height 8
+Damage (0)
+Meleerange 100
+speed 10
+floatspeed 28
+scale 3.0
+Reactiontime 35
+var int user_TracerTarget;
+States
+{
+Spawn:
+LASH A 0
+TNT1 A 0
+TNT1 A 0 A_RearrangePointers(AAPTR_DEFAULT, AAPTR_TARGET, AAPTR_DEFAULT) //make the shooter our master
+TNT1 A 0 A_TransferPointer(AAPTR_MASTER,AAPTR_DEFAULT,AAPTR_TRACER,AAPTR_TRACER) //Set the Bullet's tracer to the Shooter's, if they have one.
+//TNT1 A 0 A_SetUserVar("user_TracerTarget", ACS_NamedExecuteWithResult("ReturnCureTargeter", ACS_ExecuteWithResult(257, 0))) //A_SetArg(0, ACS_NamedExecuteWithResult("ReturnCureTargeter", ACS_ExecuteWithResult(257, 0)))
+//TNT1 A 0 A_JumpIf(user_TracerTarget == 0, "Death")
+//TNT1 A 1 ACS_NamedExecuteAlways("CSACS_SetPointer", 0, AAPTR_TRACER, user_TracerTarget)
+TNT1 AA 1 A_JumpifTracercloser(630,"Targetspotted") //immediately got a tracer, let's aim for them!
+
+TNT1 A 0 A_JumpifinTargetInventory("BeamFXBuffer",1,3)
+TNT1 A 0 //A_SpawnItemEx("HealFX2",30,random(-5,5),random(-5,5),momx/4,momy/4,1,0,SXF_ABSOLUTEMOMENTUM|SXF_TRANSFERTRANSLATION)
+TNT1 A 0 A_GiveToTarget("BeamFXBuffer",1)
+stop
+
+Targetspotted:
+LASH A 0 A_RearrangePointers(AAPTR_TRACER, AAPTR_DEFAULT, AAPTR_DEFAULT)
+LASH A 0 A_Facetarget
+TNT1 A 1 A_CustomMissile("HealBeamFX_SOLO",0,0,0,0)
+Goto AfterSpot
+AfterSpot:
+LASH A 0 A_RearrangePointers(AAPTR_MASTER, AAPTR_DEFAULT, AAPTR_TARGET) //make the target our tracer
+LASH A 0 //A_TransferPointer(AAPTR_DEFAULT,AAPTR_MASTER,AAPTR_TRACER,AAPTR_TRACER) //Set the shooter's tracer to the bullet's
+LASH A 0 A_Jump(256,"GiveHealth")
+goto GiveHealth
+Death:
+TNT1 A 0
+stop
+GiveHealth:
+TNT1 A 1 A_Stop
+
+LASH A 0 A_RearrangePointers(AAPTR_TRACER, AAPTR_DEFAULT, AAPTR_DEFAULT)
+TNT1 A 0 A_GiveToTarget("HelpingHandPowerGive",1)
+TNT1 A 5
+stop
+}
+}
+
+
+	actor HealBeam_RED : HealBeam
+	{
+	States
+	{
+	Targetspotted:
+	LASH A 0 A_RearrangePointers(AAPTR_TRACER, AAPTR_DEFAULT, AAPTR_DEFAULT)
+	LASH A 0 A_Facetarget
+	TNT1 A 1 A_CustomMissile("HealBeamFX_RED",0,0,0,0)
+	Goto AfterSpot
+	}
+	}
+
+	actor HealBeam_BLUE : HealBeam
+	{
+	States
+	{
+	Targetspotted:
+	LASH A 0 A_RearrangePointers(AAPTR_TRACER, AAPTR_DEFAULT, AAPTR_DEFAULT)
+	LASH A 0 A_Facetarget
+	TNT1 A 1 A_CustomMissile("HealBeamFX_BLUE",0,0,0,0)
+	Goto AfterSpot
+	}
+	}
+
+	actor HealBeam_GREEN : HealBeam
+	{
+	States
+	{
+	Targetspotted:
+	LASH A 0 A_RearrangePointers(AAPTR_TRACER, AAPTR_DEFAULT, AAPTR_DEFAULT)
+	LASH A 0 A_Facetarget
+	TNT1 A 1 A_CustomMissile("HealBeamFX_GREEN",0,0,0,0)
+	Goto AfterSpot
+	}
+	}
+
+	actor HealBeam_YELLOW : HealBeam
+	{
+	States
+	{
+	Targetspotted:
+	LASH A 0 A_RearrangePointers(AAPTR_TRACER, AAPTR_DEFAULT, AAPTR_DEFAULT)
+	LASH A 0 A_Facetarget
+	TNT1 A 1 A_CustomMissile("HealBeamFX_YELLOW",0,0,0,0)
+	Goto AfterSpot
+	}
+	}
+
+actor HealBeamFX
+{
++MISSILE
++NOINTERACTION
++NOGRAVITY
+-SOLID
++NOCLIP
+Speed 25
+Damage (0)
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_Jumpifcloser(100,"Death")
+TNT1 A 0 A_Spawnitemex("HelpingHandBeamFX",0,0,0,momx,momy,momz,0,SXF_ABSOLUTEMOMENTUM|SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION)
+TNT1 A 1 A_Facetarget
+TNT1 A 0 A_Jump(256,"BeamContinue")
+Goto BeamContinue
+BeamContinue:
+TNT1 A 0 A_CustomMissile("HealBeamFX",0,0,0,0)
+stop
+Death:
+TNT1 A 0
+stop
+}
+}
+
+actor HealBeamFX_SOLO : HealBeamFX {translation "250:250=4:4", "192:192=201:201", "198:198=206:206", "249:249=175:175", "195:195=244:244" States{BeamContinue:TNT1 A 0 A_CustomMissile("HealBeamFX_SOLO",0,0,0,0) stop}}
+actor HealBeamFX_BLUE : HealBeamFX {translation "192:192=205:205", "198:198=74:74", "249:249=199:199" States{BeamContinue:TNT1 A 0 A_CustomMissile("HealBeamFX_BLUE",0,0,0,0) stop}}
+actor HealBeamFX_RED : HealBeamFX {translation "192:192=171:171", "198:198=41:41", "249:249=45:45" States{BeamContinue:TNT1 A 0 A_CustomMissile("HealBeamFX_RED",0,0,0,0) stop}}
+actor HealBeamFX_GREEN : HealBeamFX {translation "192:192=104:104", "198:198=128:128", "249:249=131:131" States{BeamContinue:TNT1 A 0 A_CustomMissile("HealBeamFX_GREEN",0,0,0,0) stop}}
+actor HealBeamFX_YELLOW : HealBeamFX {translation "192:192=229:229", "198:198=232:232", "249:249=223:223" States{BeamContinue:TNT1 A 0 A_CustomMissile("HealBeamFX_YELLOW",0,0,0,0) stop}}
+
+/*
+actor HealBeamHeal : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 1 A_Giveinventory("CureSparkleFXSpawn")
+TNT1 A 0 A_Jumpifinventory("HealDelay",1,"Nope")
+TNT1 A 0 A_JumpIf(CallACS("CSACS_HealthPercent",0)>=150,"Nope")
+LASH A 0 A_JumpIf(ACS_NamedExecuteWithResult("CSACS_ActorClassifier",0,2) == TRUE, "HealMe")
+
+
+HealMe:
+TNT1 A 0 ACS_NamedExecuteAlways("CSACS_Basic(Over)Heal",0,0,CallACS("CSACS_HealRamp",CureHealMin,CureHealMax),50)
+TNT1 A 1 A_Giveinventory("HealDelay")
+TNT1 A 0 A_Giveinventory("CureHealedFlag",1)
+TNT1 A 0 A_Giveinventory("HealEffectSpawn",1)
+TNT1 A 0 A_PlaySoundEx("item/energyup","SoundSlot7")
+TNT1 A 0
+stop
+
+Nope:
+TNT1 A 0
+stop
+}
+}
+*/
+
+
+actor HelpingHandBeamFX : BasicClientside
+{
+scale 1.5
+Renderstyle "add"
+States
+{
+Spawn:
+TNT1 A 0 
+TNT1 A 0 A_GiveInventory("ProjectileFXCode",1)
+BASB U 1
+BASB UU 1 A_Fadeout(0.3)
+stop
+}
+}
+
+/*
 const int TRIO_LASERRANGE = 25;
 
 actor HelpingHandLinkBeam
@@ -133,7 +326,7 @@ DamageType "HelpingHand"
 +DONTBLAST
 +DONTREFLECT
 +SEEKERMISSILE
-+CLIENTSIDEONLY
+//+CLIENTSIDEONLY
 //+FORCEYBILLBOARD
 +PAINLESS
 damage (0)
@@ -152,7 +345,8 @@ BASB U 0 A_JumpIf((pitch>TRIO_LASERRANGE),"Death")
 BUST B 0 A_JumpIf(IsPointerEqual(AAPTR_TRACER, AAPTR_NULL) == TRUE, "Death")
 BASB U 0 A_JumpIfTracerCloser(60,"Death")
 BASB U 0 A_Seekermissile(90,90,SMF_PRECISE)
-BASB U 1 A_SpawnItemEx("HelpingHandLinkBeam",0,0,0,momx,Momy,momz,0,SXF_TRANSFERTRANSLATION|SXF_ABSOLUTEMOMENTUM|SXF_TRANSFERPOINTERS|SXF_TRANSFERPITCH)
+TNT1 A 0 A_SpawnItemEx("HelpingHandBeamFX",0,0,0,0,0,0,0,33)
+TNT1 A 1 A_SpawnItemEx("HelpingHandLinkBeam",0,0,0,momx,Momy,momz,0,SXF_TRANSFERTRANSLATION|SXF_ABSOLUTEMOMENTUM|SXF_TRANSFERPOINTERS|SXF_TRANSFERPITCH)
 BASB U 0 
 BASB U 0 //A_JumpIf(ACS_NamedExecuteWithResult("pkmn_istargetclient")==1,"Spawn2")//A_Stop
 stop
@@ -172,9 +366,50 @@ states
 {
 Spawn:
 TNT1 A 0
-TNT1 A 0 A_GiveInventory("ProjectileDCode",1)
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
 TNT1 A 0 A_TransferPointer(AAPTR_TARGET,AAPTR_DEFAULT,AAPTR_TRACER,AAPTR_TRACER)
 goto "Super::Spawn"
 }
 }
 
+
+actor HelpingHandBeamFX : BasicClientside
+{
+scale 1.5
+Renderstyle "add"
+States
+{
+Spawn:
+TNT1 A 0 
+TNT1 A 0 A_GiveInventory("ProjectileFXCode",1)
+BASB U 1
+BASB UU 1 A_Fadeout(0.3)
+stop
+}
+}
+
+*/
+
+
+actor HealBeamShooter : BasicTeamColorPickup
+{
+states
+{
+FireX:
+BUST B 1 A_FireCustomMissile("HealBeam",0,0,4,0,0,0)
+goto Done
+//---
+FireB:
+BUST B 1 A_FireCustomMissile("HealBeam_BLUE",0,0,4,0,0,0)
+goto Done
+FireR:
+BUST B 1 A_FireCustomMissile("HealBeam_RED",0,0,4,0,0,0)
+goto Done
+FireG:
+TNT1 A 0 A_FireCustomMissile("HealBeam_GREEN",0,0,0,0)
+goto Done
+FireY:
+TNT1 A 0 A_FireCustomMissile("HealBeam_YELLOW",0,0,0,0)
+goto Done
+}
+}

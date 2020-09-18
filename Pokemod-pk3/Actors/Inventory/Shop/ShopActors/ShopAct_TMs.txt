@@ -50,6 +50,8 @@ TNT1 A 0 A_GiveInventory("BuyTM51",1)
 
 TNT1 A 0 A_GiveInventory("BuyTM54",1)
 TNT1 A 0 A_GiveInventory("BuyTM55",1)
+TNT1 A 0 A_GiveInventory("BuyTM56",1)
+TNT1 A 0 A_GiveInventory("BuyTM57",1)
 
 TNT1 A 0 A_GiveInventory("BuyTM58",1)
 TNT1 A 0 A_GiveInventory("BuyTM59",1)
@@ -57,415 +59,437 @@ stop
 }
 }
 
-actor BuyTM6 : BuyThing50
+actor BuyTM6 : BuyThing3
 { //-=- Falseswipe -=-
 states
 {
 Use2:
 TNT1 A 0 A_JumpIf(!CallACS("CheckTM"),"BadTM")
-TNT1 A 0 ACS_NamedExecuteAlways("PromptMoveLearn",0,Move_FalseSwipe,50)
+TNT1 A 0 ACS_NamedExecuteAlways("PromptMoveLearn",0,Move_FalseSwipe,3)
 goto BuySuccess
 }
 }
 
-actor BuyTM7 : BuyThing50
+actor BuyTM7 : BuyThing3
 { //-=- Helping hand -=-
 states
 {
 Use2:
 TNT1 A 0 A_JumpIf(!CallACS("CheckTM",TMT_Normal|TMT_Electric,TMA_Succor),"BadTM")
-TNT1 A 0 ACS_NamedExecuteAlways("PromptMoveLearn",0,Move_HelpingHand,50)
+TNT1 A 0 ACS_NamedExecuteAlways("PromptMoveLearn",0,Move_HelpingHand,3)
 goto BuySuccess
 }
 }
 
-actor BuyTM8 : BuyThing50
+actor BuyTM8 : BuyThing3
 { //-=- Taunt -=-
 states
 {
 Use2:
 TNT1 A 0 A_JumpIf(!CallACS("CheckTM",TMT_Dark|TMT_Normal,TMA_Prankster|TMA_Pugilist),"BadTM")
-TNT1 A 0 ACS_NamedExecuteAlways("PromptMoveLearn",0,Move_Taunt,50)
+TNT1 A 0 ACS_NamedExecuteAlways("PromptMoveLearn",0,Move_Taunt,3)
 goto BuySuccess
 }
 }
 
-actor BuyTM14 : BuyThing100
+actor BuyTM14 : BuyThing10
 { //-=- Reflect -=-
 states
 {
 Use2:
 TNT1 A 0 A_JumpIf(!CallACS("CheckTM",TMT_Psychic,TMA_Succor|TMA_Defensive),"BadTM")
-TNT1 A 0 ACS_NamedExecuteAlways("PromptMoveLearn",0,Move_Reflect,100)
+TNT1 A 0 ACS_NamedExecuteAlways("PromptMoveLearn",0,Move_Reflect,10)
 goto BuySuccess
 }
 }
 
-actor BuyTM15 : BuyThing100
+actor BuyTM15 : BuyThing10
 { //-=- LightScreen -=-
 states
 {
 Use2:
 TNT1 A 0 A_JumpIf(!CallACS("CheckTM",TMT_Psychic,TMA_Succor|TMA_Defensive),"BadTM")
-TNT1 A 0 ACS_NamedExecuteAlways("PromptMoveLearn",0,Move_LightScreen,100)
+TNT1 A 0 ACS_NamedExecuteAlways("PromptMoveLearn",0,Move_LightScreen,10)
 goto BuySuccess
 }
 }
 
-actor BuyTM16 : BuyThing100
+actor BuyTM16 : BuyThing10
 { //-=- Safeguard -=-
 states
 {
 Use2:
 TNT1 A 0 A_JumpIf(!CallACS("CheckTM",TMT_Normal,TMA_Succor|TMA_Defensive),"BadTM")
-TNT1 A 0 ACS_NamedExecuteAlways("PromptMoveLearn",0,Move_SafeGuard,100)
+TNT1 A 0 ACS_NamedExecuteAlways("PromptMoveLearn",0,Move_SafeGuard,10)
 goto BuySuccess
 }
 }
 
-actor BuyTM18 : BuyThing100
+actor BuyTM18 : BuyThing10
 { //-=- Swift -=-
 states
 {
 Use2:
 TNT1 A 0 A_JumpIf(!CallACS("CheckTM",TMT_Normal|TMT_Fire|TMT_Psychic|TMT_Fairy,TMA_Slasher),"BadTM")
-TNT1 A 0 ACS_NamedExecuteAlways("PromptMoveLearn",0,Move_Swift,100)
+TNT1 A 0 ACS_NamedExecuteAlways("PromptMoveLearn",0,Move_Swift,10)
 goto BuySuccess
 }
 }
 
-actor BuyTM19 : BuyThing250
+actor BuyTM19 : BuyThing25
 { //-=- Toxic -=-
 states
 {
 Use2:
 TNT1 A 0 A_JumpIf(!CallACS("CheckTM",TMT_Poison,TMA_Defensive),"BadTM")
-TNT1 A 0 ACS_NamedExecuteAlways("PromptMoveLearn",0,Move_Toxic,250)
+TNT1 A 0 ACS_NamedExecuteAlways("PromptMoveLearn",0,Move_Toxic,25)
 goto BuySuccess
 }
 }
 
-actor BuyTM20 : BuyThing150
+actor BuyTM20 : BuyThing15
 { //-=- Protect -=-
 states
 {
 Use2:
 TNT1 A 0 A_JumpIf(!CallACS("CheckTM"),"BadTM")
-TNT1 A 0 ACS_NamedExecuteAlways("PromptMoveLearn",0,Move_Protect,150)
+TNT1 A 0 ACS_NamedExecuteAlways("PromptMoveLearn",0,Move_Protect,15)
 goto BuySuccess
 }
 }
 
-actor BuyTM22 : BuyThing250
+actor BuyTM22 : BuyThing25
 { //-=- Haze -=-
 states
 {
 Use2:
 TNT1 A 0 A_JumpIf(!CallACS("CheckTM",TMT_Ice|TMT_Water,TMA_Defensive),"BadTM")
-TNT1 A 0 ACS_NamedExecuteAlways("PromptMoveLearn",0,Move_Haze,250)
+TNT1 A 0 ACS_NamedExecuteAlways("PromptMoveLearn",0,Move_Haze,25)
 goto BuySuccess
 }
 }
 
-actor BuyTM23 : BuyThing250
+actor BuyTM23 : BuyThing25
 { //-=- SwordDance -=-
 states
 {
 Use2:
 TNT1 A 0 A_JumpIf(!CallACS("CheckTM"),"BadTM")
-TNT1 A 0 ACS_NamedExecuteAlways("PromptMoveLearn",0,Move_SwordDance,250)
+TNT1 A 0 ACS_NamedExecuteAlways("PromptMoveLearn",0,Move_SwordDance,25)
 goto BuySuccess
 }
 }
 
-actor BuyTM24 : BuyThing250
+actor BuyTM24 : BuyThing25
 { //-=- NastyPlot -=-
 states
 {
 Use2:
 TNT1 A 0 A_JumpIf(!CallACS("CheckTM"),"BadTM")
-TNT1 A 0 ACS_NamedExecuteAlways("PromptMoveLearn",0,Move_NastyPlot,250)
+TNT1 A 0 ACS_NamedExecuteAlways("PromptMoveLearn",0,Move_NastyPlot,25)
 goto BuySuccess
 }
 }
 
-actor BuyTM25 : BuyThing250
+actor BuyTM25 : BuyThing25
 { //-=- IronDefense -=-
 states
 {
 Use2:
 TNT1 A 0 A_JumpIf(!CallACS("CheckTM"),"BadTM")
-TNT1 A 0 ACS_NamedExecuteAlways("PromptMoveLearn",0,Move_IronDefense,250)
+TNT1 A 0 ACS_NamedExecuteAlways("PromptMoveLearn",0,Move_IronDefense,25)
 goto BuySuccess
 }
 }
 
-actor BuyTM26 : BuyThing250
+actor BuyTM26 : BuyThing25
 { //-=- Amnesia -=-
 states
 {
 Use2:
 TNT1 A 0 A_JumpIf(!CallACS("CheckTM"),"BadTM")
-TNT1 A 0 ACS_NamedExecuteAlways("PromptMoveLearn",0,Move_Amnesia,250)
+TNT1 A 0 ACS_NamedExecuteAlways("PromptMoveLearn",0,Move_Amnesia,25)
 goto BuySuccess
 }
 }
 
-actor BuyTM27 : BuyThing250
+actor BuyTM27 : BuyThing25
 { //-=- Agility -=-
 states
 {
 Use2: 
 TNT1 A 0 A_JumpIf(!CallACS("CheckTM"),"BadTM")
-TNT1 A 0 ACS_NamedExecuteAlways("PromptMoveLearn",0,Move_Agility,250)
+TNT1 A 0 ACS_NamedExecuteAlways("PromptMoveLearn",0,Move_Agility,25)
 goto BuySuccess
 }
 }
 
 
 
-actor BuyTM29 : BuyThing250
+actor BuyTM29 : BuyThing25
 { //-=- WideGuard -=-
 states
 {
 Use2:
 TNT1 A 0 A_JumpIf(!CallACS("CheckTM",TMT_Rock|TMT_Ground|TMT_Steel,TMA_Defensive|TMA_Terrestrial),"BadTM")
-TNT1 A 0 ACS_NamedExecuteAlways("PromptMoveLearn",0,Move_WideGuard,250)
+TNT1 A 0 ACS_NamedExecuteAlways("PromptMoveLearn",0,Move_WideGuard,25)
 goto BuySuccess
 }
 }
 
-actor BuyTM30 : BuyThing100
+actor BuyTM30 : BuyThing10
 { //-=- LifeDew -=-
 states
 {
 Use2:
 TNT1 A 0 A_JumpIf(!CallACS("CheckTM",TMT_Water|TMT_Grass,TMA_Succor|TMA_Defensive),"BadTM")
-TNT1 A 0 ACS_NamedExecuteAlways("PromptMoveLearn",0,Move_LifeDew,100)
+TNT1 A 0 ACS_NamedExecuteAlways("PromptMoveLearn",0,Move_LifeDew,10)
 goto BuySuccess
 }
 }
 
-actor BuyTM31 : BuyThing250
+actor BuyTM31 : BuyThing25
 { //-=- HealPulse -=-
 states
 {
 Use2:
 TNT1 A 0 A_JumpIf(!CallACS("CheckTM",TMT_Psychic|TMT_Fairy,TMA_Succor|TMA_Defensive),"BadTM")
-TNT1 A 0 ACS_NamedExecuteAlways("PromptMoveLearn",0,Move_HealPulse,250)
+TNT1 A 0 ACS_NamedExecuteAlways("PromptMoveLearn",0,Move_HealPulse,25)
 goto BuySuccess
 }
 }
 
-actor BuyTM32 : BuyThing150
+actor BuyTM32 : BuyThing15
 { //-=- StealthRock -=-
 states
 {
 Use2:
 TNT1 A 0 A_JumpIf(!CallACS("CheckTM",TMT_Rock|TMT_Ground|TMT_Steel,TMA_Defensive|TMA_Terrestrial),"BadTM")
-TNT1 A 0 ACS_NamedExecuteAlways("PromptMoveLearn",0,Move_StealthRock,150)
+TNT1 A 0 ACS_NamedExecuteAlways("PromptMoveLearn",0,Move_StealthRock,15)
 goto BuySuccess
 }
 }
 
-actor BuyTM33 : BuyThing150
+actor BuyTM33 : BuyThing15
 { //-=- Spikes -=-
 states
 {
 Use2:
 TNT1 A 0 A_JumpIf(!CallACS("CheckTM",TMT_Rock|TMT_Ground|TMT_Steel,TMA_Defensive|TMA_Terrestrial),"BadTM")
-TNT1 A 0 ACS_NamedExecuteAlways("PromptMoveLearn",0,Move_Spikes,150)
+TNT1 A 0 ACS_NamedExecuteAlways("PromptMoveLearn",0,Move_Spikes,15)
 goto BuySuccess
 }
 }
 
-actor BuyTM34 : BuyThing250
+actor BuyTM34 : BuyThing25
 { //-=- ToxicSpikes -=-
 states
 {
 Use2:
 TNT1 A 0 A_JumpIf(!CallACS("CheckTM",TMT_Poison,TMA_Defensive),"BadTM")
-TNT1 A 0 ACS_NamedExecuteAlways("PromptMoveLearn",0,Move_ToxicSpikes,250)
+TNT1 A 0 ACS_NamedExecuteAlways("PromptMoveLearn",0,Move_ToxicSpikes,25)
 goto BuySuccess
 }
 }
 
-actor BuyTM35 : BuyThing250
+actor BuyTM35 : BuyThing25
 { //-=- Surf -=-
 states
 {
 Use2:
 TNT1 A 0 A_JumpIf(!CallACS("CheckTM",TMT_Water),"BadTM")
-TNT1 A 0 ACS_NamedExecuteAlways("PromptMoveLearn",0,Move_Surf,250)
+TNT1 A 0 ACS_NamedExecuteAlways("PromptMoveLearn",0,Move_Surf,25)
 goto BuySuccess
 }
 }
 
-actor BuyTM36 : BuyThing250
+actor BuyTM36 : BuyThing25
 { //-=- Waterfall -=-
 states
 {
 Use2:
 TNT1 A 0 A_JumpIf(!CallACS("CheckTM",TMT_Water),"BadTM")
-TNT1 A 0 ACS_NamedExecuteAlways("PromptMoveLearn",0,Move_Waterfall,250)
+TNT1 A 0 ACS_NamedExecuteAlways("PromptMoveLearn",0,Move_Waterfall,25)
 goto BuySuccess
 }
 }
 
-actor BuyTM37 : BuyThing250
+actor BuyTM37 : BuyThing25
 { //-=- Dive -=-
 states
 {
 Use2:
 TNT1 A 0 A_JumpIf(!CallACS("CheckTM",TMT_Water),"BadTM")
-TNT1 A 0 ACS_NamedExecuteAlways("PromptMoveLearn",0,Move_Dive,250)
+TNT1 A 0 ACS_NamedExecuteAlways("PromptMoveLearn",0,Move_Dive,25)
 goto BuySuccess
 }
 }
 
-actor BuyTM38 : BuyThing150
+actor BuyTM38 : BuyThing15
 { //-=- Scald -=-
 states
 {
 Use2:
 TNT1 A 0 A_JumpIf(!CallACS("CheckTM",TMT_Water),"BadTM")
-TNT1 A 0 ACS_NamedExecuteAlways("PromptMoveLearn",0,Move_Scald,150)
+TNT1 A 0 ACS_NamedExecuteAlways("PromptMoveLearn",0,Move_Scald,15)
 goto BuySuccess
 }
 }
 
-actor BuyTM39 : BuyThing150
+actor BuyTM39 : BuyThing15
 { //-=- waterpulse -=-
 states
 {
 Use2:
 TNT1 A 0 A_JumpIf(!CallACS("CheckTM",TMT_Water),"BadTM")
-TNT1 A 0 ACS_NamedExecuteAlways("PromptMoveLearn",0,Move_waterpulse,150)
+TNT1 A 0 ACS_NamedExecuteAlways("PromptMoveLearn",0,Move_waterpulse,15)
 goto BuySuccess
 }
 }
 
 
-actor BuyTM40 : BuyThing50
+actor BuyTM40 : BuyThing3
 { //-=- Bullet Seed -=-
 states
 {
 Use2:
 TNT1 A 0 A_JumpIf(!CallACS("CheckTM",TMT_Grass,TMA_Artillery),"BadTM")
-TNT1 A 0 ACS_NamedExecuteAlways("PromptMoveLearn",0,Move_BulletSeed,50)
+TNT1 A 0 ACS_NamedExecuteAlways("PromptMoveLearn",0,Move_BulletSeed,3)
 goto BuySuccess
 }
 }
 
-actor BuyTM41 : BuyThing150
+actor BuyTM41 : BuyThing15
 { //-=- Brine -=-
 states
 {
 Use2:
 TNT1 A 0 A_JumpIf(!CallACS("CheckTM",TMT_Water,TMA_Artillery),"BadTM")
-TNT1 A 0 ACS_NamedExecuteAlways("PromptMoveLearn",0,Move_Brine,150)
+TNT1 A 0 ACS_NamedExecuteAlways("PromptMoveLearn",0,Move_Brine,15)
 goto BuySuccess
 }
 }
 
 
-actor BuyTM44 : BuyThing100
+actor BuyTM44 : BuyThing10
 { //-=- Magical Leaf -=-
 states
 {
 Use2:
 TNT1 A 0 A_JumpIf(!CallACS("CheckTM",TMT_Grass|TMT_Psychic|TMT_Fairy),"BadTM")
-TNT1 A 0 ACS_NamedExecuteAlways("PromptMoveLearn",0,Move_MagicalLeaf,100)
+TNT1 A 0 ACS_NamedExecuteAlways("PromptMoveLearn",0,Move_MagicalLeaf,10)
 goto BuySuccess
 }
 }
 
-actor BuyTM45 : BuyThing150
+actor BuyTM45 : BuyThing15
 { //-=- FlameThrower -=-
 states
 {
 Use2:
 TNT1 A 0 A_JumpIf(!CallACS("CheckTM",TMT_Fire|TMT_Dragon,TMA_Draconic|TMA_Artillery),"BadTM")
-TNT1 A 0 ACS_NamedExecuteAlways("PromptMoveLearn",0,Move_Flamethrower,150)
+TNT1 A 0 ACS_NamedExecuteAlways("PromptMoveLearn",0,Move_Flamethrower,15)
 goto BuySuccess
 }
 }
 
-actor BuyTM48 : BuyThing300
+actor BuyTM48 : BuyThing30
 { //-=- RockSlide -=-
 states
 {
 Use2:
 TNT1 A 0 A_JumpIf(!CallACS("CheckTM",TMT_Rock|TMT_Ground|TMT_Steel|TMT_Fighting,TMA_Terrestrial),"BadTM")
-TNT1 A 0 ACS_NamedExecuteAlways("PromptMoveLearn",0,Move_RockSlide,300)
+TNT1 A 0 ACS_NamedExecuteAlways("PromptMoveLearn",0,Move_RockSlide,30)
 goto BuySuccess
 }
 }
 
 
-actor BuyTM50 : BuyThing50
+actor BuyTM50 : BuyThing3
 { //-=- Icy Wind -=-
 states
 {
 Use2:
 TNT1 A 0 A_JumpIf(!CallACS("CheckTM",TMT_Water|TMT_Ice,TMA_Artillery),"BadTM")
-TNT1 A 0 ACS_NamedExecuteAlways("PromptMoveLearn",0,Move_IcyWind,50)
+TNT1 A 0 ACS_NamedExecuteAlways("PromptMoveLearn",0,Move_IcyWind,3)
 goto BuySuccess
 }
 }
 
-actor BuyTM51 : BuyThing150
+actor BuyTM51 : BuyThing15
 { //-=- Energy Ball -=-
 states
 {
 Use2:
 TNT1 A 0 A_JumpIf(!CallACS("CheckTM",TMT_Grass,TMA_Artillery),"BadTM")
-TNT1 A 0 ACS_NamedExecuteAlways("PromptMoveLearn",0,Move_EnergyBall,150)
+TNT1 A 0 ACS_NamedExecuteAlways("PromptMoveLearn",0,Move_EnergyBall,15)
 goto BuySuccess
 }
 }
 
-actor BuyTM54 : BuyThing150
+actor BuyTM54 : BuyThing15
 { //-=- SkyDrop -=-
 states
 {
 Use2:
 TNT1 A 0 A_JumpIf(!CallACS("CheckTM",TMT_Flying,TMA_Pugilist|TMA_Slasher),"BadTM")
-TNT1 A 0 ACS_NamedExecuteAlways("PromptMoveLearn",0,Move_SkyDrop,150)
+TNT1 A 0 ACS_NamedExecuteAlways("PromptMoveLearn",0,Move_SkyDrop,15)
 goto BuySuccess
 }
 }
 
-actor BuyTM55 : BuyThing300
+actor BuyTM55 : BuyThing30
 { //-=- FireBlast -=-
 states
 {
 Use2:
 TNT1 A 0 A_JumpIf(!CallACS("CheckTM",TMT_Fire|TMT_Dragon,TMA_Draconic|TMA_Artillery),"BadTM")
-TNT1 A 0 ACS_NamedExecuteAlways("PromptMoveLearn",0,Move_FireBlast,300)
+TNT1 A 0 ACS_NamedExecuteAlways("PromptMoveLearn",0,Move_FireBlast,30)
+goto BuySuccess
+}
+}
+
+actor BuyTM56 : BuyThing30
+{ //-=- Overheat -=-
+states
+{
+Use2:
+TNT1 A 0 A_JumpIf(!CallACS("CheckTM",TMT_Fire),"BadTM")
+TNT1 A 0 ACS_NamedExecuteAlways("PromptMoveLearn",0,Move_Overheat,30)
+goto BuySuccess
+}
+}
+
+actor BuyTM57 : BuyThing3
+{ //-=- Incinerate -=-
+states
+{
+Use2:
+TNT1 A 0 A_JumpIf(!CallACS("CheckTM",TMT_Fire,TMA_Defensive),"BadTM")
+TNT1 A 0 ACS_NamedExecuteAlways("PromptMoveLearn",0,Move_Incinerate,3)
 goto BuySuccess
 }
 }
 
 
-actor BuyTM58 : BuyThing300
+actor BuyTM58 : BuyThing30
 { //-=- SolarBeam -=-
 states
 {
 Use2:
 TNT1 A 0 A_JumpIf(!CallACS("CheckTM",TMT_Grass|TMT_Fire,TMA_Artillery),"BadTM")
-TNT1 A 0 ACS_NamedExecuteAlways("PromptMoveLearn",0,Move_SolarBeam,300)
+TNT1 A 0 ACS_NamedExecuteAlways("PromptMoveLearn",0,Move_SolarBeam,30)
 goto BuySuccess
 }
 }
 
-actor BuyTM59 : BuyThing300
+actor BuyTM59 : BuyThing30
 { //-=- EarthQuake -=-
 states
 {
 Use2:
 TNT1 A 0 A_JumpIf(!CallACS("CheckTM",TMT_Ground,TMA_Mature|TMA_Terrestrial),"BadTM")
-TNT1 A 0 ACS_NamedExecuteAlways("PromptMoveLearn",0,Move_Earthquake,300)
+TNT1 A 0 ACS_NamedExecuteAlways("PromptMoveLearn",0,Move_Earthquake,30)
 goto BuySuccess
 }
 }

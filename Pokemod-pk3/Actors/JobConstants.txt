@@ -152,6 +152,33 @@ const int Move_Liquidation = 126;
 const int Move_Scald = 127;
 const int Move_Dive = 128;
 const int Move_Bubble = 129;
+const int Move_Sludge = 130;
+const int Move_SludgeBomb = 131;
+const int Move_Venoshock = 132;
+const int Move_Absorb = 133;
+const int Move_MegaDrain = 134;
+const int Move_GigaDrain = 135;
+const int Move_LeafStorm = 136;
+const int Move_GrassKnot = 137;
+const int Move_StunSpore = 138;
+const int Move_PetalDance = 139;
+const int Move_PowerWhip = 140;
+const int Move_LeafTornado = 141;
+const int Move_Leafage = 142;
+const int Move_LavaPlume = 143;
+const int Move_FlameCharge = 144;
+const int Move_Overheat = 145;
+const int Move_Inferno = 146;
+const int Move_HeatCrash = 147;
+const int Move_Incinerate = 148;
+const int Move_WillOWisp = 149;
+const int Move_MysticalFire = 150;
+const int Move_Rest = 151;
+const int Move_SlackOff = 152;
+const int Move_Substitute = 153;
+const int Move_Block = 154;
+const int Move_BellyDrum = 155;
+const int Move_AirSlash = 156;
 //--[NewMove]--
 //=======|Pokedex Constants|==========
 const int Dex_SMEARGLE = 0;
@@ -196,6 +223,25 @@ const int Dex_PIPLUP = 34;
 const int Dex_PRINPLUP = 35;
 const int Dex_EMPOLEON = 36;
 
+const int Dex_DREEPY = 37;
+const int Dex_DRAKLOAK = 38;
+const int Dex_DRAGAPULT = 39;
+
+const int Dex_DRATINI = 40;
+const int Dex_DRAGONAIR = 41;
+const int Dex_DRAGONITE = 42;
+
+const int Dex_BAGON = 43;
+const int Dex_SHELGON = 44;
+const int Dex_SALAMENCE = 45;
+
+const int Dex_SLOWPOKE = 46;
+const int Dex_SLOWBRO = 47;
+const int Dex_SLOWKING = 48;
+
+const int Dex_STARYU = 49;
+const int Dex_STARMIE = 50;
+//--[NewPokemon]--
 //=======|TM Type Flags|==========
 const int TMT_NULL = 0;
 const int TMT_Normal = 1;

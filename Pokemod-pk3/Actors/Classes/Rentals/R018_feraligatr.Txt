@@ -1,0 +1,86 @@
+/*
+[+]===================================[+]
+
+[+]===================================[+]
+*/
+
+
+Actor R_Feraligatr : ClassBaseRentals 
+{
+Player.DisplayName "Feraligatr"
+Player.SoundClass "Feraligatr"
+
+Player.StartItem "PKMNRentalKit"
+//============|
+Player.StartItem "FeraligatrRentalSetupItem"
+//============|
+Player.StartItem "Base_HP", 85
+Player.StartItem "Base_PAttack", 105
+Player.StartItem "Base_PDefense", 100
+Player.StartItem "Base_SAttack", 79
+Player.StartItem "Base_SDefense", 83
+Player.StartItem "Base_Speed", 78
+//============|
+
+States
+{
+Spawn: 
+P018 A 0
+P018 B 1 
+P018 A 1
+GoTo Spawn+2
+See:
+P018 BCDE 5
+GoTo Spawn+1
+Missile:
+P018 A 0 A_JumpIfInventory("ConshotTimer",1,2) 
+P018 F 5 
+P018 G 4
+GoTo Spawn+2
+
+PainFix:
+P018 H 0 
+GoTo PainFrames
+}
+}
+
+actor FeraligatrRentalMoves : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_JumpIf(CallACS("RentalBotCheck") == 1,"BotWep")
+
+TNT1 A 0 A_GiveInventory("AquaTailMove1")
+TNT1 A 0 A_GiveInventory("LiquidationMove2")
+TNT1 A 0 A_GiveInventory("CrunchMove3")
+TNT1 A 0 A_GiveInventory("DiveMove4")
+stop
+
+BotWep:
+TNT1 A 0 A_GiveInventory("AquaTailMove1")
+stop
+}
+}
+
+ actor FeraligatrRentalSetupItem : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 ACS_NamedExecuteAlways("PKMN_RentalsSetup",0,Dex_Feraligatr)
+stop
+}
+}

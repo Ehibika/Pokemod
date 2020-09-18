@@ -51,3 +51,4 @@ stop
 #include "Actors/inventory/Shop/ShopInventory/Candies.txt"
 #include "Actors/inventory/Shop/ShopInventory/Berries.txt"
 #include "Actors/inventory/Shop/ShopInventory/Seeds.txt"
+#include "Actors/inventory/Shop/ShopInventory/Orbs.txt"

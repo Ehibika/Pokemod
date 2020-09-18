@@ -25,7 +25,7 @@ playerDisguise[p] = GetSkinNum(EnemyInfo[wep][1]);
 }
 */
 
-#DEFINE THE_COOLDOWN 50 //40
+#DEFINE THE_COOLDOWN 180 //40
 
 Script "Wait_PokeSkinHandler" (void)
 {
@@ -179,7 +179,8 @@ bool playerDisguised[S_MAX_PLAYERS];
 int playerDisguise[S_MAX_PLAYERS];
 int playerCurrentSkin[S_MAX_PLAYERS];
 
-#DEFINE SKIN_OFFSET 127//115
+#DEFINE KEYCONF_CLASSCOUNT 13 //18
+#DEFINE SKIN_OFFSET 114 + KEYCONF_CLASSCOUNT //128 // 
 
 script "SetPokeSkin" (int Skin, int update) //CLIENTSIDE
 {
@@ -194,7 +195,7 @@ script "SetDisguise" (int p)
 {
 	playerDisguised[p] = true;
     playerDisguise[p] = GetSkinNum(GetCvarString("theDisguise"));
-    //log(i:GetSkinNum(GetCvarString("theDisguise")));
+    log(i:GetSkinNum(GetCvarString("theDisguise")));
 	//SetCvarString("theDisguise","");
 }
 
@@ -291,14 +292,15 @@ DisguiseFunc2b(i);
 if(playerCooldown[i]<1) {
 	if(playerDisguised[i]) DisguiseFunc2c(i);
 } else {
-	playerCooldown[i]--;
+    playerCooldown[i]--;
+    DisguiseFunc3(i);
 }
 }
 
 function void DisguiseFunc2b(int i)
 {
 int currentSkin = GetUserCVar(i,"skin");
-if(currentSkin!=playerCurrentSkin[i]) playerCooldown[i] = THE_COOLDOWN;
+if(currentSkin!=playerCurrentSkin[i]) playerCooldown[i] = THE_COOLDOWN; 
 playerCurrentSkin[i] = currentSkin;
 }
 
@@ -311,6 +313,17 @@ if(disguise!=playerCurrentSkin[i]) {
 	playerCooldown[i] = THE_COOLDOWN;
 }
 }
+
+
+function void DisguiseFunc3(int i)
+{
+    if(PlayerIsBot(i)){return ;}
+int disguise = playerDisguise[i];
+if(disguise!=playerCurrentSkin[i]) {
+    GiveActorInventory(i+1000,"EvoMaskFX_Spawn",1);
+}
+}
+
 
 script "DisguisePlayer" (int skin, int i) CLIENTSIDE
 {
@@ -333,3 +346,12 @@ while(true) {
 	delay(1);
 }
 }
+
+/*
+Script "CheckSkinContinuity" (DexNumber)
+{
+    int currentSkin = GetUserCVar(i,"skin");
+
+
+}
+*/

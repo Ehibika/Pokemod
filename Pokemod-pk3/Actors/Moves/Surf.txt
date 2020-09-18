@@ -268,7 +268,7 @@ SURF B 0 A_Recoil(-1)
 MoveBegin:
 SURF B 0 ACS_NamedExecuteAlways("core_stickyLifts",0,STICKYMODE_GUTSLIFT)
 SURF B 0 ACS_ExecuteAlways(994, 0, 1)
-SURF G 1 A_GiveInventory("SurfFunction")
+SURF G 1 A_GiveInventory("SurfFunctionA")
 Accelerate:
 SURF B 0 A_Recoil(-1)
 SURF G 1 A_GiveInventory("SurfFunctionA")

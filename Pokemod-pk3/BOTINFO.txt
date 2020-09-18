@@ -56,6 +56,26 @@
 	favoriteweapon = "WaterGunMove1"
 }
 
+
+{
+	name = "Dreepy"
+	accuracy = 3
+	intellect = 4
+	evade = 1
+	anticipation = 1
+	reactiontime = 1
+	perception = 1
+	color = "00 00 00"
+	gender = "male"
+	skin = "base"
+	class = "Dreepy"
+	revealed = true
+	script = "humanbot"
+	chatlump = "botchats/COPYBOT"
+	chatfrequency = 50
+	favoriteweapon = "WaterGunMove1"
+}
+
 /*
 {
 	name = "Jolteon"

@@ -1,0 +1,86 @@
+/*
+[+]===================================[+]
+
+[+]===================================[+]
+*/
+
+
+Actor R_Infernape : ClassBaseRentals 
+{
+Player.DisplayName "Infernape"
+Player.SoundClass "Infernape"
+
+Player.StartItem "PKMNRentalKit"
+//============|
+Player.StartItem "InfernapeRentalSetupItem"
+//============|
+Player.StartItem "Base_HP", 76
+Player.StartItem "Base_PAttack", 104
+Player.StartItem "Base_PDefense", 71 
+Player.StartItem "Base_SAttack", 104
+Player.StartItem "Base_SDefense", 71 
+Player.StartItem "Base_Speed", 108
+//============|
+
+States
+{
+Spawn: 
+P033 A 0
+P033 B 1 
+P033 A 1
+GoTo Spawn+2
+See:
+P033 BCDE 5
+GoTo Spawn+1
+Missile:
+P033 A 0 A_JumpIfInventory("ConshotTimer",1,2) 
+P033 F 5 
+P033 G 4
+GoTo Spawn+2
+
+PainFix:
+P033 H 0 
+GoTo PainFrames
+}
+}
+
+actor InfernapeRentalMoves : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_JumpIf(CallACS("RentalBotCheck") == 1,"BotWep")
+
+TNT1 A 0 A_GiveInventory("MachPunchMove1")
+TNT1 A 0 A_GiveInventory("BlazeKickMove2")
+TNT1 A 0 A_GiveInventory("CloseCombatMove3")
+TNT1 A 0 A_GiveInventory("AcrobaticsMove4")
+stop
+
+BotWep:
+TNT1 A 0 A_GiveInventory("MachPunchMove1")
+stop
+}
+}
+
+ actor InfernapeRentalSetupItem : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 ACS_NamedExecuteAlways("PKMN_RentalsSetup",0,Dex_Infernape)
+stop
+}
+}

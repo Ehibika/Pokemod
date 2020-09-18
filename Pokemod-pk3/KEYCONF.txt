@@ -19,6 +19,13 @@ AddPlayerClass TurTwig
 AddPlayerClass Chimchar
 AddPlayerClass Piplup
 
+//AddPlayerClass Dreepy
+//AddPlayerClass Dratini
+//AddPlayerClass Bagon
+
+//AddPlayerClass Slowpoke
+//AddPlayerClass Staryu
+//--[NewPokemon]--
 
 alias TriggerEvo "CloseMenu; Use EvoStartItem" 
 alias MoveTutor "CloseMenu; Use MoveTutorStartItem"
@@ -45,6 +52,8 @@ alias BuyHasteSeed "CloseMenu; Use BuyHasteSeed; Openmenu Item_Menu"
 alias BuyPowerSeed "CloseMenu; Use BuyPowerSeed; Openmenu Item_Menu"
 alias BuyGuardSeed "CloseMenu; Use BuyGuardSeed; Openmenu Item_Menu"
 
+alias BuyEscapeOrb "CloseMenu; Use BuyEscapeOrb; Openmenu Item_Menu"
+alias BuyBarrierOrb "CloseMenu; Use BuyBarrierOrb; Openmenu Item_Menu"
 
 alias BuyTM6 "CloseMenu; Use BuyTM6;"
 alias BuyTM7 "CloseMenu; Use BuyTM7;"
@@ -88,6 +97,7 @@ alias BuyTM51 "CloseMenu; Use BuyTM51;"
 
 alias BuyTM54 "CloseMenu; Use BuyTM54;"
 alias BuyTM55 "CloseMenu; Use BuyTM55;"
-
+alias BuyTM56 "CloseMenu; Use BuyTM56;"
+alias BuyTM57 "CloseMenu; Use BuyTM57;"
 alias BuyTM58 "CloseMenu; Use BuyTM58;"
 alias BuyTM59 "CloseMenu; Use BuyTM59;"

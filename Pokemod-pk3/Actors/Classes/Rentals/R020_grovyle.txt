@@ -1,0 +1,86 @@
+/*
+[+]===================================[+]
+
+[+]===================================[+]
+*/
+
+
+Actor R_Grovyle : ClassBaseRentals 
+{
+Player.DisplayName "Grovyle"
+Player.SoundClass "Grovyle"
+
+Player.StartItem "PKMNRentalKit"
+//============|
+Player.StartItem "GrovyleRentalSetupItem"
+//============|
+Player.StartItem "Base_HP", 50
+Player.StartItem "Base_PAttack", 75
+Player.StartItem "Base_PDefense", 45
+Player.StartItem "Base_SAttack", 75
+Player.StartItem "Base_SDefense", 65
+Player.StartItem "Base_Speed", 95
+//============|
+
+States
+{
+Spawn: 
+P020 A 0
+P020 B 1 
+P020 A 1
+GoTo Spawn+2
+See:
+P020 BCDE 5
+GoTo Spawn+1
+Missile:
+P020 A 0 A_JumpIfInventory("ConshotTimer",1,2) 
+P020 F 5 
+P020 G 4
+GoTo Spawn+2
+
+PainFix:
+P020 H 0 
+GoTo PainFrames
+}
+}
+
+actor GrovyleRentalMoves : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_JumpIf(CallACS("RentalBotCheck") == 1,"BotWep")
+
+TNT1 A 0 A_GiveInventory("LeafBladeMove1")
+TNT1 A 0 A_GiveInventory("PursuitMove2")
+TNT1 A 0 A_GiveInventory("QuickAttackMove3")
+TNT1 A 0 A_GiveInventory("MagicalLeafMove4")
+stop
+
+BotWep:
+TNT1 A 0 A_GiveInventory("LeafBladeMove1")
+stop
+}
+}
+
+ actor GrovyleRentalSetupItem : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 ACS_NamedExecuteAlways("PKMN_RentalsSetup",0,Dex_Grovyle)
+stop
+}
+}

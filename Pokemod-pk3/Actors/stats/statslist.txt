@@ -30,3 +30,5 @@ Actor Active_Speed : Active_Stat {}
 
 Actor SBAR_HP : Active_Stat {}
 Actor SBAR_LVL : Active_Stat {}
+
+Actor EXPBountyitem : Inventory {Inventory.amount 1 inventory.maxamount 9999 }
