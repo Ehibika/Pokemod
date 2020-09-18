@@ -17,7 +17,7 @@ Player.StartItem "Base_PAttack", 60
 Player.StartItem "Base_PDefense", 30 
 Player.StartItem "Base_SAttack", 40
 Player.StartItem "Base_SDefense", 30 
-Player.StartItem "Base_Speed", 82
+
 //============|
 
 scale 2.0

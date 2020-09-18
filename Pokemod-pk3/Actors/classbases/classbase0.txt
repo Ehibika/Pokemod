@@ -6,7 +6,7 @@ player.damagescreencolor "yellow"
 //player.forwardmove 0.6, 0.6
 //player.sidemove 0.58, 0.58
 player.forwardmove 1.0, 0.5
-player.sidemove 0.8, 0.48
+player.sidemove 1.0, 0.5
 player.jumpz 10
 player.colorrange 0 0
 player.startitem "MegaBuster"

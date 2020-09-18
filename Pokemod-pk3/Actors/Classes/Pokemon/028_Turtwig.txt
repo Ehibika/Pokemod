@@ -17,7 +17,7 @@ Player.StartItem "Base_PAttack", 68
 Player.StartItem "Base_PDefense", 64 
 Player.StartItem "Base_SAttack", 45
 Player.StartItem "Base_SDefense", 55 
-Player.StartItem "Base_Speed", 31
+
 //============|
 
 States
