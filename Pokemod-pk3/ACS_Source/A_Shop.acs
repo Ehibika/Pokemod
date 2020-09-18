@@ -10,7 +10,7 @@
 #DEFINE MAX_PLAYERS 64
 #DEFINE MAX_SLOTS 10
 #DEFINE MAX_TEAMS 4
-#LIBDEFINE MAX_SHOP 8
+#LIBDEFINE MAX_SHOP 10
 
 bool thePlayerPlayed[MAX_PLAYERS];
 int thePlayerTeam[MAX_PLAYERS];
@@ -24,7 +24,9 @@ str ShopItemList[MAX_SHOP] = {
     "ClenseSeed",
     "PowerSeed",
     "GuardSeed",
-    "HasteSeed",
+    "HasteSeed",    
+    "EscapeOrb",
+    "BarrierOrb",
 };
 
 script "ShopEvents" (int type, int arg1, int arg2) EVENT
@@ -36,6 +38,24 @@ Switch(type)
     Case 6: SaveAllPlayerInventory(); break;
     }
 
+}
+
+#DEFINE ITEMSPAWNERTID 74000
+script "ItemSpawnTID" (void)
+{
+int NewTID = ITEMSPAWNERTID+Random(0,999);
+
+until(!IsTIDUsed(NewTID)){NewTID = ITEMSPAWNERTID+Random(0,999);}
+Thing_ChangeTID(0,NewTID);
+}
+
+script "ItemSpawnerCheck" (void)
+{
+int Output;
+
+if(!IsTIDUsed(ActivatorTID()+1000)){Output = 1;}
+
+setResultValue(Output);
 }
 
 //#region -=- Shop Display -=-
@@ -102,10 +122,12 @@ return PlayerEXP;
 
 function int GetNextEXP(int p)
 {
+int Output;
 int PlayerDexNum = GetCvar(StrParam(s:"PlayerDEXNum_",i:p));
 int PlayerLVL = GetCvar(StrParam(s:"PlayerLevel_",i:p));
 Int LvlRate = StatDEX[PlayerDexNum][9];
-return LevelUpTable[LvlRate][PlayerLVL];
+if(PlayerLVL < PKMN_MaxLVL){Output = LevelUpTable[LvlRate][PlayerLVL];}
+return Output;
 }
 
 #endregion
@@ -287,11 +309,11 @@ for(int i = 0; i<MAX_TEAMS; i++)
         TotalGames += GetTeamProperty(i,TPROP_WinCount);
 }
 
-int BaseMoney = 5;
+int BaseMoney = 1;
 //int R1 = 1 + TotalGames; //random range 1
 //int R2 = 3 + TotalGames;; //random range 2
 //int Payout = BaseMoney*random(R1,R2);
-int Payout = BaseMoney+(5*TotalGames);
+int Payout = BaseMoney;//+(5*TotalGames);
 
 ACS_NamedExecuteAlways("GivePlayerBP",0,playernumber(),Payout);
 ACS_NamedExecuteAlways("AddToBPAward",0,Payout);
@@ -339,6 +361,26 @@ Script "ItemSpew" DEATH
         SetCvarString(StrParam(s:"Player",i:PlayerNumber(),s:"_INV"),"0000");
     }
 
+}
+
+Script "ItemPurge" (int PurgeCount)
+{
+    if(GetGameModeState()!=GAMESTATE_INPROGRESS){terminate;}
+    Int InvCount;
+    Int PurgeReturn;
+
+    for (int i=0; i<MAX_SHOP; i++) 
+    {
+        InvCount = CheckInventory(ShopItemList[i]);
+        if(InvCount)
+        {     
+            TakeInventory(ShopItemList[i],PurgeCount);
+            PurgeReturn = 1;        
+        }
+    }
+    //ACS_NamedExecuteAlways("Write_Inventory",0,1);
+
+    SetResultValue(PurgeReturn);
 }
 
 #endregion
@@ -411,6 +453,12 @@ Script "ShopBuyFailTMMsg" (void) CLIENTSIDE
 {
 if(ActivatorTID()==CheckPlayerCamera(ConsolePlayerNumber())
     || (ActivatorTID()-1000+C_TID)==CheckPlayerCamera(ConsolePlayerNumber()) ) {Log(l:"SHOP_BUYFAIL_TM");}
+}
+
+Script "ShopBuyFailStatusMsg" (void) CLIENTSIDE
+{
+if(ActivatorTID()==CheckPlayerCamera(ConsolePlayerNumber())
+    || (ActivatorTID()-1000+C_TID)==CheckPlayerCamera(ConsolePlayerNumber()) ) {Log(l:"SHOP_BUYFAIL_STATUS");}
 }
 
 #endregion

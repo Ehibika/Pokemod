@@ -50,6 +50,8 @@ TNT1 A 0 A_GiveInventory("BuyTM51",1)
 
 TNT1 A 0 A_GiveInventory("BuyTM54",1)
 TNT1 A 0 A_GiveInventory("BuyTM55",1)
+TNT1 A 0 A_GiveInventory("BuyTM56",1)
+TNT1 A 0 A_GiveInventory("BuyTM57",1)
 
 TNT1 A 0 A_GiveInventory("BuyTM58",1)
 TNT1 A 0 A_GiveInventory("BuyTM59",1)
@@ -443,6 +445,28 @@ states
 Use2:
 TNT1 A 0 A_JumpIf(!CallACS("CheckTM",TMT_Fire|TMT_Dragon,TMA_Draconic|TMA_Artillery),"BadTM")
 TNT1 A 0 ACS_NamedExecuteAlways("PromptMoveLearn",0,Move_FireBlast,30)
+goto BuySuccess
+}
+}
+
+actor BuyTM56 : BuyThing30
+{ //-=- Overheat -=-
+states
+{
+Use2:
+TNT1 A 0 A_JumpIf(!CallACS("CheckTM",TMT_Fire),"BadTM")
+TNT1 A 0 ACS_NamedExecuteAlways("PromptMoveLearn",0,Move_Overheat,30)
+goto BuySuccess
+}
+}
+
+actor BuyTM57 : BuyThing3
+{ //-=- Incinerate -=-
+states
+{
+Use2:
+TNT1 A 0 A_JumpIf(!CallACS("CheckTM",TMT_Fire,TMA_Defensive),"BadTM")
+TNT1 A 0 ACS_NamedExecuteAlways("PromptMoveLearn",0,Move_Incinerate,3)
 goto BuySuccess
 }
 }

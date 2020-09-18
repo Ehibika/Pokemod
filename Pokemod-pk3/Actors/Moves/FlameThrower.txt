@@ -3,7 +3,7 @@ actor FlamethrowerMove : WepMasterBase
 Tag "Flamethrower"
 obituary "$OB_FLAMETHROWER"
 Weapon.AmmoUse 1
-Weapon.AmmoGive 10
+Weapon.AmmoGive 15
 weapon.ammotype "FlamethrowerPP"
 scale 2.0
 Inventory.Pickupmessage "$PU_MEGABUSTER"
@@ -73,7 +73,7 @@ Goto Ready
 //[+]========================================================================[+]
 //-----------------------------|Ammo & Inventory|------------------------------
 //[+]========================================================================[+]
-actor FlamethrowerPP : Ammo {inventory.amount 1 inventory.Maxamount 10}
+actor FlamethrowerPP : Ammo {inventory.amount 1 inventory.Maxamount 15}
 
 
 Actor FlameThrowerProtect : powerprotection

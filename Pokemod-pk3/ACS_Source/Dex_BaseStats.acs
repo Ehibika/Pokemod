@@ -72,4 +72,24 @@ Int StatDEX [MAXDEX][10] = {
 /*|34|*/{53, 51, 53, 61,	    56,	    40,    5,	Type_Water,Type_NULL,  LVLSPD_Normal},
 /*|35|*/{64, 66, 68, 81,	    76,	    50,    10,	Type_Water,Type_NULL,  LVLSPD_Normal},
 /*|36|*/{84, 86, 88, 111,	    101,    60,    20,	Type_Water,Type_Steel,  LVLSPD_Normal},
+
+/*|37|*/{28, 60, 30, 40,	    30,    82,    5,	Type_Dragon,Type_Ghost,  LVLSPD_Trudging},
+/*|38|*/{68, 80, 50, 60,	    50,    102,    20,	Type_Dragon,Type_Ghost,  LVLSPD_Trudging},
+/*|39|*/{88, 120, 75, 100,	    75,    142,    20,	Type_Dragon,Type_Ghost,  LVLSPD_Trudging},
+
+/*|40|*/{41, 64, 45, 50,	    50,    50,    5,	Type_Dragon,Type_NULL,  LVLSPD_Trudging},
+/*|41|*/{61, 84, 65, 70,	    70,    70,    20,	Type_Dragon,Type_NULL,  LVLSPD_Trudging},
+/*|42|*/{91, 134, 90, 100,	    100,    80,    20,	Type_Dragon,Type_Flying,  LVLSPD_Trudging},
+
+/*|43|*/{45, 75, 60, 40,	    30,    50,    5,	Type_Dragon,Type_NULL,  LVLSPD_Trudging},
+/*|44|*/{65, 95, 100, 60,	    50,    50,    20,	Type_Dragon,Type_NULL,  LVLSPD_Trudging},
+/*|45|*/{95, 135, 80, 110,	    80,    100,    20,	Type_Dragon,Type_Flying,  LVLSPD_Trudging},
+
+/*|46|*/{90, 65, 65, 40,	    40,    15,    5,	Type_Water,Type_Psychic,  LVLSPD_Normal},
+/*|47|*/{95, 75, 100, 110,	    80,    30,    20,	Type_Water,Type_Psychic,  LVLSPD_Normal},
+/*|48|*/{95, 75, 80, 100,	    110,    30,    20,	Type_Water,Type_Psychic,  LVLSPD_Normal},
+
+/*|49|*/{30, 45, 55, 75,	    55,    85,    5,	Type_Water,Type_NULL,  LVLSPD_Slow},
+/*|50|*/{60, 75, 85, 100,	    85,    115,    20,	Type_Water,Type_Psychic,  LVLSPD_Slow},
+//--[NewPokemon]--
 };

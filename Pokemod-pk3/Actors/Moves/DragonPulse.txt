@@ -3,7 +3,7 @@ actor DragonPulseMove : WepMasterBase
 Tag "DragonPulse"
 obituary "$OB_DRAGONPULSE"
 Weapon.AmmoUse 1
-Weapon.AmmoGive 10
+Weapon.AmmoGive 20
 weapon.ammotype "DragonPulsePP"
 scale 2.0
 Inventory.Pickupmessage "$PU_MEGABUSTER"
@@ -73,7 +73,7 @@ Goto Ready
 //[+]========================================================================[+]
 //-----------------------------|Ammo & Inventory|------------------------------
 //[+]========================================================================[+]
-actor DragonPulsePP : Ammo {inventory.amount 1 inventory.Maxamount 10}
+actor DragonPulsePP : Ammo {inventory.amount 1 inventory.Maxamount 20}
 
 actor DragonPulseCST : PowerupGiver
 {

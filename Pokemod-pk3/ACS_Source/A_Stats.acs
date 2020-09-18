@@ -34,25 +34,31 @@
 #LIBDEFINE STATBASELINE 80
 #LIBDEFINE STATMAX 999
 
-#LIBDEFINE SPDVAL1 50 //75
+#LIBDEFINE SPDVAL1 75 //75
 #LIBDEFINE SPDVAL2 150 //125
 
 #LIBDEFINE TestLevel 10
 
 
-Int SpeedTable[10][2] = {
-{32,90},
-{34,150},
-{36,210},
-{38,270},
-{40,330},
-{42,390},
-{44,450},
-{46,510},
-{48,570},
-{50,630},
+Int SpeedTable[15][2] = {
+    {31,78},
+    {32,126},
+    {34,174},
+    {35,222},
+    {36,270},
+    {38,318},
+    {39,366},
+    {40,414},
+    {42,462},
+    {43,510},
+    {44,558},
+    {46,606},
+    {47,654},
+    {48,702},
+    {50,750},
 };
 //#endregion
+
 
 Script "StatInitializer" (Void) 
 {
@@ -63,7 +69,7 @@ Script "StatInitializer" (Void)
                 SetCVar(StrParam(s:"PlayerLevel_",i:PlayerNumber()),PLevel);
             }
     GetActiveStats(PLevel);
-    ACS_NamedExecuteAlways("ActiveStat_Handler",0);
+    ACS_NamedExecuteAlways("ActiveStat_Handler",0,0,1);
 }
 
 Function Int ActStatCalc (int inputStat, int inputLevel)
@@ -73,14 +79,14 @@ int a ,b ,c ,d;
 
 a = inputStat*4;
 b = a * inputLevel;
-c = (b / 10);
+c = (b / PKMN_MaxLVL);
 d = c + 30;
 
 Return (d);
 
 }
 
-Script "ActiveStatUpdate" (VOID) //for level ups
+Script "ActiveStatUpdate" (int HPHeal) //for level ups
 {
     StatClear(1);
     Int PLevel = GetCVar(StrParam(s:"PlayerLevel_",i:PlayerNumber()));
@@ -90,7 +96,7 @@ Script "ActiveStatUpdate" (VOID) //for level ups
                 SetCVar(StrParam(s:"PlayerLevel_",i:PlayerNumber()),PLevel);
             }
     GetActiveStats(PLevel);
-    ACS_NamedExecuteAlways("ActiveStat_Handler",0);
+    ACS_NamedExecuteAlways("ActiveStat_Handler",0,0,HPHeal);
 }
 
 Script "StatUpdate" (VOID)  //for general stat modifications
@@ -195,7 +201,7 @@ Str StatName2[7] = {
 };
 */
 
-#LIBDEFINE STATITEMNUM 30
+#LIBDEFINE STATITEMNUM 31
 
 Str StatEffectName[STATITEMNUM][2] = {
     {"Growth","GOOD"},
@@ -228,7 +234,7 @@ Str StatEffectName[STATITEMNUM][2] = {
     {"MuddyWater","BAD"},
     {"Liquidation","BAD"},
     {"Dive","GOOD"},
-
+    {"SweetScent","BAD"},
 };
 
 #LIBDEFINE PATK_ID 0
@@ -269,6 +275,7 @@ Int StatEffectValue[STATITEMNUM][5] = {
 {   0,      0,      0,      0,      -1}, 
 {   0,      0,      -1,      0,      0}, 
 {   0,      0,      0,      0,      1}, 
+{   0,      0,      0,      0,      -3}, 
 };
 
 Int StatMulti[13] = {
@@ -342,7 +349,7 @@ GiveInventory("Base_PDefense",StatDEX[DexNum][BASE_PDEF]);
 GiveInventory("Base_SDefense",StatDEX[DexNum][BASE_SDEF]);
 GiveInventory("Base_HP",StatDEX[DexNum][BASE_HP]);
 GiveInventory("Base_Speed",StatDEX[DexNum][BASE_SPD]);
-ACS_NamedExecuteAlways("ActiveStatUpdate",0);
+ACS_NamedExecuteAlways("ActiveStatUpdate",0,1);
 }
 
 #LIBDEFINE SB_BAD 1
@@ -357,7 +364,7 @@ Script "StatItemNuke" (int ItemType)
     }  
 }
 
-Script "ActiveStat_Handler" (Int Mode)
+Script "ActiveStat_Handler" (Int Mode, int HPHeal)
 {
 /*
 So what goes on here is that, player have Active Stat inventories that act as a decider
@@ -467,14 +474,16 @@ If (Mode == 0)
         StatValue = ValueMap(CheckInventory("Active_HP"),STATBASELINE,STATMIN,HPVAL2,HPVAL1);
         }
     SetActorPRoperty(0,APROP_SPAWNHEALTH,StatValue);
-    SetActorPRoperty(0,APROP_HEALTH,StatValue);
+    //if(GetActorProperty(0,APROP_HEALTH) > GetActorProperty(0,APROP_SPAWNHEALTH)){SetActorPRoperty(0,APROP_HEALTH,StatValue);}
+    if(HPHeal){SetActorPRoperty(0,APROP_HEALTH,StatValue);}
     TakeInventory("SBAR_HP",999);
     GiveInventory("SBAR_HP",StatValue);
     }
 
     TakeInventory("SBAR_LVL",999);
-    if(PlayeLVL <= 10){GiveInventory("SBAR_LVL",PlayeLVL);}
-    Else{GiveInventory("SBAR_LVL",10);}
+    if(PlayeLVL <= PKMN_MaxLVL){GiveInventory("SBAR_LVL",PlayeLVL);}
+    Else{GiveInventory("SBAR_LVL",PKMN_MaxLVL);}
+    
 /*
 ======| Speed Stats | =======
 */

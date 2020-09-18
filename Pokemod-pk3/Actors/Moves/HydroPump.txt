@@ -137,7 +137,7 @@ Goto Ready
 //-----------------------------|Ammo & Inventory|------------------------------
 //[+]========================================================================[+]
 actor HydroPumpPP : Ammo {inventory.amount 1 inventory.Maxamount 10}
-Actor HydroPumpBuffer : powerprotection {inventory.amount 1 Powerup.duration 3}
+Actor HydroPumpBuffer : Powerup {inventory.amount 1 Powerup.duration 3}
 
 Actor DoubleHydroPump : Powerup{inventory.amount 1 powerup.duration 0x7FFFFFFF}
 

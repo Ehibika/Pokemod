@@ -14,12 +14,6 @@
 #include "actors/inventory/ArcTargeter.txt"
 #include "Actors/inventory/ThirdPCamera.txt"
 
-#include "Actors/inventory/Shop/ShopActors/shopact.txt"
-#include "Actors/inventory/Shop/ShopActors/shopact_items.txt"
-#include "Actors/inventory/Shop/ShopActors/shopact_TMs.txt"
-
-#include "Actors/inventory/Shop/ShopInventory/ShopItems.txt"
-
 #include "actors/Moves/MoveBase/MasterMoveBase.txt"
 #include "actors/Moves/MoveBase/ImbueMoveBase.txt"
 #include "actors/Moves/Swift.txt"
@@ -111,9 +105,9 @@
 #include "actors/Moves/FlameWheel.txt"
 #include "actors/Moves/Mudslap.txt"
 #include "actors/Moves/Rollout.txt"
-//#include "actors/Moves/Extrasensory.txt"
+#include "actors/Moves/Extrasensory.txt"
 #include "actors/Moves/GyroBall.txt"
-//#include "actors/Moves/Eruption.txt"
+#include "actors/Moves/Eruption.txt"
 #include "actors/Moves/Peck.txt"
 #include "actors/Moves/DoubleKick.txt"
 #include "actors/Moves/ThunderPunch.txt"
@@ -153,6 +147,41 @@
 #include "actors/Moves/Scald.txt"
 #include "actors/Moves/Dive.txt"
 //#include "actors/Moves/Bubble.txt"
+#include "actors/Moves/Sludge.txt"
+#include "actors/Moves/SludgeBomb.txt"
+#include "actors/Moves/Venoshock.txt"
+#include "actors/Moves/Absorb.txt"
+#include "actors/Moves/MegaDrain.txt"
+#include "actors/Moves/GigaDrain.txt"
+// #include "actors/Moves/LeafStorm.txt"
+// #include "actors/Moves/GrassKnot.txt"
+// #include "actors/Moves/StunSpore.txt"
+// #include "actors/Moves/PetalDance.txt"
+// #include "actors/Moves/PowerWhip.txt"
+// #include "actors/Moves/LeafTornado.txt"
+// #include "actors/Moves/Leafage.txt"
+#include "actors/Moves/LavaPlume.txt"
+// #include "actors/Moves/FlameCharge.txt"
+#include "actors/Moves/Overheat.txt"
+// #include "actors/Moves/Inferno.txt"
+// #include "actors/Moves/HeatCrash.txt"
+#include "actors/Moves/Incinerate.txt"
+// #include "actors/Moves/WillOWisp.txt"
+// #include "actors/Moves/MysticalFire.txt"
+// #include "actors/Moves/Rest.txt"
+// #include "actors/Moves/SlackOff.txt"
+// #include "actors/Moves/Substitute.txt"
+// #include "actors/Moves/Block.txt"
+// #include "actors/Moves/BellyDrum.txt"
+// #include "actors/Moves/AirSlash.txt"
+
+
+#include "Actors/inventory/Shop/ShopActors/shopact.txt"
+#include "Actors/inventory/Shop/ShopActors/shopact_items.txt"
+#include "Actors/inventory/Shop/ShopActors/shopact_TMs.txt"
+
+#include "Actors/inventory/Shop/ShopInventory/ShopItems.txt"
+
 
 // #include "Actors/Classes/Pokemon/Ditto.txt"
 
@@ -183,6 +212,14 @@
 #include "Actors/Classes/Pokemon/031_Chimchar.txt"
 #include "Actors/Classes/Pokemon/034_Piplup.txt"
 
+#include "Actors/Classes/Pokemon/037_Dreepy.txt"
+#include "Actors/Classes/Pokemon/040_Dratini.txt"
+#include "Actors/Classes/Pokemon/043_Bagon.txt"
+
+#include "Actors/Classes/Pokemon/046_Slowpoke.txt"
+#include "Actors/Classes/Pokemon/049_Staryu.txt"
+
+//--[NewPokemon]--
 
 // -=- Rentals -=-
 
@@ -229,3 +266,4 @@
 #Include "Actors/Classes/Rentals/R034_piplup.Txt"
 #Include "Actors/Classes/Rentals/R035_prinplup.Txt"
 #Include "Actors/Classes/Rentals/R036_empoleon.Txt"
+//--[NewPokemon]--

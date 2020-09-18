@@ -19,7 +19,6 @@
 #import "Dex_Leveling.acs"
 #import "Dex_BaseStats.acs"
 #import "G_Action.acs"
-
 Script "SketchGrab" (Void)
 {
 
@@ -213,4 +212,115 @@ script "TeamSmoke"  (VOID) CLIENTSIDE
     {
        SetActorProperty(0,APROP_ALPHA,0.05);
     }
+}
+
+Script "AbsorbEffect" (int Per)
+{
+    Delay(1);
+    While(GetUserVariable(0,"user_HitMemory") < 1){Delay(1); }
+int Amount = GetUserVariable(0,"user_HitMemory");
+int DrainerTID = ACS_NamedExecuteWithResult("core_gettarget",0);
+
+if(!CheckActorInventory(DrainerTID,"Absorb_Active")){Terminate;}
+
+Amount = (Amount*Per)/100;
+if(Amount<1) Amount = 1;
+
+GiveInventory("AbsorbDrainFXSpawner",1);
+SetActivator(DrainerTID,AAPTR_DEFAULT);
+ACS_NamedExecuteAlways("PKMNACS_Basic(Over)Heal",0,0,Amount);
+}
+
+Script "LifeDrainEffect" (int Per)
+{
+    Delay(1);
+    While(GetUserVariable(0,"user_HitMemory") < 1){Delay(1); }
+int Amount = GetUserVariable(0,"user_HitMemory");
+int DrainerTID = ACS_NamedExecuteWithResult("core_gettarget",0);
+
+Amount = (Amount*Per)/100;
+if(Amount<1) Amount = 1;
+
+SetActivator(DrainerTID,AAPTR_DEFAULT);
+ACS_NamedExecuteAlways("PKMNACS_Basic(Over)Heal",0,0,Amount);
+}
+
+Script "RemoteControlActor" (int ActorSpeed)
+{
+
+    int OwnerTID = ACS_NamedExecuteWithResult("core_gettarget",0);
+
+
+    int InputButtons;
+    int InputOldButtons; 
+    int UpInput;
+    int DownInput;
+    int LeftInput;
+    int RightInput;
+    Int ConfirmInput;
+    Int CancelInput;
+
+
+    int Velx;
+    int Vely;
+    int Velx2;
+    int Vely2;
+    int Angle;
+    while(GetActorProperty(0, APROP_HEALTH)>0)
+    {	
+        // - Grab Inputs -
+        InputButtons = GetPlayerInput(OwnerTID-1000, INPUT_BUTTONS);
+        UpInput = ButtonCheck(InputButtons, InputOldButtons, BT_FORWARD);
+        DownInput = ButtonCheck(InputButtons, InputOldButtons, BT_BACK);
+        LeftInput = ButtonCheck(InputButtons, InputOldButtons, BT_MOVELEFT);
+        RightInput = ButtonCheck(InputButtons, InputOldButtons, BT_MOVERIGHT);
+        ConfirmInput = ButtonCheck(InputButtons, InputOldButtons, BT_ATTACK);
+        CancelInput = ButtonCheck(InputButtons, InputOldButtons, BT_AltATTACK);
+        Angle = GetActorAngle(OwnerTID);
+        Velx = 0;
+        vely = 0;
+        VelX2 = 0;
+        Vely2 = 0;
+        if(UpInput != DownInput)
+            {
+                if(UpInput == 3){Velx = FixedMul(cos(angle),  ActorSpeed*65536); vely = FixedMul(Sin(angle),  ActorSpeed*65536);}
+                if(DownInput == 3){Velx = FixedMul(cos(angle), -ActorSpeed*65536); vely = FixedMul(Sin(angle),  -ActorSpeed*65536);}
+            }  
+
+        if(LeftInput != RightInput)
+            {
+                if(LeftInput == 3){Velx2 = FixedMul(cos(-angle),  ActorSpeed*65536); vely2 = FixedMul(Sin(-angle),  ActorSpeed*65536);}
+                if(RightInput == 3){Velx2 = FixedMul(cos(-angle), -ActorSpeed*65536); vely2 = FixedMul(Sin(-angle),  -ActorSpeed*65536);}
+            }    
+log(f:Velx);
+            if(CancelInput == 1){Thing_Remove(0); Terminate;}
+            if(ConfirmInput == 1){SetActorState(0,"Trigger");}
+    SetActorVelocity(0, velx+vely2, vely+velx2, 0, FALSE, FALSE);
+    SetActorAngle (0,Angle );
+    Delay(1);
+	InputOldButtons = InputButtons;
+    }
+
+
+}
+
+
+Script "GrabRemoteCoor" (int T)
+{
+int output;
+switch(T)
+    {
+    case 0: output = GetUserVariable(0,"user_RemoteX"); break;
+    case 1: output = GetUserVariable(0,"user_RemoteY"); break;
+    case 2: output = GetUserVariable(0,"user_RemoteZ"); break;
+    }
+SetResultValue(output);
+}
+
+script "SnapToRemote" (int X_Placement)
+{
+    int OwnerTID = ACS_NamedExecuteWithResult("core_gettarget",0);
+    int OwnerPnum = OwnerTID-1000;
+    Warp(9100+OwnerPnum, X_Placement, 0, 0, 0, WARPF_ABSOLUTEPOSITION|WARPF_USECALLERANGLE|WARPF_INTERPOLATE);
+
 }

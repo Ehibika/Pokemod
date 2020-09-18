@@ -167,6 +167,7 @@ actor PoisonMark : PowerProtection
 {
 powerup.duration -15
 DamageFactor "PoisonPowder", 0
+DamageFactor "Venoshock", 2.0
 //Powerup.Color Green, 0.15
 }
 

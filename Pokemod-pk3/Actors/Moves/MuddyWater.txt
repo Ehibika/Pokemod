@@ -216,7 +216,7 @@ States
 Spawn:
 MMFX A 0
 MMFX B 0 A_PlaySoundEx("misc/WaterSlide","Weapon")
-WHIT ABC 2 A_Spawnitemex("MuddyWaterParticle",0,0,0,random2(15),random2(15),random2(15),0,SXF_TRANSFERTRANSLATION)
+WHIT ABC 2 A_Spawnitemex("MudslapParticle",0,0,0,random2(15),random2(15),random2(15),0,SXF_TRANSFERTRANSLATION)
 HITG HHHH 1 A_Fadeout(0.3)
 stop
 }

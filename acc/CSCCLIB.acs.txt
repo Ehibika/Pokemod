@@ -1,0 +1,11 @@
+#include "8BDMLIB.ACS"
+
+function void SyncInvisibleTo (int Player)
+{
+//if(CheckActorProperty(Player,APROP_Alpha,0.0)) { 
+if(GetActorProperty(Player,APROP_Alpha)<=0.0) { 
+	SetActorProperty(0,APROP_RenderStyle,STYLE_None);
+} else {
+	SetActorProperty(0,APROP_RenderStyle,STYLE_Translucent);
+}
+}

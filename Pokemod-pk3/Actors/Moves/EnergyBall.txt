@@ -3,7 +3,7 @@ actor EnergyBallMove : WepMasterBase
 Tag "EnergyBall"
 obituary "$OB_ENERGYBALL"
 Weapon.AmmoUse 1
-Weapon.AmmoGive 10
+Weapon.AmmoGive 20
 weapon.ammotype "EnergyBallPP"
 scale 2.0
 Inventory.Pickupmessage "$PU_MEGABUSTER"
@@ -99,7 +99,7 @@ Goto Ready
 //[+]========================================================================[+]
 //-----------------------------|Ammo & Inventory|------------------------------
 //[+]========================================================================[+]
-actor EnergyBallPP : Ammo {inventory.amount 1 inventory.Maxamount 10}
+actor EnergyBallPP : Ammo {inventory.amount 1 inventory.Maxamount 20}
 
 
 //[+]========================================================================[+]

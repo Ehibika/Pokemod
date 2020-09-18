@@ -189,3 +189,44 @@ goto CostPay
 }
 //#endregion
 
+//[+]========================================================================[+]
+//----------------------------------|Orbs|-----------------------------------
+//[+]========================================================================[+]
+
+
+actor OrbShop : CustomInventory
+{
+states
+{
+Pickup:
+TNT1 A 0 A_GiveInventory("BuyEscapeOrb",1)
+TNT1 A 0 A_GiveInventory("BuyBarrierOrb",1)
+stop
+}
+}
+
+//#region -=- Buy Actors
+
+actor BuyEscapeOrb : BuyThing1
+{
+states
+{
+Use2:
+TNT1 A 0 A_JumpIfInventory("EscapeOrb",1,"FullCapacity")
+TNT1 A 0 A_GiveInventory("EscapeOrb",1)
+TNT1 A 0 ACS_NamedExecuteAlways("Write_Inventory",0)
+goto CostPay
+}
+}
+
+actor BuyBarrierOrb : BuyThing1
+{
+states
+{
+Use2:
+TNT1 A 0 A_JumpIfInventory("BarrierOrb",1,"FullCapacity")
+TNT1 A 0 A_GiveInventory("BarrierOrb",1)
+TNT1 A 0 ACS_NamedExecuteAlways("Write_Inventory",0)
+goto CostPay
+}
+}

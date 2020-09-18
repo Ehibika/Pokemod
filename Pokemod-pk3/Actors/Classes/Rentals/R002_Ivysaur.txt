@@ -57,9 +57,9 @@ stop
 Pickup:
 TNT1 A 0 A_JumpIf(CallACS("RentalBotCheck") == 1,"BotWep")
 
-TNT1 A 0 A_GiveInventory("SeedBombMove1")
-TNT1 A 0 A_GiveInventory("DoubleEdgeMove2")
-TNT1 A 0 A_GiveInventory("LeechSeedMove3")
+TNT1 A 0 A_GiveInventory("SludgeMove1")
+TNT1 A 0 A_GiveInventory("SludgeBombMove2")
+TNT1 A 0 A_GiveInventory("VenoshockMove3")
 TNT1 A 0 A_GiveInventory("GrowthMove4")
 stop
 

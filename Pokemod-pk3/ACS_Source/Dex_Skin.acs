@@ -47,15 +47,35 @@ str SkinDEX [MAXDEX][2] = {
     /*|26|*/{"Marshtomp","Marshtomp"},
     /*|27|*/{"Swampert","Swampert"},
 
-    /*|19|*/{"Turtwig","Base"},
-    /*|20|*/{"Grotle","Grotle"},
-    /*|21|*/{"Torterra","Torterra"},
+    /*|28|*/{"Turtwig","Base"},
+    /*|29|*/{"Grotle","Grotle"},
+    /*|30|*/{"Torterra","Torterra"},
 
-    /*|22|*/{"Chimchar","Base"},
-    /*|23|*/{"Monferno","Monferno"},
-    /*|24|*/{"Infernape","Infernape"},
+    /*|31|*/{"Chimchar","Base"},
+    /*|32|*/{"Monferno","Monferno"},
+    /*|33|*/{"Infernape","Infernape"},
     
-    /*|25|*/{"Piplup","Base"},
-    /*|26|*/{"Prinplup","Prinplup"},
-    /*|27|*/{"Empoleon","Empoleon"},
+    /*|34|*/{"Piplup","Base"},
+    /*|35|*/{"Prinplup","Prinplup"},
+    /*|36|*/{"Empoleon","Empoleon"},
+
+    /*|37|*/{"Dreepy","Base"},
+    /*|38|*/{"Drakloak","Drakloak"},
+    /*|39|*/{"Dragapult","Dragapult"},
+
+    /*|40|*/{"Dratini","Base"},
+    /*|41|*/{"Dragonair","Dragonair"},
+    /*|42|*/{"Dragonite","Dragonite"},
+
+    /*|43|*/{"Bagon","Base"},
+    /*|44|*/{"Shelgon","Shelgon"},
+    /*|45|*/{"Salamence","Salamence"}, 
+
+    /*|46|*/{"Slowpoke","Base"},
+    /*|47|*/{"Slowbro","Slowbro"},
+    /*|48|*/{"Slowking","Slowking"}, 
+
+    /*|49|*/{"Staryu","Base"},
+    /*|50|*/{"Starmie","Starmie"},
+    //--[NewPokemon]--
     };

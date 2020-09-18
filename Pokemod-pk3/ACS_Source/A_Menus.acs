@@ -10,6 +10,8 @@
 #Import "Dex_Pokemon.acs"
 #Import "Dex_Moves.acs"
 #Import "Dex_Movesets.acs"
+#Import "Dex_Evo.acs."
+#Import "Dex_Skin.acs."
 #Import "DB_Data.acs"
 #Import "A_Leveling.acs"
 
@@ -389,7 +391,305 @@ setplayerproperty(0,0,4);
 
 //#region -=- Level up moves
 #region -=- Level up moves 
+
+int LevelUpMoveCache[64][60];
+
 Script "PromptLevelUpMove" (Void)
+{
+//==================[+]
+// - Pre Start Up -
+//==================[+]
+if(StatusTime() == 0){print(s:"Unsafe Adjust moves right now"); Terminate;}
+//if(!PlayerInGame(PlayerNumber())){Terminate;}
+//=======================[+]
+// - Define Variables -
+//=======================[+]
+int PlayerLVL = GetCvar(StrParam(s:"PlayerLevel_",i:PlayerNumber()));
+int PlayerDEXNum = GetCvar(StrParam(s:"PlayerDEXNum_",i:PlayerNumber()));
+Int MoveFrameCap =6;
+Int StartMoves = 4;
+Int ChoiceID = 0;
+Int ChoiceCap = PlayerLVL;
+int MenuX = MenuXOrigin;
+int Menuy = MenuYOrigin;
+int MoveListVal;
+int MoveListCount;
+int CursorY;
+int LearnMove = -1;
+// - Menu -
+int InputButtons;
+int InputOldButtons; 
+int UpInput;
+int DownInput;
+Int ConfirmInput;
+Int CancelInput;
+Int MenuStates = 0;
+Int MenuNextState; 
+int i;
+int j;
+int h;
+Bool MenuUp = true;
+Bool BGUp;
+//=======================[+]
+// - Menu Loop Begin -
+//=======================[+]
+setplayerproperty(0,1,4);
+GiveInventory("SpawnSafeZone",1);
+while (MenuUp) {
+	SetHudSize(320, 200, 0);
+	SetFont("STCFN");
+	MenuStates = MenuNextState;
+
+	// #------------------
+	// # Begin Menustate 0
+	// #------------------
+	if (MenuStates == 0) {
+
+		MoveListCount = 0;
+		j = 0;
+
+		// Count number of moves
+		For(int k = 0; k < PlayerLVL; k++) // + StartMoves - 1
+		{
+			//MoveListVal = MoveDex[PlayerDEXNum][k];
+			//if (MoveListVal != -1) {LevelUpMoveCache[PlayerNumber()][MoveListCount] = MoveListVal; MoveListCount++;}
+			
+			For(h = 0; h < 4; h++)
+			{
+				MoveListVal = MoveDex2[PlayerDEXNum][k][h];
+				if (MoveListVal != -1) {LevelUpMoveCache[PlayerNumber()][MoveListCount] = MoveListVal; MoveListCount++;}
+				else{break;}
+			}
+		}
+		// - Print the list of moves -
+		For(i = 0; i < MoveListCount; i++)
+		{
+			if(ChoiceID >= 3 && ChoiceID < MoveListCount-3)
+			{
+				if(i < ChoiceID-3){continue;}
+				if(i > ChoiceID+3){break;}
+			}
+			if(ChoiceID < 3)
+			{
+				if(i > 6){break;}
+			}
+			if(ChoiceID > MoveListCount-4)
+			{
+				if(i < MoveListCount-6){continue;}
+			}
+
+			MoveListVal = LevelUpMoveCache[PlayerNumber()][i];
+			if (MoveListVal != -1) {
+				HudMessage(s: weapons_ammo[MoveListVal][2]; HUDMSG_FADEOUT, 500 + j, 0, MenuX, Menuy + (MNL * j), 0.2, 0);
+				j++;
+			}
+
+		}
+
+		if (MoveListCount <= 0) {print(s: "No moves to learn"); break;} //MenuUp = false;
+		else {
+			if(!BGUp){DrawMenuFrame(MenuX-(8.0*3),MenuY-(8.0*0),15,6+MoveFrameCap); BGup = True;}
+			ChoiceCap = MoveListCount;
+			if(MoveListCount>6)
+			{
+			if (ChoiceID > 3 && ChoiceID < MoveListCount-3){ CursorY = 3;}
+			else if(ChoiceID >= MoveListCount-3){CursorY = 3 + (ChoiceID-(MoveListCount-3));}	
+			else{CursorY = ChoiceID;}
+			}
+			else{CursorY = ChoiceID;}
+			
+			if(ChoiceID >= MoveListCount-3 && MoveListCount>6){HudMessage(s: "Exit"; HUDMSG_FADEOUT, 500 + (6), CR_ORANGE, MenuX, Menuy + (MNL * 6), 0.2, 0);}
+			else if(MoveListCount<=6){HudMessage(s: "Exit"; HUDMSG_FADEOUT, 500 + (MoveListCount), CR_ORANGE, MenuX, Menuy + (MNL * MoveListCount), 0.2, 0);}
+			HudMessage(s: ">>"; HUDMSG_FADEOUT, 515, 0, MenuX - 16.0, Menuy + (MNL * CursorY), 0.2, 0);
+		}
+
+		// - Grab Inputs -
+		InputButtons = GetPlayerInput(-1, INPUT_BUTTONS);
+		UpInput = ButtonCheck(InputButtons, InputOldButtons, BT_FORWARD);
+		DownInput = ButtonCheck(InputButtons, InputOldButtons, BT_BACK);
+		ConfirmInput = ButtonCheck(InputButtons, InputOldButtons, BT_ATTACK);
+		CancelInput = ButtonCheck(InputButtons, InputOldButtons, BT_AltATTACK);
+		if (UpInput != DownInput) {
+			if (UpInput == 1) {
+				ChoiceID--;
+				While(LevelUpMoveCache[PlayerNumber()][ChoiceID] == -1){ ChoiceID--; }
+			}
+			if (DownInput == 1) {
+				ChoiceID++;
+				While(LevelUpMoveCache[PlayerNumber()][ChoiceID] == -1
+					&& ChoiceID != ChoiceCap)
+				{ ChoiceID++; }
+			}
+		}
+		if (ChoiceID > ChoiceCap) { ChoiceID = 0; }
+		if (ChoiceID < 0) { ChoiceID = ChoiceCap; }
+		if (CancelInput == 1 || ConfirmInput == 1 && ChoiceID == MoveListCount) {break;} //MenuUp = false;
+		if (ConfirmInput == 1 && ChoiceID < MoveListCount) { LearnMove = LevelUpMoveCache[PlayerNumber()][ChoiceID];/*MoveDex[PlayerDEXNum][ChoiceID];*/ break;} //MenuUp = false;
+		// #------------------
+		// # End Menustate 0
+		// #------------------
+		Delay(1);
+		InputOldButtons = InputButtons;
+	}
+} 
+
+//=======================[+]
+// - Menu Loop End -
+//=======================[+]
+ClearMenuFrame();
+if(LearnMove > -1) 
+	{ 
+		InputButtons = GetPlayerInput(-1, INPUT_BUTTONS);
+		While(ButtonCheck(InputButtons, InputOldButtons, BT_ATTACK)
+		||ButtonCheck(InputButtons, InputOldButtons, BT_ALTATTACK))
+		{InputButtons = GetPlayerInput(-1, INPUT_BUTTONS); Delay(1); InputOldButtons = InputButtons;}
+		ACS_NamedExecuteAlways("PromptMoveLearn",0,LearnMove);
+		GiveInventory("SaveMovesetFlag",1);
+	}
+else{Delay(17);setplayerproperty(0,0,4);}
+}
+#endregion
+//#endregion
+
+//#region -=- Branch Evo standard
+#region -=- Branch Evo standard 
+
+
+Script "PromptBranchEvo_Standard" (Void)
+{
+//==================[+]
+// - Pre Start Up -
+//==================[+]
+if(StatusTime() == 0){print(s:"Unsafe to evolve right now"); Terminate;}
+//if(!PlayerInGame(PlayerNumber())){Terminate;}
+//=======================[+]
+// - Define Variables -
+//=======================[+]
+int PlayerLVL = GetCvar(StrParam(s:"PlayerLevel_",i:PlayerNumber()));
+int PlayerDEXNum = GetCvar(StrParam(s:"PlayerDEXNum_",i:PlayerNumber()));
+
+/*
+
+Int StartMoves = 4;
+Int ChoiceID = 0;
+int MoveListVal;
+int MoveListCount;
+
+int LearnMove = -1;
+*/
+
+
+Int ChoiceID = 0;
+int MenuX = MenuXOrigin;
+int Menuy = MenuYOrigin;
+int CursorY;
+
+int EvoBranchCount = EvoDEX[PlayerDEXNum][0];
+
+int EvoBranch_1 = EvoDEX[PlayerDEXNum][2];
+int EvoBranch_2 = EvoDEX[PlayerDEXNum][3];
+int EvoBranch_3 = EvoDEX[PlayerDEXNum][4];
+
+Int ChoiceCap = EvoBranchCount;
+Int MoveFrameCap =EvoBranchCount+1;
+// - Menu -
+int InputButtons;
+int InputOldButtons; 
+int UpInput;
+int DownInput;
+Int ConfirmInput;
+Int CancelInput;
+Int MenuStates = 0;
+Int MenuNextState; 
+int i;
+int j;
+Bool MenuUp = true;
+Bool BGUp;
+//=======================[+]
+// - Menu Loop Begin -
+//=======================[+]
+setplayerproperty(0,1,4);
+GiveInventory("SpawnSafeZone",1);
+while (MenuUp) {
+	SetHudSize(320, 200, 0);
+	SetFont("STCFN");
+	MenuStates = MenuNextState;
+
+	// #------------------
+	// # Begin Menustate 0
+	// #------------------
+	if (MenuStates == 0) {
+
+
+		// - Print list of evolution paths -
+		if(!BGUp){DrawMenuFrame(MenuX-(8.0*3),MenuY-(8.0*0),15,6+MoveFrameCap); BGup = True;}
+
+				if(EvoBranchCount > 1){HudMessage(s: SkinDEX[EvoBranch_1][0]; HUDMSG_FADEOUT, 500 + 0, 0, MenuX, Menuy + (MNL * 0), 0.2, 0);}
+				if(EvoBranchCount >= 2){HudMessage(s: SkinDEX[EvoBranch_2][0]; HUDMSG_FADEOUT, 500 + 1, 0, MenuX, Menuy + (MNL * 1), 0.2, 0);}
+				if(EvoBranchCount == 3){HudMessage(s: SkinDEX[EvoBranch_3][0]; HUDMSG_FADEOUT, 500 + 2, 0, MenuX, Menuy + (MNL * 2), 0.2, 0);}
+
+			
+
+			
+			HudMessage(s: "Exit"; HUDMSG_FADEOUT, 500 + (EvoBranchCount+1), CR_ORANGE, MenuX, Menuy + (MNL * EvoBranchCount+1), 0.2, 0);
+			HudMessage(s: ">>"; HUDMSG_FADEOUT, 515, 0, MenuX - 16.0, Menuy + (MNL * ChoiceID), 0.2, 0);
+		
+
+		// - Grab Inputs -
+		InputButtons = GetPlayerInput(-1, INPUT_BUTTONS);
+		UpInput = ButtonCheck(InputButtons, InputOldButtons, BT_FORWARD);
+		DownInput = ButtonCheck(InputButtons, InputOldButtons, BT_BACK);
+		ConfirmInput = ButtonCheck(InputButtons, InputOldButtons, BT_ATTACK);
+		CancelInput = ButtonCheck(InputButtons, InputOldButtons, BT_AltATTACK);
+		if (UpInput != DownInput) {
+			if (UpInput == 1) {
+				ChoiceID--;
+			}
+			if (DownInput == 1) {
+				ChoiceID++;
+			}
+		}
+		if (ChoiceID > ChoiceCap) { ChoiceID = 0; }
+		if (ChoiceID < 0) { ChoiceID = ChoiceCap; }
+		if (CancelInput == 1 || ConfirmInput == 1 && ChoiceID == EvoBranchCount) {break;} //MenuUp = false;
+		if (ConfirmInput == 1 && ChoiceID < EvoBranchCount) 
+		{ 
+
+
+
+			ACS_NamedExecuteAlways("PlayerFormChange",0,EvoDEX[PlayerDEXNum][ChoiceID+2]);
+            GiveInventory("EvolutionFX",1);
+			print(s:"Evolved!");
+			break;
+		
+		} //MenuUp = false;
+		// #------------------
+		// # End Menustate 0
+		// #------------------
+		Delay(1);
+		InputOldButtons = InputButtons;
+	}
+	
+} 
+
+
+//=======================[+]
+// - Menu Loop End -
+//=======================[+]
+ClearMenuFrame();
+
+InputButtons = GetPlayerInput(-1, INPUT_BUTTONS);
+While(ButtonCheck(InputButtons, InputOldButtons, BT_ATTACK)
+||ButtonCheck(InputButtons, InputOldButtons, BT_ALTATTACK))
+{InputButtons = GetPlayerInput(-1, INPUT_BUTTONS); Delay(1); InputOldButtons = InputButtons;}
+setplayerproperty(0,0,4);
+}
+#endregion
+//#endregion
+
+//#region -=- Level up moves (old)
+#region -=- Level up moves 
+Script "OLDPromptLevelUpMove" (Void)
 {
 //==================[+]
 // - Pre Start Up -

@@ -13,7 +13,7 @@
 
 int PlayerClassWepMem[64];
 
-#LIBDEFINE MAX_WEAPONS_GLOBAL 130 //[Trill] Keep buffer room here for patches
+#LIBDEFINE MAX_WEAPONS_GLOBAL 160 //[Trill] Keep buffer room here for patches
 
 //#DEFINE MAX_WEAPONS_GLOBAL 87 // Maximum number of weapons for the following arrays
 // v6's weapon total would be 94
@@ -283,14 +283,42 @@ str weapons_ammo[MAX_WEAPONS_GLOBAL][7] =
 {"ToxicSpikesMove", "ToxicSpikesPP", "ToxicSpikes", 1.0, "NO", "NO", "SLOT_NONE"},
 {"TauntMove", "TauntPP", "Taunt", 1.0, "YES", "NO", "SLOT_NONE"},
 
-{"WhirlpoolMove", "WhirlpoolPP", "Whirlpool", 1.0, "YES", "NO", "SLOT_NONE"},
-{"SurfMove", "SurfPP", "Surf", 1.0, "YES", "NO", "SLOT_NONE"},
-{"MuddyWaterMove", "MuddyWaterPP", "MuddyWater", 1.0, "YES", "NO", "SLOT_NONE"},
-{"WaterfallMove", "WaterfallPP", "Waterfall", 1.0, "YES", "NO", "SLOT_NONE"},
-{"LiquidationMove", "LiquidationPP", "Liquidation", 1.0, "YES", "NO", "SLOT_NONE"},
-{"ScaldMove", "ScaldPP", "Scald", 1.0, "YES", "NO", "SLOT_NONE"},
-{"DiveMove", "DivePP", "Dive", 1.0, "YES", "NO", "SLOT_NONE"},
-{"BubbleMove", "BubblePP", "Bubble", 1.0, "YES", "NO", "SLOT_NONE"},
+{"WhirlpoolMove", "WhirlpoolPP", "Whirlpool", 1.0, "NO", "NO", "SLOT_NONE"},
+{"SurfMove", "SurfPP", "Surf", 1.0, "NO", "NO", "SLOT_NONE"},
+{"MuddyWaterMove", "MuddyWaterPP", "MuddyWater", 1.0, "NO", "NO", "SLOT_NONE"},
+{"WaterfallMove", "WaterfallPP", "Waterfall", 1.0, "NO", "NO", "SLOT_NONE"},
+{"LiquidationMove", "LiquidationPP", "Liquidation", 1.0, "NO", "NO", "SLOT_NONE"},
+{"ScaldMove", "ScaldPP", "Scald", 1.0, "NO", "NO", "SLOT_NONE"},
+{"DiveMove", "DivePP", "Dive", 1.0, "NO", "NO", "SLOT_NONE"},
+{"BubbleMove", "BubblePP", "Bubble", 1.0, "NO", "NO", "SLOT_NONE"},
+
+{"SludgeMove", "SludgePP", "Sludge", 1.0, "NO", "NO", "SLOT_NONE"},
+{"SludgeBombMove", "SludgeBombPP", "SludgeBomb", 1.0, "NO", "NO", "SLOT_NONE"},
+{"VenoshockMove", "VenoshockPP", "Venoshock", 1.0, "NO", "NO", "SLOT_NONE"},
+{"AbsorbMove", "AbsorbPP", "Absorb", 1.0, "NO", "NO", "SLOT_NONE"},
+{"MegaDrainMove", "MegaDrainPP", "MegaDrain", 1.0, "YES", "NO", "SLOT_NONE"},
+{"GigaDrainMove", "GigaDrainPP", "GigaDrain", 1.0, "NO", "NO", "SLOT_NONE"},
+{"LeafStormMove", "LeafStormPP", "LeafStorm", 1.0, "NO", "NO", "SLOT_NONE"},
+{"GrassKnotMove", "GrassKnotPP", "GrassKnot", 1.0, "NO", "NO", "SLOT_NONE"},
+{"StunSporeMove", "StunSporePP", "StunSpore", 1.0, "NO", "NO", "SLOT_NONE"},
+{"PetalDanceMove", "PetalDancePP", "PetalDance", 1.0, "NO", "NO", "SLOT_NONE"},
+{"PowerWhipMove", "PowerWhipPP", "PowerWhip", 1.0, "NO", "NO", "SLOT_NONE"},
+{"LeafTornadoMove", "LeafTornadoPP", "LeafTornado", 1.0, "NO", "NO", "SLOT_NONE"},
+{"LeafageMove", "LeafagePP", "Leafage", 1.0, "NO", "NO", "SLOT_NONE"},
+{"LavaPlumeMove", "LavaPlumePP", "LavaPlume", 1.0, "NO", "NO", "SLOT_NONE"},
+{"FlameChargeMove", "FlameChargePP", "FlameCharge", 1.0, "NO", "NO", "SLOT_NONE"},
+{"OverheatMove", "OverheatPP", "Overheat", 1.0, "NO", "NO", "SLOT_NONE"},
+{"InfernoMove", "InfernoPP", "Inferno", 1.0, "NO", "NO", "SLOT_NONE"},
+{"HeatCrashMove", "HeatCrashPP", "HeatCrash", 1.0, "NO", "NO", "SLOT_NONE"},
+{"IncinerateMove", "IncineratePP", "Incinerate", 1.0, "NO", "NO", "SLOT_NONE"},
+{"WillOWispMove", "WillOWispPP", "WillOWisp", 1.0, "NO", "NO", "SLOT_NONE"},
+{"MysticalFireMove", "MysticalFirePP", "MysticalFire", 1.0, "NO", "NO", "SLOT_NONE"},
+{"RestMove", "RestPP", "Rest", 1.0, "NO", "NO", "SLOT_NONE"},
+{"SlackOffMove", "SlackOffPP", "SlackOff", 1.0, "NO", "NO", "SLOT_NONE"},
+{"SubstituteMove", "SubstitutePP", "Substitute", 1.0, "NO", "NO", "SLOT_NONE"},
+{"BlockMove", "BlockPP", "Block", 1.0, "NO", "NO", "SLOT_NONE"},
+{"BellyDrumMove", "BellyDrumPP", "BellyDrum", 1.0, "NO", "NO", "SLOT_NONE"},
+{"AirSlashMove", "AirSlashPP", "AirSlash", 1.0, "NO", "NO", "SLOT_NONE"},
 //--[NewMove]--
 };
 #endregion
@@ -310,7 +338,10 @@ function str SubtractSuffix(str string)  {
 
 function bool CheckInventory2(str inventory_item) {
 	return (CheckInventory(inventory_item)
+		||CheckInventory(AddSuffix(inventory_item,"1"))
 		||CheckInventory(AddSuffix(inventory_item,"2"))
+		||CheckInventory(AddSuffix(inventory_item,"3"))
+		||CheckInventory(AddSuffix(inventory_item,"4"))
 		);
 }
 
@@ -811,6 +842,7 @@ Script "MoveSetup" (void)
 				Case SKETCH: ACS_NamedExecuteAlways("TracerTargeter",0,TG_ENEMY|TG_TEAM,630); break;
 				Case HEALPULSE: ACS_NamedExecuteAlways("TracerTargeter",0,TG_TEAM,1500); break;
 				Case TAUNT: ACS_NamedExecuteAlways("TracerTargeter",0,TG_ENEMY,350); break;
+				Case MEGADRAIN: ACS_NamedExecuteAlways("TracerTargeter",0,TG_ENEMY,350); break;
 				default: ACS_NamedExecuteAlways("TracerTargeter",0,TG_TEAM,630); break;
 			}
 			

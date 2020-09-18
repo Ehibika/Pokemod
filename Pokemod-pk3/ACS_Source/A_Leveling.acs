@@ -11,9 +11,12 @@
 #import "Dex_Types.acs"
 #import "Dex_Leveling.acs"
 #import "Dex_BaseStats.acs"
+#import "Dex_Moves.acs"
+#import "Dex_Movesets.acs"
 #import "DB_Player.acs"
 #import "G_Startup.acs"
 #import "A_Shop.acs"
+#import "WEPACS.acs"
 #include "zcommon.acs"
 
 //#region -=- General Variables -=-
@@ -101,6 +104,30 @@ Script "AddToBPAward" (int ammount)
     TeamBPAward[PlayerTeam()] += ammount;
 }
 
+Script "PKMN_HitEXP" (Int Damage, int Divisor)
+{
+int Output;
+int EnemyPlayer = ACS_NamedExecuteWithResult("core_gettarget", 0);
+int EnemyPlN = EnemyPlayer - 1000;
+
+if(Divisor<1){Divisor = 1;}
+//log(i:EnemyPlN);
+int PlayerLVL = GetCvar(StrParam(s:"PlayerLevel_",i:PlayerNumber()));
+int PlayerDexNum = GetCvar(StrParam(s:"PlayerDEXNum_",i:PlayerNumber()));
+//int SelfDexBounty = StatDEX[PlayerDexNum][6];
+
+int SelfEXPBounty = CheckInventory("EXPBountyitem");
+Output = 1 + PlayerLVL + Damage/Divisor;
+if(SelfEXPBounty)
+    {
+        if(SelfEXPBounty < Output){Output = SelfEXPBounty;}
+        TakeInventory("EXPBountyitem",Output);
+        ACS_NamedExecuteAlways("GivePlayerEXP",0,EnemyPlN,Output,1);
+    }
+
+
+}
+
 Script "GivePlayerEXP" (int Pnum, int EXPAward, int Override)
 {
 
@@ -111,7 +138,7 @@ Script "GivePlayerEXP" (int Pnum, int EXPAward, int Override)
 
 Script "GiveEXP" (int EXPAward, Int Override)
 {
-
+if(!(ClassifyActor(ActivatorTID()) & ACTOR_PLAYER)){Terminate;}
 int p = Playernumber();
 int PlayerDexNum = GetCvar(StrParam(s:"PlayerDEXNum_",i:PlayerNumber()));
 Int LvlRate = StatDEX[PlayerDexNum][9];
@@ -125,7 +152,31 @@ str PLAYER_EXPCV = StrParam(s:"PlayerEXP_",i:PlayerNumber());
 int PlayerLVL = GetCvar(StrParam(s:"PlayerLevel_",i:PlayerNumber()));
 int PlayerEXP = GetCvar(PLAYER_EXPCV);
 
-if(PlayerLVL >= 10){LevelLoopDone = true; Terminate;}
+int levelGoal = 1;
+
+if(PlayerLVL >= PKMN_MaxLVL){SetCvar(PLAYER_EXPCV,LevelUpTable[LvlRate][PKMN_MaxLVL-1]); Terminate;}
+
+PlayerEXP = PlayerEXP+EXPAward;
+SetCvar(PLAYER_EXPCV,PlayerEXP);
+
+for(int i = 1; i<PKMN_MaxLVL; i++)
+    {
+        if(PlayerEXP >= LevelUpTable[LvlRate][i]){levelGoal++;}
+    }
+
+    if(levelGoal > PlayerLVL)
+        {
+            if(!CheckInventory("LevelupBuffer"))
+            {
+            GiveInventory("LevelupCue",1);
+            Log(n:0,s:"\cf Grew to LVL ",i:levelGoal);//,s:"  ",i:PKMN_MaxLVL
+            ACS_NamedExecuteAlways("SetPKMNLevel",0,levelGoal);  
+            ReportNewMoves(PlayerDexNum,PlayerLVL,levelGoal);
+            }
+        }
+//#region OLD
+/*
+if(PlayerLVL >= PKMN_MaxLVL){LevelLoopDone = true; Terminate;}
 
 //Just in case
 if(GetCVar(PLAYER_EXPCV) >= LevelUpTable[LvlRate][9]){LevelLoopDone = true; Terminate;}
@@ -135,7 +186,7 @@ SetCvar(PLAYER_EXPCV,PlayerEXP+EXPAward);
 // check if this passes the next level threshold
 Until(LevelLoopDone)
     {
-    if(GetCVar(PLAYER_EXPCV) >= LevelUpTable[LvlRate][PlayerLVL] && PlayerLVL < 10)
+    if(GetCVar(PLAYER_EXPCV) >= LevelUpTable[LvlRate][PlayerLVL] && PlayerLVL < PKMN_MaxLVL)
         {
             PlayerLVL++;
             GiveInventory("LevelupCue",1);
@@ -150,7 +201,28 @@ Until(LevelLoopDone)
         }
 
     }
+    */
+//#endregion
 
+}
+
+
+Function void ReportNewMoves(int Dexnum, int Startlvl, int Endlvl)
+{
+int j;
+int k;
+int MoveListVal;
+
+For(j = Startlvl; j < Endlvl; j++) 
+{
+    For(k = 0; k < 4; k++)
+    {
+        MoveListVal = MoveDex2[Dexnum][j][k];
+        if (MoveListVal != -1) 
+            {Print(n:0,s:"\cf can now learn \cj",s:weapons_ammo[MoveListVal][2]);}
+        else{break;}
+    }
+}
 
 }
 
@@ -204,7 +276,7 @@ Script "SetPlayerPKMNLevel" (int Pnum, int NewPlayerLevel, int SynchEXP)
 Script "SetPKMNLevel" (int NewPlayerLevel, int SynchEXP)
 {
         int CurLevel = GetCVar(StrParam(s:"PlayerLevel_",i:PlayerNumber()));
-        if(NewPlayerLevel > 10){NewPlayerLevel = 10;}
+        if(NewPlayerLevel > PKMN_MaxLVL){NewPlayerLevel = PKMN_MaxLVL;}
         if(NewPlayerLevel < 1){NewPlayerLevel = 1;}
         if(NewPlayerLevel != CurLevel)
         {
@@ -240,7 +312,7 @@ Script "PKMN_MassLevelup" (Void)
             EXPRate = StatDEX[PlayerDEXNum][9];
             CurLevel = GetCVar(StrParam(s:"PlayerLevel_",i:i));
             SetCVar(StrParam(s:"PlayerLevel_",i:i),CurLevel+1);
-            if(CurLevel+1 < 10){SetCvar(StrParam(s:"PlayerEXP_",i:i),LevelUpTable[EXPRate][CurLevel+1]);}
+            if(CurLevel+1 < PKMN_MaxLVL){SetCvar(StrParam(s:"PlayerEXP_",i:i),LevelUpTable[EXPRate][CurLevel+1]);}
         }
     }    
 }
@@ -255,7 +327,7 @@ Script "PKMN_Levelup" (void)
 {
 int CurLevel = GetCVar(StrParam(s:"PlayerLevel_",i:PlayerNumber()));
 
-if(CurLevel<10)
+if(CurLevel<PKMN_MaxLVL)
     {
     ACS_NamedExecuteAlways("SetPKMNLevel",0,CurLevel+1,1);
     if(PlayerInGame(PlayerNumber()))GiveInventory("LevelupCue",1);
@@ -272,7 +344,7 @@ if(EXPTime() == 0){Terminate;}
     int VictimFrags = ACS_NamedExecuteWithResult("GetPlayerFrags",VictimPN);
     int VictimBounty = StatDEX[PlayerDexNum][6];
 int EXPAward = VictimBounty*PlayerLVL;
-int BPAward = (PlayerLVL*10)+(VictimBounty*VictimFrags);
+int BPAward = (PlayerLVL*PKMN_MaxLVL)+(VictimBounty*VictimFrags);
 
 // -=- Clamp BP
 if(BPAward < 10){BPAward = 10;}
@@ -360,7 +432,8 @@ if(PlayerLVL >=  EvoDEX[PlayerDex][1])
         If (EvoPaths > 1)
             {
             //If player has more than one path, Generate a small menu to denote the paths you can take
-
+            
+            ACS_NamedExecuteAlways("PromptBranchEvo_Standard",0);
             }
         Else If (EvoPaths == 1)
             {
@@ -386,6 +459,7 @@ Function Int StatusTime (Void)
 int Output;
 
 if(CheckInventory("InSafeZone")){output = 1;}
+if(CheckInventory("CabinetCoolDown")){output = 1;} //For Jax's 1 flag koth
 if(InWarmup){output = 1;}
 if(GetCvar("lastmanstanding")==1||GetCvar("teamlms")==1)
     {
@@ -393,6 +467,11 @@ if(GetCvar("lastmanstanding")==1||GetCvar("teamlms")==1)
 	}
 	
 	return Output;
+}
+
+Script "CheckStatusTime" (void)
+{
+setResultValue(StatusTime());
 }
 
 #endregion
