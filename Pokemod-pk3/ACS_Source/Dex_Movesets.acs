@@ -1064,6 +1064,45 @@ int MoveDex2[MAXDEX][15][4] = {
 		}, 
 		//#endregion
 
+	//#region -=- 051 : Shellder -=-
+	{
+		/*|1|*/{NullMove},
+		/*|2|*/{NullMove},
+		/*|3|*/{NullMove},
+		/*|4|*/{NullMove},
+		/*|5|*/{NullMove},
+		/*|6|*/{NullMove},
+		/*|7|*/{NullMove},
+		/*|8|*/{NullMove},
+		/*|9|*/{NullMove},
+		/*|10|*/{NullMove},
+		/*|11|*/{NullMove},
+		/*|12|*/{NullMove},
+		/*|13|*/{NullMove},
+		/*|14|*/{NullMove},
+		/*|15|*/{NullMove},
+		}, 
+		//#endregion
+	//#region -=- 052 : Cloyster -=-
+	{
+		/*|1|*/{NullMove},
+		/*|2|*/{NullMove},
+		/*|3|*/{NullMove},
+		/*|4|*/{NullMove},
+		/*|5|*/{NullMove},
+		/*|6|*/{NullMove},
+		/*|7|*/{NullMove},
+		/*|8|*/{NullMove},
+		/*|9|*/{NullMove},
+		/*|10|*/{NullMove},
+		/*|11|*/{NullMove},
+		/*|12|*/{NullMove},
+		/*|13|*/{NullMove},
+		/*|14|*/{NullMove},
+		/*|15|*/{NullMove},
+		}, 
+		//#endregion
+
 //--[NewPokemon]--
 
 //[End of 3D Array]

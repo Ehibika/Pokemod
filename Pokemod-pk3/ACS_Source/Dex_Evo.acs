@@ -82,5 +82,8 @@ Int EvoDEX [MAXDEX][6] = {
 
     /*|49|*/{1,      MIDSTAGE,     STARMIE,  NULLEVO,     NULLEVO,17},
     /*|50|*/{0,      0,     NULLEVO,  NULLEVO,     NULLEVO,17},
+
+    /*|51|*/{1,      MIDSTAGE,     CLOYSTER,  NULLEVO,     NULLEVO,17},
+    /*|52|*/{0,      0,     NULLEVO,  NULLEVO,     NULLEVO,17},
     //--[NewPokemon]--
 };

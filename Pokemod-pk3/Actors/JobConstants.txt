@@ -241,6 +241,9 @@ const int Dex_SLOWKING = 48;
 
 const int Dex_STARYU = 49;
 const int Dex_STARMIE = 50;
+
+const int Dex_SHELLDER = 51;
+const int Dex_CLOYSTER = 52;
 //--[NewPokemon]--
 //=======|TM Type Flags|==========
 const int TMT_NULL = 0;

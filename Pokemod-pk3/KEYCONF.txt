@@ -19,12 +19,13 @@ AddPlayerClass TurTwig
 AddPlayerClass Chimchar
 AddPlayerClass Piplup
 
-//AddPlayerClass Dreepy
-//AddPlayerClass Dratini
-//AddPlayerClass Bagon
+AddPlayerClass Dreepy
+AddPlayerClass Dratini
+AddPlayerClass Bagon
 
-//AddPlayerClass Slowpoke
-//AddPlayerClass Staryu
+AddPlayerClass Slowpoke
+AddPlayerClass Staryu
+AddPlayerClass Shellder
 //--[NewPokemon]--
 
 alias TriggerEvo "CloseMenu; Use EvoStartItem" 

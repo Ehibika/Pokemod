@@ -77,5 +77,8 @@ str SkinDEX [MAXDEX][2] = {
 
     /*|49|*/{"Staryu","Base"},
     /*|50|*/{"Starmie","Starmie"},
+
+    /*|51|*/{"Shellder","Base"},
+    /*|52|*/{"Cloyster","Cloyster"},
     //--[NewPokemon]--
     };

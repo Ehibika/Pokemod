@@ -219,6 +219,7 @@
 #include "Actors/Classes/Pokemon/046_Slowpoke.txt"
 #include "Actors/Classes/Pokemon/049_Staryu.txt"
 
+#include "Actors/Classes/Pokemon/051_Shellder.txt"
 //--[NewPokemon]--
 
 // -=- Rentals -=-

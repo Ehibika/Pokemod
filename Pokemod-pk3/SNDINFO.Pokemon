@@ -721,4 +721,32 @@ $playersound	Starmie	male	*jump		dsnone
 $playersound	Starmie	male	*fist		dsnone
 $playersound	Starmie	male	*usefail	FATLAND
 $playersound	Starmie	male	*taunt		CRY050
+
+$playersound	Shellder	male	*death		MEGADEAT
+$playersound	Shellder	male	*xdeath		MEGADEAT
+$playersound	Shellder	male	*gibbed		MEGADEAT
+$playersound	Shellder	male	*pain100	MEGAPAIN
+$playersound	Shellder	male	*pain75		MEGAPAIN
+$playersound	Shellder	male	*pain50		MEGAPAIN
+$playersound	Shellder	male	*pain25		MEGAPAIN
+$playersound	Shellder	male	*grunt		LAND
+$playersound	Shellder	male	*land		LAND
+$playersound	Shellder	male	*jump		dsnone
+$playersound	Shellder	male	*fist		dsnone
+$playersound	Shellder	male	*usefail	FATLAND
+$playersound	Shellder	male	*taunt		CRY051
+
+$playersound	Cloyster	male	*death		MEGADEAT
+$playersound	Cloyster	male	*xdeath		MEGADEAT
+$playersound	Cloyster	male	*gibbed		MEGADEAT
+$playersound	Cloyster	male	*pain100	MEGAPAIN
+$playersound	Cloyster	male	*pain75		MEGAPAIN
+$playersound	Cloyster	male	*pain50		MEGAPAIN
+$playersound	Cloyster	male	*pain25		MEGAPAIN
+$playersound	Cloyster	male	*grunt		FATLAND
+$playersound	Cloyster	male	*land		FATLAND
+$playersound	Cloyster	male	*jump		dsnone
+$playersound	Cloyster	male	*fist		dsnone
+$playersound	Cloyster	male	*usefail	FATLAND
+$playersound	Cloyster	male	*taunt		CRY052
 //--[NewPokemon]--

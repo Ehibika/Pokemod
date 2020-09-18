@@ -91,5 +91,8 @@ Int StatDEX [MAXDEX][10] = {
 
 /*|49|*/{30, 45, 55, 75,	    55,    85,    5,	Type_Water,Type_NULL,  LVLSPD_Slow},
 /*|50|*/{60, 75, 85, 100,	    85,    115,    20,	Type_Water,Type_Psychic,  LVLSPD_Slow},
+
+/*|51|*/{30, 65, 100, 45,	    25,    40,    5,	Type_Water,Type_NULL,  LVLSPD_Slow},
+/*|52|*/{50, 95, 180, 85,	    45,    70,    20,	Type_Water,Type_Ice,  LVLSPD_Slow},
 //--[NewPokemon]--
 };

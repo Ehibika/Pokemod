@@ -11,7 +11,7 @@
 //#region -=- General Variables & Constants
 #region -=- General Variables & Constants
 #LIBDEFINE NULLEVO -1
-#LIBDEFINE MAXDEX 51
+#LIBDEFINE MAXDEX 53
 
 int Blah; //Needed to compile properly, can't have only LIBDEFINEs
 #endregion
@@ -77,4 +77,7 @@ int Blah; //Needed to compile properly, can't have only LIBDEFINEs
 
 #LIBDEFINE STARYU 49
 #LIBDEFINE STARMIE 50
+
+#LIBDEFINE SHELLDER 51
+#LIBDEFINE CLOYSTER 52
 //--[NewPokemon]--
