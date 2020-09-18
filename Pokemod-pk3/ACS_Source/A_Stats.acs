@@ -69,6 +69,7 @@ Script "StatInitializer" (Void)
                 SetCVar(StrParam(s:"PlayerLevel_",i:PlayerNumber()),PLevel);
             }
     GetActiveStats(PLevel);
+    ACS_NamedExecuteAlways("PokeSpeed_Handler",0,1);
     ACS_NamedExecuteAlways("ActiveStat_Handler",0,0,1);
 }
 
@@ -96,12 +97,15 @@ Script "ActiveStatUpdate" (int HPHeal) //for level ups
                 SetCVar(StrParam(s:"PlayerLevel_",i:PlayerNumber()),PLevel);
             }
     GetActiveStats(PLevel);
+    ACS_NamedExecuteAlways("PokeSpeed_Handler",0,1);
     ACS_NamedExecuteAlways("ActiveStat_Handler",0,0,HPHeal);
 }
 
 Script "StatUpdate" (VOID)  //for general stat modifications
 {
     StatClear(0);
+
+    ACS_NamedExecuteAlways("PokeSpeed_Handler",0,1);
     ACS_NamedExecuteAlways("ActiveStat_Handler",0,1);
 }
 /* -=- Depreciated
@@ -178,8 +182,10 @@ Function Void GetActiveStats (Int PLevel)
     GiveInventory("Active_SDefense",ActStatCalc(CheckInventory("Base_SDefense"),PLevel));
 
     GiveInventory("Active_HP",ActStatCalc(CheckInventory("Base_HP"),PLevel));
-    GiveInventory("Active_Speed",ActStatCalc(CheckInventory("Base_Speed"),PLevel));
+    //GiveInventory("Active_Speed",ActStatCalc(CheckInventory("Base_Speed"),PLevel));
+    //GiveInventory("Active_Speed",CheckInventory("Base_Speed"));
 }
+
 
 /*
 Str StatName[5] = {
@@ -330,6 +336,25 @@ for (t = 0; t < STATITEMNUM; t++)
 Return Output;
 }
 
+Function int StatModCount (int StatID)
+{
+str Flagname;
+int ModLevel;
+
+int t;
+
+for (t = 0; t < STATITEMNUM; t++)
+    {
+        Flagname = StrParam(s:"STF_",s:StatEffectName[t][0]);
+        if(CheckInventory(Flagname)){ModLevel += StatEffectValue[t][StatID];}
+    }
+
+    if(ModLevel > 6){ModLevel = 6;}
+    if(ModLevel < -6){ModLevel = -6;}
+
+Return ModLevel;
+}
+
 Script "ChangeBaseStat" (int DexNum)
 {
 //Changes the base stats inventory and updates the active stats
@@ -341,14 +366,14 @@ TakeInventory("Base_SAttack",999);
 TakeInventory("Base_PDefense",999);
 TakeInventory("Base_SDefense",999);
 TakeInventory("Base_HP",999);
-TakeInventory("Base_Speed",999);
+//TakeInventory("Base_Speed",999);
 
 GiveInventory("Base_PAttack",StatDEX[DexNum][BASE_PATK]);
 GiveInventory("Base_SAttack",StatDEX[DexNum][BASE_SATK]);
 GiveInventory("Base_PDefense",StatDEX[DexNum][BASE_PDEF]);
 GiveInventory("Base_SDefense",StatDEX[DexNum][BASE_SDEF]);
 GiveInventory("Base_HP",StatDEX[DexNum][BASE_HP]);
-GiveInventory("Base_Speed",StatDEX[DexNum][BASE_SPD]);
+//GiveInventory("Base_Speed",StatDEX[DexNum][BASE_SPD]);
 ACS_NamedExecuteAlways("ActiveStatUpdate",0,1);
 }
 
@@ -384,7 +409,8 @@ Until(CheckInventory("Active_PAttack")
     &&CheckInventory("Active_PDefense")
     &&CheckInventory("Active_SDefense")
     &&CheckInventory("Active_HP")
-    &&CheckInventory("Active_Speed"))
+    //&&CheckInventory("Active_Speed")
+    )
     {Delay(1); WaitTimer++; if(WaitTimer > 35){Terminate;}}
 
 int StatValue;
@@ -480,24 +506,66 @@ If (Mode == 0)
     GiveInventory("SBAR_HP",StatValue);
     }
 
-    TakeInventory("SBAR_LVL",999);
-    if(PlayeLVL <= PKMN_MaxLVL){GiveInventory("SBAR_LVL",PlayeLVL);}
-    Else{GiveInventory("SBAR_LVL",PKMN_MaxLVL);}
+TakeInventory("SBAR_LVL",999);
+if(PlayeLVL <= PKMN_MaxLVL){GiveInventory("SBAR_LVL",PlayeLVL);}
+Else{GiveInventory("SBAR_LVL",PKMN_MaxLVL);}
+
+log(i:PlayeLVL);
     
+}
+
+Script "PokeSpeed_Handler" (Void)
+{
 /*
 ======| Speed Stats | =======
 */
 
-ModStat = StatModifier(CheckInventory("Active_Speed"),SPD_ID);
-//StatValue = ValueMap(ModStat,STATMAX,STATMIN,SPDVAL2,SPDVAL1);
-SpeedValue = ValueMap(ModStat,SpeedTable[PlayeLVL-1][1],SpeedTable[PlayeLVL-1][0],SPDVAL2,SPDVAL1);
-if(SpeedValue < 1){SpeedValue = 1;}
-//log(i:SpeedValue,s:"  ",f:SpeedValue*0.01);
-SetActorPRoperty(0,APROP_SPEED,SpeedValue*0.01);
+int PlayerDexNum = GetCvar(StrParam(s:"PlayerDEXNum_",i:PlayerNumber()));
 
-//ACS_NamedExecuteAlways("StatusMenuUpdate",0);
+SetActorPRoperty(0,APROP_SPEED,GetSpeedTier(PlayerDexNum,StatModCount(SPD_ID)));
 }
 
+Function int GetSpeedTier (int DexNum, int ModCount)
+{
+
+//int SpeedTier = ValueMap(Speed,SpeedTable[Level-1][1],SpeedTable[Level-1][0],6,4);
+int Output = 0.0;
+
+/*
+ * if the player has their speed increased, then it would increase it based on their
+ * baseline speed tier, however if their speed has been decreased, they will be interpreted
+ * as having the lowest base speed tier. in other words. one speed drop means every
+ * pokemon regardless of speed is now at speed tier 3 with 0.7 speed multiplier.
+*/
+
+int SpeedTier = StatDEX[DexNum][BASE_SPD];
+
+//if(ModCount > 0 && SpeedTier < FAST_SPD){SpeedTier = FAST_SPD;}
+if(ModCount < 0 && SpeedTier > SLOW_SPD){SpeedTier = SLOW_SPD;}
+
+SpeedTier += ModCount;
+
+ if(SpeedTier > 10){SpeedTier = 10;}
+ if(SpeedTier < 0){SpeedTier = 0;}
+
+ switch(SpeedTier)
+    {
+    Case 0: Output = 0.5; break;
+    Case 1: Output = 0.6; break;
+    Case 2: Output = 0.7; break;
+    Case 3: Output = 0.8; break;
+    Case 4: Output = 1.0; break;
+    Case 5: Output = 1.1; break;
+    Case 6: Output = 1.2; break;
+    Case 7: Output = 1.5; break;
+    Case 8: Output = 1.75; break;
+    Case 9: Output = 2.0; break;
+    Case 10: Output = 2.5; break;
+    }
+log(s:"SpeedTier: ",i:SpeedTier, s:" Speed: ",f:Output);
+Return Output;
+
+}
 
 Script "StatValueRamp" (int StatID, Int MinValue, Int MaxValue)
 {
