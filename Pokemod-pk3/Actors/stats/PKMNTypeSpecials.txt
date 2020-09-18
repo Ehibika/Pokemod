@@ -258,6 +258,7 @@ states
 {
 pickup:
 TNT1 A 0 A_GiveInventory("BurnGuard",1)
+TNT1 A 0 A_GiveInventory("FireProof",1)
 stop
 }
 }
@@ -269,13 +270,18 @@ states
 {
 pickup:
 TNT1 A 0 A_TakeInventory("BurnGuard",99)
+TNT1 A 0 A_TakeInventory("FireProof",99)
 stop
 }
 }
 
 //====
 
-actor BurnProof : TypeBase {}
+actor FireProof : TypeBase 
+{
+    damagefactor "Incinerate", 0.0
+    damagefactor "FireSpin", 0.0
+}
 
 //#endregion
 

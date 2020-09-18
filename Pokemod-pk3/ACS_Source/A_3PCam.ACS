@@ -10,6 +10,7 @@
 
 
 #libdefine C_TID	9000	//Default camera tid
+#libdefine R_TID	9100	//Default Remote actor tid
 #define MAX_R		190	//Maximum radius (or distance from the player) 128
 #define MAXCamDist		270	
 #define ADJUSTIN_R	2	//Amount to adjust the camera by
@@ -76,23 +77,28 @@ Script "3rdCameraHandler" (int p_num) ClientSide
 {
 	Int Clamp_R = GetCvar("sv_CameraZoom");
 	int r = MAX_R-(Clamp_R);
+
+	Int HostTID;
 	//if (p_num != GetCvar("PlayerCamNum")){p_num = GetCvar("PlayerCamNum");}
 	//int test = 0.0;
 	while (GetCVar(strparam(s:"PlayerCam_",i:p_num)) == ON)//(cam_mode[p_num] == ON)
 	{	
+
+		if(ThingCount(T_NONE,R_TID+p_num)){HostTID = R_TID+p_num;}
+		else{HostTID = 0;}
 		//test += 0.01;
 		//if(test > 1.0){test = 0.0;}
-		int RoofDist = GetActorCeilingZ (0) - GetActorZ (0);
+		int RoofDist = GetActorCeilingZ (HostTID) - GetActorZ (HostTID);
 		int PlayerHeight = 30.0;
 		int a = GetActorAngle (0);
 		int p = GetActorPitch (0) + Fixedmul(POFFSET,GetUserCvar(p_num,"SV_CameraPitch"));
-		int x = GetActorX (0) ;
-		int y = GetActorY (0) ;
+		int x = GetActorX (HostTID) ;
+		int y = GetActorY (HostTID) ;
 			int h = (CAMHEIGHT_CLAMP*GetCvar("sv_CameraHeight"));
-		int z = GetActorZ (0) + VIEW_HEIGHT + h;
+		int z = GetActorZ (HostTID) + VIEW_HEIGHT + h;
 		int xyr = r * cos (p) >> 16;
 		
-		if (z > GetActorCeilingZ(0) - (PlayerHeight)){z = GetActorCeilingZ(0) - (PlayerHeight);}
+		if (z > GetActorCeilingZ(HostTID) - (PlayerHeight)){z = GetActorCeilingZ(HostTID) - (PlayerHeight);}
 		//log(f:RoofDist);
 		//log(f:cos(a));
 		//log(f:test);
@@ -128,7 +134,7 @@ Script "3rdCameraHandler" (int p_num) ClientSide
 			}
 			
 			//if()
-			While(!CheckSight(C_TID+p_num,0,0) && r > 0)
+			While(!CheckSight(C_TID+p_num,0,0) && r > 0 && HostTID == 0)
 			{
 				if(Playernumber() == ConsolePlayerNumber())
 				{
@@ -220,3 +226,10 @@ SetActorPRoperty(0,APROP_StencilColor,GetUserCVarString(selfNumber,"sv_CamReticu
 log(s:GetActorProperty(0,APROP_StencilColor));
 }
 */
+
+Script "CamGrabObject" (void)
+{
+	int HostPnum = ACS_NamedExecuteWithResult("Core_GetTarget")-1000;
+	if(!ThingCount(T_NONE,R_TID+HostPnum)){Thing_ChangeTID(0,R_TID+HostPnum); log(i:ActivatorTID());}
+
+}

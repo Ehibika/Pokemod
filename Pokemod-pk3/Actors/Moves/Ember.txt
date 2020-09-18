@@ -31,7 +31,7 @@ Fire.Bullet:
 Goto Fire.After
 
 Fire.After:
-"####" B 1 A_GiveInventory("HalfRecovery_A")
+"####" B 1 A_GiveInventory("Ember_Recovery_A")
 "####" C 0 A_REfire("Fire")
 "####" B 0 A_Jump(256,"Fire.End")
 Goto Fire.End
@@ -66,6 +66,8 @@ Goto Ready
 //[+]========================================================================[+]
 actor EmberPP : Ammo {inventory.amount 1 inventory.Maxamount 40}
 
+
+actor Ember_Recovery_A : FullRecovery_A{Powerup.Duration 10}
 //[+]========================================================================[+]
 //--------------------------------|Projectiles |--------------------------------
 //[+]========================================================================[+]
@@ -75,7 +77,7 @@ Speed 65
 Damage (MBP_Ember)
 DamageType "Ember"
 obituary "$OB_EMBER"
-radius 16
+radius 24
 Reactiontime 10
 height 16
 scale 3.5

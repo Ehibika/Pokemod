@@ -20,11 +20,11 @@ OptionMenu "Item_Menu"
 {
     Title "Item Shop"
     StaticText "===============================================================",1
-    StaticText "$SHOP_CANDY"
-	Command "$SHOP_SMALLEXPCANDY", "BuySmallEXPCandy"
-	Command "$SHOP_MEDIUMEXPCANDY", "BuyMediumEXPCandy"
-	Command "$SHOP_LARGEEXPCANDY", "BuyLargeEXPCandy"
-    StaticText ""
+    //StaticText "$SHOP_CANDY"
+	//Command "$SHOP_SMALLEXPCANDY", "BuySmallEXPCandy"
+	//Command "$SHOP_MEDIUMEXPCANDY", "BuyMediumEXPCandy"
+	//Command "$SHOP_LARGEEXPCANDY", "BuyLargeEXPCandy"
+    //StaticText ""
     StaticText "$SHOP_BERRY"
 	Command "$SHOP_HPBERRY", "BuyHPBerry"
 	Command "$SHOP_BIGHPBERRY", "BuyBigHPBerry"
@@ -41,7 +41,8 @@ OptionMenu "Item_Menu"
      StaticText "$SHOP_EMPTY"
     StaticText ""
     StaticText "$SHOP_ORB"
-     StaticText "$SHOP_EMPTY"
+     Command "$SHOP_ESCAPEORB", "BuyEscapeOrb"
+     Command "$SHOP_BARRIERORB", "BuyBarrierOrb"
     StaticText ""
     StaticText "$SHOP_CHICLE"
      StaticText "$SHOP_EMPTY"
@@ -99,7 +100,8 @@ OptionMenu "TM_Menu"
 
     Command "$SHOP_QBUYTM54", "BuyTM54" //SkyDrop
     Command "$SHOP_QBUYTM55", "BuyTM55" //FireBlast
-
+    Command "$SHOP_QBUYTM56", "BuyTM56" //Overheat
+    Command "$SHOP_QBUYTM57", "BuyTM57" //Incinerate
     Command "$SHOP_QBUYTM58", "BuyTM58"
     Command "$SHOP_QBUYTM59", "BuyTM59"
     StaticText "===============================================================",1
@@ -154,6 +156,8 @@ OptionMenu "TM_Catalogue"
 
     Submenu "                   TM54 : SkyDrop", "TMList_SkyDrop"
     Submenu "                   TM55 : FireBlast", "TMList_FireBlast"
+    Submenu "                   TM56 : FireBlast", "TMList_Overheat"
+    Submenu "                   TM57 : FireBlast", "TMList_Incinerate"
 
     Submenu "                   TM58 : SolarBeam", "TMList_SolarBeam"
     Submenu "                   TM59 : Earthquake", "TMList_Earthquake"
@@ -1082,6 +1086,57 @@ OptionMenu "TMList_FireBlast"
     StaticText"===============================================================",1
 }
 
+OptionMenu "TMList_Overheat"
+{
+	
+	Title "$M145_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M145_TYPE"
+    StaticText "$M145_CATEGORY"
+    StaticText "$M145_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M145_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+    StaticText "$SHOP_LEARNTM56"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+    StaticText "$SHOP_BUYTM56"
+    Command "                                      Buy", "BuyTM56"
+    StaticText"===============================================================",1
+}
+
+OptionMenu "TMList_Incinerate"
+{
+	
+	Title "$M148_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M148_TYPE"
+    StaticText "$M148_CATEGORY"
+    StaticText "$M148_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M148_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+    StaticText "$SHOP_LEARNTM57"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+    StaticText "$SHOP_BUYTM57"
+    Command "                                      Buy", "BuyTM57"
+    StaticText"===============================================================",1
+}
 
 OptionMenu "TMList_SolarBeam"
 {

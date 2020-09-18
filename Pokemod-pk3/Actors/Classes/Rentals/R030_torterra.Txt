@@ -1,0 +1,86 @@
+/*
+[+]===================================[+]
+
+[+]===================================[+]
+*/
+
+
+Actor R_Torterra : ClassBaseRentals 
+{
+Player.DisplayName "Torterra"
+Player.SoundClass "Torterra"
+
+Player.StartItem "PKMNRentalKit"
+//============|
+Player.StartItem "TorterraRentalSetupItem"
+//============|
+Player.StartItem "Base_HP", 95
+Player.StartItem "Base_PAttack", 105
+Player.StartItem "Base_PDefense", 105
+Player.StartItem "Base_SAttack", 75
+Player.StartItem "Base_SDefense", 85 
+Player.StartItem "Base_Speed", 56
+//============|
+
+States
+{
+Spawn: 
+P030 A 0
+P030 B 1 
+P030 A 1
+GoTo Spawn+2
+See:
+P030 BCDE 5
+GoTo Spawn+1
+Missile:
+P030 A 0 A_JumpIfInventory("ConshotTimer",1,2) 
+P030 F 5 
+P030 G 4
+GoTo Spawn+2
+
+PainFix:
+P030 H 0 
+GoTo PainFrames
+}
+}
+
+actor TorterraRentalMoves : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_JumpIf(CallACS("RentalBotCheck") == 1,"BotWep")
+
+TNT1 A 0 A_GiveInventory("WoodHammerMove1")
+TNT1 A 0 A_GiveInventory("EarthquakeMove2")
+TNT1 A 0 A_GiveInventory("ProtectMove3")
+TNT1 A 0 A_GiveInventory("LeechSeedMove4")
+stop
+
+BotWep:
+TNT1 A 0 A_GiveInventory("WoodHammerMove1")
+stop
+}
+}
+
+ actor TorterraRentalSetupItem : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 ACS_NamedExecuteAlways("PKMN_RentalsSetup",0,Dex_Torterra)
+stop
+}
+}

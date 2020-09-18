@@ -1,0 +1,86 @@
+/*
+[+]===================================[+]
+
+[+]===================================[+]
+*/
+
+
+Actor R_Blaziken : ClassBaseRentals 
+{
+Player.DisplayName "Blaziken"
+Player.SoundClass "Blaziken"
+
+Player.StartItem "PKMNRentalKit"
+//============|
+Player.StartItem "BlazikenRentalSetupItem"
+//============|
+Player.StartItem "Base_HP", 80
+Player.StartItem "Base_PAttack", 120
+Player.StartItem "Base_PDefense", 70
+Player.StartItem "Base_SAttack", 110
+Player.StartItem "Base_SDefense", 70
+Player.StartItem "Base_Speed", 80
+//============|
+
+States
+{
+Spawn: 
+P024 A 0
+P024 B 1 
+P024 A 1
+GoTo Spawn+2
+See:
+P024 BCDE 5
+GoTo Spawn+1
+Missile:
+P024 A 0 A_JumpIfInventory("ConshotTimer",1,2) 
+P024 F 5 
+P024 G 4
+GoTo Spawn+2
+
+PainFix:
+P024 H 0 
+GoTo PainFrames
+}
+}
+
+actor BlazikenRentalMoves : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_JumpIf(CallACS("RentalBotCheck") == 1,"BotWep")
+
+TNT1 A 0 A_GiveInventory("BlazeKickMove1")
+TNT1 A 0 A_GiveInventory("HiJumpKickMove2")
+TNT1 A 0 A_GiveInventory("HeatWaveMove3")
+TNT1 A 0 A_GiveInventory("SwordDanceMove4")
+stop
+
+BotWep:
+TNT1 A 0 A_GiveInventory("BlazeKickMove1")
+stop
+}
+}
+
+ actor BlazikenRentalSetupItem : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 ACS_NamedExecuteAlways("PKMN_RentalsSetup",0,Dex_Blaziken)
+stop
+}
+}

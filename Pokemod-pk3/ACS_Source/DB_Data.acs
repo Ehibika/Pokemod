@@ -256,3 +256,15 @@ Script "GetStartinglevel" (Void)
 {
 	SetResultValue(GetCvar("PKMN_StartingLevel"));
 }
+
+Script "RoundCount" (void)
+{
+
+    int RoundCount;
+
+    for(int i = 0; i<4; i++) 
+        {
+                RoundCount += GetTeamProperty(i,TPROP_WinCount);
+        }
+		SetResultValue(RoundCount);
+}

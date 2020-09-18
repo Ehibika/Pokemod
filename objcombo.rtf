@@ -1,0 +1,93 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1404\cocoasubrtf470
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 \
+The following all enable or disable gamemodes from the rotation, 1 to enable, 0 to disable. having all modes disabled is equivalent to having none disabled\
+server int Allow_FlagBall = 1;\
+server int Allow_CC = 1;\
+server int Allow_Koth = 1;\
+server int Allow_Arena = 1;\
+server int Allow_Escort = 1;\
+server int Allow_Reactor = 1;\
+\
+This mostly matters to the server host, this accepts a string and will set the next gamemode to that string, it searches for multiple different terms, like evil escort can be \'93EvilEscort\'94 or \'93EE\'94 or even \'93Payload\'94\
+server string NextGame = "_";\
+\
+The time in seconds before each gamemode starts proper after a map change\
+Server int GameStartTime = 15;\
+\
+The standard gametime in seconds used for nearly all gamemodes\
+Server int GameTimeLimit = 270;\
+\
+These represent the base time in seconds players mst wait to respawn, GameRespawntimereduce sets the maximum number of seconds the respawn timer can be reduced by for teams falling behind a mode, while GameRespawnPenalty set\'92s the maximum number of seconds that can be added to a players respawn for teams that have the lead.\
+Server int GameRespawntime = 10;\
+Server int GameRespawntimereduce = 5;\
+Server int GameRespawnPenalty = 4;\
+\
+For Reactor, dictates weather or not it\'92s health value scales by the number of players in the game.\
+server int OBJC_HealthScale = 1;\
+\
+Dictates the time in seconds that the flag ball remains in it\'92s \'93Loading\'94 state, which it enters after a score has been made.\
+server int FlagBallLoadTime = 15;\
+\
+Dictates the number of time in seconds that the flag ball can remain motionless on the ground before it returns to the white flag position.\
+server int FlagBallIdleTime = 6;\
+\
+Toggles the ball fumbling system, which causes a ball drop under specific conditions, 1 keeps it off, 0 enables it.                                                                                                                                                                                                                           \
+server int NoBallFumble = 1;\
+\
+With ball fumbling enabled, this sets the maximum damage a player must take in a single frame to trigger a ball drop.\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 server int BallHitDrop = 25;\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \
+With ball fumbling enables, this causes BallHitDrop to be read as a percentage of the victim\'92s health rather than a fixed value of their HP. 1 enables it, 0 disables this.\
+server int BallHPGrip = 1;\
+\
+with ball fumbling enabled, this causes the player to drop the ball if they reach a certain speed (speed values based on the ones retuned by the ACS Script \'93Core_GetSpeed\'94. Setting this to 0 disables this check.\
+server int BallSpeedDrop = 500;\
+\
+With ball fumbling enabled, this causes the player to drop the ball if their distance from their previous spot and current spot exceeds the set vale in base units, in otherwords. if the player warps or teleports. setting this to 0 disables this check.\
+server int BallWarpDrop = 100;\
+\
+in KOTH, Dictates the speed at which the point can be capped, lower numbers mean a faster\
+cap rate.\
+Server int koth_HoldTime = 20;\
+\
+in KOTH, dictates how large the capture point is.\
+Server int koth_PointSize = 350;\
+\
+in KOTH, if enabled. if the team in power had less than 30 seconds on their timer, and the enemy team caps, that team gets a 15 second time penalty.\
+Server Bool koth_TimePenalty = True;\
+\
+in KOTH, interprets the score goal by multiplying this value to Pointlimit. (I.E: if set to 30, it is 30 seconds for every 1 point in pointlimit.) \
+Server int koth_PointMod = 30;\
+\
+in Arena, Determins the max number of games in a best of system (I.E: if set to 3, becomes best 2 out of 3)\
+Server int ArenaRoundLimit = 3;\
+\
+in Arena, determines the number of lives players have per round\
+Server int ArenaLives = 1;\
+\
+in Arena, this determines the time before arena gas starts to close in, setting this to 0 disables this.\
+server int ArenaGas_time = 120;\
+\
+in Arena, this determines the speed at which the arena gas moves in.\
+server int ArenaGas_speed = 5;\
+\
+in Arena, this determines the base damage of the arena gas when a player is inside it.\
+server int ArenaGas_damage = 2;\
+\
+in Reactor, controls weather the reactor will be invulnerable or not while emitting fumes.\
+Server bool Reactor_FumeGuard = true;\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 in ChipChallenge, interprets the score goal by multiplying this value to Pointlimit. (I.E: if set to 30, it is 30 points for every 1 point in pointlimit.) \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 Server int CC_PointMod = 75;\
+\
+in ChipChallenge, this dictates weather a party ball will spawn in the game or not. said party ball containing chips.\
+Server bool CC_PartyBall = true;}

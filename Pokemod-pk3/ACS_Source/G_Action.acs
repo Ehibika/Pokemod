@@ -17,6 +17,23 @@
 #include "zcommon.acs"
 #include "8bdmlib.acs"
 
+//#region -=- Arc limit -=-
+
+int count;
+
+script "Arc_Limit_Start" (void) CLIENTSIDE
+{
+count = 0;
+}
+
+script "Arc_Limit" (void) CLIENTSIDE
+{
+count++;
+SetResultValue(count>50);
+}
+
+//#endregion
+
 //#region -=- EntiTID -=-
 #region -=- EntiTID -=-
 
@@ -214,7 +231,7 @@ script "PKMN_SleepHandler" (Void)
 {
 	int CurrentHP = GetActorProperty(0,APROP_Health);
 	int PrevHP = CurrentHP;
-	int WakeHP = CurrentHP/2;
+	int WakeHP = (CurrentHP/4)*3;
 	int HitDiff;
 	int WakeHitDiff = GetActorProperty(0,APROP_SpawnHealth)/4;
 	Bool Awaken;
@@ -226,7 +243,7 @@ script "PKMN_SleepHandler" (Void)
 		PrevHP = CurrentHP;
 
 		if(CurrentHP < WakeHP) {Awaken = True;}
-		if(HitDiff > WakeHitDiff){Awaken = True;}
+		//if(HitDiff > WakeHitDiff){Awaken = True;}
 		if(CheckInventory("CringeMark")) {Awaken = True;}
 		if(!CheckInventory("SleepMark")) {Awaken = True;}
 

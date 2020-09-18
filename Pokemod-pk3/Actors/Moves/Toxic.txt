@@ -230,6 +230,7 @@ Alpha 1.0
 States
 {
 Spawn:
+TNT1 A 0 
 WAVB GGGGG 2
 WAVB H 3 A_Stop
 Stop

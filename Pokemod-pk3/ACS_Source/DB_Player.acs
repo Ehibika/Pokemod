@@ -19,7 +19,7 @@ int PlayerClassMem[64];
 #LIBDEFINE POKELEVEL 1
 #LIBDEFINE POKEEXP 2
 #LIBDEFINE POKENEXTEXP 3
-#LIBDEFINE POKECASH 4
+#LIBDEFINE POKEBP 4
 
 
 Function Int GetPokeValue (Int Mode)
@@ -30,7 +30,7 @@ Function Int GetPokeValue (Int Mode)
 	Case POKEDEXNUM: OutPut = GetCvar(StrParam(s:"PlayerDEXNum_",i:PlayerNumber())); Break;
 	Case POKELEVEL: OutPut = GetCvar(StrParam(s:"PlayerLevel_",i:PlayerNumber())); Break;
 	Case POKEEXP: OutPut = GetCvar(StrParam(s:"PlayerEXP_",i:PlayerNumber())); Break;
-	Case POKECASH: OutPut = GetCvar(StrParam(s:"Player",i:PlayerNumber(),s:"_Cash")); Break;
+	Case POKEBP: OutPut = GetCvar(StrParam(s:"Player",i:PlayerNumber(),s:"_BP")); Break;
 	}
 
 
@@ -47,7 +47,7 @@ Function Int GetPlayerPokeValue (Int P, Int Mode)
 	Case POKEDEXNUM: OutPut = GetCvar(StrParam(s:"PlayerDEXNum_",i:P)); Break;
 	Case POKELEVEL: OutPut = GetCvar(StrParam(s:"PlayerLevel_",i:P)); Break;
 	Case POKEEXP: OutPut = GetCvar(StrParam(s:"PlayerEXP_",i:P)); Break;
-	Case POKECASH: OutPut = GetCvar(StrParam(s:"Player",i:P,s:"_Cash")); Break;
+	Case POKEBP: OutPut = GetCvar(StrParam(s:"Player",i:P,s:"_BP")); Break;
 	}
 
 
@@ -64,7 +64,7 @@ Script "GetPokeValue" (Int Mode)
 	Case POKEDEXNUM: OutPut = GetCvar(StrParam(s:"PlayerDEXNum_",i:PlayerNumber())); Break;
 	Case POKELEVEL: OutPut = GetCvar(StrParam(s:"PlayerLevel_",i:PlayerNumber())); Break;
 	Case POKEEXP: OutPut = GetCvar(StrParam(s:"PlayerEXP_",i:PlayerNumber())); Break;
-	Case POKECASH: OutPut = GetCvar(StrParam(s:"Player",i:PlayerNumber(),s:"_Cash")); Break;
+	Case POKEBP: OutPut = GetCvar(StrParam(s:"Player",i:PlayerNumber(),s:"_BP")); Break;
 	}
 
 

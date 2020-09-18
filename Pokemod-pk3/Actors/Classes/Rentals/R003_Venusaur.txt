@@ -1,0 +1,86 @@
+/*
+[+]===================================[+]
+
+[+]===================================[+]
+*/
+
+
+Actor R_Venusaur : ClassBaseRentals 
+{
+Player.DisplayName "Venusaur"
+Player.SoundClass "Venusaur"
+
+Player.StartItem "PKMNRentalKit"
+//============|
+Player.StartItem "VenusaurRentalSetupItem"
+//============|
+Player.StartItem "Base_HP", 80
+Player.StartItem "Base_PAttack", 82
+Player.StartItem "Base_PDefense", 83 
+Player.StartItem "Base_SAttack", 100
+Player.StartItem "Base_SDefense", 100 
+Player.StartItem "Base_Speed", 80
+//============|
+
+States
+{
+Spawn: 
+P003 A 0
+P003 B 1 
+P003 A 1
+GoTo Spawn+2
+See:
+P003 BCDE 5
+GoTo Spawn+1
+Missile:
+P003 A 0 A_JumpIfInventory("ConshotTimer",1,2) 
+P003 F 5 
+P003 G 4
+GoTo Spawn+2
+
+PainFix:
+P003 H 0 
+GoTo PainFrames
+}
+}
+
+actor VenusaurRentalMoves : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_JumpIf(CallACS("RentalBotCheck") == 1,"BotWep")
+
+TNT1 A 0 A_GiveInventory("SolarBeamMove1")
+TNT1 A 0 A_GiveInventory("EarthquakeMove2")
+TNT1 A 0 A_GiveInventory("ToxicMove3")
+TNT1 A 0 A_GiveInventory("SynthesisMove4")
+stop
+
+BotWep:
+TNT1 A 0 A_GiveInventory("SolarBeamMove1")
+stop
+}
+}
+
+ actor VenusaurRentalSetupItem : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 ACS_NamedExecuteAlways("PKMN_RentalsSetup",0,Dex_Venusaur)
+stop
+}
+}

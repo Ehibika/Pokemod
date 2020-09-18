@@ -142,7 +142,7 @@ Misc/Clap HANDCLAP
 Misc/HardDrop HARDDROP
 
 Misc/GetItem PICKUP1
-Misc/GetCash PICKUP2
+Misc/GetBP PICKUP2
 
 Misc/spin			DSSPIN
 Misc/spindash		DSSPNDSH

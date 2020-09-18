@@ -479,3 +479,193 @@ dsplpain = MEGAPAIN
 dstaunt = cry036
 gender = male
 }
+
+
+{
+name = "Dreepy"
+sprite = P037
+Scale = 2.0
+class = dreepy
+dsnoway = LAND
+dsoof = LAND
+dspldeth = MEGADEAT
+dspdiehi = MEGADEAT
+dsplpain = MEGAPAIN
+dstaunt = cry037
+gender = male
+}
+
+{
+name = "Drakloak"
+sprite = P038
+Scale = 2.0
+class = dreepy
+dsnoway = LAND
+dsoof = LAND
+dspldeth = MEGADEAT
+dspdiehi = MEGADEAT
+dsplpain = MEGAPAIN
+dstaunt = cry038
+gender = male
+}
+
+{
+name = "Dragapult"
+sprite = P039
+Scale = 2.0
+class = dreepy
+dsnoway = LAND
+dsoof = LAND
+dspldeth = MEGADEAT
+dspdiehi = MEGADEAT
+dsplpain = MEGAPAIN
+dstaunt = cry039
+gender = male
+}
+
+{
+name = "Dratini"
+sprite = P040
+class = Dratini
+dsnoway = LAND
+dsoof = LAND
+dspldeth = MEGADEAT
+dspdiehi = MEGADEAT
+dsplpain = MEGAPAIN
+dstaunt = cry040
+gender = male
+}
+
+{
+name = "Dragonair"
+sprite = P041
+class = Dratini
+dsnoway = LAND
+dsoof = LAND
+dspldeth = MEGADEAT
+dspdiehi = MEGADEAT
+dsplpain = MEGAPAIN
+dstaunt = cry041
+gender = male
+}
+
+{
+name = "Dragonite"
+sprite = P042
+class = Dratini
+dsnoway = FATLAND
+dsoof = FATLAND
+dspldeth = MEGADEAT
+dspdiehi = MEGADEAT
+dsplpain = MEGAPAIN
+dstaunt = cry042
+gender = male
+}
+
+{
+name = "Bagon"
+sprite = P043
+class = Bagon
+dsnoway = LAND
+dsoof = LAND
+dspldeth = MEGADEAT
+dspdiehi = MEGADEAT
+dsplpain = MEGAPAIN
+dstaunt = cry043
+gender = male
+}
+
+{
+name = "Shelgon"
+sprite = P044
+class = Bagon
+dsnoway = LAND
+dsoof = LAND
+dspldeth = MEGADEAT
+dspdiehi = MEGADEAT
+dsplpain = MEGAPAIN
+dstaunt = cry044
+gender = male
+}
+
+{
+name = "Salamence"
+sprite = P045
+scale = 2.0
+class = Bagon
+dsnoway = FATLAND
+dsoof = FATLAND
+dspldeth = MEGADEAT
+dspdiehi = MEGADEAT
+dsplpain = MEGAPAIN
+dstaunt = cry045
+gender = male
+}
+
+{
+name = "Slowpoke"
+sprite = P046
+class = Slowpoke
+dsnoway = LAND
+dsoof = LAND
+dspldeth = MEGADEAT
+dspdiehi = MEGADEAT
+dsplpain = MEGAPAIN
+dstaunt = cry046
+gender = male
+}
+
+{
+name = "Slowbro"
+sprite = P047
+class = Slowpoke
+dsnoway = FATLAND
+dsoof = FATLAND
+dspldeth = MEGADEAT
+dspdiehi = MEGADEAT
+dsplpain = MEGAPAIN
+dstaunt = cry047
+gender = male
+}
+
+{
+name = "Slowking"
+sprite = P048
+class = Slowpoke
+dsnoway = FATLAND
+dsoof = FATLAND
+dspldeth = MEGADEAT
+dspdiehi = MEGADEAT
+dsplpain = MEGAPAIN
+dstaunt = cry048
+gender = male
+}
+
+
+{
+name = "Staryu"
+sprite = P049
+class = Staryu
+dsnoway = LAND
+dsoof = LAND
+dspldeth = MEGADEAT
+dspdiehi = MEGADEAT
+dsplpain = MEGAPAIN
+dstaunt = cry049
+gender = male
+}
+
+{
+name = "Starmie"
+sprite = P050
+class = Staryu
+dsnoway = FATLAND
+dsoof = FATLAND
+dspldeth = MEGADEAT
+dspdiehi = MEGADEAT
+dsplpain = MEGAPAIN
+dstaunt = cry050
+gender = male
+}
+
+//--[NewPokemon]--

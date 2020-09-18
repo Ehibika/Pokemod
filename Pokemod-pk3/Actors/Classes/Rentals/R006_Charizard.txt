@@ -1,0 +1,86 @@
+/*
+[+]===================================[+]
+
+[+]===================================[+]
+*/
+
+
+Actor R_Charizard : ClassBaseRentals 
+{
+Player.DisplayName "Charizard"
+Player.SoundClass "Charizard"
+
+Player.StartItem "PKMNRentalKit"
+//============|
+Player.StartItem "CharizardRentalSetupItem"
+//============|
+Player.StartItem "Base_HP", 80
+Player.StartItem "Base_PAttack", 82
+Player.StartItem "Base_PDefense", 83 
+Player.StartItem "Base_SAttack", 100
+Player.StartItem "Base_SDefense", 100 
+Player.StartItem "Base_Speed", 80
+//============|
+
+States
+{
+Spawn: 
+P006 A 0
+P006 B 1 
+P006 A 1
+GoTo Spawn+2
+See:
+P006 BCDE 5
+GoTo Spawn+1
+Missile:
+P006 A 0 A_JumpIfInventory("ConshotTimer",1,2) 
+P006 F 5 
+P006 G 4
+GoTo Spawn+2
+
+PainFix:
+P006 H 0 
+GoTo PainFrames
+}
+}
+
+actor CharizardRentalMoves : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_JumpIf(CallACS("RentalBotCheck") == 1,"BotWep")
+
+TNT1 A 0 A_GiveInventory("FlamethrowerMove1")
+TNT1 A 0 A_GiveInventory("DragonPulseMove2")
+TNT1 A 0 A_GiveInventory("DragonClawMove3")
+TNT1 A 0 A_GiveInventory("DragonDanceMove4")
+stop
+
+BotWep:
+TNT1 A 0 A_GiveInventory("FlamethrowerMove1")
+stop
+}
+}
+
+ actor CharizardRentalSetupItem : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 ACS_NamedExecuteAlways("PKMN_RentalsSetup",0,Dex_Charizard)
+stop
+}
+}

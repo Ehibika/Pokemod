@@ -1,0 +1,86 @@
+/*
+[+]===================================[+]
+
+[+]===================================[+]
+*/
+
+
+Actor R_Empoleon : ClassBaseRentals 
+{
+Player.DisplayName "Empoleon"
+Player.SoundClass "Empoleon"
+
+Player.StartItem "PKMNRentalKit"
+//============|
+Player.StartItem "EmpoleonRentalSetupItem"
+//============|
+Player.StartItem "Base_HP", 84
+Player.StartItem "Base_PAttack", 86
+Player.StartItem "Base_PDefense", 88 
+Player.StartItem "Base_SAttack", 111
+Player.StartItem "Base_SDefense", 101 
+Player.StartItem "Base_Speed", 60
+//============|
+
+States
+{
+Spawn: 
+P036 A 0
+P036 B 1 
+P036 A 1
+GoTo Spawn+2
+See:
+P036 BCDE 5
+GoTo Spawn+1
+Missile:
+P036 A 0 A_JumpIfInventory("ConshotTimer",1,2) 
+P036 F 5 
+P036 G 4
+GoTo Spawn+2
+
+PainFix:
+P036 H 0 
+GoTo PainFrames
+}
+}
+
+actor EmpoleonRentalMoves : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_JumpIf(CallACS("RentalBotCheck") == 1,"BotWep")
+
+TNT1 A 0 A_GiveInventory("HydroPumpMove1")
+TNT1 A 0 A_GiveInventory("WaterfallMove2")
+TNT1 A 0 A_GiveInventory("YawnMove3")
+TNT1 A 0 A_GiveInventory("WhirlpoolMove4")
+stop
+
+BotWep:
+TNT1 A 0 A_GiveInventory("HydroPumpMove1")
+stop
+}
+}
+
+ actor EmpoleonRentalSetupItem : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 ACS_NamedExecuteAlways("PKMN_RentalsSetup",0,Dex_Empoleon)
+stop
+}
+}

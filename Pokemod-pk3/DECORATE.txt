@@ -14,12 +14,6 @@
 #include "actors/inventory/ArcTargeter.txt"
 #include "Actors/inventory/ThirdPCamera.txt"
 
-#include "Actors/inventory/Shop/ShopActors/shopact.txt"
-#include "Actors/inventory/Shop/ShopActors/shopact_items.txt"
-#include "Actors/inventory/Shop/ShopActors/shopact_TMs.txt"
-
-#include "Actors/inventory/Shop/ShopInventory/ShopItems.txt"
-
 #include "actors/Moves/MoveBase/MasterMoveBase.txt"
 #include "actors/Moves/MoveBase/ImbueMoveBase.txt"
 #include "actors/Moves/Swift.txt"
@@ -111,9 +105,9 @@
 #include "actors/Moves/FlameWheel.txt"
 #include "actors/Moves/Mudslap.txt"
 #include "actors/Moves/Rollout.txt"
-//#include "actors/Moves/Extrasensory.txt"
+#include "actors/Moves/Extrasensory.txt"
 #include "actors/Moves/GyroBall.txt"
-//#include "actors/Moves/Eruption.txt"
+#include "actors/Moves/Eruption.txt"
 #include "actors/Moves/Peck.txt"
 #include "actors/Moves/DoubleKick.txt"
 #include "actors/Moves/ThunderPunch.txt"
@@ -153,6 +147,41 @@
 #include "actors/Moves/Scald.txt"
 #include "actors/Moves/Dive.txt"
 //#include "actors/Moves/Bubble.txt"
+#include "actors/Moves/Sludge.txt"
+#include "actors/Moves/SludgeBomb.txt"
+#include "actors/Moves/Venoshock.txt"
+#include "actors/Moves/Absorb.txt"
+#include "actors/Moves/MegaDrain.txt"
+#include "actors/Moves/GigaDrain.txt"
+// #include "actors/Moves/LeafStorm.txt"
+// #include "actors/Moves/GrassKnot.txt"
+// #include "actors/Moves/StunSpore.txt"
+// #include "actors/Moves/PetalDance.txt"
+// #include "actors/Moves/PowerWhip.txt"
+// #include "actors/Moves/LeafTornado.txt"
+// #include "actors/Moves/Leafage.txt"
+#include "actors/Moves/LavaPlume.txt"
+// #include "actors/Moves/FlameCharge.txt"
+#include "actors/Moves/Overheat.txt"
+// #include "actors/Moves/Inferno.txt"
+// #include "actors/Moves/HeatCrash.txt"
+#include "actors/Moves/Incinerate.txt"
+// #include "actors/Moves/WillOWisp.txt"
+// #include "actors/Moves/MysticalFire.txt"
+// #include "actors/Moves/Rest.txt"
+// #include "actors/Moves/SlackOff.txt"
+// #include "actors/Moves/Substitute.txt"
+// #include "actors/Moves/Block.txt"
+// #include "actors/Moves/BellyDrum.txt"
+// #include "actors/Moves/AirSlash.txt"
+
+
+#include "Actors/inventory/Shop/ShopActors/shopact.txt"
+#include "Actors/inventory/Shop/ShopActors/shopact_items.txt"
+#include "Actors/inventory/Shop/ShopActors/shopact_TMs.txt"
+
+#include "Actors/inventory/Shop/ShopInventory/ShopItems.txt"
+
 
 // #include "Actors/Classes/Pokemon/Ditto.txt"
 
@@ -182,3 +211,59 @@
 #include "Actors/Classes/Pokemon/028_Turtwig.txt"
 #include "Actors/Classes/Pokemon/031_Chimchar.txt"
 #include "Actors/Classes/Pokemon/034_Piplup.txt"
+
+#include "Actors/Classes/Pokemon/037_Dreepy.txt"
+#include "Actors/Classes/Pokemon/040_Dratini.txt"
+#include "Actors/Classes/Pokemon/043_Bagon.txt"
+
+#include "Actors/Classes/Pokemon/046_Slowpoke.txt"
+#include "Actors/Classes/Pokemon/049_Staryu.txt"
+
+//--[NewPokemon]--
+
+// -=- Rentals -=-
+
+#include "Actors/Classes/Rentals/R000_Smeargle.txt"
+
+#include "Actors/Classes/Rentals/R001_Bulbasaur.txt"
+#include "Actors/Classes/Rentals/R002_Ivysaur.txt"
+#include "Actors/Classes/Rentals/R003_Venusaur.txt"
+
+#include "Actors/Classes/Rentals/R004_Charmander.txt"
+#include "Actors/Classes/Rentals/R005_Charmeleon.txt"
+#include "Actors/Classes/Rentals/R006_Charizard.txt"
+
+#include "Actors/Classes/Rentals/R007_Squirtle.txt"
+#include "Actors/Classes/Rentals/R008_Wartortle.txt"
+#include "Actors/Classes/Rentals/R009_Blastoise.txt"
+
+#incLude "Actors/Classes/Rentals/R010_chikorita.Txt"
+#Include "Actors/Classes/Rentals/R011_bayleef.Txt"
+#Include "Actors/Classes/Rentals/R012_meganium.Txt"
+#Include "Actors/Classes/Rentals/R013_cyndaquil.Txt"
+#Include "Actors/Classes/Rentals/R014_quilava.Txt"
+#Include "Actors/Classes/Rentals/R015_typhlosion.Txt"
+#Include "Actors/Classes/Rentals/R016_totodile.Txt"
+#Include "Actors/Classes/Rentals/R017_croconaw.Txt"
+#Include "Actors/Classes/Rentals/R018_feraligatr.Txt"
+
+#Include "Actors/Classes/Rentals/R019_treecko.Txt"
+#Include "Actors/Classes/Rentals/R020_grovyle.Txt"
+#Include "Actors/Classes/Rentals/R021_sceptile.Txt"
+#Include "Actors/Classes/Rentals/R022_torchic.Txt"
+#Include "Actors/Classes/Rentals/R023_combusken.Txt"
+#Include "Actors/Classes/Rentals/R024_blaziken.Txt"
+#Include "Actors/Classes/Rentals/R025_mudkip.Txt"
+#Include "Actors/Classes/Rentals/R026_marshtomp.Txt"
+#Include "Actors/Classes/Rentals/R027_swampert.Txt"
+
+#Include "Actors/Classes/Rentals/R028_turtwig.Txt"
+#Include "Actors/Classes/Rentals/R029_grotle.Txt"
+#Include "Actors/Classes/Rentals/R030_torterra.Txt"
+#Include "Actors/Classes/Rentals/R031_chimchar.Txt"
+#Include "Actors/Classes/Rentals/R032_monferno.Txt"
+#Include "Actors/Classes/Rentals/R033_infernape.Txt"
+#Include "Actors/Classes/Rentals/R034_piplup.Txt"
+#Include "Actors/Classes/Rentals/R035_prinplup.Txt"
+#Include "Actors/Classes/Rentals/R036_empoleon.Txt"
+//--[NewPokemon]--

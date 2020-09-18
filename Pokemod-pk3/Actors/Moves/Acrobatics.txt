@@ -201,6 +201,9 @@ ROLO T 2 A_JumpifinTargetInventory("AcrobaticsPPTimer",1,"Spawn2")
 
 stop
 Bounce.Wall:
+TNT1 A 0 A_ChangeFlag("BOUNCEONWALLS",0)
+TNT1 A 0 A_ChangeFlag("BOUNCEONCEILINGS",0)
+TNT1 A 0 A_ChangeFlag("USEBOUNCESTATE",0)
 TNT1 A 0 A_PlaySoundEx("Move/RolloutImpact","SoundSlot5")
 ROLO R 0 A_SpawnItemEx("AcrobaticsDamager")
 TNT1 A 1 a_GiveToTarget("AcrobaticsCollide1FX")

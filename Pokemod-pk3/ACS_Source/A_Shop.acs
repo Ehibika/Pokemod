@@ -10,7 +10,7 @@
 #DEFINE MAX_PLAYERS 64
 #DEFINE MAX_SLOTS 10
 #DEFINE MAX_TEAMS 4
-#LIBDEFINE MAX_SHOP 8
+#LIBDEFINE MAX_SHOP 10
 
 bool thePlayerPlayed[MAX_PLAYERS];
 int thePlayerTeam[MAX_PLAYERS];
@@ -24,7 +24,9 @@ str ShopItemList[MAX_SHOP] = {
     "ClenseSeed",
     "PowerSeed",
     "GuardSeed",
-    "HasteSeed",
+    "HasteSeed",    
+    "EscapeOrb",
+    "BarrierOrb",
 };
 
 script "ShopEvents" (int type, int arg1, int arg2) EVENT
@@ -38,13 +40,31 @@ Switch(type)
 
 }
 
+#DEFINE ITEMSPAWNERTID 74000
+script "ItemSpawnTID" (void)
+{
+int NewTID = ITEMSPAWNERTID+Random(0,999);
+
+until(!IsTIDUsed(NewTID)){NewTID = ITEMSPAWNERTID+Random(0,999);}
+Thing_ChangeTID(0,NewTID);
+}
+
+script "ItemSpawnerCheck" (void)
+{
+int Output;
+
+if(!IsTIDUsed(ActivatorTID()+1000)){Output = 1;}
+
+setResultValue(Output);
+}
+
 //#region -=- Shop Display -=-
 #region -=- Shop Display -=-
-Script "DisplayCashAndSlots" OPEN CLIENTSIDE
+Script "DisplayBPAndSlots" OPEN CLIENTSIDE
 {
 int conP = ConsolePlayerNumber();
 while(true) {
-	if(GetCvar("sv_RentalsMode") == 0){DisplayCashAndSlotsFunc(conP);}
+	if(GetCvar("sv_EnableShop") == 1){DisplayBPAndSlotsFunc(conP);}
 	delay(1);
 }
 }
@@ -71,20 +91,20 @@ function int getConPlayerView(int conP)
 #DEFINE XOFFSET 24.0
 #DEFINE YOFFSET 240.0
 
-function void DisplayCashAndSlotsFunc(int conP) {
+function void DisplayBPAndSlotsFunc(int conP) {
 	SetHudSize(XHUDSIZE, YHUDSIZE, 0);
 	SetFont("CONFONT");
     int camP = getConPlayerView(conP);
 
     //LevelUpTable[LvlRate][PlayerLCV]
-	//HudMessage(s:"Cash: ", i:GetPlayerCash(camP); HUDMSG_PLAIN, 77, CR_WHITE, 0.5, 0.75, 0.1);
-	HudMessage(s:"Cash: ", i:GetPlayerCash(camP); HUDMSG_PLAIN, MSGID, CR_WHITE, XOFFSET+0.1, YOFFSET+0.1, 0.1);
+	//HudMessage(s:"BP: ", i:GetPlayerBP(camP); HUDMSG_PLAIN, 77, CR_WHITE, 0.5, 0.75, 0.1);
+	HudMessage(s:"BP: ", i:GetPlayerBP(camP); HUDMSG_PLAIN, MSGID, CR_WHITE, XOFFSET+0.1, YOFFSET+0.1, 0.1);
 	HudMessage(s:"Exp: ", i:GetNowEXP(camP),s:"/",i:GetNextEXP(camP); HUDMSG_PLAIN, MSGID+1, CR_WHITE, XOFFSET+0.1, YOFFSET+0.2, 0.1);
 }
 
-function int GetPlayerCash(int p)
+function int GetPlayerBP(int p)
 {
-return GetCvar(StrParam(s:"PLAYER",i:p,s:"_CASH"));
+return GetCvar(StrParam(s:"PLAYER",i:p,s:"_BP"));
 }
 
 function int GetSlotCount(int p)
@@ -102,10 +122,12 @@ return PlayerEXP;
 
 function int GetNextEXP(int p)
 {
+int Output;
 int PlayerDexNum = GetCvar(StrParam(s:"PlayerDEXNum_",i:p));
 int PlayerLVL = GetCvar(StrParam(s:"PlayerLevel_",i:p));
 Int LvlRate = StatDEX[PlayerDexNum][9];
-return LevelUpTable[LvlRate][PlayerLVL];
+if(PlayerLVL < PKMN_MaxLVL){Output = LevelUpTable[LvlRate][PlayerLVL];}
+return Output;
 }
 
 #endregion
@@ -113,42 +135,42 @@ return LevelUpTable[LvlRate][PlayerLVL];
 
 //#region  -=- Shop Functions
 #region  -=- Shop Functions
-script "InitializeCash" OPEN
+script "InitializeBP" OPEN
 {
-if(!GetCVar("CASH_INIT")) {
-	ResetAllCash();
-	SetCvar("CASH_INIT",true);
+if(!GetCVar("BP_INIT")) {
+	ResetAllBP();
+	SetCvar("BP_INIT",true);
 }
 }
 
-script "RESET_ALL_CASH" (void)
+script "RESET_ALL_BP" (void)
 {
-ResetAllCash();
+ResetAllBP();
 }
 
-script "RESET_PLAYER_CASH" (int p)
+script "RESET_PLAYER_BP" (int p)
 {
-ResetPlayerCash(p);
+ResetPlayerBP(p);
 }
 
-function void ResetAllCash(void)
+function void ResetAllBP(void)
 {
-for(int i = 0; i < MAX_PLAYERS; i++) ResetPlayerCash(i);
+for(int i = 0; i < MAX_PLAYERS; i++) ResetPlayerBP(i);
 }
 
-function void ResetPlayerCash(int p)
+function void ResetPlayerBP(int p)
 {
-SetCvar(StrParam(s:"PLAYER",i:p,s:"_CASH"),GetCvar("PKMN_StartingCash"));
+SetCvar(StrParam(s:"PLAYER",i:p,s:"_BP"),GetCvar("PKMN_StartingBP"));
 }
 
-script "CashCheck" (int cost)
+script "BPCheck" (int cost)
 {
-SetResultValue(GetCvar(StrParam(s:"PLAYER",i:PlayerNumber(),s:"_CASH"))>=cost);
+SetResultValue(GetCvar(StrParam(s:"PLAYER",i:PlayerNumber(),s:"_BP"))>=cost);
 }
 
-script "CashPay" (int cost)
+script "BPPay" (int cost)
 {
-AdjustCvar(StrParam(s:"PLAYER",i:PlayerNumber(),s:"_CASH"),-cost);
+AdjustCvar(StrParam(s:"PLAYER",i:PlayerNumber(),s:"_BP"),-cost);
 }
 
 function void AdjustCvar(str cvar, int amount)
@@ -156,27 +178,27 @@ function void AdjustCvar(str cvar, int amount)
 SetCvar(cvar,GetCvar(cvar)+amount);
 }
 
-script "GivePlayerCash" (int p, int wage)
+script "GivePlayerBP" (int p, int wage)
 {
-AdjustCvar(StrParam(s:"PLAYER",i:p,s:"_CASH"),wage);
+AdjustCvar(StrParam(s:"PLAYER",i:p,s:"_BP"),wage);
 }
 
-script "CashGameOver" UNLOADING
+script "BPGameOver" UNLOADING
 {
-ACS_NamedExecuteWithResult("RESET_ALL_CASH");
+ACS_NamedExecuteWithResult("RESET_ALL_BP");
 }
 
-script "CashPlayerSpec" (int p) DISCONNECT
+script "BPPlayerSpec" (int p) DISCONNECT
 {
-ACS_NamedExecuteWithResult("RESET_PLAYER_CASH",p);
+ACS_NamedExecuteWithResult("RESET_PLAYER_BP",p);
 }
 
 
 #endregion
 //#endregion
 
-//#region -=- Gameplay Cash Functions -=-
-#region -=- Gameplay Cash Functions -=-
+//#region -=- Gameplay BP Functions -=-
+#region -=- Gameplay BP Functions -=-
 
 script "PlayerJoin_E" ENTER
 {
@@ -258,27 +280,28 @@ function void LoserFunc(int p)  {
         if(WinDiff>0)
         {
             LoserBonus = 15*WinDiff;
-            ACS_NamedExecuteWithResult("GivePlayerCash",p,LoserBonus);
+            ACS_NamedExecuteWithResult("GivePlayerBP",p,LoserBonus);
         }
     */
+    ACS_NamedExecuteWithResult("GivePlayerBP",p,GetCVar("PKMN_BPLoseAward"));
 	ParticipantFunc(p);
 }
 
 function void WinnerFunc(int p)  {
     //PrintBold(s:"winner ",i:p);
     
-    //ACS_NamedExecuteWithResult("GivePlayerCash",p,50);
+    ACS_NamedExecuteWithResult("GivePlayerBP",p,GetCVar("PKMN_BPWinAward"));
 	ParticipantFunc(p);
 }
 
 function void ParticipantFunc(int p)  {
-	ACS_NamedExecuteWithResult("GivePlayerCash",p,100);
+	ACS_NamedExecuteWithResult("GivePlayerBP",p,GetCVar("PKMN_BPAward"));
 	//if(GetActorProperty(1000+p,APROP_HEALTH)<1) ACS_NamedExecuteWithResult("CLEAR_PERSISTENT_LOADOUT",p);
 }
 
-Script "CashPickup" (void)
+Script "BPPickup" (void)
 {
-// -=- cash gained from pickup is based on total number of games, not counting draws -=-
+// -=- BP gained from pickup is based on total number of games, not counting draws -=-
 
 int TotalGames;
 for(int i = 0; i<MAX_TEAMS; i++) 
@@ -286,14 +309,14 @@ for(int i = 0; i<MAX_TEAMS; i++)
         TotalGames += GetTeamProperty(i,TPROP_WinCount);
 }
 
-int BaseMoney = 5;
+int BaseMoney = 1;
 //int R1 = 1 + TotalGames; //random range 1
 //int R2 = 3 + TotalGames;; //random range 2
 //int Payout = BaseMoney*random(R1,R2);
-int Payout = BaseMoney+(5*TotalGames);
+int Payout = BaseMoney;//+(5*TotalGames);
 
-ACS_NamedExecuteAlways("GivePlayerCash",0,playernumber(),Payout);
-ACS_NamedExecuteAlways("AddToCashAward",0,Payout);
+ACS_NamedExecuteAlways("GivePlayerBP",0,playernumber(),Payout);
+ACS_NamedExecuteAlways("AddToBPAward",0,Payout);
 }
 
 #endregion 
@@ -304,7 +327,7 @@ ACS_NamedExecuteAlways("AddToCashAward",0,Payout);
 
 Script "MoneySpawnRate" (void)
 {
-// -=- cash gained from pickup is based on total number of games, not counting draws -=-
+// -=- BP gained from pickup is based on total number of games, not counting draws -=-
 
 int TotalGames;
 int Output;
@@ -338,6 +361,26 @@ Script "ItemSpew" DEATH
         SetCvarString(StrParam(s:"Player",i:PlayerNumber(),s:"_INV"),"0000");
     }
 
+}
+
+Script "ItemPurge" (int PurgeCount)
+{
+    if(GetGameModeState()!=GAMESTATE_INPROGRESS){terminate;}
+    Int InvCount;
+    Int PurgeReturn;
+
+    for (int i=0; i<MAX_SHOP; i++) 
+    {
+        InvCount = CheckInventory(ShopItemList[i]);
+        if(InvCount)
+        {     
+            TakeInventory(ShopItemList[i],PurgeCount);
+            PurgeReturn = 1;        
+        }
+    }
+    //ACS_NamedExecuteAlways("Write_Inventory",0,1);
+
+    SetResultValue(PurgeReturn);
 }
 
 #endregion
@@ -410,6 +453,12 @@ Script "ShopBuyFailTMMsg" (void) CLIENTSIDE
 {
 if(ActivatorTID()==CheckPlayerCamera(ConsolePlayerNumber())
     || (ActivatorTID()-1000+C_TID)==CheckPlayerCamera(ConsolePlayerNumber()) ) {Log(l:"SHOP_BUYFAIL_TM");}
+}
+
+Script "ShopBuyFailStatusMsg" (void) CLIENTSIDE
+{
+if(ActivatorTID()==CheckPlayerCamera(ConsolePlayerNumber())
+    || (ActivatorTID()-1000+C_TID)==CheckPlayerCamera(ConsolePlayerNumber()) ) {Log(l:"SHOP_BUYFAIL_STATUS");}
 }
 
 #endregion

@@ -16,7 +16,7 @@ stop
 
 //#region -=- Buy Actors
 
-actor BuyHPBerry : BuyThing25
+actor BuyHPBerry : BuyThing1
 {
 states
 {
@@ -28,7 +28,7 @@ goto CostPay
 }
 }
 
-actor BuyBigHPBerry : BuyThing75
+actor BuyBigHPBerry : BuyThing5
 {
 states
 {
@@ -40,7 +40,7 @@ goto CostPay
 }
 }
 
-actor BuyPPBerry : BuyThing50
+actor BuyPPBerry : BuyThing3
 {
 states
 {
@@ -52,7 +52,7 @@ goto CostPay
 }
 }
 
-actor BuyBigPPBerry : BuyThing100
+actor BuyBigPPBerry : BuyThing10
 {
 states
 {
@@ -84,7 +84,7 @@ stop
 
 //#region -=- Buy Actors
 
-actor BuySmallEXPCandy : BuyThing25
+actor BuySmallEXPCandy : BuyThing1
 {
 states
 {
@@ -95,7 +95,7 @@ goto CostPay
 }
 }
 
-actor BuyMediumEXPCandy : BuyThing200
+actor BuyMediumEXPCandy : BuyThing20
 {
 states
 {
@@ -106,7 +106,7 @@ goto CostPay
 }
 }
 
-actor BuyLargeEXPCandy : BuyThing350
+actor BuyLargeEXPCandy : BuyThing35
 {
 states
 {
@@ -139,7 +139,7 @@ stop
 
 //#region -=- Buy Actors
 
-actor BuyClenseSeed : BuyThing25
+actor BuyClenseSeed : BuyThing1
 {
 states
 {
@@ -152,7 +152,7 @@ goto CostPay
 }
 
 
-actor BuyPowerSeed : BuyThing125
+actor BuyPowerSeed : BuyThing12
 {
 states
 {
@@ -164,7 +164,7 @@ goto CostPay
 }
 }
 
-actor BuyGuardSeed : BuyThing100
+actor BuyGuardSeed : BuyThing10
 {
 states
 {
@@ -176,7 +176,7 @@ goto CostPay
 }
 }
 
-actor BuyHasteSeed : BuyThing100
+actor BuyHasteSeed : BuyThing10
 {
 states
 {
@@ -189,3 +189,44 @@ goto CostPay
 }
 //#endregion
 
+//[+]========================================================================[+]
+//----------------------------------|Orbs|-----------------------------------
+//[+]========================================================================[+]
+
+
+actor OrbShop : CustomInventory
+{
+states
+{
+Pickup:
+TNT1 A 0 A_GiveInventory("BuyEscapeOrb",1)
+TNT1 A 0 A_GiveInventory("BuyBarrierOrb",1)
+stop
+}
+}
+
+//#region -=- Buy Actors
+
+actor BuyEscapeOrb : BuyThing1
+{
+states
+{
+Use2:
+TNT1 A 0 A_JumpIfInventory("EscapeOrb",1,"FullCapacity")
+TNT1 A 0 A_GiveInventory("EscapeOrb",1)
+TNT1 A 0 ACS_NamedExecuteAlways("Write_Inventory",0)
+goto CostPay
+}
+}
+
+actor BuyBarrierOrb : BuyThing1
+{
+states
+{
+Use2:
+TNT1 A 0 A_JumpIfInventory("BarrierOrb",1,"FullCapacity")
+TNT1 A 0 A_GiveInventory("BarrierOrb",1)
+TNT1 A 0 ACS_NamedExecuteAlways("Write_Inventory",0)
+goto CostPay
+}
+}

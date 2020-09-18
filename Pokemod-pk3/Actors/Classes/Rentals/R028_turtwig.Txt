@@ -1,0 +1,86 @@
+/*
+[+]===================================[+]
+
+[+]===================================[+]
+*/
+
+
+Actor R_Turtwig : ClassBaseRentals 
+{
+Player.DisplayName "Turtwig"
+Player.SoundClass "Turtwig"
+
+Player.StartItem "PKMNRentalKit"
+//============|
+Player.StartItem "TurtwigRentalSetupItem"
+//============|
+Player.StartItem "Base_HP", 55
+Player.StartItem "Base_PAttack", 68
+Player.StartItem "Base_PDefense", 64
+Player.StartItem "Base_SAttack", 45
+Player.StartItem "Base_SDefense", 55 
+Player.StartItem "Base_Speed", 31
+//============|
+
+States
+{
+Spawn: 
+P028 A 0
+P028 B 1 
+P028 A 1
+GoTo Spawn+2
+See:
+P028 BCDE 5
+GoTo Spawn+1
+Missile:
+P028 A 0 A_JumpIfInventory("ConshotTimer",1,2) 
+P028 F 5 
+P028 G 4
+GoTo Spawn+2
+
+PainFix:
+P028 H 0 
+GoTo PainFrames
+}
+}
+
+actor TurtwigRentalMoves : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_JumpIf(CallACS("RentalBotCheck") == 1,"BotWep")
+
+TNT1 A 0 A_GiveInventory("SeedBombMove1")
+TNT1 A 0 A_GiveInventory("CrunchMove2")
+TNT1 A 0 A_GiveInventory("ProtectMove3")
+TNT1 A 0 A_GiveInventory("LeechSeedMove4")
+stop
+
+BotWep:
+TNT1 A 0 A_GiveInventory("SeedBombMove1")
+stop
+}
+}
+
+ actor TurtwigRentalSetupItem : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 ACS_NamedExecuteAlways("PKMN_RentalsSetup",0,Dex_Turtwig)
+stop
+}
+}
