@@ -88,8 +88,7 @@ Spawn:
 TNT1 A 0
 stop
 Pickup:
-TNT1 A 0 A_JumpifInventory("ProtectGuard",1,"Nope")
-TNT1 A 0 A_JumpifInventory("DetectGuard",1,"Nope")
+TNT1 A 0 A_Jumpif(CallACS("CheckStatusGuard",AAPTR_TRACER,STATUS_MAJOR),"Nope") //Blocked by protect|Detect|Substitute|Safeguard
 TNT1 A 0 A_JumpifInventory("PoisonMark",1,"Crit")
 stop
 

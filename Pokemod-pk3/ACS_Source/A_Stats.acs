@@ -207,7 +207,7 @@ Str StatName2[7] = {
 };
 */
 
-#LIBDEFINE STATITEMNUM 31
+#LIBDEFINE STATITEMNUM 36
 
 Str StatEffectName[STATITEMNUM][2] = {
     {"Growth","GOOD"},
@@ -241,6 +241,11 @@ Str StatEffectName[STATITEMNUM][2] = {
     {"Liquidation","BAD"},
     {"Dive","GOOD"},
     {"SweetScent","BAD"},
+    {"Charm","BAD"},
+    {"Captivate","BAD"},
+    {"Freeze1","BAD"},
+    {"Freeze2","BAD"},
+    {"AuroraBeam","BAD"},
 };
 
 #LIBDEFINE PATK_ID 0
@@ -282,6 +287,11 @@ Int StatEffectValue[STATITEMNUM][5] = {
 {   0,      0,      -1,      0,      0}, 
 {   0,      0,      0,      0,      1}, 
 {   0,      0,      0,      0,      -3}, 
+{   -2,      0,      0,      0,      0}, 
+{   0,      -2,      0,      0,      0}, 
+{   0,      0,      0,      0,      -1}, 
+{   0,      0,      0,      0,      -1}, 
+{   -1,      0,      0,      0,      0}, 
 };
 
 Int StatMulti[13] = {

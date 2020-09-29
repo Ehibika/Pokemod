@@ -44,6 +44,14 @@ damagefactor "StealthRock", 1.0
 damagefactor "Spikes", 1.0
 damagefactor "ToxicSpikes", 1.0
 damagefactor "StunSpore", 1.0
+damagefactor "Confuseray", 1.0
+damagefactor "Disable", 1.0
+damagefactor "ThundeWave", 1.0
+damagefactor "Supersonic", 1.0
+damagefactor "DreamEater", 1.0
+damagefactor "PoisonGas", 1.0
+damagefactor "DestinyBond", 1.0
+damagefactor "WorrySeed", 1.0
 
 }
 
@@ -483,32 +491,50 @@ damagefactor "XScissor2", 1.15 //S
 //[+]========================================================================[+]
 actor GhostWeakness : TypeBase
 {
-
+    damagefactor "Astonish", 1.3 //W
+    damagefactor "ShadowBall", 1.3 //W
+    damagefactor "ShadowSneak", 1.3 //W
+    damagefactor "PhantomForce", 1.3 //W
 }
 
 actor Ghost2xWeakness : TypeBase
 {
-
+    damagefactor "Astonish", 1.6 //2W
+    damagefactor "ShadowBall", 1.6 //2W
+    damagefactor "ShadowSneak", 1.6 //2W
+    damagefactor "PhantomForce", 1.6 //2W
 }
 
 actor GhostResistance : TypeBase
 {
-
+    damagefactor "Astonish", 0.7 //R
+    damagefactor "ShadowBall", 0.7 //R
+    damagefactor "ShadowSneak", 0.7 //R
+    damagefactor "PhantomForce", 0.7 //R
 }
 
 actor Ghost2xResistance : TypeBase
 {
-
+    damagefactor "Astonish", 0.4 //2R
+    damagefactor "ShadowBall", 0.4 //2R
+    damagefactor "ShadowSneak", 0.4 //2R
+    damagefactor "PhantomForce", 0.4 //2R
 }
 
 actor GhostImmunity : TypeBase
 {
-
+    damagefactor "Astonish", 0.0 //I
+    damagefactor "ShadowBall", 0.0 //I
+    damagefactor "ShadowSneak", 0.0 //I
+    damagefactor "PhantomForce", 0.0 //I
 }
 
 actor GhostSTAB : STABBase
 {
-
+    damagefactor "Astonish", 1.15 //S
+    damagefactor "ShadowBall", 1.15 //S
+    damagefactor "ShadowSneak", 1.15 //S
+    damagefactor "PhantomForce", 1.15 //S
 }
 //[+]========================================================================[+]
 //--------------------------------|Steel|--------------------------------
@@ -1012,31 +1038,67 @@ damagefactor "ThunderPunch", 1.15 //S
 actor PsychicWeakness : TypeBase
 {
     damagefactor "Extrasensory", 1.3 //W
+    damagefactor "Confusion", 1.3 //W
+    damagefactor "Psychic", 1.3 //W
+    damagefactor "Psyshock", 1.3 //W
+    damagefactor "Psychocut", 1.3 //W
+    damagefactor "FutureSight", 1.3 //W
+    damagefactor "ZenHeadbutt", 1.3 //W
 }
 
 actor Psychic2xWeakness : TypeBase
 {
     damagefactor "Extrasensory", 1.6 //2W
+    damagefactor "Confusion", 1.6 //2W
+    damagefactor "Psychic", 1.6 //2W
+    damagefactor "Psyshock", 1.6 //2W
+    damagefactor "Psychocut", 1.6 //2W
+    damagefactor "FutureSight", 1.6 //2W
+    damagefactor "ZenHeadbutt", 1.6 //2W
 }
 
 actor PsychicResistance : TypeBase
 {
     damagefactor "Extrasensory", 0.7 //R
+    damagefactor "Confusion", 0.7 //R
+    damagefactor "Psychic", 0.7 //R
+    damagefactor "Psyshock", 0.7 //R
+    damagefactor "Psychocut", 0.7 //R
+    damagefactor "FutureSight", 0.7 //R
+    damagefactor "ZenHeadbutt", 0.7 //R
 }
 
 actor Psychic2xResistance : TypeBase
 {
     damagefactor "Extrasensory", 0.4 //2R
+    damagefactor "Confusion", 0.4 //2R
+    damagefactor "Psychic", 0.4 //2R
+    damagefactor "Psyshock", 0.4 //2R
+    damagefactor "Psychocut", 0.4 //2R
+    damagefactor "FutureSight", 0.4 //2R
+    damagefactor "ZenHeadbutt", 0.4 //2R
 }
 
 actor PsychicImmunity : TypeBase
 {
     damagefactor "Extrasensory", 0.0 //I
+    damagefactor "Confusion", 0.0 //I
+    damagefactor "Psychic", 0.0 //I
+    damagefactor "Psyshock", 0.0 //I
+    damagefactor "Psychocut", 0.0 //I
+    damagefactor "FutureSight", 0.0 //I
+    damagefactor "ZenHeadbutt", 0.0 //I
 }
 
 actor PsychicSTAB : STABBase
 {
     damagefactor "Extrasensory", 1.15 //S
+    damagefactor "Confusion", 1.15 //S
+    damagefactor "Psychic", 1.15 //S
+    damagefactor "Psyshock", 1.15 //S
+    damagefactor "Psychocut", 1.15 //S
+    damagefactor "FutureSight", 1.15 //S
+    damagefactor "ZenHeadbutt", 1.15 //S
 }
 //[+]========================================================================[+]
 //--------------------------------|Ice|--------------------------------
@@ -1050,6 +1112,10 @@ damagefactor "IcyWind", 1.3 //W
 damagefactor "AuroraBeam", 1.3 //W
 damagefactor "IceBeam", 1.3 //W
 damagefactor "Blizzard", 1.3 //W
+damagefactor "IcicleSpear", 1.3 //W
+damagefactor "IcicleCrash", 1.3 //W
+damagefactor "FrostBreath", 1.3 //W
+damagefactor "IceShard", 1.3 //W
 }
 
 actor Ice2xWeakness : TypeBase
@@ -1061,6 +1127,10 @@ actor Ice2xWeakness : TypeBase
     damagefactor "AuroraBeam", 1.6 //2W
     damagefactor "IceBeam", 1.6 //2W
     damagefactor "Blizzard", 1.6 //2W
+    damagefactor "IcicleSpear", 1.6 //2W
+    damagefactor "IcicleCrash", 1.6 //2W
+    damagefactor "FrostBreath", 1.6 //2W
+    damagefactor "IceShard", 1.6 //2W
 }
 
 actor Ice2xResistance : TypeBase
@@ -1072,6 +1142,10 @@ actor Ice2xResistance : TypeBase
     damagefactor "AuroraBeam", 0.7 //R
     damagefactor "IceBeam", 0.7 //R
     damagefactor "Blizzard", 0.7 //R
+    damagefactor "IcicleSpear", 0.7 //R
+    damagefactor "IcicleCrash", 0.7 //R
+    damagefactor "FrostBreath", 0.7 //R
+    damagefactor "IceShard", 0.7 //R
 }
 
 actor IceResistance : TypeBase
@@ -1083,6 +1157,10 @@ actor IceResistance : TypeBase
     damagefactor "AuroraBeam", 0.4 //2R
     damagefactor "IceBeam", 0.4 //2R
     damagefactor "Blizzard", 0.4 //2R
+    damagefactor "IcicleSpear", 0.4 //2R
+    damagefactor "IcicleCrash", 0.4 //2R
+    damagefactor "FrostBreath", 0.4 //2R
+    damagefactor "IceShard", 0.4 //2R
 }
 
 actor IceImmunity : TypeBase
@@ -1094,6 +1172,10 @@ actor IceImmunity : TypeBase
     damagefactor "AuroraBeam", 0.0 //I
     damagefactor "IceBeam", 0.0 //I
     damagefactor "Blizzard", 0.0 //I
+    damagefactor "IcicleSpear", 0.0 //I
+    damagefactor "IcicleCrash", 0.0 //I
+    damagefactor "FrostBreath", 0.0 //I
+    damagefactor "IceShard", 0.0 //I
 }
 
 actor IceSTAB : STABBase
@@ -1105,6 +1187,10 @@ actor IceSTAB : STABBase
     damagefactor "AuroraBeam", 1.15 //S
     damagefactor "IceBeam", 1.15 //S
     damagefactor "Blizzard", 1.15 //S
+    damagefactor "IcicleSpear", 1.15 //S
+    damagefactor "IcicleCrash", 1.15 //S
+    damagefactor "FrostBreath", 1.15 //S
+    damagefactor "IceShard", 1.15 //S
 }
 //[+]========================================================================[+]
 //--------------------------------|Dragon|--------------------------------

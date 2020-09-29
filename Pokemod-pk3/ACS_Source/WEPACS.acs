@@ -13,7 +13,7 @@
 
 int PlayerClassWepMem[64];
 
-#LIBDEFINE MAX_WEAPONS_GLOBAL 160 //[Trill] Keep buffer room here for patches
+#LIBDEFINE MAX_WEAPONS_GLOBAL 260 //[Trill] Keep buffer room here for patches
 
 //#DEFINE MAX_WEAPONS_GLOBAL 87 // Maximum number of weapons for the following arrays
 // v6's weapon total would be 94
@@ -319,6 +319,95 @@ str weapons_ammo[MAX_WEAPONS_GLOBAL][7] =
 {"BlockMove", "BlockPP", "Block", 1.0, "NO", "NO", "SLOT_NONE"},
 {"BellyDrumMove", "BellyDrumPP", "BellyDrum", 1.0, "NO", "NO", "SLOT_NONE"},
 {"AirSlashMove", "AirSlashPP", "AirSlash", 1.0, "NO", "NO", "SLOT_NONE"},
+
+{"AstonishMove", "AstonishPP", "Astonish", 1.0, "NO", "NO", "SLOT_NONE"},
+{"InfestationMove", "InfestationPP", "Infestation", 1.0, "NO", "NO", "SLOT_NONE"},
+{"ConfuserayMove", "ConfuserayPP", "Confuseray", 1.0, "NO", "NO", "SLOT_NONE"},
+{"DisableMove", "DisablePP", "Disable", 1.0, "NO", "NO", "SLOT_NONE"},
+{"GrudgeMove", "GrudgePP", "Grudge", 1.0, "NO", "NO", "SLOT_NONE"},
+{"HexMove", "HexPP", "Hex", 1.0, "NO", "NO", "SLOT_NONE"},
+{"ShadowBallMove", "ShadowBallPP", "ShadowBall", 1.0, "NO", "NO", "SLOT_NONE"},
+{"SuckerPunchMove", "SuckerPunchPP", "SuckerPunch", 1.0, "NO", "NO", "SLOT_NONE"},
+{"DragonDartsMove", "DragonDartsPP", "DragonDarts", 1.0, "NO", "NO", "SLOT_NONE"},
+{"PhantomForceMove", "PhantomForcePP", "PhantomForce", 1.0, "NO", "NO", "SLOT_NONE"},
+{"DracoMeteorMove", "DracoMeteorPP", "DracoMeteor", 1.0, "NO", "NO", "SLOT_NONE"},
+{"ThundeWaveMove", "ThundeWavePP", "ThundeWave", 1.0, "NO", "NO", "SLOT_NONE"},
+{"TwisterMove", "TwisterPP", "Twister", 1.0, "NO", "NO", "SLOT_NONE"},
+{"WrapMove", "WrapPP", "Wrap", 1.0, "NO", "NO", "SLOT_NONE"},
+{"BarrierMove", "BarrierPP", "Barrier", 1.0, "NO", "NO", "SLOT_NONE"},
+{"DragonBreathMove", "DragonBreathPP", "DragonBreath", 1.0, "NO", "NO", "SLOT_NONE"},
+{"HurricaneMove", "HurricanePP", "Hurricane", 1.0, "NO", "NO", "SLOT_NONE"},
+{"ExtremeSpeedMove", "ExtremeSpeedPP", "ExtremeSpeed", 1.0, "NO", "NO", "SLOT_NONE"},
+{"HyperbeamMove", "HyperbeamPP", "Hyperbeam", 1.0, "NO", "NO", "SLOT_NONE"},
+{"HeadbuttMove", "HeadbuttPP", "Headbutt", 1.0, "NO", "NO", "SLOT_NONE"},
+{"ZenheadbuttMove", "ZenheadbuttPP", "Zenheadbutt", 1.0, "NO", "NO", "SLOT_NONE"},
+{"OutrageMove", "OutragePP", "Outrage", 1.0, "NO", "NO", "SLOT_NONE"},
+{"EndureMove", "EndurePP", "Endure", 1.0, "NO", "NO", "SLOT_NONE"},
+{"PsywaveMove", "PsywavePP", "Psywave", 1.0, "NO", "NO", "SLOT_NONE"},
+{"TeleportMove", "TeleportPP", "Teleport", 1.0, "NO", "NO", "SLOT_NONE"},
+{"AllyswitchMove", "AllyswitchPP", "Allyswitch", 1.0, "NO", "NO", "SLOT_NONE"},
+{"ConfusionMove", "ConfusionPP", "Confusion", 1.0, "NO", "NO", "SLOT_NONE"},
+{"PsychicMove", "PsychicPP", "Psychic", 1.0, "NO", "NO", "SLOT_NONE"},
+{"PsycheupMove", "PsycheupPP", "Psycheup", 1.0, "NO", "NO", "SLOT_NONE"},
+{"PowerGemMove", "PowerGemPP", "PowerGem", 1.0, "NO", "NO", "SLOT_NONE"},
+{"MagiccoatMove", "MagiccoatPP", "Magiccoat", 1.0, "NO", "NO", "SLOT_NONE"},
+{"MinimizeMove", "MinimizePP", "Minimize", 1.0, "NO", "NO", "SLOT_NONE"},
+{"CosmicpowerMove", "CosmicpowerPP", "Cosmicpower", 1.0, "NO", "NO", "SLOT_NONE"},
+{"ReflecttypeMove", "ReflecttypePP", "Reflecttype", 1.0, "NO", "NO", "SLOT_NONE"},
+{"DazzlinggleemMove", "DazzlinggleemPP", "Dazzlinggleem", 1.0, "NO", "NO", "SLOT_NONE"},
+{"ScreechMove", "ScreechPP", "Screech", 1.0, "NO", "NO", "SLOT_NONE"},
+{"TwinneedleMove", "TwinneedlePP", "Twinneedle", 1.0, "NO", "NO", "SLOT_NONE"},
+{"IceShardMove", "IceShardPP", "IceShard", 1.0, "NO", "NO", "SLOT_NONE"},
+{"IcicleCrashMove", "IcicleCrashPP", "IcicleCrash", 1.0, "NO", "NO", "SLOT_NONE"},
+{"IcicleSpearMove", "IcicleSpearPP", "IcicleSpear", 1.0, "NO", "NO", "SLOT_NONE"},
+{"SpikeCannonMove", "SpikeCannonPP", "SpikeCannon", 1.0, "NO", "NO", "SLOT_NONE"},
+{"RockBlastMove", "RockBlastPP", "RockBlast", 1.0, "NO", "NO", "SLOT_NONE"},
+{"SupersonicMove", "SupersonicPP", "Supersonic", 1.0, "NO", "NO", "SLOT_NONE"},
+{"PsyBeamMove", "PsyBeamPP", "PsyBeam", 1.0, "NO", "NO", "SLOT_NONE"},
+{"ClampMove", "ClampPP", "Clamp", 1.0, "NO", "NO", "SLOT_NONE"},
+{"FeintattackMove", "FeintattackPP", "Feintattack", 1.0, "NO", "NO", "SLOT_NONE"},
+{"CharmMove", "CharmPP", "Charm", 1.0, "NO", "NO", "SLOT_NONE"},
+{"CaptivateMove", "CaptivatePP", "Captivate", 1.0, "NO", "NO", "SLOT_NONE"},
+{"DrainpunchMove", "DrainpunchPP", "Drainpunch", 1.0, "NO", "NO", "SLOT_NONE"},
+{"RecoverMove", "RecoverPP", "Recover", 1.0, "NO", "NO", "SLOT_NONE"},
+{"PowerSwapMove", "PowerSwapPP", "PowerSwap", 1.0, "NO", "NO", "SLOT_NONE"},
+{"GuardSwapMove", "GuardSwapPP", "GuardSwap", 1.0, "NO", "NO", "SLOT_NONE"},
+{"PowerSplitMove", "PowerSplitPP", "PowerSplit", 1.0, "NO", "NO", "SLOT_NONE"},
+{"GuardSplitMove", "GuardSplitPP", "GuardSplit", 1.0, "NO", "NO", "SLOT_NONE"},
+{"FutureSightMove", "FutureSightPP", "FutureSight", 1.0, "NO", "NO", "SLOT_NONE"},
+{"CalmMindMove", "CalmMindPP", "CalmMind", 1.0, "NO", "NO", "SLOT_NONE"},
+{"PsyshockMove", "PsyshockPP", "Psyshock", 1.0, "NO", "NO", "SLOT_NONE"},
+{"TrickMove", "TrickPP", "Trick", 1.0, "NO", "NO", "SLOT_NONE"},
+{"<BlankMove>Move", "<BlankMove>PP", "<BlankMove>", 1.0, "NO", "NO", "SLOT_NONE"},
+{"FocusBlastMove", "FocusBlastPP", "FocusBlast", 1.0, "NO", "NO", "SLOT_NONE"},
+{"PsychoCutMove", "PsychoCutPP", "PsychoCut", 1.0, "NO", "NO", "SLOT_NONE"},
+{"PsychoShiftMove", "PsychoShiftPP", "PsychoShift", 1.0, "NO", "NO", "SLOT_NONE"},
+{"MegaPunchMove", "MegaPunchPP", "MegaPunch", 1.0, "NO", "NO", "SLOT_NONE"},
+{"HypnosisMove", "HypnosisPP", "Hypnosis", 1.0, "NO", "NO", "SLOT_NONE"},
+{"DreamEaterMove", "DreamEaterPP", "DreamEater", 1.0, "NO", "NO", "SLOT_NONE"},
+{"MeditateMove", "MeditatePP", "Meditate", 1.0, "NO", "NO", "SLOT_NONE"},
+{"PoisonGasMove", "PoisonGasPP", "PoisonGas", 1.0, "NO", "NO", "SLOT_NONE"},
+{"SwaggerMove", "SwaggerPP", "Swagger", 1.0, "NO", "NO", "SLOT_NONE"},
+{"FlatterMove", "FlatterPP", "Flatter", 1.0, "NO", "NO", "SLOT_NONE"},
+{"AssistMove", "AssistPP", "Assist", 1.0, "NO", "NO", "SLOT_NONE"},
+{"NightmareMove", "NightmarePP", "Nightmare", 1.0, "NO", "NO", "SLOT_NONE"},
+{"DisarmingVoiceMove", "DisarmingVoicePP", "DisarmingVoice", 1.0, "NO", "NO", "SLOT_NONE"},
+{"ShadowSneakMove", "ShadowSneakPP", "ShadowSneak", 1.0, "NO", "NO", "SLOT_NONE"},
+{"DestinyBondMove", "DestinyBondPP", "DestinyBond", 1.0, "NO", "NO", "SLOT_NONE"},
+{"CharmMove", "CharmPP", "Charm", 1.0, "NO", "NO", "SLOT_NONE"},
+{"DrainingKissMove", "DrainingKissPP", "DrainingKiss", 1.0, "NO", "NO", "SLOT_NONE"},
+{"ImprisonMove", "ImprisonPP", "Imprison", 1.0, "NO", "NO", "SLOT_NONE"},
+{"WishMove", "WishPP", "Wish", 1.0, "NO", "NO", "SLOT_NONE"},
+{"StoredPowerMove", "StoredPowerPP", "StoredPower", 1.0, "NO", "NO", "SLOT_NONE"},
+{"HealingWishMove", "HealingWishPP", "HealingWish", 1.0, "NO", "NO", "SLOT_NONE"},
+{"MoonblastMove", "MoonblastPP", "Moonblast", 1.0, "NO", "NO", "SLOT_NONE"},
+{"EggBombMove", "EggBombPP", "EggBomb", 1.0, "NO", "NO", "SLOT_NONE"},
+{"MoonlightMove", "MoonlightPP", "Moonlight", 1.0, "NO", "NO", "SLOT_NONE"},
+{"UproarMove", "UproarPP", "Uproar", 1.0, "NO", "NO", "SLOT_NONE"},
+{"WorrySeedMove", "WorrySeedPP", "WorrySeed", 1.0, "NO", "NO", "SLOT_NONE"},
+{"IngrainMove", "IngrainPP", "Ingrain", 1.0, "NO", "NO", "SLOT_NONE"},
+{"AvalancheMove", "AvalanchePP", "Avalanche", 1.0, "NO", "NO", "SLOT_NONE"},
+{"MistMove", "MistPP", "Mist", 1.0, "NO", "NO", "SLOT_NONE"},
 //--[NewMove]--
 };
 #endregion
@@ -963,6 +1052,20 @@ if(CheckInventory("HazedFlagEnemy"))
 		Case SWORDDANCE: return false; break;
 		Case NASTYPLOT: return false; break;
         default: break;
+    }
+}
+
+if(CheckInventory("SleepMark"))
+    {switch(ThisWeapon) {
+        Case REST: break;
+        default: return false; break;
+    }
+}
+
+if(CheckInventory("FreezeMark"))
+    {switch(ThisWeapon) {
+        //Case REST: break;
+        default: return false; break;
     }
 }
 

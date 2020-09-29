@@ -15,13 +15,9 @@ Spawn:
 TNT1 A 0
 stop
 Pickup:
-TNT1 A 0 A_Jumpifinventory("SafeguardPower",1,"Nope")
+TNT1 A 0 A_Jumpif(CallACS("CheckStatusGuard",0,STATUS_MAJOR),"Pickup.After") //Blocked by protect|Detect|Substitute|Safeguard
 TNT1 A 0 A_Jumpifinventory("PoisonGuard",1,"Nope")
 TNT1 A 0 A_Jumpifinventory("TempPoisonGuard",1,"Nope")
-
-TNT1 A 0 A_Jumpifinventory("SleepMark",1,"Nope")
-TNT1 A 0 A_Jumpifinventory("ParalysisMark",1,"Nope")
-TNT1 A 0 A_Jumpifinventory("BurnMark",1,"Nope")
 //==
 TNT1 A 0 A_Jumpifinventory("PoisonMark",1,"Sustain")
 TNT1 A 0 A_GiveInventory("PoisonMark",1)
@@ -192,16 +188,13 @@ Spawn:
 TNT1 A 0
 stop
 Pickup:
-TNT1 A 0 A_Jumpifinventory("SafeguardPower",1,"Nope")
-
-TNT1 A 0 A_Jumpifinventory("PoisonMark",1,"Nope")
-TNT1 A 0 A_Jumpifinventory("ParalysisMark",1,"Nope")
-TNT1 A 0 A_Jumpifinventory("BurnMark",1,"Nope")
+TNT1 A 0 A_Jumpif(CallACS("CheckStatusGuard",0,STATUS_MAJOR),"Pickup.After") //Blocked by protect|Detect|Substitute|Safeguard
 TNT1 A 0 A_Jumpifinventory("CringeGuard",1,"Nope")
 //==
 TNT1 A 0 A_Jumpifinventory("SleepMark",1,"Sustain")
 TNT1 A 0 A_GiveInventory("SleepMark",1)
-TNT1 A 0 SetPlayerProperty(0,1,4)
+TNT1 A 0 SetPlayerProperty(0,1,0)
+TNT1 A 0 ACS_NamedExecuteAlways("PKMN_JumpToggle",0,0)
 TNT1 A 0 A_SpawnItemEX("HaltPlayer")
 TNT1 A 0 ACS_NamedExecuteAlways("PKMN_SleepHandler",0)
 TNT1 A 0 A_SpawnItemEX("SleepWatcher")
@@ -310,7 +303,8 @@ TNT1 A 0 A_SpawnItemEX("FrightFX",0,0,40)
 goto EndSleed
 
 EndSleed:
-TNT1 A 0 SetPlayerProperty(0,0,4)
+TNT1 A 0 SetPlayerProperty(0,0,0)
+TNT1 A 0 ACS_NamedExecuteAlways("PKMN_JumpToggle",0,1)
 stop
 
 Cringed:
@@ -344,13 +338,9 @@ Spawn:
 TNT1 A 0
 stop
 Pickup:
-TNT1 A 0 A_Jumpifinventory("SafeguardPower",1,"Nope")
+TNT1 A 0 A_Jumpif(CallACS("CheckStatusGuard",0,STATUS_MAJOR),"Pickup.After") //Blocked by protect|Detect|Substitute|Safeguard
 TNT1 A 0 A_Jumpifinventory("BurnGuard",1,"Nope")
 TNT1 A 0 A_Jumpifinventory("TempBurnGuard",1,"Nope")
-
-TNT1 A 0 A_Jumpifinventory("SleepMark",1,"Nope")
-TNT1 A 0 A_Jumpifinventory("ParalysisMark",1,"Nope")
-TNT1 A 0 A_Jumpifinventory("PoisonMark",1,"Nope")
 //==
 TNT1 A 0 A_Jumpifinventory("BurnMark",1,"Sustain")
 TNT1 A 0 A_GiveInventory("BurnMark",1)
@@ -510,7 +500,315 @@ powerup.duration -5
 //Powerup.Color Green, 0.15
 }
 
+actor STF_Freeze1 : Powerup
+{
+powerup.duration 35
+}
 
+actor STF_Freeze2 : Powerup
+{
+powerup.duration 35
+}
+
+
+actor FreezeValue : Inventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
+}
+
+actor FreezeStatusProc : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_Jumpif(CallACS("CheckStatusGuard",0,STATUS_MAJOR),"Pickup.After") //Blocked by protect|Detect|Substitute|Safeguard
+//==
+TNT1 A 0 A_Jumpifinventory("FreezeMark",1,"Sustain")
+TNT1 A 0 A_GiveInventory("FreezeMark",1)
+TNT1 A 0 A_GiveInventory("FreezeValue",1)
+TNT1 A 0 A_SpawnItemEX("FreezeWatcher")
+TNT1 A 0 A_Playsoundex("support/Negative","Soundslot5")
+stop
+
+Sustain:
+TNT1 A 0 A_GiveInventory("FreezeMark",1)
+TNT1 A 0 A_GiveInventory("FreezeValue",1)
+stop
+
+Nope:
+TNT1 A 0
+stop
+}
+}
+
+
+actor HardFreeze : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 SetPlayerProperty(0,1,0)
+TNT1 A 0 ACS_NamedExecuteAlways("PKMN_JumpToggle",0,0)
+TNT1 A 0 A_SpawnItemEX("HaltPlayer")
+TNT1 A 0 A_SpawnItemEX("HardFreezeFX",1)
+TNT1 A 0 A_GiveInventory("IceImmunity",1)
+TNT1 A 0 A_Playsoundex("weapon/IceManBreak","Soundslot5")
+stop
+
+Sustain:
+TNT1 A 0 
+stop
+
+Nope:
+TNT1 A 0
+stop
+}
+}
+
+actor FreezeWatcher //: CustomInventory
+{
++MISSILE
++RIPPER
++NOGRAVITY
++NOINTERACTION
+Reactiontime 5
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_JumpIfInTargetInventory("CutterFlag",999,"DeathTake")
+TNT1 A 0 A_JumpIfInTargetInventory("CureAll",1,"DeathTake")
+TNT1 A 0 A_GiveToTarget("FreezeMark")
+TNT1 A 5 
+
+TNT1 A 0 A_JumpIfInTargetInventory("FreezeValue",100,"FullFreeze")
+TNT1 A 0 A_JumpIfInTargetInventory("FreezeValue",50,"HalfFreeze")
+Goto PartFreeze
+
+PartFreeze:
+TNT1 A 0 A_GiveToTarget("Freeze1_NerfInitiate")
+TNT1 A 0 A_GiveToTarget("FreezeTagPickup")
+TNT1 A 0 A_JumpIfInTargetInventory("FreezeMark",1,"FreezeCycle")
+Goto Death
+
+HalfFreeze:
+TNT1 A 0 A_GiveToTarget("Freeze2_NerfInitiate")
+TNT1 A 0 A_GiveToTarget("FreezeTagPickup2")
+TNT1 A 0 A_JumpIfInTargetInventory("FreezeMark",1,"FreezeCycle")
+Goto Death
+
+FullFreeze:
+TNT1 A 0 A_GiveInventory("RestFX_Spawn")
+TNT1 A 0 A_GiveToTarget("HardFreeze")
+FullFreezeCycle:
+TNT1 A 5 A_TakefromTarget("FreezeValue",2)
+TNT1 A 0 A_GiveToTarget("FreezeMark")
+TNT1 A 0 A_GiveToTarget("FreezeTagPickup2")
+TNT1 A 0 A_JumpIfInTargetInventory("CureAll",1,"DeathTake")
+TNT1 A 0 A_JumpIfInTargetInventory("FreezeValue",1,"FullFreezeCycle")
+Goto Death
+
+FreezeCycle:
+TNT1 A 1 A_TakefromTarget("FreezeValue",1)
+TNT1 A 0 A_JumpIfInTargetInventory("CureAll",1,"DeathTake")
+TNT1 A 0 A_JumpIfInTargetInventory("FreezeValue",1,"Spawn")
+Goto Death
+
+Death:
+DeathTake:
+TNT1 A 0
+TNT1 A 1 A_TakefromTarget("FreezeMark",999)
+TNT1 A 1 A_GiveToTarget("FreezeBreaker")
+stop
+}
+}
+
+
+actor HardFreezeFX : BasicClientside
+{
+scale 3.5
+speed 7
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 ACS_NamedExecuteAlways("FreezeFXWarper",0)
+Spawn2:
+IBLK ABCDEF 1 A_Warp(AAPTR_TARGET,0,0,0,0,WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE)
+TNT1 A 0 A_JumpIfInTargetInventory("FreezeMark",1,"Spawn2")
+Goto Death
+Death:
+TNT1 A 0 A_playSoundEx("weapon/icewavebreak","Weapon")
+TNT1 AAAAAA 0 A_SpawnItemEx("FreezingFX3",random2(32),0,random(32,64),5,0,random(5,15),random(0,360),0)
+TNT1 AAAAAA 0 A_SpawnItemEx("FreezingFX3",random2(32),0,random(32,64),5,0,random(5,15),random(0,360),0)
+TNT1 AAAAAA 0 A_SpawnItemEx("FreezingFX3",random2(32),0,random(32,64),5,0,random(5,15),random(0,360),0)
+TNT1 A 1 
+stop
+}
+}
+
+actor FreezeTagPickup : CustomInventory
+{
+States
+{
+Pickup:
+TNT1 A 0
+TNT1 A 0 A_SpawnItemEx("FreezingFX",random2(32),random2(32),random(32,64),0,0,-4,0)
+stop
+}
+}
+
+actor FreezingFX : BasicClientside
+{
+scale 3.5
+renderstyle "add"
+speed 7
+States
+{
+Spawn:
+TNT1 A 0
+BLIZ ABCCC 2 
+stop
+}
+}
+
+actor FreezeTagPickup2 : CustomInventory
+{
+States
+{
+Pickup:
+TNT1 A 0
+TNT1 A 0 A_SpawnItemEx("FreezingFX",random2(32),random2(32),random(32,64),0,0,-4,0)
+TNT1 A 0 A_SpawnItemEx("FreezingFX2",random2(32),random2(32),random(32,64),0,0,0,0,0)
+stop
+}
+}
+
+actor FreezingFX2 : BasicClientside
+{
+scale 3.5
+renderstyle "add"
+speed 7
+States
+{
+Spawn:
+TNT1 A 0
+FCRA ABC 2 
+stop
+}
+}
+
+actor FreezingFX3 : BasicClientside
+{
++MISSILE
+-NOINTERACTION
+-NOGRAVITY
++BOUNCEONFLOORS
+scale 3.5
+speed 7
+Reactiontime 7
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_SetScale(Frandom(2.5,4.0))
+IMAC D 0 A_Jump(50,"Spawn2")
+IMAC E 0 A_Jump(50,"Spawn2")
+IMAC F 0 A_Jump(50,"Spawn2")
+IMAC G 0 A_Jump(50,"Spawn2")
+Spawn2:
+IMAC "#" 25 
+Spawn3:
+IMAC "#" 3 A_SetTranslucent(0.0,0)
+IMAC "#" 3 A_SetTranslucent(1.0,0)
+IMAC "#" 0 A_CountDown
+loop
+}
+}
+
+actor FreezeBreaker : CustomInventory
+{
+States
+{
+Pickup:
+TNT1 A 0
+TNT1 A 0 A_Jumpifinventory("IceImmunity",1,"Defrost")
+TNT1 A 1 A_TakeInventory("FreezValue",999)
+stop
+
+Defrost:
+TNT1 A 0 SetPlayerProperty(0,0,0)
+TNT1 A 0 ACS_NamedExecuteAlways("PKMN_JumpToggle",0,1)
+TNT1 A 0 A_TakeInventory("IceImmunity",999)
+stop
+}
+}
+
+
+actor Freeze1_NerfInitiate : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_Jumpifinventory("STF_Freeze1",1,"Sustain")
+TNT1 A 0 A_GiveInventory("STF_Freeze1",1)
+TNT1 A 0 A_GiveInventory("StatUpdator",1)
+stop
+
+Sustain:
+TNT1 A 0 A_GiveInventory("STF_Freeze1",1)
+stop
+Nope:
+TNT1 A 0
+stop
+}
+}
+
+actor Freeze2_NerfInitiate : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_Jumpifinventory("STF_Freeze2",1,"Sustain")
+TNT1 A 0 A_GiveInventory("STF_Freeze1",1)
+TNT1 A 0 A_GiveInventory("STF_Freeze2",1)
+TNT1 A 0 A_GiveInventory("StatUpdator",1)
+stop
+
+Sustain:
+TNT1 A 0 A_GiveInventory("STF_Freeze1",1)
+TNT1 A 0 A_GiveInventory("STF_Freeze2",1)
+stop
+Nope:
+TNT1 A 0
+stop
+}
+}
 //[+]=========================[+]
 //----------|Cringe|-------------
 //[+]=========================[+]
@@ -526,7 +824,7 @@ Spawn:
 TNT1 A 0
 stop
 Pickup:
-TNT1 A 0 A_Jumpifinventory("SafeguardPower",1,"Nope")
+TNT1 A 0 A_Jumpif(CallACS("CheckStatusGuard",0,STATUS_MINOR),"Pickup.After") //Blocked by protect|Detect|Substitute|Safeguard
 
 TNT1 A 0 A_Jumpifinventory("CringeMark",1,"Nope")
 TNT1 A 0 A_Jumpifinventory("CringeGuard",1,"Nope")
@@ -627,6 +925,8 @@ TNT1 A 0 A_TakeInventory("CringeMark", 999)
 TNT1 A 1 A_GiveInventory("CringeGuard")
 TNT1 A 0 A_SpawnItemEX("AlertFX")
 TNT1 A 0 SetPlayerProperty(0,0,4)
+TNT1 A 0 SetPlayerProperty(0,0,0)
+TNT1 A 0 ACS_NamedExecuteAlways("PKMN_JumpToggle",0,1)
 stop
 }
 }

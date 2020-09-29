@@ -102,6 +102,23 @@ Script "AlertFXWarper" (void) CLIENTSIDE
 	Thing_Remove(0);
 }
 
+Script "FreezeFXWarper" (void) CLIENTSIDE
+{
+	int Player = ACS_NamedExecuteWithResult("core_gettarget",0);
+	
+	// Loop if shield is active
+	while(GetActorProperty(Player, APROP_HEALTH)>0
+	&& CheckActorInventory(Player, "FreezeMark") > 0
+	){
+		Delay(1);
+	}
+	
+    // Remove
+    SetActorState(0,"Death");
+    Delay(17);
+	Thing_Remove(0);
+}
+
 Script "FalseSwipeDamage" (int Damage)
 {
 int TargTID = ACS_NamedExecuteWithResult("core_gettarget",0);
@@ -245,11 +262,11 @@ SetActivator(DrainerTID,AAPTR_DEFAULT);
 ACS_NamedExecuteAlways("PKMNACS_Basic(Over)Heal",0,0,Amount);
 }
 
-Script "RemoteControlActor" (int ActorSpeed)
+Script "RemoteControlActor" (int ActorSpeed, int MaxRange)
 {
 
     int OwnerTID = ACS_NamedExecuteWithResult("core_gettarget",0);
-
+    if (MaxRange <= 0){MaxRange = 500;}
 
     int InputButtons;
     int InputOldButtons; 
@@ -266,8 +283,11 @@ Script "RemoteControlActor" (int ActorSpeed)
     int Velx2;
     int Vely2;
     int Angle;
-    while(GetActorProperty(0, APROP_HEALTH)>0)
+    int HostAngle;
+    int MoveAngle;
+    while(GetActorProperty(OwnerTID, APROP_HEALTH)>0 && !CheckActorInventory(OwnerTID,"RemoteKiller"))
     {	
+        //log(s:"test");
         // - Grab Inputs -
         InputButtons = GetPlayerInput(OwnerTID-1000, INPUT_BUTTONS);
         UpInput = ButtonCheck(InputButtons, InputOldButtons, BT_FORWARD);
@@ -277,31 +297,43 @@ Script "RemoteControlActor" (int ActorSpeed)
         ConfirmInput = ButtonCheck(InputButtons, InputOldButtons, BT_ATTACK);
         CancelInput = ButtonCheck(InputButtons, InputOldButtons, BT_AltATTACK);
         Angle = GetActorAngle(OwnerTID);
+        HostAngle = VectorAngle (GetActorX (0) - GetActorX (OwnerTID), GetActorY (0) - GetActorY (OwnerTID));
+        //MoveAngle = Angle;
+
+
         Velx = 0;
         vely = 0;
         VelX2 = 0;
         Vely2 = 0;
         if(UpInput != DownInput)
             {
-                if(UpInput == 3){Velx = FixedMul(cos(angle),  ActorSpeed*65536); vely = FixedMul(Sin(angle),  ActorSpeed*65536);}
-                if(DownInput == 3){Velx = FixedMul(cos(angle), -ActorSpeed*65536); vely = FixedMul(Sin(angle),  -ActorSpeed*65536);}
+                if(UpInput == 3){Velx = FixedMul(cos(Angle),  ActorSpeed*65536); vely = FixedMul(Sin(Angle),  ActorSpeed*65536);}
+                if(DownInput == 3){Velx = FixedMul(cos(Angle), -ActorSpeed*65536); vely = FixedMul(Sin(Angle),  -ActorSpeed*65536);}
             }  
 
         if(LeftInput != RightInput)
             {
-                if(LeftInput == 3){Velx2 = FixedMul(cos(-angle),  ActorSpeed*65536); vely2 = FixedMul(Sin(-angle),  ActorSpeed*65536);}
-                if(RightInput == 3){Velx2 = FixedMul(cos(-angle), -ActorSpeed*65536); vely2 = FixedMul(Sin(-angle),  -ActorSpeed*65536);}
+                if(LeftInput == 3){Velx2 = FixedMul(cos(-Angle),  ActorSpeed*65536); vely2 = FixedMul(Sin(-Angle),  ActorSpeed*65536);}
+                if(RightInput == 3){Velx2 = FixedMul(cos(-Angle), -ActorSpeed*65536); vely2 = FixedMul(Sin(-Angle),  -ActorSpeed*65536);}
             }    
-log(f:Velx);
+log(f:HostAngle);
             if(CancelInput == 1){Thing_Remove(0); Terminate;}
             if(ConfirmInput == 1){SetActorState(0,"Trigger");}
     SetActorVelocity(0, velx+vely2, vely+velx2, 0, FALSE, FALSE);
     SetActorAngle (0,Angle );
+
+    if(xyDistance(0, OwnerTID) > MaxRange)
+        {
+            Warp(OwnerTID,MaxRange*cos(HostAngle),MaxRange*Sin(-HostAngle),0,HostAngle,WARPF_ABSOLUTEANGLE|WARPF_INTERPOLATE|WARPF_NOCHECKPOSITION|WARPF_TOFLOOR);
+            SetActorAngle (0,Angle );
+        //Velx = FixedMul(cos(HostAngle),  ActorSpeed*65536); vely = FixedMul(Sin(HostAngle),  ActorSpeed*65536);
+        //SetActorVelocity(0, velx, vely, 0, FALSE, FALSE);    
+        }
     Delay(1);
 	InputOldButtons = InputButtons;
     }
 
-
+    Thing_Remove(0);
 }
 
 
@@ -323,4 +355,148 @@ script "SnapToRemote" (int X_Placement)
     int OwnerPnum = OwnerTID-1000;
     Warp(9100+OwnerPnum, X_Placement, 0, 0, 0, WARPF_ABSOLUTEPOSITION|WARPF_USECALLERANGLE|WARPF_INTERPOLATE);
 
+}
+
+#DEFINE SUBTID 380000 // 37| Owner TID
+
+Script "SubstituteSetup" (void)
+{
+
+    int OwnerTID = ACS_NamedExecuteWithResult("core_gettarget",0);
+    int OwnerMaxHP = GetActorProperty(OwnerTID, APROP_SPAWNHEALTH);
+    int OwnerHP = GetActorProperty(OwnerTID, APROP_HEALTH);
+    int SubsHP = OwnerMaxHP/3;
+    int SubsPDEF = CheckActorInventory(OwnerTID,"Active_PDefense");
+    int SubsSDEF = CheckActorInventory(OwnerTID,"Active_SDefense");
+    int StatValue;
+    int ModStat;
+    int DollTID = SUBTID+OwnerTID;
+    Bool Replaced;
+
+    if(IsTIDUsed(DollTID))
+        {
+            until(!IsTIDUsed(DollTID)){SpawnSpotForced("SubPoofFXSpawn",DollTID,0,0); Thing_remove(DollTID);}
+            Replaced = True;
+        }
+    Thing_ChangeTID(0,DollTID);
+
+    SetActorPRoperty(0,APROP_SPAWNHEALTH,SubsHP);
+    SetActorPRoperty(0,APROP_HEALTH,SubsHP);
+    SetActorProperty(OwnerTID, APROP_HEALTH,OwnerHP-SubsHP);
+    Log(i:SubsHP);
+
+    ModStat = SubsPDEF;
+
+if(ModStat >= STATBASELINE)
+    {
+    StatValue = Noneg(ValueMap(ModStat,STATMAX,STATBASELINE,DEFVAL1,DEFVAL2));
+    }
+else
+    {
+    StatValue = Noneg(ValueMap(ModStat,STATBASELINE,STATMIN,DEFVAL2,DEFVAL3));    
+    }
+if(StatValue < 10){StatValue = 10;}
+GiveInventory(StrParam(s:"PDEF",i:StatValue),1);
+
+ModStat = SubsSDEF;
+
+if(ModStat >= STATBASELINE)
+    {
+    StatValue = Noneg(ValueMap(ModStat,STATMAX,STATBASELINE,DEFVAL1,DEFVAL2));
+    }
+    else
+    {
+    StatValue = Noneg(ValueMap(ModStat,STATBASELINE,STATMIN,DEFVAL2,DEFVAL3));    
+    }
+if(StatValue < 10){StatValue = 10;}
+GiveInventory(StrParam(s:"SDEF",i:StatValue),1);
+
+}
+
+
+
+Script "SubstituteActive" (int Dist) CLIENTSIDE
+{
+    int Player = ACS_NamedExecuteWithResult("core_gettarget",0);
+    Int DollTID = ActivatorTID();
+	
+	// Loop if shield is active
+	while(GetActorProperty(0, APROP_HEALTH)>0 && GetActorProperty(Player, APROP_HEALTH)>0){
+        //log(i:xyzDistance(0,Player),s:"   ",i:Dist);
+        if(CheckSight(0,Player,0) && xyzDistance(0,Player) < Dist)
+            {
+            GiveInventory("SubstituteGuardianItem",1);
+            }
+		Delay(1);
+    }
+    
+    if(GetActorProperty(Player, APROP_HEALTH)<=0 || !PlayerInGame(Player-1000)){SpawnSpotForced("SubPoofFXSpawn",DollTID,0,0); Thing_remove(DollTID);}
+}
+
+
+Script "SubstituteBarrierWarper" (void) CLIENTSIDE
+{
+	int Player = ACS_NamedExecuteWithResult("core_gettarget",0);
+	
+	// Loop if shield is active
+	while(GetActorProperty(Player, APROP_HEALTH)>0
+	&& CheckActorInventory(Player, "SubstituteGuard") > 0
+	){
+		Delay(1);
+	}
+	
+    // Remove
+    SetActorState(0,"Death");
+    Delay(17);
+	Thing_Remove(0);
+}
+
+#DEFINE STATUS_MINOR  1
+#DEFINE STATUS_MAJOR  2
+#DEFINE STATUS_SPECIALTY  4
+#DEFINE STATUS_STATS  8
+#DEFINE STATUS_TAUNT  16
+//#DEFINE STATUS_  16
+
+Script "CheckStatusGuard" (int Pointer, int Input)
+{
+Int Output;
+
+/*
+ * 0 = no status protection
+ * 1 = Minor status protection
+ * 2 = Major status protection
+ *
+ */ 
+
+if(Pointer!=0){SetActivator(0,Pointer);}
+
+if(CheckInventory("SleepMark")
+||CheckInventory("PoisonMark")
+||CheckInventory("BurnMark")
+||CheckInventory("ParalysisMark")
+||CheckInventory("FreezeMark"))
+{Output = Output | STATUS_MAJOR;}
+
+if(CheckInventory("ProtectGuard")
+||CheckInventory("DetectGuard")
+||CheckInventory("SubstituteGuard"))
+{Output = Output | STATUS_MAJOR | STATUS_MINOR | STATUS_STATS;}
+
+    if(CheckInventory("SafeguardPower"))
+    {Output = Output | STATUS_MAJOR | STATUS_MINOR | STATUS_SPECIALTY | STATUS_TAUNT;}
+
+    if(CheckInventory("HazedFlagAlly"))
+    {Output = Output | STATUS_STATS;}
+
+SetResultValue(Output & Input);
+}
+
+Script "InfernoPowerLevel" (int MaxDamage)
+{
+    int Player = ACS_NamedExecuteWithResult("core_gettarget",0);
+
+    int CurrentPower = CheckActorInventory(Player,"InfernoPower");
+    int Output = ((MaxDamage*CurrentPower)/100);
+    SetResultValue(Output);
 }

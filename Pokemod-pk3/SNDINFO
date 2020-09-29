@@ -115,6 +115,12 @@ weapon/Bounce1	coil1a
 weapon/Bounce2	coil2a
 class/ToadCroak S_M4TOA1 
 
+weapon/IceManShot ICESHOT
+weapon/Ice_Cloud ICESHOTA
+weapon/IceManLaser ICESHOTL
+weapon/IceManBit ICESHOTB
+weapon/IceManBreak ICESHOTC
+
 Move/Yawn YAWN 
 Move/BulletSeed PTUEY 
 Move/Amnesia HUH 
@@ -130,6 +136,11 @@ Move/Fakeout2 FAKEOUT2
 Move/Crunch CRUNCH
 Move/DrillPeck DRILPECK
 Move/SwordDance SWRDDANC
+Move/IceBeam ICEBEAM
+
+Move/Confusion PSILOVE1
+Move/Psychic1 PSILOVE2
+Move/Psychic2 PSILOVE3
 
 Misc/UseMove MOVEUSE
 Misc/Levelup LEVELUP

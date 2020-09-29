@@ -163,7 +163,7 @@ Script "PKMNACS_StartupScript" (int BaseDex)
 			//Log(s:"Base");
 			ACS_NamedExecuteAlways("StatInitializer",0);
 			ACS_NamedExecuteAlways("SetPlayerType",0);
-			ACS_NamedExecuteAlways("SetPokeSkin",0,BaseDex);
+			//ACS_NamedExecuteAlways("SetPokeSkin",0,BaseDex);
 			GiveInventory("PersistentLoadout",1);
 				//For TLMS's map reset
 			if( (GetCvar("lastmanstanding")==1||GetCvar("teamlms")==1)
@@ -181,7 +181,7 @@ Script "PKMNACS_StartupScript" (int BaseDex)
 			ACS_NamedExecuteAlways("StatInitializer",0);
 			ACS_NamedExecuteAlways("SetPlayerType",0);
 			ACS_NamedExecuteAlways("SetPKMNLevel",0,GetSpawnLevel(),1);
-			ACS_NamedExecuteAlways("SetPokeSkin",0,BaseDex);
+			//ACS_NamedExecuteAlways("SetPokeSkin",0,BaseDex);
 			ACS_NamedExecuteAlways("GiveStartingFund",0);
 			GiveStartingMoves();
 			Terminate;
@@ -201,7 +201,7 @@ Script "PKMNACS_StartupScript" (int BaseDex)
 			ACS_NamedExecuteAlways("StatInitializer",0);
 			ACS_NamedExecuteAlways("SetPlayerType",0);
 			ACS_NamedExecuteAlways("SetPKMNLevel",0,GetSpawnLevel(),1);
-			ACS_NamedExecuteAlways("SetPokeSkin",0,BaseDex);
+			//ACS_NamedExecuteAlways("SetPokeSkin",0,BaseDex);
 			GiveStartingMoves();
 			GiveInventory("PersistentLoadout",1);
 			break;

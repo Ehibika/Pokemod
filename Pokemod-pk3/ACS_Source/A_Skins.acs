@@ -186,6 +186,9 @@ script "SetPokeSkin" (int Skin, int update) //CLIENTSIDE
 {
 //if(PlayerNumber()==ConsolePlayerNumber()) YourTrueForm = skin;
 
+if(SkinDEX[Skin][1] == "Base"){log(s:"Boop") ;Terminate;}
+
+GiveInventory("SkinEnabler",1);
 ConsoleCommand(strParam(s:"set theDisguise ",s:SkinDEX[Skin][0]));
 ACS_NamedExecuteWithResult("SetDisguise",PlayerNumber());
 }
@@ -318,8 +321,9 @@ if(disguise!=playerCurrentSkin[i]) {
 function void DisguiseFunc3(int i)
 {
     if(PlayerIsBot(i)){return ;}
+int InDisguise = playerDisguised[i];
 int disguise = playerDisguise[i];
-if(disguise!=playerCurrentSkin[i]) {
+if(InDisguise && disguise!=playerCurrentSkin[i] && playerCooldown[i]%5) {
     GiveActorInventory(i+1000,"EvoMaskFX_Spawn",1);
 }
 }
@@ -334,6 +338,12 @@ function void ConsoleCommandP(str cmd)
 {
 ConsoleCommand(cmd);
 Log(s:cmd);
+}
+
+Script "DisconnectDisguise" (int Gone) DISCONNECT
+{
+    ACS_NamedExecuteWithResult("SetUnDisguise",Gone);
+
 }
 
 Script "ForceSkins" OPEN CLIENTSIDE

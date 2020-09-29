@@ -580,3 +580,68 @@
 			stop
 		}
 	}
+
+		//===|Version that bounces off Walls and Ceilings and has no gravity
+
+		actor GolfBallAimInstantStarter5 : GolfBallAim
+		{
+			+CLIENTSIDEONLY
+			+NOGRAVITY
+			radius 12
+			height 16
+			translation "198:198=220:220", "192:192=229:229"
+			States
+			{
+			Spawn:
+				TNT1 A 0
+				TNT1 A 0 ACS_NamedExecuteWithResult("Arc_Limit_Start")
+				TNT1 A 0 //ACS_NamedExecuteWithResult("GOLF_CLIENT",6,0,0,0)
+				TNT1 A 0 A_SpawnItemEx("GolfBallAimInstantBuffer5",0,0,0,momx,momy,momz,0,SXF_TRANSFERTRANSLATION | SXF_ABSOLUTEVELOCITY)
+				TNT1 A 1
+				stop
+			}
+		}
+		actor GolfBallAimInstantBuffer5 : GolfBallAim
+		{
+			+CLIENTSIDEONLY
+			+NOGRAVITY
+			radius 12
+			height 16
+			States
+			{
+			Spawn:
+				TNT1 A 0
+				TNT1 A 0 //ACS_NamedExecuteWithResult("GOLF_CLIENT",6,0,0,0)
+				TNT1 A 0 A_SpawnItemEx("GolfBallAimInstant5",0,0,0,momx,momy,momz,0,SXF_TRANSFERTRANSLATION | SXF_ABSOLUTEVELOCITY)
+				TNT1 A 1
+				stop
+			}
+		}
+	
+		actor GolfBallAimInstant5 : GolfBallAim
+		{
+			+CLIENTSIDEONLY
+			+BOUNCEONCEILINGS
+			+BOUNCEONWALLS
+			+BOUNCEONFLOORS
+			+MBFBOUNCER
+			+NOGRAVITY
+			radius 12
+			height 16
+			States
+			{
+			Spawn:
+				TNT1 A 0
+				TNT1 A 0 A_JumpIf(CallACS("Arc_Limit"),"Nope")
+				TNT1 A 0 //A_JumpIfInTargetInventory("BetweenShots",1,"Nope")
+				TNT1 A 0 //ACS_NamedExecuteWithResult("GOLF_CLIENT",6,0,0,0)
+				TNT1 A 0 A_SpawnItemEx("BallTrailAim",(10*momx)/-20.0,-(10*momy)/-20.0,(10*momz)/-20.0,0,0,0,0,SXF_ABSOLUTEANGLE | SXF_NOCHECKPOSITION | SXF_TRANSFERTRANSLATION)
+				TNT1 A 0 A_SpawnItemEx("BallTrailAim",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION | SXF_TRANSFERTRANSLATION )
+				TNT1 A 0 A_SpawnItemEx("GolfBallAimInstant5",0,0,0,momx,momy,momz,0,SXF_TRANSFERTRANSLATION | SXF_ABSOLUTEVELOCITY)
+				TNT1 A 1
+				stop
+			Nope:
+				TNT1 A 1
+				stop
+			}
+		}

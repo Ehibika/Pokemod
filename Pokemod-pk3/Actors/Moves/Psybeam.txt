@@ -1,0 +1,473 @@
+
+/*
+actor PsyBeamMove : WepMasterBase
+{
+Tag "PsyBeam"
+obituary "$OB_PsyBeam"
+Weapon.AmmoUse 1
+Weapon.AmmoGive 20
+weapon.ammotype "PsyBeamPP"
+scale 2.0
+Inventory.Pickupmessage "$PU_MEGABUSTER"
+States
+{
+Spawn:
+WEAP X 1
+stop
+
+
+Fire:
+"####" BBB 1 A_Jumpif(CallACS("CheckWeaponFire",RC_A)==1,"Fire.Begin")
+"####" B 0 A_Jump(256,"NoAmmo")
+Goto NoAmmo
+
+Fire.Begin:
+"####" B 0
+TNT1 A 0 A_GiveInventory("ChannelingSpeed")
+TNT1 A 0 A_Jumpifinventory("WeaponCharge",25,"Fire.Bullet")
+"####" B 0 A_PlaySoundEx("weapon/PChargeLong","Weapon")
+"####" B 0 A_Jump(256,"Fire.Warmup")
+Goto Fire.Warmup
+
+Fire.Warmup:
+TNT1 A 0 A_GiveInventory("ChannelingSpeed")
+"####" B 1 A_Jumpifinventory("WeaponCharge",25,"Fire.Start")
+"####" B 0 A_GiveInventory("WeaponCharge",1)
+"####" C 0 A_REfire("Fire.Warmup")
+Goto Fire.After
+Fire.Start:
+"####" B 0 A_GunFlash("Flash.Sound")
+Goto Fire.Bullet
+
+Fire.Bullet: //Take Ammo
+"####" A 0 A_Jumpifinventory("ConShotTimer",1,"Fire.Bullet1")
+"####" B 0 A_JumpIfNoAmmo("Fire.After2")
+"####" B 0 A_FireCustomMissile("PsyBeamRayDamager",0,1,0,0,0,0)
+"####" B 0 A_GiveInventory("PsyBeamBuffer",1)
+"####" B 0 A_GiveInventory("PsyBeamCST",1)
+"####" B 0 A_Jumpifinventory("DoublePsyBeam",1,"Fire.DBLBullet2")//Check if playerCharacter is Blastoise
+"####" B 0 A_Jump(256,"Fire.Bullet2")
+Goto Fire.Bullet2
+
+Fire.Bullet1: //Free
+"####" B 0 A_FireCustomMissile("PsyBeamRayDamager",0,0,0,0,0,0)
+"####" B 0 A_GiveInventory("PsyBeamBuffer",1)
+"####" B 0 A_Jump(256,"Fire.Bullet2")
+Goto Fire.Bullet2
+
+Fire.Bullet2:
+"####" B 1 A_FireCustomMissile("PsyBeamRay_Start",0,0,0,0,0,0)
+"####" B 0 A_FireCustomMissile("PsyBeamRay_Start_Server",0,0,0,0,0,0)
+
+"####" B 1 A_FireCustomMissile("PsyBeamRay_Start",0,0,0,0,0,0)
+"####" B 0 A_FireCustomMissile("PsyBeamRay_Start_Server",0,0,0,0,0,0)
+
+"####" B 0 A_Jump(256,"Fire.After")
+Goto Fire.After
+
+Fire.After:
+"####" C 0 A_REfire("Fire.Warmup")
+"####" C 0 A_StopSoundEX("Weapon")
+Fire.After2:
+"####" B 0 A_TakeInventory("ConShotTimer",99)
+"####" B 0 A_TakeInventory("WeaponCharge",999)
+"####" B 1 A_GiveInventory("5Recovery_A")
+"####" B 0 A_Jump(256,"Fire.End")
+Goto Fire.End
+
+Flash.Sound:
+TNT1 A 6 A_PlaySoundEx("weapon/gemini","Weapon")
+TNT1 A 0 A_Jumpifinventory("WeaponCharge",25,"Flash.Sound")
+Stop
+}
+}
+*/
+
+actor PsyBeamMove : WepMasterBase
+{
+Tag "PsyBeam"
+obituary "$OB_PSYBEAM"
+Weapon.AmmoUse 1
+Weapon.AmmoGive 25
+weapon.ammotype "PsyBeamPP"
+scale 2.0
+Inventory.Pickupmessage "$PU_MEGABUSTER"
+States
+{
+Spawn:
+WEAP X 1
+stop
+
+
+Fire:
+"####" BBB 1 A_Jumpif(CallACS("CheckWeaponFire",RC_A)==1,"Fire.Begin")
+"####" B 0 A_Jump(256,"NoAmmo")
+Goto NoAmmo
+
+Fire.Begin:
+"####" B 0
+"####" B 0 A_Jump(256,"Fire.Bullet")
+Goto Fire.Bullet
+
+Fire.Bullet:
+"####" B 0 //A_Jumpif(CallACS("CheckWeaponFire",RC_A)==0,"NoAmmo")
+"####" B 0 A_PlaySoundEx("weapon/gemini","Weapon")
+"####" B 0 A_FireCustomMissile("PsyBeam_Start",0,1,0,0)
+"####" B 0 A_Jump(256,"Fire.After")
+Goto Fire.After
+
+Fire.After:
+"####" B 1 A_GiveInventory("HalfRecovery_A")
+"####" C 0 A_REfire("Fire")
+"####" B 0 A_Jump(256,"Fire.End")
+Goto Fire.End
+
+}
+}
+
+actor PsyBeamMove1 : PsyBeamMove {Weapon.SlotNumber 1}
+actor PsyBeamMove2 : PsyBeamMove {Weapon.SlotNumber 2}
+actor PsyBeamMove3 : PsyBeamMove {Weapon.SlotNumber 3}
+actor PsyBeamMove4 : PsyBeamMove {Weapon.SlotNumber 4}
+
+actor PsyBeamMove5 : PsyBeamMove 
+{
+Weapon.SlotNumber 5
+States
+{
+Fire.End:
+TNT1 A 0
+TNT1 A 0 A_TakeInventory("PsyBeamMove5",9)
+TNT1 A 0 A_Jump(256,"Ready")
+Goto Ready
+}
+}
+
+//[+]========================================================================[+]
+//-----------------------------|Ammo & Inventory|------------------------------
+//[+]========================================================================[+]
+actor PsyBeamPP : Ammo {inventory.amount 1 inventory.Maxamount 20}
+Actor PsyBeamBuffer : Powerup {inventory.amount 1 Powerup.duration 3}
+
+Actor DoublePsyBeam : Powerup{inventory.amount 1 powerup.duration 0x7FFFFFFF}
+
+
+Actor PsyBeamProtect : powerprotection
+{
+Powerup.duration 11
+Damagefactor "PsyBeam", 0
+}
+
+actor PsyBeamCST : PowerupGiver
+{
++INVENTORY.AUTOACTIVATE
+Powerup.Duration 35
+powerup.type "ConShotTimer"
+}
+//[+]========================================================================[+]
+//--------------------------------|Projectiles |--------------------------------
+//[+]========================================================================[+]
+
+//#region -=- old -=-
+Const Int PsyBeamRange = 35;
+
+actor PsyBeamRayBase
+{
+Translation "192:192=41:41","198:198=249:249"
+RenderStyle "Add"
+PROJECTILE
+Obituary "$OB_PsyBeam"
+DamageType "PsyBeam"
+//+THRUACTORS
++DONTBLAST
++DONTREFLECT
++CLIENTSIDEONLY
++MTHRUSPECIES
+//+FORCEYBILLBOARD
++PAINLESS
+damage (0)
+Radius 11
+Height 11
+speed 30
+scale 3.5
+states
+{
+Spawn:
+GEMI A 0
+SpawnBeam:
+GEMI A 0 A_SetPitch(pitch+1)
+GEMI A 0 A_JumpIf(pitch>PsyBeamRange,"Perish")
+GEMI A 0 A_JumpIf(CallACS("pkmn_istargetclient")!=1,"Spawn.NoBeamView")
+GEMI A 0 A_SpawnItemEx("PsyBeamRayBase",0,0,0,momx,momy,momz,0,553)
+TNT1 A 0 A_Jump(256,"Spawn.BeamView")
+Goto Spawn.BeamView
+
+Spawn.BeamView:
+GEMI A 0 A_GiveInventory("ProjectileCodeSyncTarget",1)
+GEMI A 1
+stop
+
+Spawn.NoBeamView:
+TNT1 A 1 
+stop
+
+
+Perish:
+TNT1 A 1 
+stop
+
+Death:
+GEMI A 0 A_GiveInventory("ProjectileDCode",1)
+GEMI A 0 A_SpawnItemEx("PsyBeamImpactFX",0,0,0,0,0,0,0,33)
+stop
+}
+}
+
+actor PsyBeamRay_Start : PsyBeamRayBase
+{
++INVISIBLE
+states
+{
+Spawn:
+GEMI A 0
+GEMI A 0 A_GiveInventory("ProjectileCode",1)
+TNT1 A 0 A_Jump(256,"SpawnBeam")
+Goto SpawnBeam
+}
+}
+
+
+actor PsyBeamRay_Server : PsyBeamRayBase
+{
+states
+{
+Spawn:
+GEMI A 0
+SpawnBeam:
+GEMI A 0 A_SetPitch(pitch+1)
+GEMI A 0 A_JumpIf(pitch>PsyBeamRange,"Perish")
+GEMI A 0 A_SpawnItemEx("PsyBeamRay_Server",0,0,0,momx,momy,momz,0,553)
+GEMI A 0 A_JumpIf(CallACS("pkmn_istargetclient")!=1,"Spawn.BeamView")
+TNT1 A 0 A_Jump(256,"Spawn.NoBeamView")
+Goto Spawn.NoBeamView
+}
+}
+
+actor PsyBeamRay_Start_Server : PsyBeamRay_Server
+{
++INVISIBLE
+-CLIENTSIDEONLY
++NONETID
+states
+{
+Spawn:
+GEMI A 0
+GEMI A 0 A_GiveInventory("ProjectileCodeSyncTarget",1)
+TNT1 A 0 A_Jump(256,"SpawnBeam")
+Goto SpawnBeam
+}
+}
+
+
+
+actor PsyBeamRayDamager
+{
+PROJECTILE
+Obituary "$OB_PsyBeam"
+DamageType "PsyBeam"
+//+THRUACTORS
++MTHRUSPECIES
+//+THRUGHOST
++DONTBLAST
++DONTREFLECT
++SERVERSIDEONLY//+NONETID
+renderstyle none
+damage (0)
+Radius 11
+Height 11
+speed 30
+states
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_SetPitch(pitch+1)
+TNT1 A 0 A_JumpIf(pitch>PsyBeamRange,"Death")
+TNT1 A 0 A_SpawnItemEx("PsyBeamRayDamager",0,0,0,momx,momy,momz,0,552)
+TNT1 A 0 A_Stop
+TNT1 A 1 
+stop
+Death:
+TNT1 A 0 
+stop
+
+XDeath:
+Crash:
+TNT1 A 1 
+TNT1 A 0 A_Explode(MBP_PsyBeam,28,0,0,28)
+stop
+}
+}
+
+//#endregion
+
+actor PsyBeamLaser : BasicProjectile
+{
++SKYEXPLODE
++FORCEXYBILLBOARD
+
+Reactiontime 70
+Radius 8
+Height 8
+Speed 64
+Scale 2.5
+Obituary "$OB_PSYBEAM"
+damagetype "PsyBeam"
+damage (0)
+
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_SpawnItemEx("PsyBeamLaserFX1",0,-1,4,0,0,0,0,1)
+TNT1 A 1 A_SpawnItemEx("PsyBeamLaserFX2",0,0,0,momx,momy,momz,0,9)
+TNT1 A 0 A_CountDown
+loop
+
+Death:
+TNT1 A 0 
+TNT1 A 0 A_Explode(MBP_PsyBeam,28,0,0,28)
+TNT1 A 0 A_SpawnItemEx("PsyBeamBounce",0,-1,4,0,0,0,0,1)
+stop
+}
+}
+
+actor PsyBeamLaserFX1 : BasicClientSide
+{
++FORCEXYBILLBOARD
+Scale 3.0
+States
+{
+Spawn:
+ICEL HH 4 
+stop
+}
+}
+
+actor PsyBeamLaserFX2 : BasicExplosion
+{
+Obituary "$OB_PSYBEAM"
+damagetype "PsyBeam"
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_SpawnItemEx("PsyBeamLaserFX3",0,0,0,0,0,0,0,1)
+TNT1 A 0 A_SpawnItemEx("PsyBeamLaserFX3",0,0,0,-momx*0.2,-momy*0.2,-momz*0.2,0,9)
+TNT1 A 0 A_SpawnItemEx("PsyBeamLaserFX3",0,0,0,-momx*0.4,-momy*0.4,-momz*0.4,0,9)
+TNT1 A 0 A_SpawnItemEx("PsyBeamLaserFX3",0,0,0,-momx*0.6,-momy*0.6,-momz*0.6,0,9)
+TNT1 A 1 A_SpawnItemEx("PsyBeamLaserFX3",0,0,0,-momx*0.8,-momy*0.8,-momz*0.8,0,9)
+stop
+}
+}
+
+actor PsyBeamLaserFX3 : BasicClientSide
+{
++FORCEXYBILLBOARD
+//Renderstyle "Add"
+Scale 3.5
+States
+{
+Spawn:
+ICEL I 0
+ICEL I 0 A_Stop
+PSYB ABC 1
+stop
+}
+}
+
+actor PsyBeamBounce : BasicClientside
+{
++FORCEXYBILLBOARD
+//Renderstyle "Add"
+scale 6.0
+height 0
+radius 0
+Reactiontime 4
+States
+{
+Spawn:
+HARD C 2 A_SetScale(Scalex-1.5)
+HARD CCC 0 A_SpawnItemEx("PsybeamParticle",Random(-64,64),Random(-64,64),Random(-64,64),0,0,0,0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION)
+HARD C 0 A_Countdown
+Loop
+}
+}
+
+
+
+actor PsyBeam_Start : PsyBeamLaser
+{
++INVISIBLE
+-USEBOUNCESTATE
+states
+{
+Spawn:
+AQBA L 0
+AQBA L 0 A_GiveInventory("ProjectileCode",1)
+TNT1 A 0 A_SpawnItemEx("PsyBeamLaserFX1",0,-1,4,0,0,0,0,1)
+TNT1 A 1 A_SpawnItemEx("PsyBeamLaserFX2",0,0,0,momx,momy,momz,0,9)
+TNT1 A 0 A_ChangeFlag("USEBOUNCESTATE",true)
+Goto "Super::Spawn"
+}
+}
+
+actor PsyBeamNerfWatcher : BasicHelper 
+{
+Var int user_DashTime;
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 5 A_GiveToTarget("PatkDownFXSpawn")
+TNT1 A 0 A_JumpIfInTargetInventory("STF_PsyBeam",1,"Spawn")
+TNT1 A 1 A_GiveToTarget("StatUpdator")
+TNT1 A 5
+Goto Death
+
+Death:
+TNT1 A 0 
+stop
+}
+}
+
+
+
+actor PsyBeamImpactFX : BasicClientside
+{
++MISSILE
+translation "192:192=218:218", "198:198=221:221"
+scale 2.0
+Alpha 1.0
+States
+{
+Spawn:
+AQBA A 0
+NDFX A 2 A_SpawnItemEx("PsybeamParticle",Random(-64,64),Random(-64,64),Random(-64,64),0,0,0,0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION)
+stop
+}
+}
+
+actor PsybeamParticle : BasicClientside
+{
+scale 0.8
+renderstyle "add"
+speed 7
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+PSIK GGHHGGHH 1 A_SetScale(ScaleX-0.2)
+stop
+}
+}

@@ -21,6 +21,7 @@ gravity 0.6
 +DONTBLAST
 +NOBLOOD
 +QUICKTORETALIATE
++NOSKIN
 damagefactor "Dummy", 0.0
 Player.MaxSkinSizeFactor 0, 0
 scale 2.5

@@ -3,7 +3,7 @@ actor DetectMove : WepMasterBase
 Tag "Detect"
 obituary "$OB_DETECT"
 Weapon.AmmoUse 1
-Weapon.AmmoGive 10
+Weapon.AmmoGive 15
 weapon.ammotype "DetectPP"
 scale 2.0
 Inventory.Pickupmessage "$PU_MEGABUSTER"
@@ -39,13 +39,13 @@ Goto Fire.Dash
 
 Fire.Dash:
 "####" A 0 A_SpawnItemEX("GroundDustFX",-25,0,-(z-floorz),0)
-"####" A 1 A_ChangeVelocity(cos(-pitch)*30,0,sin(-pitch)*30,CVF_RELATIVE|CVF_REPLACE)
+"####" A 1 A_ChangeVelocity(cos(-pitch)*45,0,sin(-pitch)*45,CVF_RELATIVE|CVF_REPLACE)
 "####" A 0 A_Jumpifinventory("DetectDashTimer",1,"Fire.Dash")
 "####" B 0 A_ScaleVelocity(0.2)
 goto Fire.DashEnd
 
 Fire.DashEnd:
-"####" B 1 A_GiveInventory("HalfRecovery_C")
+"####" B 1 A_GiveInventory("PartRecovery_C")
 "####" B 0 A_TakeInventory("AfterImageFX",9)
 "####" B 0 A_TakeInventory("DetectGuard",99)
 "####" A 0 A_SetTranslucent(1.0,0)
@@ -77,7 +77,7 @@ Goto Ready
 //[+]========================================================================[+]
 //-----------------------------|Ammo & Inventory|------------------------------
 //[+]========================================================================[+]
-actor DetectPP : Ammo {inventory.amount 1 inventory.Maxamount 10}
+actor DetectPP : Ammo {inventory.amount 1 inventory.Maxamount 15}
 actor DetectGuard : ProtectGuard {inventory.amount 1 Powerup.Duration 17}
 actor AfterImageFX : PowerSpeed {inventory.amount 1 Powerup.Duration 17}
 actor DetectDashTimer : Powerup {inventory.amount 1 Powerup.Duration 7}

@@ -1,0 +1,478 @@
+/*
+actor IceBeamMove : WepMasterBase
+{
+Tag "IceBeam"
+obituary "$OB_IceBeam"
+Weapon.AmmoUse 1
+Weapon.AmmoGive 20
+weapon.ammotype "IceBeamPP"
+scale 2.0
+Inventory.Pickupmessage "$PU_MEGABUSTER"
+States
+{
+Spawn:
+WEAP X 1
+stop
+
+
+Fire:
+"####" BBB 1 A_Jumpif(CallACS("CheckWeaponFire",RC_A)==1,"Fire.Begin")
+"####" B 0 A_Jump(256,"NoAmmo")
+Goto NoAmmo
+
+Fire.Begin:
+"####" B 0
+TNT1 A 0 A_GiveInventory("ChannelingSpeed")
+TNT1 A 0 A_Jumpifinventory("WeaponCharge",25,"Fire.Bullet")
+"####" B 0 A_PlaySoundEx("weapon/PChargeLong","Weapon")
+"####" B 0 A_Jump(256,"Fire.Warmup")
+Goto Fire.Warmup
+
+Fire.Warmup:
+TNT1 A 0 A_GiveInventory("ChannelingSpeed")
+"####" B 1 A_Jumpifinventory("WeaponCharge",25,"Fire.Start")
+"####" B 0 A_GiveInventory("WeaponCharge",1)
+"####" C 0 A_REfire("Fire.Warmup")
+Goto Fire.After
+Fire.Start:
+"####" B 0 A_GunFlash("Flash.Sound")
+Goto Fire.Bullet
+
+Fire.Bullet: //Take Ammo
+"####" A 0 A_Jumpifinventory("ConShotTimer",1,"Fire.Bullet1")
+"####" B 0 A_JumpIfNoAmmo("Fire.After2")
+"####" B 0 A_FireCustomMissile("IceBeamRayDamager",0,1,0,0,0,0)
+"####" B 0 A_GiveInventory("IceBeamBuffer",1)
+"####" B 0 A_GiveInventory("IceBeamCST",1)
+"####" B 0 A_Jumpifinventory("DoubleIceBeam",1,"Fire.DBLBullet2")//Check if playerCharacter is Blastoise
+"####" B 0 A_Jump(256,"Fire.Bullet2")
+Goto Fire.Bullet2
+
+Fire.Bullet1: //Free
+"####" B 0 A_FireCustomMissile("IceBeamRayDamager",0,0,0,0,0,0)
+"####" B 0 A_GiveInventory("IceBeamBuffer",1)
+"####" B 0 A_Jump(256,"Fire.Bullet2")
+Goto Fire.Bullet2
+
+Fire.Bullet2:
+"####" B 1 A_FireCustomMissile("IceBeamRay_Start",0,0,0,0,0,0)
+"####" B 0 A_FireCustomMissile("IceBeamRay_Start_Server",0,0,0,0,0,0)
+
+"####" B 1 A_FireCustomMissile("IceBeamRay_Start",0,0,0,0,0,0)
+"####" B 0 A_FireCustomMissile("IceBeamRay_Start_Server",0,0,0,0,0,0)
+
+"####" B 0 A_Jump(256,"Fire.After")
+Goto Fire.After
+
+Fire.After:
+"####" C 0 A_REfire("Fire.Warmup")
+"####" C 0 A_StopSoundEX("Weapon")
+Fire.After2:
+"####" B 0 A_TakeInventory("ConShotTimer",99)
+"####" B 0 A_TakeInventory("WeaponCharge",999)
+"####" B 1 A_GiveInventory("5Recovery_A")
+"####" B 0 A_Jump(256,"Fire.End")
+Goto Fire.End
+
+
+
+
+
+
+Flash.Sound:
+TNT1 A 6 A_PlaySoundEx("Move/IceBeam","Weapon")
+TNT1 A 0 A_Jumpifinventory("WeaponCharge",25,"Flash.Sound")
+Stop
+}
+}
+*/
+
+
+actor IceBeamMove : WepMasterBase
+{
+Tag "IceBeam"
+obituary "$OB_ICEBEAM"
+Weapon.AmmoUse 1
+Weapon.AmmoGive 25
+weapon.ammotype "IceBeamPP"
+scale 2.0
+Inventory.Pickupmessage "$PU_MEGABUSTER"
+States
+{
+Spawn:
+WEAP X 1
+stop
+
+
+Fire:
+"####" BBB 1 A_Jumpif(CallACS("CheckWeaponFire",RC_A)==1,"Fire.Begin")
+"####" B 0 A_Jump(256,"NoAmmo")
+Goto NoAmmo
+
+Fire.Begin:
+"####" B 0
+"####" B 0 A_Jump(256,"Fire.Bullet")
+Goto Fire.Bullet
+
+Fire.Bullet:
+"####" B 0 //A_Jumpif(CallACS("CheckWeaponFire",RC_A)==0,"NoAmmo")
+"####" B 0 A_PlaySoundEx("weapon/IceManLaser","Weapon")
+"####" B 0 A_FireCustomMissile("IceBeam_Start",0,1,0,0)
+"####" B 0 A_Jump(256,"Fire.After")
+Goto Fire.After
+
+Fire.After:
+"####" B 1 A_GiveInventory("HalfRecovery_A")
+"####" C 0 A_REfire("Fire")
+"####" B 0 A_Jump(256,"Fire.End")
+Goto Fire.End
+
+}
+}
+
+
+
+actor IceBeamMove1 : IceBeamMove {Weapon.SlotNumber 1}
+actor IceBeamMove2 : IceBeamMove {Weapon.SlotNumber 2}
+actor IceBeamMove3 : IceBeamMove {Weapon.SlotNumber 3}
+actor IceBeamMove4 : IceBeamMove {Weapon.SlotNumber 4}
+
+actor IceBeamMove5 : IceBeamMove 
+{
+Weapon.SlotNumber 5
+States
+{
+Fire.End:
+TNT1 A 0
+TNT1 A 0 A_TakeInventory("IceBeamMove5",9)
+TNT1 A 0 A_Jump(256,"Ready")
+Goto Ready
+}
+}
+
+//[+]========================================================================[+]
+//-----------------------------|Ammo & Inventory|------------------------------
+//[+]========================================================================[+]
+actor IceBeamPP : Ammo {inventory.amount 1 inventory.Maxamount 20}
+Actor IceBeamBuffer : Powerup {inventory.amount 1 Powerup.duration 3}
+
+actor IceBeamFreezeRate : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_Jumpifinventory("FreezeMark",1,"FreezeUp")
+FreezeUp:
+TNT1 A 0 A_GiveInventory("FreezeValue",random(20,35))
+stop
+
+Nope:
+TNT1 A 0
+stop
+}
+}
+
+Actor IceBeamProtect : powerprotection
+{
+Powerup.duration 11
+Damagefactor "IceBeam", 0
+}
+
+actor IceBeamCST : PowerupGiver
+{
++INVENTORY.AUTOACTIVATE
+Powerup.Duration 35
+powerup.type "ConShotTimer"
+}
+//[+]========================================================================[+]
+//--------------------------------|Projectiles |--------------------------------
+//[+]========================================================================[+]
+
+//#region -=- old -=-
+Const Int IceBeamRange = 30;
+
+actor IceBeamRayBase
+{
+Translation "192:192=41:41","198:198=249:249"
+RenderStyle "Add"
+PROJECTILE
+Obituary "$OB_IceBeam"
+DamageType "IceBeam"
+//+THRUACTORS
++DONTBLAST
++DONTREFLECT
++CLIENTSIDEONLY
++MTHRUSPECIES
+//+FORCEYBILLBOARD
++PAINLESS
+damage (0)
+Radius 11
+Height 11
+speed 30
+scale 3.5
+states
+{
+Spawn:
+FCRA I 0
+SpawnBeam:
+FCRA I 0 A_SetPitch(pitch+1)
+FCRA I 0 A_JumpIf(pitch>IceBeamRange,"Perish")
+FCRA I 0 A_JumpIf(CallACS("pkmn_istargetclient")!=1,"Spawn.NoBeamView")
+FCRA I 0 A_SpawnItemEx("IceBeamRayBase",0,0,0,momx,momy,momz,0,553)
+TNT1 A 0 A_Jump(256,"Spawn.BeamView")
+Goto Spawn.BeamView
+
+Spawn.BeamView:
+FCRA I 0 A_GiveInventory("ProjectileCodeSyncTarget",1)
+FCRA I 1
+stop
+
+Spawn.NoBeamView:
+TNT1 A 1 
+stop
+
+
+Perish:
+TNT1 A 1 
+stop
+
+Death:
+FCRA I 0 A_GiveInventory("ProjectileDCode",1)
+FCRA I 0 A_SpawnItemEx("IceBeamImpactFX",0,0,0,0,0,0,0,33)
+stop
+}
+}
+
+actor IceBeamRay_Start : IceBeamRayBase
+{
++INVISIBLE
+states
+{
+Spawn:
+FCRA I 0
+FCRA I 0 A_GiveInventory("ProjectileCode",1)
+TNT1 A 0 A_Jump(256,"SpawnBeam")
+Goto SpawnBeam
+}
+}
+
+
+actor IceBeamRay_Server : IceBeamRayBase
+{
+states
+{
+Spawn:
+FCRA I 0
+SpawnBeam:
+FCRA I 0 A_SetPitch(pitch+1)
+FCRA I 0 A_JumpIf(pitch>IceBeamRange,"Perish")
+FCRA I 0 A_SpawnItemEx("IceBeamRay_Server",0,0,0,momx,momy,momz,0,553)
+FCRA I 0 A_JumpIf(CallACS("pkmn_istargetclient")!=1,"Spawn.BeamView")
+TNT1 A 0 A_Jump(256,"Spawn.NoBeamView")
+Goto Spawn.NoBeamView
+}
+}
+
+actor IceBeamRay_Start_Server : IceBeamRay_Server
+{
++INVISIBLE
+-CLIENTSIDEONLY
++NONETID
+states
+{
+Spawn:
+FCRA I 0
+FCRA I 0 A_GiveInventory("ProjectileCodeSyncTarget",1)
+TNT1 A 0 A_Jump(256,"SpawnBeam")
+Goto SpawnBeam
+}
+}
+
+
+
+actor IceBeamRayDamager
+{
+PROJECTILE
+Obituary "$OB_IceBeam"
+DamageType "IceBeam"
+//+THRUACTORS
++MTHRUSPECIES
+//+THRUGHOST
++DONTBLAST
++DONTREFLECT
++SERVERSIDEONLY//+NONETID
+renderstyle none
+damage (0)
+Radius 11
+Height 11
+speed 30
+states
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_SetPitch(pitch+1)
+TNT1 A 0 A_JumpIf(pitch>IceBeamRange,"Death")
+TNT1 A 0 A_SpawnItemEx("IceBeamRayDamager",0,0,0,momx,momy,momz,0,552)
+TNT1 A 0 A_Stop
+TNT1 A 1 
+stop
+Death:
+TNT1 A 0 
+stop
+
+XDeath:
+Crash:
+TNT1 A 1 
+TNT1 A 0 A_Explode(MBP_IceBeam,28,0,0,28)
+stop
+}
+}
+
+//#endregion
+
+
+
+actor IceBeamLaser : BasicProjectile
+{
++SKYEXPLODE
++FORCEXYBILLBOARD
++THRUACTORS
+Reactiontime 70
+Radius 8
+Height 8
+Speed 32
+Scale 2.5
+Obituary "$OB_ICEBEAM"
+damagetype "IceBeam"
+damage (0)
+
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_SpawnItemEx("IceBeamLaserFX1",0,-1,4,0,0,0,0,1)
+TNT1 A 1 A_SpawnItemEx("IceBeamLaserFX2",0,0,0,momx,momy,momz,0,9)
+TNT1 A 0 A_CountDown
+loop
+
+Death:
+TNT1 A 0 A_SpawnItemEx("IceBeamImpactFX",0,-1,4,0,0,0,0,1)
+stop
+}
+}
+
+actor IceBeamLaserFX1 : BasicClientSide
+{
++FORCEXYBILLBOARD
+Scale 3.0
+States
+{
+Spawn:
+ICEL HH 4 
+stop
+}
+}
+
+actor IceBeamLaserFX2 : BasicExplosion
+{
+Obituary "$OB_ICEBEAM"
+damagetype "IceBeam"
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_Explode(MBP_IceBeam,28,0,0,28)
+TNT1 A 0 A_SpawnItemEx("IceBeamLaserFX3",0,0,0,0,0,0,0,1)
+TNT1 A 0 A_SpawnItemEx("IceBeamLaserFX3",0,0,0,-momx*0.2,-momy*0.2,-momz*0.2,0,9)
+TNT1 A 0 A_SpawnItemEx("IceBeamLaserFX3",0,0,0,-momx*0.4,-momy*0.4,-momz*0.4,0,9)
+TNT1 A 0 A_SpawnItemEx("IceBeamLaserFX3",0,0,0,-momx*0.6,-momy*0.6,-momz*0.6,0,9)
+TNT1 A 0 A_SpawnItemEx("IceBeamLaserFX3",0,0,0,-momx*0.8,-momy*0.8,-momz*0.8,0,9)
+TNT1 A 1 A_SpawnItemEx("IceBeamParticle1",random2(16),random2(16),random2(16),-momx*0.8,-momy*0.8,-momz*0.8,0,9)
+stop
+}
+}
+
+actor IceBeamLaserFX3 : BasicClientSide
+{
++FORCEXYBILLBOARD
+Renderstyle "Add"
+Scale 3.5
+States
+{
+Spawn:
+ICEL I 0
+ICEL I 0 A_Stop
+GEMI A 2
+GEMI A 2 A_Fadeout(0.5)
+GEMI A 2 A_Fadeout(0.25)
+GEMI A 2
+//ICEL IZIZ 2
+stop
+}
+}
+
+
+actor IceBeam_Start : IceBeamLaser
+{
++INVISIBLE
+-USEBOUNCESTATE
+states
+{
+Spawn:
+AQBA L 0
+AQBA L 0 A_GiveInventory("ProjectileCode",1)
+Goto "Super::Spawn"
+}
+}
+
+
+actor IceBeamImpactFX : BasicClientside
+{
++MISSILE
+translation "192:192=218:218", "198:198=221:221"
+scale 3.0
+Alpha 1.0
+States
+{
+Spawn:
+AQBA A 0
+FCRA AABBCC 1 A_SpawnItemEx("IceBeamParticle",Random(-64,64),Random(-64,64),Random(-64,64),0,0,0,0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION,192)
+stop
+}
+}
+
+actor IceBeamParticle1 : BasicClientside
+{
++MISSILE
+translation "192:192=218:218", "198:198=221:221"
+scale 3.0
+Alpha 1.0
+States
+{
+Spawn:
+AQBA A 0
+FCRA ABC 2 
+stop
+}
+}
+
+actor IceBeamParticle : BasicClientside
+{
+scale 3.5
+renderstyle "add"
+speed 7
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+BLIZ ABCCC 2 
+stop
+}
+}

@@ -20,7 +20,7 @@ Fire:
 "####" BBB 1 A_Jumpif(CallACS("CheckWeaponFire",RC_A)==1,"Fire.Begin")
 "####" B 0 A_Jump(256,"NoAmmo")
 Goto NoAmmo
-
+/*
 Fire.Begin:
 "####" B 0
 TNT1 A 0 A_Jumpifinventory("ConShotTimer",1,"Fire.Bullet2")
@@ -39,9 +39,64 @@ Fire.Bullet2:
 "####" B 0 A_FireCustomMissile("BulletSeedShot",Frandom(-BSSPRD,BSSPRD),0,0,0,0,Frandom(-BSSPRD,BSSPRD))
 "####" B 0 A_Jump(256,"Fire.After")
 Goto Fire.After
+*/
+
+Fire.Begin:
+TNT1 A 0 
+TNT1 A 0 ACS_NamedExecuteAlways("TakePP",0,Move_BulletSeed,1)
+TNT1 A 0 A_Jump(256,"Fire.Charge2")
+Goto Fire.Charge2
+
+Fire.Charge1: //Preparing a stack
+TNT1 A 0 A_JumpIfInventory("MultiShotCounter",5,"Fire.Charge3")
+TNT1 A 0 A_JumpIfInventory("WeaponCharge",17,"Fire.Charge2")
+TNT1 A 0 A_GiveInventory("WeaponCharge",1)
+TNT1 A 0 A_GiveInventory("ChannelingSpeed")
+TNT1 A 0 //A_PlaySoundEx("Weapon/Heat1","Soundslot6")
+TNT1 A 1
+TNT1 A 0 A_REfire("Fire.Charge1")
+TNT1 A 0 A_Jump(256,"Fire.Launch")
+Goto Fire.Launch
+
+Fire.Charge2: //Make a stack
+TNT1 A 0 A_GiveInventory("ChannelingSpeed")
+TNT1 A 0 A_GiveInventory("MultiShotCounter",1)
+TNT1 A 0 A_TakeInventory("WeaponCharge",99)
+TNT1 A 0 A_PlaySoundEx("Weapon/rminestick","Soundslot6")
+
+TNT1 A 1
+TNT1 A 0 A_REfire("Fire.Charge1")
+TNT1 A 0 A_Jump(256,"Fire.Launch")
+Goto Fire.Launch
+
+Fire.Charge3: //Maximum stacks
+TNT1 A 0 A_GiveInventory("ChannelingSpeed")
+TNT1 A 1
+TNT1 A 0 A_REfire("Fire.Charge3")
+TNT1 A 0 A_Jump(256,"Fire.Launch")
+Goto Fire.Launch
+
+
+Fire.Launch:
+TNT1 A 0
+TNT1 A 0 A_Jumpifinventory("MultiShotCounter",1,"Fire.Bullet")
+TNT1 A 0 A_Jump(256,"Fire.After")
+Goto Fire.After
+
+Fire.Bullet:
+TNT1 A 0 A_PlaySoundEx("move/BulletSeed","Weapon")
+TNT1 A 2 A_FireCustomMissile("BulletSeedShot",Frandom(-BSSPRD,BSSPRD),0,0,0,0,Frandom(-BSSPRD,BSSPRD))
+TNT1 A 0 A_PlaySoundEx("move/BulletSeed","Weapon")
+TNT1 A 2 A_FireCustomMissile("BulletSeedShot",Frandom(-BSSPRD,BSSPRD),0,0,0,0,Frandom(-BSSPRD,BSSPRD))
+TNT1 A 0 A_PlaySoundEx("move/BulletSeed","Weapon")
+TNT1 A 2 A_FireCustomMissile("BulletSeedShot",Frandom(-BSSPRD,BSSPRD),0,0,0,0,Frandom(-BSSPRD,BSSPRD))
+TNT1 A 0 A_GiveInventory("ChannelingSpeed")
+TNT1 A 0 A_TakeInventory("MultiShotCounter",1)
+TNT1 A 0 A_Jump(256,"Fire.Launch")
+Goto Fire.Launch
 
 Fire.After:
-"####" B 1 A_GiveInventory("3Recovery_A")
+"####" B 1 A_GiveInventory("HalfRecovery_A")
 "####" C 0 A_REfire("Fire")
 "####" B 0 A_TakeInventory("ConShotTimer",99)
 "####" B 0 A_Jump(256,"Fire.End")
@@ -75,7 +130,7 @@ actor BulletSeedPP : Ammo {inventory.amount 1 inventory.Maxamount 20}
 actor BulletSeedCST : PowerupGiver
 {
 +INVENTORY.AUTOACTIVATE
-Powerup.Duration 35
+Powerup.Duration 10
 powerup.type "ConShotTimer"
 }
 //[+]========================================================================[+]

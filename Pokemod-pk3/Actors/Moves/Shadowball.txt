@@ -1,0 +1,422 @@
+actor ShadowBallMove : WepMasterBase
+{
+Tag "ShadowBall"
+obituary "$OB_SHADOWBALL"
+Weapon.AmmoUse 1
+Weapon.AmmoGive 10
+weapon.ammotype "ShadowBallPP"
+scale 2.0
+Inventory.Pickupmessage "$PU_MEGABUSTER"
+States
+{
+Spawn:
+WEAP X 1
+stop
+
+
+Fire:
+"####" BBB 1 A_Jumpif(CallACS("CheckWeaponFire",RC_A)==1,"Fire.Begin")
+"####" B 0 A_Jump(256,"NoAmmo")
+Goto NoAmmo
+
+Fire.Begin:
+"####" B 0
+"####" B 0 A_Jump(256,"Fire.Pre")
+Goto Fire.Pre
+
+Fire.Pre:
+"####" B 0 A_PlaySoundEx("Support/UberCharge2","Soundslot6")
+"####" BB 0 A_SpawnItemEx("ShadowBallSparkle", 0, 0, 28, 12, 12, random2(12), random(0, 359),1)
+"####" B 2 A_GiveInventory("ShadowBallFXGive1",1)
+"####" B 0 A_PlaySoundEx("Support/UberCharge2","Soundslot6")
+"####" BB 0 A_SpawnItemEx("ShadowBallSparkle", 0, 0, 28, 12, 12, random2(12), random(0, 359),1)
+"####" B 2 A_GiveInventory("ShadowBallFXGive2",1)
+"####" B 0 A_PlaySoundEx("Support/UberCharge2","Soundslot6")
+"####" BB 0 A_SpawnItemEx("ShadowBallSparkle", 0, 0, 28, 12, 12, random2(12), random(0, 359),1)
+"####" B 2 A_GiveInventory("ShadowBallFXGive1",1)
+Goto Fire.Bullet
+Fire.Bullet:
+"####" B 0 A_PlaySoundEx("weapon/crackerthrow","Weapon")
+"####" B 0 A_FireCustomMissile("ShadowBallShot",0,1,0,0)
+"####" B 0 A_Jump(256,"Fire.After")
+Goto Fire.After
+
+Fire.After:
+"####" B 0 A_GiveInventory("FullRecovery_A")
+Fire.After2:
+"####" B 1 A_GiveInventory("5Recovery_A")
+"####" B 0 A_TakeInventory("WeaponCharge",999)
+"####" B 0 A_TakeInventory("ChannelingSpeed",9) 
+"####" B 0 A_Jump(256,"Fire.End")
+Goto Fire.End
+
+
+
+
+
+}
+}
+
+actor ShadowBallMove1 : ShadowBallMove {Weapon.SlotNumber 1}
+actor ShadowBallMove2 : ShadowBallMove {Weapon.SlotNumber 2}
+actor ShadowBallMove3 : ShadowBallMove {Weapon.SlotNumber 3}
+actor ShadowBallMove4 : ShadowBallMove {Weapon.SlotNumber 4}
+
+actor ShadowBallMove5 : ShadowBallMove 
+{
+Weapon.SlotNumber 5
+States
+{
+Fire.End:
+TNT1 A 0
+TNT1 A 0 A_TakeInventory("ShadowBallMove5",9)
+TNT1 A 0 A_Jump(256,"Ready")
+Goto Ready
+}
+}
+
+//[+]========================================================================[+]
+//-----------------------------|Ammo & Inventory|------------------------------
+//[+]========================================================================[+]
+actor ShadowBallPP : Ammo {inventory.amount 1 inventory.Maxamount 10}
+
+
+//[+]========================================================================[+]
+//--------------------------------|Projectiles |--------------------------------
+//[+]========================================================================[+]
+actor ShadowBallShot : BasicProjectile
+{
+Speed 35
+Damage (MBP_ShadowBall)
+DamageType "ShadowBall"
+obituary "$OB_ShadowBall"
+Reactiontime 10
+Radius 14
+Height 14
+scale 2.5
+Args 20, 35
+States
+{
+Spawn:
+TNT1 A 0 
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+TNT1 A 0 A_SetPitch(CallACS("PKMNACS_PitchGrab"))
+TNT1 A 0 //A_SpawnItemEx("ShadowBallFX",0,0,0,0,0,0,0,1)
+Spawn2:
+TNT1 A 0 
+SDBL AB 2 A_SpawnItemEx("ShadowBallSparkle",random(-30,30),random(-30,30),random(-30,30),0,0,0,0,1)
+TBLA A 0 
+TBLA A 0 A_Countdown
+TBLA A 0 A_JumpIF(ReactionTime < 2,"Crash")
+loop
+
+Crash:
+XDeath:
+TNT1 A 0 A_GiveInventory("ProjectileDCode",1)
+BSTG A 0 A_SpawnItemEx("ShadowBallImpactFX1", 0, 0, 28,0, 0, 0, 0,1)
+BSTG A 0 A_SpawnItemEx("ShadowBallImpactFX2", 0, 0, 28,0, 0, 0, 0,1)
+BSTG AAAAAA 0 A_SpawnItemEx("ShadowBallSparkle", 0, 0, 28, 8, 8, random2(8), random(0, 359),1)
+BSTG AAAAAA 0 A_SpawnItemEx("ShadowBallSparkle", 0, 0, 28, 4, 4, random2(4), random(0, 359),1)
+BSTG A 0 A_PlaysoundEX("weapon/mirrordeflect2","Soundslot6")
+TNT1 A 10
+stop
+
+Death:
+LROC A 0 A_PlaySoundEx("misc/kingswing", "Weapon")
+BSTG A 0 A_SpawnItemEx("ShadowBallPhaseFX", 0, 0, 0,0, 0, 0, 0,1)
+LMEX A 0 A_SpawnItemEx("ShadowBallBurrowShot",cos(pitch)*Args[0],0,(sin(pitch)*-Args[0]),0,0,0,0,SXF_TRANSFERTRANSLATION|SXF_TRANSFERPITCH|SXF_NOCHECKPOSITION)
+stop
+}
+}
+
+actor ShadowBallShot2 : ShadowBallShot
+{
+States
+{
+Spawn:
+TNT1 A 0 
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+TNT1 A 0 A_Jump(256,"Spawn2")
+Goto Spawn2
+}
+}
+
+
+actor ShadowBallBurrowShot : ShadowBallShot
+{
++NOCLIP
++NOINTERACTION
+Radius 14
+Height 14
+scale 2.0
+speed 20
+Args 20, 35
+//seesound "weapon/legomissileshot2"
+damage (25)
+damagetype "LegoMissile"
+States
+{
+Spawn:
+TNT1 A 0
+//LROC A 1 
+TNT1 A 0 A_ChangeFlag("NOCLIP",False)
+TNT1 A 0 A_ChangeFlag("NOINTERACTION",False)
+LROC A 1
+goto Explode
+
+Explode:
+LROC A 0 A_Stop
+TNT1 A 0 A_GiveInventory("ProjectileDCode",1)
+TNT1 A 1
+LROC A 0 A_PlaySoundEx("misc/kingswing", "Weapon")
+BSTG A 0 A_SpawnItemEx("ShadowBallPhaseFX", 0, 0, 0,0, 0, 0, 0,1)
+LMEX A 0 A_SpawnItemEx("ShadowBallShot2",cos(pitch)*Args[1],0,(sin(pitch)*-Args[1]),cos(pitch)*Args[1],0,(sin(pitch)*-Args[1]),0,SXF_TRANSFERTRANSLATION|SXF_TRANSFERPITCH|SXF_NOCHECKPOSITION)
+
+//LMEX A 0 A_SpawnItemEx("LegoRocketExplosion",0,0,0,0,0,0,0,1)
+stop
+
+Death:
+LMEX A 0 A_log("Dead")
+LMEX A 0 A_JumpIf(z-floorz < -600 || z-Ceilingz > 600 , "Terminate")
+LMEX A 0 A_JumpIfCloser(1000,"Repeate")
+//LMEX A 0 A_CustomMissile("ShadowBallBurrowShot",0,0,0,CMF_AIMDIRECTION|CMF_TRACKOWNER|CMF_SAVEPITCH)//A_SpawnItemEx("ShadowBallBurrowShot",0,0,0,Velx,momy,momz,0,SXF_TRANSFERTRANSLATION|SXF_ABSOLUTEVELOCITY|SXF_NOCHECKPOSITION)
+stop
+
+Repeate:
+LMEX A 0 A_SpawnItemEx("ShadowBallBurrowShot",cos(pitch)*Args[0],0,(sin(pitch)*-Args[0]),0,0,0,0,SXF_TRANSFERTRANSLATION|SXF_TRANSFERPITCH|SXF_NOCHECKPOSITION)
+stop
+
+Terminate:
+LMEX A 0
+stop
+}
+}
+
+//[+]========================================================================[+]
+//--------------------------------|Special Actors|------------------------------
+//[+]========================================================================[+]
+actor ShadowBallFX : BasicHelper
+{
+Args 0
+States
+{
+Spawn:
+PLAY A 0
+PLAY A 0 A_JumpIfInTargetInventory("WeaponCharge",25,"Give2")
+PLAY A 0 A_JumpIfInTargetInventory("WeaponCharge",1,"PreGive")
+stop
+PreGive:
+PLAY A 0 A_JumpIf(Args[0] == 1, "Give1")
+PLAY A 0 A_JumpIf(Args[0] == 0, "Give")
+Goto Give
+Give:
+PLAY AA 1 A_GiveToTarget("ShadowBallFXGive1",1)
+PLAY A 0 A_SetArg(0,1)
+Goto Spawn
+Give1:
+PLAY AA 1 A_GiveToTarget("ShadowBallFXGive2",1)
+PLAY A 0 A_SetArg(0,0)
+Goto Spawn
+
+
+Give2:
+PLAY AAA 1 A_GiveToTarget("ShadowBallFXGive3",1)
+PLAY A 0 A_JumpIfInTargetInventory("WeaponCharge",25,"Give3")
+stop
+Give3:
+PLAY AAA 1 A_GiveToTarget("ShadowBallFXGive4",1)
+PLAY A 0 A_JumpIfInTargetInventory("WeaponCharge",25,"Give2")
+stop
+}
+}
+
+actor ShadowBallFXGive1 : CustomInventory
+{
+inventory.amount 1
+inventory.maxamount 1
++AUTOACTIVATE
+states
+{
+Spawn:
+TNT1 A 1
+loop
+Use:
+TNT1 A 0 A_SpawnItemEx("ShadowBallFX1",25*cos(0),0,35+(sin(Pitch)*-height),MomX,MomY,MomZ,0,SXF_TRANSFERPITCH|SXF_TRANSFERTRANSLATION)
+stop
+}
+}
+
+
+actor ShadowBallFXGive2 : CustomInventory
+{
+inventory.amount 1
+inventory.maxamount 1
++AUTOACTIVATE
+states
+{
+Spawn:
+TNT1 A 1
+loop
+Use:
+TNT1 A 0 A_SpawnItemEx("ShadowBallFX2",25*cos(0),0,35+(sin(Pitch)*-height),MomX,MomY,MomZ,0,SXF_TRANSFERPITCH|SXF_TRANSFERTRANSLATION)
+stop
+}
+}
+
+actor ShadowBallFXGive3 : CustomInventory
+{
+inventory.amount 1
+inventory.maxamount 1
++AUTOACTIVATE
+states
+{
+Spawn:
+TNT1 A 1
+loop
+Use:
+TNT1 A 0 A_SpawnItemEx("ShadowBallFX3",25*cos(0),0,35+(sin(Pitch)*-height),MomX,MomY,MomZ,0,SXF_TRANSFERPITCH|SXF_TRANSFERTRANSLATION)
+stop
+}
+}
+
+
+actor ShadowBallFXGive4 : CustomInventory
+{
+inventory.amount 1
+inventory.maxamount 1
++AUTOACTIVATE
+states
+{
+Spawn:
+TNT1 A 1
+loop
+Use:
+TNT1 A 0 A_SpawnItemEx("ShadowBallFX4",25*cos(0),0,35+(sin(Pitch)*-height),MomX,MomY,MomZ,0,SXF_TRANSFERPITCH|SXF_TRANSFERTRANSLATION)
+TNT1 A 0 A_SpawnItemEx("ShadowBallSparkle",(25*cos(0))+random(-30,30),random(-30,30),35+(sin(Pitch)*-height)+(random(-30,30)),0,0,0,0,1)
+stop
+}
+}
+
+actor ShadowBallFX1 : PharaohFX1
+{
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+SDBL A 2
+stop
+}
+}
+
+actor ShadowBallFX2 : PharaohFX1
+{
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+SDBL B 2
+stop
+}
+}
+
+actor ShadowBallFX3 : PharaohFX1
+{
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+SDBL A 2
+stop
+}
+}
+
+actor ShadowBallFX4 : PharaohFX1
+{
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+SDBL B 2
+stop
+}
+}
+
+
+actor ShadowBallSparkle : BasicClientside
+{
+-NOINTERACTION
+scale 1.5
+Gravity 0.5
+Alpha 0.5
+renderstyle "subtract"
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A Random(1,5)
+TNT1 A 0 A_GiveInventory("ProjectileDCode",1)
+HARD DCBE 3 
+stop
+}
+}
+
+actor ShadowBallImpactFX1 : BasicClientside
+{
+scale 1.6
+ReactionTime 2
+Renderstyle "subtract"
+Alpha 0.9
+States
+{
+Spawn:
+TNT1 A 0
+FST2 AB 1 
+FST2 CDEF 1 A_SetScale(Scalex-0.2)
+stop
+}
+}
+
+actor ShadowBallImpactFX2 : BasicClientside
+{
+scale 0.6
+ReactionTime 8
+Renderstyle "subtract"
+Alpha 0.9
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 3
+FST2 CDEF 1 A_SetScale(Scalex+0.05)
+Spawn2:
+FST2 F 1 A_SetScale(Scalex+0.05)
+TNT1 A 0 A_Fadeout
+TNT1 A 0 A_Countdown
+loop
+}
+}
+
+
+actor ShadowBallPhaseFX : BasicClientside
+{
+scale 1.5
+ReactionTime 8
+Renderstyle "subtract"
+Alpha 0.9
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 3
+ASEX ABCDE 1 A_SetScale(Scalex+0.03)
+Spawn2:
+ASEX E 1 A_SetScale(Scalex+0.03)
+TNT1 A 0 A_Fadeout
+TNT1 A 0 A_Countdown
+loop
+}
+}

@@ -204,6 +204,10 @@ Goto BugPain
 
 //#region -=- Ghost -=-
 
+Pain.ShadowBall:
+"----" H 0 
+Goto GhostPain
+
 //#endregion
 
 //#region -=- Steel -=-
@@ -306,6 +310,11 @@ Pain.Incinerate:
 "----" H 0 A_Giveinventory("IncinerateProtect")
 "----" H 0 A_Giveinventory("IncinerateItemTorch")
 "----" H 0 
+Goto FirePain
+
+Pain.Inferno:
+"----" H 0 A_Giveinventory("InfernoProtect")
+"----" H 0 A_GiveToTarget("InfernoPowerBuild")
 Goto FirePain
 //#endregion
 
@@ -442,28 +451,77 @@ Goto ElectricPain
 //#endregion
 
 //#region -=- Psychic -=-
+Pain.Confusion:
+Pain.Psychic:
+"----" H 0
+Goto PsychicPain
 
+
+Pain.Psywave:
+"----" H 0
+"----" H 0 A_GiveInventory("PsywaveProtect",1)
+Goto PsychicPain
+
+Pain.PsyBeam:
+"----" H 0
+"----" H 0 A_GiveInventory("PsyBeamProtect",1)
+Goto PsychicPain
 //#endregion
 
 //#region -=- Ice -=-
 
     //===|Ice
-    Pain.PowderSnow:
-    Pain.IcePunch:
-    Pain.IceFang:
+    Pain.IcicleSpear:
     "----" H 0
     Goto IcePain
+
+    Pain.IcePunch:
+    Pain.IceFang:
+    "----" H 0 A_GiveInventory("FreezeStatusProc",1)
+    "----" H 0 A_GiveInventory("IcePunchFreezeRate",1)
+    Goto IcePain
+
+    Pain.PowderSnow:
+    "----" H 0 A_GiveInventory("FreezeStatusProc",1)
+    "----" H 0 A_GiveInventory("PowderSnowFreezeRate",2)
+    Goto IcePain
+
     Pain.IcyWind:
     "----" H 0
     "----" H 0 A_GiveInventory("IcyWindProtect",1)
     "----" H 0 A_GiveInventory("IcyWindNerfInitiate",1)
     Goto IcePain
 
+
+    Pain.IcicleCrash:
+    "----" H 0 A_GiveInventory("IcicleCrashProtect")
+    "----" H 0 A_GiveInventory("IcicleCrashProtect2")
+    "----" H 0 A_Jump(230,2)
+    "----" H 0 A_GiveInventory("CringeStatusProc")
+    "----" H 0 
+    Goto IcePain
+
+
+    Pain.IceBeam:
+    "----" H 0
+    "----" H 0 A_GiveInventory("IceBeamProtect",1)
+    "----" H 0 A_GiveInventory("FreezeStatusProc",1)
+    "----" H 0 A_GiveInventory("IceBeamFreezeRate",2)
+    Goto IcePain
+
+    Pain.AuroraBeam:
+    "----" H 0
+    "----" H 0 A_GiveInventory("AuroraBeamProtect",1)
+    "----" H 0 A_GiveInventory("AuroraBeamNerfInitiate",1)
+    Goto IcePain
 //#endregion
 
 //#region -=- Dragon -=-
 Pain.DragonPulse:
 Pain.DragonClaw:
+Pain.DracoMeteor:
+Pain.Outrage:
+Pain.DragonDarts:
 "----" H 0
 Goto DragonPain
 
@@ -676,6 +734,10 @@ Goto BugDeath
 
 //#region -=- Ghost -=-
 
+Death.ShadowBall:
+"----" H 0 
+Goto GhostDeath
+
 //#endregion
 
 //#region -=- Steel -=-
@@ -721,6 +783,10 @@ Goto SteelDeath
     "----" H 0 A_GiveInventory("FlameWheelProtect")
     "----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,30)
     "----" H 0 ThrustThingZ(0,15,0,0)
+    Goto FireDeath
+
+    Death.Inferno:
+    "----" H 0 A_GiveToTarget("InfernoPowerBuild")
     Goto FireDeath
 //#endregion
 
@@ -811,7 +877,12 @@ Goto ElectricDeath
 //#endregion
 
 //#region -=- Psychic -=-
-
+Death.Confusion:
+Death.Psychic:
+Death.Psywave:
+Death.Psybeam:
+"----" H 0
+Goto PsychicDeath
 //#endregion
 
 //#region -=- Ice -=-
@@ -819,6 +890,10 @@ Goto ElectricDeath
     Death.IcyWind:
     Death.IcePunch:
     Death.IceFang:
+    Death.IcicleSpear:
+    Death.IcicleCrash:
+    Death.IceBeam:    
+    Death.AuroraBeam:
     "----" H 0
     Goto IceDeath
 //#endregion
@@ -835,6 +910,9 @@ Goto ElectricDeath
     
     Death.DragonPulse:
     Death.DragonClaw:
+    Death.DracoMeteor:
+    Death.Outrage:
+    Death.DragonDarts:
     "----" H 0
     Goto DragonDeath
 

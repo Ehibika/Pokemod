@@ -412,6 +412,94 @@ OB_SUBSTITUTE = "%k Defeated %o using SUBSTITUTE!";
 OB_BLOCK = "%k Defeated %o using BLOCK!";
 OB_BELLYDRUM = "%k Defeated %o using BELLYDRUM!";
 OB_AIRSLASH = "%k Defeated %o using AIRSLASH!";
+
+OB_ASTONISH = "%k Defeated %o using ASTONISH!";
+OB_INFESTATION = "%k Defeated %o using INFESTATION!";
+OB_CONFUSERAY = "%k Defeated %o using CONFUSERAY!";
+OB_DISABLE = "%k Defeated %o using DISABLE!";
+OB_GRUDGE = "%k Defeated %o using GRUDGE!";
+OB_HEX = "%k Defeated %o using HEX!";
+OB_SHADOWBALL = "%k Defeated %o using SHADOWBALL!";
+OB_SUCKERPUNCH = "%k Defeated %o using SUCKERPUNCH!";
+OB_DRAGONDARTS = "%k Defeated %o using DRAGONDARTS!";
+OB_PHANTOMFORCE = "%k Defeated %o using PHANTOMFORCE!";
+OB_DRACOMETEOR = "%k Defeated %o using DRACOMETEOR!";
+OB_THUNDEWAVE = "%k Defeated %o using THUNDEWAVE!";
+OB_TWISTER = "%k Defeated %o using TWISTER!";
+OB_WRAP = "%k Defeated %o using WRAP!";
+OB_BARRIER = "%k Defeated %o using BARRIER!";
+OB_DRAGONBREATH = "%k Defeated %o using DRAGONBREATH!";
+OB_HURRICANE = "%k Defeated %o using HURRICANE!";
+OB_EXTREMESPEED = "%k Defeated %o using EXTREMESPEED!";
+OB_HYPERBEAM = "%k Defeated %o using HYPERBEAM!";
+OB_HEADBUTT = "%k Defeated %o using HEADBUTT!";
+OB_ZENHEADBUTT = "%k Defeated %o using ZENHEADBUTT!";
+OB_OUTRAGE = "%k Defeated %o using OUTRAGE!";
+OB_ENDURE = "%k Defeated %o using ENDURE!";
+OB_PSYWAVE = "%k Defeated %o using PSYWAVE!";
+OB_TELEPORT = "%k Defeated %o using TELEPORT!";
+OB_ALLYSWITCH = "%k Defeated %o using ALLYSWITCH!";
+OB_CONFUSION = "%k Defeated %o using CONFUSION!";
+OB_PSYCHIC = "%k Defeated %o using PSYCHIC!";
+OB_PSYCHEUP = "%k Defeated %o using PSYCHEUP!";
+OB_POWERGEM = "%k Defeated %o using POWERGEM!";
+OB_MAGICCOAT = "%k Defeated %o using MAGICCOAT!";
+OB_MINIMIZE = "%k Defeated %o using MINIMIZE!";
+OB_COSMICPOWER = "%k Defeated %o using COSMICPOWER!";
+OB_REFLECTTYPE = "%k Defeated %o using REFLECTTYPE!";
+OB_DAZZLINGGLEEM = "%k Defeated %o using DAZZLINGGLEEM!";
+OB_SCREECH = "%k Defeated %o using SCREECH!";
+OB_TWINNEEDLE = "%k Defeated %o using TWINNEEDLE!";
+OB_ICESHARD = "%k Defeated %o using ICESHARD!";
+OB_ICICLECRASH = "%k Defeated %o using ICICLECRASH!";
+OB_ICICLESPEAR = "%k Defeated %o using ICICLESPEAR!";
+OB_SPIKECANNON = "%k Defeated %o using SPIKECANNON!";
+OB_ROCKBLAST = "%k Defeated %o using ROCKBLAST!";
+OB_SUPERSONIC = "%k Defeated %o using SUPERSONIC!";
+OB_PSYBEAM = "%k Defeated %o using PSYBEAM!";
+OB_CLAMP = "%k Defeated %o using CLAMP!";
+OB_FEINTATTACK = "%k Defeated %o using FEINTATTACK!";
+OB_CHARM = "%k Defeated %o using CHARM!";
+OB_CAPTIVATE = "%k Defeated %o using CAPTIVATE!";
+OB_DRAINPUNCH = "%k Defeated %o using DRAINPUNCH!";
+OB_RECOVER = "%k Defeated %o using RECOVER!";
+OB_POWERSWAP = "%k Defeated %o using POWERSWAP!";
+OB_GUARDSWAP = "%k Defeated %o using GUARDSWAP!";
+OB_POWERSPLIT = "%k Defeated %o using POWERSPLIT!";
+OB_GUARDSPLIT = "%k Defeated %o using GUARDSPLIT!";
+OB_FUTURESIGHT = "%k Defeated %o using FUTURESIGHT!";
+OB_CALMMIND = "%k Defeated %o using CALMMIND!";
+OB_PSYSHOCK = "%k Defeated %o using PSYSHOCK!";
+OB_TRICK = "%k Defeated %o using TRICK!";
+OB_FOCUSBLAST = "%k Defeated %o using FOCUSBLAST!";
+OB_PSYCHOCUT = "%k Defeated %o using PSYCHOCUT!";
+OB_PSYCHOSHIFT = "%k Defeated %o using PSYCHOSHIFT!";
+OB_MEGAPUNCH = "%k Defeated %o using MEGAPUNCH!";
+OB_HYPNOSIS = "%k Defeated %o using HYPNOSIS!";
+OB_DREAMEATER = "%k Defeated %o using DREAMEATER!";
+OB_MEDITATE = "%k Defeated %o using MEDITATE!";
+OB_POISONGAS = "%k Defeated %o using POISONGAS!";
+OB_SWAGGER = "%k Defeated %o using SWAGGER!";
+OB_FLATTER = "%k Defeated %o using FLATTER!";
+OB_ASSIST = "%k Defeated %o using ASSIST!";
+OB_NIGHTMARE = "%k Defeated %o using NIGHTMARE!";
+OB_DISARMINGVOICE = "%k Defeated %o using DISARMINGVOICE!";
+OB_SHADOWSNEAK = "%k Defeated %o using SHADOWSNEAK!";
+OB_DESTINYBOND = "%k Defeated %o using DESTINYBOND!";
+//OB_<BLANKMOVE> = "%k Defeated %o using <BLANKMOVE>!";
+OB_DRAININGKISS = "%k Defeated %o using DRAININGKISS!";
+OB_IMPRISON = "%k Defeated %o using IMPRISON!";
+OB_WISH = "%k Defeated %o using WISH!";
+OB_STOREDPOWER = "%k Defeated %o using STOREDPOWER!";
+OB_HEALINGWISH = "%k Defeated %o using HEALINGWISH!";
+OB_MOONBLAST = "%k Defeated %o using MOONBLAST!";
+OB_EGGBOMB = "%k Defeated %o using EGGBOMB!";
+OB_MOONLIGHT = "%k Defeated %o using MOONLIGHT!";
+OB_UPROAR = "%k Defeated %o using UPROAR!";
+OB_WORRYSEED = "%k Defeated %o using WORRYSEED!";
+OB_INGRAIN = "%k Defeated %o using INGRAIN!";
+OB_AVALANCHE = "%k Defeated %o using AVALANCHE!";
+OB_MIST = "%k Defeated %o using MIST!";
 //--[NewMove]--
 
 //#endregion
@@ -2136,6 +2224,711 @@ M156_CATEGORY = "\cf <Category>";
 M156_POWER = "\cfPower:\cj --";
 M156_DESC = "\cf<Desc>";
 //#endregion
+
+//#region -=- 157: Astonish -=-
+M157_NAME = "\cj Astonish";
+M157_TYPE = "\cj <Type>";
+M157_CATEGORY = "\cf <Category>";
+M157_POWER = "\cfPower:\cj --";
+M157_DESC = "\cf<Desc>";
+//#endregion
+
+//#region -=- 158: Infestation -=-
+M158_NAME = "\cj Infestation";
+M158_TYPE = "\cj <Type>";
+M158_CATEGORY = "\cf <Category>";
+M158_POWER = "\cfPower:\cj --";
+M158_DESC = "\cf<Desc>";
+//#endregion
+
+//#region -=- 159: Confuseray -=-
+M159_NAME = "\cj Confuseray";
+M159_TYPE = "\cj <Type>";
+M159_CATEGORY = "\cf <Category>";
+M159_POWER = "\cfPower:\cj --";
+M159_DESC = "\cf<Desc>";
+//#endregion
+
+//#region -=- 160: Disable -=-
+M160_NAME = "\cj Disable";
+M160_TYPE = "\cj <Type>";
+M160_CATEGORY = "\cf <Category>";
+M160_POWER = "\cfPower:\cj --";
+M160_DESC = "\cf<Desc>";
+//#endregion
+
+//#region -=- 161: Grudge -=-
+M161_NAME = "\cj Grudge";
+M161_TYPE = "\cj <Type>";
+M161_CATEGORY = "\cf <Category>";
+M161_POWER = "\cfPower:\cj --";
+M161_DESC = "\cf<Desc>";
+//#endregion
+
+//#region -=- 162: Hex -=-
+M162_NAME = "\cj Hex";
+M162_TYPE = "\cj <Type>";
+M162_CATEGORY = "\cf <Category>";
+M162_POWER = "\cfPower:\cj --";
+M162_DESC = "\cf<Desc>";
+//#endregion
+
+//#region -=- 163: ShadowBall -=-
+M163_NAME = "\cj ShadowBall";
+M163_TYPE = "\cj <Type>";
+M163_CATEGORY = "\cf <Category>";
+M163_POWER = "\cfPower:\cj --";
+M163_DESC = "\cf<Desc>";
+//#endregion
+
+//#region -=- 164: SuckerPunch -=-
+M164_NAME = "\cj SuckerPunch";
+M164_TYPE = "\cj <Type>";
+M164_CATEGORY = "\cf <Category>";
+M164_POWER = "\cfPower:\cj --";
+M164_DESC = "\cf<Desc>";
+//#endregion
+
+//#region -=- 165: DragonDarts -=-
+M165_NAME = "\cj DragonDarts";
+M165_TYPE = "\cj <Type>";
+M165_CATEGORY = "\cf <Category>";
+M165_POWER = "\cfPower:\cj --";
+M165_DESC = "\cf<Desc>";
+//#endregion
+
+//#region -=- 166: PhantomForce -=-
+M166_NAME = "\cj PhantomForce";
+M166_TYPE = "\cj <Type>";
+M166_CATEGORY = "\cf <Category>";
+M166_POWER = "\cfPower:\cj --";
+M166_DESC = "\cf<Desc>";
+//#endregion
+
+//#region -=- 167: Dracometeor -=-
+M167_NAME = "\cj Dracometeor";
+M167_TYPE = "\cj <Type>";
+M167_CATEGORY = "\cf <Category>";
+M167_POWER = "\cfPower:\cj --";
+M167_DESC = "\cf<Desc>";
+//#endregion
+
+//#region -=- 168: ThundeWave -=-
+M168_NAME = "\cj ThundeWave";
+M168_TYPE = "\cj <Type>";
+M168_CATEGORY = "\cf <Category>";
+M168_POWER = "\cfPower:\cj --";
+M168_DESC = "\cf<Desc>";
+//#endregion
+
+//#region -=- 169: Twister -=-
+M169_NAME = "\cj Twister";
+M169_TYPE = "\cj <Type>";
+M169_CATEGORY = "\cf <Category>";
+M169_POWER = "\cfPower:\cj --";
+M169_DESC = "\cf<Desc>";
+//#endregion
+
+//#region -=- 170: Wrap -=-
+M170_NAME = "\cj Wrap";
+M170_TYPE = "\cj <Type>";
+M170_CATEGORY = "\cf <Category>";
+M170_POWER = "\cfPower:\cj --";
+M170_DESC = "\cf<Desc>";
+//#endregion
+
+//#region -=- 171: Barrier -=-
+M171_NAME = "\cj Barrier";
+M171_TYPE = "\cj <Type>";
+M171_CATEGORY = "\cf <Category>";
+M171_POWER = "\cfPower:\cj --";
+M171_DESC = "\cf<Desc>";
+//#endregion
+
+//#region -=- 172: DragonBreath -=-
+M172_NAME = "\cj DragonBreath";
+M172_TYPE = "\cj <Type>";
+M172_CATEGORY = "\cf <Category>";
+M172_POWER = "\cfPower:\cj --";
+M172_DESC = "\cf<Desc>";
+//#endregion
+
+//#region -=- 173: Hurricane -=-
+M173_NAME = "\cj Hurricane";
+M173_TYPE = "\cj <Type>";
+M173_CATEGORY = "\cf <Category>";
+M173_POWER = "\cfPower:\cj --";
+M173_DESC = "\cf<Desc>";
+//#endregion
+
+//#region -=- 174: ExtremeSpeed -=-
+M174_NAME = "\cj ExtremeSpeed";
+M174_TYPE = "\cj <Type>";
+M174_CATEGORY = "\cf <Category>";
+M174_POWER = "\cfPower:\cj --";
+M174_DESC = "\cf<Desc>";
+//#endregion
+
+//#region -=- 175: Hyperbeam -=-
+M175_NAME = "\cj Hyperbeam";
+M175_TYPE = "\cj <Type>";
+M175_CATEGORY = "\cf <Category>";
+M175_POWER = "\cfPower:\cj --";
+M175_DESC = "\cf<Desc>";
+//#endregion
+
+//#region -=- 176: Headbutt -=-
+M176_NAME = "\cj Headbutt";
+M176_TYPE = "\cj <Type>";
+M176_CATEGORY = "\cf <Category>";
+M176_POWER = "\cfPower:\cj --";
+M176_DESC = "\cf<Desc>";
+//#endregion
+
+//#region -=- 177: Zenheadbutt -=-
+M177_NAME = "\cj Zenheadbutt";
+M177_TYPE = "\cj <Type>";
+M177_CATEGORY = "\cf <Category>";
+M177_POWER = "\cfPower:\cj --";
+M177_DESC = "\cf<Desc>";
+//#endregion
+
+//#region -=- 178: Outrage -=-
+M178_NAME = "\cj Outrage";
+M178_TYPE = "\cj <Type>";
+M178_CATEGORY = "\cf <Category>";
+M178_POWER = "\cfPower:\cj --";
+M178_DESC = "\cf<Desc>";
+//#endregion
+
+//#region -=- 179: Endure -=-
+M179_NAME = "\cj Endure";
+M179_TYPE = "\cj <Type>";
+M179_CATEGORY = "\cf <Category>";
+M179_POWER = "\cfPower:\cj --";
+M179_DESC = "\cf<Desc>";
+//#endregion
+
+//#region -=- 180: Psywave -=-
+M180_NAME = "\cj Psywave";
+M180_TYPE = "\cj <Type>";
+M180_CATEGORY = "\cf <Category>";
+M180_POWER = "\cfPower:\cj --";
+M180_DESC = "\cf<Desc>";
+//#endregion
+
+//#region -=- 181: Teleport -=-
+M181_NAME = "\cj Teleport";
+M181_TYPE = "\cj <Type>";
+M181_CATEGORY = "\cf <Category>";
+M181_POWER = "\cfPower:\cj --";
+M181_DESC = "\cf<Desc>";
+//#endregion
+
+//#region -=- 182: Allyswitch -=-
+M182_NAME = "\cj Allyswitch";
+M182_TYPE = "\cj <Type>";
+M182_CATEGORY = "\cf <Category>";
+M182_POWER = "\cfPower:\cj --";
+M182_DESC = "\cf<Desc>";
+//#endregion
+
+//#region -=- 183: Confusion -=-
+M183_NAME = "\cj Confusion";
+M183_TYPE = "\cj <Type>";
+M183_CATEGORY = "\cf <Category>";
+M183_POWER = "\cfPower:\cj --";
+M183_DESC = "\cf<Desc>";
+//#endregion
+
+//#region -=- 184: Psychic -=-
+M184_NAME = "\cj Psychic";
+M184_TYPE = "\cj <Type>";
+M184_CATEGORY = "\cf <Category>";
+M184_POWER = "\cfPower:\cj --";
+M184_DESC = "\cf<Desc>";
+//#endregion
+
+//#region -=- 185: Psycheup -=-
+M185_NAME = "\cj Psycheup";
+M185_TYPE = "\cj <Type>";
+M185_CATEGORY = "\cf <Category>";
+M185_POWER = "\cfPower:\cj --";
+M185_DESC = "\cf<Desc>";
+//#endregion
+
+//#region -=- 186: Powergem -=-
+M186_NAME = "\cj Powergem";
+M186_TYPE = "\cj <Type>";
+M186_CATEGORY = "\cf <Category>";
+M186_POWER = "\cfPower:\cj --";
+M186_DESC = "\cf<Desc>";
+//#endregion
+
+//#region -=- 187: Magiccoat -=-
+M187_NAME = "\cj Magiccoat";
+M187_TYPE = "\cj <Type>";
+M187_CATEGORY = "\cf <Category>";
+M187_POWER = "\cfPower:\cj --";
+M187_DESC = "\cf<Desc>";
+//#endregion
+
+//#region -=- 188: Minimize -=-
+M188_NAME = "\cj Minimize";
+M188_TYPE = "\cj <Type>";
+M188_CATEGORY = "\cf <Category>";
+M188_POWER = "\cfPower:\cj --";
+M188_DESC = "\cf<Desc>";
+//#endregion
+
+//#region -=- 189: Cosmicpower -=-
+M189_NAME = "\cj Cosmicpower";
+M189_TYPE = "\cj <Type>";
+M189_CATEGORY = "\cf <Category>";
+M189_POWER = "\cfPower:\cj --";
+M189_DESC = "\cf<Desc>";
+//#endregion
+
+//#region -=- 190: Reflecttype -=-
+M190_NAME = "\cj Reflecttype";
+M190_TYPE = "\cj <Type>";
+M190_CATEGORY = "\cf <Category>";
+M190_POWER = "\cfPower:\cj --";
+M190_DESC = "\cf<Desc>";
+//#endregion
+
+//#region -=- 191: Dazzlinggleem -=-
+M191_NAME = "\cj Dazzlinggleem";
+M191_TYPE = "\cj <Type>";
+M191_CATEGORY = "\cf <Category>";
+M191_POWER = "\cfPower:\cj --";
+M191_DESC = "\cf<Desc>";
+//#endregion
+
+//#region -=- 192: Screech -=-
+M192_NAME = "\cj Screech";
+M192_TYPE = "\cj <Type>";
+M192_CATEGORY = "\cf <Category>";
+M192_POWER = "\cfPower:\cj --";
+M192_DESC = "\cf<Desc>";
+//#endregion
+
+//#region -=- 193: Twinneedle -=-
+M193_NAME = "\cj Twinneedle";
+M193_TYPE = "\cj <Type>";
+M193_CATEGORY = "\cf <Category>";
+M193_POWER = "\cfPower:\cj --";
+M193_DESC = "\cf<Desc>";
+//#endregion
+
+//#region -=- 194: IceShard -=-
+M194_NAME = "\cj IceShard";
+M194_TYPE = "\cj <Type>";
+M194_CATEGORY = "\cf <Category>";
+M194_POWER = "\cfPower:\cj --";
+M194_DESC = "\cf<Desc>";
+//#endregion
+
+//#region -=- 195: IcicleCrash -=-
+M195_NAME = "\cj IcicleCrash";
+M195_TYPE = "\cj <Type>";
+M195_CATEGORY = "\cf <Category>";
+M195_POWER = "\cfPower:\cj --";
+M195_DESC = "\cf<Desc>";
+//#endregion
+
+//#region -=- 196: IcicleSpear -=-
+M196_NAME = "\cj IcicleSpear";
+M196_TYPE = "\cj <Type>";
+M196_CATEGORY = "\cf <Category>";
+M196_POWER = "\cfPower:\cj --";
+M196_DESC = "\cf<Desc>";
+//#endregion
+
+//#region -=- 197: SpikeCannon -=-
+M197_NAME = "\cj SpikeCannon";
+M197_TYPE = "\cj <Type>";
+M197_CATEGORY = "\cf <Category>";
+M197_POWER = "\cfPower:\cj --";
+M197_DESC = "\cf<Desc>";
+//#endregion
+
+//#region -=- 198: RockBlast -=-
+M198_NAME = "\cj RockBlast";
+M198_TYPE = "\cj <Type>";
+M198_CATEGORY = "\cf <Category>";
+M198_POWER = "\cfPower:\cj --";
+M198_DESC = "\cf<Desc>";
+//#endregion
+
+//#region -=- 199: Supersonic -=-
+M199_NAME = "\cj Supersonic";
+M199_TYPE = "\cj <Type>";
+M199_CATEGORY = "\cf <Category>";
+M199_POWER = "\cfPower:\cj --";
+M199_DESC = "\cf<Desc>";
+//#endregion
+
+//#region -=- 200: Psybeam -=-
+M200_NAME = "\cj Psybeam";
+M200_TYPE = "\cj <Type>";
+M200_CATEGORY = "\cf <Category>";
+M200_POWER = "\cfPower:\cj --";
+M200_DESC = "\cf<Desc>";
+//#endregion
+
+//#region -=- 201: Clamp -=-
+M201_NAME = "\cj Clamp";
+M201_TYPE = "\cj <Type>";
+M201_CATEGORY = "\cf <Category>";
+M201_POWER = "\cfPower:\cj --";
+M201_DESC = "\cf<Desc>";
+//#endregion
+
+//#region -=- 202: Feintattack -=-
+M202_NAME = "\cj Feintattack";
+M202_TYPE = "\cj <Type>";
+M202_CATEGORY = "\cf <Category>";
+M202_POWER = "\cfPower:\cj --";
+M202_DESC = "\cf<Desc>";
+//#endregion
+
+//#region -=- 203: Charm -=-
+M203_NAME = "\cj Charm";
+M203_TYPE = "\cj <Type>";
+M203_CATEGORY = "\cf <Category>";
+M203_POWER = "\cfPower:\cj --";
+M203_DESC = "\cf<Desc>";
+//#endregion
+
+//#region -=- 204: Captivate -=-
+M204_NAME = "\cj Captivate";
+M204_TYPE = "\cj <Type>";
+M204_CATEGORY = "\cf <Category>";
+M204_POWER = "\cfPower:\cj --";
+M204_DESC = "\cf<Desc>";
+//#endregion
+
+//#region -=- 205: Drainpunch -=-
+M205_NAME = "\cj Drainpunch";
+M205_TYPE = "\cj <Type>";
+M205_CATEGORY = "\cf <Category>";
+M205_POWER = "\cfPower:\cj --";
+M205_DESC = "\cf<Desc>";
+//#endregion
+
+//#region -=- 206: Recover -=-
+M206_NAME = "\cj Recover";
+M206_TYPE = "\cj <Type>";
+M206_CATEGORY = "\cf <Category>";
+M206_POWER = "\cfPower:\cj --";
+M206_DESC = "\cf<Desc>";
+//#endregion
+
+//#region -=- 207: PowerSwap -=-
+M207_NAME = "\cj PowerSwap";
+M207_TYPE = "\cj <Type>";
+M207_CATEGORY = "\cf <Category>";
+M207_POWER = "\cfPower:\cj --";
+M207_DESC = "\cf<Desc>";
+//#endregion
+
+//#region -=- 208: GuardSwap -=-
+M208_NAME = "\cj GuardSwap";
+M208_TYPE = "\cj <Type>";
+M208_CATEGORY = "\cf <Category>";
+M208_POWER = "\cfPower:\cj --";
+M208_DESC = "\cf<Desc>";
+//#endregion
+
+//#region -=- 209: PowerSplit -=-
+M209_NAME = "\cj PowerSplit";
+M209_TYPE = "\cj <Type>";
+M209_CATEGORY = "\cf <Category>";
+M209_POWER = "\cfPower:\cj --";
+M209_DESC = "\cf<Desc>";
+//#endregion
+
+//#region -=- 210: GuardSplit -=-
+M210_NAME = "\cj GuardSplit";
+M210_TYPE = "\cj <Type>";
+M210_CATEGORY = "\cf <Category>";
+M210_POWER = "\cfPower:\cj --";
+M210_DESC = "\cf<Desc>";
+//#endregion
+
+//#region -=- 211: FutureSight -=-
+M211_NAME = "\cj FutureSight";
+M211_TYPE = "\cj <Type>";
+M211_CATEGORY = "\cf <Category>";
+M211_POWER = "\cfPower:\cj --";
+M211_DESC = "\cf<Desc>";
+//#endregion
+
+//#region -=- 212: CalmMind -=-
+M212_NAME = "\cj CalmMind";
+M212_TYPE = "\cj <Type>";
+M212_CATEGORY = "\cf <Category>";
+M212_POWER = "\cfPower:\cj --";
+M212_DESC = "\cf<Desc>";
+//#endregion
+
+//#region -=- 213: Psyshock -=-
+M213_NAME = "\cj Psyshock";
+M213_TYPE = "\cj <Type>";
+M213_CATEGORY = "\cf <Category>";
+M213_POWER = "\cfPower:\cj --";
+M213_DESC = "\cf<Desc>";
+//#endregion
+
+//#region -=- 214: Trick -=-
+M214_NAME = "\cj Trick";
+M214_TYPE = "\cj <Type>";
+M214_CATEGORY = "\cf <Category>";
+M214_POWER = "\cfPower:\cj --";
+M214_DESC = "\cf<Desc>";
+//#endregion
+
+//#region -=- 215: <BlankMove> -=-
+M215_NAME = "\cj <BlankMove>";
+M215_TYPE = "\cj <Type>";
+M215_CATEGORY = "\cf <Category>";
+M215_POWER = "\cfPower:\cj --";
+M215_DESC = "\cf<Desc>";
+//#endregion
+
+//#region -=- 216: FocusBlast -=-
+M216_NAME = "\cj FocusBlast";
+M216_TYPE = "\cj <Type>";
+M216_CATEGORY = "\cf <Category>";
+M216_POWER = "\cfPower:\cj --";
+M216_DESC = "\cf<Desc>";
+//#endregion
+
+//#region -=- 217: PsychoCut -=-
+M217_NAME = "\cj PsychoCut";
+M217_TYPE = "\cj <Type>";
+M217_CATEGORY = "\cf <Category>";
+M217_POWER = "\cfPower:\cj --";
+M217_DESC = "\cf<Desc>";
+//#endregion
+
+//#region -=- 218: PsychoShift -=-
+M218_NAME = "\cj PsychoShift";
+M218_TYPE = "\cj <Type>";
+M218_CATEGORY = "\cf <Category>";
+M218_POWER = "\cfPower:\cj --";
+M218_DESC = "\cf<Desc>";
+//#endregion
+
+//#region -=- 219: MegaPunch -=-
+M219_NAME = "\cj MegaPunch";
+M219_TYPE = "\cj <Type>";
+M219_CATEGORY = "\cf <Category>";
+M219_POWER = "\cfPower:\cj --";
+M219_DESC = "\cf<Desc>";
+//#endregion
+
+//#region -=- 220: Hypnosis -=-
+M220_NAME = "\cj Hypnosis";
+M220_TYPE = "\cj <Type>";
+M220_CATEGORY = "\cf <Category>";
+M220_POWER = "\cfPower:\cj --";
+M220_DESC = "\cf<Desc>";
+//#endregion
+
+//#region -=- 221: DreamEater -=-
+M221_NAME = "\cj DreamEater";
+M221_TYPE = "\cj <Type>";
+M221_CATEGORY = "\cf <Category>";
+M221_POWER = "\cfPower:\cj --";
+M221_DESC = "\cf<Desc>";
+//#endregion
+
+//#region -=- 222: Meditate -=-
+M222_NAME = "\cj Meditate";
+M222_TYPE = "\cj <Type>";
+M222_CATEGORY = "\cf <Category>";
+M222_POWER = "\cfPower:\cj --";
+M222_DESC = "\cf<Desc>";
+//#endregion
+
+//#region -=- 223: PoisonGas -=-
+M223_NAME = "\cj PoisonGas";
+M223_TYPE = "\cj <Type>";
+M223_CATEGORY = "\cf <Category>";
+M223_POWER = "\cfPower:\cj --";
+M223_DESC = "\cf<Desc>";
+//#endregion
+
+//#region -=- 224: Swagger -=-
+M224_NAME = "\cj Swagger";
+M224_TYPE = "\cj <Type>";
+M224_CATEGORY = "\cf <Category>";
+M224_POWER = "\cfPower:\cj --";
+M224_DESC = "\cf<Desc>";
+//#endregion
+
+//#region -=- 225: Flatter -=-
+M225_NAME = "\cj Flatter";
+M225_TYPE = "\cj <Type>";
+M225_CATEGORY = "\cf <Category>";
+M225_POWER = "\cfPower:\cj --";
+M225_DESC = "\cf<Desc>";
+//#endregion
+
+//#region -=- 226: Assist -=-
+M226_NAME = "\cj Assist";
+M226_TYPE = "\cj <Type>";
+M226_CATEGORY = "\cf <Category>";
+M226_POWER = "\cfPower:\cj --";
+M226_DESC = "\cf<Desc>";
+//#endregion
+
+//#region -=- 227: Nightmare -=-
+M227_NAME = "\cj Nightmare";
+M227_TYPE = "\cj <Type>";
+M227_CATEGORY = "\cf <Category>";
+M227_POWER = "\cfPower:\cj --";
+M227_DESC = "\cf<Desc>";
+//#endregion
+
+//#region -=- 228: DisarmingVoice -=-
+M228_NAME = "\cj DisarmingVoice";
+M228_TYPE = "\cj <Type>";
+M228_CATEGORY = "\cf <Category>";
+M228_POWER = "\cfPower:\cj --";
+M228_DESC = "\cf<Desc>";
+//#endregion
+
+//#region -=- 229: ShadowSneak -=-
+M229_NAME = "\cj ShadowSneak";
+M229_TYPE = "\cj <Type>";
+M229_CATEGORY = "\cf <Category>";
+M229_POWER = "\cfPower:\cj --";
+M229_DESC = "\cf<Desc>";
+//#endregion
+
+//#region -=- 230: DestinyBond -=-
+M230_NAME = "\cj DestinyBond";
+M230_TYPE = "\cj <Type>";
+M230_CATEGORY = "\cf <Category>";
+M230_POWER = "\cfPower:\cj --";
+M230_DESC = "\cf<Desc>";
+//#endregion
+
+//#region -=- 231: <BlankMove> -=-
+M231_NAME = "\cj <BlankMove>";
+M231_TYPE = "\cj <Type>";
+M231_CATEGORY = "\cf <Category>";
+M231_POWER = "\cfPower:\cj --";
+M231_DESC = "\cf<Desc>";
+//#endregion
+
+//#region -=- 232: DrainingKiss -=-
+M232_NAME = "\cj DrainingKiss";
+M232_TYPE = "\cj <Type>";
+M232_CATEGORY = "\cf <Category>";
+M232_POWER = "\cfPower:\cj --";
+M232_DESC = "\cf<Desc>";
+//#endregion
+
+//#region -=- 233: Imprison -=-
+M233_NAME = "\cj Imprison";
+M233_TYPE = "\cj <Type>";
+M233_CATEGORY = "\cf <Category>";
+M233_POWER = "\cfPower:\cj --";
+M233_DESC = "\cf<Desc>";
+//#endregion
+
+//#region -=- 234: Wish -=-
+M234_NAME = "\cj Wish";
+M234_TYPE = "\cj <Type>";
+M234_CATEGORY = "\cf <Category>";
+M234_POWER = "\cfPower:\cj --";
+M234_DESC = "\cf<Desc>";
+//#endregion
+
+//#region -=- 235: StoredPower -=-
+M235_NAME = "\cj StoredPower";
+M235_TYPE = "\cj <Type>";
+M235_CATEGORY = "\cf <Category>";
+M235_POWER = "\cfPower:\cj --";
+M235_DESC = "\cf<Desc>";
+//#endregion
+
+//#region -=- 236: HealingWish -=-
+M236_NAME = "\cj HealingWish";
+M236_TYPE = "\cj <Type>";
+M236_CATEGORY = "\cf <Category>";
+M236_POWER = "\cfPower:\cj --";
+M236_DESC = "\cf<Desc>";
+//#endregion
+
+//#region -=- 237: Moonblast -=-
+M237_NAME = "\cj Moonblast";
+M237_TYPE = "\cj <Type>";
+M237_CATEGORY = "\cf <Category>";
+M237_POWER = "\cfPower:\cj --";
+M237_DESC = "\cf<Desc>";
+//#endregion
+
+//#region -=- 238: EggBomb -=-
+M238_NAME = "\cj EggBomb";
+M238_TYPE = "\cj <Type>";
+M238_CATEGORY = "\cf <Category>";
+M238_POWER = "\cfPower:\cj --";
+M238_DESC = "\cf<Desc>";
+//#endregion
+
+//#region -=- 239: Moonlight -=-
+M239_NAME = "\cj Moonlight";
+M239_TYPE = "\cj <Type>";
+M239_CATEGORY = "\cf <Category>";
+M239_POWER = "\cfPower:\cj --";
+M239_DESC = "\cf<Desc>";
+//#endregion
+
+//#region -=- 240: Uproar -=-
+M240_NAME = "\cj Uproar";
+M240_TYPE = "\cj <Type>";
+M240_CATEGORY = "\cf <Category>";
+M240_POWER = "\cfPower:\cj --";
+M240_DESC = "\cf<Desc>";
+//#endregion
+
+//#region -=- 241: WorrySeed -=-
+M241_NAME = "\cj WorrySeed";
+M241_TYPE = "\cj <Type>";
+M241_CATEGORY = "\cf <Category>";
+M241_POWER = "\cfPower:\cj --";
+M241_DESC = "\cf<Desc>";
+//#endregion
+
+//#region -=- 242: Ingrain -=-
+M242_NAME = "\cj Ingrain";
+M242_TYPE = "\cj <Type>";
+M242_CATEGORY = "\cf <Category>";
+M242_POWER = "\cfPower:\cj --";
+M242_DESC = "\cf<Desc>";
+//#endregion
+
+//#region -=- 243: Avalanche -=-
+M243_NAME = "\cj Avalanche";
+M243_TYPE = "\cj <Type>";
+M243_CATEGORY = "\cf <Category>";
+M243_POWER = "\cfPower:\cj --";
+M243_DESC = "\cf<Desc>";
+//#endregion
+
+//#region -=- 244: Mist -=-
+M244_NAME = "\cj Mist";
+M244_TYPE = "\cj <Type>";
+M244_CATEGORY = "\cf <Category>";
+M244_POWER = "\cfPower:\cj --";
+M244_DESC = "\cf<Desc>";
+//#endregion
+
 
 //===
 //#endregion

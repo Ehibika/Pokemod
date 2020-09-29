@@ -1,0 +1,247 @@
+actor RestMove : WepMasterBase
+{
+Tag "Rest"
+obituary "$OB_Rest"
+Weapon.AmmoUse 1
+Weapon.AmmoGive 5
+weapon.ammotype "RestPP"
+scale 2.0
+Inventory.Pickupmessage "$PU_MEGABUSTER"
+States
+{
+Spawn:
+WEAP X 1
+stop
+
+
+Fire:
+"####" BBB 1 A_Jumpif(CallACS("CheckWeaponFire",RC_C)==1,"Fire.Begin")
+"####" B 0 A_Jump(256,"NoAmmo")
+Goto NoAmmo
+
+Fire.Begin:
+"####" B 0
+"####" B 1 A_JumpIfInventory("IsResting",1,"NoAmmo")
+"####" B 1 A_JumpIfInventory("SleepMark",1,"Fire.FreeOn")
+"####" B 0 A_Jump(256,"Fire.On")
+Goto Fire.On
+
+Fire.On:
+"####" B 0 A_PlaySoundEx("Item/Refill","Soundslot6")
+"####" B 3 A_GiveInventory("RestFX_Spawn")
+"####" B 0 A_GiveInventory("RestInitiate")
+"####" A 0 ACS_NamedExecuteAlways("TakePP",0,Move_Rest,1)
+"####" B 0 A_Jump(256,"Fire.After")
+Goto Fire.After
+
+Fire.FreeOn:
+"####" B 0 A_PlaySoundEx("Item/Refill","Soundslot6")
+"####" B 3 A_GiveInventory("RestFX_Spawn")
+"####" B 0 A_GiveInventory("RestInitiate")
+"####" B 0 A_Jump(256,"Fire.After")
+Goto Fire.After
+
+Fire.After:
+"####" B 1 A_GiveInventory("HalfRecovery_C")
+"####" C 0 A_REfire("Fire")
+"####" B 0 A_Jump(256,"Fire.End")
+Goto Fire.End
+
+}
+}
+
+actor RestMove1 : RestMove {Weapon.SlotNumber 1}
+actor RestMove2 : RestMove {Weapon.SlotNumber 2}
+actor RestMove3 : RestMove {Weapon.SlotNumber 3}
+actor RestMove4 : RestMove {Weapon.SlotNumber 4}
+
+actor RestMove5 : RestMove 
+{
+Weapon.SlotNumber 5
+States
+{
+Fire.End:
+TNT1 A 0
+TNT1 A 0 A_TakeInventory("RestMove5",9)
+TNT1 A 0 A_Jump(256,"Ready")
+Goto Ready
+}
+}
+
+//[+]========================================================================[+]
+//-----------------------------|Ammo & Inventory|------------------------------
+//[+]========================================================================[+]
+actor RestPP : Ammo {inventory.amount 1 inventory.Maxamount 5}
+actor IsResting : Powerup {inventory.amount 1 Powerup.Duration 35}
+
+actor RestInitiate : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+
+
+TNT1 A 0 A_Jumpifinventory("CringeGuard",1,"Nope")
+//==
+TNT1 A 0 A_TakeInventory("PoisonMark",999)
+TNT1 A 0 A_TakeInventory("ParalysisMark",999)
+TNT1 A 0 A_TakeInventory("BurnMark",999)
+TNT1 A 0 A_Jumpifinventory("SleepMark",1,"Transition")
+TNT1 A 0 A_GiveInventory("RestMark",1)
+TNT1 A 0 A_GiveInventory("IsResting",1)
+TNT1 A 0 SetPlayerProperty(0,1,0)
+TNT1 A 0 ACS_NamedExecuteAlways("PKMN_JumpToggle",0,0)
+TNT1 A 0 ACS_NamedExecuteAlways("PKMN_SleepHandler",0)
+TNT1 A 0 A_SpawnItemEX("RestWatcher")
+stop
+
+Transition:
+TNT1 A 0 A_GiveInventory("IsResting",1)
+TNT1 A 0 A_GiveInventory("RestMark",1)
+TNT1 A 0 A_SpawnItemEX("RestWatcher2")
+stop
+
+Nope:
+TNT1 A 0
+stop
+}
+}
+
+actor RestMark : PowerupGiver
+{
+Inventory.Maxamount 0
++INVENTORY.AUTOACTIVATE
+Powerup.Duration -4
+powerup.type "SleepMark"
+}
+
+
+actor RestWatcher //: CustomInventory
+{
++MISSILE
++RIPPER
++NOGRAVITY
++NOINTERACTION
+Reactiontime 5
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_JumpIfInTargetInventory("CutterFlag",999,"DeathTake")
+TNT1 A 10 A_GiveToTarget("RestHeal")
+TNT1 A 0 A_GiveToTarget("SleepingTagPickup")
+TNT1 A 0 A_JumpIfInTargetInventory("CureAll",1,"DeathTake")
+TNT1 A 0 A_JumpIfInTargetInventory("SleepMark",1,"Spawn")
+Goto Death
+
+Death:
+DeathTake:
+TNT1 A 0
+TNT1 A 1 A_TakefromTarget("SleepMark",999)
+TNT1 A 1 A_GiveToTarget("SleepBreaker")
+stop
+}
+}
+
+actor RestWatcher2 : RestWatcher //Version without "Z's" for when initiated while asleep
+{
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_JumpIfInTargetInventory("CutterFlag",999,"DeathTake")
+TNT1 A 10 A_GiveToTarget("RestHeal")
+TNT1 A 0 A_JumpIfInTargetInventory("CureAll",1,"DeathTake")
+TNT1 A 0 A_JumpIfInTargetInventory("SleepMark",1,"Spawn")
+Goto Death
+}
+}
+
+actor RestHeal : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_GiveInventory("IsResting",1)
+TNT1 A 0 A_JumpIf(CallACS("PKMNACS_HealthPercent",0)>=100,"Nope")
+LASH A 0 A_JumpIf(ACS_NamedExecuteWithResult("PKMNACS_ActorClassifier",0,2) == TRUE, "HealMe")
+stop
+
+HealMe:
+TNT1 A 0 A_GiveInventory("RestMark",1)
+TNT1 A 0 ACS_NamedExecuteAlways("PKMNACS_Basic(Over)Heal",0,0,(CallACS("PKMNACS_HealthPercent",0,1,5)))
+TNT1 A 0
+stop
+
+Nope:
+TNT1 A 0
+stop
+}
+}
+
+actor RestFX_Spawn : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_SpawnItemEX("RestFX")
+Nope:
+TNT1 A 0
+stop
+}
+}
+
+actor RestFX : BasicClientside
+{
+Scale 4.0
+Renderstyle "translucent"
+Alpha 0.2
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+TCEX F 0 A_SetScale(Scalex-0.5)
+RFLC A 0 A_FadeIn
+TCEX FF 1 A_Warp(AAPTR_TARGET,0,0,22,0,WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE)
+TCEX E 0 A_SetScale(Scalex-0.5)
+RFLC A 0 A_FadeIn
+TCEX EE 1 A_Warp(AAPTR_TARGET,0,0,22,0,WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE)
+TCEX D 0 A_SetScale(Scalex-0.5)
+RFLC A 0 A_FadeIn
+TCEX DD 1 A_Warp(AAPTR_TARGET,0,0,22,0,WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE)
+TCEX C 0 A_SetScale(Scalex-0.5)
+RFLC A 0 A_FadeIn
+TCEX CC 1 A_Warp(AAPTR_TARGET,0,0,22,0,WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE)
+TCEX B 0 A_SetScale(Scalex-0.5)
+RFLC A 0 A_FadeIn
+TCEX BB 1 A_Warp(AAPTR_TARGET,0,0,22,0,WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE)
+TCEX A 0 A_SetScale(Scalex-0.5)
+RFLC A 0 A_FadeIn
+TCEX AA 1 A_Warp(AAPTR_TARGET,0,0,22,0,WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE)
+TNT1 A 0 A_Stop
+Goto Death
+
+Death:
+TNT1 A 1 
+stop
+}
+}

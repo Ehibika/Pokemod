@@ -98,7 +98,7 @@ Const int Growl_Item = 1;
 //--------------------------------|Projectiles |--------------------------------
 //[+]========================================================================[+]
 
-actor GrowlShot
+actor GrowlShot : BasicProjectile
 {
 PROJECTILE
 +RIPPER
