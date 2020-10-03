@@ -8,16 +8,6 @@ A_Moves
 //A_Stats
 A_Targeter
 A_Type
-DB_Data
-DB_Players
-Dex_evo
-Dex_leveling
-Dex_Moves
-Dex_Movesets
-Dex_Pokemon
-Dex_Skin
-Dex_Types
-G_Action
-G_Startup
+PKMNACS
 projtra1
 projtran

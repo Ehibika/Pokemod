@@ -25,3 +25,7 @@
  * "Fc" = 
  * "G_" files containing scripts and functions that are Gamestate and gameplay relevant
 */
+
+#import "G_Action.acs"
+#import "G_Startup.acs"
+

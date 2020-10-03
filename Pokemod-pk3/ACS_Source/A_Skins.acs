@@ -179,7 +179,7 @@ bool playerDisguised[S_MAX_PLAYERS];
 int playerDisguise[S_MAX_PLAYERS];
 int playerCurrentSkin[S_MAX_PLAYERS];
 
-#DEFINE KEYCONF_CLASSCOUNT 19 //18
+#DEFINE KEYCONF_CLASSCOUNT 20 //18
 #DEFINE SKIN_OFFSET 114 + KEYCONF_CLASSCOUNT //128 // 
 
 script "SetPokeSkin" (int Skin, int update) //CLIENTSIDE
@@ -189,7 +189,7 @@ script "SetPokeSkin" (int Skin, int update) //CLIENTSIDE
 if(SkinDEX[Skin][1] == "Base"){log(s:"Boop") ;Terminate;}
 
 GiveInventory("SkinEnabler",1);
-ConsoleCommand(strParam(s:"set theDisguise ",s:SkinDEX[Skin][0]));
+ConsoleCommand(strParam(s:"set theDisguise ",s:SkinDEX[Skin][1]));
 ACS_NamedExecuteWithResult("SetDisguise",PlayerNumber());
 }
 
@@ -209,14 +209,14 @@ script "SetUnDisguise" (int p)
 
 function str GetSkinNum(str skinName) {
 	//for(int i = 0; i<MAXDEX; i++) if(skinName==SkinDEX[i]) return (i+SKIN_OFFSET);
-	for(int i = 0; i<MAXDEX; i++) if(StrIcmp(skinName,SkinDEX[i][0])==0) return (i+SKIN_OFFSET);
+	for(int i = 0; i<MAXDEX; i++) if(StrIcmp(skinName,SkinDEX[i][1])==0) return (i+SKIN_OFFSET);
 	return 0;
 }
 
 function str GetSkinName(int theSkin) {
 	if(theSkin == 0) return "Base";
 	theSkin -= SKIN_OFFSET;
-	if(theSkin>-1&&theSkin<MAXDEX) return SkinDEX[theSkin][0];
+	if(theSkin>-1&&theSkin<MAXDEX) return SkinDEX[theSkin][1];
 	return "unlisted";
 }
 
