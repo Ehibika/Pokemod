@@ -316,7 +316,7 @@ Script "RemoteControlActor" (int ActorSpeed, int MaxRange)
                 if(LeftInput == 3){Velx2 = FixedMul(cos(-Angle),  ActorSpeed*65536); vely2 = FixedMul(Sin(-Angle),  ActorSpeed*65536);}
                 if(RightInput == 3){Velx2 = FixedMul(cos(-Angle), -ActorSpeed*65536); vely2 = FixedMul(Sin(-Angle),  -ActorSpeed*65536);}
             }    
-log(f:HostAngle);
+//log(f:HostAngle);
             if(CancelInput == 1){Thing_Remove(0); Terminate;}
             if(ConfirmInput == 1){SetActorState(0,"Trigger");}
     SetActorVelocity(0, velx+vely2, vely+velx2, 0, FALSE, FALSE);
@@ -383,7 +383,7 @@ Script "SubstituteSetup" (void)
     SetActorPRoperty(0,APROP_SPAWNHEALTH,SubsHP);
     SetActorPRoperty(0,APROP_HEALTH,SubsHP);
     SetActorProperty(OwnerTID, APROP_HEALTH,OwnerHP-SubsHP);
-    Log(i:SubsHP);
+    //Log(i:SubsHP);
 
     ModStat = SubsPDEF;
 
@@ -415,7 +415,7 @@ GiveInventory(StrParam(s:"SDEF",i:StatValue),1);
 
 
 
-Script "SubstituteActive" (int Dist) CLIENTSIDE
+Script "SubstituteActive" (int Dist)
 {
     int Player = ACS_NamedExecuteWithResult("core_gettarget",0);
     Int DollTID = ActivatorTID();
@@ -425,7 +425,9 @@ Script "SubstituteActive" (int Dist) CLIENTSIDE
         //log(i:xyzDistance(0,Player),s:"   ",i:Dist);
         if(CheckSight(0,Player,0) && xyzDistance(0,Player) < Dist)
             {
-            GiveInventory("SubstituteGuardianItem",1);
+            //GiveInventory("SubstituteGuardianItem",1);
+            GiveActorInventory(Player,"SubstituteGuardGiver",1);
+            SpawnProjectile(DollTID,"SubstituteLinkFX",10,0,0,0,0);
             }
 		Delay(1);
     }

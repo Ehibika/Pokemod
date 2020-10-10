@@ -48,7 +48,6 @@ damagefactor "Confuseray", 1.0
 damagefactor "Disable", 1.0
 damagefactor "ThundeWave", 1.0
 damagefactor "Supersonic", 1.0
-damagefactor "DreamEater", 1.0
 damagefactor "PoisonGas", 1.0
 damagefactor "DestinyBond", 1.0
 damagefactor "WorrySeed", 1.0
@@ -1044,6 +1043,8 @@ actor PsychicWeakness : TypeBase
     damagefactor "Psychocut", 1.3 //W
     damagefactor "FutureSight", 1.3 //W
     damagefactor "ZenHeadbutt", 1.3 //W
+    damagefactor "DreamEater", 1.3 //W
+
 }
 
 actor Psychic2xWeakness : TypeBase
@@ -1055,6 +1056,8 @@ actor Psychic2xWeakness : TypeBase
     damagefactor "Psychocut", 1.6 //2W
     damagefactor "FutureSight", 1.6 //2W
     damagefactor "ZenHeadbutt", 1.6 //2W
+    damagefactor "DreamEater", 1.6 //2W
+
 }
 
 actor PsychicResistance : TypeBase
@@ -1066,6 +1069,8 @@ actor PsychicResistance : TypeBase
     damagefactor "Psychocut", 0.7 //R
     damagefactor "FutureSight", 0.7 //R
     damagefactor "ZenHeadbutt", 0.7 //R
+    damagefactor "DreamEater", 0.7 //R
+
 }
 
 actor Psychic2xResistance : TypeBase
@@ -1077,6 +1082,8 @@ actor Psychic2xResistance : TypeBase
     damagefactor "Psychocut", 0.4 //2R
     damagefactor "FutureSight", 0.4 //2R
     damagefactor "ZenHeadbutt", 0.4 //2R
+    damagefactor "DreamEater", 0.4 //2R
+
 }
 
 actor PsychicImmunity : TypeBase
@@ -1088,6 +1095,8 @@ actor PsychicImmunity : TypeBase
     damagefactor "Psychocut", 0.0 //I
     damagefactor "FutureSight", 0.0 //I
     damagefactor "ZenHeadbutt", 0.0 //I
+    damagefactor "DreamEater", 0.0 //I
+
 }
 
 actor PsychicSTAB : STABBase
@@ -1099,6 +1108,8 @@ actor PsychicSTAB : STABBase
     damagefactor "Psychocut", 1.15 //S
     damagefactor "FutureSight", 1.15 //S
     damagefactor "ZenHeadbutt", 1.15 //S
+    damagefactor "DreamEater", 1.15 //S
+
 }
 //[+]========================================================================[+]
 //--------------------------------|Ice|--------------------------------

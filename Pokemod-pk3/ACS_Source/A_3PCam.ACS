@@ -6,6 +6,7 @@
 */
 
 #library "A_3PCam"
+#import "DB_Data.acs"
 #include "zcommon.acs"
 
 
@@ -16,12 +17,12 @@
 #define ADJUSTIN_R	2	//Amount to adjust the camera by
 #define ADJUST_R	8	//Amount to adjust the camera by
 #define VIEW_HEIGHT	72.0	//The approximate height of the player's view 41
-#define POFFSET 0.03 //Pitch offset
+#define POFFSET 0.10 //Pitch offset
 
 #Define OFFSET_LEFT -0.08
 #Define OFFSET_RIGHT 0.08
 bool cam_mode[64];		//Variable for turning the camera on or off.
-	
+bool cam_Setup[64];		//Variable for Determining if the player has seen the camera setup screen.
 
 #define CAMANGLE_CLAMP 0.08
 #define CAMHEIGHT_CLAMP 20
@@ -32,12 +33,24 @@ Script "3rdCameraEnter" ENTER
 	//log(s:"Enter");
 	//if(PlayerNumber() != ConsolePlayerNumber()){log(s:"Failed Console Check"); Terminate;}
 	//cam_mode[PlayerNumber ()] = ON;
+	SetUserCVar(PlayerNumber (),"ZoomToggle",OFF);
 	if(PlayerIsBot(PlayerNumber())){Terminate;}
 	SetCVar(strparam(s:"PlayerCam_",i:PlayerNumber()),ON);
 	ACS_NamedExecuteAlways("ClientCameraToggle",0,ON);
 }
 
+Script "CameraSetup" ENTER CLIENTSIDE
+{
 
+	if(cam_Setup[PlayerNumber()] == OFF 
+	&& PlayerNumber() == ConsolePlayerNumber()
+	&& !GetUserCvar(ConsolePlayerNumber(),"Sv_DisableStartupCamMenu")) 
+	{
+		ConsoleCommand("Openmenu CameraMenu");
+		log(s:"New Camera");
+		cam_Setup[PlayerNumber ()] = ON;
+	}
+}
 
 Script "3rdCameraRespawn" RESPAWN 
 {
@@ -55,6 +68,7 @@ Script "3rdCameraRespawn" RESPAWN
 	//cam_mode[PlayerNumber ()] = ON;
 	SetCVar(strparam(s:"PlayerCam_",i:PlayerNumber()),ON);
 	ACS_NamedExecuteAlways("ClientCameraToggle",0,ON);
+	SetUserCVar(PlayerNumber(),"ZoomToggle",OFF);
 }
 
 Script "ClientCameraToggle" (int Toggle) ClientSide
@@ -75,10 +89,15 @@ Switch(Toggle)
 
 Script "3rdCameraHandler" (int p_num) ClientSide
 {
-	Int Clamp_R = GetCvar("sv_CameraZoom");
-	int r = MAX_R-(Clamp_R);
+	//Log(f:GetCamSetting(0,0));
+	Int Clamp_R = GetCamSetting(0,0);//GetCvar("sv_CameraZoom");
+	int r = GetCamSetting(0,0);//MAX_R-(Clamp_R);
 
 	Int HostTID;
+	int ZoomKey;
+	int PastZoomKey;
+	int ZoomMode;
+
 	//if (p_num != GetCvar("PlayerCamNum")){p_num = GetCvar("PlayerCamNum");}
 	//int test = 0.0;
 	while (GetCVar(strparam(s:"PlayerCam_",i:p_num)) == ON)//(cam_mode[p_num] == ON)
@@ -88,13 +107,30 @@ Script "3rdCameraHandler" (int p_num) ClientSide
 		else{HostTID = 0;}
 		//test += 0.01;
 		//if(test > 1.0){test = 0.0;}
+		ZoomKey = PressingButton2(GetPlayerInput(-1, INPUT_BUTTONS),BT_ZOOM);
+		if(ZoomKey != 0 && ZoomKey != PastZoomKey)
+			{
+				if(GetUserCVar(p_num,"ZoomToggle") == ON){SetUserCVar(p_num,"ZoomToggle",OFF);}
+				else{SetUserCVar(p_num,"ZoomToggle",ON);}
+			}
+		PastZoomKey = ZoomKey;
+		if(GetCVar("Sv_ZoomToggle"))
+			{
+				ZoomMode = GetUserCVar(p_num,"ZoomToggle");
+			}
+			else
+			{
+				ZoomMode = ZoomKey;
+			}
+
+		//ZoomMode = PressingButton2(GetPlayerInput(-1, INPUT_BUTTONS),BT_ZOOM);
 		int RoofDist = GetActorCeilingZ (HostTID) - GetActorZ (HostTID);
 		int PlayerHeight = 30.0;
 		int a = GetActorAngle (0);
-		int p = GetActorPitch (0) + Fixedmul(POFFSET,GetUserCvar(p_num,"SV_CameraPitch"));
+		int p = GetActorPitch (0) + Fixedmul(POFFSET,GetCamSetting(1,ZoomMode));
 		int x = GetActorX (HostTID) ;
 		int y = GetActorY (HostTID) ;
-			int h = (CAMHEIGHT_CLAMP*GetCvar("sv_CameraHeight"));
+			int h = (CAMHEIGHT_CLAMP*GetCamSetting(2,ZoomMode));
 		int z = GetActorZ (HostTID) + VIEW_HEIGHT + h;
 		int xyr = r * cos (p) >> 16;
 		
@@ -102,8 +138,9 @@ Script "3rdCameraHandler" (int p_num) ClientSide
 		//log(f:RoofDist);
 		//log(f:cos(a));
 		//log(f:test);
-		int Y_CamOffset =  Fixedmul(CAMANGLE_CLAMP,GetUserCvar(p_num,"SV_CameraAng"));//sin(a + 0.22) * 64;//Fixedmul(60.0,sin(a));
-		int X_CamOffset =  Fixedmul(CAMANGLE_CLAMP,GetUserCvar(p_num,"SV_CameraAng"));//cos(a + 0.22) * 64;//Fixedmul(60.0,cos(a));
+		int Y_CamOffset =  Fixedmul(CAMANGLE_CLAMP,GetCamSetting(3,ZoomMode));//sin(a + 0.22) * 64;//Fixedmul(60.0,sin(a));
+		int X_CamOffset =  Fixedmul(CAMANGLE_CLAMP,GetCamSetting(3,ZoomMode));//cos(a + 0.22) * 64;//Fixedmul(60.0,cos(a));
+		//GetUserCvar(p_num,"SV_CameraAng")
 
 			//SetFont("SCSRC0");
 			//HudMessage(s:"A"; HUDMSG_FADEOUT, 700, CR_red,0.52, 0.52, 2.0,0.5);
@@ -153,12 +190,12 @@ Script "3rdCameraHandler" (int p_num) ClientSide
 			SetActorAngle (C_TID + p_num, a);
 			SetActorPitch (C_TID + p_num, p);
 			
-			if (r < MAX_R-(Clamp_R))   r += ADJUST_R;
+			if (r < GetCamSetting(0,ZoomMode))   r += ADJUST_R;  //MAX_R-(Clamp_R)
 			
-			if(Clamp_R != GetCvar("sv_CameraZoom"))
+			if(Clamp_R != GetCamSetting(0,ZoomMode))
 				{
-				Clamp_R = GetCvar("sv_CameraZoom");;
-				r = MAX_R-(Clamp_R);
+				Clamp_R = GetCamSetting(0,ZoomMode);
+				r = Clamp_R;//MAX_R-(Clamp_R);
 				}
 		}
 		
@@ -171,6 +208,7 @@ Script "3rdCameraHandler" (int p_num) ClientSide
 		delay (1);
 	}
 	//log(s:"Camera OFf");
+	
 }
 
 Script "3rdCameraDisconnect" (int p_num) DISCONNECT
@@ -178,6 +216,7 @@ Script "3rdCameraDisconnect" (int p_num) DISCONNECT
 	//log(s:"Disconnect");
        //cam_mode[p_num] = OFF;
 	   SetCVar(strparam(s:"PlayerCam_",i:p_num),OFF);
+	   SetUserCVar(p_num,"ZoomToggle",OFF);
        Thing_Remove (C_TID + p_num);
 }
 
@@ -190,20 +229,27 @@ script "S_Reticule_C" OPEN CLIENTSIDE {
 	int selfTID = selfNumber + 1000;
 	int ThirdCamNumber = C_TID + selfNumber;
 	int camNumber;
+	int PastZoomMode;
+
+	int ZoomMode;
+	int ZoomKey;
 	SetActorProperty(0,Aprop_renderstyle,STYLE_Translucent);
-	SetActorProperty(0,APROP_ALPHA,0.75); 
+	SetActorProperty(0,APROP_ALPHA,GetCamPlayerAlphaSetting(selfNumber,ZoomMode)); 
 	while(true) {
 		camNumber = CheckPlayerCamera(selfNumber);
-		if(!GetActorproperty(selfTID,Aprop_Invulnerable)
-			&& GetActorproperty(selfTID,APROP_ALPHA) > 0.75)
+		ZoomKey = PressingButton2(GetPlayerInput(selfNumber, INPUT_BUTTONS),BT_ZOOM);
+		if(GetUserCVar(selfNumber,"Sv_ZoomToggle")) {ZoomMode = GetUserCVar(selfNumber,"ZoomToggle");}
+		else{ZoomMode = ZoomKey;}
+		if(CheckCamAlphaSet(selfTID)
+			&& GetActorproperty(selfTID,APROP_ALPHA) != GetCamPlayerAlphaSetting(selfNumber,ZoomMode))
 			{
 			SetActorProperty(selfTID,Aprop_renderstyle,STYLE_Translucent);
-			SetActorProperty(selfTID,APROP_ALPHA,0.75);
+			SetActorProperty(selfTID,APROP_ALPHA,GetCamPlayerAlphaSetting(selfNumber,ZoomMode));
 			}
 		//log(i:(camNumber-C_TID) + 1000);
 		if(IsPlayer(selfTID) && ThirdCamNumber == camNumber) 
 		{
-		if(GetUserCvar(selfNumber,"sv_CamReticuleMode")){ GiveActorInventory(selfTID,"ReticulePickup",1); }
+		if(GetReticuleSetting(selfNumber,ZoomMode)){ GiveActorInventory(selfTID,"ReticulePickup",1); }
 		}
 		delay(1);
 	}
@@ -230,6 +276,77 @@ log(s:GetActorProperty(0,APROP_StencilColor));
 Script "CamGrabObject" (void)
 {
 	int HostPnum = ACS_NamedExecuteWithResult("Core_GetTarget")-1000;
-	if(!ThingCount(T_NONE,R_TID+HostPnum)){Thing_ChangeTID(0,R_TID+HostPnum); log(i:ActivatorTID());}
+	if(!ThingCount(T_NONE,R_TID+HostPnum)){Thing_ChangeTID(0,R_TID+HostPnum); /*08og(i:ActivatorTID());*/}
 
+}
+
+
+
+Function int GetCamSetting (int SettingNum, int Mode)
+{
+switch(SettingNum)
+	{	
+		Case 0:
+			if(Mode){return GetCvar("sv_ZoomCameraZoom");}
+			else{return GetCvar("sv_CameraZoom");}
+			break;
+
+			
+		Case 1:
+			if(Mode){return GetCvar("SV_ZoomCameraPitch");}
+			else{return GetCvar("SV_CameraPitch");}
+			break;
+			
+		Case 2:
+			if(Mode){return GetCvar("sv_ZoomCameraHeight");}
+			else{return GetCvar("sv_CameraHeight");}
+			break;		
+
+		Case 3:
+			if(Mode){return GetCvar("SV_ZoomCameraAng");}
+			else{return GetCvar("SV_CameraAng");}
+			break;	
+
+		Case 4:
+			if(Mode){return GetCvar("SV_ZoomCamPlayerAlpha");}
+			else{return GetCvar("SV_CamPlayerAlpha");}
+			break;	
+	}
+
+
+return 0.0;
+
+}
+
+Function int GetReticuleSetting (int P_Num, int Mode)
+{
+
+	if(Mode){return GetUserCvar(P_Num,"sv_ZoomCamReticuleMode");}
+	else{return GetUserCvar(P_Num,"sv_CamReticuleMode");}	
+
+	return 0;
+}
+
+
+Function int GetCamPlayerAlphaSetting (int P_Num, int Mode)
+{
+
+	if(Mode){return GetUserCvar(P_Num,"SV_ZoomCamPlayerAlpha");}
+	else{return GetUserCvar(P_Num,"SV_CamPlayerAlpha");}	
+
+	return 0;
+}
+
+function int CheckCamAlphaSet (int TID)
+{
+/*
+ * Normally the client sets your alpha to your player settings, if moves or any external effects
+ * Change your alpha, they take precedence, and thus the camera's automatic alpha settings
+ * are momentarily disabled. this is done by checking the following flags
+*/
+
+if(CheckFlag(TID,"INVISIBLE")){return 0;}
+if(CheckFlag(TID,"SHADOW")){return 0;}
+if(GetActorproperty(TID,Aprop_Invulnerable)){return 0;}
+return 1;
 }

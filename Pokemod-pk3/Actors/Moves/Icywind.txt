@@ -242,6 +242,7 @@ Alpha 0.9
 States
 {
 Spawn:
+TNT1 A 0 A_GiveInventory("ProjectileFXCode",1)
 TNT1 A 0
 Spawn2:
 TMPK DCCBBA 2 

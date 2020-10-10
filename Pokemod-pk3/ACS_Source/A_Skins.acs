@@ -179,7 +179,7 @@ bool playerDisguised[S_MAX_PLAYERS];
 int playerDisguise[S_MAX_PLAYERS];
 int playerCurrentSkin[S_MAX_PLAYERS];
 
-#DEFINE KEYCONF_CLASSCOUNT 20 //18
+#DEFINE KEYCONF_CLASSCOUNT 29 //18
 #DEFINE SKIN_OFFSET 114 + KEYCONF_CLASSCOUNT //128 // 
 
 script "SetPokeSkin" (int Skin, int update) //CLIENTSIDE
@@ -198,7 +198,7 @@ script "SetDisguise" (int p)
 {
 	playerDisguised[p] = true;
     playerDisguise[p] = GetSkinNum(GetCvarString("theDisguise"));
-    log(i:GetSkinNum(GetCvarString("theDisguise")));
+    //log(i:GetSkinNum(GetCvarString("theDisguise")));
 	//SetCvarString("theDisguise","");
 }
 
@@ -337,7 +337,7 @@ if(ConsolePlayerNumber()==i) ConsoleCommandP(strparam(s:"Skin ",s:GetSkinName(sk
 function void ConsoleCommandP(str cmd)
 {
 ConsoleCommand(cmd);
-Log(s:cmd);
+//Log(s:cmd);
 }
 
 Script "DisconnectDisguise" (int Gone) DISCONNECT

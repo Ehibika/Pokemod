@@ -520,7 +520,7 @@ TakeInventory("SBAR_LVL",999);
 if(PlayeLVL <= PKMN_MaxLVL){GiveInventory("SBAR_LVL",PlayeLVL);}
 Else{GiveInventory("SBAR_LVL",PKMN_MaxLVL);}
 
-log(i:PlayeLVL);
+//log(i:PlayeLVL);
     
 }
 
@@ -572,7 +572,7 @@ SpeedTier += ModCount;
     Case 9: Output = 2.0; break;
     Case 10: Output = 2.5; break;
     }
-log(s:"SpeedTier: ",i:SpeedTier, s:" Speed: ",f:Output);
+//log(s:"SpeedTier: ",i:SpeedTier, s:" Speed: ",f:Output);
 Return Output;
 
 }

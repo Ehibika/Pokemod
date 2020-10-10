@@ -694,4 +694,305 @@ gender = male
     dstaunt = cry050
     gender = male
     }
+
+    {
+    name = "Vulpix"
+    sprite = P053
+    class = Vulpix
+    dsnoway = LAND
+    dsoof = LAND
+    dspldeth = MEGADEAT
+    dspdiehi = MEGADEAT
+    dsplpain = MEGAPAIN
+    dstaunt = cry053
+    gender = male
+    }
+
+    {
+    name = "Ninetales"
+    sprite = P054
+    class = Vulpix
+    dsnoway = LAND
+    dsoof = LAND
+    dspldeth = MEGADEAT
+    dspdiehi = MEGADEAT
+    dsplpain = MEGAPAIN
+    dstaunt = cry054
+    gender = male
+    }
+
+    {
+    name = "Vulpix_A"
+    sprite = P055
+    class = Vulpix_A
+    dsnoway = LAND
+    dsoof = LAND
+    dspldeth = MEGADEAT
+    dspdiehi = MEGADEAT
+    dsplpain = MEGAPAIN
+    dstaunt = cry055
+    gender = male
+    }
+
+    {
+    name = "Ninetales_A"
+    sprite = P056
+    class = Vulpix_A
+    dsnoway = LAND
+    dsoof = LAND
+    dspldeth = MEGADEAT
+    dspdiehi = MEGADEAT
+    dsplpain = MEGAPAIN
+    dstaunt = cry056
+    gender = male
+    }
+
+    {
+    name = "Snover"
+    sprite = P057
+    class = Snover
+    dsnoway = LAND
+    dsoof = LAND
+    dspldeth = MEGADEAT
+    dspdiehi = MEGADEAT
+    dsplpain = MEGAPAIN
+    dstaunt = cry057
+    gender = male
+    }
+
+    {
+    name = "Abomasnow"
+    sprite = P058
+    class = Snover
+    dsnoway = LAND
+    dsoof = LAND
+    dspldeth = MEGADEAT
+    dspdiehi = MEGADEAT
+    dsplpain = MEGAPAIN
+    dstaunt = cry058
+    gender = male
+    }
+
+    {
+    name = "Swinub"
+    sprite = P059
+    class = Swinub
+    dsnoway = LAND
+    dsoof = LAND
+    dspldeth = MEGADEAT
+    dspdiehi = MEGADEAT
+    dsplpain = MEGAPAIN
+    dstaunt = cry059
+    gender = male
+    }
+
+    {
+    name = "Piloswine"
+    sprite = P060
+    class = Swinub
+    dsnoway = LAND
+    dsoof = LAND
+    dspldeth = MEGADEAT
+    dspdiehi = MEGADEAT
+    dsplpain = MEGAPAIN
+    dstaunt = cry060
+    gender = male
+    }
+
+    {
+    name = "Mamoswine"
+    sprite = P061
+    class = Swinub
+    dsnoway = LAND
+    dsoof = LAND
+    dspldeth = MEGADEAT
+    dspdiehi = MEGADEAT
+    dsplpain = MEGAPAIN
+    dstaunt = cry061
+    gender = male
+    }
+
+    {
+    name = "Abra"
+    sprite = P062
+    class = Abra
+    dsnoway = LAND
+    dsoof = LAND
+    dspldeth = MEGADEAT
+    dspdiehi = MEGADEAT
+    dsplpain = MEGAPAIN
+    dstaunt = cry062
+    gender = male
+    }
+
+    {
+    name = "Kadabra"
+    sprite = P063
+    class = Abra
+    dsnoway = LAND
+    dsoof = LAND
+    dspldeth = MEGADEAT
+    dspdiehi = MEGADEAT
+    dsplpain = MEGAPAIN
+    dstaunt = cry063
+    gender = male
+    }
+
+    {
+    name = "Alakazam"
+    sprite = P064
+    class = Abra
+    dsnoway = LAND
+    dsoof = LAND
+    dspldeth = MEGADEAT
+    dspdiehi = MEGADEAT
+    dsplpain = MEGAPAIN
+    dstaunt = cry064
+    gender = male
+    }
+
+    {
+    name = "Drowzee"
+    sprite = P065
+    class = Drowzee
+    dsnoway = LAND
+    dsoof = LAND
+    dspldeth = MEGADEAT
+    dspdiehi = MEGADEAT
+    dsplpain = MEGAPAIN
+    dstaunt = cry065
+    gender = male
+    }
+
+    {
+    name = "Hypno"
+    sprite = P066
+    class = Drowzee
+    dsnoway = LAND
+    dsoof = LAND
+    dspldeth = MEGADEAT
+    dspdiehi = MEGADEAT
+    dsplpain = MEGAPAIN
+    dstaunt = cry066
+    gender = male
+    }
+
+    {
+    name = "Ralts"
+    sprite = P067
+    class = Ralts
+    dsnoway = LAND
+    dsoof = LAND
+    dspldeth = MEGADEAT
+    dspdiehi = MEGADEAT
+    dsplpain = MEGAPAIN
+    dstaunt = cry067
+    gender = male
+    }
+
+    {
+    name = "Kirlia"
+    sprite = P068
+    class = Ralts
+    dsnoway = LAND
+    dsoof = LAND
+    dspldeth = MEGADEAT
+    dspdiehi = MEGADEAT
+    dsplpain = MEGAPAIN
+    dstaunt = cry068
+    gender = male
+    }
+
+    {
+    name = "Gardevoir"
+    sprite = P069
+    class = Ralts
+    dsnoway = LAND
+    dsoof = LAND
+    dspldeth = MEGADEAT
+    dspdiehi = MEGADEAT
+    dsplpain = MEGAPAIN
+    dstaunt = cry069
+    gender = male
+    }
+
+    {
+    name = "Gallade"
+    sprite = P070
+    class = Ralts
+    dsnoway = LAND
+    dsoof = LAND
+    dspldeth = MEGADEAT
+    dspdiehi = MEGADEAT
+    dsplpain = MEGAPAIN
+    dstaunt = cry070
+    gender = male
+    }
+
+    {
+    name = "Exeggcute"
+    sprite = P071
+    class = Exeggcute
+    dsnoway = LAND
+    dsoof = LAND
+    dspldeth = MEGADEAT
+    dspdiehi = MEGADEAT
+    dsplpain = MEGAPAIN
+    dstaunt = cry071
+    gender = male
+    }
+
+    {
+    name = "Exeggutor"
+    sprite = P072
+    class = Exeggcute
+    dsnoway = LAND
+    dsoof = LAND
+    dspldeth = MEGADEAT
+    dspdiehi = MEGADEAT
+    dsplpain = MEGAPAIN
+    dstaunt = cry072
+    gender = male
+    }
+
+    {
+    name = "Torkoal"
+    sprite = P073
+    class = Torkoal
+    dsnoway = LAND
+    dsoof = LAND
+    dspldeth = MEGADEAT
+    dspdiehi = MEGADEAT
+    dsplpain = MEGAPAIN
+    dstaunt = cry073
+    gender = male
+    }
+
+    {
+    name = "Slugma"
+    sprite = P074
+    class = Slugma
+    dsnoway = LAND
+    dsoof = LAND
+    dspldeth = MEGADEAT
+    dspdiehi = MEGADEAT
+    dsplpain = MEGAPAIN
+    dstaunt = cry074
+    gender = male
+    }
+
+    {
+    name = "Magcargo"
+    sprite = P075
+    class = Slugma
+    dsnoway = LAND
+    dsoof = LAND
+    dspldeth = MEGADEAT
+    dspdiehi = MEGADEAT
+    dsplpain = MEGAPAIN
+    dstaunt = cry075
+    gender = male
+    }
+
+
 //--[NewPokemon]--

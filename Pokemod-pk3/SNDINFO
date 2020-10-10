@@ -69,6 +69,7 @@ weapon/rollheal2 HEAL01
 support/Negative NEGSTAT
 support/Healdiode1 HEALDIO1
 support/Healdiode2 HEALDIO2
+support/Failure Help
 
 support/Ubercharge1 UBRCHR1
 support/Ubercharge2 UBRCHR2
@@ -82,6 +83,7 @@ support/BarrierStart SHLDSTRT
 support/Reflect SHLDRFCT
 support/LightScreen SHLDLTSC
 support/ShieldDown SHLDDOWN
+support/Hypnosis HYPNO
 
 weapon/Turretup FMR
 Body/ArmorPain ROCKHURT

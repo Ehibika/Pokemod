@@ -98,5 +98,38 @@ Int StatDEX [MAXDEX][10] = {
 
 /*|51|*/{30, 65, 100, 45,	    25,    SLOW_SPD,    5,	Type_Water,Type_NULL,  LVLSPD_Slow},
 /*|52|*/{50, 95, 180, 85,	    45,    SLOW_SPD,    20,	Type_Water,Type_Ice,  LVLSPD_Slow},
+
+/*|53|*/{38, 41, 40, 50,	    65,    NORM_SPD,    5,	Type_Fire,Type_Psychic,  LVLSPD_Normal},
+/*|54|*/{73, 76, 75, 81,	    100,    NORM_SPD,    20,	Type_Fire,Type_Psychic,  LVLSPD_Normal},
+
+/*|55|*/{38, 41, 40, 50,	    50,    NORM_SPD,    5,	Type_Ice,Type_Fairy,  LVLSPD_Normal},
+/*|56|*/{73, 76, 75, 81,	    100,    NORM_SPD,    5,	Type_Ice,Type_Fairy,  LVLSPD_Normal},
+
+/*|57|*/{60, 62, 50, 62,	    60,    SLOW_SPD,    5,	Type_Grass,Type_Ice,  LVLSPD_Normal},
+/*|58|*/{90, 92, 75, 92,	    85,    SLOW_SPD,    5,	Type_Grass,Type_Ice,  LVLSPD_Normal},
+
+/*|59|*/{50, 50, 40, 30,	    30,    SLOW_SPD,    5,	Type_Ground,Type_Ice,  LVLSPD_Normal},
+/*|60|*/{100, 100, 80, 60,	    60,    SLOW_SPD,    5,	Type_Ground,Type_Ice,  LVLSPD_Normal},
+/*|61|*/{110, 130, 80, 70,	    60,    SLOW_SPD,    5,	Type_Ground,Type_Ice,  LVLSPD_Normal},
+
+/*|62|*/{25, 20, 15, 105,	    55,    FAST_SPD,    5,	Type_Psychic,Type_NULL,  LVLSPD_Normal},
+/*|63|*/{40, 35, 30, 120,	    70,    FAST_SPD,    5,	Type_Psychic,Type_NULL,  LVLSPD_Normal},
+/*|64|*/{55, 50, 45, 135,	    95,    FAST_SPD,    5,	Type_Psychic,Type_NULL,  LVLSPD_Normal},
+
+/*|65|*/{60, 48, 45, 43,	    90,    NORM_SPD,    5,	Type_Psychic,Type_NULL,  LVLSPD_Normal},
+/*|66|*/{85, 73, 70, 73,	    115,    NORM_SPD,    5,	Type_Psychic,Type_NULL,  LVLSPD_Normal},
+
+/*|67|*/{28, 25, 25, 45,	    35,    NORM_SPD,    5,	Type_Psychic,Type_Fairy,  LVLSPD_Normal},
+/*|68|*/{38, 35, 35, 65,	    55,    NORM_SPD,    5,	Type_Psychic,Type_Fairy,  LVLSPD_Normal},
+/*|69|*/{68, 65, 65, 125,	    115,    NORM_SPD,    5,	Type_Psychic,Type_Fairy,  LVLSPD_Normal},
+/*|70|*/{68, 125, 65, 65,	    115,    NORM_SPD,    5,	Type_Psychic,Type_Fighting,  LVLSPD_Normal},
+
+/*|71|*/{60, 40, 80, 60,	    45,    NORM_SPD,    5,	Type_Grass,Type_Psychic,  LVLSPD_Normal},
+/*|72|*/{95, 95, 85, 125,	    75,    NORM_SPD,    5,	Type_Grass,Type_Psychic,  LVLSPD_Normal},
+
+/*|73|*/{70, 85, 140, 85,	    70,    SLOW_SPD,    5,	Type_Fire,Type_NULL,  LVLSPD_Slow},
+
+/*|74|*/{40, 40, 40, 70,	    40,    SLOW_SPD,    5,	Type_Rock,Type_Fire,  LVLSPD_Normal},
+/*|75|*/{60, 50, 120, 90,	    80,    SLOW_SPD,    5,	Type_Rock,Type_Fire,  LVLSPD_Normal},
 //--[NewPokemon]--
 };

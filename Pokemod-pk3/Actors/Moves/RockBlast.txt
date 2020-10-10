@@ -103,8 +103,6 @@ Goto Ready
 //[+]========================================================================[+]
 actor RockBlastPP : Ammo {inventory.amount 1 inventory.Maxamount 20}
 
-actor MultiShotCounter : Ammo {inventory.amount 1 inventory.Maxamount 5}
-
 actor RockBlastCST : PowerupGiver
 {
 +INVENTORY.AUTOACTIVATE

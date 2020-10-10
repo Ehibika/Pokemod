@@ -1,0 +1,84 @@
+/*
+[+]===================================[+]
+
+[+]===================================[+]
+*/
+
+Actor Vulpix_A : ClassBase 
+{
+Player.DisplayName "Vulpix_A"
+Player.SoundClass "Vulpix_A"
+
+player.startitem "PKMNStarterKit"
+
+//============|
+Player.StartItem "Base_HP", 38
+Player.StartItem "Base_PAttack", 41
+Player.StartItem "Base_PDefense", 40
+Player.StartItem "Base_SAttack", 50
+Player.StartItem "Base_SDefense", 65
+
+//============|
+
+States
+{
+Spawn: 
+P055 A 0
+P055 B 1 
+P055 A 1
+GoTo Spawn+2
+See:
+P055 BCDE 5
+GoTo Spawn+1
+Missile:
+P055 A 0 A_JumpIfInventory("ConshotTimer",1,2)
+P055 F 5 
+P055 G 4
+GoTo Spawn+2
+
+PainFix:
+P055 H 0 
+GoTo PainFrames
+}
+}
+
+actor Vulpix_AStarterMoves : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_JumpIfInventory("isbot",1,"BotWep")
+
+TNT1 A 0 A_GiveInventory("IceShardMove1")
+TNT1 A 0 A_GiveInventory("PowderSnowMove2")
+TNT1 A 0 A_GiveInventory("QuickAttackMove3")
+TNT1 A 0 A_GiveInventory("CharmMove4")
+stop
+
+BotWep:
+TNT1 A 0 A_GiveInventory("IceShardMove1")
+stop
+}
+}
+
+actor Vulpix_ASetupItem : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 ACS_NamedExecuteAlways("PKMNACS_StartupScript",0,Dex_Vulpix_A)
+stop
+}
+}

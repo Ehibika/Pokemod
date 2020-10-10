@@ -952,7 +952,7 @@ Script "BeamHitCheck" (void)
 	if(CheckActorProperty(TracerTID, APROP_SPECIES, "LightMember"))
 		{Output = 1;}
 
-		log(i:Output);
+		//log(i:Output);
 		SetResultValue(Output);
 }
 

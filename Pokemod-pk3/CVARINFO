@@ -16,11 +16,25 @@ user string DexString = "Megaman";
 
 User float sv_CameraAng = 0.0;
 User float sv_CameraHeight = 0.0;
-User int sv_CameraZoom = 60;
-User float SV_CameraPitch = 1.0;
+User int sv_CameraZoom = 130;
+User float SV_CameraPitch = 0.3;
+User float SV_CamPlayerAlpha = 0.75;
+
+User float sv_ZoomCameraAng = -6.0;
+User float sv_ZoomCameraHeight = -0.3;
+User int sv_ZoomCameraZoom = 60;
+User float SV_ZoomCameraPitch = 0.0;
+User float SV_ZoomCamPlayerAlpha = 0.3;
 
 User int sv_CamReticuleMode = 1;
+User int sv_ZoomCamReticuleMode = 1;
+
 User color sv_CamReticuleColor = "FFFFFF";
+User int Sv_ZoomToggle = 0;
+User noarchive int ZoomToggle = 0;
+
+User noarchive int Sv_DisableStartupCamMenu = 0;
+
 user noarchive int PlayerCamNum = 0;
 
 server noarchive bool PKMN_SV_HPinLMS = false;

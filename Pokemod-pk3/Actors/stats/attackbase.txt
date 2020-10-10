@@ -34,7 +34,6 @@ damagefactor "Confuseray", 1.0
 damagefactor "Disable", 1.0
 damagefactor "ThundeWave", 1.0
 damagefactor "Supersonic", 1.0
-damagefactor "DreamEater", 1.0
 damagefactor "PoisonGas", 1.0
 damagefactor "DestinyBond", 1.0
 damagefactor "WorrySeed", 1.0
@@ -126,7 +125,7 @@ damagefactor "DrainingKiss", 1.0
 damagefactor "StoredPower", 1.0
 damagefactor "Moonblast", 1.0
 damagefactor "Uproar", 1.0
-
+damagefactor "DreamEater", 1.0
 }
 
 actor SAtk : Atk

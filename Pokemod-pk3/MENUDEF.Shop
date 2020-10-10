@@ -56,6 +56,7 @@ OptionMenu "TM_Menu"
     StaticText "===============================================================",1
     Submenu "                                      TM Catalogue","TM_Catalogue"
     StaticText ""
+    //Command "$SHOP_QBUYTM5", "BuyTM5"
     Command "$SHOP_QBUYTM6", "BuyTM6"
     Command "$SHOP_QBUYTM7", "BuyTM7"
     Command "$SHOP_QBUYTM8", "BuyTM8"
@@ -112,6 +113,7 @@ OptionMenu "TM_Catalogue"
 {
     Title "TM Catalogue"
     StaticText "===============================================================",1
+    //Submenu "                   TM5 : Substitute", "TMList_Substitute"
     Submenu "                   TM6 : FalseSwipe", "TMList_FalseSwipe"
     Submenu "                   TM7 : Helping Hand", "TMList_HelpingHand"
     Submenu "                   TM8 : Taunt", "TMList_Taunt"
@@ -164,6 +166,32 @@ OptionMenu "TM_Catalogue"
     StaticText "===============================================================",1
 
     }
+
+OptionMenu "TMList_Substitute"
+{
+	
+	Title "$M153_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M153_TYPE"
+    StaticText "$M153_CATEGORY"
+    StaticText "$M153_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M153_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+    StaticText "$SHOP_LEARNTM5"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+    StaticText "$SHOP_BUYTM5"
+    Command "                                      Buy", "BuyTM5"
+    StaticText"===============================================================",1
+}
 
 OptionMenu "TMList_FalseSwipe"
 {

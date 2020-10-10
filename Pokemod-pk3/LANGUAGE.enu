@@ -44,6 +44,7 @@ SHOP_HASTESEED= "\c[MenuWhite]Haste Seed  \c[MenuYellow]10 BP";
 SHOP_ESCAPEORB= "\c[MenuWhite]Escape Orb  \c[MenuYellow]10 BP";
 SHOP_BARRIERORB= "\c[MenuWhite]Barrier Orb  \c[MenuYellow]30 BP";
 
+SHOP_QBUYTM5= "\cgTM5 : \cjSubstitute \c[MenuYellow]25 BP\cj";
 SHOP_QBUYTM6= "\cgTM6 : \cjFalseSwipe \c[MenuYellow]3 BP\cj";
 SHOP_QBUYTM7= "\cgTM7 : \cjHelping Hand \c[MenuYellow]3 BP\cj";
 SHOP_QBUYTM8= "\cgTM8 : \cmTaunt \c[MenuYellow]3 BP\cj";
@@ -84,6 +85,7 @@ SHOP_QBUYTM57= "\cgTM57 : \c[Fire]Incinerate \c[MenuYellow]3 BP\cj";
 SHOP_QBUYTM58= "\cgTM58 : \cdSolarBeam \c[MenuYellow]30 BP\cj";
 SHOP_QBUYTM59= "\cgTM59 : \cbEarthquake \c[MenuYellow]30 BP\cj";
 
+SHOP_BUYTM5= "\cjBuy TM5 : Substitute for  \c[MenuYellow]25 BP\cj ?";
 SHOP_BUYTM6= "\cjBuy TM6 : FalseSwipe for  \c[MenuYellow]3 BP\cj ?";
 SHOP_BUYTM7= "\cjBuy TM7 : HelpingHand for  \c[MenuYellow]3 BP\cj ?";
 SHOP_BUYTM8= "\cjBuy TM8 : Taunt for  \c[MenuYellow]3 BP\cj ?";
@@ -126,6 +128,7 @@ SHOP_BUYTM59= "\cjBuy TM59 : Earthquake for  \c[MenuYellow]30 BP\cj ?";
 
 // \cfTypes: \cj -- \n\cfArchetypes: \cj -- "
 
+SHOP_LEARNTM5= "\cjTeach to \cfAny \cjPokemon.";
 SHOP_LEARNTM6= "\cjTeach to \cfAny \cjPokemon.";
 SHOP_LEARNTM7= "\cfTypes: \cjNormal \n\cfArchetypes: \cjSuccor, Defensive";
 SHOP_LEARNTM8= "\cfTypes: \cjDark, Normal \n\cfArchetypes: \cjPrankster, Pugilist, Defensive";
@@ -501,6 +504,16 @@ OB_INGRAIN = "%k Defeated %o using INGRAIN!";
 OB_AVALANCHE = "%k Defeated %o using AVALANCHE!";
 OB_MIST = "%k Defeated %o using MIST!";
 //--[NewMove]--
+
+//#endregion
+
+
+//██████████████████████████████████████████Camera Menu████████████████████████████████████████
+//#region 
+MNU_CAMMESSAGE = "\c[MenuWhite]This game uses a special 3rd person camera,\n"
+                 "make sure it's set up in a way that is \n"
+                 "comfortable for you. you can find these\n" 
+                 "settings in the options menu.";
 
 //#endregion
 
@@ -956,6 +969,239 @@ D036_STATS3 = "\cfSPD:\cj <00> \cfHP:\cj <00>";
 D036_ARC = "\cj Defensive::Slasher ";
 D036_EVO = "\c[MenuRed]Does not evolve";
 //#endregion
+
+//...
+
+//#region -=- VULPIX-=-
+D053_NAME = "\cjVULPIX";
+D053_TYPE = "\cj<Type>";
+D053_STATS1 = "\cfATK:\cj <00> \cfDEF:\cj <00>";
+D053_STATS2 = "\cfSP.ATK:\cj <00> \cfSP.DEF:\cj <00>";
+D053_STATS3 = "\cfSPD:\cj <00> \cfHP:\cj <00>";
+D053_ARC = "\cj <Archetype> ";
+D053_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+//#region -=- NINETALES-=-
+D054_NAME = "\cjNINETALES";
+D054_TYPE = "\cj<Type>";
+D054_STATS1 = "\cfATK:\cj <00> \cfDEF:\cj <00>";
+D054_STATS2 = "\cfSP.ATK:\cj <00> \cfSP.DEF:\cj <00>";
+D054_STATS3 = "\cfSPD:\cj <00> \cfHP:\cj <00>";
+D054_ARC = "\cj <Archetype> ";
+D054_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+//#region -=- VULPIX_A-=-
+D055_NAME = "\cjVULPIX_A";
+D055_TYPE = "\cj<Type>";
+D055_STATS1 = "\cfATK:\cj <00> \cfDEF:\cj <00>";
+D055_STATS2 = "\cfSP.ATK:\cj <00> \cfSP.DEF:\cj <00>";
+D055_STATS3 = "\cfSPD:\cj <00> \cfHP:\cj <00>";
+D055_ARC = "\cj <Archetype> ";
+D055_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+//#region -=- NINETALES_A-=-
+D056_NAME = "\cjNINETALES_A";
+D056_TYPE = "\cj<Type>";
+D056_STATS1 = "\cfATK:\cj <00> \cfDEF:\cj <00>";
+D056_STATS2 = "\cfSP.ATK:\cj <00> \cfSP.DEF:\cj <00>";
+D056_STATS3 = "\cfSPD:\cj <00> \cfHP:\cj <00>";
+D056_ARC = "\cj <Archetype> ";
+D056_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+//#region -=- SNOVER-=-
+D057_NAME = "\cjSNOVER";
+D057_TYPE = "\cj<Type>";
+D057_STATS1 = "\cfATK:\cj <00> \cfDEF:\cj <00>";
+D057_STATS2 = "\cfSP.ATK:\cj <00> \cfSP.DEF:\cj <00>";
+D057_STATS3 = "\cfSPD:\cj <00> \cfHP:\cj <00>";
+D057_ARC = "\cj <Archetype> ";
+D057_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+//#region -=- ABOMASNOW-=-
+D058_NAME = "\cjABOMASNOW";
+D058_TYPE = "\cj<Type>";
+D058_STATS1 = "\cfATK:\cj <00> \cfDEF:\cj <00>";
+D058_STATS2 = "\cfSP.ATK:\cj <00> \cfSP.DEF:\cj <00>";
+D058_STATS3 = "\cfSPD:\cj <00> \cfHP:\cj <00>";
+D058_ARC = "\cj <Archetype> ";
+D058_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+//#region -=- SWINUB-=-
+D059_NAME = "\cjSWINUB";
+D059_TYPE = "\cj<Type>";
+D059_STATS1 = "\cfATK:\cj <00> \cfDEF:\cj <00>";
+D059_STATS2 = "\cfSP.ATK:\cj <00> \cfSP.DEF:\cj <00>";
+D059_STATS3 = "\cfSPD:\cj <00> \cfHP:\cj <00>";
+D059_ARC = "\cj <Archetype> ";
+D059_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+//#region -=- PILOSWINE-=-
+D060_NAME = "\cjPILOSWINE";
+D060_TYPE = "\cj<Type>";
+D060_STATS1 = "\cfATK:\cj <00> \cfDEF:\cj <00>";
+D060_STATS2 = "\cfSP.ATK:\cj <00> \cfSP.DEF:\cj <00>";
+D060_STATS3 = "\cfSPD:\cj <00> \cfHP:\cj <00>";
+D060_ARC = "\cj <Archetype> ";
+D060_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+//#region -=- MAMOSWINE-=-
+D061_NAME = "\cjMAMOSWINE";
+D061_TYPE = "\cj<Type>";
+D061_STATS1 = "\cfATK:\cj <00> \cfDEF:\cj <00>";
+D061_STATS2 = "\cfSP.ATK:\cj <00> \cfSP.DEF:\cj <00>";
+D061_STATS3 = "\cfSPD:\cj <00> \cfHP:\cj <00>";
+D061_ARC = "\cj <Archetype> ";
+D061_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+//#region -=- ABRA-=-
+D062_NAME = "\cjABRA";
+D062_TYPE = "\cj<Type>";
+D062_STATS1 = "\cfATK:\cj <00> \cfDEF:\cj <00>";
+D062_STATS2 = "\cfSP.ATK:\cj <00> \cfSP.DEF:\cj <00>";
+D062_STATS3 = "\cfSPD:\cj <00> \cfHP:\cj <00>";
+D062_ARC = "\cj <Archetype> ";
+D062_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+//#region -=- KADABRA-=-
+D063_NAME = "\cjKADABRA";
+D063_TYPE = "\cj<Type>";
+D063_STATS1 = "\cfATK:\cj <00> \cfDEF:\cj <00>";
+D063_STATS2 = "\cfSP.ATK:\cj <00> \cfSP.DEF:\cj <00>";
+D063_STATS3 = "\cfSPD:\cj <00> \cfHP:\cj <00>";
+D063_ARC = "\cj <Archetype> ";
+D063_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+//#region -=- ALAKAZAM-=-
+D064_NAME = "\cjALAKAZAM";
+D064_TYPE = "\cj<Type>";
+D064_STATS1 = "\cfATK:\cj <00> \cfDEF:\cj <00>";
+D064_STATS2 = "\cfSP.ATK:\cj <00> \cfSP.DEF:\cj <00>";
+D064_STATS3 = "\cfSPD:\cj <00> \cfHP:\cj <00>";
+D064_ARC = "\cj <Archetype> ";
+D064_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+//#region -=- DROWZEE-=-
+D065_NAME = "\cjDROWZEE";
+D065_TYPE = "\cj<Type>";
+D065_STATS1 = "\cfATK:\cj <00> \cfDEF:\cj <00>";
+D065_STATS2 = "\cfSP.ATK:\cj <00> \cfSP.DEF:\cj <00>";
+D065_STATS3 = "\cfSPD:\cj <00> \cfHP:\cj <00>";
+D065_ARC = "\cj <Archetype> ";
+D065_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+//#region -=- HYPNO-=-
+D066_NAME = "\cjHYPNO";
+D066_TYPE = "\cj<Type>";
+D066_STATS1 = "\cfATK:\cj <00> \cfDEF:\cj <00>";
+D066_STATS2 = "\cfSP.ATK:\cj <00> \cfSP.DEF:\cj <00>";
+D066_STATS3 = "\cfSPD:\cj <00> \cfHP:\cj <00>";
+D066_ARC = "\cj <Archetype> ";
+D066_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+//#region -=- RALTS-=-
+D067_NAME = "\cjRALTS";
+D067_TYPE = "\cj<Type>";
+D067_STATS1 = "\cfATK:\cj <00> \cfDEF:\cj <00>";
+D067_STATS2 = "\cfSP.ATK:\cj <00> \cfSP.DEF:\cj <00>";
+D067_STATS3 = "\cfSPD:\cj <00> \cfHP:\cj <00>";
+D067_ARC = "\cj <Archetype> ";
+D067_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+//#region -=- KIRLIA-=-
+D068_NAME = "\cjKIRLIA";
+D068_TYPE = "\cj<Type>";
+D068_STATS1 = "\cfATK:\cj <00> \cfDEF:\cj <00>";
+D068_STATS2 = "\cfSP.ATK:\cj <00> \cfSP.DEF:\cj <00>";
+D068_STATS3 = "\cfSPD:\cj <00> \cfHP:\cj <00>";
+D068_ARC = "\cj <Archetype> ";
+D068_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+//#region -=- GARDEVOIR-=-
+D069_NAME = "\cjGARDEVOIR";
+D069_TYPE = "\cj<Type>";
+D069_STATS1 = "\cfATK:\cj <00> \cfDEF:\cj <00>";
+D069_STATS2 = "\cfSP.ATK:\cj <00> \cfSP.DEF:\cj <00>";
+D069_STATS3 = "\cfSPD:\cj <00> \cfHP:\cj <00>";
+D069_ARC = "\cj <Archetype> ";
+D069_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+//#region -=- GALLADE-=-
+D070_NAME = "\cjGALLADE";
+D070_TYPE = "\cj<Type>";
+D070_STATS1 = "\cfATK:\cj <00> \cfDEF:\cj <00>";
+D070_STATS2 = "\cfSP.ATK:\cj <00> \cfSP.DEF:\cj <00>";
+D070_STATS3 = "\cfSPD:\cj <00> \cfHP:\cj <00>";
+D070_ARC = "\cj <Archetype> ";
+D070_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+//#region -=- EXEGGCUTE-=-
+D071_NAME = "\cjEXEGGCUTE";
+D071_TYPE = "\cj<Type>";
+D071_STATS1 = "\cfATK:\cj <00> \cfDEF:\cj <00>";
+D071_STATS2 = "\cfSP.ATK:\cj <00> \cfSP.DEF:\cj <00>";
+D071_STATS3 = "\cfSPD:\cj <00> \cfHP:\cj <00>";
+D071_ARC = "\cj <Archetype> ";
+D071_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+//#region -=- EXEGGUTOR-=-
+D072_NAME = "\cjEXEGGUTOR";
+D072_TYPE = "\cj<Type>";
+D072_STATS1 = "\cfATK:\cj <00> \cfDEF:\cj <00>";
+D072_STATS2 = "\cfSP.ATK:\cj <00> \cfSP.DEF:\cj <00>";
+D072_STATS3 = "\cfSPD:\cj <00> \cfHP:\cj <00>";
+D072_ARC = "\cj <Archetype> ";
+D072_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+//#region -=- TORKOAL-=-
+D073_NAME = "\cjTORKOAL";
+D073_TYPE = "\cj<Type>";
+D073_STATS1 = "\cfATK:\cj <00> \cfDEF:\cj <00>";
+D073_STATS2 = "\cfSP.ATK:\cj <00> \cfSP.DEF:\cj <00>";
+D073_STATS3 = "\cfSPD:\cj <00> \cfHP:\cj <00>";
+D073_ARC = "\cj <Archetype> ";
+D073_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+//#region -=- SLUGMA-=-
+D074_NAME = "\cjSLUGMA";
+D074_TYPE = "\cj<Type>";
+D074_STATS1 = "\cfATK:\cj <00> \cfDEF:\cj <00>";
+D074_STATS2 = "\cfSP.ATK:\cj <00> \cfSP.DEF:\cj <00>";
+D074_STATS3 = "\cfSPD:\cj <00> \cfHP:\cj <00>";
+D074_ARC = "\cj <Archetype> ";
+D074_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+//#region -=- MAGCARGO-=-
+D075_NAME = "\cjMAGCARGO";
+D075_TYPE = "\cj<Type>";
+D075_STATS1 = "\cfATK:\cj <00> \cfDEF:\cj <00>";
+D075_STATS2 = "\cfSP.ATK:\cj <00> \cfSP.DEF:\cj <00>";
+D075_STATS3 = "\cfSPD:\cj <00> \cfHP:\cj <00>";
+D075_ARC = "\cj <Archetype> ";
+D075_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
 
 //--[NewPokemon]--
 

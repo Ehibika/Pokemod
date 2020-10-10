@@ -333,6 +333,39 @@ const int Dex_STARMIE = 50;
 
 const int Dex_SHELLDER = 51;
 const int Dex_CLOYSTER = 52;
+
+const int Dex_VULPIX = 53;
+const int Dex_NINETALES = 54;
+
+const int Dex_VULPIX_A = 55;
+const int Dex_NINETALES_A = 56;
+
+const int Dex_SNOVER = 57;
+const int Dex_ABOMASNOW = 58;
+
+const int Dex_SWINUB = 59;
+const int Dex_PILOSWINE = 60;
+const int Dex_MAMOSWINE = 61;
+
+const int Dex_ABRA = 62;
+const int Dex_KADABRA = 63;
+const int Dex_ALAKAZAM = 64;
+
+const int Dex_DROWZEE = 65;
+const int Dex_HYPNO = 66;
+
+const int Dex_RALTS = 67;
+const int Dex_KIRLIA = 68;
+const int Dex_GARDEVOIR = 69;
+const int Dex_GALLADE = 70;
+
+const int Dex_EXEGGCUTE = 71;
+const int Dex_EXEGGUTOR = 72;
+
+const int Dex_TORKOAL = 73;
+
+const int Dex_SLUGMA = 74;
+const int Dex_MAGCARGO = 75;
 //--[NewPokemon]--
 //=======|TM Type Flags|==========
 const int TMT_NULL = 0;

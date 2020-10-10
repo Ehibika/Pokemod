@@ -111,8 +111,6 @@ Goto Ready
 //[+]========================================================================[+]
 actor SpikeCannonPP : Ammo {inventory.amount 1 inventory.Maxamount 20}
 
-actor MultiShotCounter : Ammo {inventory.amount 1 inventory.Maxamount 5}
-
 actor SpikeCannonCST : PowerupGiver
 {
 +INVENTORY.AUTOACTIVATE

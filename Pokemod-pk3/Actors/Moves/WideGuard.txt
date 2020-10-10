@@ -1049,6 +1049,8 @@ stop
 actor WideScreenGraphic_A : BasicClientside
 {
 scale 0.5
+Renderstyle "Translucent"
+Alpha 0.5
 States
 {
 Spawn:
@@ -1062,6 +1064,8 @@ stop
 actor WideScreenGraphic_B : BasicClientside
 {
 scale 0.5
+Renderstyle "Translucent"
+Alpha 0.5
 States
 {
 Spawn:

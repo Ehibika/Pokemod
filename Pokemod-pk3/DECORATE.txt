@@ -193,8 +193,8 @@
 // #include "actors/Moves/Hurricane.txt"
 // #include "actors/Moves/ExtremeSpeed.txt"
 // #include "actors/Moves/Hyperbeam.txt"
-// #include "actors/Moves/Headbutt.txt"
-// #include "actors/Moves/Zenheadbutt.txt"
+#include "actors/Moves/Headbutt.txt"
+#include "actors/Moves/Zenheadbutt.txt"
 #include "actors/Moves/Outrage.txt"
 // #include "actors/Moves/Endure.txt"
 #include "actors/Moves/Psywave.txt"
@@ -236,8 +236,8 @@
 // #include "actors/Moves/PsychoCut.txt"
 // #include "actors/Moves/PsychoShift.txt"
 // #include "actors/Moves/MegaPunch.txt"
-// #include "actors/Moves/Hypnosis.txt"
-// #include "actors/Moves/DreamEater.txt"
+#include "actors/Moves/Hypnosis.txt"
+#include "actors/Moves/DreamEater.txt"
 // #include "actors/Moves/Meditate.txt"
 // #include "actors/Moves/PoisonGas.txt"
 // #include "actors/Moves/Swagger.txt"
@@ -305,6 +305,18 @@
 #include "Actors/Classes/Pokemon/049_Staryu.txt"
 
 #include "Actors/Classes/Pokemon/051_Shellder.txt"
+
+#include "Actors/Classes/Pokemon/053_Vulpix.txt"
+#include "Actors/Classes/Pokemon/055_Vulpix_A.txt"
+#include "Actors/Classes/Pokemon/057_Snover.txt"
+#include "Actors/Classes/Pokemon/059_Swinub.txt"
+#include "Actors/Classes/Pokemon/062_Abra.txt"
+#include "Actors/Classes/Pokemon/065_Drowzee.txt"
+#include "Actors/Classes/Pokemon/067_Ralts.txt"
+#include "Actors/Classes/Pokemon/071_Exeggcute.txt"
+#include "Actors/Classes/Pokemon/073_Torkoal.txt"
+#include "Actors/Classes/Pokemon/074_Slugma.txt"
+
 //--[NewPokemon]--
 
 // -=- Rentals -=-

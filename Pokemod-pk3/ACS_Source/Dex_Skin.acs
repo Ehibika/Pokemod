@@ -80,5 +80,39 @@ str SkinDEX [MAXDEX][2] = {
 
     /*|51|*/{"Shellder","Base"},
     /*|52|*/{"Cloyster","Cloyster"},
+
+    /*|53|*/{"Vulpix","Base"},
+    /*|54|*/{"Ninetales","Ninetales"},
+
+    /*|55|*/{"Vulpix_A","Base"},
+    /*|56|*/{"Ninetales_A","Ninetales_A"},
+
+    /*|57|*/{"Snover","Base"},
+    /*|58|*/{"Abomasnow","Abomasnow"},
+
+    /*|59|*/{"Swinub","Base"},
+    /*|60|*/{"Piloswine","Piloswine"},
+    /*|61|*/{"Mamoswine","Mamoswine"},
+
+    /*|62|*/{"Abra","Base"},
+    /*|63|*/{"Kadabra","Kadabra"},
+    /*|64|*/{"Alakazam","Alakazam"},
+
+    /*|65|*/{"Drowzee","Base"},
+    /*|66|*/{"Hypno","Hypno"},
+
+    /*|67|*/{"Ralts","Base"},
+    /*|68|*/{"Kirlia","Kirlia"},
+    /*|69|*/{"Gardevoir","Gardevoir"},
+    /*|70|*/{"Gallade","Gallade"},
+
+    /*|71|*/{"Exeggcute","Base"},
+    /*|72|*/{"Exeggutor","Exeggutor"},
+
+    /*|73|*/{"Torkoal","Base"},
+
+    /*|74|*/{"Slugma","Base"},
+    /*|75|*/{"Magcargo","Magcargo"},   
+
     //--[NewPokemon]--
     };

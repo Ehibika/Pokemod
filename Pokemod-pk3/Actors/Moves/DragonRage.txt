@@ -150,7 +150,7 @@ States
 Spawn:
 CRBM A 0
 TNT1 AAAAAA 0 A_SpawnItemEx("DragonRageParticle1", 0, 0, 0, 5, 5, random2(5), random(0, 359),SXF_TRANSFERTRANSLATION)
-TNT1 AAAAAA 0 A_SpawnItemEx("DragonRageParticle2",  random2(64), random2(64), random2(64), 0, 0, 0, 0,SXF_TRANSFERTRANSLATION)
+//TNT1 AAAAAA 0 A_SpawnItemEx("DragonRageParticle2",  random2(64), random2(64), random2(64), 0, 0, 0, 0,SXF_TRANSFERTRANSLATION)
 stop
 //BSTG AAAAA 1 A_Fadeout
 stop

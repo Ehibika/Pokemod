@@ -1,4 +1,5 @@
 addkeysection "Extra Controls" PKMNKeys
+addmenukey "Alt Camera" +Zoom
 addmenukey "PP Recover" +Reload
 
 clearplayerclasses
@@ -26,6 +27,18 @@ AddPlayerClass Bagon
 AddPlayerClass Slowpoke
 AddPlayerClass Staryu
 AddPlayerClass Shellder
+
+AddPlayerClass Vulpix
+AddPlayerClass Vulpix_A
+AddPlayerClass Snover
+AddPlayerClass Swinub
+AddPlayerClass Abra
+AddPlayerClass Drowzee
+AddPlayerClass Ralts
+AddPlayerClass Exeggcute
+AddPlayerClass Torkoal
+AddPlayerClass Slugma
+
 //--[NewPokemon]--
 
 alias TriggerEvo "CloseMenu; Use EvoStartItem" 
@@ -33,7 +46,10 @@ alias MoveTutor "CloseMenu; Use MoveTutorStartItem"
 alias MoveShift "CloseMenu; Use MoveShiftStartItem"
 alias ShowStatusScreen "CloseMenu; Use PlayerStatusItem" 
 
-alias DefaultCam "sv_CameraAng 0.0; sv_CameraHeight 0.0; sv_CameraZoom 60; SV_CameraPitch 1.0; sv_CamReticuleMode 1;"
+alias DefaultCam "sv_CameraAng 0.0; sv_CameraHeight 0.0; sv_CameraZoom 130; SV_CameraPitch 0.3; sv_CamReticuleMode 1;"
+alias DefaultZoomCam "sv_ZoomCameraAng -6.0; sv_ZoomCameraHeight -0.3; sv_ZoomCameraZoom 60; SV_ZoomCameraPitch 0.0; sv_ZoomCamReticuleMode 1;"
+alias StartCameraMenu "Openmenu CameraMenu"
+alias CloseMenuCommand "CloseMenu"
 
 alias OpenItemShop "Use ShopGuardItem; Openmenu Item_Menu"
 alias OpenTMShop "Use ShopGuardItem; Openmenu TM_Menu"
@@ -56,6 +72,7 @@ alias BuyGuardSeed "CloseMenu; Use BuyGuardSeed; Openmenu Item_Menu"
 alias BuyEscapeOrb "CloseMenu; Use BuyEscapeOrb; Openmenu Item_Menu"
 alias BuyBarrierOrb "CloseMenu; Use BuyBarrierOrb; Openmenu Item_Menu"
 
+alias BuyTM5 "CloseMenu; Use BuyTM5;"
 alias BuyTM6 "CloseMenu; Use BuyTM6;"
 alias BuyTM7 "CloseMenu; Use BuyTM7;"
 alias BuyTM8 "CloseMenu; Use BuyTM8;"

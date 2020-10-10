@@ -383,8 +383,8 @@ str weapons_ammo[MAX_WEAPONS_GLOBAL][7] =
 {"PsychoCutMove", "PsychoCutPP", "PsychoCut", 1.0, "NO", "NO", "SLOT_NONE"},
 {"PsychoShiftMove", "PsychoShiftPP", "PsychoShift", 1.0, "NO", "NO", "SLOT_NONE"},
 {"MegaPunchMove", "MegaPunchPP", "MegaPunch", 1.0, "NO", "NO", "SLOT_NONE"},
-{"HypnosisMove", "HypnosisPP", "Hypnosis", 1.0, "NO", "NO", "SLOT_NONE"},
-{"DreamEaterMove", "DreamEaterPP", "DreamEater", 1.0, "NO", "NO", "SLOT_NONE"},
+{"HypnosisMove", "HypnosisPP", "Hypnosis", 1.0, "YES", "NO", "SLOT_NONE"},
+{"DreamEaterMove", "DreamEaterPP", "DreamEater", 1.0, "YES", "NO", "SLOT_NONE"},
 {"MeditateMove", "MeditatePP", "Meditate", 1.0, "NO", "NO", "SLOT_NONE"},
 {"PoisonGasMove", "PoisonGasPP", "PoisonGas", 1.0, "NO", "NO", "SLOT_NONE"},
 {"SwaggerMove", "SwaggerPP", "Swagger", 1.0, "NO", "NO", "SLOT_NONE"},
@@ -932,6 +932,8 @@ Script "MoveSetup" (void)
 				Case HEALPULSE: ACS_NamedExecuteAlways("TracerTargeter",0,TG_TEAM,1500); break;
 				Case TAUNT: ACS_NamedExecuteAlways("TracerTargeter",0,TG_ENEMY,350); break;
 				Case MEGADRAIN: ACS_NamedExecuteAlways("TracerTargeter",0,TG_ENEMY,350); break;
+				Case HYPNOSIS: ACS_NamedExecuteAlways("TracerTargeter",0,TG_ENEMY,350); break;
+				Case DREAMEATER: ACS_NamedExecuteAlways("TracerTargeter",0,TG_ENEMY,350); break;
 				default: ACS_NamedExecuteAlways("TracerTargeter",0,TG_TEAM,630); break;
 			}
 			

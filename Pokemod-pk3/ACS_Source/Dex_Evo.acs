@@ -85,5 +85,40 @@ Int EvoDEX [MAXDEX][6] = {
 
     /*|51|*/{1,      MIDSTAGE,     CLOYSTER,  NULLEVO,     NULLEVO,17},
     /*|52|*/{0,      0,     NULLEVO,  NULLEVO,     NULLEVO,17},
+
+    /*|53|*/{1,      MIDSTAGE,     NINETALES,  NULLEVO,     NULLEVO,18},
+    /*|54|*/{0,      0,     NULLEVO,  NULLEVO,     NULLEVO,18},
+
+    /*|55|*/{1,      MIDSTAGE,     NINETALES_A,  NULLEVO,     NULLEVO,19},
+    /*|56|*/{0,      0,     NULLEVO,  NULLEVO,     NULLEVO,19},
+
+    /*|57|*/{1,      MIDSTAGE,     ABOMASNOW,  NULLEVO,     NULLEVO,20},
+    /*|58|*/{0,      0,     NULLEVO,  NULLEVO,     NULLEVO,20},
+
+    /*|59|*/{1,      MIDSTAGE,     PILOSWINE,  NULLEVO,     NULLEVO,21},
+    /*|60|*/{1,      FINALSTAGE,     MAMOSWINE,  NULLEVO,     NULLEVO,21},
+    /*|61|*/{0,      0,     NULLEVO,  NULLEVO,     NULLEVO,21},
+
+    /*|62|*/{1,      MIDSTAGE,     KADABRA,  NULLEVO,     NULLEVO,22},
+    /*|63|*/{1,      FINALSTAGE,     ALAKAZAM,  NULLEVO,     NULLEVO,22},
+    /*|64|*/{0,      0,     NULLEVO,  NULLEVO,     NULLEVO,22},
+
+    /*|65|*/{1,      MIDSTAGE,     HYPNO,  NULLEVO,     NULLEVO,23},
+    /*|66|*/{0,      0,     NULLEVO,  NULLEVO,     NULLEVO,23},
+
+    /*|67|*/{1,      MIDSTAGE,     KIRLIA,  NULLEVO,     NULLEVO,24},
+    /*|68|*/{2,      FINALSTAGE,     GARDEVOIR,  GALLADE,     NULLEVO,24},
+    /*|69|*/{0,      0,     NULLEVO,  NULLEVO,     NULLEVO,24},
+    /*|70|*/{0,      0,     NULLEVO,  NULLEVO,     NULLEVO,24},
+
+    /*|71|*/{1,      MIDSTAGE,     EXEGGUTOR,  NULLEVO,     NULLEVO,25},
+    /*|72|*/{0,      0,     NULLEVO,  NULLEVO,     NULLEVO,25},
+
+    /*|73|*/{0,      0,     NULLEVO,  NULLEVO,     NULLEVO,26},
+
+    /*|74|*/{1,      MIDSTAGE,     MAGCARGO,  NULLEVO,     NULLEVO,27},
+    /*|75|*/{0,      0,     NULLEVO,  NULLEVO,     NULLEVO,27},
+    
+    
     //--[NewPokemon]--
 };

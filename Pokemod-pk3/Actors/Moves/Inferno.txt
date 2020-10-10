@@ -43,7 +43,6 @@ Fire.Bullet: //Take Ammo
 "####" B 0 A_FireCustomMissile("InfernoRayDamager",0,1,0,0,0,0)
 "####" B 0 A_GiveInventory("InfernoBuffer",1)
 "####" B 0 A_GiveInventory("InfernoCST",1)
-"####" B 0 A_Jumpifinventory("DoubleInferno",1,"Fire.DBLBullet2")//Check if playerCharacter is Blastoise
 "####" B 0 A_Jump(256,"Fire.Bullet2")
 Goto Fire.Bullet2
 

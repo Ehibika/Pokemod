@@ -4,6 +4,7 @@ actor TMShop : CustomInventory
 states
 {
 Pickup:
+TNT1 A 0 A_GiveInventory("BuyTM5",1)
 TNT1 A 0 A_GiveInventory("BuyTM6",1)
 TNT1 A 0 A_GiveInventory("BuyTM7",1)
 TNT1 A 0 A_GiveInventory("BuyTM8",1)
@@ -56,6 +57,17 @@ TNT1 A 0 A_GiveInventory("BuyTM57",1)
 TNT1 A 0 A_GiveInventory("BuyTM58",1)
 TNT1 A 0 A_GiveInventory("BuyTM59",1)
 stop
+}
+}
+
+actor BuyTM5 : BuyThing25
+{ //-=- Substitute -=-
+states
+{
+Use2:
+TNT1 A 0 A_JumpIf(!CallACS("CheckTM"),"BadTM")
+TNT1 A 0 ACS_NamedExecuteAlways("PromptMoveLearn",0,Move_Substitute,25)
+goto BuySuccess
 }
 }
 

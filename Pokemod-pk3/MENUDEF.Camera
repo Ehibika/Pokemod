@@ -31,9 +31,11 @@ OptionMenu ZA_MultiplayerOptions
 	Slider		"Camera Position",			"sv_CameraAng",			-1.0, 1.0, 0.1
 	Slider		"Camera Height",			"sv_CameraHeight",		-1.0, 1.0, 0.1
 	Slider		"Camera Angle",				"SV_CameraPitch",		0.0, 1.0, 0.1 
-	Slider		"Camera Zoom",				"sv_CameraZoom",			0, 130, 5
+	Slider		"Camera Zoom",				"sv_CameraZoom",			0, 250, 5
+	Slider		"Player Transperancy",		"SV_CamPlayerAlpha",			0.0, 1.0, 0.1
 	Option		"Toggle Reticule",			"sv_CamReticuleMode",			"OnOff"
 	Command		"Reset Camera to Default", "DefaultCam"
+	Submenu 	"Zoom Mode Options",			"ZoomCameraMenu"
 	
 }
 
@@ -66,9 +68,58 @@ OptionMenu "OptionsMenu"
 	Slider		"Camera Position",			"sv_CameraAng",			-1.0, 1.0, 0.1
 	Slider		"Camera Height",			"sv_CameraHeight",		-1.0, 1.0, 0.1
 	Slider		"Camera Angle",				"SV_CameraPitch",		0.0, 1.0, 0.1 
-	Slider		"Camera Zoom",				"sv_CameraZoom",			0, 130, 5
+	Slider		"Camera Zoom",				"sv_CameraZoom",			0, 250, 5
+	Slider		"Player Transperancy",		"SV_CamPlayerAlpha",			0.0, 1.0, 0.1
 	Option		"Toggle Reticule",			"sv_CamReticuleMode",			"OnOff"
 	Command		"Reset Camera to Default", "DefaultCam"
+	Submenu 	"Zoom Mode Options",			"ZoomCameraMenu"
+	//ColorPicker "Reticule Color", 			"sv_CamReticuleColor"
+
+}
+
+
+OptionMenu "ZoomCameraMenu"
+{
+	Title "Zoom Camera Settings"
+	StaticText ""
+	StaticText ""
+	StaticText ""
+	StaticText ""
+	StaticText ""
+	Slider		"Camera Position",			"sv_ZoomCameraAng",			-1.0, 1.0, 0.1
+	Slider		"Camera Height",			"sv_ZoomCameraHeight",		-1.0, 1.0, 0.1
+	Slider		"Camera Angle",				"SV_ZoomCameraPitch",		0.0, 1.0, 0.1 
+	Slider		"Camera Zoom",				"sv_ZoomCameraZoom",			0, 250, 5
+	Slider		"Player Transperancy",		"SV_ZoomCamPlayerAlpha",			0.0, 1.0, 0.1
+	Option		"Toggle Reticule",			"sv_ZoomCamReticuleMode",			"OnOff"
+	Command		"Reset Camera to Default", "DefaultZoomCam"
+	Control 	"Zoom Key",			"+Zoom"
+	Option		"Zoom Toggle on Key Press",			"sv_ZoomToggle",			"OnOff"
+
+}
+
+OptionMenu "CameraMenu"
+{
+	Title "Set up your camera"
+	
+	StaticText "$MNU_CAMMESSAGE"
+	StaticText ""
+	StaticText ""
+	StaticText ""
+	StaticText ""
+	Slider		"Camera Position",			"sv_CameraAng",			-1.0, 1.0, 0.1
+	Slider		"Camera Height",			"sv_CameraHeight",		-1.0, 1.0, 0.1
+	Slider		"Camera Angle",				"SV_CameraPitch",		0.0, 1.0, 0.1 
+	Slider		"Camera Zoom",				"sv_CameraZoom",			0, 250, 5
+	Slider		"Player Transperancy",		"SV_CamPlayerAlpha",			0.0, 1.0, 0.1
+	Option		"Toggle Reticule",			"sv_CamReticuleMode",			"OnOff"
+	Command		"Reset Camera to Default", "DefaultCam"
+	Submenu 	"Zoom Mode Options",			"ZoomCameraMenu"
+	StaticText ""
+	Option		"Don't Show this menu again",			"Sv_DisableStartupCamMenu",			"OnOff"
+	Command		"Exit", "CloseMenuCommand"
+	
+	
 	//ColorPicker "Reticule Color", 			"sv_CamReticuleColor"
 
 }

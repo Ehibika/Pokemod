@@ -127,8 +127,8 @@ TNT1 A 0 ACS_NamedExecuteAlways("CamGrabObject",0)
 TNT1 A 0 ACS_NamedExecuteAlways("RemoteControlActor",0,15.0,Confusion_Range)
 TNT1 A 0 A_TransferPointer(AAPTR_TARGET,AAPTR_DEFAULT,AAPTR_TRACER,AAPTR_DEFAULT)
 Spawn2:
-TNT1 A 0 A_JumpIfCloser(Confusion_Range-1,"Spawn3")
-TNT1 A 1 A_SpawnItemEx("ConfusionRingGuide2",Confusion_Forward,0,0,0,0,0,0,1)
+TNT1 A 1 A_JumpIfCloser(Confusion_Range-1,"Spawn3")
+TNT1 A 0 A_SpawnItemEx("ConfusionRingGuide2",Confusion_Forward,0,0,0,0,0,0,1)
 TNT1 A 0 A_GiveToTarget("ConfusionRCFlag",1)
 TBLA A 0
 loop
