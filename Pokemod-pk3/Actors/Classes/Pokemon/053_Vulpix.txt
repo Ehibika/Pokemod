@@ -58,7 +58,7 @@ TNT1 A 0 A_JumpIfInventory("isbot",1,"BotWep")
 TNT1 A 0 A_GiveInventory("EmberMove1")
 TNT1 A 0 A_GiveInventory("TailWhipMove2")
 TNT1 A 0 A_GiveInventory("QuickAttackMove3")
-TNT1 A 0 A_GiveInventory("BiteMove4")
+TNT1 A 0 A_GiveInventory("DisableMove4")
 stop
 
 BotWep:

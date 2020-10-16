@@ -165,6 +165,7 @@ Script "PKMNACS_StartupScript" (int BaseDex)
 			ACS_NamedExecuteAlways("SetPlayerType",0);
 			//ACS_NamedExecuteAlways("SetPokeSkin",0,BaseDex);
 			GiveInventory("PersistentLoadout",1);
+			GiveInventory("ReloadShopInventory",1);
 				//For TLMS's map reset
 			if( (GetCvar("lastmanstanding")==1||GetCvar("teamlms")==1)
 				&& CheckLMSAttendance(PlayerNumber()) == 1)
@@ -192,6 +193,7 @@ Script "PKMNACS_StartupScript" (int BaseDex)
 			ACS_NamedExecuteAlways("StatInitializer",0);
 			ACS_NamedExecuteAlways("SetPlayerType",0);
 			GiveInventory("PersistentLoadout",1);
+			GiveInventory("ReloadShopInventory",1);
 			break;
 			Case 3: //Changed
 			//Log(s:"Changed: Match Failed"); 
@@ -335,6 +337,8 @@ Bool InWarmup = true;
 Script "GameTimer" OPEN 
 {
 if(GetCvar("lastmanstanding")==1||GetCvar("teamlms")==1) {Terminate;}
+if(GetCVar("PKMN_WarmupTime")<1){Terminate;}
+
 int timelimit = timelimit*35;//GetCVar("PKMN_WarmupTime");
 int time;
 int timelimittics;

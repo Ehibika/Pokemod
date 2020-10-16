@@ -22,7 +22,9 @@ gravity 0.6
 +NOBLOOD
 +QUICKTORETALIATE
 +NOSKIN
++THRUSPECIES
 damagefactor "Dummy", 0.0
+damagefactor "BlockExplosion", 0.0
 Player.MaxSkinSizeFactor 0, 0
 scale 2.5
 bloodtype "MegamanBlood"

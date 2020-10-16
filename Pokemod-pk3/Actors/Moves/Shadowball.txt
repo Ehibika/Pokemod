@@ -176,7 +176,7 @@ LMEX A 0 A_SpawnItemEx("ShadowBallShot2",cos(pitch)*Args[1],0,(sin(pitch)*-Args[
 stop
 
 Death:
-LMEX A 0 A_log("Dead")
+LMEX A 0 //A_log("Dead")
 LMEX A 0 A_JumpIf(z-floorz < -600 || z-Ceilingz > 600 , "Terminate")
 LMEX A 0 A_JumpIfCloser(1000,"Repeate")
 //LMEX A 0 A_CustomMissile("ShadowBallBurrowShot",0,0,0,CMF_AIMDIRECTION|CMF_TRACKOWNER|CMF_SAVEPITCH)//A_SpawnItemEx("ShadowBallBurrowShot",0,0,0,Velx,momy,momz,0,SXF_TRANSFERTRANSLATION|SXF_ABSOLUTEVELOCITY|SXF_NOCHECKPOSITION)

@@ -1,0 +1,309 @@
+actor BlizzardMove : WepMasterBase
+{
+Tag "Blizzard"
+obituary "$OB_BLIZZARD"
+Weapon.AmmoUse 1
+Weapon.AmmoGive 20
+weapon.ammotype "BlizzardPP"
+scale 2.0
+Inventory.Pickupmessage "$PU_MEGABUSTER"
+States
+{
+Spawn:
+WEAP X 1
+stop
+
+
+Fire:
+"####" BBB 1 A_Jumpif(CallACS("CheckWeaponFire",RC_B)==1,"Fire.Begin")
+"####" B 0 A_Jump(256,"NoAmmo")
+Goto NoAmmo
+
+Fire.Begin:
+"####" B 0
+"####" B 0 A_Jump(256,"Fire.GroundCheck")
+Goto Fire.Bullet
+
+Fire.GroundCheck:
+"####" B 0 A_CheckFloor("Fire.Quake")
+"####" B 0 A_Jump(256,"NoAmmo2")
+Goto NoAmmo2
+
+Fire.Quake:
+"####" A 0 A_GiveInventory("DashSet_B")
+"####" B 15 A_FireCustomMissile("BlizzardExplosion",0,1,0,0)
+"####" B 0 A_Jump(256,"Fire.After")
+Goto Fire.After
+
+Fire.After:
+"####" B 1 A_GiveInventory("Blizzard_Recovery_B")
+"####" A 0 A_GiveInventory("DashSetOff")
+"####" C 0 A_REfire("Fire")
+"####" B 0 A_Jump(256,"Fire.End")
+Goto Fire.End
+
+
+
+
+
+}
+}
+
+actor BlizzardMove1 : BlizzardMove {Weapon.SlotNumber 1}
+actor BlizzardMove2 : BlizzardMove {Weapon.SlotNumber 2}
+actor BlizzardMove3 : BlizzardMove {Weapon.SlotNumber 3}
+actor BlizzardMove4 : BlizzardMove {Weapon.SlotNumber 4}
+
+actor BlizzardMove5 : BlizzardMove 
+{
+Weapon.SlotNumber 5
+States
+{
+Fire.End:
+TNT1 A 0
+TNT1 A 0 A_TakeInventory("BlizzardMove5",9)
+TNT1 A 0 A_Jump(256,"Ready")
+Goto Ready
+}
+}
+
+//[+]========================================================================[+]
+//-----------------------------|Ammo & Inventory|------------------------------
+//[+]========================================================================[+]
+actor BlizzardPP : Ammo {inventory.amount 1 inventory.Maxamount 5}
+
+Actor BlizzardProtect : powerprotection
+{
+Powerup.duration 7
+Damagefactor "Blizzard", 0
+}
+
+Const int BLIZZARD_RAD = 100;
+
+actor BlizzardFreezeRate : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_Jumpifinventory("FreezeMark",1,"FreezeUp")
+FreezeUp:
+TNT1 A 0 A_GiveInventory("FreezeValue",random(15,20))
+stop
+
+Nope:
+TNT1 A 0
+stop
+}
+}
+
+actor Blizzard_Recovery_B : FullRecovery_B{Powerup.Duration 87}
+//[+]========================================================================[+]
+//--------------------------------|Projectiles |--------------------------------
+//[+]========================================================================[+]
+actor BlizzardExplosion : BasicExplosion
+{
+translation "202:202=210:210"//90
+Damagetype "Blizzard"
+Obituary "$OB_BLIZZARD"
+scale 2.5
+Var int user_angle;
+speed 0
+Reactiontime 29
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+TNT1 A 1 A_Stop
+TNT1 A 0 A_PlaySoundEx("Move/Blizzard","Weapon")
+SpawnLoop:
+TNT1 AAAAAAAA 0 A_SpawnItemEx("Blizzard_Particle",-BLIZZARD_RAD,random(-BLIZZARD_RAD,BLIZZARD_RAD),random(5,BLIZZARD_RAD),random(32,36),0,0,0,1)
+TNT1 AAAAAAAA 0 A_SpawnItemEx("Blizzard_Particle2",-BLIZZARD_RAD,random(-BLIZZARD_RAD,BLIZZARD_RAD),random(5,BLIZZARD_RAD),random(32,36),0,0,0,1)
+TNT1 A 3 A_CountDown
+TNT1 A 0 A_JumpIf(ReactionTime%3 == 0,"HitBox")
+Loop
+HitBox:
+TNT1 A 0 A_SpawnItemEx("BlizzardHitBox",-BLIZZARD_RAD,0,16,0,0,0)
+Goto SpawnLoop
+Death:
+TNT1 A 0 //A_PlaySoundEX("wep_L/commandowave","Body")
+TNT1 A 0 //A_PlaySoundEx("weapon/napalm","Weapon")
+TNT1 A 17 //A_Quake(8,17,0,300)
+//TN_B EFGHIJKLMNOPQRS 1
+stop
+}
+}
+
+
+actor BlizzardHitBox : BasicExplosion
+{
+Damagetype "Blizzard"
+Obituary "$OB_BLIZZARD"
+scale 2.5
++SERVERSIDEONLY
+speed 0
+Reactiontime 8
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_SetPitch(Pitch+1)
+TNT1 A 0 A_JumpIf(Pitch>=ReactionTime,"Death")
+TNT1 A 1 
+TNT1 A 1 A_Stop
+TNT1 A 0 A_Explode(MBP_Blizzard,BLIZZARD_RAD,0,0,BLIZZARD_RAD)
+TNT1 A 1 A_SpawnItemEx("BlizzardHitBox2",0,0,0,BLIZZARD_RAD,0,0,0,SXF_TRANSFERPITCH|SXF_NOCHECKPOSITION)
+stop
+
+Death:
+TNT1 A 1
+stop
+}
+}
+
+actor BlizzardHitBox2 : BlizzardHitBox
+{
+Damagetype "Blizzard"
+Obituary "$OB_BLIZZARD"
+scale 2.5
++SERVERSIDEONLY
+-RIPPER
+-NOINTERACTION
+-NOCLIP
+}
+
+//#region 
+actor BlizzardWhirlProjectile : BasicProjectile
+{  //Could be handy for something else
+-SERVERSIDEONLY
+reactiontime 40
+DamageType "Blizzard"
+obituary "$OB_Blizzard"
+scale 1.2
+speed 7
++RIPPER
++NOINTERACTION
++NOCLIP
+var int user_speed;
+var int user_maxturn;
+var int user_turndivisor;
+var int user_turndivisor_add;
+var int user_Rad;
+States
+{
+Spawn:
+POWS A 0
+TNT1 A 0 A_SetUserVar("user_Rad", random(100,250))
+TNT1 A 0 A_SetUserVar("user_turndivisor", 9)
+TNT1 A 0 A_SetUserVar("user_speed", ((2*(3.14)*user_Rad)/360)*user_turndivisor)
+TNT1 A 0 A_Warp(AAPTR_DEFAULT,user_Rad,0,0,random(0,360),WARPF_NOCHECKPOSITION)
+TNT1 A 0 A_Setangle(angle-90)
+TNT1 A 0 A_SetScale(Frandom(1.5,3.5))
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+TNT1 A 0 A_Jump(256,"Spawn1","Spawn2","Spawn3","Spawn4")
+Goto Spawn1
+
+Spawn1:
+
+ICEL K 0
+Goto Spawn.Orbit
+
+Spawn2:
+ICEL L 0
+Goto Spawn.Orbit
+
+Spawn3:
+ICEL M 0
+Goto Spawn.Orbit
+
+Spawn4:
+ICEL O 0
+Goto Spawn.Orbit
+
+Spawn.Orbit:
+"####" "#" 0 A_Setangle(angle-user_turndivisor)
+"####" "#" 1 A_ChangeVelocity(user_speed,0,0,CVF_RELATIVE|CVF_REPLACE)
+"####" "#" 0 A_CountDown
+loop
+Death:
+POWS A 0
+stop
+}
+}
+//#endregion
+
+
+actor Blizzard_Particle : BasicClientside
+{
++MISSILE
+Radius 4
+Height 4
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+TNT1 A 0 A_SetScale(Frandom(1.5,3.5))
+TNT1 A 0 A_Jump(256,"Spawn1","Spawn2","Spawn3","Spawn4")
+Goto Spawn1
+
+Spawn1:
+
+ICEL K 0
+Goto Spawn.Active
+
+Spawn2:
+ICEL L 0
+Goto Spawn.Active
+
+Spawn3:
+ICEL M 0
+Goto Spawn.Active
+
+Spawn4:
+ICEL O 0
+Goto Spawn.Active
+
+Spawn.Active:
+"####" "#" 5
+"####" "#" 0 A_ChangeFlag("RIPPER", 0)
+"####" "#" 0 A_ChangeFlag("NOINTERACTION",0)
+"####" "#" 15
+"####" "#####" 1 A_Fadeout
+stop
+
+Death:
+TNT1 A 0 
+stop
+
+}
+}
+
+
+actor Blizzard_Particle2 : Blizzard_Particle
+{
+renderstyle "add"
+Alpha 0.3
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+TNT1 A 0 A_SetScale(Frandom(1.5,3.5))
+MIS2 D 5
+MIS2 D 0 A_ChangeFlag("RIPPER", 0)
+MIS2 D 0 A_ChangeFlag("NOINTERACTION",0)
+MIS2 D 15
+MIS2 DDDDD 1 A_Fadeout
+stop
+}
+}
+
+actor Blizzard_Particle3 : Blizzard_Particle2
+{renderstyle "Translucent"}

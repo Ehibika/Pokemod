@@ -67,6 +67,7 @@ TNT1 A 0 A_SetTranslucent(0.0,0)
 TNT1 A 0 ThrustThingZ(0,40,1,0)
 TNT1 A 0 ACS_NamedExecuteAlways("PKMN_JumpToggle",0,0)
 TNT1 A 0 A_GiveInventory("DiveBuffer",1)
+TNT1 A 0 A_GiveInventory("PKMN_WhiteFlagDropper",1) //For objective combo
 goto Fire.DiveHold
 Fire.DiveHold:
 TNT1 A 0 A_JumpIfInventory("DivePPTimer",1,3)

@@ -37,6 +37,7 @@ Fire.DashWarmup:
 "####" A 0 A_Recoil(-5)
 "####" A 0 A_PlaySoundEx("Misc/spin","Weapon")
 "####" A 0 A_SpawnItemEx("FlameWheelPreFX", 0, 0, 0, 0, 0, 0, 0,1)
+"####" A 0 A_GiveInventory("PKMN_WhiteFlagDropper",1) //For objective combo
 Fire.DashWarmup1:
 "####" A 3
 "####" A 0 //A_PlaySoundEx("weapon/Heat2","Weapon")

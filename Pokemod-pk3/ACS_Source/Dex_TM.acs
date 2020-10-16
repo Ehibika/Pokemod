@@ -13,12 +13,14 @@
 
 */
 #library "Dex_TM"
-#include "zcommon.acs"
-
 #import "Dex_Pokemon.acs"
+#import "Dex_moves.acs"
 #import "Dex_Types.acs"
 #import "Dex_Leveling.acs"
 #import "Dex_BaseStats.acs"
+#include "zcommon.acs"
+
+
 //#region -=- constants -=-
 
 #LIBDEFINE TMT_NULL 0
@@ -53,6 +55,12 @@
 #LIBDEFINE TMA_Draconic 128
 #LIBDEFINE TMA_Spikey 256
 #LIBDEFINE TMA_Slasher 512
+
+#LIBDEFINE TMF_NULL 0
+#LIBDEFINE TMF_UNIVERSAL 1
+#LIBDEFINE TMF_EVOLVED 2
+
+#LIBDEFINE MAXTMLIST 59
 //#endregion
 
 //#region -=- TM Reference -=-
@@ -70,6 +78,417 @@
 59 = Earthquake
 */
 //#endregion
+
+//#region -=- TM MasterList -=-
+int TMList [MAXTMLIST][4] = {
+{Substitute     ,TMF_UNIVERSAL      ,TMT_NORMAL                                 ,25},
+{Protect        ,TMF_UNIVERSAL      ,TMT_NORMAL                                 ,10},
+{Taunt          ,TMF_UNIVERSAL      ,TMT_NORMAL                                 ,15},
+{Fakeout        ,TMF_UNIVERSAL      ,TMT_NORMAL                                 ,15},
+{FalseSwipe     ,TMF_UNIVERSAL      ,TMT_NORMAL                                 ,15},
+{Rest           ,TMF_UNIVERSAL      ,TMT_PSYCHIC                                ,15},
+{SlackOff       ,TMF_UNIVERSAL      ,TMT_NORMAL                                 ,15},
+{Refresh        ,TMF_UNIVERSAL      ,TMT_NORMAL                                 ,15},
+
+{IronDefense    ,TMF_UNIVERSAL      ,TMT_STEEL                                  ,10},
+{Amnesia        ,TMF_UNIVERSAL      ,TMT_PSYCHIC                                ,10},
+{SwordDance     ,TMF_UNIVERSAL      ,TMT_NORMAL                                 ,10},
+{NastyPlot      ,TMF_UNIVERSAL      ,TMT_DARK                                   ,10},
+{Agility        ,TMF_UNIVERSAL      ,TMT_PSYCHIC                                ,10},
+
+{Screech        ,TMF_UNIVERSAL      ,TMT_NORMAL                                 ,10},
+{FakeTears      ,TMF_UNIVERSAL      ,TMT_DARK                                   ,10},
+{Charm          ,TMF_UNIVERSAL      ,TMT_FAIRY                                  ,10},
+{Captivate      ,TMF_UNIVERSAL      ,TMT_NORMAL                                 ,10},
+{ScaryFace      ,TMF_UNIVERSAL      ,TMT_NORMAL                                 ,10},
+
+{WideGuard      ,TMF_NULL           ,TMT_GROUND|TMT_ROCK|TMT_STEEL              ,15},
+{SafeGuard      ,TMF_NULL           ,TMT_NORMAL|TMT_PSYCHIC|TMT_FAIRY           ,15},
+{Reflect        ,TMF_NULL           ,TMT_PSYCHIC|TMT_FAIRY                      ,15},
+{LightScreen    ,TMF_NULL           ,TMT_PSYCHIC|TMT_FAIRY                      ,15},
+{HealPulse      ,TMF_NULL           ,TMT_PSYCHIC|TMT_FAIRY                      ,15},
+{LifeDew        ,TMF_NULL           ,TMT_WATER|TMT_PSYCHIC|TMT_FAIRY            ,15},
+
+{Magicalleaf    ,TMF_NULL           ,TMT_GRASS|TMT_FAIRY|TMT_PSYCHIC             ,3},
+{BulletSeed     ,TMF_NULL           ,TMT_GRASS|TMT_BUG                           ,3},
+{Swift          ,TMF_NULL           ,TMT_NORMAL|TMT_PSYCHIC|TMT_FAIRY            ,3},
+{HeadButt       ,TMF_UNIVERSAL      ,TMT_NORMAL                                 ,15},
+{IcyWind        ,TMF_NULL           ,TMT_WATER|TMT_ICE                           ,3},
+{FlameBurst     ,TMF_NULL           ,TMT_FIRE|TMT_DRAGON                        ,15},
+{LavaPlume      ,TMF_NULL           ,TMT_FIRE|TMT_DRAGON                        ,15},
+{WaterPulse     ,TMF_NULL           ,TMT_WATER                                  ,15},
+{Brine          ,TMF_NULL           ,TMT_WATER|TMT_POISON                       ,15},
+{Scald          ,TMF_NULL           ,TMT_WATER|TMT_FIRE                         ,15},
+{Spikes         ,TMF_NULL           ,TMT_GROUND                                 ,10},
+{ToxicSpikes    ,TMF_NULL           ,TMT_POISON|TMT_FIRE                        ,25},
+{StealthRock    ,TMF_NULL           ,TMT_GROUND|TMT_ROCK                        ,25},
+{DragonRage     ,TMF_NULL           ,TMT_DRAGON                                 ,25},
+{Incinerate     ,TMF_NULL           ,TMT_FIRE|TMT_DRAGON                        ,25},
+{ThunderWave    ,TMF_NULL           ,TMT_ELECTRIC|TMT_PSYCHIC                   ,25},
+{Acrobatics     ,TMF_NULL           ,TMT_FLYING                                 ,15},
+{Rollout        ,TMF_NULL           ,TMT_ROCK                                   ,15},
+{GyroBall       ,TMF_NULL           ,TMT_STEEL                                  ,15},
+
+{IceBeam        ,TMF_NULL           ,TMT_WATER|TMT_ICE                          ,35},
+{Flamethrower   ,TMF_NULL           ,TMT_FIRE|TMT_DRAGON                        ,35},
+{ShadowBall     ,TMF_NULL           ,TMT_GHOST|TMT_PSYCHIC                      ,35},
+{Toxic          ,TMF_NULL           ,TMT_POISON                                 ,35},
+{SludgeBomb     ,TMF_NULL           ,TMT_POISON                                 ,35},
+{Surf           ,TMF_NULL           ,TMT_WATER                                  ,35},
+{Waterfall      ,TMF_NULL           ,TMT_WATER                                  ,35},
+{DragonPulse    ,TMF_NULL           ,TMT_DRAGON                                 ,35},
+{DazzlingGleem  ,TMF_NULL           ,TMT_FAIRY|TMT_PSYCHIC                      ,35},
+
+{EarthQuake     ,TMF_EVOLVED        ,TMT_GROUND|TMT_ROCK|TMT_STEEL              ,60},
+{FireBlast      ,TMF_NULL           ,TMT_FIRE|TMT_DRAGON                        ,60},
+{SolarBeam      ,TMF_NULL           ,TMT_GRASS|TMT_FIRE                         ,60},
+{GigaDrain      ,TMF_NULL           ,TMT_GRASS                                  ,60},
+{Psychic        ,TMF_NULL           ,TMT_PSYCHIC                                ,60},
+{Blizzard       ,TMF_NULL           ,TMT_ICE|TMT_WATER                          ,60},
+{Overheat       ,TMF_NULL           ,TMT_FIRE                                   ,60},
+};
+
+//#endregion
+
+function int CheckTMArray (int Index, int Dexnum)
+{
+//Redurns the move index number of that given TM number if it passes all checks
+int TMOut = TMList[Index][0];
+int PlayerTypeA = StatDEX[Dexnum][7];
+int PlayerTypeB = StatDEX[Dexnum][8];
+
+    //First check for first qualifiers, if the TM is universal, it will pass
+    if (TMList[Index][1] & TMF_UNIVERSAL) return TMOut;
+
+    //next, if the TM is for all evolved pokemon
+    if (TMList[Index][1] & TMF_EVOLVED) {if(TMR_Evolved(Dexnum)) {return TMOut;}}
+
+    //Next, Check for any matching Types
+    if(TMList[Index][2] & GrabTMType(PlayerTypeA)
+    || TMList[Index][2] & GrabTMType(PlayerTypeB)){return TMOut;}
+
+    //Lastly, check if there's a specialty rule for this move and pokemon
+    if(SpecialtyMoveRules(Dexnum,TMOut)){return TMOut;}
+
+    // All Checks failed
+    return -1;
+}
+
+
+// -=- Specialty Rules -=-
+
+//#region -=- TM Rules : Evolved
+Function int TMR_Evolved (int Dexnum)
+{
+int output = 0;
+// All Final Stage pokemon can learn this TM
+
+    Switch (Dexnum)
+    {
+        case VENUSAUR: output = 1; break;
+        case CHARIZARD: output = 1; break;
+        case BLASTOISE: output = 1; break;
+        case MEGANIUM: output = 1; break;
+        case TYPHLOSION: output = 1; break;
+        case FERALIGATR: output = 1; break;
+        case SCEPTILE: output = 1; break;
+        case BLAZIKEN: output = 1; break;
+        case SWAMPERT: output = 1; break;
+        case TORTERRA: output = 1; break;
+        case INFERNAPE: output = 1; break;
+        case EMPOLEON: output = 1; break;
+        case DRAGAPULT: output = 1; break;
+        case DRAGONITE: output = 1; break;
+        case SALAMENCE: output = 1; break;
+        case SLOWBRO: output = 1; break;
+        case SLOWKING: output = 1; break;
+        case STARMIE: output = 1; break;
+        case CLOYSTER: output = 1; break;
+        case NINETALES: output = 1; break;
+        case NINETALES_A: output = 1; break;
+        case ABOMASNOW: output = 1; break;
+        case MAMOSWINE: output = 1; break;
+        case ALAKAZAM: output = 1; break;
+        case HYPNO: output = 1; break;
+        case GARDEVOIR: output = 1; break;
+        case GALLADE: output = 1; break;
+        case EXEGGUTOR: output = 1; break;
+        case TORKOAL: output = 1; break;
+        case MAGCARGO: output = 1; break;        
+        }
+return output;
+}
+//#endregion 
+
+Function int SpecialtyMoveRules (int Dexnum, int MoveID)
+{
+int output = 0;
+
+/*
+ * This function returns of a given move has any specialty learning rules, that is to say, if pokemon outside the TM's general typing rules can learn that
+ * specific move. this is done by first checking if the given move has specialty rules, which is in the form of another function. if the rules exist then
+ * it inputs the Dex number and returns the output.
+*/
+
+    Switch (MoveID)
+    {
+        case MagicalLeaf: output = TMR_MagicalLeaf(Dexnum); break;    
+        case WaterPulse: output = TMR_WaterPulse(Dexnum); break;    
+        case Brine: output = TMR_WaterPulse(Dexnum); break;    
+        case Scald: output = TMR_WaterPulse(Dexnum); break;    
+        case Surf: output = TMR_WaterPulse(Dexnum); break;    
+        case Waterfall: output = TMR_WaterPulse(Dexnum); break;   
+        case HealPulse: output = TMR_HealPulse(Dexnum); break;    
+        case LifeDew: output = TMR_HealPulse(Dexnum); break;    
+        case Reflect: output = TMR_HealPulse(Dexnum); break;    
+        case LightScreen: output = TMR_HealPulse(Dexnum); break;    
+        case Psychic: output = TMR_Psychic(Dexnum); break;    
+        case Refresh: output = TMR_HealPulse(Dexnum); break;    
+        case Dragonrage: output = TMR_Dragonrage(Dexnum); break;    
+        case DragonPulse: output = TMR_Dragonrage(Dexnum); break;    
+        case Wideguard: output = TMR_WideGuard(Dexnum); break;    
+        case Spikes: output = TMR_WideGuard(Dexnum); break;    
+        case ToxicSpikes: output = TMR_WideGuard(Dexnum); break;    
+        case StealthRock: output = TMR_WideGuard(Dexnum); break;   
+        case ThunderWave: output = TMR_ThunderWave(Dexnum); break;   
+        case DazzlingGleem: output = TMR_DazzlingGleem(Dexnum); break; 
+        case Acrobatics: output = TMR_Acrobatics(Dexnum); break; 
+        case Rollout: output = TMR_Rollout(Dexnum); break; 
+        case GyroBall: output = TMR_Rollout(Dexnum); break; 
+        
+        
+        
+        
+    }
+return output;
+}
+
+
+//#region -=- TM Rules : MagicalLeaf -=-
+Function int TMR_MagicalLeaf (int Dexnum) 
+{
+int output = 0;
+    Switch (Dexnum)
+    {
+    case DRAKLOAK: output = 1; break;
+    case DRAGAPULT: output = 1; break;
+    }
+return output;
+}
+//#endregion
+
+//#region -=- TM Rules : WaterPulse -=-
+Function int TMR_WaterPulse (int Dexnum) 
+{
+
+    // also used for other water moves
+int output = 0;
+    Switch (Dexnum)
+    {
+    case DRATINI: output = 1; break;
+    case DRAGONAIR: output = 1; break;
+    case DRAGONITE: output = 1; break;
+    }
+return output;
+}
+//#endregion
+
+//#region -=- TM Rules : Swift -=-
+Function int TMR_Swift (int Dexnum) 
+{
+
+int output = 0;
+    Switch (Dexnum)
+    {
+    case CYNDAQUIL: output = 1; break;
+    case QUILAVA: output = 1; break;
+    case TYPHLOSION: output = 1; break;
+    case TREECKO: output = 1; break;
+    case GROVYLE: output = 1; break;
+    case SCEPTILE: output = 1; break;
+    }
+return output;
+}
+//#endregion
+
+//#region -=- TM Rules : HealPulse -=-
+Function int TMR_HealPulse (int Dexnum) 
+{
+    //Also used for most supportive moves
+int output = 0;
+    Switch (Dexnum)
+    {
+    case CHIKORITA: output = 1; break;
+    case BAYLEEF: output = 1; break;
+    case MEGANIUM: output = 1; break;
+    case DRATINI: output = 1; break;
+    case DRAGONAIR: output = 1; break;
+    case DRAGONITE: output = 1; break;
+    case RALTS: output = 1; break;
+    case KIRLIA: output = 1; break;
+    case GARDEVOIR: output = 1; break;
+    case GALLADE: output = 1; break;
+    }
+return output;
+}
+//#endregion
+
+//#region -=- TM Rules : Psychic -=-
+Function int TMR_Psychic (int Dexnum) 
+{
+
+    int output = 0;
+    Switch (Dexnum)
+    {
+    case CHIKORITA: output = 1; break;
+    case BAYLEEF: output = 1; break;
+    case MEGANIUM: output = 1; break;
+    case DRATINI: output = 1; break;
+    case DRAGONAIR: output = 1; break;
+    case DRAGONITE: output = 1; break;
+    case VULPIX_A: output = 1; break;
+    case NINETALES_A: output = 1; break;
+    }
+return output;
+}
+//#endregion
+
+//#region -=- TM Rules : ThunderWave -=-
+Function int TMR_ThunderWave (int Dexnum) 
+{
+
+    int output = 0;
+    Switch (Dexnum)
+    {
+    case DRATINI: output = 1; break;
+    case DRAGONAIR: output = 1; break;
+    case DRAGONITE: output = 1; break;
+    case VULPIX_A: output = 1; break;
+    case NINETALES_A: output = 1; break;
+    }
+return output;
+}
+//#endregion
+
+//#region -=- TM Rules : DazzlingGleem -=-
+Function int TMR_DazzlingGleem (int Dexnum) 
+{
+
+    int output = 0;
+    Switch (Dexnum)
+    {
+    case STARYU: output = 1; break;
+    }
+return output;
+}
+//#endregion
+
+//#region -=- TM Rules : DragonRage -=-
+Function int TMR_DragonRage (int Dexnum) 
+{
+    //used for other dragon moves
+    int output = 0;
+    Switch (Dexnum)
+    {
+    case CHARMANDER: output = 1; break;
+    case CHARMELEON: output = 1; break;
+    case CHARIZARD: output = 1; break;
+    case TOTODILE: output = 1; break;
+    case CROCONAW: output = 1; break;
+    case FERALIGATR: output = 1; break;
+    case TREECKO: output = 1; break;
+    case GROVYLE: output = 1; break;
+    case SCEPTILE: output = 1; break;
+    }
+return output;
+}
+//#endregion
+
+//#region -=- TM Rules : WideGuard -=-
+Function int TMR_WideGuard (int Dexnum) 
+{
+    //used for other Defensive moves
+    int output = 0;
+    Switch (Dexnum)
+    {
+    case SQUIRTLE: output = 1; break;
+    case WARTORTLE: output = 1; break;
+    case BLASTOISE: output = 1; break;
+    case CYNDAQUIL: output = 1; break;
+    case QUILAVA: output = 1; break;
+    case TYPHLOSION: output = 1; break;
+    case CHIKORITA: output = 1; break;
+    case BAYLEEF: output = 1; break;
+    case MEGANIUM: output = 1; break;
+    case SHELLDER: output = 1; break;
+    case CLOYSTER: output = 1; break;
+    case SHELGON: output = 1; break;
+    case TORKOAL: output = 1; break;
+    }
+return output;
+}
+//#endregion
+
+//#region -=- TM Rules : Acrobatics -=-
+Function int TMR_Acrobatics (int Dexnum) 
+{
+
+    int output = 0;
+    Switch (Dexnum)
+    {
+    case CHARMANDER: output = 1; break;
+    case CHARMELEON: output = 1; break;
+    case TREECKO: output = 1; break;
+    case GROVYLE: output = 1; break;
+    case SCEPTILE: output = 1; break;
+    case TORCHIC: output = 1; break;
+    case COMBUSKEN: output = 1; break;
+    case BLAZIKEN: output = 1; break;
+    case CHIMCHAR: output = 1; break;
+    case MONFERNO: output = 1; break;
+    case INFERNAPE: output = 1; break;
+    case STARYU: output = 1; break;
+    case STARMIE: output = 1; break;
+    case KIRLIA: output = 1; break;
+    case GARDEVOIR: output = 1; break;
+    case GALLADE: output = 1; break;
+    }
+return output;
+}
+//#endregion
+
+//#region -=- TM Rules : Rollout -=-
+Function int TMR_Rollout (int Dexnum) 
+{
+    //used for other rolling moves
+    int output = 0;
+    Switch (Dexnum)
+    {
+    case SQUIRTLE: output = 1; break;
+    case WARTORTLE: output = 1; break;
+    case BLASTOISE: output = 1; break;
+    case TURTWIG: output = 1; break;
+    case GROTLE: output = 1; break;
+    case TORTERRA: output = 1; break;
+    case CLOYSTER: output = 1; break;
+    case SLOWPOKE: output = 1; break;
+    case SLOWBRO: output = 1; break;
+    case SLOWKING: output = 1; break;
+    case SLUGMA: output = 1; break;
+    case MAGCARGO: output = 1; break;
+    case STARYU: output = 1; break;
+    case STARMIE: output = 1; break;
+    case SHELGON: output = 1; break;
+    case SALAMENCE: output = 1; break;
+    }
+return output;
+}
+//#endregion
+//======
+
+
+//#region -=-=-= Depreciated -=-=-=
+
 
 script "CheckTM" (int TM_TYPE, int TM_ARCH1)
 {
@@ -386,10 +805,8 @@ return output;
 }
 //#endregion 
 
-//======
 
-
-//#region -=-=-= Depreciated -=-=-=
+//====
 
 //#region -=- old TM check -=-
 script "CheckTM_Old" (int TMNum)

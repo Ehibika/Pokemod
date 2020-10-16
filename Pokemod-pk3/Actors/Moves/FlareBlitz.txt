@@ -29,6 +29,7 @@ Fire.DashWarmup:
 "####" A 0 A_GiveInventory("FlareBlitzWarmupTimer")
 "####" A 0 A_GiveInventory("DashSet_A")
 "####" A 0 A_ChangeFlag("NOGRAVITY",1)
+"####" A 0 A_GiveInventory("PKMN_WhiteFlagDropper",1) //For objective combo
 "####" A 0 A_Stop
 Fire.DashWarmup1:
 "####" A 3

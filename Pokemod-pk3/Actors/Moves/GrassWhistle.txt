@@ -101,7 +101,7 @@ stop
 //[+]========================================================================[+]
 actor GrassWhistleShot : BasicFastProjectile
 {
-Speed 85
+Speed 64
 Damage (0)
 DamageType "GrassWhistle"
 obituary "$OB_GRASSWHISTLE"

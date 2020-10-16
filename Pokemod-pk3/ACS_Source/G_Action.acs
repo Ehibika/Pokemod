@@ -12,6 +12,7 @@
 #import "Dex_Types.acs"
 #import "WEPACS.acs"
 #import "A_Stats.acs"
+#import "A_3Pcam.acs"
 #import "Dex_Leveling.acs"
 #import "Dex_BaseStats.acs"
 #include "zcommon.acs"
@@ -186,10 +187,12 @@ Str TinyBarSprite[21] = {
     script "PKMNACS_MedivisionScript" (int Weapon) CLIENTSIDE
     { 
     if(Weapon==1){str WeaponRequired = GetWeapon();}
-    int Target_TID;
+	int Target_TID;
+	int CamTID = C_TID + PlayerNumber();
+	int ViewerTID;
     int PlayersTeam;
     str TeamTag; 
-    
+	
     if(ACS_ExecuteWithResult(975,1)!=1){terminate;}
     
     Switch(PlayerTeam())
@@ -202,6 +205,9 @@ Str TinyBarSprite[21] = {
     
     while(GetActorProperty(ActivatorTID(), APROP_HEALTH) > 0 && !CheckActorInventory(ActivatorTID(),"CopyRobotUnmorphed"))
         {
+		if(cam_Setup[PlayerNumber()] == ON){ViewerTID = CamTID;}
+		else{ViewerTID = 0;}
+		
         Delay(1);
         if(Weapon==1 && StrIcmp(GetWeapon(),WeaponRequired)!=0){terminate;}
         PlayersTeam = GetPlayerInfo(ActivatorTID()-1000, PLAYERINFO_TEAM);
@@ -210,9 +216,9 @@ Str TinyBarSprite[21] = {
             Target_TID = p+1000;
             If(PlayerInGame(p)
                 && p+1000 != ActivatorTID()
-                && (xyzDistance(0,Target_TID) < 900) 
+                && (xyzDistance(ViewerTID,Target_TID) < 900) 
                 && PlayersTeam == GetPlayerInfo(p, PLAYERINFO_TEAM)
-                && Checksight(0,Target_TID,0))
+                && Checksight(ViewerTID,Target_TID,0))
                 {
                 if(CheckActorInventory(Target_TID,"CannotUseHealing")){SpawnForced(StrParam(s:TinyBarHealth(Target_TID),s:TeamTag,s:"_NoHeal"),GetActorX(Target_TID),GetActorY(Target_TID),GetActorZ(Target_TID) + (65 << 16));}
                 else{if(ConsolePlayerNumber() == PlayerNumber ()){SpawnForced(StrParam(s:TinyBarHealth(Target_TID),s:TeamTag),GetActorX(Target_TID),GetActorY(Target_TID),GetActorZ(Target_TID) + (65 << 16));}}
@@ -1149,6 +1155,7 @@ Script "PKMNACS_HealthPickup" (int Amount)
 {
 int PickupStyle = GetCvar("PKMN_SV_HPPickupStyle");
 int MaxHealth = GetActorProperty(0,APROP_SPAWNHEALTH);
+/*
 if(CheckInventory("IsSnatcher")){Amount = Amount/2;}
 switch(PickupStyle)
 	{
@@ -1162,6 +1169,7 @@ switch(PickupStyle)
 	Amount = (Amount*MaxHealth)/100;
 	break;
 	}
+*/
 ACS_NamedExecuteAlways("PKMNACS_Basic(Over)Heal",0,0,Amount);
 }
 
@@ -1261,6 +1269,7 @@ int Target_TID;
 int Target_Distance;
 int FiringPlayer;
 int PlayersTeam;
+int TargetTeam;
 int TeamGame = ACS_ExecuteWithResult(975, 1);
 Str MoveFX = strparam(s:weapons_ammo[MoveID][2],s:"HealFX");
 
@@ -1275,7 +1284,8 @@ PlayersTeam = GetPlayerInfo(FiringPlayer-1000, PLAYERINFO_TEAM);
 For(int i = 0;i < ServerMax; i++)
 	{
 	Target_TID = i+1000;
-	If(PlayerInGame(i) && xyzDistance(0,Target_TID) < HealRadius) // && FiringPlayer!=Target_TID
+	TargetTeam = GetPlayerInfo(i, PLAYERINFO_TEAM);
+	If(PlayerInGame(i) && PlayersTeam == TargetTeam && xyzDistance(0,Target_TID) < HealRadius) // && FiringPlayer!=Target_TID
 		{
 		ACS_NamedExecuteAlways("PKMNACS_HealTID",0,Target_TID,Ammount);
 		GiveActorInventory(Target_TID,MoveFX, 1);
@@ -1318,3 +1328,12 @@ script "pkmn_istargetclient" (void) CLIENTSIDE
 
 #endregion
 //#endregion
+
+Script "HasFlagBall" (void)
+{
+// For the objective combo, returns if the player is carrying the flag ball
+// this is just to avoid console errors
+
+SetResultValue(CheckInventory("WhiteFlagCarry"));
+
+}

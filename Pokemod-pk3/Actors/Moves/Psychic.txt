@@ -74,7 +74,7 @@ actor PsychicPP : Ammo {inventory.amount 1 inventory.Maxamount 5}
 
 actor PsychicRCFlag : Powerup {inventory.amount 1 powerup.duration 35 }
 
-Const int PsychicRad = 150;
+Const int PsychicRad = 175;
 Const int Psychic_Forward = 150;
 Const int Psychic_Range = 1000;
 

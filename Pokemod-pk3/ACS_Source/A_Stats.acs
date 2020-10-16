@@ -23,8 +23,8 @@
 #LIBDEFINE HPVAL3 999
 
 #LIBDEFINE ATKVAL1 1
-#LIBDEFINE ATKVAL2 100
-#LIBDEFINE ATKVAL3 400
+#LIBDEFINE ATKVAL2 50
+#LIBDEFINE ATKVAL3 800
 
 #LIBDEFINE DEFVAL1 1
 #LIBDEFINE DEFVAL2 100
@@ -160,7 +160,7 @@ Function Void StatClear (Int Mode)
     TakeInventory("Active_Speed",999);
     }
 
-    For (int s = 0; s < 1000; s++)
+    For (int s = 0; s < 1001; s++)
     {
         a = StrParam(s:"PATK",i:s);
         b = StrParam(s:"SATK",i:s);
@@ -207,7 +207,7 @@ Str StatName2[7] = {
 };
 */
 
-#LIBDEFINE STATITEMNUM 36
+#LIBDEFINE STATITEMNUM 38
 
 Str StatEffectName[STATITEMNUM][2] = {
     {"Growth","GOOD"},
@@ -246,6 +246,8 @@ Str StatEffectName[STATITEMNUM][2] = {
     {"Freeze1","BAD"},
     {"Freeze2","BAD"},
     {"AuroraBeam","BAD"},
+    {"Screech","BAD"},
+    {"Paralyze","BAD"},
 };
 
 #LIBDEFINE PATK_ID 0
@@ -292,6 +294,8 @@ Int StatEffectValue[STATITEMNUM][5] = {
 {   0,      0,      0,      0,      -1}, 
 {   0,      0,      0,      0,      -1}, 
 {   -1,      0,      0,      0,      0}, 
+{   0,      0,      -2,      0,      0}, 
+{   0,      0,      0,      0,      -2}, 
 };
 
 Int StatMulti[13] = {
@@ -441,6 +445,8 @@ else
     {
     StatValue = Noneg(ValueMap(ModStat,STATBASELINE,STATMIN,ATKVAL2,ATKVAL1));    
     }
+if(StatValue < 10){StatValue = 10;}
+if(StatValue>1000){StatValue=1000;}
 GiveInventory(StrParam(s:"PATK",i:StatValue),1);
 
 ModStat = StatModifier(CheckInventory("Active_SAttack"),SATK_ID);
@@ -453,6 +459,8 @@ else
     {
     StatValue = Noneg(ValueMap(ModStat,STATBASELINE,STATMIN,ATKVAL2,ATKVAL1));    
     }
+if(StatValue < 10){StatValue = 10;}
+if(StatValue>1000){StatValue=1000;}
 GiveInventory(StrParam(s:"SATK",i:StatValue),1);
 
 /*
@@ -479,6 +487,7 @@ else
     StatValue = Noneg(ValueMap(ModStat,STATBASELINE,STATMIN,DEFVAL2,DEFVAL3));    
     }
 if(StatValue < 10){StatValue = 10;}
+if(StatValue>1000){StatValue=1000;}
 GiveInventory(StrParam(s:"PDEF",i:StatValue),1);
 
 ModStat = StatModifier(CheckInventory("Active_SDefense"),SDEF_ID);
@@ -492,6 +501,7 @@ if(ModStat >= STATBASELINE)
     StatValue = Noneg(ValueMap(ModStat,STATBASELINE,STATMIN,DEFVAL2,DEFVAL3));    
     }
 if(StatValue < 10){StatValue = 10;}
+if(StatValue>1000){StatValue=1000;}
 GiveInventory(StrParam(s:"SDEF",i:StatValue),1);
 
 /*

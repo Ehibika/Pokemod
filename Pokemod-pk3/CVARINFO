@@ -21,7 +21,7 @@ User float SV_CameraPitch = 0.3;
 User float SV_CamPlayerAlpha = 0.75;
 
 User float sv_ZoomCameraAng = -6.0;
-User float sv_ZoomCameraHeight = -0.3;
+User float sv_ZoomCameraHeight = -0.6;
 User int sv_ZoomCameraZoom = 60;
 User float SV_ZoomCameraPitch = 0.0;
 User float SV_ZoomCamPlayerAlpha = 0.3;
@@ -47,6 +47,7 @@ user bool PKMN_CV_ProjTeamColor = true;
 server noarchive int PKMN_WarmupTime = 45;
 
 server noarchive int PKMN_StartingLevel = 1;
+server noarchive int PKMN_AllowFreeSetup = 0;
 server noarchive int PKMN_RoundLevel = 0;
 server noarchive Bool StartingLevelSet = false;
 

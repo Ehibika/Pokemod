@@ -46,7 +46,7 @@ damagefactor "ToxicSpikes", 1.0
 damagefactor "StunSpore", 1.0
 damagefactor "Confuseray", 1.0
 damagefactor "Disable", 1.0
-damagefactor "ThundeWave", 1.0
+damagefactor "ThunderWave", 1.0
 damagefactor "Supersonic", 1.0
 damagefactor "PoisonGas", 1.0
 damagefactor "DestinyBond", 1.0
@@ -491,6 +491,7 @@ damagefactor "XScissor2", 1.15 //S
 actor GhostWeakness : TypeBase
 {
     damagefactor "Astonish", 1.3 //W
+    damagefactor "Astonish2", 1.3 //W
     damagefactor "ShadowBall", 1.3 //W
     damagefactor "ShadowSneak", 1.3 //W
     damagefactor "PhantomForce", 1.3 //W
@@ -499,6 +500,7 @@ actor GhostWeakness : TypeBase
 actor Ghost2xWeakness : TypeBase
 {
     damagefactor "Astonish", 1.6 //2W
+    damagefactor "Astonish2", 1.6 //2W
     damagefactor "ShadowBall", 1.6 //2W
     damagefactor "ShadowSneak", 1.6 //2W
     damagefactor "PhantomForce", 1.6 //2W
@@ -507,6 +509,7 @@ actor Ghost2xWeakness : TypeBase
 actor GhostResistance : TypeBase
 {
     damagefactor "Astonish", 0.7 //R
+    damagefactor "Astonish2", 0.7 //R
     damagefactor "ShadowBall", 0.7 //R
     damagefactor "ShadowSneak", 0.7 //R
     damagefactor "PhantomForce", 0.7 //R
@@ -515,6 +518,7 @@ actor GhostResistance : TypeBase
 actor Ghost2xResistance : TypeBase
 {
     damagefactor "Astonish", 0.4 //2R
+    damagefactor "Astonish2", 0.4 //2R
     damagefactor "ShadowBall", 0.4 //2R
     damagefactor "ShadowSneak", 0.4 //2R
     damagefactor "PhantomForce", 0.4 //2R
@@ -523,6 +527,7 @@ actor Ghost2xResistance : TypeBase
 actor GhostImmunity : TypeBase
 {
     damagefactor "Astonish", 0.0 //I
+    damagefactor "Astonish2", 0.0 //I
     damagefactor "ShadowBall", 0.0 //I
     damagefactor "ShadowSneak", 0.0 //I
     damagefactor "PhantomForce", 0.0 //I
@@ -531,6 +536,7 @@ actor GhostImmunity : TypeBase
 actor GhostSTAB : STABBase
 {
     damagefactor "Astonish", 1.15 //S
+    damagefactor "Astonish2", 1.15 //S
     damagefactor "ShadowBall", 1.15 //S
     damagefactor "ShadowSneak", 1.15 //S
     damagefactor "PhantomForce", 1.15 //S

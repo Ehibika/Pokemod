@@ -33,7 +33,7 @@ damagefactor "StunSpore", 1.0
 
 damagefactor "Confuseray", 1.0
 damagefactor "Disable", 1.0
-damagefactor "ThundeWave", 1.0
+damagefactor "ThunderWave", 1.0
 damagefactor "Supersonic", 1.0
 damagefactor "PoisonGas", 1.0
 damagefactor "DestinyBond", 1.0
@@ -200,6 +200,7 @@ damagefactor "HeatCrash", 1.0
 
 damagefactor "Psyshock", 1.0 // Special > Physical Def
 damagefactor "Astonish", 1.0
+damagefactor "Astonish2", 1.0
 damagefactor "SuckerPunch", 1.0
 damagefactor "DragonDarts", 1.0
 damagefactor "PhantomForce", 1.0

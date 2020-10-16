@@ -1,0 +1,270 @@
+actor StunSporeMove : WepMasterBase
+{
+Tag "Stun Spore"
+Weapon.AmmoUse 1
+Weapon.AmmoGive 10
+weapon.ammotype "StunSporePP"
+scale 2.0
+Inventory.Pickupmessage "$PU_MEGABUSTER"
+States
+{
+Spawn:
+WEAP X 1
+stop
+
+
+Fire:
+"####" BBB 1 A_Jumpif(CallACS("CheckWeaponFire",RC_C)==1,"Fire.Begin")
+"####" B 0 A_Jump(256,"NoAmmo")
+Goto NoAmmo
+
+Fire.Begin:
+"####" B 0
+"####" B 0 A_Jump(256,"Fire.Aim")
+Goto Fire.Aim
+
+
+Fire.Aim:
+"####" B 1 A_FireCustomMissile("StunSporeRingSpawner",0,0,0,Aim_OverHead)
+"####" C 0 A_REfire("Fire.Aim")
+"####" B 0 A_Jump(256,"Fire.Bullet")
+Goto Fire.Bullet
+
+Fire.Bullet:
+"####" B 0 A_PlaySoundEx("Misc/UseMove","Weapon")
+"####" B 0 A_FireCustomMissile("StunSporeSpawner",0,1,0,Aim_OverHead)
+"####" B 0 A_Jump(256,"Fire.After")
+Goto Fire.After
+
+Fire.After:
+"####" B 1 A_GiveInventory("FullRecovery_C")
+"####" C 0 A_REfire("Fire")
+"####" B 0 A_Jump(256,"Fire.End")
+Goto Fire.End
+
+
+
+
+
+}
+}
+
+actor StunSporeMove1 : StunSporeMove {Weapon.SlotNumber 1}
+actor StunSporeMove2 : StunSporeMove {Weapon.SlotNumber 2}
+actor StunSporeMove3 : StunSporeMove {Weapon.SlotNumber 3}
+actor StunSporeMove4 : StunSporeMove {Weapon.SlotNumber 4}
+
+actor StunSporeMove5 : StunSporeMove 
+{
+Weapon.SlotNumber 5
+States
+{
+Fire.End:
+TNT1 A 0
+TNT1 A 0 A_TakeInventory("StunSporeMove5",9)
+TNT1 A 0 A_Jump(256,"Ready")
+Goto Ready
+}
+}
+
+//[+]========================================================================[+]
+//-----------------------------|Ammo & Inventory|------------------------------
+//[+]========================================================================[+]
+actor StunSporePP : Ammo {inventory.amount 1 inventory.Maxamount 10}
+
+
+Const int SlpPwdRad = 100;
+Const int SlpPwd_Item = 22;
+//[+]========================================================================[+]
+//--------------------------------|Projectiles |--------------------------------
+//[+]========================================================================[+]
+actor StunSporeRingGuide : BasicHelper
+{
+translation "198:198=220:220", "192:192=229:229"
+	reactiontime 15
+	var int user_angle;
+	States
+	{
+		Spawn:
+		TNT1 A 0
+		TNT1 A 0 //A_SetUserVar("user_angle", random(0, 30))
+		SpawnLoop:
+		TNT1 A 0 A_SpawnItemEx("StunSporeGuideDot", SlpPwdRad, 0, -(z-floorz)+24, 0, 0, 0, user_angle, 1061)
+		TNT1 A 0 A_SpawnItemEx("StunSporeGuideDot", -SlpPwdRad, 0, -(z-floorz)+24, 0, 0, 0, user_angle, 1061)
+		TNT1 A 0 A_SetUserVar("user_angle", user_angle + 12)
+		TNT1 A 0 A_Countdown
+		loop
+		Death:
+		TNT1 A 0
+		stop
+	}
+}
+
+
+actor StunSporeRingSpawner : BasicFastProjectile
+{
+translation "198:198=220:220", "192:192=229:229"
++DONTBLAST
++SKYEXPLODE
++THRUACTORS
++CLIENTSIDEONLY
+reactiontime 1
+damage (0)
+radius 3
+height 3
+speed 300
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 1 A_CountDown
+loop
+Death:
+TNT1 A 0 A_SpawnItemEx("StunSporeRingGuide",0,0,0,0,0,0,0,1)
+stop
+}
+}
+
+actor StunSporeGuideDot : BasicGuideDot {}
+
+actor StunSporeSpawner : BasicFastProjectile
+{
++DONTBLAST
++SKYEXPLODE
++THRUACTORS
+reactiontime 1
+damage (0)
+radius 3
+height 3
+speed 300
+States
+{
+Spawn:
+TNT1 A 0 
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+TNT1 A 1 A_CountDown
+loop
+Death:
+TNT1 A 0
+TNT1 A 0 A_GiveInventory("ProjectileDCode",1)
+TNT1 A 2
+TNT1 A 0 A_SpawnItemEx("StunSporeField",0,0,-(z-floorz)+24,0,0,0,0,SXF_TRANSFERPOINTERS|SXF_NOCHECKPOSITION)
+TNT1 A 1
+stop
+}
+}
+
+actor StunSporeField : BasicExplosion
+{
+ReactionTime 25
+Damage (0)
+DamageType "StunSpore"
+obituary "$OB_StunSpore"
+states
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+TNT1 A 0 A_SpawnItemEx("StunSporeRing1",0,0,0,0,0,0,0,SXF_TRANSFERTRANSLATION)
+TNT1 A 7 
+TNT1 A 0 
+TNT1 A 0 A_SpawnItemEx("StunSporeRing2",0,0,0,0,0,0,0,SXF_TRANSFERTRANSLATION)
+TNT1 AAAAA 1 ACS_NamedExecuteAlways("PKMNACS_RadiusGive",0,SlpPwd_Item,SlpPwdRad+25,RG_ENEMY)
+TNT1 A 5
+stop 
+
+Death:
+TNT1 A 1 
+stop
+}
+}
+
+actor StunSporeRing1 : GravityHoldFX
+{
+	reactiontime 15
+	var int user_angle;
+	States
+	{
+		Spawn:
+		TNT1 A 0
+		TNT1 A 0 A_GiveInventory("ProjectileCodeSyncTarget",1)
+		TNT1 A 1
+		SpawnLoop:
+		TNT1 A 0 A_SpawnItemEx("StunSporeFx1", SlpPwdRad-random(0,40), 0, random(130,160), 0, 0, random(-15,-8), user_angle, SXF_TRANSFERTRANSLATION) //1061
+		TNT1 A 0 A_SpawnItemEx("StunSporeFx1", -SlpPwdRad-random(0,40), 0, random(130,160), 0, 0, random(-15,-8), user_angle, SXF_TRANSFERTRANSLATION)
+		TNT1 A 0 A_SetUserVar("user_angle", user_angle + 12)
+		TNT1 A 0 A_Countdown
+		loop
+		Death:
+		TNT1 A 0
+		stop
+	}
+}
+
+actor StunSporeRing2 : GravityHoldFX
+{
+	reactiontime 15
+	var int user_angle;
+	RenderStyle "Translucent"
+	States
+	{
+		Spawn:
+		TNT1 A 0
+		TNT1 A 0 A_GiveInventory("ProjectileCodeSyncTarget",1)
+		TNT1 A 1
+		SpawnLoop:
+		TNT1 A 0 A_SpawnItemEx("StunSporeFx2", SlpPwdRad, 0, -(z-floorz)+24, 5, 0, 0, user_angle, SXF_TRANSFERTRANSLATION)
+		TNT1 A 0 A_SpawnItemEx("StunSporeFx2", -SlpPwdRad, 0, -(z-floorz)+24, -5, 0, 0, user_angle, SXF_TRANSFERTRANSLATION)
+		TNT1 A 0 A_SetUserVar("user_angle", user_angle + 12)
+		TNT1 A 0 A_Countdown
+		loop
+		Death:
+		TNT1 A 0 
+		stop
+	}
+}
+
+actor StunSporeFx1 : BasicClientside
+{
++NOCLIP
+scale 1.5
+RenderStyle "Translucent"
+Alpha 0.1
+States
+{
+Spawn:
+TNT1 A 0 
+PSPD C 2 A_Fadein(0.2)
+PSPD C 0 A_ScaleVelocity(0.8)
+PSPD C 2 A_Fadein(0.2)
+PSPD C 0 A_ScaleVelocity(0.8)
+PSPD C 2 A_Fadein(0.2)
+PSPD C 0 A_ScaleVelocity(0.8)
+PSPD C 2 A_Fadein(0.2)
+PSPD C 0 A_ScaleVelocity(0.8)
+PSPD C 2 A_Fadein(0.2)
+PSPD C 0 A_ScaleVelocity(0.8)
+PSPD C 10 
+Goto Death
+
+Death:
+PSPD CCCCC 4 A_Fadeout
+stop
+}
+}
+
+actor StunSporeFx2 : BasicClientside
+{
+scale 1.5
+RenderStyle "Translucent"
+Alpha 0.6
+States
+{
+Spawn:
+TNT1 A 0 
+TNT1 A random(1,8)
+PSMS ABC 3 A_ScaleVelocity(0.6)
+PSMS DEF 3
+stop
+}
+}

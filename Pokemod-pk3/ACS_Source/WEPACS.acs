@@ -331,7 +331,7 @@ str weapons_ammo[MAX_WEAPONS_GLOBAL][7] =
 {"DragonDartsMove", "DragonDartsPP", "DragonDarts", 1.0, "NO", "NO", "SLOT_NONE"},
 {"PhantomForceMove", "PhantomForcePP", "PhantomForce", 1.0, "NO", "NO", "SLOT_NONE"},
 {"DracoMeteorMove", "DracoMeteorPP", "DracoMeteor", 1.0, "NO", "NO", "SLOT_NONE"},
-{"ThundeWaveMove", "ThundeWavePP", "ThundeWave", 1.0, "NO", "NO", "SLOT_NONE"},
+{"ThunderWaveMove", "ThunderWavePP", "ThunderWave", 1.0, "NO", "NO", "SLOT_NONE"},
 {"TwisterMove", "TwisterPP", "Twister", 1.0, "NO", "NO", "SLOT_NONE"},
 {"WrapMove", "WrapPP", "Wrap", 1.0, "NO", "NO", "SLOT_NONE"},
 {"BarrierMove", "BarrierPP", "Barrier", 1.0, "NO", "NO", "SLOT_NONE"},
@@ -397,12 +397,12 @@ str weapons_ammo[MAX_WEAPONS_GLOBAL][7] =
 {"CharmMove", "CharmPP", "Charm", 1.0, "NO", "NO", "SLOT_NONE"},
 {"DrainingKissMove", "DrainingKissPP", "DrainingKiss", 1.0, "NO", "NO", "SLOT_NONE"},
 {"ImprisonMove", "ImprisonPP", "Imprison", 1.0, "NO", "NO", "SLOT_NONE"},
-{"WishMove", "WishPP", "Wish", 1.0, "NO", "NO", "SLOT_NONE"},
+{"WishMove", "WishPP", "Wish", 1.0, "NO", "YES", "SLOT_NONE"},
 {"StoredPowerMove", "StoredPowerPP", "StoredPower", 1.0, "NO", "NO", "SLOT_NONE"},
-{"HealingWishMove", "HealingWishPP", "HealingWish", 1.0, "NO", "NO", "SLOT_NONE"},
+{"HealingWishMove", "HealingWishPP", "HealingWish", 1.0, "NO", "YES", "SLOT_NONE"},
 {"MoonblastMove", "MoonblastPP", "Moonblast", 1.0, "NO", "NO", "SLOT_NONE"},
 {"EggBombMove", "EggBombPP", "EggBomb", 1.0, "NO", "NO", "SLOT_NONE"},
-{"MoonlightMove", "MoonlightPP", "Moonlight", 1.0, "NO", "NO", "SLOT_NONE"},
+{"MoonlightMove", "MoonlightPP", "Moonlight", 1.0, "NO", "YES", "SLOT_NONE"},
 {"UproarMove", "UproarPP", "Uproar", 1.0, "NO", "NO", "SLOT_NONE"},
 {"WorrySeedMove", "WorrySeedPP", "WorrySeed", 1.0, "NO", "NO", "SLOT_NONE"},
 {"IngrainMove", "IngrainPP", "Ingrain", 1.0, "NO", "NO", "SLOT_NONE"},
@@ -1030,6 +1030,7 @@ Function bool CheckWeaponFireFunc(int RecoveryType)
 {
 	if(CheckInventory("SpawnInBuffer")>0) return false;
 	if(CheckInventory("FatigueMark")>0) return false;
+	if(CheckInventory("CringeMark")>0) return false;
 
 if(((RecoveryType&RC_A)>0) && (CheckInventory("Recovery_A")>0)) return false;
 if(((RecoveryType&RC_B)>0) && (CheckInventory("Recovery_B")>0)) return false;
@@ -1039,6 +1040,9 @@ int ThisWeapon = WhichWeapon();
 str WepAmmoName = weapons_ammo[ThisWeapon][1];
 
 if(CheckInventory(WepAmmoName)<1) return false;
+
+if(CheckInventory("DisableMark"))
+	{if(CheckInventory("DisableFlag") == ThisWeapon){return false;}}
 
 if(CheckInventory("HazedFlagEnemy"))
     {switch(ThisWeapon) {
@@ -1061,6 +1065,31 @@ if(CheckInventory("SleepMark"))
     {switch(ThisWeapon) {
         Case REST: break;
         default: return false; break;
+    }
+}
+
+if(CheckInventory("ParalysisMark"))
+    {switch(ThisWeapon) {
+		Case QuickAttack: ACS_Execute(979,0); return false;
+		Case DoubleEdge: acs_execute(979,0); return false;
+		Case HeadButt: acs_execute(979,0); return false;
+		Case ZenHeadbutt: acs_execute(979,0); return false;
+		Case FlareBlitz: acs_execute(979,0); return false;
+		Case DragonRush: acs_execute(979,0); return false;
+		Case Rollout: acs_execute(979,0); return false;
+		Case GyroBall: acs_execute(979,0); return false;
+		Case FlameWheel: acs_execute(979,0); return false;
+		Case MachPunch: acs_execute(979,0); return false;
+		Case AquaJet: acs_execute(979,0); return false;
+		Case Waterfall: acs_execute(979,0); return false;
+		Case Liquidation: acs_execute(979,0); return false;
+		Case Dive: acs_execute(979,0); return false;
+		Case PhantomForce: acs_execute(979,0); return false;
+		Case SkyUppercut: acs_execute(979,0); return false;
+		Case HiJumpKick: acs_execute(979,0); return false;
+		Case Pursuit: acs_execute(979,0); return false;
+		Case Acrobatics: acs_execute(979,0); return false;
+		Case BraveBird: acs_execute(979,0); return false;
     }
 }
 

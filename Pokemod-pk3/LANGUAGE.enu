@@ -427,7 +427,7 @@ OB_SUCKERPUNCH = "%k Defeated %o using SUCKERPUNCH!";
 OB_DRAGONDARTS = "%k Defeated %o using DRAGONDARTS!";
 OB_PHANTOMFORCE = "%k Defeated %o using PHANTOMFORCE!";
 OB_DRACOMETEOR = "%k Defeated %o using DRACOMETEOR!";
-OB_THUNDEWAVE = "%k Defeated %o using THUNDEWAVE!";
+OB_ThunderWave = "%k Defeated %o using ThunderWave!";
 OB_TWISTER = "%k Defeated %o using TWISTER!";
 OB_WRAP = "%k Defeated %o using WRAP!";
 OB_BARRIER = "%k Defeated %o using BARRIER!";
@@ -2559,8 +2559,8 @@ M167_POWER = "\cfPower:\cj --";
 M167_DESC = "\cf<Desc>";
 //#endregion
 
-//#region -=- 168: ThundeWave -=-
-M168_NAME = "\cj ThundeWave";
+//#region -=- 168: ThunderWave -=-
+M168_NAME = "\cj ThunderWave";
 M168_TYPE = "\cj <Type>";
 M168_CATEGORY = "\cf <Category>";
 M168_POWER = "\cfPower:\cj --";

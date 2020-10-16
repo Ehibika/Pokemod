@@ -73,7 +73,7 @@ actor Ember_Recovery_A : FullRecovery_A{Powerup.Duration 10}
 //[+]========================================================================[+]
 actor EmberFireball : BasicProjectile
 {
-Speed 65
+Speed 64
 Damage (MBP_Ember)
 DamageType "Ember"
 obituary "$OB_EMBER"

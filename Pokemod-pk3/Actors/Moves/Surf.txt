@@ -33,7 +33,7 @@ Goto Fire.Bullet
 
 Fire.Bullet:
 "####" A 0 ACS_NamedExecuteAlways("TakePP",0,Move_Surf,1)
-"####" B 0 A_PlaySoundEx("weapon/WaterBalloon","Weapon")
+"####" B 0 A_PlaySoundEx("Misc/UseMove","Weapon")
 "####" B 5 A_SpawnItemEx("SurfWaveSpawner",0,0,-(z-floorz),momx,momy,momz,0,SXF_AbsoluteMomentum)
 "####" B 0 A_Jump(256,"Fire.After")
 Goto Fire.After

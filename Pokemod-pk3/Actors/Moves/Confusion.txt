@@ -74,7 +74,7 @@ actor ConfusionPP : Ammo {inventory.amount 1 inventory.Maxamount 15}
 
 actor ConfusionRCFlag : Powerup {inventory.amount 1 powerup.duration 35 }
 
-Const int ConfusionRad = 75;
+Const int ConfusionRad = 150;
 Const int Confusion_Forward = 150;
 Const int Confusion_Range = 750;
 

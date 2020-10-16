@@ -224,7 +224,7 @@ scale 2.5
 damage (0)
 +FORCEXYBILLBOARD
 speed 45
-reactiontime 1
+reactiontime 3
 Args 0
 States
 {

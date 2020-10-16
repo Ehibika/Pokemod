@@ -1,0 +1,186 @@
+/*
+Model StoneCube
+{
+Path "models"
+Model 0 "BLOCK.md2"
+Skin 0 "BLOCFULL.png"
+scale 0.5 0.5 0.6
+zoffset 8
+FrameIndex BRBK E 0 0
+}
+
+
+//=====
+Model StoneCubeB
+{
+Path "models"
+Model 0 "BLOCK.md2"
+Skin 0 "BLOCFULL.png"
+scale 0.5 0.5 0.6
+zoffset 8
+FrameIndex BRBK E 0 0
+}
+Model StoneCubeR
+{
+
+Path "models"
+Model 0 "BLOCK.md2"
+Skin 0 "BLOCFULL.png"
+scale 0.5 0.5 0.6
+zoffset 8
+FrameIndex BRBK E 0 0
+}
+*/
+
+
+Model StoneCube
+{
+Path "models"
+Model 0 "BLOCK.md2"
+Skin 0 "BARBLK1.png"
+scale 0.5 0.5 0.6
+zoffset 8
+FrameIndex PSBK A 0 0
+}
+
+Model StoneCube
+{
+Path "models"
+Model 0 "BLOCK.md2"
+Skin 0 "BARBLK2.png"
+scale 0.5 0.5 0.6
+zoffset 8
+FrameIndex PSBK B 0 0
+}
+
+Model StoneCube
+{
+Path "models"
+Model 0 "BLOCK.md2"
+Skin 0 "BARBLK3.png"
+scale 0.5 0.5 0.6
+zoffset 8
+FrameIndex PSBK C 0 0
+}
+
+//===
+Model StoneCubeB
+{
+Path "models"
+Model 0 "BLOCK.md2"
+Skin 0 "BARBLK1.png"
+scale 0.5 0.5 0.6
+zoffset 8
+FrameIndex PSBK A 0 0
+}
+
+Model StoneCubeB
+{
+Path "models"
+Model 0 "BLOCK.md2"
+Skin 0 "BARBLK2.png"
+scale 0.5 0.5 0.6
+zoffset 8
+FrameIndex PSBK B 0 0
+}
+
+Model StoneCubeB
+{
+Path "models"
+Model 0 "BLOCK.md2"
+Skin 0 "BARBLK3.png"
+scale 0.5 0.5 0.6
+zoffset 8
+FrameIndex PSBK C 0 0
+}
+//====
+Model StoneCubeR
+{
+Path "models"
+Model 0 "BLOCK.md2"
+Skin 0 "BARBLK1.png"
+scale 0.5 0.5 0.6
+zoffset 8
+FrameIndex PSBK A 0 0
+}
+
+Model StoneCubeR
+{
+Path "models"
+Model 0 "BLOCK.md2"
+Skin 0 "BARBLK2.png"
+scale 0.5 0.5 0.6
+zoffset 8
+FrameIndex PSBK B 0 0
+}
+
+Model StoneCubeR
+{
+Path "models"
+Model 0 "BLOCK.md2"
+Skin 0 "BARBLK3.png"
+scale 0.5 0.5 0.6
+zoffset 8
+FrameIndex PSBK C 0 0
+}
+//====
+Model StoneCubeG
+{
+Path "models"
+Model 0 "BLOCK.md2"
+Skin 0 "BARBLK1.png"
+scale 0.5 0.5 0.6
+zoffset 8
+FrameIndex PSBK A 0 0
+}
+
+Model StoneCubeG
+{
+Path "models"
+Model 0 "BLOCK.md2"
+Skin 0 "BARBLK2.png"
+scale 0.5 0.5 0.6
+zoffset 8
+FrameIndex PSBK B 0 0
+}
+
+Model StoneCubeG
+{
+Path "models"
+Model 0 "BLOCK.md2"
+Skin 0 "BARBLK3.png"
+scale 0.5 0.5 0.6
+zoffset 8
+FrameIndex PSBK C 0 0
+}
+
+//====
+Model StoneCubeY
+{
+Path "models"
+Model 0 "BLOCK.md2"
+Skin 0 "BARBLK1.png"
+scale 0.5 0.5 0.6
+zoffset 8
+FrameIndex PSBK A 0 0
+}
+
+Model StoneCubeY
+{
+Path "models"
+Model 0 "BLOCK.md2"
+Skin 0 "BARBLK2.png"
+scale 0.5 0.5 0.6
+zoffset 8
+FrameIndex PSBK B 0 0
+}
+
+Model StoneCubeY
+{
+Path "models"
+Model 0 "BLOCK.md2"
+Skin 0 "BARBLK3.png"
+scale 0.5 0.5 0.6
+zoffset 8
+FrameIndex PSBK C 0 0
+}

@@ -1,0 +1,276 @@
+actor MoonblastMove : WepMasterBase
+{
+Tag "Moonblast"
+obituary "$OB_MOONBLAST"
+Weapon.AmmoUse 1
+Weapon.AmmoGive 20
+weapon.ammotype "MoonblastPP"
+scale 2.0
+Inventory.Pickupmessage "$PU_MEGABUSTER"
+States
+{
+Spawn:
+WEAP X 1
+stop
+
+
+Fire:
+"####" BBB 1 A_Jumpif(CallACS("CheckWeaponFire",RC_A)==1,"Fire.Begin")
+"####" B 0 A_Jump(256,"NoAmmo")
+Goto NoAmmo
+
+Fire.Begin:
+"####" B 0
+"####" B 0 A_Jump(256,"Fire.Pre")
+Goto Fire.Pre
+
+Fire.Pre:
+"####" B 1 A_SpawnItemEX("MoonblastMoonFX",1)
+"####" B 0 A_GiveInventory("MoonBlastPreFire",1)
+"####" B 0 A_PlaySoundEx("weapon/chargeup","Weapon")
+Fire.Pre2:
+"####" BB 1 A_GiveInventory("MoonblastFXGive1",1)
+"####" BB 1 A_GiveInventory("MoonblastFXGive2",1)
+"####" B 1 A_JumpIfInventory("MoonBlastPreFire",1,"Fire.Pre2")
+Goto Fire.Bullet
+Fire.Bullet:
+"####" B 0 A_PlaySoundEx("weapon/cfire","Weapon")
+"####" B 0 A_FireCustomMissile("MoonblastShot",0,1,0,0)
+"####" B 0 A_Jump(256,"Fire.After")
+Goto Fire.After
+
+Fire.After:
+"####" B 1 A_GiveInventory("HalfRecovery_A")
+//Fire.After2:
+//"####" B 0 A_GiveInventory("5Recovery_A")
+"####" B 0 A_TakeInventory("WeaponCharge",999)
+"####" B 0 A_TakeInventory("ChannelingSpeed",9) 
+"####" B 0 A_Jump(256,"Fire.End")
+Goto Fire.End
+
+
+
+
+
+}
+}
+
+actor MoonblastMove1 : MoonblastMove {Weapon.SlotNumber 1}
+actor MoonblastMove2 : MoonblastMove {Weapon.SlotNumber 2}
+actor MoonblastMove3 : MoonblastMove {Weapon.SlotNumber 3}
+actor MoonblastMove4 : MoonblastMove {Weapon.SlotNumber 4}
+
+actor MoonblastMove5 : MoonblastMove 
+{
+Weapon.SlotNumber 5
+States
+{
+Fire.End:
+TNT1 A 0
+TNT1 A 0 A_TakeInventory("MoonblastMove5",9)
+TNT1 A 0 A_Jump(256,"Ready")
+Goto Ready
+}
+}
+
+//[+]========================================================================[+]
+//-----------------------------|Ammo & Inventory|------------------------------
+//[+]========================================================================[+]
+actor MoonblastPP : Ammo {inventory.amount 1 inventory.Maxamount 20}
+
+actor MoonBlastPreFire : Powerup {inventory.amount 1 Powerup.Duration 17}
+
+//[+]========================================================================[+]
+//--------------------------------|Projectiles |--------------------------------
+//[+]========================================================================[+]
+actor MoonblastShot : BasicFastProjectile
+{
+Speed 64
+Damage (MBP_Moonblast)
+DamageType "Moonblast"
+obituary "$OB_Moonblast"
+Reactiontime 10
+radius 12
+height 16
+scale 3.5
+States
+{
+Spawn:
+TNT1 A 0 
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+Spawn2:
+TNT1 A 0 
+CHBU ABCD 1 A_SpawnItemEx("MoonblastFXSpawn",0,0,0,0,0,0,0,1)
+TBLA A 0 
+TBLA A 0 A_Countdown
+loop
+
+Death:
+TNT1 A 0 A_GiveInventory("ProjectileDCode",1)
+TNT1 A 0 A_SpawnItemEx("MoonblastImpact",0,0,0,0,0,0,0,1)
+TNT1 A 8
+stop
+}
+}
+
+
+
+//[+]========================================================================[+]
+//--------------------------------|Special Actors|------------------------------
+//[+]========================================================================[+]
+
+actor MoonblastParticle1 : BasicClientside
+{
+scale 1.6
+speed 7
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+TNT1 A random(0,3)
+CHBU GGFFEE 2 A_ScaleVelocity(0.8)
+stop
+}
+}
+
+actor MoonblastParticle2 : BasicClientside
+{
+scale 2.2
+Renderstyle "Add"
+speed 7
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+TNT1 A random(0,3)
+CHBU GGFFEE 2 A_ScaleVelocity(0.8)
+stop
+}
+}
+
+actor MoonblastImpact : BasicClientside
+{
+scale 2.2
+renderstyle "Normal"
+speed 7
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+BSTG AAAAAA 0 A_SpawnItemEx("MoonblastParticle1", 0, 0, 0, 10, 10, random2(10), random(0, 359),1)
+BSTG AAAAAA 0 A_SpawnItemEx("MoonblastParticle2", 0, 0, 0, 10, 10, random2(10), random(0, 359),1)
+BSTG AAAAAA 0 A_SpawnItemEx("FlashCannonSparkle", 0, 0, 0, 10, 10, random2(10), random(0, 359),1)
+PHAS LMNO 2 
+stop
+}
+}
+
+
+actor MoonblastFXGive1 : CustomInventory
+{
+inventory.amount 1
+inventory.maxamount 1
++AUTOACTIVATE
+states
+{
+Spawn:
+TNT1 A 1
+loop
+Use:
+TNT1 A 0 A_SpawnItemEx("MoonblastFX1",25*cos(0),0,35+(sin(Pitch)*-height),MomX,MomY,MomZ,0,SXF_TRANSFERPITCH|SXF_TRANSFERTRANSLATION)
+stop
+}
+}
+
+
+actor MoonblastFXGive2 : CustomInventory
+{
+inventory.amount 1
+inventory.maxamount 1
++AUTOACTIVATE
+states
+{
+Spawn:
+TNT1 A 1
+loop
+Use:
+TNT1 A 0 A_SpawnItemEx("MoonblastFX2",25*cos(0),0,35+(sin(Pitch)*-height),MomX,MomY,MomZ,0,SXF_TRANSFERPITCH|SXF_TRANSFERTRANSLATION)
+stop
+}
+}
+
+
+actor MoonblastFX1 : PharaohFX1
+{
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+CHBU E 2
+stop
+}
+}
+
+actor MoonblastFX2 : PharaohFX1
+{
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+CHBU F 2
+stop
+}
+}
+
+
+actor MoonblastFXSpawn : PharaohFX1
+{
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+TNT1 A 0 A_SpawnItemEx("MoonblastParticle1",random2(15),random2(15),random2(15),0,0,0,0,1)
+TNT1 A 0 A_SpawnItemEx("MoonblastParticle2",random2(15),random2(15),random2(15),0,0,0,0,1)
+TNT1 A 0 A_SpawnItemEx("FlashCannonSparkle",random2(15),random2(15),random2(15),0,0,0,0,1)
+TNT1 A 1
+stop
+}
+}
+
+actor MoonblastMoonFX : BasicClientside
+{
+scale 1.0
+Renderstyle "Translucent"
+Alpha 0.1
+speed 7
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 //A_PlaySoundEx("misc/astroplatformraise","Soundslot6")
+TNT1 A 1 A_Warp(AAPTR_TARGET,0,0,96,0,WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE)
+TNT1 A 0 A_FadeIn(0.2)
+MOON C 1 A_Warp(AAPTR_TARGET,0,0,96,0,WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE)
+TNT1 A 0 A_FadeIn(0.2)
+MOON C 1 A_Warp(AAPTR_TARGET,0,0,96,0,WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE)
+TNT1 A 0 A_FadeIn(0.2)
+MOON C 1 A_Warp(AAPTR_TARGET,0,0,96,0,WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE)
+TNT1 A 0 A_FadeIn(0.2)
+MOON CCCCCCCCCC 1 A_Warp(AAPTR_TARGET,0,0,96,0,WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE)
+TNT1 A 0 A_FadeOut(0.2)
+MOON C 1 A_Warp(AAPTR_TARGET,0,0,96,0,WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE)
+TNT1 A 0 A_FadeOut(0.2)
+MOON C 1 A_Warp(AAPTR_TARGET,0,0,96,0,WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE)
+TNT1 A 0 A_FadeOut(0.2)
+MOON C 1 A_Warp(AAPTR_TARGET,0,0,96,0,WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE)
+TNT1 A 0 A_FadeOut(0.2)
+MOON C 1 A_Warp(AAPTR_TARGET,0,0,96,0,WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE)
+stop
+}
+}

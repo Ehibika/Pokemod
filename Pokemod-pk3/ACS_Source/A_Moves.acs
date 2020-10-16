@@ -419,15 +419,33 @@ Script "SubstituteActive" (int Dist)
 {
     int Player = ACS_NamedExecuteWithResult("core_gettarget",0);
     Int DollTID = ActivatorTID();
+    Int DollState = 0;
+    int DollNewState = 0;
 	
 	// Loop if shield is active
 	while(GetActorProperty(0, APROP_HEALTH)>0 && GetActorProperty(Player, APROP_HEALTH)>0){
         //log(i:xyzDistance(0,Player),s:"   ",i:Dist);
-        if(CheckSight(0,Player,0) && xyzDistance(0,Player) < Dist)
+        if(CheckSight(DollTID,Player,0) && xyzDistance(DollTID,Player) < Dist)
             {
-            //GiveInventory("SubstituteGuardianItem",1);
-            GiveActorInventory(Player,"SubstituteGuardGiver",1);
-            SpawnProjectile(DollTID,"SubstituteLinkFX",10,0,0,0,0);
+               //GiveActorInventory(DollTID,"SubstituteFunction_A",1);
+               //SpawnProjectile(1, "SubstituteLinkFX", 0, 20, 0, 0, 0);
+            //if(CheckActorInventory(Player,"SubGuard"))GiveActorInventory(Player,"SubstituteGuardGiver_B",1);
+           // else GiveActorInventory(Player,"SubstituteGuardGiver_A",1);
+           DollNewState = 1;
+            }
+            else {DollNewState = 0;}
+
+            if(DollState != DollNewState)
+            {
+
+                //Switch(DollNewState)
+                //    {
+                //        Case 0: SetActorState(DollTID,"Spawn.Basic",0); Break;
+                //        Case 1: SetActorState(DollTID,"Spawn.Linked",0); Break;
+                //    }
+                SetUserVariable(DollTID,"User_DecoyState",DollNewState);
+                 DollState = DollNewState;
+                 
             }
 		Delay(1);
     }
@@ -442,7 +460,7 @@ Script "SubstituteBarrierWarper" (void) CLIENTSIDE
 	
 	// Loop if shield is active
 	while(GetActorProperty(Player, APROP_HEALTH)>0
-	&& CheckActorInventory(Player, "SubstituteGuard") > 0
+	&& CheckActorInventory(Player, "SubGuard") > 0
 	){
 		Delay(1);
 	}
@@ -482,7 +500,7 @@ if(CheckInventory("SleepMark")
 
 if(CheckInventory("ProtectGuard")
 ||CheckInventory("DetectGuard")
-||CheckInventory("SubstituteGuard"))
+||CheckInventory("SubGuard"))
 {Output = Output | STATUS_MAJOR | STATUS_MINOR | STATUS_STATS;}
 
     if(CheckInventory("SafeguardPower"))
@@ -502,3 +520,75 @@ Script "InfernoPowerLevel" (int MaxDamage)
     int Output = ((MaxDamage*CurrentPower)/100);
     SetResultValue(Output);
 }
+
+Script "DisableEffect" (Void)
+{
+int ThisWeapon = WhichWeapon();
+TakeInventory("DisableFlag",999);
+GiveInventory("DisableFlag",ThisWeapon);
+}
+
+Script "IsMoveDisabled" (Void)
+{
+
+//used so that you get an error sound when attempting to use a disabled move
+
+int ThisWeapon = WhichWeapon();
+int Output;
+
+if(CheckInventory("DisableFlag") == ThisWeapon){Output = 1;}
+SetResultValue(Output);
+}
+
+
+#DEFINE BARRIERTID 390000 // 37| Owner TID
+
+script "BarrierBlockTID" (void)
+{
+    int OwnerTID = ACS_NamedExecuteWithResult("core_gettarget",0);
+    int WallTID = BARRIERTID+OwnerTID;
+
+    if(IsTIDUsed(WallTID))
+    {
+        until(!IsTIDUsed(WallTID)){/*SpawnSpotForced("SubPoofFXSpawn",WallTID,0,0);*/ Thing_remove(WallTID);}
+    }
+    Thing_ChangeTID(0,WallTID);
+}
+
+Script "BarrierStatGrab" (int WallTID)
+{
+
+    int OwnerTID = ACS_NamedExecuteWithResult("core_gettarget",0);
+    int OwnerMaxHP = GetActorProperty(OwnerTID, APROP_SPAWNHEALTH);
+    int StatValue;
+    int ModStat;
+
+    //Log(i:SubsHP);
+
+
+
+    GiveInventory(StrParam(s:"PDEF",i:100),1);
+    GiveInventory(StrParam(s:"SDEF",i:100),1);
+
+    ModStat = CheckActorInventory(OwnerTID,"Active_PAttack");
+
+if(ModStat >= STATBASELINE)
+    {
+    StatValue = Noneg(ValueMap(ModStat,STATMAX,STATBASELINE,50,200));
+    }
+else
+    {
+    StatValue = Noneg(ValueMap(ModStat,STATBASELINE,STATMIN,50,10));    
+    }
+if(StatValue < 10){StatValue = 10;}
+
+SetActorProperty(0,APROP_SPAWNHEALTH,StatValue);
+SetActorProperty(0,APROP_HEALTH,StatValue);
+
+SetUserVariable(0,"User_HPR1",(StatValue/4)*3);
+SetUserVariable(0,"User_HPR2",StatValue/2);
+//SetActorProperty(0,APROP_SPECIES,GetActorProperty(OwnerTID,APROP_SPECIES));
+//ACS_NamedExecuteAlways("ConsoleSpeciesSynch",0);
+
+}
+

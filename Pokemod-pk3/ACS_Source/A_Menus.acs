@@ -12,15 +12,17 @@
 #Import "Dex_Movesets.acs"
 #Import "Dex_Evo.acs."
 #Import "Dex_Skin.acs."
+#Import "Dex_TM.acs."
 #Import "DB_Data.acs"
 #Import "A_Leveling.acs"
-
-//#region -=- Move Learning
-#region -=- Move Learning
 
 #define MNL 8.0 //menu line spacing
 #define MenuXOrigin 120.1
 #define MenuYOrigin 80.1
+int PastMenuSize;
+
+//#region -=- Move Learning
+#region -=- Move Learning
 
 Script "PromptMoveLearn" (int Moveid, int MoveCost)
 {
@@ -81,7 +83,7 @@ Bool MenuUp = true;
 //=======================[+]
 setplayerproperty(0,1,4);
 GiveInventory("SpawnSafeZone",1);
-DrawMenuFrame(MenuX-(8.0*3),MenuY-(8.0*0),15,10);
+DrawMenuFrame(MenuX-(8.0*3),MenuY-(8.0*0),15,10,0);
 while(MenuUp)
 	{
 	MenuStates = MenuNextState;
@@ -198,6 +200,8 @@ int WepRepo2;
 int MenuX = MenuXOrigin;
 int Menuy = MenuYOrigin;
 int slot;
+int Safewep;
+int SafeSlot;
 int Move1 = -1,Move2 = -1,Move3 = -1,Move4 = -1;
 str Str1 = "----",Str2 = "----",Str3 = "----",Str4 = "----";
 str WepName;
@@ -237,7 +241,7 @@ Bool MenuUp = true;
 	GiveInventory("SpawnSafeZone",1);
 while(MenuUp)
 {		
-	DrawMenuFrame(MenuX-(8.0*3),MenuY-(8.0*0),15,10);
+	DrawMenuFrame(MenuX-(8.0*3),MenuY-(8.0*0),15,10,0);
 	SetHudSize(320,200,0);
 	SetFont("STCFN");
 	MenuStates = MenuNextState;
@@ -319,8 +323,18 @@ while(MenuUp)
 	* the values within "Move1" and "Move3"
 	*
 	* I'll store the appropriate Wep values in "WepRepo1" and "WepRepo2"
+	*
+	*
+	* but first, let's switch the player over to a safe weapon, one that isn't being moved.
 	* -=-=-=-=-=-=-
 	*/ 
+
+	if(WepToMove!=Move4 && ChoiceID!=Move4){Safewep = Move4; SafeSlot = 4;}
+	if(WepToMove!=Move3 && ChoiceID!=Move3){Safewep = Move3; SafeSlot = 3;}
+	if(WepToMove!=Move2 && ChoiceID!=Move2){Safewep = Move2; SafeSlot = 2;}
+	if(WepToMove!=Move1 && ChoiceID!=Move1){Safewep = Move1; SafeSlot = 1;}
+	SetWeapon(StrParam(s:weapons_ammo[Safewep][0],i:SafeSlot));
+
 	switch(WepToMove)
 	{
 		Case 0: WepRepo1 = Move1; TakeInventory(StrParam(s:weapons_ammo[Move1][0],i:WepToMove+1),99);break;
@@ -488,7 +502,7 @@ while (MenuUp) {
 
 		if (MoveListCount <= 0) {print(s: "No moves to learn"); break;} //MenuUp = false;
 		else {
-			if(!BGUp){DrawMenuFrame(MenuX-(8.0*3),MenuY-(8.0*0),15,6+MoveFrameCap); BGup = True;}
+			if(!BGUp){DrawMenuFrame(MenuX-(8.0*3),MenuY-(8.0*0),15,6+MoveFrameCap,0); BGup = True;}
 			ChoiceCap = MoveListCount;
 			if(MoveListCount>6)
 			{
@@ -545,6 +559,202 @@ if(LearnMove > -1)
 		{InputButtons = GetPlayerInput(-1, INPUT_BUTTONS); Delay(1); InputOldButtons = InputButtons;}
 		ACS_NamedExecuteAlways("PromptMoveLearn",0,LearnMove);
 		GiveInventory("SaveMovesetFlag",1);
+	}
+else{Delay(17);setplayerproperty(0,0,4);}
+}
+#endregion
+//#endregion
+
+//#region -=- TM Shop
+#region -=- TM Shop
+
+int TMMoveCache[64][MAXTMLIST];
+int TMNumCache[64][MAXTMLIST];
+int TMCostCache[64][MAXTMLIST];
+
+Script "PromptTMShop" (Void)
+{
+//==================[+]
+// - Pre Start Up -
+//==================[+]
+if(StatusTime() == 0){print(s:"Unsafe to learn TMs right now"); Terminate;}
+//if(!PlayerInGame(PlayerNumber())){Terminate;}
+//=======================[+]
+// - Define Variables -
+//=======================[+]
+int PlayerLVL = GetCvar(StrParam(s:"PlayerLevel_",i:PlayerNumber()));
+int PlayerDEXNum = GetCvar(StrParam(s:"PlayerDEXNum_",i:PlayerNumber()));
+Int MoveFrameCap =6;
+Int StartMoves = 4;
+Int ChoiceID = 0;
+Int ChoiceCap = PlayerLVL;
+int MenuX = MenuXOrigin;
+int Menuy = MenuYOrigin+19.0;
+int MoveListVal;
+int MoveListCount;
+int TMNumber;
+int Movecost;
+bool ShopSet;
+int CursorY;
+int LearnMove = -1;
+// - Menu -
+int InputButtons;
+int InputOldButtons; 
+int UpInput;
+int DownInput;
+Int ConfirmInput;
+Int CancelInput;
+Int MenuStates = 0;
+Int MenuNextState; 
+int i;
+int j;
+int h;
+Bool MenuUp = true;
+Bool BGUp;
+//=======================[+]
+// - Menu Loop Begin -
+//=======================[+]
+setplayerproperty(0,1,4);
+GiveInventory("SpawnSafeZone",1);
+while (MenuUp) {
+	SetHudSize(320, 200, 0);
+	SetFont("STCFN");
+	MenuStates = MenuNextState;
+
+	// #------------------
+	// # Begin Menustate 0
+	// #------------------
+	if (MenuStates == 0) {
+
+		//MoveListCount = 0;
+		j = 0;
+
+		/*
+		 * First, let's process all the moves we can learn with the pokemon we are playing, and store them into the Cache TM.
+		*/
+		if(!ShopSet)
+		{
+			For(int k = 0; k < MAXTMLIST; k++) // + StartMoves - 1
+			{
+				//MoveListVal = MoveDex[PlayerDEXNum][k];
+				//if (MoveListVal != -1) {TMMoveCache[PlayerNumber()][MoveListCount] = MoveListVal; MoveListCount++;}
+				
+					MoveListVal = CheckTMArray(k,PlayerDEXNum);
+					if (MoveListVal != -1) 
+						{
+						TMMoveCache[PlayerNumber()][MoveListCount] = MoveListVal; 
+						TMNumCache[PlayerNumber()][MoveListCount] = k+1;
+						TMCostCache[PlayerNumber()][MoveListCount] = TMList[k][3];
+						MoveListCount++;
+						}
+			
+			}
+		ShopSet = True;
+		}
+
+		// - Print the list of moves -
+		For(i = 0; i < MoveListCount; i++)
+		{
+			if(ChoiceID >= 3 && ChoiceID < MoveListCount-3)
+			{
+				if(i < ChoiceID-3){continue;}
+				if(i > ChoiceID+3){break;}
+			}
+			if(ChoiceID < 3)
+			{
+				if(i > 6){break;}
+			}
+			if(ChoiceID > MoveListCount-4)
+			{
+				if(i < MoveListCount-6){continue;}
+			}
+
+			MoveListVal = TMMoveCache[PlayerNumber()][i];
+			TMNumber = TMNumCache[PlayerNumber()][i];
+			MoveCost = TMCostCache[PlayerNumber()][i];
+			if (MoveListVal != -1) {
+				HudMessage(s:"\cfTM",i:TMNumber,s:": \cj",s: weapons_ammo[MoveListVal][2]; HUDMSG_FADEOUT, 500 + j, 0, MenuX, Menuy + (MNL * j), 0.2, 0);
+				j++;
+			}
+
+		}
+
+		if (MoveListCount <= 0) {print(s: "No TMs to learn"); break;} //MenuUp = false;
+		else {
+			if(!BGUp)
+				{DrawMenuFrame(MenuX-(8.0*3),MenuY-(8.0*0),21,6+MoveFrameCap,0); 
+				DrawMenuFrame(MenuX-(8.0*3),MenuY-(8.0*3),21,2,PastMenuSize);
+				BGup = True;}
+			ChoiceCap = MoveListCount;
+			if(MoveListCount>6)
+			{
+			if (ChoiceID > 3 && ChoiceID < MoveListCount-3){ CursorY = 3;}
+			else if(ChoiceID >= MoveListCount-3){CursorY = 3 + (ChoiceID-(MoveListCount-3));}	
+			else{CursorY = ChoiceID;}
+			}
+			else{CursorY = ChoiceID;}
+			
+			if(ChoiceID >= MoveListCount-3 && MoveListCount>6){HudMessage(s: "Exit"; HUDMSG_FADEOUT, 500 + (6), CR_ORANGE, MenuX, Menuy + (MNL * 6), 0.2, 0);}
+			else if(MoveListCount<=6){HudMessage(s: "Exit"; HUDMSG_FADEOUT, 500 + (MoveListCount), CR_ORANGE, MenuX, Menuy + (MNL * MoveListCount), 0.2, 0);}
+			HudMessage(s: ">>"; HUDMSG_FADEOUT, 515, 0, MenuX - 16.0, Menuy + (MNL * CursorY), 0.2, 0);
+
+			//Draw Cost
+			MoveCost = TMCostCache[PlayerNumber()][ChoiceID];
+			if(ChoiceID < MoveListCount)HudMessage(s:"\cjBP Cost : ",i:MoveCost; HUDMSG_FADEOUT, 516, 0, MenuX , Menuy - (MNL * 3 + 6.0), 0.2, 0);
+		}
+
+		// - Grab Inputs -
+		InputButtons = GetPlayerInput(-1, INPUT_BUTTONS);
+		UpInput = ButtonCheck(InputButtons, InputOldButtons, BT_FORWARD);
+		DownInput = ButtonCheck(InputButtons, InputOldButtons, BT_BACK);
+		ConfirmInput = ButtonCheck(InputButtons, InputOldButtons, BT_ATTACK);
+		CancelInput = ButtonCheck(InputButtons, InputOldButtons, BT_AltATTACK);
+		if (UpInput != DownInput) {
+			if (UpInput == 1) {
+				ChoiceID--;
+				While(TMMoveCache[PlayerNumber()][ChoiceID] == -1){ ChoiceID--; }
+			}
+			if (DownInput == 1) {
+				ChoiceID++;
+				While(TMMoveCache[PlayerNumber()][ChoiceID] == -1
+					&& ChoiceID != ChoiceCap)
+				{ ChoiceID++; }
+			}
+		}
+		if (ChoiceID > ChoiceCap) { ChoiceID = 0; }
+		if (ChoiceID < 0) { ChoiceID = ChoiceCap; }
+		if (CancelInput == 1 || ConfirmInput == 1 && ChoiceID == MoveListCount) {break;} //MenuUp = false;
+		if (ConfirmInput == 1 && ChoiceID < MoveListCount) { LearnMove = TMMoveCache[PlayerNumber()][ChoiceID]; MoveCost = TMCostCache[PlayerNumber()][ChoiceID]; break;} //MenuUp = false;
+		// #------------------
+		// # End Menustate 0
+		// #------------------
+		Delay(1);
+		InputOldButtons = InputButtons;
+	}
+} 
+
+//=======================[+]
+// - Menu Loop End -
+//=======================[+]
+ClearMenuFrame();
+if(LearnMove > -1) 
+	{ 
+		if(ACS_NamedExecuteWithResult("BPCheck",MoveCost))
+		{
+			InputButtons = GetPlayerInput(-1, INPUT_BUTTONS);
+			While(ButtonCheck(InputButtons, InputOldButtons, BT_ATTACK)
+			||ButtonCheck(InputButtons, InputOldButtons, BT_ALTATTACK))
+			{InputButtons = GetPlayerInput(-1, INPUT_BUTTONS); Delay(1); InputOldButtons = InputButtons;}
+			ACS_NamedExecuteAlways("PromptMoveLearn",0,LearnMove,MoveCost);
+			ACS_NamedExecuteAlways("ShopSuccessSound",0);
+			GiveInventory("SaveMovesetFlag",1);
+		}
+		else{
+			print(s: "Cannot Afford that TM");
+			ACS_NamedExecuteAlways("ShopFailSound",0);
+			Delay(17);
+			setplayerproperty(0,0,4);
+			}
 	}
 else{Delay(17);setplayerproperty(0,0,4);}
 }
@@ -622,7 +832,7 @@ while (MenuUp) {
 
 
 		// - Print list of evolution paths -
-		if(!BGUp){DrawMenuFrame(MenuX-(8.0*3),MenuY-(8.0*0),15,6+MoveFrameCap); BGup = True;}
+		if(!BGUp){DrawMenuFrame(MenuX-(8.0*3),MenuY-(8.0*0),15,6+MoveFrameCap,0); BGup = True;}
 
 				if(EvoBranchCount > 1){HudMessage(s: SkinDEX[EvoBranch_1][0]; HUDMSG_FADEOUT, 500 + 0, 0, MenuX, Menuy + (MNL * 0), 0.2, 0);}
 				if(EvoBranchCount >= 2){HudMessage(s: SkinDEX[EvoBranch_2][0]; HUDMSG_FADEOUT, 500 + 1, 0, MenuX, Menuy + (MNL * 1), 0.2, 0);}
@@ -754,7 +964,7 @@ while (MenuUp) {
 
 		if (MoveListCount <= 0) {print(s: "No moves to learn"); break;} //MenuUp = false;
 		else {
-			if(!BGUp){DrawMenuFrame(MenuX-(8.0*3),MenuY-(8.0*0),15,6+MoveListCount); BGup = True;}
+			if(!BGUp){DrawMenuFrame(MenuX-(8.0*3),MenuY-(8.0*0),15,6+MoveListCount,0); BGup = True;}
 			ChoiceCap = MoveListCount;
 			HudMessage(s: "Exit"; HUDMSG_FADEOUT, 514, CR_ORANGE, MenuX, Menuy + (MNL * ChoiceCap), 0.2, 0);
 			HudMessage(s: ">>"; HUDMSG_FADEOUT, 515, 0, MenuX - 16.0, Menuy + (MNL * ChoiceID), 0.2, 0);
@@ -861,7 +1071,7 @@ while (MenuUp) {
 	if (MenuStates == 0) {
 
 		// - Print the list of stats -
-			if(!BGUp){DrawMenuFrame(MenuX-(8.0*3),MenuY-(8.0*0),20,9); BGup = True;}
+			if(!BGUp){DrawMenuFrame(MenuX-(8.0*3),MenuY-(8.0*0),20,9,0); BGup = True;}
 			HudMessage(s: "HP:"; HUDMSG_FADEOUT, 500, CR_WHITE, MenuX, Menuy + (MNL * 0), 0.2, 0);
 			HudMessage(s: "Attack:"; HUDMSG_FADEOUT, 502, CR_WHITE, MenuX, Menuy + (MNL * 1), 0.2, 0);
 			HudMessage(s: "Defense:"; HUDMSG_FADEOUT, 504, CR_WHITE, MenuX, Menuy + (MNL * 2), 0.2, 0);
@@ -906,7 +1116,9 @@ Str MenuFrames[1] = {
 	"MFRA",
 };
 
-Function Void DrawMenuFrame (Int Ox, int Oy, int h,int w)
+
+
+Function Void DrawMenuFrame (Int Ox, int Oy, int h,int w, int MenuMid)
 {
 /*
  * Ox = Origin X
@@ -914,7 +1126,7 @@ Function Void DrawMenuFrame (Int Ox, int Oy, int h,int w)
  * w = Width
  * H = Height
 */ 
-int Mid = 2000;
+int Mid = 2000 + MenuMid;
 int Ofs = 8.0;
 int k;
 str sprite;
@@ -948,7 +1160,7 @@ for (int i = 0; i < h+1; i++)
 	}
 j = 0;
 }
-
+PastMenuSize = k;
 }
 
 Function Void ClearMenuFrame (Void)

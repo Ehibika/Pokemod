@@ -47,12 +47,12 @@ alias MoveShift "CloseMenu; Use MoveShiftStartItem"
 alias ShowStatusScreen "CloseMenu; Use PlayerStatusItem" 
 
 alias DefaultCam "sv_CameraAng 0.0; sv_CameraHeight 0.0; sv_CameraZoom 130; SV_CameraPitch 0.3; sv_CamReticuleMode 1;"
-alias DefaultZoomCam "sv_ZoomCameraAng -6.0; sv_ZoomCameraHeight -0.3; sv_ZoomCameraZoom 60; SV_ZoomCameraPitch 0.0; sv_ZoomCamReticuleMode 1;"
+alias DefaultZoomCam "sv_ZoomCameraAng -6.0; sv_ZoomCameraHeight -0.6; sv_ZoomCameraZoom 60; SV_ZoomCameraPitch 0.0; sv_ZoomCamReticuleMode 1;"
 alias StartCameraMenu "Openmenu CameraMenu"
 alias CloseMenuCommand "CloseMenu"
 
 alias OpenItemShop "Use ShopGuardItem; Openmenu Item_Menu"
-alias OpenTMShop "Use ShopGuardItem; Openmenu TM_Menu"
+alias OpenTMShop "CloseMenu; Use ShopGuardItem; Use TMShopStartItem"
 
 //===|Shop
 alias BuySmallEXPCandy "CloseMenu; Use BuySmallEXPCandy; Openmenu Item_Menu"

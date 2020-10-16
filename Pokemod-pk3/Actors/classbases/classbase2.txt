@@ -220,6 +220,17 @@ Goto BugPain
 //#region -=- Ghost -=-
 
 Pain.ShadowBall:
+Pain.PhantomForce:
+"----" H 0 
+Goto GhostPain
+
+Pain.Astonish:
+"----" H 0 A_GiveInventory("AstonishBackstabItem",1)
+Goto GhostPain
+Pain.Astonish2:
+"----" H 0
+"----" H 0 //A_SpawnItemEX("PowerStrikeFX2",0,0,28)
+"----" H 0 A_GiveInventory("CringeStatusProc")
 "----" H 0 
 Goto GhostPain
 
@@ -482,6 +493,11 @@ Pain.PsyBeam:
 "----" H 0 A_GiveInventory("PsyBeamProtect",1)
 Goto PsychicPain
 
+Pain.PsychoCut:
+"----" H 0
+"----" H 0 A_GiveInventory("PsychoCutProtect",1)
+Goto PsychicPain
+
 Pain.ZenHeadButt:
 "----" H 0 A_GiveInventory("ZenHeadbuttDelay",1)
 "----" H 0 A_GiveInventory("HeadButtCringeChance",1)
@@ -541,6 +557,13 @@ Goto PsychicPain
     "----" H 0 A_GiveInventory("IceBeamFreezeRate",2)
     Goto IcePain
 
+    Pain.Blizzard:
+    "----" H 0
+    "----" H 0 A_GiveInventory("BlizzardProtect",1)
+    "----" H 0 A_GiveInventory("FreezeStatusProc",1)
+    "----" H 0 A_GiveInventory("BlizzardFreezeRate",2)
+    Goto IcePain
+
     Pain.AuroraBeam:
     "----" H 0
     "----" H 0 A_GiveInventory("AuroraBeamProtect",1)
@@ -566,13 +589,19 @@ Pain.DragonRush:
 "----" H 0 ThrustThingZ(0,15,0,0)
 Goto DragonPain
 
+Pain.Twister:
+"----" H 0 A_GiveInventory("TwisterProtect",1)
+"----" H 0 A_GiveInventory("TwisterCringeChance",1)
+Goto DragonPain
+
 Pain.DragonRage:
 "----" H 0
 Goto NormalPain
 
 Pain.DragonBreath:
+"----" H 0 A_GiveInventory("DragonBreathParaChance",1)
 "----" H 0
-Goto NormalPain
+Goto DragonPain
 //#endregion
 
 //#region -=- Dark -=-
@@ -601,6 +630,21 @@ Goto NormalPain
 //#endregion
 
 //#region -=- Fairy -=-
+
+Pain.DisarmingVoice:
+Pain.MoonBlast:
+"----" H 0
+Goto FairyPain
+
+Pain.Dazzlinggleem:
+"----" H 0 A_GiveInventory("DazzlinggleemProtect", 1)
+Goto FairyPain
+
+Pain.DrainingKiss:
+"----" H 0 A_SpawnItemEX("GigaDrainFXSpawn")
+"----" H 0 ACS_NamedExecuteAlways("LifeDrainEffect",0,50)
+"----" H 0
+Goto FairyPain
 
 //#endregion
 
@@ -781,6 +825,9 @@ Goto BugDeath
 //#region -=- Ghost -=-
 
 Death.ShadowBall:
+Death.Astonish:
+Death.Astonish2:
+Death.PhantomForce:
 "----" H 0 
 Goto GhostDeath
 
@@ -927,6 +974,7 @@ Death.Confusion:
 Death.Psychic:
 Death.Psywave:
 Death.Psybeam:
+Death.PsychoCut:
 "----" H 0
 Goto PsychicDeath
 
@@ -955,6 +1003,7 @@ Goto PsychicDeath
     Death.IcicleCrash:
     Death.IceBeam:    
     Death.AuroraBeam:
+    Death.Blizzard:
     "----" H 0
     Goto IceDeath
 //#endregion
@@ -975,6 +1024,7 @@ Goto PsychicDeath
     Death.DracoMeteor:
     Death.Outrage:
     Death.DragonDarts:
+    Death.Twister:
     "----" H 0
     Goto DragonDeath
 
@@ -984,6 +1034,18 @@ Goto PsychicDeath
 //#endregion
 
 //#region -=- Fairy -=-
+
+Death.DisarmingVoice:
+Death.MoonBlast:
+Death.Dazzlinggleem:
+"----" H 0
+Goto FairyDeath
+
+Death.DrainingKiss:
+"----" H 0 A_SpawnItemEX("GigaDrainFXSpawn")
+"----" H 0 ACS_NamedExecuteAlways("LifeDrainEffect",0,50)
+"----" H 0
+Goto FairyDeath
 
 //#endregion
 

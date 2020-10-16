@@ -1,0 +1,181 @@
+actor ThunderWaveMove : WepMasterBase
+{
+Tag "ThunderWave"
+obituary "$OB_THUNDERWAVE"
+Weapon.AmmoUse 1
+Weapon.AmmoGive 10
+weapon.ammotype "ThunderWavePP"
+scale 2.0
+Inventory.Pickupmessage "$PU_MEGABUSTER"
++WEAPON.EXPLOSIVE
+States
+{
+Spawn:
+WEAP X 1
+stop
+
+
+Fire:
+"####" BBB 1 A_Jumpif(CallACS("CheckWeaponFire",RC_A)==1,"Fire.Begin")
+"####" B 0 A_Jump(256,"NoAmmo")
+Goto NoAmmo
+
+Fire.Begin:
+"####" B 0
+"####" B 0 A_Jump(256,"Fire.Bullet")
+Goto Fire.Bullet
+
+Fire.Bullet:
+"####" B 0 A_PlaySoundEx("weapon/SparkShock","Weapon")
+
+"####" B 0 A_FireCustomMissile("ThunderWaveShot",0,1,0,0)
+"####" B 0 A_Jump(256,"Fire.After")
+Goto Fire.After
+
+Fire.After:
+"####" B 1 A_GiveInventory("SemiRecovery_A")
+"####" C 0 A_REfire("Fire")
+"####" B 0 A_Jump(256,"Fire.End")
+Goto Fire.End
+
+
+
+
+
+}
+}
+
+actor ThunderWaveMove1 : ThunderWaveMove {Weapon.SlotNumber 1}
+actor ThunderWaveMove2 : ThunderWaveMove {Weapon.SlotNumber 2}
+actor ThunderWaveMove3 : ThunderWaveMove {Weapon.SlotNumber 3}
+actor ThunderWaveMove4 : ThunderWaveMove {Weapon.SlotNumber 4}
+
+actor ThunderWaveMove5 : ThunderWaveMove 
+{
+Weapon.SlotNumber 5
+States
+{
+Fire.End:
+TNT1 A 0
+TNT1 A 0 A_TakeInventory("ThunderWaveMove5",9)
+TNT1 A 0 A_Jump(256,"Ready")
+Goto Ready
+}
+}
+
+//[+]========================================================================[+]
+//-----------------------------|Ammo & Inventory|------------------------------
+//[+]========================================================================[+]
+actor ThunderWavePP : Ammo {inventory.amount 1 inventory.Maxamount 10}
+
+/*
+actor ThunderWaveNerfInitiate : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_Jumpifinventory("STF_ThunderWave",1,"Sustain")
+TNT1 A 0 A_GiveInventory("STF_ThunderWave",1)
+TNT1 A 0 A_SpawnItemEX("ThunderWaveNerfWatcher")
+TNT1 A 0 A_GiveInventory("StatUpdator",1)
+stop
+
+Sustain:
+TNT1 A 0 A_GiveInventory("STF_ThunderWave",1)
+stop
+Nope:
+TNT1 A 0
+stop
+}
+}
+*/
+
+//[+]========================================================================[+]
+//--------------------------------|Projectiles |--------------------------------
+//[+]========================================================================[+]
+actor ThunderWaveShot : BasicFastProjectile
+{
+Speed 64
+Damage (0)
+DamageType "ThunderWave"
+obituary "$OB_THUNDERWAVE"
++HITTRACER
+radius 16
+Reactiontime 15
+height 16
+scale 3.5
+States
+{
+Spawn:
+TNT1 A 0 
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+
+Spawn2:
+TNT1 A 0 
+SPAS A 1 A_Countdown
+TNT1 A 0 A_Spawnitemex("ThunderWaveParticle",random2(10),random2(10),random2(10),0,0,0,0,SXF_TRANSFERTRANSLATION|SXF_ABSOLUTEVELOCITY)
+loop
+
+Crash:
+TNT1 A 1 
+TNT1 A 0 A_JumpIf(IsPointerEqual(AAPTR_TRACER,AAPTR_NULL) == False, "GWCheck")
+Goto Death
+
+GWCheck:
+TNT1 A 0 A_Jumpif(CallACS("CheckStatusGuard",AAPTR_TRACER,STATUS_MAJOR),"Death") //Blocked by protect|Detect|Substitute|Safeguard and pre-existing conditions
+TNT1 A 0 A_GiveInventory("ParalysisStatusProc",1,AAPTR_TRACER)
+TNT1 A 0 A_Spawnitemex("ThunderWaveFX",0,0,0,0,0,0,0,SXF_TRANSFERTRANSLATION)
+Goto Death
+
+Death:
+TNT1 A 0 A_GiveInventory("ProjectileDCode",1)
+TNT1 AAAAAA 0 A_SpawnItemEx("ThunderWaveParticle", 0, 0, 28, 256/24, 256/24, random2(256/24), random(0, 359),1)
+TNT1 A 17
+stop
+}
+}
+
+
+actor ThunderWaveParticle : BasicClientside
+{
+-NOINTERACTION
+-NOGRAVITY
+scale 2
+Gravity 0.5
+Reactiontime 8
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+TNT1 A 0
+Spawn2:
+SPAS A 1 A_ScaleVelocity(0.6)
+SPAS B 1 A_SetScale(ScaleX-0.2)
+TNT1 A 0 A_Countdown
+loop
+}
+}
+
+actor ThunderWaveFX : BasicClientside
+{
+-NOINTERACTION
+-NOGRAVITY
+scale 2
+Gravity 0.5
+ReactionTime 8
+States
+{
+Spawn:
+TNT1 A 0
+LBFX DEFGHIJ 2 
+stop
+}
+}
+

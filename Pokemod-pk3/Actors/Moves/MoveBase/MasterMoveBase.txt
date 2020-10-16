@@ -83,6 +83,7 @@ Goto Ready
 
 NoAmmo:
 TNT1 A 1 A_JumpIfNoAmmo("NoAmmo2")
+TNT1 A 0 A_JumpIf(CallACS("IsMoveDisabled") == 1,"NoAmmo2")
 TNT1 A 0 
 TNT1 A 0 A_Jump(256,"Fire.End")
 Goto Fire.End

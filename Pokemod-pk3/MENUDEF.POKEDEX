@@ -4566,7 +4566,7 @@ OptionMenu "MoveMenu_Dracometeor"
     StaticText"===============================================================",1
 }
 
-OptionMenu "MoveMenu_ThundeWave"
+OptionMenu "MoveMenu_ThunderWave"
 {
 	
 	Title "$M168_NAME"

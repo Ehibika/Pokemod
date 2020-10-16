@@ -440,6 +440,7 @@ TNT1 A 0 ACS_NamedExecuteAlways("PKMN_Setup",0)
 TNT1 A 0 //A_GiveInventory("PokeFormHandler",1)
 TNT1 A 0 A_GiveInventory("EvoStartItem",1)
 TNT1 A 0 A_GiveInventory("MoveTutorStartItem",1)
+TNT1 A 0 A_GiveInventory("TMShopStartItem",1)
 TNT1 A 0 A_GiveInventory("MoveShiftStartItem",1)
 TNT1 A 0 A_GiveInventory("PlayerStatusItem",1)
 TNT1 A 0 A_GiveInventory("ShopGuardItem",1)
@@ -521,6 +522,7 @@ TNT1 A 0 A_JumpIf(CallACS("SafeZoneSpawnCheck",0) == 1,"Pickup2")
 stop
 Pickup2:
 TNT1 A 0 A_GiveInventory("inSafeZone",1)
+TNT1 A 0 A_ChangeFlag("SOLID",0)
 TNT1 A 0 A_SpawnItemEx("SafeZoneField",0,0,0,0,0,0,0,1)
 stop
 }
@@ -535,6 +537,7 @@ TNT1 A 0 A_JumpIf(CallACS("SafeZoneSpawnCheck",1) == 1,"Pickup2")
 stop
 Pickup2:
 TNT1 A 0 A_GiveInventory("inSafeZone",1)
+TNT1 A 0 A_ChangeFlag("SOLID",0)
 TNT1 A 0 A_SpawnItemEx("SafeZoneField",0,0,0,0,0,0,0,1)
 stop
 }
@@ -546,16 +549,20 @@ states
 {
 Spawn:
 TNT1 A 0
+TNT1 A 0 A_GiveToTarget("inSafeZone")
+TNT1 A 10 
 TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+TNT1 A 0 A_SpawnItemEx("SafeZoneRingFXSpawn",0,0,0,0,0,0,0,1)
 Spawn2:
 TNT1 A 0 A_GiveToTarget("inSafeZone")
 TNT1 A 10 
 TNT1 A 0 A_SpawnItemEx("SafeZoneRingFXSpawn",0,0,0,0,0,0,0,1)
 TNT1 AAAAA 1 A_JumpIfCloser(SafeZoneSize+50,"Spawn2")
 TNT1 A 1
-stop 
+Goto Death 
 
 Death:
+TNT1 A 0 A_SpawnItemEx("ReSolidifier")
 TNT1 A 1 
 stop
 }
@@ -724,6 +731,25 @@ fail
 }
 }
 
+actor TMShopStartItem : CustomInventory
+{
+inventory.amount 1
+inventory.maxamount 1
+inventory.pickupmessage "Move Tutor"
+Tag "TM Shop"
+Inventory.PickupSound "item/1up"
+scale 2.0
+states
+{
+Spawn:
+WEAP X 1
+loop
+Use:
+TNT1 A 0 ACS_NamedExecuteAlways("PromptTMShop",0)
+fail
+}
+}
+
 actor MoveShiftStartItem : CustomInventory
 {
 inventory.amount 1
@@ -780,5 +806,26 @@ loop
 Use:
 TNT1 A 0 A_GiveInventory("MenuSpawnSafeZone",0)
 fail
+}
+}
+
+
+actor PKMN_WhiteFlagDropper : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0
+TNT1 A 0 A_JumpIf(CallACS("HasFlagBall") == 1,"DropFlag")
+stop
+DropFlag:
+SCRW A 1 ACS_NamedExecuteAlways("FlagFumble",0)
+stop
 }
 }

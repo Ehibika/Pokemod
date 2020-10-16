@@ -167,7 +167,7 @@ SuckerPunch
 DragonDarts
 PhantomForce
 Dracometeor
-ThundeWave
+ThunderWave
 Twister
 Wrap
 Barrier

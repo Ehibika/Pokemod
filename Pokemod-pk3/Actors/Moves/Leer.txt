@@ -27,11 +27,11 @@ Goto Fire.Melee
 
 Fire.Melee:
 TNT1 A 0 A_PlaySoundEx("weapon/Gemini","Weapon")
-TNT1 A 0 A_FireCustomMissile("LeerRay1_S",0,0,8,0)
-TNT1 A 0 A_FireCustomMissile("LeerRay1_ST",0,0,8,0)
+TNT1 A 0 A_FireCustomMissile("LeerRay_Start",0,0,8,0)
+TNT1 A 0 A_FireCustomMissile("LeerRay_Start_Server",0,0,8,0)
 //--
-TNT1 A 0 A_FireCustomMissile("LeerRay1_S",0,0,-8,0)
-TNT1 A 0 A_FireCustomMissile("LeerRay1_ST",0,0,-8,0)
+TNT1 A 0 A_FireCustomMissile("LeerRay_Start",0,0,-8,0)
+TNT1 A 0 A_FireCustomMissile("LeerRay_Start_Server",0,0,-8,0)
 //--
 TNT1 A 0 A_FireCustomMissile("LeerEffectRay",0,1,0,0)
 Goto Fire.After
@@ -105,7 +105,7 @@ DamageType "Leer"
 //+THRUGHOST
 +DONTBLAST
 +DONTREFLECT
-//+SERVERSIDEONLY
++SERVERSIDEONLY
 +HITTRACER
 renderstyle none
 damage (0)
@@ -159,6 +159,105 @@ stop
 }
 
 
+actor LeerRayBase
+{
+Translation "192:192=41:41","198:198=249:249"
+RenderStyle "Add"
+PROJECTILE
+Obituary "$OB_Leer"
+DamageType "Leer"
+//+THRUACTORS
++DONTBLAST
++DONTREFLECT
++CLIENTSIDEONLY
++MTHRUSPECIES
+//+FORCEYBILLBOARD
++PAINLESS
+damage (0)
+Radius 11
+Height 11
+speed 30
+scale 3.5
+states
+{
+Spawn:
+GEMI A 0
+SpawnBeam:
+GEMI A 0 A_SetPitch(pitch+1)
+GEMI A 0 A_JumpIf(pitch>Leer_Range,"Perish")
+GEMI A 0 A_JumpIf(CallACS("pkmn_istargetclient")!=1,"Spawn.NoBeamView")
+GEMI A 0 A_SpawnItemEx("LeerRayBase",0,0,0,momx,momy,momz,0,553)
+TNT1 A 0 A_Jump(256,"Spawn.BeamView")
+Goto Spawn.BeamView
+
+Spawn.BeamView:
+TNT1 A 0 A_SpawnItemEx("LearBeamFX",0,0,0,0,0,0,0,33)
+TNT1 A 1
+stop
+
+Spawn.NoBeamView:
+TNT1 A 1 
+stop
+
+
+Perish:
+TNT1 A 1 
+stop
+
+Death:
+GEMI A 0 A_GiveInventory("ProjectileDCode",1)
+GEMI A 0 A_SpawnItemEx("LeerPuff",0,0,0,0,0,0,0,33)
+stop
+}
+}
+
+actor LeerRay_Start : LeerRayBase
+{
++INVISIBLE
+states
+{
+Spawn:
+GEMI A 0
+GEMI A 0 A_GiveInventory("ProjectileCode",1)
+TNT1 A 0 A_Jump(256,"SpawnBeam")
+Goto SpawnBeam
+}
+}
+
+
+actor LeerRay_Server : LeerRayBase
+{
+states
+{
+Spawn:
+GEMI A 0
+SpawnBeam:
+GEMI A 0 A_SetPitch(pitch+1)
+GEMI A 0 A_JumpIf(pitch>Leer_Range,"Perish")
+GEMI A 0 A_SpawnItemEx("LeerRay_Server",0,0,0,momx,momy,momz,0,553)
+GEMI A 0 A_JumpIf(CallACS("pkmn_istargetclient")!=1,"Spawn.BeamView")
+TNT1 A 0 A_Jump(256,"Spawn.NoBeamView")
+Goto Spawn.NoBeamView
+}
+}
+
+actor LeerRay_Start_Server : LeerRay_Server
+{
++INVISIBLE
+-CLIENTSIDEONLY
++NONETID
+states
+{
+Spawn:
+GEMI A 0
+GEMI A 0 A_GiveInventory("ProjectileCodeSyncTarget",1)
+TNT1 A 0 A_Jump(256,"SpawnBeam")
+Goto SpawnBeam
+}
+}
+
+//#region old
+/*
 actor LeerRay1
 {
 PROJECTILE
@@ -249,6 +348,8 @@ TNT1 A 0 A_Jump(256,"SpawnBeam")
 goto SpawnBeam
 }
 }
+*/
+//#endregion
 
 actor LearBeamFX : BasicClientside
 {

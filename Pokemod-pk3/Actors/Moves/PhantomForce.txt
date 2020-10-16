@@ -1,0 +1,246 @@
+Const int PHANTOMFORCE_AREA1 = 128;
+Const int PHANTOMFORCE_AREA2 = 64;
+
+actor PhantomForceMove : WepMasterBase
+{
+Tag "Phantomforce"
+obituary "$OB_PhantomForce"
+Weapon.AmmoUse 1
+Weapon.AmmoGive 20
+weapon.ammotype "PhantomForcePP"
+scale 2.0
+Inventory.Pickupmessage "$PU_MEGABUSTER"
+States
+{
+Spawn:
+WEAP X 1
+stop
+
+
+Fire:
+"####" BBB 1 A_Jumpif(CallACS("CheckWeaponFire",RC_A)==1,"Fire.Begin")
+"####" B 0 A_Jump(256,"NoAmmo")
+Goto NoAmmo
+
+Fire.Begin:
+"####" B 0
+"####" B 1 
+Goto Fire.PhantomForceInitiate
+
+Fire.PhantomForceInitiate:
+TNT1 A 0 A_PlaySoundEx("Move/Amnesia","Weapon")
+TNT1 A 0 A_ChangeFlag("THRUACTORS",1)
+//TNT1 A 0 A_ChangeFlag("SHADOW",1)
+TNT1 A 0 A_SpawnItemEx("PhantomForceResurfaceFX",0,0,22,0,0,0,0,1)
+TNT1 A 0 A_GiveInventory("PKMN_WhiteFlagDropper",1) //For objective combo
+Goto Fire.PhantomForce
+
+
+Fire.PhantomForce:
+TNT1 A 0 A_TakeInventory("PhantomForcePP",1)
+TNT1 A 0 A_GiveInventory("PhantomForcePPTimer",1)
+//TNT1 A 0 A_PlaySoundEx("misc/splash","Voice")
+//===
+TNT1 A 0 A_ChangeFlag("THRUACTORS",0)
+TNT1 A 0 A_GiveInventory("InvulnerableOn_Pickup",1)
+TNT1 A 0 A_SpawnItemEx("PhantomForce_VWatcher")
+TNT1 A 0 
+TNT1 A 0 A_TakeInventory("UnSolid",1)
+TNT1 A 0 A_ChangeFlag("NONSHOOTABLE",1)
+TNT1 A 0 A_ChangeFlag("SOLID",0)
+TNT1 A 0 A_ChangeFlag("PICKUP",0)
+TNT1 A 0 A_ChangeFlag("INVISIBLE",1)
+TNT1 A 0 A_SetTranslucent(0.0,0)
+TNT1 A 0 ACS_NamedExecuteAlways("core_flyplayer",0,0,1)
+TNT1 A 0 A_GiveInventory("PhantomForceBuffer",1)
+goto Fire.PhantomForceHold
+Fire.PhantomForceHold:
+TNT1 A 0 A_JumpIfInventory("PhantomForcePPTimer",1,3)
+TNT1 A 0 A_TakeInventory("PhantomForcePP",1)
+TNT1 A 0 A_GiveInventory("PhantomForcePPTimer",1)
+TNT1 A 0
+TNT1 AA 1 
+TNT1 A 0 A_JumpIfInventory("PhantomForcePP",1,"Fire.PhantomForceHoldFX")
+goto Fire.PhantomForceRelease
+
+Fire.PhantomForceHoldFX:
+TNT1 A 1 A_JumpIfInventory("PhantomForceFXBuffer",1,"Fire.PhantomForceCheck")
+TNT1 A 1 A_JumpIf(momx>5||momy>5||momx<-5||momy<-5,"Fire.PhantomForceHoldFX1")
+TNT1 AA 0 A_SpawnItemEx("PhantomForceParticleFX",0,0,0,0,0,0,0,1)
+TNT1 A 0 A_GiveInventory("PhantomForceFXBuffer")
+goto Fire.PhantomForceCheck
+
+Fire.PhantomForceHoldFX1:
+TNT1 A 0 A_SpawnItemEx("PhantomForceParticleFX",0,0,0,0,0,0,0,1)
+TNT1 A 0 A_GiveInventory("PhantomForceFXBuffer")
+goto Fire.PhantomForceCheck
+
+Fire.PhantomForceCheck:
+TNT1 A 0 A_JumpIfInventory("PhantomForceBuffer",1,"Fire.PhantomForceHold")
+TNT1 AA 1 A_Jumpif(CallACS("PKMNACS_ButtonCheck",BT_ATTACK) == 1,"Fire.PhantomForceRelease")
+goto Fire.PhantomForceHold
+
+Fire.PhantomForceRelease:
+TNT1 A 0 A_SpawnItemEx("PhantomForceBlast",0,0,0,0,0,0,0,1)
+TNT1 A 0 A_ClearRefire
+TNT1 A 0 A_SetTranslucent(1.0,0)
+TNT1 A 0 A_ChangeFlag("INVISIBLE",0)
+TNT1 A 0 A_ChangeFlag("PICKUP",1)
+TNT1 A 0 ACS_NamedExecuteAlways("core_flyplayer",0,0,0)
+TNT1 A 0 A_ChangeFlag("THRUACTORS",1)
+TNT1 A 0 A_ChangeFlag("NONSHOOTABLE",0)
+TNT1 A 0 A_ChangeFlag("THRUACTORS",0)
+TNT1 A 0 A_SpawnItemEx("ReSolidifier")
+TNT1 A 0 A_GiveInventory("InvulnerableOff_Pickup",1)
+Goto Fire.PhantomForceRelease2
+
+Fire.PhantomForceRelease2:
+TNT1 A 2 
+TNT1 A 2 A_JumpIf(z-floorz==0,"Fire.After") 
+Goto Fire.PhantomForceRelease2
+
+Fire.After:
+"####" B 1 A_GiveInventory("FullRecovery_A")
+"####" C 0 A_REfire("Fire")
+"####" B 0 A_Jump(256,"Fire.End")
+Goto Fire.End
+
+}
+}
+
+actor PhantomForceMove1 : PhantomForceMove {Weapon.SlotNumber 1}
+actor PhantomForceMove2 : PhantomForceMove {Weapon.SlotNumber 2}
+actor PhantomForceMove3 : PhantomForceMove {Weapon.SlotNumber 3}
+actor PhantomForceMove4 : PhantomForceMove {Weapon.SlotNumber 4}
+
+actor PhantomForceMove5 : PhantomForceMove 
+{
+Weapon.SlotNumber 5
+States
+{
+Fire.End:
+TNT1 A 0
+TNT1 A 0 A_TakeInventory("PhantomForceMove5",9)
+TNT1 A 0 A_Jump(256,"Ready")
+Goto Ready
+}
+}
+
+//[+]========================================================================[+]
+//-----------------------------|Ammo & Inventory|------------------------------
+//[+]========================================================================[+]
+actor PhantomForcePP : Ammo {inventory.amount 1 inventory.Maxamount 20}
+
+actor PhantomForceBuffer : Powerup {inventory.amount 1 Powerup.Duration 30}
+actor PhantomForcePPTimer : Powerup {inventory.amount 1 Powerup.Duration 35}
+actor PhantomForceFXBuffer : Powerup {inventory.amount 1 Powerup.Duration 7}
+
+actor STF_PhantomForce : Powerup {inventory.amount 1 Powerup.Duration 17}
+
+Actor PhantomForce_VWatcher : VisibilityWatcher
+{
+ReactionTime 70
+States
+{
+CheckInv:
+TNT1 AAAAAAAA 1 A_JumpIfInTargetInventory("PhantomForcePPTimer",1,"Reloop")
+Goto Death
+}
+}
+//[+]========================================================================[+]
+//--------------------------------|Projectiles |--------------------------------
+//[+]========================================================================[+]
+
+actor PhantomForceBlast : BasicExplosion
+{
+DamageType "PhantomForce"
+obituary "$OB_PhantomForce"
+ReactionTime 5
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+TNT1 A 0 A_Explode(MBP_PhantomForce,PHANTOMFORCE_AREA1,0,0,PHANTOMFORCE_AREA2)
+TNT1 A 0 A_PlaySoundEx("weapon/watershieldburst","SoundSlot5")
+TNT1 A 0 A_SpawnItemEx("PhantomForceResurfaceFX",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION)
+Spawn2:
+TNT1 A 2 A_CountDown
+TNT1 AAAA 0 A_SpawnItemEx("PhantomForceSmoke", Random(-PHANTOMFORCE_AREA1,PHANTOMFORCE_AREA1), 0, Random(0,PHANTOMFORCE_AREA2), 0, 0, 0, random(0,360),1)
+loop
+
+Death:
+TNT1 A 5
+stop
+}
+}
+
+
+actor PhantomForceSmoke : BasicClientside
+{
+Scale 3.0
+States
+{
+Spawn:
+HITG E 0
+DOLP B 0 //A_PlaySoundEx("misc/waterslide","Voice")
+TNT1 A 0 A_GiveInventory("ProjectileFXCode",1)
+Spawn2:
+HAZ2 ABCDEEFFGG 2
+Goto Death
+
+Death:
+BEWA A 0
+stop
+}
+}
+
+
+actor PhantomForceParticleFX : BasicClientside
+{
+States
+{
+Spawn:
+HITG E 0
+TNT1 A 0 A_GiveInventory("ProjectileFXCode",1)
+TNT1 AAA 1 A_SpawnItemEX("PhantomForceParticle",Random2(96),Random2(96),Random2(96),0,0,0,0,1)
+Goto Death
+
+Death:
+BEWA A 0
+stop
+}
+}
+
+
+actor PhantomForceParticle : BasicClientside
+{
+-NOINTERACTION
+-NOGRAVITY
+scale 1.5
+Gravity 0.5
+Alpha 0.5
+renderstyle "subtract"
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_GiveInventory("ProjectileDCode",1)
+HARD DCBE 3 
+stop
+}
+}
+
+actor PhantomForceResurfaceFX : BasicClientside
+{
+scale 4.5
+States
+{
+Spawn:
+TNT1 A 0 
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+HAZ2 ABCDEEFFGG 2
+stop
+}
+}
+

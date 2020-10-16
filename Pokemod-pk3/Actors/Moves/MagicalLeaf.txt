@@ -77,6 +77,7 @@ DamageType "MagicalLeaf"
 obituary "$OB_MagicalLeaf"
 +SEEKERMISSILE
 +SCREENSEEKER
++FLOAT
 radius 5
 Reactiontime 15
 height 16

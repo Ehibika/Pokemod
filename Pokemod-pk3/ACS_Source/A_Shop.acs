@@ -1,10 +1,11 @@
 #library "A_Shop"
 #include "zcommon.acs"
 #import "A_3pcam.acs"
-#Import "Dex_Pokemon.acs"
+#import "Dex_Pokemon.acs"
 #import "Dex_Types.acs"
 #import "Dex_Leveling.acs"
-#Import "Dex_Basestats.acs"
+#import "Dex_Basestats.acs"
+#import "Dex_Moves.acs"
 #import "Dex_TM.acs"
 
 #DEFINE MAX_PLAYERS 64
@@ -343,6 +344,7 @@ SetResultValue(Output);
 
 Script "ItemSpew" DEATH
 {
+    if(GetCvar("lastmanstanding")==0&&GetCvar("teamlms")==0){ACS_NamedExecuteAlways("Write_Inventory",0); terminate;}
     if(GetGameModeState()!=GAMESTATE_INPROGRESS){terminate;}
     Int InvCount;
 
@@ -478,6 +480,7 @@ if(CheckInventory("SleepMark")
     if(GetCvar("lastmanstanding")==1||GetCvar("teamlms")==1)
     {if(GetGameModeState()!=GAMESTATE_INPROGRESS){Output = 0;}}
 
+    if (GetCvar("Game_Arena")==1){if(GetCvar("Game_GameState")==0){output = 0;}}
 setresultvalue(Output);
 }
 #endregion
@@ -612,11 +615,11 @@ str HexArray[16] = {
     int len = StrLen(HexVal);
     int base = 1;
     int output;
-    int Hex;
+    int HexDigit;
     for (int i=len-1; i>=0; i--) 
         { 
-            Hex = HexCharToInt(strparam(c:GetChar(HexVal,i)));
-            output += Hex*base;
+            HexDigit = HexCharToInt(strparam(c:GetChar(HexVal,i)));
+            output += HexDigit*base;
             base = base*16;
             //log(i:Hex);
             //log(i:output);

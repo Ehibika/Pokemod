@@ -106,6 +106,7 @@ Script "AddToBPAward" (int ammount)
 
 Script "PKMN_HitEXP" (Int Damage, int Divisor)
 {
+if(EXPTime() == 0){Terminate;}
 int Output;
 int EnemyPlayer = ACS_NamedExecuteWithResult("core_gettarget", 0);
 int EnemyPlN = EnemyPlayer - 1000;
@@ -388,6 +389,7 @@ if(GetCvar("lastmanstanding")==1||GetCvar("teamlms")==1)
     {
     if(GetGameModeState() == 2 ||GetGameModeState() == 3){output = 1;}
     }
+else if (GetCvar("Game_Arena")==1){if(GetCvar("Game_GameState")==1||GetCvar("Game_GameState")==2||GetCvar("Game_GameState")==3){output = 1;}}
 else{output = 1;}
 
 return Output;
@@ -457,7 +459,7 @@ Function Int StatusTime (Void)
 //Returns when you are allowed to perform status functions like
 //Evolutions or learning new moves
 int Output;
-
+if(CheckInventory("PKMN_AllowFreeSetup")){output = 1;}
 if(CheckInventory("InSafeZone")){output = 1;}
 if(CheckInventory("CabinetCoolDown")){output = 1;} //For Jax's 1 flag koth
 if(InWarmup){output = 1;}
@@ -465,7 +467,7 @@ if(GetCvar("lastmanstanding")==1||GetCvar("teamlms")==1)
     {
     if(GetGameModeState() != 2){output = 1;}
 	}
-	
+if (GetCvar("Game_Arena")==1){if(GetCvar("Game_GameState")==0){output = 1;}}
 	return Output;
 }
 

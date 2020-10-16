@@ -36,6 +36,20 @@ stop
 }
 }
 
+actor ReloadShopInventory : CustomInventory
+{
+States
+{
+Pickup:
+TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(975, 0)==2,"Nope")
+TNT1 A 0 ACS_NamedExecuteAlways("Read_Inventory",0)
+stop
+Nope:
+TNT1 A 0 
+stop
+}
+}
+
 actor Shop : CustomInventory
 {
 states
@@ -46,7 +60,7 @@ TNT1 A 0 ACS_NamedExecuteAlways("ShopOpenMsg",0)
 TNT1 A 0 A_GiveInventory("BerryShop",1)
 TNT1 A 0 A_GiveInventory("SeedShop",1)
 TNT1 A 0 A_GiveInventory("OrbShop",1)
-TNT1 A 0 A_GiveInventory("TMShop",1)
+//TNT1 A 0 A_GiveInventory("TMShop",1)
 stop
 }
 }
