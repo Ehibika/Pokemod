@@ -261,6 +261,7 @@
 // #include "actors/Moves/Ingrain.txt"
 // #include "actors/Moves/Avalanche.txt"
 // #include "actors/Moves/Mist.txt"
+//--[NewMove]--
 
 #include "Actors/inventory/Shop/ShopActors/shopact.txt"
 #include "Actors/inventory/Shop/ShopActors/shopact_items.txt"
