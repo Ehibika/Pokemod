@@ -174,26 +174,29 @@ else {Output = CheckActorInventory(FiringPlayer,CountActor);}
 SetResultValue(Output);
 }
 
-#DEFINE HAZTID 37000 // 37| TeamNum | Hazard num
-#DEFINE HAZMAX 50
-int HazTIDRecord[4];
+#DEFINE HAZTID 3700000 // 37| TeamNum | PlayerNum | Hazard num
+#DEFINE HAZMAX 30
+int HazTIDRecord[64];
 
 Script "HazardTID" (Void)
 {
 
-if(activatorTID() != 0){Terminate;}
+if(activatorTID() != 0){Thing_Remove(0); Terminate;}
 
 int FiringPlayer = ACS_NamedExecuteWithResult("core_gettarget",0);
-Int TeamNum = ACS_NamedExecuteWithResult("core_getplayerteam",FiringPlayer-1000);
+int FPN = FiringPlayer-1000;
+Int TeamNum = ACS_NamedExecuteWithResult("core_getplayerteam",FPN);
 
-int newHazTID = HazTIDRecord[TeamNum];
-int MaxHazTID = HAZTID+(TeamNum*100)+HAZMAX;
+int BaseHazTID = HAZTID+(TeamNum*10000)+(FPN*1000);
 
-if(!newHazTID){newHazTID = HAZTID+(TeamNum*100);}
-else if(newHazTID > MaxHazTID){newHazTID = newHazTID-HAZMAX;}
+int newHazTID = HazTIDRecord[FPN];
+int MaxHazTID = BaseHazTID+HAZMAX;
+
+if(!newHazTID){newHazTID = BaseHazTID;}
+else if(newHazTID > MaxHazTID){newHazTID = BaseHazTID;}
 until(!IsTIDUsed(newHazTID)){Thing_remove(newHazTID);}
 Thing_ChangeTID(0,newHazTID);
-HazTIDRecord[TeamNum] = newHazTID+1;
+HazTIDRecord[FPN] = newHazTID+1;
 
 }
 
@@ -202,20 +205,44 @@ Script "HazardScrub" (int ScrubRange)
     int FiringPlayer = ACS_NamedExecuteWithResult("core_gettarget",0);
     Int TeamNum = ACS_NamedExecuteWithResult("core_getplayerteam",FiringPlayer-1000);
 int MaxTeams = GetCvar("sv_maxteams");
+int MaxPlayers = PlayerCount();
 int CheckTID;
 
+
+for(int j; j < MaxTeams; j++)
+{if(j == TeamNum){continue;}
+    for(int k; k < MaxPlayers; k++)
+    {
+        For(int i; i<HAZMAX;i++)
+        {
+            CheckTID = HAZTID+(j*10000)+(k*1000)+i;
+            if(IsTIDUsed(CheckTID) 
+                && xyzDistance(0,CheckTID) <= ScrubRange
+                && j != TeamNum){SetActorState(CheckTID,"Purge");}           
+        }
+        i = 0;
+    }
+    k = 0;
+}
+
+/*
 For(int i; i<HAZMAX;i++)
     {
     for(int j; j < MaxTeams; j++)
-    {
-    CheckTID = HAZTID + (j*100)+ i;
-        if(IsTIDUsed(CheckTID) 
-            && xyzDistance(0,CheckTID) <= ScrubRange
-            && j != TeamNum){SetActorState(CheckTID,"Purge");}
+    { if(j == TeamNum){continue;}
+
+        for(int k; k < 64; k++)
+        {
+            CheckTID = HAZTID + (j*10000)+(k*1000)+i;
+            if(IsTIDUsed(CheckTID) 
+                && xyzDistance(0,CheckTID) <= ScrubRange
+                && j != TeamNum){SetActorState(CheckTID,"Purge");}
+        }
+        k = 0;
     }
     j = 0;
     }
-
+*/
 }
 
 
@@ -233,9 +260,14 @@ script "TeamSmoke"  (VOID) CLIENTSIDE
 
 Script "AbsorbEffect" (int Per)
 {
-    Delay(1);
-    While(GetUserVariable(0,"user_HitMemory") < 1){Delay(1); }
-int Amount = GetUserVariable(0,"user_HitMemory");
+int Amount = getLastHit(0);
+switch(Amount)
+    {
+        case -3: terminate; break;
+        case -2: Delay(1); Restart; break;
+        case -1: terminate; break;
+    }
+
 int DrainerTID = ACS_NamedExecuteWithResult("core_gettarget",0);
 
 if(!CheckActorInventory(DrainerTID,"Absorb_Active")){Terminate;}
@@ -250,9 +282,15 @@ ACS_NamedExecuteAlways("PKMNACS_Basic(Over)Heal",0,0,Amount);
 
 Script "LifeDrainEffect" (int Per)
 {
-    Delay(1);
-    While(GetUserVariable(0,"user_HitMemory") < 1){Delay(1); }
-int Amount = GetUserVariable(0,"user_HitMemory");
+
+    int Amount = getLastHit(0);
+    switch(Amount)
+        {
+            case -3: terminate; break;
+            case -2: Delay(1); Restart; break;
+            case -1: terminate; break;
+        }
+
 int DrainerTID = ACS_NamedExecuteWithResult("core_gettarget",0);
 
 Amount = (Amount*Per)/100;
@@ -495,7 +533,9 @@ if(CheckInventory("SleepMark")
 ||CheckInventory("PoisonMark")
 ||CheckInventory("BurnMark")
 ||CheckInventory("ParalysisMark")
-||CheckInventory("FreezeMark"))
+||CheckInventory("semiFreezeMark")
+||CheckInventory("FreezeMark")
+||CheckInventory("RestMark"))
 {Output = Output | STATUS_MAJOR;}
 
 if(CheckInventory("ProtectGuard")

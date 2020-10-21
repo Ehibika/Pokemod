@@ -1,0 +1,86 @@
+/*
+[+]===================================[+]
+
+[+]===================================[+]
+*/
+
+
+Actor R_Dragonair : ClassBaseRentals 
+{
+Player.DisplayName "Dragonair"
+Player.SoundClass "Dragonair"
+
+Player.StartItem "PKMNRentalKit"
+//============|
+Player.StartItem "DragonairRentalSetupItem"
+//============|
+Player.StartItem "Base_HP", 61
+Player.StartItem "Base_PAttack", 84
+Player.StartItem "Base_PDefense", 65
+Player.StartItem "Base_SAttack", 70
+Player.StartItem "Base_SDefense", 70
+
+//============|
+
+States
+{
+Spawn: 
+P041 A 0
+P041 B 1 
+P041 A 1
+GoTo Spawn+2
+See:
+P041 BCDE 5
+GoTo Spawn+1
+Missile:
+P041 A 0 A_JumpIfInventory("ConshotTimer",1,2) 
+P041 F 5 
+P041 G 4
+GoTo Spawn+2
+
+PainFix:
+P041 H 0 
+GoTo PainFrames
+}
+}
+
+actor DragonairRentalMoves : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_JumpIf(CallACS("RentalBotCheck") == 1,"BotWep")
+
+TNT1 A 0 A_GiveInventory("HydroPumpMove1")
+TNT1 A 0 A_GiveInventory("WaterfallMove2")
+TNT1 A 0 A_GiveInventory("YawnMove3")
+TNT1 A 0 A_GiveInventory("WhirlpoolMove4")
+stop
+
+BotWep:
+TNT1 A 0 A_GiveInventory("HydroPumpMove1")
+stop
+}
+}
+
+ actor DragonairRentalSetupItem : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 ACS_NamedExecuteAlways("PKMN_RentalsSetup",0,Dex_Dragonair)
+stop
+}
+}

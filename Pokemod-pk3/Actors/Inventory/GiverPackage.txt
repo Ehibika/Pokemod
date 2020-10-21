@@ -54,7 +54,7 @@ TNT1 A 1 A_Jumpifinventory("PackageID",1,"Growl")
 Goto Pickup.After
 //===============
 Twister:
-TNT1 A 1 ThrustThingZ(0,40,0,0)
+TNT1 A 0 ThrustThingZ(0,40,0,0)
 Goto Pickup.After
 
 StunSpore:

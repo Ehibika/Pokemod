@@ -79,7 +79,7 @@ actor BubbleBeamPP : Ammo {inventory.amount 1 inventory.Maxamount 15}
 
 Actor BubbleBeamProtect : powerprotection
 {
-Powerup.duration 3
+Powerup.duration 5
 Damagefactor "BubbleBeam", 0
 }
 

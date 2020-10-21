@@ -107,6 +107,15 @@ Script "AddToBPAward" (int ammount)
 Script "PKMN_HitEXP" (Int Damage, int Divisor)
 {
 if(EXPTime() == 0){Terminate;}
+
+Damage = getLastHit(0);
+switch(Damage)
+    {
+        case -3: terminate; break;
+        case -2: Delay(1); Restart; break;
+        case -1: Delay(1); Restart; break;
+    }
+
 int Output;
 int EnemyPlayer = ACS_NamedExecuteWithResult("core_gettarget", 0);
 int EnemyPlN = EnemyPlayer - 1000;
@@ -118,7 +127,8 @@ int PlayerDexNum = GetCvar(StrParam(s:"PlayerDEXNum_",i:PlayerNumber()));
 //int SelfDexBounty = StatDEX[PlayerDexNum][6];
 
 int SelfEXPBounty = CheckInventory("EXPBountyitem");
-Output = 1 + PlayerLVL + Damage/Divisor;
+Output = 1 + Damage/Divisor;
+//Output = 1 + PlayerLVL + Damage/Divisor;
 if(SelfEXPBounty)
     {
         if(SelfEXPBounty < Output){Output = SelfEXPBounty;}
@@ -126,7 +136,7 @@ if(SelfEXPBounty)
         ACS_NamedExecuteAlways("GivePlayerEXP",0,EnemyPlN,Output,1);
     }
 
-
+    //Log(i:Damage, s:" : ",i:Output);
 }
 
 Script "GivePlayerEXP" (int Pnum, int EXPAward, int Override)

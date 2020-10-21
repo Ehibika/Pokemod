@@ -14,7 +14,7 @@ stop
 
 
 Fire:
-"####" BBB 1 A_Jumpif(CallACS("CheckWeaponFire",RC_C)==1,"Fire.Begin")
+"####" BBB 1 A_Jumpif(CallACS("CheckWeaponFire",RC_D)==1,"Fire.Begin")
 "####" B 0 A_Jump(256,"NoAmmo")
 Goto NoAmmo
 
@@ -39,7 +39,7 @@ Fire.Bullet:
 Goto Fire.After
 
 Fire.After:
-"####" B 1 A_GiveInventory("FullRecovery_C")
+"####" B 1 A_GiveInventory("Twister_Recovery_D")
 "####" C 0 A_REfire("Fire")
 "####" B 0 A_Jump(256,"Fire.End")
 Goto Fire.End
@@ -84,6 +84,8 @@ Actor TwisterProtect : powerprotection
 Powerup.duration 5
 Damagefactor "Twister", 0
 }
+
+actor Twister_Recovery_D : FullRecovery_D{Powerup.Duration 87} //87
 
 actor TwisterCringeChance : CustomInventory
 {
@@ -228,7 +230,7 @@ Height 48
 Radius 20
 Speed 0
 Damage (0)
-reactiontime 70
+reactiontime 40
 States
 {
 Spawn:
@@ -245,7 +247,7 @@ TNT1 A 0 A_SpawnItemEx("TwisterFXSpawn",0,0,0,0,0,0,0,1)
 TNT1 A 0 A_SpawnItemEx("TwisterTornado",0,0,15,0,0,0,0,SXF_NOCHECKPOSITION)
 TNT1 AA 2
 TORH D 0 A_GiveInventory("CutterFlag", 1)
-TORH D 0 A_JumpIfInventory("CutterFlag", 30, "End")
+TORH D 0 A_JumpIfInventory("CutterFlag", 5, "End")
 loop
 End:
 TNT1 A 0

@@ -19,12 +19,12 @@
 
 //#region -=- General Constants & Variables
 #LIBDEFINE HPVAL1 10
-#LIBDEFINE HPVAL2 100
+#LIBDEFINE HPVAL2 250
 #LIBDEFINE HPVAL3 999
 
 #LIBDEFINE ATKVAL1 1
 #LIBDEFINE ATKVAL2 50
-#LIBDEFINE ATKVAL3 800
+#LIBDEFINE ATKVAL3 400
 
 #LIBDEFINE DEFVAL1 1
 #LIBDEFINE DEFVAL2 100
@@ -207,7 +207,7 @@ Str StatName2[7] = {
 };
 */
 
-#LIBDEFINE STATITEMNUM 38
+#LIBDEFINE STATITEMNUM 39
 
 Str StatEffectName[STATITEMNUM][2] = {
     {"Growth","GOOD"},
@@ -248,6 +248,7 @@ Str StatEffectName[STATITEMNUM][2] = {
     {"AuroraBeam","BAD"},
     {"Screech","BAD"},
     {"Paralyze","BAD"},
+    {"DracoMeteor","BAD"},
 };
 
 #LIBDEFINE PATK_ID 0
@@ -296,6 +297,7 @@ Int StatEffectValue[STATITEMNUM][5] = {
 {   -1,      0,      0,      0,      0}, 
 {   0,      0,      -2,      0,      0}, 
 {   0,      0,      0,      0,      -2}, 
+{   0,      -2,      0,      0,      0}, 
 };
 
 Int StatMulti[13] = {
@@ -306,12 +308,12 @@ Int StatMulti[13] = {
 0.35, //0.50,
 0.5,  //0.66,
 1.0,
-1.75, //1.5,
-2.5,  //2.0,
-3.25, //2.5,
-3.75, //3.0,
-4.25, //3.5,
-4.5,  //4.0,
+1.25, //1.5,
+1.5,  //2.0,
+1.75, //2.5,
+2.0, //3.0,
+2.25, //3.5,
+2.5,  //4.0,
 };
 
 Function int StatModifier (int ModStat, int StatID)

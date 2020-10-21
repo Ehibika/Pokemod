@@ -88,7 +88,7 @@ Goto Fire.Bullet2_1
     Goto Fire.After
 
 Fire.After:
-"####" C 0 A_REfire("Fire.Warmup")
+"####" C 0 A_REfire("Fire")
 "####" C 0 A_StopSoundEX("Weapon")
 Fire.After2:
 "####" B 0 A_TakeInventory("ConShotTimer",99)

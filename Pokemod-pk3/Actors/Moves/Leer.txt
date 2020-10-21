@@ -107,6 +107,7 @@ DamageType "Leer"
 +DONTREFLECT
 +SERVERSIDEONLY
 +HITTRACER
++MTHRUSPECIES
 renderstyle none
 damage (0)
 Radius 11

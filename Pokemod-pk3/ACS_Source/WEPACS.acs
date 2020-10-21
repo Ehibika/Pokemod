@@ -165,7 +165,7 @@ str weapons_ammo[MAX_WEAPONS_GLOBAL][7] =
 {"VineWhipMove", "VineWhipPP", "VineWhip", 1.0, "NO", "NO", "SLOT_NONE"},
 {"GrowthMove", "GrowthPP", "Growth", 1.0, "NO", "NO", "SLOT_NONE"},
 {"GrowlMove", "GrowlPP", "Growl", 1.0, "NO", "NO", "SLOT_NONE"},
-{"TailWhipMove", "TailWhipPP", "TailWhip", 1.0, "NO", "NO", "SLOT_NONE"},
+{"TailwhipMove", "TailwhipPP", "Tailwhip", 1.0, "NO", "NO", "SLOT_NONE"},
 {"LeechSeedMove", "LeechSeedPP", "LeechSeed", 1.0, "NO", "NO", "SLOT_NONE"},
 {"RazorLeafMove", "RazorLeafPP", "RazorLeaf", 1.0, "NO", "NO", "SLOT_NONE"},
 {"SweetScentMove", "SweetScentPP", "SweetScent", 1.0, "NO", "NO", "SLOT_NONE"},
@@ -378,7 +378,7 @@ str weapons_ammo[MAX_WEAPONS_GLOBAL][7] =
 {"CalmMindMove", "CalmMindPP", "CalmMind", 1.0, "NO", "NO", "SLOT_NONE"},
 {"PsyshockMove", "PsyshockPP", "Psyshock", 1.0, "NO", "NO", "SLOT_NONE"},
 {"TrickMove", "TrickPP", "Trick", 1.0, "NO", "NO", "SLOT_NONE"},
-{"<BlankMove>Move", "<BlankMove>PP", "<BlankMove>", 1.0, "NO", "NO", "SLOT_NONE"},
+{"BulkUpMove", "BulkUpPP", "BulkUp", 1.0, "NO", "NO", "SLOT_NONE"},
 {"FocusBlastMove", "FocusBlastPP", "FocusBlast", 1.0, "NO", "NO", "SLOT_NONE"},
 {"PsychoCutMove", "PsychoCutPP", "PsychoCut", 1.0, "NO", "NO", "SLOT_NONE"},
 {"PsychoShiftMove", "PsychoShiftPP", "PsychoShift", 1.0, "NO", "NO", "SLOT_NONE"},
@@ -394,7 +394,7 @@ str weapons_ammo[MAX_WEAPONS_GLOBAL][7] =
 {"DisarmingVoiceMove", "DisarmingVoicePP", "DisarmingVoice", 1.0, "NO", "NO", "SLOT_NONE"},
 {"ShadowSneakMove", "ShadowSneakPP", "ShadowSneak", 1.0, "NO", "NO", "SLOT_NONE"},
 {"DestinyBondMove", "DestinyBondPP", "DestinyBond", 1.0, "NO", "NO", "SLOT_NONE"},
-{"CharmMove", "CharmPP", "Charm", 1.0, "NO", "NO", "SLOT_NONE"},
+{"<BlankMove>Move", "<BlankMove>PP", "<BlankMove>", 1.0, "NO", "NO", "SLOT_NONE"},
 {"DrainingKissMove", "DrainingKissPP", "DrainingKiss", 1.0, "NO", "NO", "SLOT_NONE"},
 {"ImprisonMove", "ImprisonPP", "Imprison", 1.0, "NO", "NO", "SLOT_NONE"},
 {"WishMove", "WishPP", "Wish", 1.0, "NO", "YES", "SLOT_NONE"},
@@ -932,7 +932,7 @@ Script "MoveSetup" (void)
 				Case HEALPULSE: ACS_NamedExecuteAlways("TracerTargeter",0,TG_TEAM,1500); break;
 				Case TAUNT: ACS_NamedExecuteAlways("TracerTargeter",0,TG_ENEMY,350); break;
 				Case MEGADRAIN: ACS_NamedExecuteAlways("TracerTargeter",0,TG_ENEMY,350); break;
-				Case HYPNOSIS: ACS_NamedExecuteAlways("TracerTargeter",0,TG_ENEMY,350); break;
+				Case HYPNOSIS: ACS_NamedExecuteAlways("TracerTargeter",0,TG_ENEMY,550); break;
 				Case DREAMEATER: ACS_NamedExecuteAlways("TracerTargeter",0,TG_ENEMY,350); break;
 				default: ACS_NamedExecuteAlways("TracerTargeter",0,TG_TEAM,630); break;
 			}
@@ -1015,6 +1015,7 @@ SetResultValue(ImbueOn);
 #DEFINE RC_A 1
 #DEFINE RC_B 2
 #DEFINE RC_C 4
+#DEFINE RC_D 8
 
 Script "CheckWeaponFire" (int RecoveryType)
 {
@@ -1035,6 +1036,7 @@ Function bool CheckWeaponFireFunc(int RecoveryType)
 if(((RecoveryType&RC_A)>0) && (CheckInventory("Recovery_A")>0)) return false;
 if(((RecoveryType&RC_B)>0) && (CheckInventory("Recovery_B")>0)) return false;
 if(((RecoveryType&RC_C)>0) && (CheckInventory("Recovery_C")>0)) return false;
+if(((RecoveryType&RC_D)>0) && (CheckInventory("Recovery_D")>0)) return false;
 
 int ThisWeapon = WhichWeapon();
 str WepAmmoName = weapons_ammo[ThisWeapon][1];

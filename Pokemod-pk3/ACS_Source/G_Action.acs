@@ -269,8 +269,6 @@ script "PKMN_CollisionDamager" (int Damage)
 	//log(s:"Bump"); 
 Int SelfHP = GetActorProperty(0,APROP_HEALTH);
 
-Damage = GetUserVariable(0,"user_HitMemory");
-
 // -=- calculate damage for self damage
 int ModStat = StatModifier(CheckInventory("Active_PAttack"),PATK_ID);
 int Output;
@@ -1088,12 +1086,18 @@ thing_damage2(TID,damage,"PoisonDamage");
 
 script "PKMN_RecoilDamager" (int PerVal)
 {
-	//log(s:"Bump");
+
 Int Damage;
+Damage = getLastHit(0);
+switch(Damage)
+	{
+		case -3: terminate; break;
+		case -2: Delay(1); Restart; break;
+		case -1: terminate; break;
+	}
 Int VictimHP = GetActorProperty(0,APROP_SPAWNHEALTH);
 
-Delay(2);
-Damage = GetUserVariable(0,"user_HitMemory");
+//Delay(2);
 
 setactivator(0,AAPTR_TARGET);
 Int RecoilerHP = GetActorProperty(0,APROP_HEALTH);

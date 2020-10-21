@@ -11,6 +11,7 @@
 
 #LIBDEFINE MIDSTAGE 5
 #LIBDEFINE FINALSTAGE 10
+#LIBDEFINE FINALSTAGE2 7
 Int EvoDEX [MAXDEX][6] = {
     //      Paths  |Level |1st      |2nd      |3rd 	    |FamilyID   |Form Number
     /*|0|*/{NULLEVO, MIDSTAGE,    NULLEVO,  NULLEVO, NULLEVO	,0},
@@ -76,23 +77,23 @@ Int EvoDEX [MAXDEX][6] = {
     /*|44|*/{1,      FINALSTAGE,     SALAMENCE,  NULLEVO,     NULLEVO,15},
     /*|45|*/{0,      0,     NULLEVO,  NULLEVO,     NULLEVO,15},
 
-    /*|46|*/{2,      MIDSTAGE,     SLOWBRO,  SLOWKING,     NULLEVO,16},
+    /*|46|*/{2,      FINALSTAGE2,     SLOWBRO,  SLOWKING,     NULLEVO,16},
     /*|47|*/{0,      0,     NULLEVO,  NULLEVO,     NULLEVO,16},
     /*|48|*/{0,      0,     NULLEVO,  NULLEVO,     NULLEVO,16},
 
-    /*|49|*/{1,      MIDSTAGE,     STARMIE,  NULLEVO,     NULLEVO,17},
+    /*|49|*/{1,      FINALSTAGE2,     STARMIE,  NULLEVO,     NULLEVO,17},
     /*|50|*/{0,      0,     NULLEVO,  NULLEVO,     NULLEVO,17},
 
-    /*|51|*/{1,      MIDSTAGE,     CLOYSTER,  NULLEVO,     NULLEVO,17},
+    /*|51|*/{1,      FINALSTAGE2,     CLOYSTER,  NULLEVO,     NULLEVO,17},
     /*|52|*/{0,      0,     NULLEVO,  NULLEVO,     NULLEVO,17},
 
-    /*|53|*/{1,      MIDSTAGE,     NINETALES,  NULLEVO,     NULLEVO,18},
+    /*|53|*/{1,      FINALSTAGE2,     NINETALES,  NULLEVO,     NULLEVO,18},
     /*|54|*/{0,      0,     NULLEVO,  NULLEVO,     NULLEVO,18},
 
-    /*|55|*/{1,      MIDSTAGE,     NINETALES_A,  NULLEVO,     NULLEVO,19},
+    /*|55|*/{1,      FINALSTAGE2,     NINETALES_A,  NULLEVO,     NULLEVO,19},
     /*|56|*/{0,      0,     NULLEVO,  NULLEVO,     NULLEVO,19},
 
-    /*|57|*/{1,      MIDSTAGE,     ABOMASNOW,  NULLEVO,     NULLEVO,20},
+    /*|57|*/{1,      FINALSTAGE2,     ABOMASNOW,  NULLEVO,     NULLEVO,20},
     /*|58|*/{0,      0,     NULLEVO,  NULLEVO,     NULLEVO,20},
 
     /*|59|*/{1,      MIDSTAGE,     PILOSWINE,  NULLEVO,     NULLEVO,21},
@@ -103,7 +104,7 @@ Int EvoDEX [MAXDEX][6] = {
     /*|63|*/{1,      FINALSTAGE,     ALAKAZAM,  NULLEVO,     NULLEVO,22},
     /*|64|*/{0,      0,     NULLEVO,  NULLEVO,     NULLEVO,22},
 
-    /*|65|*/{1,      MIDSTAGE,     HYPNO,  NULLEVO,     NULLEVO,23},
+    /*|65|*/{1,      FINALSTAGE2,     HYPNO,  NULLEVO,     NULLEVO,23},
     /*|66|*/{0,      0,     NULLEVO,  NULLEVO,     NULLEVO,23},
 
     /*|67|*/{1,      MIDSTAGE,     KIRLIA,  NULLEVO,     NULLEVO,24},
@@ -111,14 +112,18 @@ Int EvoDEX [MAXDEX][6] = {
     /*|69|*/{0,      0,     NULLEVO,  NULLEVO,     NULLEVO,24},
     /*|70|*/{0,      0,     NULLEVO,  NULLEVO,     NULLEVO,24},
 
-    /*|71|*/{1,      MIDSTAGE,     EXEGGUTOR,  NULLEVO,     NULLEVO,25},
+    /*|71|*/{1,      FINALSTAGE2,     EXEGGUTOR,  NULLEVO,     NULLEVO,25},
     /*|72|*/{0,      0,     NULLEVO,  NULLEVO,     NULLEVO,25},
 
     /*|73|*/{0,      0,     NULLEVO,  NULLEVO,     NULLEVO,26},
 
-    /*|74|*/{1,      MIDSTAGE,     MAGCARGO,  NULLEVO,     NULLEVO,27},
+    /*|74|*/{1,      FINALSTAGE2,     MAGCARGO,  NULLEVO,     NULLEVO,27},
     /*|75|*/{0,      0,     NULLEVO,  NULLEVO,     NULLEVO,27},
-    
+  
+    /*|76|*/{1,      MIDSTAGE,      PIKACHU,  PIKACHU,     NULLEVO,28},
+    /*|77|*/{1,      FINALSTAGE,     RAICHU,  NULLEVO,     NULLEVO,28},
+    /*|78|*/{0,      0,             NULLEVO,  NULLEVO,     NULLEVO,28},
+
     
     //--[NewPokemon]--
 };

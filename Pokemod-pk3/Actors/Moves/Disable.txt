@@ -80,7 +80,7 @@ actor DisableFXHold : Powerup {inventory.amount 1 Powerup.Duration 17}
 
 
 
-Const int DisableRad = 100;
+Const int DisableRad = 150;
 Const int Disable_Item = 21;
 
 actor DisableCaster : CustomInventory
@@ -95,7 +95,7 @@ TNT1 A 0
 stop
 Pickup:
 TNT1 A 0 A_Jumpifinventory("DisableMark",1,"Nope")
-TNT1 A 0 A_Jumpif(CallACS("CheckStatusGuard",0,STATUS_MAJOR),"Nope")
+TNT1 A 0 A_Jumpif(CallACS("CheckStatusGuard",0,STATUS_SPECIALTY),"Nope")
 
 TNT1 A 0 A_GiveInventory("DisableMark",1)
 TNT1 A 0 A_SpawnItemEX("DisableWatcher",1)

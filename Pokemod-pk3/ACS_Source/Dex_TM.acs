@@ -60,7 +60,7 @@
 #LIBDEFINE TMF_UNIVERSAL 1
 #LIBDEFINE TMF_EVOLVED 2
 
-#LIBDEFINE MAXTMLIST 59
+#LIBDEFINE MAXTMLIST 63
 //#endregion
 
 //#region -=- TM Reference -=-
@@ -81,7 +81,7 @@
 
 //#region -=- TM MasterList -=-
 int TMList [MAXTMLIST][4] = {
-{Substitute     ,TMF_UNIVERSAL      ,TMT_NORMAL                                 ,25},
+{Substitute     ,TMF_UNIVERSAL      ,TMT_NORMAL                                 ,10},
 {Protect        ,TMF_UNIVERSAL      ,TMT_NORMAL                                 ,10},
 {Taunt          ,TMF_UNIVERSAL      ,TMT_NORMAL                                 ,15},
 {Fakeout        ,TMF_UNIVERSAL      ,TMT_NORMAL                                 ,15},
@@ -89,12 +89,13 @@ int TMList [MAXTMLIST][4] = {
 {Rest           ,TMF_UNIVERSAL      ,TMT_PSYCHIC                                ,15},
 {SlackOff       ,TMF_UNIVERSAL      ,TMT_NORMAL                                 ,15},
 {Refresh        ,TMF_UNIVERSAL      ,TMT_NORMAL                                 ,15},
+{HelpingHand    ,TMF_UNIVERSAL      ,TMT_NORMAL                                 ,15},
 
-{IronDefense    ,TMF_UNIVERSAL      ,TMT_STEEL                                  ,10},
-{Amnesia        ,TMF_UNIVERSAL      ,TMT_PSYCHIC                                ,10},
-{SwordDance     ,TMF_UNIVERSAL      ,TMT_NORMAL                                 ,10},
-{NastyPlot      ,TMF_UNIVERSAL      ,TMT_DARK                                   ,10},
-{Agility        ,TMF_UNIVERSAL      ,TMT_PSYCHIC                                ,10},
+{IronDefense    ,TMF_UNIVERSAL      ,TMT_STEEL                                  ,55},
+{Amnesia        ,TMF_UNIVERSAL      ,TMT_PSYCHIC                                ,55},
+{SwordDance     ,TMF_UNIVERSAL      ,TMT_NORMAL                                 ,75},
+{NastyPlot      ,TMF_UNIVERSAL      ,TMT_DARK                                   ,75},
+{Agility        ,TMF_UNIVERSAL      ,TMT_PSYCHIC                                ,55},
 
 {Screech        ,TMF_UNIVERSAL      ,TMT_NORMAL                                 ,10},
 {FakeTears      ,TMF_UNIVERSAL      ,TMT_DARK                                   ,10},
@@ -128,6 +129,7 @@ int TMList [MAXTMLIST][4] = {
 {Acrobatics     ,TMF_NULL           ,TMT_FLYING                                 ,15},
 {Rollout        ,TMF_NULL           ,TMT_ROCK                                   ,15},
 {GyroBall       ,TMF_NULL           ,TMT_STEEL                                  ,15},
+{AuroraBeam     ,TMF_NULL           ,TMT_ICE|TMT_WATER                          ,15},
 
 {IceBeam        ,TMF_NULL           ,TMT_WATER|TMT_ICE                          ,35},
 {Flamethrower   ,TMF_NULL           ,TMT_FIRE|TMT_DRAGON                        ,35},
@@ -138,13 +140,15 @@ int TMList [MAXTMLIST][4] = {
 {Waterfall      ,TMF_NULL           ,TMT_WATER                                  ,35},
 {DragonPulse    ,TMF_NULL           ,TMT_DRAGON                                 ,35},
 {DazzlingGleem  ,TMF_NULL           ,TMT_FAIRY|TMT_PSYCHIC                      ,35},
+{PsychoCut      ,TMF_NULL           ,TMT_PSYCHIC                                ,35},
+{HammerArm      ,TMF_NULL           ,TMT_FIGHTING                               ,35},
 
 {EarthQuake     ,TMF_EVOLVED        ,TMT_GROUND|TMT_ROCK|TMT_STEEL              ,60},
 {FireBlast      ,TMF_NULL           ,TMT_FIRE|TMT_DRAGON                        ,60},
 {SolarBeam      ,TMF_NULL           ,TMT_GRASS|TMT_FIRE                         ,60},
 {GigaDrain      ,TMF_NULL           ,TMT_GRASS                                  ,60},
 {Psychic        ,TMF_NULL           ,TMT_PSYCHIC                                ,60},
-{Blizzard       ,TMF_NULL           ,TMT_ICE|TMT_WATER                          ,60},
+{Blizzard       ,TMF_NULL           ,TMT_ICE                                    ,60},
 {Overheat       ,TMF_NULL           ,TMT_FIRE                                   ,60},
 };
 
@@ -255,6 +259,9 @@ int output = 0;
         case Acrobatics: output = TMR_Acrobatics(Dexnum); break; 
         case Rollout: output = TMR_Rollout(Dexnum); break; 
         case GyroBall: output = TMR_Rollout(Dexnum); break; 
+        case HammerArm: output = TMR_HammerArm(Dexnum); break; 
+        //case sworddance: output = TMR_sworddance(Dexnum); break; 
+        //case NastyPlot: output = TMR_NastyPlot(Dexnum); break; 
         
         
         
@@ -263,6 +270,115 @@ int output = 0;
 return output;
 }
 
+
+//#region -=- TM Rules : SwordDance -=-
+Function int TMR_SwordDance (int Dexnum) 
+{
+int output = 0; //Inverted, Works more like a banlist
+    Switch (Dexnum)
+    {
+    case TOTODILE: output = 0; break;
+    case CROCONAW: output = 0; break;
+    case FERALIGATR: output = 0; break;
+    case TREECKO: output = 0; break;
+    case GROVYLE: output = 0; break;
+    case SCEPTILE: output = 0; break;
+    case TORCHIC: output = 0; break;
+    case COMBUSKEN: output = 0; break;
+    case BLAZIKEN: output = 0; break;
+    case MUDKIP: output = 0; break;
+    case MARSHTOMP: output = 0; break;
+    case SWAMPERT: output = 0; break;
+    case TURTWIG: output = 0; break;
+    case GROTLE: output = 0; break;
+    case TORTERRA: output = 0; break;
+    case CHIMCHAR: output = 0; break;
+    case MONFERNO: output = 0; break;
+    case INFERNAPE: output = 0; break;
+    case SWINUB: output = 0; break;
+    case PILOSWINE: output = 0; break;
+    case MAMOSWINE: output = 0; break;
+    case DRATINI: output = 0; break;
+    case DRAGONAIR: output = 0; break;
+    case DRAGONITE: output = 0; break;
+    case BAGON: output = 0; break;
+    case SHELGON: output = 0; break;
+    case SALAMENCE: output = 0; break;
+    case DREEPY: output = 0; break;
+    case DRAKLOAK: output = 0; break;
+    case DRAGAPULT: output = 0; break;
+    }
+return output;
+}
+//#endregion
+
+//#region -=- TM Rules : NastyPlot -=-
+Function int TMR_NastyPlot (int Dexnum) 
+{
+int output = 0; //Inverted, Works more like a banlist
+    Switch (Dexnum)
+    {
+    case BULBASAUR: output = 0; break;
+    case IVYSAUR: output = 0; break;
+    case VENUSAUR: output = 0; break;
+    case CHARMANDER: output = 0; break;
+    case CHARMELEON: output = 0; break;
+    case CHARIZARD: output = 0; break;
+    case TOTODILE: output = 0; break;
+    case CROCONAW: output = 0; break;
+    case FERALIGATR: output = 0; break;
+    case TREECKO: output = 0; break;
+    case GROVYLE: output = 0; break;
+    case SCEPTILE: output = 0; break;
+    case TORCHIC: output = 0; break;
+    case COMBUSKEN: output = 0; break;
+    case BLAZIKEN: output = 0; break;
+    case MUDKIP: output = 0; break;
+    case MARSHTOMP: output = 0; break;
+    case SWAMPERT: output = 0; break;
+    case TURTWIG: output = 0; break;
+    case GROTLE: output = 0; break;
+    case TORTERRA: output = 0; break;
+    case CHIMCHAR: output = 0; break;
+    case MONFERNO: output = 0; break;
+    case INFERNAPE: output = 0; break;
+    case SWINUB: output = 0; break;
+    case PILOSWINE: output = 0; break;
+    case MAMOSWINE: output = 0; break;
+    case DRATINI: output = 0; break;
+    case DRAGONAIR: output = 0; break;
+    case DRAGONITE: output = 0; break;
+    case BAGON: output = 0; break;
+    case SHELGON: output = 0; break;
+    case SALAMENCE: output = 0; break;
+    case DREEPY: output = 0; break;
+    case DRAKLOAK: output = 0; break;
+    case DRAGAPULT: output = 0; break;
+    }
+return output;
+}
+//#endregion
+
+//#region -=- TM Rules : HammerArm -=-
+Function int TMR_HammerArm (int Dexnum) 
+{
+
+    int output = 0;
+    Switch (Dexnum)
+    {
+    case WARTORTLE: output = 1; break;
+    case BLASTOISE: output = 1; break;
+    case CROCONAW: output = 1; break;
+    case FERALIGATR: output = 1; break;
+    case MARSHTOMP: output = 1; break;
+    case SWAMPERT: output = 1; break;
+    case DRAGONITE: output = 1; break;
+    case SALAMENCE: output = 1; break;
+    case ABOMASNOW: output = 1; break;
+    }
+return output;
+}
+//#endregion
 
 //#region -=- TM Rules : MagicalLeaf -=-
 Function int TMR_MagicalLeaf (int Dexnum) 

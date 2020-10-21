@@ -5412,7 +5412,7 @@ OptionMenu "MoveMenu_Trick"
     StaticText"===============================================================",1
 }
 
-OptionMenu "MoveMenu_<BlankMove>"
+OptionMenu "MoveMenu_BulkUp"
 {
 	
 	Title "$M215_NAME"
@@ -5700,7 +5700,7 @@ OptionMenu "MoveMenu_DestinyBond"
     StaticText"===============================================================",1
 }
 
-OptionMenu "MoveMenu_Charm"
+OptionMenu "MoveMenu_<BlankMove>"
 {
 	
 	Title "$M231_NAME"

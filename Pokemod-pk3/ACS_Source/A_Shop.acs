@@ -475,6 +475,8 @@ int Output = 1;
 
 // -=- General Checks -=-
 if(CheckInventory("SleepMark")
+    ||CheckInventory("FreezeMark")
+    ||CheckInventory("ConShotTimer")
     ||CheckInventory("EmbargoFlag")){Output = 0;}
 
     if(GetCvar("lastmanstanding")==1||GetCvar("teamlms")==1)

@@ -233,6 +233,7 @@ DamageFactor "Normal" , 0.2
     TNT1 AAAA 4 A_Stop
 	TNT1 A 0 
     TNT1 A 0 A_JumpifinTargetInventory("WideScreenKiller",1,"Death")
+    TNT1 A 0 A_Jumpifintargetinventory("IsDead",1,"Death")
     TNT1 A 0 A_JumpifinTargetInventory("WideGuardPP",6,"Shield")
     Goto WeakShield
     WeakShield:
@@ -241,6 +242,7 @@ DamageFactor "Normal" , 0.2
     TNT1 A 4 A_Stop
 	TNT1 A 0 
     TNT1 A 0 A_JumpifinTargetInventory("WideScreenKiller",1,"Death")
+    TNT1 A 0 A_Jumpifintargetinventory("IsDead",1,"Death")
     TNT1 A 0 A_JumpifinTargetInventory("WideGuardPP",6,"Shield")
     Goto WeakShield
 	Pain:
@@ -709,6 +711,7 @@ SCBL A 0 A_RearrangePointers(AAPTR_MASTER,AAPTR_DEFAULT,AAPTR_DEFAULT)
 Goto IdleLoop
 
 IdleLoop:
+SCBL A 0 A_Jumpifintargetinventory("IsDead",1,"Death")
 SCBL A 0 A_JumpifInventory("WideScreenKiller",1,"Terminate",AAPTR_TARGET)
 SCBL A 0 A_SetUserVar("User_Tick",User_Tick+1)
 SCBL A 0 A_Jumpif(User_Tick >= 35,"PPTake")
@@ -755,6 +758,7 @@ Goto DeathCheck
 */
 DeathCheck:   //intended to be a defense against desynch
 SCBL A 1 
+SCBL A 0 A_Jumpifintargetinventory("IsDead",1,"Death")
 SCBL A 0 A_Jumpifintargetinventory("WideGuardPP",1,"IdleLoop")
 Goto Death
 Death:

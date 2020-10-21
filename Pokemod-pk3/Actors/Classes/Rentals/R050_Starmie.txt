@@ -1,0 +1,86 @@
+/*
+[+]===================================[+]
+
+[+]===================================[+]
+*/
+
+
+Actor R_Starmie : ClassBaseRentals 
+{
+Player.DisplayName "Starmie"
+Player.SoundClass "Starmie"
+
+Player.StartItem "PKMNRentalKit"
+//============|
+Player.StartItem "StarmieRentalSetupItem"
+//============|
+Player.StartItem "Base_HP", 95
+Player.StartItem "Base_PAttack", 135
+Player.StartItem "Base_PDefense", 80
+Player.StartItem "Base_SAttack", 110
+Player.StartItem "Base_SDefense", 80
+
+//============|
+
+States
+{
+Spawn: 
+P050 A 0
+P050 B 1 
+P050 A 1
+GoTo Spawn+2
+See:
+P050 BCDE 5
+GoTo Spawn+1
+Missile:
+P050 A 0 A_JumpIfInventory("ConshotTimer",1,2) 
+P050 F 5 
+P050 G 4
+GoTo Spawn+2
+
+PainFix:
+P050 H 0 
+GoTo PainFrames
+}
+}
+
+actor StarmieRentalMoves : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_JumpIf(CallACS("RentalBotCheck") == 1,"BotWep")
+
+TNT1 A 0 A_GiveInventory("HydroPumpMove1")
+TNT1 A 0 A_GiveInventory("WaterfallMove2")
+TNT1 A 0 A_GiveInventory("YawnMove3")
+TNT1 A 0 A_GiveInventory("WhirlpoolMove4")
+stop
+
+BotWep:
+TNT1 A 0 A_GiveInventory("HydroPumpMove1")
+stop
+}
+}
+
+ actor StarmieRentalSetupItem : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 ACS_NamedExecuteAlways("PKMN_RentalsSetup",0,Dex_Starmie)
+stop
+}
+}

@@ -1072,5 +1072,47 @@ $playersound	Magcargo male	*fist		dsnone
 $playersound	Magcargo male	*usefail	FATLAND
 $playersound	Magcargo male	*taunt		CRY075
 
+$playersound	PICHU male	*death		MEGADEAT
+$playersound	PICHU male	*xdeath		MEGADEAT
+$playersound	PICHU male	*gibbed		MEGADEAT
+$playersound	PICHU male	*pain100	MEGAPAIN
+$playersound	PICHU male	*pain75		MEGAPAIN
+$playersound	PICHU male	*pain50		MEGAPAIN
+$playersound	PICHU male	*pain25		MEGAPAIN
+$playersound	PICHU male	*grunt		LAND
+$playersound	PICHU male	*land		LAND
+$playersound	PICHU male	*jump		dsnone
+$playersound	PICHU male	*fist		dsnone
+$playersound	PICHU male	*usefail	FATLAND
+$playersound	PICHU male	*taunt		CRY076
+
+$playersound	PIKACHU male	*death		MEGADEAT
+$playersound	PIKACHU male	*xdeath		MEGADEAT
+$playersound	PIKACHU male	*gibbed		MEGADEAT
+$playersound	PIKACHU male	*pain100	MEGAPAIN
+$playersound	PIKACHU male	*pain75		MEGAPAIN
+$playersound	PIKACHU male	*pain50		MEGAPAIN
+$playersound	PIKACHU male	*pain25		MEGAPAIN
+$playersound	PIKACHU male	*grunt		LAND
+$playersound	PIKACHU male	*land		LAND
+$playersound	PIKACHU male	*jump		dsnone
+$playersound	PIKACHU male	*fist		dsnone
+$playersound	PIKACHU male	*usefail	FATLAND
+$playersound	PIKACHU male	*taunt		CRY077
+
+$playersound	RAICHU male	*death		MEGADEAT
+$playersound	RAICHU male	*xdeath		MEGADEAT
+$playersound	RAICHU male	*gibbed		MEGADEAT
+$playersound	RAICHU male	*pain100	MEGAPAIN
+$playersound	RAICHU male	*pain75		MEGAPAIN
+$playersound	RAICHU male	*pain50		MEGAPAIN
+$playersound	RAICHU male	*pain25		MEGAPAIN
+$playersound	RAICHU male	*grunt		FATLAND
+$playersound	RAICHU male	*land		FATLAND
+$playersound	RAICHU male	*jump		dsnone
+$playersound	RAICHU male	*fist		dsnone
+$playersound	RAICHU male	*usefail	FATLAND
+$playersound	RAICHU male	*taunt		CRY078
+
 
 //--[NewPokemon]--

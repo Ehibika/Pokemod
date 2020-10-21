@@ -474,6 +474,7 @@ OB_FUTURESIGHT = "%k Defeated %o using FUTURESIGHT!";
 OB_CALMMIND = "%k Defeated %o using CALMMIND!";
 OB_PSYSHOCK = "%k Defeated %o using PSYSHOCK!";
 OB_TRICK = "%k Defeated %o using TRICK!";
+//OB_BulkUp = "%k Defeated %o using BulkUp!";
 OB_FOCUSBLAST = "%k Defeated %o using FOCUSBLAST!";
 OB_PSYCHOCUT = "%k Defeated %o using PSYCHOCUT!";
 OB_PSYCHOSHIFT = "%k Defeated %o using PSYCHOSHIFT!";
@@ -1200,6 +1201,37 @@ D075_STATS2 = "\cfSP.ATK:\cj <00> \cfSP.DEF:\cj <00>";
 D075_STATS3 = "\cfSPD:\cj <00> \cfHP:\cj <00>";
 D075_ARC = "\cj <Archetype> ";
 D075_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+
+//#region -=- PICHU-=-
+D076_NAME = "\cjPICHU";
+D076_TYPE = "\cj<Type>";
+D076_STATS1 = "\cfATK:\cj <00> \cfDEF:\cj <00>";
+D076_STATS2 = "\cfSP.ATK:\cj <00> \cfSP.DEF:\cj <00>";
+D076_STATS3 = "\cfSPD:\cj <00> \cfHP:\cj <00>";
+D076_ARC = "\cj <Archetype> ";
+D076_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+//#region -=- PIKACHU-=-
+D077_NAME = "\cjPIKACHU";
+D077_TYPE = "\cj<Type>";
+D077_STATS1 = "\cfATK:\cj <00> \cfDEF:\cj <00>";
+D077_STATS2 = "\cfSP.ATK:\cj <00> \cfSP.DEF:\cj <00>";
+D077_STATS3 = "\cfSPD:\cj <00> \cfHP:\cj <00>";
+D077_ARC = "\cj <Archetype> ";
+D077_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+//#region -=- RAICHU-=-
+D078_NAME = "\cjRAICHU";
+D078_TYPE = "\cj<Type>";
+D078_STATS1 = "\cfATK:\cj <00> \cfDEF:\cj <00>";
+D078_STATS2 = "\cfSP.ATK:\cj <00> \cfSP.DEF:\cj <00>";
+D078_STATS3 = "\cfSPD:\cj <00> \cfHP:\cj <00>";
+D078_ARC = "\cj <Archetype> ";
+D078_EVO = "\c[MenuRed]Does not evolve";
 //#endregion
 
 
@@ -2935,8 +2967,8 @@ M214_POWER = "\cfPower:\cj --";
 M214_DESC = "\cf<Desc>";
 //#endregion
 
-//#region -=- 215: <BlankMove> -=-
-M215_NAME = "\cj <BlankMove>";
+//#region -=- 215: BulkUp -=-
+M215_NAME = "\cj BulkUp";
 M215_TYPE = "\cj <Type>";
 M215_CATEGORY = "\cf <Category>";
 M215_POWER = "\cfPower:\cj --";

@@ -232,6 +232,7 @@
 // #include "actors/Moves/CalmMind.txt"
 // #include "actors/Moves/Psyshock.txt"
 // #include "actors/Moves/Trick.txt"
+// #include "actors/Moves/BulkUp.txt"
 // #include "actors/Moves/FocusBlast.txt"
 #include "actors/Moves/PsychoCut.txt"
 // #include "actors/Moves/PsychoShift.txt"
@@ -316,6 +317,7 @@
 #include "Actors/Classes/Pokemon/071_Exeggcute.txt"
 #include "Actors/Classes/Pokemon/073_Torkoal.txt"
 #include "Actors/Classes/Pokemon/074_Slugma.txt"
+#include "Actors/Classes/Pokemon/076_Pichu.txt"
 
 //--[NewPokemon]--
 
@@ -364,4 +366,23 @@
 #Include "Actors/Classes/Rentals/R034_piplup.Txt"
 #Include "Actors/Classes/Rentals/R035_prinplup.Txt"
 #Include "Actors/Classes/Rentals/R036_empoleon.Txt"
+
+#Include "Actors/Classes/Rentals/R037_Dreepy.Txt"
+#Include "Actors/Classes/Rentals/R038_Drakloak.Txt"
+#Include "Actors/Classes/Rentals/R039_Dragapult.Txt"
+
+#Include "Actors/Classes/Rentals/R040_Dratini.Txt"
+#Include "Actors/Classes/Rentals/R041_Dragonair.Txt"
+#Include "Actors/Classes/Rentals/R042_Dragonite.Txt"
+
+#Include "Actors/Classes/Rentals/R043_Bagon.Txt"
+#Include "Actors/Classes/Rentals/R044_Shelgon.Txt"
+#Include "Actors/Classes/Rentals/R045_Salamence.Txt"
+
+#Include "Actors/Classes/Rentals/R046_Slowpoke.Txt"
+#Include "Actors/Classes/Rentals/R047_Slowbro.Txt"
+#Include "Actors/Classes/Rentals/R048_Slowking.Txt"
+
+#Include "Actors/Classes/Rentals/R049_Staryu.Txt"
+#Include "Actors/Classes/Rentals/R050_Starmie.Txt"
 //--[NewPokemon]--

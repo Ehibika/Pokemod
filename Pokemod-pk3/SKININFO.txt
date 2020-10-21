@@ -994,5 +994,44 @@ gender = male
     gender = male
     }
 
+    {
+        name = "Pichu"
+        sprite = P076
+        class = Pichu
+        dsnoway = LAND
+        dsoof = LAND
+        dspldeth = MEGADEAT
+        dspdiehi = MEGADEAT
+        dsplpain = MEGAPAIN
+        dstaunt = cry076
+        gender = male
+        }
+        
+        {
+            name = "Pikachu"
+            sprite = P077
+            class = Pichu
+            dsnoway = LAND
+            dsoof = LAND
+            dspldeth = MEGADEAT
+            dspdiehi = MEGADEAT
+            dsplpain = MEGAPAIN
+            dstaunt = cry077
+            gender = male
+            }
+            
 
+{
+    name = "Raichu"
+    sprite = P078
+    class = Pichu
+    dsnoway = FATLAND
+    dsoof = FATLAND
+    dspldeth = MEGADEAT
+    dspdiehi = MEGADEAT
+    dsplpain = MEGAPAIN
+    dstaunt = Cry078
+    gender = male
+    }
+        
 //--[NewPokemon]--

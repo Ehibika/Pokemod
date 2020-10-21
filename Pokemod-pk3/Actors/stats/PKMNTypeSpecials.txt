@@ -122,7 +122,7 @@ actor GroundTypeSpecial : CustomInventory
 states
 {
 pickup:
-TNT1 A 0 //A_GiveInventory("",1)
+TNT1 A 0 A_GiveInventory("ParalyzeProof",1)
 stop
 }
 }
@@ -133,7 +133,7 @@ actor GroundTypeSpecialClear : CustomInventory
 states
 {
 pickup:
-TNT1 A 0 //A_TakeInventory("",99) 
+TNT1 A 0 A_TakeInventory("ParalyzeProof",99) 
 stop
 }
 }
@@ -149,7 +149,7 @@ actor RockTypeSpecial : CustomInventory
 states
 {
 pickup:
-TNT1 A 0 //A_GiveInventory("",1)
+TNT1 A 0 A_GiveInventory("ParalyzeProof",1)
 stop
 }
 }

@@ -1,0 +1,86 @@
+/*
+[+]===================================[+]
+
+[+]===================================[+]
+*/
+
+
+Actor R_Slowpoke : ClassBaseRentals 
+{
+Player.DisplayName "Slowpoke"
+Player.SoundClass "Slowpoke"
+
+Player.StartItem "PKMNRentalKit"
+//============|
+Player.StartItem "SlowpokeRentalSetupItem"
+//============|
+Player.StartItem "Base_HP", 95
+Player.StartItem "Base_PAttack", 135
+Player.StartItem "Base_PDefense", 80
+Player.StartItem "Base_SAttack", 110
+Player.StartItem "Base_SDefense", 80
+
+//============|
+
+States
+{
+Spawn: 
+P046 A 0
+P046 B 1 
+P046 A 1
+GoTo Spawn+2
+See:
+P046 BCDE 5
+GoTo Spawn+1
+Missile:
+P046 A 0 A_JumpIfInventory("ConshotTimer",1,2) 
+P046 F 5 
+P046 G 4
+GoTo Spawn+2
+
+PainFix:
+P046 H 0 
+GoTo PainFrames
+}
+}
+
+actor SlowpokeRentalMoves : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_JumpIf(CallACS("RentalBotCheck") == 1,"BotWep")
+
+TNT1 A 0 A_GiveInventory("HydroPumpMove1")
+TNT1 A 0 A_GiveInventory("WaterfallMove2")
+TNT1 A 0 A_GiveInventory("YawnMove3")
+TNT1 A 0 A_GiveInventory("WhirlpoolMove4")
+stop
+
+BotWep:
+TNT1 A 0 A_GiveInventory("HydroPumpMove1")
+stop
+}
+}
+
+ actor SlowpokeRentalSetupItem : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 ACS_NamedExecuteAlways("PKMN_RentalsSetup",0,Dex_Slowpoke)
+stop
+}
+}

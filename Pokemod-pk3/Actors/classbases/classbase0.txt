@@ -37,6 +37,7 @@ var int user_wepangle;
 var int user_weppitch;
 var int user_wepangle2;
 var int user_HitMemory;
+var int user_HitFrame;
 
 var int user_RemoteX;
 var int user_RemoteY;

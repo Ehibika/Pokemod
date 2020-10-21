@@ -2,6 +2,7 @@
 const int RC_A = 1;
 const int RC_B = 2;
 const int RC_C = 4;
+const int RC_D = 8;
 
 actor WepMasterBase0 : Weapon
 {
@@ -165,11 +166,12 @@ actor SpawnInBuffer : Powerup {inventory.amount 1 Powerup.Duration 17}
 actor Recovery_A : Powerup {inventory.amount 1 Powerup.Duration 35}
 actor Recovery_B : Recovery_A {}
 actor Recovery_C : Recovery_A {}
-
+actor Recovery_D : Recovery_A {}
 
 actor FullRecovery_A : PowerupGiver
 {
-//inventory.maxamount 0
+inventory.amount 1
+inventory.maxamount 1
 +INVENTORY.AUTOACTIVATE
 Powerup.Duration 35
 powerup.type "Recovery_A"
@@ -183,7 +185,8 @@ actor PartRecovery_A : FullRecovery_A{Powerup.Duration 7}
 
 actor FullRecovery_B : PowerupGiver
 {
-//inventory.maxamount 0
+inventory.amount 1
+inventory.maxamount 1
 +INVENTORY.AUTOACTIVATE
 Powerup.Duration 35
 powerup.type "Recovery_B"
@@ -197,7 +200,8 @@ actor PartRecovery_B : FullRecovery_B{Powerup.Duration 7}
 
 actor FullRecovery_C : PowerupGiver
 {
-//inventory.maxamount 0
+inventory.amount 1
+inventory.maxamount 1
 +INVENTORY.AUTOACTIVATE
 Powerup.Duration 35
 powerup.type "Recovery_C"
@@ -209,6 +213,21 @@ actor SemiRecovery_C : FullRecovery_C{Powerup.Duration 20}
 actor HalfRecovery_C : FullRecovery_C{Powerup.Duration 17}
 actor PartRecovery_C : FullRecovery_C{Powerup.Duration 7}
 
+
+actor FullRecovery_D : PowerupGiver
+{
+inventory.amount 1
+inventory.maxamount 1
++INVENTORY.AUTOACTIVATE
+Powerup.Duration 35
+powerup.type "Recovery_D"
+}
+
+actor 3Recovery_D : FullRecovery_D{Powerup.Duration 3}
+actor 5Recovery_D : FullRecovery_D{Powerup.Duration 5}
+actor SemiRecovery_D : FullRecovery_D{Powerup.Duration 20}
+actor HalfRecovery_D : FullRecovery_D{Powerup.Duration 17}
+actor PartRecovery_D : FullRecovery_D{Powerup.Duration 7}
 /*
 actor MoveRecoveryHandler : BasicHelper 
 {

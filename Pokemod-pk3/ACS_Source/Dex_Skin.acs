@@ -114,5 +114,8 @@ str SkinDEX [MAXDEX][2] = {
     /*|74|*/{"Slugma","Base"},
     /*|75|*/{"Magcargo","Magcargo"},   
 
+    /*|76|*/{"Pichu","Base"},
+    /*|77|*/{"Pikachu","Pikachu"},  
+    /*|78|*/{"Raichu","Raichu"},  
     //--[NewPokemon]--
     };

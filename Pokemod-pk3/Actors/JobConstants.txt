@@ -238,7 +238,7 @@ const int Move_FutureSight = 211;
 const int Move_CalmMind = 212;
 const int Move_Psyshock = 213;
 const int Move_Trick = 214;
-//const int Move_<BlankMove> = 215;
+const int Move_BulkUp = 215;
 const int Move_FocusBlast = 216;
 const int Move_PsychoCut = 217;
 const int Move_PsychoShift = 218;
@@ -366,6 +366,11 @@ const int Dex_TORKOAL = 73;
 
 const int Dex_SLUGMA = 74;
 const int Dex_MAGCARGO = 75;
+
+const int Dex_PICHU = 76;
+const int Dex_PIKACHU = 77;
+const int Dex_RAICHU = 78;
+
 //--[NewPokemon]--
 //=======|TM Type Flags|==========
 const int TMT_NULL = 0;

@@ -38,6 +38,7 @@ AddPlayerClass Ralts
 AddPlayerClass Exeggcute
 AddPlayerClass Torkoal
 AddPlayerClass Slugma
+AddPlayerClass Pichu
 
 //--[NewPokemon]--
 

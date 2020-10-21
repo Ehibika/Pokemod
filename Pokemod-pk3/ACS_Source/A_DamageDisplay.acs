@@ -32,16 +32,17 @@ script "PKMN_CV_DamageDisplay" ENTER
 			SpawnDivideZeroBug = GetActorProperty(0, APROP_SpawnHealth);
 			if(SpawnDivideZeroBug == 0)
 			{
-				HPP = GetActorProperty(0, APROP_Health);
-				delay(2); 
+				HPP = HPF;//GetActorProperty(0, APROP_Health);
+				delay(1); 
 				HPF = GetActorProperty(0, APROP_Health); 
 			}
 			else
 			{
-				HPP = GetActorProperty(0, APROP_Health);
-				delay(2); 
+				HPP = HPF;//GetActorProperty(0, APROP_Health);
+				delay(1); 
 				HPF = GetActorProperty(0, APROP_Health); 
 			}
+			SetUserVariable(0,"user_HitFrame",0);
 			HPC = HPP-HPF;
 			 
 				if(HPC != 0)
@@ -77,6 +78,7 @@ script "PKMN_CV_DamageDisplay" ENTER
 					{ Damagedigits = GetTotalDigits(HPCC);
 						if(HPCC > 999){HPCC = 999;}
 						SetUserVariable(0,"User_HitMemory",HPCC);
+						SetUserVariable(0,"user_HitFrame",1);
 						//log(s:"Got hurt,", i:getNthDigit(HPCC,10,3),i:getNthDigit(HPCC,10,2),i:getNthDigit(HPCC,10,1));
 						
 						x = GetActorX(0) + random(-DDNUMDIST, DDNUMDIST);
