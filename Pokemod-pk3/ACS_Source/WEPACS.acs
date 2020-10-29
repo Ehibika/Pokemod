@@ -13,7 +13,7 @@
 
 int PlayerClassWepMem[64];
 
-#LIBDEFINE MAX_WEAPONS_GLOBAL 260 //[Trill] Keep buffer room here for patches
+#LIBDEFINE MAX_WEAPONS_GLOBAL 280 //[Trill] Keep buffer room here for patches
 
 //#DEFINE MAX_WEAPONS_GLOBAL 87 // Maximum number of weapons for the following arrays
 // v6's weapon total would be 94
@@ -408,6 +408,11 @@ str weapons_ammo[MAX_WEAPONS_GLOBAL][7] =
 {"IngrainMove", "IngrainPP", "Ingrain", 1.0, "NO", "NO", "SLOT_NONE"},
 {"AvalancheMove", "AvalanchePP", "Avalanche", 1.0, "NO", "NO", "SLOT_NONE"},
 {"MistMove", "MistPP", "Mist", 1.0, "NO", "NO", "SLOT_NONE"},
+{"ThunderboltMove", "ThunderboltPP", "Thunderbolt", 1.0, "NO", "NO", "SLOT_NONE"},
+{"ThunderMove", "ThunderPP", "Thunder", 1.0, "NO", "NO", "SLOT_NONE"},
+{"SparkMove", "SparkPP", "Spark", 1.0, "NO", "NO", "SLOT_NONE"},
+{"ShockwaveMove", "ShockwavePP", "Shockwave", 1.0, "NO", "NO", "SLOT_NONE"},
+{"FirepunchMove", "FirepunchPP", "Firepunch", 1.0, "NO", "NO", "SLOT_NONE"},
 //--[NewMove]--
 };
 #endregion
@@ -1046,7 +1051,7 @@ if(CheckInventory(WepAmmoName)<1) return false;
 if(CheckInventory("DisableMark"))
 	{if(CheckInventory("DisableFlag") == ThisWeapon){return false;}}
 
-if(CheckInventory("HazedFlagEnemy"))
+if(CheckInventory("HazeFlag"))
     {switch(ThisWeapon) {
 		Case GROWTH: return false; break;
 		Case AMNESIA: return false; break;
@@ -1059,6 +1064,11 @@ if(CheckInventory("HazedFlagEnemy"))
 		Case DEFENSECURL: return false; break;
 		Case SWORDDANCE: return false; break;
 		Case NASTYPLOT: return false; break;
+		Case RAGE: return false; break;
+		Case MEDITATE: return false; break;
+		Case CALMMIND: return false; break;
+		Case REFLECT: return false; break;
+		Case LIGHTSCREEN: return false; break;
         default: break;
     }
 }
@@ -1157,6 +1167,49 @@ if(CheckInventory("TauntFlag"))
 	Case TOXICSPIKES: return false; break;
 	Case LEER: return false; break;
 	Case TAUNT: return false; break;
+	Case CONFUSERAY: return false; break;
+	Case DISABLE: return false; break;
+	Case GRUDGE: return false; break;
+	//Case SPITE: return false; break;
+	Case RECOVER: return false; break;
+	Case IMPRISON: return false; break;
+	Case BARRIER: return false; break;
+	Case STUNSPORE: return false; break;
+	Case THUNDERWAVE: return false; break;
+	//Case TELEPORT: return false; break;
+	Case ALLYSWITCH: return false; break;
+	Case POWERSPLIT: return false; break;
+	Case POWERSWAP: return false; break;
+	Case GUARDSPLIT: return false; break;
+	Case GUARDSWAP: return false; break;
+	Case BULKUP: return false; break;
+	Case CALMMIND: return false; break;
+	Case COSMICPOWER: return false; break;
+	Case ENDURE: return false; break;
+	Case MAGICCOAT: return false; break;
+	Case SCREECH: return false; break;
+	Case CHARM: return false; break;
+	Case CAPTIVATE: return false; break;
+	Case SUPERSONIC: return false; break;
+	Case TRICK: return false; break;
+	Case PSYCHOSHIFT: return false; break;
+	Case MEDITATE: return false; break;
+	Case POISONGAS: return false; break;
+	Case SWAGGER: return false; break;
+	Case FLATTER: return false; break;
+	Case ASSIST: return false; break;
+	Case NIGHTMARE: return false; break;
+	Case WISH: return false; break;
+	Case HEALINGWISH: return false; break;
+	Case MOONLIGHT: return false; break;
+	Case REST: return false; break;
+	Case SLACKOFF: return false; break;
+	Case WORRYSEED: return false; break;
+	Case INGRAIN: return false; break;
+	Case MIST: return false; break;
+	Case BELLYDRUM: return false; break;
+	Case BLOCK: return false; break;
+	Case WIDEGUARD: return false; break;
     }
 }
 

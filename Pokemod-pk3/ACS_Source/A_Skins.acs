@@ -13,7 +13,7 @@
 #import "DB_Player.acs"
 #include "zcommon.acs"
 
-
+//#region -=- depreciated -=-
 int YourTrueForm;
 /*
 script "SetPokeSkin" (int Skin, int update) CLIENTSIDE
@@ -170,7 +170,7 @@ while(true) {
 }
 }
 */
-
+//#endregion
 #DEFINE S_MAX_PLAYERS 64
 
 int playerCooldown[S_MAX_PLAYERS];
@@ -180,7 +180,7 @@ int playerDisguise[S_MAX_PLAYERS];
 int playerCurrentSkin[S_MAX_PLAYERS];
 
 #DEFINE KEYCONF_CLASSCOUNT 30 //18
-#DEFINE SKIN_OFFSET 114 + KEYCONF_CLASSCOUNT //128 // 
+#DEFINE SKIN_OFFSET 133 + KEYCONF_CLASSCOUNT //128 // 
 
 script "SetPokeSkin" (int Skin, int update) //CLIENTSIDE
 {
@@ -311,7 +311,7 @@ function void DisguiseFunc2c(int i)
 {
 int disguise = playerDisguise[i];
 if(disguise!=playerCurrentSkin[i]) {
-    //log(i:disguise,s:" ",i:playerCurrentSkin[i]);
+    log(i:disguise,s:" ",i:playerCurrentSkin[i]);
 	ACS_NamedExecuteAlways("DisguisePlayer",0,disguise,i);
 	playerCooldown[i] = THE_COOLDOWN;
 }
@@ -345,6 +345,7 @@ Script "DisconnectDisguise" (int Gone) DISCONNECT
     ACS_NamedExecuteWithResult("SetUnDisguise",Gone);
 
 }
+
 
 Script "ForceSkins" OPEN CLIENTSIDE
 {

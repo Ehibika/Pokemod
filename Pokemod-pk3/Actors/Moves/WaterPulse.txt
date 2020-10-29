@@ -72,12 +72,12 @@ actor WaterPulsePP : Ammo {inventory.amount 1 inventory.Maxamount 20}
 //[+]========================================================================[+]
 actor WaterPulseFireball : BasicProjectile
 {
-Speed 65
+Speed 48
 Damage (MBP_WaterPulse1)
 DamageType "WaterPulse"
 obituary "$OB_WaterPulse"
-radius 35
-Reactiontime 13
+radius 16
+Reactiontime 26
 height 16
 scale 3.5
 States

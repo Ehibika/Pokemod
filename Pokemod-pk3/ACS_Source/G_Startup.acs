@@ -42,7 +42,7 @@ GiveInventory(StrParam(s:GetActorClass(0),s:"SetupItem"),1);
 if(GetCvar("sv_EnableShop") == 1){GiveInventory("SetupShop",1);}
 GiveInventory("SpawnInBuffer",1);
 GiveInventory("EXPBountyitem",1000);
-GiveInventory("SpawnSafeZone",1);
+//GiveInventory("SpawnSafeZone",1);
 
 if(PlayerIsBot(PlayerNumber())){GiveInventory("InSafeZone",1); ACS_NamedExecuteAlways("EvolveTrigger",0);}
 
@@ -184,6 +184,7 @@ Script "PKMNACS_StartupScript" (int BaseDex)
 			ACS_NamedExecuteAlways("SetPKMNLevel",0,GetSpawnLevel(),1);
 			//ACS_NamedExecuteAlways("SetPokeSkin",0,BaseDex);
 			ACS_NamedExecuteAlways("GiveStartingFund",0);
+			ACS_NamedExecuteWithResult("SetUnDisguise",PlayerNumber());
 			GiveStartingMoves();
 			Terminate;
 			break;
@@ -204,6 +205,7 @@ Script "PKMNACS_StartupScript" (int BaseDex)
 			ACS_NamedExecuteAlways("SetPlayerType",0);
 			ACS_NamedExecuteAlways("SetPKMNLevel",0,GetSpawnLevel(),1);
 			//ACS_NamedExecuteAlways("SetPokeSkin",0,BaseDex);
+			ACS_NamedExecuteWithResult("SetUnDisguise",PlayerNumber());
 			GiveStartingMoves();
 			GiveInventory("PersistentLoadout",1);
 			break;
@@ -415,7 +417,7 @@ ACS_NamedExecuteAlways("SetPKMNLevel",0,GetSpawnLevel(),1);
 ACS_NamedExecuteAlways("StatInitializer",0);
 ACS_NamedExecuteAlways("SetPlayerType",0);
 GiveInventory("PersistentLoadout",1);
-GiveInventory("SpawnSafeZone",1);
+//GiveInventory("SpawnSafeZone",1);
 }   
 
 Function Void GiveRentalMoves (void)

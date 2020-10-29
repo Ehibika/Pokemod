@@ -7,7 +7,7 @@
 #library "A_Moves"
 #include "zcommon.acs"
 #include "8bdmlib.acs"
-#import "tools.acs"
+//#import "tools.acs"
 #import "DB_Player.acs"
 #import "DB_Data.acs"
 #import "Dex_Pokemon.acs"
@@ -509,6 +509,24 @@ Script "SubstituteBarrierWarper" (void) CLIENTSIDE
 	Thing_Remove(0);
 }
 
+
+Script "GeneralWarper" (void) CLIENTSIDE
+{
+	int Player = ACS_NamedExecuteWithResult("core_gettarget",0);
+	
+	// Loop if shield is active
+	while(GetActorProperty(Player, APROP_HEALTH)>0
+	&& CheckActorInventory(Player, "BasicWarperHold") > 0 
+	){
+		Delay(1);
+	}
+	
+    // Remove
+    SetActorState(0,"Death");
+    Delay(17);
+	Thing_Remove(0);
+}
+
 #DEFINE STATUS_MINOR  1
 #DEFINE STATUS_MAJOR  2
 #DEFINE STATUS_SPECIALTY  4
@@ -546,7 +564,7 @@ if(CheckInventory("ProtectGuard")
     if(CheckInventory("SafeguardPower"))
     {Output = Output | STATUS_MAJOR | STATUS_MINOR | STATUS_SPECIALTY | STATUS_TAUNT;}
 
-    if(CheckInventory("HazedFlagAlly"))
+    if(CheckInventory("MistFlag"))
     {Output = Output | STATUS_STATS;}
 
 SetResultValue(Output & Input);

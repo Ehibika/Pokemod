@@ -243,4 +243,9 @@ WorrySeed
 Ingrain
 Avalanche
 Mist
+Thunderbolt
+Thunder
+Spark
+Shockwave
+Firepunch
 //--[NewMove]--

@@ -38,6 +38,7 @@ damagefactor "Supersonic", 1.0
 damagefactor "PoisonGas", 1.0
 damagefactor "DestinyBond", 1.0
 damagefactor "WorrySeed", 1.0
+//--[NewStatusMove]--
 }
 
 actor PDef : Def
@@ -126,7 +127,10 @@ damagefactor "StoredPower", 1.0
 damagefactor "Moonblast", 1.0
 damagefactor "Uproar", 1.0
 damagefactor "DreamEater", 1.0
-
+damagefactor "Thunderbolt", 1.0
+damagefactor "Thunder", 1.0
+damagefactor "Shockwave", 1.0
+//--[NewSpecialMove]--
 }
 
 actor SDef : Def
@@ -224,5 +228,7 @@ damagefactor "Nightmare", 1.0
 damagefactor "ShadowSneak", 1.0
 damagefactor "EggBomb", 1.0
 damagefactor "Avalanche", 1.0
-
+damagefactor "Spark", 1.0
+damagefactor "Firepunch", 1.0
+//--[NewPhysicalMove]--
 }

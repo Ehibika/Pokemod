@@ -314,6 +314,14 @@ actor PsyBeamLaser : BasicProjectile
 {
 +SKYEXPLODE
 +FORCEXYBILLBOARD
++HEXENBOUNCE
+-ALLOWBOUNCEONACTORS
++CANBOUNCEWATER
++USEBOUNCESTATE
+WALLBOUNCEFACTOR 0.91
+BOUNCEFACTOR 0.91
+
+BounceCount 3
 
 Reactiontime 70
 Radius 8
@@ -333,6 +341,10 @@ TNT1 A 0 A_SpawnItemEx("PsyBeamLaserFX1",0,-1,4,0,0,0,0,1)
 TNT1 A 1 A_SpawnItemEx("PsyBeamLaserFX2",0,0,0,momx,momy,momz,0,9)
 TNT1 A 0 A_CountDown
 loop
+
+Bounce:
+TNT1 A 0 A_SpawnItemEx("AuroraBeamBounce",0,-1,4,0,0,0,0,1)
+Goto Spawn
 
 Death:
 TNT1 A 0 

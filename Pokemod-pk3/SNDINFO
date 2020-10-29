@@ -151,6 +151,9 @@ $attenuation Move/Blizzard 0.5
 Move/Confusion PSILOVE1
 Move/Psychic1 PSILOVE2
 Move/Psychic2 PSILOVE3
+Move/Extrasensory PSILOVE4
+
+Move/ThunderBolt S_MV_E4
 
 Misc/UseMove MOVEUSE
 Misc/Levelup LEVELUP

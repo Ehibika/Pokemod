@@ -26,22 +26,26 @@ Fire.Begin:
 "####" B 0 A_SetUserVar("user_wepangle2",90)
 "####" B 0 A_GiveInventory("AquaTailSwingTimer")
 "####" B 0 A_Playsoundex("misc/kingswing","Weapon")
-"####" A 0 A_GiveInventory("DashSet_B")
+//"####" A 0 A_GiveInventory("DashSet_B")
 "####" A 0 ACS_NamedExecuteAlways("TakePP",0,Move_AquaTail,1)
 "####" B 0 A_Jump(256,"Fire.Blade")
 Goto Fire.Blade
 
 Fire.Blade:
+"####" B 17 A_FireCustomMissile("AquaTailWatcher",0,0,0,0,0,0)
+
+/*
 "####" B 1 A_FireCustomMissile("AquaTailStart",CallACS("GRAB_MEMANGLE",2),0,0,0,0,pitch)
 "####" B 0 A_FireCustomMissile("AquaTailSlashFX1",CallACS("GRAB_MEMANGLE",2),0,0,0,0,pitch)
 "####" B 0 A_SetUserVar("user_wepangle2",CallACS("GRAB_MEMANGLE",2)-AQTL_SwingSPD)
 "####" B 0 A_JumpIfInventory("AquaTailSwingTimer",1,"Fire.Blade")
+*/
 "####" B 0 A_Jump(256,"Fire.After")
 Goto Fire.After
 
 Fire.After:
 "####" B 1 A_GiveInventory("FullRecovery_B")
-"####" A 0 A_GiveInventory("DashSetOff")
+//"####" A 0 A_GiveInventory("DashSetOff")
 "####" C 0 A_REfire("Fire")
 "####" B 0 A_Jump(256,"Fire.End")
 Goto Fire.End
@@ -87,6 +91,32 @@ damagefactor "AquaTail", 0.0
 //[+]========================================================================[+]
 //--------------------------------|Projectiles |--------------------------------
 //[+]========================================================================[+]
+actor AquaTailWatcher
+{
+    PROJECTILE
+    +NOINTERACTION
+    renderstyle none
+    speed 32
+    height 1
+    radius 1
+    States
+    {
+    Spawn:
+		TNT1 A 0
+    Spawn1:
+        TNT1 A 1 A_Warp(AAPTR_TARGET, cos(-pitch)*16,0,32+(sin(-pitch)*16), 0, WARPF_USECALLERANGLE)
+        TNT1 A 0 A_SpawnItemEx("AquaTailStart", 0, 0, 0, cos(pitch), 0, sin(-pitch), 90-(10*args[0]), SXF_MULTIPLYSPEED)
+        TNT1 A 0 A_SpawnItemEx("AquaTailSlashFX1", 0, 0, 0, cos(pitch), 0, sin(-pitch), 90-(10*args[0]), SXF_MULTIPLYSPEED)
+		TNT1 A 0 A_SetArg(0,args[0]+1)
+		TNT1 A 0 A_JumpIf(args[0] < 18,"Spawn1")
+		TNT1 A 0 A_SetArg(0,0)
+        stop
+    WindDown1:
+        TNT1 A 0
+        stop
+    }
+}
+
 
 actor AquaTailStart 
 {

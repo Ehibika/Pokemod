@@ -1,0 +1,72 @@
+/* -=- Safe Zone -=-
+ * Code that handles safe zones, which are areas that allow for player setup
+ *
+ * 
+
+*/
+
+#library "A_SafeZone"
+#import "DB_Data.acs"
+#include "zcommon.acs"
+
+#DEFINE P_ZONESPAWN 8000
+
+
+Script "SafeZone_Enter" ENTER
+{
+    delay(5);
+    int pln = playerNumber();
+    int tid = pln+1000;
+
+
+    if(GetCvar("lastmanstanding")==1||GetCvar("teamlms")==1)
+    {
+    if(GetGameModeState() == 1){GiveInventory("SpawnSafeZone",1);}
+    Terminate;
+    }
+
+    
+
+    If(ThingCount(0, pln+P_ZONESPAWN)>0)
+    {
+        Thing_Remove(pln+P_ZONESPAWN);
+    }
+    SpawnSpotForced("PersonalSafeZoneField",ActivatorTID(),pln+P_ZONESPAWN,0);
+
+    SetActivator(pln+P_ZONESPAWN,AAPTR_DEFAULT);
+    SetPointer(AAPTR_TARGET, tid,0,PTROP_UNSAFETARGET);
+}
+
+Script "SafeZone_Respawn" RESPAWN
+{
+ACS_NamedExecuteAlways("SafeZone_Enter",0);
+}
+
+script "SafeZone_disconnect" (int who) DISCONNECT
+{
+    Thing_Remove(who+P_ZONESPAWN);
+}
+
+Script "EscapeToSpawn" (void)
+{
+
+
+    int pln = playerNumber();
+
+
+    if(GetCvar("lastmanstanding")==1||GetCvar("teamlms")==1)
+    {
+    if(GetGameModeState() == 2){GiveInventory("TLMSOrbEscape",1);}
+    Terminate;
+    }
+
+Teleport(pln+P_ZONESPAWN, 0, false);
+
+}
+
+
+Script "SpawnFlagHealStations" (void)
+{
+
+    SpawnSpotForced(strParam(s:GetActorClass(0),s:"_HealUnit"),0,0,0);    
+}

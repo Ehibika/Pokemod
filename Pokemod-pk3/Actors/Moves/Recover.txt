@@ -88,6 +88,8 @@ actor RecoverParticle : Basicprojectile
 scale 1.2
 +SeekerMissile
 speed 7
+Damage 0
++THRUACTORS
 States
 {
 Spawn:

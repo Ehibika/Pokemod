@@ -70,7 +70,7 @@ LISTMENU "MainMenu"
 	{
 		Font "DBIGFONT", "MenuWhite"
 		TextItem "SinglePlayer", "s", "PlayerclassMenu"
-		TextItem "Multiplayer", "m", "ZA_MultiplayerOptions" // [Lego]
+		TextItem "Multiplayer", "m", "ZA_MultiplayerOptions" // [Russ]
 		TextItem "Player Setup", "p", "PlayerMenu"
 		Font "DBIGFONT", "MenuGreen" 
 		TextItem "PKMN Setup", "h", "ShopMenu"
@@ -338,6 +338,56 @@ OptionValue 8BDM_MapCards
 	2.0, "Maps and Bosses"
 }
 
+OptionValue "MM8Music"
+{
+	0, "Random"
+	1, "PSX"
+	2, "Saturn"
+}
+OptionValue "MM10Music"
+{
+	0, "Random"
+	1, "MM10"
+	2, "Gameboy"
+}
+OptionMenu "OptionsMenu"
+{
+	Title "OPTIONS"
+	// [Russ] These were moved to the main menu.
+	//Submenu "Multiplayer Options",		"ZA_MultiplayerOptions" // [TP]
+	//StaticText " " // [TP]
+	Submenu "Customize Controls",		"CustomizeControls"
+	Submenu "Mouse options",			"MouseOptions"
+	Submenu "Joystick options",			"JoystickOptions"
+	StaticText " "
+	Submenu "Message Options", 			"MessageOptions"
+	StaticText " "
+	Submenu "Sound Options",			"SoundOptions"
+	Submenu "Display Options",			"VideoOptions"
+	Submenu "Set video mode",			"VideoModeMenu"
+	Submenu "Advanced Options",			"8BDMAdvancedOptions"
+	
+	StaticText " "
+	
+	StaticText	"MM8BDM Options", 1
+	StaticText " "
+	Option "Display Health Number",			"mm8bdm_healthnumber", "OnOff"
+	Option "Display Ammo Number",			"mm8bdm_ammonumber", "OnOff"
+	Option "Pickup Weapon Colors",			"mm8bdm_noenergycolors", "OffOn"
+	Option "Show Critical Death Gibs",		"mm8bdm_enablegibs", "OnOff"
+	Option "Show Map Creator Cards",		"mm8bdm_mapcards", "8BDM_MapCards"
+	Option "CTF Objective Compass",			"mm8bdm_noctfradar", "OffOn"
+	
+	StaticText " "
+	
+	StaticText	"Music Preferences", 1
+	StaticText " "
+	Option "Tengu Man Stage",			"mm8bdm_music_tenguman", "MM8Music"
+	Option "Enker Stage",			"mm8bdm_music_enker", "MM10Music"
+	Option "Punk Stage",			"mm8bdm_music_punk", "MM10Music"
+	Option "Ballade Stage",			"mm8bdm_music_ballade", "MM10Music"
+}
+
 // Menudef.camera
 
 OptionMenu "8BDMAdvancedOptions"
@@ -352,6 +402,8 @@ OptionMenu "8BDMAdvancedOptions"
 	Submenu "Load Game (Doom)", "LoadGameMenu"
 	Submenu "Save Game (Doom)", "SaveGameMenu"
 	StaticText " "
+	SafeCommand "Boost Save Data", "boostsavedata"
+    StaticText " "
 	SafeCommand "Reset to defaults",	"reset2defaults"
 	SafeCommand	"Reset to last saved",	"reset2saved"
 	Command "Go to console",			"menuconsole"
@@ -503,7 +555,7 @@ OptionMenu "CustomizeControls"
 	Title "CUSTOMIZE CONTROLS"
 	ScrollTop 2
 	StaticTextSwitchable 	"ENTER to change, BACKSPACE to clear", "Press new key for control, ESC to cancel", "ControlMessage"
-	// [Lego] MM8BDM core controls
+	// [Russ] MM8BDM core controls
 	StaticText 	""
 	StaticText	"Basic Controls", 1
 	Control 	"Move forward",			"+forward"

@@ -785,7 +785,7 @@ TNT1 A 0 A_GiveInventory("RestFX_Spawn")
 TNT1 A 0 A_GiveToTarget("HardFreeze")
 TNT1 A 0 A_TakefromTarget("SemiFreezeMark",999)
 FullFreezeCycle:
-TNT1 A 5 A_TakefromTarget("FreezeValue",2)
+TNT1 A 5 A_TakefromTarget("FreezeValue",5)
 TNT1 A 0 A_GiveToTarget("FreezeMark")
 TNT1 A 0 A_GiveToTarget("FreezeTagPickup2")
 TNT1 A 0 A_JumpIfInTargetInventory("CureAll",1,"DeathTake")
@@ -793,7 +793,7 @@ TNT1 A 0 A_JumpIfInTargetInventory("FreezeValue",1,"FullFreezeCycle")
 Goto Death
 
 FreezeCycle:
-TNT1 A 1 A_TakefromTarget("FreezeValue",1)
+TNT1 A 1 A_TakefromTarget("FreezeValue",5)
 TNT1 A 0 A_JumpIfInTargetInventory("CutterFlag",999,"DeathTake")
 TNT1 A 0 A_JumpIfInTargetInventory("CureAll",1,"DeathTake")
 TNT1 A 0 A_JumpIfInTargetInventory("FreezeValue",1,"Spawn")
@@ -1004,6 +1004,7 @@ TNT1 A 0
 stop
 Pickup:
 TNT1 A 0 A_Jumpif(CallACS("CheckStatusGuard",0,STATUS_MINOR),"Nope") //Blocked by protect|Detect|Substitute|Safeguard
+TNT1 A 0 A_Jumpifinventory("FreezeMark",1,"Nope")
 TNT1 A 0 A_Jumpifinventory("CringeMark",1,"Nope")
 TNT1 A 0 A_Jumpifinventory("CringeGuard",1,"Nope")
 //==

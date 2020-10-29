@@ -87,6 +87,7 @@ damagefactor "RapidSpin", 1.3 //W
 damagefactor "FalseSwipe", 1.3 //W
 damagefactor "Fakeout", 1.3 //W
 damagefactor "Thrash", 1.3 //W
+//--[Move|Normal]--
 }
 
 actor Normal2xWeakness : TypeBase
@@ -100,6 +101,8 @@ damagefactor "RapidSpin", 1.6 //2W
 damagefactor "FalseSwipe", 1.6 //2W
 damagefactor "Fakeout", 1.6 //2W
 damagefactor "Thrash", 1.6 //2W
+//--[Move|Normal]--
+
 }
 
 actor NormalResistance : TypeBase
@@ -113,6 +116,8 @@ damagefactor "RapidSpin", 0.7 //R
 damagefactor "FalseSwipe", 0.7 //R
 damagefactor "Fakeout", 0.7 //R
 damagefactor "Thrash", 0.7 //R
+//--[Move|Normal]--
+
 }
 
 actor Normal2xResistance : TypeBase
@@ -126,6 +131,8 @@ damagefactor "RapidSpin", 0.4 //2R
 damagefactor "FalseSwipe", 0.4 //2R
 damagefactor "Fakeout", 0.4 //2R
 damagefactor "Thrash", 0.4 //2R
+//--[Move|Normal]--
+
 }
 
 actor NormalImmunity : TypeBase
@@ -139,6 +146,8 @@ damagefactor "RapidSpin", 0.0 //I
 damagefactor "FalseSwipe", 0.0 //I
 damagefactor "Fakeout", 0.0 //I
 damagefactor "Thrash", 0.0 //I
+//--[Move|Normal]--
+
 }
 
 actor NormalSTAB : STABBase
@@ -151,6 +160,8 @@ damagefactor "SkullBash", 1.15 //S
 damagefactor "RapidSpin", 1.15 //S
 damagefactor "Fakeout", 1.15 //S
 damagefactor "Thrash", 1.15 //S
+//--[Move|Normal]--
+
 }
 
 //[+]========================================================================[+]
@@ -165,6 +176,7 @@ actor FightingWeakness : TypeBase
     damagefactor "Vacuumwave", 1.3 //W
     damagefactor "CloseCombat", 1.3 //W
     damagefactor "HammerArm", 1.3 //W
+    //--[Move|Fighting]--
 }
 
 actor Fighting2xWeakness : TypeBase
@@ -176,6 +188,7 @@ actor Fighting2xWeakness : TypeBase
     damagefactor "Vacuumwave", 1.6 //2W
     damagefactor "CloseCombat", 1.6 //2W
     damagefactor "HammerArm", 1.6 //2W
+    //--[Move|Fighting]--
 }
 
 actor FightingResistance : TypeBase
@@ -187,6 +200,7 @@ actor FightingResistance : TypeBase
     damagefactor "Vacuumwave", 0.7 //R
     damagefactor "CloseCombat", 0.7 //R
     damagefactor "HammerArm", 0.7 //R
+    //--[Move|Fighting]--
 }
 
 actor Fighting2xResistance : TypeBase
@@ -198,6 +212,7 @@ actor Fighting2xResistance : TypeBase
     damagefactor "Vacuumwave", 0.4 //2R
     damagefactor "CloseCombat", 0.4 //2R
     damagefactor "HammerArm", 0.4 //2R
+    //--[Move|Fighting]--
 }
 
 actor FightingImmunity : TypeBase
@@ -209,6 +224,7 @@ actor FightingImmunity : TypeBase
     damagefactor "Vacuumwave", 0.0 //I
     damagefactor "CloseCombat", 0.0 //I
     damagefactor "HammerArm", 0.0 //I
+    //--[Move|Fighting]--
 }
 
 actor FightingSTAB : STABBase
@@ -220,6 +236,7 @@ actor FightingSTAB : STABBase
     damagefactor "Vacuumwave", 1.15 //S
     damagefactor "CloseCombat", 1.15 //S
     damagefactor "HammerArm", 1.15 //S
+    //--[Move|Fighting]--
 }
 //[+]========================================================================[+]
 //--------------------------------|Flying|--------------------------------
@@ -233,6 +250,7 @@ actor FlyingWeakness : TypeBase
     damagefactor "Acrobatics", 1.3 //W
     damagefactor "DrillPeck", 1.3 //W
     damagefactor "AirSlash", 1.3 //W
+    //--[Move|Flying]--
 }
 
 actor Flying2xWeakness : TypeBase
@@ -244,6 +262,7 @@ actor Flying2xWeakness : TypeBase
     damagefactor "Acrobatics", 1.6 //2W
     damagefactor "DrillPeck", 1.6 //2W
     damagefactor "AirSlash", 1.6 //2W
+    //--[Move|Flying]--
 }
 
 actor FlyingResistance : TypeBase
@@ -255,6 +274,7 @@ actor FlyingResistance : TypeBase
     damagefactor "Acrobatics", 0.7 //R
     damagefactor "DrillPeck", 0.7 //R
     damagefactor "AirSlash", 0.7 //R
+    //--[Move|Flying]--
 }
 
 actor Flying2xResistance : TypeBase
@@ -266,6 +286,7 @@ actor Flying2xResistance : TypeBase
     damagefactor "Acrobatics", 0.4 //2R
     damagefactor "DrillPeck", 0.4 //2R
     damagefactor "AirSlash", 0.4 //2R
+    //--[Move|Flying]--
 }
 
 actor FlyingImmunity : TypeBase
@@ -277,6 +298,7 @@ actor FlyingImmunity : TypeBase
     damagefactor "Acrobatics", 0.0 //I
     damagefactor "DrillPeck", 0.0 //I
     damagefactor "AirSlash", 0.0 //I
+    //--[Move|Flying]--
 }
 
 actor FlyingSTAB : STABBase
@@ -288,6 +310,7 @@ actor FlyingSTAB : STABBase
     damagefactor "Acrobatics", 1.15 //S
     damagefactor "DrillPeck", 1.15 //S
     damagefactor "AirSlash", 1.15 //S
+    //--[Move|Flying]--
 }
 //[+]========================================================================[+]
 //--------------------------------|Poison|--------------------------------
@@ -301,6 +324,7 @@ damagefactor "ToxicSpikes", 1.0 //Static
 damagefactor "Sludge", 1.3 //W
 damagefactor "SludgeBomb", 1.3 //W
 damagefactor "Venoshock", 1.3 //W
+//--[Move|Poison]--
 }
 
 actor Poison2xWeakness : TypeBase
@@ -312,6 +336,7 @@ damagefactor "ToxicSpikes", 1.0 //Static
 damagefactor "Sludge", 1.6 //2W
 damagefactor "SludgeBomb", 1.6 //2W
 damagefactor "Venoshock", 1.6 //2W
+//--[Move|Poison]--
 }
 
 actor PoisonResistance : TypeBase
@@ -323,6 +348,7 @@ damagefactor "ToxicSpikes", 1.0 //Static
 damagefactor "Sludge", 0.7 //R
 damagefactor "SludgeBomb", 0.7 //R
 damagefactor "Venoshock", 0.7 //R
+//--[Move|Poison]--
 }
 
 
@@ -335,6 +361,7 @@ damagefactor "ToxicSpikes", 1.0 //Static
 damagefactor "Sludge", 0.4 //2R
 damagefactor "SludgeBomb", 0.4 //2R
 damagefactor "Venoshock", 0.4 //2R
+//--[Move|Poison]--
 }
 
 actor PoisonImmunity : TypeBase
@@ -346,6 +373,7 @@ damagefactor "ToxicSpikes", 0.0 //I
 damagefactor "Sludge", 0.0 //I
 damagefactor "SludgeBomb", 0.0 //I
 damagefactor "Venoshock", 0.0 //I
+//--[Move|Poison]--
 }
 
 actor PoisonSTAB : STABBase
@@ -353,6 +381,7 @@ actor PoisonSTAB : STABBase
 damagefactor "Sludge", 1.15 //S
 damagefactor "SludgeBomb", 1.15 //S
 damagefactor "Venoshock", 1.15 //S
+//--[Move|Poison]--
 }
 
 //[+]========================================================================[+]
@@ -364,6 +393,7 @@ actor GroundWeakness : TypeBase
     damagefactor "Mudslap", 1.3 //W
     damagefactor "MudBomb", 1.3 //W
     damagefactor "Spikes", 1.3 //W
+//--[Move|Ground]--
 }
 
 actor Ground2xWeakness : TypeBase
@@ -372,6 +402,7 @@ actor Ground2xWeakness : TypeBase
     damagefactor "Mudslap", 1.6 //2W
     damagefactor "MudBomb", 1.6 //2W
     damagefactor "Spikes", 1.6 //2W
+//--[Move|Ground]--
 }
 
 actor GroundResistance : TypeBase
@@ -380,6 +411,7 @@ actor GroundResistance : TypeBase
     damagefactor "Mudslap", 0.7 //R
     damagefactor "MudBomb", 0.7 //R
     damagefactor "Spikes", 0.7 //R
+//--[Move|Ground]--
 }
 
 actor Ground2xResistance : TypeBase
@@ -388,6 +420,7 @@ actor Ground2xResistance : TypeBase
     damagefactor "Mudslap", 0.4 //2R
     damagefactor "MudBomb", 0.4 //2R
     damagefactor "Spikes", 0.4 //2R
+//--[Move|Ground]--
 }
 
 actor GroundImmunity : TypeBase
@@ -396,6 +429,7 @@ actor GroundImmunity : TypeBase
     damagefactor "Mudslap", 0.0 //I
     damagefactor "MudBomb", 0.0 //I
     damagefactor "Spikes", 0.0 //I
+//--[Move|Ground]--
 }
 
 actor GroundSTAB : STABBase
@@ -403,6 +437,7 @@ actor GroundSTAB : STABBase
     damagefactor "Earthquake", 1.15 //S
     damagefactor "Mudslap", 1.15 //S
     damagefactor "MudBomb", 1.15 //S
+//--[Move|Ground]--
 }
 //[+]========================================================================[+]
 //--------------------------------|Rock|--------------------------------
@@ -412,6 +447,7 @@ actor RockWeakness : TypeBase
     damagefactor "StealthRock", 1.3 //W
     damagefactor "Rollout", 1.3 //W
     damagefactor "RockSlide", 1.3 //W
+//--[Move|Rock]--
 }
 
 actor Rock2xWeakness : TypeBase
@@ -419,6 +455,8 @@ actor Rock2xWeakness : TypeBase
     damagefactor "StealthRock", 1.6 //2W
     damagefactor "Rollout", 1.6 //2W
     damagefactor "RockSlide", 1.6 //2W
+//--[Move|Rock]--
+
 }
 
 actor RockResistance : TypeBase
@@ -426,6 +464,8 @@ actor RockResistance : TypeBase
     damagefactor "StealthRock", 0.7 //R
     damagefactor "Rollout", 0.7 //R
     damagefactor "RockSlide", 0.7 //R
+//--[Move|Rock]--
+
 }
 
 actor Rock2xResistance : TypeBase
@@ -433,6 +473,8 @@ actor Rock2xResistance : TypeBase
     damagefactor "StealthRock", 0.4 //2R
     damagefactor "Rollout", 0.4 //2R
     damagefactor "RockSlide", 0.4 //2R
+//--[Move|Rock]--
+
 }
 
 actor RockImmunity : TypeBase
@@ -440,12 +482,16 @@ actor RockImmunity : TypeBase
     damagefactor "StealthRock", 0.0 //I
     damagefactor "Rollout", 0.0 //I
     damagefactor "RockSlide", 0.0 //I
+//--[Move|Rock]--
+
 }
 
 actor RockSTAB : STABBase
 {
     damagefactor "Rollout", 1.15 //S
     damagefactor "RockSlide", 1.15 //S
+//--[Move|Rock]--
+
 }
 //[+]========================================================================[+]
 //--------------------------------|Bug|--------------------------------
@@ -454,36 +500,43 @@ actor BugWeakness : TypeBase
 {
 damagefactor "XScissor1", 1.3 //W
 damagefactor "XScissor2", 1.3 //W
+//--[Move|Bug]--
+
 }
 
 actor Bug2xWeakness : TypeBase
 {
 damagefactor "XScissor1", 1.6 //2W
 damagefactor "XScissor2", 1.6 //2W
+//--[Move|Bug]--
 }
 
 actor BugResistance : TypeBase
 {
 damagefactor "XScissor1", 0.7 //R
 damagefactor "XScissor2", 0.7 //R
+//--[Move|Bug]--
 }
 
 actor Bug2xResistance : TypeBase
 {
 damagefactor "XScissor1", 0.4 //2R
 damagefactor "XScissor2", 0.4 //2R
+//--[Move|Bug]--
 }
 
 actor BugImmunity : TypeBase
 {
 damagefactor "XScissor1", 0.0 //I
 damagefactor "XScissor2", 0.0 //I
+//--[Move|Bug]--
 }
 
 actor BugSTAB : STABBase
 {
 damagefactor "XScissor1", 1.15 //S
 damagefactor "XScissor2", 1.15 //S
+//--[Move|Bug]--
 }
 //[+]========================================================================[+]
 //--------------------------------|Ghost|--------------------------------
@@ -495,6 +548,7 @@ actor GhostWeakness : TypeBase
     damagefactor "ShadowBall", 1.3 //W
     damagefactor "ShadowSneak", 1.3 //W
     damagefactor "PhantomForce", 1.3 //W
+//--[Move|Ghost]--
 }
 
 actor Ghost2xWeakness : TypeBase
@@ -504,6 +558,7 @@ actor Ghost2xWeakness : TypeBase
     damagefactor "ShadowBall", 1.6 //2W
     damagefactor "ShadowSneak", 1.6 //2W
     damagefactor "PhantomForce", 1.6 //2W
+//--[Move|Ghost]--
 }
 
 actor GhostResistance : TypeBase
@@ -513,6 +568,7 @@ actor GhostResistance : TypeBase
     damagefactor "ShadowBall", 0.7 //R
     damagefactor "ShadowSneak", 0.7 //R
     damagefactor "PhantomForce", 0.7 //R
+//--[Move|Ghost]--
 }
 
 actor Ghost2xResistance : TypeBase
@@ -522,6 +578,7 @@ actor Ghost2xResistance : TypeBase
     damagefactor "ShadowBall", 0.4 //2R
     damagefactor "ShadowSneak", 0.4 //2R
     damagefactor "PhantomForce", 0.4 //2R
+//--[Move|Ghost]--
 }
 
 actor GhostImmunity : TypeBase
@@ -531,6 +588,7 @@ actor GhostImmunity : TypeBase
     damagefactor "ShadowBall", 0.0 //I
     damagefactor "ShadowSneak", 0.0 //I
     damagefactor "PhantomForce", 0.0 //I
+//--[Move|Ghost]--
 }
 
 actor GhostSTAB : STABBase
@@ -540,6 +598,7 @@ actor GhostSTAB : STABBase
     damagefactor "ShadowBall", 1.15 //S
     damagefactor "ShadowSneak", 1.15 //S
     damagefactor "PhantomForce", 1.15 //S
+//--[Move|Ghost]--
 }
 //[+]========================================================================[+]
 //--------------------------------|Steel|--------------------------------
@@ -549,6 +608,7 @@ actor SteelWeakness : TypeBase
 damagefactor "FlashCannon", 1.3 //W
 damagefactor "MetalClaw", 1.3 //W
 damagefactor "GyroBall", 1.3 //W
+//--[Move|Steel]--
 }
 
 actor Steel2xWeakness : TypeBase
@@ -556,6 +616,7 @@ actor Steel2xWeakness : TypeBase
     damagefactor "FlashCannon", 1.6 //2W
     damagefactor "MetalClaw", 1.6 //2W
     damagefactor "GyroBall", 1.6 //2W
+//--[Move|Steel]--
 }
 
 actor SteelResistance : TypeBase
@@ -563,6 +624,7 @@ actor SteelResistance : TypeBase
     damagefactor "FlashCannon", 0.7 //R
     damagefactor "MetalClaw", 0.7 //R
     damagefactor "GyroBall", 0.7 //R
+//--[Move|Steel]--
 }
 
 
@@ -571,6 +633,7 @@ actor Steel2xResistance : TypeBase
     damagefactor "FlashCannon", 0.4 //2R
     damagefactor "MetalClaw", 0.4 //2R
     damagefactor "GyroBall", 0.4 //2R
+//--[Move|Steel]--
 }
 
 actor SteelImmunity : TypeBase
@@ -578,6 +641,7 @@ actor SteelImmunity : TypeBase
     damagefactor "FlashCannon", 0.0 //I
     damagefactor "MetalClaw", 0.0 //I
     damagefactor "GyroBall", 0.0 //I
+//--[Move|Steel]--
 }
 
 actor SteelSTAB : STABBase
@@ -585,6 +649,7 @@ actor SteelSTAB : STABBase
     damagefactor "FlashCannon", 1.15 //S
     damagefactor "MetalClaw", 1.15 //S
     damagefactor "GyroBall", 1.15 //S
+//--[Move|Steel]--
 }
 //[+]========================================================================[+]
 //--------------------------------|Fire|--------------------------------
@@ -611,6 +676,8 @@ damagefactor "HeatCrash", 1.3 //W
 damagefactor "Incinerate", 1.3 //W
 damagefactor "WillOWisp", 1.3 //W
 damagefactor "MysticalFire", 1.3 //W
+damagefactor "Firepunch", 1.3 //W
+//--[Move|Fire]--
 }
 
 actor Fire2xWeakness : TypeBase
@@ -635,6 +702,8 @@ damagefactor "HeatCrash", 1.6 //2W
 damagefactor "Incinerate", 1.6 //2W
 damagefactor "WillOWisp", 1.6 //2W
 damagefactor "MysticalFire", 1.6 //2W
+damagefactor "Firepunch", 1.6 //2W
+//--[Move|Fire]--
 }
 
 actor FireResistance : TypeBase
@@ -659,6 +728,8 @@ damagefactor "HeatCrash", 0.7 //R
 damagefactor "Incinerate", 0.7 //R
 damagefactor "WillOWisp", 0.7 //R
 damagefactor "MysticalFire", 0.7 //R
+damagefactor "Firepunch", 0.7 //R
+//--[Move|Fire]--
 }
 
 actor Fire2xResistance : TypeBase
@@ -683,6 +754,8 @@ damagefactor "HeatCrash", 0.4 //2R
 damagefactor "Incinerate", 0.4 //2R
 damagefactor "WillOWisp", 0.4 //2R
 damagefactor "MysticalFire", 0.4 //2R
+damagefactor "Firepunch", 0.4 //2R
+//--[Move|Fire]--
 }
 
 actor FireImmunity : TypeBase
@@ -707,6 +780,8 @@ damagefactor "HeatCrash", 0.0 //I
 damagefactor "Incinerate", 0.0 //I
 damagefactor "WillOWisp", 0.0 //I
 damagefactor "MysticalFire", 0.0 //I
+damagefactor "Firepunch", 0.0 //I
+//--[Move|Fire]--
 }
 
 actor FireSTAB : STABBase
@@ -730,6 +805,8 @@ damagefactor "HeatCrash", 1.15 //S
 damagefactor "Incinerate", 1.15 //S
 damagefactor "WillOWisp", 1.15 //S
 damagefactor "MysticalFire", 1.15 //S
+damagefactor "Firepunch", 1.15 //S
+//--[Move|Fire]--
 }
 //[+]========================================================================[+]
 //--------------------------------|Water|--------------------------------
@@ -752,6 +829,7 @@ damagefactor "Liquidation", 1.3 //W
 damagefactor "Scald", 1.3 //W
 damagefactor "Dive", 1.3 //W
 damagefactor "Bubble", 1.3 //W
+//--[Move|Water]--
 }
 
 actor Water2xWeakness : TypeBase
@@ -772,6 +850,7 @@ damagefactor "Liquidation", 1.6 //2W
 damagefactor "Scald", 1.6 //2W
 damagefactor "Dive", 1.6 //2W
 damagefactor "Bubble", 1.6 //2W
+//--[Move|Water]--
 }
 
 actor WaterResistance : TypeBase
@@ -792,6 +871,7 @@ damagefactor "Liquidation", 0.7 //R
 damagefactor "Scald", 0.7 //R
 damagefactor "Dive", 0.7 //R
 damagefactor "Bubble", 0.7 //R
+//--[Move|Water]--
 }
 
 actor Water2xResistance : TypeBase
@@ -812,6 +892,7 @@ damagefactor "Liquidation", 0.4 //2R
 damagefactor "Scald", 0.4 //2R
 damagefactor "Dive", 0.4 //2R
 damagefactor "Bubble", 0.4 //2R
+//--[Move|Water]--
 }
 
 actor WaterImmunity : TypeBase
@@ -832,6 +913,7 @@ damagefactor "Liquidation", 0.0 //I
 damagefactor "Scald", 0.0 //I
 damagefactor "Dive", 0.0 //I
 damagefactor "Bubble", 0.0 //I
+//--[Move|Water]--
 }
 
 actor WaterSTAB : STABBase
@@ -852,6 +934,7 @@ damagefactor "Liquidation", 1.15 //S
 damagefactor "Scald", 1.15 //S
 damagefactor "Dive", 1.15 //S
 damagefactor "Bubble", 1.15 //S
+//--[Move|Water]--
 }
 //[+]========================================================================[+]
 //--------------------------------|Grass|--------------------------------
@@ -878,6 +961,7 @@ damagefactor "PetalDance", 1.3 //W
 damagefactor "PowerWhip", 1.3 //W
 damagefactor "LeafTornado", 1.3 //W
 damagefactor "Leafage", 1.3 //W
+//--[Move|Grass]--
 }
 
 actor Grass2xWeakness : TypeBase
@@ -902,6 +986,7 @@ damagefactor "PetalDance", 1.6 //2W
 damagefactor "PowerWhip", 1.6 //2W
 damagefactor "LeafTornado", 1.6 //2W
 damagefactor "Leafage", 1.6 //2W
+//--[Move|Grass]--
 }
 
 actor GrassResistance : TypeBase
@@ -926,6 +1011,7 @@ damagefactor "PetalDance", 0.7 //R
 damagefactor "PowerWhip", 0.7 //R
 damagefactor "LeafTornado", 0.7 //R
 damagefactor "Leafage", 0.7 //R
+//--[Move|Grass]--
 }
 
 actor Grass2xResistance : TypeBase
@@ -950,6 +1036,7 @@ damagefactor "PetalDance", 0.4 //2R
 damagefactor "PowerWhip", 0.4 //2R
 damagefactor "LeafTornado", 0.4 //2R
 damagefactor "Leafage", 0.4 //2R
+//--[Move|Grass]--
 }
 
 actor GrassImmunity : TypeBase
@@ -974,6 +1061,7 @@ damagefactor "PetalDance", 0.0 //I
 damagefactor "PowerWhip", 0.0 //I
 damagefactor "LeafTornado", 0.0 //I
 damagefactor "Leafage", 0.0 //I
+//--[Move|Grass]--
 }
 
 actor GrassSTAB : STABBase
@@ -998,6 +1086,7 @@ damagefactor "PetalDance", 1.15 //S
 damagefactor "PowerWhip", 1.15 //S
 damagefactor "LeafTornado", 1.15 //S
 damagefactor "Leafage", 1.15 //S
+//--[Move|Grass]--
 }
 //[+]========================================================================[+]
 //--------------------------------|Electric|--------------------------------
@@ -1006,36 +1095,66 @@ actor ElectricWeakness : TypeBase
 {
 damagefactor "ThunderShock", 1.3 //W
 damagefactor "ThunderPunch", 1.3 //W
+damagefactor "Thunderbolt", 1.3 //W
+damagefactor "Thunder", 1.3 //W
+damagefactor "Spark", 1.3 //W
+damagefactor "Shockwave", 1.3 //W
+//--[Move|Electric]--
 }
 
 actor Electric2xWeakness : TypeBase
 {
 damagefactor "ThunderShock", 1.6 //2W
 damagefactor "ThunderPunch", 1.6 //2W
+damagefactor "Thunderbolt", 1.6 //2W
+damagefactor "Thunder", 1.6 //2W
+damagefactor "Spark", 1.6 //2W
+damagefactor "Shockwave", 1.6 //2W
+//--[Move|Electric]--
 }
 
 actor ElectricResistance : TypeBase
 {
 damagefactor "ThunderShock", 0.7 //R
 damagefactor "ThunderPunch", 0.7 //R
+damagefactor "Thunderbolt", 0.7 //R
+damagefactor "Thunder", 0.7 //R
+damagefactor "Spark", 0.7 //R
+damagefactor "Shockwave", 0.7 //R
+//--[Move|Electric]--
 }
 
 actor Electric2xResistance : TypeBase
 {
 damagefactor "ThunderShock", 0.4 //2R
 damagefactor "ThunderPunch", 0.4 //2R
+damagefactor "Thunderbolt", 0.4 //2R
+damagefactor "Thunder", 0.4 //2R
+damagefactor "Spark", 0.4 //2R
+damagefactor "Shockwave", 0.4 //2R
+//--[Move|Electric]--
 }
 
 actor ElectricImmunity : TypeBase
 {
 damagefactor "ThunderShock", 0.0 //I
 damagefactor "ThunderPunch", 0.0 //I
+damagefactor "Thunderbolt", 0.0 //I
+damagefactor "Thunder", 0.0 //I
+damagefactor "Spark", 0.0 //I
+damagefactor "Shockwave", 0.0 //I
+//--[Move|Electric]--
 }
 
 actor ElectricSTAB : STABBase
 {
 damagefactor "ThunderShock", 1.15 //S
 damagefactor "ThunderPunch", 1.15 //S
+damagefactor "Thunderbolt", 1.15 //S
+damagefactor "Thunder", 1.15 //S
+damagefactor "Spark", 1.15 //S
+damagefactor "Shockwave", 1.15 //S
+//--[Move|Electric]--
 }
 //[+]========================================================================[+]
 //--------------------------------|Psychic|--------------------------------
@@ -1050,6 +1169,7 @@ actor PsychicWeakness : TypeBase
     damagefactor "FutureSight", 1.3 //W
     damagefactor "ZenHeadbutt", 1.3 //W
     damagefactor "DreamEater", 1.3 //W
+//--[Move|Psychic]--
 
 }
 
@@ -1063,6 +1183,7 @@ actor Psychic2xWeakness : TypeBase
     damagefactor "FutureSight", 1.6 //2W
     damagefactor "ZenHeadbutt", 1.6 //2W
     damagefactor "DreamEater", 1.6 //2W
+//--[Move|Psychic]--
 
 }
 
@@ -1076,6 +1197,7 @@ actor PsychicResistance : TypeBase
     damagefactor "FutureSight", 0.7 //R
     damagefactor "ZenHeadbutt", 0.7 //R
     damagefactor "DreamEater", 0.7 //R
+//--[Move|Psychic]--
 
 }
 
@@ -1089,6 +1211,7 @@ actor Psychic2xResistance : TypeBase
     damagefactor "FutureSight", 0.4 //2R
     damagefactor "ZenHeadbutt", 0.4 //2R
     damagefactor "DreamEater", 0.4 //2R
+//--[Move|Psychic]--
 
 }
 
@@ -1102,6 +1225,7 @@ actor PsychicImmunity : TypeBase
     damagefactor "FutureSight", 0.0 //I
     damagefactor "ZenHeadbutt", 0.0 //I
     damagefactor "DreamEater", 0.0 //I
+//--[Move|Psychic]--
 
 }
 
@@ -1115,6 +1239,7 @@ actor PsychicSTAB : STABBase
     damagefactor "FutureSight", 1.15 //S
     damagefactor "ZenHeadbutt", 1.15 //S
     damagefactor "DreamEater", 1.15 //S
+//--[Move|Psychic]--
 
 }
 //[+]========================================================================[+]
@@ -1133,6 +1258,7 @@ damagefactor "IcicleSpear", 1.3 //W
 damagefactor "IcicleCrash", 1.3 //W
 damagefactor "FrostBreath", 1.3 //W
 damagefactor "IceShard", 1.3 //W
+//--[Move|Ice]--
 }
 
 actor Ice2xWeakness : TypeBase
@@ -1148,6 +1274,7 @@ actor Ice2xWeakness : TypeBase
     damagefactor "IcicleCrash", 1.6 //2W
     damagefactor "FrostBreath", 1.6 //2W
     damagefactor "IceShard", 1.6 //2W
+//--[Move|Ice]--
 }
 
 actor Ice2xResistance : TypeBase
@@ -1163,6 +1290,7 @@ actor Ice2xResistance : TypeBase
     damagefactor "IcicleCrash", 0.7 //R
     damagefactor "FrostBreath", 0.7 //R
     damagefactor "IceShard", 0.7 //R
+//--[Move|Ice]--
 }
 
 actor IceResistance : TypeBase
@@ -1178,6 +1306,7 @@ actor IceResistance : TypeBase
     damagefactor "IcicleCrash", 0.4 //2R
     damagefactor "FrostBreath", 0.4 //2R
     damagefactor "IceShard", 0.4 //2R
+//--[Move|Ice]--
 }
 
 actor IceImmunity : TypeBase
@@ -1193,6 +1322,7 @@ actor IceImmunity : TypeBase
     damagefactor "IcicleCrash", 0.0 //I
     damagefactor "FrostBreath", 0.0 //I
     damagefactor "IceShard", 0.0 //I
+//--[Move|Ice]--
 }
 
 actor IceSTAB : STABBase
@@ -1208,6 +1338,7 @@ actor IceSTAB : STABBase
     damagefactor "IcicleCrash", 1.15 //S
     damagefactor "FrostBreath", 1.15 //S
     damagefactor "IceShard", 1.15 //S
+//--[Move|Ice]--
 }
 //[+]========================================================================[+]
 //--------------------------------|Dragon|--------------------------------
@@ -1218,6 +1349,7 @@ damagefactor "DragonPulse", 1.3 //W
 damagefactor "DragonRush", 1.3 //W
 damagefactor "DragonClaw", 1.3 //W
 damagefactor "DragonRage", 1.0 //Static
+//--[Move|Dragon]--
 
 }
 
@@ -1227,6 +1359,7 @@ damagefactor "DragonPulse", 1.6 //2W
 damagefactor "DragonRush", 1.6 //2W
 damagefactor "DragonClaw", 1.6 //2W
 damagefactor "DragonRage", 1.0 //Static
+//--[Move|Dragon]--
 
 }
 
@@ -1236,6 +1369,7 @@ damagefactor "DragonPulse", 0.7 //R
 damagefactor "DragonRush", 0.7 //R
 damagefactor "DragonClaw", 0.7 //R
 damagefactor "DragonRage", 1.0 //Static
+//--[Move|Dragon]--
 
 }
 
@@ -1245,6 +1379,7 @@ damagefactor "DragonPulse", 0.4 //2R
 damagefactor "DragonRush", 0.4 //2R
 damagefactor "DragonClaw", 0.4 //2R
 damagefactor "DragonRage", 1.0 //Static
+//--[Move|Dragon]--
 
 }
 
@@ -1254,6 +1389,7 @@ damagefactor "DragonPulse", 0.0 //I
 damagefactor "DragonRush", 0.0 //I
 damagefactor "DragonClaw", 0.0 //I
 damagefactor "DragonRage", 1.0 //Static
+//--[Move|Dragon]--
 
 }
 
@@ -1263,6 +1399,7 @@ damagefactor "DragonPulse", 1.15 //S
 damagefactor "DragonRush", 1.15 //S
 damagefactor "DragonClaw", 1.15 //S
 damagefactor "DragonRage", 1.0 //Static
+//--[Move|Dragon]--
 
 }
 //[+]========================================================================[+]
@@ -1276,6 +1413,7 @@ damagefactor "NightSlash1", 1.3 //W
 damagefactor "NightSlash2", 1.3 //W
 damagefactor "NightSlash3", 1.3 //W
 damagefactor "Crunch", 1.3 //W
+//--[Move|Dark]--
 
 }
 
@@ -1287,6 +1425,7 @@ damagefactor "NightSlash1", 1.6 //2W
 damagefactor "NightSlash2", 1.6 //2W
 damagefactor "NightSlash3", 1.6 //2W
 damagefactor "Crunch", 1.6 //2W
+//--[Move|Dark]--
 
 }
 
@@ -1298,6 +1437,7 @@ damagefactor "NightSlash1", 0.7 //R
 damagefactor "NightSlash2", 0.7 //R
 damagefactor "NightSlash3", 0.7 //R
 damagefactor "Crunch", 0.7 //R
+//--[Move|Dark]--
 
 }
 
@@ -1309,6 +1449,7 @@ damagefactor "NightSlash1", 0.4 //2R
 damagefactor "NightSlash2", 0.4 //2R
 damagefactor "NightSlash3", 0.4 //2R
 damagefactor "Crunch", 0.4 //2R
+//--[Move|Dark]--
 
 }
 
@@ -1320,6 +1461,7 @@ damagefactor "NightSlash1", 0.0 //I
 damagefactor "NightSlash2", 0.0 //I
 damagefactor "NightSlash3", 0.0 //I
 damagefactor "Crunch", 0.0 //I
+//--[Move|Dark]--
 
 }
 
@@ -1331,6 +1473,7 @@ damagefactor "NightSlash1", 1.15 //S
 damagefactor "NightSlash2", 1.15 //S
 damagefactor "NightSlash3", 1.15 //S
 damagefactor "Crunch", 1.15 //S
+//--[Move|Dark]--
 
 }
 //[+]========================================================================[+]
@@ -1338,32 +1481,56 @@ damagefactor "Crunch", 1.15 //S
 //[+]========================================================================[+]
 actor FairyWeakness : TypeBase
 {
-
+damagefactor "DisarmingVoice", 1.3 //W
+damagefactor "DazzlingGleem", 1.3 //W
+damagefactor "MoonBlast", 1.3 //W
+damagefactor "DrainingKiss", 1.3 //W
+//--[Move|Fairy]--
 }
 
 actor Fairy2xWeakness : TypeBase
 {
-
+damagefactor "DisarmingVoice", 1.6 //2W
+damagefactor "DazzlingGleem", 1.6 //2W
+damagefactor "MoonBlast", 1.6 //2W
+damagefactor "DrainingKiss", 1.6 //2W
+//--[Move|Fairy]--
 }
 
 actor FairyResistance : TypeBase
 {
-
+damagefactor "DisarmingVoice", 0.7 //R
+damagefactor "DazzlingGleem", 0.7 //R
+damagefactor "MoonBlast", 0.7 //R
+damagefactor "DrainingKiss", 0.7 //R
+//--[Move|Fairy]--
 }
 
 actor Fairy2xResistance : TypeBase
 {
-
+damagefactor "DisarmingVoice", 0.4 //2R
+damagefactor "DazzlingGleem", 0.4 //2R
+damagefactor "MoonBlast", 0.4 //2R
+damagefactor "DrainingKiss", 0.4 //2R
+//--[Move|Fairy]--
 }
 
 actor FairyImmunity : TypeBase
 {
-
+damagefactor "DisarmingVoice", 0.0 //I
+damagefactor "DazzlingGleem", 0.0 //I
+damagefactor "MoonBlast", 0.0 //I
+damagefactor "DrainingKiss", 0.0 //I
+//--[Move|Fairy]--
 }
 
 actor FairySTAB : STABBase
 {
-
+damagefactor "DisarmingVoice", 1.15 //S
+damagefactor "DazzlingGleem", 1.15 //S
+damagefactor "MoonBlast", 1.15 //S
+damagefactor "DrainingKiss", 1.15 //S
+//--[Move|Fairy]--
 }
 
 

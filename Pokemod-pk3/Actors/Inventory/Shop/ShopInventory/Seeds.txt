@@ -75,7 +75,7 @@ Spawn:
 TNT1 A 0
 stop
 Pickup:
-TNT1 A 0 A_JumpIfInventory("HazedFlagEnemy",1,"Nope")
+TNT1 A 0 A_JumpIfInventory("HazeFlag",1,"Nope")
 TNT1 A 0 A_PlaySoundEx("Support/Statup","Soundslot7")
 TNT1 A 0 A_Jumpifinventory("STF_PowerSeed",1,"Sustain")
 TNT1 A 0 A_GiveInventory("STF_PowerSeed",1)
@@ -151,7 +151,7 @@ Spawn:
 TNT1 A 0
 stop
 Pickup:
-TNT1 A 0 A_JumpIfInventory("HazedFlagEnemy",1,"Nope")
+TNT1 A 0 A_JumpIfInventory("HazeFlag",1,"Nope")
 TNT1 A 0 A_PlaySoundEx("Support/Statup","Soundslot7")
 TNT1 A 0 A_Jumpifinventory("STF_GuardSeed",1,"Sustain")
 TNT1 A 0 A_GiveInventory("STF_GuardSeed",1)
@@ -227,7 +227,7 @@ Spawn:
 TNT1 A 0
 stop
 Pickup:
-TNT1 A 0 A_JumpIfInventory("HazedFlagEnemy",1,"Nope")
+TNT1 A 0 A_JumpIfInventory("HazeFlag",1,"Nope")
 TNT1 A 0 A_PlaySoundEx("Support/Statup","Soundslot7")
 TNT1 A 0 A_Jumpifinventory("STF_HasteSeed",1,"Sustain")
 TNT1 A 0 A_GiveInventory("STF_HasteSeed",1)

@@ -64,7 +64,9 @@ stop
 }
 }
 
-actor OrbEscape : ArtiTeleport  
+
+
+actor OrbEscape : CustomInventory  
 {
 inventory.amount 1
 inventory.maxamount 1
@@ -74,6 +76,30 @@ Inventory.PickupSound ""
 Tag ""
 scale 2.0
 +INVENTORY.AUTOACTIVATE
+states
+{
+Spawn:
+EXIT BC 6
+Loop
+Pickup:
+TNT1 A 0 ACS_NamedExecuteAlways("EscapeToSpawn",0)
+stop
+Death:
+EXIT A 1
+stop
+}
+}
+
+actor TLMSOrbEscape : ArtiTeleport //10160
+{
+    inventory.amount 1
+    inventory.maxamount 1
+    inventory.pickupmessage ""
+    inventory.icon ""
+    Inventory.PickupSound ""
+    Tag ""
+    scale 2.0
+    +INVENTORY.AUTOACTIVATE
 states
 {
 Spawn:

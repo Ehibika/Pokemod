@@ -5,6 +5,7 @@ States
 // -=-=-=- Pain States -=-=-=-
 //#region -=- Normal -=-
 Pain.Swift:
+//--[Move|Normal]--
  "----" H 0
 Goto NormalPain
 
@@ -42,13 +43,13 @@ Pain.HeadButt:
 "----" H 1
 "----" H 0 A_GiveToTarget("HeadButtCollision",1)
 "----" H 0 A_PlaySoundEx("weapon/Rebound","SoundSlot5")
-"----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,40)
+"----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,35)
 "----" H 0 ThrustThingZ(0,15,0,0)
 Goto NormalPain
 
 Pain.RapidSpin:
 "----" H 0 A_GiveInventory("RapidSpinProtect",1)
-"----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,40)
+"----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,15)
 Goto NormalPain
 
 Pain.FalseSwipe:
@@ -70,6 +71,12 @@ goto SuperSpawn
 //#endregion
 
 //#region -=- Fighting -=-
+
+Pain.Fighting:
+//--[Move|Fighting]--
+"----" H 0 
+Goto FightingPain
+
 Pain.VacuumWave:
 Pain.DoubleKick:
 "----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,6)
@@ -109,6 +116,7 @@ Goto FightingPain
 //#region -=- Flying -=-
 
 Pain.Peck:
+//--[Move|Flying]--
 "----" H 0 
 goto FlyingPain
 
@@ -142,6 +150,7 @@ goto FlyingPain
 
 //#region -=- Poison -=-
 Pain.Venoshock:
+//--[Move|Poison]--
 "----" H 0 
 Goto PoisonPain
 
@@ -157,6 +166,10 @@ Goto PoisonPain
 
 //#region -=- Ground -=-
 
+Pain.Ground:
+//--[Move|Ground]--
+"----" H 0 
+Goto GroundPain
 
 pain.Earthquake:
 "----" H 0 A_jumpifinventory("EarthQuakeProtect",1,2)
@@ -176,7 +189,9 @@ Goto GroundPain
 //#endregion
 
 //#region -=- Rock -=-
+
 Pain.PowerGem:
+//--[Move|Rock]--
 "----" H 0
 Goto RockPain
 
@@ -203,6 +218,11 @@ Goto RockPain
 
 //#region -=- Bug -=-
 
+Pain.Bug:
+//--[Move|Bug]--
+"----" H 0
+Goto BugPain
+
 Pain.XScissor1:
 "----" H 0 A_GiveInventory("XScissor1Protect", 1)
 "----" H 0 A_Jumpifinventory("XScissor2Protect",1,"XScissorImpact")
@@ -219,8 +239,10 @@ Goto BugPain
 
 //#region -=- Ghost -=-
 
+
 Pain.ShadowBall:
 Pain.PhantomForce:
+//--[Move|Ghost]--
 "----" H 0 
 Goto GhostPain
 
@@ -239,6 +261,7 @@ Goto GhostPain
 //#region -=- Steel -=-
 Pain.MetalClaw:
 Pain.FlashCannon:
+//--[Move|Steel]--
 "----" H 0
 Goto SteelPain
 
@@ -251,29 +274,36 @@ Goto SteelPain
 //#endregion
 
 //#region -=- Fire
-    //===|Fire
+
+Pain.Fire:
+//--[Move|Fire]--
+"----" H 0
+Goto FirePain
+
+Pain.Firepunch:
+"----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,15)
+"----" H 0 A_GiveInventory("FirePunchProtect")
+"----" H 0 A_GiveInventory("FirePunchBurnProc")
+Goto FirePain
 
 Pain.Ember:
 Pain.FireBlast:
 Pain.FlameBurst:
 "----" H 0
-"----" H 0 A_Jump(230,2)
-"----" H 0 A_GiveInventory("BurnStatusProc")
+"----" H 0 A_GiveInventory("FirePunchBurnProc")
 "----" H 0 
 Goto FirePain
 
 Pain.Eruption:
 Pain.LavaPlume:
 "----" H 0
-"----" H 0 A_Jump(63,2)
-"----" H 0 A_GiveInventory("BurnStatusProc")
+"----" H 0 A_GiveInventory("FirePunchBurnProc")
 "----" H 0 
 Goto FirePain
 
 Pain.BlazeKick:
 "----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,6)
-"----" H 0 A_Jump(230,2)
-"----" H 0 A_GiveInventory("BurnStatusProc")
+"----" H 0 A_GiveInventory("FirePunchBurnProc")
 "----" H 0 
 Goto FirePain
 
@@ -284,8 +314,7 @@ Goto FirePain
 
 Pain.HeatWave:
 "----" H 0 A_Giveinventory("HeatWaveProtect")
-"----" H 0 A_Jump(230,2)
-"----" H 0 A_GiveInventory("BurnStatusProc")
+"----" H 0 A_GiveInventory("FirePunchBurnProc")
 "----" H 0 
 Goto FirePain
 
@@ -294,8 +323,7 @@ pain.FlameThrower:
 "----" H 0 A_jumpifinventory("FlameThrowerProtect",1,2)
 "----" H 0 A_GiveInventory("FlameThrowerProtect",1)
 "----" H 0 
-"----" H 0 A_Jump(230,2)
-"----" H 0 A_GiveInventory("BurnStatusProc")
+"----" H 0 A_GiveInventory("FirePunchBurnProc")
 "----" H 0 
 Goto FirePain
 
@@ -306,9 +334,7 @@ pain.FireFang:
 //"----" H 0 A_Giveinventory("BurnMark")
 "----" H 0
 "----" H 0
-"----" H 0 A_Jump(230,2)
-"----" H 0 A_GiveInventory("BurnStatusProc")
-"----" H 0 
+"----" H 0 A_GiveInventory("FirePunchBurnProc")
 Goto FirePain
 
 Pain.FlareBlitz:
@@ -345,12 +371,13 @@ Goto FirePain
 //#endregion
 
 //#region -=- Water -=-
-    //===|Water
+    
 Pain.WaterGun:
 Pain.WaterPulse:
 Pain.AquaTail:
 Pain.BubbleBeam:
 Pain.Whirlpool:
+//--[Move|Water]--
 "----" H 0
 Goto WaterPain
 
@@ -433,14 +460,19 @@ Goto WaterPain
 
 //#region -=- Grass -=-
     //===|Grass
-Pain.RazorLeaf:
+
+Pain.Leafage:
 Pain.MagicalLeaf:
-Pain.VineWhip:
 Pain.SeedBomb:
 Pain.EnergyBall:
 Pain.SolarBeam:
 Pain.BulletSeed:
+//--[Move|Grass]--
 "----" H 0
+Goto GrassPain
+
+Pain.RazorLeaf:
+"----" H 0 A_GiveInventory("RazorLeafProtect", 1)
 Goto GrassPain
 
 Pain.MegaDrain:
@@ -464,6 +496,10 @@ Pain.LeafBlade2:
 "----" H 0 A_GiveInventory("LeafBlade2Protect", 1)
 Goto GrassPain
 
+Pain.VineWhip:
+"----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,5)
+Goto GrassPain
+
 Pain.WoodHammer:
 "----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,40)
 "----" H 0 ACS_NamedExecuteAlways("PKMN_RecoilDamager",0,30)
@@ -474,15 +510,38 @@ Goto GrassPain
 
 //#region -=- Electric -=-
 
-Pain.ThunderPunch:
+
+Pain.Spark:
+Pain.Shockwave:
+//--[Move|Electric]--
 "----" H 0
 Goto ElectricPain
 
+Pain.ThunderPunch:
+"----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,15)
+"----" H 0 A_GiveInventory("ThunderPunchProtect")
+"----" H 0 A_GiveInventory("ThunderPunchParaProc")
+Goto ElectricPain
+
+Pain.ThunderShock:
+"----" H 0 A_GiveInventory("ThunderShockParaChance", 1)
+Goto ElectricPain
+
+Pain.Thunderbolt:
+"----" H 0 A_GiveInventory("ThunderboltProtect",1)
+"----" H 0 A_GiveInventory("ThunderBoltParaChance",1)
+Goto ElectricPain
+
+Pain.Thunder:
+"----" H 0 A_GiveInventory("ThunderParaChance",1)
+Goto ElectricPain
 //#endregion
 
 //#region -=- Psychic -=-
 Pain.Confusion:
 Pain.Psychic:
+Pain.Extrasensory:
+//--[Move|Psychic]--
 "----" H 0
 Goto PsychicPain
 
@@ -490,6 +549,11 @@ Goto PsychicPain
 Pain.Psywave:
 "----" H 0
 "----" H 0 A_GiveInventory("PsywaveProtect",1)
+Goto PsychicPain
+
+Pain.Psyshock:
+"----" H 0
+"----" H 0 A_GiveInventory("PsyshockProtect",1)
 Goto PsychicPain
 
 Pain.PsyBeam:
@@ -524,10 +588,17 @@ Goto PsychicPain
 
     //===|Ice
     Pain.IcicleSpear:
+    //--[Move|Ice]--
     "----" H 0
     Goto IcePain
 
     Pain.IcePunch:
+    "----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,15)
+    "----" H 0 A_GiveInventory("IcePunchProtect",1)
+    "----" H 0 A_GiveInventory("FreezeStatusProc",1)
+    "----" H 0 A_GiveInventory("IcePunchFreezeRate",1)
+    Goto IcePain
+
     Pain.IceFang:
     "----" H 0 A_GiveInventory("FreezeStatusProc",1)
     "----" H 0 A_GiveInventory("IcePunchFreezeRate",1)
@@ -579,6 +650,7 @@ Goto PsychicPain
 Pain.DragonPulse:
 Pain.DragonClaw:
 Pain.DragonDarts:
+//--[Move|Dragon]--
 "----" H 0
 Goto DragonPain
 
@@ -619,9 +691,12 @@ Goto DragonPain
 //#endregion
 
 //#region -=- Dark -=-
+
     Pain.Pursuit:
+    //--[Move|Dark]--
     "----" H 0
     Goto DarkPain
+
     Pain.NightSlash1:
     "----" H 0 A_GiveInventory("NightSlash1Protect", 1)
     "----" H 0 A_GiveInventory("NightSlashBackstabItem",1)
@@ -647,6 +722,7 @@ Goto DragonPain
 
 Pain.DisarmingVoice:
 Pain.MoonBlast:
+//--[Move|Fairy]--
 "----" H 0
 Goto FairyPain
 
@@ -696,6 +772,7 @@ Goto PainNormal
     Death.SkullBash:
     Death.Fakeout:
     Death.Thrash:
+    //--[Move|Normal]--
     "----" H 0
     Goto NormalDeath
 
@@ -730,6 +807,12 @@ Goto PainNormal
 //#endregion
 
 //#region -=- Fighting -=-
+
+Death.CloseCombat:
+//--[Move|Fighting]--
+"----" H 0 
+Goto FightingDeath
+
 Death.VacuumWave:
 Death.DoubleKick:
 Death.CloseCombat:
@@ -772,6 +855,7 @@ Goto Death
 Death.Peck:
 Death.DrillPeck:
 Death.Acrobatics:
+//--[Move|Flying]--
 "----" H 0 
 goto FlyingDeath
 
@@ -798,6 +882,7 @@ Goto Death
 Death.Venoshock:
 Death.Sludge:
 Death.SludgeBomb:
+//--[Move|Poison]--
 "----" H 0 
 Goto PoisonDeath
 //#endregion
@@ -807,6 +892,7 @@ Goto PoisonDeath
 Death.Mudslap:
 Death.MudBomb:
 Death.Earthquake:
+//--[Move|Ground]--
 "----" H 0 
 Goto GroundDeath
 
@@ -817,6 +903,7 @@ Goto GroundDeath
 Death.RockSlide:
 Death.StealthRock:
 Death.PowerGem:
+//--[Move|Rock]--
 "----" H 0 A_Stop
 Goto RockDeath
 
@@ -831,6 +918,7 @@ Goto RockDeath
 
 Death.XScissor1:
 Death.XScissor2:
+//--[Move|Bug]--
 "----" H 0 
 Goto BugDeath
 
@@ -842,6 +930,7 @@ Death.ShadowBall:
 Death.Astonish:
 Death.Astonish2:
 Death.PhantomForce:
+//--[Move|Ghost]--
 "----" H 0 
 Goto GhostDeath
 
@@ -851,6 +940,7 @@ Goto GhostDeath
 
 Death.MetalClaw:
 Death.FlashCannon:
+//--[Move|Steel]--
 "----" H 0
 Goto SteelDeath
 
@@ -873,6 +963,9 @@ Goto SteelDeath
     Death.LavaPlume:
     Death.Eruption:
     Death.Overheat:
+Death.Firepunch:
+    //--[Move|Fire]--
+    "----" H 0
     Goto FireDeath
 
     
@@ -908,6 +1001,7 @@ Goto SteelDeath
     Death.Liquidation:
     Death.MuddyWater:
     Death.WhirlPool:
+    //--[Move|Water]--
     "----" H 0
     Goto WaterDeath
 
@@ -945,6 +1039,7 @@ Goto SteelDeath
     Death.EnergyBall:
     Death.SolarBeam:
     Death.Bulletseed:
+    //--[Move|Grass]--
     "----" H 0
     Goto GrassDeath
 
@@ -978,17 +1073,27 @@ Goto SteelDeath
 //#region -=- Electric -=-
 
 Death.ThunderPunch:
+Death.ThunderShock:
+Death.Thunderbolt:
+Death.Thunder:
+Death.Spark:
+Death.Shockwave:
+//--[Move|Electric]--
 "----" H 0
 Goto ElectricDeath
+
 
 //#endregion
 
 //#region -=- Psychic -=-
 Death.Confusion:
 Death.Psychic:
+Death.Extrasensory:
 Death.Psywave:
+Death.Psyshock:
 Death.Psybeam:
 Death.PsychoCut:
+//--[Move|Psychic]--
 "----" H 0
 Goto PsychicDeath
 
@@ -1018,11 +1123,23 @@ Goto PsychicDeath
     Death.IceBeam:    
     Death.AuroraBeam:
     Death.Blizzard:
+    //--[Move|Ice]--
     "----" H 0
     Goto IceDeath
 //#endregion
 
 //#region -=- Dragon -=-
+    Death.DragonPulse:
+    Death.DragonBreath:
+    Death.DragonClaw:
+    Death.DracoMeteor:
+    Death.Outrage:
+    Death.DragonDarts:
+    Death.Twister:
+    //--[Move|Dragon]--
+    "----" H 0
+    Goto DragonDeath
+
     Death.DragonRush:
     "----" A 0 ACS_NamedExecuteAlways("PKMN_PainSound",0,Type_Dragon) 
     "----" H 0 A_GiveToTarget("DragonRushCollision",1)
@@ -1031,16 +1148,6 @@ Goto PsychicDeath
     "----" H 0 ThrustThingZ(0,35,0,0)
     "----" H 5
     Goto Death
-    
-    Death.DragonPulse:
-    Death.DragonBreath:
-    Death.DragonClaw:
-    Death.DracoMeteor:
-    Death.Outrage:
-    Death.DragonDarts:
-    Death.Twister:
-    "----" H 0
-    Goto DragonDeath
 
     Death.DragonRage:
     "----" H 0
@@ -1052,6 +1159,7 @@ Goto PsychicDeath
 Death.DisarmingVoice:
 Death.MoonBlast:
 Death.Dazzlinggleem:
+//--[Move|Fairy]--
 "----" H 0
 Goto FairyDeath
 
@@ -1067,6 +1175,7 @@ Goto FairyDeath
     Death.Pursuit:
     Death.Bite:
     Death.Crunch:
+    //--[Move|Dark]--
     "----" H 0
     Goto DarkDeath
     Death.NightSlash1:

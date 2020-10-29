@@ -93,7 +93,7 @@ stop
 Pickup:
 TNT1 A 0 A_Jumpifinventory("FreezeMark",1,"FreezeUp")
 FreezeUp:
-TNT1 A 0 A_GiveInventory("FreezeValue",random(15,20))
+TNT1 A 0 A_GiveInventory("FreezeValue",random(25,35))
 stop
 
 Nope:
@@ -122,6 +122,7 @@ TNT1 A 0
 TNT1 A 0 A_GiveInventory("ProjectileCode",1)
 TNT1 A 1 A_Stop
 TNT1 A 0 A_PlaySoundEx("Move/Blizzard","Weapon")
+Goto HitBox
 SpawnLoop:
 TNT1 AAAAAAAA 0 A_SpawnItemEx("Blizzard_Particle",-BLIZZARD_RAD,random(-BLIZZARD_RAD,BLIZZARD_RAD),random(5,BLIZZARD_RAD),random(32,36),0,0,0,1)
 TNT1 AAAAAAAA 0 A_SpawnItemEx("Blizzard_Particle2",-BLIZZARD_RAD,random(-BLIZZARD_RAD,BLIZZARD_RAD),random(5,BLIZZARD_RAD),random(32,36),0,0,0,1)
@@ -129,8 +130,7 @@ TNT1 A 3 A_CountDown
 TNT1 A 0 A_JumpIf(ReactionTime%3 == 0,"HitBox")
 Loop
 HitBox:
-TNT1 A 0 A_SpawnItemEx("BlizzardHitBox",-BLIZZARD_RAD,20,16,32,0,0)
-TNT1 A 0 A_SpawnItemEx("BlizzardHitBox",-BLIZZARD_RAD,-20,16,32,0,0)
+TNT1 A 0 A_SpawnItemEx("BlizzardHitBox",-BLIZZARD_RAD,0,16,32,0,0)
 Goto SpawnLoop
 Death:
 TNT1 A 0 //A_PlaySoundEX("wep_L/commandowave","Body")
@@ -148,12 +148,16 @@ Obituary "$OB_BLIZZARD"
 scale 2.5
 +SERVERSIDEONLY
 +NOINTERACTION
++NOEXPLODEFLOOR
++SLIDESONWALLS
++STEPMISSILE
 +RIPPER
-Damage(MBP_Blizzard)
+MaxStepHeight 16
 speed 0
-Reactiontime 20
-Radius 20
-Height 32
+Reactiontime 15
+Damage(0)
+Radius 4
+Height 4
 States
 {
 Spawn:
@@ -161,7 +165,8 @@ TNT1 A 0
 TNT1 A 1
 TNT1 A 0 A_ChangeFlag("NOINTERACTION",0)
 Spawn2:
-TNT1 A 1 //A_Explode(MBP_Blizzard,BLIZZARD_RAD,0,0,BLIZZARD_RAD)
+//TNT1 A 1 //A_Explode(MBP_Blizzard,BLIZZARD_RAD,0,0,BLIZZARD_RAD)
+TNT1 A 1 A_SpawnItemEx("BlizzardDamager",-BLIZZARD_RAD/2)
 TNT1 A 0 A_CountDown
 Loop
 
@@ -171,6 +176,28 @@ stop
 }
 }
 
+
+actor BlizzardDamager : BasicExplosion
+{
+Damagetype "Blizzard"
+Obituary "$OB_BLIZZARD"
+scale 2.5
++SERVERSIDEONLY
+speed 0
+Reactiontime 8
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 2 
+TNT1 A 0 A_Explode(MBP_Blizzard,BLIZZARD_RAD,0,0,BLIZZARD_RAD)
+stop
+
+Death:
+TNT1 A 1
+stop
+}
+}
 
 actor BlizzardHitBox1 : BasicExplosion
 {
@@ -305,7 +332,7 @@ Spawn.Active:
 "####" "#" 5
 //"####" "#" 0 A_ChangeFlag("RIPPER", 0)
 "####" "#" 0 A_ChangeFlag("NOINTERACTION",0)
-"####" "#" 15
+"####" "#" 10
 "####" "#####" 1 A_Fadeout
 stop
 
@@ -330,7 +357,7 @@ TNT1 A 0 A_SetScale(Frandom(1.5,3.5))
 MIS2 D 5
 //MIS2 D 0 A_ChangeFlag("RIPPER", 0)
 MIS2 D 0 A_ChangeFlag("NOINTERACTION",0)
-MIS2 D 15
+MIS2 D 10
 MIS2 DDDDD 1 A_Fadeout
 stop
 }

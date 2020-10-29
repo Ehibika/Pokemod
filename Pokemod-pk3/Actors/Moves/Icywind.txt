@@ -134,8 +134,8 @@ Stop
 
 Death:
 TNT1 A 0 A_GiveInventory("ProjectileDCode",1)
-TNT1 A 0 A_Explode(MBP_IcyWind,64,0,0,36)
-TNT1 A 0 A_SpawnItemEx("IcyWindWaveFX",0,0,0,0,0,0,0,16385)
+TNT1 A 0 A_Explode(MBP_IcyWind,64,0,0,64)
+TNT1 A 0 //A_SpawnItemEx("IcyWindWaveFX",0,0,0,0,0,0,0,16385)
 TNT1 A 3
 stop
 }
@@ -163,7 +163,7 @@ TNT1 A 0 A_SetArg(0,MomX)
 TNT1 A 0 A_SetArg(1,MomY)
 TNT1 A 0 A_SetArg(2,MomZ)
 TNT1 A 0 A_Stop
-TNT1 A 0 A_Explode(10,64,0,0,36)
+TNT1 A 0 A_Explode(MBP_IcyWind,64,0,0,64)
 TNT1 A 1 A_SpawnItemEx("IcyWindParticle1",random2(60),random2(60),random2(60),0,0,-2,0,1)
 TNT1 A 1 A_SpawnItemEx("IcyWindParticle2",random2(60),random2(60),random2(60),0,0,0,0,1)
 TNT1 A 0 A_SpawnItemEx("IcyWindShot_B",0,0,0,Args[0],Args[1],Args[2],0,17929)

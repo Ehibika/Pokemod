@@ -268,6 +268,11 @@ const int Move_WorrySeed = 241;
 const int Move_Ingrain = 242;
 const int Move_Avalanche = 243;
 const int Move_Mist = 244;
+const int Move_Thunderbolt = 245;
+const int Move_Thunder = 246;
+const int Move_Spark = 247;
+const int Move_Shockwave = 248;
+const int Move_Firepunch = 249;
 //--[NewMove]--
 //=======|Pokedex Constants|==========
 const int Dex_SMEARGLE = 0;
@@ -425,7 +430,8 @@ const int BT_USER4 = 16777216;
 */
 
 //=======|weapon Constants|==========
-const int Aim_OverHead = 35;
+const int Aim_OverHead = 15;
+const int Aim_ArcScale = 20;
 const int Aim_BodyCheck = 17;
 
 const int Cost_1 = 200;

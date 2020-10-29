@@ -1,4 +1,4 @@
-// [Lego] In your source code, always include "zcommon.acs" before this file.
+// [Russ] In your source code, always include "zcommon.acs" before this file.
 // This was done for clarity and organizational purposes.
 
 // This file contains a number of variables added to make expanding 8BDM easier.
@@ -6,8 +6,6 @@
 // as your source ACS before compiling. 
 // Otherwise, extract it to the same folder as your acc.exe.
 // Note that this file SHOULD NOT be compiled on its own.
-
-//#library "8BDMLIB"
 
 #DEFINE TEAM_LIGHT 0
 #DEFINE TEAM_WILY 1
@@ -20,6 +18,11 @@
 #DEFINE COLOR_COSSACK 232
 #DEFINE COLOR_KING 233
 
+#define PLN_RESPAWN 2000
+#define PLN_EXITUNITIMAGE 3000
+#define PLN_EDDIETEMP 3100
+#define PLN_EXITUNITPOINT 4000
+
 #define STICKYMODE_GUTSLIFT	0
 #define STICKYMODE_MAGFLY	1
 
@@ -27,14 +30,13 @@ BOOL IsTeamGame = 0; // Is mode a team game?
 
 int timestop=-1; // Is time stopper active?
 int MaxFrags; // Frag limit for match
-int BossMusic = 0; // Boss Music State
 int intensePlaying = false; // whether intense music is playing
 int ServerMAX = 32; // Max number of players (Default: 32)
 
-// [Lego] Stores player's default gravity for situational uses in customized classes.
+// [Russ] Stores player's default gravity for situational uses in customized classes.
 int PlayerGravity[64];
 
-// [Lego] These are global ints to allow values to be rolled at the beginning of rounds only.
+// [Russ] These are global ints to allow values to be rolled at the beginning of rounds only.
 global int 5: RangedWepRandom;
 global int 6: RapidWepRandom;
 global int 7: CloseWepRandom;
@@ -43,7 +45,7 @@ global int 9: ShieldWepRandom;
 
 //Functions
 
-// [Lego] Gets the absolute maximum number of players in the server.
+// [Russ] Gets the absolute maximum number of players in the server.
 function int GetMaxPlayers(void)
 {
 	int ret = GetCVAR("sv_MaxClients");
@@ -83,7 +85,7 @@ Function void BossMusicSelect(int ThePar, int Type)
 		Switch(Type)
 		{
 			Case 0:
-			if(StrCmp(GetCvarString("mm8bdm_map_bossmusic"), "") == false){
+			if(StrLen(GetCvarString("mm8bdm_map_bossmusic")) == 0){
 				if(ThePar==1){SetMusic("MM1BOSS");}
 				else if(ThePar==2){SetMusic("MM2BOSS");}
 				else if(ThePar==3){SetMusic("MM3BOSS");}
@@ -107,7 +109,7 @@ Function void BossMusicSelect(int ThePar, int Type)
 			break;
 			}
 			Case 1:
-			if(StrCmp(GetCvarString("mm8bdm_map_victorymusic"), "") == false){
+			if(StrLen(GetCvarString("mm8bdm_map_victorymusic")) == 0){
 				if(ThePar==1){SetMusic("MM1VIC");}
 				else if(ThePar==2){SetMusic("MM2VIC");}
 				else if(ThePar==3){SetMusic("MM3VIC");}
@@ -131,7 +133,7 @@ Function void BossMusicSelect(int ThePar, int Type)
 			break;
 			}
 			Case 2:
-			if(StrCmp(GetCvarString("mm8bdm_map_intensemusic"), "") == false){
+			if(StrLen(GetCvarString("mm8bdm_map_intensemusic")) == 0){
 				if(ThePar==0){SetMusic("MM6BOSS2");}
 				else if(ThePar==1){SetMusic("MM1PWBOS");}
 				else if(ThePar==2){SetMusic("GUTSBOSS");}
@@ -156,6 +158,15 @@ Function void BossMusicSelect(int ThePar, int Type)
 			break;
 			}
 		}
+}
+
+//[Russ] boss music state update
+function void setBossMusicState(int x) {
+    SetCVar("mm8bdm_bossstate", x);
+}
+
+function int getBossMusicState(void) {
+	return GetCVar("mm8bdm_bossstate");
 }
 
 //[Mess] Used by ridable items (Item2, Ice wall etc)
@@ -200,7 +211,7 @@ function int abs (int x)
 }
 
 // Returns the closest integer, rounded up
-function int ceil_cscc(int fixedIn)
+function int ceilOld(int fixedIn)
 {
 	if(fixedIn % 65536 != 0)
 	{
@@ -208,6 +219,7 @@ function int ceil_cscc(int fixedIn)
 	}
 	return fixedIn >> 16;
 }
+
 function int max(int x, int y)
 {
 	if(x > y)
@@ -313,6 +325,34 @@ Function int LMSBossCheck (int blue, int red, int orange, int purple)
 	Return(Check1 == 1 && Check2 >= 2);
 }
 
+// [Russ] Returns the number of teams who have 1 active player AND who are about to win the map
+function int TLMSBossCount(int blue, int red, int green, int gold)
+{
+	int maxTeams = getCVar("sv_maxteams");
+	int maxWins = getCVar("winlimit");
+
+	int count = 0;
+
+	for(int i = 0; i < maxTeams; i++) {
+		if(GetTeamProperty(i, TPROP_Score) == maxWins-1 && TeamArray(i, blue, red, green, gold) == 1)
+			count++;
+	}
+
+	return count;
+}
+
+function int TeamArray(int i, int blue, int red, int green, int gold)
+{
+	if(i == 0)
+		return blue;
+	if(i == 1)
+		return red;
+	if(i == 2)
+		return green;
+	if(i == 3)
+		return gold;
+	return 0;
+}
 
 // Returns frags from Orange Team
 Function int OrangeFrags(void)
@@ -360,7 +400,7 @@ function int ActorFace (int facer, int target)
 	return 0;
 }
 
-// (Lego) Thrust an actor towards another with offsets
+// (Russ) Thrust an actor towards another with offsets
 
 function void actorPull(int puller, int pullee, int force, int xOff, int yOff, int zOff)
 {
@@ -380,7 +420,7 @@ function void actorPull(int puller, int pullee, int force, int xOff, int yOff, i
 	ThrustThingZ(pullee, vertiForce*4, 0, 0);
 }
 
-// (Lego) Stolen from Evil Escort, which in turn was stolen from the ZDoom forum
+// (Russ) Stolen from Evil Escort, which in turn was stolen from the ZDoom forum
 function int pitchBetween(int looker, int target, int xOff, int yOff, int zOff)
 {
 	int x, y, z, ang, pitch, len;
@@ -398,7 +438,7 @@ function int pitchBetween(int looker, int target, int xOff, int yOff, int zOff)
 }
 
 
-// (Lego)
+// (Russ)
 function int normalize(int x)
 {
     while(x < 0)
@@ -432,4 +472,23 @@ function void SetInventory(str inv, int amt)
 function int magnitudeThree(int x, int y, int z)
 {
     return sqrt8(x*x + y*y + z*z);
+}
+
+// Taken from unkown
+function int ActorLookAt(int looker, int target, int zoff, int lookerzoff)
+{
+   int x, y, z, ang, pitch, len;
+   x = getactorx(target) - getactorx(looker);
+   y = getactory(target) - getactory(looker);
+
+   ang = vectorangle(x,y);
+   if(((ang+0.125)%0.5) > 0.25) len = fixeddiv(y, sin(ang));
+   else len = fixeddiv(x, cos(ang));
+
+   z = (getactorz(target) + zoff) - (getactorz(looker)+lookerzoff);
+
+   pitch = -vectorangle(len, z);
+
+   setactorpitch(looker, pitch);
+   return 0;
 }

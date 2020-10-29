@@ -41,8 +41,8 @@ TNT1 A 1 A_Jumpifinventory("PackageID",11,"LightScreen")
 TNT1 A 1 A_Jumpifinventory("PackageID",10,"Reflect")
 
 
-TNT1 A 1 A_Jumpifinventory("PackageID",9,"HazeB")
-TNT1 A 1 A_Jumpifinventory("PackageID",8,"HazeA")
+TNT1 A 1 A_Jumpifinventory("PackageID",9,"Mist")
+TNT1 A 1 A_Jumpifinventory("PackageID",8,"Haze")
 
 TNT1 A 1 A_Jumpifinventory("PackageID",7,"AquaRing")
 TNT1 A 1 A_Jumpifinventory("PackageID",6,"ScaryFace")
@@ -117,10 +117,10 @@ Reflect:
 TNT1 A 0 A_Giveinventory("ReflectInitiate")
 Goto Pickup.After
 
-HazeB:
-TNT1 A 0 A_Giveinventory("HazeAllyClense")
+Mist:
+TNT1 A 0 A_Giveinventory("MistAllyClense")
 Goto Pickup.After
-HazeA:
+Haze:
 TNT1 A 0 A_Giveinventory("HazeEnemyClense")
 Goto Pickup.After
 

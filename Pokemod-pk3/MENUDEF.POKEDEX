@@ -5953,6 +5953,91 @@ OptionMenu "MoveMenu_Mist"
 }
 
 
+OptionMenu "MoveMenu_Thunderbolt"
+{
+    
+    Title "$M245_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M245_TYPE"
+    StaticText "$M245_CATEGORY"
+    StaticText "$M2454_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M245_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+} 
+OptionMenu "MoveMenu_Thunder"
+{
+    
+    Title "$M246_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M246_TYPE"
+    StaticText "$M246_CATEGORY"
+    StaticText "$M2464_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M246_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+} 
+OptionMenu "MoveMenu_Spark"
+{
+    
+    Title "$M247_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M247_TYPE"
+    StaticText "$M247_CATEGORY"
+    StaticText "$M2474_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M247_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+} 
+OptionMenu "MoveMenu_Shockwave"
+{
+    
+    Title "$M248_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M248_TYPE"
+    StaticText "$M248_CATEGORY"
+    StaticText "$M2484_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M248_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+} 
+OptionMenu "MoveMenu_Firepunch"
+{
+    
+    Title "$M249_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M249_TYPE"
+    StaticText "$M249_CATEGORY"
+    StaticText "$M2494_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M249_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+} 
 //--[NewMove]--
 
 OptionMenu "MoveMenu_Sketch"

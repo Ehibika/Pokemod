@@ -502,7 +502,12 @@ while (MenuUp) {
 
 		if (MoveListCount <= 0) {print(s: "No moves to learn"); break;} //MenuUp = false;
 		else {
-			if(!BGUp){DrawMenuFrame(MenuX-(8.0*3),MenuY-(8.0*0),15,6+MoveFrameCap,0); BGup = True;}
+			if(!BGUp)
+				{
+					DrawMenuFrame(MenuX-(8.0*3),MenuY-(8.0*0),15,6+MoveFrameCap,0); 
+					DrawMenuFrame(MenuX-(8.0*12),MenuY-(8.0*8),38,7,PastMenuSize);
+					BGup = True;
+				}
 			ChoiceCap = MoveListCount;
 			if(MoveListCount>6)
 			{
@@ -515,6 +520,11 @@ while (MenuUp) {
 			if(ChoiceID >= MoveListCount-3 && MoveListCount>6){HudMessage(s: "Exit"; HUDMSG_FADEOUT, 500 + (6), CR_ORANGE, MenuX, Menuy + (MNL * 6), 0.2, 0);}
 			else if(MoveListCount<=6){HudMessage(s: "Exit"; HUDMSG_FADEOUT, 500 + (MoveListCount), CR_ORANGE, MenuX, Menuy + (MNL * MoveListCount), 0.2, 0);}
 			HudMessage(s: ">>"; HUDMSG_FADEOUT, 515, 0, MenuX - 16.0, Menuy + (MNL * CursorY), 0.2, 0);
+
+			//Draw Description
+			str MoveLangNum = strParam(s:"M",s:strLeft("000",3-strlen(strParam(i:LevelUpMoveCache[PlayerNumber()][ChoiceID]))),i:LevelUpMoveCache[PlayerNumber()][ChoiceID]);
+			str MoveLang = strParam(s:MoveLangNum,s:"_DESC");
+			if(ChoiceID < MoveListCount)HudMessage(l:MoveLang; HUDMSG_FADEOUT, 517, CR_White, MenuX- (MNL * 10) , Menuy - (MNL * 7), 0.2, 0);
 		}
 
 		// - Grab Inputs -
@@ -639,7 +649,7 @@ while (MenuUp) {
 				//MoveListVal = MoveDex[PlayerDEXNum][k];
 				//if (MoveListVal != -1) {TMMoveCache[PlayerNumber()][MoveListCount] = MoveListVal; MoveListCount++;}
 				
-					MoveListVal = CheckTMArray(k,PlayerDEXNum);
+					MoveListVal = CheckTMArray(k,PlayerDEXNum,PlayerLVL);
 					if (MoveListVal != -1) 
 						{
 						TMMoveCache[PlayerNumber()][MoveListCount] = MoveListVal; 
@@ -683,7 +693,8 @@ while (MenuUp) {
 		else {
 			if(!BGUp)
 				{DrawMenuFrame(MenuX-(8.0*3),MenuY-(8.0*0),21,6+MoveFrameCap,0); 
-				DrawMenuFrame(MenuX-(8.0*3),MenuY-(8.0*3),21,2,PastMenuSize);
+				//DrawMenuFrame(MenuX-(8.0*3),MenuY-(8.0*3),21,2,PastMenuSize);
+				DrawMenuFrame(MenuX-(8.0*12),MenuY-(8.0*8),38,7,PastMenuSize);
 				BGup = True;}
 			ChoiceCap = MoveListCount;
 			if(MoveListCount>6)
@@ -701,6 +712,11 @@ while (MenuUp) {
 			//Draw Cost
 			MoveCost = TMCostCache[PlayerNumber()][ChoiceID];
 			if(ChoiceID < MoveListCount)HudMessage(s:"\cjBP Cost : ",i:MoveCost; HUDMSG_FADEOUT, 516, 0, MenuX , Menuy - (MNL * 3 + 6.0), 0.2, 0);
+
+			//Draw Description
+			str MoveLangNum = strParam(s:"M",s:strLeft("000",3-strlen(strParam(i:TMMoveCache[PlayerNumber()][ChoiceID]))),i:TMMoveCache[PlayerNumber()][ChoiceID]);
+			str MoveLang = strParam(s:MoveLangNum,s:"_DESC");
+			if(ChoiceID < MoveListCount)HudMessage(l:MoveLang; HUDMSG_FADEOUT, 517, CR_White, MenuX- (MNL * 10) , Menuy - (MNL * 8), 0.2, 0);
 		}
 
 		// - Grab Inputs -
@@ -1166,7 +1182,7 @@ PastMenuSize = k;
 Function Void ClearMenuFrame (Void)
 {
 	int Mid = 2000;
-	for (int i = 0; i < 500; i++)
+	for (int i = 0; i < 2000; i++)
 {
 	HudMessage(s:""; HUDMSG_PLAIN, Mid+i, CR_red,0.0, 0.0, 2.0,0);
 }

@@ -1,0 +1,448 @@
+
+//[+]========================================================================[+]
+//-------------------------|Safe Zone|---------------------
+//[+]========================================================================[+]
+
+/*
+ * So There are 3 types of safezones, personal, temporary, and team all 3 share the function of letting you access
+ * status menus, however each offers different functionality.
+ * 
+ * the personal safezone is spawned wherever you first spawn, and being within it enables you to access status updates.
+ * 
+ * temporary safezones are the old safezones that actually make you invincible. 
+ * 
+ * team safezones act like heal units, and are spawned where team flags are.
+
+
+*/
+const Int SafeZoneSize = 60;
+const Int P_SafeZoneSize = 60;
+
+actor inSafeZone : PowerProtection {inventory.amount 1 Powerup.Duration 35 DamageFactor "Normal", 0}
+
+
+actor SpawnSafeZone : CustomInventory
+{
+states
+{
+Pickup:
+TNT1 A 0 A_JumpIf(CallACS("SafeZoneSpawnCheck",0) == 1,"Pickup2")
+stop
+Pickup2:
+TNT1 A 0 A_GiveInventory("inSafeZone",1)
+TNT1 A 0 A_ChangeFlag("SOLID",0)
+TNT1 A 0 A_SpawnItemEx("SafeZoneField",0,0,0,0,0,0,0,1)
+stop
+}
+}
+
+actor MenuSpawnSafeZone : CustomInventory
+{
+states
+{
+Pickup:
+TNT1 A 0 A_JumpIf(CallACS("SafeZoneSpawnCheck",1) == 1,"Pickup2")
+stop
+Pickup2:
+TNT1 A 0 A_GiveInventory("inSafeZone",1)
+TNT1 A 0 A_ChangeFlag("SOLID",0)
+TNT1 A 0 A_SpawnItemEx("SafeZoneField",0,0,0,0,0,0,0,1)
+stop
+}
+}
+
+//#region -=- personal safe zone
+actor PersonalSafeZoneField : BasicHelper
+{
+states
+{
+Spawn:
+TNT1 A 0
+TNT1 A 1 A_GiveInventory("ProjectileCode",1)
+Goto ZoneActive
+
+ZoneActive:
+TNT1 A 0 A_GiveToTarget("inSafeZone")
+TNT1 A 1 A_SpawnItemEx("P_SafeZoneRingFXSpawn",0,0,0,0,0,0,0,1)
+TNT1 AAAAAAAAA 1 A_SpawnItemEx("P_SafeZoneRingFXSpawn2",0,0,0,0,0,0,0,1)
+TNT1 A 1 A_JumpIfCloser(P_SafeZoneSize+50,"ZoneActive")
+Goto Dormant 
+
+Dormant:
+TNT1 A 0 A_SpawnItemEx("ReSolidifier")
+DormantWait:
+TNT1 A 0 A_SpawnItemEx("P_SafeZoneRingFXSpawn3",0,0,0,0,0,0,0,1)
+TNT1 A 1 A_JumpIfCloser(P_SafeZoneSize+50,"ZoneActive")
+loop
+}
+}
+
+actor P_SafeZoneRingFXSpawn : BasicHelper
+{
+translation "198:198=220:220", "192:192=229:229"
++CLIENTSIDEONLY
+	reactiontime 15
+	var int user_angle;
+	States
+	{
+		Spawn:
+		TNT1 A 0
+        TNT1 A 0 A_GiveInventory("ProjectileCodeSyncTarget",1)
+		SpawnLoop:
+		TNT1 A 0 A_SpawnItemEx("SafeZoneRingFX", P_SafeZoneSize, 0, 24, 0, 0, 2, user_angle, 1)
+        TNT1 A 0 A_SpawnItemEx("SafeZoneRingFX", -P_SafeZoneSize, 0, 24, 0, 0, 2, user_angle, 1)
+		TNT1 A 0 A_SpawnItemEx("SafeZoneRingFX3", P_SafeZoneSize, 0, 12, 0, 0, 0, user_angle, 1)
+		TNT1 A 0 A_SpawnItemEx("SafeZoneRingFX3", -P_SafeZoneSize, 0, 12, 0, 0, 0, user_angle, 1)
+		TNT1 A 0 A_SetUserVar("user_angle", user_angle + 12)
+		TNT1 A 0 A_Countdown
+		loop
+		Death:
+		TNT1 A 0
+		stop
+	}
+}
+
+
+actor P_SafeZoneRingFXSpawn2 : BasicHelper
+{
+translation "198:198=220:220", "192:192=229:229"
++CLIENTSIDEONLY
+	reactiontime 15
+	var int user_angle;
+	States
+	{
+		Spawn:
+		TNT1 A 0
+        TNT1 A 0 A_GiveInventory("ProjectileCodeSyncTarget",1)
+		SpawnLoop:
+		TNT1 A 0 A_SpawnItemEx("SafeZoneRingFX3", P_SafeZoneSize, 0, 12, 0, 0, 0, user_angle, 1)
+		TNT1 A 0 A_SpawnItemEx("SafeZoneRingFX3", -P_SafeZoneSize, 0, 12, 0, 0, 0, user_angle, 1)
+		TNT1 A 0 A_SetUserVar("user_angle", user_angle + 12)
+		TNT1 A 0 A_Countdown
+		loop
+		Death:
+		TNT1 A 0
+		stop
+	}
+}
+
+actor P_SafeZoneRingFXSpawn3 : BasicHelper //Only seen by owner
+{
+translation "198:198=220:220", "192:192=229:229"
++CLIENTSIDEONLY
+	reactiontime 15
+	var int user_angle;
+	States
+	{
+		Spawn:
+		TNT1 A 0
+        TNT1 A 0 A_GiveInventory("ProjectileCodeSyncTarget",1)
+        TNT1 A 1 A_JumpIf(CallACS("pkmn_istargetclient")!=1,"Death")
+		SpawnLoop:
+		TNT1 A 0 A_SpawnItemEx("SafeZoneRingFX3", P_SafeZoneSize, 0, 12, 0, 0, 0, user_angle, 1)
+		TNT1 A 0 A_SpawnItemEx("SafeZoneRingFX3", -P_SafeZoneSize, 0, 12, 0, 0, 0, user_angle, 1)
+		TNT1 A 0 A_SetUserVar("user_angle", user_angle + 12)
+		TNT1 A 0 A_Countdown
+		loop
+		Death:
+		TNT1 A 0
+		stop
+	}
+}
+//#endregion
+
+//#region -=- Temporary Safe Zone -=-
+actor SafeZoneField : BasicHelper
+{
+states
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_GiveToTarget("inSafeZone")
+TNT1 A 2 
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+Spawn2:
+TNT1 A 0 A_GiveToTarget("inSafeZone")
+TNT1 A 1 A_SpawnItemEx("SafeZoneRingFXSpawn",0,0,0,0,0,0,0,1)
+TNT1 AAAAAAAAA 1 A_SpawnItemEx("SafeZoneRingFXSpawn2",0,0,0,0,0,0,0,1)
+TNT1 AAAAA 1 A_JumpIfCloser(SafeZoneSize+50,"Spawn2")
+TNT1 A 1
+Goto Death 
+
+Death:
+TNT1 A 0 A_SpawnItemEx("ReSolidifier")
+TNT1 A 1 
+stop
+}
+}
+
+actor SafeZoneRingFXSpawn : BasicHelper
+{
+translation "198:198=220:220", "192:192=229:229"
++CLIENTSIDEONLY
+	reactiontime 15
+	var int user_angle;
+	States
+	{
+		Spawn:
+		TNT1 A 0
+		TNT1 A 0 A_GiveInventory("ProjectileCodeSyncTarget",1)
+		SpawnLoop:
+		TNT1 A 0 A_SpawnItemEx("SafeZoneRingFX", SafeZoneSize, 0, 24, 0, 0, 2, user_angle, 1)
+        TNT1 A 0 A_SpawnItemEx("SafeZoneRingFX", -SafeZoneSize, 0, 24, 0, 0, 2, user_angle, 1)
+		TNT1 A 0 A_SpawnItemEx("SafeZoneRingFX2", SafeZoneSize, 0, 12, 0, 0, 0, user_angle, 1)
+		TNT1 A 0 A_SpawnItemEx("SafeZoneRingFX2", -SafeZoneSize, 0, 12, 0, 0, 0, user_angle, 1)
+		TNT1 A 0 A_SetUserVar("user_angle", user_angle + 12)
+		TNT1 A 0 A_Countdown
+		loop
+		Death:
+		TNT1 A 0
+		stop
+	}
+}
+
+
+actor SafeZoneRingFXSpawn2 : BasicHelper
+{
+translation "198:198=220:220", "192:192=229:229"
++CLIENTSIDEONLY
+	reactiontime 15
+	var int user_angle;
+	States
+	{
+		Spawn:
+		TNT1 A 0
+		TNT1 A 0 A_GiveInventory("ProjectileCodeSyncTarget",1)
+		SpawnLoop:
+		TNT1 A 0 A_SpawnItemEx("SafeZoneRingFX2", SafeZoneSize, 0, 12, 0, 0, 0, user_angle, 1)
+		TNT1 A 0 A_SpawnItemEx("SafeZoneRingFX2", -SafeZoneSize, 0, 12, 0, 0, 0, user_angle, 1)
+		TNT1 A 0 A_SetUserVar("user_angle", user_angle + 12)
+		TNT1 A 0 A_Countdown
+		loop
+		Death:
+		TNT1 A 0
+		stop
+	}
+}
+
+//#endregion
+
+//#region -=- Flag safe zone -=-
+
+actor HealUnit
+{
++DONTSPLASH
+scale 2.5
+}
+
+//actor HealUnitBlue : HealUnit replaces BlueFlag
+
+actor MegaBlueFlag_HealUnit : HealUnit 
+{
+states
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_RadiusGive("MedCabinetHealBlue",200,RGF_PLAYERS)
+TNT1 A 35 //A_SpawnItemEx("HealFXBlue", 0, 0, 40, 0, 0, 0, 0, SXF_CLIENTSIDE)
+TNT1 A 0 A_SpawnItemEx("HealUnitLead",0,0,0,0,0,2,0,SXF_CLIENTSIDE|SXF_TRANSFERTRANSLATION)
+loop
+}
+}
+
+//actor HealUnitRed : HealUnit replaces RedFlag
+actor MegaRedFlag_HealUnit : HealUnit 
+{
+Translation "192:192=16:16", "198:198=178:178"
+states
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_RadiusGive("MedCabinetHealRed",200,RGF_PLAYERS)
+TNT1 A 35 //A_SpawnItemEx("HealFXRed", 0, 0, 40, 0, 0, 0, 0, SXF_CLIENTSIDE)
+TNT1 A 0 A_SpawnItemEx("HealUnitLead",0,0,0,0,0,2,0,SXF_CLIENTSIDE|SXF_TRANSFERTRANSLATION)
+loop
+}
+}
+
+actor HealUnitLead
+{
+Height 0
+Radius 0
++NOINTERACTION
++NOCLIP
+PROJECTILE
++CLIENTSIDEONLY
+reactiontime 6
+States
+{
+Spawn:
+TNT1 A 0
+SpawnLoop:
+TNT1 A 0 A_SpawnItemEx("HealUnitRadius", 0, 0, 0, 0, 0, 0, 0, SXF_TRANSFERTRANSLATION|SXF_NOCHECKPOSITION)
+TNT1 A 3 A_Countdown
+TNT1 A 0 A_SpawnItemEx("HealUnitRadius2", 0, 0, 0, 0, 0, 0, 0, SXF_TRANSFERTRANSLATION|SXF_NOCHECKPOSITION)
+TNT1 A 3 A_Countdown
+loop
+Death:
+TNT1 A 0
+stop
+}
+}
+
+actor HealUnitRadius
+{
+Height 0
+Radius 0
++NOINTERACTION
++NOCLIP
+PROJECTILE
++CLIENTSIDEONLY
+reactiontime 36
+States
+{
+Spawn:
+TNT1 A 0
+SpawnLoop:
+TNT1 A 0 A_SpawnItemEx("PointRadiusFX", 200, 0, 0, 0, 0, 0, args[0], SXF_TRANSFERTRANSLATION|SXF_NOCHECKPOSITION)
+TNT1 A 0 A_Setarg(0,args[0]+10)
+TNT1 A 0 A_Countdown
+loop
+Death:
+TNT1 A 0
+stop
+}
+}
+
+actor HealUnitRadius2
+{
+Height 0
+Radius 0
++NOINTERACTION
++NOCLIP
+PROJECTILE
++CLIENTSIDEONLY
+reactiontime 36
+States
+{
+Spawn:
+TNT1 A 0
+SpawnLoop:
+TNT1 A 0 A_SpawnItemEx("PointRadiusFX", 200, 0, 0, 0, 0, 0, 5+args[0], SXF_TRANSFERTRANSLATION|SXF_NOCHECKPOSITION)
+TNT1 A 0 A_Setarg(0,args[0]+10)
+TNT1 A 0 A_Countdown
+loop
+Death:
+TNT1 A 0
+stop
+}
+}
+
+actor CabinetCoolDown : PowerUp
+{
+powerup.duration 90
+}
+
+actor MedCabinetHeal : CustomInventory
+{
+states
+{
+Pickup:
+Pickup1:
+TNT1 A 0 A_JumpIfInventory("CabinetCoolDown",1,"No")
+EBAL E 0 A_GiveInventory("CabinetCoolDown",1)
+Pickup2:
+EBAL E 0 A_PlaySound("item/energyup")
+EBAL E 0 ACS_NamedExecuteAlways("PKMNACS_HealthPickup",0,100)//HealThing(100)
+EBAL E 0 ACS_ExecuteAlways(992, 0, 0, 1)
+stop
+No:
+TNT1 A 0
+stop
+}
+}
+
+actor MedCabinetHealBlue : MedCabinetHeal
+{
+states
+{
+Pickup:
+TNT1 A 0 A_JumpIfInventory("LightTeamFlag",1,"Pickup1")
+stop
+}
+}
+
+actor MedCabinetHealRed : MedCabinetHeal
+{
+states
+{
+Pickup:
+TNT1 A 0 A_JumpIfInventory("WilyTeamFlag",1,"Pickup1")
+stop
+}
+}
+
+//#endregion
+
+
+//#region -=- FX -=-
+actor SafeZoneRingFX : BasicClientSide
+{
+Scale 1.0
+Renderstyle "Add"
+States
+{
+Spawn:
+BASB U 0
+BASB U 17
+BASB UUUUUUUU 2 A_Fadeout
+stop
+}
+}
+
+actor SafeZoneRingFX2 : BasicClientSide
+{
+Scale 1.5
+Renderstyle "Add"
+States
+{
+Spawn:
+BASB U 0
+BASB U 2
+BASB UUUU 2 A_Fadeout
+stop
+}
+}
+
+
+actor SafeZoneRingFX3 : BasicClientSide
+{
+Scale 1.5
+Renderstyle "Translucent"
+States
+{
+Spawn:
+BASB W 0
+BASB U 2
+BASB UUUU 1 A_Fadeout
+stop
+}
+}
+
+
+
+actor PointRadiusFX : BasicClientSide
+{
+Scale 1.0
+Renderstyle "Translucent"
+States
+{
+Spawn:
+BASB W 0
+BASB U 2
+BASB UUUU 2 A_SetScale(Scalex-0.2)
+stop
+}
+}
+
+//#endregion

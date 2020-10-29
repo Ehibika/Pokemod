@@ -1,0 +1,176 @@
+actor CalmMindMove : WepMasterBase
+{
+Tag "CalmMind"
+obituary "$OB_CalmMind"
+Weapon.AmmoUse 1
+Weapon.AmmoGive 25
+weapon.ammotype "CalmMindPP"
+scale 2.0
+Inventory.Pickupmessage "$PU_MEGABUSTER"
+States
+{
+Spawn:
+WEAP X 1
+stop
+
+
+Fire:
+"####" BBB 1 A_Jumpif(CallACS("CheckWeaponFire",RC_C)==1,"Fire.Begin")
+"####" B 0 A_Jump(256,"NoAmmo")
+Goto NoAmmo
+
+Fire.Begin:
+"####" B 0
+"####" B 0 A_JumpIfInventory("STF_CalmMind",1,"Fire.Off")
+"####" B 0 A_Jump(256,"Fire.On")
+Goto Fire.On
+
+Fire.On:
+"####" B 0 A_PlaySoundEx("Move/DragonDance","Soundslot6")
+"####" BBB 10 A_GiveInventory("CalmMindParticleSpawn")
+"####" B 5 //A_PlaySoundEx("Move/CalmMind","Soundslot6")
+"####" B 0 A_PlaySoundEx("Support/Statup","Soundslot7")
+"####" B 0 A_GiveInventory("CalmMindBuffInitiate")
+"####" B 0 A_TakeInventory("CalmMindPP",1)
+"####" B 0 A_Jump(256,"Fire.After")
+Goto Fire.After
+
+Fire.Off:
+"####" B 0 A_TakeInventory("CalmMind_Active",99)
+"####" B 0 A_GiveInventory("PartRecovery_C")
+"####" B 0 A_Jump(256,"Fire.After")
+Goto Fire.After
+
+Fire.After:
+"####" B 1 A_GiveInventory("HalfRecovery_C")
+"####" C 0 A_REfire("Fire")
+"####" B 0 A_Jump(256,"Fire.End")
+Goto Fire.End
+
+}
+}
+
+actor CalmMindMove1 : CalmMindMove {Weapon.SlotNumber 1}
+actor CalmMindMove2 : CalmMindMove {Weapon.SlotNumber 2}
+actor CalmMindMove3 : CalmMindMove {Weapon.SlotNumber 3}
+actor CalmMindMove4 : CalmMindMove {Weapon.SlotNumber 4}
+
+actor CalmMindMove5 : CalmMindMove 
+{
+Weapon.SlotNumber 5
+States
+{
+Fire.End:
+TNT1 A 0
+TNT1 A 0 A_TakeInventory("CalmMindMove5",9)
+TNT1 A 0 A_Jump(256,"Ready")
+Goto Ready
+}
+}
+
+//[+]========================================================================[+]
+//-----------------------------|Ammo & Inventory|------------------------------
+//[+]========================================================================[+]
+actor CalmMindPP : Ammo {inventory.amount 1 inventory.Maxamount 25}
+actor STF_CalmMind : Powerup {inventory.amount 1 Powerup.Duration 40}
+actor CalmMind_Active : Inventory {inventory.amount 1 inventory.Maxamount 1}
+
+actor CalmMindBuffInitiate : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_Jumpifinventory("CalmMind_Active",1,"Sustain")
+TNT1 A 0 A_GiveInventory("CalmMind_Active",1)
+TNT1 A 0 A_SpawnitemEX("CalmMindBuffWatcher")
+TNT1 A 0 A_GiveInventory("StatUpdator",1)
+stop
+
+Sustain:
+TNT1 A 0 A_GiveInventory("STF_CalmMind",1)
+stop
+Nope:
+TNT1 A 0
+stop
+}
+}
+
+
+actor CalmMindBuffWatcher : BasicHelper 
+{
+Var int user_TickTime;
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_JumpIfInTargetInventory("CutterFlag",999,"Death")
+TNT1 A 0 A_JumpIfInTargetInventory("IsDead",1,"Death")
+TNT1 A 0 A_JumpIfInTargetInventory("HazeFlag",1,"Death")
+TNT1 A 5 A_GiveToTarget("STF_CalmMind")
+TNT1 A 0 A_GiveToTarget("SDefUpFXSpawn")
+TNT1 A 0 A_GiveToTarget("SATKUpFXSpawn")
+TNT1 A 0 A_SetUserVar("user_TickTime",user_TickTime+5)
+TNT1 A 0 A_JumpIf(user_TickTime>=35,"SpawnTick")
+TNT1 A 0 A_JumpIfInTargetInventory("CalmMind_Active",1,"Spawn")
+Goto Death
+
+SpawnTick:
+TNT1 A 0 A_SetUserVar("user_TickTime",0)
+TNT1 A 0 A_TakeFromTarget("CalmMindPP",1)
+TNT1 A 0 A_JumpIfInTargetInventory("CalmMindPP",1,"Spawn")
+Goto Death
+
+Death:
+TNT1 A 0 A_GiveToTarget("StatUpdator")
+TNT1 A 0 A_GiveToTarget("BuffLossSoundCue")
+TNT1 A 0 A_TakeFromTarget("STF_CalmMind",9)
+TNT1 A 0 A_TakeFromTarget("CalmMind_Active",99)
+TNT1 A 2 
+stop
+}
+}
+
+
+actor CalmMindParticle : BasicClientside
+{
+scale 5.4
+speed 7
+ReactionTime 27
+States
+{
+Spawn:
+TNT1 A 0
+ASEX F 1 A_Warp(AAPTR_TARGET,0,0,54,0,WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE)
+ASEX F 0 A_SetScale(ScaleX-0.2)
+TNT1 A 0 A_CountDown
+loop
+Death:
+TNT1 A 0
+stop
+}
+}
+
+actor CalmMindParticleSpawn : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_SpawnItemEx ("CalmMindParticle", 0, 0, 54, momx, momy, momz, 0,SXF_NOCHECKPOSITION|SXF_ABSOLUTEMOMENTUM|SXF_TRANSFERTRANSLATION)
+stop
+Nope:
+TNT1 A 0
+stop
+}
+}

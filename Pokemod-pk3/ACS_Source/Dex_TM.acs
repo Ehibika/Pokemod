@@ -60,7 +60,13 @@
 #LIBDEFINE TMF_UNIVERSAL 1
 #LIBDEFINE TMF_EVOLVED 2
 
-#LIBDEFINE MAXTMLIST 63
+#LIBDEFINE TML_ALL 0
+#LIBDEFINE TML_LOW 3
+#LIBDEFINE TML_MID 5
+#LIBDEFINE TML_HIGH 10
+#LIBDEFINE TML_MAX 15
+
+#LIBDEFINE MAXTMLIST 73
 //#endregion
 
 //#region -=- TM Reference -=-
@@ -80,88 +86,102 @@
 //#endregion
 
 //#region -=- TM MasterList -=-
-int TMList [MAXTMLIST][4] = {
-{Substitute     ,TMF_UNIVERSAL      ,TMT_NORMAL                                 ,10},
-{Protect        ,TMF_UNIVERSAL      ,TMT_NORMAL                                 ,10},
-{Taunt          ,TMF_UNIVERSAL      ,TMT_NORMAL                                 ,15},
-{Fakeout        ,TMF_UNIVERSAL      ,TMT_NORMAL                                 ,15},
-{FalseSwipe     ,TMF_UNIVERSAL      ,TMT_NORMAL                                 ,15},
-{Rest           ,TMF_UNIVERSAL      ,TMT_PSYCHIC                                ,15},
-{SlackOff       ,TMF_UNIVERSAL      ,TMT_NORMAL                                 ,15},
-{Refresh        ,TMF_UNIVERSAL      ,TMT_NORMAL                                 ,15},
-{HelpingHand    ,TMF_UNIVERSAL      ,TMT_NORMAL                                 ,15},
+int TMList [MAXTMLIST][5] = {
+{Substitute     ,TMF_UNIVERSAL      ,TMT_NORMAL                                 ,10  ,TML_ALL},
+{Protect        ,TMF_UNIVERSAL      ,TMT_NORMAL                                 ,10  ,TML_ALL},
+{Taunt          ,TMF_UNIVERSAL      ,TMT_NORMAL                                 ,15  ,TML_ALL},
+{Fakeout        ,TMF_UNIVERSAL      ,TMT_NORMAL                                 ,15  ,TML_ALL},
+{FalseSwipe     ,TMF_UNIVERSAL      ,TMT_NORMAL                                 ,15  ,TML_ALL},
+{Rest           ,TMF_UNIVERSAL      ,TMT_PSYCHIC                                ,15  ,TML_ALL},
+{SlackOff       ,TMF_UNIVERSAL      ,TMT_NORMAL                                 ,15  ,TML_ALL},
+{Refresh        ,TMF_UNIVERSAL      ,TMT_NORMAL                                 ,15  ,TML_ALL},
+{HelpingHand    ,TMF_UNIVERSAL      ,TMT_NORMAL                                 ,15  ,TML_ALL},
 
-{IronDefense    ,TMF_UNIVERSAL      ,TMT_STEEL                                  ,55},
-{Amnesia        ,TMF_UNIVERSAL      ,TMT_PSYCHIC                                ,55},
-{SwordDance     ,TMF_UNIVERSAL      ,TMT_NORMAL                                 ,75},
-{NastyPlot      ,TMF_UNIVERSAL      ,TMT_DARK                                   ,75},
-{Agility        ,TMF_UNIVERSAL      ,TMT_PSYCHIC                                ,55},
+{CalmMind       ,TMF_UNIVERSAL      ,TMT_PSYCHIC                                ,25  ,TML_LOW},
+{Rage           ,TMF_UNIVERSAL      ,TMT_NORMAL                                ,25  ,TML_LOW},
+{Meditate       ,TMF_UNIVERSAL      ,TMT_PSYCHIC                                ,25  ,TML_LOW},
 
-{Screech        ,TMF_UNIVERSAL      ,TMT_NORMAL                                 ,10},
-{FakeTears      ,TMF_UNIVERSAL      ,TMT_DARK                                   ,10},
-{Charm          ,TMF_UNIVERSAL      ,TMT_FAIRY                                  ,10},
-{Captivate      ,TMF_UNIVERSAL      ,TMT_NORMAL                                 ,10},
-{ScaryFace      ,TMF_UNIVERSAL      ,TMT_NORMAL                                 ,10},
+{IronDefense    ,TMF_UNIVERSAL      ,TMT_STEEL                                  ,55  ,TML_MID},
+{Amnesia        ,TMF_UNIVERSAL      ,TMT_PSYCHIC                                ,55  ,TML_MID},
+{SwordDance     ,TMF_UNIVERSAL      ,TMT_NORMAL                                 ,75  ,TML_MID},
+{NastyPlot      ,TMF_UNIVERSAL      ,TMT_DARK                                   ,75  ,TML_MID},
+{Agility        ,TMF_UNIVERSAL      ,TMT_PSYCHIC                                ,55  ,TML_MID},
 
-{WideGuard      ,TMF_NULL           ,TMT_GROUND|TMT_ROCK|TMT_STEEL              ,15},
-{SafeGuard      ,TMF_NULL           ,TMT_NORMAL|TMT_PSYCHIC|TMT_FAIRY           ,15},
-{Reflect        ,TMF_NULL           ,TMT_PSYCHIC|TMT_FAIRY                      ,15},
-{LightScreen    ,TMF_NULL           ,TMT_PSYCHIC|TMT_FAIRY                      ,15},
-{HealPulse      ,TMF_NULL           ,TMT_PSYCHIC|TMT_FAIRY                      ,15},
-{LifeDew        ,TMF_NULL           ,TMT_WATER|TMT_PSYCHIC|TMT_FAIRY            ,15},
+{Screech        ,TMF_UNIVERSAL      ,TMT_NORMAL                                 ,10  ,TML_MID},
+{FakeTears      ,TMF_UNIVERSAL      ,TMT_DARK                                   ,10  ,TML_MID},
+{Charm          ,TMF_UNIVERSAL      ,TMT_FAIRY                                  ,10  ,TML_MID},
+{Captivate      ,TMF_UNIVERSAL      ,TMT_NORMAL                                 ,10  ,TML_MID},
+{ScaryFace      ,TMF_UNIVERSAL      ,TMT_NORMAL                                 ,10  ,TML_MID},
 
-{Magicalleaf    ,TMF_NULL           ,TMT_GRASS|TMT_FAIRY|TMT_PSYCHIC             ,3},
-{BulletSeed     ,TMF_NULL           ,TMT_GRASS|TMT_BUG                           ,3},
-{Swift          ,TMF_NULL           ,TMT_NORMAL|TMT_PSYCHIC|TMT_FAIRY            ,3},
-{HeadButt       ,TMF_UNIVERSAL      ,TMT_NORMAL                                 ,15},
-{IcyWind        ,TMF_NULL           ,TMT_WATER|TMT_ICE                           ,3},
-{FlameBurst     ,TMF_NULL           ,TMT_FIRE|TMT_DRAGON                        ,15},
-{LavaPlume      ,TMF_NULL           ,TMT_FIRE|TMT_DRAGON                        ,15},
-{WaterPulse     ,TMF_NULL           ,TMT_WATER                                  ,15},
-{Brine          ,TMF_NULL           ,TMT_WATER|TMT_POISON                       ,15},
-{Scald          ,TMF_NULL           ,TMT_WATER|TMT_FIRE                         ,15},
-{Spikes         ,TMF_NULL           ,TMT_GROUND                                 ,10},
-{ToxicSpikes    ,TMF_NULL           ,TMT_POISON|TMT_FIRE                        ,25},
-{StealthRock    ,TMF_NULL           ,TMT_GROUND|TMT_ROCK                        ,25},
-{DragonRage     ,TMF_NULL           ,TMT_DRAGON                                 ,25},
-{Incinerate     ,TMF_NULL           ,TMT_FIRE|TMT_DRAGON                        ,25},
-{ThunderWave    ,TMF_NULL           ,TMT_ELECTRIC|TMT_PSYCHIC                   ,25},
-{Acrobatics     ,TMF_NULL           ,TMT_FLYING                                 ,15},
-{Rollout        ,TMF_NULL           ,TMT_ROCK                                   ,15},
-{GyroBall       ,TMF_NULL           ,TMT_STEEL                                  ,15},
-{AuroraBeam     ,TMF_NULL           ,TMT_ICE|TMT_WATER                          ,15},
+{WideGuard      ,TMF_NULL           ,TMT_GROUND|TMT_ROCK|TMT_STEEL              ,15  ,TML_ALL},
+{SafeGuard      ,TMF_NULL           ,TMT_NORMAL|TMT_PSYCHIC|TMT_FAIRY           ,15  ,TML_ALL},
+{Reflect        ,TMF_NULL           ,TMT_PSYCHIC|TMT_FAIRY                      ,15  ,TML_MID},
+{LightScreen    ,TMF_NULL           ,TMT_PSYCHIC|TMT_FAIRY                      ,15  ,TML_MID},
+{HealPulse      ,TMF_NULL           ,TMT_PSYCHIC|TMT_FAIRY                      ,15  ,TML_MID},
+{LifeDew        ,TMF_NULL           ,TMT_WATER|TMT_PSYCHIC|TMT_FAIRY            ,15  ,TML_ALL},
 
-{IceBeam        ,TMF_NULL           ,TMT_WATER|TMT_ICE                          ,35},
-{Flamethrower   ,TMF_NULL           ,TMT_FIRE|TMT_DRAGON                        ,35},
-{ShadowBall     ,TMF_NULL           ,TMT_GHOST|TMT_PSYCHIC                      ,35},
-{Toxic          ,TMF_NULL           ,TMT_POISON                                 ,35},
-{SludgeBomb     ,TMF_NULL           ,TMT_POISON                                 ,35},
-{Surf           ,TMF_NULL           ,TMT_WATER                                  ,35},
-{Waterfall      ,TMF_NULL           ,TMT_WATER                                  ,35},
-{DragonPulse    ,TMF_NULL           ,TMT_DRAGON                                 ,35},
-{DazzlingGleem  ,TMF_NULL           ,TMT_FAIRY|TMT_PSYCHIC                      ,35},
-{PsychoCut      ,TMF_NULL           ,TMT_PSYCHIC                                ,35},
-{HammerArm      ,TMF_NULL           ,TMT_FIGHTING                               ,35},
+{Magicalleaf    ,TMF_NULL           ,TMT_GRASS|TMT_FAIRY|TMT_PSYCHIC             ,3  ,TML_LOW},
+{BulletSeed     ,TMF_NULL           ,TMT_GRASS|TMT_BUG                           ,3  ,TML_LOW},
+{Swift          ,TMF_NULL           ,TMT_NORMAL|TMT_PSYCHIC|TMT_FAIRY           ,15  ,TML_LOW},
+{HeadButt       ,TMF_UNIVERSAL      ,TMT_NORMAL                                 ,15  ,TML_LOW},
+{IcyWind        ,TMF_NULL           ,TMT_WATER|TMT_ICE                           ,3  ,TML_LOW},
+{FlameBurst     ,TMF_NULL           ,TMT_FIRE|TMT_DRAGON                        ,15  ,TML_MID},
+{LavaPlume      ,TMF_NULL           ,TMT_FIRE|TMT_DRAGON                        ,15  ,TML_MID},
+{WaterPulse     ,TMF_NULL           ,TMT_WATER                                  ,15  ,TML_MID},
+{Brine          ,TMF_NULL           ,TMT_WATER|TMT_POISON                       ,15  ,TML_MID},
+{Scald          ,TMF_NULL           ,TMT_WATER|TMT_FIRE                         ,15  ,TML_MID},
+{Spikes         ,TMF_NULL           ,TMT_GROUND                                 ,10  ,TML_MID},
+{ToxicSpikes    ,TMF_NULL           ,TMT_POISON|TMT_FIRE                        ,25  ,TML_MID},
+{StealthRock    ,TMF_NULL           ,TMT_GROUND|TMT_ROCK                        ,25  ,TML_MID},
+{DragonRage     ,TMF_NULL           ,TMT_DRAGON                                 ,25  ,TML_LOW},
+{Incinerate     ,TMF_NULL           ,TMT_FIRE|TMT_DRAGON                        ,25  ,TML_MID},
+{ThunderWave    ,TMF_NULL           ,TMT_ELECTRIC|TMT_PSYCHIC                   ,25  ,TML_LOW},
+{Acrobatics     ,TMF_NULL           ,TMT_FLYING                                 ,15  ,TML_MID},
+{Rollout        ,TMF_NULL           ,TMT_ROCK                                   ,15  ,TML_LOW},
+{GyroBall       ,TMF_NULL           ,TMT_STEEL                                  ,15  ,TML_LOW},
+{AuroraBeam     ,TMF_NULL           ,TMT_ICE|TMT_WATER                          ,15  ,TML_MID},
+{DrainingKiss   ,TMF_NULL           ,TMT_FAIRY                                  ,15  ,TML_MID},
+{FirePunch      ,TMF_NULL           ,TMT_FIGHTING|TMT_FIRE|TMT_DRAGON           ,15  ,TML_MID},
+{IcePunch       ,TMF_NULL           ,TMT_FIGHTING|TMT_ICE|TMT_WATER             ,15  ,TML_MID},
+{ThunderPunch   ,TMF_NULL           ,TMT_FIGHTING|TMT_ELECTRIC                  ,15  ,TML_MID},
+{DreamEater     ,TMF_NULL           ,TMT_PSYCHIC|TMT_FAIRY|TMT_GHOST|TMT_DARK   ,15  ,TML_MID},
 
-{EarthQuake     ,TMF_EVOLVED        ,TMT_GROUND|TMT_ROCK|TMT_STEEL              ,60},
-{FireBlast      ,TMF_NULL           ,TMT_FIRE|TMT_DRAGON                        ,60},
-{SolarBeam      ,TMF_NULL           ,TMT_GRASS|TMT_FIRE                         ,60},
-{GigaDrain      ,TMF_NULL           ,TMT_GRASS                                  ,60},
-{Psychic        ,TMF_NULL           ,TMT_PSYCHIC                                ,60},
-{Blizzard       ,TMF_NULL           ,TMT_ICE                                    ,60},
-{Overheat       ,TMF_NULL           ,TMT_FIRE                                   ,60},
+{IceBeam        ,TMF_NULL           ,TMT_WATER|TMT_ICE                          ,35  ,TML_HIGH},
+{Flamethrower   ,TMF_NULL           ,TMT_FIRE|TMT_DRAGON                        ,35  ,TML_HIGH},
+{ThunderBolt    ,TMF_NULL           ,TMT_ELECTRIC|TMT_PSYCHIC                   ,35  ,TML_HIGH},
+{ShadowBall     ,TMF_NULL           ,TMT_GHOST|TMT_PSYCHIC                      ,35  ,TML_HIGH},
+{Toxic          ,TMF_NULL           ,TMT_POISON                                 ,35  ,TML_ALL},
+{SludgeBomb     ,TMF_NULL           ,TMT_POISON                                 ,35  ,TML_HIGH},
+{Surf           ,TMF_NULL           ,TMT_WATER                                  ,35  ,TML_HIGH},
+{Waterfall      ,TMF_NULL           ,TMT_WATER                                  ,35  ,TML_HIGH},
+{DragonPulse    ,TMF_NULL           ,TMT_DRAGON                                 ,35  ,TML_HIGH},
+{DazzlingGleem  ,TMF_NULL           ,TMT_FAIRY|TMT_PSYCHIC                      ,35  ,TML_ALL},
+{PsychoCut      ,TMF_NULL           ,TMT_PSYCHIC                                ,35  ,TML_HIGH},
+{HammerArm      ,TMF_NULL           ,TMT_FIGHTING                               ,35  ,TML_HIGH},
+
+{EarthQuake     ,TMF_NULL           ,TMT_GROUND|TMT_ROCK|TMT_STEEL              ,60  ,TML_HIGH},
+{FireBlast      ,TMF_NULL           ,TMT_FIRE|TMT_DRAGON                        ,60  ,TML_HIGH},
+{SolarBeam      ,TMF_NULL           ,TMT_GRASS|TMT_FIRE                         ,60  ,TML_HIGH},
+{GigaDrain      ,TMF_NULL           ,TMT_GRASS                                  ,60  ,TML_HIGH},
+{Psychic        ,TMF_NULL           ,TMT_PSYCHIC                                ,60  ,TML_HIGH},
+{Blizzard       ,TMF_NULL           ,TMT_ICE                                    ,60  ,TML_HIGH},
+{Overheat       ,TMF_NULL           ,TMT_FIRE                                   ,60  ,TML_HIGH},
+{Thunder        ,TMF_NULL           ,TMT_ELECTRIC                               ,60  ,TML_HIGH},
 };
 
 //#endregion
 
-function int CheckTMArray (int Index, int Dexnum)
+function int CheckTMArray (int Index, int Dexnum, int Level)
 {
 //Redurns the move index number of that given TM number if it passes all checks
 int TMOut = TMList[Index][0];
 int PlayerTypeA = StatDEX[Dexnum][7];
 int PlayerTypeB = StatDEX[Dexnum][8];
 
-    //First check for first qualifiers, if the TM is universal, it will pass
+    //First check if the player is of the appropriate level
+    if (Level < TMList[Index][4]) return -1; //not the right level? no TM.
+
+    //next check for first qualifiers, if the TM is universal, it will pass
     if (TMList[Index][1] & TMF_UNIVERSAL) return TMOut;
 
     //next, if the TM is for all evolved pokemon
@@ -240,7 +260,7 @@ int output = 0;
         case WaterPulse: output = TMR_WaterPulse(Dexnum); break;    
         case Brine: output = TMR_WaterPulse(Dexnum); break;    
         case Scald: output = TMR_WaterPulse(Dexnum); break;    
-        case Surf: output = TMR_WaterPulse(Dexnum); break;    
+        case Surf: output = TMR_Surf(Dexnum); break;    
         case Waterfall: output = TMR_WaterPulse(Dexnum); break;   
         case HealPulse: output = TMR_HealPulse(Dexnum); break;    
         case LifeDew: output = TMR_HealPulse(Dexnum); break;    
@@ -260,6 +280,11 @@ int output = 0;
         case Rollout: output = TMR_Rollout(Dexnum); break; 
         case GyroBall: output = TMR_Rollout(Dexnum); break; 
         case HammerArm: output = TMR_HammerArm(Dexnum); break; 
+        case DrainingKiss: output = TMR_DrainingKiss(Dexnum); break; 
+        case FirePunch: output = TMR_FirePunch(Dexnum); break; 
+        case IcePunch: output = TMR_FirePunch(Dexnum); break; 
+        case ThunderPunch: output = TMR_FirePunch(Dexnum); break; 
+        
         //case sworddance: output = TMR_sworddance(Dexnum); break; 
         //case NastyPlot: output = TMR_NastyPlot(Dexnum); break; 
         
@@ -409,6 +434,63 @@ return output;
 }
 //#endregion
 
+//#region -=- TM Rules : Surf -=-
+Function int TMR_Surf (int Dexnum) 
+{
+
+int output = 0;
+    Switch (Dexnum)
+    {
+    case PICHU: output = 1; break;
+    case PIKACHU: output = 1; break;
+    case RAICHU: output = 1; break;
+    case DRATINI: output = 1; break;
+    case DRAGONAIR: output = 1; break;
+    case DRAGONITE: output = 1; break;
+    }
+return output;
+}
+//#endregion
+
+//#region -=- TM Rules : DrainingKiss -=-
+Function int TMR_DrainingKiss (int Dexnum) 
+{
+
+int output = 0;
+    Switch (Dexnum)
+    {
+    case MUDKIP: output = 1; break;
+    case MARSHTOMP: output = 1; break;
+    case SWAMPERT: output = 1; break;
+    case PICHU: output = 1; break;
+    case PIKACHU: output = 1; break;
+    case RAICHU: output = 1; break;
+    }
+return output;
+}
+//#endregion
+
+//#region -=- TM Rules : FirePunch -=-
+Function int TMR_FirePunch (int Dexnum) 
+{
+ // includes other elemental punches
+int output = 0;
+    Switch (Dexnum)
+    {
+    case ABRA: output = 1; break;
+    case KADABRA: output = 1; break;
+    case ALAKAZAM: output = 1; break;
+    case MUDKIP: output = 1; break;
+    case MARSHTOMP: output = 1; break;
+    case SWAMPERT: output = 1; break;
+    case PICHU: output = 1; break;
+    case PIKACHU: output = 1; break;
+    case RAICHU: output = 1; break;
+    }
+return output;
+}
+//#endregion
+
 //#region -=- TM Rules : Swift -=-
 Function int TMR_Swift (int Dexnum) 
 {
@@ -464,6 +546,46 @@ Function int TMR_Psychic (int Dexnum)
     case DRAGONITE: output = 1; break;
     case VULPIX_A: output = 1; break;
     case NINETALES_A: output = 1; break;
+    }
+return output;
+}
+//#endregion
+
+//#region -=- TM Rules : ThunderBolt -=-
+Function int TMR_ThunderBolt (int Dexnum) 
+{
+
+    int output = 0;
+    Switch (Dexnum)
+    {
+    case DRATINI: output = 1; break;
+    case DRAGONAIR: output = 1; break;
+    case DRAGONITE: output = 1; break;
+    case BAGON: output = 1; break;
+    case SHELGON: output = 1; break;
+    case SALAMENCE: output = 1; break;
+    case DRAKLOAK: output = 1; break;
+    case DRAGAPULT: output = 1; break;
+    }
+return output;
+}
+//#endregion
+
+//#region -=- TM Rules : Thunder -=-
+Function int TMR_Thunder (int Dexnum) 
+{
+
+    int output = 0;
+    Switch (Dexnum)
+    {
+    case DRATINI: output = 1; break;
+    case DRAGONAIR: output = 1; break;
+    case DRAGONITE: output = 1; break;
+    case BAGON: output = 1; break;
+    case SHELGON: output = 1; break;
+    case SALAMENCE: output = 1; break;
+    case DRAKLOAK: output = 1; break;
+    case DRAGAPULT: output = 1; break;
     }
 return output;
 }

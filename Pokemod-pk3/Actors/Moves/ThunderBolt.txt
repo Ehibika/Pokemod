@@ -1,0 +1,744 @@
+actor ThunderboltMove : WepMasterBase
+{
+Tag "Thunderbolt"
+obituary "$OB_Thunderbolt"
+Weapon.AmmoUse 1
+Weapon.AmmoGive 10
+weapon.ammotype "ThunderboltPP"
+scale 2.0
+Inventory.Pickupmessage "$PU_MEGABUSTER"
+States
+{
+Spawn:
+WEAP X 1
+stop
+
+
+Fire:
+"####" BBB 1 A_Jumpif(CallACS("CheckWeaponFire",RC_A)==1,"Fire.Begin")
+"####" B 0 A_Jump(256,"NoAmmo")
+Goto NoAmmo
+
+
+Fire.Begin:
+"####" B 0
+TNT1 A 0 A_GiveInventory("ChannelingSpeed")
+TNT1 A 0 A_GiveInventory("BasicWarperHold",1)
+TNT1 A 0 A_Jumpifinventory("WeaponCharge",25,"Fire.Bullet")
+"####" B 0 A_PlaySoundEx("weapon/PChargeLong","Weapon")
+"####" B 0 A_Jump(256,"Fire.Warmup")
+Goto Fire.Warmup
+
+Fire.Warmup:
+TNT1 A 0 A_GiveInventory("ChannelingSpeed")
+"####" B 0 A_GiveInventory("BasicWarperHold",1)
+"####" B 1 A_Jumpifinventory("WeaponCharge",25,"Fire.Start")
+"####" B 0 A_GiveInventory("WeaponCharge",1)
+"####" C 0 A_REfire("Fire.Warmup")
+Goto Fire.After
+Fire.Start:
+"####" B 0 A_GunFlash("Flash.Sound")
+"####" B 0 //A_SpawnItemEX("ThunderBoltMoveFXWarper") //get's in the way
+Goto Fire.Bullet
+
+Fire.Bullet: //Take Ammo
+"####" A 0 A_Jumpifinventory("ConShotTimer",1,"Fire.Bullet1")
+"####" B 0 A_JumpIfNoAmmo("Fire.After2")
+"####" B 0 A_FireCustomMissile("MoveThunderBoltDamager",0,1,0,0,0,0)
+"####" B 0 A_GiveInventory("ThunderboltCST",1)
+"####" B 0 A_Jump(256,"Fire.Bullet2")
+Goto Fire.Bullet2
+
+Fire.Bullet1: //Free
+"####" B 0 A_FireCustomMissile("MoveThunderBoltDamager",0,0,0,0,0,0)
+//"####" B 0 A_FireCustomMissile("ThunderboltRayDamager",0,0,0,0,0,0)
+"####" B 0 A_Jump(256,"Fire.Bullet2")
+Goto Fire.Bullet2
+
+Fire.Bullet2:
+"####" B 3 A_FireCustomMissile("MoveThunderBoltBurstStart",0,0,0,0,0,0)
+/*
+"####" B 0 A_FireCustomMissile("ThunderboltRay_A_Start_Server",0,0,0,0,0,0)
+"####" B 1 A_FireCustomMissile("ThunderboltRay_A_Start",0,0,0,0,0,0)
+
+"####" B 0 A_FireCustomMissile("ThunderboltRay_B_Start_Server",0,0,0,0,0,0)
+"####" B 1 A_FireCustomMissile("ThunderboltRay_B_Start",0,0,0,0,0,0)
+
+"####" B 0 A_FireCustomMissile("ThunderboltRay_C_Start_Server",0,0,0,0,0,0)
+"####" B 1 A_FireCustomMissile("ThunderboltRay_C_Start",0,0,0,0,0,0)
+
+"####" B 0 A_FireCustomMissile("ThunderboltRay_B_Start_Server",0,0,0,0,0,0)
+"####" B 1 A_FireCustomMissile("ThunderboltRay_B_Start",0,0,0,0,0,0)
+*/
+
+"####" B 0 A_Jump(256,"Fire.After")
+Goto Fire.After
+
+
+Fire.After:
+"####" C 0 A_REfire("Fire")
+"####" C 0 //A_StopSoundEX("Weapon")
+Fire.After2:
+"####" B 0 A_TakeInventory("BasicWarperHold",99)
+"####" B 0 A_TakeInventory("ConShotTimer",99)
+"####" B 0 A_TakeInventory("WeaponCharge",999)
+"####" B 1 A_GiveInventory("5Recovery_A")
+"####" B 0 A_Jump(256,"Fire.End")
+Goto Fire.End
+
+
+
+
+
+
+Flash.Sound:
+TNT1 A 3 A_PlaySoundEx("weapon/electricshock","Weapon")
+TNT1 A 0 A_Jumpifinventory("WeaponCharge",25,"Flash.Sound")
+Stop
+}
+}
+
+actor ThunderboltMove1 : ThunderboltMove {Weapon.SlotNumber 1}
+actor ThunderboltMove2 : ThunderboltMove {Weapon.SlotNumber 2}
+actor ThunderboltMove3 : ThunderboltMove {Weapon.SlotNumber 3}
+actor ThunderboltMove4 : ThunderboltMove {Weapon.SlotNumber 4}
+
+actor ThunderboltMove5 : ThunderboltMove 
+{
+Weapon.SlotNumber 5
+States
+{
+Fire.End:
+TNT1 A 0
+TNT1 A 0 A_TakeInventory("ThunderboltMove5",9)
+TNT1 A 0 A_Jump(256,"Ready")
+Goto Ready
+}
+}
+
+//[+]========================================================================[+]
+//-----------------------------|Ammo & Inventory|------------------------------
+//[+]========================================================================[+]
+actor ThunderboltPP : Ammo {inventory.amount 1 inventory.Maxamount 10}
+
+Actor DoubleThunderbolt : Powerup{inventory.amount 1 powerup.duration 0x7FFFFFFF}
+
+
+Actor ThunderboltProtect : powerprotection
+{
+Powerup.duration 8
+Damagefactor "Thunderbolt", 0
+}
+
+actor ThunderboltCST : PowerupGiver
+{
++INVENTORY.AUTOACTIVATE
+Powerup.Duration 45
+powerup.type "ConShotTimer"
+}
+
+actor ThunderBoltParaChance : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_Jump(24,"Paralyse")
+stop
+Paralyse:
+TNT1 A 0 A_GiveInventory("ParalysisStatusProc2")
+stop
+
+Nope:
+TNT1 A 0
+stop
+}
+}
+//[+]========================================================================[+]
+//--------------------------------|Projectiles |--------------------------------
+//[+]========================================================================[+]
+
+
+Const Int ThunderboltRange = 35;
+
+
+actor MoveThunderBoltBurstStart //: BasicHelper
+{
+    +MISSILE
+    -SOLID
+    +NOCLIP
+    +NOINTERACTION
+    +NOGRAVITY
+    +DONTBLAST
+    +DONTREFLECT
+    +THRUACTORS
+    RenderStyle none
+    Radius 2
+    Height 2
+
+    Speed 15
+    States
+    {
+    Spawn:
+        TNT1 A 0
+        TNT1 A 0 A_Warp(2,0,0,32,0,16+8)//But which interpolation? Does it matter?
+        TNT1 A 1 A_SpawnItemEx("MoveThunderBoltBurst",0,0,0,momx,momy,momz,0,8)
+        stop
+    }
+}
+
+actor MoveThunderBoltBurst : BasicFastProjectile//FastProj to match damager hitbox
+{
+    +MISSILE
+    +NOGRAVITY
+    +SKYEXPLODE
+    +EXPLODEONWATER
+    +DONTSPLASH
+    +PAINLESS
+    +CLIENTSIDEONLY
+    RenderStyle None
+    Damage (0)
+    Radius 10
+    Height 10
+    Speed 15
+    Scale 2.5
+    States
+    {
+    Spawn:
+        TNT1 A 0
+        TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+        TNT1 A 0 A_JumpIf(Pitch > ThunderboltRange,"Death2")
+        TNT1 A 0 A_SetPitch(Pitch+1)
+        TNT1 A 0 A_SpawnItemEx("MoveThunderBoltBurst",0,0,0,momx,momy,momz,0,552+1)//512+32+8
+        TNT1 A 0 A_Stop
+        TNT1 A 0 A_SpawnItemEx("MoveThunderBoltFX",0,frandom(-9,9),frandom(-9,9),0,0,0,0,1)
+        TNT1 A 0 A_SpawnItemEx("MoveThunderBoltBurst2",0,frandom(-16,16),frandom(-16,16),0,0,0,0,1)
+        TNT1 A 1
+        stop
+    Death:
+        TNT1 A 0 A_SpawnItemEx("MoveThunderBoltEndFX",0,0,0,0,0,0,0,1)
+        stop
+    Death2:
+        TNT1 A 0 A_Stop
+        TNT1 A 0 A_SpawnItemEx("MoveThunderBoltEndFX",0,0,0,0,0,0,0,1)
+        stop
+    }
+}
+
+actor MoveThunderBoltFX : BasicGraphicEffect
+{
+    +FORCEXYBILLBOARD
+    +BRIGHT
+    States
+    {
+    Spawn:
+        ESPA Q 0
+        ESPA Q 0 A_Jump(256,1,4)
+        ESPA QRS 1
+        stop
+        ESPA XWV 1
+        stop
+    }
+}
+
+actor MoveThunderBoltEndFX : MoveThunderBoltFX
+{
+    States
+    {
+    Spawn:
+        ESPA ZYZY 1
+        ESPA Z 0 A_SetScale(1.25)
+        ESPA ZY 1
+        stop
+    }
+}
+
+actor MoveThunderBoltBurst2
+{
+    +MISSILE
+    +NOGRAVITY
+    +SKYEXPLODE
+    +EXPLODEONWATER
+    +DONTSPLASH
+    +PAINLESS
+    +CLIENTSIDEONLY
+    +FORCEXYBILLBOARD
+    +BRIGHT
+    Damage (0)
+    Radius 10
+    Height 10
+    Speed 15
+    Scale 2.5
+    States
+    {
+    Spawn:
+        TNT1 A 0
+        TNT1 A 0 A_JumpIf(random(1,4) >= 4,"SpawnReal")
+        stop
+    SpawnReal:
+        TNT1 A 10 A_SetTics(random(2,4)*3)
+        TNT1 A 0 A_PlaySoundEx("weapon/electricshockspark","Auto")
+        TNT1 A 0 A_SetPitch(random(12,18))
+        TNT1 A 0 A_SpawnItemEx("MoveThunderBoltBurst3",0,0,0,0,0,0,0,544+1)//512+32
+        stop
+    Death:
+        TNT1 A 0
+        stop
+    }
+}
+
+actor MoveThunderBoltBurst3 : MoveThunderBoltBurst2
+{
+    +BRIGHT
+    Scale 0.5
+    States
+    {
+    Spawn:
+        ESPA T 0
+        ESPA T 0 A_JumpIf(Pitch < 2,"Death")
+        ESPA T 0 A_SetPitch(Pitch-1)
+        ESPA T 0 A_SpawnItemEx("MoveThunderBoltBurst3",-2*random(0,1)+1, -2*random(0,1)+1, -2*random(0,1)+1,0,0,0,0,544+1)//512+32
+        ESPA T 0 A_SetTics(random(0,2))
+        ESPA T 0 A_Jump(256,1,2)
+        ESPA T 1
+        stop
+        ESPA U 1
+        stop
+    }
+}
+
+actor MoveThunderBoltDamager : BasicFastProjectile
+{
+    PROJECTILE
+    damagetype "Thunderbolt"
+    Obituary "$OB_THUNDERBOLT"
+    +SKYEXPLODE
+    +EXPLODEONWATER
+    RenderStyle None
+    Damage (9)
+    Radius 10
+    Height 10
+    speed 525 //15 * ThunderboltRange(35)
+    scale 2.5
+    states
+    {
+    Spawn:
+        TNT1 A 0
+        TNT1 A 1
+        TNT1 A 0
+        stop
+    }
+}
+
+
+
+
+/*
+actor ThunderboltRayBase
+{
+//RenderStyle "Add"
+PROJECTILE
+Obituary "$OB_Thunderbolt"
+DamageType "Thunderbolt"
+//+THRUACTORS
++DONTBLAST
++DONTREFLECT
++CLIENTSIDEONLY
++MTHRUSPECIES
++FORCEYBILLBOARD
++PAINLESS
+damage (0)
+Radius 8
+Height 8
+speed 55
+scale 3.5
+
+Renderstyle "Translucent"
+Alpha 0.6
+
+states
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_Jump(256,"SpawnBeam")
+Goto SpawnBeam
+SpawnBeam:
+TNT1 A 0 A_SetPitch(pitch+1)
+TNT1 A 0 A_JumpIf(pitch>ThunderboltRange,"Death")
+TNT1 A 0 A_JumpIf(CallACS("pkmn_istargetclient")!=1,"Spawn.NoBeamView")
+TNT1 A 0 A_SpawnItemEx("ThunderboltRayBase",0,0,0,momx,momy,momz,0,553)
+TNT1 A 0 A_Jump(256,"Spawn.BeamView")
+Goto Spawn.BeamView
+
+Spawn.BeamView:
+TNT1 A 0 A_GiveInventory("ProjectileCodeSyncTarget",1)
+ESHB A 1
+stop
+
+Spawn.NoBeamView:
+TNT1 A 1 
+stop
+
+
+Perish:
+TNT1 A 1 
+stop
+
+Death:
+TNT1 A 1 A_GiveInventory("ProjectileDCode",1)
+TNT1 A 1 A_Jump(256,"Death1")
+stop
+
+Death1:
+TNT1 A 1
+ESHB D 1 A_SpawnItemEx("ThunderboltImpactFX",0,0,0,0,0,0,0,33)
+stop
+}
+}
+
+actor ThunderboltRay_A_Start : ThunderboltRayBase
+{
++INVISIBLE
+states
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+TNT1 A 0 A_Jump(256,"SpawnBeam")
+Goto SpawnBeam
+}
+}
+
+
+actor ThunderboltRay_A_Server : ThunderboltRayBase
+{
+states
+{
+Spawn:
+TNT1 A 0
+SpawnBeam:
+TNT1 A 0 A_SetPitch(pitch+1)
+TNT1 A 0 A_JumpIf(pitch>ThunderboltRange,"Death")
+TNT1 A 0 A_SpawnItemEx("ThunderboltRay_A_Server",0,0,0,momx,momy,momz,0,553)
+TNT1 A 0 A_JumpIf(CallACS("pkmn_istargetclient")!=1,"Spawn.BeamView")
+TNT1 A 0 A_Jump(256,"Spawn.NoBeamView")
+Goto Spawn.NoBeamView
+}
+}
+
+actor ThunderboltRay_A_Start_Server : ThunderboltRay_A_Server
+{
++INVISIBLE
+-CLIENTSIDEONLY
++NONETID
+states
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_GiveInventory("ProjectileCodeSyncTarget",1)
+TNT1 A 0 A_Jump(256,"SpawnBeam")
+Goto SpawnBeam
+}
+}
+
+
+actor ThunderboltRay_B : ThunderboltRayBase
+{
+states
+{
+
+SpawnBeam:
+TNT1 A 0 A_SetPitch(pitch+1)
+TNT1 A 0 A_JumpIf(pitch>ThunderboltRange,"Death")
+TNT1 A 0 A_JumpIf(CallACS("pkmn_istargetclient")!=1,"Spawn.NoBeamView")
+TNT1 A 0 A_SpawnItemEx("ThunderboltRay_B",0,0,0,momx,momy,momz,0,553)
+TNT1 A 0 A_Jump(256,"Spawn.BeamView")
+Goto Spawn.BeamView
+
+Spawn.BeamView:
+TNT1 A 0 A_GiveInventory("ProjectileCodeSyncTarget",1)
+ESHB B 1
+stop
+
+Spawn.NoBeamView:
+TNT1 A 1 
+stop
+
+Death1:
+TNT1 A 1
+//ESHB E 1 //A_SpawnItemEx("ThunderboltImpactFX",0,0,0,0,0,0,0,33)
+stop
+}
+}
+
+actor ThunderboltRay_B_Start : ThunderboltRay_B
+{
++INVISIBLE
+states
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+TNT1 A 0 A_Jump(256,"SpawnBeam")
+Goto SpawnBeam
+}
+}
+
+
+actor ThunderboltRay_B_Server : ThunderboltRay_B
+{
+states
+{
+Spawn:
+TNT1 A 0
+SpawnBeam:
+TNT1 A 0 A_SetPitch(pitch+1)
+TNT1 A 0 A_JumpIf(pitch>ThunderboltRange,"Death")
+TNT1 A 0 A_SpawnItemEx("ThunderboltRay_B_Server",0,0,0,momx,momy,momz,0,553)
+TNT1 A 0 A_JumpIf(CallACS("pkmn_istargetclient")!=1,"Spawn.BeamView")
+TNT1 A 0 A_Jump(256,"Spawn.NoBeamView")
+Goto Spawn.NoBeamView
+}
+}
+
+actor ThunderboltRay_B_Start_Server : ThunderboltRay_B_Server
+{
++INVISIBLE
+-CLIENTSIDEONLY
++NONETID
+states
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_GiveInventory("ProjectileCodeSyncTarget",1)
+TNT1 A 0 A_Jump(256,"SpawnBeam")
+Goto SpawnBeam
+}
+}
+
+
+actor ThunderboltRay_C : ThunderboltRayBase
+{
+states
+{
+
+SpawnBeam:
+TNT1 A 0 A_SetPitch(pitch+1)
+TNT1 A 0 A_JumpIf(pitch>ThunderboltRange,"Death")
+TNT1 A 0 A_JumpIf(CallACS("pkmn_istargetclient")!=1,"Spawn.NoBeamView")
+TNT1 A 0 A_SpawnItemEx("ThunderboltRay_C",0,0,0,momx,momy,momz,0,553)
+TNT1 A 0 A_Jump(256,"Spawn.BeamView")
+Goto Spawn.BeamView
+
+Spawn.BeamView:
+TNT1 A 0 A_GiveInventory("ProjectileCodeSyncTarget",1)
+ESHB C 1
+stop
+
+Spawn.NoBeamView:
+TNT1 A 1 
+stop
+
+Death1:
+TNT1 A 1
+TNT1 A 0 A_Jump(256,1,2)
+ESHB D 1
+stop
+ESHB E 1
+stop
+}
+}
+
+actor ThunderboltRay_C_Start : ThunderboltRay_C
+{
++INVISIBLE
+states
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+TNT1 A 0 A_Jump(256,"SpawnBeam")
+Goto SpawnBeam
+}
+}
+
+
+actor ThunderboltRay_C_Server : ThunderboltRay_C
+{
+states
+{
+Spawn:
+TNT1 A 0
+SpawnBeam:
+TNT1 A 0 A_SetPitch(pitch+1)
+TNT1 A 0 A_JumpIf(pitch>ThunderboltRange,"Death")
+TNT1 A 0 A_SpawnItemEx("ThunderboltRay_C_Server",0,0,0,momx,momy,momz,0,553)
+TNT1 A 0 A_JumpIf(CallACS("pkmn_istargetclient")!=1,"Spawn.BeamView")
+TNT1 A 0 A_Jump(256,"Spawn.NoBeamView")
+Goto Spawn.NoBeamView
+}
+}
+
+actor ThunderboltRay_C_Start_Server : ThunderboltRay_C_Server
+{
++INVISIBLE
+-CLIENTSIDEONLY
++NONETID
+states
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_GiveInventory("ProjectileCodeSyncTarget",1)
+TNT1 A 0 A_Jump(256,"SpawnBeam")
+Goto SpawnBeam
+}
+}
+
+
+actor ThunderboltSounder
+{
+PROJECTILE
+Obituary "$OB_Thunderbolt"
+DamageType "Thunderbolt"
+//+THRUACTORS
++MTHRUSPECIES
+//+THRUGHOST
++DONTBLAST
++DONTREFLECT
++SERVERSIDEONLY//+NONETID
+renderstyle none
+damage (0)
+Radius 8
+Height 8
+speed 55
+states
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_SetPitch(pitch+1)
+TNT1 A 0 A_JumpIf(pitch>ThunderboltRange,"Death")
+TNT1 A 0 A_SpawnItemEx("ThunderboltRayDamager",0,0,0,momx,momy,momz,0,552)
+TNT1 A 0 A_Stop
+TNT1 A 1 
+stop
+Death:
+TNT1 A 0 
+stop
+
+XDeath:
+Crash:
+TNT1 A 1 
+TNT1 A 10 A_PlaySound("move/thunderbolt",1,0.5)
+stop
+}
+}
+
+
+actor ThunderboltRayDamager
+{
+PROJECTILE
+Obituary "$OB_Thunderbolt"
+DamageType "Thunderbolt"
+//+THRUACTORS
++MTHRUSPECIES
+//+THRUGHOST
++DONTBLAST
++DONTREFLECT
++SERVERSIDEONLY//+NONETID
+renderstyle none
+damage (0)
+Radius 8
+Height 8
+speed 55
+states
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_SetPitch(pitch+1)
+TNT1 A 0 A_JumpIf(pitch>ThunderboltRange,"Death")
+TNT1 A 0 A_SpawnItemEx("ThunderboltRayDamager",0,0,0,momx,momy,momz,0,552)
+TNT1 A 0 A_Stop
+TNT1 A 1 
+stop
+Death:
+TNT1 A 0 
+stop
+
+XDeath:
+Crash:
+TNT1 A 1 
+TNT1 A 0 A_Explode(MBP_Thunderbolt,28,0,0,28)
+stop
+}
+}
+
+
+actor ThunderboltImpactFX : BasicClientSide
+{
+Translation "202:202=216:216","199:199=0:0"
++MISSILE
+states
+{
+Spawn:
+TNT1 A 0
+TNT1 AAAA 0 A_SpawnItemEx("ThunderboltImpactSparkFX",0,0,0,15,0,random(-15,15),random(0,359),1)
+stop
+}
+}
+
+actor ThunderboltImpactNoise : ThunderboltImpactFX
+{
+states
+{
+Spawn:
+TNT1 A 0
+TNT1 AAAA 0 A_SpawnItemEx("ThunderboltImpactSparkFX",0,0,0,15,0,random(-15,15),random(0,359),1)
+TNT1 A 10 A_PlaySound("move/thunderbolt",1,0.5)
+stop
+}
+}
+
+actor ThunderboltImpactSparkFX
+{
++MISSILE
++DOOMBOUNCE
++THRUACTORS
++DONTBLAST
++DONTSPLASH
++FORCEXYBILLBOARD
++CLIENTSIDEONLY
+radius 2
+height 2
+scale 2.5
+states
+{
+Spawn:
+ESHB H 0
+ESHB HHHHH 1 bright A_SetScale(scalex - 0.5,scaley - 0.5)
+stop
+}
+}
+
+actor ThunderBoltMoveFXWarper : BasicWarper
+{
++FORCEXYBILLBOARD
+Renderstyle "Translucent"
+Alpha 0.6
+states
+{
+Shield:
+TNT1 A 0
+ESHB FFGGFFGG 1 A_Warp(AAPTR_TARGET,0,0,42,0,72)
+loop
+Death:
+TNT1 A 0
+stop
+}
+}
+
+*/

@@ -24,7 +24,7 @@
 
 #LIBDEFINE ATKVAL1 1
 #LIBDEFINE ATKVAL2 50
-#LIBDEFINE ATKVAL3 400
+#LIBDEFINE ATKVAL3 600
 
 #LIBDEFINE DEFVAL1 1
 #LIBDEFINE DEFVAL2 100
@@ -207,7 +207,7 @@ Str StatName2[7] = {
 };
 */
 
-#LIBDEFINE STATITEMNUM 39
+#LIBDEFINE STATITEMNUM 43
 
 Str StatEffectName[STATITEMNUM][2] = {
     {"Growth","GOOD"},
@@ -249,6 +249,10 @@ Str StatEffectName[STATITEMNUM][2] = {
     {"Screech","BAD"},
     {"Paralyze","BAD"},
     {"DracoMeteor","BAD"},
+    {"Calmmind","GOOD"},
+    {"Meditate1","GOOD"},
+    {"Meditate2","GOOD"},
+    {"Meditate3","GOOD"},
 };
 
 #LIBDEFINE PATK_ID 0
@@ -266,7 +270,7 @@ Int StatEffectValue[STATITEMNUM][5] = {
 {   0,      0,      0,      2,      0}, 
 {   0,      0,      2,      0,      0}, 
 {   1,      0,      0,      0,      1}, 
-{   2,      2,      -1,      -1,      2},
+{   1,      1,      -1,      -1,      1}, //ShellSmash
 {   0,      0,      0,      0,      -1}, 
 {   0,      0,      0,      0,      -1}, 
 {   1,      1,      0,      0,      0}, 
@@ -298,6 +302,10 @@ Int StatEffectValue[STATITEMNUM][5] = {
 {   0,      0,      -2,      0,      0}, 
 {   0,      0,      0,      0,      -2}, 
 {   0,      -2,      0,      0,      0}, 
+{   0,      1,      0,      1,      0}, //Calmmind
+{   1,      0,      0,      0,      0}, //Meditate1
+{   2,      0,      0,      0,      0}, //Meditate2
+{   3,      0,      0,      0,      0}, //Meditate3
 };
 
 Int StatMulti[13] = {
@@ -403,6 +411,15 @@ Script "StatItemNuke" (int ItemType)
         if((ItemType & SB_GOOD) && (StatEffectName[t][1] == "GOOD")){TakeInventory(StrParam(s:"STF_",s:StatEffectName[t][0]),999);}
         else if((ItemType & SB_BAD) && (StatEffectName[t][1] == "BAD")){TakeInventory(StrParam(s:"STF_",s:StatEffectName[t][0]),999);}
     }  
+
+    //for extra stuff
+    if(ItemType & SB_GOOD) 
+        {
+            if(CheckInventory("ReflectPower"))TakeInventory("ReflectPower",999);
+            if(CheckInventory("LightScreenPower"))TakeInventory("LightScreenPower",999);
+            if(CheckInventory("MistFlag"))TakeInventory("MistFlag",999);
+        }
+
 }
 
 Script "ActiveStat_Handler" (Int Mode, int HPHeal)
@@ -578,7 +595,7 @@ SpeedTier += ModCount;
     Case 3: Output = 0.8; break;
     Case 4: Output = 1.0; break;
     Case 5: Output = 1.1; break;
-    Case 6: Output = 1.2; break;
+    Case 6: Output = 1.3; break;
     Case 7: Output = 1.5; break;
     Case 8: Output = 1.75; break;
     Case 9: Output = 2.0; break;
