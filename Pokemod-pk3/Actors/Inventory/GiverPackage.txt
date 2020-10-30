@@ -12,6 +12,8 @@ Spawn:
 TNT1 A 0
 stop
 Pickup:
+TNT1 A 1 A_Jumpifinventory("PackageID",24,"CraftyShield")
+
 TNT1 A 1 A_Jumpifinventory("PackageID",23,"Twister")
 
 TNT1 A 1 A_Jumpifinventory("PackageID",22,"StunSpore")
@@ -53,6 +55,10 @@ TNT1 A 1 A_Jumpifinventory("PackageID",2,"Tailwhip")
 TNT1 A 1 A_Jumpifinventory("PackageID",1,"Growl")
 Goto Pickup.After
 //===============
+CraftyShield:
+TNT1 A 0 A_Giveinventory("CraftyShieldInitiate")
+Goto Pickup.After
+
 Twister:
 TNT1 A 0 ThrustThingZ(0,40,0,0)
 Goto Pickup.After

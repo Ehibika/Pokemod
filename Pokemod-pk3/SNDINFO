@@ -72,6 +72,11 @@ support/Healdiode1 HEALDIO1
 support/Healdiode2 HEALDIO2
 support/Failure Help
 
+Status/Poison S_PSN
+status/Burn S_BURN
+status/Paralyze S_PARA
+status/sleep S_SLEEP
+
 support/Ubercharge1 UBRCHR1
 support/Ubercharge2 UBRCHR2
 
@@ -147,6 +152,8 @@ Move/MoonLight MOONL1
 $attenuation Move/MoonLight 0.5
 Move/Blizzard BLIZZARD
 $attenuation Move/Blizzard 0.5
+Move/CraftyShield CRAFSHLD
+Move/Aromatherapy AROMAT
 
 Move/Confusion PSILOVE1
 Move/Psychic1 PSILOVE2

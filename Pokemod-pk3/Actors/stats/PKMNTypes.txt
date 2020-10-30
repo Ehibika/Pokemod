@@ -1485,6 +1485,7 @@ damagefactor "DisarmingVoice", 1.3 //W
 damagefactor "DazzlingGleem", 1.3 //W
 damagefactor "MoonBlast", 1.3 //W
 damagefactor "DrainingKiss", 1.3 //W
+damagefactor "CraftyShield", 1.3 //W
 //--[Move|Fairy]--
 }
 
@@ -1494,6 +1495,7 @@ damagefactor "DisarmingVoice", 1.6 //2W
 damagefactor "DazzlingGleem", 1.6 //2W
 damagefactor "MoonBlast", 1.6 //2W
 damagefactor "DrainingKiss", 1.6 //2W
+damagefactor "CraftyShield", 1.6 //2W
 //--[Move|Fairy]--
 }
 
@@ -1503,6 +1505,7 @@ damagefactor "DisarmingVoice", 0.7 //R
 damagefactor "DazzlingGleem", 0.7 //R
 damagefactor "MoonBlast", 0.7 //R
 damagefactor "DrainingKiss", 0.7 //R
+damagefactor "CraftyShield", 0.7 //R
 //--[Move|Fairy]--
 }
 
@@ -1512,6 +1515,7 @@ damagefactor "DisarmingVoice", 0.4 //2R
 damagefactor "DazzlingGleem", 0.4 //2R
 damagefactor "MoonBlast", 0.4 //2R
 damagefactor "DrainingKiss", 0.4 //2R
+damagefactor "CraftyShield", 0.4 //2R
 //--[Move|Fairy]--
 }
 
@@ -1521,6 +1525,7 @@ damagefactor "DisarmingVoice", 0.0 //I
 damagefactor "DazzlingGleem", 0.0 //I
 damagefactor "MoonBlast", 0.0 //I
 damagefactor "DrainingKiss", 0.0 //I
+damagefactor "CraftyShield", 0.0 //I
 //--[Move|Fairy]--
 }
 
@@ -1530,6 +1535,7 @@ damagefactor "DisarmingVoice", 1.15 //S
 damagefactor "DazzlingGleem", 1.15 //S
 damagefactor "MoonBlast", 1.15 //S
 damagefactor "DrainingKiss", 1.15 //S
+damagefactor "CraftyShield", 1.15 //S
 //--[Move|Fairy]--
 }
 

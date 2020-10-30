@@ -66,7 +66,7 @@
 #LIBDEFINE TML_HIGH 10
 #LIBDEFINE TML_MAX 15
 
-#LIBDEFINE MAXTMLIST 73
+#LIBDEFINE MAXTMLIST 78
 //#endregion
 
 //#region -=- TM Reference -=-
@@ -98,7 +98,8 @@ int TMList [MAXTMLIST][5] = {
 {HelpingHand    ,TMF_UNIVERSAL      ,TMT_NORMAL                                 ,15  ,TML_ALL},
 
 {CalmMind       ,TMF_UNIVERSAL      ,TMT_PSYCHIC                                ,25  ,TML_LOW},
-{Rage           ,TMF_UNIVERSAL      ,TMT_NORMAL                                ,25  ,TML_LOW},
+{CosmicPower    ,TMF_UNIVERSAL      ,TMT_PSYCHIC|TMT_FAIRY                      ,25  ,TML_LOW},
+{Rage           ,TMF_UNIVERSAL      ,TMT_NORMAL                                 ,25  ,TML_LOW},
 {Meditate       ,TMF_UNIVERSAL      ,TMT_PSYCHIC                                ,25  ,TML_LOW},
 
 {IronDefense    ,TMF_UNIVERSAL      ,TMT_STEEL                                  ,55  ,TML_MID},
@@ -113,9 +114,13 @@ int TMList [MAXTMLIST][5] = {
 {Captivate      ,TMF_UNIVERSAL      ,TMT_NORMAL                                 ,10  ,TML_MID},
 {ScaryFace      ,TMF_UNIVERSAL      ,TMT_NORMAL                                 ,10  ,TML_MID},
 
+{Haze           ,TMF_NULL           ,TMT_WATER|TMT_ICE|TMT_FAIRY|TMT_GHOST      ,15  ,TML_LOW},
+{Mist           ,TMF_NULL           ,TMT_WATER|TMT_ICE|TMT_FAIRY|TMT_GHOST      ,15  ,TML_LOW},
+
 {WideGuard      ,TMF_NULL           ,TMT_GROUND|TMT_ROCK|TMT_STEEL              ,15  ,TML_ALL},
 {SafeGuard      ,TMF_NULL           ,TMT_NORMAL|TMT_PSYCHIC|TMT_FAIRY           ,15  ,TML_ALL},
 {Reflect        ,TMF_NULL           ,TMT_PSYCHIC|TMT_FAIRY                      ,15  ,TML_MID},
+{CraftyShield   ,TMF_NULL           ,TMT_PSYCHIC|TMT_FAIRY                      ,15  ,TML_MID},
 {LightScreen    ,TMF_NULL           ,TMT_PSYCHIC|TMT_FAIRY                      ,15  ,TML_MID},
 {HealPulse      ,TMF_NULL           ,TMT_PSYCHIC|TMT_FAIRY                      ,15  ,TML_MID},
 {LifeDew        ,TMF_NULL           ,TMT_WATER|TMT_PSYCHIC|TMT_FAIRY            ,15  ,TML_ALL},
@@ -157,6 +162,7 @@ int TMList [MAXTMLIST][5] = {
 {DragonPulse    ,TMF_NULL           ,TMT_DRAGON                                 ,35  ,TML_HIGH},
 {DazzlingGleem  ,TMF_NULL           ,TMT_FAIRY|TMT_PSYCHIC                      ,35  ,TML_ALL},
 {PsychoCut      ,TMF_NULL           ,TMT_PSYCHIC                                ,35  ,TML_HIGH},
+{AirSlash       ,TMF_NULL           ,TMT_Flying                                 ,35  ,TML_HIGH},
 {HammerArm      ,TMF_NULL           ,TMT_FIGHTING                               ,35  ,TML_HIGH},
 
 {EarthQuake     ,TMF_NULL           ,TMT_GROUND|TMT_ROCK|TMT_STEEL              ,60  ,TML_HIGH},
@@ -284,6 +290,13 @@ int output = 0;
         case FirePunch: output = TMR_FirePunch(Dexnum); break; 
         case IcePunch: output = TMR_FirePunch(Dexnum); break; 
         case ThunderPunch: output = TMR_FirePunch(Dexnum); break; 
+        case AirSlash: output = TMR_AirSlash(Dexnum); break; 
+        case Psychocut: output = TMR_AirSlash(Dexnum); break; 
+        case Thunderbolt: output = TMR_Thunderbolt(Dexnum); break; 
+        case Thunder: output = TMR_Thunder(Dexnum); break; 
+        case Solarbeam: output = TMR_SolarBeam(Dexnum); break; 
+        case Flamethrower: output = TMR_Flamethrower(Dexnum); break; 
+        
         
         //case sworddance: output = TMR_sworddance(Dexnum); break; 
         //case NastyPlot: output = TMR_NastyPlot(Dexnum); break; 
@@ -411,6 +424,7 @@ Function int TMR_MagicalLeaf (int Dexnum)
 int output = 0;
     Switch (Dexnum)
     {
+    case DREEPY: output = 1; break;
     case DRAKLOAK: output = 1; break;
     case DRAGAPULT: output = 1; break;
     }
@@ -429,6 +443,9 @@ int output = 0;
     case DRATINI: output = 1; break;
     case DRAGONAIR: output = 1; break;
     case DRAGONITE: output = 1; break;
+    case DREEPY: output = 1; break;
+    case DRAKLOAK: output = 1; break;
+    case DRAGAPULT: output = 1; break;    
     }
 return output;
 }
@@ -447,6 +464,9 @@ int output = 0;
     case DRATINI: output = 1; break;
     case DRAGONAIR: output = 1; break;
     case DRAGONITE: output = 1; break;
+    case DREEPY: output = 1; break;
+    case DRAKLOAK: output = 1; break;
+    case DRAGAPULT: output = 1; break;
     }
 return output;
 }
@@ -477,16 +497,26 @@ Function int TMR_FirePunch (int Dexnum)
 int output = 0;
     Switch (Dexnum)
     {
-    case ABRA: output = 1; break;
-    case KADABRA: output = 1; break;
-    case ALAKAZAM: output = 1; break;
-    case MUDKIP: output = 1; break;
-    case MARSHTOMP: output = 1; break;
-    case SWAMPERT: output = 1; break;
     case PICHU: output = 1; break;
     case PIKACHU: output = 1; break;
     case RAICHU: output = 1; break;
     }
+    if(TMArch_Pugilist(Dexnum)){output = 1;}
+    
+return output;
+}
+//#endregion
+
+//#region -=- TM Rules : AirSlash -=-
+Function int TMR_AirSlash (int Dexnum) 
+{
+ // includes other "Slashing" moves
+int output = 0;
+    Switch (Dexnum)
+    {
+
+    }
+    if(TMArch_Slasher(Dexnum)){output = 1;}
 return output;
 }
 //#endregion
@@ -516,17 +546,11 @@ Function int TMR_HealPulse (int Dexnum)
 int output = 0;
     Switch (Dexnum)
     {
-    case CHIKORITA: output = 1; break;
-    case BAYLEEF: output = 1; break;
-    case MEGANIUM: output = 1; break;
     case DRATINI: output = 1; break;
     case DRAGONAIR: output = 1; break;
     case DRAGONITE: output = 1; break;
-    case RALTS: output = 1; break;
-    case KIRLIA: output = 1; break;
-    case GARDEVOIR: output = 1; break;
-    case GALLADE: output = 1; break;
     }
+    if(TMArch_Succor(Dexnum)){output = 1;}
 return output;
 }
 //#endregion
@@ -601,6 +625,9 @@ Function int TMR_ThunderWave (int Dexnum)
     case DRATINI: output = 1; break;
     case DRAGONAIR: output = 1; break;
     case DRAGONITE: output = 1; break;
+    case DREEPY: output = 1; break;
+    case DRAKLOAK: output = 1; break;
+    case DRAGAPULT: output = 1; break;
     case VULPIX_A: output = 1; break;
     case NINETALES_A: output = 1; break;
     }
@@ -628,16 +655,26 @@ Function int TMR_DragonRage (int Dexnum)
     int output = 0;
     Switch (Dexnum)
     {
-    case CHARMANDER: output = 1; break;
-    case CHARMELEON: output = 1; break;
-    case CHARIZARD: output = 1; break;
-    case TOTODILE: output = 1; break;
-    case CROCONAW: output = 1; break;
-    case FERALIGATR: output = 1; break;
-    case TREECKO: output = 1; break;
-    case GROVYLE: output = 1; break;
-    case SCEPTILE: output = 1; break;
+
     }
+
+    if(TMArch_Draconic(Dexnum)){output = 1;}
+
+return output;
+}
+//#endregion
+
+//#region -=- TM Rules : Flamethrower -=-
+Function int TMR_Flamethrower (int Dexnum) 
+{
+    int output = 0;
+    Switch (Dexnum)
+    {
+
+    }
+
+    if(TMArch_Draconic(Dexnum)){output = 1;}
+
 return output;
 }
 //#endregion
@@ -690,6 +727,9 @@ Function int TMR_Acrobatics (int Dexnum)
     case KIRLIA: output = 1; break;
     case GARDEVOIR: output = 1; break;
     case GALLADE: output = 1; break;
+    case DREEPY: output = 1; break;
+    case DRAKLOAK: output = 1; break;
+    case DRAGAPULT: output = 1; break;
     }
 return output;
 }
@@ -722,8 +762,115 @@ Function int TMR_Rollout (int Dexnum)
 return output;
 }
 //#endregion
+
+//#region -=- TM Rules : SolarBeam -=-
+Function int TMR_SolarBeam (int Dexnum) 
+{
+    int output = 0;
+    Switch (Dexnum)
+    {
+    case DRAGAPULT: output = 1; break;
+    }
+return output;
+}
+//#endregion
 //======
 
+//#region -=- TM Archetype : Draconic
+Function int TMArch_Draconic (int Dexnum)
+{
+int output = 0;
+    /* Draconic archetype favors Dragon type and dragon like pokemon, allowing the use of dragon moves, and moves
+     * that resemble dragon breath.
+
+    */
+    Switch (Dexnum)
+        {
+            case CHARMANDER: output = 1; break;
+            case CHARMELEON: output = 1; break;
+            case CHARIZARD: output = 1; break;
+            case TOTODILE: output = 1; break;
+            case CROCONAW: output = 1; break;
+            case FERALIGATR: output = 1; break;
+            case TREECKO: output = 1; break;
+            case GROVYLE: output = 1; break;
+            case SCEPTILE: output = 1; break;
+        }
+return output;
+}
+//#endregion 
+
+//#region -=- TM Archetype : Succor
+Function int TMArch_Succor (int Dexnum)
+{
+int output = 0;
+    /* Succor archetype Favors pokemon naturally disposed to team support through healing and buffing, also
+     * favors some protective abilities
+
+    */
+    Switch (Dexnum)
+        {
+        case CHIKORITA: output = 1; break;
+        case BAYLEEF: output = 1; break;
+        case MEGANIUM: output = 1; break;
+        case RALTS: output = 1; break;
+        case KIRLIA: output = 1; break;
+        case GARDEVOIR: output = 1; break;
+        case GALLADE: output = 1; break;
+        }
+return output;
+}
+//#endregion 
+
+//#region -=- TM Archetype : Pugilist
+Function int TMArch_Pugilist (int Dexnum)
+{
+int output = 0;
+    /* Pugilist archetype favors pokemon that mainly fight through punches and kicks, thus can learn TM's based around
+     * Punches, kicks, and other physical maneuvers.
+
+    */
+    Switch (Dexnum)
+        {        
+            case COMBUSKEN: output = 1; break;
+            case BLAZIKEN: output = 1; break;
+            case MARSHTOMP: output = 1; break;
+            case SWAMPERT: output = 1; break;
+            case CHIMCHAR: output = 1; break;
+            case MONFERNO: output = 1; break;
+            case INFERNAPE: output = 1; break;   
+            case DROWZEE: output = 1; break;
+            case HYPNO: output = 1; break; 
+            case GALLADE: output = 1; break;
+            case ABRA: output = 1; break;
+            case KADABRA: output = 1; break;
+            case ALAKAZAM: output = 1; break;
+        }
+return output;
+}
+//#endregion 
+
+//#region -=- TM Archetype : Slasher
+Function int TMArch_Slasher (int Dexnum)
+{
+int output = 0;
+    /* Slasher archetype favors pokemon that possess sharp claws or natural blades of some kind, 
+     * thus they can perform any sword based or slashing moves
+
+    */
+    Switch (Dexnum)
+        {        
+        case CHARMELEON: output = 1; break;
+        case CHARIZARD: output = 1; break;
+        case FERALIGATR: output = 1; break;
+        case EMPOLEON: output = 1; break;
+        case GROVYLE: output = 1; break;
+        case SCEPTILE: output = 1; break;
+        case GALLADE: output = 1; break;
+        }
+return output;
+}
+//#endregion 
 
 //#region -=-=-= Depreciated -=-=-=
 
@@ -903,46 +1050,6 @@ return output;
 }
 //#endregion 
 
-//#region -=- Archetype : Succor
-Function int TMArch_Succor (int Dexnum)
-{
-int output = 0;
-    /* Succor archetype Favors pokemon naturally disposed to team support through healing and buffing, also
-     * favors some protective abilities
-
-    */
-    Switch (Dexnum)
-        {
-        case CHIKORITA: output = 1; break;
-        case BAYLEEF: output = 1; break;
-        case MEGANIUM: output = 1; break;
-        }
-return output;
-}
-//#endregion 
-
-//#region -=- Archetype : Pugilist
-Function int TMArch_Pugilist (int Dexnum)
-{
-int output = 0;
-    /* Pugilist archetype favors pokemon that mainly fight through punches and kicks, thus can learn TM's based around
-     * Punches, kicks, and other physical maneuvers.
-
-    */
-    Switch (Dexnum)
-        {        
-            case COMBUSKEN: output = 1; break;
-            case BLAZIKEN: output = 1; break;
-            case MARSHTOMP: output = 1; break;
-            case SWAMPERT: output = 1; break;
-            case CHIMCHAR: output = 1; break;
-            case MONFERNO: output = 1; break;
-            case INFERNAPE: output = 1; break;    
-        }
-return output;
-}
-//#endregion 
-
 //#region -=- Archetype : Terrestrial
 Function int TMArch_Terrestrial (int Dexnum)
 {
@@ -990,24 +1097,6 @@ return output;
 }
 //#endregion 
 
-//#region -=- Archetype : Draconic
-Function int TMArch_Draconic (int Dexnum)
-{
-int output = 0;
-    /* Draconic archetype favors Dragon type and dragon like pokemon, allowing the use of dragon moves, and moves
-     * that resemble dragon breath.
-
-    */
-    Switch (Dexnum)
-        {
-        case CHARIZARD: output = 1; break;
-        case SCEPTILE: output = 1; break;
-
-        }
-return output;
-}
-//#endregion 
-
 //#region -=- Archetype : Spikey
 Function int TMArch_Spikey (int Dexnum)
 {
@@ -1018,26 +1107,6 @@ int output = 0;
     Switch (Dexnum)
         {
             
-        }
-return output;
-}
-//#endregion 
-
-//#region -=- Archetype : Slasher
-Function int TMArch_Slasher (int Dexnum)
-{
-int output = 0;
-    /* Slasher archetype involves pokemon that possess sharp claws, or blades, thus they can learn slashing moves.
-
-    */
-    Switch (Dexnum)
-        {
-        case CHARMELEON: output = 1; break;
-        case CHARIZARD: output = 1; break;
-        case FERALIGATR: output = 1; break;
-        case GROVYLE: output = 1; break;
-        case SCEPTILE: output = 1; break; 
-        case EMPOLEON: output = 1; break;
         }
 return output;
 }

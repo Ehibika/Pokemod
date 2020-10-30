@@ -183,7 +183,7 @@ actor VineWhipFX : BasicGraphicEffect
     {
     Spawn:
         TNT1 A 0
-        TNT1 A 0 A_GiveInventory("ProjectileCodeSynchTarget",1)
+        TNT1 A 0 A_GiveInventory("ProjectileCodeSyncTarget",1)
         TNT1 A 1
         VWIP D 1
         stop

@@ -352,7 +352,7 @@ str weapons_ammo[MAX_WEAPONS_GLOBAL][7] =
 {"PowerGemMove", "PowerGemPP", "PowerGem", 1.0, "NO", "NO", "SLOT_NONE"},
 {"MagiccoatMove", "MagiccoatPP", "Magiccoat", 1.0, "NO", "NO", "SLOT_NONE"},
 {"MinimizeMove", "MinimizePP", "Minimize", 1.0, "NO", "NO", "SLOT_NONE"},
-{"CosmicpowerMove", "CosmicpowerPP", "Cosmicpower", 1.0, "NO", "NO", "SLOT_NONE"},
+{"CosmicPowerMove", "CosmicPowerPP", "CosmicPower", 1.0, "NO", "NO", "SLOT_NONE"},
 {"ReflecttypeMove", "ReflecttypePP", "Reflecttype", 1.0, "NO", "NO", "SLOT_NONE"},
 {"DazzlinggleemMove", "DazzlinggleemPP", "Dazzlinggleem", 1.0, "NO", "NO", "SLOT_NONE"},
 {"ScreechMove", "ScreechPP", "Screech", 1.0, "NO", "NO", "SLOT_NONE"},
@@ -368,7 +368,7 @@ str weapons_ammo[MAX_WEAPONS_GLOBAL][7] =
 {"FeintattackMove", "FeintattackPP", "Feintattack", 1.0, "NO", "NO", "SLOT_NONE"},
 {"CharmMove", "CharmPP", "Charm", 1.0, "NO", "NO", "SLOT_NONE"},
 {"CaptivateMove", "CaptivatePP", "Captivate", 1.0, "NO", "NO", "SLOT_NONE"},
-{"DrainpunchMove", "DrainpunchPP", "Drainpunch", 1.0, "NO", "NO", "SLOT_NONE"},
+{"DrainPunchMove", "DrainPunchPP", "DrainPunch", 1.0, "NO", "NO", "SLOT_NONE"},
 {"RecoverMove", "RecoverPP", "Recover", 1.0, "NO", "NO", "SLOT_NONE"},
 {"PowerSwapMove", "PowerSwapPP", "PowerSwap", 1.0, "NO", "NO", "SLOT_NONE"},
 {"GuardSwapMove", "GuardSwapPP", "GuardSwap", 1.0, "NO", "NO", "SLOT_NONE"},
@@ -413,6 +413,7 @@ str weapons_ammo[MAX_WEAPONS_GLOBAL][7] =
 {"SparkMove", "SparkPP", "Spark", 1.0, "NO", "NO", "SLOT_NONE"},
 {"ShockwaveMove", "ShockwavePP", "Shockwave", 1.0, "NO", "NO", "SLOT_NONE"},
 {"FirepunchMove", "FirepunchPP", "Firepunch", 1.0, "NO", "NO", "SLOT_NONE"},
+{"CraftyShieldMove", "CraftyShieldPP", "CraftyShield", 1.0, "NO", "NO", "SLOT_NONE"},
 //--[NewMove]--
 };
 #endregion

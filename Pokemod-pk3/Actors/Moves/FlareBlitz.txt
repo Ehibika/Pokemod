@@ -59,9 +59,6 @@ Fire.DashEnd:
 "####" B 0 A_Jump(256,"Fire.End")
 Goto Fire.End
 
-
-
-
 }
 }
 

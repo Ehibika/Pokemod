@@ -311,7 +311,7 @@ function void DisguiseFunc2c(int i)
 {
 int disguise = playerDisguise[i];
 if(disguise!=playerCurrentSkin[i]) {
-    log(i:disguise,s:" ",i:playerCurrentSkin[i]);
+    //log(i:disguise,s:" ",i:playerCurrentSkin[i]);
 	ACS_NamedExecuteAlways("DisguisePlayer",0,disguise,i);
 	playerCooldown[i] = THE_COOLDOWN;
 }

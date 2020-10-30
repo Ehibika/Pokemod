@@ -70,6 +70,7 @@ WeaponAmmo RazorLeafPP{Drawbar"VARAM201", "VAREMPTY", Ammo1, horizontal, 58, 184
 WeaponAmmo SweetScentPP{Drawbar"VARAM201", "VAREMPTY", Ammo1, horizontal, 58, 184;}
 */
 //████████████████████████████████████████CopyWeapons██████████████████████████████████████
+/*
 //MM1 Bars
 IsSelected RollingCutterWep{Drawbar"VARAMMO1", "VAREMPTY", Ammo1, horizontal, 58, 184;}
 IsSelected SuperArmWep{Drawbar"VARAMMO2", "VAREMPTY", Ammo1, horizontal, 58, 184;}
@@ -237,4 +238,5 @@ InInventory EvilRobotShield, 1{DrawBar "VARAMM32", "VAREMPTY", BossHealth1, hori
 
 // Misc
 InInventory TimeStoppedCounter, 1{DrawImage "FLASHS", 36, 0;}
+*/
 }

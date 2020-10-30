@@ -38,6 +38,7 @@ damagefactor "Supersonic", 1.0
 damagefactor "PoisonGas", 1.0
 damagefactor "DestinyBond", 1.0
 damagefactor "WorrySeed", 1.0
+damagefactor "CraftyShield", 1.0
 //--[NewStatusMove]--
 }
 
@@ -74,7 +75,7 @@ damagefactor "Mudslap", 1.0
 damagefactor "Extrasensory", 1.0
 damagefactor "Eruption", 1.0
 damagefactor "HeatWave", 1.0
-damagefactor "Vacuumwave", 1.0
+damagefactor "Vacuumwave", 1.0 // Physical > Special Def
 damagefactor "MudBomb", 1.0
 damagefactor "Brine", 1.0
 

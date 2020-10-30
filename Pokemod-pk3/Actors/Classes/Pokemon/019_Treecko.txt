@@ -58,14 +58,14 @@ stop
 Pickup:
 TNT1 A 0 A_JumpIfInventory("isbot",1,"BotWep")
 
-TNT1 A 0 A_GiveInventory("BulletSeedMove1")
+TNT1 A 0 A_GiveInventory("LeafageMove1")
 TNT1 A 0 A_GiveInventory("QuickAttackMove2")
 TNT1 A 0 A_GiveInventory("DetectMove3")
 TNT1 A 0 A_GiveInventory("LeerMove4")
 stop
 
 BotWep:
-TNT1 A 0 A_GiveInventory("BulletSeedMove1")
+TNT1 A 0 A_GiveInventory("LeafageMove1")
 stop
 }
 }

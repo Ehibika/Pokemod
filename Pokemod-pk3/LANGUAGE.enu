@@ -509,6 +509,7 @@ OB_THUNDER = "%k Defeated %o using THUNDER!";
 OB_SPARK = "%k Defeated %o using SPARK!";
 OB_SHOCKWAVE = "%k Defeated %o using SHOCKWAVE!";
 OB_FIREPUNCH = "%k Defeated %o using FIREPUNCH!";
+OB_CRAFTYSHIELD = "%k Defeated %o using CRAFTYSHIELD!";
 //--[NewMove]--
 
 //#endregion
@@ -2085,9 +2086,11 @@ M101_DESC = "\cfRam \cjinto an opponent with a high speed punch.";
 //#region -=- 0102: Vacuumwave -=-
 M102_NAME = "\cj Vacuumwave";
 M102_TYPE = "\cj Fighting";
-M102_CATEGORY = "\cf Special";
+M102_CATEGORY = "\cf Physical";
 M102_POWER = "\cfPower:\cj --";
-M102_DESC = "\cj punch with enough force to \cfshoot \n\cja wave of pressure";
+M102_DESC = "\cjPunch with enough force to launch a wave\n"
+"of pressure, a physical attack that\n"
+"targets SP.DEF";
 //#endregion
 
 //#region -=- 0103: NastyPlot -=-
@@ -2556,7 +2559,8 @@ M156_NAME = "\cj AirSlash";
 M156_TYPE = "\cj <Type>";
 M156_CATEGORY = "\cf <Category>";
 M156_POWER = "\cfPower:\cj --";
-M156_DESC = "\cf<Desc>";
+M156_DESC = "\cjLaunch a blade of air that cuts through\n"
+"opponents!";
 //#endregion
 
 //#region -=- 157: Astonish -=-
@@ -2608,7 +2612,9 @@ M162_NAME = "\cj Hex";
 M162_TYPE = "\cj <Type>";
 M162_CATEGORY = "\cf <Category>";
 M162_POWER = "\cfPower:\cj --";
-M162_DESC = "\cf<Desc>";
+M162_DESC = "\cjTarget the ground to cast an evil eye\n"
+"onto the area, deals double damage to\n"
+"those under a major status condition.";
 //#endregion
 
 //#region -=- 163: ShadowBall -=-
@@ -2821,8 +2827,8 @@ M186_NAME = "\cj Powergem";
 M186_TYPE = "\cj <Type>";
 M186_CATEGORY = "\cf <Category>";
 M186_POWER = "\cfPower:\cj --";
-M186_DESC = "\cjlaunch a cluster of bouncing stones, does\n"
-"special rock type damage.";
+M186_DESC = "\cjLaunch a power imbued bouncing stone that\n"
+"grows in strength with each bounce.";
 //#endregion
 
 //#region -=- 187: Magiccoat -=-
@@ -2846,7 +2852,8 @@ M189_NAME = "\cj Cosmicpower";
 M189_TYPE = "\cj <Type>";
 M189_CATEGORY = "\cf <Category>";
 M189_POWER = "\cfPower:\cj --";
-M189_DESC = "\cf<Desc>";
+M189_DESC = "\cjCast a self buff that boosts DEF and\n"
+"S.DEF through the power of the cosmos.";
 //#endregion
 
 //#region -=- 190: Reflecttype -=-
@@ -2941,7 +2948,8 @@ M200_NAME = "\cj Psybeam";
 M200_TYPE = "\cj <Type>";
 M200_CATEGORY = "\cf <Category>";
 M200_POWER = "\cfPower:\cj --";
-M200_DESC = "\cjlaunch a fast moving psychic lazer."
+M200_DESC = "\cjLaunch a fast moving psychic laser that\n"
+"can ricochet off walls.";
 //#endregion
 
 //#region -=- 201: Clamp -=-
@@ -2983,7 +2991,8 @@ M205_NAME = "\cj Drainpunch";
 M205_TYPE = "\cj <Type>";
 M205_CATEGORY = "\cf <Category>";
 M205_POWER = "\cfPower:\cj --";
-M205_DESC = "\cf<Desc>";
+M205_DESC = "\cjStrike foes with fists that sap energy on\n"
+"impact.";
 //#endregion
 
 //#region -=- 206: Recover -=-
@@ -3040,7 +3049,8 @@ M212_NAME = "\cj CalmMind";
 M212_TYPE = "\cj <Type>";
 M212_CATEGORY = "\cf <Category>";
 M212_POWER = "\cfPower:\cj --";
-M212_DESC = "\cf<Desc>";
+M212_DESC = "\cjCast a self buff that boosts S.ATK and\n"
+"S.DEF through quieting one's mind.";
 //#endregion
 
 //#region -=- 213: Psyshock -=-
@@ -3048,7 +3058,9 @@ M213_NAME = "\cj Psyshock";
 M213_TYPE = "\cj <Type>";
 M213_CATEGORY = "\cf <Category>";
 M213_POWER = "\cfPower:\cj --";
-M213_DESC = "\cf<Desc>";
+M213_DESC = "\cjConjure telekinetic particles to bombard\n"
+"foes, a special attack that targets \n"
+"\cfphysical defense!";
 //#endregion
 
 //#region -=- 214: Trick -=-
@@ -3115,7 +3127,7 @@ M221_NAME = "\cj DreamEater";
 M221_TYPE = "\cj <Type>";
 M221_CATEGORY = "\cf <Category>";
 M221_POWER = "\cfPower:\cj --";
-M221_DESC = "\cf<Desc>";
+M221_DESC = "\cjDrain life from a sleeping target.\n"
 //#endregion
 
 //#region -=- 222: Meditate -=-
@@ -3123,7 +3135,8 @@ M222_NAME = "\cj Meditate";
 M222_TYPE = "\cj <Type>";
 M222_CATEGORY = "\cf <Category>";
 M222_POWER = "\cfPower:\cj --";
-M222_DESC = "\cf<Desc>";
+M222_DESC = "\cjAssume a yoga pose to raise ATK, boost is\n"
+"greater when healthy";
 //#endregion
 
 //#region -=- 223: PoisonGas -=-
@@ -3204,7 +3217,7 @@ M232_NAME = "\cj DrainingKiss";
 M232_TYPE = "\cj <Type>";
 M232_CATEGORY = "\cf <Category>";
 M232_POWER = "\cfPower:\cj --";
-M232_DESC = "\cjsaps health with a close ranged kiss,\n"
+M232_DESC = "\cjBlow a guided kiss that drains health,\n"
 "deals fairy damage.";
 //#endregion
 
@@ -3305,7 +3318,8 @@ M244_NAME = "\cj Mist";
 M244_TYPE = "\cj <Type>";
 M244_CATEGORY = "\cf <Category>";
 M244_POWER = "\cfPower:\cj --";
-M244_DESC = "\cf<Desc>";
+M244_DESC = "\cjCast a mist that protects self and allies\n"
+"from from stat changes and minor debuffs\n";
 //#endregion
 
 
@@ -3335,7 +3349,8 @@ M247_NAME = "\cj Spark";
 M247_TYPE = "\cj <Type>";
 M247_CATEGORY = "\cf <Category>";
 M247_POWER = "\cfPower:\cj --";
-M247_DESC = "\cf<Desc>";
+M247_DESC = "\cjAn electrified tackle that may paralize\n"
+"the victim.";
 //#endregion
 
 
@@ -3355,6 +3370,16 @@ M249_CATEGORY = "\cf <Category>";
 M249_POWER = "\cfPower:\cj --";
 M249_DESC = "\cjstrike foes with burning fists, may cause\n"
 "a burn.";
+//#endregion
+
+
+//#region -=- 250: CraftyShield -=-
+M250_NAME = "\cj CraftyShield";
+M250_TYPE = "\cj Fairy";
+M250_CATEGORY = "\cf Status";
+M250_POWER = "\cfPower:\cj --";
+M250_DESC = "\cjTarget the ground to cast a barrier that\n"
+"repells all status conditions and homing.";
 //#endregion
 
 

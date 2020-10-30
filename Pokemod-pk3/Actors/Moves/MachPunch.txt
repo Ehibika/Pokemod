@@ -199,7 +199,9 @@ Pickup:
 TNT1 A 0 A_JumpIfInventory("CutterFlag",999,"Nope")
 TNT1 A 0 A_JumpIfInventory("DashBreaker",1,"Nope")
 TNT1 A 0 A_ChangeVelocity(cos(-pitch)*80,0,sin(-pitch)*80,CVF_RELATIVE|CVF_REPLACE)
-TNT1 A 1 A_FireCustomMissile("MachpunchBumper",0,0,0,15)
+TNT1 A 0 A_FireCustomMissile("MachpunchBumper",15,0,0,0)
+TNT1 A 0 A_FireCustomMissile("MachpunchBumper",-15,0,0,0)
+TNT1 A 1 A_FireCustomMissile("MachpunchBumper",0,0,0,0)
 BASB A 1 A_SpawnitemEx("MachpunchFist",cos(-pitch)*55,0,(25)+(sin(pitch)*40),0,0,0,0)
 stop
 Nope:

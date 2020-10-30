@@ -99,6 +99,7 @@ Goto Spawn3
 
 Spawn3: // -=- ExamineTarget -=-
 TNT1 A 0 A_JumpifInventory("SafeguardPower",1,"TargClear",AAPTR_TRACER)
+TNT1 A 0 A_JumpifInventory("CraftyShieldPower",1,"TargClear",AAPTR_TRACER)
 Goto Spawn4
 
 TargClear:

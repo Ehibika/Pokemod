@@ -1,0 +1,200 @@
+actor CosmicPowerMove : WepMasterBase
+{
+Tag "CosmicPower"
+obituary "$OB_CosmicPower"
+Weapon.AmmoUse 1
+Weapon.AmmoGive 25
+weapon.ammotype "CosmicPowerPP"
+scale 2.0
+Inventory.Pickupmessage "$PU_MEGABUSTER"
+States
+{
+Spawn:
+WEAP X 1
+stop
+
+
+Fire:
+"####" BBB 1 A_Jumpif(CallACS("CheckWeaponFire",RC_C)==1,"Fire.Begin")
+"####" B 0 A_Jump(256,"NoAmmo")
+Goto NoAmmo
+
+Fire.Begin:
+"####" B 0
+"####" B 0 A_JumpIfInventory("STF_CosmicPower",1,"Fire.Off")
+"####" B 0 A_Jump(256,"Fire.On")
+Goto Fire.On
+
+Fire.On:
+"####" B 0 A_PlaySoundEx("Move/DragonDance","Soundslot6")
+"####" BBBBB 5 A_GiveInventory("CosmicPowerParticleSpawn")
+"####" B 5 //A_PlaySoundEx("Move/CosmicPower","Soundslot6")
+"####" B 0 A_PlaySoundEx("Support/Statup","Soundslot7")
+"####" B 0 A_GiveInventory("CosmicPowerBuffInitiate")
+"####" B 0 A_TakeInventory("CosmicPowerPP",1)
+"####" B 0 A_Jump(256,"Fire.After")
+Goto Fire.After
+
+Fire.Off:
+"####" B 0 A_TakeInventory("CosmicPower_Active",99)
+"####" B 0 A_GiveInventory("PartRecovery_C")
+"####" B 0 A_Jump(256,"Fire.After")
+Goto Fire.After
+
+Fire.After:
+"####" B 1 A_GiveInventory("HalfRecovery_C")
+"####" C 0 A_REfire("Fire")
+"####" B 0 A_Jump(256,"Fire.End")
+Goto Fire.End
+
+}
+}
+
+actor CosmicPowerMove1 : CosmicPowerMove {Weapon.SlotNumber 1}
+actor CosmicPowerMove2 : CosmicPowerMove {Weapon.SlotNumber 2}
+actor CosmicPowerMove3 : CosmicPowerMove {Weapon.SlotNumber 3}
+actor CosmicPowerMove4 : CosmicPowerMove {Weapon.SlotNumber 4}
+
+actor CosmicPowerMove5 : CosmicPowerMove 
+{
+Weapon.SlotNumber 5
+States
+{
+Fire.End:
+TNT1 A 0
+TNT1 A 0 A_TakeInventory("CosmicPowerMove5",9)
+TNT1 A 0 A_Jump(256,"Ready")
+Goto Ready
+}
+}
+
+//[+]========================================================================[+]
+//-----------------------------|Ammo & Inventory|------------------------------
+//[+]========================================================================[+]
+actor CosmicPowerPP : Ammo {inventory.amount 1 inventory.Maxamount 25}
+actor STF_CosmicPower : Powerup {inventory.amount 1 Powerup.Duration 40}
+actor CosmicPower_Active : Inventory {inventory.amount 1 inventory.Maxamount 1}
+
+actor CosmicPowerBuffInitiate : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_Jumpifinventory("CosmicPower_Active",1,"Sustain")
+TNT1 A 0 A_GiveInventory("CosmicPower_Active",1)
+TNT1 A 0 A_SpawnitemEX("CosmicPowerBuffWatcher")
+TNT1 A 0 A_GiveInventory("StatUpdator",1)
+stop
+
+Sustain:
+TNT1 A 0 A_GiveInventory("STF_CosmicPower",1)
+stop
+Nope:
+TNT1 A 0
+stop
+}
+}
+
+
+actor CosmicPowerBuffWatcher : BasicHelper 
+{
+Var int user_TickTime;
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_JumpIfInTargetInventory("CutterFlag",999,"Death")
+TNT1 A 0 A_JumpIfInTargetInventory("IsDead",1,"Death")
+TNT1 A 0 A_JumpIfInTargetInventory("HazeFlag",1,"Death")
+TNT1 A 5 A_GiveToTarget("STF_CosmicPower")
+TNT1 A 0 A_GiveToTarget("SDefUpFXSpawn")
+TNT1 A 0 A_GiveToTarget("SATKUpFXSpawn")
+TNT1 A 0 A_SetUserVar("user_TickTime",user_TickTime+5)
+TNT1 A 0 A_JumpIf(user_TickTime>=35,"SpawnTick")
+TNT1 A 0 A_JumpIfInTargetInventory("CosmicPower_Active",1,"Spawn")
+Goto Death
+
+SpawnTick:
+TNT1 A 0 A_SetUserVar("user_TickTime",0)
+TNT1 A 0 A_TakeFromTarget("CosmicPowerPP",1)
+TNT1 A 0 A_JumpIfInTargetInventory("CosmicPowerPP",1,"Spawn")
+Goto Death
+
+Death:
+TNT1 A 0 A_GiveToTarget("StatUpdator")
+TNT1 A 0 A_GiveToTarget("BuffLossSoundCue")
+TNT1 A 0 A_TakeFromTarget("STF_CosmicPower",9)
+TNT1 A 0 A_TakeFromTarget("CosmicPower_Active",99)
+TNT1 A 2 
+stop
+}
+}
+
+
+actor CosmicPowerParticle : BasicClientside
+{
+scale 2.0
+speed 3
+ReactionTime 27
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+STAP ABCD 2
+Spawn2:
+STAP ABCD 2 A_FadeOut
+TNT1 A 0 A_CountDown
+loop
+Death:
+TNT1 A 0
+stop
+}
+}
+
+actor CosmicPowerParticle2 : BasicClientside
+{
+scale 2.0
+speed 3
+ReactionTime 27
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+STRP ABCD 2
+Spawn2:
+STRP ABCD 2 A_FadeOut
+TNT1 A 0 A_CountDown
+loop
+Death:
+TNT1 A 0
+stop
+}
+}
+
+actor CosmicPowerParticleSpawn : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 AA 0 A_SpawnItemEx ("CosmicPowerParticle", 64, 0, random(12,48), 0, 0, 3, random(0,360),SXF_NOCHECKPOSITION)
+TNT1 A 0 A_SpawnItemEx ("CosmicPowerParticle2", 64, 0, random(12,48), 0, 0, 2, random(0,360),SXF_NOCHECKPOSITION)
+stop
+Nope:
+TNT1 A 0
+stop
+}
+}

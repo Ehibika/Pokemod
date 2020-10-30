@@ -122,6 +122,7 @@ WeaponAmmo SweetScentPP{Drawbar"BARAM201", "BAREMPTY", Ammo1, vertical, 16, 8;}
 */
 //████████████████████████████████████████CopyWeapons██████████████████████████████████████
 
+/*
 //MM1 Bars
 IsSelected RollingCutterWep{Drawbar"BARAMMO1", "BAREMPTY", Ammo1, vertical, 16, 8;}
 IsSelected SuperArmWep{Drawbar"BARAMMO2", "BAREMPTY", Ammo1, vertical, 16, 8;}
@@ -290,4 +291,5 @@ InInventory EvilRobotShield, 1{DrawBar "BARAMM32", "BAREMPTY", BossHealth1, vert
 
 // Misc
 InInventory TimeStoppedCounter, 1{DrawImage "FLASHS", 36, 0;}
+*/
 }

@@ -561,11 +561,12 @@ if(CheckInventory("ProtectGuard")
 ||CheckInventory("SubGuard"))
 {Output = Output | STATUS_MAJOR | STATUS_MINOR | STATUS_STATS;}
 
-    if(CheckInventory("SafeguardPower"))
+    if(CheckInventory("SafeguardPower")
+    ||CheckInventory("CraftyShieldPower"))
     {Output = Output | STATUS_MAJOR | STATUS_MINOR | STATUS_SPECIALTY | STATUS_TAUNT;}
 
     if(CheckInventory("MistFlag"))
-    {Output = Output | STATUS_STATS;}
+    {Output = Output | STATUS_STATS  | STATUS_MINOR;}
 
 SetResultValue(Output & Input);
 }
