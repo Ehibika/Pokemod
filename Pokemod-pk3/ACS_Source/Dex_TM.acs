@@ -590,6 +590,8 @@ Function int TMR_ThunderBolt (int Dexnum)
     case SALAMENCE: output = 1; break;
     case DRAKLOAK: output = 1; break;
     case DRAGAPULT: output = 1; break;
+    case FERROSEED: output = 1; break;
+    case FERROTHORN: output = 1; break;
     }
 return output;
 }
@@ -610,6 +612,8 @@ Function int TMR_Thunder (int Dexnum)
     case SALAMENCE: output = 1; break;
     case DRAKLOAK: output = 1; break;
     case DRAGAPULT: output = 1; break;
+    case FERROSEED: output = 1; break;
+    case FERROTHORN: output = 1; break;
     }
 return output;
 }

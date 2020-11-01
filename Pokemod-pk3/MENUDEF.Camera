@@ -63,6 +63,24 @@ OptionMenu "OptionsMenu"
 	Option "Display Health Number",			"mm8bdm_healthnumber", "OnOff"
 	Option "Display Ammo Number",			"mm8bdm_ammonumber", "OnOff"
 	Option "Pickup Weapon Colors",			"mm8bdm_noenergycolors", "OffOn"
+	Option "Show Critical Death Gibs",		"mm8bdm_enablegibs", "OnOff"
+	Option "Show Map Creator Cards",		"mm8bdm_mapcards", "8BDM_MapCards"
+	Option "CTF Objective Compass",			"mm8bdm_noctfradar", "OffOn"
+	
+	StaticText " "
+	
+	StaticText	"Music Preferences", 1
+	StaticText " "
+	Option "Tengu Man Stage",			"mm8bdm_music_tenguman", "MM8Music"
+	Option "Enker Stage",			"mm8bdm_music_enker", "MM10Music"
+	Option "Punk Stage",			"mm8bdm_music_punk", "MM10Music"
+	Option "Ballade Stage",			"mm8bdm_music_ballade", "MM10Music"
+
+	StaticText	"MM8BDM Options", 1
+	StaticText " "
+	Option "Display Health Number",			"mm8bdm_healthnumber", "OnOff"
+	Option "Display Ammo Number",			"mm8bdm_ammonumber", "OnOff"
+	Option "Pickup Weapon Colors",			"mm8bdm_noenergycolors", "OffOn"
 	Option "Show Map Creator Cards",		"mm8bdm_mapcards", "8BDM_MapCards"
 	Option "CTF Objective Compass",			"mm8bdm_noctfradar", "OffOn"
 	Slider		"Camera Position",			"sv_CameraAng",			-1.0, 1.0, 0.1

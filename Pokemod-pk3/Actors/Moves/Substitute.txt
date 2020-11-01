@@ -90,7 +90,8 @@ actor SubGuard : PowerProtection
     DamageFactor "Telefrag", 1.0
     DamageFactor "Suicide", 1.0
     DamageFactor "Ice", 1.0
-    DamageFactor "Poison", 1.0
+	DamageFactor "Poison", 1.0
+	DamageFactor "Falling", 1.0
 }
 
 actor SubstituteFunction_A : CustomInventory

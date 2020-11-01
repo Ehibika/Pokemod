@@ -377,6 +377,11 @@ const int Dex_PICHU = 76;
 const int Dex_PIKACHU = 77;
 const int Dex_RAICHU = 78;
 
+const int Dex_FERROSEED = 79;
+const int Dex_FERROTHORN = 80;
+const int Dex_HORSEA = 81;
+const int Dex_SEADRA = 82;
+const int Dex_KINGDRA = 83;
 //--[NewPokemon]--
 //=======|TM Type Flags|==========
 const int TMT_NULL = 0;

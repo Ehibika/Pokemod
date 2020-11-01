@@ -125,5 +125,11 @@ Int EvoDEX [MAXDEX][6] = {
     /*|78|*/{0,      0,             NULLEVO,  NULLEVO,     NULLEVO,28},
 
     
+    /*|79|*/{ 1,      FINALSTAGE2,             FERROTHORN,  NULLEVO,     NULLEVO,29 },
+    /*|80|*/{ 0,      0,             NULLEVO,  NULLEVO,     NULLEVO,29 },
+    
+    /*|81|*/{ 1,      MIDSTAGE,             SEADRA,  NULLEVO,     NULLEVO,30 },
+    /*|82|*/{ 1,      FINALSTAGE,             KINGDRA,  NULLEVO,     NULLEVO,30 },
+    /*|83|*/{ 0,      0,             NULLEVO,  NULLEVO,     NULLEVO,30 },
     //--[NewPokemon]--
 };

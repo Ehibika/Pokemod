@@ -40,6 +40,8 @@ AddPlayerClass Torkoal
 AddPlayerClass Slugma
 AddPlayerClass Pichu
 
+AddPlayerClass Ferroseed
+AddPlayerClass Horsea
 //--[NewPokemon]--
 
 alias TriggerEvo "CloseMenu; Use EvoStartItem" 

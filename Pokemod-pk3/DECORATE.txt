@@ -327,9 +327,11 @@
 #include "Actors/Classes/Pokemon/074_Slugma.txt"
 #include "Actors/Classes/Pokemon/076_Pichu.txt"
 
-//--[NewPokemon]--
+#include "Actors/Classes/Pokemon/079_Ferroseed.txt"
+#include "Actors/Classes/Pokemon/081_Horsea.txt"
 
 // -=- Rentals -=-
+//--[NewPokemon]--
 
 #include "Actors/Classes/Rentals/R000_Smeargle.txt"
 
@@ -393,4 +395,9 @@
 
 #Include "Actors/Classes/Rentals/R049_Staryu.Txt"
 #Include "Actors/Classes/Rentals/R050_Starmie.Txt"
+//  #Include "Actors/Classes/Rentals/R079_Ferroseed.Txt"
+//  #Include "Actors/Classes/Rentals/R080_Ferrothorn.Txt"
+//  #Include "Actors/Classes/Rentals/R081_Horsea.Txt"
+//  #Include "Actors/Classes/Rentals/R082_Seadra.Txt"
+//  #Include "Actors/Classes/Rentals/R083_Kingdra.Txt"
 //--[NewPokemon]--

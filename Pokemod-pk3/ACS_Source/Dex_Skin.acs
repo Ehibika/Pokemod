@@ -117,5 +117,10 @@ str SkinDEX [MAXDEX][2] = {
     /*|76|*/{"Pichu","Base"},
     /*|77|*/{"Pikachu","Pikachu"},  
     /*|78|*/{"Raichu","Raichu"},  
+    /*|79|*/{"Ferroseed","Base"},
+    /*|80|*/{"Ferrothorn","Ferrothorn"},
+    /*|81|*/{"Horsea","Base"},
+    /*|82|*/{"Seadra","Seadra"},
+    /*|83|*/{"Kingdra","Kingdra"},
     //--[NewPokemon]--
     };

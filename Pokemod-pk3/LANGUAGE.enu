@@ -1241,6 +1241,61 @@ D078_EVO = "\c[MenuRed]Does not evolve";
 //#endregion
 
 
+//#region -=- Ferroseed-=-
+D079_NAME = "\cjFerroseed";
+D079_TYPE = "\cjGrass/Steel";
+D079_STATS1 = "\cfATK:\cj 50 \cfDEF:\cj 91";
+D079_STATS2 = "\cfSP.ATK:\cj 24 \cfSP.DEF:\cj 86";
+D079_STATS3 = "\cfHP:\cj 44";
+D079_ARC = "\cj <Archetype> ";
+D079_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+
+//#region -=- Ferrothorn-=-
+D080_NAME = "\cjFerrothorn";
+D080_TYPE = "\cjGrass/Steel";
+D080_STATS1 = "\cfATK:\cj 94 \cfDEF:\cj 131";
+D080_STATS2 = "\cfSP.ATK:\cj 54 \cfSP.DEF:\cj 116";
+D080_STATS3 = "\cfHP:\cj 74";
+D080_ARC = "\cj <Archetype> ";
+D080_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+
+//#region -=- Horsea-=-
+D081_NAME = "\cjHorsea";
+D081_TYPE = "\cjWater/Null";
+D081_STATS1 = "\cfATK:\cj 40 \cfDEF:\cj 70";
+D081_STATS2 = "\cfSP.ATK:\cj 70 \cfSP.DEF:\cj 25";
+D081_STATS3 = "\cfHP:\cj 30";
+D081_ARC = "\cj <Archetype> ";
+D081_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+
+//#region -=- Seadra-=-
+D082_NAME = "\cjSeadra";
+D082_TYPE = "\cjWater/Null";
+D082_STATS1 = "\cfATK:\cj 65 \cfDEF:\cj 95";
+D082_STATS2 = "\cfSP.ATK:\cj 95 \cfSP.DEF:\cj 45";
+D082_STATS3 = "\cfHP:\cj 55";
+D082_ARC = "\cj <Archetype> ";
+D082_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+
+//#region -=- Kingdra-=-
+D083_NAME = "\cjKingdra";
+D083_TYPE = "\cjWater/Dragon";
+D083_STATS1 = "\cfATK:\cj 95 \cfDEF:\cj 95";
+D083_STATS2 = "\cfSP.ATK:\cj 95 \cfSP.DEF:\cj 95";
+D083_STATS3 = "\cfHP:\cj 75";
+D083_ARC = "\cj <Archetype> ";
+D083_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+
 //--[NewPokemon]--
 
 //#endregion

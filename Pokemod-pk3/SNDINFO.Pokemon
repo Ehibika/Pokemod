@@ -1115,4 +1115,79 @@ $playersound	RAICHU male	*usefail	FATLAND
 $playersound	RAICHU male	*taunt		CRY078
 
 
+$playersound    Ferroseed male *death      MEGADEAT
+$playersound    Ferroseed male *xdeath     MEGADEAT
+$playersound    Ferroseed male *gibbed     MEGADEAT
+$playersound    Ferroseed male *pain100    MEGAPAIN
+$playersound    Ferroseed male *pain75     MEGAPAIN
+$playersound    Ferroseed male *pain50     MEGAPAIN
+$playersound    Ferroseed male *pain25     MEGAPAIN
+$playersound    Ferroseed male *grunt      LAND
+$playersound    Ferroseed male *land       LAND
+$playersound    Ferroseed male *jump       dsnone
+$playersound    Ferroseed male *fist       dsnone
+$playersound    Ferroseed male *usefail    LAND
+$playersound    Ferroseed male *taunt      CRY079
+
+
+$playersound    Ferrothorn male *death      MEGADEAT
+$playersound    Ferrothorn male *xdeath     MEGADEAT
+$playersound    Ferrothorn male *gibbed     MEGADEAT
+$playersound    Ferrothorn male *pain100    MEGAPAIN
+$playersound    Ferrothorn male *pain75     MEGAPAIN
+$playersound    Ferrothorn male *pain50     MEGAPAIN
+$playersound    Ferrothorn male *pain25     MEGAPAIN
+$playersound    Ferrothorn male *grunt      FATLAND
+$playersound    Ferrothorn male *land       FATLAND
+$playersound    Ferrothorn male *jump       dsnone
+$playersound    Ferrothorn male *fist       dsnone
+$playersound    Ferrothorn male *usefail    FATLAND
+$playersound    Ferrothorn male *taunt      CRY080
+
+
+$playersound    Horsea male *death      MEGADEAT
+$playersound    Horsea male *xdeath     MEGADEAT
+$playersound    Horsea male *gibbed     MEGADEAT
+$playersound    Horsea male *pain100    MEGAPAIN
+$playersound    Horsea male *pain75     MEGAPAIN
+$playersound    Horsea male *pain50     MEGAPAIN
+$playersound    Horsea male *pain25     MEGAPAIN
+$playersound    Horsea male *grunt      LAND
+$playersound    Horsea male *land       LAND
+$playersound    Horsea male *jump       dsnone
+$playersound    Horsea male *fist       dsnone
+$playersound    Horsea male *usefail    LAND
+$playersound    Horsea male *taunt      CRY081
+
+
+$playersound    Seadra male *death      MEGADEAT
+$playersound    Seadra male *xdeath     MEGADEAT
+$playersound    Seadra male *gibbed     MEGADEAT
+$playersound    Seadra male *pain100    MEGAPAIN
+$playersound    Seadra male *pain75     MEGAPAIN
+$playersound    Seadra male *pain50     MEGAPAIN
+$playersound    Seadra male *pain25     MEGAPAIN
+$playersound    Seadra male *grunt      LAND
+$playersound    Seadra male *land       LAND
+$playersound    Seadra male *jump       dsnone
+$playersound    Seadra male *fist       dsnone
+$playersound    Seadra male *usefail    LAND
+$playersound    Seadra male *taunt      CRY082
+
+
+$playersound    Kingdra male *death      MEGADEAT
+$playersound    Kingdra male *xdeath     MEGADEAT
+$playersound    Kingdra male *gibbed     MEGADEAT
+$playersound    Kingdra male *pain100    MEGAPAIN
+$playersound    Kingdra male *pain75     MEGAPAIN
+$playersound    Kingdra male *pain50     MEGAPAIN
+$playersound    Kingdra male *pain25     MEGAPAIN
+$playersound    Kingdra male *grunt      FATLAND
+$playersound    Kingdra male *land       FATLAND
+$playersound    Kingdra male *jump       dsnone
+$playersound    Kingdra male *fist       dsnone
+$playersound    Kingdra male *usefail    FATLAND
+$playersound    Kingdra male *taunt      CRY083
+
+
 //--[NewPokemon]--

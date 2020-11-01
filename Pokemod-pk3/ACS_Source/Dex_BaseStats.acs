@@ -137,5 +137,10 @@ Int StatDEX [MAXDEX][10] = {
 /*|77|*/{45, 80, 50, 75,	    60,    FAST_SPD,    10,	Type_Electric,Type_NULL,  LVLSPD_Normal},
 /*|78|*/{70, 105, 60, 105,	    90,    FAST_SPD,    20,	Type_Electric,Type_NULL,  LVLSPD_Normal},
 
+/*|79|*/{ 44, 50, 91, 24,        86,    SLOW_SPD,    5, Type_Grass,Type_Steel,  LVLSPD_Normal},
+/*|80|*/{ 74, 94, 131, 54,        116,    SLOW_SPD,    20, Type_Grass,Type_Steel,  LVLSPD_Normal},
+/*|81|*/{ 30, 40, 70, 70,        25,    NORM_SPD,    5, Type_Water,Type_Null,  LVLSPD_Normal},
+/*|82|*/{ 55, 65, 95, 95,        45,    NORM_SPD,    10, Type_Water,Type_Null,  LVLSPD_Normal},
+/*|83|*/{ 75, 95, 95, 95,        95,    NORM_SPD,    20, Type_Water,Type_Dragon,  LVLSPD_Normal},
 //--[NewPokemon]--
 };

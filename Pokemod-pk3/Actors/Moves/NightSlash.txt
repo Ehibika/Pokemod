@@ -21,6 +21,7 @@ Goto NoAmmo
 
 Fire.Begin:
 "####" B 0
+"####" A 0 ACS_NamedExecuteAlways("TakePP",0,Move_NightSlash,1)
 "####" B 0 A_CheckFloor("Fire.PitchCheck")
 "####" B 0 A_Jump(256,"Fire.Blade")
 Goto Fire.Blade
