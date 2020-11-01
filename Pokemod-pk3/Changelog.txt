@@ -1,0 +1,22 @@
+//#region -=-=- Beta 19 -=-=-
+/*
+ *
+ * ====
+ * Increased the Base stats of Pichu and Evos to match that of the starters
+ * established a 4th speed tier and redistributed the speed tiers in response to this:
+ *  Treecko family: Fast > SuperFast
+ *  Torchic family: Fast > Normal
+ *  Squirtle family: slow > Normal
+ *  Totodile family: Fast > Normal
+ *  Dreepy family: Fast > SuperFast
+ *  Bagon: Normal > Fast
+ *  Salamence: Normal > Fast
+ *  Vulpix family: Normal > Fast
+ *  Alolan Vulpix family: Normal > Fast
+ *  Swinub family: Slow > Normal
+ *  Abra family: Fast > Superfast
+ *  Hypno family: Normal > Slow
+ *  Exeggcute family: Normal > Slow
+ *  
+ * Fixed base power discrepancy with Thunderbolt
+//#endregion

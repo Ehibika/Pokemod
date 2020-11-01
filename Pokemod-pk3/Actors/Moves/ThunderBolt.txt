@@ -320,7 +320,7 @@ actor MoveThunderBoltDamager : BasicFastProjectile
     +SKYEXPLODE
     +EXPLODEONWATER
     RenderStyle None
-    Damage (9)
+    Damage (MBP_Thunderbolt)
     Radius 10
     Height 10
     speed 525 //15 * ThunderboltRange(35)

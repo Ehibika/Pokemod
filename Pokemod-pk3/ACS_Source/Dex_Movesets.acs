@@ -1608,6 +1608,102 @@ int MoveDex2[MAXDEX][15][4] = {
 }, 
 //#endregion
 
+    //#region -=- 079 : Ferroseed-=-
+{
+        /*|1|*/{Leafage,MetalClaw,Spikes,Rapidspin},
+        /*|2|*/{LeechSeed,Protect,NullMove},
+        /*|3|*/{GyroBall,SpikeCannon,NullMove},
+        /*|4|*/{BulletSeed,StealthRock,NullMove},
+        /*|5|*/{MegaDrain,IronDefense,NullMove},
+        /*|6|*/{Curse,SeedBomb,NullMove},
+        /*|7|*/{FlashCannon,NullMove},
+        /*|8|*/{Toxic,NullMove},
+        /*|9|*/{WideGuard,NullMove},
+        /*|10|*/{GigaDrain,NullMove},
+        /*|11|*/{NullMove},
+        /*|12|*/{NullMove},
+        /*|13|*/{NullMove},
+        /*|14|*/{NullMove},
+        /*|15|*/{NullMove},
+}, 
+//#endregion
+    //#region -=- 080 : Ferrothorn-=-
+{
+        /*|1|*/{Leafage,MetalClaw,Spikes,Rapidspin},
+        /*|2|*/{LeechSeed,Protect,NullMove},
+        /*|3|*/{GyroBall,SpikeCannon,NullMove},
+        /*|4|*/{BulletSeed,StealthRock,NullMove},
+        /*|5|*/{MegaDrain,IronDefense,NullMove},
+        /*|6|*/{Curse,SeedBomb,NullMove},
+        /*|7|*/{FlashCannon,NullMove},
+        /*|8|*/{Toxic,NullMove},
+        /*|9|*/{WideGuard,NullMove},
+        /*|10|*/{GigaDrain,NullMove},
+        /*|11|*/{NullMove},
+        /*|12|*/{NullMove},
+        /*|13|*/{NullMove},
+        /*|14|*/{NullMove},
+        /*|15|*/{NullMove},
+}, 
+//#endregion
+
+    //#region -=- 081 : Horsea-=-
+{
+        /*|1|*/{Watergun,leer,smokescreen,twister},
+        /*|2|*/{NullMove},
+        /*|3|*/{NullMove},
+        /*|4|*/{NullMove},
+        /*|5|*/{NullMove},
+        /*|6|*/{NullMove},
+        /*|7|*/{NullMove},
+        /*|8|*/{NullMove},
+        /*|9|*/{NullMove},
+        /*|10|*/{NullMove},
+        /*|11|*/{NullMove},
+        /*|12|*/{NullMove},
+        /*|13|*/{NullMove},
+        /*|14|*/{NullMove},
+        /*|15|*/{NullMove},
+}, 
+//#endregion
+    //#region -=- 082 : Seadra-=-
+{
+        /*|1|*/{Watergun,leer,smokescreen,twister},
+        /*|2|*/{NullMove},
+        /*|3|*/{NullMove},
+        /*|4|*/{NullMove},
+        /*|5|*/{NullMove},
+        /*|6|*/{NullMove},
+        /*|7|*/{NullMove},
+        /*|8|*/{NullMove},
+        /*|9|*/{NullMove},
+        /*|10|*/{NullMove},
+        /*|11|*/{NullMove},
+        /*|12|*/{NullMove},
+        /*|13|*/{NullMove},
+        /*|14|*/{NullMove},
+        /*|15|*/{NullMove},
+}, 
+//#endregion
+    //#region -=- 083 : Kingdra-=-
+{
+        /*|1|*/{Watergun,leer,smokescreen,twister},
+        /*|2|*/{NullMove},
+        /*|3|*/{NullMove},
+        /*|4|*/{NullMove},
+        /*|5|*/{NullMove},
+        /*|6|*/{NullMove},
+        /*|7|*/{NullMove},
+        /*|8|*/{NullMove},
+        /*|9|*/{NullMove},
+        /*|10|*/{NullMove},
+        /*|11|*/{NullMove},
+        /*|12|*/{NullMove},
+        /*|13|*/{NullMove},
+        /*|14|*/{NullMove},
+        /*|15|*/{NullMove},
+}, 
+//#endregion
 //--[NewPokemon]--
 
 //[End of 3D Array]

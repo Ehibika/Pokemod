@@ -12,11 +12,11 @@ Player.SoundClass "Pichu"
 player.startitem "PKMNStarterKit"
 
 //============|
-Player.StartItem "Base_HP", 20
-Player.StartItem "Base_PAttack", 40
-Player.StartItem "Base_PDefense", 15
-Player.StartItem "Base_SAttack", 35
-Player.StartItem "Base_SDefense", 35
+Player.StartItem "Base_HP", 35
+Player.StartItem "Base_PAttack", 55
+Player.StartItem "Base_PDefense", 40
+Player.StartItem "Base_SAttack", 50
+Player.StartItem "Base_SDefense", 50
 
 //============|
 
