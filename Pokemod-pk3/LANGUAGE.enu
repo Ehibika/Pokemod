@@ -510,6 +510,8 @@ OB_SPARK = "%k Defeated %o using SPARK!";
 OB_SHOCKWAVE = "%k Defeated %o using SHOCKWAVE!";
 OB_FIREPUNCH = "%k Defeated %o using FIREPUNCH!";
 OB_CRAFTYSHIELD = "%k Defeated %o using CRAFTYSHIELD!";
+OB_MUDSHOT = "%k Defeated %o using MUDSHOT!";
+OB_CLEARSMOG = "%k Defeated %o using CLEARSMOG!";
 //--[NewMove]--
 
 //#endregion
@@ -1296,6 +1298,160 @@ D083_EVO = "\c[MenuRed]Does not evolve";
 //#endregion
 
 
+//#region -=- Cherubi-=-
+D084_NAME = "\cjCherubi";
+D084_TYPE = "\cjGrass/Null";
+D084_STATS1 = "\cfATK:\cj 35 \cfDEF:\cj 45";
+D084_STATS2 = "\cfSP.ATK:\cj 60 \cfSP.DEF:\cj 50";
+D084_STATS3 = "\cfHP:\cj 60";
+D084_ARC = "\cj <Archetype> ";
+D084_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+
+//#region -=- Cherrim_O-=-
+D085_NAME = "\cjCherrim_O";
+D085_TYPE = "\cjGrass/Null";
+D085_STATS1 = "\cfATK:\cj 60 \cfDEF:\cj 70";
+D085_STATS2 = "\cfSP.ATK:\cj 65 \cfSP.DEF:\cj 80";
+D085_STATS3 = "\cfHP:\cj 100";
+D085_ARC = "\cj <Archetype> ";
+D085_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+
+//#region -=- Cherrim_S-=-
+D086_NAME = "\cjCherrim_S";
+D086_TYPE = "\cjGrass/Null";
+D086_STATS1 = "\cfATK:\cj 85 \cfDEF:\cj 50";
+D086_STATS2 = "\cfSP.ATK:\cj 100 \cfSP.DEF:\cj 90";
+D086_STATS3 = "\cfHP:\cj 80";
+D086_ARC = "\cj <Archetype> ";
+D086_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+
+//#region -=- Growlithe-=-
+D087_NAME = "\cjGrowlithe";
+D087_TYPE = "\cjFire/Null";
+D087_STATS1 = "\cfATK:\cj 70 \cfDEF:\cj 45";
+D087_STATS2 = "\cfSP.ATK:\cj 70 \cfSP.DEF:\cj 50";
+D087_STATS3 = "\cfHP:\cj 55";
+D087_ARC = "\cj <Archetype> ";
+D087_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+
+//#region -=- Arcanine-=-
+D088_NAME = "\cjArcanine";
+D088_TYPE = "\cjFire/Null";
+D088_STATS1 = "\cfATK:\cj 110 \cfDEF:\cj 80";
+D088_STATS2 = "\cfSP.ATK:\cj 110 \cfSP.DEF:\cj 80";
+D088_STATS3 = "\cfHP:\cj 90";
+D088_ARC = "\cj <Archetype> ";
+D088_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+
+//#region -=- Deino-=-
+D089_NAME = "\cjDeino";
+D089_TYPE = "\cjDark/Dragon";
+D089_STATS1 = "\cfATK:\cj 65 \cfDEF:\cj 50";
+D089_STATS2 = "\cfSP.ATK:\cj 45 \cfSP.DEF:\cj 50";
+D089_STATS3 = "\cfHP:\cj 52";
+D089_ARC = "\cj <Archetype> ";
+D089_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+
+//#region -=- Zweilous-=-
+D090_NAME = "\cjZweilous";
+D090_TYPE = "\cjDark/Dragon";
+D090_STATS1 = "\cfATK:\cj 85 \cfDEF:\cj 70";
+D090_STATS2 = "\cfSP.ATK:\cj 65 \cfSP.DEF:\cj 70";
+D090_STATS3 = "\cfHP:\cj 72";
+D090_ARC = "\cj <Archetype> ";
+D090_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+
+//#region -=- Hydreigon-=-
+D091_NAME = "\cjHydreigon";
+D091_TYPE = "\cjDark/Dragon";
+D091_STATS1 = "\cfATK:\cj 105 \cfDEF:\cj 90";
+D091_STATS2 = "\cfSP.ATK:\cj 125 \cfSP.DEF:\cj 90";
+D091_STATS3 = "\cfHP:\cj 92";
+D091_ARC = "\cj <Archetype> ";
+D091_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+
+//#region -=- Solosis-=-
+D092_NAME = "\cjSolosis";
+D092_TYPE = "\cjPsychic/Null";
+D092_STATS1 = "\cfATK:\cj 30 \cfDEF:\cj 40";
+D092_STATS2 = "\cfSP.ATK:\cj 105 \cfSP.DEF:\cj 50";
+D092_STATS3 = "\cfHP:\cj 45";
+D092_ARC = "\cj <Archetype> ";
+D092_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+
+//#region -=- Duosion-=-
+D093_NAME = "\cjDuosion";
+D093_TYPE = "\cjPsychic/Null";
+D093_STATS1 = "\cfATK:\cj 40 \cfDEF:\cj 50";
+D093_STATS2 = "\cfSP.ATK:\cj 125 \cfSP.DEF:\cj 60";
+D093_STATS3 = "\cfHP:\cj 65";
+D093_ARC = "\cj <Archetype> ";
+D093_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+
+//#region -=- Reuniclus-=-
+D094_NAME = "\cjReuniclus";
+D094_TYPE = "\cjPsychic/Null";
+D094_STATS1 = "\cfATK:\cj 65 \cfDEF:\cj 75";
+D094_STATS2 = "\cfSP.ATK:\cj 125 \cfSP.DEF:\cj 85";
+D094_STATS3 = "\cfHP:\cj 110";
+D094_ARC = "\cj <Archetype> ";
+D094_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+
+//#region -=- Happiny-=-
+D095_NAME = "\cjHappiny";
+D095_TYPE = "\cjNormal/Null";
+D095_STATS1 = "\cfATK:\cj 5 \cfDEF:\cj 5";
+D095_STATS2 = "\cfSP.ATK:\cj 15 \cfSP.DEF:\cj 65";
+D095_STATS3 = "\cfHP:\cj 100";
+D095_ARC = "\cj <Archetype> ";
+D095_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+
+//#region -=- Chansey-=-
+D096_NAME = "\cjChansey";
+D096_TYPE = "\cjNormal/Null";
+D096_STATS1 = "\cfATK:\cj 5 \cfDEF:\cj 5";
+D096_STATS2 = "\cfSP.ATK:\cj 35 \cfSP.DEF:\cj 105";
+D096_STATS3 = "\cfHP:\cj 250";
+D096_ARC = "\cj <Archetype> ";
+D096_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+
+//#region -=- Blissey-=-
+D097_NAME = "\cjBlissey";
+D097_TYPE = "\cjNormal/Null";
+D097_STATS1 = "\cfATK:\cj 10 \cfDEF:\cj 10";
+D097_STATS2 = "\cfSP.ATK:\cj 75 \cfSP.DEF:\cj 135";
+D097_STATS3 = "\cfHP:\cj 255";
+D097_ARC = "\cj <Archetype> ";
+D097_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+
 //--[NewPokemon]--
 
 //#endregion
@@ -1783,7 +1939,8 @@ M058_NAME = "\cj IceFang";
 M058_TYPE = "\cj Ice";
 M058_CATEGORY = "\cf Physical";
 M058_POWER = "\cfPower:\cj --";
-M058_DESC = "<Desc>";
+M058_DESC = "\cjBites down with icy fangs that can freeze\n"
+"opponents";
 //#endregion
 
 //#region -=- 059: IceBeam -=-
@@ -2374,7 +2531,8 @@ M129_NAME = "\cj Bubble";
 M129_TYPE = "\cj <Type>";
 M129_CATEGORY = "\cf <Category>";
 M129_POWER = "\cfPower:\cj --";
-M129_DESC = "\cf<Desc>";
+M129_DESC = "\cjSpray bubbles that linger around for a\n"
+"while.";
 //#endregion
 
 //#region -=- 130: Sludge -=-
@@ -2422,7 +2580,7 @@ M134_TYPE = "\cj <Type>";
 M134_CATEGORY = "\cf <Category>";
 M134_POWER = "\cfPower:\cj --";
 M134_DESC = "\cjsiphon health from a target infront of\n"
-"you at a steady rate.";
+"you.";
 //#endregion
 
 //#region -=- 135: GigaDrain -=-
@@ -2750,10 +2908,8 @@ M171_NAME = "\cj Barrier";
 M171_TYPE = "\cj <Type>";
 M171_CATEGORY = "\cf <Category>";
 M171_POWER = "\cfPower:\cj --";
-M171_DESC = "\cjconjure a wall of mysterious psychic\n"
-"blocks that enemies cannot move or shoot\n"
-"through, it's strength is based on\n"
-"SP.ATK.";
+M171_DESC = "\cjLaunch a small vortex, creates a wind\n"
+"tunnle if it hits the floor.";
 //#endregion
 
 //#region -=- 172: DragonBreath -=-
@@ -3435,6 +3591,26 @@ M250_CATEGORY = "\cf Status";
 M250_POWER = "\cfPower:\cj --";
 M250_DESC = "\cjTarget the ground to cast a barrier that\n"
 "repells all status conditions and homing.";
+//#endregion
+
+
+//#region -=- 251: MudShot -=-
+M251_NAME = "\cj MudShot";
+M251_TYPE = "\cj Ground";
+M251_CATEGORY = "\cf Special";
+M251_POWER = "\cfPower:\cj --";
+M251_DESC = "\cjShoot a pile of mud that can slow foes\n"
+"down.";
+//#endregion
+
+
+//#region -=- 252: ClearSmog -=-
+M252_NAME = "\cj ClearSmog";
+M252_TYPE = "\cj Poison";
+M252_CATEGORY = "\cf Special";
+M252_POWER = "\cfPower:\cj --";
+M252_DESC = "\cjLaunch a mysterious smog that purges stat\n"
+"buffs from the opponent.";
 //#endregion
 
 

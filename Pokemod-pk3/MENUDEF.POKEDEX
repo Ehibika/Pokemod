@@ -6055,6 +6055,40 @@ OptionMenu "MoveMenu_CraftyShield"
     StaticText ""
     StaticText"===============================================================",1
 } 
+OptionMenu "MoveMenu_MudShot"
+{
+    
+    Title "$M251_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M251_TYPE"
+    StaticText "$M251_CATEGORY"
+    StaticText "$M2514_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M251_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+} 
+OptionMenu "MoveMenu_ClearSmog"
+{
+    
+    Title "$M252_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M252_TYPE"
+    StaticText "$M252_CATEGORY"
+    StaticText "$M2524_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M252_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+} 
 //--[NewMove]--
 
 OptionMenu "MoveMenu_Sketch"

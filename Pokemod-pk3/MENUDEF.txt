@@ -350,6 +350,7 @@ OptionValue "MM10Music"
 	1, "MM10"
 	2, "Gameboy"
 }
+/*
 OptionMenu "OptionsMenu"
 {
 	Title "OPTIONS"
@@ -387,7 +388,7 @@ OptionMenu "OptionsMenu"
 	Option "Punk Stage",			"mm8bdm_music_punk", "MM10Music"
 	Option "Ballade Stage",			"mm8bdm_music_ballade", "MM10Music"
 }
-
+*/
 // Menudef.camera
 
 OptionMenu "8BDMAdvancedOptions"

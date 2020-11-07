@@ -190,6 +190,7 @@ actor TShock_Bolt : LightningBolt
 ReactionTime 1
 DamageType "ThunderShock"
 obituary "$OB_ThunderShock"
++OLDRADIUSDMG
 states
 {
 Spawn:

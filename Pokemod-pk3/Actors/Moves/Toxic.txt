@@ -155,6 +155,7 @@ DamageType "Toxic"
 +BOUNCEONCEILINGS
 +ALLOWBOUNCEONACTORS
 +BOUNCEONACTORS
++THRUGHOST
 Bouncefactor 1.0
 Gravity 1.5
 damage (0)

@@ -1,3 +1,4 @@
+/*
 actor TwisterMove : WepMasterBase
 {
 Tag "Twister"
@@ -43,11 +44,48 @@ Fire.After:
 "####" C 0 A_REfire("Fire")
 "####" B 0 A_Jump(256,"Fire.End")
 Goto Fire.End
+}
+}
+
+*/
+
+actor TwisterMove : WepMasterBase
+{
+Tag "Twister"
+obituary "$OB_TWISTER"
+Weapon.AmmoUse 1
+Weapon.AmmoGive 35
+weapon.ammotype "TwisterPP"
+scale 2.0
+Inventory.Pickupmessage "$PU_MEGABUSTER"
+States
+{
+Spawn:
+WEAP X 1
+stop
 
 
+Fire:
+"####" BBB 1 A_Jumpif(CallACS("CheckWeaponFire",RC_A)==1,"Fire.Begin")
+"####" B 0 A_Jump(256,"NoAmmo")
+Goto NoAmmo
 
+Fire.Begin:
+"####" B 0
+"####" B 0 A_Jump(256,"Fire.Bullet")
+Goto Fire.Bullet
 
+Fire.Bullet:
+"####" B 0 A_PlaySoundEx("weapon/AirShooter","Weapon")
+"####" B 0 A_FireCustomMissile("TwisterShot",0,1,0,0)
+"####" B 0 A_Jump(256,"Fire.After")
+Goto Fire.After
 
+Fire.After:
+"####" B 1 A_GiveInventory("FullRecovery_A")
+"####" C 0 A_REfire("Fire")
+"####" B 0 A_Jump(256,"Fire.End")
+Goto Fire.End
 }
 }
 
@@ -68,11 +106,10 @@ TNT1 A 0 A_Jump(256,"Ready")
 Goto Ready
 }
 }
-
 //[+]========================================================================[+]
 //-----------------------------|Ammo & Inventory|------------------------------
 //[+]========================================================================[+]
-actor TwisterPP : Ammo {inventory.amount 1 inventory.Maxamount 10}
+actor TwisterPP : Ammo {inventory.amount 1 inventory.Maxamount 35}
 
 
 Const int TwisterRad = 75;
@@ -87,6 +124,10 @@ Damagefactor "Twister", 0
 
 actor Twister_Recovery_D : FullRecovery_D{Powerup.Duration 87} //87
 
+
+actor Twister_SweetSpot : Powerup {inventory.amount 1 powerup.duration 17}
+
+
 actor TwisterCringeChance : CustomInventory
 {
 inventory.amount 1
@@ -98,6 +139,9 @@ Spawn:
 TNT1 A 0
 stop
 Pickup:
+TNT1 A 0 A_JumpifInventory("Twister_SweetSpot",1,"Pickup2")
+stop
+Pickup2:
 TNT1 A 0 A_Jump(170,"Cringe")
 stop
 Cringe:
@@ -186,6 +230,7 @@ stop
 */
 actor TwisterGuideDot : BasicGuideDot {}
 
+/*
 actor TwisterSpawner : FastProjectile
 {
 +DONTBLAST
@@ -216,7 +261,48 @@ TNT1 A 0
 stop
 }
 }
+*/
 
+actor TwisterShot : BasicProjectile
+{
+Speed 48
+Damage (MBP_Twister)
+DamageType "Twister"
+obituary "$OB_Twister"
+radius 5
+Reactiontime 10
+height 16
+scale 3.5
+States
+{
+Spawn:
+TNT1 A 0 
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+Spawn2:
+TNT1 A 0 
+TBLO BCDE 1 
+TBLA A 0 
+TBLA A 0 A_Countdown
+loop
+
+Death:
+TNT1 A 1 A_CheckFloor("Death2")
+TNT1 A 0 A_GiveInventory("ProjectileDCode",1)
+BSTG AAAAAA 0 A_SpawnItemEx("TwisterParticle", 0, 0, 28, 5, 5, random2(5), random(0, 359),1)
+SPKH ABCD 2
+SPKH DDDD 2 A_Fadeout
+stop
+
+Death2:
+TNT1 A 0 A_stop
+TNT1 A 0 A_ChangeFlag("NOINTERACTION",true)
+TNT1 A 0 A_SpawnItemEx("TwisterSource",0,0,-(z-floorz),0,0,0,0,1)
+TBLO FGHIFGHI 1
+TBLO FGHIFGHI 1 A_Fadeout
+TNT1 A 1
+stop
+}
+}
 
 actor TwisterSource
 {
@@ -245,6 +331,7 @@ TNT1 A 0 A_PlaySoundEx("weapon/tornadohold","Weapon")
 Holding:
 TNT1 A 0 A_SpawnItemEx("TwisterFXSpawn",0,0,0,0,0,0,0,1)
 TNT1 A 0 A_SpawnItemEx("TwisterTornado",0,0,15,0,0,0,0,SXF_NOCHECKPOSITION)
+TNT1 A 0 A_RadiusGive("Twister_SweetSpot",TwisterRad,RGF_PLAYERS)
 TNT1 AA 2
 TORH D 0 A_GiveInventory("CutterFlag", 1)
 TORH D 0 A_JumpIfInventory("CutterFlag", 5, "End")
@@ -277,19 +364,19 @@ TNT1 A 0 A_GiveInventory("ProjectileCode",1)
 TORH FF 0 ThrustThingZ(0,40,0,0)
 Loop1:
 TORH F 0 A_JumpIf(z-floorz>=288,"Death")
-TNT1 A 0 A_Explode(MBP_TWISTER,TwisterRad,0,0,TwisterRad/2)
+TNT1 A 0 A_Explode(MBP_Twister2,TwisterRad,0,0,TwisterRad/2)
 TORH FFF 1 
 TNT1 A 0 A_CheckSightOrRange(TwisterRad,"Loop2")
 goto Lift1
 Loop2:
 TORH G 0 A_JumpIf(z-floorz>=288,"Death")
-TNT1 A 0 A_Explode(MBP_TWISTER,TwisterRad,0,0,TwisterRad/2)
+TNT1 A 0 A_Explode(MBP_Twister2,TwisterRad,0,0,TwisterRad/2)
 TORH GGG 1 //A_JumpIfCloser(40,"Lift2")
 TNT1 A 0 A_CheckSightOrRange(TwisterRad,"Loop3")
 goto Lift2
 Loop3:
 TORH H 0 A_JumpIf(z-floorz>=288,"Death")
-TNT1 A 0 A_Explode(MBP_TWISTER,TwisterRad,0,0,TwisterRad/2)
+TNT1 A 0 A_Explode(MBP_Twister2,TwisterRad,0,0,TwisterRad/2)
 TORH HHH 1 //A_JumpIfCloser(40,"Lift3")
 TNT1 A 0 A_CheckSightOrRange(TwisterRad,"Loop3")
 goto Loop1
@@ -383,6 +470,33 @@ Spawn:
 TNT1 A 0
 TNT1 A 0 A_GiveInventory("ProjectileCode",1)
 TORH HGFHGF  3
+stop
+}
+}
+
+actor TwisterParticle : BasicClientside
+{
+scale 1.2
+renderstyle "Translucent"
+ReactionTime 5
+speed 7
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+TBLA BCDBCD 2
+Spawn2:
+TBLA B 1 A_ScaleVelocity(0.8)
+TBLA B 1 A_Fadeout
+
+TBLA C 1 A_ScaleVelocity(0.8)
+TBLA C 1 A_Fadeout
+
+TBLA D 1 A_ScaleVelocity(0.8)
+TBLA D 1 A_Fadeout
+
+TNT1 A 0 A_Countdown
 stop
 }
 }

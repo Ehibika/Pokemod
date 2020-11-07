@@ -118,7 +118,7 @@ DamageType "Sludge"
 obituary "$OB_Sludge"
 -NOGRAVITY
 Speed 40
-Damage (MBP_SludgeBomb2)
+Damage (MBP_SludgeBomb1)
 Height 10
 Radius 12
 ReactionTime 12
@@ -190,7 +190,7 @@ States
 Spawn:
 TNT1 A 0
 TNT1 A 0 A_GiveInventory("ProjectileCode",1)
-TNT1 A 0 A_Explode(MBP_SludgeBomb1,SLUDGEBOMB_AREA1,0,0,SLUDGEBOMB_AREA2)
+TNT1 A 0 A_Explode(MBP_SludgeBomb2,SLUDGEBOMB_AREA1,0,0,SLUDGEBOMB_AREA2)
 NAPC A 0 A_PlaySoundEx("weapon/napalm", "Weapon")
 TNT1 AAAAAAAAA 0 A_SpawnItemEx("SludgeBombProjectile",0,0,35,random(5,10),0,random(5,15),Random(1,360),SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION)
 TNT1 A 0 A_SpawnItemEx("SludgeBombImpactFX",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION)
@@ -232,7 +232,6 @@ Spawn:
 AQBA A 0
 OILL D 5 
 OILL EEEE 0 A_Spawnitemex("SludgeParticle",0,0,0,random2(15),random2(15),random2(15),0,SXF_TRANSFERTRANSLATION)
-
 stop
 }
 }

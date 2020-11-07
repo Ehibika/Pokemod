@@ -42,6 +42,11 @@ AddPlayerClass Pichu
 
 AddPlayerClass Ferroseed
 AddPlayerClass Horsea
+AddPlayerClass Cherubi
+AddPlayerClass Growlithe
+AddPlayerClass Deino
+AddPlayerClass Solosis
+AddPlayerClass Happiny
 //--[NewPokemon]--
 
 alias TriggerEvo "CloseMenu; Use EvoStartItem" 

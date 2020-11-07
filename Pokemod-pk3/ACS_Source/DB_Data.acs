@@ -127,15 +127,6 @@ function int fdistanceVal (int x, int y, int z)
 
 
 
-script "PKMNACS_HitKnockback" (int force, int disabled, int type)
-{
-if(disabled == 0){GiveInventory("TempPitProtection",1);}
-int pusher = ACS_NamedExecuteWithResult("core_gettarget");
-if(type == 1){force*=CheckActorInventory(pusher,"ScriptCharge");}//ColdFusion
-int Vang = VectorAngle(GetActorX(0) - GetActorX(pusher), GetActorY(0) - GetActorY(pusher)) >> 8;
-ThrustThing(Vang, force, 1, 0);
-}
-
 script "PKMNACS_CheckPitProtect" (void)
 {
 SetResultValue(GetCvar("PKMN_SV_PitProtection"));

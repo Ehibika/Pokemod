@@ -274,6 +274,8 @@ const int Move_Spark = 247;
 const int Move_Shockwave = 248;
 const int Move_Firepunch = 249;
 const int Move_CraftyShield = 250;
+const int Move_MudShot = 251;
+const int Move_ClearSmog = 252;
 //--[NewMove]--
 //=======|Pokedex Constants|==========
 const int Dex_SMEARGLE = 0;
@@ -379,9 +381,26 @@ const int Dex_RAICHU = 78;
 
 const int Dex_FERROSEED = 79;
 const int Dex_FERROTHORN = 80;
+
 const int Dex_HORSEA = 81;
 const int Dex_SEADRA = 82;
 const int Dex_KINGDRA = 83;
+
+const int Dex_CHERUBI = 84;
+const int Dex_CHERRIM_O = 85;
+const int Dex_CHERRIM_S = 86;
+
+const int Dex_GROWLITHE = 87;
+const int Dex_ARCANINE = 88;
+const int Dex_DEINO = 89;
+const int Dex_ZWEILOUS = 90;
+const int Dex_HYDREIGON = 91;
+const int Dex_SOLOSIS = 92;
+const int Dex_DUOSION = 93;
+const int Dex_REUNICLUS = 94;
+const int Dex_HAPPINY = 95;
+const int Dex_CHANSEY = 96;
+const int Dex_BLISSEY = 97;
 //--[NewPokemon]--
 //=======|TM Type Flags|==========
 const int TMT_NULL = 0;

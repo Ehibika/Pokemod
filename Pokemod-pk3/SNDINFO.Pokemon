@@ -1190,4 +1190,214 @@ $playersound    Kingdra male *usefail    FATLAND
 $playersound    Kingdra male *taunt      CRY083
 
 
+$playersound    Cherubi male *death      MEGADEAT
+$playersound    Cherubi male *xdeath     MEGADEAT
+$playersound    Cherubi male *gibbed     MEGADEAT
+$playersound    Cherubi male *pain100    MEGAPAIN
+$playersound    Cherubi male *pain75     MEGAPAIN
+$playersound    Cherubi male *pain50     MEGAPAIN
+$playersound    Cherubi male *pain25     MEGAPAIN
+$playersound    Cherubi male *grunt      LAND
+$playersound    Cherubi male *land       LAND
+$playersound    Cherubi male *jump       dsnone
+$playersound    Cherubi male *fist       dsnone
+$playersound    Cherubi male *usefail    LAND
+$playersound    Cherubi male *taunt      CRY084
+
+
+$playersound    Cherrim_O male *death      MEGADEAT
+$playersound    Cherrim_O male *xdeath     MEGADEAT
+$playersound    Cherrim_O male *gibbed     MEGADEAT
+$playersound    Cherrim_O male *pain100    MEGAPAIN
+$playersound    Cherrim_O male *pain75     MEGAPAIN
+$playersound    Cherrim_O male *pain50     MEGAPAIN
+$playersound    Cherrim_O male *pain25     MEGAPAIN
+$playersound    Cherrim_O male *grunt      FATLAND
+$playersound    Cherrim_O male *land       FATLAND
+$playersound    Cherrim_O male *jump       dsnone
+$playersound    Cherrim_O male *fist       dsnone
+$playersound    Cherrim_O male *usefail    FATLAND
+$playersound    Cherrim_O male *taunt      CRY085
+
+
+$playersound    Cherrim_S male *death      MEGADEAT
+$playersound    Cherrim_S male *xdeath     MEGADEAT
+$playersound    Cherrim_S male *gibbed     MEGADEAT
+$playersound    Cherrim_S male *pain100    MEGAPAIN
+$playersound    Cherrim_S male *pain75     MEGAPAIN
+$playersound    Cherrim_S male *pain50     MEGAPAIN
+$playersound    Cherrim_S male *pain25     MEGAPAIN
+$playersound    Cherrim_S male *grunt      FATLAND
+$playersound    Cherrim_S male *land       FATLAND
+$playersound    Cherrim_S male *jump       dsnone
+$playersound    Cherrim_S male *fist       dsnone
+$playersound    Cherrim_S male *usefail    FATLAND
+$playersound    Cherrim_S male *taunt      CRY086
+
+
+$playersound    Growlithe male *death      MEGADEAT
+$playersound    Growlithe male *xdeath     MEGADEAT
+$playersound    Growlithe male *gibbed     MEGADEAT
+$playersound    Growlithe male *pain100    MEGAPAIN
+$playersound    Growlithe male *pain75     MEGAPAIN
+$playersound    Growlithe male *pain50     MEGAPAIN
+$playersound    Growlithe male *pain25     MEGAPAIN
+$playersound    Growlithe male *grunt      LAND
+$playersound    Growlithe male *land       LAND
+$playersound    Growlithe male *jump       dsnone
+$playersound    Growlithe male *fist       dsnone
+$playersound    Growlithe male *usefail    LAND
+$playersound    Growlithe male *taunt      CRY087
+
+
+$playersound    Arcanine male *death      MEGADEAT
+$playersound    Arcanine male *xdeath     MEGADEAT
+$playersound    Arcanine male *gibbed     MEGADEAT
+$playersound    Arcanine male *pain100    MEGAPAIN
+$playersound    Arcanine male *pain75     MEGAPAIN
+$playersound    Arcanine male *pain50     MEGAPAIN
+$playersound    Arcanine male *pain25     MEGAPAIN
+$playersound    Arcanine male *grunt      FATLAND
+$playersound    Arcanine male *land       FATLAND
+$playersound    Arcanine male *jump       dsnone
+$playersound    Arcanine male *fist       dsnone
+$playersound    Arcanine male *usefail    FATLAND
+$playersound    Arcanine male *taunt      CRY088
+
+
+$playersound    Deino male *death      MEGADEAT
+$playersound    Deino male *xdeath     MEGADEAT
+$playersound    Deino male *gibbed     MEGADEAT
+$playersound    Deino male *pain100    MEGAPAIN
+$playersound    Deino male *pain75     MEGAPAIN
+$playersound    Deino male *pain50     MEGAPAIN
+$playersound    Deino male *pain25     MEGAPAIN
+$playersound    Deino male *grunt      LAND
+$playersound    Deino male *land       LAND
+$playersound    Deino male *jump       dsnone
+$playersound    Deino male *fist       dsnone
+$playersound    Deino male *usefail    LAND
+$playersound    Deino male *taunt      CRY089
+
+
+$playersound    Zweilous male *death      MEGADEAT
+$playersound    Zweilous male *xdeath     MEGADEAT
+$playersound    Zweilous male *gibbed     MEGADEAT
+$playersound    Zweilous male *pain100    MEGAPAIN
+$playersound    Zweilous male *pain75     MEGAPAIN
+$playersound    Zweilous male *pain50     MEGAPAIN
+$playersound    Zweilous male *pain25     MEGAPAIN
+$playersound    Zweilous male *grunt      LAND
+$playersound    Zweilous male *land       LAND
+$playersound    Zweilous male *jump       dsnone
+$playersound    Zweilous male *fist       dsnone
+$playersound    Zweilous male *usefail    LAND
+$playersound    Zweilous male *taunt      CRY090
+
+
+$playersound    Hydreigon male *death      MEGADEAT
+$playersound    Hydreigon male *xdeath     MEGADEAT
+$playersound    Hydreigon male *gibbed     MEGADEAT
+$playersound    Hydreigon male *pain100    MEGAPAIN
+$playersound    Hydreigon male *pain75     MEGAPAIN
+$playersound    Hydreigon male *pain50     MEGAPAIN
+$playersound    Hydreigon male *pain25     MEGAPAIN
+$playersound    Hydreigon male *grunt      FATLAND
+$playersound    Hydreigon male *land       FATLAND
+$playersound    Hydreigon male *jump       dsnone
+$playersound    Hydreigon male *fist       dsnone
+$playersound    Hydreigon male *usefail    FATLAND
+$playersound    Hydreigon male *taunt      CRY091
+
+
+$playersound    Solosis male *death      MEGADEAT
+$playersound    Solosis male *xdeath     MEGADEAT
+$playersound    Solosis male *gibbed     MEGADEAT
+$playersound    Solosis male *pain100    MEGAPAIN
+$playersound    Solosis male *pain75     MEGAPAIN
+$playersound    Solosis male *pain50     MEGAPAIN
+$playersound    Solosis male *pain25     MEGAPAIN
+$playersound    Solosis male *grunt      LAND
+$playersound    Solosis male *land       LAND
+$playersound    Solosis male *jump       dsnone
+$playersound    Solosis male *fist       dsnone
+$playersound    Solosis male *usefail    LAND
+$playersound    Solosis male *taunt      CRY092
+
+
+$playersound    Duosion male *death      MEGADEAT
+$playersound    Duosion male *xdeath     MEGADEAT
+$playersound    Duosion male *gibbed     MEGADEAT
+$playersound    Duosion male *pain100    MEGAPAIN
+$playersound    Duosion male *pain75     MEGAPAIN
+$playersound    Duosion male *pain50     MEGAPAIN
+$playersound    Duosion male *pain25     MEGAPAIN
+$playersound    Duosion male *grunt      LAND
+$playersound    Duosion male *land       LAND
+$playersound    Duosion male *jump       dsnone
+$playersound    Duosion male *fist       dsnone
+$playersound    Duosion male *usefail    LAND
+$playersound    Duosion male *taunt      CRY093
+
+
+$playersound    Reuniclus male *death      MEGADEAT
+$playersound    Reuniclus male *xdeath     MEGADEAT
+$playersound    Reuniclus male *gibbed     MEGADEAT
+$playersound    Reuniclus male *pain100    MEGAPAIN
+$playersound    Reuniclus male *pain75     MEGAPAIN
+$playersound    Reuniclus male *pain50     MEGAPAIN
+$playersound    Reuniclus male *pain25     MEGAPAIN
+$playersound    Reuniclus male *grunt      FATLAND
+$playersound    Reuniclus male *land       FATLAND
+$playersound    Reuniclus male *jump       dsnone
+$playersound    Reuniclus male *fist       dsnone
+$playersound    Reuniclus male *usefail    FATLAND
+$playersound    Reuniclus male *taunt      CRY094
+
+
+$playersound    Happiny male *death      MEGADEAT
+$playersound    Happiny male *xdeath     MEGADEAT
+$playersound    Happiny male *gibbed     MEGADEAT
+$playersound    Happiny male *pain100    MEGAPAIN
+$playersound    Happiny male *pain75     MEGAPAIN
+$playersound    Happiny male *pain50     MEGAPAIN
+$playersound    Happiny male *pain25     MEGAPAIN
+$playersound    Happiny male *grunt      LAND
+$playersound    Happiny male *land       LAND
+$playersound    Happiny male *jump       dsnone
+$playersound    Happiny male *fist       dsnone
+$playersound    Happiny male *usefail    LAND
+$playersound    Happiny male *taunt      CRY095
+
+
+$playersound    Chansey male *death      MEGADEAT
+$playersound    Chansey male *xdeath     MEGADEAT
+$playersound    Chansey male *gibbed     MEGADEAT
+$playersound    Chansey male *pain100    MEGAPAIN
+$playersound    Chansey male *pain75     MEGAPAIN
+$playersound    Chansey male *pain50     MEGAPAIN
+$playersound    Chansey male *pain25     MEGAPAIN
+$playersound    Chansey male *grunt      LAND
+$playersound    Chansey male *land       LAND
+$playersound    Chansey male *jump       dsnone
+$playersound    Chansey male *fist       dsnone
+$playersound    Chansey male *usefail    LAND
+$playersound    Chansey male *taunt      CRY096
+
+
+$playersound    Blissey male *death      MEGADEAT
+$playersound    Blissey male *xdeath     MEGADEAT
+$playersound    Blissey male *gibbed     MEGADEAT
+$playersound    Blissey male *pain100    MEGAPAIN
+$playersound    Blissey male *pain75     MEGAPAIN
+$playersound    Blissey male *pain50     MEGAPAIN
+$playersound    Blissey male *pain25     MEGAPAIN
+$playersound    Blissey male *grunt      FATLAND
+$playersound    Blissey male *land       FATLAND
+$playersound    Blissey male *jump       dsnone
+$playersound    Blissey male *fist       dsnone
+$playersound    Blissey male *usefail    FATLAND
+$playersound    Blissey male *taunt      CRY097
+
+
 //--[NewPokemon]--

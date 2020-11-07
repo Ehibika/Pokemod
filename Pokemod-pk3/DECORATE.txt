@@ -147,7 +147,7 @@
 #include "actors/Moves/Liquidation.txt"
 #include "actors/Moves/Scald.txt"
 #include "actors/Moves/Dive.txt"
-//#include "actors/Moves/Bubble.txt"
+#include "actors/Moves/Bubble.txt"
 #include "actors/Moves/Sludge.txt"
 #include "actors/Moves/SludgeBomb.txt"
 #include "actors/Moves/Venoshock.txt"
@@ -268,6 +268,8 @@
 // #include "actors/Moves/Shockwave.txt"
 #include "actors/Moves/Firepunch.txt"
 #include "actors/Moves/CraftyShield.txt"
+#include "actors/Moves/MudShot.txt"
+#include "actors/Moves/ClearSmog.txt"
 //--[NewMove]--
 
 #include "Actors/inventory/Shop/ShopActors/shopact.txt"
@@ -329,10 +331,14 @@
 
 #include "Actors/Classes/Pokemon/079_Ferroseed.txt"
 #include "Actors/Classes/Pokemon/081_Horsea.txt"
-
-// -=- Rentals -=-
+#include "Actors/Classes/Pokemon/084_Cherubi.txt"
+#include "Actors/Classes/Pokemon/087_Growlithe.txt"
+#include "Actors/Classes/Pokemon/089_Deino.txt"
+#include "Actors/Classes/Pokemon/092_Solosis.txt"
+#include "Actors/Classes/Pokemon/095_Happiny.txt"
 //--[NewPokemon]--
 
+// -=- Rentals -=-
 #include "Actors/Classes/Rentals/R000_Smeargle.txt"
 
 #include "Actors/Classes/Rentals/R001_Bulbasaur.txt"
@@ -397,7 +403,26 @@
 #Include "Actors/Classes/Rentals/R050_Starmie.Txt"
 //  #Include "Actors/Classes/Rentals/R079_Ferroseed.Txt"
 //  #Include "Actors/Classes/Rentals/R080_Ferrothorn.Txt"
+
 //  #Include "Actors/Classes/Rentals/R081_Horsea.Txt"
 //  #Include "Actors/Classes/Rentals/R082_Seadra.Txt"
 //  #Include "Actors/Classes/Rentals/R083_Kingdra.Txt"
+
+//  #Include "Actors/Classes/Rentals/R084_Cherubi.Txt"
+//  #Include "Actors/Classes/Rentals/R085_Cherrim_O.Txt"
+//  #Include "Actors/Classes/Rentals/R086_Cherrim_S.Txt"
+
+//  #Include "Actors/Classes/Rentals/R087_Growlithe.Txt"
+//  #Include "Actors/Classes/Rentals/R088_Arcanine.Txt"
+
+//  #Include "Actors/Classes/Rentals/R089_Deino.Txt"
+//  #Include "Actors/Classes/Rentals/R090_Zweilous.Txt"
+//  #Include "Actors/Classes/Rentals/R091_Hydreigon.Txt"
+
+//  #Include "Actors/Classes/Rentals/R092_Solosis.Txt"
+//  #Include "Actors/Classes/Rentals/R093_Duosion.Txt"
+//  #Include "Actors/Classes/Rentals/R094_Reuniclus.Txt"
+//  #Include "Actors/Classes/Rentals/R095_Happiny.Txt"
+//  #Include "Actors/Classes/Rentals/R096_Chansey.Txt"
+//  #Include "Actors/Classes/Rentals/R097_Blissey.Txt"
 //--[NewPokemon]--

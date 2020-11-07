@@ -1,0 +1,232 @@
+actor ClearSmogMove : WepMasterBase
+{
+Tag "ClearSmog"
+obituary "$OB_CLEARSMOG"
+Weapon.AmmoUse 1
+Weapon.AmmoGive 20
+weapon.ammotype "ClearSmogPP"
+scale 2.0
+Inventory.Pickupmessage "$PU_MEGABUSTER"
+States
+{
+Spawn:
+WEAP X 1
+stop
+
+
+Fire:
+"####" BBB 1 A_Jumpif(CallACS("CheckWeaponFire",RC_A)==1,"Fire.Begin")
+"####" B 0 A_Jump(256,"NoAmmo")
+Goto NoAmmo
+
+Fire.Begin:
+"####" B 0
+"####" B 0 A_Jump(256,"Fire.Bullet")
+Goto Fire.Bullet
+
+Fire.Bullet:
+"####" B 0 A_PlaySoundEx("weapon/tengushot","Weapon")
+"####" B 0 A_FireCustomMissile("ClearSmogShot",0,1,0,0)
+"####" B 0 A_Jump(256,"Fire.After")
+Goto Fire.After
+
+Fire.After:
+"####" B 1 A_GiveInventory("HalfRecovery_A")
+"####" C 0 A_REfire("Fire")
+"####" B 0 A_Jump(256,"Fire.End")
+Goto Fire.End
+
+
+
+
+
+}
+}
+
+actor ClearSmogMove1 : ClearSmogMove {Weapon.SlotNumber 1}
+actor ClearSmogMove2 : ClearSmogMove {Weapon.SlotNumber 2}
+actor ClearSmogMove3 : ClearSmogMove {Weapon.SlotNumber 3}
+actor ClearSmogMove4 : ClearSmogMove {Weapon.SlotNumber 4}
+
+actor ClearSmogMove5 : ClearSmogMove 
+{
+Weapon.SlotNumber 5
+States
+{
+Fire.End:
+TNT1 A 0
+TNT1 A 0 A_TakeInventory("ClearSmogMove5",9)
+TNT1 A 0 A_Jump(256,"Ready")
+Goto Ready
+}
+}
+
+//[+]========================================================================[+]
+//-----------------------------|Ammo & Inventory|------------------------------
+//[+]========================================================================[+]
+actor ClearSmogPP : Ammo {inventory.amount 1 inventory.Maxamount 20}
+
+Actor ClearSmogProtect : powerprotection
+{
+Powerup.duration 5
+Damagefactor "ClearSmog", 0
+}
+
+actor ClearSmogPower : PowerupGiver
+{
+inventory.amount 1
+inventory.maxamount 1
++INVENTORY.AUTOACTIVATE
+Powerup.Duration 35
+powerup.type "HazeFlag"
+}
+
+
+actor ClearSmogPurge : CustomInventory
+{ // - Removes net Positive effects on Enemies
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0
+TNT1 A 0 A_GiveInventory("ClearSmogPower",1)
+TNT1 A 0 ACS_NamedExecuteAlways("StatItemNuke",0,SB_GOOD)
+TNT1 A 0 A_GiveInventory("StatUpdator",1)
+stop
+
+Nope:
+TNT1 A 0
+stop
+}
+}
+
+//[+]========================================================================[+]
+//--------------------------------|Projectiles |--------------------------------
+//[+]========================================================================[+]
+actor ClearSmogShot : BasicProjectile
+{
+Speed 32
+Damage (0)
+DamageType "ClearSmog"
+obituary "$OB_CLEARSMOG"
+radius 12
+Reactiontime 35
+height 12
+scale 2.0
++RIPPER
++THRUGHOST
+
+RenderStyle "Translucent"
++FORCEXYBILLBOARD
+Alpha 0.7
+
+States
+{
+Spawn:
+TNT1 A 0 
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+MIST ABC 1 A_Spawnitemex("ClearSmogDamager",0,0,0,momx,momy,momz,0,SXF_TRANSFERTRANSLATION|SXF_ABSOLUTEMOMENTUM)
+Spawn2:
+TNT1 A 0 
+TNT1 A 0 A_Spawnitemex("ClearSmogTrail",0,0,0,momx,momy,momz,0,SXF_TRANSFERTRANSLATION|SXF_ABSOLUTEMOMENTUM)
+TNT1 A 0 A_Spawnitemex("ClearSmogDamager",0,0,0,momx,momy,momz,0,SXF_TRANSFERTRANSLATION|SXF_ABSOLUTEMOMENTUM)
+MIST C 1 
+TNT1 A 0 A_Countdown
+loop
+
+Death:
+FWVE W 0 A_SpawnItemEx("OilPitIgnite",0,0,8)
+TNT1 A 0 A_GiveInventory("ProjectileDCode",1)
+BSTG A 1 A_Spawnitemex("ClearSmogPuff",0,0,0,0,0,0,0,SXF_TRANSFERTRANSLATION)
+stop
+}
+}
+
+
+actor ClearSmogDamager
+{
+PROJECTILE
++RIPPER
+damagetype "ClearSmog"
+Obituary "$OB_ClearSmog"
+Radius 12
+Height 12
+scale 2.5
+damage (MBP_ClearSmog)
+speed 0
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 1
+Stop
+}
+}
+
+//[+]========================================================================[+]
+//--------------------------------|Special Actors|------------------------------
+//[+]========================================================================[+]
+actor ClearSmogPuff : BasicClientside
+{
+scale 3
+States
+{
+Spawn:
+TNT1 A 0
+MIST DEFG 2 A_Spawnitemex("ClearSmogParticle",0,0,0,random2(3),random2(3),random2(3),0,SXF_TRANSFERTRANSLATION)
+stop
+}
+}
+
+actor ClearSmogTrail : BasicClientside
+{
+scale 2.5
+Alpha 0.9
+Renderstyle "add"
+States
+{
+Spawn:
+CRBM A 0
+TNT1 A 0 A_Spawnitemex("ClearSmogParticle",random2(16),random2(16),random2(16),momx*0.5,momy*0.5,momz*0.5,0,SXF_TRANSFERTRANSLATION|SXF_ABSOLUTEMOMENTUM)
+TNT1 A 0 A_Spawnitemex("ClearSmogParticle",random2(16),random2(16),random2(16),momx*0.3,momy*0.3,momz*0.3,0,SXF_TRANSFERTRANSLATION|SXF_ABSOLUTEMOMENTUM)
+TNT1 A 0 A_Spawnitemex("RefreshFx1",random2(32),random2(32),random2(32),momx*0.3,momy*0.3,momz*0.3,0,SXF_TRANSFERTRANSLATION|SXF_ABSOLUTEMOMENTUM)
+stop
+}
+}
+
+actor ClearSmogParticle : MistCloud
+{
+scale 2.0
+RenderStyle "Translucent"
++FORCEXYBILLBOARD
+Alpha 0.7
+States
+{
+Spawn:
+TNT1 A 0 
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+TNT1 A 0 A_SetScale(frandom(0.5,2.0))
+MIST ABC 2 A_SetScale(Scalex+0.1)
+MIST CCCC 2 A_SetScale(Scalex+0.1)
+MIST DEF 2 A_Fadeout(0.2)
+stop
+}
+}
+
+actor ClearSmogSparkle : BasicGraphicEffect
+{
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+TNT1 A 2
+TMPK ABCD 3
+stop
+}
+}

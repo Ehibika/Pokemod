@@ -117,10 +117,31 @@ str SkinDEX [MAXDEX][2] = {
     /*|76|*/{"Pichu","Base"},
     /*|77|*/{"Pikachu","Pikachu"},  
     /*|78|*/{"Raichu","Raichu"},  
+    
     /*|79|*/{"Ferroseed","Base"},
     /*|80|*/{"Ferrothorn","Ferrothorn"},
+
     /*|81|*/{"Horsea","Base"},
     /*|82|*/{"Seadra","Seadra"},
     /*|83|*/{"Kingdra","Kingdra"},
+
+    /*|84|*/{"Cherubi","Base"},
+    /*|85|*/{"Cherrim_O","Cherrim_O"},
+    /*|86|*/{"Cherrim_S","Cherrim_S"},
+    
+    /*|87|*/{"Growlithe","Base"},
+    /*|88|*/{"Arcanine","Arcanine"},
+
+    /*|89|*/{"Deino","Base"},
+    /*|90|*/{"Zweilous","Zweilous"},
+    /*|91|*/{"Hydreigon","Hydreigon"},
+    
+    /*|92|*/{"Solosis","Base"},
+    /*|93|*/{"Duosion","Duosion"},
+    /*|94|*/{"Reuniclus","Reuniclus"},
+
+    /*|95|*/{"Happiny","Base"},
+    /*|96|*/{"Chansey","Chansey"},
+    /*|97|*/{"Blissey","Blissey"},
     //--[NewPokemon]--
     };

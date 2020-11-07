@@ -1087,15 +1087,15 @@ thing_damage2(TID,damage,"PoisonDamage");
 script "PKMN_RecoilDamager" (int PerVal)
 {
 
+Int VictimHP = GetActorProperty(0,APROP_SPAWNHEALTH);
 Int Damage;
 Damage = getLastHit(0);
 switch(Damage)
 	{
-		case -3: terminate; break;
+		case -3: Damage = VictimHP; break;
 		case -2: Delay(1); Restart; break;
-		case -1: terminate; break;
+		case -1: Damage = VictimHP; break;
 	}
-Int VictimHP = GetActorProperty(0,APROP_SPAWNHEALTH);
 
 //Delay(2);
 
@@ -1123,7 +1123,56 @@ int TargetTID = ACS_ExecuteWithResult(257,0);
 SetActorProperty(0,APROP_SPECIES,GetActorProperty(TargetTID,APROP_SPECIES));
 }
 
+function int TypeReaction (Int PainType, int TypeA, int TypeB)
+{
 
+Int PainVal;
+Int OutPut;
+	switch(PKMNTypeList2[TypeA][PainType])
+	{
+	Case T_NEU: break;
+	Case T_WEA: PainVal++; break;
+	Case T_RES: PainVal--; break;
+	Case T_IMU: PainVal = 0; break;
+	}
+
+	switch(PKMNTypeList2[TypeB][PainType])
+	{
+	Case T_NEU: break;
+	Case T_WEA: PainVal++; break;
+	Case T_RES: PainVal--; break;
+	Case T_IMU: PainVal = 0; break;
+	}
+
+	If(PainVal > 0){Return 2;}
+	If(PainVal == 0){Return 1;}
+	If(PainVal < 0){Return 0;}
+
+	Return 0;
+}
+
+script "PKMNACS_HitKnockback" (int force, int type, int disabled)
+{
+if(disabled == 0){GiveInventory("TempPitProtection",1);}
+int pusher = ACS_NamedExecuteWithResult("core_gettarget");
+
+if(type != -1)
+	{
+		int PlayerDEXNum = GetPokeValue(POKEDEXNUM);
+		int TypeA = StatDEX[PlayerDEXNum][7];
+		int TypeB = StatDEX[PlayerDEXNum][8];
+
+		switch(TypeReaction(type,TypeA,TypeB))
+			{
+				//case 2: force += force/2; break;
+				case 0: Terminate; break;
+			}
+	}
+
+
+int Vang = VectorAngle(GetActorX(0) - GetActorX(pusher), GetActorY(0) - GetActorY(pusher)) >> 8;
+ThrustThing(Vang, force, 1, 0);
+}
 
 script "PitchGrab" (Void)
 {

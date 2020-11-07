@@ -59,9 +59,9 @@ Pickup:
 TNT1 A 0 A_JumpIfInventory("isbot",1,"BotWep")
 
 TNT1 A 0 A_GiveInventory("LeafageMove1")
-TNT1 A 0 A_GiveInventory("LifeDewMove2")
+TNT1 A 0 A_GiveInventory("VineWhipMove2")
 TNT1 A 0 A_GiveInventory("PoisonPowderMove3")
-TNT1 A 0 A_GiveInventory("RefreshMove4")
+TNT1 A 0 A_GiveInventory("SynthesisMove4")
 stop
 
 BotWep:

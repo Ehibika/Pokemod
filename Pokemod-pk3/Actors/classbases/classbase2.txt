@@ -16,7 +16,7 @@ Goto NormalPain
 
 Pain.Thrash:
 "----" H 0 A_GiveInventory("ThrashProtect",1)
-"----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,10)
+"----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,10,Type_Normal)
 Goto NormalPain
 
 Pain.QuickAttack:
@@ -24,7 +24,7 @@ Pain.QuickAttack:
 "----" H 1
 "----" H 0 A_GiveToTarget("QuickAttackCollision",1)
 "----" H 0 A_PlaySoundEx("weapon/Rebound","SoundSlot5")
-"----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,10)
+"----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,10,Type_Normal)
 "----" H 0 ThrustThingZ(0,15,0,0)
 Goto NormalPain
 
@@ -33,7 +33,7 @@ Pain.DoubleEdge:
 "----" H 1
 "----" H 0 A_GiveToTarget("DoubleEdgeCollision",1)
 "----" H 0 A_PlaySoundEx("weapon/Rebound","SoundSlot5")
-"----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,40)
+"----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,40,Type_Normal)
 "----" H 0 ACS_NamedExecuteAlways("PKMN_RecoilDamager",0,30)
 "----" H 0 ThrustThingZ(0,15,0,0)
 Goto NormalPain
@@ -44,13 +44,13 @@ Pain.HeadButt:
 "----" H 1
 "----" H 0 A_GiveToTarget("HeadButtCollision",1)
 "----" H 0 A_PlaySoundEx("weapon/Rebound","SoundSlot5")
-"----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,35)
+"----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,35,Type_Normal)
 "----" H 0 ThrustThingZ(0,15,0,0)
 Goto NormalPain
 
 Pain.RapidSpin:
 "----" H 0 A_GiveInventory("RapidSpinProtect",1)
-"----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,15)
+"----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,15,Type_Normal)
 Goto NormalPain
 
 Pain.FalseSwipe:
@@ -80,7 +80,7 @@ Goto FightingPain
 
 Pain.VacuumWave:
 Pain.DoubleKick:
-"----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,6)
+"----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,6,Type_Fighting)
 Goto FightingPain
 
 Pain.Skyuppercut:
@@ -93,8 +93,7 @@ Pain.HiJumpKick:
 "----" H 1
 "----" H 0 A_GiveToTarget("HiJumpKickCollision",1)
 "----" H 0 A_PlaySoundEx("weapon/Rebound","SoundSlot5")
-"----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,50)
-"----" H 0 ACS_NamedExecuteAlways("PKMN_RecoilDamager",0,30)
+"----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,50,Type_Fighting)
 "----" H 0 ThrustThingZ(0,45,0,0)
 Goto FightingPain
 
@@ -103,14 +102,14 @@ Pain.Machpunch:
 "----" H 1
 "----" H 0 A_GiveToTarget("MachpunchCollision",1)
 "----" H 0 A_PlaySoundEx("weapon/Rebound","SoundSlot5")
-"----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,10)
+"----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,10,Type_Fighting)
 "----" H 0 ThrustThingZ(0,15,0,0)
 Goto FightingPain
 
 
 Pain.CloseCombat:
 "----" H 0 A_GiveInventory("CloseCombatProtect",1)
-"----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,10)
+"----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,10,Type_Fighting)
 Goto FightingPain
 
 Pain.DrainPunch:
@@ -136,7 +135,7 @@ Goto FlyingPain
 
 Pain.DrillPeck:
 "----" H 0 A_GiveInventory("DrillPeckProtect",1)
-"----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,40)
+"----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,40,Type_Flying)
 goto FlyingPain
 
 Pain.SkyDrop1:
@@ -151,7 +150,7 @@ Pain.BraveBird:
 "----" H 1
 "----" H 0 A_GiveToTarget("BraveBirdCollision",1)
 "----" H 0 A_PlaySoundEx("weapon/Rebound","SoundSlot5")
-"----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,40)
+"----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,40,Type_Flying)
 "----" H 0 ACS_NamedExecuteAlways("PKMN_RecoilDamager",0,30)
 "----" H 0 ThrustThingZ(0,15,0,0)
 Goto FlyingPain
@@ -161,7 +160,7 @@ Pain.Acrobatics:
 "----" H 1
 "----" H 0 A_GiveToTarget("AcrobaticsCollision",1)
 "----" H 0 A_PlaySoundEx("Misc/CeilingBonk","SoundSlot5")
-"----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,40)
+"----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,40,Type_Flying)
 "----" H 0 ThrustThingZ(0,15,0,0)
 goto FlyingPain
 //#endregion
@@ -172,6 +171,11 @@ Pain.Venoshock:
 "----" H 0 
 Goto PoisonPain
 
+Pain.ClearSmog:
+"----" H 0 A_GiveInventory("ClearSmogProtect")
+"----" H 0 A_GiveInventory("ClearSmogPurge")
+"----" H 0 
+Goto PoisonPain
 
 Pain.Sludge:
 Pain.SludgeBomb:
@@ -193,6 +197,11 @@ pain.Earthquake:
 "----" H 0 A_jumpifinventory("EarthQuakeProtect",1,2)
 "----" H 0 A_GiveInventory("EarthQuakeProtect",1)
 "----" H 0 
+Goto GroundPain
+
+Pain.MudShot:
+"----" H 0 
+"----" H 0 A_GiveInventory("MudShotNerfInitiate",1)
 Goto GroundPain
 
 pain.Mudslap:
@@ -221,8 +230,8 @@ Goto RockPain
 
 Pain.Rollout:
 "----" H 0 A_GiveInventory("RolloutProtect")
-"----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,15)
-"----" H 0 ThrustThingZ(0,15,0,0)
+"----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,40,Type_Rock)
+"----" H 0 ThrustThingZ(0,25,0,0)
 Goto RockPain
 
 Pain.RockSlide:
@@ -286,8 +295,8 @@ Goto SteelPain
 
 Pain.GyroBall:
 "----" H 0 A_GiveInventory("GyroBallProtect")
-"----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,15)
-"----" H 0 ThrustThingZ(0,15,0,0)
+"----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,40,Type_Steel)
+"----" H 0 ThrustThingZ(0,25,0,0)
 Goto SteelPain
 
 //#endregion
@@ -300,7 +309,7 @@ Pain.Fire:
 Goto FirePain
 
 Pain.Firepunch:
-"----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,15)
+"----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,15,Type_Fire)
 "----" H 0 A_GiveInventory("FirePunchProtect")
 "----" H 0 A_GiveInventory("FirePunchBurnProc")
 Goto FirePain
@@ -321,7 +330,7 @@ Pain.LavaPlume:
 Goto FirePain
 
 Pain.BlazeKick:
-"----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,6)
+"----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,6,Type_Fire)
 "----" H 0 A_GiveInventory("FirePunchBurnProc")
 "----" H 0 
 Goto FirePain
@@ -333,6 +342,7 @@ Goto FirePain
 
 Pain.HeatWave:
 "----" H 0 A_Giveinventory("HeatWaveProtect")
+"----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,25,Type_Fire)
 "----" H 0 A_GiveInventory("FirePunchBurnProc")
 "----" H 0 
 Goto FirePain
@@ -347,7 +357,7 @@ pain.FlameThrower:
 Goto FirePain
 
 pain.FireFang:
-"----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,6)
+"----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,6,Type_Fire)
 //"----" H 0 A_jumpifinventory("BurnMark",1,2)
 //"----" H 0 A_SpawnItemEX("BurnWatcher",1)
 //"----" H 0 A_Giveinventory("BurnMark")
@@ -361,14 +371,15 @@ Pain.FlareBlitz:
 "----" H 1
 "----" H 0 A_GiveToTarget("FlareBlitzCollision",1)
 "----" H 0 A_PlaySoundEx("weapon/Rebound","SoundSlot5")
-"----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,40)
+"----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,40,Type_Fire)
+"----" H 0 ACS_NamedExecuteAlways("PKMN_RecoilDamager",0,30)
 "----" H 0 ThrustThingZ(0,15,0,0)
 Goto FirePain
 
 Pain.FlameWheel:
 "----" H 0 A_GiveInventory("FlameWheelProtect")
-"----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,30)
-"----" H 0 ThrustThingZ(0,15,0,0)
+"----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,30,Type_Fire)
+"----" H 0 ThrustThingZ(0,25,0,0)
 Goto FirePain
 
 Pain.Overheat:
@@ -394,7 +405,6 @@ Goto FirePain
 Pain.WaterGun:
 Pain.WaterPulse:
 Pain.AquaTail:
-Pain.BubbleBeam:
 Pain.Whirlpool:
 //--[Move|Water]--
 "----" H 0
@@ -402,6 +412,10 @@ Goto WaterPain
 
 Pain.BubbleBeam:
 "----" H 0 A_GiveInventory("BubbleBeamProtect",1)
+Goto WaterPain
+
+Pain.Bubble:
+"----" H 0 A_GiveInventory("BubbleProtect",1)
 Goto WaterPain
 
 Pain.Surf:
@@ -420,9 +434,7 @@ Goto WaterPain
 Pain.HydroPump:
 "----" H 0
 "----" H 0 A_GiveInventory("HydroPumpProtect",1)
-"----" H 0 A_JumpIfInventory("WaterResistance",1,3)
-"----" H 0 A_JumpIfInventory("Water2XResistance",1,2)
-"----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,5)
+"----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,5,Type_Water)
 "----" H 0
 Goto WaterPain
 
@@ -430,9 +442,7 @@ Pain.AquaTail:
 "----" H 0
 "----" H 0 A_GiveInventory("AquaTailProtect",1)
 "----" H 0 A_SpawnItemEX("AquaTailImpactPuff")
-"----" H 0 A_JumpIfInventory("WaterResistance",1,3)
-"----" H 0 A_JumpIfInventory("Water2XResistance",1,2)
-"----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,25)
+"----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,25,Type_Water)
 "----" H 0
 Goto WaterPain
 
@@ -441,29 +451,25 @@ Pain.AquaJet:
 "----" H 1
 "----" H 0 A_GiveToTarget("AquaJetCollision",1)
 "----" H 0 A_PlaySoundEx("weapon/Rebound","SoundSlot5")
-"----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,10)
+"----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,10,Type_Water)
 "----" H 0 ThrustThingZ(0,15,0,0)
 Goto WaterPain
 
 Pain.Waterfall:
 "----" H 0 A_GiveInventory("WaterfallProtect",1)
 "----" H 0 ThrustThingZ(0,35,0,0)
-"----" H 0 A_JumpIfInventory("WaterResistance",1,3)
-"----" H 0 A_JumpIfInventory("Water2XResistance",1,2)
-"----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,15)
+"----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,15,Type_Water)
 "----" H 0
 Goto WaterPain
 
 Pain.Liquidation:
 "----" H 0 A_GiveInventory("LiquidationNerfInitiate",1)
-"----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,15)
+"----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,15,Type_Water)
 Goto WaterPain
 
 Pain.MuddyWater:
 "----" H 0 A_GiveInventory("MuddyWaterNerfInitiate",1)
-"----" H 0 A_JumpIfInventory("WaterResistance",1,3)
-"----" H 0 A_JumpIfInventory("Water2XResistance",1,2)
-"----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,8)
+"----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,8,Type_Water)
 "----" H 0
 Goto WaterPain
 
@@ -516,11 +522,11 @@ Pain.LeafBlade2:
 Goto GrassPain
 
 Pain.VineWhip:
-"----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,5)
+"----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,5,Type_Grass)
 Goto GrassPain
 
 Pain.WoodHammer:
-"----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,40)
+"----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,40,Type_Grass)
 "----" H 0 ACS_NamedExecuteAlways("PKMN_RecoilDamager",0,30)
 "----" H 0 ThrustThingZ(0,15,0,0)
 Goto GrassPain
@@ -542,12 +548,12 @@ Pain.Spark:
 "----" H 1
 "----" H 0 A_GiveToTarget("SparkCollision",1)
 "----" H 0 A_PlaySoundEx("weapon/Rebound","SoundSlot5")
-"----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,40)
+"----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,40,Type_Electric)
 "----" H 0 ThrustThingZ(0,15,0,0)
 Goto ElectricPain
 
 Pain.ThunderPunch:
-"----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,15)
+"----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,15,Type_Electric)
 "----" H 0 A_GiveInventory("ThunderPunchProtect")
 "----" H 0 A_GiveInventory("ThunderPunchParaProc")
 Goto ElectricPain
@@ -601,7 +607,7 @@ Pain.ZenHeadButt:
 "----" H 1
 "----" H 0 A_GiveToTarget("ZenHeadButtCollision",1)
 "----" H 0 A_PlaySoundEx("weapon/Rebound","SoundSlot5")
-"----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,40)
+"----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,40,Type_Psychic)
 "----" H 0 ThrustThingZ(0,15,0,0)
 Goto PsychicPain
 
@@ -622,7 +628,7 @@ Goto PsychicPain
     Goto IcePain
 
     Pain.IcePunch:
-    "----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,15)
+    "----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,15,Type_Ice)
     "----" H 0 A_GiveInventory("IcePunchProtect",1)
     "----" H 0 A_GiveInventory("FreezeStatusProc",1)
     "----" H 0 A_GiveInventory("IcePunchFreezeRate",1)
@@ -642,6 +648,7 @@ Goto PsychicPain
     "----" H 0
     "----" H 0 A_GiveInventory("IcyWindProtect",1)
     "----" H 0 A_GiveInventory("IcyWindNerfInitiate",1)
+    "----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,25,Type_Ice)
     Goto IcePain
 
 
@@ -700,7 +707,7 @@ Pain.DragonRush:
 "----" H 1
 "----" H 0 A_GiveToTarget("DragonRushCollision",1)
 "----" H 0 A_PlaySoundEx("weapon/Rebound","SoundSlot5")
-"----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,60)
+"----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,60,Type_Dragon)
 "----" H 0 ThrustThingZ(0,15,0,0)
 Goto DragonPain
 
@@ -741,8 +748,8 @@ Goto DragonPain
 
     Pain.Crunch:
     Pain.Bite:
-    "----" H 0 A_Jump(230,2)
-    "----" H 0 A_GiveInventory("CringeStatusProc")
+    "----" H 0 //A_Jump(230,2)
+    "----" H 0 //A_GiveInventory("CringeStatusProc")
     "----" H 0 
     Goto DarkPain
 //#endregion
@@ -811,7 +818,7 @@ Goto PainNormal
     "----" A 0 ACS_NamedExecuteAlways("PKMN_PainSound",0,Type_Normal) 
     "----" H 0 A_GiveToTarget("QuickAttackCollision",1)
     "----" H 0 A_PlaySoundEx("weapon/Rebound","SoundSlot5")
-    "----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,35)
+    "----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,35,Type_Normal)
     "----" H 0 ThrustThingZ(0,35,0,0)
     "----" H 5
     Goto Death
@@ -821,7 +828,7 @@ Goto PainNormal
     "----" A 0 ACS_NamedExecuteAlways("PKMN_PainSound",0,Type_Normal) 
     "----" H 0 A_GiveToTarget("DoubleEdgeCollision",1)
     "----" H 0 A_PlaySoundEx("weapon/Rebound","SoundSlot5")
-    "----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,50)
+    "----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,50,Type_Normal)
     "----" H 0 ACS_NamedExecuteAlways("PKMN_RecoilDamager",0,30)
     "----" H 0 ThrustThingZ(0,35,0,0)
     "----" H 5
@@ -831,7 +838,7 @@ Goto PainNormal
     "----" A 0 ACS_NamedExecuteAlways("PKMN_PainSound",0,Type_Normal) 
     "----" H 0 A_GiveToTarget("HeadButtCollision",1)
     "----" H 0 A_PlaySoundEx("weapon/Rebound","SoundSlot5")
-    "----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,50)
+    "----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,50,Type_Normal)
     "----" H 0 ThrustThingZ(0,35,0,0)
     "----" H 5
     Goto Death
@@ -847,7 +854,7 @@ Goto FightingDeath
 Death.VacuumWave:
 Death.DoubleKick:
 Death.CloseCombat:
-"----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,6)
+"----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,6,Type_Fighting)
 Goto FightingDeath
 
 Death.Skyuppercut:
@@ -864,8 +871,7 @@ Death.HiJumpKick:
 "----" A 0 ACS_NamedExecuteAlways("PKMN_PainSound",0,Type_Fighting) 
 "----" H 0 A_GiveToTarget("HiJumpKickCollision",1)
 "----" H 0 A_PlaySoundEx("weapon/Rebound","SoundSlot5")
-"----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,50)
-"----" H 0 ACS_NamedExecuteAlways("PKMN_RecoilDamager",0,30)
+"----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,50,Type_Fighting)
 "----" H 0 ThrustThingZ(0,45,0,0)
 "----" H 0 A_SpawnitemEX("BodyBumper",0,0,0,Velx,vely,velz,0,SXF_ABSOLUTEVELOCITY)// Hijumpkick
 "----" HHHHHHHHHH 1 A_JumpIfInventory("BodyBumpCheck",1, "Death")
@@ -875,7 +881,7 @@ Death.Machpunch:
 "----" A 0 ACS_NamedExecuteAlways("PKMN_PainSound",0,Type_Fighting) 
 "----" H 0 A_GiveToTarget("MachpunchCollision",1)
 "----" H 0 A_PlaySoundEx("weapon/Rebound","SoundSlot5")
-"----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,35)
+"----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,35,Type_Fighting)
 "----" H 0 ThrustThingZ(0,35,0,0)
 "----" H 5
 Goto Death
@@ -902,7 +908,7 @@ Death.Acrobatics:
 "----" A 0 ACS_NamedExecuteAlways("PKMN_PainSound",0,Type_Flying)
 "----" H 0 A_GiveToTarget("AcrobaticsCollision",1)
 "----" H 0 A_PlaySoundEx("Misc/CeilingBonk","SoundSlot5")
-"----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,40)
+"----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,40,Type_Flying)
 "----" H 0 ThrustThingZ(0,15,0,0)
 Goto Death
 
@@ -917,7 +923,7 @@ Death.BraveBird:
 "----" A 0 ACS_NamedExecuteAlways("PKMN_PainSound",0,Type_Flying) 
 "----" H 0 A_GiveToTarget("BraveBirdCollision",1)
 "----" H 0 A_PlaySoundEx("weapon/Rebound","SoundSlot5")
-"----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,50)
+"----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,50,Type_Flying)
 "----" H 0 ACS_NamedExecuteAlways("PKMN_RecoilDamager",0,30)
 "----" H 0 ThrustThingZ(0,35,0,0)
 "----" H 5
@@ -929,6 +935,7 @@ Goto Death
 Death.Venoshock:
 Death.Sludge:
 Death.SludgeBomb:
+Death.ClearSmog:
 //--[Move|Poison]--
 "----" H 0 
 Goto PoisonDeath
@@ -939,6 +946,7 @@ Goto PoisonDeath
 Death.Mudslap:
 Death.MudBomb:
 Death.Earthquake:
+Death.MudShot:
 //--[Move|Ground]--
 "----" H 0 
 Goto GroundDeath
@@ -956,8 +964,8 @@ Death.RockBlast:
 Goto RockDeath
 
 Death.Rollout:
-"----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,15)
-"----" H 0 ThrustThingZ(0,15,0,0)
+"----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,45,Type_Rock)
+"----" H 0 ThrustThingZ(0,25,0,0)
 Goto RockDeath
 
 //#endregion
@@ -993,8 +1001,8 @@ Death.FlashCannon:
 Goto SteelDeath
 
 Death.GyroBall:
-"----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,15)
-"----" H 0 ThrustThingZ(0,15,0,0)
+"----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,45,Type_Steel)
+"----" H 0 ThrustThingZ(0,25,0,0)
 Goto SteelDeath
 
 //#endregion
@@ -1021,7 +1029,7 @@ Death.Firepunch:
     "----" A 0 ACS_NamedExecuteAlways("PKMN_PainSound",0,Type_Fire) 
     "----" H 0 A_GiveToTarget("FlareBlitzCollision",1)
     "----" H 0 A_PlaySoundEx("weapon/Rebound","SoundSlot5")
-    "----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,50)
+    "----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,50,Type_Fire)
     "----" H 0 ACS_NamedExecuteAlways("PKMN_RecoilDamager",0,30)
     "----" H 0 ThrustThingZ(0,35,0,0)
     "----" H 5
@@ -1029,7 +1037,7 @@ Death.Firepunch:
 
     Death.FlameWheel:
     "----" H 0 A_GiveInventory("FlameWheelProtect")
-    "----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,30)
+    "----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,30,Type_Fire)
     "----" H 0 ThrustThingZ(0,15,0,0)
     Goto FireDeath
 
@@ -1044,6 +1052,7 @@ Death.Firepunch:
     Death.AquaTail:
     Death.HydroPump:
     Death.BubbleBeam:
+    Death.Bubble:
     Death.Brine:
     Death.Surf:
     Death.Liquidation:
@@ -1058,10 +1067,10 @@ Death.Firepunch:
     Goto WaterDeath
 
     Death.AquaJet:
-    "----" A 0 ACS_NamedExecuteAlways("PKMN_PainSound",0,Type_Normal) 
+    "----" A 0 ACS_NamedExecuteAlways("PKMN_PainSound",0,Type_Water) 
     "----" H 0 A_GiveToTarget("AquaJetCollision",1)
     "----" H 0 A_PlaySoundEx("weapon/Rebound","SoundSlot5")
-    "----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,35)
+    "----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,35,Type_Water)
     "----" H 0 ThrustThingZ(0,35,0,0)
     "----" H 5
     Goto Death
@@ -1100,7 +1109,7 @@ Death.Firepunch:
     Goto GrassDeath
 
     Death.WoodHammer:
-    "----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,40)
+    "----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,40,Type_Grass)
     "----" H 0 ACS_NamedExecuteAlways("PKMN_RecoilDamager",0,30)
     "----" H 0 ThrustThingZ(0,15,0,0)
     Goto GrassDeath
@@ -1134,7 +1143,7 @@ Death.Spark:
 "----" A 0 ACS_NamedExecuteAlways("PKMN_PainSound",0,Type_Electric) 
 "----" H 0 A_GiveToTarget("SparkCollision",1)
 "----" H 0 A_PlaySoundEx("weapon/Rebound","SoundSlot5")
-"----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,50)
+"----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,50,Type_Electric)
 "----" H 0 ThrustThingZ(0,35,0,0)
 "----" H 5
 Goto Death
@@ -1157,7 +1166,7 @@ Death.ZenHeadButt:
 "----" A 0 ACS_NamedExecuteAlways("PKMN_PainSound",0,Type_Psychic) 
 "----" H 0 A_GiveToTarget("ZenHeadButtCollision",1)
 "----" H 0 A_PlaySoundEx("weapon/Rebound","SoundSlot5")
-"----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,50)
+"----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,50,Type_Psychic)
 "----" H 0 ThrustThingZ(0,35,0,0)
 "----" H 5
 Goto Death
@@ -1200,7 +1209,7 @@ Goto PsychicDeath
     "----" A 0 ACS_NamedExecuteAlways("PKMN_PainSound",0,Type_Dragon) 
     "----" H 0 A_GiveToTarget("DragonRushCollision",1)
     "----" H 0 A_PlaySoundEx("weapon/Rebound","SoundSlot5")
-    "----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,50)
+    "----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,50,Type_Dragon)
     "----" H 0 ThrustThingZ(0,35,0,0)
     "----" H 5
     Goto Death

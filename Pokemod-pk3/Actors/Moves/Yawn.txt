@@ -127,6 +127,7 @@ Spawn:
 TNT1 A 0
 stop
 Pickup:
+TNT1 A 0 A_Jumpif(CallACS("CheckStatusGuard",0,STATUS_MAJOR),"Nope") //Blocked by protect|Detect|Substitute|Safeguard
 TNT1 A 0 A_Jumpifinventory("CringeGuard",1,"Nope")
 TNT1 A 0 A_Jumpifinventory("STF_Yawn",1,"Sustain")
 TNT1 A 0 A_GiveInventory("STF_Yawn",1)
@@ -347,11 +348,12 @@ TNT1 A 0
 TNT1 A 0 A_SetUserVar("user_NapTime",user_NapTime+5)
 TNT1 A 4 A_GiveToTarget("SpdDownFXSpawn")
 TNT1 A 0 A_GiveToTarget("YawnTagPickup")
-TNT1 A 0 A_JumpIfInTargetInventory("SleepMark",1,"Death")
-TNT1 A 0 A_JumpIfInTargetInventory("PoisonMark",1,"Death")
-TNT1 A 0 A_JumpIfInTargetInventory("ParalysisMark",1,"Death")
-TNT1 A 0 A_JumpIfInTargetInventory("CringeMark",1,"Death")
-TNT1 A 0 A_JumpIfInTargetInventory("FatigueMark",1,"Death")
+TNT1 A 0 A_Jumpif(CallACS("CheckStatusGuard",AAPTR_TARGET,STATUS_MAJOR|STATUS_MINOR),"Death") //Blocked by protect|Detect|Substitute|Safeguard
+TNT1 A 0 A_Jumpif(CallACS("YawnBreakCheck",AAPTR_TARGET),"Death") //Blocked by protect|Detect|Substitute|Safeguard
+TNT1 A 1 A_JumpIfInTargetInventory("CureAll",1,"Death")
+TNT1 A 1 A_JumpIfInTargetInventory("STF_Yawn",1,"Spawn")
+
+
 TNT1 A 0 A_JumpIf(user_NapTime >= 175,"NapTime")
 Goto Check1
 
@@ -365,6 +367,7 @@ TNT1 A 0 A_GiveToTarget("SleepStatusProc")
 Goto Death
 
 Death:
+TNT1 A 0 A_TakeFromTarget("STF_Yawn",999)
 TNT1 A 1 A_GiveToTarget("StatUpdator")
 TNT1 A 0 
 stop

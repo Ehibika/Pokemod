@@ -108,8 +108,8 @@ actor HeadbuttBumper : BasicProjectile
 {
 Speed 32 //Same as HDBT_Thrust
 Damage (0)
-radius 6
-height 6
+radius 12
+height 12
 DamageType "Headbutt"
 Obituary "$OB_HEADBUTT"
 scale 1.5
@@ -120,38 +120,21 @@ Spawn:
 TNT1 A 0 
 TNT1 A 0 A_JumpIfInTargetInventory("DashBreaker",1,"Terminate")
 TNT1 A 1
-TNT1 A 1 A_SpawnItemEX("HeadButtDamager",0,0,0,Momx,Momy,MomZ,0,SXF_ABSOLUTEMOMENTUM)
+TNT1 A 1 A_Explode(MBP_HeadButt,32,0,0,32)
 stop
 Death:
+TNT1 A 0 A_Explode(MBP_HeadButt,32,0,0,32)
 TNT1 A 0 A_GiveInventory("ProjectileDCode",1)
 TNT1 A 1 A_GiveToTarget("HeadbuttCollision",1)
 TNT1 A 0 A_SpawnItemEx("BasicMeleeFX", 0, 0, 0, 0, 0, 0, 0,1)
 Crash:
+TNT1 A 1 A_Explode(MBP_HeadButt,32,0,0,32)
 Terminate:
 TNT1 A 1
 stop
 }
 }
 
-actor HeadButtDamager : BasicFastProjectile
-{
-Speed 0
-Damage (MBP_HeadButt)
-radius 20
-height 20
-DamageType "HeadButt"
-Obituary "$OB_HEADBUTT"
-scale 1.5
-+RIPPER
-+SERVERSIDEONLY
-States
-{
-Spawn:
-TNT1 A 0 
-TNT1 AA 1 
-stop
-}
-}
 //[+]========================================================================[+]
 //--------------------------------|Special Actors|------------------------------
 //[+]========================================================================[+]

@@ -98,7 +98,7 @@ SetResultValue(output);
 
 function int getLastHit(int TID)
 {
-if(!((ClassifyActor(0) & ACTOR_ALIVE))){Return -3;} //Actor died, terminate script function
+if(!((ClassifyActor(TID) & ACTOR_ALIVE))){Return -3;} //Actor died, terminate script function
 if(GetUserVariable(TID,"user_HitFrame") == 0){Return -2;} //not on HitFrame
 if(GetUserVariable(TID,"user_HitMemory") == 0){Return -1;} //no Hitmemory data
 Return GetUserVariable(TID,"user_HitMemory");

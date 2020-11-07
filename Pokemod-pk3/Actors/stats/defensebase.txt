@@ -17,7 +17,7 @@ damagefactor "SuperAdaptor", 1.0
 damagefactor "TrebleBoost", 1.0
 
 damagefactor "PoisonDamage", 1.0
-//damagefactor "RecoilDamage", 1.0
+damagefactor "RecoilDamage", 1.0
 
 damagefactor "LeechSeed", 1.0
 damagefactor "PoisonPowder", 1.0
@@ -131,6 +131,8 @@ damagefactor "DreamEater", 1.0
 damagefactor "Thunderbolt", 1.0
 damagefactor "Thunder", 1.0
 damagefactor "Shockwave", 1.0
+damagefactor "MudShot", 1.0
+damagefactor "ClearSmog", 1.0
 //--[NewSpecialMove]--
 }
 

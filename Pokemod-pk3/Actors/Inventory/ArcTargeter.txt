@@ -9,6 +9,7 @@
 		Species "Player"
 		-NOGRAVITY
 		+THRUSPECIES
+		+THRUGHOST
 		-ACTIVATEIMPACT
 		-ACTIVATEPCROSS
 		Gravity 1.5

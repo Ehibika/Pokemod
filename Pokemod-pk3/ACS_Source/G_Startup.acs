@@ -392,6 +392,7 @@ if(MenuSpawn == 0)
 
 }
 
+if(PlayerIsBot(PlayerNumber())) {output = 0;}
 SetResultValue(output);
 }
 

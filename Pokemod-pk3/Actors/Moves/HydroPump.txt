@@ -176,7 +176,7 @@ actor HydroPumpDamager : BasicFastProjectile
     +SKYEXPLODE
     +EXPLODEONWATER
     RenderStyle None
-    Damage (MBP_HydroPump)
+    Damage (MBP_HydroPump/4) // hits 4 times per second
     Radius 10
     Height 10
     speed 750 //15 * HydroPumpRange(50)

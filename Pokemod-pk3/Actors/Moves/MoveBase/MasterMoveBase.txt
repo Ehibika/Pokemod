@@ -29,10 +29,18 @@ Spawn:
 WEAP X 1
 stop
 Ready:
+TNT1 A 0 A_JumpifInventory("PlayerPropertyFrozen",1,"NotReady")
+
 TNT1 A 0 A_JumpifInventory("SleepMark",1,"SleepReady")
 TNT1 A 0 A_JumpifInventory("FreezeMark",1,"FreezeReady")
 TNT1 A 1 A_WeaponReady(WRF_ALLOWRELOAD|WRF_NOSECONDARY)
 TNT1 A 0 A_Jumpif(CallACS("PKMNACS_ButtonCheck",BT_ALTATTACK) == 1,"Altfire")
+Goto Ready
+
+NotReady: //for the training room
+TNT1 A 1
+TNT1 A 0 A_JumpifInventory("PlayerPropertyFrozen",1,"NotReady")
+TNT1 A 17
 Goto Ready
 
 FreezeReady:

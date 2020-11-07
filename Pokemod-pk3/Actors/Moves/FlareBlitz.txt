@@ -88,6 +88,7 @@ actor FlareBlitzPP : Ammo {inventory.amount 1 inventory.Maxamount 10}
 actor FlareBlitzWarmupTimer : Powerup {inventory.amount 1 powerup.duration 10 }
 actor FlareBlitzTimer : Powerup {inventory.amount 1 powerup.duration 35 }
 
+
 Actor FlareBlitzDelay : powerprotection
 {
 Powerup.duration 5
@@ -118,10 +119,12 @@ TNT1 A 1 A_Explode(MBP_FlareBlitz,80,0,0,80)
 FWVE W 0 A_SpawnItemEx("OilPitIgnite",0,0,8)
 stop
 Death:
-TNT1 A 0 A_GiveInventory("ProjectileDCode",1)
-TNT1 A 1 A_GiveToTarget("FlareBlitzCollision2",1)
+TNT1 A 0 A_Explode(MBP_FlareBlitz,80,0,0,80)
+TNT1 A 1 A_GiveInventory("ProjectileDCode",1)
+TNT1 A 0 A_GiveToTarget("FlareBlitzCollision2",1)
 TNT1 A 0 A_SpawnItemEx("BasicMeleeFX", 0, 0, 0, 0, 0, 0, 0,1)
 Crash:
+TNT1 A 0 A_Explode(MBP_FlareBlitz,80,0,0,80)
 Terminate:
 TNT1 A 1
 stop
@@ -185,10 +188,10 @@ actor FlareBlitzCollision2 : CustomInventory
 states
 {
 Pickup:
+TNT1 A 0 A_JumpIfInventory("DashBreaker",1,"Nope")
 TNT1 A 0 A_PlaySoundEx("weapon/Rebound","SoundSlot5")
 TNT1 A 0 ACS_NamedExecuteAlways("PKMN_CollisionDamager",0,MBP_FlareBlitz)
 //TNT1 A 0 DamageThing(MBP_FlareBlitz*(CallACS("StatValueRamp",STAT_PATK,1,400)*0.01))
-TNT1 A 0 A_JumpIfInventory("DashBreaker",1,"Nope")
 TNT1 A 1 A_GiveInventory("DashBreaker",1)
 TNT1 A 0 A_Stop
 stop

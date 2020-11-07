@@ -95,7 +95,7 @@ stop
 }
 }
 
-actor Thunder_Recovery_D : FullRecovery_D{Powerup.Duration 87}
+actor Thunder_Recovery_D : FullRecovery_D{Powerup.Duration 52} //87
 
 actor Thunder_SweetSpot : Powerup {inventory.amount 1 powerup.duration 17}
 
@@ -201,6 +201,7 @@ actor ThunderHitbox : LightningBolt
 ReactionTime 1
 DamageType "Thunder"
 obituary "$OB_Thunder"
++OLDRADIUSDMG
 YScale 4.0
 XScale 8.0
 states

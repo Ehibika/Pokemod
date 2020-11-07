@@ -324,6 +324,7 @@ damagefactor "ToxicSpikes", 1.0 //Static
 damagefactor "Sludge", 1.3 //W
 damagefactor "SludgeBomb", 1.3 //W
 damagefactor "Venoshock", 1.3 //W
+damagefactor "ClearSmog", 1.3 //W
 //--[Move|Poison]--
 }
 
@@ -336,6 +337,7 @@ damagefactor "ToxicSpikes", 1.0 //Static
 damagefactor "Sludge", 1.6 //2W
 damagefactor "SludgeBomb", 1.6 //2W
 damagefactor "Venoshock", 1.6 //2W
+damagefactor "ClearSmog", 1.6 //2W
 //--[Move|Poison]--
 }
 
@@ -348,6 +350,7 @@ damagefactor "ToxicSpikes", 1.0 //Static
 damagefactor "Sludge", 0.7 //R
 damagefactor "SludgeBomb", 0.7 //R
 damagefactor "Venoshock", 0.7 //R
+damagefactor "ClearSmog", 0.7 //R
 //--[Move|Poison]--
 }
 
@@ -361,6 +364,7 @@ damagefactor "ToxicSpikes", 1.0 //Static
 damagefactor "Sludge", 0.4 //2R
 damagefactor "SludgeBomb", 0.4 //2R
 damagefactor "Venoshock", 0.4 //2R
+damagefactor "ClearSmog", 0.4 //2R
 //--[Move|Poison]--
 }
 
@@ -373,6 +377,7 @@ damagefactor "ToxicSpikes", 0.0 //I
 damagefactor "Sludge", 0.0 //I
 damagefactor "SludgeBomb", 0.0 //I
 damagefactor "Venoshock", 0.0 //I
+damagefactor "ClearSmog", 0.0 //I
 //--[Move|Poison]--
 }
 
@@ -381,6 +386,7 @@ actor PoisonSTAB : STABBase
 damagefactor "Sludge", 1.15 //S
 damagefactor "SludgeBomb", 1.15 //S
 damagefactor "Venoshock", 1.15 //S
+damagefactor "ClearSmog", 1.15 //S
 //--[Move|Poison]--
 }
 
@@ -393,6 +399,7 @@ actor GroundWeakness : TypeBase
     damagefactor "Mudslap", 1.3 //W
     damagefactor "MudBomb", 1.3 //W
     damagefactor "Spikes", 1.3 //W
+damagefactor "MudShot", 1.3 //W
 //--[Move|Ground]--
 }
 
@@ -402,6 +409,7 @@ actor Ground2xWeakness : TypeBase
     damagefactor "Mudslap", 1.6 //2W
     damagefactor "MudBomb", 1.6 //2W
     damagefactor "Spikes", 1.6 //2W
+damagefactor "MudShot", 1.6 //2W
 //--[Move|Ground]--
 }
 
@@ -411,6 +419,7 @@ actor GroundResistance : TypeBase
     damagefactor "Mudslap", 0.7 //R
     damagefactor "MudBomb", 0.7 //R
     damagefactor "Spikes", 0.7 //R
+damagefactor "MudShot", 0.7 //R
 //--[Move|Ground]--
 }
 
@@ -420,6 +429,7 @@ actor Ground2xResistance : TypeBase
     damagefactor "Mudslap", 0.4 //2R
     damagefactor "MudBomb", 0.4 //2R
     damagefactor "Spikes", 0.4 //2R
+damagefactor "MudShot", 0.4 //2R
 //--[Move|Ground]--
 }
 
@@ -429,6 +439,7 @@ actor GroundImmunity : TypeBase
     damagefactor "Mudslap", 0.0 //I
     damagefactor "MudBomb", 0.0 //I
     damagefactor "Spikes", 0.0 //I
+damagefactor "MudShot", 0.0 //I
 //--[Move|Ground]--
 }
 
@@ -437,6 +448,7 @@ actor GroundSTAB : STABBase
     damagefactor "Earthquake", 1.15 //S
     damagefactor "Mudslap", 1.15 //S
     damagefactor "MudBomb", 1.15 //S
+damagefactor "MudShot", 1.15 //S
 //--[Move|Ground]--
 }
 //[+]========================================================================[+]

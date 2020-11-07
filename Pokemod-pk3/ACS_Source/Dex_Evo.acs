@@ -131,5 +131,24 @@ Int EvoDEX [MAXDEX][6] = {
     /*|81|*/{ 1,      MIDSTAGE,             SEADRA,  NULLEVO,     NULLEVO,30 },
     /*|82|*/{ 1,      FINALSTAGE,             KINGDRA,  NULLEVO,     NULLEVO,30 },
     /*|83|*/{ 0,      0,             NULLEVO,  NULLEVO,     NULLEVO,30 },
+    
+    /*|84|*/{ 2,      FINALSTAGE2,             CHERRIM_O,  CHERRIM_S,     NULLEVO,31 },
+    /*|85|*/{ 0,      0,             NULLEVO,  NULLEVO,     NULLEVO,31 },
+    /*|86|*/{ 0,      0,             NULLEVO,  NULLEVO,     NULLEVO,31 },
+    
+    /*|87|*/{ 1,      FINALSTAGE2,             ARCANINE,  NULLEVO,     NULLEVO,32 },
+    /*|88|*/{ 0,      0,             NULLEVO,  NULLEVO,     NULLEVO,32 },
+    
+    /*|89|*/{ 1,      MIDSTAGE,             ZWEILOUS,  NULLEVO,     NULLEVO,33 },
+    /*|90|*/{ 1,      FINALSTAGE,             HYDREIGON,  NULLEVO,     NULLEVO,33 },
+    /*|91|*/{ 0,      0,             NULLEVO,  NULLEVO,     NULLEVO,33 },
+    
+    /*|92|*/{ 1,      MIDSTAGE,             DUOSION,  NULLEVO,     NULLEVO,34 },
+    /*|93|*/{ 1,      FINALSTAGE,             REUNICLUS,  NULLEVO,     NULLEVO,34 },
+    /*|94|*/{ 0,      0,             NULLEVO,  NULLEVO,     NULLEVO,34 },
+
+    /*|95|*/{ 1,      MIDSTAGE,             CHANSEY,  NULLEVO,     NULLEVO,35 },
+    /*|96|*/{ 1,      FINALSTAGE,             BLISSEY,  NULLEVO,     NULLEVO,35 },
+    /*|97|*/{ 0,      0,             NULLEVO,  NULLEVO,     NULLEVO,35 },
     //--[NewPokemon]--
 };

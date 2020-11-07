@@ -24,6 +24,7 @@ Script "SafeZone_Enter" ENTER
     if(GetGameModeState() == 1){GiveInventory("SpawnSafeZone",1);}
     Terminate;
     }
+    if(PlayerIsBot(pln)) Terminate;
 
     
 

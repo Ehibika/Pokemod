@@ -78,7 +78,7 @@ actor FlamethrowerPP : Ammo {inventory.amount 1 inventory.Maxamount 15}
 
 Actor FlameThrowerProtect : powerprotection
 {
-Powerup.duration 5
+Powerup.duration 8
 Damagefactor "FlameThrower", 0
 }
 
@@ -105,7 +105,7 @@ PROJECTILE
 //+FORCEPAIN
 Radius 10
 Height 12
-damage (MBP_Flamethrower)
+damage (MBP_Flamethrower/4) //hits 4 times per second
 DamageType "FlameThrower"
 RenderStyle "Add"
 Obituary "$OB_FLAMETHROWER"
@@ -136,7 +136,7 @@ actor Heatspray2 : Heatspray1
 {
 Radius 16
 Height 12
-damage (MBP_Flamethrower)
+damage (MBP_Flamethrower/4) //hits 4 times per second
 speed 176
 States
 {
@@ -160,7 +160,7 @@ actor Heatspray3 : Heatspray1
 {
 Radius 28
 Height 12
-damage (MBP_Flamethrower)
+damage (MBP_Flamethrower/4) //hits 4 times per second
 speed 285
 States
 {

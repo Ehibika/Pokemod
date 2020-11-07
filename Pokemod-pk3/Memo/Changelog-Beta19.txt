@@ -1,0 +1,175 @@
+//#region -=-=- Beta 19 -=-=-
+/*
+ *
+ * ====
+ * Increased the Base stats of Pichu and Evos to match that of the starters
+ * established a 4th speed tier and redistributed the speed tiers in response to this:
+ *  Treecko family: Fast > SuperFast
+ *  Torchic family: Fast > Normal
+ *  Squirtle family: slow > Normal
+ *  Totodile family: Fast > Normal
+ *  Dreepy family: Fast > SuperFast
+ *  Bagon: Normal > Fast
+ *  Salamence: Normal > Fast
+ *  Vulpix family: Normal > Fast
+ *  Alolan Vulpix family: Normal > Fast
+ *  Swinub family: Slow > Normal
+ *  Abra family: Fast > Superfast
+ *  Hypno family: Normal > Slow
+ *  Exeggcute family: Normal > Slow
+ * 
+ * Steel now resists poison rather than taking neutral damage from it
+ * 
+ * TM prices have been revisited
+ * 
+ * ===|Move Changes|===
+ *  
+ * [thunderbolt]
+ * Fixed base power discrepancy with Thunderbolt
+ * 
+ * [powdersnow]
+ * restructured to function as a single hit projectile
+ * 
+ * [twister]
+ * restructured to function as a single hit projectile
+ * hitting the floor spawns the original twister AOE
+ * 
+ * [Reflect]
+ * physical damage reduction reduced from 50% > 25%
+ * 
+ * [LightScreen]
+ * Special damage reduction reduced from 50% > 25%
+ * 
+ * [Sludge]
+ * restructured to be a single projectile
+ * 
+ * [quick attack]
+ * improved collission detection
+ * 
+ * [double edge]
+ * improved collission detection
+ * 
+ * [flare blitz]
+ * improved collission detection
+ * fixed issue of nonlethal hits dealing no recoil damage
+ * 
+ * [hi jump kick]
+ * improved collission detection
+ * removed recoil upon successfull landing
+ * 
+ * [dragon rush]
+ * improved collission detection
+ * now has a 10 frame warmup before dashing
+ * dash speed and distance traveled increased
+ * 
+ * [headbutt]
+ * improved collission detection
+ * 
+ * [zenheadbutt]
+ * improved collission detection
+ * 
+ * [aqua jet]
+ * improved collission detection
+ * 
+ * [mach punch]
+ * improved collission detection
+ * 
+ * [rapid spin]
+ * now executes once rather than continuously
+ * duration of speedboost now lasts 2 seconds
+ * PP reduced from 20 > 10
+ * 
+ * [toxic]
+ * can now go through barriers
+ * 
+ * [haze]
+ * can n ow go through barriers
+ * 
+ * [mist]
+ * can now go through barriers
+ * 
+ * [wide guard]
+ * AOE of the barrier increased slightly
+ * now no longer blocks moves that bypass barriers
+ * removed by haze and clearsmog
+ * 
+ * [Swift]
+ * damage increased
+ * 
+ * [bubblebeam]
+ * hit intervals reduced from 7 per second to 4
+ * 
+ * [Bite]
+ * can no longer proc cringe
+ * 
+ * [Crunch]
+ * can no longer proc cringe
+ * 
+ * [HeatWave]
+ * now has knockback
+ * 
+ * [icy wind]
+ * now has knockback
+ * 
+ * [Yawn]
+ * when under the drowsiness effect, the following moves and conditions can cure it before sleep takes effect
+ *  ~Status Curatives
+ *  ~Gaining any form of status immunity
+ *      Protect
+ *      Detect
+ *      Safeguard
+ *      Crafty Shield
+ *      Substitute
+ *  ~using a continuous ramming move or rolling moves
+ *      Double edge
+ *      Flare Blitz
+ *      Hi Jump Kick
+ *      Rollout
+ *      Gyroball
+ *      Flamewheel
+ *  ~using a burrowing move
+ *      Dive
+ *      Phantom Force
+ * 
+ * [megadrain]
+ * now stalls after sapping health
+ * power was increased
+ * 
+ * ===|Pokemon Changes|===
+ * [cyndaquil family]
+ * levelup set was adjusted to place flamewheel at lvl 6, and quick attack as lvl 1
+ * 
+ * [Squirtle family]
+ * levelup set was adjusted to move yawn to lvl 3 and add bubble to lvl 1
+ * 
+ * [staryu family]
+ * swapped watergun with bubble in levelup set
+ * 
+ * [piplup family]
+ * swapped watergun with bubble in levelup set
+ * 
+ * [chikorita family]
+ * swapped lifedew with vine whip
+ * swapped refresh for synthesis
+ * moveset reshuffled slightly
+ * 
+ * ===|The following have had their damage values adjusted|===
+ * sludge
+ * sludgebomb
+ * mudslap
+ * mudbomb
+ * seedbomb
+ * brine
+ * Thunderbolt
+ * Flamethrower
+ * HydroPump
+ * dragonpulse
+ * 
+ * ===|New Moves|===
+ * MudShot
+ * Clear smog
+ * bubble
+ * 
+ * ===|New TMs|===
+ * clear smog
+//#endregion

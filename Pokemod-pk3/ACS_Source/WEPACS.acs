@@ -414,6 +414,8 @@ str weapons_ammo[MAX_WEAPONS_GLOBAL][7] =
 {"ShockwaveMove", "ShockwavePP", "Shockwave", 1.0, "NO", "NO", "SLOT_NONE"},
 {"FirepunchMove", "FirepunchPP", "Firepunch", 1.0, "NO", "NO", "SLOT_NONE"},
 {"CraftyShieldMove", "CraftyShieldPP", "CraftyShield", 1.0, "NO", "NO", "SLOT_NONE"},
+{"MudShotMove", "MudShotPP", "MudShot", 1.0, "NO", "NO", "SLOT_NONE"},
+{"ClearSmogMove", "ClearSmogPP", "ClearSmog", 1.0, "NO", "NO", "SLOT_NONE"},
 //--[NewMove]--
 };
 #endregion

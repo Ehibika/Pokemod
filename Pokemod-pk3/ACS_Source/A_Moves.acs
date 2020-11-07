@@ -651,3 +651,26 @@ SetUserVariable(0,"User_HPR2",StatValue/2);
 
 }
 
+Script "YawnBreakCheck" (int Pointer)
+{
+    Int Output;
+    
+    if(Pointer!=0){SetActivator(0,Pointer);}
+
+    if(CheckInventory("CloseCombatTimer")
+    ||CheckInventory("OutrageTimer")
+    ||CheckInventory("ThrashTimer")
+    ||CheckInventory("RolloutTimer")
+    ||CheckInventory("GyroballTimer")
+    ||CheckInventory("FlameWheelTimer")
+    ||CheckInventory("FlareBlitzTimer")
+    ||CheckInventory("HiJumpKickTimer")
+    ||CheckInventory("BraveBirdTimer")
+    ||CheckInventory("DivePPTimer")
+    ||CheckInventory("PhantomForcePPTimer")
+    ||CheckInventory("DoubleEdgeTimer"))
+    {Output = 1;}
+
+
+    SetResultValue(Output);
+}
