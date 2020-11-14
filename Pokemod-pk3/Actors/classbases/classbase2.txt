@@ -16,7 +16,7 @@ Goto NormalPain
 
 Pain.Thrash:
 "----" H 0 A_GiveInventory("ThrashProtect",1)
-"----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,10,Type_Normal)
+"----" H 0 //ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,10,Type_Normal)
 Goto NormalPain
 
 Pain.QuickAttack:
@@ -24,8 +24,8 @@ Pain.QuickAttack:
 "----" H 1
 "----" H 0 A_GiveToTarget("QuickAttackCollision",1)
 "----" H 0 A_PlaySoundEx("weapon/Rebound","SoundSlot5")
-"----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,10,Type_Normal)
-"----" H 0 ThrustThingZ(0,15,0,0)
+"----" H 0 //ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,10,Type_Normal)
+"----" H 0 //ThrustThingZ(0,15,0,0)
 Goto NormalPain
 
 Pain.DoubleEdge:
@@ -81,6 +81,7 @@ Goto FightingPain
 Pain.VacuumWave:
 Pain.DoubleKick:
 "----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,6,Type_Fighting)
+"----" H 0 A_GiveInventory("DoubleKickProtect",1)
 Goto FightingPain
 
 Pain.Skyuppercut:
@@ -109,7 +110,7 @@ Goto FightingPain
 
 Pain.CloseCombat:
 "----" H 0 A_GiveInventory("CloseCombatProtect",1)
-"----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,10,Type_Fighting)
+"----" H 0 //ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,10,Type_Fighting)
 Goto FightingPain
 
 Pain.DrainPunch:
@@ -309,9 +310,9 @@ Pain.Fire:
 Goto FirePain
 
 Pain.Firepunch:
-"----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,15,Type_Fire)
+"----" H 0 //ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,15,Type_Fire)
 "----" H 0 A_GiveInventory("FirePunchProtect")
-"----" H 0 A_GiveInventory("FirePunchBurnProc")
+"----" H 0 //A_GiveInventory("FirePunchBurnProc")
 Goto FirePain
 
 Pain.Ember:
@@ -357,13 +358,13 @@ pain.FlameThrower:
 Goto FirePain
 
 pain.FireFang:
-"----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,6,Type_Fire)
+"----" H 0 //ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,6,Type_Fire)
 //"----" H 0 A_jumpifinventory("BurnMark",1,2)
 //"----" H 0 A_SpawnItemEX("BurnWatcher",1)
 //"----" H 0 A_Giveinventory("BurnMark")
 "----" H 0
 "----" H 0
-"----" H 0 A_GiveInventory("FirePunchBurnProc")
+"----" H 0 //A_GiveInventory("FirePunchBurnProc")
 Goto FirePain
 
 Pain.FlareBlitz:
@@ -419,7 +420,8 @@ Pain.Bubble:
 Goto WaterPain
 
 Pain.Surf:
-"----" H 0 ThrustThingZ(0,55,0,0)
+//"----" H 0 ThrustThingZ(0,55,0,0)
+"----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,55,Type_Water)
 "----" H 0 A_GiveInventory("SurfProtect",1)
 Goto WaterPain
 
@@ -456,9 +458,9 @@ Pain.AquaJet:
 Goto WaterPain
 
 Pain.Waterfall:
-"----" H 0 A_GiveInventory("WaterfallProtect",1)
+"----" H 0 A_GiveInventory("WaterfallProtect1",1)
+"----" H 0 A_GiveInventory("WaterfallProtect2",1)
 "----" H 0 ThrustThingZ(0,35,0,0)
-"----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,15,Type_Water)
 "----" H 0
 Goto WaterPain
 
@@ -498,6 +500,12 @@ Goto GrassPain
 
 Pain.RazorLeaf:
 "----" H 0 A_GiveInventory("RazorLeafProtect", 1)
+Goto GrassPain
+
+Pain.Absorb:
+"----" H 0 A_SpawnItemEX("AbsorbDrainFXSpawn")
+"----" H 0 ACS_NamedExecuteAlways("LifeDrainEffect",0,50)
+"----" H 0
 Goto GrassPain
 
 Pain.MegaDrain:
@@ -553,9 +561,9 @@ Pain.Spark:
 Goto ElectricPain
 
 Pain.ThunderPunch:
-"----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,15,Type_Electric)
+"----" H 0 //ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,15,Type_Electric)
 "----" H 0 A_GiveInventory("ThunderPunchProtect")
-"----" H 0 A_GiveInventory("ThunderPunchParaProc")
+"----" H 0 //A_GiveInventory("ThunderPunchParaProc")
 Goto ElectricPain
 
 Pain.ThunderShock:
@@ -628,15 +636,15 @@ Goto PsychicPain
     Goto IcePain
 
     Pain.IcePunch:
-    "----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,15,Type_Ice)
+    "----" H 0 //ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,15,Type_Ice)
     "----" H 0 A_GiveInventory("IcePunchProtect",1)
-    "----" H 0 A_GiveInventory("FreezeStatusProc",1)
-    "----" H 0 A_GiveInventory("IcePunchFreezeRate",1)
+    "----" H 0 //A_GiveInventory("FreezeStatusProc",1)
+    "----" H 0 //A_GiveInventory("IcePunchFreezeRate",1)
     Goto IcePain
 
     Pain.IceFang:
-    "----" H 0 A_GiveInventory("FreezeStatusProc",1)
-    "----" H 0 A_GiveInventory("IcePunchFreezeRate",1)
+    "----" H 0 //A_GiveInventory("FreezeStatusProc",1)
+    "----" H 0 //A_GiveInventory("IcePunchFreezeRate",1)
     Goto IcePain
 
     Pain.PowderSnow:
@@ -679,6 +687,10 @@ Goto PsychicPain
     "----" H 0
     "----" H 0 A_GiveInventory("AuroraBeamProtect",1)
     "----" H 0 A_GiveInventory("AuroraBeamNerfInitiate",1)
+    Goto IcePain
+
+    Pain.IceShard:
+    "----" H 0
     Goto IcePain
 //#endregion
 
@@ -763,8 +775,8 @@ Pain.CraftyShield:
 "----" H 0
 Goto FairyPain
 
-Pain.Dazzlinggleem:
-"----" H 0 A_GiveInventory("DazzlinggleemProtect", 1)
+Pain.Dazzlinggleam:
+"----" H 0 A_GiveInventory("DazzlinggleamProtect", 1)
 Goto FairyPain
 
 Pain.DrainingKiss:
@@ -1114,6 +1126,11 @@ Death.Firepunch:
     "----" H 0 ThrustThingZ(0,15,0,0)
     Goto GrassDeath
 
+    Death.Absorb:
+    "----" H 0 A_SpawnItemEX("AbsorbDrainFXSpawn")
+    "----" H 0 ACS_NamedExecuteAlways("LifeDrainEffect",0,50)
+    Goto GrassDeath
+
     Death.MegaDrain:
     "----" H 0 A_GiveInventory("MegaDrainProtect", 1)
     "----" H 0 ACS_NamedExecuteAlways("LifeDrainEffect",0,50)
@@ -1188,6 +1205,7 @@ Goto PsychicDeath
     Death.IceBeam:    
     Death.AuroraBeam:
     Death.Blizzard:
+    Death.IceShard:
     //--[Move|Ice]--
     "----" H 0
     Goto IceDeath
@@ -1223,7 +1241,7 @@ Goto PsychicDeath
 
 Death.DisarmingVoice:
 Death.MoonBlast:
-Death.Dazzlinggleem:
+Death.Dazzlinggleam:
 Death.CraftyShield:
 //--[Move|Fairy]--
 "----" H 0

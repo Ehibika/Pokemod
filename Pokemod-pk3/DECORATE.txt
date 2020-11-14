@@ -209,7 +209,7 @@
 // #include "actors/Moves/Minimize.txt"
 #include "actors/Moves/Cosmicpower.txt"
 // #include "actors/Moves/Reflecttype.txt"
-#include "actors/Moves/Dazzlinggleem.txt"
+#include "actors/Moves/Dazzlinggleam.txt"
 #include "actors/Moves/Screech.txt"
 // #include "actors/Moves/Twinneedle.txt"
 #include "actors/Moves/IceShard.txt"

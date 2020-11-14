@@ -1,10 +1,10 @@
-actor DazzlinggleemMove : WepMasterBase
+actor DazzlinggleamMove : WepMasterBase
 {
-Tag "Dazzlinggleem"
-obituary "$OB_DAZZLINGGLEEM"
+Tag "Dazzlinggleam"
+obituary "$OB_DAZZLINGGLEAM"
 Weapon.AmmoUse 1
 Weapon.AmmoGive 10
-weapon.ammotype "DazzlinggleemPP"
+weapon.ammotype "DazzlinggleamPP"
 scale 2.0
 Inventory.Pickupmessage "$PU_MEGABUSTER"
 States
@@ -26,10 +26,10 @@ Goto Fire.Quake
 
 Fire.Quake:
 "####" A 0 A_GiveInventory("DashSet_B")
-"####" B 0 A_PlaySoundEx("Move/DazzlingGleem","Weapon")
+"####" B 0 A_PlaySoundEx("Move/Dazzlinggleam","Weapon")
 
 "####" BBB 3 A_SpawnItemEX("DazzlingGlow")
-"####" B 0 A_FireCustomMissile("DazzlinggleemExplosion",0,1,0,0)
+"####" B 0 A_FireCustomMissile("DazzlinggleamExplosion",0,1,0,0)
 "####" BBBBBB 3 A_SpawnItemEX("DazzlingGlow")
 "####" B 0 A_Jump(256,"Fire.After")
 Goto Fire.After
@@ -48,19 +48,19 @@ Goto Fire.End
 }
 }
 
-actor DazzlinggleemMove1 : DazzlinggleemMove {Weapon.SlotNumber 1}
-actor DazzlinggleemMove2 : DazzlinggleemMove {Weapon.SlotNumber 2}
-actor DazzlinggleemMove3 : DazzlinggleemMove {Weapon.SlotNumber 3}
-actor DazzlinggleemMove4 : DazzlinggleemMove {Weapon.SlotNumber 4}
+actor DazzlinggleamMove1 : DazzlinggleamMove {Weapon.SlotNumber 1}
+actor DazzlinggleamMove2 : DazzlinggleamMove {Weapon.SlotNumber 2}
+actor DazzlinggleamMove3 : DazzlinggleamMove {Weapon.SlotNumber 3}
+actor DazzlinggleamMove4 : DazzlinggleamMove {Weapon.SlotNumber 4}
 
-actor DazzlinggleemMove5 : DazzlinggleemMove 
+actor DazzlinggleamMove5 : DazzlinggleamMove 
 {
 Weapon.SlotNumber 5
 States
 {
 Fire.End:
 TNT1 A 0
-TNT1 A 0 A_TakeInventory("DazzlinggleemMove5",9)
+TNT1 A 0 A_TakeInventory("DazzlinggleamMove5",9)
 TNT1 A 0 A_Jump(256,"Ready")
 Goto Ready
 }
@@ -69,21 +69,21 @@ Goto Ready
 //[+]========================================================================[+]
 //-----------------------------|Ammo & Inventory|------------------------------
 //[+]========================================================================[+]
-actor DazzlinggleemPP : Ammo {inventory.amount 1 inventory.Maxamount 10}
+actor DazzlinggleamPP : Ammo {inventory.amount 1 inventory.Maxamount 10}
 
-Actor DazzlinggleemProtect : powerprotection
+Actor DazzlinggleamProtect : powerprotection
 {
 Powerup.duration 17
-Damagefactor "Dazzlinggleem", 0
+Damagefactor "Dazzlinggleam", 0
 }
 //[+]========================================================================[+]
 //--------------------------------|Projectiles |--------------------------------
 //[+]========================================================================[+]
-actor DazzlinggleemExplosion : BasicExplosion
+actor DazzlinggleamExplosion : BasicExplosion
 {
 translation "202:202=210:210"//90
-Damagetype "Dazzlinggleem"
-Obituary "$OB_DAZZLINGGLEEM"
+Damagetype "Dazzlinggleam"
+Obituary "$OB_DAZZLINGGLEAM"
 scale 2.5
 Var int user_angle;
 Reactiontime 20
@@ -94,8 +94,8 @@ TNT1 A 0
 TNT1 A 0 A_GiveInventory("ProjectileCode",1)
 TNT1 A 1 
 SpawnLoop:
-TNT1 A 0 A_SpawnItemEx("Dazzlinggleem_WaveTrail",20,0,16,25,0,0,user_angle,1)
-TNT1 A 0 A_SpawnItemEx("Dazzlinggleem_WaveTrail",20,0,16,20,0,0,user_angle+16,1)
+TNT1 A 0 A_SpawnItemEx("Dazzlinggleam_WaveTrail",20,0,16,25,0,0,user_angle,1)
+TNT1 A 0 A_SpawnItemEx("Dazzlinggleam_WaveTrail",20,0,16,20,0,0,user_angle+16,1)
 TNT1 A 0 A_SetUserVar("user_angle",user_angle+36)
 TNT1 A 0 A_CountDown
 Loop
@@ -108,10 +108,10 @@ stop
 }
 }
 
-actor Dazzlinggleem_WaveTrail : BasicProjectile
+actor Dazzlinggleam_WaveTrail : BasicProjectile
 {
-Damagetype "Dazzlinggleem"
-Obituary "$OB_DAZZLINGGLEEM"
+Damagetype "Dazzlinggleam"
+Obituary "$OB_DAZZLINGGLEAM"
 +DONTBLAST
 +DONTREFLECT
 +RIPPER
@@ -132,18 +132,18 @@ TNT1 A 0
 TNT1 A 0 A_GiveInventory("ProjectileCode",1)
 Spawn2:
 TNT1 AAAA 1 
-TNT1 A 1 A_SpawnItemEx("Dazzlinggleem_Damager",0,0,0,0,0,0,0,1)
-TNT1 A 0 A_SpawnItemEX("Dazzlinggleem_WaveFX",0,0,0,0,0,0,0,1)
+TNT1 A 1 A_SpawnItemEx("Dazzlinggleam_Damager",0,0,0,0,0,0,0,1)
+TNT1 A 0 A_SpawnItemEX("Dazzlinggleam_WaveFX",0,0,0,0,0,0,0,1)
 TNT1 A 0 A_CountDown
 loop
 }
 }
 
 
-actor Dazzlinggleem_Damager : BasicProjectile
+actor Dazzlinggleam_Damager : BasicProjectile
 {
-Damagetype "Dazzlinggleem"
-Obituary "$OB_DAZZLINGGLEEM"
+Damagetype "Dazzlinggleam"
+Obituary "$OB_DAZZLINGGLEAM"
 +DONTBLAST
 +DONTREFLECT
 +THRUGHOST
@@ -159,7 +159,7 @@ Spawn:
 TNT1 A 0
 TNT1 A 0 A_GiveInventory("ProjectileCode",1)
 TNT1 A 1
-TNT1 A 1 A_Explode(MBP_Dazzlinggleem,64,0,0,64)
+TNT1 A 1 A_Explode(MBP_Dazzlinggleam,64,0,0,64)
 Goto Death
 Death:
 TNT1 A 0 
@@ -167,7 +167,7 @@ stop
 }
 }
 
-actor Dazzlinggleem_WaveFX : BasicClientside
+actor Dazzlinggleam_WaveFX : BasicClientside
 {
 Scale 2.5
 States
@@ -175,15 +175,15 @@ States
 Spawn:
 TNT1 A 0
 TNT1 A 0 A_GiveInventory("ProjectileCodeSyncTarget",1)
-TNT1 A 0 A_SpawnItemEX("Dazzlinggleem_Particle1",Random2(16),Random2(16),Random2(16),0,0,0,0,1)
-TNT1 AA 0 A_SpawnItemEX("Dazzlinggleem_Particle2",Random2(32),Random2(32),Random2(32),0,0,0,0,1)
+TNT1 A 0 A_SpawnItemEX("Dazzlinggleam_Particle1",Random2(16),Random2(16),Random2(16),0,0,0,0,1)
+TNT1 AA 0 A_SpawnItemEX("Dazzlinggleam_Particle2",Random2(32),Random2(32),Random2(32),0,0,0,0,1)
 TNT1 A 1
 stop
 }
 }
 
 
-actor Dazzlinggleem_Particle1 : BasicClientside
+actor Dazzlinggleam_Particle1 : BasicClientside
 {
 Scale 2.5
 Alpha 1.0
@@ -204,7 +204,7 @@ loop
 }
 }
 
-actor Dazzlinggleem_Particle2 : BasicClientside
+actor Dazzlinggleam_Particle2 : BasicClientside
 {
 Scale 2.5
 Alpha 1.0
@@ -246,15 +246,15 @@ States
 Spawn:
 TNT1 A 0
 TNT1 A 0 A_GiveInventory("ProjectileCode",1)
-TNT1 A 0 A_SpawnItemEx("Dazzlinggleem_GlowFX",0,0,0,0,0,0,0,1)
-TNT1 AAA 0 A_SpawnItemEX("Dazzlinggleem_Particle1",Random2(96),Random2(96),Random2(96),0,0,0,0,1)
-TNT1 AA 0 A_SpawnItemEX("Dazzlinggleem_Particle2",Random2(96),Random2(96),Random2(96),0,0,0,0,1)
+TNT1 A 0 A_SpawnItemEx("Dazzlinggleam_GlowFX",0,0,0,0,0,0,0,1)
+TNT1 AAA 0 A_SpawnItemEX("Dazzlinggleam_Particle1",Random2(96),Random2(96),Random2(96),0,0,0,0,1)
+TNT1 AA 0 A_SpawnItemEX("Dazzlinggleam_Particle2",Random2(96),Random2(96),Random2(96),0,0,0,0,1)
 TNT1 A 1
 stop
 }
 }
 
-actor Dazzlinggleem_GlowFX : BasicClientside
+actor Dazzlinggleam_GlowFX : BasicClientside
 {
 Scale 3.5
 Alpha 0.5

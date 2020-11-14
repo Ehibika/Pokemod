@@ -326,6 +326,12 @@ ACS_NamedExecuteAlways("AddToBPAward",0,Payout);
 //#region -=- gameplay inventory functions -=-
 #region -=- gameplay inventory functions -=-
 
+Script "MoneyCount" (void)
+{
+
+    SetResultValue(ThingCountName("PokeMoney",0));  
+}
+
 Script "MoneySpawnRate" (void)
 {
 // -=- BP gained from pickup is based on total number of games, not counting draws -=-

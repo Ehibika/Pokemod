@@ -190,7 +190,7 @@ Magiccoat
 Minimize
 Cosmicpower
 Reflecttype
-Dazzlinggleem
+Dazzlinggleam
 Screech
 Twinneedle
 IceShard

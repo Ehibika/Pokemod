@@ -505,7 +505,7 @@ while (MenuUp) {
 			if(!BGUp)
 				{
 					DrawMenuFrame(MenuX-(8.0*3),MenuY-(8.0*0),15,6+MoveFrameCap,0); 
-					DrawMenuFrame(MenuX-(8.0*12),MenuY-(8.0*8),38,7,PastMenuSize);
+					DrawMenuFrame(MenuX-(8.0*12),MenuY-(8.0*9),38,8,PastMenuSize);
 					BGup = True;
 				}
 			ChoiceCap = MoveListCount;
@@ -524,7 +524,13 @@ while (MenuUp) {
 			//Draw Description
 			str MoveLangNum = strParam(s:"M",s:strLeft("000",3-strlen(strParam(i:LevelUpMoveCache[PlayerNumber()][ChoiceID]))),i:LevelUpMoveCache[PlayerNumber()][ChoiceID]);
 			str MoveLang = strParam(s:MoveLangNum,s:"_DESC");
-			if(ChoiceID < MoveListCount)HudMessage(l:MoveLang; HUDMSG_FADEOUT, 517, CR_White, MenuX- (MNL * 10) , Menuy - (MNL * 7), 0.2, 0);
+			str MoveType = strParam(s:MoveLangNum,s:"_TYPE");
+			str MoveCat = strParam(s:MoveLangNum,s:"_CATEGORY");
+			if(ChoiceID < MoveListCount)
+				{
+					HudMessage(l:MoveLang; HUDMSG_FADEOUT, 517, CR_White, MenuX- (MNL * 10) , Menuy - (MNL * 8), 0.2, 0);
+					HudMessage(l:MoveType,s:"  ",l:MoveCat; HUDMSG_FADEOUT, 516, 0, MenuX , Menuy - (MNL * 3 + 4.0), 0.2, 0);
+				}
 		}
 
 		// - Grab Inputs -
@@ -709,14 +715,16 @@ while (MenuUp) {
 			else if(MoveListCount<=6){HudMessage(s: "Exit"; HUDMSG_FADEOUT, 500 + (MoveListCount), CR_ORANGE, MenuX, Menuy + (MNL * MoveListCount), 0.2, 0);}
 			HudMessage(s: ">>"; HUDMSG_FADEOUT, 515, 0, MenuX - 16.0, Menuy + (MNL * CursorY), 0.2, 0);
 
-			//Draw Cost
-			MoveCost = TMCostCache[PlayerNumber()][ChoiceID];
-			if(ChoiceID < MoveListCount)HudMessage(s:"\cjBP Cost : ",i:MoveCost; HUDMSG_FADEOUT, 516, 0, MenuX , Menuy - (MNL * 3 + 6.0), 0.2, 0);
-
 			//Draw Description
 			str MoveLangNum = strParam(s:"M",s:strLeft("000",3-strlen(strParam(i:TMMoveCache[PlayerNumber()][ChoiceID]))),i:TMMoveCache[PlayerNumber()][ChoiceID]);
 			str MoveLang = strParam(s:MoveLangNum,s:"_DESC");
+			str MoveType = strParam(s:MoveLangNum,s:"_TYPE");
+			str MoveCat = strParam(s:MoveLangNum,s:"_CATEGORY");
 			if(ChoiceID < MoveListCount)HudMessage(l:MoveLang; HUDMSG_FADEOUT, 517, CR_White, MenuX- (MNL * 10) , Menuy - (MNL * 8), 0.2, 0);
+
+			//Draw Cost
+			MoveCost = TMCostCache[PlayerNumber()][ChoiceID];
+			if(ChoiceID < MoveListCount)HudMessage(s:"\cjBP Cost : ",i:MoveCost,s:"  ",l:MoveType,s:"  ",l:MoveCat; HUDMSG_FADEOUT, 516, 0, MenuX- (MNL * 2) , Menuy - (MNL * 3 + 6.0), 0.2, 0);
 		}
 
 		// - Grab Inputs -

@@ -24,7 +24,7 @@ Script "SafeZone_Enter" ENTER
     if(GetGameModeState() == 1){GiveInventory("SpawnSafeZone",1);}
     Terminate;
     }
-    if(PlayerIsBot(pln)) Terminate;
+    //if(PlayerIsBot(pln)) Terminate;
 
     
 
@@ -70,4 +70,16 @@ Script "SpawnFlagHealStations" (void)
 {
 
     SpawnSpotForced(strParam(s:GetActorClass(0),s:"_HealUnit"),0,0,0);    
+}
+
+script "pkmn_isMySafezone" (void) 
+{
+    SetActivator(0,AAPTR_TARGET);
+	if(consoleplayernumber() == playernumber()){
+		SetResultValue(1);
+	}
+	else
+	{
+		SetResultValue(0);
+	}
 }

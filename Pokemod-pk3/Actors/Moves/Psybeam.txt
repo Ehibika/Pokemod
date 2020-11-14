@@ -321,7 +321,7 @@ actor PsyBeamLaser : BasicProjectile
 WALLBOUNCEFACTOR 0.91
 BOUNCEFACTOR 0.91
 
-BounceCount 3
+BounceCount 2
 
 Reactiontime 70
 Radius 8

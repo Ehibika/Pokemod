@@ -118,7 +118,7 @@ damagefactor "Psywave", 1.0
 damagefactor "Confusion", 1.0
 damagefactor "Psychic", 1.0
 damagefactor "Powergem", 1.0
-damagefactor "Dazzlinggleem", 1.0
+damagefactor "Dazzlinggleam", 1.0
 damagefactor "Psybeam", 1.0
 damagefactor "FutureSight", 1.0
 damagefactor "FocusBlast", 1.0

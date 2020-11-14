@@ -3,7 +3,7 @@ actor CharmMove : WepMasterBase
 Tag "Charm"
 obituary "$OB_CHARM"
 Weapon.AmmoUse 1
-Weapon.AmmoGive 10
+Weapon.AmmoGive 25
 weapon.ammotype "CharmPP"
 scale 2.0
 Inventory.Pickupmessage "$PU_MEGABUSTER"
@@ -21,27 +21,31 @@ Goto NoAmmo
 
 Fire.Begin:
 "####" B 0
-"####" B 0 A_Jump(256,"Fire.Bullet")
-Goto Fire.Bullet
+"####" B 1 A_Jumpif(CallACS("CheckDebuffAura")==1,"Fire.Off")
+"####" B 0 A_Jump(256,"Fire.On")
+Goto Fire.On
 
-Fire.Bullet:
-"####" B 0 A_PlaySoundEx("weapon/noisecrush2","Weapon")
+Fire.On:
+"####" B 0 A_PlaySoundEx("Misc/UseMove","Weapon")
+"####" B 1 A_GiveInventory("CharmAuraFlag")
+"####" B 0 A_GiveInventory("CharmPPTimer")
+"####" B 0 A_SpawnItemEX("CharmPPWatcher")
+"####" B 0 A_FireCustomMissile("CharmAura",0,0,0,0)
+"####" B 0 A_Jump(256,"Fire.After")
+Goto Fire.After
 
-"####" B 0 A_FireCustomMissile("CharmShot",0,1,0,0)
-"####" B 0 A_FireCustomMissile("CharmShot",15,0,0,0)
-"####" B 0 A_FireCustomMissile("CharmShot",345,0,0,0)
+Fire.Off:
+"####" B 0 A_PlaySoundEx("Misc/UseMove","Weapon")
+"####" B 0 A_GiveInventory("AuraPurge") // in Charm.txt
+"####" B 17 
 "####" B 0 A_Jump(256,"Fire.After")
 Goto Fire.After
 
 Fire.After:
-"####" B 1 A_GiveInventory("FullRecovery_A")
+"####" B 1 A_GiveInventory("HalfRecovery_A")
 "####" C 0 A_REfire("Fire")
 "####" B 0 A_Jump(256,"Fire.End")
 Goto Fire.End
-
-
-
-
 
 }
 }
@@ -67,9 +71,32 @@ Goto Ready
 //[+]========================================================================[+]
 //-----------------------------|Ammo & Inventory|------------------------------
 //[+]========================================================================[+]
-actor CharmPP : Ammo {inventory.amount 1 inventory.Maxamount 10}
+actor CharmPP : Ammo {inventory.amount 1 inventory.Maxamount 25}
 
 actor STF_Charm : Powerup {inventory.amount 1 Powerup.Duration -6}
+
+actor CharmAuraFlag : inventory {inventory.amount 1 inventory.Maxamount 1}
+actor CharmPPTimer : Powerup {inventory.amount 1 Powerup.Duration 35}
+
+actor AuraPurge : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_TakeInventory("CharmAuraFlag",99)
+TNT1 A 0 A_TakeInventory("CaptivateAuraFlag",99)
+TNT1 A 0 A_TakeInventory("ScreechAuraFlag",99)
+TNT1 A 0 A_TakeInventory("FakeTearsAuraFlag",99)
+TNT1 A 0 A_TakeInventory("ScaryFaceAuraFlag",99)
+stop
+}
+}
 
 actor CharmNerfInitiate : CustomInventory
 {
@@ -98,9 +125,122 @@ stop
 }
 
 Const int Charm_Item = 18;
+Const int Charm_RAD = 250;
 //[+]========================================================================[+]
 //--------------------------------|Projectiles |--------------------------------
 //[+]========================================================================[+]
+
+
+actor CharmAura //: BasicHelper
+{
+    +MISSILE
+    -SOLID
+    +NOCLIP
+    +NOINTERACTION
+    +NOGRAVITY
+    +DONTBLAST
+    +DONTREFLECT
+    +THRUACTORS
+    RenderStyle none
+    Radius 2
+    Height 2
+    Args 7
+    Speed 15
+    States
+    {
+    Spawn:
+        TNT1 A 0
+        TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+        TNT1 A 0 ACS_NamedExecuteAlways("GeneralWarper2",0)    
+    Warp:
+        TNT1 A 1 A_Warp(2,0,0,0,0,WARPF_INTERPOLATE|WARPF_NOCHECKPOSITION)
+        TNT1 A 0 A_SpawnItemEx("CharmAuraFX",0,0,-(z-floorz)+24,0,0,0,0,8)
+        TNT1 A 1 A_Warp(2,0,0,0,0,WARPF_INTERPOLATE|WARPF_NOCHECKPOSITION)
+        TNT1 A 0 A_SpawnItemEx("CharmAuraFX",0,0,-(z-floorz)+24,0,0,0,0,8)
+        TNT1 A 1 A_Warp(2,0,0,0,0,WARPF_INTERPOLATE|WARPF_NOCHECKPOSITION)
+        TNT1 A 0 A_SpawnItemEx("CharmAuraFX",0,0,-(z-floorz)+24,0,0,0,0,8)
+        TNT1 A 1 A_Warp(2,0,0,0,0,WARPF_INTERPOLATE|WARPF_NOCHECKPOSITION)
+        TNT1 A 0 A_SpawnItemEx("CharmAuraFX",0,0,-(z-floorz)+24,0,0,0,0,8)
+        TNT1 A 1 A_Warp(2,0,0,0,0,WARPF_INTERPOLATE|WARPF_NOCHECKPOSITION)
+        TNT1 A 0 A_SpawnItemEx("CharmAuraFX",0,0,-(z-floorz)+24,0,0,0,0,8)
+        TNT1 A 0 A_GiveToTarget("CharmFXSpawn")
+        TNT1 A 0 ACS_NamedExecuteAlways("PKMNACS_RadiusGive",0,Charm_Item,Charm_RAD,RG_ENEMY)
+        loop
+    Death:
+    TNT1 A 0 A_GiveToTarget("DebuffOffSoundCue")
+    TNT1 A 0
+    stop
+
+    }
+}
+
+actor CharmPPWatcher : BasicHelper 
+{
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 5 
+TNT1 A 0 A_JumpIfInTargetInventory("CharmPPTimer",1,"Spawn")
+TNT1 A 0 A_JumpIfInTargetInventory("isDead",1,"Death")
+TNT1 A 0 A_GiveToTarget("CharmPPTimer")
+Goto Check1
+
+Check1:
+TNT1 A 0 A_JumpIfInTargetInventory("CharmAuraFlag",1,"Check2")
+TNT1 A 0
+Goto Death
+
+Check2:
+TNT1 A 0 A_TakeFromTarget("CharmPP",1)
+TNT1 A 0 A_JumpIfInTargetInventory("CharmPP",1,"Spawn")
+TNT1 A 0
+Goto Death
+
+Death:
+TNT1 A 0 A_TakeFromTarget("CharmAuraFlag",99)
+TNT1 A 0 
+stop
+}
+}
+
+actor CharmAuraFX : BasicHelper
+{
++CLIENTSIDEONLY
+translation "198:198=220:220", "192:192=229:229"
+	reactiontime 60
+	var int user_angle;
+	States
+	{
+		Spawn:
+		TNT1 A 0
+        TNT1 A 0// A_SetUserVar("user_angle", random(0, 30))
+        TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+		SpawnLoop:
+		TNT1 A 0 A_SpawnItemEx("CharmGuideDot", Charm_RAD, 0, 0, 0, 0, 0, user_angle, 1061)
+		TNT1 A 0 A_SpawnItemEx("CharmGuideDot", -Charm_RAD, 0, 0, 0, 0, 0, user_angle, 1061)
+		TNT1 A 0 A_SetUserVar("user_angle", user_angle + 6)
+		TNT1 A 0 A_Countdown
+		loop
+		Death:
+		TNT1 A 0
+		stop
+	}
+}
+
+
+actor CharmGuideDot : BasicGuideDot {Renderstyle Add
+ scale 1.5
+    States
+    {
+    Spawn:
+    BASB U 0
+    BASB U 1 //A_Warp(0,0,0,-(z-floorz)+24,0,0)
+    stop
+    }
+}
+
+//#region 
 
 actor CharmShot : BasicProjectile
 {
@@ -177,17 +317,30 @@ stop
 
 }
 }
+//#endregion
+
+actor CharmFXSpawn : CustomInventory
+{
+States
+{
+Pickup:
+TNT1 A 0
+TNT1 AAAA 0 A_SpawnItemEx("CharmWaveFX",random(Charm_RAD/2,Charm_RAD),0,-(z-floorz)+24,0,0,4,random(0,360))
+stop
+}
+}
 
 actor CharmWaveFX : NoiseCrushTrail1
 {
 ReactionTime 5
+Scale 1.5
 States
 {
 Spawn:
 TNT1 A 0
 TNT1 A 0 A_GiveInventory("ProjectileCode",1)
-LHRT ABCD 1 
-LHRT EEDDEEDD 1 A_Fadeout
+LHRT AAABBBCCCDDD 1 A_ScaleVelocity(0.9)
+LHRT EEDDEEDD 3 A_Fadeout
 stop
 }
 }
@@ -208,6 +361,25 @@ Goto Death
 
 Death:
 TNT1 A 0 
+stop
+}
+}
+
+
+actor DebuffOffSoundCue : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_PlaySoundEx("Move/ImbueOff","SoundSlot8")
+Nope:
+TNT1 A 0
 stop
 }
 }

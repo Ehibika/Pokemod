@@ -1,4 +1,5 @@
 //=======|Type Constants|==========
+const int Type_Null = -1;
 const int Type_Normal = 0;
 const int Type_Fighting = 1;
 const int Type_Flying = 2;
@@ -214,7 +215,7 @@ const int Move_Magiccoat = 187;
 const int Move_Minimize = 188;
 const int Move_Cosmicpower = 189;
 const int Move_Reflecttype = 190;
-const int Move_Dazzlinggleem = 191;
+const int Move_Dazzlinggleam = 191;
 const int Move_Screech = 192;
 const int Move_Twinneedle = 193;
 const int Move_IceShard = 194;

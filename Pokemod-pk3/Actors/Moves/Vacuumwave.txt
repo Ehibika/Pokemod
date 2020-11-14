@@ -68,6 +68,8 @@ Scale 2.5
 DamageType "Vacuumwave"
 Obituary "$OB_Vacuumwave"
 Damage(MBP_Vacuumwave)
+radius 16
+height 16
 States
 {
 Spawn:

@@ -22,11 +22,13 @@ Goto NoAmmo
 Fire.Begin:
 "####" B 0
 TNT1 A 0 A_GiveInventory("ChannelingSpeed")
-TNT1 A 0 A_Jumpifinventory("WeaponCharge",25,"Fire.Bullet")
-"####" B 0 A_PlaySoundEx("weapon/PChargeLong","Weapon")
-"####" B 0 A_Jump(256,"Fire.Warmup")
-Goto Fire.Warmup
+//TNT1 A 0 A_Jumpifinventory("WeaponCharge",25,"Fire.Bullet")
+//"####" B 0 A_PlaySoundEx("weapon/PChargeLong","Weapon")
+"####" B 0 A_GunFlash("Flash.Sound")
+"####" B 0 A_Jump(256,"Fire.Bullet")
+Goto Fire.Bullet
 
+/*
 Fire.Warmup:
 TNT1 A 0 A_GiveInventory("ChannelingSpeed")
 "####" B 1 A_Jumpifinventory("WeaponCharge",25,"Fire.Start")
@@ -36,6 +38,7 @@ Goto Fire.After
 Fire.Start:
 "####" B 0 A_GunFlash("Flash.Sound")
 Goto Fire.Bullet
+*/
 
 Fire.Bullet: //Take Ammo
 "####" A 0 A_Jumpifinventory("ConShotTimer",1,"Fire.Bullet1")
@@ -176,7 +179,7 @@ actor HydroPumpDamager : BasicFastProjectile
     +SKYEXPLODE
     +EXPLODEONWATER
     RenderStyle None
-    Damage (MBP_HydroPump/4) // hits 4 times per second
+    Damage (MBP_HydroPump) 
     Radius 10
     Height 10
     speed 750 //15 * HydroPumpRange(50)

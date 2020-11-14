@@ -23,12 +23,13 @@ Goto NoAmmo
 Fire.Begin:
 "####" B 0
 TNT1 A 0 A_GiveInventory("ChannelingSpeed")
-TNT1 A 0 A_GiveInventory("BasicWarperHold",1)
-TNT1 A 0 A_Jumpifinventory("WeaponCharge",25,"Fire.Bullet")
-"####" B 0 A_PlaySoundEx("weapon/PChargeLong","Weapon")
-"####" B 0 A_Jump(256,"Fire.Warmup")
-Goto Fire.Warmup
-
+//TNT1 A 0 A_GiveInventory("BasicWarperHold",1)
+//TNT1 A 0 A_Jumpifinventory("WeaponCharge",25,"Fire.Bullet")
+//"####" B 0 A_PlaySoundEx("weapon/PChargeLong","Weapon")
+"####" B 0 A_GunFlash("Flash.Sound")
+"####" B 0 A_Jump(256,"Fire.Bullet")
+Goto Fire.Bullet
+/*
 Fire.Warmup:
 TNT1 A 0 A_GiveInventory("ChannelingSpeed")
 "####" B 0 A_GiveInventory("BasicWarperHold",1)
@@ -40,6 +41,7 @@ Fire.Start:
 "####" B 0 A_GunFlash("Flash.Sound")
 "####" B 0 //A_SpawnItemEX("ThunderBoltMoveFXWarper") //get's in the way
 Goto Fire.Bullet
+*/
 
 Fire.Bullet: //Take Ammo
 "####" A 0 A_Jumpifinventory("ConShotTimer",1,"Fire.Bullet1")
@@ -164,7 +166,7 @@ stop
 //[+]========================================================================[+]
 
 
-Const Int ThunderboltRange = 35;
+Const Int ThunderboltRange = 55;
 
 
 actor MoveThunderBoltBurstStart //: BasicHelper
@@ -320,10 +322,10 @@ actor MoveThunderBoltDamager : BasicFastProjectile
     +SKYEXPLODE
     +EXPLODEONWATER
     RenderStyle None
-    Damage (MBP_Thunderbolt/4) //Hits 4 times per second
+    Damage (MBP_Thunderbolt) 
     Radius 10
     Height 10
-    speed 525 //15 * ThunderboltRange(35)
+    speed 825 //15 * ThunderboltRange(35)
     scale 2.5
     states
     {

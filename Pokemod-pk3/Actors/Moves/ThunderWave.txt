@@ -101,7 +101,7 @@ stop
 //[+]========================================================================[+]
 actor ThunderWaveShot : BasicFastProjectile
 {
-Speed 64
+Speed 96
 Damage (0)
 DamageType "ThunderWave"
 obituary "$OB_THUNDERWAVE"

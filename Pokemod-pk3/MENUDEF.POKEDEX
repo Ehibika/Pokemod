@@ -4980,7 +4980,7 @@ OptionMenu "MoveMenu_Reflecttype"
     StaticText"===============================================================",1
 }
 
-OptionMenu "MoveMenu_Dazzlinggleem"
+OptionMenu "MoveMenu_Dazzlinggleam"
 {
 	
 	Title "$M191_NAME"

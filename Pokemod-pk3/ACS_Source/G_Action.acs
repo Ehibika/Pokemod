@@ -240,10 +240,13 @@ script "PKMN_SleepHandler" (Void)
 	int WakeHP = (CurrentHP/4)*3;
 	int HitDiff;
 	int WakeHitDiff = GetActorProperty(0,APROP_SpawnHealth)/4;
+	int newWakeHP;
 	Bool Awaken;
 	
 	while(CheckInventory("SleepMark")) {
 		CurrentHP = GetActorProperty(0,APROP_Health);
+		newWakeHP = (CurrentHP/4)*3;
+		if(WakeHP < newWakeHP){WakeHP = newWakeHP;}
 		Delay(1);
 		HitDiff = CurrentHP-PrevHP;
 		PrevHP = CurrentHP;
@@ -1156,6 +1159,7 @@ script "PKMNACS_HitKnockback" (int force, int type, int disabled)
 if(disabled == 0){GiveInventory("TempPitProtection",1);}
 int pusher = ACS_NamedExecuteWithResult("core_gettarget");
 
+/*
 if(type != -1)
 	{
 		int PlayerDEXNum = GetPokeValue(POKEDEXNUM);
@@ -1168,7 +1172,7 @@ if(type != -1)
 				case 0: Terminate; break;
 			}
 	}
-
+*/
 
 int Vang = VectorAngle(GetActorX(0) - GetActorX(pusher), GetActorY(0) - GetActorY(pusher)) >> 8;
 ThrustThing(Vang, force, 1, 0);
@@ -1226,7 +1230,7 @@ switch(PickupStyle)
 ACS_NamedExecuteAlways("PKMNACS_Basic(Over)Heal",0,0,Amount);
 }
 
-Script "PKMNACS_Basic(Over)Heal" (int Pointer, int HealAmount, int Overheal )
+Script "PKMNACS_Basic(Over)Heal" (int Pointer, int HealAmount, int Overheal ) //to be phased out
 {
 int OverhealMax = Overheal+100;
 if(OverhealMax<=100){OverhealMax=101;}
@@ -1340,7 +1344,8 @@ For(int i = 0;i < ServerMax; i++)
 	TargetTeam = GetPlayerInfo(i, PLAYERINFO_TEAM);
 	If(PlayerInGame(i) && PlayersTeam == TargetTeam && xyzDistance(0,Target_TID) < HealRadius) // && FiringPlayer!=Target_TID
 		{
-		ACS_NamedExecuteAlways("PKMNACS_HealTID",0,Target_TID,Ammount);
+		if(FiringPlayer-1000 == i){ACS_NamedExecuteAlways("PKMNACS_HealTID",0,Target_TID,Ammount);}
+		else{ACS_NamedExecuteAlways("PKMNACS_HealTID",0,Target_TID,Ammount,1);}
 		GiveActorInventory(Target_TID,MoveFX, 1);
 		}
 	}
@@ -1348,20 +1353,36 @@ For(int i = 0;i < ServerMax; i++)
 
 }
 
-Script "PKMNACS_HealTID" (int TargTID, int HealAmount, int Overheal )
+Script "PKMNACS_HealTID" (int TargTID, int HealAmount, int GetEXP)
 {
-int OverhealMax = Overheal+100;
-if(OverhealMax<=100){OverhealMax=101;}
-if(OverhealMax>150){OverhealMax=150;}
+int HealerTID = ACS_NamedExecuteWithResult("core_gettarget");
+int PayEXP;
 SetActivator(TargTID);
 int MaxHealth = GetActorProperty(0,APROP_SPAWNHEALTH);
 if(MaxHealth==0){MaxHealth=100;}
 for(int g=1;g<=HealAmount;g++)
     {
-    if(GetActorProperty(0,APROP_Health)<MaxHealth){HealThing(1,MaxHealth);}
-    else if(ACS_NamedExecuteWithResult("PKMNACS_HealthPercent",0)<OverhealMax && Overheal>=1){GiveInventory("BasicOverhealItem",1);}
-    }
+    if(GetActorProperty(0,APROP_Health)<MaxHealth){HealThing(1,MaxHealth); PayEXP++;}
+	}
+	
+	if(GetEXP){ACS_NamedExecuteAlways("GivePlayerEXP",0,HealerTID-1000,PayEXP/2,0);}
 }
+
+Script "PKMNACS_HealPointer" (int Pointer, int HealAmount, int GetEXP)
+{
+int HealerTID = ACS_NamedExecuteWithResult("core_gettarget");
+int PayEXP;
+if(Pointer!=0){SetActivator(0,Pointer);}
+int MaxHealth = GetActorProperty(0,APROP_SPAWNHEALTH);
+if(MaxHealth==0){MaxHealth=100;}
+for(int g=1;g<=HealAmount;g++)
+    {
+    if(GetActorProperty(0,APROP_Health)<MaxHealth){HealThing(1,MaxHealth); PayEXP++;}
+	}
+	
+	if(GetEXP){ACS_NamedExecuteAlways("GivePlayerEXP",0,HealerTID-1000,PayEXP/2,0);}
+}
+
 
 // Checks if the target is the client. Useful for FX you don't want to render for the creator of them.
 script "pkmn_istargetclient" (void) CLIENTSIDE
@@ -1388,5 +1409,36 @@ Script "HasFlagBall" (void)
 // this is just to avoid console errors
 
 SetResultValue(CheckInventory("WhiteFlagCarry"));
+
+}
+
+// Player visibility setter
+// Set player to 0 for the activator or specify a player number
+script "PKMN_ToggleVisible" (int player, int toggle)
+{
+int tid = ActivatorTID();
+
+if(player>0){tid = player + 999;}
+
+	//PrintBold(i:tid);
+	if(toggle >= 1){
+		GiveActorInventory(tid, "PlayerIsInvisible", 1);
+		//SetActivator(tid);
+		GiveActorInventory(tid, "PlayerVisibilityOn",1);
+		if(toggle !=2){
+		Thing_Stop(tid);
+		}
+	}
+	if(toggle == 0){
+		if(CheckActorInventory(tid, "PlayerIsInvisible")>0){
+		TakeActorInventory(tid, "PlayerIsInvisible", 1);
+		
+			if(CheckActorInventory(tid, "PlayerIsInvisible")==0){
+			//SetActivator(tid);
+			GiveActorInventory(tid, "PlayerVisibilityOff",1);//SetPlayerProperty(0, 0, PROP_FLIGHT);
+			}
+			
+		}
+	}
 
 }

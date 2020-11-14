@@ -61,7 +61,7 @@ TNT1 A 0 A_JumpIfInventory("isbot",1,"BotWep")
 
 TNT1 A 0 A_GiveInventory("AstonishMove1")
 TNT1 A 0 A_GiveInventory("QuickAttackMove2")
-TNT1 A 0 A_GiveInventory("DragonBreathMove3")
+TNT1 A 0 A_GiveInventory("DragonRageMove3")
 TNT1 A 0 A_GiveInventory("BiteMove4")
 stop
 

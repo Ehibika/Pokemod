@@ -21,14 +21,21 @@ Goto NoAmmo
 
 Fire.Begin:
 "####" B 0
-"####" B 0 A_Jump(256,"Fire.Drain")
-Goto Fire.Drain
+"####" B 0 A_Jump(256,"Fire.GroundCheck")
+Goto Fire.GroundCheck
+
+Fire.GroundCheck:
+"####" B 0 A_CheckFloor("Fire.Drain")
+"####" B 0 A_Jump(256,"NoAmmo2")
+Goto NoAmmo2
 
 Fire.Drain:
-"####" A 0 A_GiveInventory("DashSet_B")
+"####" A 0 A_GiveInventory("DashSet_C")
+"####" A 0 A_Stop
+"####" B 5 A_PlaySoundEx("Misc/UseMove","SoundSlot6")
 "####" B 0 A_PlaySoundEx("support/Ubercharge1","Weapon")
-"####" B 5 
 "####" B 0 A_FireCustomMissile("GigaDrainExplosion",0,1,0,0)
+"####" B 35
 "####" B 0 A_Jump(256,"Fire.After")
 Goto Fire.After
 
@@ -187,7 +194,7 @@ TNT1 A 0 A_Setangle(angle-user_maxturn/user_turndivisor)
 ASEX E 1 A_ChangeVelocity(user_speed,0,0,CVF_RELATIVE|CVF_REPLACE)
 TNT1 A 0 A_SetUserVar("user_turndivisor",user_turndivisor+user_turndivisor_add)
 //POWS A 0 A_SpawnItemEx("GigaDrainSapperFX",0,0,0,0,0,0,180,1)
-TNT1 A 0 A_Explode(MBP_GigaDrain,64,0,0,64)
+TNT1 A 0 A_Explode(MBP_GigaDrain,32,0,0,32)
 TNT1 A 0 A_CountDown
 loop
 Death:

@@ -230,6 +230,7 @@ script "S_Reticule_C" OPEN CLIENTSIDE {
 	int ThirdCamNumber = C_TID + selfNumber;
 	int camNumber;
 	int PastZoomMode;
+	int AlphaTimer;
 
 	int ZoomMode;
 	int ZoomKey;
@@ -243,8 +244,14 @@ script "S_Reticule_C" OPEN CLIENTSIDE {
 		if(CheckCamAlphaSet(selfTID)
 			&& GetActorproperty(selfTID,APROP_ALPHA) != GetCamPlayerAlphaSetting(selfNumber,ZoomMode))
 			{
-			SetActorProperty(selfTID,Aprop_renderstyle,STYLE_Translucent);
-			SetActorProperty(selfTID,APROP_ALPHA,GetCamPlayerAlphaSetting(selfNumber,ZoomMode));
+				AlphaTimer--;
+				if(AlphaTimer<1)
+				{
+				SetActorProperty(selfTID,Aprop_renderstyle,STYLE_Translucent);
+				SetActorProperty(selfTID,APROP_ALPHA,GetCamPlayerAlphaSetting(selfNumber,ZoomMode));
+				AlphaTimer = 17;
+				}
+
 			}
 		//log(i:(camNumber-C_TID) + 1000);
 		if(IsPlayer(selfTID) && ThirdCamNumber == camNumber) 
@@ -344,7 +351,7 @@ function int CheckCamAlphaSet (int TID)
  * Change your alpha, they take precedence, and thus the camera's automatic alpha settings
  * are momentarily disabled. this is done by checking the following flags
 */
-
+if(CheckActorInventory(TID,"PlayerIsInvisible")){return 0;}
 if(CheckFlag(TID,"INVISIBLE")){return 0;}
 if(CheckFlag(TID,"SHADOW")){return 0;}
 if(GetActorproperty(TID,Aprop_Invulnerable)){return 0;}

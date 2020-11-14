@@ -114,7 +114,7 @@ actor AuroraBeamLaser : BasicProjectile
 WALLBOUNCEFACTOR 0.91
 BOUNCEFACTOR 0.91
 
-Reactiontime 70
+Reactiontime 35
 Radius 8
 Height 8
 Speed 64

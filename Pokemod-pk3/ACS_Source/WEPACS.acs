@@ -354,7 +354,7 @@ str weapons_ammo[MAX_WEAPONS_GLOBAL][7] =
 {"MinimizeMove", "MinimizePP", "Minimize", 1.0, "NO", "NO", "SLOT_NONE"},
 {"CosmicPowerMove", "CosmicPowerPP", "CosmicPower", 1.0, "NO", "NO", "SLOT_NONE"},
 {"ReflecttypeMove", "ReflecttypePP", "Reflecttype", 1.0, "NO", "NO", "SLOT_NONE"},
-{"DazzlinggleemMove", "DazzlinggleemPP", "Dazzlinggleem", 1.0, "NO", "NO", "SLOT_NONE"},
+{"DazzlinggleamMove", "DazzlinggleamPP", "Dazzlinggleam", 1.0, "NO", "NO", "SLOT_NONE"},
 {"ScreechMove", "ScreechPP", "Screech", 1.0, "NO", "NO", "SLOT_NONE"},
 {"TwinneedleMove", "TwinneedlePP", "Twinneedle", 1.0, "NO", "NO", "SLOT_NONE"},
 {"IceShardMove", "IceShardPP", "IceShard", 1.0, "NO", "NO", "SLOT_NONE"},
@@ -819,6 +819,7 @@ Return(-1);
 
 script "PERSISTENT_LOADOUT" (void)
 {
+delay(1);
 LoadLoadout();
 SaveLoadout();
 while(PlayerHealth()>0) {

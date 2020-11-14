@@ -215,11 +215,12 @@ TNT1 A 0
 TNT1 A 0 A_GiveInventory("ProjectileCode",1)
 TNT1 A 0 A_playSoundEx("misc/alarmlong","Weapon")
 TNT1 AAAAAA 4 A_SpawnItemEx("DracoMeteorWarnWave",0,0,0,0,0,0,0,1)
+TNT1 A 0 A_playSoundEx("weapon/astrocrush","SoundSlot6")
 Spawn2:
 TNT1 A 0 A_SpawnItemEx("DracoMeteorWarnWave",0,0,0,0,0,0,0,1)
-TNT1 A 2 A_SpawnItemEx("DracoMeteor",random2(DracoMeteorRad)-176,random2(DracoMeteorRad),320,0,0,random(-20,-22),0,1)
+TNT1 A 2 A_SpawnItemEx("DracoMeteor",random2(DracoMeteorRad),random2(DracoMeteorRad),320,0,0,random(-20,-22),0,1)
 TNT1 A 0 A_Countdown
-TNT1 A 2 A_SpawnItemEx("DracoMeteor",random2(DracoMeteorRad)-176,random2(DracoMeteorRad),320,0,0,random(-20,-22),0,1)
+TNT1 A 2 A_SpawnItemEx("DracoMeteor",random2(DracoMeteorRad),random2(DracoMeteorRad),320,0,0,random(-20,-22),0,1)
 TNT1 A 0 A_Countdown
 loop
 
@@ -286,23 +287,22 @@ Reactiontime 10
 States
 {
 Spawn:
-ASTR B 0
+DMTO B 0
 TNT1 A 0 A_GiveInventory("ProjectileCode",1)
-ASTR B 0 A_ChangeVelocity(11,0,momz,CVF_RELATIVE|CVF_REPLACE)
-ASTR BBBCCCDDD 1 A_JumpIf(ceilingz-z>8, "Spawn2")
-ASTR B 0 A_JumpIf(momz==0,"Death")
-ASTR B 0 A_CountDown
+DMTO BBBCCCDDD 1 A_JumpIf(ceilingz-z>8, "Spawn2")
+DMTO B 0 A_JumpIf(momz==0,"Death")
+DMTO B 0 A_CountDown
 Goto Spawn+2
 Spawn2:
-ASTR B 0 A_ChangeFlag("RIPPER", 0)
-ASTR B 0 A_ChangeFlag("NOINTERACTION",0)
-ASTR BCD 3 A_ChangeVelocity(11,0,momz,CVF_RELATIVE|CVF_REPLACE) 
-ASTR B 0 A_JumpIf(momz==0,"Death")
-ASTR B 0 A_CountDown
+DMTO B 0 A_ChangeFlag("RIPPER", 0)
+DMTO B 0 A_ChangeFlag("NOINTERACTION",0)
+DMTO BCD 3 
+DMTO B 0 A_JumpIf(momz==0,"Death")
+DMTO B 0 A_CountDown
 Goto Spawn2+2
 Death:
 TNT1 A 0 A_GiveInventory("ProjectileDCode",1)
-ASEX A 0 A_playSoundEx("weapon/AstroCrush","Weapon")
+ASEX A 0 A_playSoundEx("weapon/astrocrush2","Weapon")
 ASEX A 0 A_ChangeFlag(NOGRAVITY,1)
 ASEX A 0 A_Explode(MBP_Dracometeor,128,0,0,128)
 ASEX ABCDEF 2

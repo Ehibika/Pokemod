@@ -7,7 +7,7 @@ actor CloseCombatMove : WepMasterBase
 Tag "CloseCombat"
 obituary "$OB_CloseCombat"
 Weapon.AmmoUse 1
-Weapon.AmmoGive 5
+Weapon.AmmoGive 10
 weapon.ammotype "CloseCombatPP"
 scale 2.0
 Inventory.Pickupmessage "$PU_MEGABUSTER"
@@ -19,7 +19,7 @@ stop
 
 
 Fire:
-"####" BBB 1 A_Jumpif(CallACS("CheckWeaponFire",RC_A)==1,"Fire.Begin")
+"####" BBB 1 A_Jumpif(CallACS("CheckWeaponFire",RC_B)==1,"Fire.Begin")
 "####" B 0 A_Jump(256,"NoAmmo")
 Goto NoAmmo
 
@@ -28,28 +28,27 @@ Fire.Begin:
 "####" A 0 ACS_NamedExecuteAlways("TakePP",0,Move_CloseCombat,1)
 "####" B 5 A_PlaySoundEx("Misc/UseMove","Weapon")
 "####" B 0 A_GiveInventory("CloseCombatTimer",1)
+"####" B 0 A_GiveInventory("CloseCombatNerfInitiate")
 "####" B 0 A_Jump(256,"Fire.Rampage")
 Goto Fire.Rampage
 
 Fire.Rampage:
-"####" B 1 A_PlaySoundEx("misc/darkleap","Weapon")
-"####" B 0 A_GiveInventory("ChannelingSpeed")
+"####" B 2 A_PlaySoundEx("misc/darkleap","Weapon")
 "####" BBB 0 A_FireCustomMissile("CloseCombatMelee",0,0,random(-CLOSECOMBAT_SPD,CLOSECOMBAT_SPD),random(CLOSECOMBAT_SPD2,CLOSECOMBAT_SPD3),0,0)
-"####" B 2
-"####" B 0 A_Jumpifinventory("CloseCombatTimer",1,"Fire.RampageCheck")
-"####" B 0 A_Jump(256,"Fire.After")
+"####" B 1 A_Jumpifinventory("CloseCombatTimer",1,"Fire.RampageCheck")
+"####" B 1 A_Jump(256,"Fire.After")
 Goto Fire.After
 
 Fire.RampageCheck:
-"####" B 0 A_Jumpifinventory("SleepMark",1,"Fire.RampageCheck")
-"####" B 0 A_Jumpifinventory("CringeMark",1,"Fire.RampageCheck")
+"####" B 0 A_Jumpifinventory("SleepMark",1,"Fire.After")
+"####" B 0 A_Jumpifinventory("FreezeMark",1,"Fire.After")
+"####" B 0 A_Jumpifinventory("CringeMark",1,"Fire.After")
 
-"####" B 0 A_Jump(256,"Fire.Rampage")
+"####" B 1 A_Jump(256,"Fire.Rampage")
 Goto Fire.Rampage
 
 Fire.After:
-"####" B 1 A_GiveInventory("FullRecovery_A")
-"####" B 0 A_GiveInventory("FatigueStatusProc")
+"####" B 1 A_GiveInventory("SemiRecovery_B")
 "####" B 0 A_TakeInventory("CloseCombatTimer",99)
 "####" B 0 A_Jump(256,"Fire.End")
 Goto Fire.End
@@ -77,13 +76,41 @@ Goto Ready
 //[+]========================================================================[+]
 //-----------------------------|Ammo & Inventory|------------------------------
 //[+]========================================================================[+]
-actor CloseCombatPP : Ammo {inventory.amount 1 inventory.Maxamount 5}
-actor CloseCombatTimer : Powerup {inventory.amount 1 powerup.duration -3 }
+actor CloseCombatPP : Ammo {inventory.amount 1 inventory.Maxamount 10}
+actor CloseCombatTimer : Powerup {inventory.amount 1 powerup.duration 25 }
 
 Actor CloseCombatProtect : powerprotection
 {
 Powerup.duration 3
 Damagefactor "CloseCombat", 0
+}
+
+actor STF_CloseCombat : Powerup {inventory.amount 1 Powerup.Duration -3}
+
+actor CloseCombatNerfInitiate : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_Jumpifinventory("STF_CloseCombat",1,"Sustain")
+TNT1 A 0 A_GiveInventory("STF_CloseCombat",1)
+TNT1 A 0 A_SpawnItemEX("CloseCombatNerfWatcher")
+TNT1 A 0 A_GiveInventory("StatUpdator",1)
+stop
+
+Sustain:
+TNT1 A 0 A_GiveInventory("STF_CloseCombat",1)
+stop
+Nope:
+TNT1 A 0
+stop
+}
 }
 //[+]========================================================================[+]
 //--------------------------------|Projectiles |--------------------------------
@@ -135,16 +162,21 @@ stop
 
 actor CloseCombatFXTrail : BasicClientside
 {
-scale 1.5
+scale 3.5
+Renderstyle Translucent
+alpha 1.0
+reactiontime 5
 States
 {
 Spawn:
 TNT1 A 0 
 HITG B 1
-HITG BBB 1 A_Fadeout(0.3)
-stop
+HITG B 0 A_Fadeout(0.3)
+HITG B 0 A_SetScale(Scalex-0.2)
+loop
 }
 }
+
 
 
 actor CloseCombatFX1 : BasicClientside
@@ -175,6 +207,25 @@ HITG H 1 A_SetScale(ScaleX+0.5)
 HITG H 0 A_Fadeout(0.3)
 HITG H 1 A_SetScale(ScaleX+0.5)
 HITG H 0 A_Fadeout(0.3)
+stop
+}
+}
+
+actor CloseCombatNerfWatcher : BasicHelper 
+{
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_GiveToTarget("SDefDownFXSpawn")
+TNT1 A 5 A_GiveToTarget("PDefDownFXSpawn")
+TNT1 A 0 A_JumpIfInTargetInventory("STF_CloseCombat",1,"Spawn")
+TNT1 A 1 A_GiveToTarget("StatUpdator")
+TNT1 A 5
+Goto Death
+
+Death:
+TNT1 A 0 
 stop
 }
 }

@@ -90,7 +90,7 @@ TNT1 A 0 A_GiveInventory("ProjectileCode",1)
 TNT1 A 0 A_SpawnItemEx("DisarmingVoiceFX",0,0,0,0,0,0,0,1)
 Spawn2: // -=- Seeking Target -=-
 SPLQ R 1 A_SeekerMissile (2, 10, SMF_LOOK|SMF_PRECISE, 256, 2)
-SPLQ R 1 A_SpawnItemEx("CaptivateImpactParticle",random(-25,25),random(-25,25),random(-25,25),0,0,0,0,1)
+SPLQ R 1 A_SpawnItemEx("CaptivateParticle",random(-25,25),random(-25,25),random(-25,25),0,0,0,0,1)
 SPLQ RR 0 A_SpawnItemEx("GrassWhistleParticle",random(-10,10),random(-10,10),random(-10,10),0,0,0,0,1)
 SPLQ R 0 A_Countdown
 
@@ -109,13 +109,13 @@ Goto Spawn4
 Spawn4: // -=- target acquired -=-
 TNT1 A 0 A_SeekerMissile (2, 10, SMF_PRECISE)
 SPLQ R 1 A_SpawnItemEx("GrassWhistleParticle",random(-10,10),random(-10,10),random(-10,10),0,0,0,0,1)
-SPLQ R 1 A_SpawnItemEx("CaptivateImpactParticle",random(-25,25),random(-25,25),random(-25,25),0,0,0,0,1)
+SPLQ R 1 A_SpawnItemEx("CaptivateParticle",random(-25,25),random(-25,25),random(-25,25),0,0,0,0,1)
 TNT1 A 0 A_SeekerMissile (2, 10, SMF_PRECISE)
 SPLQ R 1 A_SpawnItemEx("GrassWhistleParticle",random(-10,10),random(-10,10),random(-10,10),0,0,0,0,1)
-SPLQ R 1 A_SpawnItemEx("CaptivateImpactParticle",random(-25,25),random(-25,25),random(-25,25),0,0,0,0,1)
+SPLQ R 1 A_SpawnItemEx("CaptivateParticle",random(-25,25),random(-25,25),random(-25,25),0,0,0,0,1)
 TNT1 A 0 A_SeekerMissile (2, 10, SMF_PRECISE)
 SPLQ R 1 A_SpawnItemEx("GrassWhistleParticle",random(-10,10),random(-10,10),random(-10,10),0,0,0,0,1)
-SPLQ R 1 A_SpawnItemEx("CaptivateImpactParticle",random(-25,25),random(-25,25),random(-25,25),0,0,0,0,1)
+SPLQ R 1 A_SpawnItemEx("CaptivateParticle",random(-25,25),random(-25,25),random(-25,25),0,0,0,0,1)
 SPLQ R 0 A_Countdown
 loop
 
@@ -124,7 +124,7 @@ Death:
 TNT1 A 0 A_GiveInventory("ProjectileDCode",1)
 TNT1 A 0 A_PlaySoundEx("weapon/noisecrush1","Weapon")
 BSTG AAAAAA 0 A_SpawnItemEx("GrassWhistleParticle", 0, 0, 28, 256/24, 256/24, random2(256/24), random(0, 359),1)
-BSTG AAAAAA 0 A_SpawnItemEx("CaptivateImpactParticle", 0, 0, 28, 256/24, 256/24, random2(256/24), random(0, 359),1)
+BSTG AAAAAA 0 A_SpawnItemEx("CaptivateParticle", 0, 0, 28, 256/24, 256/24, random2(256/24), random(0, 359),1)
 SPKH ABCD 2
 stop
 }

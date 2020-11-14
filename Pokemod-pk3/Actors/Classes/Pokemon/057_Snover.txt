@@ -61,7 +61,7 @@ TNT1 A 0 A_JumpIfInventory("isbot",1,"BotWep")
 TNT1 A 0 A_GiveInventory("PowderSnowMove1")
 TNT1 A 0 A_GiveInventory("LeafageMove2")
 TNT1 A 0 A_GiveInventory("LeerMove3")
-TNT1 A 0 A_GiveInventory("IceShardMove4")
+TNT1 A 0 A_GiveInventory("GrowthMove4")
 stop
 
 BotWep:

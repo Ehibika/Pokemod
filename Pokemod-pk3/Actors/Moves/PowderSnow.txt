@@ -90,15 +90,12 @@ actor PowderSnowPP : Ammo {inventory.amount 1 inventory.Maxamount 40}
 //--------------------------------|Projectiles |--------------------------------
 //[+]========================================================================[+]
 
-actor PowderSnowShot : basicProjectile
+actor PowderSnowShot : PKMN_EarlyGameProjectile
 {
 Damage (MBP_PowderSnow)
 damagetype "PowderSnow"
 Obituary "$OB_POWDERSNOW"
 Scale 1.5
-Height 6
-Radius 12
-Speed 32
 ReactionTime 35
 States
 {

@@ -21,9 +21,10 @@ Goto NoAmmo
 
 Fire.Begin:
 "####" B 0
-"####" B 0 A_Jump(256,"Fire.Pre")
-Goto Fire.Pre
+"####" B 0 A_Jump(256,"Fire.Bullet")
+Goto Fire.Bullet
 
+/*
 Fire.Pre:
 "####" B 0 A_PlaySoundEx("Support/UberCharge2","Soundslot6")
 "####" BB 0 A_SpawnItemEx("ShadowBallSparkle", 0, 0, 28, 12, 12, random2(12), random(0, 359),1)
@@ -35,6 +36,7 @@ Fire.Pre:
 "####" BB 0 A_SpawnItemEx("ShadowBallSparkle", 0, 0, 28, 12, 12, random2(12), random(0, 359),1)
 "####" B 2 A_GiveInventory("ShadowBallFXGive1",1)
 Goto Fire.Bullet
+*/
 Fire.Bullet:
 "####" B 0 A_PlaySoundEx("weapon/crackerthrow","Weapon")
 "####" B 0 A_FireCustomMissile("ShadowBallShot",0,1,0,0)
@@ -42,7 +44,7 @@ Fire.Bullet:
 Goto Fire.After
 
 Fire.After:
-"####" B 0 A_GiveInventory("HalfRecovery_A")
+"####" B 0 A_GiveInventory("SemiRecovery_A")
 Fire.After2:
 "####" B 1 A_GiveInventory("5Recovery_A")
 "####" B 0 A_TakeInventory("WeaponCharge",999)

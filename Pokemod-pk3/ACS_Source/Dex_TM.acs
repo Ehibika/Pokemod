@@ -134,6 +134,8 @@ int TMList [MAXTMLIST][5] = {
 {LightScreen    ,TMF_NULL           ,TMT_PSYCHIC|TMT_FAIRY                      ,TMP_2  ,TML_MID},
 {HealPulse      ,TMF_NULL           ,TMT_PSYCHIC|TMT_FAIRY                      ,TMP_2  ,TML_MID},
 {LifeDew        ,TMF_NULL           ,TMT_WATER|TMT_PSYCHIC|TMT_FAIRY            ,TMP_2  ,TML_ALL},
+{Barrier        ,TMF_NULL           ,TMT_PSYCHIC                                ,TMP_2  ,TML_MID},
+{AquaRing       ,TMF_NULL           ,TMT_WATER                                  ,TMP_2  ,TML_MID},
 
 {Magicalleaf    ,TMF_NULL           ,TMT_GRASS|TMT_FAIRY|TMT_PSYCHIC            ,TMP_2  ,TML_LOW},
 {BulletSeed     ,TMF_NULL           ,TMT_GRASS|TMT_BUG                          ,TMP_2  ,TML_LOW},
@@ -145,9 +147,7 @@ int TMList [MAXTMLIST][5] = {
 {WaterPulse     ,TMF_NULL           ,TMT_WATER                                  ,TMP_2  ,TML_MID},
 {Brine          ,TMF_NULL           ,TMT_WATER|TMT_POISON                       ,TMP_2  ,TML_MID},
 {Scald          ,TMF_NULL           ,TMT_WATER|TMT_FIRE                         ,TMP_2  ,TML_MID},
-{Spikes         ,TMF_NULL           ,TMT_GROUND                                 ,TMP_2  ,TML_MID},
-{ToxicSpikes    ,TMF_NULL           ,TMT_POISON|TMT_FIRE                        ,TMP_2  ,TML_MID},
-{StealthRock    ,TMF_NULL           ,TMT_GROUND|TMT_ROCK                        ,TMP_2  ,TML_MID},
+{CloseCombat    ,TMF_NULL           ,TMT_FIGHTING                               ,TMP_2  ,TML_MID},
 {DragonRage     ,TMF_NULL           ,TMT_DRAGON                                 ,TMP_2  ,TML_LOW},
 {Incinerate     ,TMF_NULL           ,TMT_FIRE|TMT_DRAGON                        ,TMP_2  ,TML_MID},
 {ThunderWave    ,TMF_NULL           ,TMT_ELECTRIC|TMT_PSYCHIC                   ,TMP_2  ,TML_LOW},
@@ -164,19 +164,19 @@ int TMList [MAXTMLIST][5] = {
 
 {IceBeam        ,TMF_NULL           ,TMT_WATER|TMT_ICE                          ,TMP_4  ,TML_MID2},
 {Flamethrower   ,TMF_NULL           ,TMT_FIRE|TMT_DRAGON                        ,TMP_4  ,TML_MID2},
-{ThunderBolt    ,TMF_NULL           ,TMT_ELECTRIC|TMT_PSYCHIC                   ,TMP_4  ,TML_MID2},
+{ThunderBolt    ,TMF_NULL           ,TMT_ELECTRIC                               ,TMP_4  ,TML_MID2},
 {ShadowBall     ,TMF_NULL           ,TMT_GHOST|TMT_PSYCHIC                      ,TMP_4  ,TML_MID2},
 {Toxic          ,TMF_NULL           ,TMT_POISON                                 ,TMP_4  ,TML_ALL},
 {SludgeBomb     ,TMF_NULL           ,TMT_POISON                                 ,TMP_4  ,TML_MID2},
 {Surf           ,TMF_NULL           ,TMT_WATER                                  ,TMP_4  ,TML_MID2},
 {Waterfall      ,TMF_NULL           ,TMT_WATER                                  ,TMP_4  ,TML_MID2},
 {DragonPulse    ,TMF_NULL           ,TMT_DRAGON                                 ,TMP_4  ,TML_MID2},
-{DazzlingGleem  ,TMF_NULL           ,TMT_FAIRY|TMT_PSYCHIC                      ,TMP_4  ,TML_ALL},
+{Dazzlinggleam  ,TMF_NULL           ,TMT_FAIRY|TMT_PSYCHIC                      ,TMP_4  ,TML_ALL},
 {PsychoCut      ,TMF_NULL           ,TMT_PSYCHIC                                ,TMP_4  ,TML_MID2},
 {AirSlash       ,TMF_NULL           ,TMT_Flying                                 ,TMP_4  ,TML_MID2},
 {HammerArm      ,TMF_NULL           ,TMT_FIGHTING                               ,TMP_4  ,TML_MID2},
 
-{EarthQuake     ,TMF_NULL           ,TMT_GROUND|TMT_ROCK|TMT_STEEL              ,TMP_5  ,TML_HIGH},
+{EarthQuake     ,TMF_UNIVERSAL      ,TMT_GROUND|TMT_ROCK|TMT_STEEL              ,TMP_5  ,TML_HIGH},
 {FireBlast      ,TMF_NULL           ,TMT_FIRE|TMT_DRAGON                        ,TMP_5  ,TML_HIGH},
 {SolarBeam      ,TMF_NULL           ,TMT_GRASS|TMT_FIRE                         ,TMP_5  ,TML_HIGH},
 {GigaDrain      ,TMF_NULL           ,TMT_GRASS                                  ,TMP_5  ,TML_HIGH},
@@ -255,7 +255,16 @@ int output = 0;
         case GALLADE: output = 1; break;
         case EXEGGUTOR: output = 1; break;
         case TORKOAL: output = 1; break;
-        case MAGCARGO: output = 1; break;        
+        case MAGCARGO: output = 1; break;  
+        case RAICHU: output = 1; break;
+        case FERROTHORN: output = 1; break;      
+        case KINGDRA: output = 1; break;      
+        case CHERRIM_O: output = 1; break;      
+        case CHERRIM_S: output = 1; break;      
+        case ARCANINE: output = 1; break;      
+        case HYDREIGON: output = 1; break;      
+        case REUNICLUS: output = 1; break;      
+        case BLISSEY: output = 1; break;      
         }
 return output;
 }
@@ -292,7 +301,7 @@ int output = 0;
         case ToxicSpikes: output = TMR_WideGuard(Dexnum); break;    
         case StealthRock: output = TMR_WideGuard(Dexnum); break;   
         case ThunderWave: output = TMR_ThunderWave(Dexnum); break;   
-        case DazzlingGleem: output = TMR_DazzlingGleem(Dexnum); break; 
+        case Dazzlinggleam: output = TMR_Dazzlinggleam(Dexnum); break; 
         case Acrobatics: output = TMR_Acrobatics(Dexnum); break; 
         case Rollout: output = TMR_Rollout(Dexnum); break; 
         case GyroBall: output = TMR_Rollout(Dexnum); break; 
@@ -307,9 +316,16 @@ int output = 0;
         case Thunder: output = TMR_Thunder(Dexnum); break; 
         case Solarbeam: output = TMR_SolarBeam(Dexnum); break; 
         case Flamethrower: output = TMR_Flamethrower(Dexnum); break; 
+        case FireBlast: output = TMR_Flamethrower(Dexnum); break; 
         case ClearSmog: output = TMR_ClearSmog(Dexnum); break; 
         case IceBeam: output = TMR_IceBeam(Dexnum); break; 
         case Blizzard: output = TMR_IceBeam(Dexnum); break; 
+        case Barrier: output = TMR_WideGuard(Dexnum); break;   
+        case AquaRing: output = TMR_HealPulse(Dexnum); break;    
+        case CloseCombat: output = TMR_CloseCombat(Dexnum); break;    
+        case Toxic: output = TMR_Toxic(Dexnum); break;    
+        case SludgeBomb: output = TMR_SludgeBomb(Dexnum); break;    
+
         
         
         //case sworddance: output = TMR_sworddance(Dexnum); break; 
@@ -585,6 +601,9 @@ Function int TMR_Psychic (int Dexnum)
     case DRAGONITE: output = 1; break;
     case VULPIX_A: output = 1; break;
     case NINETALES_A: output = 1; break;
+    case HAPPINY: output = 1; break;
+    case CHANSEY: output = 1; break;
+    case BLISSEY: output = 1; break;
     }
 return output;
 }
@@ -607,6 +626,12 @@ Function int TMR_ThunderBolt (int Dexnum)
     case DRAGAPULT: output = 1; break;
     case FERROSEED: output = 1; break;
     case FERROTHORN: output = 1; break;
+    case RALTS: output = 1; break;
+    case KIRLIA: output = 1; break;
+    case GARDEVOIR: output = 1; break;
+    case GALLADE: output = 1; break;
+    case STARYU: output = 1; break;
+    case STARMIE: output = 1; break;
     }
     if(TMArch_Generalist(Dexnum)){output = 1;}
 return output;
@@ -630,6 +655,9 @@ Function int TMR_Thunder (int Dexnum)
     case DRAGAPULT: output = 1; break;
     case FERROSEED: output = 1; break;
     case FERROTHORN: output = 1; break;
+    case SOLOSIS: output = 1; break;
+    case DUOSION: output = 1; break;
+    case REUNICLUS: output = 1; break;
     }
     if(TMArch_Generalist(Dexnum)){output = 1;}
 return output;
@@ -660,8 +688,8 @@ return output;
 }
 //#endregion
 
-//#region -=- TM Rules : DazzlingGleem -=-
-Function int TMR_DazzlingGleem (int Dexnum) 
+//#region -=- TM Rules : Dazzlinggleam -=-
+Function int TMR_Dazzlinggleam (int Dexnum) 
 {
 
     int output = 0;
@@ -706,13 +734,33 @@ return output;
 //#endregion
 
 
+//#region -=- TM Rules : FireBlast -=-
+Function int TMR_FireBlast (int Dexnum) 
+{
+    int output = 0;
+    Switch (Dexnum)
+    {
+        case SLOWPOKE: output = 1; break;
+        case SLOWBRO: output = 1; break;
+        case SLOWKING: output = 1; break;
+    }
+
+    if(TMArch_Draconic(Dexnum)){output = 1;}
+    if(TMArch_Generalist(Dexnum)){output = 1;}
+
+return output;
+}
+//#endregion
+
 //#region -=- TM Rules : IceBeam -=-
 Function int TMR_IceBeam (int Dexnum) 
 {
     int output = 0;
     Switch (Dexnum)
     {
-
+    case DRATINI: output = 1; break;
+    case DRAGONAIR: output = 1; break;
+    case DRAGONITE: output = 1; break;
     }
 
     if(TMArch_Generalist(Dexnum)){output = 1;}
@@ -728,19 +776,7 @@ Function int TMR_WideGuard (int Dexnum)
     int output = 0;
     Switch (Dexnum)
     {
-    case SQUIRTLE: output = 1; break;
-    case WARTORTLE: output = 1; break;
-    case BLASTOISE: output = 1; break;
-    case CYNDAQUIL: output = 1; break;
-    case QUILAVA: output = 1; break;
-    case TYPHLOSION: output = 1; break;
-    case CHIKORITA: output = 1; break;
-    case BAYLEEF: output = 1; break;
-    case MEGANIUM: output = 1; break;
-    case SHELLDER: output = 1; break;
-    case CLOYSTER: output = 1; break;
-    case SHELGON: output = 1; break;
-    case TORKOAL: output = 1; break;
+
     }
 return output;
 }
@@ -830,6 +866,56 @@ Function int TMR_ClearSmog (int Dexnum)
     case SEADRA: output = 1; break;
     case KINGDRA: output = 1; break;
     }
+return output;
+}
+//#endregion
+
+//#region -=- TM Rules : SludgeBomb -=-
+Function int TMR_SludgeBomb (int Dexnum) 
+{
+    int output = 0;
+    Switch (Dexnum)
+    {
+        case MUDKIP: output = 1; break;
+        case MARSHTOMP: output = 1; break;
+        case SWAMPERT: output = 1; break;
+        case TORKOAL: output = 1; break;
+    }
+return output;
+}
+//#endregion
+
+//#region -=- TM Rules : Toxic -=-
+Function int TMR_Toxic (int Dexnum) 
+{
+    int output = 0;
+    Switch (Dexnum)
+    {
+    case MUDKIP: output = 1; break;
+    case MARSHTOMP: output = 1; break;
+    case SWAMPERT: output = 1; break;
+    case HORSEA: output = 1; break;
+    case SEADRA: output = 1; break;
+    case KINGDRA: output = 1; break;
+    }
+    if(TMArch_Defensive(Dexnum)){output = 1;}
+    if(TMArch_Generalist(Dexnum)){output = 1;}
+return output;
+}
+//#endregion
+
+//#region -=- TM Rules : CloseCombat -=-
+Function int TMR_CloseCombat (int Dexnum) 
+{
+
+int output = 0;
+    Switch (Dexnum)
+    {
+    case GROWLITHE: output = 1; break;
+    case ARCANINE: output = 1; break;
+    }
+    if(TMArch_Pugilist(Dexnum)){output = 1;}
+    
 return output;
 }
 //#endregion
@@ -951,6 +1037,33 @@ int output = 0;
         case HAPPINY: output = 1; break;
         case CHANSEY: output = 1; break;
         case BLISSEY: output = 1; break;
+        }
+return output;
+}
+//#endregion 
+
+//#region -=- TM Archetype : Defensive
+Function int TMArch_Defensive (int Dexnum)
+{
+int output = 0;
+    /* the Defensive archetype is given to more tanky and defense oriented pokemon, giving them access to many defensive utilities.
+
+    */
+    Switch (Dexnum)
+        {        
+            case SQUIRTLE: output = 1; break;
+            case WARTORTLE: output = 1; break;
+            case BLASTOISE: output = 1; break;
+            case CYNDAQUIL: output = 1; break;
+            case QUILAVA: output = 1; break;
+            case TYPHLOSION: output = 1; break;
+            case CHIKORITA: output = 1; break;
+            case BAYLEEF: output = 1; break;
+            case MEGANIUM: output = 1; break;
+            case SHELLDER: output = 1; break;
+            case CLOYSTER: output = 1; break;
+            case SHELGON: output = 1; break;
+            case TORKOAL: output = 1; break;
         }
 return output;
 }
@@ -1106,29 +1219,6 @@ int output = 0;
         case CHIMCHAR: output = 1; break;
         case MONFERNO: output = 1; break;
         case INFERNAPE: output = 1; break;
-    }
-return output;
-}
-//#endregion 
-
-//#region -=- Archetype : Defensive
-Function int TMArch_Defensive (int Dexnum)
-{
-int output = 0;
-// Prankster archetype favors Pokemon naturally built for more defensive playstyles, this favors recovery moves,
-// protective moves, and some zone control moves.
-
-    Switch (Dexnum)
-    {
-        case SQUIRTLE: output = 1; break;
-        case WARTORTLE: output = 1; break;
-        case BLASTOISE: output = 1; break;
-        case CHIKORITA: output = 1; break;
-        case BAYLEEF: output = 1; break;
-        case MEGANIUM: output = 1; break;
-        case TURTWIG: output = 1; break;
-        case GROTLE: output = 1; break;
-        case TORTERRA: output = 1; break;
     }
 return output;
 }

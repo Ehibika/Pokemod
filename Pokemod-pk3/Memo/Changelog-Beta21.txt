@@ -1,0 +1,289 @@
+//#region -=-=- Beta 19 -=-=-
+/*
+ *
+ * ===|Gameplay Changes|===
+ * 
+ * Healing allies with the following moves now generates exp
+ *      Life dew
+ *      moonlight
+ *      heal pulse
+ *      aqua ring
+ * 
+ * [Fatigue status]
+ * duration reduced from 5 seconds to 2
+ * 
+ * [burn status]
+ * Tick damage percent increased form 2 to 6
+ * 
+ * Type based knockback was removed
+ * 
+ * Level up sets across the board have been reworked.
+ * 
+ * ===|Move Changes|===
+ * 
+ * [generic melee]
+ * base power increased
+ * base power now scales with level
+ * 
+ * The following moves were missing type multipliers
+ *      Twister
+ *      DragonBreath
+ *      DracoMeteor
+ *      Outrage
+ * [giga drain]
+ * hitbox on projectiles halved in size
+ * 
+ * 
+ * [fire punch]
+ * damage increased
+ * knockback removed
+ * no longer procs burn
+ * move recovery time increased
+ * 
+ * [ice punch]
+ * damage increased
+ * knockback removed
+ * no longer procs freeze
+ * move recovery time increased
+ * 
+ * [thunder punch]
+ * damage increased
+ * knockback removed
+ * no longer procs paralysis
+ * move recovery time increased
+ * 
+ * [drain punch]
+ * damage increased
+ * move recovery time increased
+ * 
+ * [fire fang]
+ * damage increased
+ * knockback removed
+ * no longer procs burn
+ * move recovery time increased
+ * 
+ * [ice fang]
+ * damage increased
+ * no longer procs freeze
+ * move recovery time increased
+ * 
+ * [Bite]
+ * move recovery time increased
+ * 
+ * [crunch]
+ * move recovery time increased
+ * 
+ * [surf]
+ * no longer a physical object you can stand on
+ * wave speed and accelleration increased
+ * damage increased
+ * knockup removed
+ * knockback added
+ * 
+ * [waterfall]
+ * damage increased and altered, first hit deals full damage
+ * knockback removed
+ * 
+ * [liquidation]
+ * fixed missing VFX for nonclients
+ * fixed issue where the move couldn't collide with players
+ * 
+ * [AquaRing]
+ * no longer effects only water types
+ * no longer effects enemies
+ * healing is based on sp.def and not sp.atk 
+ * 
+ * most all early game lvl 1 projectile moves have been standardized, all having similar movespeeds, hitbox sizes, and flight trajectories, the effected moves include
+ *  Ember
+ *  Watergun
+ *  Leafage
+ *  Psywave
+ *  PowderSnow
+ *  Mudslap
+ *  ThunderShock
+ *  Twister
+ *  DragonRage
+ * 
+ * [ember]
+ * rebalanced to match the power of other lvl 1 projectile moves, 
+ *      lowered fire rate
+ *      increased projectile lifetime
+ *      lowered projectile speed
+ * 
+ * [watergun]
+ * no longer gravity effected
+ * 
+ * [psywave]
+ * damae buffer adjusted to only hit once
+ * power increased to standard
+ * 
+ * [mudslap]
+ * no longer gravity effected
+ * now shoots 1 full powered projectile
+ * PP increased to 40
+ * 
+ * [ThunderShock]
+ * reworked into being a projectile instead of a ground targeted move
+ * 
+ * Reapproaced damage scaling for the following moves (as zandro rounding was giving them lower values than they should)
+ *      Thunderbolt
+ *      Flamethrower
+ *      DragonPulse
+ *      HydroPump
+ *      BubbleBeam
+ * 
+ * [DoubleKick]
+ * now has a damage buffer
+ * damage scaled with other rapid hit moves
+ * 
+ * [Thunderbolt]
+ * range increased
+ * windup removed
+ * 
+ * [hydro Pump]
+ * windup removed
+ * 
+ * [Fire Blast]
+ * Charge time reduced by half
+ * 
+ * [energy ball]
+ * wind up removed
+ * 
+ * [flash cannon]
+ * windup removed
+ * recovery time reduced
+ * 
+ * [moonblast]
+ * windup removed
+ * moon FX adjusted for visibility
+ * 
+ * [psybeam]
+ * bounces reduced to 1
+ * 
+ * [Aurorabeam]
+ * projectile lifetime reduced by half
+ * 
+ * [powerGem]
+ * windup removed
+ * damage increased
+ * 
+ * [ClearSmog]
+ * hitbox size increased
+ * Damage increased
+ * 
+ * [rest]
+ * now has a fixed duration of 5 seconds
+ * pp increased to 10
+ * 
+ * [thunderWave]
+ * projectile speed increased
+ * 
+ * [DragonBreath]
+ * elevated into being a mid tier missile like flameburst, waterpulse, and extrasensory
+ *      projectile speed increased
+ *      damage increased
+ *      PP increased to 20
+ * [dragon rage]
+ * Re-established as an early game projectile
+ *      projectile speed increased
+ *      PP increased to 40
+ * 
+ * [DracoMeteor]
+ * Projectiles come from above and not an an angle
+ * 
+ * [Close Combat]
+ * attack duration shortened
+ * lowers Def and Sp.Def instead of inflicting fatigue
+ * PP increased to 10
+ * removed knockback
+ * 
+ * [thrash]
+ * Fixed the conditions that create a server crashing infinite loop
+ * duration reduced
+ * range reduced
+ * hits all around the user
+ * pp increased to 10
+ * knockback removed
+ * 
+ * [Outrage]
+ * Fixed the conditions that create a server crashing infinite loop
+ * duration reduced
+ * range reduced
+ * hits all around the user
+ * pp increased to 10
+ * 
+ * [mach punch]
+ * damage increased
+ * 
+ * [fakeout]
+ * damage increased
+ * 
+ * [quick attack]
+ * damage increased
+ * knockback removed
+ * 
+ * [aqua jet]
+ * damage increased
+ * 
+ * [peck]
+ * Damage increased
+ * 
+ * [aquatail]
+ * swing speed increased
+ * damage increased
+ * hitbox widened 
+ * 
+ * [Brine]
+ * Shots are launch all on the same frame
+ * 
+ * [icicle crash]
+ * speed up the move's execution
+ * increased the number of icicle waves
+ * updated spawning method to account for 3d floors
+ * 
+ * [rockslide]
+ * updated spawning method to account for 3d floors
+ * damage increased
+ * 
+ * [HeatWave]
+ * Range increased
+ * PP increased from 10 to 15
+ * 
+ * [icy wind]
+ * recoded to function similarly to heatwave
+ * Damage increased
+ * PP increased from 10 to 15
+ * 
+ * [whirlpool]
+ * altered suction mechanics
+ * 
+ * [firespin]
+ * is now ground targeted rather than only spawning at your location
+ * damage increased
+ * PP increased from 5 to 10
+ * 
+ * [Absorb]
+ * reworked into being a basic projectile
+ * 
+ * [mega drain]
+ * restored it's ability to drain continuously
+ * 
+ * [Giga drain]
+ * now fully imobilizes the user while the move is active.
+ * 
+ * [Phantom Force]
+ * Fixed issue of missing FX when a nonclient player uses the move
+ *  ===|Pokemon Changes|===
+ * 
+ * ===|TM Changes|===
+ * 
+ * The following TM's have been removed from the TM shop
+ *      Spikes
+ *      Toxic Spikes
+ *      Stealth Rock
+ * 
+ * the following TM's have been added to the TM shop
+ *      Aqua Ring
+ *      Barrier
+ *      Close Combat
+ */ 

@@ -83,6 +83,12 @@ actor DoubleKickCST : PowerupGiver
 Powerup.Duration 35
 powerup.type "ConShotTimer"
 }
+
+Actor DoubleKickProtect : powerprotection
+{
+Powerup.duration 17
+Damagefactor "DoubleKick", 0
+}
 //[+]========================================================================[+]
 //--------------------------------|Projectiles |--------------------------------
 //[+]========================================================================[+]

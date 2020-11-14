@@ -76,7 +76,7 @@ Actor WhirlpoolBuffer : Powerup {inventory.amount 1 Powerup.duration 17}
 
 Const int WhlPolRad1 = 200;
 Const int WhlPolRad2 = 125;
-Const int WhlPol_Pull = 1;
+Const int WhlPol_Pull = 7;
 Const int WhlPolEntiTID = 6;
 Const int WhlPol_Time = 80;
 
@@ -184,7 +184,7 @@ Spawn:
 WHRL E 0
 WHRL E 0 A_SetArg(0,WhlPol_Time)
 WHRL E 0 A_GiveInventory("ProjectileCode",1)
-WHRL E 0 ACS_NamedExecuteAlways("GiveEntiTID",0,WhlPolEntiTID)
+WHRL E 0 //ACS_NamedExecuteAlways("GiveEntiTID",0,WhlPolEntiTID)
 BLKH F 0 A_SpawnItemEx("WhirlpoolFXSpawner", 0, 0, 0, 0, 0, 0, 0, SXF_TRANSFERTRANSLATION)
 BLKH F 0 A_SpawnItemEx("WhirlPoolGraphic1", 0, 0, 0, 0, 0, 0, 0, SXF_TRANSFERTRANSLATION)
 WHRL E 0 A_PlaySoundEx("weapon/blackholebombdetonate", "body", 1)
@@ -193,13 +193,13 @@ Spawn2:
 WHRL E 0 A_Explode(MBP_Whirlpool,WhlPolRad2,0,0,WhlPolRad2)
 BLKH F 0 A_SpawnItemEx("WhirlPoolGraphic1", 0, 0, 0, 0, 0, 0, 0, SXF_TRANSFERTRANSLATION)
 WHRL E 0 A_GiveToTarget("WhirlpoolBuffer")
-WHRL E 1 ACS_ExecuteAlways(247, 0, WhlPol_Pull, WhlPolRad1,1)
+WHRL E 1 ACS_ExecuteAlways(247, 0, WhlPol_Pull, WhlPolRad1,0)
 WHRL E 1 A_Countdownarg(0)
 
-WHRL F 1 ACS_ExecuteAlways(247, 0, WhlPol_Pull, WhlPolRad1,1)
+WHRL F 1 ACS_ExecuteAlways(247, 0, WhlPol_Pull, WhlPolRad1,0)
 WHRL F 1 A_Countdownarg(0)
 
-WHRL G 1 ACS_ExecuteAlways(247, 0, WhlPol_Pull, WhlPolRad1,1)
+WHRL G 1 ACS_ExecuteAlways(247, 0, WhlPol_Pull, WhlPolRad1,0)
 WHRL G 1 A_Countdownarg(0)
 goto Spawn2
 Death:

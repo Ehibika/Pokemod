@@ -67,19 +67,26 @@ Goto Ready
 actor EmberPP : Ammo {inventory.amount 1 inventory.Maxamount 40}
 
 
-actor Ember_Recovery_A : FullRecovery_A{Powerup.Duration 10}
+actor Ember_Recovery_A : FullRecovery_A{Powerup.Duration 17}
 //[+]========================================================================[+]
 //--------------------------------|Projectiles |--------------------------------
 //[+]========================================================================[+]
-actor EmberFireball : BasicProjectile
+
+actor PKMN_EarlyGameProjectile : BasicProjectile
 {
-Speed 64
+Speed 48
+Reactiontime 80
+height 16
+radius 16
+}
+
+
+actor EmberFireball : PKMN_EarlyGameProjectile
+{
 Damage (MBP_Ember)
 DamageType "Ember"
 obituary "$OB_EMBER"
-radius 24
-Reactiontime 10
-height 16
+Reactiontime 80
 scale 3.5
 States
 {

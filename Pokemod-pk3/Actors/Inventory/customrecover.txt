@@ -7,18 +7,18 @@ states
 spawn:
 TNT1 A 0
 TNT1 A 2 ACS_NAmedExecuteAlways("ItemSpawnTID",0)
-TNT1 A 0 A_Jump(256,"Spawn0")
-stop
+TNT1 A 0 A_Jump(256,"spawn0")
+goto spawn0
 
 spawn0:
 TNT1 A 0
-EBAL E 0 A_JumpIf(CallACS("ItemUseCheck")==1,"Spawn1")
+EBAL E 0 A_JumpIf(CallACS("ItemUseCheck")==1,"Spawn2")
 stop
-
+/*
 Spawn1:
 TNT1 A 0 A_Jump(Callacs("MoneySpawnRate"),"Spawn2")
-stop
-
+goto RespawnTime
+*/
 Spawn2:
 TNT1 A 0 A_SpawnItemEX("PokeMoney",0,0,0,0,0,0,0,0,0,tid+1000)
 goto RespawnWait
@@ -29,6 +29,9 @@ wait
 
 RespawnTime:
 TNT1 AAAAAAAAAAAAAAAAAAAA 35
+RespawnTime2:
+TNT1 A 35
+TNT1 A 1 A_JumpIf(CallACS("MoneyCount") > 30,"RespawnTime2")
 TNT1 A 0 A_SpawnItemEX("ItemFog2")
 TNT1 A 0 A_Jump(256,"Spawn2")
 goto Spawn2

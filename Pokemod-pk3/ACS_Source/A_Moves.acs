@@ -527,6 +527,25 @@ Script "GeneralWarper" (void) CLIENTSIDE
 	Thing_Remove(0);
 }
 
+Script "GeneralWarper2" (void) //CLIENTSIDE  //for nonclientsided actors
+{
+    int Player = ACS_NamedExecuteWithResult("core_gettarget",0);
+    str FlagName = StrParam(s:GetActorClass(0), s:"Flag");
+
+	
+	// Loop if shield is active
+	while(GetActorProperty(Player, APROP_HEALTH)>0
+	&& CheckActorInventory(Player, FlagName) > 0 
+	){
+		Delay(1);
+	}
+	
+    // Remove
+    SetActorState(0,"Death");
+    Delay(17);
+	Thing_Remove(0);
+}
+
 #DEFINE STATUS_MINOR  1
 #DEFINE STATUS_MAJOR  2
 #DEFINE STATUS_SPECIALTY  4
@@ -673,4 +692,26 @@ Script "YawnBreakCheck" (int Pointer)
 
 
     SetResultValue(Output);
+}
+
+
+Script "CheckDebuffAura" (void)
+{
+Int Output;
+
+if(CheckInventory("CharmAuraFlag")
+||CheckInventory("CaptivateAuraFlag")
+||CheckInventory("ScreechAuraFlag")
+||CheckInventory("FakeTearsAuraFlag")
+||CheckInventory("ScaryFaceAuraFlag"))
+{Output = 1;}
+
+SetResultValue(Output);
+}
+
+Script "GenericAttackPower" (int Rate)
+{
+    int PlayerLVL = GetCvar(StrParam(s:"PlayerLevel_",i:PlayerNumber()));
+    setResultValue(Rate*(PlayerLVL-1));
+
 }

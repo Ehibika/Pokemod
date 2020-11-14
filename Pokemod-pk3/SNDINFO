@@ -147,7 +147,7 @@ Move/DrillPeck DRILPECK
 Move/SwordDance SWRDDANC
 Move/IceBeam ICEBEAM
 Move/DisarmingVoice DISVOI
-Move/DazzlingGleem DAZZLE
+Move/Dazzlinggleam DAZZLE
 Move/MoonLight MOONL1
 $attenuation Move/MoonLight 0.5
 Move/Blizzard BLIZZARD

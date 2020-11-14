@@ -28,6 +28,8 @@ Goto Fire.Melee
 
 Fire.Melee:
 TNT1 A 0 ACS_NamedExecuteAlways("TakePP",0,Move_Waterfall,1)
+TNT1 A 0 A_TakeInventory("UnSolid",1)
+TNT1 A 0 A_ChangeFlag("SOLID",0)
 TNT1 A 0 A_PlaySoundEx("weapon/ChargeKick","Weapon")
 TNT1 B 5 ThrustThing(angle * 256 / 360, 25, 0, 0)
 TNT1 B 0 A_GiveInventory("WaterfallBuffer")
@@ -56,6 +58,7 @@ Goto Fire.After
 
 Fire.After:
 "####" B 1 A_GiveInventory("FullRecovery_C") //Sky Uppercut uses C recovery so it can combo with other moves
+"####" B 0 A_SpawnItemEx("ReSolidifier")
 "####" B 0 A_Jump(256,"Fire.End")
 Goto Fire.End
 }
@@ -91,11 +94,19 @@ Actor WaterfallBuffer2 : Powerup {inventory.amount 1 Powerup.duration 35}
 Actor WaterfallBoostBuffer : Powerup {inventory.amount 1 Powerup.duration 17}
 
 
-Actor WaterfallProtect : powerprotection
+Actor WaterfallProtect1 : powerprotection
 {
 Powerup.duration 5
 Damagefactor "Waterfall", 0
 }
+
+Actor WaterfallProtect2 : powerprotection
+{
+Powerup.duration 17
+Damagefactor "Waterfall", 0.1
+}
+
+const int Waterfall_Rad = 80;
 //[+]========================================================================[+]
 //--------------------------------|Projectiles |--------------------------------
 //[+]========================================================================[+]
@@ -113,7 +124,7 @@ Spawn:
 TNT1 A 0 
 TNT1 A 0 A_GiveInventory("ProjectileCode",1)
 Spawn2:
-TNT1 A 0 A_Explode(MBP_Waterfall,64,0,0,64)
+TNT1 A 0 A_Explode(MBP_Waterfall,Waterfall_Rad,0,0,Waterfall_Rad)
 TNT1 A 1 A_SpawnItemEx("WaterfallFX1", 0, 0, 0, 0, 0, 0, 0,1)
 stop
 

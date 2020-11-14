@@ -64,15 +64,12 @@ actor LeafagePP : Ammo {inventory.amount 1 inventory.Maxamount 40}
 //[+]========================================================================[+]
 //--------------------------------|Projectiles |--------------------------------
 //[+]========================================================================[+]
-actor LeafageShot : BasicProjectile
+actor LeafageShot : PKMN_EarlyGameProjectile
 {
-Speed 32
 Damage (MBP_Leafage)
 DamageType "Leafage"
 obituary "$OB_Leafage"
-radius 5
 Reactiontime 10
-height 16
 scale 3.5
 States
 {
