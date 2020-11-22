@@ -455,6 +455,10 @@ if(PlayerLVL >=  EvoDEX[PlayerDex][1])
             print(s:"Evolved!");
             }
     }
+    else
+    {
+        print(s:"Cannot evolve untill level ",i:EvoDEX[PlayerDex][1]);
+    }
 }
 
 Script "PlayerFormChange" (Int NextForm)

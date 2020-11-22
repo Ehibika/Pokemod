@@ -1,3 +1,4 @@
+//#region 
 /*
 actor IceBeamMove : WepMasterBase
 {
@@ -86,7 +87,7 @@ Stop
 }
 }
 */
-
+//#endregion
 
 actor IceBeamMove : WepMasterBase
 {
@@ -338,15 +339,12 @@ stop
 
 
 
-actor IceBeamLaser : BasicProjectile
+actor IceBeamLaser : PKMN_SkillShot
 {
 +SKYEXPLODE
 +FORCEXYBILLBOARD
 //+THRUACTORS
 Reactiontime 70
-Radius 8
-Height 8
-Speed 48
 Scale 2.5
 Obituary "$OB_ICEBEAM"
 damagetype "IceBeam"

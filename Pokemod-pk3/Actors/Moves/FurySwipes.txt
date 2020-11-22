@@ -1,0 +1,205 @@
+Const int FURYSWIPES_SPACE = 35;
+
+actor FurySwipesMove : WepMasterBase
+{
+Tag "FurySwipes"
+obituary "$OB_FurySwipes"
+Weapon.AmmoUse 1
+Weapon.AmmoGive 25
+weapon.ammotype "FurySwipesPP"
+scale 2.0
+Inventory.Pickupmessage "$PU_MEGABUSTER"
+States
+{
+Spawn:
+WEAP X 1
+stop
+
+
+Fire:
+"####" BBB 1 A_Jumpif(CallACS("CheckWeaponFire",RC_B)==1,"Fire.Begin")
+"####" B 0 A_Jump(256,"NoAmmo")
+Goto NoAmmo
+
+Fire.Begin:
+"####" B 0
+"####" B 0 A_Jumpifinventory("ConShotTimer",1,"Fire.Bullet2")
+"####" B 0 A_Jump(256,"Fire.Bullet")
+Goto Fire.Bullet
+
+Fire.Bullet:
+"####" B 0 A_PlaySoundEx("weapon/SlashClaw","Weapon")
+"####" B 0 A_FireCustomMissile("FurySwipesMelee",0,1,FURYSWIPES_SPACE,0,0,CallACS("PitchClamp",Pitch,55))
+"####" B 5 A_FireCustomMissile("FurySwipesMelee",0,0,0,0,0,CallACS("PitchClamp",Pitch,55))
+"####" B 0 A_PlaySoundEx("weapon/SlashClaw","Weapon")
+"####" B 0 A_FireCustomMissile("FurySwipesMelee",0,0,0,0,0,CallACS("PitchClamp",Pitch,55))
+"####" B 0 A_FireCustomMissile("FurySwipesMelee",0,0,-FURYSWIPES_SPACE,0,0,CallACS("PitchClamp",Pitch,55))
+"####" B 0 A_GiveInventory("FurySwipesCST",1)
+"####" B 0 A_Jump(256,"Fire.After")
+Goto Fire.After
+
+Fire.Bullet2:
+"####" B 0 A_PlaySoundEx("weapon/SlashClaw","Weapon")
+"####" B 0 A_FireCustomMissile("FurySwipesMelee",0,0,FURYSWIPES_SPACE,0,0,CallACS("PitchClamp",Pitch,55))
+"####" B 5 A_FireCustomMissile("FurySwipesMelee",0,0,0,0,0,CallACS("PitchClamp",Pitch,55))
+"####" B 0 A_PlaySoundEx("weapon/SlashClaw","Weapon")
+"####" B 0 A_FireCustomMissile("FurySwipesMelee",0,0,0,0,0,CallACS("PitchClamp",Pitch,55))
+"####" B 0 A_FireCustomMissile("FurySwipesMelee",0,0,-FURYSWIPES_SPACE,0,0,CallACS("PitchClamp",Pitch,55))
+"####" B 0 A_Jump(256,"Fire.After")
+Goto Fire.After
+
+Fire.After:
+"####" B 1 A_GiveInventory("5Recovery_B")
+"####" C 0 A_REfire("Fire")
+"####" B 0 A_TakeInventory("ConShotTimer",99)
+"####" B 0 A_Jump(256,"Fire.End")
+Goto Fire.End
+
+
+
+
+
+}
+}
+
+actor FurySwipesMove1 : FurySwipesMove {Weapon.SlotNumber 1}
+actor FurySwipesMove2 : FurySwipesMove {Weapon.SlotNumber 2}
+actor FurySwipesMove3 : FurySwipesMove {Weapon.SlotNumber 3}
+actor FurySwipesMove4 : FurySwipesMove {Weapon.SlotNumber 4}
+
+actor FurySwipesMove5 : FurySwipesMove 
+{
+Weapon.SlotNumber 5
+States
+{
+Fire.End:
+TNT1 A 0
+TNT1 A 0 A_TakeInventory("FurySwipesMove5",9)
+TNT1 A 0 A_Jump(256,"Ready")
+Goto Ready
+}
+}
+
+//[+]========================================================================[+]
+//-----------------------------|Ammo & Inventory|------------------------------
+//[+]========================================================================[+]
+actor FurySwipesPP : Ammo {inventory.amount 1 inventory.Maxamount 25}
+
+actor FurySwipesCST : PowerupGiver
+{
++INVENTORY.AUTOACTIVATE
+Powerup.Duration 35
+powerup.type "ConShotTimer"
+}
+
+Actor FurySwipesProtect : powerprotection
+{
+Powerup.duration 17
+Damagefactor "FurySwipes", 0
+}
+//[+]========================================================================[+]
+//--------------------------------|Projectiles |--------------------------------
+//[+]========================================================================[+]
+
+
+actor FurySwipesMelee : BasicMeleeAttack
+{
+DamageType "FurySwipes"
+Obituary "$OB_FURYSWIPES"
+scale 1.5
+Speed 48
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+TBLA GGGG 1 A_SpawnItemEx("FurySwipesTrail",-48,0,0,momx,momy,momz,0,9)
+stop
+
+Death:
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+NDFX A 1 A_Explode(MBP_FurySwipes,80,0,0,80)
+NDFX A 1 A_SpawnItemEx("FurySwipesImpactFX",0,0,0,0,0,0,0,1)
+stop
+}
+}
+
+//[+]========================================================================[+]
+//--------------------------------|Special Actors|------------------------------
+//[+]========================================================================[+]
+
+actor FurySwipesTrail : BasicExplosion
+{
+Obituary "$OB_FURYSWIPES"
+damagetype "FurySwipes"
+Args 10
+States
+{
+Spawn:
+TNT1 A 0
+AQBA L 0 A_GiveInventory("ProjectileCode",1)
+TNT1 A 0 A_SpawnItemEx("FurySwipesTrailFX1",0,0,0,-momx*0.3,-momy*0.2,-momz*0.2,0,9)
+TNT1 A 0 A_SpawnItemEx("FurySwipesTrailFX2",0,0,0,-momx*0.6,-momy*0.4,-momz*0.4,0,9)
+TNT1 A 0 A_SpawnItemEx("FurySwipesTrailFX3",0,0,0,-momx*0.9,-momy*0.6,-momz*0.6,0,9)
+stop
+}
+}
+
+actor FurySwipesTrailFX1 : BasicClientside
+{
+scale 1.5
+alpha 0.8
+renderstyle "Translucent"
+speed 7
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+TBLA G 1 
+stop
+}
+}
+
+actor FurySwipesTrailFX2 : FurySwipesTrailFX1
+{
+alpha 0.6
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+TBLA F 1 
+stop
+}
+}
+
+actor FurySwipesTrailFX3 : FurySwipesTrailFX1
+{
+alpha 0.4
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+TBLA E 1 
+stop
+}
+}
+
+
+
+actor FurySwipesImpactFX : BasicClientside
+{
+scale 2.0
+States
+{
+Spawn:
+TNT1 A 0
+//MCLA ABCDE 1 
+//MCLA E 5
+//MCLA EZEZEZ 2
+SCLA HIJKL 1
+stop
+}
+}

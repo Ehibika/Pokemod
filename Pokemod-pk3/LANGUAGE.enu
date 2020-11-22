@@ -512,6 +512,22 @@ OB_FIREPUNCH = "%k Defeated %o using FIREPUNCH!";
 OB_CRAFTYSHIELD = "%k Defeated %o using CRAFTYSHIELD!";
 OB_MUDSHOT = "%k Defeated %o using MUDSHOT!";
 OB_CLEARSMOG = "%k Defeated %o using CLEARSMOG!";
+OB_ROCKTHROW = "%k Defeated %o using ROCKTHROW!";
+OB_ROCKTOMB = "%k Defeated %o using ROCKTOMB!";
+OB_FURYSWIPES = "%k Defeated %o using FURYSWIPES!";
+OB_CRUSHCLAW = "%k Defeated %o using CRUSHCLAW!";
+OB_HONECLAWS = "%k Defeated %o using HONECLAWS!";
+OB_STONEEDGE = "%k Defeated %o using STONEEDGE!";
+OB_IRONTAIL = "%k Defeated %o using IRONTAIL!";
+OB_SLAM = "%k Defeated %o using SLAM!";
+OB_SANDTOMB = "%k Defeated %o using SANDTOMB!";
+OB_DIG = "%k Defeated %o using DIG!";
+OB_ROCKPOLISH = "%k Defeated %o using ROCKPOLISH!";
+OB_BULLDOZE = "%k Defeated %o using BULLDOZE!";
+OB_POISONTAIL = "%k Defeated %o using POISONTAIL!";
+OB_WINGATTACK = "%k Defeated %o using WINGATTACK!";
+OB_TAKEDOWN = "%k Defeated %o using TAKEDOWN!";
+OB_GLARE = "%k Defeated %o using GLARE!";
 //--[NewMove]--
 
 //#endregion
@@ -1449,6 +1465,171 @@ D097_STATS2 = "\cfSP.ATK:\cj 75 \cfSP.DEF:\cj 135";
 D097_STATS3 = "\cfHP:\cj 255";
 D097_ARC = "\cj <Archetype> ";
 D097_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+
+//#region -=- Geodude-=-
+D098_NAME = "\cjGeodude";
+D098_TYPE = "\cjRock/Ground";
+D098_STATS1 = "\cfATK:\cj 80 \cfDEF:\cj 100";
+D098_STATS2 = "\cfSP.ATK:\cj 30 \cfSP.DEF:\cj 30";
+D098_STATS3 = "\cfHP:\cj 40";
+D098_ARC = "\cj <Archetype> ";
+D098_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+
+//#region -=- Graveler-=-
+D099_NAME = "\cjGraveler";
+D099_TYPE = "\cjRock/Ground";
+D099_STATS1 = "\cfATK:\cj 95 \cfDEF:\cj 115";
+D099_STATS2 = "\cfSP.ATK:\cj 45 \cfSP.DEF:\cj 45";
+D099_STATS3 = "\cfHP:\cj 55";
+D099_ARC = "\cj <Archetype> ";
+D099_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+
+//#region -=- Golem-=-
+D100_NAME = "\cjGolem";
+D100_TYPE = "\cjRock/Ground";
+D100_STATS1 = "\cfATK:\cj 110 \cfDEF:\cj 130";
+D100_STATS2 = "\cfSP.ATK:\cj 55 \cfSP.DEF:\cj 65";
+D100_STATS3 = "\cfHP:\cj 80";
+D100_ARC = "\cj <Archetype> ";
+D100_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+
+//#region -=- Geodude_A-=-
+D101_NAME = "\cjGeodude_A";
+D101_TYPE = "\cjRock/Electric";
+D101_STATS1 = "\cfATK:\cj 80 \cfDEF:\cj 100";
+D101_STATS2 = "\cfSP.ATK:\cj 30 \cfSP.DEF:\cj 30";
+D101_STATS3 = "\cfHP:\cj 40";
+D101_ARC = "\cj <Archetype> ";
+D101_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+
+//#region -=- Graveler_A-=-
+D102_NAME = "\cjGraveler_A";
+D102_TYPE = "\cjRock/Electric";
+D102_STATS1 = "\cfATK:\cj 95 \cfDEF:\cj 115";
+D102_STATS2 = "\cfSP.ATK:\cj 45 \cfSP.DEF:\cj 45";
+D102_STATS3 = "\cfHP:\cj 55";
+D102_ARC = "\cj <Archetype> ";
+D102_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+
+//#region -=- Golem_A-=-
+D103_NAME = "\cjGolem_A";
+D103_TYPE = "\cjRock/Electric";
+D103_STATS1 = "\cfATK:\cj 120 \cfDEF:\cj 130";
+D103_STATS2 = "\cfSP.ATK:\cj 55 \cfSP.DEF:\cj 65";
+D103_STATS3 = "\cfHP:\cj 80";
+D103_ARC = "\cj <Archetype> ";
+D103_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+
+//#region -=- Onix-=-
+D104_NAME = "\cjOnix";
+D104_TYPE = "\cjRock/Ground";
+D104_STATS1 = "\cfATK:\cj 45 \cfDEF:\cj 160";
+D104_STATS2 = "\cfSP.ATK:\cj 30 \cfSP.DEF:\cj 45";
+D104_STATS3 = "\cfHP:\cj 35";
+D104_ARC = "\cj <Archetype> ";
+D104_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+
+//#region -=- Steelix-=-
+D105_NAME = "\cjSteelix";
+D105_TYPE = "\cjSteel/Ground";
+D105_STATS1 = "\cfATK:\cj 85 \cfDEF:\cj 200";
+D105_STATS2 = "\cfSP.ATK:\cj 55 \cfSP.DEF:\cj 65";
+D105_STATS3 = "\cfHP:\cj 75";
+D105_ARC = "\cj <Archetype> ";
+D105_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+
+//#region -=- Scyther-=-
+D106_NAME = "\cjScyther";
+D106_TYPE = "\cjBug/Flying";
+D106_STATS1 = "\cfATK:\cj 110 \cfDEF:\cj 80";
+D106_STATS2 = "\cfSP.ATK:\cj 55 \cfSP.DEF:\cj 80";
+D106_STATS3 = "\cfHP:\cj 70";
+D106_ARC = "\cj <Archetype> ";
+D106_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+
+//#region -=- Scizor-=-
+D107_NAME = "\cjScizor";
+D107_TYPE = "\cjBug/Steel";
+D107_STATS1 = "\cfATK:\cj 130 \cfDEF:\cj 100";
+D107_STATS2 = "\cfSP.ATK:\cj 55 \cfSP.DEF:\cj 80";
+D107_STATS3 = "\cfHP:\cj 70";
+D107_ARC = "\cj <Archetype> ";
+D107_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+
+//#region -=- Zangoose-=-
+D108_NAME = "\cjZangoose";
+D108_TYPE = "\cjNormal/Null";
+D108_STATS1 = "\cfATK:\cj 115 \cfDEF:\cj 60";
+D108_STATS2 = "\cfSP.ATK:\cj 60 \cfSP.DEF:\cj 60";
+D108_STATS3 = "\cfHP:\cj 73";
+D108_ARC = "\cj <Archetype> ";
+D108_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+
+//#region -=- Seviper-=-
+D109_NAME = "\cjSeviper";
+D109_TYPE = "\cjPoison/Null";
+D109_STATS1 = "\cfATK:\cj 100 \cfDEF:\cj 60";
+D109_STATS2 = "\cfSP.ATK:\cj 100 \cfSP.DEF:\cj 60";
+D109_STATS3 = "\cfHP:\cj 73";
+D109_ARC = "\cj <Archetype> ";
+D109_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+
+//#region -=- Beldum-=-
+D110_NAME = "\cjBeldum";
+D110_TYPE = "\cjSteel/Psychic";
+D110_STATS1 = "\cfATK:\cj 55 \cfDEF:\cj 80";
+D110_STATS2 = "\cfSP.ATK:\cj 35 \cfSP.DEF:\cj 60";
+D110_STATS3 = "\cfHP:\cj 40";
+D110_ARC = "\cj <Archetype> ";
+D110_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+
+//#region -=- Metang-=-
+D111_NAME = "\cjMetang";
+D111_TYPE = "\cjSteel/Psychic";
+D111_STATS1 = "\cfATK:\cj 75 \cfDEF:\cj 100";
+D111_STATS2 = "\cfSP.ATK:\cj 55 \cfSP.DEF:\cj 80";
+D111_STATS3 = "\cfHP:\cj 60";
+D111_ARC = "\cj <Archetype> ";
+D111_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+
+//#region -=- Metagross-=-
+D112_NAME = "\cjMetagross";
+D112_TYPE = "\cjSteel/Psychic";
+D112_STATS1 = "\cfATK:\cj 135 \cfDEF:\cj 130";
+D112_STATS2 = "\cfSP.ATK:\cj 95 \cfSP.DEF:\cj 90";
+D112_STATS3 = "\cfHP:\cj 80";
+D112_ARC = "\cj <Archetype> ";
+D112_EVO = "\c[MenuRed]Does not evolve";
 //#endregion
 
 
@@ -3023,7 +3204,7 @@ M183_NAME = "\cj Confusion";
 M183_TYPE = "\cj Psychic";
 M183_CATEGORY = "\cf Special";
 M183_POWER = "\cfPower:\cj --";
-M183_DESC = "\cjremotely cast a small psychic explosion."
+M183_DESC = "\cjremotely cast a small psychic explosion.";
 //#endregion
 
 //#region -=- 184: Psychic -=-
@@ -3031,7 +3212,7 @@ M184_NAME = "\cj Psychic";
 M184_TYPE = "\cj Psychic";
 M184_CATEGORY = "\cf Special";
 M184_POWER = "\cfPower:\cj --";
-M184_DESC = "\cjremotely cast a great psychic explosion."
+M184_DESC = "\cjremotely cast a great psychic explosion.";
 //#endregion
 
 //#region -=- 185: Psycheup -=-
@@ -3346,7 +3527,7 @@ M221_NAME = "\cj DreamEater";
 M221_TYPE = "\cj Psychic";
 M221_CATEGORY = "\cf Special";
 M221_POWER = "\cfPower:\cj --";
-M221_DESC = "\cjDrain life from a sleeping target.\n"
+M221_DESC = "\cjDrain life from a sleeping target.\n";
 //#endregion
 
 //#region -=- 222: Meditate -=-
@@ -3619,6 +3800,150 @@ M252_CATEGORY = "\cf Special";
 M252_POWER = "\cfPower:\cj --";
 M252_DESC = "\cjLaunch a mysterious smog that purges stat\n"
 "buffs from the opponent.";
+//#endregion
+
+
+//#region -=- 253: RockThrow -=-
+M253_NAME = "\cj RockThrow";
+M253_TYPE = "\cj Rock";
+M253_CATEGORY = "\cf Physical";
+M253_POWER = "\cfPower:\cj --";
+M253_DESC = "\cf<Desc>";
+//#endregion
+
+
+//#region -=- 254: RockTomb -=-
+M254_NAME = "\cj RockTomb";
+M254_TYPE = "\cj Rock";
+M254_CATEGORY = "\cf Physical";
+M254_POWER = "\cfPower:\cj --";
+M254_DESC = "\cf<Desc>";
+//#endregion
+
+
+//#region -=- 255: FurySwipes -=-
+M255_NAME = "\cj FurySwipes";
+M255_TYPE = "\cj Normal";
+M255_CATEGORY = "\cf Physical";
+M255_POWER = "\cfPower:\cj --";
+M255_DESC = "\cf<Desc>";
+//#endregion
+
+
+//#region -=- 256: CrushClaw -=-
+M256_NAME = "\cj CrushClaw";
+M256_TYPE = "\cj Normal";
+M256_CATEGORY = "\cf Physical";
+M256_POWER = "\cfPower:\cj --";
+M256_DESC = "\cf<Desc>";
+//#endregion
+
+
+//#region -=- 257: HoneClaws -=-
+M257_NAME = "\cj HoneClaws";
+M257_TYPE = "\cj Dark";
+M257_CATEGORY = "\cf Status";
+M257_POWER = "\cfPower:\cj --";
+M257_DESC = "\cf<Desc>";
+//#endregion
+
+
+//#region -=- 258: StoneEdge -=-
+M258_NAME = "\cj StoneEdge";
+M258_TYPE = "\cj Rock";
+M258_CATEGORY = "\cf Physical";
+M258_POWER = "\cfPower:\cj --";
+M258_DESC = "\cf<Desc>";
+//#endregion
+
+
+//#region -=- 259: IronTail -=-
+M259_NAME = "\cj IronTail";
+M259_TYPE = "\cj Steel";
+M259_CATEGORY = "\cf Physical";
+M259_POWER = "\cfPower:\cj --";
+M259_DESC = "\cf<Desc>";
+//#endregion
+
+
+//#region -=- 260: Slam -=-
+M260_NAME = "\cj Slam";
+M260_TYPE = "\cj Normal";
+M260_CATEGORY = "\cf Physical";
+M260_POWER = "\cfPower:\cj --";
+M260_DESC = "\cf<Desc>";
+//#endregion
+
+
+//#region -=- 261: SandTomb -=-
+M261_NAME = "\cj SandTomb";
+M261_TYPE = "\cj Ground";
+M261_CATEGORY = "\cf Physical";
+M261_POWER = "\cfPower:\cj --";
+M261_DESC = "\cf<Desc>";
+//#endregion
+
+
+//#region -=- 262: Dig -=-
+M262_NAME = "\cj Dig";
+M262_TYPE = "\cj Ground";
+M262_CATEGORY = "\cf Physical";
+M262_POWER = "\cfPower:\cj --";
+M262_DESC = "\cf<Desc>";
+//#endregion
+
+
+//#region -=- 263: RockPolish -=-
+M263_NAME = "\cj RockPolish";
+M263_TYPE = "\cj Rock";
+M263_CATEGORY = "\cf Status";
+M263_POWER = "\cfPower:\cj --";
+M263_DESC = "\cf<Desc>";
+//#endregion
+
+
+//#region -=- 264: Bulldoze -=-
+M264_NAME = "\cj Bulldoze";
+M264_TYPE = "\cj Ground";
+M264_CATEGORY = "\cf Physical";
+M264_POWER = "\cfPower:\cj --";
+M264_DESC = "\cf<Desc>";
+//#endregion
+
+
+//#region -=- 265: PoisonTail -=-
+M265_NAME = "\cj PoisonTail";
+M265_TYPE = "\cj Poison";
+M265_CATEGORY = "\cf Physical";
+M265_POWER = "\cfPower:\cj --";
+M265_DESC = "\cf<Desc>";
+//#endregion
+
+
+//#region -=- 266: WingAttack -=-
+M266_NAME = "\cj WingAttack";
+M266_TYPE = "\cj Flying";
+M266_CATEGORY = "\cf Physical";
+M266_POWER = "\cfPower:\cj --";
+M266_DESC = "\cf<Desc>";
+//#endregion
+
+
+//#region -=- 267: TakeDown -=-
+M267_NAME = "\cj TakeDown";
+M267_TYPE = "\cj Normal";
+M267_CATEGORY = "\cf Physical";
+M267_POWER = "\cfPower:\cj --";
+M267_DESC = "\cf<Desc>";
+//#endregion
+
+
+//#region -=- 268: Glare -=-
+M268_NAME = "\cj Glare";
+M268_TYPE = "\cj Normal";
+M268_CATEGORY = "\cf Status";
+M268_POWER = "\cfPower:\cj --";
+M268_DESC = "\cf<Desc>";
 //#endregion
 
 

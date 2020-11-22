@@ -86,17 +86,12 @@ actor ShadowBallPP : Ammo {inventory.amount 1 inventory.Maxamount 15}
 //[+]========================================================================[+]
 //--------------------------------|Projectiles |--------------------------------
 //[+]========================================================================[+]
-actor ShadowBallShot : BasicProjectile
+actor ShadowBallShot : PKMN_SkillShot
 {
-Speed 48
 Damage (MBP_ShadowBall)
 DamageType "ShadowBall"
 obituary "$OB_ShadowBall"
-Reactiontime 10
-Radius 14
-Height 14
-scale 2.5
-Args 20, 48
+Args 20, 64
 +THRUGHOST
 States
 {

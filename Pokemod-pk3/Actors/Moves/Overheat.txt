@@ -31,6 +31,10 @@ Goto NoAmmo2
 
 Fire.Quake:
 "####" A 0 A_GiveInventory("DashSet_B")
+"####" A 0 A_GiveInventory("Overheated")
+"####" A 0 ACS_NamedExecuteAlways("StatItemNuke",0,SB_GOOD)
+"####" A 0 A_GiveInventory("StatUpdator",1)
+
 "####" B 0 A_PlaySoundEx("weapon/pchargelong","Weapon")
 "####" B 0 A_Quake(2,5,0,300)
 "####" AAA 0 A_SpawnItemEx("OverheatBodyFX", random2(55), random2(55), random2(55), 0, 0,0, 0,SXF_TRANSFERTRANSLATION)
@@ -94,6 +98,15 @@ Goto Ready
 }
 }
 
+actor Overheated : PowerupGiver
+{
+inventory.amount 1
+inventory.maxamount 1
++INVENTORY.AUTOACTIVATE
+Powerup.Duration 15
+powerup.type "HazeFlag"
+}
+
 //[+]========================================================================[+]
 //-----------------------------|Ammo & Inventory|------------------------------
 //[+]========================================================================[+]
@@ -133,6 +146,7 @@ TNT1 A 0
 stop
 }
 }
+
 //[+]========================================================================[+]
 //--------------------------------|Projectiles |--------------------------------
 //[+]========================================================================[+]
@@ -265,6 +279,7 @@ States
 {
 Spawn:
 TNT1 A 0
+TNT1 A 0 A_GiveToTarget("Overheated")
 TNT1 A 5 A_GiveToTarget("SATKDownFXSpawn")
 TNT1 A 0 A_JumpIfInTargetInventory("STF_Overheat",1,"Spawn")
 TNT1 A 1 A_GiveToTarget("StatUpdator")

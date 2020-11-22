@@ -207,7 +207,7 @@ Str StatName2[7] = {
 };
 */
 
-#LIBDEFINE STATITEMNUM 47
+#LIBDEFINE STATITEMNUM 57
 
 Str StatEffectName[STATITEMNUM][2] = {
     {"Growth","GOOD"},
@@ -257,6 +257,17 @@ Str StatEffectName[STATITEMNUM][2] = {
     {"MudShot","BAD"},
     {"CloseCombat","BAD"},
     {"Overheat","BAD"},
+    {"RockTomb","BAD"},
+    {"HoneClaws1","GOOD"},
+    {"HoneClaws2","GOOD"},
+    {"HoneClaws3","GOOD"},
+    {"CrushClaw","BAD"},
+    {"MetalClaw","BAD"},
+    {"RockPolish1","GOOD"},
+    {"RockPolish2","GOOD"},
+    {"RockPolish3","GOOD"},
+    {"Bulldoze","BAD"},
+
 };
 
 #LIBDEFINE PATK_ID 0
@@ -314,6 +325,16 @@ Int StatEffectValue[STATITEMNUM][5] = {
 {   -1,      0,      0,      0,      0}, //Mudshot
 {   0,      0,      -1,      -1,      0}, //CloseCombat
 {   0,      -2,      0,      0,      0}, //Overheat
+{   0,      0,      0,      0,      -1}, //RockTomb
+{   1,      0,      0,      0,      0}, //HoneClaws1
+{   1,      0,      0,      0,      0}, //HoneClaws2
+{   1,      0,      0,      0,      0}, //HoneClaws3
+{   0,      0,      -1,      0,      0}, //CrushClaw
+{   -1,      0,      0,      0,      0}, //MetalClaw
+{   0,      0,      0,      0,      1}, //RockPolish1
+{   0,      0,      0,      0,      1}, //RockPolish2
+{   0,      0,      0,      0,      1}, //RockPolish3
+{   0,      0,      0,      0,      -1}, //Bulldoze
 
 
 };

@@ -109,16 +109,11 @@ actor FlashCannonPP : Ammo {inventory.amount 1 inventory.Maxamount 10}
 //[+]========================================================================[+]
 //--------------------------------|Projectiles |--------------------------------
 //[+]========================================================================[+]
-actor FlashCannonShot : BasicProjectile
+actor FlashCannonShot : PKMN_SkillShot
 {
-Speed 90
 Damage (MBP_FlashCannon)
 DamageType "FlashCannon"
 obituary "$OB_FlashCannon"
-radius 5
-Reactiontime 10
-height 16
-scale 2.5
 States
 {
 Spawn:

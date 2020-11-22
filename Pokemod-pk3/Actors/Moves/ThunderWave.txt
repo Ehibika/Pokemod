@@ -129,7 +129,7 @@ Goto Death
 
 GWCheck:
 TNT1 A 0 A_Jumpif(CallACS("CheckStatusGuard",AAPTR_TRACER,STATUS_MAJOR),"Death") //Blocked by protect|Detect|Substitute|Safeguard and pre-existing conditions
-TNT1 A 0 A_GiveInventory("ParalysisStatusProc",1,AAPTR_TRACER)
+TNT1 A 0 A_GiveInventory("Zap_ParalysisStatusProc",1,AAPTR_TRACER)
 TNT1 A 0 A_Spawnitemex("ThunderWaveFX",0,0,0,0,0,0,0,SXF_TRANSFERTRANSLATION)
 Goto Death
 

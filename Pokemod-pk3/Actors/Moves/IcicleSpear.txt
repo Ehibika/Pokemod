@@ -1,5 +1,7 @@
 const Int ISSPRD = 2.6;
 
+//#region 
+/*
 actor IcicleSpearMove : WepMasterBase
 {
 Tag "IcicleSpear"
@@ -80,6 +82,109 @@ Goto Fire.End
 }
 }
 
+
+*/
+//#endregion
+
+actor IcicleSpearMove : WepMasterBase
+{
+Tag "IcicleSpear"
+obituary "$OB_IcicleSpear"
+Weapon.AmmoUse 1
+Weapon.AmmoGive 20
+weapon.ammotype "IcicleSpearPP"
+scale 2.0
+Inventory.Pickupmessage "$PU_MEGABUSTER"
+States
+{
+Spawn:
+WEAP X 1
+stop
+
+
+Fire:
+"####" BBB 1 A_Jumpif(CallACS("CheckWeaponFire",RC_A)==1,"Fire.Begin")
+"####" B 0 A_Jump(256,"NoAmmo")
+Goto NoAmmo
+
+Fire.Begin:
+TNT1 A 0 
+TNT1 A 0 A_PlaySoundEx("Weapon/CrashLand","Soundslot6")
+TNT1 A 0 A_Jump(256,"Fire.Charge0")
+Goto Fire.Charge0
+
+Fire.Charge0: //Initiation
+TNT1 A 0 A_JumpIfInventory("WeaponCharge",17,"Fire.Charge1")
+TNT1 A 0 A_GiveInventory("WeaponCharge",1)
+TNT1 A 0 A_GiveInventory("ChannelingSpeed")
+TNT1 A 1
+TNT1 A 0 A_REfire("Fire.Charge0")
+TNT1 A 0 A_Jump(256,"Fire.After")
+Goto Fire.After
+
+Fire.Charge1: //Preparing a stack
+TNT1 A 0 A_JumpIfInventory("MultiShotCounter",5,"Fire.Charge3")
+TNT1 A 0 A_JumpIfInventory("WeaponCharge",20,"Fire.Charge2")
+TNT1 A 0 A_GiveInventory("WeaponCharge",1)
+TNT1 A 0 A_GiveInventory("ChannelingSpeed")
+TNT1 A 0 //A_PlaySoundEx("Weapon/Heat1","Soundslot6")
+TNT1 A 1
+TNT1 A 0 A_REfire("Fire.Charge1")
+TNT1 A 0 A_Jump(256,"Fire.Launch")
+Goto Fire.Launch
+
+Fire.Charge2: //Make a stack
+TNT1 A 0 A_GiveInventory("ChannelingSpeed")
+TNT1 A 0 A_GiveInventory("Give_MultiShotCounter",1)
+TNT1 A 0 ACS_NamedExecuteAlways("TakePP",0,Move_IcicleSpear,1)
+TNT1 A 0 A_TakeInventory("WeaponCharge",99)
+TNT1 A 0 A_PlaySoundEx("Weapon/rminestick","Soundslot6")
+
+TNT1 A 1
+TNT1 A 0 A_JumpifNoAmmo("Fire.Charge3")
+TNT1 A 0 A_REfire("Fire.Charge1")
+TNT1 A 0 A_Jump(256,"Fire.Launch")
+Goto Fire.Launch
+
+Fire.Charge3: //Maximum stacks
+TNT1 A 0 A_GiveInventory("ChannelingSpeed")
+TNT1 A 1
+TNT1 A 0 A_REfire("Fire.Charge3")
+TNT1 A 0 A_Jump(256,"Fire.Launch")
+Goto Fire.Launch
+
+
+Fire.Launch:
+TNT1 A 0
+TNT1 A 0 A_GiveInventory("MultiShotTimer")
+TNT1 A 0 A_Jumpifinventory("MultiShotCounter",1,"Fire.Bullet")
+TNT1 A 0 A_Jump(256,"Fire.After")
+Goto Fire.After
+
+Fire.Bullet:
+TNT1 A 0 A_PlaySoundEx("Weapon/icewavespawn","Weapon")
+TNT1 A 5 A_FireCustomMissile("IcicleSpearShot",0,0,0,0,0,ISSPRD/2)
+TNT1 A 0 A_PlaySoundEx("Weapon/icewavespawn","Weapon")
+TNT1 A 5 A_FireCustomMissile("IcicleSpearShot",-ISSPRD,0,0,0,0,-ISSPRD/2)
+TNT1 A 0 A_PlaySoundEx("Weapon/icewavespawn","Weapon")
+TNT1 A 5 A_FireCustomMissile("IcicleSpearShot",ISSPRD,0,0,0,0,-ISSPRD/2)
+
+TNT1 A 0 A_GiveInventory("ChannelingSpeed")
+//TNT1 A 0 A_Jumpifinventory("MultiShotTimer",1,"Fire.Bullet")
+TNT1 A 0 A_TakeInventory("MultiShotCounter",1)
+TNT1 A 0 A_Jump(256,"Fire.Launch")
+Goto Fire.Launch
+
+Fire.After:
+"####" B 1 A_GiveInventory("HalfRecovery_A")
+"####" B 0 A_TakeInventory("MultiShotTimer",99)
+"####" B 0 A_TakeInventory("MultiShotCounter",99)
+"####" B 0 A_TakeInventory("WeaponCharge",99)
+"####" B 0 A_Jump(256,"Fire.End")
+Goto Fire.End
+}
+}
+
 actor IcicleSpearMove1 : IcicleSpearMove {Weapon.SlotNumber 1}
 actor IcicleSpearMove2 : IcicleSpearMove {Weapon.SlotNumber 2}
 actor IcicleSpearMove3 : IcicleSpearMove {Weapon.SlotNumber 3}
@@ -97,14 +202,13 @@ TNT1 A 0 A_Jump(256,"Ready")
 Goto Ready
 }
 }
-
 //[+]========================================================================[+]
 //-----------------------------|Ammo & Inventory|------------------------------
 //[+]========================================================================[+]
 actor IcicleSpearPP : Ammo {inventory.amount 1 inventory.Maxamount 20}
 
 actor MultiShotCounter : Ammo {inventory.amount 1 inventory.Maxamount 5}
-
+actor MultiShotTimer : PowerUp {inventory.amount 1 Powerup.Duration 17}
 actor IcicleSpearCST : PowerupGiver
 {
 +INVENTORY.AUTOACTIVATE

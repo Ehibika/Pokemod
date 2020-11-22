@@ -47,6 +47,13 @@ AddPlayerClass Growlithe
 AddPlayerClass Deino
 AddPlayerClass Solosis
 AddPlayerClass Happiny
+AddPlayerClass Geodude
+AddPlayerClass Geodude_A
+AddPlayerClass Onix
+AddPlayerClass Scyther
+AddPlayerClass Zangoose
+AddPlayerClass Seviper
+AddPlayerClass Beldum
 //--[NewPokemon]--
 
 alias TriggerEvo "CloseMenu; Use EvoStartItem" 

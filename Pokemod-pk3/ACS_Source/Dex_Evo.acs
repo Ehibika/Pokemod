@@ -150,5 +150,27 @@ Int EvoDEX [MAXDEX][6] = {
     /*|95|*/{ 1,      MIDSTAGE,             CHANSEY,  NULLEVO,     NULLEVO,35 },
     /*|96|*/{ 1,      FINALSTAGE,             BLISSEY,  NULLEVO,     NULLEVO,35 },
     /*|97|*/{ 0,      0,             NULLEVO,  NULLEVO,     NULLEVO,35 },
+    
+    /*|98|*/{ 1,      MIDSTAGE,             GRAVELER,  NULLEVO,     NULLEVO,36 },
+    /*|99|*/{ 1,      FINALSTAGE,             GOLEM,  NULLEVO,     NULLEVO,36 },
+    /*|100|*/{ 0,      0,             NULLEVO,  NULLEVO,     NULLEVO,36 },
+    
+    /*|101|*/{ 1,      MIDSTAGE,             GRAVELER_A,  NULLEVO,     NULLEVO,37 },
+    /*|102|*/{ 1,      FINALSTAGE,             GOLEM_A,  NULLEVO,     NULLEVO,37 },
+    /*|103|*/{ 0,      0,             NULLEVO,  NULLEVO,     NULLEVO,37 },
+
+    /*|104|*/{ 1,      FINALSTAGE2,             STEELIX,  NULLEVO,     NULLEVO,38 },
+    /*|105|*/{ 0,      0,             NULLEVO,  NULLEVO,     NULLEVO,38 },
+
+    /*|106|*/{ 1,      FINALSTAGE2,             SCIZOR,  NULLEVO,     NULLEVO,39 },
+    /*|107|*/{ 0,      0,             NULLEVO,  NULLEVO,     NULLEVO,39 },
+
+    /*|108|*/{ 0,      0,             NULLEVO,  NULLEVO,     NULLEVO,40 },
+
+    /*|109|*/{ 0,      0,             NULLEVO,  NULLEVO,     NULLEVO,41 },
+    
+    /*|110|*/{ 1,      MIDSTAGE,             METANG,  NULLEVO,     NULLEVO,42 },
+    /*|111|*/{ 1,      FINALSTAGE,             METAGROSS,  NULLEVO,     NULLEVO,42 },
+    /*|112|*/{ 0,      0,             NULLEVO,  NULLEVO,     NULLEVO,42 },
     //--[NewPokemon]--
 };

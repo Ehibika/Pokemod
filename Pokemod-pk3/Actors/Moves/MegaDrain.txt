@@ -84,7 +84,7 @@ actor MegaDrainPP : Ammo {inventory.amount 1 inventory.Maxamount 20}
 
 Actor MegaDrainProtect : powerprotection
 {
-Powerup.duration 8
+Powerup.duration 17
 Damagefactor "MegaDrain", 0
 }
 

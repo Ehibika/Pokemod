@@ -1,0 +1,236 @@
+const int Glare_Range = 65;
+
+actor GlareMove : WepMasterBase
+{
+Tag "Glare"
+obituary "$OB_Glare"
+Weapon.AmmoUse 1
+Weapon.AmmoGive 35
+weapon.ammotype "GlarePP"
+scale 2.0
+Inventory.Pickupmessage "$PU_MEGABUSTER"
+States
+{
+Spawn:
+WEAP X 1
+stop
+
+Fire:
+"####" BBB 1 A_Jumpif(CallACS("CheckWeaponFire",RC_C)==1,"Fire.Begin")
+"####" B 0 A_Jump(256,"NoAmmo")
+Goto NoAmmo
+
+Fire.Begin:
+"####" B 0
+"####" B 0 A_Jump(256,"Fire.Melee")
+Goto Fire.Melee
+
+Fire.Melee:
+TNT1 A 0 A_PlaySoundEx("weapon/Gemini","Weapon")
+TNT1 A 0 A_FireCustomMissile("GlareBeamStart",0,0,0,0)
+TNT1 A 0 A_FireCustomMissile("GlareEffector",0,1,0,0)
+TNT1 A 0 A_FireCustomMissile("GlareFace",0,0,0,0)
+Goto Fire.After
+
+Fire.After:
+"####" B 1 A_GiveInventory("HalfRecovery_C")
+"####" B 0 A_Jump(256,"Fire.End")
+Goto Fire.End
+}
+}
+
+actor GlareMove1 : GlareMove {Weapon.SlotNumber 1}
+actor GlareMove2 : GlareMove {Weapon.SlotNumber 2}
+actor GlareMove3 : GlareMove {Weapon.SlotNumber 3}
+actor GlareMove4 : GlareMove {Weapon.SlotNumber 4}
+
+actor GlareMove5 : GlareMove 
+{
+Weapon.SlotNumber 5
+States
+{
+Fire.End:
+TNT1 A 0
+TNT1 A 0 A_TakeInventory("GlareMove5",9)
+TNT1 A 0 A_Jump(256,"Ready")
+Goto Ready
+}
+}
+
+//[+]========================================================================[+]
+//-----------------------------|Ammo & Inventory|------------------------------
+//[+]========================================================================[+]
+actor GlarePP : Ammo {inventory.amount 1 inventory.Maxamount 35}
+
+
+//[+]========================================================================[+]
+//--------------------------------|Projectiles |--------------------------------
+//[+]========================================================================[+]
+
+
+actor GlareBeamStart //: BasicHelper
+{
+    +MISSILE
+    -SOLID
+    +NOCLIP
+    +NOINTERACTION
+    +NOGRAVITY
+    +DONTBLAST
+    +DONTREFLECT
+    +THRUACTORS
+    RenderStyle none
+    Radius 2
+    Height 2
+
+    Speed 15
+    States
+    {
+    Spawn:
+        TNT1 A 0
+        TNT1 A 0 A_Warp(2,0,0,32,0,16+8)//But which interpolation? Does it matter?
+        TNT1 A 0 A_SpawnItemEx("GlareBeam",0,-8,0,momx,momy,momz,0,8)
+        TNT1 A 1 A_SpawnItemEx("GlareBeam",0,8,0,momx,momy,momz,0,8)
+        stop
+    }
+}
+
+actor GlareFace //: BasicHelper
+{
+    +MISSILE
+    -SOLID
+    +NOCLIP
+    +NOINTERACTION
+    +NOGRAVITY
+    +DONTBLAST
+    +DONTREFLECT
+    +THRUACTORS
+    RenderStyle none
+    Radius 2
+    Height 2
+
+    Speed 15
+    States
+    {
+    Spawn:
+        TNT1 A 0
+        TNT1 A 0 A_Warp(2,0,0,32,0,16+8)//But which interpolation? Does it matter?
+        TNT1 A 1 A_GiveToTarget("ScaryFaceFXSpawn")
+        stop
+    }
+}
+
+actor GlareBeam : BasicFastProjectile//FastProj to match damager hitbox
+{
+    +MISSILE
+    +NOGRAVITY
+    +SKYEXPLODE
+    +EXPLODEONWATER
+    +DONTSPLASH
+    +PAINLESS
+    +CLIENTSIDEONLY
+    RenderStyle None
+    Damage (0)
+    Radius 10
+    Height 10
+    Speed 15
+    Scale 2.5
+    States
+    {
+    Spawn:
+        TNT1 A 0
+        TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+        TNT1 A 0 A_JumpIf(Pitch > Glare_Range,"Death2")
+        TNT1 A 0 A_SetPitch(Pitch+1)
+        TNT1 A 0 A_SpawnItemEx("GlareBeam",0,0,0,momx,momy,momz,0,552+1)//512+32+8
+        TNT1 A 0 A_Stop
+        TNT1 A 0 A_SpawnItemEx("GlareBeamFX",0,0,0,0,0,0,0,1)
+        TNT1 A 1
+        stop
+    Death:
+        TNT1 A 0 A_SpawnItemEx("GlarePuff",0,0,0,0,0,0,0,1)
+        stop
+    Death2:
+        TNT1 A 0 A_Stop
+        TNT1 A 0 //A_SpawnItemEx("GlarePuff",0,0,0,0,0,0,0,1)
+        stop
+    }
+}
+
+
+actor GlarePuff : BasicClientside//BulletPuff
+{
+scale 2.5
+//+PUFFONACTORS
+//+PUFFGETSOWNER
+//+MTHRUSPECIES
+//+NOINTERACTION
+//+DONTSPLASH
+DamageType "Glare"
+obituary "$OB_Glare"
+
+alpha 1.0
+States
+{
+Spawn:
+CRBM A 0
+CRBM A 0 //A_Explode(50,10,0,0,10)
+TNT1 A 0 A_PlaySoundEx("weapon/Mirrordeflect","Weapon")
+Hard BBCCDDEE 1 
+stop
+}
+}
+
+
+
+actor GlareBeamFX : BasicClientside
+{
+scale 2.5
+speed 7
+States
+{
+Spawn:
+TNT1 A 0
+MBEA A 3
+MBEA AAAAA 2 A_Fadeout
+stop
+}
+}
+
+actor GlareEffector : BasicFastProjectile
+{
+    PROJECTILE
+    damagetype "Glare"
+    Obituary "$OB_GLARE"
+    +SKYEXPLODE
+    +EXPLODEONWATER
+    +HITTRACER
+    RenderStyle None
+    Damage (0) 
+    Radius 10
+    Height 10
+    speed 975 //15 * GlareRange(65)
+    scale 2.5
+    states
+    {
+    Spawn:
+        TNT1 A 0
+        TNT1 A 1
+        TNT1 A 0
+        stop
+        
+    XDeath:
+    Crash:
+    TNT1 A 1 
+    TNT1 A 0 A_JumpIf(IsPointerEqual(AAPTR_TRACER,AAPTR_NULL) == False, "GWCheck")
+    Goto Death
+    
+    GWCheck:
+    TNT1 A 0 A_Jumpif(CallACS("CheckStatusGuard",AAPTR_TRACER,STATUS_MAJOR),"Death") //Blocked by protect|Detect|Substitute|Safeguard and pre-existing conditions
+    TNT1 A 0 A_GiveInventory("ParalysisStatusProc",1,AAPTR_TRACER)
+    Goto Death
+
+    Death:
+    TNT1 A 1
+    stop
+    }
+}

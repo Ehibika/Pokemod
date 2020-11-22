@@ -1,3 +1,4 @@
+
 actor HazeMove : WepMasterBase
 {
 Tag "Haze"

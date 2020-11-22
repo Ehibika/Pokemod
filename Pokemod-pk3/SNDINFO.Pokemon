@@ -1400,4 +1400,229 @@ $playersound    Blissey male *usefail    FATLAND
 $playersound    Blissey male *taunt      CRY097
 
 
+$playersound    Geodude male *death      MEGADEAT
+$playersound    Geodude male *xdeath     MEGADEAT
+$playersound    Geodude male *gibbed     MEGADEAT
+$playersound    Geodude male *pain100    MEGAPAIN
+$playersound    Geodude male *pain75     MEGAPAIN
+$playersound    Geodude male *pain50     MEGAPAIN
+$playersound    Geodude male *pain25     MEGAPAIN
+$playersound    Geodude male *grunt      LAND
+$playersound    Geodude male *land       LAND
+$playersound    Geodude male *jump       dsnone
+$playersound    Geodude male *fist       dsnone
+$playersound    Geodude male *usefail    LAND
+$playersound    Geodude male *taunt      CRY098
+
+
+$playersound    Graveler male *death      MEGADEAT
+$playersound    Graveler male *xdeath     MEGADEAT
+$playersound    Graveler male *gibbed     MEGADEAT
+$playersound    Graveler male *pain100    MEGAPAIN
+$playersound    Graveler male *pain75     MEGAPAIN
+$playersound    Graveler male *pain50     MEGAPAIN
+$playersound    Graveler male *pain25     MEGAPAIN
+$playersound    Graveler male *grunt      LAND
+$playersound    Graveler male *land       LAND
+$playersound    Graveler male *jump       dsnone
+$playersound    Graveler male *fist       dsnone
+$playersound    Graveler male *usefail    LAND
+$playersound    Graveler male *taunt      CRY099
+
+
+$playersound    Golem male *death      MEGADEAT
+$playersound    Golem male *xdeath     MEGADEAT
+$playersound    Golem male *gibbed     MEGADEAT
+$playersound    Golem male *pain100    MEGAPAIN
+$playersound    Golem male *pain75     MEGAPAIN
+$playersound    Golem male *pain50     MEGAPAIN
+$playersound    Golem male *pain25     MEGAPAIN
+$playersound    Golem male *grunt      FATLAND
+$playersound    Golem male *land       FATLAND
+$playersound    Golem male *jump       dsnone
+$playersound    Golem male *fist       dsnone
+$playersound    Golem male *usefail    FATLAND
+$playersound    Golem male *taunt      CRY100
+
+
+$playersound    Geodude_A male *death      MEGADEAT
+$playersound    Geodude_A male *xdeath     MEGADEAT
+$playersound    Geodude_A male *gibbed     MEGADEAT
+$playersound    Geodude_A male *pain100    MEGAPAIN
+$playersound    Geodude_A male *pain75     MEGAPAIN
+$playersound    Geodude_A male *pain50     MEGAPAIN
+$playersound    Geodude_A male *pain25     MEGAPAIN
+$playersound    Geodude_A male *grunt      LAND
+$playersound    Geodude_A male *land       LAND
+$playersound    Geodude_A male *jump       dsnone
+$playersound    Geodude_A male *fist       dsnone
+$playersound    Geodude_A male *usefail    LAND
+$playersound    Geodude_A male *taunt      CRY101
+
+
+$playersound    Graveler_A male *death      MEGADEAT
+$playersound    Graveler_A male *xdeath     MEGADEAT
+$playersound    Graveler_A male *gibbed     MEGADEAT
+$playersound    Graveler_A male *pain100    MEGAPAIN
+$playersound    Graveler_A male *pain75     MEGAPAIN
+$playersound    Graveler_A male *pain50     MEGAPAIN
+$playersound    Graveler_A male *pain25     MEGAPAIN
+$playersound    Graveler_A male *grunt      LAND
+$playersound    Graveler_A male *land       LAND
+$playersound    Graveler_A male *jump       dsnone
+$playersound    Graveler_A male *fist       dsnone
+$playersound    Graveler_A male *usefail    LAND
+$playersound    Graveler_A male *taunt      CRY102
+
+
+$playersound    Golem_A male *death      MEGADEAT
+$playersound    Golem_A male *xdeath     MEGADEAT
+$playersound    Golem_A male *gibbed     MEGADEAT
+$playersound    Golem_A male *pain100    MEGAPAIN
+$playersound    Golem_A male *pain75     MEGAPAIN
+$playersound    Golem_A male *pain50     MEGAPAIN
+$playersound    Golem_A male *pain25     MEGAPAIN
+$playersound    Golem_A male *grunt      FATLAND
+$playersound    Golem_A male *land       FATLAND
+$playersound    Golem_A male *jump       dsnone
+$playersound    Golem_A male *fist       dsnone
+$playersound    Golem_A male *usefail    FATLAND
+$playersound    Golem_A male *taunt      CRY103
+
+
+$playersound    Onix male *death      MEGADEAT
+$playersound    Onix male *xdeath     MEGADEAT
+$playersound    Onix male *gibbed     MEGADEAT
+$playersound    Onix male *pain100    MEGAPAIN
+$playersound    Onix male *pain75     MEGAPAIN
+$playersound    Onix male *pain50     MEGAPAIN
+$playersound    Onix male *pain25     MEGAPAIN
+$playersound    Onix male *grunt      LAND
+$playersound    Onix male *land       LAND
+$playersound    Onix male *jump       dsnone
+$playersound    Onix male *fist       dsnone
+$playersound    Onix male *usefail    LAND
+$playersound    Onix male *taunt      CRY104
+
+
+$playersound    Steelix male *death      MEGADEAT
+$playersound    Steelix male *xdeath     MEGADEAT
+$playersound    Steelix male *gibbed     MEGADEAT
+$playersound    Steelix male *pain100    MEGAPAIN
+$playersound    Steelix male *pain75     MEGAPAIN
+$playersound    Steelix male *pain50     MEGAPAIN
+$playersound    Steelix male *pain25     MEGAPAIN
+$playersound    Steelix male *grunt      FATLAND
+$playersound    Steelix male *land       FATLAND
+$playersound    Steelix male *jump       dsnone
+$playersound    Steelix male *fist       dsnone
+$playersound    Steelix male *usefail    FATLAND
+$playersound    Steelix male *taunt      CRY105
+
+
+$playersound    Scyther male *death      MEGADEAT
+$playersound    Scyther male *xdeath     MEGADEAT
+$playersound    Scyther male *gibbed     MEGADEAT
+$playersound    Scyther male *pain100    MEGAPAIN
+$playersound    Scyther male *pain75     MEGAPAIN
+$playersound    Scyther male *pain50     MEGAPAIN
+$playersound    Scyther male *pain25     MEGAPAIN
+$playersound    Scyther male *grunt      LAND
+$playersound    Scyther male *land       LAND
+$playersound    Scyther male *jump       dsnone
+$playersound    Scyther male *fist       dsnone
+$playersound    Scyther male *usefail    LAND
+$playersound    Scyther male *taunt      CRY106
+
+
+$playersound    Scizor male *death      MEGADEAT
+$playersound    Scizor male *xdeath     MEGADEAT
+$playersound    Scizor male *gibbed     MEGADEAT
+$playersound    Scizor male *pain100    MEGAPAIN
+$playersound    Scizor male *pain75     MEGAPAIN
+$playersound    Scizor male *pain50     MEGAPAIN
+$playersound    Scizor male *pain25     MEGAPAIN
+$playersound    Scizor male *grunt      FATLAND
+$playersound    Scizor male *land       FATLAND
+$playersound    Scizor male *jump       dsnone
+$playersound    Scizor male *fist       dsnone
+$playersound    Scizor male *usefail    FATLAND
+$playersound    Scizor male *taunt      CRY107
+
+
+$playersound    Zangoose male *death      MEGADEAT
+$playersound    Zangoose male *xdeath     MEGADEAT
+$playersound    Zangoose male *gibbed     MEGADEAT
+$playersound    Zangoose male *pain100    MEGAPAIN
+$playersound    Zangoose male *pain75     MEGAPAIN
+$playersound    Zangoose male *pain50     MEGAPAIN
+$playersound    Zangoose male *pain25     MEGAPAIN
+$playersound    Zangoose male *grunt      LAND
+$playersound    Zangoose male *land       LAND
+$playersound    Zangoose male *jump       dsnone
+$playersound    Zangoose male *fist       dsnone
+$playersound    Zangoose male *usefail    LAND
+$playersound    Zangoose male *taunt      CRY108
+
+
+$playersound    Seviper male *death      MEGADEAT
+$playersound    Seviper male *xdeath     MEGADEAT
+$playersound    Seviper male *gibbed     MEGADEAT
+$playersound    Seviper male *pain100    MEGAPAIN
+$playersound    Seviper male *pain75     MEGAPAIN
+$playersound    Seviper male *pain50     MEGAPAIN
+$playersound    Seviper male *pain25     MEGAPAIN
+$playersound    Seviper male *grunt      LAND
+$playersound    Seviper male *land       LAND
+$playersound    Seviper male *jump       dsnone
+$playersound    Seviper male *fist       dsnone
+$playersound    Seviper male *usefail    LAND
+$playersound    Seviper male *taunt      CRY109
+
+
+$playersound    Beldum male *death      MEGADEAT
+$playersound    Beldum male *xdeath     MEGADEAT
+$playersound    Beldum male *gibbed     MEGADEAT
+$playersound    Beldum male *pain100    MEGAPAIN
+$playersound    Beldum male *pain75     MEGAPAIN
+$playersound    Beldum male *pain50     MEGAPAIN
+$playersound    Beldum male *pain25     MEGAPAIN
+$playersound    Beldum male *grunt      LAND
+$playersound    Beldum male *land       LAND
+$playersound    Beldum male *jump       dsnone
+$playersound    Beldum male *fist       dsnone
+$playersound    Beldum male *usefail    LAND
+$playersound    Beldum male *taunt      CRY110
+
+
+$playersound    Metang male *death      MEGADEAT
+$playersound    Metang male *xdeath     MEGADEAT
+$playersound    Metang male *gibbed     MEGADEAT
+$playersound    Metang male *pain100    MEGAPAIN
+$playersound    Metang male *pain75     MEGAPAIN
+$playersound    Metang male *pain50     MEGAPAIN
+$playersound    Metang male *pain25     MEGAPAIN
+$playersound    Metang male *grunt      LAND
+$playersound    Metang male *land       LAND
+$playersound    Metang male *jump       dsnone
+$playersound    Metang male *fist       dsnone
+$playersound    Metang male *usefail    LAND
+$playersound    Metang male *taunt      CRY111
+
+
+$playersound    Metagross male *death      MEGADEAT
+$playersound    Metagross male *xdeath     MEGADEAT
+$playersound    Metagross male *gibbed     MEGADEAT
+$playersound    Metagross male *pain100    MEGAPAIN
+$playersound    Metagross male *pain75     MEGAPAIN
+$playersound    Metagross male *pain50     MEGAPAIN
+$playersound    Metagross male *pain25     MEGAPAIN
+$playersound    Metagross male *grunt      FATLAND
+$playersound    Metagross male *land       FATLAND
+$playersound    Metagross male *jump       dsnone
+$playersound    Metagross male *fist       dsnone
+$playersound    Metagross male *usefail    FATLAND
+$playersound    Metagross male *taunt      CRY112
+
+
 //--[NewPokemon]--

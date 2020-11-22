@@ -1,5 +1,7 @@
 const Int RBSPRD = 0.3;
 
+//#region 
+/*
 actor RockBlastMove : WepMasterBase
 {
 Tag "RockBlast"
@@ -79,6 +81,104 @@ TNT1 A 0 A_Jump(256,"Fire.End")
 Goto Fire.End
 }
 }
+*/
+//#endregion
+
+
+actor RockBlastMove : WepMasterBase
+{
+Tag "RockBlast"
+obituary "$OB_RockBlast"
+Weapon.AmmoUse 1
+Weapon.AmmoGive 20
+weapon.ammotype "RockBlastPP"
+scale 2.0
+Inventory.Pickupmessage "$PU_MEGABUSTER"
+States
+{
+Spawn:
+WEAP X 1
+stop
+
+
+Fire:
+"####" BBB 1 A_Jumpif(CallACS("CheckWeaponFire",RC_A)==1,"Fire.Begin")
+"####" B 0 A_Jump(256,"NoAmmo")
+Goto NoAmmo
+
+Fire.Begin:
+TNT1 A 0 
+TNT1 A 0 A_PlaySoundEx("Weapon/CrashLand","Soundslot6")
+TNT1 A 0 A_Jump(256,"Fire.Charge0")
+Goto Fire.Charge0
+
+Fire.Charge0: //Initiation
+TNT1 A 0 A_JumpIfInventory("WeaponCharge",17,"Fire.Charge1")
+TNT1 A 0 A_GiveInventory("WeaponCharge",1)
+TNT1 A 0 A_GiveInventory("ChannelingSpeed")
+TNT1 A 1
+TNT1 A 0 A_REfire("Fire.Charge0")
+TNT1 A 0 A_Jump(256,"Fire.After")
+Goto Fire.After
+
+Fire.Charge1: //Preparing a stack
+TNT1 A 0 A_JumpIfInventory("MultiShotCounter",5,"Fire.Charge3")
+TNT1 A 0 A_JumpIfInventory("WeaponCharge",10,"Fire.Charge2")
+TNT1 A 0 A_GiveInventory("WeaponCharge",1)
+TNT1 A 0 A_GiveInventory("ChannelingSpeed")
+TNT1 A 0 //A_PlaySoundEx("Weapon/Heat1","Soundslot6")
+TNT1 A 1
+TNT1 A 0 A_REfire("Fire.Charge1")
+TNT1 A 0 A_Jump(256,"Fire.Launch")
+Goto Fire.Launch
+
+Fire.Charge2: //Make a stack
+TNT1 A 0 A_GiveInventory("ChannelingSpeed")
+TNT1 A 0 A_GiveInventory("Give_MultiShotCounter",1)
+TNT1 A 0 ACS_NamedExecuteAlways("TakePP",0,Move_RockBlast,1)
+TNT1 A 0 A_TakeInventory("WeaponCharge",99)
+TNT1 A 0 A_PlaySoundEx("Weapon/rminestick","Soundslot6")
+
+TNT1 A 1
+TNT1 A 0 A_JumpifNoAmmo("Fire.Charge3")
+TNT1 A 0 A_REfire("Fire.Charge1")
+TNT1 A 0 A_Jump(256,"Fire.Launch")
+Goto Fire.Launch
+
+Fire.Charge3: //Maximum stacks
+TNT1 A 0 A_GiveInventory("ChannelingSpeed")
+TNT1 A 1
+TNT1 A 0 A_REfire("Fire.Charge3")
+TNT1 A 0 A_Jump(256,"Fire.Launch")
+Goto Fire.Launch
+
+
+Fire.Launch:
+TNT1 A 0
+TNT1 A 0 A_GiveInventory("MultiShotTimer")
+TNT1 A 0 A_Jumpifinventory("MultiShotCounter",1,"Fire.Bullet")
+TNT1 A 0 A_Jump(256,"Fire.After")
+Goto Fire.After
+
+Fire.Bullet:
+TNT1 A 0 A_PlaySoundEx("Weapon/PowerStone","Weapon")
+TNT1 A 7 A_FireCustomMissile("RockBlastShot",Frandom(-RBSPRD,RBSPRD),0,0,0,0,Frandom(-RBSPRD,RBSPRD))
+
+TNT1 A 0 A_GiveInventory("ChannelingSpeed")
+//TNT1 A 0 A_Jumpifinventory("MultiShotTimer",1,"Fire.Bullet")
+TNT1 A 0 A_TakeInventory("MultiShotCounter",1)
+TNT1 A 0 A_Jump(256,"Fire.Launch")
+Goto Fire.Launch
+
+Fire.After:
+"####" B 1 A_GiveInventory("HalfRecovery_A")
+"####" B 0 A_TakeInventory("MultiShotTimer",99)
+"####" B 0 A_TakeInventory("MultiShotCounter",99)
+"####" B 0 A_TakeInventory("WeaponCharge",99)
+"####" B 0 A_Jump(256,"Fire.End")
+Goto Fire.End
+}
+}
 
 actor RockBlastMove1 : RockBlastMove {Weapon.SlotNumber 1}
 actor RockBlastMove2 : RockBlastMove {Weapon.SlotNumber 2}
@@ -137,7 +237,7 @@ loop
 
 Death:
 TNT1 A 0 A_GiveInventory("ProjectileDCode",1)
-TNT1 A 0 A_PlaySoundEx("misc/icebreak","Weapon")
+TNT1 A 0 A_PlaySoundEx("weapon/deepdiggerbreak","Weapon")
 TNT1 A 0 A_SpawnItemEx("RockBlastImpact",0,0,0,0,0,0,0,1)
 BSTG AAAAAA 0 A_SpawnItemEx("RockBlastParticle", 0, 0, 0, random2(256/24), random2(256/24), random(0,5), random(0, 359),1)
 TNT1 A 8

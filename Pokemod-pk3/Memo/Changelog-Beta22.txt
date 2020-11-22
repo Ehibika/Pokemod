@@ -1,0 +1,64 @@
+//#region -=-=- Beta 22 -=-=-
+/*
+ *
+ *
+ * ===|Gameplay Changes|===
+ * Fixed issue of steel types not being poison proof
+ * 
+ * made distinctions between electric and non electric paralysis, ground types are immune to the former, electric types
+ * are immune to both.
+ * 
+ * 
+ * ===|Move Changes|===
+ * 
+ * [Synthesis]
+ * No longer scaled by special attack
+ * is now a single cast move rather than a channeled heal.
+ * restores 50% of your health
+ * PP reduced from 10 to 5
+ *  ===Dev note===
+ * Self sustain is perhaps the grass type's biggest claim to fame. and already they are loaded on ways to restore their health. with synthesis being pretty common
+ * amongst members of the type, I decided to power it down some and make it a move that's harder to use right in the heat of combat.
+ * 
+ * [Recover]
+ * No longer Scaled by special attack
+ * healing tick rate reduced from 7 ticks per second to 5 ticks per second
+ * base healing rate increased from 1% to 2%
+ *  ==Dev note==
+ * This essentially means that now recover heals for 10% per second, or 10 percent per PP. and at 20 max PP means the move is worth a total of 
+ * 200% of your health in healing.
+ * 
+ * [CloseCombat]
+ * fixed the issue of the move reaching farther than what is visually represented
+ * decreased the hit intervals from ~11 per second to ~4 per second
+ * 
+ * [megadrain]
+ * damage reduced
+ * decrease hit intervals from ~4 per second to 2 per second
+ * 
+ * [overheat]
+ * removes buffs upon casting
+ * blocks buffs while debuffed after use
+ * 
+ * [dracoMeteor]
+ * removes buffs upon casting
+ * blocks buffs while debuffed after use
+ * 
+ * ===|TM Changes Changes|===
+ * increased the cost of TM Close Combat
+ * 
+ * the following TMs were pulled form the shop:
+ * SwordDance
+ * NastyPlot
+ * Amnesia
+ * IronDefense
+ * Agility
+ * CalmMind
+ * CosmicPower
+ * Rage
+ * Meditate
+ * 
+ * 
+ * ===|Pokemon Changes|===
+ * Gallade regained Nightslash in his levelup set
+ * /

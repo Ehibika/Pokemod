@@ -1421,21 +1421,16 @@ int tid = ActivatorTID();
 if(player>0){tid = player + 999;}
 
 	//PrintBold(i:tid);
-	if(toggle >= 1){
-		GiveActorInventory(tid, "PlayerIsInvisible", 1);
-		//SetActivator(tid);
-		GiveActorInventory(tid, "PlayerVisibilityOn",1);
-		if(toggle !=2){
-		Thing_Stop(tid);
-		}
-	}
 	if(toggle == 0){
+		GiveActorInventory(tid, "PlayerIsInvisible", 1);
+		GiveActorInventory(tid, "PlayerVisibilityOff",1);
+	}
+	if(toggle >= 1){
 		if(CheckActorInventory(tid, "PlayerIsInvisible")>0){
 		TakeActorInventory(tid, "PlayerIsInvisible", 1);
 		
 			if(CheckActorInventory(tid, "PlayerIsInvisible")==0){
-			//SetActivator(tid);
-			GiveActorInventory(tid, "PlayerVisibilityOff",1);//SetPlayerProperty(0, 0, PROP_FLIGHT);
+			GiveActorInventory(tid, "PlayerVisibilityOn",1);//SetPlayerProperty(0, 0, PROP_FLIGHT);
 			}
 			
 		}

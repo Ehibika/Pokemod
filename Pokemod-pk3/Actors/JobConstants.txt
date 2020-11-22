@@ -277,6 +277,22 @@ const int Move_Firepunch = 249;
 const int Move_CraftyShield = 250;
 const int Move_MudShot = 251;
 const int Move_ClearSmog = 252;
+const int Move_RockThrow = 253;
+const int Move_RockTomb = 254;
+const int Move_FurySwipes = 255;
+const int Move_CrushClaw = 256;
+const int Move_HoneClaws = 257;
+const int Move_StoneEdge = 258;
+const int Move_IronTail = 259;
+const int Move_Slam = 260;
+const int Move_SandTomb = 261;
+const int Move_Dig = 262;
+const int Move_RockPolish = 263;
+const int Move_Bulldoze = 264;
+const int Move_PoisonTail = 265;
+const int Move_WingAttack = 266;
+const int Move_TakeDown = 267;
+const int Move_Glare = 268;
 //--[NewMove]--
 //=======|Pokedex Constants|==========
 const int Dex_SMEARGLE = 0;
@@ -402,6 +418,21 @@ const int Dex_REUNICLUS = 94;
 const int Dex_HAPPINY = 95;
 const int Dex_CHANSEY = 96;
 const int Dex_BLISSEY = 97;
+const int Dex_GEODUDE = 98;
+const int Dex_GRAVELER = 99;
+const int Dex_GOLEM = 100;
+const int Dex_GEODUDE_A = 101;
+const int Dex_GRAVELER_A = 102;
+const int Dex_GOLEM_A = 103;
+const int Dex_ONIX = 104;
+const int Dex_STEELIX = 105;
+const int Dex_SCYTHER = 106;
+const int Dex_SCIZOR = 107;
+const int Dex_ZANGOOSE = 108;
+const int Dex_SEVIPER = 109;
+const int Dex_BELDUM = 110;
+const int Dex_METANG = 111;
+const int Dex_METAGROSS = 112;
 //--[NewPokemon]--
 //=======|TM Type Flags|==========
 const int TMT_NULL = 0;

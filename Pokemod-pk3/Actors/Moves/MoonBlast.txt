@@ -87,15 +87,11 @@ actor MoonBlastPreFire : Powerup {inventory.amount 1 Powerup.Duration 17}
 //[+]========================================================================[+]
 //--------------------------------|Projectiles |--------------------------------
 //[+]========================================================================[+]
-actor MoonblastShot : BasicFastProjectile
+actor MoonblastShot : PKMN_SkillShot
 {
-Speed 64
 Damage (MBP_Moonblast)
 DamageType "Moonblast"
 obituary "$OB_Moonblast"
-Reactiontime 10
-radius 12
-height 16
 scale 3.5
 States
 {

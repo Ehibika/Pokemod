@@ -1,3 +1,5 @@
+Const int METALCLAW_SPACE = 35;
+
 actor MetalClawMove : WepMasterBase
 {
 Tag "MetalClaw"
@@ -20,37 +22,37 @@ Goto NoAmmo
 
 Fire.Begin:
 "####" B 0
+"####" A 0 ACS_NamedExecuteAlways("TakePP",0,Move_MetalClaw,1)
+"####" B 0 A_CheckFloor("Fire.PitchCheck")
 "####" B 0 A_Jump(256,"Fire.Claw")
 Goto Fire.Claw
 
+Fire.PitchCheck:
+"####" B 0 A_Jumpif(Pitch < 55,"Fire.Claw2")
+"####" B 0 A_Jump(256,"Fire.Claw")
+Goto Fire.Claw
+
+
 Fire.Claw:
 TNT1 A 0 A_PlaySoundEx("weapon/SlashClaw","Weapon")
-TNT1 A 0 A_FireCustomMissile("MetalClawMelee",0,1,0,0)
+TNT1 A 0 A_FireCustomMissile("MetalClawMelee",0,0,METALCLAW_SPACE,0)
+TNT1 A 0 A_FireCustomMissile("MetalClawMelee",0,0,0,0)
+TNT1 A 5 A_FireCustomMissile("MetalClawMelee",0,0,-METALCLAW_SPACE,0)
+
 "####" B 0 A_Jump(256,"Fire.After")
 Goto Fire.After
 
-/*
-Fire.Initiate:
-"####" B 1 A_Jumpif(CallACS("CheckWeaponFire",RC_C)==0,"NoAmmo")
-"####" B 0 A_Jumpif(CallACS("ImbueSwitch",Move_MetalClaw) == True,"Fire.On")
-"####" B 0 A_Jump(256,"Fire.Off")
-Goto Fire.Off
+Fire.Claw2:
+TNT1 A 0 A_PlaySoundEx("weapon/SlashClaw","Weapon")
+TNT1 A 0 A_FireCustomMissile("MetalClawMelee",0,0,METALCLAW_SPACE,0,0,Pitch)
+TNT1 A 0 A_FireCustomMissile("MetalClawMelee",0,0,0,0,0,Pitch)
+TNT1 A 5 A_FireCustomMissile("MetalClawMelee",0,0,-METALCLAW_SPACE,0,0,Pitch)
 
-Fire.On:
-"####" B 0 A_SpawnitemEX("ImbueOnFX",0,0,0,0,0,0,0,1)
-"####" B 0 A_PlaySoundEx("Move/ImbueOn","Weapon")
 "####" B 0 A_Jump(256,"Fire.After")
 Goto Fire.After
-
-Fire.Off:
-"####" B 0 A_SpawnitemEX("ImbueOffFX",0,0,0,0,0,0,0,1)
-"####" B 0 A_PlaySoundEx("Move/ImbueOff","Weapon")
-"####" B 0 A_Jump(256,"Fire.After")
-Goto Fire.After
-*/
 
 Fire.After:
-"####" B 1 A_GiveInventory("SemiRecovery_B")
+"####" B 1 A_GiveInventory("PartRecovery_B")
 "####" B 0 A_Jump(256,"Fire.End")
 Goto Fire.End
 }
@@ -66,11 +68,6 @@ actor MetalClawMove5 : MetalClawMove
 Weapon.SlotNumber 5
 States
 {
-Fire:
-TNT1 A 0 A_PlaySoundEx("weapon/SlashClaw","Weapon")
-TNT1 A 0 A_FireCustomMissile("MetalClawMelee",0,1,0,0)
-TNT1 A 15
-Goto Fire.End
 
 Fire.End:
 TNT1 A 0
@@ -85,6 +82,34 @@ Goto Ready
 //[+]========================================================================[+]
 actor MetalClawPP : Ammo {inventory.amount 1 inventory.Maxamount 35}
 Actor Imbue_MetalClaw : Powerup{inventory.amount 1 powerup.duration 0x7FFFFFFF}
+
+actor STF_MetalClaw : Powerup {inventory.amount 1 Powerup.Duration -6}
+
+actor MetalClawNerfInitiate : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_Jumpifinventory("STF_MetalClaw",1,"Sustain")
+TNT1 A 0 A_GiveInventory("STF_MetalClaw",1)
+TNT1 A 0 A_SpawnItemEX("MetalClawNerfWatcher")
+TNT1 A 0 A_GiveInventory("StatUpdator",1)
+stop
+
+Sustain:
+TNT1 A 0 A_GiveInventory("STF_MetalClaw",1)
+stop
+Nope:
+TNT1 A 0
+stop
+}
+}
 //[+]========================================================================[+]
 //--------------------------------|Projectiles |--------------------------------
 //[+]========================================================================[+]
@@ -93,17 +118,114 @@ actor MetalClawMelee : BasicMeleeAttack
 {
 DamageType "MetalClaw"
 Obituary "$OB_METALCLAW"
+scale 2.0
+Speed 48
 States
 {
 Spawn:
 TNT1 A 0
-TNT1 A 1 
-TNT1 A 0 A_Stop
-Goto Death
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+TBLA GGGG 1 A_SpawnItemEx("MetalClawTrail",-48,0,0,momx,momy,momz,0,9)
+stop
 
 Death:
-MCLA A 0 A_Explode(MBP_MetalClaw,80,0,0,80)
-MCLA ABCDE 1 
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+NDFX A 1 A_Explode(MBP_MetalClaw,80,0,0,80)
+NDFX A 1 A_SpawnItemEx("MetalClawImpactFX",0,0,0,0,0,0,0,1)
+stop
+}
+}
+
+//[+]========================================================================[+]
+//--------------------------------|Special Actors|------------------------------
+//[+]========================================================================[+]
+
+actor MetalClawTrail : BasicExplosion
+{
+Obituary "$OB_METALCLAW"
+damagetype "MetalClaw"
+Args 10
+States
+{
+Spawn:
+TNT1 A 0
+AQBA L 0 A_GiveInventory("ProjectileCode",1)
+TNT1 A 0 A_SpawnItemEx("MetalClawParticleFX",45+Args[0],random(-32,32),random(-32,32),0,0,0,0,1)
+TNT1 A 0 A_SpawnItemEx("MetalClawTrailFX1",0,0,0,-momx*0.3,-momy*0.2,-momz*0.2,0,9)
+TNT1 A 0 A_SpawnItemEx("MetalClawTrailFX2",0,0,0,-momx*0.6,-momy*0.4,-momz*0.4,0,9)
+TNT1 A 0 A_SpawnItemEx("MetalClawTrailFX3",0,0,0,-momx*0.9,-momy*0.6,-momz*0.6,0,9)
+stop
+}
+}
+
+actor MetalClawTrailFX1 : BasicClientside
+{
+scale 2.0
+alpha 0.8
+renderstyle "Translucent"
+speed 7
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+TBLA G 1 
+stop
+}
+}
+
+actor MetalClawTrailFX2 : MetalClawTrailFX1
+{
+alpha 0.6
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+TBLA F 1 
+stop
+}
+}
+
+actor MetalClawTrailFX3 : MetalClawTrailFX1
+{
+alpha 0.4
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+TBLA E 1 
+stop
+}
+}
+
+
+actor MetalClawParticleFX : BasicClientside
+{
+scale 1.5
+ReactionTime 2
+Renderstyle "Translucent"
+Alpha 0.9
+States
+{
+Spawn:
+TNT1 A 0
+TMPK CBA 2 
+TNT1 A 5
+stop
+}
+}
+
+
+actor MetalClawImpactFX : BasicClientside
+{
+scale 2.0
+States
+{
+Spawn:
+TNT1 A 0
+//MCLA ABCDE 1 
 MCLA E 5
 MCLA EZEZEZ 2
 stop
@@ -111,58 +233,21 @@ stop
 }
 
 
-actor ImbueOnFX : BasicClientside
+actor MetalClawNerfWatcher : BasicHelper 
 {
-Scale 4.0
+Var int user_DashTime;
 States
 {
 Spawn:
 TNT1 A 0
-TCEX F 0 A_SetScale(Scalex-0.5)
-TCEX FF 1 A_Warp(AAPTR_TARGET,0,0,22,0,WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE)
-TCEX E 0 A_SetScale(Scalex-0.5)
-TCEX EE 1 A_Warp(AAPTR_TARGET,0,0,22,0,WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE)
-TCEX D 0 A_SetScale(Scalex-0.5)
-TCEX DD 1 A_Warp(AAPTR_TARGET,0,0,22,0,WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE)
-TCEX C 0 A_SetScale(Scalex-0.5)
-TCEX CC 1 A_Warp(AAPTR_TARGET,0,0,22,0,WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE)
-TCEX B 0 A_SetScale(Scalex-0.5)
-TCEX BB 1 A_Warp(AAPTR_TARGET,0,0,22,0,WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE)
-TCEX A 0 A_SetScale(Scalex-0.5)
-TCEX AA 1 A_Warp(AAPTR_TARGET,0,0,22,0,WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE)
-TNT1 A 0 A_Stop
+TNT1 A 5 A_GiveToTarget("PATKDownFXSpawn")
+TNT1 A 0 A_JumpIfInTargetInventory("STF_MetalClaw",1,"Spawn")
+TNT1 A 1 A_GiveToTarget("StatUpdator")
+TNT1 A 5
 Goto Death
 
 Death:
-TNT1 A 1 
-stop
-}
-}
-
-actor ImbueOffFX : BasicClientside
-{
-Scale 1.0
-States
-{
-Spawn:
-TNT1 A 0
-TCEX A 0 A_SetScale(Scalex+0.5)
-TCEX AA 1 A_Warp(AAPTR_TARGET,0,0,22,0,WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE)
-TCEX B 0 A_SetScale(Scalex+0.5)
-TCEX BB 1 A_Warp(AAPTR_TARGET,0,0,22,0,WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE)
-TCEX C 0 A_SetScale(Scalex+0.5)
-TCEX CC 1 A_Warp(AAPTR_TARGET,0,0,22,0,WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE)
-TCEX D 0 A_SetScale(Scalex+0.5)
-TCEX DD 1 A_Warp(AAPTR_TARGET,0,0,22,0,WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE)
-TCEX E 0 A_SetScale(Scalex+0.5)
-TCEX EE 1 A_Warp(AAPTR_TARGET,0,0,22,0,WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE)
-TCEX F 0 A_SetScale(Scalex+0.5)
-TCEX FF 1 A_Warp(AAPTR_TARGET,0,0,22,0,WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE)
-TNT1 A 0 A_Stop
-Goto Death
-
-Death:
-TNT1 A 1 
+TNT1 A 0 
 stop
 }
 }

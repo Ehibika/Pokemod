@@ -90,3 +90,15 @@ Script "SetPlayerType" (VOID)
 
 
 }
+
+Script "SetObjectType" (int Type1, int Type2)
+{
+    int TypeA = Type1;
+    int TypeB = Type2;
+    ClearTypeData();
+
+    if(TypeA > -1){GiveTypeData(TypeA); GiveInventory(StrParam(s:PKMNTypeList[TypeA],s:"TypeSpecial"),1);}
+    if(TypeB > -1){GiveTypeData(TypeB); GiveInventory(StrParam(s:PKMNTypeList[TypeB],s:"TypeSpecial"),1);}
+
+
+}

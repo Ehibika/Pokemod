@@ -106,16 +106,21 @@ actor EnergyBallPP : Ammo {inventory.amount 1 inventory.Maxamount 20}
 //[+]========================================================================[+]
 //--------------------------------|Projectiles |--------------------------------
 //[+]========================================================================[+]
-actor EnergyBallShot : BasicFastProjectile
+
+actor PKMN_SkillShot : BasicProjectile
 {
-Speed 85
-Damage (MBP_EnergyBall)
-DamageType "EnergyBall"
-obituary "$OB_EnergyBall"
+Speed 64
 Reactiontime 10
 radius 12
 height 16
-scale 2.5
+Scale 2.5
+}
+
+actor EnergyBallShot : PKMN_SkillShot
+{
+Damage (MBP_EnergyBall)
+DamageType "EnergyBall"
+obituary "$OB_EnergyBall"
 States
 {
 Spawn:

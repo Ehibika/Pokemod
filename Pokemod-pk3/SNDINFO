@@ -154,6 +154,7 @@ Move/Blizzard BLIZZARD
 $attenuation Move/Blizzard 0.5
 Move/CraftyShield CRAFSHLD
 Move/Aromatherapy AROMAT
+Move/Synthesis SYNTHES
 
 Move/Confusion PSILOVE1
 Move/Psychic1 PSILOVE2

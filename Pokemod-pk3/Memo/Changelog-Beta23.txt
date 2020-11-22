@@ -1,0 +1,34 @@
+//#region -=-=- Beta 22 -=-=-
+/*
+ *
+ *
+ * ===|Gameplay Changes|===
+ * ===|Move Changes|===
+ * 
+ * [bullet seed]
+ * 
+ * [incinerate]
+ * AOE reduced slightly
+ * Damage rate adjusted for fewer, larger hits
+ * duration reduced
+ * 
+ * 
+ * Several moves have now been normalized under the group of "skillshot" projectiles, 
+ * which are no-nonsense, single shot projectiles that requires nothing short of a 
+ * direct hit in order to deal damage. all projectiles of this class share the same 
+ * speed and hitbox size, moves brought under this group include:
+ *      Energy ball
+ *      Flash cannon
+ *      Shadow Ball
+ *      MoonBlast
+ *      Power Gem
+ *      Psybeam
+ *      Aurorabeam
+ *      IceBeam
+ * specialized projectile properties such as bouncing, piercing, and burrowing still remain.
+ * 
+ * 
+ * ===|TM Changes Changes|===
+ * ===|Pokemon Changes|===
+ * 
+ * /

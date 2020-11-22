@@ -3,7 +3,7 @@ actor SynthesisMove : WepMasterBase
 Tag "Synthesis"
 obituary "$OB_SYNTHESIS"
 Weapon.AmmoUse 1
-Weapon.AmmoGive 10
+Weapon.AmmoGive 5
 weapon.ammotype "SynthesisPP"
 scale 2.0
 Inventory.Pickupmessage "$PU_MEGABUSTER"
@@ -20,32 +20,24 @@ Goto NoAmmo
 
 Fire.Begin:
 "####" B 0
+"####" B 0 A_JumpIf(CallACS("PKMNACS_HealthPercent",0)>=100,"NoAmmo2")
 "####" B 0 A_Jump(256,"Fire.Channel")
 Goto Fire.Channel
 
 Fire.Channel:
-"####" B 0 A_GiveInventory("WeaponCharge",1)
-"####" B 0 A_GiveInventory("ChannelingSpeed")
-"####" B 0 A_GiveInventory("SynthesisParticleSpawn")
-"####" B 0 A_JumpIfInventory("WeaponCharge",17,"Fire.Initiate")
-"####" B 0 A_PlaySoundEx("Weapon/Heat1","Soundslot6")
-"####" B 1
-"####" C 0 A_REfire("Fire.Channel")
-"####" B 0 A_Jump(256,"Fire.After")
-Goto Fire.After
-
-Fire.Initiate:
-"####" B 0 A_GiveInventory("SynthesisHeal")
+"####" A 0 A_GiveInventory("DashSet_C")
+"####" A 0 A_Stop
 "####" B 0 A_TakeInventory("SynthesisPP",1)
-
+"####" B 0 A_PlaySoundEx("Move/Synthesis","Soundslot6")
+"####" BBBBBBBBBBBBBBBBBBBBBBBBB 1 A_GiveInventory("SynthesisParticleSpawn")
+"####" B 1
+"####" B 0 A_GiveInventory("SynthesisHeal")
 "####" B 0 A_Jump(256,"Fire.After")
 Goto Fire.After
 
 Fire.After:
-"####" B 0 A_TakeInventory("WeaponCharge",999)
-"####" C 0 A_REfire("Fire")
-"####" B 0 A_TakeInventory("ChannelingSpeed",9)
-"####" B 1 A_GiveInventory("SemiRecovery_C")
+"####" B 1 A_GiveInventory("Synthesis_Recovery_C")
+"####" A 0 A_GiveInventory("DashSetOff")
 "####" B 0 A_Jump(256,"Fire.End")
 Goto Fire.End
 }
@@ -72,8 +64,9 @@ Goto Ready
 //[+]========================================================================[+]
 //-----------------------------|Ammo & Inventory|------------------------------
 //[+]========================================================================[+]
-actor SynthesisPP : Ammo {inventory.amount 1 inventory.Maxamount 10}
+actor SynthesisPP : Ammo {inventory.amount 1 inventory.Maxamount 5}
 
+actor Synthesis_Recovery_C : FullRecovery_C{Powerup.Duration 70}
 
 actor SynthesisParticle : Basicprojectile
 {
@@ -129,7 +122,7 @@ stop
 
 HealMe:
 TNT1 A 0 //HealThing(CallACS("StatValueRamp",STAT_SATK,1,80))
-TNT1 A 0 ACS_NamedExecuteAlways("PKMNACS_Basic(Over)Heal",0,0,(CallACS("PKMNACS_HealthPercent",0,1,10)+CallACS("StatValueRamp",STAT_SATK,20,150)))
+TNT1 A 0 ACS_NamedExecuteAlways("PKMNACS_Basic(Over)Heal",0,0,(CallACS("PKMNACS_HealthPercent",0,1,50))) //+CallACS("StatValueRamp",STAT_SATK,20,150)
 TNT1 A 0 A_Giveinventory("HealEffectSpawner",1)
 TNT1 A 0 A_PlaySoundEx("item/energyup","SoundSlot7")
 TNT1 A 0

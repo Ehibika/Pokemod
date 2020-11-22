@@ -76,7 +76,7 @@
 
 
 
-#LIBDEFINE MAXTMLIST 79
+#LIBDEFINE MAXTMLIST 82
 //#endregion
 
 //#region -=- TM Reference -=-
@@ -107,6 +107,7 @@ int TMList [MAXTMLIST][5] = {
 {Refresh        ,TMF_UNIVERSAL      ,TMT_NORMAL                                 ,TMP_1  ,TML_ALL},
 {HelpingHand    ,TMF_UNIVERSAL      ,TMT_NORMAL                                 ,TMP_1  ,TML_ALL},
 
+/*
 {CalmMind       ,TMF_UNIVERSAL      ,TMT_PSYCHIC                                ,TMP_3  ,TML_LOW},
 {CosmicPower    ,TMF_UNIVERSAL      ,TMT_PSYCHIC|TMT_FAIRY                      ,TMP_3  ,TML_LOW},
 {Rage           ,TMF_UNIVERSAL      ,TMT_NORMAL                                 ,TMP_3  ,TML_LOW},
@@ -117,7 +118,7 @@ int TMList [MAXTMLIST][5] = {
 {SwordDance     ,TMF_UNIVERSAL      ,TMT_NORMAL                                 ,TMP_4  ,TML_MID},
 {NastyPlot      ,TMF_UNIVERSAL      ,TMT_DARK                                   ,TMP_4  ,TML_MID},
 {Agility        ,TMF_UNIVERSAL      ,TMT_PSYCHIC                                ,TMP_4  ,TML_MID},
-
+*/
 {Screech        ,TMF_UNIVERSAL      ,TMT_NORMAL                                 ,TMP_1  ,TML_MID},
 {FakeTears      ,TMF_UNIVERSAL      ,TMT_DARK                                   ,TMP_1  ,TML_MID},
 {Charm          ,TMF_UNIVERSAL      ,TMT_FAIRY                                  ,TMP_1  ,TML_MID},
@@ -147,7 +148,6 @@ int TMList [MAXTMLIST][5] = {
 {WaterPulse     ,TMF_NULL           ,TMT_WATER                                  ,TMP_2  ,TML_MID},
 {Brine          ,TMF_NULL           ,TMT_WATER|TMT_POISON                       ,TMP_2  ,TML_MID},
 {Scald          ,TMF_NULL           ,TMT_WATER|TMT_FIRE                         ,TMP_2  ,TML_MID},
-{CloseCombat    ,TMF_NULL           ,TMT_FIGHTING                               ,TMP_2  ,TML_MID},
 {DragonRage     ,TMF_NULL           ,TMT_DRAGON                                 ,TMP_2  ,TML_LOW},
 {Incinerate     ,TMF_NULL           ,TMT_FIRE|TMT_DRAGON                        ,TMP_2  ,TML_MID},
 {ThunderWave    ,TMF_NULL           ,TMT_ELECTRIC|TMT_PSYCHIC                   ,TMP_2  ,TML_LOW},
@@ -161,6 +161,7 @@ int TMList [MAXTMLIST][5] = {
 {ThunderPunch   ,TMF_NULL           ,TMT_FIGHTING|TMT_ELECTRIC                  ,TMP_2  ,TML_MID},
 {DreamEater     ,TMF_NULL           ,TMT_PSYCHIC|TMT_FAIRY|TMT_GHOST|TMT_DARK   ,TMP_2  ,TML_MID},
 {ClearSmog      ,TMF_NULL           ,TMT_POISON|TMT_FIRE                        ,TMP_2  ,TML_MID},
+{RockTomb       ,TMF_NULL           ,TMT_ROCK|TMT_GROUND|TMT_Steel              ,TMP_2  ,TML_MID},
 
 {IceBeam        ,TMF_NULL           ,TMT_WATER|TMT_ICE                          ,TMP_4  ,TML_MID2},
 {Flamethrower   ,TMF_NULL           ,TMT_FIRE|TMT_DRAGON                        ,TMP_4  ,TML_MID2},
@@ -175,6 +176,7 @@ int TMList [MAXTMLIST][5] = {
 {PsychoCut      ,TMF_NULL           ,TMT_PSYCHIC                                ,TMP_4  ,TML_MID2},
 {AirSlash       ,TMF_NULL           ,TMT_Flying                                 ,TMP_4  ,TML_MID2},
 {HammerArm      ,TMF_NULL           ,TMT_FIGHTING                               ,TMP_4  ,TML_MID2},
+{RockSlide      ,TMF_NULL           ,TMT_ROCK|TMT_GROUND|TMT_Steel              ,TMP_4  ,TML_MID2},
 
 {EarthQuake     ,TMF_UNIVERSAL      ,TMT_GROUND|TMT_ROCK|TMT_STEEL              ,TMP_5  ,TML_HIGH},
 {FireBlast      ,TMF_NULL           ,TMT_FIRE|TMT_DRAGON                        ,TMP_5  ,TML_HIGH},
@@ -184,6 +186,9 @@ int TMList [MAXTMLIST][5] = {
 {Blizzard       ,TMF_NULL           ,TMT_ICE                                    ,TMP_5  ,TML_HIGH},
 {Overheat       ,TMF_NULL           ,TMT_FIRE                                   ,TMP_5  ,TML_HIGH},
 {Thunder        ,TMF_NULL           ,TMT_ELECTRIC                               ,TMP_5  ,TML_HIGH},
+{CloseCombat    ,TMF_NULL           ,TMT_FIGHTING                               ,TMP_5  ,TML_HIGH},
+{StoneEdge      ,TMF_NULL           ,TMT_ROCK|TMT_GROUND|TMT_Steel|TMT_FIGHTING ,TMP_5  ,TML_HIGH},
+
 };
 
 //#endregion
@@ -325,6 +330,9 @@ int output = 0;
         case CloseCombat: output = TMR_CloseCombat(Dexnum); break;    
         case Toxic: output = TMR_Toxic(Dexnum); break;    
         case SludgeBomb: output = TMR_SludgeBomb(Dexnum); break;    
+        case IcyWind: output = TMR_IcyWind(Dexnum); break;    
+        case StoneEdge: output = TMR_StoneEdge(Dexnum); break;    
+        case RockTomb: output = TMR_RockTomb(Dexnum); break;    
 
         
         
@@ -723,7 +731,12 @@ Function int TMR_Flamethrower (int Dexnum)
     int output = 0;
     Switch (Dexnum)
     {
-
+        case GEODUDE: output = 1; break;
+        case GRAVELER: output = 1; break;
+        case GOLEM: output = 1; break;
+        case GEODUDE_A: output = 1; break;
+        case GRAVELER_A: output = 1; break;
+        case GOLEM_A: output = 1; break;
     }
 
     if(TMArch_Draconic(Dexnum)){output = 1;}
@@ -743,6 +756,12 @@ Function int TMR_FireBlast (int Dexnum)
         case SLOWPOKE: output = 1; break;
         case SLOWBRO: output = 1; break;
         case SLOWKING: output = 1; break;
+        case GEODUDE: output = 1; break;
+        case GRAVELER: output = 1; break;
+        case GOLEM: output = 1; break;
+        case GEODUDE_A: output = 1; break;
+        case GRAVELER_A: output = 1; break;
+        case GOLEM_A: output = 1; break;
     }
 
     if(TMArch_Draconic(Dexnum)){output = 1;}
@@ -761,6 +780,29 @@ Function int TMR_IceBeam (int Dexnum)
     case DRATINI: output = 1; break;
     case DRAGONAIR: output = 1; break;
     case DRAGONITE: output = 1; break;
+    }
+
+    if(TMArch_Generalist(Dexnum)){output = 1;}
+
+return output;
+}
+//#endregion
+
+//#region -=- TM Rules : IcyWind -=-
+Function int TMR_IcyWind (int Dexnum) 
+{
+    int output = 0;
+    Switch (Dexnum)
+    {
+    case DRATINI: output = 1; break;
+    case DRAGONAIR: output = 1; break;
+    case DRAGONITE: output = 1; break;
+    case RALTS: output = 1; break;
+    case KIRLIA: output = 1; break;
+    case GARDEVOIR: output = 1; break;
+    case GALLADE: output = 1; break;
+    case METANG: output = 1; break;
+    case METAGROSS: output = 1; break;
     }
 
     if(TMArch_Generalist(Dexnum)){output = 1;}
@@ -839,6 +881,12 @@ Function int TMR_Rollout (int Dexnum)
     case HAPPINY: output = 1; break;
     case CHANSEY: output = 1; break;
     case BLISSEY: output = 1; break;
+    case GEODUDE: output = 1; break;
+    case GRAVELER: output = 1; break;
+    case GOLEM: output = 1; break;
+    case GEODUDE_A: output = 1; break;
+    case GRAVELER_A: output = 1; break;
+    case GOLEM_A: output = 1; break;
     }
 return output;
 }
@@ -919,6 +967,64 @@ int output = 0;
 return output;
 }
 //#endregion
+
+//#region -=- TM Rules : StoneEdge -=-
+Function int TMR_StoneEdge (int Dexnum) 
+{
+
+int output = 0;
+    Switch (Dexnum)
+    {
+    case SALAMENCE: output = 1; break;
+    case HYDREIGON: output = 1; break;
+    case TORKOAL: output = 1; break;
+    }
+    
+return output;
+}
+//#endregion
+
+//#region -=- TM Rules : RockTomb -=-
+Function int TMR_RockTomb (int Dexnum) 
+{
+
+int output = 0;
+    Switch (Dexnum)
+    {
+    case CHARMANDER: output = 1; break;
+    case CHARMELEON: output = 1; break;
+    case CHARIZARD: output = 1; break;
+    case SQUIRTLE: output = 1; break;
+    case WARTORTLE: output = 1; break;
+    case BLASTOISE: output = 1; break;
+    case DRAGONITE: output = 1; break;
+    case TREECKO: output = 1; break;
+    case GROVYLE: output = 1; break;
+    case SCEPTILE: output = 1; break;
+    case TORCHIC: output = 1; break;
+    case COMBUSKEN: output = 1; break;
+    case BLAZIKEN: output = 1; break;
+    case MUDKIP: output = 1; break;
+    case MARSHTOMP: output = 1; break;
+    case SWAMPERT: output = 1; break;
+    case TORKOAL: output = 1; break;
+    case ABOMASNOW: output = 1; break;
+    case GALLADE: output = 1; break;
+    case SOLOSIS: output = 1; break;
+    case DUOSION: output = 1; break;
+    case REUNICLUS: output = 1; break;
+    case BAGON: output = 1; break;
+    case SHELGON: output = 1; break;
+    case SALAMENCE: output = 1; break;
+    case HYDREIGON: output = 1; break;
+    case TORKOAL: output = 1; break;
+    }
+    if(TMArch_Defensive(Dexnum)){output = 1;}
+    if(TMArch_Generalist(Dexnum)){output = 1;}
+
+return output;
+}
+//#endregion
 //======
 
 //#region -=- TM Archetype : Draconic
@@ -942,6 +1048,9 @@ int output = 0;
             case SCEPTILE: output = 1; break;
             case HORSEA: output = 1; break;
             case SEADRA: output = 1; break;
+            case ONIX: output = 1; break;
+            case STEELIX: output = 1; break;
+            case SEVIPER: output = 1; break;
         }
 return output;
 }
@@ -998,6 +1107,16 @@ int output = 0;
             case KADABRA: output = 1; break;
             case ALAKAZAM: output = 1; break;
             case REUNICLUS: output = 1; break;
+            case GEODUDE: output = 1; break;
+            case GRAVELER: output = 1; break;
+            case GOLEM: output = 1; break;
+            case GEODUDE_A: output = 1; break;
+            case GRAVELER_A: output = 1; break;
+            case GOLEM_A: output = 1; break;
+            case ZANGOOSE: output = 1; break;
+            case SCIZOR: output = 1; break;
+            case METANG: output = 1; break;
+            case METAGROSS: output = 1; break;
         }
 return output;
 }
@@ -1020,6 +1139,10 @@ int output = 0;
         case GROVYLE: output = 1; break;
         case SCEPTILE: output = 1; break;
         case GALLADE: output = 1; break;
+        case ZANGOOSE: output = 1; break;
+        case SCYTHER: output = 1; break;
+        case SCIZOR: output = 1; break;
+        case SEVIPER: output = 1; break;
         }
 return output;
 }
@@ -1037,6 +1160,7 @@ int output = 0;
         case HAPPINY: output = 1; break;
         case CHANSEY: output = 1; break;
         case BLISSEY: output = 1; break;
+        case ZANGOOSE: output = 1; break;
         }
 return output;
 }
@@ -1064,6 +1188,15 @@ int output = 0;
             case CLOYSTER: output = 1; break;
             case SHELGON: output = 1; break;
             case TORKOAL: output = 1; break;
+            case GEODUDE: output = 1; break;
+            case GRAVELER: output = 1; break;
+            case GOLEM: output = 1; break;
+            case GEODUDE_A: output = 1; break;
+            case GRAVELER_A: output = 1; break;
+            case GOLEM_A: output = 1; break;
+            case ONIX: output = 1; break;
+            case STEELIX: output = 1; break;
+
         }
 return output;
 }

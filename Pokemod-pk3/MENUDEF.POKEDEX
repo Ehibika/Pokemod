@@ -6089,6 +6089,278 @@ OptionMenu "MoveMenu_ClearSmog"
     StaticText ""
     StaticText"===============================================================",1
 } 
+OptionMenu "MoveMenu_RockThrow"
+{
+    
+    Title "$M253_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M253_TYPE"
+    StaticText "$M253_CATEGORY"
+    StaticText "$M2534_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M253_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+} 
+OptionMenu "MoveMenu_RockTomb"
+{
+    
+    Title "$M254_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M254_TYPE"
+    StaticText "$M254_CATEGORY"
+    StaticText "$M2544_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M254_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+} 
+OptionMenu "MoveMenu_FurySwipes"
+{
+    
+    Title "$M255_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M255_TYPE"
+    StaticText "$M255_CATEGORY"
+    StaticText "$M2554_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M255_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+} 
+OptionMenu "MoveMenu_CrushClaw"
+{
+    
+    Title "$M256_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M256_TYPE"
+    StaticText "$M256_CATEGORY"
+    StaticText "$M2564_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M256_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+} 
+OptionMenu "MoveMenu_HoneClaws"
+{
+    
+    Title "$M257_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M257_TYPE"
+    StaticText "$M257_CATEGORY"
+    StaticText "$M2574_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M257_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+} 
+OptionMenu "MoveMenu_StoneEdge"
+{
+    
+    Title "$M258_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M258_TYPE"
+    StaticText "$M258_CATEGORY"
+    StaticText "$M2584_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M258_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+} 
+OptionMenu "MoveMenu_IronTail"
+{
+    
+    Title "$M259_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M259_TYPE"
+    StaticText "$M259_CATEGORY"
+    StaticText "$M2594_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M259_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+} 
+OptionMenu "MoveMenu_Slam"
+{
+    
+    Title "$M260_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M260_TYPE"
+    StaticText "$M260_CATEGORY"
+    StaticText "$M2604_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M260_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+} 
+OptionMenu "MoveMenu_SandTomb"
+{
+    
+    Title "$M261_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M261_TYPE"
+    StaticText "$M261_CATEGORY"
+    StaticText "$M2614_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M261_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+} 
+OptionMenu "MoveMenu_Dig"
+{
+    
+    Title "$M262_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M262_TYPE"
+    StaticText "$M262_CATEGORY"
+    StaticText "$M2624_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M262_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+} 
+OptionMenu "MoveMenu_RockPolish"
+{
+    
+    Title "$M263_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M263_TYPE"
+    StaticText "$M263_CATEGORY"
+    StaticText "$M2634_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M263_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+} 
+OptionMenu "MoveMenu_Bulldoze"
+{
+    
+    Title "$M264_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M264_TYPE"
+    StaticText "$M264_CATEGORY"
+    StaticText "$M2644_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M264_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+} 
+OptionMenu "MoveMenu_PoisonTail"
+{
+    
+    Title "$M265_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M265_TYPE"
+    StaticText "$M265_CATEGORY"
+    StaticText "$M2654_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M265_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+} 
+OptionMenu "MoveMenu_WingAttack"
+{
+    
+    Title "$M266_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M266_TYPE"
+    StaticText "$M266_CATEGORY"
+    StaticText "$M2664_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M266_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+} 
+OptionMenu "MoveMenu_TakeDown"
+{
+    
+    Title "$M267_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M267_TYPE"
+    StaticText "$M267_CATEGORY"
+    StaticText "$M2674_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M267_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+} 
+OptionMenu "MoveMenu_Glare"
+{
+    
+    Title "$M268_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M268_TYPE"
+    StaticText "$M268_CATEGORY"
+    StaticText "$M2684_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M268_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+} 
 //--[NewMove]--
 
 OptionMenu "MoveMenu_Sketch"

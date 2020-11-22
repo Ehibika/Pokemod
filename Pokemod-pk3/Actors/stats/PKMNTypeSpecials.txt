@@ -122,7 +122,7 @@ actor GroundTypeSpecial : CustomInventory
 states
 {
 pickup:
-TNT1 A 0 A_GiveInventory("ParalyzeProof",1)
+TNT1 A 0 A_GiveInventory("Zap_ParalysisGuard",1)
 stop
 }
 }
@@ -133,7 +133,7 @@ actor GroundTypeSpecialClear : CustomInventory
 states
 {
 pickup:
-TNT1 A 0 A_TakeInventory("ParalyzeProof",99) 
+TNT1 A 0 A_TakeInventory("Zap_ParalysisGuard",99) 
 stop
 }
 }
@@ -149,7 +149,7 @@ actor RockTypeSpecial : CustomInventory
 states
 {
 pickup:
-TNT1 A 0 A_GiveInventory("ParalyzeProof",1)
+TNT1 A 0 //A_GiveInventory("",1)
 stop
 }
 }
@@ -230,7 +230,8 @@ actor SteelTypeSpecial : CustomInventory
 states
 {
 pickup:
-TNT1 A 0 //A_GiveInventory("",1)
+TNT1 A 0 A_GiveInventory("Steel_PoisonProof",1)
+TNT1 A 0 A_GiveInventory("PoisonGuard",1)
 stop
 }
 }
@@ -241,11 +242,18 @@ actor SteelTypeSpecialClear : CustomInventory
 states
 {
 pickup:
-TNT1 A 0 //A_TakeInventory("",99) 
+TNT1 A 0 A_TakeInventory("Steel_PoisonProof",99)
+TNT1 A 0 A_TakeInventory("PoisonGuard",99)
 stop
 }
 }
 
+actor Steel_PoisonProof : TypeBase 
+{
+    damagefactor "Toxic", 0.0
+    damagefactor "PoisonPowder", 0.0
+    damagefactor "ToxicSpikes", 0.0
+}
 //====
 
 //#endregion
@@ -279,7 +287,7 @@ stop
 
 actor FireProof : TypeBase 
 {
-    damagefactor "Incinerate", 0.0
+    //damagefactor "Incinerate", 0.0
     damagefactor "FireSpin", 0.0
 }
 

@@ -600,6 +600,11 @@ if(StatusTime() == 0){print(s:"Unsafe to learn TMs right now"); Terminate;}
 //=======================[+]
 int PlayerLVL = GetCvar(StrParam(s:"PlayerLevel_",i:PlayerNumber()));
 int PlayerDEXNum = GetCvar(StrParam(s:"PlayerDEXNum_",i:PlayerNumber()));
+
+if(PlayerDEXNum == SMEARGLE){print(s:"Smeargle Cannot use TMs"); Terminate;}
+if(PlayerDEXNum == BELDUM){print(s:"beldum Cannot use TMs"); Terminate;}
+
+
 Int MoveFrameCap =6;
 Int StartMoves = 4;
 Int ChoiceID = 0;

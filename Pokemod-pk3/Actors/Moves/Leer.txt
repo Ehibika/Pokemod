@@ -27,13 +27,8 @@ Goto Fire.Melee
 
 Fire.Melee:
 TNT1 A 0 A_PlaySoundEx("weapon/Gemini","Weapon")
-TNT1 A 0 A_FireCustomMissile("LeerRay_Start",0,0,8,0)
-TNT1 A 0 A_FireCustomMissile("LeerRay_Start_Server",0,0,8,0)
-//--
-TNT1 A 0 A_FireCustomMissile("LeerRay_Start",0,0,-8,0)
-TNT1 A 0 A_FireCustomMissile("LeerRay_Start_Server",0,0,-8,0)
-//--
-TNT1 A 0 A_FireCustomMissile("LeerEffectRay",0,1,0,0)
+TNT1 A 0 A_FireCustomMissile("LeerBeamStart",0,0,8,0)
+TNT1 A 0 A_FireCustomMissile("LeerEffector",0,1,0,0)
 Goto Fire.After
 
 Fire.After:
@@ -97,6 +92,9 @@ stop
 //--------------------------------|Projectiles |--------------------------------
 //[+]========================================================================[+]
 
+
+//#region 
+/*
 actor LeerEffectRay
 {
 PROJECTILE
@@ -352,7 +350,99 @@ goto SpawnBeam
 */
 //#endregion
 
-actor LearBeamFX : BasicClientside
+actor LeerBeamStart //: BasicHelper
+{
+    +MISSILE
+    -SOLID
+    +NOCLIP
+    +NOINTERACTION
+    +NOGRAVITY
+    +DONTBLAST
+    +DONTREFLECT
+    +THRUACTORS
+    RenderStyle none
+    Radius 2
+    Height 2
+
+    Speed 15
+    States
+    {
+    Spawn:
+        TNT1 A 0
+        TNT1 A 0 A_Warp(2,0,0,32,0,16+8)//But which interpolation? Does it matter?
+        TNT1 A 0 A_SpawnItemEx("LeerBeam",0,-8,0,momx,momy,momz,0,8)
+        TNT1 A 1 A_SpawnItemEx("LeerBeam",0,8,0,momx,momy,momz,0,8)
+        stop
+    }
+}
+
+
+
+
+actor LeerBeam : BasicFastProjectile//FastProj to match damager hitbox
+{
+    +MISSILE
+    +NOGRAVITY
+    +SKYEXPLODE
+    +EXPLODEONWATER
+    +DONTSPLASH
+    +PAINLESS
+    +CLIENTSIDEONLY
+    RenderStyle None
+    Damage (0)
+    Radius 10
+    Height 10
+    Speed 15
+    Scale 2.5
+    States
+    {
+    Spawn:
+        TNT1 A 0
+        TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+        TNT1 A 0 A_JumpIf(Pitch > Leer_Range,"Death2")
+        TNT1 A 0 A_SetPitch(Pitch+1)
+        TNT1 A 0 A_SpawnItemEx("LeerBeam",0,0,0,momx,momy,momz,0,552+1)//512+32+8
+        TNT1 A 0 A_Stop
+        TNT1 A 0 A_SpawnItemEx("LeerBeamFX",0,0,0,0,0,0,0,1)
+        TNT1 A 1
+        stop
+    Death:
+        TNT1 A 0 A_SpawnItemEx("LeerPuff",0,0,0,0,0,0,0,1)
+        stop
+    Death2:
+        TNT1 A 0 A_Stop
+        TNT1 A 0 //A_SpawnItemEx("LeerPuff",0,0,0,0,0,0,0,1)
+        stop
+    }
+}
+
+
+actor LeerPuff : BasicClientside//BulletPuff
+{
+scale 2.5
+//+PUFFONACTORS
+//+PUFFGETSOWNER
+//+MTHRUSPECIES
+//+NOINTERACTION
+//+DONTSPLASH
+DamageType "Leer"
+obituary "$OB_Leer"
+
+alpha 1.0
+States
+{
+Spawn:
+CRBM A 0
+CRBM A 0 //A_Explode(50,10,0,0,10)
+TNT1 A 0 A_PlaySoundEx("weapon/Mirrordeflect","Weapon")
+Hard BBCCDDEE 1 
+stop
+}
+}
+
+
+
+actor LeerBeamFX : BasicClientside
 {
 scale 2.5
 speed 7
@@ -364,6 +454,45 @@ MBEA A 3
 MBEA AAAAA 2 A_Fadeout
 stop
 }
+}
+
+actor LeerEffector : BasicFastProjectile
+{
+    PROJECTILE
+    damagetype "Leer"
+    Obituary "$OB_LEER"
+    +SKYEXPLODE
+    +EXPLODEONWATER
+    +HITTRACER
+    RenderStyle None
+    Damage (0) 
+    Radius 10
+    Height 10
+    speed 975 //15 * LeerRange(65)
+    scale 2.5
+    states
+    {
+    Spawn:
+        TNT1 A 0
+        TNT1 A 1
+        TNT1 A 0
+        stop
+        
+    XDeath:
+    Crash:
+    TNT1 A 1 
+    TNT1 A 0 A_JumpIf(IsPointerEqual(AAPTR_TRACER,AAPTR_NULL) == False, "GWCheck")
+    Goto Death
+    
+    GWCheck:
+    TNT1 A 0 A_Jumpif(CallACS("CheckStatusGuard",AAPTR_TRACER,STATUS_STATS),"Death") //Blocked by protect|Detect|Substitute|Safeguard and pre-existing conditions
+    TNT1 A 0 A_GiveInventory("LeerNerfInitiate",1,AAPTR_TRACER)
+    Goto Death
+
+    Death:
+    TNT1 A 1
+    stop
+    }
 }
 
 

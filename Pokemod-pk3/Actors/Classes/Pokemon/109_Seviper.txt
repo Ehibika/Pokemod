@@ -1,0 +1,87 @@
+/*
+[+]===================================[+]
+
+[+]===================================[+]
+*/
+
+Actor Seviper : ClassBase 
+{
+Player.DisplayName "Seviper"
+Player.SoundClass "Seviper"
+
+player.startitem "PKMNStarterKit"
+
+//============|
+Player.StartItem "Base_HP", 73
+Player.StartItem "Base_PAttack", 100
+Player.StartItem "Base_PDefense", 60
+Player.StartItem "Base_SAttack", 100
+Player.StartItem "Base_SDefense", 60
+
+//============|
+
+States
+{
+Spawn: 
+P109 A 0
+P109 B 1 
+P109 A 1
+GoTo Spawn+2
+See:
+P109 BCDE 5
+GoTo Spawn+1
+Missile:
+P109 A 0 A_JumpIfInventory("ConshotTimer",1,"Missile2")
+P109 F 5 
+P109 G 4
+GoTo Spawn+2
+Missile2:
+P109 G 9
+GoTo Spawn+2
+
+PainFix:
+P109 H 0 
+GoTo PainFrames
+}
+}
+
+actor SeviperStarterMoves : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_JumpIfInventory("isbot",1,"BotWep")
+
+TNT1 A 0 A_GiveInventory("BiteMove1")
+TNT1 A 0 A_GiveInventory("GlareMove2")
+TNT1 A 0 A_GiveInventory("TauntMove3")
+TNT1 A 0 A_GiveInventory("PursuitMove4")
+stop
+
+BotWep:
+TNT1 A 0 A_GiveInventory("BiteMove1")
+stop
+}
+}
+
+actor SeviperSetupItem : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 ACS_NamedExecuteAlways("PKMNACS_StartupScript",0,Dex_Seviper)
+stop
+}
+}

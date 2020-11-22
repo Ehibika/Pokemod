@@ -249,43 +249,43 @@ translation "198:198=220:220", "192:192=229:229"
 
 //#region -=- Flag safe zone -=-
 
-actor HealUnit
+actor TeamHealZone
 {
 +DONTSPLASH
 scale 2.5
 }
 
-//actor HealUnitBlue : HealUnit replaces BlueFlag
+//actor TeamHealZoneBlue : TeamHealZone replaces BlueFlag
 
-actor MegaBlueFlag_HealUnit : HealUnit 
+actor MegaBlueFlag_TeamHealZone : TeamHealZone 
 {
 states
 {
 Spawn:
 TNT1 A 0
-TNT1 A 0 A_RadiusGive("MedCabinetHealBlue",200,RGF_PLAYERS)
+TNT1 A 0 A_RadiusGive("TeamZoneHealBlue",200,RGF_PLAYERS)
 TNT1 A 35 //A_SpawnItemEx("HealFXBlue", 0, 0, 40, 0, 0, 0, 0, SXF_CLIENTSIDE)
-TNT1 A 0 A_SpawnItemEx("HealUnitLead",0,0,0,0,0,2,0,SXF_CLIENTSIDE|SXF_TRANSFERTRANSLATION)
+TNT1 A 0 A_SpawnItemEx("TeamHealZoneLead",0,0,0,0,0,2,0,SXF_CLIENTSIDE|SXF_TRANSFERTRANSLATION)
 loop
 }
 }
 
-//actor HealUnitRed : HealUnit replaces RedFlag
-actor MegaRedFlag_HealUnit : HealUnit 
+//actor TeamHealZoneRed : TeamHealZone replaces RedFlag
+actor MegaRedFlag_TeamHealZone : TeamHealZone 
 {
 Translation "192:192=16:16", "198:198=178:178"
 states
 {
 Spawn:
 TNT1 A 0
-TNT1 A 0 A_RadiusGive("MedCabinetHealRed",200,RGF_PLAYERS)
+TNT1 A 0 A_RadiusGive("TeamZoneHealRed",200,RGF_PLAYERS)
 TNT1 A 35 //A_SpawnItemEx("HealFXRed", 0, 0, 40, 0, 0, 0, 0, SXF_CLIENTSIDE)
-TNT1 A 0 A_SpawnItemEx("HealUnitLead",0,0,0,0,0,2,0,SXF_CLIENTSIDE|SXF_TRANSFERTRANSLATION)
+TNT1 A 0 A_SpawnItemEx("TeamHealZoneLead",0,0,0,0,0,2,0,SXF_CLIENTSIDE|SXF_TRANSFERTRANSLATION)
 loop
 }
 }
 
-actor HealUnitLead
+actor TeamHealZoneLead
 {
 Height 0
 Radius 0
@@ -299,9 +299,9 @@ States
 Spawn:
 TNT1 A 0
 SpawnLoop:
-TNT1 A 0 A_SpawnItemEx("HealUnitRadius", 0, 0, 0, 0, 0, 0, 0, SXF_TRANSFERTRANSLATION|SXF_NOCHECKPOSITION)
+TNT1 A 0 A_SpawnItemEx("TeamHealZoneRadius", 0, 0, 0, 0, 0, 0, 0, SXF_TRANSFERTRANSLATION|SXF_NOCHECKPOSITION)
 TNT1 A 3 A_Countdown
-TNT1 A 0 A_SpawnItemEx("HealUnitRadius2", 0, 0, 0, 0, 0, 0, 0, SXF_TRANSFERTRANSLATION|SXF_NOCHECKPOSITION)
+TNT1 A 0 A_SpawnItemEx("TeamHealZoneRadius2", 0, 0, 0, 0, 0, 0, 0, SXF_TRANSFERTRANSLATION|SXF_NOCHECKPOSITION)
 TNT1 A 3 A_Countdown
 loop
 Death:
@@ -310,7 +310,7 @@ stop
 }
 }
 
-actor HealUnitRadius
+actor TeamHealZoneRadius
 {
 Height 0
 Radius 0
@@ -334,7 +334,7 @@ stop
 }
 }
 
-actor HealUnitRadius2
+actor TeamHealZoneRadius2
 {
 Height 0
 Radius 0
@@ -363,7 +363,7 @@ actor CabinetCoolDown : PowerUp
 powerup.duration 90
 }
 
-actor MedCabinetHeal : CustomInventory
+actor TeamZoneHeal : CustomInventory
 {
 states
 {
@@ -382,7 +382,7 @@ stop
 }
 }
 
-actor MedCabinetHealBlue : MedCabinetHeal
+actor TeamZoneHealBlue : TeamZoneHeal
 {
 states
 {
@@ -392,7 +392,7 @@ stop
 }
 }
 
-actor MedCabinetHealRed : MedCabinetHeal
+actor TeamZoneHealRed : TeamZoneHeal
 {
 states
 {

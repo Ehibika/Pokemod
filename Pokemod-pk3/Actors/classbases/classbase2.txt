@@ -6,8 +6,22 @@ States
 //#region -=- Normal -=-
 Pain.Swift:
 Pain.SpikeCannon:
+Pain.FurySwipes:
+Pain.Glare:
 //--[Move|Normal]--
  "----" H 0
+Goto NormalPain
+
+Pain.Slam:
+"----" H 0
+"----" H 0 A_GiveInventory("SlamProtect",1)
+"----" H 0 A_SpawnItemEX("SlamImpactPuff")
+"----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,25,Type_Null)
+"----" H 0
+Goto NormalPain
+
+Pain.CrushClaw:
+"----" H 0 A_GiveInventory("CrushClawNerfInitiate",1)
 Goto NormalPain
 
 Pain.Fakeout:
@@ -26,6 +40,16 @@ Pain.QuickAttack:
 "----" H 0 A_PlaySoundEx("weapon/Rebound","SoundSlot5")
 "----" H 0 //ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,10,Type_Normal)
 "----" H 0 //ThrustThingZ(0,15,0,0)
+Goto NormalPain
+
+Pain.TakeDown:
+"----" H 0 A_GiveInventory("TakeDownDelay",1)
+"----" H 1
+"----" H 0 A_GiveToTarget("TakeDownCollision",1)
+"----" H 0 A_PlaySoundEx("weapon/Rebound","SoundSlot5")
+"----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,30,Type_Normal)
+"----" H 0 ACS_NamedExecuteAlways("PKMN_RecoilDamager",0,25)
+"----" H 0 ThrustThingZ(0,15,0,0)
 Goto NormalPain
 
 Pain.DoubleEdge:
@@ -54,20 +78,46 @@ Pain.RapidSpin:
 Goto NormalPain
 
 Pain.FalseSwipe:
- "----" H 0 A_JumpIfHealthLower(2,"FalseAward")
+ "----" H 0 //A_JumpIfHealthLower(2,"PainFalse2")
 Goto PainFalse
+
+Pain.FalseSwipe2:
+ "----" H 0 
+Goto PainFalse2
+
+/*
 FalseAward:
 "----" H 0 ACS_NamedExecuteAlways("FalseEXPAward",0)
 Goto NormalPain
+*/
 
 PainFalse:
 PLY1 H 0
+"----" A 0 ACS_NamedExecuteAlways("PKMN_HitEXP",0,User_HitMemory,1) 
+/*
 "####" H 0
 "----" A 0 ACS_NamedExecuteAlways("PKMN_PainSound",0,Type_Normal) 
 "----" A 1 ACS_NamedExecuteAlways("PKMN_HitEXP",0,User_HitMemory,1) 
 "----" HHHHHHHHH 2 A_SpawnItemEx("PainFX",-5,0,3,0,0,0)
 "----" A 1
+*/
 goto SuperSpawn
+
+PainFalse2:
+PLY1 H 0
+"####" H 0
+"----" A 0 ACS_NamedExecuteAlways("PKMN_PainSound",0,Type_Normal) 
+"----" HHHHHHHHH 2 A_SpawnItemEx("PainFX",-5,0,3,0,0,0)
+"----" A 1
+goto SuperSpawn
+
+Pain.Slash1:
+"----" H 0 A_GiveInventory("Slash1Protect", 1)
+Goto NormalPain
+Pain.Slash2:
+"----" H 0 A_SpawnItemEX("PowerStrikeFX2",0,0,28)
+"----" H 0 A_GiveInventory("Slash2Protect", 1)
+Goto NormalPain
 
 //#endregion
 
@@ -79,6 +129,9 @@ Pain.Fighting:
 Goto FightingPain
 
 Pain.VacuumWave:
+"----" H 0
+Goto FightingPain
+
 Pain.DoubleKick:
 "----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,6,Type_Fighting)
 "----" H 0 A_GiveInventory("DoubleKickProtect",1)
@@ -125,6 +178,7 @@ Goto FightingPain
 //#region -=- Flying -=-
 
 Pain.Peck:
+Pain.WingAttack:
 //--[Move|Flying]--
 "----" H 0 
 goto FlyingPain
@@ -168,7 +222,22 @@ goto FlyingPain
 
 //#region -=- Poison -=-
 Pain.Venoshock:
+Pain.PoisonTail:
 //--[Move|Poison]--
+"----" H 0 
+Goto PoisonPain
+
+Pain.PoisonTail1:
+"----" H 0 A_GiveInventory("PoisonTail1Protect", 1)
+"----" H 0 A_Jump(83,2)
+"----" H 0 A_GiveInventory("PoisonStatusProc")
+"----" H 0 
+Goto PoisonPain
+Pain.PoisonTail2:
+"----" H 0 A_SpawnItemEX("PowerStrikeFX2",0,0,28)
+"----" H 0 A_GiveInventory("PoisonTail2Protect", 1)
+"----" H 0 A_Jump(83,2)
+"----" H 0 A_GiveInventory("PoisonStatusProc")
 "----" H 0 
 Goto PoisonPain
 
@@ -190,6 +259,9 @@ Goto PoisonPain
 //#region -=- Ground -=-
 
 Pain.Ground:
+Pain.SandTomb:
+Pain.Dig:
+
 //--[Move|Ground]--
 "----" H 0 
 Goto GroundPain
@@ -198,6 +270,11 @@ pain.Earthquake:
 "----" H 0 A_jumpifinventory("EarthQuakeProtect",1,2)
 "----" H 0 A_GiveInventory("EarthQuakeProtect",1)
 "----" H 0 
+Goto GroundPain
+
+Pain.Bulldoze:
+"----" H 0 A_GiveInventory("BulldozeProtect",1)
+"----" H 0 A_GiveInventory("BulldozeNerfInitiate",1)
 Goto GroundPain
 
 Pain.MudShot:
@@ -220,6 +297,9 @@ Goto GroundPain
 
 Pain.PowerGem:
 Pain.RockBlast:
+Pain.RockThrow:
+Pain.RockTomb:
+Pain.RockPolish:
 //--[Move|Rock]--
 "----" H 0
 Goto RockPain
@@ -241,6 +321,10 @@ Pain.RockSlide:
 "----" H 0 A_Jump(230,2)
 "----" H 0 A_GiveInventory("CringeStatusProc")
 "----" H 0 
+Goto RockPain
+
+Pain.StoneEdge:
+"----" H 0 ThrustThingZ(0,55,0,0)
 Goto RockPain
 
 //#endregion
@@ -288,11 +372,22 @@ Goto GhostPain
 //#endregion
 
 //#region -=- Steel -=-
-Pain.MetalClaw:
 Pain.FlashCannon:
 //--[Move|Steel]--
 "----" H 0
 Goto SteelPain
+
+Pain.IronTail:
+"----" H 0
+"----" H 0 A_GiveInventory("IronTailProtect",1)
+"----" H 0 A_SpawnItemEX("IronTailImpactPuff")
+"----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,25,Type_Water)
+"----" H 0
+Goto SteelPain
+
+Pain.MetalClaw:
+"----" H 0 A_GiveInventory("MetalClawNerfInitiate",1)
+Goto NormalPain
 
 Pain.GyroBall:
 "----" H 0 A_GiveInventory("GyroBallProtect")
@@ -405,7 +500,6 @@ Goto FirePain
     
 Pain.WaterGun:
 Pain.WaterPulse:
-Pain.AquaTail:
 Pain.Whirlpool:
 //--[Move|Water]--
 "----" H 0
@@ -476,8 +570,6 @@ Pain.MuddyWater:
 Goto WaterPain
 
 Pain.Scald:
-"----" H 0 A_GiveInventory("RockSlideProtect")
-"----" H 0 A_GiveInventory("RockSlideProtect2")
 "----" H 0 A_Jump(230,2)
 "----" H 0 A_GiveInventory("BurnStatusProc")
 "----" H 0 
@@ -741,6 +833,7 @@ Goto DragonPain
 //#region -=- Dark -=-
 
     Pain.Pursuit:
+Pain.HoneClaws:
     //--[Move|Dark]--
     "----" H 0
     Goto DarkPain
@@ -822,10 +915,18 @@ Goto PainNormal
     Death.Fakeout:
     Death.Thrash:
     Death.SpikeCannon:
+Death.FurySwipes:
+Death.CrushClaw:
+
+Death.Glare:
     //--[Move|Normal]--
     "----" H 0
     Goto NormalDeath
 
+    Death.Slam:
+    "----" H 0 A_SpawnItemEX("SlamImpactPuff")
+    Goto NormalDeath
+    
     Death.QuickAttack:
     "----" A 0 ACS_NamedExecuteAlways("PKMN_PainSound",0,Type_Normal) 
     "----" H 0 A_GiveToTarget("QuickAttackCollision",1)
@@ -835,6 +936,15 @@ Goto PainNormal
     "----" H 5
     Goto Death
 
+    Death.TakeDown:
+    "----" A 0 ACS_NamedExecuteAlways("PKMN_PainSound",0,Type_Normal) 
+    "----" H 0 A_GiveToTarget("TakeDownCollision",1)
+    "----" H 0 A_PlaySoundEx("weapon/Rebound","SoundSlot5")
+    "----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,35,Type_Normal)
+    "----" H 0 ACS_NamedExecuteAlways("PKMN_RecoilDamager",0,25)
+    "----" H 0 ThrustThingZ(0,35,0,0)
+    "----" H 5
+    Goto Death
 
     Death.DoubleEdge:
     "----" A 0 ACS_NamedExecuteAlways("PKMN_PainSound",0,Type_Normal) 
@@ -854,6 +964,14 @@ Goto PainNormal
     "----" H 0 ThrustThingZ(0,35,0,0)
     "----" H 5
     Goto Death
+
+    Death.Slash1:
+    "----" H 0 A_GiveInventory("Slash1Protect", 1)
+    Goto NormalDeath
+    Death.Slash2:
+    "----" H 0 A_SpawnItemEX("PowerStrikeFX2",0,0,28)
+    "----" H 0 A_GiveInventory("Slash2Protect", 1)
+    Goto NormalDeath
 //#endregion
 
 //#region -=- Fighting -=-
@@ -912,6 +1030,7 @@ Goto FightingDeath
 Death.Peck:
 Death.DrillPeck:
 Death.AirSlash:
+Death.WingAttack:
 //--[Move|Flying]--
 "----" H 0 
 goto FlyingDeath
@@ -948,9 +1067,15 @@ Death.Venoshock:
 Death.Sludge:
 Death.SludgeBomb:
 Death.ClearSmog:
+Death.PoisonTail1:
 //--[Move|Poison]--
 "----" H 0 
 Goto PoisonDeath
+
+Death.PoisonTail2:
+"----" H 0 A_SpawnItemEX("PowerStrikeFX2",0,0,28)
+Goto PoisonDeath
+
 //#endregion
 
 //#region -=- Ground -=-
@@ -959,6 +1084,9 @@ Death.Mudslap:
 Death.MudBomb:
 Death.Earthquake:
 Death.MudShot:
+Death.SandTomb:
+Death.Dig:
+Death.Bulldoze:
 //--[Move|Ground]--
 "----" H 0 
 Goto GroundDeath
@@ -971,14 +1099,31 @@ Death.RockSlide:
 Death.StealthRock:
 Death.PowerGem:
 Death.RockBlast:
+Death.RockThrow:
+Death.RockPolish:
 //--[Move|Rock]--
 "----" H 0 A_Stop
 Goto RockDeath
+
+Death.RockTomb:
+"----" H 0 A_GiveInventory("IcyWindNerfInitiate",1)
+Goto RockDeath
+
 
 Death.Rollout:
 "----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,45,Type_Rock)
 "----" H 0 ThrustThingZ(0,25,0,0)
 Goto RockDeath
+
+Death.StoneEdge:
+"----" A 0 ACS_NamedExecuteAlways("PKMN_PainSound",0,Type_Rock) 
+"----" H 0 ThrustThingZ(0,120,0,0)
+"----" HHHHHHHHHHHHHHHHH 1 A_JumpIf(MomZ <=0 || CeilingZ-Z <= height, "StoneEdgeDeath2")
+Goto Death
+StoneEdgeDeath2:
+"----" H 1 A_JumpIf(CeilingZ-Z > height, "Death")
+"----" H 0 A_SpawnitemEX("WaterfallCeilingBonk")//
+Goto Death
 
 //#endregion
 
@@ -1010,6 +1155,10 @@ Death.MetalClaw:
 Death.FlashCannon:
 //--[Move|Steel]--
 "----" H 0
+Goto SteelDeath
+
+Death.IronTail:
+"----" H 0 A_SpawnItemEX("IronTailImpactPuff")
 Goto SteelDeath
 
 Death.GyroBall:
@@ -1259,6 +1408,7 @@ Goto FairyDeath
     Death.Pursuit:
     Death.Bite:
     Death.Crunch:
+Death.HoneClaws:
     //--[Move|Dark]--
     "----" H 0
     Goto DarkDeath

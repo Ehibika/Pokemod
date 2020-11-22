@@ -116,7 +116,7 @@ Pickup2:
 TNT1 A 0 A_Jump(203,"Paralyse")
 stop
 Paralyse:
-TNT1 A 0 A_GiveInventory("ParalysisStatusProc2")
+TNT1 A 0 A_GiveInventory("Zap_ParalysisStatusProc2")
 stop
 
 Nope:

@@ -1,0 +1,123 @@
+Const int WINGATTACK_SPACE = 35;
+
+actor WingAttackMove : WepMasterBase
+{
+Tag "WingAttack"
+obituary "$OB_WingAttack"
+Weapon.AmmoUse 1
+Weapon.AmmoGive 35
+weapon.ammotype "WingAttackPP"
+scale 2.0
+Inventory.Pickupmessage "$PU_MEGABUSTER"
+States
+{
+Spawn:
+WEAP X 1
+stop
+
+Fire:
+"####" BBB 1 A_Jumpif(CallACS("CheckWeaponFire",RC_B)==1,"Fire.Begin")
+"####" B 0 A_Jump(256,"NoAmmo")
+Goto NoAmmo
+
+Fire.Begin:
+"####" B 0
+"####" B 0 A_Jump(256,"Fire.Melee")
+Goto Fire.Melee
+
+Fire.Melee:
+TNT1 A 0 A_PlaySoundEx("weapon/AirShooter","Weapon")
+TNT1 A 0 A_FireCustomMissile("WingAttackMelee",0,1,WINGATTACK_SPACE,0)
+TNT1 A 0 A_FireCustomMissile("WingAttackMelee",0,0,-WINGATTACK_SPACE,0)
+Goto Fire.After
+
+Fire.After:
+"####" B 1 A_GiveInventory("HalfRecovery_B")
+"####" B 0 A_Jump(256,"Fire.End")
+Goto Fire.End
+}
+}
+
+actor WingAttackMove1 : WingAttackMove {Weapon.SlotNumber 1}
+actor WingAttackMove2 : WingAttackMove {Weapon.SlotNumber 2}
+actor WingAttackMove3 : WingAttackMove {Weapon.SlotNumber 3}
+actor WingAttackMove4 : WingAttackMove {Weapon.SlotNumber 4}
+
+actor WingAttackMove5 : WingAttackMove 
+{
+Weapon.SlotNumber 5
+States
+{
+Fire:
+TNT1 A 0 A_PlaySoundEx("weapon/SlashClaw","Weapon")
+TNT1 A 0 A_FireCustomMissile("WingAttackMelee",0,1,0,0)
+Goto Fire.End
+
+Fire.End:
+TNT1 A 0
+TNT1 A 0 A_TakeInventory("WingAttackMove5",9)
+TNT1 A 0 A_Jump(256,"Ready")
+Goto Ready
+}
+}
+
+//[+]========================================================================[+]
+//-----------------------------|Ammo & Inventory|------------------------------
+//[+]========================================================================[+]
+actor WingAttackPP : Ammo {inventory.amount 1 inventory.Maxamount 35}
+//[+]========================================================================[+]
+//--------------------------------|Projectiles |--------------------------------
+//[+]========================================================================[+]
+
+actor WingAttackMelee : BasicMeleeAttack
+{
+Speed 44
+Scale 5.0
+DamageType "WingAttack"
+Obituary "$OB_WingAttack"
+Damage(MBP_WingAttack)
+States
+{
+Spawn:
+TNT1 A 0 
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+Spawn2:
+TNT1 A 0 
+AIRS ABCABCABC 1 //A_SpawnItemEx("WingAttackFXTrail", 0, 0, 0, 0, 0, 0, 0,1)
+stop
+
+Death:
+TNT1 A 0 A_Stop
+TNT1 A 0 A_GiveInventory("ProjectileDCode",1)
+TNT1 A 0 A_SpawnItemEx("WingAttackFX", 0, 0, 0, 0, 0, 0, 0,1)
+TNT1 A 5
+stop
+}
+}
+
+
+actor WingAttackFXTrail : BasicClientside
+{
+scale 5.0
+States
+{
+Spawn:
+TNT1 A 0 
+NEDC A 1
+NEDC AAA 1 A_Fadeout(0.3)
+stop
+}
+}
+
+actor WingAttackFX : BasicClientside
+{
+scale 2.5
+States
+{
+Spawn:
+TNT1 A 0 
+NDFX A 1
+AIRS GHIJ 1 A_SetScale(ScaleX+0.3)
+stop
+}
+}

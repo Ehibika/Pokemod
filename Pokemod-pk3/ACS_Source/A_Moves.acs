@@ -66,6 +66,7 @@ if(SketchSlot<4)
         */
     }
     SetWeapon(StrParam(s:weapons_ammo[SketchWeapon][0],i:SketchSlot));
+    SaveLoadout();
 }
 
 Script "ProtectBarrierWarper" (void) CLIENTSIDE
@@ -123,6 +124,8 @@ Script "FalseSwipeDamage" (int Damage)
 {
 int TargTID = ACS_NamedExecuteWithResult("core_gettarget",0);
 int TracTID = ACS_NamedExecuteWithResult("core_gettracer",0);
+if(GetActorProperty(TracTID,APROP_HEALTH) < 2){Terminate;}
+
 ACS_NamedExecuteAlways("FalseBuddha",0,TracTID,1);
 Delay(1);
 Thing_Damage2(TracTID,Damage,"FalseSwipe");
@@ -509,6 +512,26 @@ Script "SubstituteBarrierWarper" (void) CLIENTSIDE
 	Thing_Remove(0);
 }
 
+Script "MultishotCountWarper" (void) CLIENTSIDE
+{
+    int Player = ACS_NamedExecuteWithResult("core_gettarget",0);
+    int MHCount;
+	
+	// Loop if shield is active
+	while(GetActorProperty(Player, APROP_HEALTH)>0
+	&& (CheckActorInventory(Player, "MultiShotCounter") > 0 || CheckActorInventory(Player, "MultiShotTimer") > 0)
+	){
+
+        MHCount = CheckActorInventory(Player, "MultiShotCounter");
+        SetActorState(0,strParam(s:"Count",i:MHCount));
+		Delay(1);
+	}
+	
+    // Remove
+    SetActorState(0,"Death");
+    Delay(17);
+	Thing_Remove(0);
+}
 
 Script "GeneralWarper" (void) CLIENTSIDE
 {
@@ -714,4 +737,88 @@ Script "GenericAttackPower" (int Rate)
     int PlayerLVL = GetCvar(StrParam(s:"PlayerLevel_",i:PlayerNumber()));
     setResultValue(Rate*(PlayerLVL-1));
 
+}
+
+Script "DeployableDefenseSet" (int MinHP)
+{
+
+    int OwnerTID = ACS_NamedExecuteWithResult("core_gettarget",0);
+    int OwnerMaxHP = GetActorProperty(OwnerTID, APROP_SPAWNHEALTH);
+    int OwnerHP = GetActorProperty(OwnerTID, APROP_HEALTH);
+    int SubsHP = OwnerMaxHP;
+    int SubsPDEF = CheckActorInventory(OwnerTID,"Active_PDefense");
+    int SubsSDEF = CheckActorInventory(OwnerTID,"Active_SDefense");
+    int StatValue;
+    int ModStat;
+    int DollTID = SUBTID+OwnerTID;
+    Bool Replaced;
+
+    if(MinHP > 0 && SubsHP < MinHP){SubsHP = MinHP;}
+
+    SetActorPRoperty(0,APROP_SPAWNHEALTH,SubsHP);
+    SetActorPRoperty(0,APROP_HEALTH,SubsHP);
+    //Log(i:SubsHP);
+
+    ModStat = SubsPDEF;
+
+if(ModStat >= STATBASELINE)
+    {
+    StatValue = Noneg(ValueMap(ModStat,STATMAX,STATBASELINE,DEFVAL1,DEFVAL2));
+    }
+else
+    {
+    StatValue = Noneg(ValueMap(ModStat,STATBASELINE,STATMIN,DEFVAL2,DEFVAL3));    
+    }
+if(StatValue < 10){StatValue = 10;}
+GiveInventory(StrParam(s:"PDEF",i:StatValue),1);
+
+ModStat = SubsSDEF;
+
+if(ModStat >= STATBASELINE)
+    {
+    StatValue = Noneg(ValueMap(ModStat,STATMAX,STATBASELINE,DEFVAL1,DEFVAL2));
+    }
+    else
+    {
+    StatValue = Noneg(ValueMap(ModStat,STATBASELINE,STATMIN,DEFVAL2,DEFVAL3));    
+    }
+if(StatValue < 10){StatValue = 10;}
+GiveInventory(StrParam(s:"SDEF",i:StatValue),1);
+
+}
+
+Script "ActorDecay" (int Damage)
+{
+    Thing_Damage2(0,Damage,"Decay");
+}
+
+Script "PitchClamp" (int PitchVal, int PitchClamp)
+{
+int Output;
+
+if(PitchVal < PitchClamp && GetActorZ(0)-GetActorFloorZ(0) == 0){Output = PitchVal;}
+SetResultValue(Output);
+
+}
+
+Script "GetHoneClawsLVL" (int Pointer)
+{
+    if(Pointer!=0){SetActivator(0,Pointer);}
+
+    int output;
+    if(CheckInventory("STF_HoneClaws1")) output++;
+    if(CheckInventory("STF_HoneClaws2")) output++;
+    if(CheckInventory("STF_HoneClaws3")) output++;
+    SetResultValue(Output);
+}
+
+Script "GetRockPolishLVL" (int Pointer)
+{
+    if(Pointer!=0){SetActivator(0,Pointer);}
+
+    int output;
+    if(CheckInventory("STF_RockPolish1")) output++;
+    if(CheckInventory("STF_RockPolish2")) output++;
+    if(CheckInventory("STF_RockPolish3")) output++;
+    SetResultValue(Output);
 }

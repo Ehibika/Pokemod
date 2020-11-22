@@ -416,6 +416,22 @@ str weapons_ammo[MAX_WEAPONS_GLOBAL][7] =
 {"CraftyShieldMove", "CraftyShieldPP", "CraftyShield", 1.0, "NO", "NO", "SLOT_NONE"},
 {"MudShotMove", "MudShotPP", "MudShot", 1.0, "NO", "NO", "SLOT_NONE"},
 {"ClearSmogMove", "ClearSmogPP", "ClearSmog", 1.0, "NO", "NO", "SLOT_NONE"},
+{"RockThrowMove", "RockThrowPP", "RockThrow", 1.0, "NO", "NO", "SLOT_NONE"},
+{"RockTombMove", "RockTombPP", "RockTomb", 1.0, "NO", "NO", "SLOT_NONE"},
+{"FurySwipesMove", "FurySwipesPP", "FurySwipes", 1.0, "NO", "NO", "SLOT_NONE"},
+{"CrushClawMove", "CrushClawPP", "CrushClaw", 1.0, "NO", "NO", "SLOT_NONE"},
+{"HoneClawsMove", "HoneClawsPP", "HoneClaws", 1.0, "NO", "NO", "SLOT_NONE"},
+{"StoneEdgeMove", "StoneEdgePP", "StoneEdge", 1.0, "NO", "NO", "SLOT_NONE"},
+{"IronTailMove", "IronTailPP", "IronTail", 1.0, "NO", "NO", "SLOT_NONE"},
+{"SlamMove", "SlamPP", "Slam", 1.0, "NO", "NO", "SLOT_NONE"},
+{"SandTombMove", "SandTombPP", "SandTomb", 1.0, "NO", "NO", "SLOT_NONE"},
+{"DigMove", "DigPP", "Dig", 1.0, "NO", "NO", "SLOT_NONE"},
+{"RockPolishMove", "RockPolishPP", "RockPolish", 1.0, "NO", "NO", "SLOT_NONE"},
+{"BulldozeMove", "BulldozePP", "Bulldoze", 1.0, "NO", "NO", "SLOT_NONE"},
+{"PoisonTailMove", "PoisonTailPP", "PoisonTail", 1.0, "NO", "NO", "SLOT_NONE"},
+{"WingAttackMove", "WingAttackPP", "WingAttack", 1.0, "NO", "NO", "SLOT_NONE"},
+{"TakeDownMove", "TakeDownPP", "TakeDown", 1.0, "NO", "NO", "SLOT_NONE"},
+{"GlareMove", "GlarePP", "Glare", 1.0, "NO", "NO", "SLOT_NONE"},
 //--[NewMove]--
 };
 #endregion

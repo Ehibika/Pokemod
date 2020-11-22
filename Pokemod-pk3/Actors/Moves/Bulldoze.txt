@@ -1,0 +1,232 @@
+actor BulldozeMove : WepMasterBase
+{
+Tag "Bulldoze"
+obituary "$OB_BULLDOZE"
+Weapon.AmmoUse 1
+Weapon.AmmoGive 20
+weapon.ammotype "BulldozePP"
+scale 2.0
+Inventory.Pickupmessage "$PU_MEGABUSTER"
+States
+{
+Spawn:
+WEAP X 1
+stop
+
+
+Fire:
+"####" BBB 1 A_Jumpif(CallACS("CheckWeaponFire",RC_B)==1,"Fire.Begin")
+"####" B 0 A_Jump(256,"NoAmmo")
+Goto NoAmmo
+
+Fire.Begin:
+"####" B 0
+"####" B 0 A_Jump(256,"Fire.GroundCheck")
+Goto Fire.Bullet
+
+Fire.GroundCheck:
+"####" B 0 A_CheckFloor("Fire.Quake")
+"####" B 0 A_Jump(256,"NoAmmo2")
+Goto NoAmmo2
+
+Fire.Quake:
+"####" A 5 A_GiveInventory("DashSet_C")
+"####" B 0 A_PlaySoundEx("Misc/Fatland","Weapon")
+"####" B 0 A_FireCustomMissile("BulldozeExplosion",0,1,0,0)
+"####" B 5 A_Quake(2,5,0,300)
+"####" B 0 A_Jump(256,"Fire.After")
+Goto Fire.After
+
+Fire.After:
+"####" B 1 A_GiveInventory("HalfRecovery_B")
+"####" A 0 A_GiveInventory("DashSetOff")
+"####" C 0 A_REfire("Fire")
+"####" B 0 A_Jump(256,"Fire.End")
+Goto Fire.End
+
+
+
+
+
+}
+}
+
+actor BulldozeMove1 : BulldozeMove {Weapon.SlotNumber 1}
+actor BulldozeMove2 : BulldozeMove {Weapon.SlotNumber 2}
+actor BulldozeMove3 : BulldozeMove {Weapon.SlotNumber 3}
+actor BulldozeMove4 : BulldozeMove {Weapon.SlotNumber 4}
+
+actor BulldozeMove5 : BulldozeMove 
+{
+Weapon.SlotNumber 5
+States
+{
+Fire.End:
+TNT1 A 0
+TNT1 A 0 A_TakeInventory("BulldozeMove5",9)
+TNT1 A 0 A_Jump(256,"Ready")
+Goto Ready
+}
+}
+
+//[+]========================================================================[+]
+//-----------------------------|Ammo & Inventory|------------------------------
+//[+]========================================================================[+]
+actor BulldozePP : Ammo {inventory.amount 1 inventory.Maxamount 20}
+
+Actor BulldozeProtect : powerprotection
+{
+Powerup.duration 17
+Damagefactor "Bulldoze", 0
+}
+
+actor STF_Bulldoze : Powerup {inventory.amount 1 Powerup.Duration -6}
+
+actor BulldozeNerfInitiate : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_Jumpifinventory("STF_Bulldoze",1,"Sustain")
+TNT1 A 0 A_GiveInventory("STF_Bulldoze",1)
+TNT1 A 0 A_SpawnItemEX("BulldozeNerfWatcher")
+TNT1 A 0 A_GiveInventory("StatUpdator",1)
+stop
+
+Sustain:
+TNT1 A 0 A_GiveInventory("STF_Bulldoze",1)
+stop
+Nope:
+TNT1 A 0
+stop
+}
+}
+//[+]========================================================================[+]
+//--------------------------------|Projectiles |--------------------------------
+//[+]========================================================================[+]
+actor BulldozeExplosion : BasicExplosion
+{
+translation "202:202=210:210"//90
+Damagetype "Bulldoze"
+Obituary "$OB_BULLDOZE"
+scale 2.5
+Var int user_angle;
+Reactiontime 20
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+TNT1 A 1 
+SpawnLoop:
+TNT1 A 0 A_SpawnItemEx("Bulldoze_WaveTrail",64,0,16,32,0,0,user_angle,1)
+//TNT1 A 0 A_SpawnItemEx("Bulldoze_WaveTrail",20,0,32,20,0,0,user_angle+16,1)
+TNT1 A 0 A_SetUserVar("user_angle",user_angle+36)
+TNT1 A 0 A_CountDown
+Loop
+Death:
+TNT1 A 0 A_PlaySoundEX("weapon/breakdashimpact","Body")
+//TNT1 A 0 A_PlaySoundEx("weapon/napalm","Weapon")
+TNT1 A 17 A_Quake(8,17,0,300)
+//TN_B EFGHIJKLMNOPQRS 1
+stop
+}
+}
+
+actor Bulldoze_WaveTrail : BasicProjectile
+{
+Damagetype "Bulldoze"
+Obituary "$OB_BULLDOZE"
++DONTBLAST
++DONTREFLECT
++RIPPER
+//+FLOORHUGGER
++STEPMISSILE
++NOEXPLODEFLOOR
+maxstepheight 16
+gravity 5.0
+Damage (0)
+Radius 20
+Height 12
+Speed 50
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+TNT1 AAA 1 A_SpawnItemEx("Bulldoze_Wave",0,0,0,0,0,0,0,1)
+stop
+
+Death:
+TNT1 A 1 A_SpawnItemEx("Bulldoze_Wave",0,0,0,0,0,0,0,1)
+stop
+}
+}
+
+
+actor Bulldoze_Wave : BasicProjectile
+{
+Damagetype "Bulldoze"
+Obituary "$OB_BULLDOZE"
++DONTBLAST
++DONTREFLECT
++THRUGHOST
++RIPPER
++FLOORHUGGER
+Radius 20
+Height 26
+Damage (0)
+Speed 0
+Scale 2.5
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+TNT1 A 0 A_SpawnItemEX("Bulldoze_WaveFX",0,0,0,0,0,0,0,1)
+TNT1 A 1
+TNT1 A 1 A_Explode(MBP_Bulldoze,32,0,0,32)
+Goto Death
+Death:
+TNT1 A 0 
+stop
+}
+}
+
+actor Bulldoze_WaveFX : BasicClientside
+{
+Scale 2.5
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_GiveInventory("ProjectileCodeSyncTarget",1)
+EQWV DABCD 2
+stop
+}
+}
+
+actor BulldozeNerfWatcher : BasicHelper 
+{
+Var int user_DashTime;
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 5 A_GiveToTarget("SpdDownFXSpawn")
+TNT1 A 0 A_JumpIfInTargetInventory("STF_Bulldoze",1,"Spawn")
+TNT1 A 1 A_GiveToTarget("StatUpdator")
+TNT1 A 5
+Goto Death
+
+Death:
+TNT1 A 0 
+stop
+}
+}

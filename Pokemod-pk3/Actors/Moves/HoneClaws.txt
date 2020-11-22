@@ -1,0 +1,228 @@
+actor HoneClawsMove : WepMasterBase
+{
+Tag "HoneClaws"
+obituary "$OB_SYNTHESIS"
+Weapon.AmmoUse 1
+Weapon.AmmoGive 20
+weapon.ammotype "HoneClawsPP"
+scale 2.0
+Inventory.Pickupmessage "$PU_MEGABUSTER"
+States
+{
+Spawn:
+WEAP X 1
+stop
+
+Fire:
+"####" BBB 1 A_Jumpif(CallACS("CheckWeaponFire",RC_C)==1,"Fire.Begin")
+"####" B 0 A_Jump(256,"NoAmmo")
+Goto NoAmmo
+
+Fire.Begin:
+"####" B 0
+"####" B 0 A_Jump(256,"Fire.Channel")
+Goto Fire.Channel
+
+Fire.Channel:
+"####" B 0 A_GiveInventory("WeaponCharge",5)
+"####" B 0 A_GiveInventory("ChannelingSpeed")
+"####" B 0 A_JumpIfInventory("WeaponCharge",25,"Fire.Initiate")
+"####" B 0 A_PlaySoundEx("weapon/SlashClawhit","Soundslot6")
+"####" B 5 A_FireCustomMissile("HoneClawsSwipe",0,0,0,0,Pitch)
+"####" C 0 A_REfire("Fire.Channel")
+"####" B 0 A_Jump(256,"Fire.After")
+Goto Fire.After
+
+Fire.Initiate:
+"####" B 0 A_GiveInventory("HoneClawsBuffInitiate")
+"####" B 0 A_JumpIfInventory("ConShotTimer",1,"Fire.After")
+
+"####" A 0 ACS_NamedExecuteAlways("TakePP",0,Move_HoneClaws,1)
+"####" B 0 A_Jump(256,"Fire.After")
+Goto Fire.After
+
+Fire.After:
+"####" B 0 A_TakeInventory("WeaponCharge",999)
+"####" C 0 A_REfire("Fire")
+"####" B 0 A_TakeInventory("ChannelingSpeed",9)
+"####" B 1 A_GiveInventory("SemiRecovery_C")
+"####" B 0 A_Jump(256,"Fire.End")
+Goto Fire.End
+}
+}
+
+actor HoneClawsMove1 : HoneClawsMove {Weapon.SlotNumber 1}
+actor HoneClawsMove2 : HoneClawsMove {Weapon.SlotNumber 2}
+actor HoneClawsMove3 : HoneClawsMove {Weapon.SlotNumber 3}
+actor HoneClawsMove4 : HoneClawsMove {Weapon.SlotNumber 4}
+
+actor HoneClawsMove5 : HoneClawsMove 
+{
+Weapon.SlotNumber 5
+States
+{
+Fire.End:
+TNT1 A 0
+TNT1 A 0 A_TakeInventory("HoneClawsMove5",9)
+TNT1 A 0 A_Jump(256,"Ready")
+Goto Ready
+}
+}
+
+//[+]========================================================================[+]
+//-----------------------------|Ammo & Inventory|------------------------------
+//[+]========================================================================[+]
+actor HoneClawsPP : Ammo {inventory.amount 1 inventory.Maxamount 20}
+
+actor STF_HoneClaws1 : PowerUp { inventory.amount 1 Powerup.Duration -3}
+actor STF_HoneClaws2 : PowerUp { inventory.amount 1 Powerup.Duration -6}
+actor STF_HoneClaws3 : PowerUp { inventory.amount 1 Powerup.Duration -9}
+
+actor HoneClawsBuffInitiate : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_JumpIF(CallACS("GetHoneClawsLVL") == 1,"HoneClaws2")
+TNT1 A 0 A_JumpIF(CallACS("GetHoneClawsLVL") == 2,"HoneClaws3")
+TNT1 A 0 A_JumpIF(CallACS("GetHoneClawsLVL") == 3,"HoneClaws3")
+goto HoneClaws0
+
+HoneClaws0:
+TNT1 A 0 A_GiveInventory("STF_HoneClaws1",1)
+Goto Pickup2
+
+HoneClaws1:
+TNT1 A 0 A_GiveInventory("HoneClawsPurge",1)
+TNT1 A 0 A_GiveInventory("StatUpdator",1)
+Goto Nope
+
+HoneClaws2:
+TNT1 A 0 A_GiveInventory("HoneClawsPurge",1)
+TNT1 A 0 A_GiveInventory("STF_HoneClaws1",1)
+TNT1 A 0 A_GiveInventory("STF_HoneClaws2",1)
+TNT1 A 0 A_GiveInventory("StatUpdator",1)
+Goto Nope
+
+HoneClaws3:
+TNT1 A 0 A_GiveInventory("HoneClawsPurge",1)
+TNT1 A 0 A_GiveInventory("STF_HoneClaws1",1)
+TNT1 A 0 A_GiveInventory("STF_HoneClaws2",1)
+TNT1 A 0 A_GiveInventory("STF_HoneClaws3",1)
+TNT1 A 0 A_GiveInventory("StatUpdator",1)
+Goto Nope
+
+Pickup2:
+TNT1 A 0 A_SpawnitemEX("HoneClawsBuffWatcher")
+TNT1 A 0 A_GiveInventory("StatUpdator",1)
+stop
+
+Nope:
+TNT1 A 0
+stop
+}
+}
+
+
+actor HoneClawsPurge : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_TakeInventory("STF_HoneClaws1",9)
+TNT1 A 0 A_TakeInventory("STF_HoneClaws2",9)
+TNT1 A 0 A_TakeInventory("STF_HoneClaws3",9)
+stop
+}
+}
+
+
+actor HoneClawsBuffWatcher : BasicHelper 
+{
+Var int user_TickTime;
++SERVERSIDEONLY
+Args 1
+States
+{
+Spawn:
+TNT1 A 0
+Cycle.Start:
+TNT1 A 0 A_JumpIfInTargetInventory("CutterFlag",999,"Death")
+TNT1 A 0 A_JumpIfInTargetInventory("IsDead",1,"Death")
+TNT1 A 0 A_JumpIfInTargetInventory("HazeFlag",1,"Death")
+TNT1 A 0 A_GiveToTarget("PATKUpFXSpawn")
+TNT1 A 0 A_JumpIF(CallACS("GetHoneClawsLVL",AAPTR_TARGET) > 0,"Cycle.Mode")
+goto Death
+
+Cycle.Mode:
+TNT1 A 5 
+TNT1 A 1 A_JumpIF(CallACS("GetHoneClawsLVL",AAPTR_TARGET) == Args[0],"Cycle.Start")
+TNT1 A 0 A_SetArg(0,CallACS("GetHoneClawsLVL",AAPTR_TARGET))
+TNT1 A 0 A_GiveToTarget("StatUpdator")
+goto Cycle.Start
+
+
+Death:
+TNT1 A 0 A_GiveToTarget("StatUpdator")
+TNT1 A 0 A_GiveToTarget("BuffLossSoundCue")
+TNT1 A 0 A_TakeFromTarget("STF_HoneClaws1",9)
+TNT1 A 0 A_TakeFromTarget("STF_HoneClaws2",9)
+TNT1 A 0 A_TakeFromTarget("STF_HoneClaws3",9)
+TNT1 A 2 
+stop
+}
+}
+
+actor HoneClawsSwipe : BasicProjectile
+{
++NOINTERACTION
+damage(0)
+scale 2.0
+Speed 48
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 1 A_GiveInventory("ProjectileCode",1)
+TNT1 A 1 A_SpawnItemEx("HoneClawsFX",0,0,0,0,0,0,0,1)
+stop
+}
+}
+
+actor HoneClawsFX : BasicClientside
+{
+scale 3.5
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 AAAAA 0 A_SpawnItemEx("HoneClawsParticle",0,0,0,random(-7,7),random(-7,7),random(-7,7),0,1)
+NDFX A 1
+NDFX AAAA 1 A_SetScale(ScaleX-0.5)
+stop
+}
+}
+
+actor HoneClawsParticle : BasicClientside
+{
+scale 2.5
+States
+{
+Spawn:
+TNT1 A 0 
+SCLA HIJKL 1
+stop
+}
+}

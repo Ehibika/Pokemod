@@ -143,5 +143,27 @@ str SkinDEX [MAXDEX][2] = {
     /*|95|*/{"Happiny","Base"},
     /*|96|*/{"Chansey","Chansey"},
     /*|97|*/{"Blissey","Blissey"},
+
+    /*|98|*/{"Geodude","Base"},
+    /*|99|*/{"Graveler","Graveler"},
+    /*|100|*/{"Golem","Golem"},
+
+    /*|101|*/{"Geodude_A","Base"},
+    /*|102|*/{"Graveler_A","Graveler_A"},
+    /*|103|*/{"Golem_A","Golem_A"},
+
+    /*|104|*/{"Onix","Base"},
+    /*|105|*/{"Steelix","Steelix"},
+
+    /*|106|*/{"Scyther","Base"},
+    /*|107|*/{"Scizor","Scizor"},
+
+    /*|108|*/{"Zangoose","Base"},
+
+    /*|109|*/{"Seviper","Base"},
+
+    /*|110|*/{"Beldum","Base"},
+    /*|111|*/{"Metang","Metang"},
+    /*|112|*/{"Metagross","Metagross"},
     //--[NewPokemon]--
     };

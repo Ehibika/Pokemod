@@ -39,6 +39,9 @@ damagefactor "PoisonGas", 1.0
 damagefactor "DestinyBond", 1.0
 damagefactor "WorrySeed", 1.0
 damagefactor "CraftyShield", 1.0
+damagefactor "HoneClaws", 1.0
+damagefactor "RockPolish", 1.0
+damagefactor "Glare", 1.0
 //--[NewStatusMove]--
 }
 
@@ -147,7 +150,8 @@ damagefactor "RazorLeaf", 1.0
 damagefactor "SeedBomb", 1.0
 damagefactor "DoubleEdge", 1.0
 
-damagefactor "Slash", 1.0
+damagefactor "Slash1", 1.0
+damagefactor "Slash2", 1.0
 damagefactor "FireFang", 1.0
 damagefactor "DragonRush", 1.0
 damagefactor "FlareBlitz", 1.0
@@ -233,5 +237,19 @@ damagefactor "EggBomb", 1.0
 damagefactor "Avalanche", 1.0
 damagefactor "Spark", 1.0
 damagefactor "Firepunch", 1.0
+damagefactor "RockThrow", 1.0
+damagefactor "RockTomb", 1.0
+damagefactor "FurySwipes", 1.0
+damagefactor "CrushClaw", 1.0
+damagefactor "StoneEdge", 1.0
+damagefactor "IronTail", 1.0
+damagefactor "Slam", 1.0
+damagefactor "SandTomb", 1.0
+damagefactor "Dig", 1.0
+damagefactor "Bulldoze", 1.0
+damagefactor "PoisonTail1", 1.0
+damagefactor "PoisonTail2", 1.0
+damagefactor "WingAttack", 1.0
+damagefactor "TakeDown", 1.0
 //--[NewPhysicalMove]--
 }

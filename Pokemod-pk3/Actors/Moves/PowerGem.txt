@@ -112,21 +112,18 @@ actor PowerGemPP : Ammo {inventory.amount 1 inventory.Maxamount 20}
 //[+]========================================================================[+]
 //--------------------------------|Projectiles |--------------------------------
 //[+]========================================================================[+]
-actor PowerGemShot : BasicProjectile
+actor PowerGemShot : PKMN_SkillShot
 {
 +DOOMBOUNCE
 +MBFBOUNCER
 +USEBOUNCESTATE
 BounceCount 5
 Bouncefactor 1.0
-Speed 64
 Damage (MBP_PowerGem+args[0])
 DamageType "PowerGem"
 obituary "$OB_PowerGem"
 SeeSound "weapon/OrbBounce"
 Reactiontime 36
-radius 12
-height 16
 scale 3.5
 States
 {

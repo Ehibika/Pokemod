@@ -1,4 +1,5 @@
 
+//#region 
 /*
 actor PsyBeamMove : WepMasterBase
 {
@@ -82,6 +83,7 @@ Stop
 }
 }
 */
+//#endregion
 
 actor PsyBeamMove : WepMasterBase
 {
@@ -310,7 +312,7 @@ stop
 
 //#endregion
 
-actor PsyBeamLaser : BasicProjectile
+actor PsyBeamLaser : PKMN_SkillShot
 {
 +SKYEXPLODE
 +FORCEXYBILLBOARD
@@ -324,9 +326,6 @@ BOUNCEFACTOR 0.91
 BounceCount 2
 
 Reactiontime 70
-Radius 8
-Height 8
-Speed 64
 Scale 2.5
 Obituary "$OB_PSYBEAM"
 damagetype "PsyBeam"

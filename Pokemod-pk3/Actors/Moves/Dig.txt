@@ -1,0 +1,265 @@
+Const int DIG_AREA1 = 128;
+Const int DIG_AREA2 = 64;
+
+actor DigMove : WepMasterBase
+{
+Tag "Dig"
+obituary "$OB_Dig"
+Weapon.AmmoUse 1
+Weapon.AmmoGive 20
+weapon.ammotype "DigPP"
+scale 2.0
+Inventory.Pickupmessage "$PU_MEGABUSTER"
+States
+{
+Spawn:
+WEAP X 1
+stop
+
+
+Fire:
+"####" BBB 1 A_Jumpif(CallACS("CheckWeaponFire",RC_A)==1,"Fire.Begin")
+"####" B 0 A_Jump(256,"NoAmmo")
+Goto NoAmmo
+
+Fire.Begin:
+"####" B 0
+"####" B 1 
+Goto Fire.DigInitiate
+
+/*
+Fire.DigInitiate:
+TNT1 A 0 A_PlaySoundEx("weapon/Bounce2","Weapon")
+TNT1 A 0 A_ChangeFlag("THRUACTORS",1)
+TNT1 A 0 A_GiveInventory("NoJumpCancel",1)
+TNT1 A 0 ThrustThingZ(0,55,0,0)
+TNT1 A 0 A_TakeInventory("JumpCancler",2)
+Goto Fire.DigInitiate1
+
+Fire.DigInitiate1:
+TNT1 A 5 
+TNT1 AAAAA 2 A_JumpIf(z-floorz==0,"Fire.Dig") 
+Goto Fire.DigInitiate2
+
+Fire.DigInitiate2:
+TNT1 A 0 ThrustThingZ(0,55,1,1)
+TNT1 A 0 A_GiveInventory("AfterImageFX")
+TNT1 A 0 A_PlaySoundEx("weapon/breakdash","Weapon")
+TNT1 A 2 A_JumpIf(z-floorz==0,"Fire.Dig") 
+loop
+*/
+
+Fire.DigInitiate:
+TNT1 A 0 A_GiveInventory("DashSet_A")
+TNT1 AAAAA 5 A_SpawnItemEx("PreDigFX")
+TNT1 A 0 A_ChangeFlag("THRUACTORS",1)
+TNT1 A 0 A_GiveInventory("DashSetOff")
+goto Fire.Dig
+
+Fire.Dig:
+TNT1 A 0 A_TakeInventory("DigPP",1)
+TNT1 A 0 A_GiveInventory("DigPPTimer",1)
+TNT1 A 0 A_PlaySoundEx("weapon/deepdiggerdig","Voice")
+TNT1 A 0 A_SpawnItemEx("DigSplash",0,0,0,0,0,0,0,1)
+//===
+TNT1 A 0 A_ChangeFlag("THRUACTORS",0)
+TNT1 A 0 A_GiveInventory("InvulnerableOn_Pickup",1)
+TNT1 A 0 A_SpawnItemEx("Dig_VWatcher")
+TNT1 A 0 
+TNT1 A 0 A_TakeInventory("UnSolid",1)
+TNT1 A 0 A_ChangeFlag("NONSHOOTABLE",1)
+TNT1 A 0 A_ChangeFlag("SOLID",0)
+TNT1 A 0 A_ChangeFlag("PICKUP",0)
+TNT1 A 0 A_ChangeFlag("FLOORHUGGER",1)
+TNT1 A 0 ACS_NamedExecuteAlways("PKMN_ToggleVisible",0,0,0)
+TNT1 A 0 ThrustThingZ(0,40,1,0)
+TNT1 A 0 ACS_NamedExecuteAlways("PKMN_JumpToggle",0,0)
+TNT1 A 0 A_GiveInventory("DigBuffer",1)
+TNT1 A 0 A_GiveInventory("PKMN_WhiteFlagDropper",1) //For objective combo
+goto Fire.DigHold
+Fire.DigHold:
+TNT1 A 0 A_JumpIfInventory("DigPPTimer",1,3)
+TNT1 A 0 A_TakeInventory("DigPP",1)
+TNT1 A 0 A_GiveInventory("DigPPTimer",1)
+TNT1 A 0
+TNT1 AA 1 ThrustThingZ(0,0,1,0)//Fix running over fans/bubbles
+TNT1 A 0 A_JumpIfInventory("DigPP",1,"Fire.DigHoldFX")
+goto Fire.DigRelease
+
+Fire.DigHoldFX:
+TNT1 A 1 A_JumpIfInventory("DigFXBuffer",1,"Fire.DigCheck")
+TNT1 A 1 A_JumpIf(momx>5||momy>5||momx<-5||momy<-5,"Fire.DigHoldFX1")
+TNT1 A 0 A_SpawnItemEx("DigParticle_1",random(-30,30),0,8,0,0,random(3,8),random(0,359),1)
+TNT1 A 0 A_GiveInventory("DigFXBuffer")
+goto Fire.DigCheck
+
+Fire.DigHoldFX1:
+TNT1 A 0 A_SpawnItemEx("DigTunnelFX",0,0,0,0,0,0,0,1)
+TNT1 A 0 A_GiveInventory("DigFXBuffer")
+goto Fire.DigCheck
+
+Fire.DigCheck:
+TNT1 A 0 A_JumpIfInventory("DigBuffer",1,"Fire.DigHold")
+TNT1 AA 1 A_Jumpif(CallACS("PKMNACS_ButtonCheck",BT_ATTACK) == 1,"Fire.DigRelease")
+goto Fire.DigHold
+
+Fire.DigRelease:
+TNT1 A 0 A_SpawnItemEx("DigBlast",0,0,0,0,0,0,0,1)
+TNT1 A 0 //A_ClearRefire
+TNT1 A 0 ACS_NamedExecuteAlways("PKMN_ToggleVisible",0,0,1)
+TNT1 A 0 A_ChangeFlag("FLOORHUGGER",0)
+TNT1 A 0 A_ChangeFlag("PICKUP",1)
+TNT1 A 0 ACS_NamedExecuteAlways("PKMN_JumpToggle",0,1)
+TNT1 A 0 A_ChangeFlag("THRUACTORS",1)
+TNT1 A 4 ThrustThingZ(0,20,0,0)
+TNT1 A 0 A_ChangeFlag("NONSHOOTABLE",0)
+TNT1 A 0 A_ChangeFlag("THRUACTORS",0)
+TNT1 A 0 A_SpawnItemEx("ReSolidifier")
+TNT1 A 0 A_GiveInventory("InvulnerableOff_Pickup",1)
+TNT1 A 0 A_TakeInventory("NoJumpCancel",1)
+Goto Fire.DigRelease2
+
+Fire.DigRelease2:
+TNT1 A 2 
+TNT1 A 2 A_JumpIf(z-floorz==0,"Fire.After") 
+Goto Fire.DigRelease2
+
+Fire.After:
+"####" B 1 A_GiveInventory("FullRecovery_A")
+"####" C 0 A_REfire("Fire")
+"####" B 0 A_Jump(256,"Fire.End")
+Goto Fire.End
+
+}
+}
+
+actor DigMove1 : DigMove {Weapon.SlotNumber 1}
+actor DigMove2 : DigMove {Weapon.SlotNumber 2}
+actor DigMove3 : DigMove {Weapon.SlotNumber 3}
+actor DigMove4 : DigMove {Weapon.SlotNumber 4}
+
+actor DigMove5 : DigMove 
+{
+Weapon.SlotNumber 5
+States
+{
+Fire.End:
+TNT1 A 0
+TNT1 A 0 A_TakeInventory("DigMove5",9)
+TNT1 A 0 A_Jump(256,"Ready")
+Goto Ready
+}
+}
+
+//[+]========================================================================[+]
+//-----------------------------|Ammo & Inventory|------------------------------
+//[+]========================================================================[+]
+actor DigPP : Ammo {inventory.amount 1 inventory.Maxamount 20}
+
+actor DigBuffer : Powerup {inventory.amount 1 Powerup.Duration 30}
+actor DigPPTimer : Powerup {inventory.amount 1 Powerup.Duration 35}
+actor DigFXBuffer : Powerup {inventory.amount 1 Powerup.Duration 7}
+
+Actor Dig_VWatcher : VisibilityWatcher
+{
+ReactionTime 70
+States
+{
+CheckInv:
+TNT1 AAAAAAAA 1 A_JumpIfInTargetInventory("DigPPTimer",1,"Reloop")
+Goto Death
+}
+}
+//[+]========================================================================[+]
+//--------------------------------|Projectiles |--------------------------------
+//[+]========================================================================[+]
+
+actor PreDigFX : BasicClientside
+{
+States
+{
+Spawn:
+HITG E 0
+TNT1 A 0 A_GiveInventory("ProjectileFXCode",1)
+TNT1 A 0 A_PlaySoundEx("weapon/breakdash","Weapon")
+TNT1 A 0 A_SpawnItemEx("MudBombFx2", Random2(32), 0, Random(0,32), 0, 0, 0, random(0,360),1)
+TNT1 A 7 A_SpawnItemEx("DigTunnelFX",0,0,0,0,0,0,0,1)
+stop
+}
+}
+
+
+actor DigBlast : BasicExplosion
+{
+DamageType "Dig"
+obituary "$OB_Dig"
+ReactionTime 5
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+TNT1 A 0 A_Explode(MBP_Dig,DIG_AREA1,0,0,DIG_AREA2)
+TNT1 A 0 A_PlaySoundEx("weapon/breakdashimpact","SoundSlot5")
+TNT1 A 0 A_SpawnItemEx("DigResurfaceFX",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION)
+Spawn2:
+TNT1 A 2 A_CountDown
+TNT1 AAAA 0 A_SpawnItemEx("MudBombFx2", Random(-DIG_AREA1,DIG_AREA1), 0, Random(0,DIG_AREA2), 0, 0, 0, random(0,360),1)
+loop
+
+Death:
+TNT1 A 5
+stop
+}
+}
+
+actor DigTunnelFX : BasicClientside
+{
+States
+{
+Spawn:
+HITG E 0
+TNT1 A 0 A_GiveInventory("ProjectileFXCode",1)
+DOLP B 0 A_PlaySoundEx("weapon/deepdiggerdig","Voice")
+HSHH A 0 A_SpawnItemEx("DigParticle_1", 0, 0, 0, random2(256/24), random2(256/24), random(1,8), random(0, 359),1)
+HSHH AA 0 A_SpawnItemEx("DigParticle_2", 0, 0, 0, random2(256/24), random2(256/24), random(1,8), random(0, 359),1)
+HSHH PQR 2 
+Goto Death
+
+Death:
+BEWA A 0
+stop
+}
+}
+
+actor DigParticle_1 : RockTombParticle{Alpha 1.0}
+actor DigParticle_2 : RockBlastParticle{Alpha 1.0}
+
+actor DigSplash : BasicClientside
+{
+States
+{
+Spawn:
+HITG E 0
+TNT1 A 0 A_GiveInventory("ProjectileFXCode",1)
+TNT1 A 0 A_SpawnItemEx("DigResurfaceFX",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION)
+Goto Death
+
+Death:
+BEWA A 0
+stop
+}
+}
+
+
+actor DigResurfaceFX : BasicClientside
+{
+scale 2.5
+States
+{
+Spawn:
+TNT1 A 0 
+DIGM ABCDEFGH 3 
+stop
+}
+}
