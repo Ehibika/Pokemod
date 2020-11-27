@@ -363,7 +363,44 @@ actor CabinetCoolDown : PowerUp
 powerup.duration 90
 }
 
+actor CabinetCoolDown2 : PowerUp //for HP
+{
+powerup.duration 7
+}
+
 actor TeamZoneHeal : CustomInventory
+{
+states
+{
+Pickup:
+Pickup1:
+EBAL E 0 A_GiveInventory("TeamZone_HPHeal",1)
+EBAL E 0 A_GiveInventory("TeamZone_PPHeal",1)
+stop
+No:
+TNT1 A 0
+stop
+}
+}
+
+actor TeamZone_HPHeal : CustomInventory
+{
+states
+{
+Pickup:
+Pickup1:
+TNT1 A 0 A_JumpIfInventory("CabinetCoolDown2",1,"No")
+EBAL E 0 A_GiveInventory("CabinetCoolDown2",1)
+Pickup2:
+EBAL E 0 ACS_NamedExecuteAlways("PKMNACS_HealthPickup",0,5,1)//HealThing(100)
+stop
+No:
+TNT1 A 0
+stop
+}
+}
+
+actor TeamZone_PPHeal : CustomInventory
 {
 states
 {
@@ -372,8 +409,7 @@ Pickup1:
 TNT1 A 0 A_JumpIfInventory("CabinetCoolDown",1,"No")
 EBAL E 0 A_GiveInventory("CabinetCoolDown",1)
 Pickup2:
-EBAL E 0 A_PlaySound("item/energyup")
-EBAL E 0 ACS_NamedExecuteAlways("PKMNACS_HealthPickup",0,100)//HealThing(100)
+EBAL E 0 A_PlaySound("item/refill")
 EBAL E 0 ACS_ExecuteAlways(992, 0, 0, 1)
 stop
 No:

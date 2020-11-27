@@ -91,6 +91,7 @@ const int WideGuard2_PARTMAX = 12;
 const int WGA = 6;
 const int WG_ExpandTime = 30;
 const int WideGuardRad = WGA*WG_ExpandTime;
+const int WideGuardEntiTID = 8;
 
 actor WideGuard2Spawner
 {
@@ -166,6 +167,7 @@ actor WideGuard2Core
         WGUA C 0 A_RearrangePointers(AAPTR_TRACER, AAPTR_DEFAULT, AAPTR_DEFAULT)
         BHOL B 0 A_SetUserVar(user_partmax, 16)
         BHOL B 0 A_SetUserVar(user_part, user_partmax)
+        BHOL B 0 ACS_NamedExecuteAlways("GiveEntiTID",0,WideGuardEntiTID)
     SpawnParts:
     BLTR C 0 A_Jumpifintargetinventory("LightTeamFlag",1,"SpawnBLUE")
     BLTR C 0 A_Jumpifintargetinventory("WilyTeamFlag",1,"SpawnRED")

@@ -43,6 +43,8 @@ SHOP_HASTESEED= "\c[MenuWhite]Haste Seed  \c[MenuYellow]10 BP";
 
 SHOP_ESCAPEORB= "\c[MenuWhite]Escape Orb  \c[MenuYellow]10 BP";
 SHOP_BARRIERORB= "\c[MenuWhite]Barrier Orb  \c[MenuYellow]30 BP";
+SHOP_QUICKORB= "\c[MenuWhite]Quick Orb  \c[MenuYellow]30 BP";
+SHOP_ERASERORB= "\c[MenuWhite]Eraser Orb  \c[MenuYellow]30 BP";
 
 SHOP_QBUYTM5= "\cgTM5 : \cjSubstitute \c[MenuYellow]25 BP\cj";
 SHOP_QBUYTM6= "\cgTM6 : \cjFalseSwipe \c[MenuYellow]3 BP\cj";
@@ -172,34 +174,78 @@ SHOP_LEARNTM59= "\cfTypes: \cjGround \n\cfArchetypes: \cj Terrestrial \n\cjAny F
 //#region -=- Items -=-
 
 PU_HPBERRY = "Picked up a HP Berry!";
-TAG_HPBERRY = "HP Berry : restores 20 HP";
+TAG_HPBERRY = "HP Berry : restores 100 HP";
+DESC_HPBERRY = "Restores 100 HP";
 
 PU_BIGHPBERRY = "Picked up a Big HP Berry!";
-TAG_BIGHPBERRY = "Big HP Berry : restores 100 HP";
+TAG_BIGHPBERRY = "Big HP Berry : Fully Restores HP";
+DESC_BIGHPBERRY = "Fully Restores HP";
 
 PU_PPBERRY = "Picked up a PP Berry!";
-TAG_PPBERRY = "PP Berry : restores a little PP";
+TAG_PPBERRY = "PP Berry : Replenishes PP of current move";
+DESC_PPBERRY = "Replenishes PP of current move";
 
 PU_BIGPPBERRY = "Picked up a Big PP Berry!";
-TAG_BIGPPBERRY = "Big PP Berry : restores a lot of pp";
+TAG_BIGPPBERRY = "Big PP Berry : Replenishes all PP";
+DESC_BIGPPBERRY = "Replenishes all PP";
 
 PU_CLENSESEED = "Picked up a Clense Seed!";
 TAG_CLENSESEED = "Clense Seed : Removes negative effects";
+DESC_CLENSESEED = "Cures Poison, Paralysis, burn, sleep,\n" 
+"and freeze.";
 
 PU_POWERSEED = "Picked up a Power Seed!";
 TAG_POWERSEED = "Power Seed : Boosts Atk and S.Atk";
+DESC_POWERSEED = "Grants a 1 stage boost to Attack and\n" 
+"Special Attack";
 
 PU_GUARDSEED = "Picked up a Guard Seed!";
 TAG_GUARDSEED = "Guard Seed : Boosts Def and S.Def";
+DESC_GUARDSEED = "Grants a 1 stage boost to Defense and\n" 
+"Special Defense";
 
 PU_HASTESEED = "Picked up a Haste Seed!";
 TAG_HASTESEED = "Haste Seed : Boosts Speed";
+DESC_HASTESEED = "Grants a 1 stage speed boost";
 
 PU_ESCAPEORB = "Picked up an Escape Orb!";
 TAG_ESCAPEORB = "Escape Orb : Warps the user to (relative) Safety";
+DESC_ESCAPEORB = "Warps you to your personal spawn point,\n" 
+"or any random spawn point";
 
 PU_BARRIERORB = "Picked up an Barrier Orb!";
 TAG_BARRIERORB = "Barrier Orb : envelop allies in dual barriers";
+DESC_BARRIERORB = "Applies both REFLECT and LIGHTSCREEN to \n" 
+"all nearby teammates";
+
+PU_QUICKORB = "Picked up an Quick Orb!";
+TAG_QUICKORB = "Quick Orb : Gives the team a boost of speed!";
+DESC_QUICKORB = "Grants a 2 stage speed buff to all nearby teammates";
+
+PU_ERASERORB = "Picked up an Eraser Orb!";
+TAG_ERASERORB = "Eraser Orb : Destroys nearby structures, hazards, and AOEs!";
+DESC_ERASERORB = "removes all deployables, field effects, \n" 
+"and hazards.";
+
+PU_SEALORB = "Picked up an Seal Orb!";
+TAG_SEALORB = "Seal Orb : Disable enemy moves!";
+DESC_SEALORB = "Disables the current move on all \n" 
+"surrounding opponents";
+
+PU_SLUMBERWAND = "Picked up a Slumber Wand!";
+TAG_SLUMBERWAND = "Slumber Wand: Cast a sleep inducing projectile";
+DESC_SLUMBERWAND = "fires a projectile that inflicts sleep \n" 
+"on an opponent";
+
+PU_SHRINKWAND = "Picked up a Shrink Wand!";
+TAG_SHRINKWAND = "Shrink Wand: Cast a projectile that debuffs all stats";
+DESC_SHRINKWAND = "Fires a projectile that drops all stats \n" 
+"by 1 stage on an opponent";
+
+PU_SOMARIANWAND = "Picked up a Somarian Wand!";
+TAG_SOMARIANWAND = "Somarian wand: Cast a projectile that spawns a stone block";
+DESC_SOMARIANWAND = "Fires an intangible projectile that \n" 
+"spawns a 3x3x3 block wherever it lands";
 
 PU_G_NORMAL = "Found a White Gummi!";
 TAG_G_NORMAL = "White Gummi";
@@ -528,6 +574,7 @@ OB_POISONTAIL = "%k Defeated %o using POISONTAIL!";
 OB_WINGATTACK = "%k Defeated %o using WINGATTACK!";
 OB_TAKEDOWN = "%k Defeated %o using TAKEDOWN!";
 OB_GLARE = "%k Defeated %o using GLARE!";
+OB_WILDCHARGE = "%k Defeated %o using WILDCHARGE!";
 //--[NewMove]--
 
 //#endregion
@@ -3808,7 +3855,7 @@ M253_NAME = "\cj RockThrow";
 M253_TYPE = "\cj Rock";
 M253_CATEGORY = "\cf Physical";
 M253_POWER = "\cfPower:\cj --";
-M253_DESC = "\cf<Desc>";
+M253_DESC = "\cjThrow a rock\n"
 //#endregion
 
 
@@ -3817,7 +3864,9 @@ M254_NAME = "\cj RockTomb";
 M254_TYPE = "\cj Rock";
 M254_CATEGORY = "\cf Physical";
 M254_POWER = "\cfPower:\cj --";
-M254_DESC = "\cf<Desc>";
+M254_DESC = "\cjLob a stone that drops speed upon\n"
+"damaging foes, if it lands on the ground,\n"
+"it remains as an obstacle.";
 //#endregion
 
 
@@ -3826,7 +3875,7 @@ M255_NAME = "\cj FurySwipes";
 M255_TYPE = "\cj Normal";
 M255_CATEGORY = "\cf Physical";
 M255_POWER = "\cfPower:\cj --";
-M255_DESC = "\cf<Desc>";
+M255_DESC = "\cjhold to repetedly slash at opponents.\n"
 //#endregion
 
 
@@ -3835,7 +3884,8 @@ M256_NAME = "\cj CrushClaw";
 M256_TYPE = "\cj Normal";
 M256_CATEGORY = "\cf Physical";
 M256_POWER = "\cfPower:\cj --";
-M256_DESC = "\cf<Desc>";
+M256_DESC = "\cjSlash with claws that rip the opponent's\n"
+"DEF stat.";
 //#endregion
 
 
@@ -3844,7 +3894,9 @@ M257_NAME = "\cj HoneClaws";
 M257_TYPE = "\cj Dark";
 M257_CATEGORY = "\cf Status";
 M257_POWER = "\cfPower:\cj --";
-M257_DESC = "\cf<Desc>";
+M257_DESC = "\cjHold to sharpen your claws to increase\n"
+"ATK up to 3 stages, attack boosts decay\n"
+"overtime.";
 //#endregion
 
 
@@ -3853,7 +3905,9 @@ M258_NAME = "\cj StoneEdge";
 M258_TYPE = "\cj Rock";
 M258_CATEGORY = "\cf Physical";
 M258_POWER = "\cfPower:\cj --";
-M258_DESC = "\cf<Desc>";
+M258_DESC = "\cjTarget the ground to cause jagged stones\n"
+"to erupt from underneath, said stones may\n"
+"remain as obstacles.";
 //#endregion
 
 
@@ -3862,7 +3916,7 @@ M259_NAME = "\cj IronTail";
 M259_TYPE = "\cj Steel";
 M259_CATEGORY = "\cf Physical";
 M259_POWER = "\cfPower:\cj --";
-M259_DESC = "\cf<Desc>";
+M259_DESC = "\cjCleave foes with a tail as hard as iron.\n"
 //#endregion
 
 
@@ -3871,7 +3925,8 @@ M260_NAME = "\cj Slam";
 M260_TYPE = "\cj Normal";
 M260_CATEGORY = "\cf Physical";
 M260_POWER = "\cfPower:\cj --";
-M260_DESC = "\cf<Desc>";
+M260_DESC = "\cjCleave foes with a tail or long apendage,\n"
+"has heavy knockback.";
 //#endregion
 
 
@@ -3880,7 +3935,8 @@ M261_NAME = "\cj SandTomb";
 M261_TYPE = "\cj Ground";
 M261_CATEGORY = "\cf Physical";
 M261_POWER = "\cfPower:\cj --";
-M261_DESC = "\cf<Desc>";
+M261_DESC = "\cjTarget the ground and conjur a small\n"
+"sandstorm to suck opponents into it.";
 //#endregion
 
 
@@ -3889,7 +3945,9 @@ M262_NAME = "\cj Dig";
 M262_TYPE = "\cj Ground";
 M262_CATEGORY = "\cf Physical";
 M262_POWER = "\cfPower:\cj --";
-M262_DESC = "\cf<Desc>";
+M262_DESC = "\cjTunnel beneath the floor and out of harms\n"
+"way, can move around freely and submerge\n"
+"to deal heavy damage.";
 //#endregion
 
 
@@ -3898,7 +3956,9 @@ M263_NAME = "\cj RockPolish";
 M263_TYPE = "\cj Rock";
 M263_CATEGORY = "\cf Status";
 M263_POWER = "\cfPower:\cj --";
-M263_DESC = "\cf<Desc>";
+M263_DESC = "\cjHold to buff down one's body to increase\n"
+"SPD up to 3 stages, Speed boost decays\n"
+"overtime.";
 //#endregion
 
 
@@ -3907,7 +3967,8 @@ M264_NAME = "\cj Bulldoze";
 M264_TYPE = "\cj Ground";
 M264_CATEGORY = "\cf Physical";
 M264_POWER = "\cfPower:\cj --";
-M264_DESC = "\cf<Desc>";
+M264_DESC = "\cjPound the ground to deal area damage and\n"
+"lower speed.";
 //#endregion
 
 
@@ -3916,7 +3977,8 @@ M265_NAME = "\cj PoisonTail";
 M265_TYPE = "\cj Poison";
 M265_CATEGORY = "\cf Physical";
 M265_POWER = "\cfPower:\cj --";
-M265_DESC = "\cf<Desc>";
+M265_DESC = "\cjCleave foes with a poison laced tail, can\n"
+"poison and deals extra damage at the tip.";
 //#endregion
 
 
@@ -3925,7 +3987,8 @@ M266_NAME = "\cj WingAttack";
 M266_TYPE = "\cj Flying";
 M266_CATEGORY = "\cf Physical";
 M266_POWER = "\cfPower:\cj --";
-M266_DESC = "\cf<Desc>";
+M266_DESC = "\cjFlap one's wings and strike foes with a\n"
+"pair of tornados.";
 //#endregion
 
 
@@ -3934,7 +3997,8 @@ M267_NAME = "\cj TakeDown";
 M267_TYPE = "\cj Normal";
 M267_CATEGORY = "\cf Physical";
 M267_POWER = "\cfPower:\cj --";
-M267_DESC = "\cf<Desc>";
+M267_DESC = "\cjA reckless charge that deals considerable\n"
+"damage and recoil.";
 //#endregion
 
 
@@ -3943,7 +4007,19 @@ M268_NAME = "\cj Glare";
 M268_TYPE = "\cj Normal";
 M268_CATEGORY = "\cf Status";
 M268_POWER = "\cfPower:\cj --";
-M268_DESC = "\cf<Desc>";
+M268_DESC = "\cjcast a menacing gaze that causes\n"
+"paralysis.";
+//#endregion
+
+
+//#region -=- 269: WildCharge -=-
+M269_NAME = "\cj WildCharge";
+M269_TYPE = "\cj Electric";
+M269_CATEGORY = "\cf Physical";
+M269_POWER = "\cfPower:\cj --";
+M269_DESC = "\cja dangerous and reckless electrical\n"
+"ramming attack that defys gravity, has\n"
+"severe recoil damage.";
 //#endregion
 
 

@@ -82,6 +82,12 @@ Goto Ready
 //[+]========================================================================[+]
 actor DragonClawPP : Ammo {inventory.amount 1 inventory.Maxamount 35}
 Actor Imbue_DragonClaw : Powerup{inventory.amount 1 powerup.duration 0x7FFFFFFF}
+
+Actor DragonClawProtect : powerprotection
+{
+Powerup.duration 5
+Damagefactor "DragonClaw", 0
+}
 //[+]========================================================================[+]
 //--------------------------------|Projectiles |--------------------------------
 //[+]========================================================================[+]

@@ -46,9 +46,13 @@ stop
 }
 }
 
-
+ACTOR MaxItemValue : Ammo // For GetAmmoCapacity()
+{
+   Inventory.MaxAmount 10
+}
 
 #include "Actors/inventory/Shop/ShopInventory/Candies.txt"
 #include "Actors/inventory/Shop/ShopInventory/Berries.txt"
 #include "Actors/inventory/Shop/ShopInventory/Seeds.txt"
 #include "Actors/inventory/Shop/ShopInventory/Orbs.txt"
+#include "Actors/inventory/Shop/ShopInventory/Wands.txt"

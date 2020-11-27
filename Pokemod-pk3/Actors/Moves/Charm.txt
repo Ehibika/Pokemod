@@ -109,6 +109,7 @@ Spawn:
 TNT1 A 0
 stop
 Pickup:
+TNT1 A 0 A_Jumpif(CallACS("CheckStatusGuard",0,STATUS_STATS),"Nope") //Blocked by Protect|Detect|Substitute|Mist
 TNT1 A 0 A_Jumpifinventory("STF_Charm",1,"Sustain")
 TNT1 A 0 A_GiveInventory("STF_Charm",1)
 TNT1 A 0 A_SpawnItemEX("CharmNerfWatcher")

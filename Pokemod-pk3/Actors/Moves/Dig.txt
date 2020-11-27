@@ -67,7 +67,7 @@ TNT1 A 0 A_GiveInventory("InvulnerableOn_Pickup",1)
 TNT1 A 0 A_SpawnItemEx("Dig_VWatcher")
 TNT1 A 0 
 TNT1 A 0 A_TakeInventory("UnSolid",1)
-TNT1 A 0 A_ChangeFlag("NONSHOOTABLE",1)
+TNT1 A 0 A_ChangeFlag("NONSHOOTABLE",1) 
 TNT1 A 0 A_ChangeFlag("SOLID",0)
 TNT1 A 0 A_ChangeFlag("PICKUP",0)
 TNT1 A 0 A_ChangeFlag("FLOORHUGGER",1)

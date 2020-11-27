@@ -1,7 +1,7 @@
 actor ClenseSeed : ConsumableBase 
 {
 inventory.amount 1
-inventory.maxamount 3
+inventory.maxamount 5
 inventory.pickupmessage "$PU_CLENSESEED"
 Tag "$TAG_CLENSESEED"
 inventory.icon "CLSEEDI"
@@ -36,6 +36,7 @@ TNT1 A 0 A_SpawnitemEX("ConsumeFX",0,0,0,0,0,0,0,1)
 stop
 }
 }
+actor MaxClenseSeed : Ammo {inventory.maxamount 5}
 
 actor PowerSeed : ConsumableBase 
 {
@@ -61,6 +62,8 @@ TNT1 A 0 A_SpawnitemEX("ConsumeFX",0,0,0,0,0,0,0,1)
 stop
 }
 }
+actor MaxPowerSeed : Ammo {inventory.maxamount 3}
+
 
 actor STF_PowerSeed : Powerup {inventory.amount 1 Powerup.Duration -15}
 
@@ -137,6 +140,7 @@ TNT1 A 0 A_SpawnitemEX("ConsumeFX",0,0,0,0,0,0,0,1)
 stop
 }
 }
+actor MaxGuardSeed : Ammo {inventory.maxamount 3}
 
 actor STF_GuardSeed : Powerup {inventory.amount 1 Powerup.Duration -15}
 
@@ -213,6 +217,7 @@ TNT1 A 0 A_SpawnitemEX("ConsumeFX",0,0,0,0,0,0,0,1)
 stop
 }
 }
+actor MaxHasteSeed : Ammo {inventory.maxamount 3}
 
 actor STF_HasteSeed : Powerup {inventory.amount 1 Powerup.Duration -15}
 

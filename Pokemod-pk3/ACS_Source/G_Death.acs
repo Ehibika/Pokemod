@@ -1,0 +1,33 @@
+/* -=- Death -=-
+ * Code that takes place upon a player dying and becoming a deadspectator, this handles stuff such as allowing for a degree of player setup while as a DeadSpectator
+ * 
+ * sadly, this ultimately did not work in the end.
+
+*/
+
+#library "G_Death"
+#import "WEPACS.acs"
+#import "A_Stats.acs"
+#import "DB_Player.acs"
+#import "DB_Data.acs"
+#import "Dex_Pokemon.acs"
+#import "Dex_Types.acs"
+#import "Dex_Evo.acs"
+#import "Dex_Leveling.acs"
+#import "Dex_BaseStats.acs"
+#import "A_Skins.acs"
+
+#include "zcommon.acs"
+/*
+Script "Death_MenuGive" DEATH
+{
+    log(s:"start");
+int p = PlayerNumber();
+setActivator(0,AAPTR_NULL);
+    until(PlayerIsSpectator(p) == 2){log(s:"running"); Delay(5);}
+    log(s:"done");
+if(PlayerIsSpectator(p) == 1){Terminate;}
+
+GiveInventory("PKMNDeadKit",1);
+}
+*/

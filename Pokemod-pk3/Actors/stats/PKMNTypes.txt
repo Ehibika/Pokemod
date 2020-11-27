@@ -1213,6 +1213,7 @@ damagefactor "Thunderbolt", 1.5 //W
 damagefactor "Thunder", 1.5 //W
 damagefactor "Spark", 1.5 //W
 damagefactor "Shockwave", 1.5 //W
+damagefactor "WildCharge", 1.5 //W
 //--[Move|Electric]--
 }
 
@@ -1224,6 +1225,7 @@ damagefactor "Thunderbolt", 2.0 //2W
 damagefactor "Thunder", 2.0 //2W
 damagefactor "Spark", 2.0 //2W
 damagefactor "Shockwave", 2.0 //2W
+damagefactor "WildCharge", 2.0 //2W
 //--[Move|Electric]--
 }
 
@@ -1235,6 +1237,7 @@ damagefactor "Thunderbolt", 0.5 //R
 damagefactor "Thunder", 0.5 //R
 damagefactor "Spark", 0.5 //R
 damagefactor "Shockwave", 0.5 //R
+damagefactor "WildCharge", 0.5 //R
 //--[Move|Electric]--
 }
 
@@ -1246,6 +1249,7 @@ damagefactor "Thunderbolt", 0.25 //2R
 damagefactor "Thunder", 0.25 //2R
 damagefactor "Spark", 0.25 //2R
 damagefactor "Shockwave", 0.25 //2R
+damagefactor "WildCharge", 0.25 //2R
 //--[Move|Electric]--
 }
 
@@ -1257,6 +1261,7 @@ damagefactor "Thunderbolt", 0.0 //I
 damagefactor "Thunder", 0.0 //I
 damagefactor "Spark", 0.0 //I
 damagefactor "Shockwave", 0.0 //I
+damagefactor "WildCharge", 0.0 //I
 //--[Move|Electric]--
 }
 
@@ -1268,6 +1273,7 @@ damagefactor "Thunderbolt", 1.3 //S
 damagefactor "Thunder", 1.3 //S
 damagefactor "Spark", 1.3 //S
 damagefactor "Shockwave", 1.3 //S
+damagefactor "WildCharge", 1.15 //S
 //--[Move|Electric]--
 }
 //[+]========================================================================[+]

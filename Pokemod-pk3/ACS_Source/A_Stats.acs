@@ -207,7 +207,7 @@ Str StatName2[7] = {
 };
 */
 
-#LIBDEFINE STATITEMNUM 57
+#LIBDEFINE STATITEMNUM 59
 
 Str StatEffectName[STATITEMNUM][2] = {
     {"Growth","GOOD"},
@@ -267,6 +267,8 @@ Str StatEffectName[STATITEMNUM][2] = {
     {"RockPolish2","GOOD"},
     {"RockPolish3","GOOD"},
     {"Bulldoze","BAD"},
+    {"QuickOrb","GOOD"},
+    {"Shrink","BAD"},
 
 };
 
@@ -335,6 +337,8 @@ Int StatEffectValue[STATITEMNUM][5] = {
 {   0,      0,      0,      0,      1}, //RockPolish2
 {   0,      0,      0,      0,      1}, //RockPolish3
 {   0,      0,      0,      0,      -1}, //Bulldoze
+{   0,      0,      0,      0,      3}, //Bulldoze
+{   -1,      -1,      -1,      -1,      -1}, //shrink
 
 
 };

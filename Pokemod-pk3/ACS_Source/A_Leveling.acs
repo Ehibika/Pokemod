@@ -477,6 +477,7 @@ if(CheckInventory("PKMN_AllowFreeSetup")){output = 1;}
 if(CheckInventory("InSafeZone")){output = 1;}
 if(CheckInventory("CabinetCoolDown")){output = 1;} //For Jax's 1 flag koth
 if(InWarmup){output = 1;}
+if(PlayerIsSpectator(PlayerNumber()) == 2){output = 1;}
 if(GetCvar("lastmanstanding")==1||GetCvar("teamlms")==1)
     {
     if(GetGameModeState() != 2){output = 1;}

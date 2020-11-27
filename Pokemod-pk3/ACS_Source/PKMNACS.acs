@@ -28,4 +28,6 @@
 
 #import "G_Action.acs"
 #import "G_Startup.acs"
+#import "G_Death.acs"
+
 

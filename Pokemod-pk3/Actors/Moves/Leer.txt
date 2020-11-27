@@ -74,6 +74,7 @@ Spawn:
 TNT1 A 0
 stop
 Pickup:
+TNT1 A 0 A_Jumpif(CallACS("CheckStatusGuard",0,STATUS_STATS),"Nope") //Blocked by Protect|Detect|Substitute|Mist
 TNT1 A 0 A_Jumpifinventory("STF_Leer",1,"Sustain")
 TNT1 A 0 A_GiveInventory("STF_Leer",1)
 TNT1 A 0 A_SpawnItemEX("LeerNerfWatcher")
@@ -485,7 +486,7 @@ actor LeerEffector : BasicFastProjectile
     Goto Death
     
     GWCheck:
-    TNT1 A 0 A_Jumpif(CallACS("CheckStatusGuard",AAPTR_TRACER,STATUS_STATS),"Death") //Blocked by protect|Detect|Substitute|Safeguard and pre-existing conditions
+    TNT1 A 0 A_Jumpif(CallACS("CheckStatusGuard",AAPTR_TRACER,STATUS_STATS),"Death") //Blocked by Protect|Detect|Substitute|Mist
     TNT1 A 0 A_GiveInventory("LeerNerfInitiate",1,AAPTR_TRACER)
     Goto Death
 

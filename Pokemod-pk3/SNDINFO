@@ -176,6 +176,9 @@ Misc/HardDrop HARDDROP
 Misc/GetItem PICKUP1
 Misc/GetBP PICKUP2
 
+Misc/Wand1		WAND1
+Misc/Wand2		WAND2
+
 Misc/spin			DSSPIN
 Misc/spindash		DSSPNDSH
 Misc/release		DSZOOM

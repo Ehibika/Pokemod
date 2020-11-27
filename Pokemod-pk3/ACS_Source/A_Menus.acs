@@ -14,12 +14,181 @@
 #Import "Dex_Skin.acs."
 #Import "Dex_TM.acs."
 #Import "DB_Data.acs"
+#Import "A_Shop.acs"
 #Import "A_Leveling.acs"
 
 #define MNL 8.0 //menu line spacing
 #define MenuXOrigin 120.1
 #define MenuYOrigin 80.1
 int PastMenuSize;
+
+
+//#region -=- Item Shop
+#region -=- Item Shop
+
+Script "PromptItemShop" (void)
+{
+	//==================[+]
+	// - Pre Start Up -
+	//==================[+]
+	if(StatusTime() == 0){print(s:"Unsafe to learn TMs right now"); Terminate;}
+	//if(!PlayerInGame(PlayerNumber())){Terminate;}
+	//=======================[+]
+	// - Define Variables -
+	//=======================[+]
+	int PlayerLVL = GetCvar(StrParam(s:"PlayerLevel_",i:PlayerNumber()));
+	int PlayerDEXNum = GetCvar(StrParam(s:"PlayerDEXNum_",i:PlayerNumber()));
+	
+	if(PlayerDEXNum == SMEARGLE){print(s:"Smeargle Cannot use TMs"); Terminate;}
+	if(PlayerDEXNum == BELDUM){print(s:"beldum Cannot use TMs"); Terminate;}
+	
+	
+	Int MoveFrameCap =6;
+	Int StartMoves = 4;
+	Int ChoiceID = 0;
+	Int ChoiceCap = PlayerLVL;
+	int MenuX = MenuXOrigin;
+	int Menuy = MenuYOrigin+19.0;
+
+	str ItemName;
+	str itemSpace;
+	int ItemCost;
+
+	str ChoiceItemName;
+	int ChoiceItemCost;
+	int CursorY;
+	// - Menu -
+	int InputButtons;
+	int InputOldButtons; 
+	int UpInput;
+	int DownInput;
+	Int ConfirmInput;
+	Int CancelInput;
+	Int MenuStates = 0;
+	Int MenuNextState; 
+	int i;
+	int j;
+	int h;
+	Bool MenuUp = true;
+	Bool BGUp;
+	//=======================[+]
+	// - Menu Loop Begin -
+	//=======================[+]
+	setplayerproperty(0,1,4);
+	GiveInventory("SpawnSafeZone",1);
+	while (MenuUp) {
+		SetHudSize(320, 200, 0);
+		SetFont("STCFN");
+		MenuStates = MenuNextState;
+	
+		// #------------------
+		// # Begin Menustate 0
+		// #------------------
+		if (MenuStates == 0) {
+	
+			j = 0;
+			// - Print the list of items -
+			For(i = 0; i < MAX_SHOP; i++)
+			{
+				if(ChoiceID >= 3 && ChoiceID < MAX_SHOP-3)
+				{
+					if(i < ChoiceID-3){continue;}
+					if(i > ChoiceID+3){break;}
+				}
+				if(ChoiceID < 3)
+				{
+					if(i > 6){break;}
+				}
+				if(ChoiceID > MAX_SHOP-4)
+				{
+					if(i < MAX_SHOP-6){continue;}
+				}
+				ItemName = ShopItemList[i][1];
+				itemSpace = StrLeft("                ",16-StrLen(ItemName));
+				ItemCost = ShopItemList[i][2]>>16;
+					HudMessage(s:ItemName,s:itemSpace,i:ItemCost,s:" \cfBP"; HUDMSG_FADEOUT, 500 + j, CR_WHITE, MenuX, Menuy + (MNL * j), 0.2, 0);
+					j++;
+			}
+	
+				if(!BGUp)
+					{DrawMenuFrame(MenuX-(8.0*3),MenuY-(8.0*0),21,6+MoveFrameCap,0); 
+					//DrawMenuFrame(MenuX-(8.0*3),MenuY-(8.0*3),21,2,PastMenuSize);
+					DrawMenuFrame(MenuX-(8.0*12),MenuY-(8.0*8),38,7,PastMenuSize);
+					BGup = True;}
+
+				ChoiceCap = MAX_SHOP;
+				if(MAX_SHOP>6)
+				{
+				if (ChoiceID > 3 && ChoiceID < MAX_SHOP-3){ CursorY = 3;}
+				else if(ChoiceID >= MAX_SHOP-3){CursorY = 3 + (ChoiceID-(MAX_SHOP-3));}	
+				else{CursorY = ChoiceID;}
+				}
+				else{CursorY = ChoiceID;}
+				
+				if(ChoiceID >= MAX_SHOP-3 && MAX_SHOP>6){HudMessage(s: "Exit"; HUDMSG_FADEOUT, 500 + (6), CR_ORANGE, MenuX, Menuy + (MNL * 6), 0.2, 0);}
+				else if(MAX_SHOP<=6){HudMessage(s: "Exit"; HUDMSG_FADEOUT, 500 + (MAX_SHOP), CR_ORANGE, MenuX, Menuy + (MNL * MAX_SHOP), 0.2, 0);}
+				HudMessage(s: ">>"; HUDMSG_FADEOUT, 515, 0, MenuX - 16.0, Menuy + (MNL * CursorY), 0.2, 0);
+	
+				//Draw Description
+				str ItemGameName = ShopItemList[ChoiceID][0];
+				str ItemLang = strParam(s:"DESC_",s:ItemGameName);
+				if(ChoiceID < MAX_SHOP)HudMessage(l:ItemLang; HUDMSG_FADEOUT, 517, CR_White, MenuX- (MNL * 10) , Menuy - (MNL * 8), 0.2, 0);
+			
+	
+			// - Grab Inputs -
+			InputButtons = GetPlayerInput(-1, INPUT_BUTTONS);
+			UpInput = ButtonCheck(InputButtons, InputOldButtons, BT_FORWARD);
+			DownInput = ButtonCheck(InputButtons, InputOldButtons, BT_BACK);
+			ConfirmInput = ButtonCheck(InputButtons, InputOldButtons, BT_ATTACK);
+			CancelInput = ButtonCheck(InputButtons, InputOldButtons, BT_AltATTACK);
+			if (UpInput != DownInput) {
+				if (UpInput == 1) {
+					ChoiceID--;
+				}
+				if (DownInput == 1) {
+					ChoiceID++;
+				}
+			}
+			if (ChoiceID > ChoiceCap) { ChoiceID = 0; }
+			if (ChoiceID < 0) { ChoiceID = ChoiceCap; }
+			if (CancelInput == 1 || ConfirmInput == 1 && ChoiceID == MAX_SHOP) {break;} //MenuUp = false;
+			if (ConfirmInput == 1 && ChoiceID < MAX_SHOP) 
+					{ //Item Purchase
+						ChoiceItemName = ShopItemList[ChoiceID][0];
+						str ChoiceItemMaxName = strParam(s:"Max",s:ChoiceItemName);
+						ChoiceItemCost = ShopItemList[ChoiceID][2]>>16;
+						if(ACS_NamedExecuteWithResult("BPCheck",ChoiceItemCost)
+							&& CheckInventory(ChoiceItemName) < GetAmmoCapacity(ChoiceItemMaxName))
+						{
+							GiveInventory(ChoiceItemName,1);
+							ACS_NamedExecuteAlways("BPPay",0,ChoiceItemCost);
+							ACS_NamedExecuteAlways("ShopSuccessSound",0);
+						}
+						else
+						{
+							ACS_NamedExecuteAlways("ShopFailSound",0);
+							if(!ACS_NamedExecuteWithResult("BPCheck",ChoiceItemCost)){ACS_NamedExecuteAlways("ShopBuyFailMoneyMsg",0);}
+							else if(CheckInventory(ChoiceItemName) >= GetAmmoCapacity(ChoiceItemMaxName)){ACS_NamedExecuteAlways("ShopBuyFailSpaceMsg",0);}
+						}
+
+					} 
+			// #------------------
+			// # End Menustate 0
+			// #------------------
+			Delay(1);
+			InputOldButtons = InputButtons;
+		}
+	} 
+	
+	//=======================[+]
+	// - Menu Loop End -
+	//=======================[+]
+	ClearMenuFrame();
+	Delay(17);setplayerproperty(0,0,4);
+}
+
+#endregion
+//#endregion
 
 //#region -=- Move Learning
 #region -=- Move Learning
@@ -378,7 +547,7 @@ while(MenuUp)
 	// #------------------
 	}
 		// - Grab Inputs -
-		InputButtons = GetPlayerInput(-1, INPUT_BUTTONS);
+		InputButtons = GetPlayerInput(-1, MODINPUT_OLDBUTTONS);
 		UpInput = ButtonCheck(InputButtons, InputOldButtons, BT_FORWARD);
 		DownInput = ButtonCheck(InputButtons, InputOldButtons, BT_BACK);
 		ConfirmInput = ButtonCheck(InputButtons, InputOldButtons, BT_ATTACK);

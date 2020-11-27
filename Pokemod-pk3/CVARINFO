@@ -59,6 +59,10 @@ user noarchive bool auto_false = false;
 server noarchive bool BP_INIT = false;
 server noarchive bool Player_INIT = false;
 
+server noarchive bool PKMN_NoAttackInSafezone = false;
+
+
+
 user int YOUR_BP;
 
 

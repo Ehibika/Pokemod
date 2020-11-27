@@ -194,7 +194,7 @@ TNT1 A 0 A_Setangle(angle-user_maxturn/user_turndivisor)
 ASEX E 1 A_ChangeVelocity(user_speed,0,0,CVF_RELATIVE|CVF_REPLACE)
 TNT1 A 0 A_SetUserVar("user_turndivisor",user_turndivisor+user_turndivisor_add)
 //POWS A 0 A_SpawnItemEx("GigaDrainSapperFX",0,0,0,0,0,0,180,1)
-TNT1 A 0 A_Explode(MBP_GigaDrain,32,0,0,32)
+TNT1 A 0 A_Explode(MBP_GigaDrain,16,0,0,16)
 TNT1 A 0 A_CountDown
 loop
 Death:

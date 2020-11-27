@@ -251,5 +251,6 @@ damagefactor "PoisonTail1", 1.0
 damagefactor "PoisonTail2", 1.0
 damagefactor "WingAttack", 1.0
 damagefactor "TakeDown", 1.0
+damagefactor "WildCharge", 1.0
 //--[NewPhysicalMove]--
 }

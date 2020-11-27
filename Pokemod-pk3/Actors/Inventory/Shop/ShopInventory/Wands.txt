@@ -1,0 +1,432 @@
+
+//#region 
+actor BasicWandShot : BasicFastProjectile
+{
+Speed 64
+Damage (0)
+DamageType "Wand"
+obituary "$OB_Wand"
++HITTRACER
+radius 8
+Reactiontime 60
+height 8
+scale 3.5
+States
+{
+Spawn:
+TNT1 A 0 
+MGMS A 1 A_Spawnitemex("WandTrailFX",0,cos(args[0]),random2(10),0,0,0,0,SXF_TRANSFERTRANSLATION|SXF_ABSOLUTEVELOCITY)
+TNT1 A 0 A_Countdown
+loop
+
+Crash:
+TNT1 A 1 
+TNT1 A 0 A_JumpIf(IsPointerEqual(AAPTR_TRACER,AAPTR_NULL) == False, "WandCheck")
+Goto Death
+
+WandCheck:
+TNT1 A 0 A_Jumpif(CallACS("CheckStatusGuard",AAPTR_TRACER,STATUS_MAJOR),"Death") //Blocked by protect|Detect|Substitute|Safeguard and pre-existing conditions
+TNT1 A 0 A_GiveInventory("SleepStatusProc",1,AAPTR_TRACER)
+TNT1 A 0 A_PlaySoundEx("support/Negative","Weapon")
+Goto Death
+
+Death:
+TNT1 A 0 A_SpawnItemEx("WandImpactFX")
+TNT1 AAAAAAAAAAAA 1 A_SpawnItemEx("WandTrailFX", 0, 0, 0, 256/24, 256/24, random2(256/24), random(0, 359),0)
+stop
+}
+}
+
+actor WandFlashFX
+{
+renderstyle "add"
++NOINTERACTION
++FORCEXYBILLBOARD
++CLIENTSIDEONLY
+height 1
+radius 1
+alpha 1.0
+scale 1.5
+-SOLID
++NOGRAVITY
+states
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_PlaySoundEX("Misc/Wand2","Voice")
+MGMS GHIJKLM 1 A_Warp(AAPTR_TARGET,36,0,28,0,WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE)
+stop
+}
+}
+
+actor WandTrailFX : BasicClientside
+{
+scale 2
+Gravity 0.5
+ReactionTime 8
+States
+{
+Spawn:
+TNT1 A 0
+MGMS BCDEF 1 
+stop
+}
+}
+
+actor WandImpactFX : BasicClientside
+{
+renderstyle "add"
+scale 2
+Gravity 0.5
+ReactionTime 8
+States
+{
+Spawn:
+TNT1 A 0
+MGMS GHIJKLM 2
+stop
+}
+}
+//#endregion
+
+//#region -=- Slumber Wand -=-
+actor SlumberWand : ConsumableBase 
+{
+inventory.amount 1
+inventory.maxamount 3
+inventory.pickupmessage "$PU_SLUMBERWAND"
+Tag "$TAG_SLUMBERWAND"
+inventory.icon "SWNDI"
+Inventory.PickupSound "Misc/GetItem"
++INVBAR
++COUNTITEM
+Translation "250:250=144:144", "192:192=165:165", "198:198=167:167"
+scale 2.0
+States
+{
+Spawn:
+PITM E 0 
+PITM E 6
+Goto Spawn
+use1:
+TNT1 A 0 A_SpawnitemEX("SlumberWandCast",0,0,0,0,0,0,0,0)
+stop
+}
+}
+actor MaxSlumberWand : Ammo {inventory.maxamount 3}
+
+actor SlumberWandCast : BasicHelper
+{
+scale 3.5
+Renderstyle "Normal"
+Translation "250:250=144:144", "192:192=165:165", "198:198=167:167"
++MISSILE
+ReactionTime 12
+Alpha 0.2
+speed 7
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_PlaySoundEX("Misc/Wand1","Voice")
+PITM EEEEEEEEEE 1 A_Warp(AAPTR_TARGET,32,0,8,0,WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE)
+TNT1 A 0 A_SetPitch(CallACS("PitchGrab"))
+PITM E 1 A_Warp(AAPTR_TARGET,32,0,8,0,WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE)
+TNT1 A 0 A_SpawnitemEX("WandFlashFX",0,0,16,0,0,0,0,0)
+TNT1 A 0 A_SpawnItemEx("SlumberWandShot", 0, 0, 16, cos(pitch), 0, sin(-pitch), 0, SXF_MULTIPLYSPEED)
+PITM EEEEEZZEEZZEE 1 A_Warp(AAPTR_TARGET,32,0,8,0,WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE)
+stop
+}
+}
+
+actor SlumberWandShot : BasicWandShot
+{
+States
+{
+WandCheck:
+TNT1 A 0 A_Jumpif(CallACS("CheckStatusGuard",AAPTR_TRACER,STATUS_MAJOR),"Death") //Blocked by protect|Detect|Substitute|Safeguard and pre-existing conditions
+TNT1 A 0 A_GiveInventory("SleepStatusProc",1,AAPTR_TRACER)
+TNT1 A 0 A_PlaySoundEx("support/Negative","Weapon")
+Goto Death
+}
+}
+//#endregion
+
+//#region -=- Shrink Wand -=-
+actor ShrinkWand : ConsumableBase 
+{
+inventory.amount 1
+inventory.maxamount 3
+inventory.pickupmessage "$PU_SHRINKWAND"
+Tag "$TAG_SHRINKWAND"
+inventory.icon "SRNDI"
+Inventory.PickupSound "Misc/GetItem"
++INVBAR
++COUNTITEM
+Translation "250:250=144:144", "192:192=165:165", "198:198=167:167"
+scale 2.0
+States
+{
+Spawn:
+PITM E 0 
+PITM E 6
+Goto Spawn
+use1:
+TNT1 A 0 A_SpawnitemEX("ShrinkWandCast",0,0,0,0,0,0,0,0)
+stop
+}
+}
+actor MaxShrinkWand : Ammo {inventory.maxamount 3}
+
+actor ShrinkWandCast : BasicHelper
+{
+scale 3.5
+Renderstyle "Normal"
+Translation "250:250=144:144", "192:192=165:165", "198:198=167:167"
++MISSILE
+ReactionTime 12
+Alpha 0.2
+speed 7
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_PlaySoundEX("Misc/Wand1","Voice")
+PITM EEEEEEEEEE 1 A_Warp(AAPTR_TARGET,32,0,8,0,WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE)
+TNT1 A 0 A_SetPitch(CallACS("PitchGrab"))
+PITM E 1 A_Warp(AAPTR_TARGET,32,0,8,0,WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE)
+TNT1 A 0 A_SpawnitemEX("WandFlashFX",0,0,16,0,0,0,0,0)
+TNT1 A 0 A_SpawnItemEx("ShrinkWandShot", 0, 0, 16, cos(pitch), 0, sin(-pitch), 0, SXF_MULTIPLYSPEED)
+PITM EEEEEZZEEZZEE 1 A_Warp(AAPTR_TARGET,32,0,8,0,WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE)
+stop
+}
+}
+
+actor ShrinkWandShot : BasicWandShot
+{
+States
+{
+WandCheck:
+TNT1 A 0 A_Jumpif(CallACS("CheckStatusGuard",AAPTR_TRACER,STATUS_STATS),"Death") 
+TNT1 A 0 A_GiveInventory("ShrinkNerfInitiate",1,AAPTR_TRACER)
+TNT1 A 0 A_PlaySoundEx("support/StatDown","Weapon")
+Goto Death
+}
+}
+
+
+actor STF_Shrink : Powerup {inventory.amount 1 Powerup.Duration -6}
+
+actor ShrinkNerfInitiate : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_Jumpif(CallACS("CheckStatusGuard",0,STATUS_STATS),"Nope") //Blocked by Protect|Detect|Substitute|Mist
+TNT1 A 0 A_Jumpifinventory("STF_Shrink",1,"Sustain")
+TNT1 A 0 A_GiveInventory("STF_Shrink",1)
+TNT1 A 0 A_SpawnItemEX("ShrinkNerfWatcher")
+TNT1 A 0 A_GiveInventory("StatUpdator",1)
+stop
+
+Sustain:
+TNT1 A 0 A_GiveInventory("STF_Shrink",1)
+stop
+Nope:
+TNT1 A 0
+stop
+}
+}
+
+actor ShrinkNerfWatcher : BasicHelper 
+{
+Var int user_DashTime;
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_GiveToTarget("PATKDownFXSpawn")
+TNT1 A 0 A_GiveToTarget("PdefDownFXSpawn")
+TNT1 A 0 A_GiveToTarget("SATKDownFXSpawn")
+TNT1 A 0 A_GiveToTarget("SdefDownFXSpawn")
+TNT1 A 5 A_GiveToTarget("SPDDownFXSpawn")
+TNT1 A 0 A_JumpIfInTargetInventory("STF_Shrink",1,"Spawn")
+TNT1 A 1 A_GiveToTarget("StatUpdator")
+TNT1 A 5
+Goto Death
+
+Death:
+TNT1 A 0 
+stop
+}
+}
+//#endregion
+
+//#region -=- Somarian Wand -=-
+actor SomarianWand : ConsumableBase 
+{
+inventory.amount 1
+inventory.maxamount 3
+inventory.pickupmessage "$PU_SOMARIANWAND"
+Tag "$TAG_SOMARIANWAND"
+inventory.icon "SMNDI"
+Inventory.PickupSound "Misc/GetItem"
++INVBAR
++COUNTITEM
+Translation "250:250=144:144", "192:192=165:165", "198:198=167:167"
+scale 2.0
+States
+{
+Spawn:
+PITM E 0 
+PITM E 6
+Goto Spawn
+use1:
+TNT1 A 0 A_SpawnitemEX("SomarianWandCast",0,0,0,0,0,0,0,0)
+stop
+}
+}
+actor MaxSomarianWand : Ammo {inventory.maxamount 3}
+
+actor SomarianWandCast : BasicHelper
+{
+scale 3.5
+Renderstyle "Normal"
+Translation "250:250=144:144", "192:192=165:165", "198:198=167:167"
++MISSILE
+ReactionTime 12
+Alpha 0.2
+speed 7
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_PlaySoundEX("Misc/Wand1","Voice")
+PITM EEEEEEEEEE 1 A_Warp(AAPTR_TARGET,32,0,8,0,WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE)
+TNT1 A 0 A_SetPitch(CallACS("PitchGrab"))
+PITM E 1 A_Warp(AAPTR_TARGET,32,0,8,0,WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE)
+TNT1 A 0 A_SpawnitemEX("WandFlashFX",0,0,16,0,0,0,0,0)
+TNT1 A 0 A_SpawnItemEx("SomarianWandShot", 0, 0, 16, cos(pitch), 0, sin(-pitch), 0, SXF_MULTIPLYSPEED)
+PITM EEEEEZZEEZZEE 1 A_Warp(AAPTR_TARGET,32,0,8,0,WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE)
+stop
+}
+}
+
+actor SomarianWandShot : BasicWandShot
+{
+-HITTRACER
++THRUACTORS
+States
+{
+Crash:
+Death:
+//TNT1 A 0 A_CheckFloor("BlockSpawn")
+//Goto "Super::Death"
+
+//BlockSpawn:
+TNT1 A 0 
+TNT1 A 1 ACS_NamedExecuteAlways("GridSnapper",0)
+TNT1 A 0 ACS_NamedExecuteAlways("AngleSnapper",0)
+TNT1 A 0 ACS_NamedExecuteAlways("SomarianBlockTID",0)
+TNT1 A 2
+TNT1 A 0 A_JumpIf(Ceilingz-z <= 32,"BlockCeiling")
+TNT1 A 0 A_Jump(256,"BlockFloor")
+goto BlockFloor
+
+BlockFloor:
+TNT1 A 0 A_SpawnitemEx("S_CubeSquare",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,TID)
+TNT1 A 0 A_SpawnitemEx("S_CubeSquare",0,0,32,0,0,0,0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,TID)
+TNT1 A 0 A_SpawnitemEx("S_CubeSquare",0,0,64,0,0,0,0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,TID)
+stop
+
+BlockCeiling:
+TNT1 A 0 //A_Logint(TID)
+TNT1 A 0 A_SpawnitemEx("S_CubeSquare",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,TID)
+TNT1 A 0 A_SpawnitemEx("S_CubeSquare",0,0,-32,0,0,0,0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,TID)
+TNT1 A 0 A_SpawnitemEx("S_CubeSquare",0,0,-64,0,0,0,0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,TID)
+stop
+}
+}
+
+actor S_CubeLine
+{
+  Radius 1
+  Height 1
+  +NOGRAVITY
+  +NOINTERACTION
+  States
+  {
+  Spawn:
+    TNT1 A 0
+    TNT1 A 0
+    TNT1 A 0 A_SpawnitemEx("SomariBlock",0,32,0,0,0,0,0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,TID)
+    TNT1 A 0 A_SpawnitemEx("SomariBlock",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,TID)
+    TNT1 A 0 A_SpawnitemEx("SomariBlock",0,-32,0,0,0,0,0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,TID)
+    stop
+  }
+}
+
+actor S_CubeSquare
+{
+  Radius 1
+  Height 1
+  +NOGRAVITY
+  +NOINTERACTION
+  States
+  {
+  Spawn:
+    TNT1 A 0
+    TNT1 A 0
+    TNT1 A 0 A_SpawnitemEx("S_CubeLine",32,0,0,0,0,0,0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,TID)
+    TNT1 A 0 A_SpawnitemEx("S_CubeLine",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,TID)
+    TNT1 A 0 A_SpawnitemEx("S_CubeLine",-32,0,0,0,0,0,0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,TID)
+    stop
+  }
+}
+
+
+actor SomariBlock : BasicBlock
+{
+Health 100
+Renderstyle "normal"
+Alpha 1.0
+States
+{
+    SpawnContinue:
+    TNT1 A 1 
+    TNT1 A 0 A_ChangeFlag("SOLID",1)
+    MIN5 A 0 A_ChangeFlag("SHOOTABLE",1)
+    MIN5 A 0 A_PlaySoundEx("misc/astroplatformappear", "Voice")
+    TNT1 A 0 ACS_NamedExecuteAlways("SomarianBlockStatGrab",0,TID)
+    TNT1 A 1 A_Jump(256,"SpawnL")
+    wait
+
+SpawnL:
+CONC E 0 
+CONC E 1 A_JumpIFHealthLower(User_HPR1,"SpawnL2")
+CONC E 0 A_CountDownArg(0,"Fade")
+loop
+
+SpawnL2:
+CONC E 0 
+CONC E 1 A_JumpIFHealthLower(User_HPR2,"SpawnL3")
+CONC E 0 A_CountDownArg(0,"Fade")
+loop
+
+SpawnL3:
+CONC F 0 
+CONC F 1 
+CONC F 0 A_CountDownArg(0,"Fade")
+loop
+
+}
+}
+
+
+//#endregion

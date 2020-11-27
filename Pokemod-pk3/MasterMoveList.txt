@@ -267,4 +267,5 @@ PoisonTail
 WingAttack
 TakeDown
 Glare
+WildCharge
 //--[NewMove]--

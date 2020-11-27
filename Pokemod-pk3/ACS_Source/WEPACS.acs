@@ -432,6 +432,7 @@ str weapons_ammo[MAX_WEAPONS_GLOBAL][7] =
 {"WingAttackMove", "WingAttackPP", "WingAttack", 1.0, "NO", "NO", "SLOT_NONE"},
 {"TakeDownMove", "TakeDownPP", "TakeDown", 1.0, "NO", "NO", "SLOT_NONE"},
 {"GlareMove", "GlarePP", "Glare", 1.0, "NO", "NO", "SLOT_NONE"},
+{"WildChargeMove", "WildChargePP", "WildCharge", 1.0, "NO", "NO", "SLOT_NONE"},
 //--[NewMove]--
 };
 #endregion
@@ -844,6 +845,16 @@ while(PlayerHealth()>0) {
 }
 }
 
+script "LoadMoveset" (void)
+{
+LoadLoadout();
+}
+
+script "SaveMoveset" (void)
+{
+SaveLoadout();
+}
+
 function void LoadLoadout(void)
 {
 int p = PlayerNumber();
@@ -1057,6 +1068,7 @@ Function bool CheckWeaponFireFunc(int RecoveryType)
 	if(CheckInventory("SpawnInBuffer")>0) return false;
 	if(CheckInventory("FatigueMark")>0) return false;
 	if(CheckInventory("CringeMark")>0) return false;
+	if(GetCVar("PKMN_NoAttackInSafezone")==true && CheckInventory("InSafeZone")>0) return false;
 
 if(((RecoveryType&RC_A)>0) && (CheckInventory("Recovery_A")>0)) return false;
 if(((RecoveryType&RC_B)>0) && (CheckInventory("Recovery_B")>0)) return false;

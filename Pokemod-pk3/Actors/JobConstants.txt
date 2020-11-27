@@ -293,6 +293,7 @@ const int Move_PoisonTail = 265;
 const int Move_WingAttack = 266;
 const int Move_TakeDown = 267;
 const int Move_Glare = 268;
+const int Move_WildCharge = 269;
 //--[NewMove]--
 //=======|Pokedex Constants|==========
 const int Dex_SMEARGLE = 0;

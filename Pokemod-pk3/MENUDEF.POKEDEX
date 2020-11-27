@@ -6361,6 +6361,23 @@ OptionMenu "MoveMenu_Glare"
     StaticText ""
     StaticText"===============================================================",1
 } 
+OptionMenu "MoveMenu_WildCharge"
+{
+    
+    Title "$M269_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M269_TYPE"
+    StaticText "$M269_CATEGORY"
+    StaticText "$M2694_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M269_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+} 
 //--[NewMove]--
 
 OptionMenu "MoveMenu_Sketch"

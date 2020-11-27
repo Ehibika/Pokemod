@@ -158,7 +158,7 @@
 // #include "actors/Moves/GrassKnot.txt"
 #include "actors/Moves/StunSpore.txt"
 // #include "actors/Moves/PetalDance.txt"
-// #include "actors/Moves/PowerWhip.txt"
+#include "actors/Moves/PowerWhip.txt"
 // #include "actors/Moves/LeafTornado.txt"
 #include "actors/Moves/Leafage.txt"
 #include "actors/Moves/LavaPlume.txt"
@@ -286,6 +286,7 @@
 #include "actors/Moves/WingAttack.txt"
 #include "actors/Moves/TakeDown.txt"
 #include "actors/Moves/Glare.txt"
+#include "actors/Moves/WildCharge.txt"
 //--[NewMove]--
 
 #include "Actors/inventory/Shop/ShopActors/shopact.txt"

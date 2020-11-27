@@ -13,6 +13,7 @@
 #import "WEPACS.acs"
 #import "A_Stats.acs"
 #import "A_3Pcam.acs"
+#import "A_Moves.acs"
 #import "Dex_Leveling.acs"
 #import "Dex_BaseStats.acs"
 #include "zcommon.acs"
@@ -67,6 +68,192 @@ Thing_ChangeTID(0,EntityTID+P+EntityID);
 
 #endregion
 //#endregion
+
+//#region -=- Multi EntiTID -=-
+#region -=- Multi EntiTID -=-
+
+#LIBDEFINE M_ENTITYTID 4900000
+int M_EntityRecord[64];
+Script "GiveM_EntiTID" (Int EntityID, int EntityCap)
+{
+/*
+This one allows for multiple entities to be spawned but only up to 9. and if a new one is spawned beyond the cap, the old one get's replaced
+
+EntiTID Tag | Player Number | Entity ID | Entity count
+49|00|00|0
+*/
+
+int OwnerTID = ACS_NamedExecuteWithResult("core_gettarget");
+Int P = (OwnerTID-1000)*1000;
+int M_ETID = M_ENTITYTID+(P)+(EntityID*100);
+int EntityNum;
+bool SpawnComplete;
+
+while(!SpawnComplete)
+	{
+		if(EntityNum >= EntityCap)
+			{
+				Thing_Remove(M_ETID);
+				for(int i = 1; i < EntityCap; i++)
+				{
+					Thing_ChangeTID(M_ETID+i,M_ETID+i-1);
+				}
+				EntityNum = 0;
+			}
+		if(ThingCount(T_NONE,M_ETID+EntityNum)){EntityNum++;}
+		else{SpawnComplete = true;}
+
+	}
+Thing_ChangeTID(0,M_ETID+EntityNum);
+}
+//#endregion
+
+//#region -=- HazardTID -=-
+#region -=- HazardTID -=-
+
+
+#DEFINE HAZTID 3700000 // 37| TeamNum | PlayerNum | Hazard num
+#DEFINE HAZMAX 30
+int HazTIDRecord[64];
+
+Script "HazardTID" (Void)
+{
+
+if(activatorTID() != 0){Thing_Remove(0); Terminate;}
+
+int FiringPlayer = ACS_NamedExecuteWithResult("core_gettarget",0);
+int FPN = FiringPlayer-1000;
+Int TeamNum = ACS_NamedExecuteWithResult("core_getplayerteam",FPN);
+
+int BaseHazTID = HAZTID+(TeamNum*10000)+(FPN*1000);
+
+int newHazTID = HazTIDRecord[FPN];
+int MaxHazTID = BaseHazTID+HAZMAX;
+
+if(!newHazTID){newHazTID = BaseHazTID;}
+else if(newHazTID > MaxHazTID){newHazTID = BaseHazTID;}
+until(!IsTIDUsed(newHazTID)){Thing_remove(newHazTID);}
+Thing_ChangeTID(0,newHazTID);
+HazTIDRecord[FPN] = newHazTID+1;
+
+}
+
+Script "HazardScrub" (int ScrubRange)
+{
+    int FiringPlayer = ACS_NamedExecuteWithResult("core_gettarget",0);
+    Int TeamNum = ACS_NamedExecuteWithResult("core_getplayerteam",FiringPlayer-1000);
+int MaxTeams = GetCvar("sv_maxteams");
+int MaxPlayers = PlayerCount();
+int CheckTID;
+
+
+for(int j; j < MaxTeams; j++)
+{if(j == TeamNum){continue;}
+    for(int k; k < MaxPlayers; k++)
+    {
+        For(int i; i<HAZMAX;i++)
+        {
+            CheckTID = HAZTID+(j*10000)+(k*1000)+i;
+            if(IsTIDUsed(CheckTID) 
+                && xyzDistance(0,CheckTID) <= ScrubRange
+                && j != TeamNum){SetActorState(CheckTID,"Purge");}           
+        }
+        i = 0;
+    }
+    k = 0;
+}
+
+/*
+For(int i; i<HAZMAX;i++)
+    {
+    for(int j; j < MaxTeams; j++)
+    { if(j == TeamNum){continue;}
+
+        for(int k; k < 64; k++)
+        {
+            CheckTID = HAZTID + (j*10000)+(k*1000)+i;
+            if(IsTIDUsed(CheckTID) 
+                && xyzDistance(0,CheckTID) <= ScrubRange
+                && j != TeamNum){SetActorState(CheckTID,"Purge");}
+        }
+        k = 0;
+    }
+    j = 0;
+    }
+*/
+}
+
+//#endregion
+
+Script "MasterScrub" (int ScrubRange)
+{
+	//Clears all entities indiscriminately, regardless of team affiliation
+	int FiringPlayer = ACS_NamedExecuteWithResult("core_gettarget",0);
+	int MaxTeams = GetCvar("sv_maxteams");
+	int MaxPlayers = PlayerCount();
+
+int CheckTID;
+int i;
+int j;
+int k;
+
+//Kill Hazards
+for(j=0; j < MaxTeams; j++)
+{
+    for(k=0; k < MaxPlayers; k++)
+    {
+        For(i=0; i<HAZMAX;i++)
+        {
+            CheckTID = HAZTID+(j*10000)+(k*1000)+i;
+            if(IsTIDUsed(CheckTID) && xyzDistance(0,CheckTID) <= ScrubRange){SetActorState(CheckTID,"Purge");}           
+        }
+        i = 0;
+    }
+    k = 0;
+}
+
+//Kill Entity
+for( k=0; k < MaxPlayers; k++)
+{
+	For( i=0; i<99;i++)
+	{
+		CheckTID = EntityTID+(k*100)+i;
+		if(IsTIDUsed(CheckTID) && xyzDistance(0,CheckTID) <= ScrubRange){Thing_Remove(CheckTID);}           
+	}
+	i = 0;
+}
+
+//Kill Multi Entity
+for( k=0; k < MaxPlayers; k++)
+{
+	For( i=0; i<99;i++)
+	{
+		For( j=0; j<9;j++)
+		{
+		CheckTID = M_ENTITYTID+(k*1000)+(i*100)+j;
+		if(IsTIDUsed(CheckTID) && xyzDistance(0,CheckTID) <= ScrubRange){Thing_Remove(CheckTID);}  
+		}
+		j = 0;         
+	}
+	i = 0;
+}
+
+//Kill Barrier
+for( k=0; k < MaxPlayers; k++)
+{
+		CheckTID = BARRIERTID+(k+1000);
+		if(IsTIDUsed(CheckTID) && xyzDistance(0,CheckTID) <= ScrubRange){Thing_Remove(CheckTID);}           
+}
+
+//Kill Somaria block
+for( k=0; k < MaxPlayers; k++)
+{
+		CheckTID = SOMARIATID+(k+1000);
+		if(IsTIDUsed(CheckTID) && xyzDistance(0,CheckTID) <= ScrubRange){Thing_Remove(CheckTID);}           
+}
+
+}
+
 
 //#region -=- Radius Give -=-
 #region -=- Radius Give -=-
@@ -248,15 +435,10 @@ script "PKMN_SleepHandler" (Void)
 		newWakeHP = (CurrentHP/4)*3;
 		if(WakeHP < newWakeHP){WakeHP = newWakeHP;}
 		Delay(1);
-		HitDiff = CurrentHP-PrevHP;
-		PrevHP = CurrentHP;
 
-		if(CurrentHP < WakeHP) {Awaken = True;}
-		//if(HitDiff > WakeHitDiff){Awaken = True;}
-		if(CheckInventory("CringeMark")) {Awaken = True;}
-		if(!CheckInventory("SleepMark")) {Awaken = True;}
-
-		if(Awaken){GiveActorInventory(0,"SleepBreaker",1);}
+		if(CurrentHP < WakeHP
+		|| CheckInventory("CringeMark")) 
+		{GiveActorInventory(0,"SleepBreaker",1); Delay(5); Terminate;}
 	}
 }
 
@@ -1156,6 +1338,7 @@ Int OutPut;
 
 script "PKMNACS_HitKnockback" (int force, int type, int disabled)
 {
+if(!(ClassifyActor(0) & ACTOR_PLAYER)){terminate;}
 if(disabled == 0){GiveInventory("TempPitProtection",1);}
 int pusher = ACS_NamedExecuteWithResult("core_gettarget");
 
@@ -1176,6 +1359,12 @@ if(type != -1)
 
 int Vang = VectorAngle(GetActorX(0) - GetActorX(pusher), GetActorY(0) - GetActorY(pusher)) >> 8;
 ThrustThing(Vang, force, 1, 0);
+}
+
+script "PKMNACS_HitKnockUp" (int force, int SetAdd)
+{
+if(!(ClassifyActor(0) & ACTOR_PLAYER)){terminate;}
+ThrustThingZ(0,force,0,SetAdd);
 }
 
 script "PitchGrab" (Void)
@@ -1208,10 +1397,12 @@ if(GetActorProperty(0,APROP_HEALTH) > Tick){SetActorProperty(0,APROP_HEALTH,(Get
 	GiveInventory("DaDiBuffer",Tick);}
 }
 
-Script "PKMNACS_HealthPickup" (int Amount)
+Script "PKMNACS_HealthPickup" (int Amount, int mode)
 {
 int PickupStyle = GetCvar("PKMN_SV_HPPickupStyle");
 int MaxHealth = GetActorProperty(0,APROP_SPAWNHEALTH);
+
+if(mode >0){Amount = (Amount*MaxHealth)/100;}
 /*
 if(CheckInventory("IsSnatcher")){Amount = Amount/2;}
 switch(PickupStyle)
@@ -1252,6 +1443,7 @@ SetPointer(pointer,TID);
   
 Script "PKMN_PainSound" (Int PainType)
 {
+	if(!(ClassifyActor(0) & ACTOR_PLAYER)){Terminate;}
 //Detects the appropriate pain sound by weakness
 int PlayerDEXNum = GetPokeValue(POKEDEXNUM);
 int TypeA = StatDEX[PlayerDEXNum][7];
@@ -1437,3 +1629,56 @@ if(player>0){tid = player + 999;}
 	}
 
 }
+
+
+//Version of push/pull that always references the owner.
+script "PKMN_PushPull" (int maxforce, int maxRange, int noFalloff)
+{
+	if(maxRange == 0){terminate;}
+
+	int targetTID;
+	int angle;
+	int finalforce;
+	int distance;
+	int userTID;
+	int userTeam = -1;
+	int userCount = 0;
+
+		userTID = ACS_ExecuteWithResult(257, 0);
+		userTeam = GetPlayerInfo(userTID - 1000, PLAYERINFO_TEAM);
+
+	for(int p = 0;p < ServerMax; p++)
+	{
+		if(!PlayerInGame(p))
+		{
+			continue;
+		}
+		if(isTeamGame)
+		{
+			if(userTeam == GetPlayerInfo(p, PLAYERINFO_TEAM))
+			{
+				continue;
+			}
+		}
+		
+		targetTID = p+1000;
+		if(!CheckActorInventory(targetTID, "NoPushFlag") && xyzDistance(0, targetTID) < maxRange && userTID != targetTID)
+		{	
+			userCount++;
+			distance = xyzDistance(0,targetTID);
+			finalforce = ceil_cscc(FixedMul(maxforce << 16, 1.0 - FixedDiv(distance, maxRange)));
+			if(finalforce > maxforce || noFalloff > 0 )
+			{
+				finalforce = maxforce;
+			}
+			
+			angle = VectorAngle(GetActorX(0) - GetActorX(targetTID), GetActorY(0) - GetActorY(targetTID)) >> 8;
+			if(distance>40 || finalforce < 0)
+			{
+				ThrustThing(angle, finalforce, false, targetTID);
+			}
+		}
+		
+	}
+	SetResultValue(userCount); // Returns amount of players caught in the pull
+}// End script 247

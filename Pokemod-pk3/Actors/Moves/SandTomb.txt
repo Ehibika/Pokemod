@@ -77,7 +77,7 @@ Actor SandTombBuffer : Powerup {inventory.amount 1 Powerup.duration 17}
 Const int SndTmbRad1 = 200;
 Const int SndTmbRad2 = 125;
 Const int SndTmb_Pull = 7;
-Const int SndTmbEntiTID = 6;
+Const int SndTmbEntiTID = 7;
 Const int SndTmb_Time = 40;
 
 //[+]========================================================================[+]
@@ -185,6 +185,7 @@ TBLO E 0
 TBLO E 0 A_SetArg(0,SndTmb_Time)
 TBLO E 0 A_GiveInventory("ProjectileCode",1)
 TBLO E 0 A_PlaySoundEx("misc/commandosandstorm", "body", 1)
+TBLO E 0 ACS_NamedExecuteAlways("GiveEntiTID",0,SndTmbEntiTID)
 TBLO FFF 0 A_SpawnItemEx("SandTombWhirlProjectile", 0, 0, 45, 0, 0, 0, 0, SXF_TRANSFERTRANSLATION)
 TBLO FGH 1 A_FadeIn(0.3)
 TBLO FFF 0 A_SpawnItemEx("SandTombWhirlProjectile", 0, 0, 45, 0, 0, 0, 0, SXF_TRANSFERTRANSLATION)
@@ -193,13 +194,13 @@ Spawn2:
 TBLO E 0 A_Explode(MBP_SandTomb,SndTmbRad2,0,0,SndTmbRad2)
 TBLO FFF 0 A_SpawnItemEx("SandTombWhirlProjectile", 0, 0, 45, 0, 0, 0, 0, SXF_TRANSFERTRANSLATION)
 TBLO F 0 A_GiveToTarget("SandTombBuffer")
-TBLO F 1 ACS_ExecuteAlways(247, 0, SndTmb_Pull, SndTmbRad1,0)
+TBLO F 1 ACS_NamedExecuteAlways("PKMN_PushPull", 0, SndTmb_Pull, SndTmbRad1,0)
 TBLO F 1 A_Countdownarg(0,"Death")
 
-TBLO G 1 ACS_ExecuteAlways(247, 0, SndTmb_Pull, SndTmbRad1,0)
+TBLO G 1 ACS_NamedExecuteAlways("PKMN_PushPull", 0, SndTmb_Pull, SndTmbRad1,0)
 TBLO G 1 A_Countdownarg(0,"Death")
 
-TBLO H 1 ACS_ExecuteAlways(247, 0, SndTmb_Pull, SndTmbRad1,0)
+TBLO H 1 ACS_NamedExecuteAlways("PKMN_PushPull", 0, SndTmb_Pull, SndTmbRad1,0)
 TBLO H 1 A_Countdownarg(0,"Death")
 goto Spawn2
 Death:

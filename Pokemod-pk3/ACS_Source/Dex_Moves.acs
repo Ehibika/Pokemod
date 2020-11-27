@@ -282,5 +282,6 @@
 #LIBDEFINE WINGATTACK 266
 #LIBDEFINE TAKEDOWN 267
 #LIBDEFINE GLARE 268
+#LIBDEFINE WILDCHARGE 269
 //--[NewMove]--
 int Blah2; //Needed to compile properly, can't have only LIBDEFINEs

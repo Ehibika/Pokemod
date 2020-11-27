@@ -85,6 +85,7 @@ Spawn:
 TNT1 A 0
 stop
 Pickup:
+TNT1 A 0 A_Jumpif(CallACS("CheckStatusGuard",0,STATUS_STATS),"Nope") //Blocked by Protect|Detect|Substitute|Mist
 TNT1 A 0 A_Jumpifinventory("STF_RockTomb",1,"Sustain")
 TNT1 A 0 A_GiveInventory("STF_RockTomb",1)
 TNT1 A 0 A_SpawnItemEX("RockTombNerfWatcher")
@@ -99,6 +100,10 @@ TNT1 A 0
 stop
 }
 }
+
+
+Const int RockTombEntiTID = 9;
+
 //[+]========================================================================[+]
 //--------------------------------|Projectiles |--------------------------------
 //[+]========================================================================[+]
@@ -133,6 +138,8 @@ AQBA C 0 A_Stop
 TNT1 A 0 A_Explode(MBP_RockTomb2,ROCKTOMB_AREA2,0,0,ROCKTOMB_AREA2)
 TNT1 A 5 A_SpawnItemEx("RockTombImpactFX",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION)
 stop
+
+Deploy.Death:
 Death:
 TNT1 A 0 A_GiveInventory("ProjectileDCode",1)
 AQBA C 0 A_Stop
@@ -295,6 +302,7 @@ Wait
 Spawn.Setup2:
 BROK A 0 ACS_NamedExecuteAlways("DeployableDefenseSet",0,150)
 BROK A 0 ACS_NamedExecuteAlways("SetObjectType",0,Type_Rock,Type_Null)
+SEDG D 0 ACS_NamedExecuteAlways("GiveM_EntiTID",0,RockTombEntiTID,3)
 BROK A 1 A_CheckRange(70,"Spawn.Setup3")
 Wait
 Spawn.Setup3:

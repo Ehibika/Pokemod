@@ -10,6 +10,11 @@ TNT1 A 2 ACS_NAmedExecuteAlways("ItemSpawnTID",0)
 TNT1 A 0 A_Jump(256,"Spawn0")
 stop
 
+//#region -=- Berries -=-
+Berries:
+TNT1 A 0 A_Jump(256,"BigPPBerry","BigHPBerry","PPBerry","HPBerry")
+wait
+
 BigPPBerry:
 TNT1 A 0 A_SpawnItemEX("BigPPBerry",0,0,0,0,0,0,0,0,0,tid+1000)
 goto RespawnWait
@@ -22,6 +27,14 @@ goto RespawnWait
 HPBerry:
 TNT1 A 0 A_SpawnItemEX("HPBerry",0,0,0,0,0,0,0,0,0,tid+1000)
 goto RespawnWait
+//#endregion 
+
+//#region -=- Seeds -=-
+
+Seeds:
+TNT1 A 0 A_Jump(256,"HasteSeed","PowerSeed","GuardSeed","ClenseSeed")
+wait
+
 HasteSeed:
 TNT1 A 0 A_SpawnItemEX("HasteSeed",0,0,0,0,0,0,0,0,0,tid+1000)
 goto RespawnWait
@@ -34,9 +47,50 @@ goto RespawnWait
 ClenseSeed:
 TNT1 A 0 A_SpawnItemEX("ClenseSeed",0,0,0,0,0,0,0,0,0,tid+1000)
 goto RespawnWait
-PokeMoney:
-TNT1 A 0 A_SpawnItemEX("PokeMoney",0,0,0,0,0,0,0,0,0,tid+1000)
+//#endregion 
+
+//#region -=- Orbs -=-
+Orbs:
+TNT1 A 0 A_Jump(256,"EscapeOrb","BarrierOrb","QuickOrb","EraserOrb")
+wait
+
+EscapeOrb:
+TNT1 A 0 A_SpawnItemEX("EscapeOrb",0,0,0,0,0,0,0,0,0,tid+1000)
 goto RespawnWait
+BarrierOrb:
+TNT1 A 0 A_SpawnItemEX("BarrierOrb",0,0,0,0,0,0,0,0,0,tid+1000)
+goto RespawnWait
+QuickOrb:
+TNT1 A 0 A_SpawnItemEX("QuickOrb",0,0,0,0,0,0,0,0,0,tid+1000)
+goto RespawnWait
+EraserOrb:
+TNT1 A 0 A_SpawnItemEX("EraserOrb",0,0,0,0,0,0,0,0,0,tid+1000)
+goto RespawnWait
+SealOrb:
+TNT1 A 0 A_SpawnItemEX("SealOrb",0,0,0,0,0,0,0,0,0,tid+1000)
+goto RespawnWait
+//#endregion 
+
+//#region -=- Wands -=-
+Wands:
+TNT1 A 0 A_Jump(256,"SlumberWand","ShrinkWand","SomarianWand")
+wait
+
+SlumberWand:
+TNT1 A 0 A_SpawnItemEX("SlumberWand",0,0,0,0,0,0,0,0,0,tid+1000)
+goto RespawnWait
+ShrinkWand:
+TNT1 A 0 A_SpawnItemEX("ShrinkWand",0,0,0,0,0,0,0,0,0,tid+1000)
+goto RespawnWait
+SomarianWand:
+TNT1 A 0 A_SpawnItemEX("SomarianWand",0,0,0,0,0,0,0,0,0,tid+1000)
+goto RespawnWait
+//#endregion
+
+//#region -=- Gummies -=- 
+Gummies:
+TNT1 A 0 A_Jump(256,"RoyalGummi","CobaltGummi","PinkGummi","MintGummi","MagentaGummi","RedGummi","BlueGummi","GreenGummi","WhiteGummi","YellowGummi","LavanderGummi","BlackGummi","CrimsonGummi","PeachGummi","SkyGummi","CocoaGummi","KiwiGummi","VioletGummi")
+wait
 
 WhiteGummi:
 TNT1 A 0 A_SpawnItemEX("WhiteGummi",0,0,0,0,0,0,0,0,0,tid+1000)
@@ -92,6 +146,11 @@ goto RespawnWait
 PinkGummi:
 TNT1 A 0 A_SpawnItemEX("PinkGummi",0,0,0,0,0,0,0,0,0,tid+1000)
 goto RespawnWait
+//#endregion 
+
+PokeMoney:
+TNT1 A 0 A_SpawnItemEX("PokeMoney",0,0,0,0,0,0,0,0,0,tid+1000)
+goto RespawnWait
 
 RespawnWait:
 TNT1 A 10 A_JumpIf(CallACS("ItemSpawnerCheck") == 1,"RespawnTime")
@@ -127,15 +186,15 @@ stop
 
 Tier1:
 TNT1 A 0 A_JumpIf(CallACS("GetStartinglevel") >= 10,2)
-TNT1 A 0 A_Jump(127,"RoyalGummi","CobaltGummi","PinkGummi","MintGummi","MagentaGummi","RedGummi","BlueGummi","GreenGummi","WhiteGummi","YellowGummi","LavanderGummi","BlackGummi","CrimsonGummi","PeachGummi","SkyGummi","CocoaGummi","KiwiGummi","VioletGummi")
+TNT1 A 0 A_Jump(127,"Gummies")
 TNT1 A 0 
-TNT1 A 0 A_Jump(127,"BigPPBerry","PPBerry","HasteSeed","PowerSeed")
+TNT1 A 0 A_Jump(127,"Orbs","Seeds","Wands","BigHPBerry","BigPPBerry")
 TNT1 A 0 A_Jump(256,"Tier2")
 Tier2:
-TNT1 A 0 A_Jump(127,"BigHPBerry","GuardSeed","ClenseSeed")
+TNT1 A 0 A_Jump(127,"Seeds","Berries")
 TNT1 A 0 A_Jump(256,"Tier3")
 Tier3:
-TNT1 A 0 A_Jump(127,"HPBerry")
+TNT1 A 0 A_Jump(127,"HPBerry","PPBerry")
 TNT1 A 0 A_Jump(256,"PokeMoney")
 stop
 }
@@ -152,15 +211,15 @@ stop
     
 Tier1:
 TNT1 A 0 A_JumpIf(CallACS("GetStartinglevel") >= 10,"BigHPBerry")
-TNT1 A 0 A_Jump(127,"RoyalGummi","CobaltGummi","PinkGummi","MintGummi","MagentaGummi")
+TNT1 A 0 A_Jump(127,"Gummies","Orbs","Wands")
 TNT1 A 0 A_Jump(256,"Tier2")
 Tier2:
 TNT1 A 0 A_JumpIf(CallACS("GetStartinglevel") >= 10,"BigHPBerry")
-TNT1 A 0 A_Jump(127,"RedGummi","BlueGummi","GreenGummi","WhiteGummi","YellowGummi","LavanderGummi","BlackGummi","CrimsonGummi")
+TNT1 A 0 A_Jump(127,"Wands","Orbs","BigHPBerry","BigPPBerry")
 TNT1 A 0 A_Jump(256,"Tier3")
 Tier3:
 TNT1 A 0 A_JumpIf(CallACS("GetStartinglevel") >= 10,"BigHPBerry")
-TNT1 A 0 A_Jump(256,"PeachGummi","SkyGummi","CocoaGummi","KiwiGummi","VioletGummi")
+TNT1 A 0 A_Jump(256,"Orbs","Seeds","BigHPBerry","BigPPBerry")
 stop
 }
 }

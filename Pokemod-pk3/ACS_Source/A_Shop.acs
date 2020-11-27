@@ -7,27 +7,34 @@
 #import "Dex_Basestats.acs"
 #import "Dex_Moves.acs"
 #import "Dex_TM.acs"
+#import "DB_Data.acs"
 
-#DEFINE MAX_PLAYERS 64
-#DEFINE MAX_SLOTS 10
+#LIBDEFINE SHOP_MAX_PLAYERS 64
+#DEFINE SHOP_MAX_SLOTS 10
 #DEFINE MAX_TEAMS 4
-#LIBDEFINE MAX_SHOP 10
+#LIBDEFINE MAX_SHOP 16
 
-bool thePlayerPlayed[MAX_PLAYERS];
-int thePlayerTeam[MAX_PLAYERS];
+bool thePlayerPlayed[SHOP_MAX_PLAYERS];
+int thePlayerTeam[SHOP_MAX_PLAYERS];
 bool theTeamPlayed[MAX_TEAMS];
 
-str ShopItemList[MAX_SHOP] = {
-    "HPBerry",
-    "BigHPBerry",
-    "PPBerry",
-    "BigPPBerry",
-    "ClenseSeed",
-    "PowerSeed",
-    "GuardSeed",
-    "HasteSeed",    
-    "EscapeOrb",
-    "BarrierOrb",
+str ShopItemList[MAX_SHOP][3] = {
+    {"HPBerry", "HP Berry", 3.0},
+    {"BigHPBerry", "Big HP Berry", 5.0},
+    {"PPBerry", "PP Berry", 3.0},
+    {"BigPPBerry", "Big PP Berry", 5.0},
+    {"ClenseSeed", "Clense Seed", 1.0},
+    {"PowerSeed", "Power Seed", 10.0},
+    {"GuardSeed", "Guard Seed", 10.0},
+    {"HasteSeed", "Haste Seed", 10.0},    
+    {"EscapeOrb", "Escape Orb", 3.0},
+    {"BarrierOrb", "Barrier Orb", 15.0},
+    {"QuickOrb", "Quick Orb", 15.0},
+    {"EraserOrb", "Eraser Orb", 15.0},
+    {"SealOrb", "Seal Orb", 15.0},
+    {"SlumberWand", "Slumber Wand", 15.0},
+    {"ShrinkWand", "Shrink Wand", 15.0},
+    {"SomarianWand", "Somarian Wand", 25.0},
 };
 
 script "ShopEvents" (int type, int arg1, int arg2) EVENT
@@ -73,7 +80,7 @@ while(true) {
 function int getConPlayerView(int conP)
 {
 	int camera = CheckPlayerCamera(conP);
-	if(camera>999&&camera<(1000+MAX_PLAYERS)) return (camera-1000);
+	if(camera>999&&camera<(1000+SHOP_MAX_PLAYERS)) return (camera-1000);
 	return conP;
 }
 
@@ -111,7 +118,7 @@ return GetCvar(StrParam(s:"PLAYER",i:p,s:"_BP"));
 function int GetSlotCount(int p)
 {
 int slotCount = 0;
-for(int i = 0; i<MAX_SLOTS; i++) if(GetCvar(StrParam(s:"PLAYER",i:p,s:"_SLOT",i:i))!=-1) slotCount++;
+for(int i = 0; i<SHOP_MAX_SLOTS; i++) if(GetCvar(StrParam(s:"PLAYER",i:p,s:"_SLOT",i:i))!=-1) slotCount++;
 return slotCount;
 }
 
@@ -156,7 +163,7 @@ ResetPlayerBP(p);
 
 function void ResetAllBP(void)
 {
-for(int i = 0; i < MAX_PLAYERS; i++) ResetPlayerBP(i);
+for(int i = 0; i < SHOP_MAX_PLAYERS; i++) ResetPlayerBP(i);
 }
 
 function void ResetPlayerBP(int p)
@@ -224,13 +231,13 @@ script "MatchMonitorTeam" (void)
 {
 while(GetGameModeState()!=GAMESTATE_INRESULTSEQUENCE) delay(1);
 int v = FindVictorTeam(GetCvar("sv_maxteams"));
-if(v>-1) TeamFunc(v,MAX_PLAYERS,MAX_TEAMS);
+if(v>-1) TeamFunc(v,SHOP_MAX_PLAYERS,MAX_TEAMS);
 }
 
 script "MatchMonitorSolo" (void)
 {
 while(GetGameModeState()!=GAMESTATE_INRESULTSEQUENCE) delay(1);
-int theMaxPlayers = MAX_PLAYERS;
+int theMaxPlayers = SHOP_MAX_PLAYERS;
 int v = FindVictor(theMaxPlayers);
 if(v>-1) SoloFunc(v,theMaxPlayers);
 }
@@ -356,13 +363,13 @@ Script "ItemSpew" DEATH
 
     for (int i=0; i<MAX_SHOP; i++) 
     {
-    InvCount = CheckInventory(ShopItemList[i]);
+    InvCount = CheckInventory(ShopItemList[i][0]);
      while(InvCount)
         {
-            SpawnProjectile (0,ShopItemList[i], random(0,360), random(10,60), random(10,60), 0.5, 0);
-            TakeInventory(ShopItemList[i],1);
-            InvCount = CheckInventory(ShopItemList[i]);
-            //DropInventory(0,ShopItemList[i]); 
+            SpawnProjectile (0,ShopItemList[i][0], random(0,360), random(10,60), random(10,60), 0.5, 0);
+            TakeInventory(ShopItemList[i][0],1);
+            InvCount = CheckInventory(ShopItemList[i][0]);
+            //DropInventory(0,ShopItemList[i][0]); 
 
 
         }
@@ -379,10 +386,10 @@ Script "ItemPurge" (int PurgeCount)
 
     for (int i=0; i<MAX_SHOP; i++) 
     {
-        InvCount = CheckInventory(ShopItemList[i]);
+        InvCount = CheckInventory(ShopItemList[i][0]);
         if(InvCount)
         {     
-            TakeInventory(ShopItemList[i],PurgeCount);
+            TakeInventory(ShopItemList[i][0],PurgeCount);
             PurgeReturn = 1;        
         }
     }
@@ -527,7 +534,7 @@ int ItemCount; //number of different items found
 
    for (int i=0; i<MAX_SHOP; i++) 
    {
-    InvCount = CheckInventory(ShopItemList[i]);
+    InvCount = CheckInventory(ShopItemList[i][0]);
     if(InvCount)
         {
             if(i<15){ItemID = StrParam(s:"0",x:i);}
@@ -579,7 +586,7 @@ int ItemQ;
         if(ItemQ>0)
             {
             //log(s:"get ",i:ItemQ,s:" ",s:ShopItemList[ItemID]);
-            GiveInventory(ShopItemList[ItemID],ItemQ);
+            GiveInventory(ShopItemList[ItemID][0],ItemQ);
             }
         
 
@@ -591,12 +598,12 @@ int ItemQ;
 
 function void LoadAllPlayerInventory(void)
 {
-for(int i = 0; i < MAX_PLAYERS; i++) GiveActorInventory(i+1000,"LoadShopInventory",1);
+for(int i = 0; i < SHOP_MAX_PLAYERS; i++) GiveActorInventory(i+1000,"LoadShopInventory",1);
 }
 
 function void SaveAllPlayerInventory(void)
 {
-for(int i = 0; i < MAX_PLAYERS; i++) GiveActorInventory(i+1000,"SaveShopInventory",1);
+for(int i = 0; i < SHOP_MAX_PLAYERS; i++) GiveActorInventory(i+1000,"SaveShopInventory",1);
 }
 
 str HexArray[16] = {
