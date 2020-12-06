@@ -28,11 +28,17 @@ int PastMenuSize;
 
 Script "PromptItemShop" (void)
 {
-	//==================[+]
-	// - Pre Start Up -
-	//==================[+]
-	if(StatusTime() == 0){print(s:"Unsafe to learn TMs right now"); Terminate;}
-	//if(!PlayerInGame(PlayerNumber())){Terminate;}
+//==================[+]
+// - Pre Start Up -
+//==================[+]
+if(StatusTime() == 0){print(s:"Unsafe to buy items now"); Terminate;}
+GiveInventory("SpawnSafeZone",1);
+ACS_NamedExecuteAlways("Menu_ItemShop",0);
+}
+
+Script "Menu_ItemShop" (void) CLIENTSIDE
+{
+	while(!CheckInventory("NetCheck_Freeze")){NamedRequestScriptPuke("NET_FreezePlayer",1);Delay(1);}
 	//=======================[+]
 	// - Define Variables -
 	//=======================[+]
@@ -74,8 +80,6 @@ Script "PromptItemShop" (void)
 	//=======================[+]
 	// - Menu Loop Begin -
 	//=======================[+]
-	setplayerproperty(0,1,4);
-	GiveInventory("SpawnSafeZone",1);
 	while (MenuUp) {
 		SetHudSize(320, 200, 0);
 		SetFont("STCFN");
@@ -160,9 +164,7 @@ Script "PromptItemShop" (void)
 						if(ACS_NamedExecuteWithResult("BPCheck",ChoiceItemCost)
 							&& CheckInventory(ChoiceItemName) < GetAmmoCapacity(ChoiceItemMaxName))
 						{
-							GiveInventory(ChoiceItemName,1);
-							ACS_NamedExecuteAlways("BPPay",0,ChoiceItemCost);
-							ACS_NamedExecuteAlways("ShopSuccessSound",0);
+							while(!CheckInventory("NetCheck_A")){NamedRequestScriptPuke("NET_ItemShop_Buy",ChoiceItemName,ChoiceItemCost);Delay(3);}
 						}
 						else
 						{
@@ -184,14 +186,31 @@ Script "PromptItemShop" (void)
 	// - Menu Loop End -
 	//=======================[+]
 	ClearMenuFrame();
-	Delay(17);setplayerproperty(0,0,4);
+	while(!CheckInventory("NetCheck_Freeze")){NamedRequestScriptPuke("NET_FreezePlayer",0);Delay(1);}
 }
 
+
+Script "NET_ItemShop_Buy" (int ChoiceItemName, int ChoiceItemCost) NET
+{
+	if(CheckInventory("NetCheck_A")) Terminate;
+
+	GiveInventory(ChoiceItemName,1);
+	ACS_NamedExecuteAlways("BPPay",0,ChoiceItemCost);
+	ACS_NamedExecuteAlways("ShopSuccessSound",0);
+GiveInventory("NetCheck_A",1);
+}
 #endregion
 //#endregion
 
 //#region -=- Move Learning
 #region -=- Move Learning
+
+Script "NET_PromptMoveLearn" (int Moveid, int MoveCost) NET
+{
+if(CheckInventory("NetCheck_A")) Terminate;
+ACS_NamedExecuteAlways("PromptMoveLearn",0,Moveid,MoveCost);
+GiveInventory("NetCheck_A",1);
+}
 
 Script "PromptMoveLearn" (int Moveid, int MoveCost)
 {
@@ -199,7 +218,22 @@ Script "PromptMoveLearn" (int Moveid, int MoveCost)
 // - Pre Start Up -
 //==================[+]
 if(StatusTime() == 0){print(s:"Unsafe to Learn Moves now"); Terminate;}
-//if(!PlayerInGame(PlayerNumber())){Terminate;}
+//setplayerproperty(0,1,4);
+GiveInventory("SpawnSafeZone",1);
+
+ACS_NamedExecuteAlways("Menu_MoveLearn",0,Moveid,MoveCost);
+//NamedScriptWait("Menu_MoveLearn");
+//log(s:"Done waiting on movelearn");
+//setplayerproperty(0,0,4);
+}
+
+Script "Menu_MoveLearn" (int Moveid, int MoveCost) CLIENTSIDE
+{
+	if(!CheckInventory("PlayerPropertyFrozen"))
+	{
+	while(!CheckInventory("NetCheck_Freeze")){NamedRequestScriptPuke("NET_FreezePlayer",1);Delay(1);}	
+	}
+
 //=======================[+]
 // - Define Variables -
 //=======================[+]
@@ -213,6 +247,7 @@ str WepName;
 str WepTag;
 int MenuX = MenuXOrigin;
 int Menuy = MenuYOrigin;
+bool LearnAMove;
 int slot;
 for(; slot<MAX_SLOTS+1; slot++) {
 		for(int i = 0; ((i<MAX_WEAPONS_GLOBAL)&& Slot<5); i++) 
@@ -235,7 +270,11 @@ if (NewMove == Move1
 	||NewMove == Move2
 	||NewMove == Move3
 	||NewMove == Move4)
-	{print(s:"Move ",s:weapons_ammo[NewMove][2], s:" Already Known!"); setplayerproperty(0,0,4); Terminate;}
+	{
+	print(s:"Move ",s:weapons_ammo[NewMove][2], s:" Already Known!"); 
+	while(!CheckInventory("NetCheck_Freeze")){NamedRequestScriptPuke("NET_FreezePlayer",0);Delay(1);} 
+	Terminate;
+	}
 
 // - Menu -
 int InputButtons;
@@ -250,8 +289,6 @@ Bool MenuUp = true;
 //=======================[+]
 // - Menu Loop Begin -
 //=======================[+]
-setplayerproperty(0,1,4);
-GiveInventory("SpawnSafeZone",1);
 DrawMenuFrame(MenuX-(8.0*3),MenuY-(8.0*0),15,10,0);
 while(MenuUp)
 	{
@@ -288,6 +325,7 @@ while(MenuUp)
 		Case 3: ChoiceWep = Move4; break;
 	}
 
+	/*
 	if(PlayerInGame(PlayerNumber()))
 	{
 	TakeInventory(StrParam(s:weapons_ammo[ChoiceWep][0],i:ChoiceID+1),99);
@@ -299,6 +337,9 @@ while(MenuUp)
 	SetCvar(StrParam(s:"PLAYER",i:PlayerNumber(),s:"_SLOT",i:ChoiceID+1),NewMove);
 	ACS_NamedExecuteAlways("BPPay",0,Movecost);
 	}
+	*/
+
+	LearnAMove = true;
 	break;//MenuUp = False;
 	// #------------------
 	// # End Menustate 1
@@ -343,8 +384,45 @@ InputButtons = GetPlayerInput(-1, INPUT_BUTTONS);
 While(ButtonCheck(InputButtons, InputOldButtons, BT_ATTACK)
 ||ButtonCheck(InputButtons, InputOldButtons, BT_ALTATTACK))
 {InputButtons = GetPlayerInput(-1, INPUT_BUTTONS); Delay(1); InputOldButtons = InputButtons;}
+
+	if(LearnAMove)
+	{
+		while(!CheckInventory("NetCheck_A")){NamedRequestScriptPuke("NET_MoveLearn_TakeMove",ChoiceWep,ChoiceID);Delay(3);}
+		while(!CheckInventory("NetCheck_B")){NamedRequestScriptPuke("NET_MoveLearn_GiveMove",NewMove,ChoiceID);Delay(3);}
+		while(!CheckInventory("NetCheck_C")){NamedRequestScriptPuke("NET_MoveLearn_TakeBP",Movecost);Delay(3);}
+		
+		TakeInventory("NetCheck_A",99);
+		TakeInventory("NetCheck_B",99);
+		TakeInventory("NetCheck_C",99);
+	}
+
+while(!CheckInventory("NetCheck_Freeze")){NamedRequestScriptPuke("NET_FreezePlayer",0);Delay(1);}
+}
+
+Script "NET_MoveLearn_TakeMove" (int ChoiceWep, int ChoiceID) NET
+{
+	if(CheckInventory("NetCheck_A")) Terminate;
+
+TakeInventory(StrParam(s:weapons_ammo[ChoiceWep][0],i:ChoiceID+1),99);
+GiveInventory("NetCheck_A",1);
+}
+
+Script "NET_MoveLearn_GiveMove" (int NewMove, int ChoiceID) NET
+{
+	if(CheckInventory("NetCheck_B")) Terminate;
+
+GiveInventory(StrParam(s:weapons_ammo[NewMove][0],i:ChoiceID+1),1);
+SetCvar(StrParam(s:"PLAYER",i:PlayerNumber(),s:"_SLOT",i:ChoiceID+1),NewMove);
 GiveInventory("SaveMovesetFlag",1);
-setplayerproperty(0,0,4);
+GiveInventory("NetCheck_B",1);
+}
+
+Script "NET_MoveLearn_TakeBP" (int MoveCost) NET
+{
+	if(CheckInventory("NetCheck_C")) Terminate;
+
+ACS_NamedExecuteAlways("BPPay",0,Movecost);
+GiveInventory("NetCheck_C",1);
 }
 
 #endregion
@@ -352,13 +430,20 @@ setplayerproperty(0,0,4);
 
 //#region -=- Move Repositioning
 #region -=- Move Repositioning
+
 Script "PromptMoveReposition" (Void)
 {
 //==================[+]
 // - Pre Start Up -
 //==================[+]
 if(StatusTime() == 0){print(s:"Unsafe Adjust moves right now"); Terminate;}
-//if(!PlayerInGame(PlayerNumber())){Terminate;}
+GiveInventory("SpawnSafeZone",1);
+ACS_NamedExecuteAlways("Menu_MoveReposition",0);
+}
+
+Script "Menu_MoveReposition" (Void) CLIENTSIDE
+{
+	while(!CheckInventory("NetCheck_Freeze")){NamedRequestScriptPuke("NET_FreezePlayer",1);Delay(1);}
 //=======================[+]
 // - Define Variables -
 //=======================[+]
@@ -406,8 +491,6 @@ Bool MenuUp = true;
 //=======================[+]
 // - Menu Loop Begin -
 //=======================[+]
-	setplayerproperty(0,1,4);
-	GiveInventory("SpawnSafeZone",1);
 while(MenuUp)
 {		
 	DrawMenuFrame(MenuX-(8.0*3),MenuY-(8.0*0),15,10,0);
@@ -503,35 +586,35 @@ while(MenuUp)
 	if(WepToMove!=Move2 && ChoiceID!=Move2){Safewep = Move2; SafeSlot = 2;}
 	if(WepToMove!=Move1 && ChoiceID!=Move1){Safewep = Move1; SafeSlot = 1;}
 	SetWeapon(StrParam(s:weapons_ammo[Safewep][0],i:SafeSlot));
-
+	LocalAmbientSound("misc/GravityWarn",128);
 	switch(WepToMove)
 	{
-		Case 0: WepRepo1 = Move1; TakeInventory(StrParam(s:weapons_ammo[Move1][0],i:WepToMove+1),99);break;
-		Case 1: WepRepo1 = Move2; TakeInventory(StrParam(s:weapons_ammo[Move2][0],i:WepToMove+1),99);break;
-		Case 2: WepRepo1 = Move3; TakeInventory(StrParam(s:weapons_ammo[Move3][0],i:WepToMove+1),99);break;
-		Case 3: WepRepo1 = Move4; TakeInventory(StrParam(s:weapons_ammo[Move4][0],i:WepToMove+1),99);break;
+		Case 0: WepRepo1 = Move1; while(!CheckInventory("NetCheck_A")){NamedRequestScriptPuke("NET_MoveRepo_TakeMoveA",Move1,WepToMove);Delay(3);}break;
+		Case 1: WepRepo1 = Move2; while(!CheckInventory("NetCheck_A")){NamedRequestScriptPuke("NET_MoveRepo_TakeMoveA",Move2,WepToMove);Delay(3);}break;
+		Case 2: WepRepo1 = Move3; while(!CheckInventory("NetCheck_A")){NamedRequestScriptPuke("NET_MoveRepo_TakeMoveA",Move3,WepToMove);Delay(3);}break;
+		Case 3: WepRepo1 = Move4; while(!CheckInventory("NetCheck_A")){NamedRequestScriptPuke("NET_MoveRepo_TakeMoveA",Move4,WepToMove);Delay(3);}break;
 	}
 	switch(ChoiceID)
 	{
-		Case 0: WepRepo2 = Move1; TakeInventory(StrParam(s:weapons_ammo[Move1][0],i:ChoiceID+1),99);break;
-		Case 1: WepRepo2 = Move2; TakeInventory(StrParam(s:weapons_ammo[Move2][0],i:ChoiceID+1),99);break;
-		Case 2: WepRepo2 = Move3; TakeInventory(StrParam(s:weapons_ammo[Move3][0],i:ChoiceID+1),99);break;
-		Case 3: WepRepo2 = Move4; TakeInventory(StrParam(s:weapons_ammo[Move4][0],i:ChoiceID+1),99);break;
+		Case 0: WepRepo2 = Move1; while(!CheckInventory("NetCheck_B")){NamedRequestScriptPuke("NET_MoveRepo_TakeMoveB",Move1,ChoiceID);Delay(3);}break;
+		Case 1: WepRepo2 = Move2; while(!CheckInventory("NetCheck_B")){NamedRequestScriptPuke("NET_MoveRepo_TakeMoveB",Move2,ChoiceID);Delay(3);}break;
+		Case 2: WepRepo2 = Move3; while(!CheckInventory("NetCheck_B")){NamedRequestScriptPuke("NET_MoveRepo_TakeMoveB",Move3,ChoiceID);Delay(3);}break;
+		Case 3: WepRepo2 = Move4; while(!CheckInventory("NetCheck_B")){NamedRequestScriptPuke("NET_MoveRepo_TakeMoveB",Move4,ChoiceID);Delay(3);}break;
 	}
 	// - Now to do the actual weapon swap -
 	switch(WepToMove)
 	{
-		Case 0: Move1 = WepRepo2; GiveInventory(StrParam(s:weapons_ammo[Move1][0],i:WepToMove+1),1);break;
-		Case 1: Move2 = WepRepo2; GiveInventory(StrParam(s:weapons_ammo[Move2][0],i:WepToMove+1),1);break;
-		Case 2: Move3 = WepRepo2; GiveInventory(StrParam(s:weapons_ammo[Move3][0],i:WepToMove+1),1);break;
-		Case 3: Move4 = WepRepo2; GiveInventory(StrParam(s:weapons_ammo[Move4][0],i:WepToMove+1),1);break;
+		Case 0: Move1 = WepRepo2; while(!CheckInventory("NetCheck_C")){NamedRequestScriptPuke("NET_MoveRepo_GiveMoveA",Move1,WepToMove);Delay(3);}break;
+		Case 1: Move2 = WepRepo2; while(!CheckInventory("NetCheck_C")){NamedRequestScriptPuke("NET_MoveRepo_GiveMoveA",Move2,WepToMove);Delay(3);}break;
+		Case 2: Move3 = WepRepo2; while(!CheckInventory("NetCheck_C")){NamedRequestScriptPuke("NET_MoveRepo_GiveMoveA",Move3,WepToMove);Delay(3);}break;
+		Case 3: Move4 = WepRepo2; while(!CheckInventory("NetCheck_C")){NamedRequestScriptPuke("NET_MoveRepo_GiveMoveA",Move4,WepToMove);Delay(3);}break;
 	}
 	switch(ChoiceID)
 	{
-		Case 0: Move1 = WepRepo1; GiveInventory(StrParam(s:weapons_ammo[Move1][0],i:ChoiceID+1),1);break;
-		Case 1: Move2 = WepRepo1; GiveInventory(StrParam(s:weapons_ammo[Move2][0],i:ChoiceID+1),1);break;
-		Case 2: Move3 = WepRepo1; GiveInventory(StrParam(s:weapons_ammo[Move3][0],i:ChoiceID+1),1);break;
-		Case 3: Move4 = WepRepo1; GiveInventory(StrParam(s:weapons_ammo[Move4][0],i:ChoiceID+1),1);break;
+		Case 0: Move1 = WepRepo1; while(!CheckInventory("NetCheck_D")){NamedRequestScriptPuke("NET_MoveRepo_GiveMoveB",Move1,ChoiceID);Delay(3);}break;
+		Case 1: Move2 = WepRepo1; while(!CheckInventory("NetCheck_D")){NamedRequestScriptPuke("NET_MoveRepo_GiveMoveB",Move2,ChoiceID);Delay(3);}break;
+		Case 2: Move3 = WepRepo1; while(!CheckInventory("NetCheck_D")){NamedRequestScriptPuke("NET_MoveRepo_GiveMoveB",Move3,ChoiceID);Delay(3);}break;
+		Case 3: Move4 = WepRepo1; while(!CheckInventory("NetCheck_D")){NamedRequestScriptPuke("NET_MoveRepo_GiveMoveB",Move4,ChoiceID);Delay(3);}break;
 	}
 	// - rescan moves for hud -
 		if(Move1 > 0){Str1 = weapons_ammo[Move1][2];}
@@ -564,11 +647,51 @@ while(MenuUp)
 	InputOldButtons = InputButtons;
 	}
 ClearMenuFrame();
+while(!CheckInventory("NetCheck_Freeze")){NamedRequestScriptPuke("NET_FreezePlayer",0);Delay(1);}
+/*
 GiveInventory("SaveMovesetFlag",1);
 Delay(17);
 setplayerproperty(0,0,4);
+*/
 //--
 }
+
+Script "NET_MoveRepo_TakeMoveA" (int MoveNum, int WepToMove) NET
+{
+	if(CheckInventory("NetCheck_A")) Terminate;
+
+TakeInventory(StrParam(s:weapons_ammo[MoveNum][0],i:WepToMove+1),99);
+GiveInventory("NetCheck_A",1);
+}
+
+Script "NET_MoveRepo_TakeMoveB" (int MoveNum, int WepToMove) NET
+{
+	if(CheckInventory("NetCheck_B")) Terminate;
+
+TakeInventory(StrParam(s:weapons_ammo[MoveNum][0],i:WepToMove+1),99);
+GiveInventory("NetCheck_B",1);
+}
+
+Script "NET_MoveRepo_GiveMoveA" (int MoveNum, int WepToMove) NET
+{
+	if(CheckInventory("NetCheck_C")) Terminate;
+
+GiveInventory(StrParam(s:weapons_ammo[MoveNum][0],i:WepToMove+1),1);
+SetCvar(StrParam(s:"PLAYER",i:PlayerNumber(),s:"_SLOT",i:WepToMove+1),MoveNum);
+GiveInventory("SaveMovesetFlag",1);
+GiveInventory("NetCheck_C",1);
+}
+
+Script "NET_MoveRepo_GiveMoveB" (int MoveNum, int WepToMove) NET
+{
+	if(CheckInventory("NetCheck_D")) Terminate;
+
+GiveInventory(StrParam(s:weapons_ammo[MoveNum][0],i:WepToMove+1),1);
+SetCvar(StrParam(s:"PLAYER",i:PlayerNumber(),s:"_SLOT",i:WepToMove+1),MoveNum);
+GiveInventory("SaveMovesetFlag",1);
+GiveInventory("NetCheck_D",1);
+}
+
 #endregion
 //#endregion
 
@@ -577,13 +700,20 @@ setplayerproperty(0,0,4);
 
 int LevelUpMoveCache[64][60];
 
-Script "PromptLevelUpMove" (Void)
+Script "PromptLevelUpMove" (Void) 
 {
 //==================[+]
 // - Pre Start Up -
 //==================[+]
 if(StatusTime() == 0){print(s:"Unsafe Adjust moves right now"); Terminate;}
-//if(!PlayerInGame(PlayerNumber())){Terminate;}
+GiveInventory("SpawnSafeZone",1);
+ACS_NamedExecuteAlways("Menu_LevelUpMove",0);
+}
+
+Script "Menu_LevelUpMove" (Void) CLIENTSIDE
+{
+while(!CheckInventory("NetCheck_Freeze")){NamedRequestScriptPuke("NET_FreezePlayer",1);Delay(1);}
+
 //=======================[+]
 // - Define Variables -
 //=======================[+]
@@ -616,8 +746,6 @@ Bool BGUp;
 //=======================[+]
 // - Menu Loop Begin -
 //=======================[+]
-setplayerproperty(0,1,4);
-GiveInventory("SpawnSafeZone",1);
 while (MenuUp) {
 	SetHudSize(320, 200, 0);
 	SetFont("STCFN");
@@ -742,10 +870,12 @@ if(LearnMove > -1)
 		While(ButtonCheck(InputButtons, InputOldButtons, BT_ATTACK)
 		||ButtonCheck(InputButtons, InputOldButtons, BT_ALTATTACK))
 		{InputButtons = GetPlayerInput(-1, INPUT_BUTTONS); Delay(1); InputOldButtons = InputButtons;}
-		ACS_NamedExecuteAlways("PromptMoveLearn",0,LearnMove);
-		GiveInventory("SaveMovesetFlag",1);
+		//until(CheckInventory("NetCheck_A")){NamedRequestScriptPuke("NET_PromptMoveLearn",LearnMove);Delay(2);}
+		//TakeInventory("NetCheck_A",99);
+		ACS_NamedExecuteAlways("Menu_MoveLearn",0,LearnMove);
+		//GiveInventory("SaveMovesetFlag",1);
 	}
-else{Delay(17);setplayerproperty(0,0,4);}
+else{while(!CheckInventory("NetCheck_Freeze")){NamedRequestScriptPuke("NET_FreezePlayer",0);Delay(1);}}
 }
 #endregion
 //#endregion
@@ -758,22 +888,28 @@ int TMNumCache[64][MAXTMLIST];
 int TMCostCache[64][MAXTMLIST];
 int TMColCache[64][MAXTMLIST];
 
-Script "PromptTMShop" (Void)
+Script "PromptTMShop" (Void) 
 {
 //==================[+]
 // - Pre Start Up -
 //==================[+]
+int PlayerDEXNum = GetCvar(StrParam(s:"PlayerDEXNum_",i:PlayerNumber()));
+
+if(PlayerDEXNum == SMEARGLE){print(s:"Smeargle Cannot use TMs"); Terminate;}
+if(PlayerDEXNum == BELDUM){print(s:"beldum Cannot use TMs"); Terminate;}
 if(StatusTime() == 0){print(s:"Unsafe to learn TMs right now"); Terminate;}
-//if(!PlayerInGame(PlayerNumber())){Terminate;}
+GiveInventory("SpawnSafeZone",1);
+ACS_NamedExecuteAlways("Menu_TMShop",0);
+}
+
+Script "Menu_TMShop" (Void) CLIENTSIDE
+{
+	while(!CheckInventory("NetCheck_Freeze")){NamedRequestScriptPuke("NET_FreezePlayer",1);Delay(1);}
 //=======================[+]
 // - Define Variables -
 //=======================[+]
 int PlayerLVL = GetCvar(StrParam(s:"PlayerLevel_",i:PlayerNumber()));
 int PlayerDEXNum = GetCvar(StrParam(s:"PlayerDEXNum_",i:PlayerNumber()));
-
-if(PlayerDEXNum == SMEARGLE){print(s:"Smeargle Cannot use TMs"); Terminate;}
-if(PlayerDEXNum == BELDUM){print(s:"beldum Cannot use TMs"); Terminate;}
-
 
 Int MoveFrameCap =6;
 Int StartMoves = 4;
@@ -806,8 +942,6 @@ Bool BGUp;
 //=======================[+]
 // - Menu Loop Begin -
 //=======================[+]
-setplayerproperty(0,1,4);
-GiveInventory("SpawnSafeZone",1);
 while (MenuUp) {
 	SetHudSize(320, 200, 0);
 	SetFont("STCFN");
@@ -956,25 +1090,41 @@ if(LearnMove > -1)
 			While(ButtonCheck(InputButtons, InputOldButtons, BT_ATTACK)
 			||ButtonCheck(InputButtons, InputOldButtons, BT_ALTATTACK))
 			{InputButtons = GetPlayerInput(-1, INPUT_BUTTONS); Delay(1); InputOldButtons = InputButtons;}
-			ACS_NamedExecuteAlways("PromptMoveLearn",0,LearnMove,MoveCost);
+			//ACS_NamedExecuteAlways("PromptMoveLearn",0,LearnMove,MoveCost);
+			ACS_NamedExecuteAlways("Menu_MoveLearn",0,LearnMove,MoveCost);
 			ACS_NamedExecuteAlways("ShopSuccessSound",0);
-			if(!CheckTMUnlock(TMNumCache[PlayerNumber()][ChoiceID]-1,PlayerDEXNum,PlayerLVL))
-			{
-				if(GetCvar("PKMN_TeamTMPurchase")){UnlockTeamTM(TMNumCache[PlayerNumber()][ChoiceID]-1,PlayerTeam());}
-				else{UnlockTM(TMNumCache[PlayerNumber()][ChoiceID]-1);}
-			}
+			//if(!CheckTMUnlock(TMNumCache[PlayerNumber()][ChoiceID]-1,PlayerDEXNum,PlayerLVL))
+			//{
+
+				while(!CheckInventory("NetCheck_A")){NamedRequestScriptPuke("NET_TMTeamPurchase",TMNumCache[PlayerNumber()][ChoiceID],PlayerDEXNum,PlayerLVL);Delay(3);}
+
+				//if(GetCvar("PKMN_TeamTMPurchase")){UnlockTeamTM(TMNumCache[PlayerNumber()][ChoiceID]-1,PlayerTeam());}
+				//else{UnlockTM(TMNumCache[PlayerNumber()][ChoiceID]-1);}
+			//}
 			
-			GiveInventory("SaveMovesetFlag",1);
+			//GiveInventory("SaveMovesetFlag",1);
 			
 		}
 		else{
 			print(s: "Cannot Afford that TM");
 			ACS_NamedExecuteAlways("ShopFailSound",0);
-			Delay(17);
-			setplayerproperty(0,0,4);
+			while(!CheckInventory("NetCheck_Freeze")){NamedRequestScriptPuke("NET_FreezePlayer",0);Delay(1);}
 			}
 	}
-else{Delay(17);setplayerproperty(0,0,4);}
+	else{while(!CheckInventory("NetCheck_Freeze")){NamedRequestScriptPuke("NET_FreezePlayer",0);Delay(1);}}
+}
+
+Script "NET_TMTeamPurchase" (int TMNum,int PlayerDEXNum,int PlayerLVL) NET
+{
+	if(CheckInventory("NetCheck_A")) Terminate;
+
+	if(!CheckTMUnlock(TMNum,PlayerDEXNum,PlayerLVL))
+	{
+	if(GetCvar("PKMN_TeamTMPurchase")){UnlockTeamTM(TMNum-1,PlayerTeam());}
+	else{UnlockTM(TMNum-1);}
+	}
+
+	if(!CheckTMUnlock(TMNum,PlayerDEXNum,PlayerLVL)){GiveInventory("NetCheck_A",1);}
 }
 #endregion
 //#endregion
@@ -1115,127 +1265,6 @@ setplayerproperty(0,0,4);
 #endregion
 //#endregion
 
-//#region -=- Level up moves (old)
-#region -=- Level up moves 
-Script "OLDPromptLevelUpMove" (Void)
-{
-//==================[+]
-// - Pre Start Up -
-//==================[+]
-if(StatusTime() == 0){print(s:"Unsafe Adjust moves right now"); Terminate;}
-//if(!PlayerInGame(PlayerNumber())){Terminate;}
-//=======================[+]
-// - Define Variables -
-//=======================[+]
-int PlayerLVL = GetCvar(StrParam(s:"PlayerLevel_",i:PlayerNumber()));
-int PlayerDEXNum = GetCvar(StrParam(s:"PlayerDEXNum_",i:PlayerNumber()));
-Int StartMoves = 4;
-Int ChoiceID = 0;
-Int ChoiceCap = PlayerLVL;
-int MenuX = MenuXOrigin;
-int Menuy = MenuYOrigin;
-int MoveListVal;
-int MoveListCount;
-int LearnMove = -1;
-// - Menu -
-int InputButtons;
-int InputOldButtons; 
-int UpInput;
-int DownInput;
-Int ConfirmInput;
-Int CancelInput;
-Int MenuStates = 0;
-Int MenuNextState; 
-int i;
-int j;
-Bool MenuUp = true;
-Bool BGUp;
-//=======================[+]
-// - Menu Loop Begin -
-//=======================[+]
-setplayerproperty(0,1,4);
-GiveInventory("SpawnSafeZone",1);
-while (MenuUp) {
-	SetHudSize(320, 200, 0);
-	SetFont("STCFN");
-	MenuStates = MenuNextState;
-
-	// #------------------
-	// # Begin Menustate 0
-	// #------------------
-	if (MenuStates == 0) {
-
-		MoveListCount = 0;
-		j = 0;
-
-		// - Print the list of moves -
-		For(i = 0; i < PlayerLVL + StartMoves - 1; i++)
-		{
-			MoveListVal = MoveDex[PlayerDEXNum][i];
-			if (MoveListVal != -1) {
-				HudMessage(s: weapons_ammo[MoveListVal][2]; HUDMSG_FADEOUT, 500 + j, 0, MenuX, Menuy + (MNL * j), 0.2, 0);
-				j++;
-				MoveListCount++;
-			}
-
-		}
-
-		if (MoveListCount <= 0) {print(s: "No moves to learn"); break;} //MenuUp = false;
-		else {
-			if(!BGUp){DrawMenuFrame(MenuX-(8.0*3),MenuY-(8.0*0),15,6+MoveListCount,0); BGup = True;}
-			ChoiceCap = MoveListCount;
-			HudMessage(s: "Exit"; HUDMSG_FADEOUT, 514, CR_ORANGE, MenuX, Menuy + (MNL * ChoiceCap), 0.2, 0);
-			HudMessage(s: ">>"; HUDMSG_FADEOUT, 515, 0, MenuX - 16.0, Menuy + (MNL * ChoiceID), 0.2, 0);
-		}
-
-		// - Grab Inputs -
-		InputButtons = GetPlayerInput(-1, INPUT_BUTTONS);
-		UpInput = ButtonCheck(InputButtons, InputOldButtons, BT_FORWARD);
-		DownInput = ButtonCheck(InputButtons, InputOldButtons, BT_BACK);
-		ConfirmInput = ButtonCheck(InputButtons, InputOldButtons, BT_ATTACK);
-		CancelInput = ButtonCheck(InputButtons, InputOldButtons, BT_AltATTACK);
-		if (UpInput != DownInput) {
-			if (UpInput == 1) {
-				ChoiceID--;
-				While(MoveDex[PlayerDEXNum][ChoiceID] == -1){ ChoiceID--; }
-			}
-			if (DownInput == 1) {
-				ChoiceID++;
-				While(MoveDex[PlayerDEXNum][ChoiceID] == -1
-					&& ChoiceID != ChoiceCap)
-				{ ChoiceID++; }
-			}
-		}
-		if (ChoiceID > ChoiceCap) { ChoiceID = 0; }
-		if (ChoiceID < 0) { ChoiceID = ChoiceCap; }
-		if (CancelInput == 1 || ConfirmInput == 1 && ChoiceID == MoveListCount) {break;} //MenuUp = false;
-		if (ConfirmInput == 1 && ChoiceID < MoveListCount) { LearnMove = MoveDex[PlayerDEXNum][ChoiceID]; break;} //MenuUp = false;
-		// #------------------
-		// # End Menustate 0
-		// #------------------
-		Delay(1);
-		InputOldButtons = InputButtons;
-	}
-} 
-
-//=======================[+]
-// - Menu Loop End -
-//=======================[+]
-ClearMenuFrame();
-if(LearnMove > -1) 
-	{ 
-		InputButtons = GetPlayerInput(-1, INPUT_BUTTONS);
-		While(ButtonCheck(InputButtons, InputOldButtons, BT_ATTACK)
-		||ButtonCheck(InputButtons, InputOldButtons, BT_ALTATTACK))
-		{InputButtons = GetPlayerInput(-1, INPUT_BUTTONS); Delay(1); InputOldButtons = InputButtons;}
-		ACS_NamedExecuteAlways("PromptMoveLearn",0,LearnMove);
-		GiveInventory("SaveMovesetFlag",1);
-	}
-else{Delay(17);setplayerproperty(0,0,4);}
-}
-#endregion
-//#endregion
-
 //#region -=- Display Status
 #region -=- Display Status
 Script "ShowPlayerStatus" (Void)
@@ -1326,6 +1355,28 @@ setplayerproperty(0,0,4);
 }
 #endregion
 //#endregion
+
+script "NET_freezeplayer" (int toggle) NET
+{
+	if(toggle >= 1){
+		GiveInventory("PlayerPropertyFrozen", 1);
+		SetPlayerProperty(0, 1, PROP_TOTALLYFROZEN);
+
+		if(CheckInventory("PlayerPropertyFrozen")>0){GiveInventory("NetCheck_Freeze",1);}
+	}
+	if(toggle == 0){
+		if(CheckInventory("PlayerPropertyFrozen")>0){
+		TakeInventory("PlayerPropertyFrozen", 1);
+		
+			if(CheckInventory("PlayerPropertyFrozen")==0){
+			SetPlayerProperty(0, 0, PROP_TOTALLYFROZEN);
+
+			if(!CheckInventory("PlayerPropertyFrozen")>0){GiveInventory("NetCheck_Freeze",1);}
+			}
+		}
+	}
+	
+}
 
 //#region -=- Menu Backing
 #region -=- Menu Backing 

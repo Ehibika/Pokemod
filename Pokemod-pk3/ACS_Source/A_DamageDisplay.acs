@@ -10,7 +10,7 @@ ACS_NamedExecuteAlways("PKMN_CV_DamageDisplay",0);
 
 #DEFINE DDNUMTID 82000
 #DEFINE DDNUMDIST 25.0
-script "PKMN_CV_DamageDisplay" ENTER
+script "PKMN_CV_DamageDisplay" ENTER NET
 {
 	Delay(5);
 	int HPMax = GetActorProperty(0, APROP_Health);
@@ -53,11 +53,14 @@ script "PKMN_CV_DamageDisplay" ENTER
 				
 					if(HPCC <= -1) // Healing Gained
 					{ Damagedigits = GetTotalDigits(-HPCC);
+						//while(!CheckInventory("NetCheck_DD")){NamedRequestScriptPuke("NET_DD_ShowNum",-HPCC,Damagedigits,0);Delay(1);}
+						
 						x = GetActorX(0) + random(-DDNUMDIST, DDNUMDIST);
 						y = GetActorY(0) + random(-DDNUMDIST, DDNUMDIST);
 						z = GetActorZ(0) + random(30.0, 64.0);
-						if(CheckInventory("OverHealValue")){ColorVal = 56;}
-						 Else{ColorVal = 404;}
+						//if(CheckInventory("OverHealValue")){ColorVal = 56;}
+						 //Else{ColorVal = 232;}
+						 ColorVal = 232;
 						SpawnForced("DNUM_POS",x,y,z,DDNUMTID+ColorVal,0);
 						Switch(Damagedigits)
 						{
@@ -71,12 +74,15 @@ script "PKMN_CV_DamageDisplay" ENTER
 									SpawnForced(StrParam(s:"DNUM2_",i:getNthDigit(-HPCC,10,2)),x,y,z,DDNUMTID+ColorVal,0);
 									SpawnForced(StrParam(s:"DNUM3_",i:getNthDigit(-HPCC,10,1)),x,y,z,DDNUMTID+ColorVal,0);
 									break;
+						
 						}
 					}
 					
 					if(HPCC >= 1) // Damage taken
 					{ Damagedigits = GetTotalDigits(HPCC);
 						if(HPCC > 999){HPCC = 999;}
+						//while(!CheckInventory("NetCheck_DD")){NamedRequestScriptPuke("NET_DD_ShowNum",HPCC,Damagedigits,1);Delay(1);}
+						
 						SetUserVariable(0,"User_HitMemory",HPCC);
 						SetUserVariable(0,"user_HitFrame",1);
 						//log(s:"Got hurt,", i:getNthDigit(HPCC,10,3),i:getNthDigit(HPCC,10,2),i:getNthDigit(HPCC,10,1));
@@ -84,8 +90,9 @@ script "PKMN_CV_DamageDisplay" ENTER
 						x = GetActorX(0) + random(-DDNUMDIST, DDNUMDIST);
 						y = GetActorY(0) + random(-DDNUMDIST, DDNUMDIST);
 						z = GetActorZ(0) + random(30.0, 64.0);
-						if(CheckInventory("OverHealValue")){ColorVal = 177;}
-						 Else{ColorVal = 25;}
+						//if(CheckInventory("OverHealValue")){ColorVal = 177;}
+						 //Else{ColorVal = 25;}
+						 ColorVal = 25;
 						SpawnForced("DNUM_Neg",x,y,z,DDNUMTID+ColorVal,0);
 						Switch(Damagedigits)
 						{
@@ -98,6 +105,7 @@ script "PKMN_CV_DamageDisplay" ENTER
 									SpawnForced(StrParam(s:"DNUM2_",i:getNthDigit(HPCC,10,2)),x,y,z,DDNUMTID+ColorVal,0);
 									SpawnForced(StrParam(s:"DNUM3_",i:getNthDigit(HPCC,10,1)),x,y,z,DDNUMTID+ColorVal,0);
 									break;
+						
 						}
 					}
 					
@@ -108,6 +116,36 @@ script "PKMN_CV_DamageDisplay" ENTER
 							//log(s:"Stop");
 }
 
+/*
+Script "NET_DD_ShowNum" (int HPCC, int Damagedigits, int Neg) NET
+{
+	if(CheckInventory("NetCheck_DD")) Terminate;
+
+	int ColorVal;
+	SetUserVariable(0,"User_HitMemory",HPCC);
+	SetUserVariable(0,"user_HitFrame",1);	
+	int x = GetActorX(0) + random(-DDNUMDIST, DDNUMDIST);
+	int y = GetActorY(0) + random(-DDNUMDIST, DDNUMDIST);
+	int z = GetActorZ(0) + random(30.0, 64.0);
+	 if(HPCC<0){ColorVal = 25; SpawnForced("DNUM_Neg",x,y,z,DDNUMTID+ColorVal,0);}
+	 else{ColorVal = 206; SpawnForced("DNUM_POS",x,y,z,DDNUMTID+ColorVal,0); }
+	Switch(Damagedigits)
+	{
+		Case 1: SpawnForced(StrParam(s:"DNUM1_",i:getNthDigit(HPCC,10,1)),x,y,z,DDNUMTID+ColorVal,0);
+				break;
+		Case 2: SpawnForced(StrParam(s:"DNUM1_",i:getNthDigit(HPCC,10,2)),x,y,z,DDNUMTID+ColorVal,0);
+				SpawnForced(StrParam(s:"DNUM2_",i:getNthDigit(HPCC,10,1)),x,y,z,DDNUMTID+ColorVal,0);
+				break;
+		Case 3: SpawnForced(StrParam(s:"DNUM1_",i:getNthDigit(HPCC,10,3)),x,y,z,DDNUMTID+ColorVal,0);
+				SpawnForced(StrParam(s:"DNUM2_",i:getNthDigit(HPCC,10,2)),x,y,z,DDNUMTID+ColorVal,0);
+				SpawnForced(StrParam(s:"DNUM3_",i:getNthDigit(HPCC,10,1)),x,y,z,DDNUMTID+ColorVal,0);
+				break;
+	}
+
+GiveInventory("NetCheck_DD",1);
+}
+*/
+
 script "PKMNACS_DDTEXTCOL" (void) CLIENTSIDE
 {
 	int CPLN = consoleplayernumber();
@@ -117,6 +155,7 @@ script "PKMNACS_DDTEXTCOL" (void) CLIENTSIDE
 	
 	if(ShowDamage)
 		{
+			SetActorVelocity(0,0,0,2.0,FALSE, FALSE);
 		Thing_SetTranslation(0, ActivatorTID()-DDNUMTID);
 		SetActorProperty(0,APROP_ALPHA,0.8);
 		}

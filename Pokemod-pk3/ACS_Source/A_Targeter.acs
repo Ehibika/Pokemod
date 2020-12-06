@@ -238,7 +238,7 @@ script 405 ENTER CLIENTSIDE {
 		while(GetActorProperty(0,APROP_HEALTH) > 0) {
 			t =  checkInventory("TargetingFlag"); //getuservariable(0,"User_STargTID")+1;
 			T_Range = checkInventory("TargetingRangeFlag"); //getuservariable(ownerNumber+1000,"User_STargRange");
-			ThisWeapon = WhichWeapon();
+			
 			
 			if(t>0) {
 			if(checkinventory("TargHolder")) {
@@ -248,15 +248,14 @@ script 405 ENTER CLIENTSIDE {
 				{
 				HudMessageOnActorZPlusAllign(1000-1+t, PLAYER_CENTER, 103, 0, 0, 0, 0, T_Range, "JUSTB0", "Target", 0, CR_UNTRANSLATED);
 				}
-				/*
-			if(ThisWeapon == SKETCH)
+			if(checkinventory("WepScanFlag"))
 				{
+					ThisWeapon = WhichWeapon();
 					TheirWeapon = ACS_NamedExecuteWithResult("TIDWeapon",1000-1+t);
 					//log(s:weapons_ammo[TheirWeapon][2]);
 					SetFont("CONFONT");
 					HudMessageOnActorZPlusAllign(1000-1+t, PLAYER_CENTER, 105, 0, 0, -40, -40, T_Range, -1, weapons_ammo[TheirWeapon][2], 0, CR_UNTRANSLATED);
 				}
-				*/
 				//
 			}
 			

@@ -28,6 +28,13 @@ OptionMenu ZA_MultiplayerOptions
 	Option		"Identify players",			"cl_identifytarget",		"OnOff"
 	Option		"Show spawn spots",			"cl_showspawns",			"YesNo"
 	Slider		"Spectator move speed",		"cl_spectatormove",			0.1, 5.0, 0.1
+
+	StaticText	"PKMN Options", 1
+	StaticText " "
+	Option "Show Damage/Healing Numbers",			"PKMN_CV_DamageDisplay", "OnOff"
+
+	StaticText	"Camera Options", 1
+	StaticText " "
 	Slider		"Camera Position",			"sv_CameraAng",			-1.0, 1.0, 0.1
 	Slider		"Camera Height",			"sv_CameraHeight",		-1.0, 1.0, 0.1
 	Slider		"Camera Angle",				"SV_CameraPitch",		0.0, 1.0, 0.1 
@@ -83,6 +90,13 @@ OptionMenu "OptionsMenu"
 	Option "Pickup Weapon Colors",			"mm8bdm_noenergycolors", "OffOn"
 	Option "Show Map Creator Cards",		"mm8bdm_mapcards", "8BDM_MapCards"
 	Option "CTF Objective Compass",			"mm8bdm_noctfradar", "OffOn"
+
+	StaticText	"PKMN Options", 1
+	StaticText " "
+	Option "Show Damage/Healing Numbers",			"PKMN_CV_DamageDisplay", "OnOff"
+
+	StaticText	"Camera Options", 1
+	StaticText " "
 	Slider		"Camera Position",			"sv_CameraAng",			-1.0, 1.0, 0.1
 	Slider		"Camera Height",			"sv_CameraHeight",		-1.0, 1.0, 0.1
 	Slider		"Camera Angle",				"SV_CameraPitch",		0.0, 1.0, 0.1 

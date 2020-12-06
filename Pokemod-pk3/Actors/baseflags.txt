@@ -10,6 +10,13 @@ stop
 }
 }
 
+actor NetCheck_A : Powerup{powerup.duration 7}
+actor NetCheck_B : Powerup{powerup.duration 7}
+actor NetCheck_C : Powerup{powerup.duration 7}
+actor NetCheck_D : Powerup{powerup.duration 7}
+actor NetCheck_Freeze : Powerup{powerup.duration 7}
+actor NetCheck_DD : Powerup{powerup.duration 3}
+
 
 //[+]========================================================================[+]
 //------------------------------|Player Resources|---------------------------
@@ -194,6 +201,9 @@ actor TargetingRangeFlag : Inventory{inventory.amount 1 inventory.maxamount 3000
 Actor TargActive : Powerup{inventory.amount 1 powerup.duration 0x7FFFFFFF}
 Actor TargScriptActive : Powerup{inventory.amount 1 powerup.duration 3}
 Actor TargHolder : Powerup{inventory.amount 1 powerup.duration 7}
+
+actor WepScanFlag : once{}
+
 //[+]========================================================================[+]
 
 actor ProjectilePortDead : Powerup{powerup.duration 17}

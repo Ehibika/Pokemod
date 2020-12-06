@@ -204,11 +204,23 @@ int TMList [MAXTMLIST][5] = {
 function void UnlockTM (int Index)
 {
     TMMem_Player[PlayerNumber()][Index] = ON;
+    ACS_NamedExecuteAlways("unlockTMonClient",0,0,Index);
 }
 
 function void UnlockTeamTM (int Index, int TeamNum)
 {
     TMMem_Team[TeamNum][Index] = ON;
+    ACS_NamedExecuteAlways("unlockTMonClient",0,1,Index,TeamNum);
+}
+
+Script "unlockTMonClient"(int mode, int index, int TeamNum) CLIENTSIDE
+{
+switch(mode)
+    {
+        case 0: TMMem_Player[PlayerNumber()][Index] = ON; break;
+        case 1: TMMem_Team[TeamNum][Index] = ON; break;
+    }
+
 }
 
 function int CheckTMUnlock (int Index, int Dexnum, int Level)

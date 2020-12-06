@@ -974,7 +974,7 @@ Script "MoveSetup" (void)
 			switch(ThisWeapon)
 			{
 				Case HELPINGHAND: ACS_NamedExecuteAlways("TracerTargeter",0,TG_TEAM,630); break;
-				Case SKETCH: ACS_NamedExecuteAlways("TracerTargeter",0,TG_ENEMY|TG_TEAM,630); break;
+				Case SKETCH: ACS_NamedExecuteAlways("TracerTargeter",0,TG_ENEMY|TG_TEAM,630); GiveInventory("WepScanFlag",1);break;
 				Case HEALPULSE: ACS_NamedExecuteAlways("TracerTargeter",0,TG_TEAM,1500); break;
 				Case TAUNT: ACS_NamedExecuteAlways("TracerTargeter",0,TG_ENEMY,350); break;
 				Case MEGADRAIN: ACS_NamedExecuteAlways("TracerTargeter",0,TG_ENEMY,350); break;
@@ -991,17 +991,19 @@ Script "MoveSetup" (void)
 		if(weapons_ammo[ThisWeapon][2] == "HydroPump"
 		&& ACS_NamedExecuteWithResult("GetPokeValue",0) == 9)
 		{GiveInventory("DoubleHydroPump",1);}
+
 }
 
 Script "MoveSwap" (void)
 {
 	// Which weapon player currently has equipped.
-	//int ThisWeapon = WhichWeapon();
+	int ThisWeapon = WhichWeapon();
 	//PlayerClassWepMem[PlayerNumber()] = ThisWeapon;
 	str WepName = weapons_ammo[ThisWeapon][0];
 	/*This script is ran upon switching off a weapon, it shuts off the targeter and will also remove any
 	temporary weapons from the player's inventory */
 	TakeInventory("TargActive",9);
+	if(ThisWeapon != SKETCH){TakeInventory("WepScanFlag",99);}
 	If(StrCmp(GetWeapon(), strparam(s:WepName,i:5)) != 0 )
 		//{TakeInventory(strparam(s:WepName,i:5),99);}
 	{
