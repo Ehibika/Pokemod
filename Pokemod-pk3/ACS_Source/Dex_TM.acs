@@ -366,8 +366,9 @@ int output = 0;
         case Waterfall: output = TMR_WaterPulse(Dexnum); break;   
         case HealPulse: output = TMR_HealPulse(Dexnum); break;    
         case LifeDew: output = TMR_HealPulse(Dexnum); break;    
-        case Reflect: output = TMR_HealPulse(Dexnum); break;    
-        case LightScreen: output = TMR_HealPulse(Dexnum); break;    
+        case Reflect: output = TMR_Reflect(Dexnum); break;    
+        case LightScreen: output = TMR_LightScreen(Dexnum); break;    
+        case CraftyShield: output = TMR_CraftyShield(Dexnum); break;    
         case Psychic: output = TMR_Psychic(Dexnum); break;    
         case Refresh: output = TMR_HealPulse(Dexnum); break;    
         case Dragonrage: output = TMR_Dragonrage(Dexnum); break;    
@@ -663,6 +664,121 @@ int output = 0;
     case DRATINI: output = 1; break;
     case DRAGONAIR: output = 1; break;
     case DRAGONITE: output = 1; break;
+    }
+    if(TMArch_Succor(Dexnum)){output = 1;}
+return output;
+}
+//#endregion
+
+//#region -=- TM Rules : Reflect -=-
+Function int TMR_Reflect (int Dexnum) 
+{
+    //Also used for most supportive moves
+int output = 0;
+    Switch (Dexnum)
+    {
+    case BULBASAUR: output = 1; break;
+    case IVYSAUR: output = 1; break;
+    case VENUSAUR: output = 1; break;
+    case CHARMANDER: output = 1; break;
+    case CHARMELEON: output = 1; break;
+    case CHARIZARD: output = 1; break;
+    case SQUIRTLE: output = 1; break;
+    case WARTORTLE: output = 1; break;
+    case BLASTOISE: output = 1; break;
+    case PIKACHU: output = 1; break;
+    case RAICHU: output = 1; break;
+    case GROWLITHE: output = 1; break;
+    case ARCANINE: output = 1; break;
+    case SHELLDER: output = 1; break;
+    case CLOYSTER: output = 1; break;
+    case SWINUB: output = 1; break;
+    case PILOSWINE: output = 1; break;
+    case MAMOSWINE: output = 1; break;
+    case SLUGMA: output = 1; break;
+    case MAGCARGO: output = 1; break;
+    case TURTWIG: output = 1; break;
+    case GROTLE: output = 1; break;
+    case TORTERRA: output = 1; break;
+    case HYDREIGON: output = 1; break;
+    case DRAGAPULT: output = 1; break;
+    case DRATINI: output = 1; break;
+    case DRAGONAIR: output = 1; break;
+    case DRAGONITE: output = 1; break;
+    }
+    if(TMArch_Succor(Dexnum)){output = 1;}
+return output;
+}
+//#endregion
+
+//#region -=- TM Rules : LightScreen -=-
+Function int TMR_LightScreen (int Dexnum) 
+{
+    //Also used for most supportive moves
+int output = 0;
+    Switch (Dexnum)
+    {
+    case BULBASAUR: output = 1; break;
+    case IVYSAUR: output = 1; break;
+    case VENUSAUR: output = 1; break;
+    case PIKACHU: output = 1; break;
+    case RAICHU: output = 1; break;
+    case SHELLDER: output = 1; break;
+    case CLOYSTER: output = 1; break;
+    case SCYTHER: output = 1; break;
+    case SCIZOR: output = 1; break;
+    case DRATINI: output = 1; break;
+    case DRAGONAIR: output = 1; break;
+    case DRAGONITE: output = 1; break;
+    case SLUGMA: output = 1; break;
+    case MAGCARGO: output = 1; break;
+    case SWINUB: output = 1; break;
+    case PILOSWINE: output = 1; break;
+    case MAMOSWINE: output = 1; break;
+    case TURTWIG: output = 1; break;
+    case GROTLE: output = 1; break;
+    case TORTERRA: output = 1; break;
+    case SNOVER: output = 1; break;
+    case ABOMASNOW: output = 1; break;
+    case DRAGAPULT: output = 1; break;
+
+    }
+    if(TMArch_Succor(Dexnum)){output = 1;}
+return output;
+}
+//#endregion
+
+//#region -=- TM Rules : CraftyShield -=-
+Function int TMR_CraftyShield (int Dexnum) 
+{
+    //Also used for most supportive moves
+int output = 0;
+    Switch (Dexnum)
+    {
+    case BULBASAUR: output = 1; break;
+    case IVYSAUR: output = 1; break;
+    case VENUSAUR: output = 1; break;
+    case PIKACHU: output = 1; break;
+    case RAICHU: output = 1; break;
+    case SHELLDER: output = 1; break;
+    case CLOYSTER: output = 1; break;
+    case SCYTHER: output = 1; break;
+    case SCIZOR: output = 1; break;
+    case DRATINI: output = 1; break;
+    case DRAGONAIR: output = 1; break;
+    case DRAGONITE: output = 1; break;
+    case SLUGMA: output = 1; break;
+    case MAGCARGO: output = 1; break;
+    case SWINUB: output = 1; break;
+    case PILOSWINE: output = 1; break;
+    case MAMOSWINE: output = 1; break;
+    case TURTWIG: output = 1; break;
+    case GROTLE: output = 1; break;
+    case TORTERRA: output = 1; break;
+    case SNOVER: output = 1; break;
+    case ABOMASNOW: output = 1; break;
+    case DRAGAPULT: output = 1; break;
+
     }
     if(TMArch_Succor(Dexnum)){output = 1;}
 return output;

@@ -1,0 +1,29 @@
+//#region -=-=- Beta 27 -=-=-
+/*
+ *
+ *
+ * ===|Gameplay Changes|===
+ * 
+ * ===|Move Changes|===
+ * [reflect]
+ * now is immediately casted at your location
+ * duration increased in seconds from 10 > 15
+ * radius increased from 150 > 1000
+ * 
+ * [lightScreen]
+ * now is immediately casted at your location
+ * duration increased in seconds from 10 > 15
+ * radius increased from 150 > 1000
+ *  
+ * [CraftyShield]
+ * now is immediately casted at your location
+ * duration increased in seconds from 10 > 15
+ * radius increased from 150 > 1000
+ * 
+ * [moonlight]
+ * cast time reduced
+ * 
+ * ===|TM Changes|===
+ * ===|Pokemon Changes|===
+ * 
+ */
