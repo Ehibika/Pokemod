@@ -996,7 +996,7 @@ Script "MoveSetup" (void)
 Script "MoveSwap" (void)
 {
 	// Which weapon player currently has equipped.
-	//int ThisWeapon = WhichWeapon();
+	int ThisWeapon = WhichWeapon();
 	//PlayerClassWepMem[PlayerNumber()] = ThisWeapon;
 	str WepName = weapons_ammo[ThisWeapon][0];
 	/*This script is ran upon switching off a weapon, it shuts off the targeter and will also remove any
