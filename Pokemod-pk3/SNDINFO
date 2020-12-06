@@ -155,6 +155,9 @@ $attenuation Move/Blizzard 0.5
 Move/CraftyShield CRAFSHLD
 Move/Aromatherapy AROMAT
 Move/Synthesis SYNTHES
+Move/Barrage BARRAGE
+Move/SoftBoiled1 SBOIL1
+Move/SoftBoiled2 SBOIL2
 
 Move/Confusion PSILOVE1
 Move/Psychic1 PSILOVE2

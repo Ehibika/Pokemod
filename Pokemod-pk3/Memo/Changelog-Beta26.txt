@@ -1,0 +1,154 @@
+//#region -=-=- Beta 26 -=-=-
+/*
+ *
+ *
+ * ===|Gameplay Changes|===
+ * 
+ * Fixed issue with eraser orb reporting a runaway script error
+ * 
+ * [New TM system]
+ * TM's now work differently, rather than being individually purchased every time, they are unlocked after purchase either individually or 
+ * for the whole team depending on a Cvar. unlocked TM's are shown as green and cost nothing to relearn, effectively making them a part
+ * of your levelup set.
+ * 
+ * a new item is also introduced for this, the Mystery TM. when picked up it will unlock any random move that the player doesn't already have
+ * unlocked either for themselves or for the entire team based on a Cvar
+ * 
+ * [Status recovery]
+ * now, all forms of status recovery (refresh,aromatherapy,ClenseSeeds) will grant 3 seconds of status immunity after
+ * curing a status
+ * 
+ * ===|Move Changes|===
+ * [NEW MOVES]
+ *  FlameCharge
+ *  EggBomb
+ *  SoftBoiled
+ *  darkpulse
+ *  focusblast
+ *  furycutter
+ *
+ * [vaccum wave]
+ * power reduced from 40 to 30
+ * 
+ * [wing attack]
+ * power reduced from 30 to 20
+ *  
+ * [surf]
+ * damage buffer increased from 17 frames to 25
+ * knockback strength reduced from 55 to 25
+ * 
+ * [fire Punch]
+ * fire rate reduced
+ * can proc burn again
+ * 
+ * [Fire Fang]
+ * can proc burn again
+ * 
+ * [ice punch]
+ * fire rate reduced
+ * can proc freeze again
+ * 
+ * [ice fang]
+ * can proc freeze again
+ * 
+ * [Thunder Punch]
+ * fire rate reduced
+ * can proc paralysis again
+ * 
+ * [Sword Dance]
+ * PP reduced from 25 to 10
+ * 
+ * [Nasty Plot]
+ * PP reduced from 25 to 10
+ * 
+ * [Wish]
+ * activation time reduced
+ * Healing is now based on the user's HP instead of SP.ATK (heals 50% of their health)
+ * 
+ * [life dew]
+ * Healing is now based on the user's HP instead of SP.ATK (heals 50% of their health)
+ * 
+ * [Heal Pulse]
+ * Healing is now based on the recipient's HP instead of SP.ATK (heals 50% of their health)
+ * 
+ * [Sludge]
+ * sludge puddles are now classified as hazards, and can be removed by rapid spin and the eraser orb
+ * 
+ * [SludgeBomb]
+ * sludge puddles are now classified as hazards, and can be removed by rapid spin and the eraser orb
+ * 
+ * [rapidspin]
+ * PP increased from 10 > 20
+ * recovery time reduced 
+ * 
+ * [Aromatherapy]
+ * Grants lingering status immunity regardless if a status was healed or not
+ * 
+ * [fire blast]
+ * Explosion damage now has falloff
+ * 
+ * [WoodHammer]
+ * Radius increased from 75 > 125
+ * PP increased from 10 > 20
+ * 
+ * [SeedBomb]
+ * now a continuous fire lob move
+ * damage has been reduced slightly
+ * 
+ * [StealthRock]
+ * damage increased
+ * 
+ * [Quick Attack]
+ * PP increased from 10 > 30
+ * recovery time reduced
+ * 
+ * ===|TM Changes|===
+ * added TM FlameCharge
+ * added tm DarkPulse
+ * added tm FuryCutter
+ * added TM FocusBlast
+ * 
+ * ===|Pokemon Changes|===
+ * 
+ * [Speed changes]
+ * 
+ * the number of natural movement tiers have been reduced back from 4 to 3,movement speed tiers have also been adjusted to reduce the gap in difference between them. 
+ * now across the 3 speed tiers, all are set between a 15% speed difference
+ * 
+ * this means that normal speed pokemon are only 15% faster than slow pokemon, and fast pokemon are 15% faster than normal. and so on.
+ * 
+ * [Leveling speed changes]
+ * 
+ * Speed orders:
+ *  Rapid
+ *  Swift
+ *  Normal
+ *  Slow
+ *  Trudging
+ * 
+ * Scyther family: Slow > Trudging
+ * Zangoose: Slow > Normal
+ * Seviper: Slow > Normal
+ * Smeargle: Swift > Rapid
+ * Happiny Family: normal > Swift
+ * 
+ * [Stat changes]
+ * Drowzee family's speed tier is raised from Slow > Normal
+ * Drowzee's base HP from 60 > 70
+ * Drowzee's base ATK from 48 > 55
+ * Drowzee's base SP.ATK from 43 > 55
+ * 
+ * Hypno's base HP from 85 > 95
+ * Hypno's base ATK from 73 > 80
+ * Hypno's base SP.ATK from 73 > 80
+ * 
+ * Smeargle base HP from 55 > 80
+ * Smeargle base ATK from 20 > 60
+ * Smeargle base DEF from 35 > 80
+ * Smeargle base SP.ATK from 20 > 60
+ * Smeargle base SP.DEF from 45 > 95
+ * 
+ * 
+ * 
+ * 
+ */

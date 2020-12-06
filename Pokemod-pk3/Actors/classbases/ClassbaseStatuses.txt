@@ -1,5 +1,5 @@
 Actor CureAll : Powerup{inventory.amount 1 powerup.duration 17}
-
+Actor FeelingFine : Powerup{inventory.amount 1 powerup.duration -3}
 
 //[+]=========================[+]
 //----------|Poison|-------------
@@ -57,7 +57,8 @@ TNT1 A 0
 LASH A 0 A_Setuservar("user_OwnerTID",ACS_ExecuteWithResult(257,0))
 LASH A 0 A_TransferPointer(AAPTR_TARGET,AAPTR_DEFAULT,AAPTR_TARGET,AAPTR_MASTER,PTROP_NOSAFEGUARDS)
 LASH A 0 A_ReArrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
-LASH A 0 A_Setuservar("user_TickDamage",CallACS("PKMNACS_HealthPercent",user_OwnerTID,1,8)) //ACS_ExecuteWithResult(GetTargValueHPPerc,6)
+//LASH A 0 A_Setuservar("user_TickDamage",CallACS("PKMNACS_HealthPercent",user_OwnerTID,1,8)) //ACS_ExecuteWithResult(GetTargValueHPPerc,6)
+LASH A 0 A_Setuservar("user_TickDamage",CallACS("PKMNACS_HealthPercent",AAPTR_TARGET,1,8))
 Spawn2:
 
     TNT1 A 1 A_JumpIfInTargetInventory("CutterFlag",999,"DeathTake")
@@ -362,7 +363,8 @@ TNT1 A 0
 LASH A 0 A_Setuservar("user_OwnerTID",ACS_ExecuteWithResult(257,0))
 LASH A 0 A_TransferPointer(AAPTR_TARGET,AAPTR_DEFAULT,AAPTR_TARGET,AAPTR_MASTER,PTROP_NOSAFEGUARDS)
 LASH A 0 A_ReArrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
-LASH A 0 A_Setuservar("user_TickDamage",CallACS("PKMNACS_HealthPercent",user_OwnerTID,1,6)) //ACS_ExecuteWithResult(GetTargValueHPPerc,6)
+//LASH A 0 A_Setuservar("user_TickDamage",CallACS("PKMNACS_HealthPercent",user_OwnerTID,1,6)) //ACS_ExecuteWithResult(GetTargValueHPPerc,6)
+LASH A 0 A_Setuservar("user_TickDamage",CallACS("PKMNACS_HealthPercent",AAPTR_TARGET,1,6))
 Spawn2:
 
     TNT1 A 1 A_JumpIfInTargetInventory("CutterFlag",999,"DeathTake")

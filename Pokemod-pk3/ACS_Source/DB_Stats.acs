@@ -1,0 +1,313 @@
+/* -=- Stats Database -=-
+ * Variables and functions for A_Stats
+ *
+ * 
+
+*/
+
+#library "DB_Stats"
+#include "zcommon.acs"
+
+
+//#region -=- General Constants & Variables
+#LIBDEFINE HPVAL1 10
+#LIBDEFINE HPVAL2 250
+#LIBDEFINE HPVAL3 999
+
+#LIBDEFINE ATKVAL1 1
+#LIBDEFINE ATKVAL2 50
+#LIBDEFINE ATKVAL3 600
+
+#LIBDEFINE DEFVAL1 1
+#LIBDEFINE DEFVAL2 100
+#LIBDEFINE DEFVAL3 400
+
+#LIBDEFINE STATMIN 1
+#LIBDEFINE STATBASELINE 80
+#LIBDEFINE STATMAX 999
+
+#LIBDEFINE SPDVAL1 75 //75
+#LIBDEFINE SPDVAL2 150 //125
+
+#LIBDEFINE TestLevel 10
+
+
+Int SpeedTable[15][2] = {
+    {31,78},
+    {32,126},
+    {34,174},
+    {35,222},
+    {36,270},
+    {38,318},
+    {39,366},
+    {40,414},
+    {42,462},
+    {43,510},
+    {44,558},
+    {46,606},
+    {47,654},
+    {48,702},
+    {50,750},
+};
+//#endregion
+
+
+
+#LIBDEFINE STATITEMNUM 60
+
+Str StatEffectName[STATITEMNUM][2] = {
+    {"Growth","GOOD"},
+    {"Growl","BAD"},
+    {"Tailwhip","BAD"},
+    {"ScaryFace","BAD"},
+    {"Amnesia","GOOD"},
+    {"IronDefense","GOOD"},
+    {"DragonDance","GOOD"},
+    {"ShellSmash","GOOD"},
+    {"Yawn","BAD"},
+    {"IcyWind","BAD"},
+    {"PowerSeed","GOOD"},
+    {"GuardSeed","GOOD"},
+    {"HasteSeed","GOOD"},
+    {"Agility","GOOD"},
+    {"Curse","GOOD"},
+    {"Mudslap","BAD"},
+    {"DefenseCurl","GOOD"},
+    {"Leer","BAD"},
+    {"NastyPlot","GOOD"},
+    {"Rage1","GOOD"},
+    {"Rage2","GOOD"},
+    {"Rage3","GOOD"},
+    {"FakeTears","BAD"},
+    {"MudBomb","BAD"},
+    {"HammerArm","BAD"},
+    {"SwordDance","GOOD"},
+    {"RapidSpin","GOOD"},
+    {"MuddyWater","BAD"},
+    {"Liquidation","BAD"},
+    {"Dive","GOOD"},
+    {"SweetScent","BAD"},
+    {"Charm","BAD"},
+    {"Captivate","BAD"},
+    {"Freeze1","BAD"},
+    {"Freeze2","BAD"},
+    {"AuroraBeam","BAD"},
+    {"Screech","BAD"},
+    {"Paralyze","BAD"},
+    {"DracoMeteor","BAD"},
+    {"Calmmind","GOOD"},
+    {"Meditate1","GOOD"},
+    {"Meditate2","GOOD"},
+    {"Meditate3","GOOD"},
+    {"CosmicPower","GOOD"},
+    {"MudShot","BAD"},
+    {"CloseCombat","BAD"},
+    {"Overheat","BAD"},
+    {"RockTomb","BAD"},
+    {"HoneClaws1","GOOD"},
+    {"HoneClaws2","GOOD"},
+    {"HoneClaws3","GOOD"},
+    {"CrushClaw","BAD"},
+    {"MetalClaw","BAD"},
+    {"RockPolish1","GOOD"},
+    {"RockPolish2","GOOD"},
+    {"RockPolish3","GOOD"},
+    {"Bulldoze","BAD"},
+    {"QuickOrb","GOOD"},
+    {"Shrink","BAD"},
+    {"FlameCharge","GOOD"},
+
+};
+
+#LIBDEFINE PATK_ID 0
+#LIBDEFINE SATK_ID 1
+#LIBDEFINE PDEF_ID 2
+#LIBDEFINE SDEF_ID 3
+#LIBDEFINE SPD_ID 4
+
+Int StatEffectValue[STATITEMNUM][5] = {
+//Patk  Satk    PDef    SDef        Spd
+{   1,      1,      0,      0,       0}, 
+{   -1,      0,      0,      0,      0}, 
+{   0,      0,      -1,      0,      0}, 
+{   0,      0,      0,      0,      -2}, 
+{   0,      0,      0,      2,      0}, 
+{   0,      0,      2,      0,      0}, 
+{   1,      0,      0,      0,      1}, 
+{   1,      1,      -1,      -1,      1}, //ShellSmash
+{   0,      0,      0,      0,      -1}, 
+{   0,      0,      0,      0,      -1}, 
+{   1,      1,      0,      0,      0}, 
+{   0,      0,      1,      1,      0}, 
+{   0,      0,      0,      0,      1}, 
+{   0,      0,      0,      0,      2}, 
+{   1,      0,      1,      0,      -1}, 
+{   0,      0,      0,      0,      -1}, 
+{   0,      0,      1,      0,      0}, 
+{   0,      0,      -1,      0,      0}, 
+{   0,      2,      0,      0,      0}, 
+{   3,      0,      0,      0,      0}, 
+{   2,      0,      0,      0,      0}, 
+{   1,      0,      0,      0,      0}, 
+{   0,      0,      0,      -2,      0}, 
+{   0,      0,      0,      0,      -2}, 
+{   0,      0,      0,      0,      -1}, 
+{   2,      0,      0,      0,      0}, 
+{   0,      0,      0,      0,      1}, 
+{   0,      0,      0,      0,      -1}, 
+{   0,      0,      -1,      0,      0}, 
+{   0,      0,      0,      0,      1}, 
+{   0,      0,      0,      0,      -3}, 
+{   -2,      0,      0,      0,      0}, 
+{   0,      -2,      0,      0,      0}, 
+{   0,      0,      0,      0,      -1}, 
+{   0,      0,      0,      0,      -1}, 
+{   -1,      0,      0,      0,      0}, 
+{   0,      0,      -2,      0,      0}, 
+{   0,      0,      0,      0,      -2}, 
+{   0,      -2,      0,      0,      0}, 
+{   0,      1,      0,      1,      0}, //Calmmind
+{   1,      0,      0,      0,      0}, //Meditate1
+{   2,      0,      0,      0,      0}, //Meditate2
+{   3,      0,      0,      0,      0}, //Meditate3
+{   0,      0,      1,      1,      0}, //CosmicPower
+{   -1,      0,      0,      0,      0}, //Mudshot
+{   0,      0,      -1,      -1,      0}, //CloseCombat
+{   0,      -2,      0,      0,      0}, //Overheat
+{   0,      0,      0,      0,      -1}, //RockTomb
+{   1,      0,      0,      0,      0}, //HoneClaws1
+{   1,      0,      0,      0,      0}, //HoneClaws2
+{   1,      0,      0,      0,      0}, //HoneClaws3
+{   0,      0,      -1,      0,      0}, //CrushClaw
+{   -1,      0,      0,      0,      0}, //MetalClaw
+{   0,      0,      0,      0,      1}, //RockPolish1
+{   0,      0,      0,      0,      1}, //RockPolish2
+{   0,      0,      0,      0,      1}, //RockPolish3
+{   0,      0,      0,      0,      -1}, //Bulldoze
+{   0,      0,      0,      0,      3}, //Bulldoze
+{   -1,      -1,      -1,      -1,      -1}, //shrink
+{   0,      0,      0,      0,      1}, //FlameCharge
+
+
+};
+
+Int StatMulti[13] = {
+0.15, //0.25,
+0.18, //0.28,
+0.20, //0.33,
+0.25, //0.40,
+0.35, //0.50,
+0.5,  //0.66,
+1.0,
+1.25, //1.5,
+1.5,  //2.0,
+1.75, //2.5,
+2.0, //3.0,
+2.25, //3.5,
+2.5,  //4.0,
+};
+
+#LIBDEFINE SB_BAD 1
+#LIBDEFINE SB_GOOD 2
+
+
+Function int GetStatMod (int TID, int StatID)
+{
+Int Output;
+str Flagname;
+
+    for (int t = 0; t < STATITEMNUM; t++)
+    {
+        Flagname = StrParam(s:"STF_",s:StatEffectName[t][0]);
+        if(TID>0){if(CheckActorInventory(TID,Flagname)){Output += StatEffectValue[t][StatID];}}
+        Else{if(CheckInventory(Flagname)){Output += StatEffectValue[t][StatID];}}
+    }
+    //if(Output != 0){log(i:Output);}
+Return Output;
+}
+
+
+
+Function int StatModifier (int ModStat, int StatID)
+{
+
+int Output = ModStat;
+str Flagname;
+int ModLevel = 6;
+/*
+Here, this checks for any flag items that would serve as modifiers to your active stats
+*/
+int t;
+int v;
+
+for (t = 0; t < STATITEMNUM; t++)
+    {
+        Flagname = StrParam(s:"STF_",s:StatEffectName[t][0]);
+        if(CheckInventory(Flagname)){ModLevel += StatEffectValue[t][StatID];}
+            /*
+        for (v = 0; v < 7; v++)
+            {
+            Flagname = StrParam(s:StatName[StatID],s:StatName2[v],s:"_ID",i:t);
+            log(s:Flagname);
+                if(CheckInventory(Flagname)){ModLevel += (3-v);}
+            }
+        v = 0;
+        */
+    }
+
+    if(ModLevel > 13){ModLevel = 13;}
+    if(ModLevel < 0){ModLevel = 0;}
+
+
+    Output = (Output*StatMulti[ModLevel]) >> 16;
+    //Log(i:Output);
+Return Output;
+}
+
+Function int StatModCount (int StatID)
+{
+str Flagname;
+int ModLevel;
+
+int t;
+
+for (t = 0; t < STATITEMNUM; t++)
+    {
+        Flagname = StrParam(s:"STF_",s:StatEffectName[t][0]);
+        if(CheckInventory(Flagname)){ModLevel += StatEffectValue[t][StatID];}
+    }
+
+    if(ModLevel > 6){ModLevel = 6;}
+    if(ModLevel < -6){ModLevel = -6;}
+
+Return ModLevel;
+}
+
+
+Function Void ClearPlayerCVars(int PlayerNum, int NewLevel)
+{
+    SetCvar(StrParam(s:"PlayerLevel_",i:PlayerNum),NewLevel);
+    SetCvar(StrParam(s:"PlayerEXP_",i:PlayerNum),0);
+    SetCvar(StrParam(s:"PlayerDEXNum_",i:PlayerNum),-1);
+    //SetCvar(StrParam(s:"Player",i:PlayerNum,s:"_BP"),0);
+    SetCvarString(StrParam(s:"Player",i:PlayerNum,s:"_INV"),"0000");
+
+    //ACS_NamedExecuteAlways("StatusMenuClear",0);
+}
+
+Function Void ClearAllPlayerCVars(void)
+{
+    For (int i; i < 37; i++) {ClearPlayerCVars(i,0);}
+}
+
+#LIBDEFINE SPEEDTIER_0 0.4
+#LIBDEFINE SPEEDTIER_1 0.5
+#LIBDEFINE SPEEDTIER_2 0.6
+#LIBDEFINE SPEEDTIER_3 0.8
+#LIBDEFINE SPEEDTIER_4 1.1
+#LIBDEFINE SPEEDTIER_5 1.25
+#LIBDEFINE SPEEDTIER_6 1.4
+#LIBDEFINE SPEEDTIER_7 1.55
+#LIBDEFINE SPEEDTIER_8 2.0
+#LIBDEFINE SPEEDTIER_9 2.5
+#LIBDEFINE SPEEDTIER_10 3.5

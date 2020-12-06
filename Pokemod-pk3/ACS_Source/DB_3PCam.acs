@@ -1,0 +1,96 @@
+/* -=- Third Person Camera Database -=-
+ * Variables and functions for A_3PCam
+ *
+ * 
+
+*/
+
+#library "DB_3PCam"
+#include "zcommon.acs"
+
+#libdefine C_TID	9000	//Default camera tid
+#libdefine R_TID	9100	//Default Remote actor tid
+#libdefine MAX_R		190	//Maximum radius (or distance from the player) 128
+#libdefine MAXCamDist		270	
+#libdefine ADJUSTIN_R	2	//Amount to adjust the camera by
+#libdefine ADJUST_R	8	//Amount to adjust the camera by
+#libdefine VIEW_HEIGHT	72.0	//The approximate height of the player's view 41
+#libdefine POFFSET 0.10 //Pitch offset
+
+#LIBDEFINE OFFSET_LEFT -0.08
+#LIBDEFINE OFFSET_RIGHT 0.08
+bool cam_mode[64];		//Variable for turning the camera on or off.
+bool cam_Setup[64];		//Variable for Determining if the player has seen the camera setup screen.
+
+#libdefine CAMANGLE_CLAMP 0.08
+#libdefine CAMHEIGHT_CLAMP 20
+
+
+Function int GetCamSetting (int SettingNum, int Mode)
+{
+switch(SettingNum)
+	{	
+		Case 0:
+			if(Mode){return GetCvar("sv_ZoomCameraZoom");}
+			else{return GetCvar("sv_CameraZoom");}
+			break;
+
+			
+		Case 1:
+			if(Mode){return GetCvar("SV_ZoomCameraPitch");}
+			else{return GetCvar("SV_CameraPitch");}
+			break;
+			
+		Case 2:
+			if(Mode){return GetCvar("sv_ZoomCameraHeight");}
+			else{return GetCvar("sv_CameraHeight");}
+			break;		
+
+		Case 3:
+			if(Mode){return GetCvar("SV_ZoomCameraAng");}
+			else{return GetCvar("SV_CameraAng");}
+			break;	
+
+		Case 4:
+			if(Mode){return GetCvar("SV_ZoomCamPlayerAlpha");}
+			else{return GetCvar("SV_CamPlayerAlpha");}
+			break;	
+	}
+
+
+return 0.0;
+
+}
+
+Function int GetReticuleSetting (int P_Num, int Mode)
+{
+
+	if(Mode){return GetUserCvar(P_Num,"sv_ZoomCamReticuleMode");}
+	else{return GetUserCvar(P_Num,"sv_CamReticuleMode");}	
+
+	return 0;
+}
+
+
+Function int GetCamPlayerAlphaSetting (int P_Num, int Mode)
+{
+
+	if(Mode){return GetUserCvar(P_Num,"SV_ZoomCamPlayerAlpha");}
+	else{return GetUserCvar(P_Num,"SV_CamPlayerAlpha");}	
+
+	return 0;
+}
+
+function int CheckCamAlphaSet (int TID)
+{
+/*
+ * Normally the client sets your alpha to your player settings, if moves or any external effects
+ * Change your alpha, they take precedence, and thus the camera's automatic alpha settings
+ * are momentarily disabled. this is done by checking the following flags
+*/
+if(CheckActorInventory(TID,"PlayerIsInvisible")){return 0;}
+if(CheckFlag(TID,"INVISIBLE")){return 0;}
+if(CheckFlag(TID,"SHADOW")){return 0;}
+if(GetActorproperty(TID,Aprop_Invulnerable)){return 0;}
+return 1;
+}

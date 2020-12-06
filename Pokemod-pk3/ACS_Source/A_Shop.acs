@@ -1,6 +1,6 @@
 #library "A_Shop"
 #include "zcommon.acs"
-#import "A_3pcam.acs"
+#import "DB_3PCam.acs"
 #import "Dex_Pokemon.acs"
 #import "Dex_Types.acs"
 #import "Dex_Leveling.acs"
@@ -8,34 +8,8 @@
 #import "Dex_Moves.acs"
 #import "Dex_TM.acs"
 #import "DB_Data.acs"
+#import "DB_Shop.acs"
 
-#LIBDEFINE SHOP_MAX_PLAYERS 64
-#DEFINE SHOP_MAX_SLOTS 10
-#DEFINE MAX_TEAMS 4
-#LIBDEFINE MAX_SHOP 16
-
-bool thePlayerPlayed[SHOP_MAX_PLAYERS];
-int thePlayerTeam[SHOP_MAX_PLAYERS];
-bool theTeamPlayed[MAX_TEAMS];
-
-str ShopItemList[MAX_SHOP][3] = {
-    {"HPBerry", "HP Berry", 3.0},
-    {"BigHPBerry", "Big HP Berry", 5.0},
-    {"PPBerry", "PP Berry", 3.0},
-    {"BigPPBerry", "Big PP Berry", 5.0},
-    {"ClenseSeed", "Clense Seed", 1.0},
-    {"PowerSeed", "Power Seed", 10.0},
-    {"GuardSeed", "Guard Seed", 10.0},
-    {"HasteSeed", "Haste Seed", 10.0},    
-    {"EscapeOrb", "Escape Orb", 3.0},
-    {"BarrierOrb", "Barrier Orb", 15.0},
-    {"QuickOrb", "Quick Orb", 15.0},
-    {"EraserOrb", "Eraser Orb", 15.0},
-    {"SealOrb", "Seal Orb", 15.0},
-    {"SlumberWand", "Slumber Wand", 15.0},
-    {"ShrinkWand", "Shrink Wand", 15.0},
-    {"SomarianWand", "Somarian Wand", 25.0},
-};
 
 script "ShopEvents" (int type, int arg1, int arg2) EVENT
 {
@@ -48,7 +22,6 @@ Switch(type)
 
 }
 
-#DEFINE ITEMSPAWNERTID 74000
 script "ItemSpawnTID" (void)
 {
 int NewTID = ITEMSPAWNERTID+Random(0,999);

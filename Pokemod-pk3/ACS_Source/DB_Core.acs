@@ -1,0 +1,10 @@
+/* -=- Core Dadabase -=-
+ * Contains Variables and standalone functions used by many scripts
+ * 
+
+*/
+
+#library "DB_Core"
+#include "zcommon.acs"
+
+Bool InWarmup = true;

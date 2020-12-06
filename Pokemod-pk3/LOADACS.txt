@@ -1,13 +1,17 @@
+
+A_3PCam
+A_CTF
 A_Safezone
 A_DamageDisplay
 A_Grid
-//A_Leveling
+    A_Leveling
 A_Menus
 A_Moves
-//A_Shop
-//A_Stats
+    A_Shop
+    A_Stats
 A_Targeter
 A_Type
+A_TM
 PKMNACS
 projtra1
 projtran

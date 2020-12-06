@@ -433,6 +433,9 @@ str weapons_ammo[MAX_WEAPONS_GLOBAL][7] =
 {"TakeDownMove", "TakeDownPP", "TakeDown", 1.0, "NO", "NO", "SLOT_NONE"},
 {"GlareMove", "GlarePP", "Glare", 1.0, "NO", "NO", "SLOT_NONE"},
 {"WildChargeMove", "WildChargePP", "WildCharge", 1.0, "NO", "NO", "SLOT_NONE"},
+{"SoftBoiledMove", "SoftBoiledPP", "SoftBoiled", 1.0, "NO", "YES", "SLOT_NONE"},
+{"FuryCutterMove", "FuryCutterPP", "FuryCutter", 1.0, "NO", "NO", "SLOT_NONE"},
+{"DarkPulseMove", "DarkPulsePP", "DarkPulse", 1.0, "NO", "NO", "SLOT_NONE"},
 //--[NewMove]--
 };
 #endregion
@@ -829,6 +832,13 @@ Return(-1);
 #endregion
 //#endregion
 
+Script "TIDWeapon" (int TID)
+{
+	SetActivator(TID,AAPTR_DEFAULT);	
+	int output = WhichWeapon();
+	SetResultValue(output);
+}
+
 //#region -=- persistent loadouts
 #region -=- persistent loadouts
 #LIBDEFINE MAX_PLAYERS 64
@@ -986,7 +996,8 @@ Script "MoveSetup" (void)
 Script "MoveSwap" (void)
 {
 	// Which weapon player currently has equipped.
-	int ThisWeapon = WhichWeapon();
+	//int ThisWeapon = WhichWeapon();
+	//PlayerClassWepMem[PlayerNumber()] = ThisWeapon;
 	str WepName = weapons_ammo[ThisWeapon][0];
 	/*This script is ran upon switching off a weapon, it shuts off the targeter and will also remove any
 	temporary weapons from the player's inventory */

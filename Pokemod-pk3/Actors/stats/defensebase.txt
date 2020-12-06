@@ -42,6 +42,7 @@ damagefactor "CraftyShield", 1.0
 damagefactor "HoneClaws", 1.0
 damagefactor "RockPolish", 1.0
 damagefactor "Glare", 1.0
+damagefactor "SoftBoiled", 1.0
 //--[NewStatusMove]--
 }
 
@@ -101,7 +102,6 @@ damagefactor "PetalDance", 1.0
 damagefactor "LeafTornado", 1.0
 
 damagefactor "LavaPlume", 1.0
-damagefactor "FlameCharge", 1.0
 damagefactor "Overheat", 1.0
 damagefactor "Inferno", 1.0
 damagefactor "Incinerate", 1.0
@@ -136,6 +136,7 @@ damagefactor "Thunder", 1.0
 damagefactor "Shockwave", 1.0
 damagefactor "MudShot", 1.0
 damagefactor "ClearSmog", 1.0
+damagefactor "DarkPulse", 1.0
 //--[NewSpecialMove]--
 }
 
@@ -252,5 +253,8 @@ damagefactor "PoisonTail2", 1.0
 damagefactor "WingAttack", 1.0
 damagefactor "TakeDown", 1.0
 damagefactor "WildCharge", 1.0
+damagefactor "FlameCharge", 1.0
+
+damagefactor "FuryCutter", 1.0
 //--[NewPhysicalMove]--
 }

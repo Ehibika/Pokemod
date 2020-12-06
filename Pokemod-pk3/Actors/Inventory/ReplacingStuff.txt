@@ -152,6 +152,10 @@ PokeMoney:
 TNT1 A 0 A_SpawnItemEX("PokeMoney",0,0,0,0,0,0,0,0,0,tid+1000)
 goto RespawnWait
 
+MysteryTM:
+TNT1 A 0 A_SpawnItemEX("MysteryTM",0,0,0,0,0,0,0,0,0,tid+1000)
+goto RespawnWait
+
 RespawnWait:
 TNT1 A 10 A_JumpIf(CallACS("ItemSpawnerCheck") == 1,"RespawnTime")
 wait
@@ -194,8 +198,8 @@ Tier2:
 TNT1 A 0 A_Jump(127,"Seeds","Berries")
 TNT1 A 0 A_Jump(256,"Tier3")
 Tier3:
-TNT1 A 0 A_Jump(127,"HPBerry","PPBerry")
-TNT1 A 0 A_Jump(256,"PokeMoney")
+TNT1 A 0 A_Jump(256,"HPBerry","PPBerry")
+//TNT1 A 0 A_Jump(256,"PokeMoney")
 stop
 }
 }
@@ -211,14 +215,14 @@ stop
     
 Tier1:
 TNT1 A 0 A_JumpIf(CallACS("GetStartinglevel") >= 10,"BigHPBerry")
-TNT1 A 0 A_Jump(127,"Gummies","Orbs","Wands")
+TNT1 A 0 A_Jump(127,"Gummies","Orbs","Wands","MysteryTM")
 TNT1 A 0 A_Jump(256,"Tier2")
 Tier2:
-TNT1 A 0 A_JumpIf(CallACS("GetStartinglevel") >= 10,"BigHPBerry")
-TNT1 A 0 A_Jump(127,"Wands","Orbs","BigHPBerry","BigPPBerry")
+TNT1 A 0 //A_JumpIf(CallACS("GetStartinglevel") >= 10,"BigHPBerry")
+TNT1 A 0 A_Jump(127,"Wands","Orbs","MysteryTM")
 TNT1 A 0 A_Jump(256,"Tier3")
 Tier3:
-TNT1 A 0 A_JumpIf(CallACS("GetStartinglevel") >= 10,"BigHPBerry")
+TNT1 A 0 //A_JumpIf(CallACS("GetStartinglevel") >= 10,"BigHPBerry")
 TNT1 A 0 A_Jump(256,"Orbs","Seeds","BigHPBerry","BigPPBerry")
 stop
 }

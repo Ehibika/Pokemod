@@ -150,11 +150,15 @@ SetResultValue(Result);
 }
 
 
-Script "PKMNACS_HealthPercent" (int TargTID, int Type, int perval)
+Script "PKMNACS_HealthPercent" (int Pointer, int Type, int perval)
 {
 int HealthPercent;
 int PlayerCurrentHealth;
 int PlayerMaxHealth;
+int TargTID;
+
+if(Pointer>0){TargTID = ACS_NamedExecuteWithResult("core_getptrtid",Pointer);}
+
 
 if(GetActorProperty(TargTID,APROP_HEALTH)<=0){PlayerCurrentHealth = 1; }
 else{PlayerCurrentHealth = GetActorProperty(TargTID,APROP_Health);}

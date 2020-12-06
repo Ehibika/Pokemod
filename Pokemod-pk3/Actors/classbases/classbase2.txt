@@ -8,8 +8,14 @@ Pain.Swift:
 Pain.SpikeCannon:
 Pain.FurySwipes:
 Pain.Glare:
+Pain.SoftBoiled:
 //--[Move|Normal]--
  "----" H 0
+Goto NormalPain
+
+Pain.Eggbomb:
+"----" H 0
+"----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,25,Type_Null)
 Goto NormalPain
 
 Pain.Slam:
@@ -125,6 +131,7 @@ Goto NormalPain
 
 Pain.Fighting:
 Pain.HammerArm:
+Pain.FocusBlast:
 //--[Move|Fighting]--
 "----" H 0 
 Goto FightingPain
@@ -333,6 +340,7 @@ Goto RockPain
 //#region -=- Bug -=-
 
 Pain.Bug:
+Pain.FuryCutter:
 //--[Move|Bug]--
 "----" H 0
 Goto BugPain
@@ -406,10 +414,15 @@ Pain.Fire:
 "----" H 0
 Goto FirePain
 
+Pain.FlameCharge:
+"----" H 0 A_GiveInventory("FlameChargeProtect",1)
+"----" H 0 
+Goto FirePain
+
 Pain.Firepunch:
 "----" H 0 //ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,15,Type_Fire)
 "----" H 0 A_GiveInventory("FirePunchProtect")
-"----" H 0 //A_GiveInventory("FirePunchBurnProc")
+"----" H 0 A_GiveInventory("FirePunchBurnProc")
 Goto FirePain
 
 Pain.Ember:
@@ -461,7 +474,7 @@ pain.FireFang:
 //"----" H 0 A_Giveinventory("BurnMark")
 "----" H 0
 "----" H 0
-"----" H 0 //A_GiveInventory("FirePunchBurnProc")
+"----" H 0 A_GiveInventory("FirePunchBurnProc")
 Goto FirePain
 
 Pain.FlareBlitz:
@@ -517,7 +530,7 @@ Goto WaterPain
 
 Pain.Surf:
 //"----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockUp",0,55,0)
-"----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,55,Type_Water)
+"----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,25,Type_Water)
 "----" H 0 A_GiveInventory("SurfProtect",1)
 Goto WaterPain
 
@@ -675,7 +688,7 @@ Goto ElectricPain
 Pain.ThunderPunch:
 "----" H 0 //ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,15,Type_Electric)
 "----" H 0 A_GiveInventory("ThunderPunchProtect")
-"----" H 0 //A_GiveInventory("ThunderPunchParaProc")
+"----" H 0 A_GiveInventory("ThunderPunchParaProc")
 Goto ElectricPain
 
 Pain.ThunderShock:
@@ -750,13 +763,13 @@ Goto PsychicPain
     Pain.IcePunch:
     "----" H 0 //ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,15,Type_Ice)
     "----" H 0 A_GiveInventory("IcePunchProtect",1)
-    "----" H 0 //A_GiveInventory("FreezeStatusProc",1)
-    "----" H 0 //A_GiveInventory("IcePunchFreezeRate",1)
+    "----" H 0 A_GiveInventory("FreezeStatusProc",1)
+    "----" H 0 A_GiveInventory("IcePunchFreezeRate",1)
     Goto IcePain
 
     Pain.IceFang:
-    "----" H 0 //A_GiveInventory("FreezeStatusProc",1)
-    "----" H 0 //A_GiveInventory("IcePunchFreezeRate",1)
+    "----" H 0 A_GiveInventory("FreezeStatusProc",1)
+    "----" H 0 A_GiveInventory("IcePunchFreezeRate",1)
     Goto IcePain
 
     Pain.PowderSnow:
@@ -857,8 +870,16 @@ Goto DragonPain
 
     Pain.Pursuit:
 Pain.HoneClaws:
+
     //--[Move|Dark]--
     "----" H 0
+    Goto DarkPain
+
+    Pain.DarkPulse:
+    "----" H 0
+    "----" H 0 A_GiveInventory("DarkPulseProtect",1)
+    "----" H 0 A_GiveInventory("DarkPulseCringeChance",1)
+    "----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,25,Type_Ice)
     Goto DarkPain
 
     Pain.NightSlash1:
@@ -942,8 +963,9 @@ Goto PainNormal
     Death.SpikeCannon:
 Death.FurySwipes:
 Death.CrushClaw:
-
+Death.EggBomb:
 Death.Glare:
+Death.SoftBoiled:
     //--[Move|Normal]--
     "----" H 0
     Goto NormalDeath
@@ -1010,6 +1032,7 @@ Goto FightingDeath
 Death.VacuumWave:
 Death.DoubleKick:
 Death.CloseCombat:
+Death.FocusBlast:
 "----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,6,Type_Fighting)
 Goto FightingDeath
 
@@ -1132,7 +1155,7 @@ Death.RockPolish:
 Goto RockDeath
 
 Death.RockTomb:
-"----" H 0 A_GiveInventory("IcyWindNerfInitiate",1)
+"----" H 0 A_GiveInventory("RockTombNerfInitiate",1)
 Goto RockDeath
 
 
@@ -1157,6 +1180,7 @@ Goto Death
 
 Death.XScissor1:
 Death.XScissor2:
+Death.FuryCutter:
 //--[Move|Bug]--
 "----" H 0 
 Goto BugDeath
@@ -1207,6 +1231,7 @@ Goto SteelDeath
     Death.Eruption:
     Death.Overheat:
 Death.Firepunch:
+Death.FlameCharge:
     //--[Move|Fire]--
     "----" H 0
     Goto FireDeath
@@ -1448,6 +1473,7 @@ Goto FairyDeath
     Death.Bite:
     Death.Crunch:
 Death.HoneClaws:
+Death.DarkPulse:
     //--[Move|Dark]--
     "----" H 0
     Goto DarkDeath

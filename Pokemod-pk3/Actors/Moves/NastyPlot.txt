@@ -71,7 +71,7 @@ Goto Ready
 //[+]========================================================================[+]
 //-----------------------------|Ammo & Inventory|------------------------------
 //[+]========================================================================[+]
-actor NastyPlotPP : Ammo {inventory.amount 1 inventory.Maxamount 25}
+actor NastyPlotPP : Ammo {inventory.amount 1 inventory.Maxamount 10}
 actor STF_NastyPlot : Powerup {inventory.amount 1 Powerup.Duration 40}
 actor NastyPlot_Active : Inventory {inventory.amount 1 inventory.Maxamount 1}
 

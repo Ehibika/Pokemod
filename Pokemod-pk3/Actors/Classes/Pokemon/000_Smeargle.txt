@@ -11,11 +11,11 @@ Player.SoundClass "Megaman"
 +NOSKIN
 player.startitem "PKMNStarterKit"
 //============|
-Player.StartItem "Base_HP", 55
-Player.StartItem "Base_PAttack", 20
-Player.StartItem "Base_PDefense", 35
-Player.StartItem "Base_SAttack", 20
-Player.StartItem "Base_SDefense", 45
+Player.StartItem "Base_HP", 80
+Player.StartItem "Base_PAttack", 60
+Player.StartItem "Base_PDefense", 80
+Player.StartItem "Base_SAttack", 60
+Player.StartItem "Base_SDefense", 95
 
 //============|
 

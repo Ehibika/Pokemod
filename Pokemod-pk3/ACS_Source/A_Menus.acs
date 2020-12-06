@@ -14,8 +14,8 @@
 #Import "Dex_Skin.acs."
 #Import "Dex_TM.acs."
 #Import "DB_Data.acs"
-#Import "A_Shop.acs"
-#Import "A_Leveling.acs"
+#Import "DB_Shop.acs"
+#Import "DB_Leveling.acs"
 
 #define MNL 8.0 //menu line spacing
 #define MenuXOrigin 120.1
@@ -547,7 +547,7 @@ while(MenuUp)
 	// #------------------
 	}
 		// - Grab Inputs -
-		InputButtons = GetPlayerInput(-1, MODINPUT_OLDBUTTONS);
+		InputButtons = GetPlayerInput(-1, INPUT_OLDBUTTONS);
 		UpInput = ButtonCheck(InputButtons, InputOldButtons, BT_FORWARD);
 		DownInput = ButtonCheck(InputButtons, InputOldButtons, BT_BACK);
 		ConfirmInput = ButtonCheck(InputButtons, InputOldButtons, BT_ATTACK);
@@ -756,6 +756,7 @@ else{Delay(17);setplayerproperty(0,0,4);}
 int TMMoveCache[64][MAXTMLIST];
 int TMNumCache[64][MAXTMLIST];
 int TMCostCache[64][MAXTMLIST];
+int TMColCache[64][MAXTMLIST];
 
 Script "PromptTMShop" (Void)
 {
@@ -784,6 +785,7 @@ int MoveListVal;
 int MoveListCount;
 int TMNumber;
 int Movecost;
+str MoveListCol;
 bool ShopSet;
 int CursorY;
 int LearnMove = -1;
@@ -830,11 +832,21 @@ while (MenuUp) {
 				//if (MoveListVal != -1) {TMMoveCache[PlayerNumber()][MoveListCount] = MoveListVal; MoveListCount++;}
 				
 					MoveListVal = CheckTMArray(k,PlayerDEXNum,PlayerLVL);
-					if (MoveListVal != -1) 
+					if (MoveListVal != -1 ) 
 						{
 						TMMoveCache[PlayerNumber()][MoveListCount] = MoveListVal; 
 						TMNumCache[PlayerNumber()][MoveListCount] = k+1;
-						TMCostCache[PlayerNumber()][MoveListCount] = TMList[k][3];
+						if(CheckTMUnlock(k,PlayerDEXNum,PlayerLVL))
+							{
+							TMCostCache[PlayerNumber()][MoveListCount] = 0;
+							TMColCache[PlayerNumber()][MoveListCount] = ": \cd";
+							}
+						else
+							{
+							TMCostCache[PlayerNumber()][MoveListCount] = TMList[k][3];
+							TMColCache[PlayerNumber()][MoveListCount] = ": \cj";
+							}
+						
 						MoveListCount++;
 						}
 			
@@ -862,8 +874,9 @@ while (MenuUp) {
 			MoveListVal = TMMoveCache[PlayerNumber()][i];
 			TMNumber = TMNumCache[PlayerNumber()][i];
 			MoveCost = TMCostCache[PlayerNumber()][i];
-			if (MoveListVal != -1) {
-				HudMessage(s:"\cfTM",i:TMNumber,s:": \cj",s: weapons_ammo[MoveListVal][2]; HUDMSG_FADEOUT, 500 + j, 0, MenuX, Menuy + (MNL * j), 0.2, 0);
+			MoveListCol = TMColCache[PlayerNumber()][i];
+			if (MoveListVal != -1 ) {
+				HudMessage(s:"\cfTM",i:TMNumber,s:MoveListCol,s: weapons_ammo[MoveListVal][2]; HUDMSG_FADEOUT, 500 + j, 0, MenuX, Menuy + (MNL * j), 0.2, 0);
 				j++;
 			}
 
@@ -945,7 +958,14 @@ if(LearnMove > -1)
 			{InputButtons = GetPlayerInput(-1, INPUT_BUTTONS); Delay(1); InputOldButtons = InputButtons;}
 			ACS_NamedExecuteAlways("PromptMoveLearn",0,LearnMove,MoveCost);
 			ACS_NamedExecuteAlways("ShopSuccessSound",0);
+			if(!CheckTMUnlock(TMNumCache[PlayerNumber()][ChoiceID]-1,PlayerDEXNum,PlayerLVL))
+			{
+				if(GetCvar("PKMN_TeamTMPurchase")){UnlockTeamTM(TMNumCache[PlayerNumber()][ChoiceID]-1,PlayerTeam());}
+				else{UnlockTM(TMNumCache[PlayerNumber()][ChoiceID]-1);}
+			}
+			
 			GiveInventory("SaveMovesetFlag",1);
+			
 		}
 		else{
 			print(s: "Cannot Afford that TM");

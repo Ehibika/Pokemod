@@ -6,8 +6,9 @@
 */
 
 #library "G_Startup"
+#import "DB_Core.acs"
 #import "WEPACS.acs"
-#import "A_Stats.acs"
+#import "DB_Stats.acs"
 #import "DB_Player.acs"
 #import "DB_Data.acs"
 #import "Dex_Pokemon.acs"
@@ -218,7 +219,9 @@ Script "PKMNACS_StartupScript" (int BaseDex)
 
 
 	if(GetCvar("lastmanstanding")==1||GetCvar("teamlms")==1) {LMSAttendance(PlayerNumber(),1);}
-
+	//delay(1);
+	//int ThisWeapon = WhichWeapon();
+	//PlayerClassWepMem[PlayerNumber()] = ThisWeapon;
 }
 
 script "PKMNACS_TSRespawn" RESPAWN
@@ -334,7 +337,6 @@ else if(BaseLevel < 1)
 
 }
 
-Bool InWarmup = true;
 
 Script "GameTimer" OPEN 
 {

@@ -6378,6 +6378,57 @@ OptionMenu "MoveMenu_WildCharge"
     StaticText ""
     StaticText"===============================================================",1
 } 
+OptionMenu "MoveMenu_SoftBoiled"
+{
+    
+    Title "$M270_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M270_TYPE"
+    StaticText "$M270_CATEGORY"
+    StaticText "$M2704_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M270_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+} 
+OptionMenu "MoveMenu_FuryCutter"
+{
+    
+    Title "$M271_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M271_TYPE"
+    StaticText "$M271_CATEGORY"
+    StaticText "$M2714_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M271_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+} 
+OptionMenu "MoveMenu_DarkPulse"
+{
+    
+    Title "$M272_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M272_TYPE"
+    StaticText "$M272_CATEGORY"
+    StaticText "$M2724_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M272_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+} 
 //--[NewMove]--
 
 OptionMenu "MoveMenu_Sketch"

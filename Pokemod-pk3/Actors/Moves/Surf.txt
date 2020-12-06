@@ -72,7 +72,7 @@ actor SurfPP : Ammo {inventory.amount 1 inventory.Maxamount 10}
 
 Actor SurfProtect : powerprotection
 {
-Powerup.duration 17
+Powerup.duration 25
 Damagefactor "Surf", 0
 }
 

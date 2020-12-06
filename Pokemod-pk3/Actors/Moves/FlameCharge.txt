@@ -1,0 +1,249 @@
+actor FlameChargeMove : WepMasterBase
+{
+Tag "FlameCharge"
+obituary "$OB_FlameCharge"
+Weapon.AmmoUse 1
+Weapon.AmmoGive 25
+weapon.ammotype "FlameChargePP"
+scale 2.0
+Inventory.Pickupmessage "$PU_MEGABUSTER"
+States
+{
+Spawn:
+WEAP X 1
+stop
+
+
+Fire:
+"####" BBB 1 A_Jumpif(CallACS("CheckWeaponFire",RC_A)==1,"Fire.Begin")
+"####" B 0 A_Jump(256,"NoAmmo")
+Goto NoAmmo
+
+Fire.Begin:
+"####" B 0
+"####" B 0 A_JumpIfInventory("FlameChargeAuraFlag",1,"Fire.Off")
+"####" B 0 A_Jump(256,"Fire.On")
+Goto Fire.On
+
+Fire.On:
+"####" B 7 A_PlaySoundEx("Misc/UseMove","Weapon")
+"####" B 0 A_PlaySoundEx("weapon/ScorchWheel","soundslot6")
+"####" B 0 A_FireCustomMissile("FlameChargeAura",0,0,0,0)
+"####" B 0 A_Jump(256,"Fire.After")
+Goto Fire.After
+
+Fire.Off:
+"####" B 0 A_PlaySoundEx("Misc/UseMove","Weapon")
+"####" B 0 A_TakeInventory("FlameChargeAuraFlag") 
+"####" B 17 
+"####" B 0 A_Jump(256,"Fire.After")
+Goto Fire.After
+
+Fire.After:
+"####" B 1 A_GiveInventory("HalfRecovery_A")
+"####" C 0 A_REfire("Fire")
+"####" B 0 A_Jump(256,"Fire.End")
+Goto Fire.End
+
+}
+}
+
+actor FlameChargeMove1 : FlameChargeMove {Weapon.SlotNumber 1}
+actor FlameChargeMove2 : FlameChargeMove {Weapon.SlotNumber 2}
+actor FlameChargeMove3 : FlameChargeMove {Weapon.SlotNumber 3}
+actor FlameChargeMove4 : FlameChargeMove {Weapon.SlotNumber 4}
+
+actor FlameChargeMove5 : FlameChargeMove 
+{
+Weapon.SlotNumber 5
+States
+{
+Fire.End:
+TNT1 A 0
+TNT1 A 0 A_TakeInventory("FlameChargeMove5",9)
+TNT1 A 0 A_Jump(256,"Ready")
+Goto Ready
+}
+}
+
+//[+]========================================================================[+]
+//-----------------------------|Ammo & Inventory|------------------------------
+//[+]========================================================================[+]
+actor FlameChargePP : Ammo {inventory.amount 1 inventory.Maxamount 25}
+
+actor STF_FlameCharge : Powerup {inventory.amount 1 Powerup.Duration -6}
+
+actor FlameChargeAuraFlag : inventory {inventory.amount 1 inventory.Maxamount 1}
+actor FlameChargePPTimer : Powerup {inventory.amount 1 Powerup.Duration 35}
+
+actor FlameChargeBuffInitiate : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_Jumpifinventory("FlameChargeAuraFlag",1,"Sustain")
+TNT1 A 0 A_GiveInventory("FlameChargeAuraFlag",1)
+TNT1 A 0 A_SpawnitemEX("FlameChargeBuffWatcher")
+TNT1 A 0 A_GiveInventory("StatUpdator",1)
+stop
+
+Sustain:
+TNT1 A 0 A_GiveInventory("STF_FlameCharge",1)
+stop
+Nope:
+TNT1 A 0
+stop
+}
+}
+
+Const int FlameCharge_RAD = 96;
+
+Actor FlameChargeProtect : powerprotection
+{
+Powerup.duration 8
+Damagefactor "FlameCharge", 0
+}
+//[+]========================================================================[+]
+//--------------------------------|Projectiles |--------------------------------
+//[+]========================================================================[+]
+
+
+actor FlameChargeAura //: BasicHelper
+{
+    +MISSILE
+    -SOLID
+    +NOCLIP
+    +NOINTERACTION
+    +NOGRAVITY
+    +DONTBLAST
+    +DONTREFLECT
+    +THRUACTORS
+    RenderStyle none
+    Radius 2
+    Height 2
+    Args 7
+    Speed 15
+    States
+    {
+    Spawn:
+        TNT1 A 0
+        TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+        TNT1 A 0 ACS_NamedExecuteAlways("GeneralWarper2",0)    
+        TNT1 A 0 A_GiveToTarget("FlameChargeBuffInitiate")
+    Warp:
+        TNT1 A 1 A_Warp(2,0,0,0,0,WARPF_INTERPOLATE|WARPF_NOCHECKPOSITION)
+        TNT1 A 0 A_GiveInventory("FlameChargeFXSpawn")
+        TNT1 A 1 A_Warp(2,0,0,0,0,WARPF_INTERPOLATE|WARPF_NOCHECKPOSITION)
+        TNT1 A 0 A_GiveInventory("FlameChargeFXSpawn")
+        TNT1 A 1 A_Warp(2,0,0,0,0,WARPF_INTERPOLATE|WARPF_NOCHECKPOSITION)
+        TNT1 A 0 A_GiveInventory("FlameChargeFXSpawn")
+        TNT1 A 1 A_Warp(2,0,0,0,0,WARPF_INTERPOLATE|WARPF_NOCHECKPOSITION)
+        TNT1 A 0 A_GiveInventory("FlameChargeFXSpawn")
+        TNT1 A 1 A_Warp(2,0,0,0,0,WARPF_INTERPOLATE|WARPF_NOCHECKPOSITION)
+        TNT1 A 0 A_GiveInventory("FlameChargeFXSpawn")
+        TNT1 A 0 A_PlaySoundEx("weapon/waveburner","Weapon")
+        TNT1 A 0 A_SpawnItemEX("FlameChargeDamager")
+        loop
+    Death:
+    TNT1 A 0 
+    TNT1 A 0
+    stop
+
+    }
+}
+
+actor FlameChargeDamager : BasicExplosion
+{
+Speed 0
+Damage (0)
+radius 4
+height 4
+DamageType "FlameCharge"
+Obituary "$OB_FlameCharge"
+scale 1.5
++RIPPER
++SERVERSIDEONLY
+States
+{
+Spawn:
+TNT1 A 0 
+TNT1 A 2 A_Explode(MBP_FlameCharge,FlameCharge_RAD,0,0,FlameCharge_RAD)
+stop
+}
+}
+
+actor FlameChargeBuffWatcher : BasicHelper 
+{
+Var int user_TickTime;
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_JumpIfInTargetInventory("CutterFlag",999,"Death")
+TNT1 A 0 A_JumpIfInTargetInventory("IsDead",1,"Death")
+TNT1 A 0 A_JumpIfInTargetInventory("HazeFlag",1,"Death")
+TNT1 A 5 A_GiveToTarget("STF_FlameCharge")
+TNT1 A 0 A_GiveToTarget("SPDUpFXSpawn")
+TNT1 A 0 A_SetUserVar("user_TickTime",user_TickTime+5)
+TNT1 A 0 A_JumpIf(user_TickTime>=35,"SpawnTick")
+TNT1 A 0 A_JumpIfInTargetInventory("FlameChargeAuraFlag",1,"Spawn")
+Goto Death
+
+SpawnTick:
+TNT1 A 0 A_SetUserVar("user_TickTime",0)
+TNT1 A 0 A_TakeFromTarget("FlameChargePP",1)
+TNT1 A 0 A_JumpIfInTargetInventory("FlameChargePP",1,"Spawn")
+Goto Death
+
+Death:
+TNT1 A 0 A_GiveToTarget("StatUpdator")
+TNT1 A 0 //A_GiveToTarget("BuffLossSoundCue")
+TNT1 A 0 A_TakeFromTarget("STF_FlameCharge",9)
+TNT1 A 0 A_TakeFromTarget("FlameChargeAuraFlag",99)
+TNT1 A 2 
+stop
+}
+}
+
+
+actor FlameChargeFXSpawn : CustomInventory
+{
+States
+{
+Pickup:
+TNT1 A 0
+TNT1 AAA 1 A_SpawnItemEx("FlameChargeFx", FlameCharge_RAD/2, 0, Random(18,FlameCharge_RAD/2), 0, 0, 0, random(0,360), 1061)
+stop
+}
+}
+
+
+actor FlameChargeFx  //flames 
+{
+PROJECTILE
++NOINTERACTION
++NOGRAVITY
++CLIENTSIDEONLY
+height 2
+Radius 2
+damage (0)
+reactiontime 1
+scale 1
+RenderStyle "Add"
+Alpha 0.2
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+BRNF ABCDEFGH 1 A_Fadein(0.1)
+BRNF C 0 
+stop
+}
+}

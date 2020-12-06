@@ -15,6 +15,7 @@
 #library "Dex_TM"
 #import "Dex_Pokemon.acs"
 #import "Dex_moves.acs"
+#import "Dex_movesets.acs"
 #import "Dex_Types.acs"
 #import "Dex_Leveling.acs"
 #import "Dex_BaseStats.acs"
@@ -76,7 +77,7 @@
 
 
 
-#LIBDEFINE MAXTMLIST 82
+#LIBDEFINE MAXTMLIST 77//82
 //#endregion
 
 //#region -=- TM Reference -=-
@@ -95,6 +96,9 @@
 */
 //#endregion
 
+
+int TMMem_Team [4][MAXTMLIST] = {};
+int TMMem_Player [64][MAXTMLIST] = {};
 //#region -=- TM MasterList -=-
 int TMList [MAXTMLIST][5] = {
 {Substitute     ,TMF_UNIVERSAL      ,TMT_NORMAL                                 ,TMP_1  ,TML_ALL},
@@ -162,6 +166,9 @@ int TMList [MAXTMLIST][5] = {
 {DreamEater     ,TMF_NULL           ,TMT_PSYCHIC|TMT_FAIRY|TMT_GHOST|TMT_DARK   ,TMP_2  ,TML_MID},
 {ClearSmog      ,TMF_NULL           ,TMT_POISON|TMT_FIRE                        ,TMP_2  ,TML_MID},
 {RockTomb       ,TMF_NULL           ,TMT_ROCK|TMT_GROUND|TMT_Steel              ,TMP_2  ,TML_MID},
+{FlameCharge    ,TMF_NULL           ,TMT_FIRE                                   ,TMP_2  ,TML_LOW},
+{FuryCutter     ,TMF_NULL           ,TMT_BUG                                    ,TMP_2  ,TML_LOW},
+{DarkPulse      ,TMF_NULL           ,TMT_DARK|TMT_GHOST                         ,TMP_4  ,TML_MID2},
 
 {IceBeam        ,TMF_NULL           ,TMT_WATER|TMT_ICE                          ,TMP_4  ,TML_MID2},
 {Flamethrower   ,TMF_NULL           ,TMT_FIRE|TMT_DRAGON                        ,TMP_4  ,TML_MID2},
@@ -188,10 +195,46 @@ int TMList [MAXTMLIST][5] = {
 {Thunder        ,TMF_NULL           ,TMT_ELECTRIC                               ,TMP_5  ,TML_HIGH},
 {CloseCombat    ,TMF_NULL           ,TMT_FIGHTING                               ,TMP_5  ,TML_HIGH},
 {StoneEdge      ,TMF_NULL           ,TMT_ROCK|TMT_GROUND|TMT_Steel|TMT_FIGHTING ,TMP_5  ,TML_HIGH},
+{FocusBlast     ,TMF_NULL           ,TMT_FIGHTING|TMT_PSYCHIC                   ,TMP_5  ,TML_HIGH},
 
 };
 
 //#endregion
+
+function void UnlockTM (int Index)
+{
+    TMMem_Player[PlayerNumber()][Index] = ON;
+}
+
+function void UnlockTeamTM (int Index, int TeamNum)
+{
+    TMMem_Team[TeamNum][Index] = ON;
+}
+
+function int CheckTMUnlock (int Index, int Dexnum, int Level)
+{
+
+    
+    //is the TM unlocked for the team
+    if(TMMem_Team[PlayerTeam()][Index] == ON) return 1;
+
+    //is the TM unlocked for this player
+    if(TMMem_Player[PlayerNumber()][Index] == ON) return 1;
+
+    //is the TM move available in their levelup set?
+    int h;
+    int MoveListVal;
+    For(int k = 0; k < Level; k++) // + StartMoves - 1
+    {
+        For(h = 0; h < 4; h++)
+        {
+            MoveListVal = MoveDex2[Dexnum][k][h];
+            if (MoveListVal == TMList[Index][0]) {return 1; break;}
+        }
+    }
+
+    return 0;
+}
 
 function int CheckTMArray (int Index, int Dexnum, int Level)
 {
@@ -200,8 +243,23 @@ int TMOut = TMList[Index][0];
 int PlayerTypeA = StatDEX[Dexnum][7];
 int PlayerTypeB = StatDEX[Dexnum][8];
 
-    //First check if the player is of the appropriate level
-    if (Level < TMList[Index][4]) return -1; //not the right level? no TM.
+    //First, check if you have this move in your levelup set already
+    int h;
+    int MoveListVal;
+    For(int k = 0; k < Level; k++) // + StartMoves - 1
+    {
+        For(h = 0; h < 4; h++)
+        {
+            MoveListVal = MoveDex2[Dexnum][k][h];
+            if (MoveListVal == TMList[Index][0]) {return TMOut; break;}
+        }
+    }
+
+    //Next we will check if the player is of the correct level, or if the TM is unlocked
+    // if the TM is unlocked then this check is skipped
+        if(TMMem_Team[PlayerTeam()][Index] == OFF && TMMem_Player[PlayerNumber()][Index] == OFF) 
+         //Now, check if the player is of the appropriate level
+        {if (Level < TMList[Index][4]) return -1; }//not the right level? no TM.
 
     //next check for first qualifiers, if the TM is universal, it will pass
     if (TMList[Index][1] & TMF_UNIVERSAL) return TMOut;
@@ -213,8 +271,9 @@ int PlayerTypeB = StatDEX[Dexnum][8];
     if(TMList[Index][2] & GrabTMType(PlayerTypeA)
     || TMList[Index][2] & GrabTMType(PlayerTypeB)){return TMOut;}
 
-    //Lastly, check if there's a specialty rule for this move and pokemon
+    //next, check if there's a specialty rule for this move and pokemon
     if(SpecialtyMoveRules(Dexnum,TMOut)){return TMOut;}
+    
 
     // All Checks failed
     return -1;
@@ -321,6 +380,7 @@ int output = 0;
         case Thunder: output = TMR_Thunder(Dexnum); break; 
         case Solarbeam: output = TMR_SolarBeam(Dexnum); break; 
         case Flamethrower: output = TMR_Flamethrower(Dexnum); break; 
+        case Incinerate: output = TMR_Flamethrower(Dexnum); break; 
         case FireBlast: output = TMR_Flamethrower(Dexnum); break; 
         case ClearSmog: output = TMR_ClearSmog(Dexnum); break; 
         case IceBeam: output = TMR_IceBeam(Dexnum); break; 
@@ -333,6 +393,9 @@ int output = 0;
         case IcyWind: output = TMR_IcyWind(Dexnum); break;    
         case StoneEdge: output = TMR_StoneEdge(Dexnum); break;    
         case RockTomb: output = TMR_RockTomb(Dexnum); break;    
+        case FuryCutter: output = TMR_FuryCutter(Dexnum); break;    
+        case DarkPulse: output = TMR_DarkPulse(Dexnum); break;    
+        case FocusBlast: output = TMR_FocusBlast(Dexnum); break;    
 
         
         
@@ -1025,6 +1088,87 @@ int output = 0;
 return output;
 }
 //#endregion
+
+//#region -=- TM Rules : FuryCutter -=-
+Function int TMR_FuryCutter (int Dexnum) 
+{
+
+int output = 0;
+    Switch (Dexnum)
+    {
+        case BULBASAUR: output = 1; break;
+        case IVYSAUR: output = 1; break;
+        case VENUSAUR: output = 1; break;
+        case CHARMANDER: output = 1; break;
+        case GOLEM: output = 1; break;  
+        case SLOWBRO: output = 1; break;
+        case SLOWKING: output = 1; break;
+        case DRAGONITE: output = 1; break;
+        case CHIKORITA: output = 1; break;
+        case BAYLEEF: output = 1; break;
+        case MEGANIUM: output = 1; break;
+        case TOTODILE: output = 1; break;
+        case CROCONAW: output = 1; break;
+        case FERALIGATR: output = 1; break;
+        case QUILAVA: output = 1; break;
+        case TYPHLOSION: output = 1; break;
+        case TREECKO: output = 1; break;
+        case COMBUSKEN: output = 1; break;
+        case BLAZIKEN: output = 1; break;
+        case SALAMENCE: output = 1; break;
+        case METANG: output = 1; break;
+        case METAGROSS: output = 1; break;
+    }
+    if(TMArch_Slasher(Dexnum)){output = 1;}
+return output;
+}
+//#endregion
+
+//#region -=- TM Rules : DarkPulse -=-
+Function int TMR_DarkPulse (int Dexnum) 
+{
+
+int output = 0;
+    Switch (Dexnum)
+    {
+    case BLASTOISE: output = 1; break;
+    case VULPIX: output = 1; break;
+    case VULPIX_A: output = 1; break;
+    case NINETALES: output = 1; break;
+    case NINETALES_A: output = 1; break;
+    case STEELIX: output = 1; break;
+    case SEVIPER: output = 1; break;
+    }
+    
+return output;
+}
+//#endregion
+
+//#region -=- TM Rules : FocusBlast -=-
+Function int TMR_FocusBlast (int Dexnum) 
+{
+
+int output = 0;
+    Switch (Dexnum)
+    {
+    case CHARIZARD: output = 1; break;
+    case BLASTOISE: output = 1; break;
+    case RAICHU: output = 1; break;
+    case GOLEM: output = 1; break;
+    case GOLEM_A: output = 1; break;
+    case DRAGONITE: output = 1; break;
+    case TYPHLOSION: output = 1; break;
+    case FERALIGATR: output = 1; break;
+    case SWAMPERT: output = 1; break;
+    case SCEPTILE: output = 1; break;
+    case HYDREIGON: output = 1; break;
+    }
+    if(TMArch_Generalist(Dexnum)){output = 1;}
+
+return output;
+}
+//#endregion
+
 //======
 
 //#region -=- TM Archetype : Draconic

@@ -11,9 +11,9 @@
 #import "Dex_Pokemon.acs"
 #import "Dex_Types.acs"
 #import "WEPACS.acs"
-#import "A_Stats.acs"
-#import "A_3Pcam.acs"
-#import "A_Moves.acs"
+#import "DB_Stats.acs"
+#import "DB_3PCam.acs"
+#import "DB_Moves.acs"
 #import "Dex_Leveling.acs"
 #import "Dex_BaseStats.acs"
 #include "zcommon.acs"
@@ -40,7 +40,7 @@ SetResultValue(count>50);
 #region -=- EntiTID -=-
 
 #LIBDEFINE EntityTID 480000
-
+#LIBDEFINE ENTITY_CAP 10 //for masterscrub, to reduce the loops
 Script "GiveEntiTID" (Int EntityID)
 {
 /*
@@ -73,6 +73,7 @@ Thing_ChangeTID(0,EntityTID+P+EntityID);
 #region -=- Multi EntiTID -=-
 
 #LIBDEFINE M_ENTITYTID 4900000
+#LIBDEFINE M_ENTITY_CAP 5 //for masterscrub, to reduce the loops
 int M_EntityRecord[64];
 Script "GiveM_EntiTID" (Int EntityID, int EntityCap)
 {
@@ -182,9 +183,11 @@ For(int i; i<HAZMAX;i++)
     }
 */
 }
-
+#endregion
 //#endregion
 
+//#region -=- MasterScrub -=-
+#region -=- MasterScrub -=-
 Script "MasterScrub" (int ScrubRange)
 {
 	//Clears all entities indiscriminately, regardless of team affiliation
@@ -198,45 +201,13 @@ int j;
 int k;
 
 //Kill Hazards
-for(j=0; j < MaxTeams; j++)
-{
-    for(k=0; k < MaxPlayers; k++)
-    {
-        For(i=0; i<HAZMAX;i++)
-        {
-            CheckTID = HAZTID+(j*10000)+(k*1000)+i;
-            if(IsTIDUsed(CheckTID) && xyzDistance(0,CheckTID) <= ScrubRange){SetActorState(CheckTID,"Purge");}           
-        }
-        i = 0;
-    }
-    k = 0;
-}
+Kill_Hazards(MaxTeams,MaxPlayers,ScrubRange);
 
 //Kill Entity
-for( k=0; k < MaxPlayers; k++)
-{
-	For( i=0; i<99;i++)
-	{
-		CheckTID = EntityTID+(k*100)+i;
-		if(IsTIDUsed(CheckTID) && xyzDistance(0,CheckTID) <= ScrubRange){Thing_Remove(CheckTID);}           
-	}
-	i = 0;
-}
+Kill_Entity(MaxPlayers,ScrubRange);
 
 //Kill Multi Entity
-for( k=0; k < MaxPlayers; k++)
-{
-	For( i=0; i<99;i++)
-	{
-		For( j=0; j<9;j++)
-		{
-		CheckTID = M_ENTITYTID+(k*1000)+(i*100)+j;
-		if(IsTIDUsed(CheckTID) && xyzDistance(0,CheckTID) <= ScrubRange){Thing_Remove(CheckTID);}  
-		}
-		j = 0;         
-	}
-	i = 0;
-}
+Kill_M_Entity(MaxPlayers,ScrubRange);
 
 //Kill Barrier
 for( k=0; k < MaxPlayers; k++)
@@ -254,6 +225,83 @@ for( k=0; k < MaxPlayers; k++)
 
 }
 
+//#region -=- Kill_Hazards function -=-
+#region -=- Kill_Hazards function -=-
+Function void Kill_Hazards(int MaxTeams, int MaxPlayers, int ScrubRange)
+{
+	int CheckTID;
+	int i;
+	int j;
+	int k;
+	
+	for(j=0; j < MaxTeams; j++)
+	{
+		for(k=0; k < MaxPlayers; k++)
+		{
+			For(i=0; i<HAZMAX;i++)
+			{
+				CheckTID = HAZTID+(j*10000)+(k*1000)+i;
+				if(IsTIDUsed(CheckTID) && xyzDistance(0,CheckTID) <= ScrubRange){SetActorState(CheckTID,"Purge");}           
+			}
+			i = 0;
+		}
+		k = 0;
+	}
+}
+#endregion
+//#endregion
+
+//#region -=- Kill_Entity function -=-
+#region -=- Kill_Entity function -=-
+Function void Kill_Entity(int MaxPlayers, int ScrubRange)
+{
+	int CheckTID;
+	int i;
+	int j;
+	int k;
+
+	for( k=0; k < MaxPlayers; k++)
+	{
+		For( i=0; i<ENTITY_CAP;i++)
+		{
+			CheckTID = EntityTID+(k*100)+i;
+			if(IsTIDUsed(CheckTID) && xyzDistance(0,CheckTID) <= ScrubRange){Thing_Remove(CheckTID);}           
+		}
+		i = 0;
+	}
+}
+#endregion
+//#endregion
+
+//#region -=- Kill_M_Entity function -=-
+#region -=- Kill_M_Entity function -=-
+Function void Kill_M_Entity(int MaxPlayers, int ScrubRange)
+{
+	int CheckTID;
+	int i;
+	int j;
+	int k;
+
+	for( k=0; k < MaxPlayers; k++)
+	{
+		For( i=0; i<M_ENTITY_CAP;i++)
+		{
+			For( j=0; j<9;j++)
+			{
+			CheckTID = M_ENTITYTID+(k*1000)+(i*100)+j;
+			if(IsTIDUsed(CheckTID) && xyzDistance(0,CheckTID) <= ScrubRange){Thing_Remove(CheckTID);}  
+			}
+			j = 0;         
+		}
+		i = 0;
+	}
+}
+#endregion
+//#endregion
+
+
+#endregion
+//#endregion
 
 //#region -=- Radius Give -=-
 #region -=- Radius Give -=-
@@ -1130,6 +1178,25 @@ while (true) {
 //#region -=- Miscellany -=-
 #region -=- Miscellany -=-
 
+Script "GrabMoveCount" (int WepID)
+{
+// grabs generic count inventories for Various moves
+int FiringPlayer;
+str CountActor = StrParam(s:weapons_ammo[WepID][2],s:"Count");
+int Output;
+
+if(ActivatorTID() <= 999)
+	{FiringPlayer= ACS_ExecuteWithResult(257, 0); }//Returns the target of the activator
+else if(ActivatorTID() >= EntityTID && ActivatorTID() <= (EntityTID+6499))
+	{FiringPlayer= ACS_ExecuteWithResult(257, 0);} //Actor is a player spawed entity, Returns the target of the activator
+else{FiringPlayer=ActivatorTID();}
+
+if(FiringPlayer == 0){Output = CheckInventory(CountActor);}
+else {Output = CheckActorInventory(FiringPlayer,CountActor);}
+
+SetResultValue(Output);
+}
+
 Script "BeamHitCheck" (void)
 {
 	Int TracerTID = ACS_NamedExecuteWithResult("Tracer_GetTID",0);
@@ -1592,8 +1659,7 @@ script "pkmn_istargetclient" (void) CLIENTSIDE
 
 
 
-#endregion
-//#endregion
+
 
 Script "HasFlagBall" (void)
 {
@@ -1682,3 +1748,7 @@ script "PKMN_PushPull" (int maxforce, int maxRange, int noFalloff)
 	}
 	SetResultValue(userCount); // Returns amount of players caught in the pull
 }// End script 247
+
+
+#endregion
+//#endregion

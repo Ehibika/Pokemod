@@ -1,5 +1,7 @@
 
 #library "A_Targeter"
+#import "Dex_Moves.acs"
+#import "WepACS.acs"
 #include "zcommon.acs"
 #include "8bdmlib.acs"
 
@@ -22,7 +24,7 @@ int angleDistRegister; // replaced with User_angleDistRegister
 
 
 
-script "TracerTargeter" (int TargType, int TargRange) {
+script "TracerTargeter" (int TargType, int TargRange, int TargMove) {
 	int ownerNumber = PlayerNumber();
 	int team;
 	int x;
@@ -223,7 +225,8 @@ function void adjustActorInventory(int actor, str item, int quantity) {
 
 script 405 ENTER CLIENTSIDE {
 	int ownerNumber = PlayerNumber();
-	
+	int ThisWeapon;
+	int TheirWeapon;
 	if(ownerNumber==ConsolePlayerNumber()) {
 	
 		int xOffset = 10.0;
@@ -235,6 +238,7 @@ script 405 ENTER CLIENTSIDE {
 		while(GetActorProperty(0,APROP_HEALTH) > 0) {
 			t =  checkInventory("TargetingFlag"); //getuservariable(0,"User_STargTID")+1;
 			T_Range = checkInventory("TargetingRangeFlag"); //getuservariable(ownerNumber+1000,"User_STargRange");
+			ThisWeapon = WhichWeapon();
 			
 			if(t>0) {
 			if(checkinventory("TargHolder")) {
@@ -244,6 +248,16 @@ script 405 ENTER CLIENTSIDE {
 				{
 				HudMessageOnActorZPlusAllign(1000-1+t, PLAYER_CENTER, 103, 0, 0, 0, 0, T_Range, "JUSTB0", "Target", 0, CR_UNTRANSLATED);
 				}
+				/*
+			if(ThisWeapon == SKETCH)
+				{
+					TheirWeapon = ACS_NamedExecuteWithResult("TIDWeapon",1000-1+t);
+					//log(s:weapons_ammo[TheirWeapon][2]);
+					SetFont("CONFONT");
+					HudMessageOnActorZPlusAllign(1000-1+t, PLAYER_CENTER, 105, 0, 0, -40, -40, T_Range, -1, weapons_ammo[TheirWeapon][2], 0, CR_UNTRANSLATED);
+				}
+				*/
+				//
 			}
 			
 			//apparently these two for loops are done in a way that excludes the

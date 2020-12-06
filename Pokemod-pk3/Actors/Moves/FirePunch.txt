@@ -45,7 +45,7 @@ TNT1 A 0 A_FireCustomMissile("FirepunchMelee",-25,0,0,0,0,pitch)
 Goto Fire.After
 
 Fire.After:
-"####" B 1 A_GiveInventory("FullRecovery_B")
+"####" B 1 A_GiveInventory("HalfRecovery_B")
 "####" B 0 A_Jump(256,"Fire.End")
 Goto Fire.End
 }
@@ -151,7 +151,7 @@ stop
 
 actor FirepunchTrailFX : BasicClientside
 {
-scale 1.5
+scale 3.5
 Renderstyle Translucent
 alpha 1.0
 reactiontime 5

@@ -12,10 +12,10 @@ Player.SoundClass "Drowzee"
 player.startitem "PKMNStarterKit"
 
 //============|
-Player.StartItem "Base_HP", 60
-Player.StartItem "Base_PAttack", 48
+Player.StartItem "Base_HP", 70
+Player.StartItem "Base_PAttack", 55
 Player.StartItem "Base_PDefense", 45
-Player.StartItem "Base_SAttack", 43
+Player.StartItem "Base_SAttack", 55
 Player.StartItem "Base_SDefense", 90
 
 //============|

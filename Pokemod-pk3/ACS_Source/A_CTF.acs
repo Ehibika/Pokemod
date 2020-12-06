@@ -1,0 +1,58 @@
+#library "A_CTF"
+#import "DB_Data.acs"
+#import "DB_3PCam.acs"
+#include "zcommon.acs"
+#include "8bdmlib.acs"
+
+script "FlagCarryDisplay" (int type, int arg1, int arg2) EVENT CLIENTSIDE
+{
+if(type == GAMEEVENT_TOUCHES)
+    {
+        if(Playernumber() != ConsolePlayerNumber()){Terminate;}
+    Switch(arg1)
+        {
+            Case 0: GiveInventory("Give_BlueFlagWarper",1); Break;
+            Case 1: GiveInventory("Give_RedFlagWarper",1); Break;
+            Case 2: GiveInventory("Give_GreenFlagWarper",1); Break;
+            Case 3: GiveInventory("Give_YellowFlagWarper",1); Break;
+        }
+    }
+
+
+}
+
+Script "FlagWarper" (int Team) CLIENTSIDE
+{
+    int Player = ACS_NamedExecuteWithResult("core_gettarget",0);
+    int selfNumber = ConsolePlayerNumber();
+    str FlagName = GetTeamProperty(Team,TPROP_TeamItem);
+    int AlphaTimer;
+    int ZoomMode;
+	int ZoomKey;
+	// Loop if shield is active
+	while(GetActorProperty(Player, APROP_HEALTH)>0
+	&& CheckActorInventory(Player, FlagName) > 0 
+	){
+        ZoomKey = PressingButton2(GetPlayerInput(selfNumber, INPUT_BUTTONS),BT_ZOOM);
+		if(GetUserCVar(selfNumber,"Sv_ZoomToggle")) {ZoomMode = GetUserCVar(selfNumber,"ZoomToggle");}
+		else{ZoomMode = ZoomKey;}
+        if(CheckCamAlphaSet(0)
+        && GetActorproperty(0,APROP_ALPHA) != GetCamPlayerAlphaSetting(selfNumber,ZoomMode))
+        {
+            AlphaTimer--;
+            if(AlphaTimer<1)
+            {
+            SetActorProperty(0,Aprop_renderstyle,STYLE_Translucent);
+            SetActorProperty(0,APROP_ALPHA,GetCamPlayerAlphaSetting(selfNumber,ZoomMode));
+            AlphaTimer = 5;
+            }
+
+        }
+		Delay(1);
+	}
+	
+    // Remove
+    SetActorState(0,"Death");
+    Delay(17);
+	Thing_Remove(0);
+}

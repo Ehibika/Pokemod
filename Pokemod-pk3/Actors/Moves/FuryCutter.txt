@@ -1,0 +1,315 @@
+
+actor FuryCutterMove : WepMasterBase
+{
+Tag "FuryCutter"
+obituary "$OB_FURYCUTTER"
+Weapon.AmmoUse 1
+Weapon.AmmoGive 35
+weapon.ammotype "FuryCutterPP"
+scale 2.0
+Inventory.Pickupmessage "$PU_MEGABUSTER"
+States
+{
+Spawn:
+WEAP X 1
+stop
+
+Fire:
+"####" BBB 1 A_Jumpif(CallACS("CheckWeaponFire",RC_B)==1,"Fire.Begin")
+"####" B 0 A_Jump(256,"NoAmmo")
+Goto NoAmmo
+
+Fire.Begin:
+"####" B 0
+"####" A 0 ACS_NamedExecuteAlways("TakePP",0,Move_FuryCutter,1)
+"####" B 0 A_Jump(256,"Fire.Claw")
+Goto Fire.Claw
+
+Fire.Claw:
+TNT1 A 0 A_PlaySoundEx("weapon/SlashClaw","Weapon")
+TNT1 A 0 A_GiveInventory("FurySwipeShooter")
+"####" B 0 A_Jump(256,"Fire.After")
+Goto Fire.After
+
+Fire.After:
+"####" B 1 A_GiveInventory("HalfRecovery_B")
+"####" B 0 A_Jump(256,"Fire.End")
+Goto Fire.End
+}
+}
+
+actor FuryCutterMove1 : FuryCutterMove {Weapon.SlotNumber 1}
+actor FuryCutterMove2 : FuryCutterMove {Weapon.SlotNumber 2}
+actor FuryCutterMove3 : FuryCutterMove {Weapon.SlotNumber 3}
+actor FuryCutterMove4 : FuryCutterMove {Weapon.SlotNumber 4}
+
+actor FuryCutterMove5 : FuryCutterMove 
+{
+Weapon.SlotNumber 5
+States
+{
+
+Fire.End:
+TNT1 A 0
+TNT1 A 0 A_TakeInventory("FuryCutterMove5",9)
+TNT1 A 0 A_Jump(256,"Ready")
+Goto Ready
+}
+}
+
+//[+]========================================================================[+]
+//-----------------------------|Ammo & Inventory|------------------------------
+//[+]========================================================================[+]
+actor FuryCutterPP : Ammo {inventory.amount 1 inventory.Maxamount 35}
+
+
+actor FuryCombo_1 : Powerup {inventory.amount 1 Powerup.Duration 35}
+actor FuryCombo_2 : Powerup {inventory.amount 1 Powerup.Duration 35}
+
+actor FuryComboer : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+
+TNT1 A 0 A_Jumpifinventory("FuryCombo_1",1,"Pickup2")
+TNT1 A 0 A_GiveInventory("FuryCombo_1",1)
+stop
+
+Pickup2:
+TNT1 A 0 A_GiveInventory("FuryCombo_1",1)
+TNT1 A 0 A_GiveInventory("FuryCombo_2",1)
+stop
+Nope:
+TNT1 A 0
+stop
+}
+}
+
+actor FuryComboClear : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_TakeInventory("FuryCombo_1",99)
+TNT1 A 0 A_TakeInventory("FuryCombo_2",99)
+stop
+}
+}
+
+actor FurySwipeShooter : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 B 0 A_CheckFloor("Grounded")
+Fury1:
+TNT1 A 0 A_Jumpifinventory("FuryCombo_1",1,"Fury2")
+TNT1 A 0 A_FireCustomMissile("FuryCutterMelee_1",0,0,0,0)
+stop
+Fury2:
+TNT1 A 0 A_Jumpifinventory("FuryCombo_2",1,"Fury3")
+TNT1 A 0 A_FireCustomMissile("FuryCutterMelee_2",0,0,0,0)
+stop
+Fury3:
+TNT1 A 0 A_FireCustomMissile("FuryCutterMelee_3",0,0,0,0)
+stop
+
+Grounded:
+"####" B 0 A_Jumpif(Pitch < 55,"Fury1")
+Grounded1:
+TNT1 A 0 A_Jumpifinventory("FuryCombo_1",1,"Grounded2")
+TNT1 A 0 A_FireCustomMissile("FuryCutterMelee_1",0,0,0,0,0,Pitch)
+stop
+Grounded2:
+TNT1 A 0 A_Jumpifinventory("FuryCombo_2",1,"Grounded3")
+TNT1 A 0 A_FireCustomMissile("FuryCutterMelee_2",0,0,0,0,0,Pitch)
+stop
+Grounded3:
+TNT1 A 0 A_FireCustomMissile("FuryCutterMelee_3",0,0,0,0,0,Pitch)
+stop
+Nope:
+TNT1 A 0
+stop
+}
+}
+//[+]========================================================================[+]
+//--------------------------------|Projectiles |--------------------------------
+//[+]========================================================================[+]
+
+actor FuryCutterMelee : BasicMeleeAttack
+{
+DamageType "FuryCutter"
+Obituary "$OB_FURYCUTTER"
+scale 2.0
+Speed 48
+Damage(MBP_FuryCutter)
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+TBLA GGGG 1 A_SpawnItemEx("FuryCutterTrail",-48,0,0,momx,momy,momz,0,9)
+TNT1 A 0 A_GiveToTarget("FuryComboClear")
+stop
+
+Crash:
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+TNT1 A 0 A_GiveToTarget("FuryComboer")
+TNT1 A 1 A_SpawnItemEx("FuryCutterImpactFX_2",0,0,0,0,0,0,0,1)
+stop
+
+Death:
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+TNT1 A 0 A_GiveToTarget("FuryComboClear")
+TNT1 A 1 A_SpawnItemEx("FuryCutterImpactFX_1",0,0,0,0,0,0,0,1)
+stop
+}
+}
+
+actor FuryCutterMelee_1 : FuryCutterMelee
+{
+Scale 2.0
+Damage(MBP_FuryCutter)
+}
+
+actor FuryCutterMelee_2 : FuryCutterMelee
+{
+Scale 2.5
+Damage(MBP_FuryCutter*1.5)
+}
+
+actor FuryCutterMelee_3 : FuryCutterMelee
+{
+Scale 3.0
+Damage(MBP_FuryCutter*2.0)
+}
+
+//[+]========================================================================[+]
+//--------------------------------|Special Actors|------------------------------
+//[+]========================================================================[+]
+
+actor FuryCutterTrail : BasicExplosion
+{
+Obituary "$OB_FURYCUTTER"
+damagetype "FuryCutter"
+Args 10
+States
+{
+Spawn:
+TNT1 A 0
+AQBA L 0 A_GiveInventory("ProjectileCode",1)
+TNT1 A 0 A_SpawnItemEx("FuryCutterParticleFX",45+Args[0],random(-32,32),random(-32,32),0,0,0,0,1)
+TNT1 A 0 A_SpawnItemEx("FuryCutterTrailFX1",0,0,0,-momx*0.3,-momy*0.2,-momz*0.2,0,9)
+TNT1 A 0 A_SpawnItemEx("FuryCutterTrailFX2",0,0,0,-momx*0.6,-momy*0.4,-momz*0.4,0,9)
+TNT1 A 0 A_SpawnItemEx("FuryCutterTrailFX3",0,0,0,-momx*0.9,-momy*0.6,-momz*0.6,0,9)
+stop
+}
+}
+
+actor FuryCutterTrailFX1 : BasicClientside
+{
+scale 2.0
+alpha 0.8
+renderstyle "Translucent"
+speed 7
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+TBLA G 1 
+stop
+}
+}
+
+actor FuryCutterTrailFX2 : FuryCutterTrailFX1
+{
+alpha 0.6
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+TBLA F 1 
+stop
+}
+}
+
+actor FuryCutterTrailFX3 : FuryCutterTrailFX1
+{
+alpha 0.4
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+TBLA E 1 
+stop
+}
+}
+
+
+actor FuryCutterParticleFX : BasicClientside
+{
+scale 1.5
+ReactionTime 2
+Renderstyle "Translucent"
+Alpha 0.9
+States
+{
+Spawn:
+TNT1 A 0
+TMPK CBA 2 
+TNT1 A 5
+stop
+}
+}
+
+
+actor FuryCutterImpactFX_1 : BasicClientside
+{
+scale 2.0
+States
+{
+Spawn:
+TNT1 A 0
+//MCLA ABCDE 1 
+MCLA E 5
+MCLA EZEZEZ 2
+stop
+}
+}
+
+actor FuryCutterImpactFX_2 : BasicClientside
+{
+scale 3.5
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 AAAAA 0 A_SpawnItemEx("HoneClawsParticle",0,0,0,random(-7,7),random(-7,7),random(-7,7),0,1)
+NDFX A 1
+NDFX AAAA 1 A_SetScale(ScaleX-0.5)
+stop
+}
+}
+    

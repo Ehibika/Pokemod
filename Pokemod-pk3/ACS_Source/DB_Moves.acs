@@ -1,0 +1,22 @@
+/* -=- Moves script Database -=-
+ * Variables and functions for A_Stats
+ *
+ * 
+
+*/
+
+#library "DB_Moves"
+#include "zcommon.acs"
+
+#LIBDEFINE SUBTID 380000 // 37| Owner TID
+
+#LIBDEFINE STATUS_MINOR  1
+#LIBDEFINE STATUS_MAJOR  2
+#LIBDEFINE STATUS_SPECIALTY  4
+#LIBDEFINE STATUS_STATS  8
+#LIBDEFINE STATUS_TAUNT  16
+//#LIBDEFINE STATUS_  16
+
+#LIBDEFINE SOMARIATID 320000 // 32| Owner TID
+
+#LIBDEFINE BARRIERTID 390000 // 37| Owner TID

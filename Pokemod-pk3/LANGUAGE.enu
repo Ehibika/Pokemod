@@ -575,6 +575,9 @@ OB_WINGATTACK = "%k Defeated %o using WINGATTACK!";
 OB_TAKEDOWN = "%k Defeated %o using TAKEDOWN!";
 OB_GLARE = "%k Defeated %o using GLARE!";
 OB_WILDCHARGE = "%k Defeated %o using WILDCHARGE!";
+OB_SOFTBOILED = "%k Defeated %o using SOFTBOILED!";
+OB_FURYCUTTER = "%k Defeated %o using FURYCUTTER!";
+OB_DARKPULSE = "%k Defeated %o using DARKPULSE!";
 //--[NewMove]--
 
 //#endregion
@@ -2054,7 +2057,7 @@ M044_NAME = "\cj Life Dew";
 M044_TYPE = "\cj Normal";
 M044_CATEGORY = "\cf Status";
 M044_POWER = "\cfPower:\cj --";
-M044_DESC = "\cjSprinkle healing water on the \cfGround \n\cjyou target, healing is based on SP.ATK";
+M044_DESC = "\cjSprinkle healing water on the \cfGround \n\cjyou target, heals for 25% of the user's health";
 //#endregion
 
 //#region -=- 045: Hydro Pump -=-
@@ -2902,7 +2905,9 @@ M144_NAME = "\cj FlameCharge";
 M144_TYPE = "\cj Fire";
 M144_CATEGORY = "\cf Physical";
 M144_POWER = "\cfPower:\cj --";
-M144_DESC = "\cf<Desc>";
+M144_DESC = "\cjDon a fiery aura that boosts speed and\n"
+"deals constant proximity damage while\n"
+"active.";
 //#endregion
 
 //#region -=- 145: Overheat -=-
@@ -3531,7 +3536,8 @@ M216_NAME = "\cj FocusBlast";
 M216_TYPE = "\cj Fighting";
 M216_CATEGORY = "\cf Special";
 M216_POWER = "\cfPower:\cj --";
-M216_DESC = "\cf<Desc>";
+M216_DESC = "\cjCharge up to unleash a powerful energy\n"
+"blast!";
 //#endregion
 
 //#region -=- 217: PsychoCut -=-
@@ -3716,7 +3722,7 @@ M238_NAME = "\cj EggBomb";
 M238_TYPE = "\cj Normal";
 M238_CATEGORY = "\cf Physical";
 M238_POWER = "\cfPower:\cj --";
-M238_DESC = "\cf<Desc>";
+M238_DESC = "\cjToss a volatile egg grenade.\n"
 //#endregion
 
 //#region -=- 239: Moonlight -=-
@@ -4020,6 +4026,37 @@ M269_POWER = "\cfPower:\cj --";
 M269_DESC = "\cja dangerous and reckless electrical\n"
 "ramming attack that defys gravity, has\n"
 "severe recoil damage.";
+//#endregion
+
+
+//#region -=- 270: SoftBoiled -=-
+M270_NAME = "\cj SoftBoiled";
+M270_TYPE = "\cj Normal";
+M270_CATEGORY = "\cf Status";
+M270_POWER = "\cfPower:\cj --";
+M270_DESC = "\cjLob an egg that heals for up to half of\n"
+"the caster's Health.";
+//#endregion
+
+
+//#region -=- 271: FuryCutter -=-
+M271_NAME = "\cj FuryCutter";
+M271_TYPE = "\cj Bug";
+M271_CATEGORY = "\cf Physical";
+M271_POWER = "\cfPower:\cj --";
+M271_DESC = "\cjmelee strike that increases in power on\n"
+"consecutive hits, power will reset if you\n"
+"miss.";
+//#endregion
+
+
+//#region -=- 272: DarkPulse -=-
+M272_NAME = "\cj DarkPulse";
+M272_TYPE = "\cj Dark";
+M272_CATEGORY = "\cf Special";
+M272_POWER = "\cfPower:\cj --";
+M272_DESC = "\cjunleash a wave of dark energy, can cause\n"
+"nearby opponents to cringe.";
 //#endregion
 
 

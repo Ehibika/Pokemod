@@ -53,11 +53,15 @@ Script "EscapeToSpawn" (void)
 
 
     int pln = playerNumber();
+    for(int I; I<GetCvar("MaxTeams"); I++)
+    {if(CheckInventory(GetTeamProperty(I,TPROP_TeamItem))){ACS_Execute(979,0); Terminate;}}
+
 
 
     if(GetCvar("lastmanstanding")==1||GetCvar("teamlms")==1)
     {
     if(GetGameModeState() == 2){GiveInventory("TLMSOrbEscape",1);}
+    ACS_Execute(979,0);
     Terminate;
     }
 

@@ -268,4 +268,7 @@ WingAttack
 TakeDown
 Glare
 WildCharge
+SoftBoiled
+FuryCutter
+DarkPulse
 //--[NewMove]--

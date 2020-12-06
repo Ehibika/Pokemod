@@ -6,6 +6,7 @@
 */
 
 #library "A_Leveling"
+#import "DB_Leveling.acs"
 #import "Dex_Pokemon.acs"
 #import "Dex_Evo.acs"
 #import "Dex_Types.acs"
@@ -18,14 +19,6 @@
 #import "A_Shop.acs"
 #import "WEPACS.acs"
 #include "zcommon.acs"
-
-//#region -=- General Variables -=-
-#region -=- General Variables -=-
-Int TeamEXPAward [4] = {};
-Int TeamBPAward [4] = {};
-
-#endregion
-//#endregion
 
 //#region -=- Experience And Levels -=-
 #region -=- Experience And Levels -=-
@@ -218,25 +211,6 @@ Until(LevelLoopDone)
 }
 
 
-Function void ReportNewMoves(int Dexnum, int Startlvl, int Endlvl)
-{
-int j;
-int k;
-int MoveListVal;
-
-For(j = Startlvl; j < Endlvl; j++) 
-{
-    For(k = 0; k < 4; k++)
-    {
-        MoveListVal = MoveDex2[Dexnum][j][k];
-        if (MoveListVal != -1) 
-            {Print(n:0,s:"\cf can now learn \cj",s:weapons_ammo[MoveListVal][2]);}
-        else{break;}
-    }
-}
-
-}
-
 
 Script "GummiEXP" (int EXPAward, Int TypeMatch)
 {
@@ -389,22 +363,6 @@ script "IncrementRoundLevel" (Void)
     SetCVar("PKMN_RoundLevel",GetCvar("PKMN_RoundLevel")+1);
 }
 
-
-Function Int EXPTime (void)
-{
-//Returns when you are allowed to earn EXP
-int Output;
-
-if(GetCvar("lastmanstanding")==1||GetCvar("teamlms")==1)
-    {
-    if(GetGameModeState() == 2 ||GetGameModeState() == 3){output = 1;}
-    }
-else if (GetCvar("Game_Arena")==1){if(GetCvar("Game_GameState")==1||GetCvar("Game_GameState")==2||GetCvar("Game_GameState")==3){output = 1;}}
-else{output = 1;}
-
-return Output;
-}
-
 #endregion -=-=-=-=-=-=-=-
 //#endregion -=-=-=-=-=-=-=-
 
@@ -466,29 +424,6 @@ Script "PlayerFormChange" (Int NextForm)
 ACS_NamedExecuteAlways("ChangeBaseStat",0,NextForm);
 ACS_NamedExecuteAlways("SetDexNumber",0,NextForm);
 ACS_NamedExecuteAlways("SetPlayerType",0);
-}
-
-Function Int StatusTime (Void)
-{
-//Returns when you are allowed to perform status functions like
-//Evolutions or learning new moves
-int Output;
-if(CheckInventory("PKMN_AllowFreeSetup")){output = 1;}
-if(CheckInventory("InSafeZone")){output = 1;}
-if(CheckInventory("CabinetCoolDown")){output = 1;} //For Jax's 1 flag koth
-if(InWarmup){output = 1;}
-if(PlayerIsSpectator(PlayerNumber()) == 2){output = 1;}
-if(GetCvar("lastmanstanding")==1||GetCvar("teamlms")==1)
-    {
-    if(GetGameModeState() != 2){output = 1;}
-	}
-if (GetCvar("Game_Arena")==1){if(GetCvar("Game_GameState")==0){output = 1;}}
-	return Output;
-}
-
-Script "CheckStatusTime" (void)
-{
-setResultValue(StatusTime());
 }
 
 #endregion

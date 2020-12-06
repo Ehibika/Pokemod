@@ -1,0 +1,91 @@
+/* -=- TM Scripts -=-
+ * Scripts that handle TM related functions
+ * 
+
+*/
+
+#library "A_TM"
+#import "Dex_Pokemon.acs"
+#import "Dex_moves.acs"
+#import "Dex_movesets.acs"
+#import "Dex_Types.acs"
+#import "Dex_Leveling.acs"
+#import "Dex_BaseStats.acs"
+#import "Dex_TM.acs"
+#import "WepACS.acs"
+#import "DB_3PCam.acs"
+#include "zcommon.acs"
+
+int RandTMCache[64][MAXTMLIST] = {};
+Script "UnlockRandomTM" (int TMIndex, int Mode)
+{
+
+    /*
+    used by the TM item pickup, it checks for any TM's that you personally haven't unlocked, and will randomly unlock one of them
+    for you and the team.
+    */
+int pn = Playernumber();
+int team = PlayerTeam();
+int j;
+
+for(int i;i<MAXTMLIST;i++)
+    {
+        if(TMMem_Team[team][i] == ON
+        ||TMMem_Player[pn][i] == ON) continue;
+        else{RandTMCache[pn][j] = i; j++; log(s:"got TM",i:i);}
+    }
+
+    if(j<1) {ACS_NamedExecuteAlways("TMFailure",0); terminate;}
+    
+    int RandomRoll = Random(0,j-1);
+    int choiceTM = RandTMCache[pn][RandomRoll];
+
+    if(GetCvar("PKMN_TeamTMPickup")){UnlockTeamTM(choiceTM,team); ACS_NamedExecuteAlways("TeamTMAnnounce",0,playerTeam(),choiceTM);}
+    else{UnlockTM(choiceTM); ACS_NamedExecuteAlways("SelfTMAnnounce",0,choiceTM);}
+}
+
+
+Script "TeamTMAnnounce" (int Team, int TMNum) CLIENTSIDE
+{
+    int MoveID = TMList[TMNum][0];
+    str TMName = weapons_ammo[MoveID][2];
+if(GetPlayerInfo(ConsolePlayerNumber(), PLAYERINFO_TEAM) == Team) {Print(s:"TM",i:TMNum+1,s:": ",s:TMName,s:" has been found!");}
+}
+
+Script "SelfTMAnnounce" (int TMNum) CLIENTSIDE
+{
+    int MoveID = TMList[TMNum][0];
+    str TMName = weapons_ammo[MoveID][2];
+    if(ActivatorTID()==CheckPlayerCamera(ConsolePlayerNumber())
+    || (ActivatorTID()-1000+C_TID)==CheckPlayerCamera(ConsolePlayerNumber()) ) {Print(s:"TM",i:TMNum+1,s:": ",s:TMName,s:" has been found!");}
+}
+
+Script "TMFailure" (int TMNum) CLIENTSIDE
+{
+    if(ActivatorTID()==CheckPlayerCamera(ConsolePlayerNumber())
+    || (ActivatorTID()-1000+C_TID)==CheckPlayerCamera(ConsolePlayerNumber()) ) {Print(s:"Cannot learn any more TM moves");}
+}
+
+Script "UnlockTM" (int TMIndex, int Mode)
+{
+int pn = Playernumber();
+int team = PlayerTeam();
+
+Switch(mode)
+    {
+        Case 0: UnlockTM(TMIndex); break;
+        Case 1: UnlockTeamTM(TMIndex,team); break;
+    }
+
+}
+
+Script "UnlockAllTM" (void)
+{
+
+    for(int i;i<MAXTMLIST;i++)
+    {
+        UnlockTM(i);
+        UnlockTeamTM(i,PlayerTeam());
+    }
+
+}

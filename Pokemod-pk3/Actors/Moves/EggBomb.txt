@@ -1,0 +1,190 @@
+Const int EGGBOMB_AREA1 = 128;
+Const int EGGBOMB_AREA2 = 64;
+
+actor EggBombMove : WepMasterBase
+{
+Tag "EggBomb"
+obituary "$OB_EGGBOMB"
+Weapon.AmmoUse 1
+Weapon.AmmoGive 20
+weapon.ammotype "EggBombPP"
+scale 2.0
+Inventory.Pickupmessage "$PU_MEGABUSTER"
+States
+{
+Spawn:
+WEAP X 1
+stop
+
+
+Fire:
+"####" BBB 1 A_Jumpif(CallACS("CheckWeaponFire",RC_A)==1,"Fire.Begin")
+"####" B 0 A_Jump(256,"NoAmmo")
+Goto NoAmmo
+
+Fire.Begin:
+"####" B 0
+"####" B 0 A_Jump(256,"Fire.Bullet")
+Goto Fire.Bullet
+
+Fire.Bullet:
+"####" B 0 A_PlaySoundEx("weapon/CrackerThrow","Weapon")
+"####" B 0 A_FireCustomMissile("EggBombGrenade",0,1,0,0)
+"####" B 0 A_Jump(256,"Fire.After")
+Goto Fire.After
+
+Fire.After:
+"####" B 1 A_GiveInventory("SemiRecovery_A")
+"####" B 0 A_Jump(256,"Fire.End")
+Goto Fire.End
+
+
+
+
+
+}
+}
+
+actor EggBombMove1 : EggBombMove {Weapon.SlotNumber 1}
+actor EggBombMove2 : EggBombMove {Weapon.SlotNumber 2}
+actor EggBombMove3 : EggBombMove {Weapon.SlotNumber 3}
+actor EggBombMove4 : EggBombMove {Weapon.SlotNumber 4}
+
+actor EggBombMove5 : EggBombMove 
+{
+Weapon.SlotNumber 5
+States
+{
+Fire.End:
+TNT1 A 0
+TNT1 A 0 A_TakeInventory("EggBombMove5",9)
+TNT1 A 0 A_Jump(256,"Ready")
+Goto Ready
+}
+}
+
+//[+]========================================================================[+]
+//-----------------------------|Ammo & Inventory|------------------------------
+//[+]========================================================================[+]
+actor EggBombPP : Ammo {inventory.amount 1 inventory.Maxamount 40}
+
+//[+]========================================================================[+]
+//--------------------------------|Projectiles |--------------------------------
+//[+]========================================================================[+]
+
+
+actor EggBombGrenade : BasicProjectile
+{
+PROJECTILE
++BOUNCEONWALLS
++BOUNCEONCEILINGS
++BOUNCEONFLOORS
++CANBOUNCEWATER
++MBFBOUNCER
+-NOGRAVITY
+Damage (0)
+height 18
+radius 18
+reactiontime 50
+speed 40
+translation "4:4=248:248", "210:210=230:230"
+damagetype "EggBomb"
+Obituary "$OB_EGGBOMB"
+bouncefactor 0.3
+wallbouncefactor 0.9
+Gravity 1.55
+scale 2.5
+Args 25
+States
+{
+Spawn:
+TNT1 A 0 
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+TNT1 A 0 ThrustThingZ(0,35,0,1)
+Spawn2:
+TNT1 A 0
+EGGB A 1 A_Countdown
+EGGB "#" 0 A_CheckFloor("Grounded")
+EGGB B 1 A_Countdown
+EGGB "#" 0 A_CheckFloor("Grounded")
+EGGB C 1 A_Countdown
+EGGB "#" 0 A_CheckFloor("Grounded")
+EGGB D 1 A_Countdown
+EGGB "#" 0 A_CheckFloor("Grounded")
+EGGB E 1 A_Countdown
+EGGB "#" 0 A_CheckFloor("Grounded")
+EGGB F 1 A_Countdown
+EGGB "#" 0 A_CheckFloor("Grounded")
+EGGB G 1 A_Countdown
+EGGB "#" 0 A_CheckFloor("Grounded")
+EGGB H 1 A_Countdown
+EGGB "#" 0 A_CheckFloor("Grounded")
+loop
+
+Grounded:
+EGGB G 0 A_ScaleVelocity(0.6)
+EGGB G 1 A_Countdown
+EGGB "#" 0 A_CheckFloor("Grounded")
+Goto Spawn2
+
+Death:
+NAPA A 0 A_Stop
+TNT1 A 0 A_Spawnitemex("EggBombPuff",0,0,0,0,0,0,0,SXF_TRANSFERTRANSLATION)
+NAPA A 0
+stop
+}
+}
+
+actor EggBombPuff : BasicExplosion
+{
+scale 4.5
+DamageType "EggBomb"
+obituary "$OB_EggBomb"
+States
+{
+Spawn:
+TNT1 A 0
+FWVE W 0 A_SpawnItemEx("OilPitIgnite",0,0,8)
+NAPA D 0 A_Explode(MBP_EggBomb1, EGGBOMB_AREA1, 0,0, EGGBOMB_AREA2)
+NAPA D 0 A_Explode(MBP_EggBomb2, EGGBOMB_AREA1, 0,0, EGGBOMB_AREA1)
+NAPC A 0 A_PlaySoundEx("weapon/napalm", "Weapon")
+TNT1 A 0 A_SpawnItemEx("EggBombExplosionFX",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION)
+TNT1 AAAAAA 2 A_SpawnItemEx("EggBombExplosionFX",random2(MBP_EggBomb2),random2(MBP_EggBomb2),random(0,MBP_EggBomb2),0,0,0,0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION)
+TNT1 A 2
+stop
+}
+}
+
+//[+]========================================================================[+]
+//--------------------------------|Special Actors|------------------------------
+//[+]========================================================================[+]
+
+
+actor EggBombImpactFX : BasicClientside
+{
+scale 3.0
+Alpha 1.0
+States
+{
+Spawn:
+AQBA A 0
+EGGB IJKL 2 
+stop
+}
+}
+
+
+actor EggBombExplosionFX
+{
+PROJECTILE
+Scale 2.5
++CLIENTSIDEONLY
++NOINTERACTION
+States
+{
+Spawn:
+TNT1 A 0
+EGGB IJKL 2 
+stop
+}
+}
