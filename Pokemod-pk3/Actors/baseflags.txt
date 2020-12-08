@@ -17,6 +17,7 @@ actor NetCheck_D : Powerup{powerup.duration 7}
 actor NetCheck_Freeze : Powerup{powerup.duration 7}
 actor NetCheck_DD : Powerup{powerup.duration 3}
 
+actor InMenu : Once{}
 
 //[+]========================================================================[+]
 //------------------------------|Player Resources|---------------------------

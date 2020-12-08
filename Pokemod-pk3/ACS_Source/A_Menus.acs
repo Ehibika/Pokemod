@@ -38,6 +38,7 @@ ACS_NamedExecuteAlways("Menu_ItemShop",0);
 
 Script "Menu_ItemShop" (void) CLIENTSIDE
 {
+	if(Playernumber() != ConsolePlayerNumber()) {Terminate;}
 	while(!CheckInventory("NetCheck_Freeze")){NamedRequestScriptPuke("NET_FreezePlayer",1);Delay(1);}
 	//=======================[+]
 	// - Define Variables -
@@ -192,6 +193,7 @@ Script "Menu_ItemShop" (void) CLIENTSIDE
 
 Script "NET_ItemShop_Buy" (int ChoiceItemName, int ChoiceItemCost) NET
 {
+	if(!CheckInventory("InMenu")){Print(s:"Illegal netscript call!!");GiveInventory("NetCheck_A",1);Terminate;}
 	if(CheckInventory("NetCheck_A")) Terminate;
 
 	GiveInventory(ChoiceItemName,1);
@@ -207,6 +209,8 @@ GiveInventory("NetCheck_A",1);
 
 Script "NET_PromptMoveLearn" (int Moveid, int MoveCost) NET
 {
+	if(!CheckInventory("InMenu")){Print(s:"Illegal netscript call!!");GiveInventory("NetCheck_A",1);Terminate;}
+
 if(CheckInventory("NetCheck_A")) Terminate;
 ACS_NamedExecuteAlways("PromptMoveLearn",0,Moveid,MoveCost);
 GiveInventory("NetCheck_A",1);
@@ -401,6 +405,7 @@ while(!CheckInventory("NetCheck_Freeze")){NamedRequestScriptPuke("NET_FreezePlay
 
 Script "NET_MoveLearn_TakeMove" (int ChoiceWep, int ChoiceID) NET
 {
+	if(!CheckInventory("InMenu")){Print(s:"Illegal netscript call!!");GiveInventory("NetCheck_A",1);Terminate;}
 	if(CheckInventory("NetCheck_A")) Terminate;
 
 TakeInventory(StrParam(s:weapons_ammo[ChoiceWep][0],i:ChoiceID+1),99);
@@ -409,6 +414,7 @@ GiveInventory("NetCheck_A",1);
 
 Script "NET_MoveLearn_GiveMove" (int NewMove, int ChoiceID) NET
 {
+	if(!CheckInventory("InMenu")){Print(s:"Illegal netscript call!!");GiveInventory("NetCheck_B",1);Terminate;}
 	if(CheckInventory("NetCheck_B")) Terminate;
 
 GiveInventory(StrParam(s:weapons_ammo[NewMove][0],i:ChoiceID+1),1);
@@ -419,6 +425,7 @@ GiveInventory("NetCheck_B",1);
 
 Script "NET_MoveLearn_TakeBP" (int MoveCost) NET
 {
+	if(!CheckInventory("InMenu")){Print(s:"Illegal netscript call!!");GiveInventory("NetCheck_C",1);Terminate;}
 	if(CheckInventory("NetCheck_C")) Terminate;
 
 ACS_NamedExecuteAlways("BPPay",0,Movecost);
@@ -443,6 +450,7 @@ ACS_NamedExecuteAlways("Menu_MoveReposition",0);
 
 Script "Menu_MoveReposition" (Void) CLIENTSIDE
 {
+	if(Playernumber() != ConsolePlayerNumber()) {Terminate;}
 	while(!CheckInventory("NetCheck_Freeze")){NamedRequestScriptPuke("NET_FreezePlayer",1);Delay(1);}
 //=======================[+]
 // - Define Variables -
@@ -658,6 +666,7 @@ setplayerproperty(0,0,4);
 
 Script "NET_MoveRepo_TakeMoveA" (int MoveNum, int WepToMove) NET
 {
+	if(!CheckInventory("InMenu")){Print(s:"Illegal netscript call!!");GiveInventory("NetCheck_A",1);Terminate;}
 	if(CheckInventory("NetCheck_A")) Terminate;
 
 TakeInventory(StrParam(s:weapons_ammo[MoveNum][0],i:WepToMove+1),99);
@@ -666,6 +675,7 @@ GiveInventory("NetCheck_A",1);
 
 Script "NET_MoveRepo_TakeMoveB" (int MoveNum, int WepToMove) NET
 {
+	if(!CheckInventory("InMenu")){Print(s:"Illegal netscript call!!");GiveInventory("NetCheck_B",1);Terminate;}
 	if(CheckInventory("NetCheck_B")) Terminate;
 
 TakeInventory(StrParam(s:weapons_ammo[MoveNum][0],i:WepToMove+1),99);
@@ -674,6 +684,7 @@ GiveInventory("NetCheck_B",1);
 
 Script "NET_MoveRepo_GiveMoveA" (int MoveNum, int WepToMove) NET
 {
+	if(!CheckInventory("InMenu")){Print(s:"Illegal netscript call!!");GiveInventory("NetCheck_C",1);Terminate;}
 	if(CheckInventory("NetCheck_C")) Terminate;
 
 GiveInventory(StrParam(s:weapons_ammo[MoveNum][0],i:WepToMove+1),1);
@@ -684,6 +695,7 @@ GiveInventory("NetCheck_C",1);
 
 Script "NET_MoveRepo_GiveMoveB" (int MoveNum, int WepToMove) NET
 {
+	if(!CheckInventory("InMenu")){Print(s:"Illegal netscript call!!");GiveInventory("NetCheck_D",1);Terminate;}
 	if(CheckInventory("NetCheck_D")) Terminate;
 
 GiveInventory(StrParam(s:weapons_ammo[MoveNum][0],i:WepToMove+1),1);
@@ -712,6 +724,7 @@ ACS_NamedExecuteAlways("Menu_LevelUpMove",0);
 
 Script "Menu_LevelUpMove" (Void) CLIENTSIDE
 {
+if(Playernumber() != ConsolePlayerNumber()) {Terminate;}
 while(!CheckInventory("NetCheck_Freeze")){NamedRequestScriptPuke("NET_FreezePlayer",1);Delay(1);}
 
 //=======================[+]
@@ -904,6 +917,7 @@ ACS_NamedExecuteAlways("Menu_TMShop",0);
 
 Script "Menu_TMShop" (Void) CLIENTSIDE
 {
+	if(Playernumber() != ConsolePlayerNumber()) {Terminate;}
 	while(!CheckInventory("NetCheck_Freeze")){NamedRequestScriptPuke("NET_FreezePlayer",1);Delay(1);}
 //=======================[+]
 // - Define Variables -
@@ -1116,6 +1130,7 @@ if(LearnMove > -1)
 
 Script "NET_TMTeamPurchase" (int TMNum,int PlayerDEXNum,int PlayerLVL) NET
 {
+	if(!CheckInventory("InMenu")){Print(s:"Illegal netscript call!!");GiveInventory("NetCheck_A",1);Terminate;}
 	if(CheckInventory("NetCheck_A")) Terminate;
 
 	if(!CheckTMUnlock(TMNum,PlayerDEXNum,PlayerLVL))
@@ -1359,23 +1374,27 @@ setplayerproperty(0,0,4);
 script "NET_freezeplayer" (int toggle) NET
 {
 	if(toggle >= 1){
-		GiveInventory("PlayerPropertyFrozen", 1);
-		SetPlayerProperty(0, 1, PROP_TOTALLYFROZEN);
-
-		if(CheckInventory("PlayerPropertyFrozen")>0){GiveInventory("NetCheck_Freeze",1);}
+		if(!CheckInventory("InMenu")){ACS_NamedExecuteAlways("MenuFreeze",0);}
+		GiveInventory("NetCheck_Freeze",1);
 	}
 	if(toggle == 0){
-		if(CheckInventory("PlayerPropertyFrozen")>0){
-		TakeInventory("PlayerPropertyFrozen", 1);
-		
-			if(CheckInventory("PlayerPropertyFrozen")==0){
-			SetPlayerProperty(0, 0, PROP_TOTALLYFROZEN);
-
-			if(!CheckInventory("PlayerPropertyFrozen")>0){GiveInventory("NetCheck_Freeze",1);}
-			}
+		if(CheckInventory("InMenu")>0){
+		TakeInventory("InMenu", 99);
+		SetPlayerProperty(0, 0, PROP_TOTALLYFROZEN);
+		if(!CheckInventory("InMenu")){GiveInventory("NetCheck_Freeze",1);}
+			
 		}
 	}
 	
+}
+
+Script "MenuFreeze" (void)
+{
+	GiveInventory("InMenu", 1);
+	SetPlayerProperty(0, 1, PROP_TOTALLYFROZEN);
+
+	While(CheckInventory("InMenu")){Delay(1);}
+	SetPlayerProperty(0, 0, PROP_TOTALLYFROZEN);
 }
 
 //#region -=- Menu Backing

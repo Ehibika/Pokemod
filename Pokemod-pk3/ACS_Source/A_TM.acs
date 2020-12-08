@@ -32,7 +32,7 @@ for(int i;i<MAXTMLIST;i++)
     {
         if(TMMem_Team[team][i] == ON
         ||TMMem_Player[pn][i] == ON) continue;
-        else{RandTMCache[pn][j] = i; j++; log(s:"got TM",i:i);}
+        else{RandTMCache[pn][j] = i; j++; /*log(s:"got TM",i:i);*/}
     }
 
     if(j<1) {ACS_NamedExecuteAlways("TMFailure",0); terminate;}
