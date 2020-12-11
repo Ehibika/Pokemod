@@ -144,6 +144,7 @@ stop
 actor PoisonMark : PowerProtection
 {
 powerup.duration -10
+DamageFactor "PoisonGas", 0
 DamageFactor "PoisonPowder", 0
 DamageFactor "Venoshock", 2.0
 //Powerup.Color Green, 0.15

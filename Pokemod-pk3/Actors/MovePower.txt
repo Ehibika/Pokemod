@@ -62,6 +62,7 @@ const int MBP_IceFang = MBP_HighPower1;
 const int MBP_IceBeam = MBP_MidPower3;
 const int MBP_FrostBreath = MBP_MidPower1;
 const int MBP_Blizzard = MBP_HighPower1;
+const int MBP_PetalBlizzard = MBP_HighPower1;
 
 const int MBP_MagicalLeaf = MBP_MidPower1;
 const int MBP_BulletSeed = MBP_RapidLow;
@@ -205,7 +206,7 @@ const int MBP_PowerSwap = MBP_MidPower1;
 const int MBP_GuardSwap = MBP_MidPower1;
 const int MBP_PowerSplit = MBP_MidPower1;
 const int MBP_GuardSplit = MBP_MidPower1;
-const int MBP_FutureSight = MBP_MidPower1;
+const int MBP_FutureSight = MBP_HighPower1;
 const int MBP_CalmMind = MBP_MidPower1;
 const int MBP_Psyshock = MBP_Low3;
 const int MBP_Trick = MBP_MidPower1;
@@ -270,4 +271,5 @@ const int MBP_WildCharge = MBP_HighPower1;
 const int MBP_SoftBoiled = MBP_StandardPower;
 const int MBP_FuryCutter = MBP_StandardPower;
 const int MBP_DarkPulse = MBP_StandardPower;
+const int MBP_MorningSun = MBP_StandardPower;
 //--[NewMove]--

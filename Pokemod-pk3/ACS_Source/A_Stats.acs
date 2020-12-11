@@ -284,13 +284,13 @@ ranges of 80 and 1.
 
 ModStat = StatModifier(CheckInventory("Active_PDefense"),PDEF_ID);
 
-if(ModStat >= STATBASELINE)
+if(ModStat >= STATBASELINE2)
     {
-    StatValue = Noneg(ValueMap(ModStat,STATMAX,STATBASELINE,DEFVAL1,DEFVAL2));
+    StatValue = Noneg(ValueMap(ModStat,STATMAX,STATBASELINE2,DEFVAL1,DEFVAL2));
     }
 else
     {
-    StatValue = Noneg(ValueMap(ModStat,STATBASELINE,STATMIN,DEFVAL2,DEFVAL3));    
+    StatValue = Noneg(ValueMap(ModStat,STATBASELINE2,STATMIN,DEFVAL2,DEFVAL3));    
     }
 if(StatValue < 10){StatValue = 10;}
 if(StatValue>1000){StatValue=1000;}
@@ -298,13 +298,13 @@ GiveInventory(StrParam(s:"PDEF",i:StatValue),1);
 
 ModStat = StatModifier(CheckInventory("Active_SDefense"),SDEF_ID);
 
-if(ModStat >= STATBASELINE)
+if(ModStat >= STATBASELINE2)
     {
-    StatValue = Noneg(ValueMap(ModStat,STATMAX,STATBASELINE,DEFVAL1,DEFVAL2));
+    StatValue = Noneg(ValueMap(ModStat,STATMAX,STATBASELINE2,DEFVAL1,DEFVAL2));
     }
     else
     {
-    StatValue = Noneg(ValueMap(ModStat,STATBASELINE,STATMIN,DEFVAL2,DEFVAL3));    
+    StatValue = Noneg(ValueMap(ModStat,STATBASELINE2,STATMIN,DEFVAL2,DEFVAL3));    
     }
 if(StatValue < 10){StatValue = 10;}
 if(StatValue>1000){StatValue=1000;}
@@ -317,14 +317,16 @@ HP is also piecewise
 */
 If (Mode == 0)
     {
-    if(CheckInventory("Active_HP") >= STATBASELINE)
+    if(CheckInventory("Active_HP") >= STATBASELINE3)
         {
-        StatValue = ValueMap(CheckInventory("Active_HP"),STATMAX,STATBASELINE,HPVAL3,HPVAL2);
+        StatValue = ValueMap(CheckInventory("Active_HP"),STATMAX,STATBASELINE3,HPVAL3,HPVAL2);
         }
     else
         {
-        StatValue = ValueMap(CheckInventory("Active_HP"),STATBASELINE,STATMIN,HPVAL2,HPVAL1);
+        StatValue = ValueMap(CheckInventory("Active_HP"),STATBASELINE3,STATMIN,HPVAL2,HPVAL1);
         }
+    if(StatValue < 50){StatValue = 50;}
+    if(StatValue>999){StatValue=999;}
     SetActorPRoperty(0,APROP_SPAWNHEALTH,StatValue);
     //if(GetActorProperty(0,APROP_HEALTH) > GetActorProperty(0,APROP_SPAWNHEALTH)){SetActorPRoperty(0,APROP_HEALTH,StatValue);}
     if(HPHeal){SetActorPRoperty(0,APROP_HEALTH,StatValue);}

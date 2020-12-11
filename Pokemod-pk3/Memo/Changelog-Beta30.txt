@@ -1,0 +1,129 @@
+//#region -=-=- Beta 27 -=-=-
+/*
+ *
+ *
+ * ===|Gameplay Changes|===
+ * 
+ * 2x weakness damage multiplier has been reduced from 2.0 > 1.75
+ * Adjusted the scaling of all active stats for the purposes of creating a greater difference between low stats and high stats at
+ * higher levels
+ * 
+ * ===|Move Changes|===
+ * [NEW MOVES]
+ *  Block
+ *  MorningSun
+ * future sight
+ * petal blizzard
+ * PoisonGass
+ * 
+ * 
+ * [flame charge]
+ * fixed VFX issue
+ * 
+ * [SwordDance]
+ * PP increased from 10 > 25
+ * 
+ * [NastyPlot]
+ * pp increased from 10 > 25
+ * 
+ * [Rest]
+ * healing rate increased from 5% > 10%
+ * Rest duration reduced from 5 seconds to 2
+ * healing ticks reduced from 10 > 5 frames
+ * Self inflicted rest cannot be cured
+ * rest now leaves lingering status immunity
+ * 
+ * [Slack Off]
+ * Cast time increased to be the same as Synthesis
+ * no longer inflicts fatigue
+ * 
+ * 
+ * [icy wind]
+ * hitbox reduces so that it will consistently be blocked by block
+ * 
+ * [Heatwave]
+ * hitbox reduces so that it will consistently be blocked by block
+ * 
+ * [Dark Pulse]
+ * hitbox reduces so that it will consistently be blocked by block
+ * 
+ * [moonlight]
+ * pp increased from 5 > 10
+ * Healing is now 50% of the caster's Health
+ * 
+ * [grasswhistle]
+ * projectile speed increased from 32 > 96
+ * 
+ * [captivate]
+ * reworked back into being a projectile again
+ * 
+ * [curse]
+ * now implemented the ghost side of curse
+ * 
+ * [dreameater]
+ * PP increased from 5 > 20
+ * now inflicts cringe
+ * Range is made to match hypnosis
+ * 
+ * [sweetscent]
+ * range increased from 300 > 600
+ * 
+ * [Barrier]
+ * health is based on the caster's level instead
+ * Blocks naturally have 5 I frames to help defend against certain attacks
+ * 
+ * [surf]
+ * projectile recoded for clean up, and to ensure it can be reliably blocked by block.
+ * 
+ * [doubleEdge]
+ * reduced hitbox size
+ * 
+ * [takedown]
+ * reduced hitbox size
+ * 
+ * [Spark]
+ * Fixed hitbox issue
+ * 
+ * [wildCharge]
+ * reduced hitbox size
+ * 
+ * [FlareBlitz]
+ * reduced hitbox size
+ * 
+ * [quick attack]
+ * reduced hitbox size
+ * 
+ * [brave bird]
+ * reduced hitbox size
+ * 
+ * [HiJumpKick]
+ * reduced hitbox size
+ * now added a brief delay between the initial jump and the launch, this delay allows for free aim so that users can quickly flick their aim before
+ * launching.
+ * 
+ * [thunderwave]
+ * is now a targeted move rather than a projectile
+ * ===|TM Changes|===
+ * ===|Pokemon Changes|===
+ * 
+ * [leveling rate changes]
+ * Happiny family: Swift > Rapid
+ * Shelldar Family: Slow > Swift
+ * slowpoke Family: Normal > Swift
+ * Staryu Family: Slow > Trudging
+ * Vulpix Family : Normal > Swift
+ * A_Vulpix Family : Normal > Swift
+ * Drowzee Family: Normal > Swift
+ * Exeggcute Family: Normal > Slow
+ * Torkoal : Slow > Normal
+ * 
+ * [Pokemon with moveset changes]
+ * Chikorita family
+ * Cherubi family
+ * Squirtle Family
+ * Totodile Family
+ * Bulbasaur Family
+ * Turtwig Family
+ * Shelldar Family
+ * Dreepy Family
+ */

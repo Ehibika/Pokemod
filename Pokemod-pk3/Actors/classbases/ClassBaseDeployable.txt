@@ -29,6 +29,7 @@ Radius 16
 Height 56
 Painchance 256
 
+Damagefactor "PoisonGas", 0.0
 Damagefactor "PoisonPowder", 0.0
 Damagefactor "Toxic", 0.0
 Damagefactor "FalseSwipe", 0.0

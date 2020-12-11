@@ -114,15 +114,15 @@ Spawn:
 TNT1 A 0 
 TNT1 A 0 A_JumpIfInTargetInventory("DashBreaker",1,"Terminate")
 TNT1 A 1 
-TNT1 A 1 A_Explode(MBP_DoubleEdge,80,0,0,80)
+TNT1 A 1 A_Explode(MBP_DoubleEdge,RAMHITBOX,0,0,RAMHITBOX)
 stop
 Death:
-TNT1 A 0 A_Explode(MBP_DoubleEdge,80,0,0,80)
+TNT1 A 0 A_Explode(MBP_DoubleEdge,RAMHITBOX,0,0,RAMHITBOX)
 TNT1 A 1 A_GiveInventory("ProjectileDCode",1)
 TNT1 A 0 A_GiveToTarget("DoubleEdgeCollision2",1)
 TNT1 A 0 A_SpawnItemEx("BasicMeleeFX", 0, 0, 0, 0, 0, 0, 0,1)
 Crash:
-TNT1 A 0 A_Explode(MBP_DoubleEdge,80,0,0,80)
+TNT1 A 0 A_Explode(MBP_DoubleEdge,RAMHITBOX,0,0,RAMHITBOX)
 Terminate:
 TNT1 A 1
 stop

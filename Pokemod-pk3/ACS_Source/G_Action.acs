@@ -1406,6 +1406,7 @@ Int OutPut;
 script "PKMNACS_HitKnockback" (int force, int type, int disabled)
 {
 if(!(ClassifyActor(0) & ACTOR_PLAYER)){terminate;}
+if(CheckInventory("STF_Curse")){terminate;}
 if(disabled == 0){GiveInventory("TempPitProtection",1);}
 int pusher = ACS_NamedExecuteWithResult("core_gettarget");
 

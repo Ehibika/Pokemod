@@ -1,0 +1,367 @@
+actor PetalBlizzardMove : WepMasterBase
+{
+Tag "PetalBlizzard"
+obituary "$OB_PETALBLIZZARD"
+Weapon.AmmoUse 1
+Weapon.AmmoGive 20
+weapon.ammotype "PetalBlizzardPP"
+scale 2.0
+Inventory.Pickupmessage "$PU_MEGABUSTER"
+States
+{
+Spawn:
+WEAP X 1
+stop
+
+
+Fire:
+"####" BBB 1 A_Jumpif(CallACS("CheckWeaponFire",RC_C)==1,"Fire.Begin")
+"####" B 0 A_Jump(256,"NoAmmo")
+Goto NoAmmo
+
+Fire.Begin:
+"####" B 0
+"####" B 0 A_Jump(256,"Fire.GroundCheck")
+Goto Fire.Bullet
+
+Fire.GroundCheck:
+"####" B 0 A_CheckFloor("Fire.Quake")
+"####" B 0 A_Jump(256,"NoAmmo2")
+Goto NoAmmo2
+
+Fire.Quake:
+"####" A 0 A_GiveInventory("DashSet_B")
+"####" B 15 A_FireCustomMissile("PetalBlizzardExplosion",0,1,0,0)
+"####" B 0 A_Jump(256,"Fire.After")
+Goto Fire.After
+
+Fire.After:
+"####" B 1 A_GiveInventory("PetalBlizzard_Recovery_C")
+"####" A 0 A_GiveInventory("DashSetOff")
+"####" C 0 A_REfire("Fire")
+"####" B 0 A_Jump(256,"Fire.End")
+Goto Fire.End
+
+
+
+
+
+}
+}
+
+actor PetalBlizzardMove1 : PetalBlizzardMove {Weapon.SlotNumber 1}
+actor PetalBlizzardMove2 : PetalBlizzardMove {Weapon.SlotNumber 2}
+actor PetalBlizzardMove3 : PetalBlizzardMove {Weapon.SlotNumber 3}
+actor PetalBlizzardMove4 : PetalBlizzardMove {Weapon.SlotNumber 4}
+
+actor PetalBlizzardMove5 : PetalBlizzardMove 
+{
+Weapon.SlotNumber 5
+States
+{
+Fire.End:
+TNT1 A 0
+TNT1 A 0 A_TakeInventory("PetalBlizzardMove5",9)
+TNT1 A 0 A_Jump(256,"Ready")
+Goto Ready
+}
+}
+
+//[+]========================================================================[+]
+//-----------------------------|Ammo & Inventory|------------------------------
+//[+]========================================================================[+]
+actor PetalBlizzardPP : Ammo {inventory.amount 1 inventory.Maxamount 5}
+
+Actor PetalBlizzardProtect : powerprotection
+{
+Powerup.duration 7
+Damagefactor "PetalBlizzard", 0
+}
+
+Const int PETALBLIZZARD_RAD = 100;
+Const int PETALBLIZZARD_RAD2 = 32;
+
+actor PetalBlizzardFreezeRate : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_Jumpifinventory("FreezeMark",1,"FreezeUp")
+FreezeUp:
+TNT1 A 0 A_GiveInventory("FreezeValue",random(25,35))
+stop
+
+Nope:
+TNT1 A 0
+stop
+}
+}
+
+actor PetalBlizzard_Recovery_C : FullRecovery_C{Powerup.Duration -3} //87
+//[+]========================================================================[+]
+//--------------------------------|Projectiles |--------------------------------
+//[+]========================================================================[+]
+actor PetalBlizzardExplosion : BasicExplosion
+{
+translation "202:202=210:210"//90
+Damagetype "PetalBlizzard"
+Obituary "$OB_PETALBLIZZARD"
+scale 2.5
+Var int user_angle;
+speed 0
+Reactiontime 29
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+TNT1 A 1 A_Stop
+TNT1 A 0 A_PlaySoundEx("Move/PetalBlizzard","Weapon")
+Goto HitBox
+SpawnLoop:
+TNT1 AAA 0 A_SpawnItemEx("PetalBlizzard_Particle",-PETALBLIZZARD_RAD,random(-PETALBLIZZARD_RAD,PETALBLIZZARD_RAD),random(5,PETALBLIZZARD_RAD),random(32,36),0,0,0,1)
+TNT1 A 0 A_SpawnItemEx("PetalBlizzard_Particle2",-PETALBLIZZARD_RAD,random(-PETALBLIZZARD_RAD,PETALBLIZZARD_RAD),random(5,PETALBLIZZARD_RAD),random(32,36),0,0,0,1)
+TNT1 AAA 0 A_SpawnItemEx("PetalBlizzard_Particle3",-PETALBLIZZARD_RAD,random(-PETALBLIZZARD_RAD,PETALBLIZZARD_RAD),random(5,PETALBLIZZARD_RAD),random(32,36),0,0,0,1)
+TNT1 A 3 A_CountDown
+TNT1 A 0 A_JumpIf(ReactionTime%3 == 0,"HitBox")
+Loop
+HitBox:
+//PetalBlizzard wall
+TNT1 A 0 A_SpawnItemEx("PetalBlizzardHitBox",-PETALBLIZZARD_RAD,-80,16,32,0)
+TNT1 A 0 A_SpawnItemEx("PetalBlizzardHitBox",-PETALBLIZZARD_RAD,-48,16,32,0)
+TNT1 A 0 A_SpawnItemEx("PetalBlizzardHitBox",-PETALBLIZZARD_RAD,0,16,32,0)
+TNT1 A 0 A_SpawnItemEx("PetalBlizzardHitBox",-PETALBLIZZARD_RAD,48,16,32,0)
+TNT1 A 0 A_SpawnItemEx("PetalBlizzardHitBox",-PETALBLIZZARD_RAD,80,16,32,0)
+
+TNT1 A 0 A_SpawnItemEx("PetalBlizzardHitBox",-PETALBLIZZARD_RAD,-80,48,32,0)
+TNT1 A 0 A_SpawnItemEx("PetalBlizzardHitBox",-PETALBLIZZARD_RAD,-48,48,32,0)
+TNT1 A 0 A_SpawnItemEx("PetalBlizzardHitBox",-PETALBLIZZARD_RAD,0,48,32,0)
+TNT1 A 0 A_SpawnItemEx("PetalBlizzardHitBox",-PETALBLIZZARD_RAD,48,48,32,0)
+TNT1 A 0 A_SpawnItemEx("PetalBlizzardHitBox",-PETALBLIZZARD_RAD,80,48,32,0)
+
+TNT1 A 0 A_SpawnItemEx("PetalBlizzardHitBox",-PETALBLIZZARD_RAD,-80,80,32,0)
+TNT1 A 0 A_SpawnItemEx("PetalBlizzardHitBox",-PETALBLIZZARD_RAD,-48,80,32,0)
+TNT1 A 0 A_SpawnItemEx("PetalBlizzardHitBox",-PETALBLIZZARD_RAD,0,80,32,0)
+TNT1 A 0 A_SpawnItemEx("PetalBlizzardHitBox",-PETALBLIZZARD_RAD,48,80,32,0)
+TNT1 A 0 A_SpawnItemEx("PetalBlizzardHitBox",-PETALBLIZZARD_RAD,80,80,32,0)
+
+Goto SpawnLoop
+Death:
+TNT1 A 0 //A_PlaySoundEX("wep_L/commandowave","Body")
+TNT1 A 0 //A_PlaySoundEx("weapon/napalm","Weapon")
+TNT1 A 17 //A_Quake(8,17,0,300)
+//TN_B EFGHIJKLMNOPQRS 1
+stop
+}
+}
+
+actor PetalBlizzardHitBox : BasicProjectile
+{
+Damagetype "PetalBlizzard"
+Obituary "$OB_PETALBLIZZARD"
+scale 2.5
++SERVERSIDEONLY
++NOINTERACTION
++NOEXPLODEFLOOR
++SLIDESONWALLS
++STEPMISSILE
++RIPPER
+MaxStepHeight 16
+speed 0
+Reactiontime 17
+Damage(0)
+Radius 4
+Height 4
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 1
+TNT1 A 0 A_ChangeFlag("NOINTERACTION",0)
+Spawn2:
+//TNT1 A 1 //A_Explode(MBP_PetalBlizzard,PETALBLIZZARD_RAD,0,0,PETALBLIZZARD_RAD)
+TNT1 A 1 A_SpawnItemEx("PetalBlizzardDamager",-PETALBLIZZARD_RAD/2)
+TNT1 A 0 A_CountDown
+Loop
+
+Death:
+TNT1 A 1
+stop
+}
+}
+
+
+actor PetalBlizzardDamager : BasicExplosion
+{
+Damagetype "PetalBlizzard"
+Obituary "$OB_PETALBLIZZARD"
+scale 2.5
++SERVERSIDEONLY
+speed 0
+Reactiontime 8
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 2 
+TNT1 A 0 A_Explode(MBP_PetalBlizzard,PETALBLIZZARD_RAD2,0,0,PETALBLIZZARD_RAD2)
+stop
+
+Death:
+TNT1 A 1
+stop
+}
+}
+
+actor PetalBlizzardHitBox1 : BasicExplosion
+{
+Damagetype "PetalBlizzard"
+Obituary "$OB_PETALBLIZZARD"
+scale 2.5
++SERVERSIDEONLY
+speed 0
+Reactiontime 8
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_SetPitch(Pitch+1)
+TNT1 A 0 A_JumpIf(Pitch>=ReactionTime,"Death")
+TNT1 A 1 
+TNT1 A 1 A_Stop
+TNT1 A 0 A_Explode(MBP_PetalBlizzard,PETALBLIZZARD_RAD,0,0,PETALBLIZZARD_RAD)
+TNT1 A 1 A_SpawnItemEx("PetalBlizzardHitBox2",0,0,0,PETALBLIZZARD_RAD,0,0,0,SXF_TRANSFERPITCH|SXF_NOCHECKPOSITION)
+stop
+
+Death:
+TNT1 A 1
+stop
+}
+}
+
+actor PetalBlizzardHitBox2 : PetalBlizzardHitBox
+{
+Damagetype "PetalBlizzard"
+Obituary "$OB_PETALBLIZZARD"
+scale 2.5
++SERVERSIDEONLY
+-RIPPER
+-NOINTERACTION
+-NOCLIP
+}
+
+/*
+actor PetalBlizzard_Particle : BasicClientside
+{
+    renderstyle "ADD"
+    Alpha 0.3
++MISSILE
+Radius 4
+Height 4
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+TNT1 A 0 A_SetScale(Frandom(1.5,3.5))
+TNT1 A 0 A_Jump(256,"Spawn1","Spawn2","Spawn3","Spawn4")
+Goto Spawn1
+
+Spawn1:
+
+PDAN O 0
+Goto Spawn.Active
+
+Spawn2:
+PDAN P 0
+Goto Spawn.Active
+
+Spawn3:
+PDAN Q 0
+Goto Spawn.Active
+
+Spawn4:
+PDAN L 0
+Goto Spawn.Active
+
+Spawn.Active:
+"####" "#" 5
+//"####" "#" 0 A_ChangeFlag("RIPPER", 0)
+"####" "#" 0 A_ChangeFlag("NOINTERACTION",0)
+"####" "#" 10
+"####" "#####" 1 A_Fadeout
+stop
+
+Death:
+TNT1 A 0 
+stop
+
+}
+}
+*/
+
+actor PetalBlizzard_Particle : BasicGraphicEffect
+{
+renderstyle "normal"
+Alpha 1.0
+scale 1.5
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+TNT1 A 0 A_SetScale(Frandom(1.5,3.5))
+TMPK ABCDA 1
+//MIS2 D 0 A_ChangeFlag("RIPPER", 0)
+MIS2 D 0 A_ChangeFlag("NOINTERACTION",0)
+TMPK BCD 1
+TMPK ABCD 1
+PDAN ABC 1 A_Fadeout
+stop
+}
+}
+
+
+actor PetalBlizzard_Particle2 : PetalBlizzard_Particle
+{
+renderstyle "normal"
+Alpha 1.0
+scale 2.5
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+TNT1 A 0 A_SetScale(Frandom(1.5,3.5))
+PDAN ABCDE 1
+//MIS2 D 0 A_ChangeFlag("RIPPER", 0)
+MIS2 D 0 A_ChangeFlag("NOINTERACTION",0)
+PDAN FGH 1
+PDAN ABCDEFGH 1
+PDAN ABC 1 A_Fadeout
+stop
+}
+}
+
+actor PetalBlizzard_Particle3 : PetalBlizzard_Particle2
+{
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+TNT1 A 0 A_SetScale(Frandom(1.5,3.5))
+PDAN IJKIJK 1
+//MIS2 D 0 A_ChangeFlag("RIPPER", 0)
+MIS2 D 0 A_ChangeFlag("NOINTERACTION",0)
+PDAN IJK 1
+PDAN IJKIJK 1 A_Fadeout
+stop
+}
+}

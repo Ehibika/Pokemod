@@ -6429,6 +6429,23 @@ OptionMenu "MoveMenu_DarkPulse"
     StaticText ""
     StaticText"===============================================================",1
 } 
+OptionMenu "MoveMenu_MorningSun"
+{
+    
+    Title "$M273_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M273_TYPE"
+    StaticText "$M273_CATEGORY"
+    StaticText "$M2734_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M273_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+} 
 //--[NewMove]--
 
 OptionMenu "MoveMenu_Sketch"

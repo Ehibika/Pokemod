@@ -297,6 +297,7 @@ const int Move_WildCharge = 269;
 const int Move_SoftBoiled = 270;
 const int Move_FuryCutter = 271;
 const int Move_DarkPulse = 272;
+const int Move_MorningSun = 273;
 //--[NewMove]--
 //=======|Pokedex Constants|==========
 const int Dex_SMEARGLE = 0;
@@ -495,6 +496,8 @@ const int Aim_OverHead = 35;
 const int Aim_ArcOverHead = 15;
 const int Aim_ArcScale = 20;
 const int Aim_BodyCheck = 17;
+
+const int RamHitbox = 64;
 
 const int Cost_1 = 200;
 const int Cost_2 = 400;

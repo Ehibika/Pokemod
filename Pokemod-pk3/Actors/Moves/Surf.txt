@@ -218,41 +218,22 @@ scale 2.5
 Obituary "$OB_SURF"
 +MISSILE
 +RIPPER
-+SHOOTABLE
-//+SOLID
-+ACTLIKEBRIDGE
 +NODAMAGETHRUST
 +NOTARGETSWITCH
 +NOBLOOD
 +MOVEWITHSECTOR
-+CANBOUNCEWATER
 +DONTSPLASH
-+DONTRIP
 +NOEXPLODEFLOOR
 +STEPMISSILE
 +DONTREFLECT
 +NOTAUTOAIMED
-//+BOUNCEONWALLS
-+ALLOWBOUNCEONACTORS
-Maxstepheight 7
-Mass 9999999
 DamageType "Surf"
-Health 200
 Damage (MBP_Surf)
 maxstepheight 16
-//Height 45
-//Radius 45
-Height 16
+Height 45
 Radius 16
 speed 0
 Gravity 2.0
-BounceFactor 0.91
-WallBounceFactor 0.91
-DamageFactor "Surf", 0.0
-species "MovingPlatform"
-+THRUSPECIES
-//+MTHRUSPECIES
-var int user_playerRiding[64];
 States
 {
 Spawn:
@@ -270,8 +251,6 @@ SURF B 0 A_Recoil(-SurfAccel)
 SURF I 1 A_GiveInventory("SurfFunctionC")
 SURF B 0 A_Recoil(-SurfAccel)
 MoveBegin:
-SURF B 0 ACS_NamedExecuteAlways("core_stickyLifts",0,STICKYMODE_GUTSLIFT)
-SURF B 0 ACS_ExecuteAlways(994, 0, 1)
 SURF G 1 A_GiveInventory("SurfFunctionA")
 Accelerate:
 SURF B 0 A_Recoil(-SurfAccel)
@@ -281,12 +260,9 @@ SURF I 1 A_GiveInventory("SurfFunctionC")
 ICWL F 0 A_JumpIf(momx>SurfSPD||momy>SurfSPD||momx<-SurfSPD||momy<-SurfSPD,"Moving")
 Loop
 Moving:
-SURF B 0 A_GiveInventory("SurfFunctionA")
-SURF G 1 Thing_Damage(0, 1)
-SURF B 0 A_GiveInventory("SurfFunctionB")
-SURF H 1 Thing_Damage(0, 1)
-SURF B 0 A_GiveInventory("SurfFunctionC")
-SURF I 1 Thing_Damage(0, 1)
+SURF G 1 A_GiveInventory("SurfFunctionA")//Thing_Damage(0, 1)
+SURF H 1 A_GiveInventory("SurfFunctionB")//Thing_Damage(0, 1)
+SURF I 1 A_GiveInventory("SurfFunctionC")//Thing_Damage(0, 1)
 loop
 Death:
 SURF B 0
@@ -307,7 +283,7 @@ actor SurfSideWaveA
 PROJECTILE
 -NOGRAVITY
 +NOEXPLODEFLOOR
-+THRUACTORS
++RIPPER
 Damage (MBP_Surf)
 damagetype "SURF"
 Obituary "$OB_SURF"

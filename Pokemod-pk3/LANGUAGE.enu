@@ -578,6 +578,7 @@ OB_WILDCHARGE = "%k Defeated %o using WILDCHARGE!";
 OB_SOFTBOILED = "%k Defeated %o using SOFTBOILED!";
 OB_FURYCUTTER = "%k Defeated %o using FURYCUTTER!";
 OB_DARKPULSE = "%k Defeated %o using DARKPULSE!";
+OB_MORNINGSUN = "%k Defeated %o using MORNINGSUN!";
 //--[NewMove]--
 
 //#endregion
@@ -2347,9 +2348,9 @@ M079_NAME = "\cj Curse";
 M079_TYPE = "\cj Ghost";
 M079_CATEGORY = "\cf Status";
 M079_POWER = "\cfPower:\cj --";
-M079_DESC = "\cjRaises ATK and DEF and lowers SPD. but\n"
-"for ghosts it applies a deadly curse on a\n"
-"target.";
+M079_DESC = "\cjBoost ATK and DEF and makes you immovably\n"
+"slow, for ghosts it casts a deadly curse\n"
+"on a target.";
 //#endregion
 
 //#region -=- 080: Earthquake -=-
@@ -4057,6 +4058,15 @@ M272_CATEGORY = "\cf Special";
 M272_POWER = "\cfPower:\cj --";
 M272_DESC = "\cjunleash a wave of dark energy, can cause\n"
 "nearby opponents to cringe.";
+//#endregion
+
+
+//#region -=- 273: MorningSun -=-
+M273_NAME = "\cj MorningSun";
+M273_TYPE = "\cj Normal";
+M273_CATEGORY = "\cf Status";
+M273_POWER = "\cfPower:\cj --";
+M273_DESC = "\cf<Desc>";
 //#endregion
 
 

@@ -130,7 +130,7 @@ actor GrassWhistleWatcher
 
 actor GrassWhistleShot : BasicFastProjectile
 {
-Speed 32
+Speed 96
 Damage (0)
 DamageType "GrassWhistle"
 obituary "$OB_GRASSWHISTLE"

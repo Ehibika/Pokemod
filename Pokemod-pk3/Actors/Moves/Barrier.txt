@@ -186,7 +186,10 @@ BRBK B 1
 loop
 Pain:
 "####" "#" 0 A_Stop//
+"####" "#" 0 A_ChangeFlag("SHOOTABLE",0)
 "####" "#" 0 A_PlaySoundEx("Weapon/ObjectHit", "Voice")
+"####" "#" 5
+"####" "#" 0 A_ChangeFlag("SHOOTABLE",1)
 TNT1 A 1 A_Jump(256,"SpawnL")
 Goto SpawnL
 Death:
@@ -542,7 +545,7 @@ Spawn:
 TNT1 A 0
 TNT1 A 0 A_GiveInventory("ProjectileCode",1)
 TNT1 A 1 A_playSoundEx("weapon/icewavebreak","Weapon")
-TNT1 AAAAAA 0 A_SpawnItemEx("FreezingFX3",random2(32),0,random(32,64),5,0,random(5,15),random(0,360),0)
+TNT1 AA 0 A_SpawnItemEx("FreezingFX3",random2(32),0,random(32,64),5,0,random(5,15),random(0,360),0)
 stop
 }
 }
