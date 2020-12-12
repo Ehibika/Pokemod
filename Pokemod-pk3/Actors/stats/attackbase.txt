@@ -139,6 +139,8 @@ damagefactor "Shockwave", 1.0
 damagefactor "MudShot", 1.0
 damagefactor "ClearSmog", 1.0
 damagefactor "DarkPulse", 1.0
+damagefactor "Acid", 1.0
+damagefactor "AcidSpray", 1.0
 //--[NewSpecialMove]--
 }
 
@@ -258,5 +260,7 @@ damagefactor "TakeDown", 1.0
 damagefactor "WildCharge", 1.0
 damagefactor "FlameCharge", 1.0
 damagefactor "FuryCutter", 1.0
+damagefactor "MeteorMash", 1.0
+damagefactor "IronHead", 1.0
 //--[NewPhysicalMove]--
 }

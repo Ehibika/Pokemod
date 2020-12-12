@@ -111,17 +111,17 @@ int TMList [MAXTMLIST][5] = {
 {HelpingHand    ,TMF_UNIVERSAL      ,TMT_NORMAL                                 ,TMP_1  ,TML_ALL},
 
 
-{CalmMind       ,TMF_UNIVERSAL      ,TMT_PSYCHIC                                ,TMP_3  ,TML_LOW},
-{CosmicPower    ,TMF_UNIVERSAL      ,TMT_PSYCHIC|TMT_FAIRY                      ,TMP_3  ,TML_LOW},
-{Rage           ,TMF_UNIVERSAL      ,TMT_NORMAL                                 ,TMP_3  ,TML_LOW},
-{Meditate       ,TMF_UNIVERSAL      ,TMT_PSYCHIC                                ,TMP_3  ,TML_LOW},
-{HoneClaws      ,TMF_NULL           ,TMT_NORMAL                                 ,TMP_1  ,TML_ALL},
+{CalmMind       ,TMF_UNIVERSAL      ,TMT_PSYCHIC                                ,TMP_3  ,TML_ALL},
+{CosmicPower    ,TMF_UNIVERSAL      ,TMT_PSYCHIC|TMT_FAIRY                      ,TMP_3  ,TML_ALL},
+{Rage           ,TMF_UNIVERSAL      ,TMT_NORMAL                                 ,TMP_3  ,TML_ALL},
+{Meditate       ,TMF_UNIVERSAL      ,TMT_PSYCHIC                                ,TMP_3  ,TML_ALL},
+{HoneClaws      ,TMF_NULL           ,TMT_DARK                                   ,TMP_3  ,TML_ALL},
+{DragonDance    ,TMF_NULL           ,TMT_DRAGON                                 ,TMP_3  ,TML_ALL},
+{RockPolish     ,TMF_NULL           ,TMT_ROCK|TMT_GROUND|TMT_Steel              ,TMP_3  ,TML_ALL},
+{BulkUp         ,TMF_NULL           ,TMT_FIGHTING                               ,TMP_3  ,TML_ALL},
 
 {IronDefense    ,TMF_UNIVERSAL      ,TMT_STEEL                                  ,TMP_4  ,TML_MID},
 {Amnesia        ,TMF_UNIVERSAL      ,TMT_PSYCHIC                                ,TMP_4  ,TML_MID},
-{SwordDance     ,TMF_UNIVERSAL      ,TMT_NORMAL                                 ,TMP_4  ,TML_MID},
-{NastyPlot      ,TMF_UNIVERSAL      ,TMT_DARK                                   ,TMP_4  ,TML_MID},
-{Agility        ,TMF_UNIVERSAL      ,TMT_PSYCHIC                                ,TMP_4  ,TML_MID},
 
 {Screech        ,TMF_UNIVERSAL      ,TMT_NORMAL                                 ,TMP_1  ,TML_MID},
 {FakeTears      ,TMF_UNIVERSAL      ,TMT_DARK                                   ,TMP_1  ,TML_MID},
@@ -171,6 +171,7 @@ int TMList [MAXTMLIST][5] = {
 {DarkPulse      ,TMF_NULL           ,TMT_DARK|TMT_GHOST                         ,TMP_4  ,TML_MID2},
 {Dig            ,TMF_NULL           ,TMT_ROCK|TMT_GROUND                        ,TMP_4  ,TML_MID2},
 {Bulldoze       ,TMF_NULL           ,TMT_ROCK|TMT_GROUND|TMT_Steel              ,TMP_4  ,TML_MID2},
+{IronHead       ,TMF_NULL           ,TMT_ROCK|TMT_GROUND|TMT_Steel              ,TMP_4  ,TML_MID2},
 
 {IceBeam        ,TMF_NULL           ,TMT_WATER|TMT_ICE                          ,TMP_4  ,TML_MID2},
 {Flamethrower   ,TMF_NULL           ,TMT_FIRE|TMT_DRAGON                        ,TMP_4  ,TML_MID2},
@@ -191,7 +192,7 @@ int TMList [MAXTMLIST][5] = {
 {FireBlast      ,TMF_NULL           ,TMT_FIRE|TMT_DRAGON                        ,TMP_5  ,TML_HIGH},
 {SolarBeam      ,TMF_NULL           ,TMT_GRASS|TMT_FIRE                         ,TMP_5  ,TML_HIGH},
 {GigaDrain      ,TMF_NULL           ,TMT_GRASS                                  ,TMP_5  ,TML_HIGH},
-{Psychic        ,TMF_NULL           ,TMT_PSYCHIC                                ,TMP_5  ,TML_HIGH},
+{Psychic        ,TMF_NULL           ,TMT_PSYCHIC|TMT_GHOST                      ,TMP_5  ,TML_HIGH},
 {Blizzard       ,TMF_NULL           ,TMT_ICE                                    ,TMP_5  ,TML_HIGH},
 {Overheat       ,TMF_NULL           ,TMT_FIRE                                   ,TMP_5  ,TML_HIGH},
 {Thunder        ,TMF_NULL           ,TMT_ELECTRIC                               ,TMP_5  ,TML_HIGH},
@@ -400,6 +401,10 @@ int output = 0;
         case DarkPulse: output = TMR_DarkPulse(Dexnum); break;    
         case FocusBlast: output = TMR_FocusBlast(Dexnum); break;    
         case HoneClaws: output = TMR_HoneClaws(Dexnum); break;    
+        case DragonDance: output = TMR_DragonDance(Dexnum); break;    
+        case RockPolish: output = TMR_RockPolish(Dexnum); break;    
+        case BulkUp: output = TMR_BulkUp(Dexnum); break;    
+        case IronHead: output = TMR_IronHead(Dexnum); break;    
 
         
         
@@ -1258,6 +1263,49 @@ return output;
 }
 //#endregion
 
+//#region -=- TM Rules : DragonDance -=-
+Function int TMR_DragonDance (int Dexnum) 
+{
+
+int output = 0;
+    Switch (Dexnum)
+    {
+    }
+    if(TMArch_Draconic(Dexnum)){output = 1;}
+
+return output;
+}
+//#endregion
+
+//#region -=- TM Rules : RockPolish -=-
+Function int TMR_RockPolish (int Dexnum) 
+{
+
+int output = 0;
+    Switch (Dexnum)
+    {
+        case BERGMITE: output = 1; break;
+        case AVALUGG: output = 1; break;
+    }
+
+return output;
+}
+//#endregion
+
+//#region -=- TM Rules : BulkUp -=-
+Function int TMR_BulkUp (int Dexnum) 
+{
+
+int output = 0;
+    Switch (Dexnum)
+    {
+    }
+    if(TMArch_Pugilist(Dexnum)){output = 1;}
+
+return output;
+}
+//#endregion
+
 //#region -=- TM Rules : FuryCutter -=-
 Function int TMR_FuryCutter (int Dexnum) 
 {
@@ -1341,6 +1389,23 @@ return output;
 }
 //#endregion
 
+//#region -=- TM IronHead : BulkUp -=-
+Function int TMR_IronHead (int Dexnum) 
+{
+
+int output = 0;
+    Switch (Dexnum)
+    {
+        case ARCANINE: output = 1; break;
+        case DRAGONITE: output = 1; break;
+        case KINGDRA: output = 1; break;
+        case AVALUGG: output = 1; break;
+    }
+    
+
+return output;
+}
+//#endregion
 //======
 
 //#region -=- TM Archetype : Draconic

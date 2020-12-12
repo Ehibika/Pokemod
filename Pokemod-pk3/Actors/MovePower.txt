@@ -272,4 +272,8 @@ const int MBP_SoftBoiled = MBP_StandardPower;
 const int MBP_FuryCutter = MBP_StandardPower;
 const int MBP_DarkPulse = MBP_StandardPower;
 const int MBP_MorningSun = MBP_StandardPower;
+const int MBP_MeteorMash = MBP_HighPower1;
+const int MBP_IronHead = MBP_HighPower1;
+const int MBP_Acid = MBP_StandardPower;
+const int MBP_AcidSpray = MBP_MidPower2;
 //--[NewMove]--

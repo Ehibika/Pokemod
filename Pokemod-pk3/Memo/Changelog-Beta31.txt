@@ -1,0 +1,39 @@
+//#region -=-=- Beta 31 -=-=-
+/*
+ *
+ *
+ * ===|Gameplay Changes|===
+ * 
+ * further changes to stat scaling has been made in an effort to shift the time to kill over to the higher end.
+ * 
+ * The power, Guard, and haste seeds were removed from the item shop
+ * 
+ * immunities have been restored for all types that have them safe for the flying type.
+ * 
+ * immunities are now equivalent to a double resistance rather than total damage immunity.
+ * 
+ * ===|Move Changes|===
+ * [New Moves]
+ * Acid
+ * Acid Spray
+ * MeteorMash
+ * IronHead
+ * BulkUp
+ * 
+ * [drainingKiss]
+ * Range reduced from 550 > 350
+ * Recovery time increased
+ * ===|TM Changes|===
+ * the following TM's were removed:
+ *  swordDance
+ *  NastyPlot
+ *  Agility
+ * 
+ * the following TM's were added
+ *  HoneClaws
+ *  RockPolish
+ *  BulkUp
+ *  IronHead
+ *  
+ * 
+ * ===|Pokemon Changes|===

@@ -160,8 +160,8 @@ TNT1 A 0
 stop
 Pickup:
 TNT1 A 0 A_Jumpifinventory("MultiShotCounter",1,"Pickup2")
-TNT1 A 0 A_SpawnItemEx("MultiShotCountWarper")
 TNT1 A 0 A_GiveInventory("MultiShotCounter")
+TNT1 A 0 A_SpawnItemEx("MultiShotCountWarper")
 stop
 
 Pickup2:

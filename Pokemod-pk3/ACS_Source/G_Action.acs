@@ -1525,7 +1525,7 @@ Int OutPut;
 	Case T_NEU: break;
 	Case T_WEA: PainVal++; break;
 	Case T_RES: PainVal--; break;
-	Case T_IMU: PainVal = 0; break;
+	Case T_IMU: PainVal = -2; break;
 	}
 
 	switch(PKMNTypeList2[TypeB][PainType])
@@ -1533,7 +1533,7 @@ Int OutPut;
 	Case T_NEU: break;
 	Case T_WEA: PainVal++; break;
 	Case T_RES: PainVal--; break;
-	Case T_IMU: PainVal = 0; break;
+	Case T_IMU: PainVal = -2; break;
 	}
 
 	If(PainVal > 0){PlaySound(0,"PokePain/Strong",CHAN_VOICE); OutPut = 2;}

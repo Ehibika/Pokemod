@@ -579,6 +579,10 @@ OB_SOFTBOILED = "%k Defeated %o using SOFTBOILED!";
 OB_FURYCUTTER = "%k Defeated %o using FURYCUTTER!";
 OB_DARKPULSE = "%k Defeated %o using DARKPULSE!";
 OB_MORNINGSUN = "%k Defeated %o using MORNINGSUN!";
+OB_METEORMASH = "%k Defeated %o using METEORMASH!";
+OB_IRONHEAD = "%k Defeated %o using IRONHEAD!";
+OB_ACID = "%k Defeated %o using ACID!";
+OB_ACIDSPRAY = "%k Defeated %o using ACIDSPRAY!";
 //--[NewMove]--
 
 //#endregion
@@ -4297,7 +4301,47 @@ M273_NAME = "\cj MorningSun";
 M273_TYPE = "\cj Normal";
 M273_CATEGORY = "\cf Status";
 M273_POWER = "\cfPower:\cj --";
-M273_DESC = "\cf<Desc>";
+M273_DESC = "\cjCall forth the sunrise to heal the team\n"
+"for 50% of the caster's health.";
+//#endregion
+
+
+//#region -=- 274: MeteorMash -=-
+M274_NAME = "\cj MeteorMash";
+M274_TYPE = "\cj Steel";
+M274_CATEGORY = "\cf Physical";
+M274_POWER = "\cfPower:\cj --";
+M274_DESC = "\cjPound the ground with the force of a\n"
+"meteor, can raise ATK";
+//#endregion
+
+
+//#region -=- 275: IronHead -=-
+M275_NAME = "\cj IronHead";
+M275_TYPE = "\cj Steel";
+M275_CATEGORY = "\cf Physical";
+M275_POWER = "\cfPower:\cj --";
+M275_DESC = "\cjA hard as steal ramming attack that can\n"
+"cause foes to cringe.";
+//#endregion
+
+
+//#region -=- 276: Acid -=-
+M276_NAME = "\cj Acid";
+M276_TYPE = "\cj Poison";
+M276_CATEGORY = "\cf Special";
+M276_POWER = "\cfPower:\cj --";
+M276_DESC = "\cjSpray corrosive liquid that lowers DEF\n"
+//#endregion
+
+
+//#region -=- 277: ACIDSPRAY -=-
+M277_NAME = "\cj ACIDSPRAY";
+M277_TYPE = "\cj Poison";
+M277_CATEGORY = "\cf Special";
+M277_POWER = "\cfPower:\cj --";
+M277_DESC = "\cjLob an acid bomb that Harshly lowers\n"
+"SP.DEF";
 //#endregion
 
 

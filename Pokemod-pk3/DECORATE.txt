@@ -234,7 +234,7 @@
 #include "actors/Moves/CalmMind.txt"
 #include "actors/Moves/Psyshock.txt"
 // #include "actors/Moves/Trick.txt"
-// #include "actors/Moves/BulkUp.txt"
+#include "actors/Moves/BulkUp.txt"
 #include "actors/Moves/FocusBlast.txt"
 #include "actors/Moves/PsychoCut.txt"
 // #include "actors/Moves/PsychoShift.txt"
@@ -292,6 +292,10 @@
 #include "actors/Moves/FuryCutter.txt"
 #include "actors/Moves/DarkPulse.txt"
 #include "actors/Moves/MorningSun.txt"
+#include "actors/Moves/MeteorMash.txt"
+#include "actors/Moves/IronHead.txt"
+#include "actors/Moves/Acid.txt"
+#include "actors/Moves/AcidSpray.txt"
 //--[NewMove]--
 
 #include "Actors/inventory/Shop/ShopActors/shopact.txt"
