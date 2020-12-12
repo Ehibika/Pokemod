@@ -1511,4 +1511,298 @@ gender = male
 }
 
 
+{
+name = "Cleffa"
+sprite = P113
+class = Cleffa
+dsnoway = LAND
+dsoof = LAND
+dspldeth = MEGADEAT
+dspdiehi = MEGADEAT
+dsplpain = MEGAPAIN
+dstaunt = Cry113
+gender = male
+}
+
+
+{
+name = "Clefairy"
+sprite = P114
+class = Cleffa
+dsnoway = LAND
+dsoof = LAND
+dspldeth = MEGADEAT
+dspdiehi = MEGADEAT
+dsplpain = MEGAPAIN
+dstaunt = Cry114
+gender = male
+}
+
+
+{
+name = "Clefable"
+sprite = P115
+class = Cleffa
+dsnoway = FATLAND
+dsoof = FATLAND
+dspldeth = MEGADEAT
+dspdiehi = MEGADEAT
+dsplpain = MEGAPAIN
+dstaunt = Cry115
+gender = male
+}
+
+
+{
+name = "Igglybuff"
+sprite = P116
+class = Igglybuff
+dsnoway = LAND
+dsoof = LAND
+dspldeth = MEGADEAT
+dspdiehi = MEGADEAT
+dsplpain = MEGAPAIN
+dstaunt = Cry116
+gender = male
+}
+
+
+{
+name = "JigglyPuff"
+sprite = P117
+class = Igglybuff
+dsnoway = LAND
+dsoof = LAND
+dspldeth = MEGADEAT
+dspdiehi = MEGADEAT
+dsplpain = MEGAPAIN
+dstaunt = Cry117
+gender = male
+}
+
+
+{
+name = "Wigglytuff"
+sprite = P118
+class = Igglybuff
+dsnoway = FATLAND
+dsoof = FATLAND
+dspldeth = MEGADEAT
+dspdiehi = MEGADEAT
+dsplpain = MEGAPAIN
+dstaunt = Cry118
+gender = male
+}
+
+
+{
+name = "Audino"
+sprite = P119
+class = Audino
+dsnoway = LAND
+dsoof = LAND
+dspldeth = MEGADEAT
+dspdiehi = MEGADEAT
+dsplpain = MEGAPAIN
+dstaunt = Cry119
+gender = male
+}
+
+
+{
+name = "Alomomola"
+sprite = P120
+class = Alomomola
+dsnoway = LAND
+dsoof = LAND
+dspldeth = MEGADEAT
+dspdiehi = MEGADEAT
+dsplpain = MEGAPAIN
+dstaunt = Cry120
+gender = male
+}
+
+
+{
+name = "Bergmite"
+sprite = P121
+class = Bergmite
+dsnoway = LAND
+dsoof = LAND
+dspldeth = MEGADEAT
+dspdiehi = MEGADEAT
+dsplpain = MEGAPAIN
+dstaunt = Cry121
+gender = male
+}
+
+
+{
+name = "avalugg"
+sprite = P122
+class = Bergmite
+dsnoway = FATLAND
+dsoof = FATLAND
+dspldeth = MEGADEAT
+dspdiehi = MEGADEAT
+dsplpain = MEGAPAIN
+dstaunt = Cry122
+gender = male
+}
+
+
+{
+name = "Croagunk"
+sprite = P123
+class = Croagunk
+dsnoway = LAND
+dsoof = LAND
+dspldeth = MEGADEAT
+dspdiehi = MEGADEAT
+dsplpain = MEGAPAIN
+dstaunt = Cry123
+gender = male
+}
+
+
+{
+name = "Toxicroak"
+sprite = P124
+class = Croagunk
+dsnoway = FATLAND
+dsoof = FATLAND
+dspldeth = MEGADEAT
+dspdiehi = MEGADEAT
+dsplpain = MEGAPAIN
+dstaunt = Cry124
+gender = male
+}
+
+
+{
+name = "Ekans"
+sprite = P125
+class = Ekans
+dsnoway = LAND
+dsoof = LAND
+dspldeth = MEGADEAT
+dspdiehi = MEGADEAT
+dsplpain = MEGAPAIN
+dstaunt = Cry125
+gender = male
+}
+
+
+{
+name = "Arbok"
+sprite = P126
+class = Ekans
+dsnoway = FATLAND
+dsoof = FATLAND
+dspldeth = MEGADEAT
+dspdiehi = MEGADEAT
+dsplpain = MEGAPAIN
+dstaunt = Cry126
+gender = male
+}
+
+
+{
+name = "Stunky"
+sprite = P127
+class = Stunky
+dsnoway = LAND
+dsoof = LAND
+dspldeth = MEGADEAT
+dspdiehi = MEGADEAT
+dsplpain = MEGAPAIN
+dstaunt = Cry127
+gender = male
+}
+
+
+{
+name = "Skuntank"
+sprite = P128
+class = Stunky
+dsnoway = FATLAND
+dsoof = FATLAND
+dspldeth = MEGADEAT
+dspdiehi = MEGADEAT
+dsplpain = MEGAPAIN
+dstaunt = Cry128
+gender = male
+}
+
+
+{
+name = "Gulpin"
+sprite = P129
+class = Gulpin
+dsnoway = LAND
+dsoof = LAND
+dspldeth = MEGADEAT
+dspdiehi = MEGADEAT
+dsplpain = MEGAPAIN
+dstaunt = Cry129
+gender = male
+}
+
+
+{
+name = "Swalot"
+sprite = P130
+class = Gulpin
+dsnoway = FATLAND
+dsoof = FATLAND
+dspldeth = MEGADEAT
+dspdiehi = MEGADEAT
+dsplpain = MEGAPAIN
+dstaunt = Cry130
+gender = male
+}
+
+
+{
+name = "Gastly"
+sprite = P131
+class = Gastly
+dsnoway = LAND
+dsoof = LAND
+dspldeth = MEGADEAT
+dspdiehi = MEGADEAT
+dsplpain = MEGAPAIN
+dstaunt = Cry131
+gender = male
+}
+
+
+{
+name = "Haunter"
+sprite = P132
+class = Gastly
+dsnoway = LAND
+dsoof = LAND
+dspldeth = MEGADEAT
+dspdiehi = MEGADEAT
+dsplpain = MEGAPAIN
+dstaunt = Cry132
+gender = male
+}
+
+
+{
+name = "Gengar"
+sprite = P133
+class = Gastly
+dsnoway = FATLAND
+dsoof = FATLAND
+dspldeth = MEGADEAT
+dspdiehi = MEGADEAT
+dsplpain = MEGAPAIN
+dstaunt = Cry133
+gender = male
+}
+
+
 //--[NewPokemon]--

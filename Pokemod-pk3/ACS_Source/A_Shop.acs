@@ -280,9 +280,8 @@ function void ParticipantFunc(int p)  {
 	//if(GetActorProperty(1000+p,APROP_HEALTH)<1) ACS_NamedExecuteWithResult("CLEAR_PERSISTENT_LOADOUT",p);
 }
 
-Script "BPPickup" (void)
+Script "BPPickup" (int Payout)
 {
-// -=- BP gained from pickup is based on total number of games, not counting draws -=-
 
 int TotalGames;
 for(int i = 0; i<MAX_TEAMS; i++) 
@@ -290,11 +289,11 @@ for(int i = 0; i<MAX_TEAMS; i++)
         TotalGames += GetTeamProperty(i,TPROP_WinCount);
 }
 
-int BaseMoney = 1;
+//int BaseMoney = 1;
 //int R1 = 1 + TotalGames; //random range 1
 //int R2 = 3 + TotalGames;; //random range 2
 //int Payout = BaseMoney*random(R1,R2);
-int Payout = BaseMoney;//+(5*TotalGames);
+//int Payout = BaseMoney;//+(5*TotalGames);
 
 ACS_NamedExecuteAlways("GivePlayerBP",0,playernumber(),Payout);
 ACS_NamedExecuteAlways("AddToBPAward",0,Payout);

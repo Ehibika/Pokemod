@@ -297,6 +297,7 @@ const int Move_WildCharge = 269;
 const int Move_SoftBoiled = 270;
 const int Move_FuryCutter = 271;
 const int Move_DarkPulse = 272;
+const int Move_MorningSun = 273;
 //--[NewMove]--
 //=======|Pokedex Constants|==========
 const int Dex_SMEARGLE = 0;
@@ -437,6 +438,27 @@ const int Dex_SEVIPER = 109;
 const int Dex_BELDUM = 110;
 const int Dex_METANG = 111;
 const int Dex_METAGROSS = 112;
+const int Dex_CLEFFA = 113;
+const int Dex_CLEFAIRY = 114;
+const int Dex_CLEFABLE = 115;
+const int Dex_IGGLYBUFF = 116;
+const int Dex_JIGGLYPUFF = 117;
+const int Dex_WIGGLYTUFF = 118;
+const int Dex_AUDINO = 119;
+const int Dex_ALOMOMOLA = 120;
+const int Dex_BERGMITE = 121;
+const int Dex_AVALUGG = 122;
+const int Dex_CROAGUNK = 123;
+const int Dex_TOXICROAK = 124;
+const int Dex_EKANS = 125;
+const int Dex_ARBOK = 126;
+const int Dex_STUNKY = 127;
+const int Dex_SKUNTANK = 128;
+const int Dex_GULPIN = 129;
+const int Dex_SWALOT = 130;
+const int Dex_GASTLY = 131;
+const int Dex_HAUNTER = 132;
+const int Dex_GENGAR = 133;
 //--[NewPokemon]--
 //=======|TM Type Flags|==========
 const int TMT_NULL = 0;
@@ -495,6 +517,8 @@ const int Aim_OverHead = 35;
 const int Aim_ArcOverHead = 15;
 const int Aim_ArcScale = 20;
 const int Aim_BodyCheck = 17;
+
+const int RamHitbox = 64;
 
 const int Cost_1 = 200;
 const int Cost_2 = 400;

@@ -570,6 +570,7 @@ Script "BarrierStatGrab" (int WallTID)
 
     int OwnerTID = ACS_NamedExecuteWithResult("core_gettarget",0);
     int OwnerMaxHP = GetActorProperty(OwnerTID, APROP_SPAWNHEALTH);
+    int PlayerLVL = GetCvar(StrParam(s:"PlayerLevel_",i:OwnerTID-1000));
     int StatValue;
     int ModStat;
 
@@ -579,7 +580,7 @@ Script "BarrierStatGrab" (int WallTID)
 
     GiveInventory(StrParam(s:"PDEF",i:100),1);
     GiveInventory(StrParam(s:"SDEF",i:100),1);
-
+/*
     ModStat = CheckActorInventory(OwnerTID,"Active_SAttack");
 
 if(ModStat >= STATBASELINE)
@@ -591,7 +592,9 @@ else
     StatValue = Noneg(ValueMap(ModStat,STATBASELINE,STATMIN,50,10));    
     }
 if(StatValue < 10){StatValue = 10;}
+*/
 
+StatValue = 150+(50*PlayerLVL);
 SetActorProperty(0,APROP_SPAWNHEALTH,StatValue);
 SetActorProperty(0,APROP_HEALTH,StatValue);
 
@@ -761,4 +764,23 @@ Script "GetRockPolishLVL" (int Pointer)
     if(CheckInventory("STF_RockPolish2")) output++;
     if(CheckInventory("STF_RockPolish3")) output++;
     SetResultValue(Output);
+}
+
+script "TrapSensorIdentify"  (VOID) 
+{
+
+	int SensorPlayer= ACS_NamedExecuteWithResult("Core_GetTarget", 0) - 1000;
+    int FiringPlayer= ACS_NamedExecuteWithResult("Core_GetMaster", 0) - 1000;
+    int Output;
+    if( GetPlayerInfo(SensorPlayer, PLAYERINFO_TEAM) == GetPlayerInfo(FiringPlayer, PLAYERINFO_TEAM))
+    {
+        Output = 1;
+    }
+
+    setResultValue(Output);
+}
+
+Script "CurseHarm" (int Damage)
+{
+    Thing_Damage2(0,Damage,"Curse");
 }

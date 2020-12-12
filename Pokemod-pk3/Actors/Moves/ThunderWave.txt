@@ -26,9 +26,10 @@ Fire.Begin:
 Goto Fire.Bullet
 
 Fire.Bullet:
+"####" B 1 A_JumpIf(IsPointerEqual(AAPTR_TRACER,AAPTR_NULL) == true, "NoAmmo2")
 "####" B 0 A_PlaySoundEx("weapon/SparkShock","Weapon")
 
-"####" B 0 A_FireCustomMissile("ThunderWaveShot",0,1,0,0)
+"####" B 0 A_FireCustomMissile("ThunderWaveSeeker",0,1,0,0)
 "####" B 0 A_Jump(256,"Fire.After")
 Goto Fire.After
 
@@ -99,6 +100,38 @@ stop
 //[+]========================================================================[+]
 //--------------------------------|Projectiles |--------------------------------
 //[+]========================================================================[+]
+
+actor ThunderWaveSeeker : BasicExplosion
+{
+Damage(0)
+DamageType "ThunderWave"
+obituary "$OB_THUNDERWAVE"
+Reactiontime 17
+Args 6, 0, 0
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+TNT1 A 0 A_TransferPointer(AAPTR_TARGET,AAPTR_DEFAULT,AAPTR_TRACER,AAPTR_TRACER)
+//==
+TNT1 AAAAAA 0 A_SpawnItemEx("ThunderWaveParticle", 0, 0, 28, 256/24, 256/24, random2(256/24), random(0, 359),1)
+TNT1 A 1 
+TNT1 A 0 A_Jumpif(CallACS("CheckStatusGuard",AAPTR_TRACER,STATUS_MAJOR),"Death")
+TNT1 A 1 A_Warp(AAPTR_TRACER,1,0,45,0,WARPF_COPYINTERPOLATION)
+TNT1 A 0 A_GiveInventory("Zap_ParalysisStatusProc",1,AAPTR_TRACER)
+TNT1 AAAAAA 0 A_SpawnItemEx("ThunderWaveParticle", 0, 0, 28, 256/24, 256/24, random2(256/24), random(0, 359),1)
+TNT1 A 0 A_Spawnitemex("ThunderWaveFX",0,0,0,0,0,0,0,SXF_TRANSFERTRANSLATION)
+TNT1 A 5
+Goto Death
+
+Death:
+TNT1 A 0 
+stop
+}
+}
+
+/*
 actor ThunderWaveShot : BasicFastProjectile
 {
 Speed 96
@@ -140,7 +173,7 @@ TNT1 A 17
 stop
 }
 }
-
+*/
 
 actor ThunderWaveParticle : BasicClientside
 {
@@ -166,7 +199,6 @@ loop
 actor ThunderWaveFX : BasicClientside
 {
 -NOINTERACTION
--NOGRAVITY
 scale 2
 Gravity 0.5
 ReactionTime 8

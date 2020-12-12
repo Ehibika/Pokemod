@@ -69,15 +69,15 @@
 #LIBDEFINE TML_MAX 15
 
 //TM Price
-#LIBDEFINE TMP_1 5
-#LIBDEFINE TMP_2 10
-#LIBDEFINE TMP_3 15
-#LIBDEFINE TMP_4 25
-#LIBDEFINE TMP_5 50
+#LIBDEFINE TMP_1 3
+#LIBDEFINE TMP_2 5
+#LIBDEFINE TMP_3 10
+#LIBDEFINE TMP_4 15
+#LIBDEFINE TMP_5 30
 
 
 
-#LIBDEFINE MAXTMLIST 77//82
+#LIBDEFINE MAXTMLIST 89
 //#endregion
 
 //#region -=- TM Reference -=-
@@ -107,22 +107,22 @@ int TMList [MAXTMLIST][5] = {
 {Fakeout        ,TMF_UNIVERSAL      ,TMT_NORMAL                                 ,TMP_1  ,TML_ALL},
 {FalseSwipe     ,TMF_UNIVERSAL      ,TMT_NORMAL                                 ,TMP_1  ,TML_ALL},
 {Rest           ,TMF_UNIVERSAL      ,TMT_PSYCHIC                                ,TMP_1  ,TML_ALL},
-{SlackOff       ,TMF_UNIVERSAL      ,TMT_NORMAL                                 ,TMP_1  ,TML_ALL},
 {Refresh        ,TMF_UNIVERSAL      ,TMT_NORMAL                                 ,TMP_1  ,TML_ALL},
 {HelpingHand    ,TMF_UNIVERSAL      ,TMT_NORMAL                                 ,TMP_1  ,TML_ALL},
 
-/*
+
 {CalmMind       ,TMF_UNIVERSAL      ,TMT_PSYCHIC                                ,TMP_3  ,TML_LOW},
 {CosmicPower    ,TMF_UNIVERSAL      ,TMT_PSYCHIC|TMT_FAIRY                      ,TMP_3  ,TML_LOW},
 {Rage           ,TMF_UNIVERSAL      ,TMT_NORMAL                                 ,TMP_3  ,TML_LOW},
 {Meditate       ,TMF_UNIVERSAL      ,TMT_PSYCHIC                                ,TMP_3  ,TML_LOW},
+{HoneClaws      ,TMF_NULL           ,TMT_NORMAL                                 ,TMP_1  ,TML_ALL},
 
 {IronDefense    ,TMF_UNIVERSAL      ,TMT_STEEL                                  ,TMP_4  ,TML_MID},
 {Amnesia        ,TMF_UNIVERSAL      ,TMT_PSYCHIC                                ,TMP_4  ,TML_MID},
 {SwordDance     ,TMF_UNIVERSAL      ,TMT_NORMAL                                 ,TMP_4  ,TML_MID},
 {NastyPlot      ,TMF_UNIVERSAL      ,TMT_DARK                                   ,TMP_4  ,TML_MID},
 {Agility        ,TMF_UNIVERSAL      ,TMT_PSYCHIC                                ,TMP_4  ,TML_MID},
-*/
+
 {Screech        ,TMF_UNIVERSAL      ,TMT_NORMAL                                 ,TMP_1  ,TML_MID},
 {FakeTears      ,TMF_UNIVERSAL      ,TMT_DARK                                   ,TMP_1  ,TML_MID},
 {Charm          ,TMF_UNIVERSAL      ,TMT_FAIRY                                  ,TMP_1  ,TML_MID},
@@ -169,6 +169,8 @@ int TMList [MAXTMLIST][5] = {
 {FlameCharge    ,TMF_NULL           ,TMT_FIRE                                   ,TMP_2  ,TML_LOW},
 {FuryCutter     ,TMF_NULL           ,TMT_BUG                                    ,TMP_2  ,TML_LOW},
 {DarkPulse      ,TMF_NULL           ,TMT_DARK|TMT_GHOST                         ,TMP_4  ,TML_MID2},
+{Dig            ,TMF_NULL           ,TMT_ROCK|TMT_GROUND                        ,TMP_4  ,TML_MID2},
+{Bulldoze       ,TMF_NULL           ,TMT_ROCK|TMT_GROUND|TMT_Steel              ,TMP_4  ,TML_MID2},
 
 {IceBeam        ,TMF_NULL           ,TMT_WATER|TMT_ICE                          ,TMP_4  ,TML_MID2},
 {Flamethrower   ,TMF_NULL           ,TMT_FIRE|TMT_DRAGON                        ,TMP_4  ,TML_MID2},
@@ -409,6 +411,7 @@ int output = 0;
         case FuryCutter: output = TMR_FuryCutter(Dexnum); break;    
         case DarkPulse: output = TMR_DarkPulse(Dexnum); break;    
         case FocusBlast: output = TMR_FocusBlast(Dexnum); break;    
+        case HoneClaws: output = TMR_HoneClaws(Dexnum); break;    
 
         
         
@@ -617,6 +620,8 @@ int output = 0;
     case RAICHU: output = 1; break;
     }
     if(TMArch_Pugilist(Dexnum)){output = 1;}
+    if(TMArch_Generalist(Dexnum)){output = 1;}
+
     
 return output;
 }
@@ -650,6 +655,8 @@ int output = 0;
     case GROVYLE: output = 1; break;
     case SCEPTILE: output = 1; break;
     }
+    if(TMArch_Generalist(Dexnum)){output = 1;}
+
 return output;
 }
 //#endregion
@@ -804,6 +811,8 @@ Function int TMR_Psychic (int Dexnum)
     case CHANSEY: output = 1; break;
     case BLISSEY: output = 1; break;
     }
+    if(TMArch_Generalist(Dexnum)){output = 1;}
+
 return output;
 }
 //#endregion
@@ -1091,6 +1100,7 @@ Function int TMR_SolarBeam (int Dexnum)
     {
     case DRAGAPULT: output = 1; break;
     }
+    if(TMArch_Generalist(Dexnum)){output = 1;}
 return output;
 }
 //#endregion
@@ -1212,6 +1222,49 @@ int output = 0;
     }
     if(TMArch_Defensive(Dexnum)){output = 1;}
     if(TMArch_Generalist(Dexnum)){output = 1;}
+    if(TMArch_Terrestrial(Dexnum)){output = 1;}
+
+return output;
+}
+//#endregion
+
+//#region -=- TM Rules : Dig -=-
+Function int TMR_Dig (int Dexnum) 
+{
+
+int output = 0;
+    Switch (Dexnum)
+    {
+    }
+    if(TMArch_Terrestrial(Dexnum)){output = 1;}
+
+return output;
+}
+//#endregion
+
+//#region -=- TM Rules : Bulldoze -=-
+Function int TMR_Bulldoze (int Dexnum) 
+{
+
+int output = 0;
+    Switch (Dexnum)
+    {
+    }
+    if(TMArch_Terrestrial(Dexnum)){output = 1;}
+
+return output;
+}
+//#endregion
+
+//#region -=- TM Rules : HoneClaws -=-
+Function int TMR_HoneClaws (int Dexnum) 
+{
+
+int output = 0;
+    Switch (Dexnum)
+    {
+    }
+    if(TMArch_Slasher(Dexnum)){output = 1;}
 
 return output;
 }
@@ -1290,6 +1343,9 @@ int output = 0;
     case SWAMPERT: output = 1; break;
     case SCEPTILE: output = 1; break;
     case HYDREIGON: output = 1; break;
+    case GASTLY: output = 1; break;
+    case HAUNTER: output = 1; break;
+    case GENGAR: output = 1; break;
     }
     if(TMArch_Generalist(Dexnum)){output = 1;}
 
@@ -1323,6 +1379,8 @@ int output = 0;
             case ONIX: output = 1; break;
             case STEELIX: output = 1; break;
             case SEVIPER: output = 1; break;
+            case EKANS: output = 1; break;
+            case ARBOK: output = 1; break;
         }
 return output;
 }
@@ -1350,6 +1408,14 @@ int output = 0;
         case HAPPINY: output = 1; break;
         case CHANSEY: output = 1; break;
         case BLISSEY: output = 1; break;
+        case CLEFFA: output = 1; break;
+        case CLEFAIRY: output = 1; break;
+        case CLEFABLE: output = 1; break;
+        case IGGLYBUFF: output = 1; break;
+        case JIGGLYPUFF: output = 1; break;
+        case WIGGLYTUFF: output = 1; break;
+        case AUDINO: output = 1; break;
+        case ALOMOMOLA: output = 1; break;
         }
 return output;
 }
@@ -1389,6 +1455,12 @@ int output = 0;
             case SCIZOR: output = 1; break;
             case METANG: output = 1; break;
             case METAGROSS: output = 1; break;
+            case CROAGUNK: output = 1; break;
+            case TOXICROAK: output = 1; break;
+            case GULPIN: output = 1; break;
+            case SWALOT: output = 1; break;
+            case HAUNTER: output = 1; break;
+            case GENGAR: output = 1; break;
         }
 return output;
 }
@@ -1415,6 +1487,8 @@ int output = 0;
         case SCYTHER: output = 1; break;
         case SCIZOR: output = 1; break;
         case SEVIPER: output = 1; break;
+        case SKUNTANK: output = 1; break;
+        case ZANGOOSE: output = 1; break;
         }
 return output;
 }
@@ -1433,6 +1507,14 @@ int output = 0;
         case CHANSEY: output = 1; break;
         case BLISSEY: output = 1; break;
         case ZANGOOSE: output = 1; break;
+        case CLEFFA: output = 1; break;
+        case CLEFAIRY: output = 1; break;
+        case CLEFABLE: output = 1; break;
+        case IGGLYBUFF: output = 1; break;
+        case JIGGLYPUFF: output = 1; break;
+        case WIGGLYTUFF: output = 1; break;
+        case AUDINO: output = 1; break;
+
         }
 return output;
 }
@@ -1468,7 +1550,47 @@ int output = 0;
             case GOLEM_A: output = 1; break;
             case ONIX: output = 1; break;
             case STEELIX: output = 1; break;
+            case BERGMITE: output = 1; break;
+            case AVALUGG: output = 1; break;
+            case GULPIN: output = 1; break;
+            case SWALOT: output = 1; break;
 
+        }
+return output;
+}
+//#endregion 
+
+//#region -=- Archetype : Terrestrial
+Function int TMArch_Terrestrial (int Dexnum)
+{
+int output = 0;
+    /* Terrestrial archetype involves pokemon that are largely land based, and can learn many 
+     * ground and rock moves as a result.
+
+    */
+    Switch (Dexnum)
+        {
+            case BULBASAUR: output = 1; break;
+            case IVYSAUR: output = 1; break;
+            case VENUSAUR: output = 1; break;
+            case CHIKORITA: output = 1; break;
+            case BAYLEEF: output = 1; break;
+            case MEGANIUM: output = 1; break;
+            case CYNDAQUIL: output = 1; break;
+            case QUILAVA: output = 1; break;
+            case TYPHLOSION: output = 1; break;
+            case MUDKIP: output = 1; break;
+            case MARSHTOMP: output = 1; break;
+            case SWAMPERT: output = 1; break;
+            case TURTWIG: output = 1; break;
+            case GROTLE: output = 1; break;
+            case TORTERRA: output = 1; break;
+            case STUNKY: output = 1; break;
+            case SKUNTANK: output = 1; break;
+            case ZANGOOSE: output = 1; break;
+            case SEVIPER: output = 1; break;
+            case EKANS: output = 1; break;
+            case ARBOK: output = 1; break;
         }
 return output;
 }
@@ -1625,36 +1747,6 @@ int output = 0;
         case MONFERNO: output = 1; break;
         case INFERNAPE: output = 1; break;
     }
-return output;
-}
-//#endregion 
-
-//#region -=- Archetype : Terrestrial
-Function int TMArch_Terrestrial (int Dexnum)
-{
-int output = 0;
-    /* Terrestrial archetype involves pokemon that are largely land based, and can learn many 
-     * ground and rock moves as a result.
-
-    */
-    Switch (Dexnum)
-        {
-            case BULBASAUR: output = 1; break;
-            case IVYSAUR: output = 1; break;
-            case VENUSAUR: output = 1; break;
-            case CHIKORITA: output = 1; break;
-            case BAYLEEF: output = 1; break;
-            case MEGANIUM: output = 1; break;
-            case CYNDAQUIL: output = 1; break;
-            case QUILAVA: output = 1; break;
-            case TYPHLOSION: output = 1; break;
-            case MUDKIP: output = 1; break;
-            case MARSHTOMP: output = 1; break;
-            case SWAMPERT: output = 1; break;
-            case TURTWIG: output = 1; break;
-            case GROTLE: output = 1; break;
-            case TORTERRA: output = 1; break;
-        }
 return output;
 }
 //#endregion 

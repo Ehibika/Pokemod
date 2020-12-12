@@ -65,7 +65,7 @@ TNT1 A 0 A_GiveInventory("ProtectMove4")
 stop
 
 BotWep:
-TNT1 A 0 A_GiveInventory("WaterGunMove1")
+TNT1 A 0 A_GiveInventory("SurfMove1")
 stop
 }
 }

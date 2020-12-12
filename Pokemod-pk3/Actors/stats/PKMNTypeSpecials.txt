@@ -108,6 +108,7 @@ actor PoisonProof : TypeBase
 {
     damagefactor "Toxic", 0.0
     damagefactor "PoisonPowder", 0.0
+    damagefactor "PoisonGas", 0.0
     damagefactor "ToxicSpikes", 0.0
 }
 
@@ -252,6 +253,7 @@ actor Steel_PoisonProof : TypeBase
 {
     damagefactor "Toxic", 0.0
     damagefactor "PoisonPowder", 0.0
+    damagefactor "PoisonGas", 0.0
     damagefactor "ToxicSpikes", 0.0
 }
 //====

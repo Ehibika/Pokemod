@@ -1406,6 +1406,7 @@ Int OutPut;
 script "PKMNACS_HitKnockback" (int force, int type, int disabled)
 {
 if(!(ClassifyActor(0) & ACTOR_PLAYER)){terminate;}
+if(CheckInventory("STF_Curse")){terminate;}
 if(disabled == 0){GiveInventory("TempPitProtection",1);}
 int pusher = ACS_NamedExecuteWithResult("core_gettarget");
 
@@ -1710,7 +1711,7 @@ script "PKMN_PushPull" (int maxforce, int maxRange, int noFalloff)
 	int userTeam = -1;
 	int userCount = 0;
 
-		userTID = ACS_ExecuteWithResult(257, 0);
+		userTID = ACS_NamedExecuteWithResult("Core_GetTarget", 0);
 		userTeam = GetPlayerInfo(userTID - 1000, PLAYERINFO_TEAM);
 
 	for(int p = 0;p < ServerMax; p++)
@@ -1728,7 +1729,9 @@ script "PKMN_PushPull" (int maxforce, int maxRange, int noFalloff)
 		}
 		
 		targetTID = p+1000;
-		if(!CheckActorInventory(targetTID, "NoPushFlag") && xyzDistance(0, targetTID) < maxRange && userTID != targetTID)
+		if(!CheckActorInventory(targetTID, "NoPushFlag")
+			&&!CheckActorInventory(targetTID, "STF_Curse") 
+			&& xyzDistance(0, targetTID) < maxRange && userTID != targetTID)
 		{	
 			userCount++;
 			distance = xyzDistance(0,targetTID);

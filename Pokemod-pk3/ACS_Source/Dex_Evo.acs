@@ -172,5 +172,36 @@ Int EvoDEX [MAXDEX][6] = {
     /*|110|*/{ 1,      MIDSTAGE,             METANG,  NULLEVO,     NULLEVO,42 },
     /*|111|*/{ 1,      FINALSTAGE,             METAGROSS,  NULLEVO,     NULLEVO,42 },
     /*|112|*/{ 0,      0,             NULLEVO,  NULLEVO,     NULLEVO,42 },
+
+    /*|113|*/{ 1,      MIDSTAGE,             CLEFAIRY,  NULLEVO,     NULLEVO,43 },
+    /*|114|*/{ 1,      FINALSTAGE,             CLEFABLE,  NULLEVO,     NULLEVO,43 },
+    /*|115|*/{ 0,      0,             NULLEVO,  NULLEVO,     NULLEVO,43 },
+    
+    /*|116|*/{ 1,      MIDSTAGE,             JIGGLYPUFF,  NULLEVO,     NULLEVO,44 },
+    /*|117|*/{ 1,      FINALSTAGE,             WIGGLYTUFF,  NULLEVO,     NULLEVO,44 },
+    /*|118|*/{ 0,      0,             NULLEVO,  NULLEVO,     NULLEVO,44 },
+
+    /*|119|*/{ 0,      0,             NULLEVO,  NULLEVO,     NULLEVO,45 },
+    
+    /*|120|*/{ 0,      0,             NULLEVO,  NULLEVO,     NULLEVO,46 },
+
+    /*|121|*/{ 1,      FINALSTAGE2,             AVALUGG,  NULLEVO,     NULLEVO,47 },
+    /*|122|*/{ 0,      0,             NULLEVO,  NULLEVO,     NULLEVO,47 },
+
+    /*|123|*/{ 1,      FINALSTAGE2,             TOXICROAK,  NULLEVO,     NULLEVO,48 },
+    /*|124|*/{ 0,      0,             NULLEVO,  NULLEVO,     NULLEVO,48 },
+
+    /*|125|*/{ 1,      FINALSTAGE2,             ARBOK,  NULLEVO,     NULLEVO,49 },
+    /*|126|*/{ 0,      0,             NULLEVO,  NULLEVO,     NULLEVO,49 },
+    
+    /*|127|*/{ 1,      FINALSTAGE2,             SKUNTANK,  NULLEVO,     NULLEVO,50 },
+    /*|128|*/{ 0,      0,             NULLEVO,  NULLEVO,     NULLEVO,50 },
+    
+    /*|129|*/{ 1,      FINALSTAGE2,             SWALOT,  NULLEVO,     NULLEVO,51 },
+    /*|130|*/{ 0,      0,             NULLEVO,  NULLEVO,     NULLEVO,51 },
+    
+    /*|131|*/{ 1,      MIDSTAGE,             HAUNTER,  NULLEVO,     NULLEVO,52 },
+    /*|132|*/{ 1,      FINALSTAGE,             GENGAR,  NULLEVO,     NULLEVO,52 },
+    /*|133|*/{ 0,      0,             NULLEVO,  NULLEVO,     NULLEVO,52 },
     //--[NewPokemon]--
 };

@@ -28,7 +28,7 @@ Fire.Loaf:
 "####" A 0 A_GiveInventory("DashSet_B")
 "####" A 0 ACS_NamedExecuteAlways("TakePP",0,Move_SlackOff,1)
 "####" B 0 A_PlaySoundEx("Move/Yawn","Weapon")
-"####" BBBBBBBBBBBBBBBBB 1 A_GiveInventory("SlackOffParticleSpawn")
+"####" BBBBBBBBBBBBBBBBBBBBBBBBB 1 A_GiveInventory("SlackOffParticleSpawn")
 "####" B 0 A_GiveInventory("SlackOffHeal")
 "####" B 0 A_PlaySoundEx("Item/Refill","Soundslot6")
 "####" B 5 A_GiveInventory("RestFX_Spawn")
@@ -38,7 +38,6 @@ Goto Fire.After
 Fire.After:
 "####" B 1 A_GiveInventory("FullRecovery_A")
 "####" A 0 A_GiveInventory("DashSetOff")
-"####" B 0 A_GiveInventory("FatigueStatusProc")
 "####" B 0 A_Jump(256,"Fire.End")
 Goto Fire.End
 }

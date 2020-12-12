@@ -331,7 +331,7 @@ str weapons_ammo[MAX_WEAPONS_GLOBAL][7] =
 {"DragonDartsMove", "DragonDartsPP", "DragonDarts", 1.0, "NO", "NO", "SLOT_NONE"},
 {"PhantomForceMove", "PhantomForcePP", "PhantomForce", 1.0, "NO", "NO", "SLOT_NONE"},
 {"DracoMeteorMove", "DracoMeteorPP", "DracoMeteor", 1.0, "NO", "NO", "SLOT_NONE"},
-{"ThunderWaveMove", "ThunderWavePP", "ThunderWave", 1.0, "NO", "NO", "SLOT_NONE"},
+{"ThunderWaveMove", "ThunderWavePP", "ThunderWave", 1.0, "YES", "NO", "SLOT_NONE"},
 {"TwisterMove", "TwisterPP", "Twister", 1.0, "NO", "NO", "SLOT_NONE"},
 {"WrapMove", "WrapPP", "Wrap", 1.0, "NO", "NO", "SLOT_NONE"},
 {"BarrierMove", "BarrierPP", "Barrier", 1.0, "NO", "NO", "SLOT_NONE"},
@@ -395,7 +395,7 @@ str weapons_ammo[MAX_WEAPONS_GLOBAL][7] =
 {"ShadowSneakMove", "ShadowSneakPP", "ShadowSneak", 1.0, "NO", "NO", "SLOT_NONE"},
 {"DestinyBondMove", "DestinyBondPP", "DestinyBond", 1.0, "NO", "NO", "SLOT_NONE"},
 {"<BlankMove>Move", "<BlankMove>PP", "<BlankMove>", 1.0, "NO", "NO", "SLOT_NONE"},
-{"DrainingKissMove", "DrainingKissPP", "DrainingKiss", 1.0, "NO", "NO", "SLOT_NONE"},
+{"DrainingKissMove", "DrainingKissPP", "DrainingKiss", 1.0, "YES", "NO", "SLOT_NONE"},
 {"ImprisonMove", "ImprisonPP", "Imprison", 1.0, "NO", "NO", "SLOT_NONE"},
 {"WishMove", "WishPP", "Wish", 1.0, "NO", "YES", "SLOT_NONE"},
 {"StoredPowerMove", "StoredPowerPP", "StoredPower", 1.0, "NO", "NO", "SLOT_NONE"},
@@ -436,6 +436,7 @@ str weapons_ammo[MAX_WEAPONS_GLOBAL][7] =
 {"SoftBoiledMove", "SoftBoiledPP", "SoftBoiled", 1.0, "NO", "YES", "SLOT_NONE"},
 {"FuryCutterMove", "FuryCutterPP", "FuryCutter", 1.0, "NO", "NO", "SLOT_NONE"},
 {"DarkPulseMove", "DarkPulsePP", "DarkPulse", 1.0, "NO", "NO", "SLOT_NONE"},
+{"MorningSunMove", "MorningSunPP", "MorningSun", 1.0, "NO", "YES", "SLOT_NONE"},
 //--[NewMove]--
 };
 #endregion
@@ -979,7 +980,10 @@ Script "MoveSetup" (void)
 				Case TAUNT: ACS_NamedExecuteAlways("TracerTargeter",0,TG_ENEMY,350); break;
 				Case MEGADRAIN: ACS_NamedExecuteAlways("TracerTargeter",0,TG_ENEMY,350); break;
 				Case HYPNOSIS: ACS_NamedExecuteAlways("TracerTargeter",0,TG_ENEMY,550); break;
-				Case DREAMEATER: ACS_NamedExecuteAlways("TracerTargeter",0,TG_ENEMY,350); break;
+				Case DREAMEATER: ACS_NamedExecuteAlways("TracerTargeter",0,TG_ENEMY,550); break;
+				Case CURSE: ACS_NamedExecuteAlways("TracerTargeter",0,TG_ENEMY,800); break;
+				Case THUNDERWAVE: ACS_NamedExecuteAlways("TracerTargeter",0,TG_ENEMY,800); break;
+				Case DrainingKiss: ACS_NamedExecuteAlways("TracerTargeter",0,TG_ENEMY,550); break;
 				default: ACS_NamedExecuteAlways("TracerTargeter",0,TG_TEAM,630); break;
 			}
 			
@@ -1112,6 +1116,8 @@ if(CheckInventory("HazeFlag"))
 		Case RAGE: return false; break;
 		Case MEDITATE: return false; break;
 		Case CALMMIND: return false; break;
+		Case ROCKPOLISH: return false; break;
+		Case HONECLAWS: return false; break;
 		Case REFLECT: return false; break;
 		Case LIGHTSCREEN: return false; break;
         default: break;
@@ -1147,6 +1153,10 @@ if(CheckInventory("ParalysisMark"))
 		Case Pursuit: acs_execute(979,0); return false;
 		Case Acrobatics: acs_execute(979,0); return false;
 		Case BraveBird: acs_execute(979,0); return false;
+		Case Spark: acs_execute(979,0); return false;
+		Case WildCharge: acs_execute(979,0); return false;
+		Case TakeDown: acs_execute(979,0); return false;
+		Case DIG: acs_execute(979,0); return false;
     }
 }
 
@@ -1255,6 +1265,11 @@ if(CheckInventory("TauntFlag"))
 	Case BELLYDRUM: return false; break;
 	Case BLOCK: return false; break;
 	Case WIDEGUARD: return false; break;
+	Case MORNINGSUN: return false; break;
+	Case SOFTBOILED: return false; break;
+	Case ROCKPOLISH: return false; break;
+	Case HONECLAWS: return false; break;
+	Case CRAFTYSHIELD: return false; break;
     }
 }
 

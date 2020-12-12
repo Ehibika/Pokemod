@@ -1,0 +1,547 @@
+
+actor BlockMove : WepMasterBase
+{
+Tag "Block"
+obituary "$OB_BLOCK"
+Weapon.AmmoUse 1
+Weapon.AmmoGive 30
+weapon.ammotype "BlockPP"
+scale 2.0
+Inventory.Pickupmessage "$PU_MEGABUSTER"
+States
+{
+Spawn:
+WEAP X 1
+stop
+
+
+Fire:
+"####" BBB 1 A_Jumpif(CallACS("CheckWeaponFire",RC_C)==1,"Fire.Begin")
+"####" B 0 A_Jump(256,"NoAmmo")
+Goto NoAmmo
+
+Fire.Begin:
+"####" B 0
+"####" B 0 A_Jumpifinventory("BlockWarperFlag",1,"Fire.Guard")
+"####" B 0 A_Jump(256,"Fire.Initiate")
+Goto Fire.Initiate
+
+Fire.Initiate:
+"####" B 0 A_PlaySoundEx("Support/Barrier","Soundslot6")
+"####" B 0 A_SpawnItemEx("BlockWarper", 0, 0, 0, 0, 0, 0, 0,SXF_NOCHECKPOSITION)
+"####" B 0 A_GiveInventory("BlockWarperFlag")
+"####" B 0 A_TakeInventory("BlockPP",1)
+"####" B 0 A_GiveInventory("BlockCST")
+"####" B 0 A_Jump(256,"Fire.Guard")
+Goto Fire.Guard
+
+Fire.Guard:
+"####" B 0 A_GiveInventory("ChannelingSpeed")
+"####" B 0 A_Jumpifinventory("ConShotTimer",1,"Fire.Guard2")
+"####" B 0 A_Jump(256,"Fire.Guard1")
+Goto Fire.Guard1
+
+
+Fire.Guard1:
+"####" B 0 A_GiveInventory("BlockWarperFlag")
+"####" B 0 A_TakeInventory("BlockPP",1)
+"####" B 0 A_GiveInventory("BlockCST")
+"####" B 0 A_Jump(256,"Fire.After")
+Goto Fire.After
+
+Fire.Guard2:
+"####" B 0 A_GiveInventory("BlockWarperFlag")
+"####" B 0 A_Jump(256,"Fire.After")
+Goto Fire.After
+
+Fire.After:
+"####" B 3
+"####" C 0 A_REfire("Fire")
+"####" B 0 A_TakeInventory("ChannelingSpeed",9)
+"####" B 0 A_TakeInventory("BlockWarperFlag",99)
+"####" B 0 A_Jump(256,"Fire.End")
+Goto Fire.End
+}
+}
+
+actor BlockMove1 : BlockMove {Weapon.SlotNumber 1}
+actor BlockMove2 : BlockMove {Weapon.SlotNumber 2}
+actor BlockMove3 : BlockMove {Weapon.SlotNumber 3}
+actor BlockMove4 : BlockMove {Weapon.SlotNumber 4}
+
+actor BlockMove5 : BlockMove 
+{
+Weapon.SlotNumber 5
+States
+{
+Fire.End:
+TNT1 A 0
+TNT1 A 0 A_TakeInventory("BlockMove5",9)
+TNT1 A 0 A_Jump(256,"Ready")
+Goto Ready
+}
+}
+
+//[+]========================================================================[+]
+//-----------------------------|Ammo & Inventory|------------------------------
+//[+]========================================================================[+]
+actor BlockPP : Ammo {inventory.amount 1 inventory.Maxamount 30}
+
+actor BlockWarperFlag : Powerup
+{
+    inventory.amount 1 
+    Powerup.Duration 17
+}
+
+actor BlockCST : PowerupGiver
+{
++INVENTORY.AUTOACTIVATE
+Powerup.Duration 35
+powerup.type "ConShotTimer"
+}
+
+
+actor BlockPushBuffer : PowerUp
+{
+inventory.amount 1 
+Powerup.Duration 7
+}
+
+
+Const int BlockRad = 125;
+Const int BlockPush = -14;
+
+actor BlockPusher : CustomInventory 
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_JumpIfInventory("BlockPushBuffer",1,"Nope")
+TNT1 A 0 A_GiveInventory("BlockPushBuffer",1)
+TNT1 A 0 ACS_NamedExecuteAlways("PKMN_PushPull", 0, BlockPush, BlockRad,0)
+stop
+Nope:
+BLTR C 0 
+stop
+}
+}
+//[+]========================================================================[+]
+//--------------------------------|Projectiles |--------------------------------
+//[+]========================================================================[+]
+actor BlockWarper //: BasicHelper
+{
+    +MISSILE
+    -SOLID
+    +NOCLIP
+    +NOINTERACTION
+    +NOGRAVITY
+    +DONTBLAST
+    +DONTREFLECT
+    +THRUACTORS
+    RenderStyle none
+    Radius 2
+    Height 2
+    Args 7
+    Speed 15
+    States
+    {
+    Spawn:
+        TNT1 A 0
+        TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+        TNT1 A 0 ACS_NamedExecuteAlways("GeneralWarper2",0)    
+    Warp:
+        TNT1 A 1 A_Warp(2,64,0,28,0,WARPF_INTERPOLATE|WARPF_NOCHECKPOSITION)
+        TNT1 A 0 A_SpawnItemEx("BlockFX_2",0,0,1,0,0,0,0,8)
+        TNT1 A 0 A_GiveInventory("BlockWallSpawner",1)
+        TNT1 A 0 A_GiveInventory("BlockPusher",1)
+        //TNT1 A 0 A_GiveToTarget("CharmFXSpawn")
+        loop
+    Death:
+    TNT1 A 0 
+    TNT1 A 0
+    stop
+
+    }
+}
+
+
+
+actor BlockFX_2 : BasicHelper
+{
+//+CLIENTSIDEONLY
+	States
+	{
+		Spawn:
+		TNT1 A 0
+        TNT1 A 0// A_SetUserVar("user_angle", random(0, 30))
+        TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+		TNT1 A 0 A_SpawnItemEx("BlockGraphic_2",0,96,24,0,0,0,0,SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS)
+        TNT1 A 0 A_SpawnItemEx("BlockGraphic_1",0,0,24,0,0,0,0,SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS)
+        TNT1 A 0 A_SpawnItemEx("BlockGraphic_2",0,-96,24,0,0,0,0,SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS)
+		stop
+	}
+}
+
+actor BlockGraphic_1 : BasicGraphicEffect
+{
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+BLKX A 1
+BLKX A 1 A_Fadeout(0.5)
+stop
+}
+}
+
+actor BlockGraphic_2 : BasicGraphicEffect
+{
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+BLKX B 1
+BLKX B 1 A_Fadeout(0.5)
+stop
+}
+}
+
+//[+]========================================================================[+]
+//--------------------------------|Shield Actors|---------------------------
+//[+]========================================================================[+]
+Actor BlockShieldPart //: HexBarrierBase
+{
+  Health 9999
+  +ISMONSTER
+  +NOCLIP
+  +NOGRAVITY
+  +DROPOFF
+  +MISSILE
+  +SHOOTABLE
+  +DONTREFLECT
+  +DONTSPLASH
+  +DONTBLAST
+  +DONTRIP
+  +INVULNERABLE
+  +NOBLOOD
+  +MTHRUSPECIES
+  +GHOST
+  //+SERVERSIDEONLY
+    RenderStyle "TRANSLUCENT"
+  Alpha 0.3
+  radius 24
+  States
+  {
+  Spawn:
+	TNT1 A 0
+	TNT1 A 0 
+    TNT1 AA 1 
+    Goto Death
+	Pain:
+	TNT1 A 0 A_PlaySoundEX ("item/protoreflect","Soundslot5")
+    TNT1 A 0 A_SpawnItemEx("CentaurFlashFX", 0, 0, 28, 256/24, 256/24, random2(256/24), random(0, 359))
+	Goto Death
+	Perish:
+  Death:
+    TNT1 A 2
+    stop
+  }
+}
+
+Actor BlockShieldPart1 : BlockShieldPart{+NORADIUSDMG}
+Actor BlockShieldPart_B : BlockShieldPart{Designatedteam 0 Species "LightMember" +NORADIUSDMG}
+Actor BlockShieldPart_R : BlockShieldPart{Designatedteam 1 Species "WilyMember" +NORADIUSDMG}
+Actor BlockShieldPart_G : BlockShieldPart{Designatedteam 2 Species "CossackMember" +NORADIUSDMG}
+Actor BlockShieldPart_O : BlockShieldPart{Designatedteam 3 Species "KingMember" +NORADIUSDMG}
+
+
+//[+]==================================[+]
+//[+]==================================[+]
+//#region -=- screen spawn actors -=-
+actor BlockLine
+{
+  Radius 1
+  Height 1
+  +NOGRAVITY
+  +NOINTERACTION
+  States
+  {
+  Spawn:
+    TNT1 A 0
+    TNT1 A 0
+    TNT1 A 0 A_SpawnItemEx ("BlockShieldPart", 0, 0, 0, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("BlockShieldPart", 0, 0, 16, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("BlockShieldPart", 0, 0, 32, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("BlockShieldPart", 0, 0, 48, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("BlockShieldPart", 0, 0, 64, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("BlockShieldPart", 0, 0, 80, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    stop
+  }
+}
+
+actor BlockLine_B
+{
+  Radius 1
+  Height 1
+  +NOGRAVITY
+  +NOINTERACTION
+  States
+  {
+  Spawn:
+    TNT1 A 0
+    TNT1 A 0
+    TNT1 A 0 A_SpawnItemEx ("BlockShieldPart_B", 0, 0, 0, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("BlockShieldPart_B", 0, 0, 16, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("BlockShieldPart_B", 0, 0, 32, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("BlockShieldPart_B", 0, 0, 48, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("BlockShieldPart_B", 0, 0, 64, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("BlockShieldPart_B", 0, 0, 80, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    stop
+  }
+}
+
+actor BlockLine_R
+{
+  Radius 1
+  Height 1
+  +NOGRAVITY
+  +NOINTERACTION
+  States
+  {
+  Spawn:
+    TNT1 A 0
+    TNT1 A 0
+    TNT1 A 0 A_SpawnItemEx ("BlockShieldPart_R", 0, 0, 0, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("BlockShieldPart_R", 0, 0, 16, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("BlockShieldPart_R", 0, 0, 32, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("BlockShieldPart_R", 0, 0, 48, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("BlockShieldPart_R", 0, 0, 64, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("BlockShieldPart_R", 0, 0, 80, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    stop
+  }
+}
+
+actor BlockLine_G
+{
+  Radius 1
+  Height 1
+  +NOGRAVITY
+  +NOINTERACTION
+  States
+  {
+  Spawn:
+    TNT1 A 0
+    TNT1 A 0
+    TNT1 A 0 A_SpawnItemEx ("BlockShieldPart_G", 0, 0, 0, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("BlockShieldPart_G", 0, 0, 16, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("BlockShieldPart_G", 0, 0, 32, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("BlockShieldPart_G", 0, 0, 48, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("BlockShieldPart_G", 0, 0, 64, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("BlockShieldPart_G", 0, 0, 80, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    stop
+  }
+}
+
+actor BlockLine_O
+{
+  Radius 1
+  Height 1
+  +NOGRAVITY
+  +NOINTERACTION
+  States
+  {
+  Spawn:
+    TNT1 A 0
+    TNT1 A 0
+    TNT1 A 0 A_SpawnItemEx ("BlockShieldPart_O", 0, 0, 0, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("BlockShieldPart_O", 0, 0, 16, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("BlockShieldPart_O", 0, 0, 32, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("BlockShieldPart_O", 0, 0, 48, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("BlockShieldPart_O", 0, 0, 64, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("BlockShieldPart_O", 0, 0, 80, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    stop
+  }
+}
+
+
+
+actor BlockWall
+{
+  Radius 1
+  Height 1
+  +NOGRAVITY
+  +NOINTERACTION
+  States
+  {
+  Spawn:
+    TNT1 A 0
+    TNT1 A 0
+    TNT1 A 0 A_SpawnItemEx ("BlockLine", 0, 80, 0, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("BlockLine", 0, 64, 0, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("BlockLine", 0, 48, 0, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("BlockLine", 0, 32, 0, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("BlockLine", 0, 16, 0, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("BlockLine", 0, 0, 0, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("BlockLine", 0, -16, 0, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("BlockLine", 0, -32, 0, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("BlockLine", 0, -48, 0, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("BlockLine", 0, -64, 0, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("BlockLine", 0, -80, 0, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+
+    stop
+  }
+}
+
+actor BlockWall_B
+{
+  Radius 1
+  Height 1
+  +NOGRAVITY
+  +NOINTERACTION
+  translation "192:192=205:205", "198:198=74:74"
+  States
+  {
+  Spawn:
+    TNT1 A 0
+    TNT1 A 0
+    TNT1 A 0 A_SpawnItemEx ("BlockLine_B", 0, 80, 0, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("BlockLine_B", 0, 64, 0, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("BlockLine_B", 0, 48, 0, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("BlockLine_B", 0, 32, 0, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("BlockLine_B", 0, 16, 0, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("BlockLine_B", 0, 0, 0, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("BlockLine_B", 0, -16, 0, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("BlockLine_B", 0, -32, 0, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("BlockLine_B", 0, -48, 0, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("BlockLine_B", 0, -64, 0, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("BlockLine_B", 0, -80, 0, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+
+    stop
+  }
+}
+
+actor BlockWall_R
+{
+  Radius 1
+  Height 1
+  +NOGRAVITY
+  +NOINTERACTION
+  Translation "192:192=171:171", "198:198=41:41"
+  States
+  {
+  Spawn:
+    TNT1 A 0
+    TNT1 A 0
+    TNT1 A 0 A_SpawnItemEx ("BlockLine_R", 0, 80, 0, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("BlockLine_R", 0, 64, 0, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("BlockLine_R", 0, 48, 0, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("BlockLine_R", 0, 32, 0, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("BlockLine_R", 0, 16, 0, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("BlockLine_R", 0, 0, 0, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("BlockLine_R", 0, -16, 0, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("BlockLine_R", 0, -32, 0, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("BlockLine_R", 0, -48, 0, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("BlockLine_R", 0, -64, 0, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("BlockLine_R", 0, -80, 0, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+
+    stop
+  }
+}
+
+actor BlockWall_G
+{
+  Radius 1
+  Height 1
+  +NOGRAVITY
+  +NOINTERACTION
+  Translation "192:192=104:104", "198:198=128:128"
+  States
+  {
+  Spawn:
+    TNT1 A 0
+    TNT1 A 0
+    TNT1 A 0 A_SpawnItemEx ("BlockLine_G", 0, 80, 0, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("BlockLine_G", 0, 64, 0, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("BlockLine_G", 0, 48, 0, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("BlockLine_G", 0, 32, 0, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("BlockLine_G", 0, 16, 0, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("BlockLine_G", 0, 0, 0, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("BlockLine_G", 0, -16, 0, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("BlockLine_G", 0, -32, 0, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("BlockLine_G", 0, -48, 0, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("BlockLine_G", 0, -64, 0, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("BlockLine_G", 0, -80, 0, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+
+    stop
+  }
+}
+
+actor BlockWall_O
+{
+  Radius 1
+  Height 1
+  +NOGRAVITY
+  +NOINTERACTION
+  Translation "192:192=229:229", "198:198=232:232"
+  States
+  {
+  Spawn:
+    TNT1 A 0
+    TNT1 A 0
+    TNT1 A 0 A_SpawnItemEx ("BlockLine_O", 0, 80, 0, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("BlockLine_O", 0, 64, 0, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("BlockLine_O", 0, 48, 0, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("BlockLine_O", 0, 32, 0, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("BlockLine_O", 0, 16, 0, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("BlockLine_O", 0, 0, 0, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("BlockLine_O", 0, -16, 0, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("BlockLine_O", 0, -32, 0, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("BlockLine_O", 0, -48, 0, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("BlockLine_O", 0, -64, 0, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+    TNT1 A 0 A_SpawnItemEx ("BlockLine_O", 0, -80, 0, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS,0,tid)
+
+    stop
+  }
+}
+
+//#endregion
+
+actor BlockWallSpawner : CustomInventory 
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_JumpIfInTargetInventory("LightTeamFlag",1,"BFire")
+TNT1 A 0 A_JumpIfInTargetInventory("WilyTeamFlag",1,"RFire")
+TNT1 A 0 A_JumpIfInTargetInventory("CossackTeamFlag",1,"GFire")
+TNT1 A 0 A_JumpIfInTargetInventory("KingTeamFlag",1,"YFire")
+BLTR C 0 A_SpawnItemEx("BlockWall",0,0,0,0,0,0,0,8)
+stop
+RFire:
+BLTR C 0 A_SpawnItemEx("BlockWall_R",0,0,0,0,0,0,0,8)
+stop
+BFire:
+BLTR C 0 A_SpawnItemEx("BlockWall_B",0,0,0,0,0,0,0,8)
+stop
+GFire:
+BLTR C 0 A_SpawnItemEx("BlockWall_G",0,0,0,0,0,0,0,8)
+stop
+YFire:
+BLTR C 0 A_SpawnItemEx("BlockWall_O",0,0,0,0,0,0,0,8)
+stop
+}
+}

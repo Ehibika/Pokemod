@@ -21,6 +21,7 @@ damagefactor "RecoilDamage", 1.0
 
 damagefactor "LeechSeed", 1.0
 damagefactor "PoisonPowder", 1.0
+damagefactor "PoisonGas", 1.0
 damagefactor "SleepPowder", 1.0
 damagefactor "Toxic", 1.0
 damagefactor "DragonRage", 1.0
@@ -42,6 +43,8 @@ damagefactor "HoneClaws", 1.0
 damagefactor "RockPolish", 1.0
 damagefactor "Glare", 1.0
 damagefactor "SoftBoiled", 1.0
+damagefactor "MorningSun", 1.0
+damagefactor "Curse", 1.0
 //--[NewStatusMove]--
 }
 

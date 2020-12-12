@@ -2,7 +2,7 @@ actor MoonlightMove : WepMasterBase
 {
 Tag "Moonlight"
 Weapon.AmmoUse 1
-Weapon.AmmoGive 5
+Weapon.AmmoGive 10
 weapon.ammotype "MoonlightPP"
 scale 2.0
 Inventory.Pickupmessage "$PU_MEGABUSTER"
@@ -70,7 +70,7 @@ Goto Ready
 //[+]========================================================================[+]
 //-----------------------------|Ammo & Inventory|------------------------------
 //[+]========================================================================[+]
-actor MoonlightPP : Ammo {inventory.amount 1 inventory.Maxamount 5}
+actor MoonlightPP : Ammo {inventory.amount 1 inventory.Maxamount 10}
 
 
 Const int MoonlightRad = 300;
@@ -206,7 +206,7 @@ Spawn:
 TNT1 A 0
 TNT1 A 1
 TNT1 A 0 A_PlaySoundEx("support/Heal5","SoundSlot7")
-TNT1 A 0 ACS_NamedExecuteAlways("MoveAreaHeal",0,CallACS("StatValueRamp2",STAT_SATK,50,350),MoonlightRad,Move_Moonlight)
+TNT1 A 0 ACS_NamedExecuteAlways("MoveAreaHeal",0,CallACS("PKMNACS_HealthPercent",AAPTR_TARGET,1,50),MoonlightRad,Move_Moonlight)
 Spawn2:
 TNT1 AAAAAAAA 0 A_SpawnItemEx("MoonlightSparkle", MoonlightRad, 0, -(z-floorz)+150, 0, 0, random(-6,-1), Random(0,360), 1061)
 TNT1 A 5 A_CountDown

@@ -107,14 +107,14 @@ States
 Spawn:
 TNT1 A 0 
 TNT1 A 0 A_JumpIfInTargetInventory("DashBreaker",1,"Terminate")
-TNT1 A 1 A_Explode(MBP_AquaJet,64,0,0,64)//A_SpawnItemEX("AquaJetDamager",0,0,0,Momx,Momy,MomZ,0,SXF_ABSOLUTEMOMENTUM)
+TNT1 A 1 A_Explode(MBP_AquaJet,RAMHITBOX,0,0,RAMHITBOX)//A_SpawnItemEX("AquaJetDamager",0,0,0,Momx,Momy,MomZ,0,SXF_ABSOLUTEMOMENTUM)
 TNT1 A 1 
 stop
 Death:
 XDeath:
 Crash:
 TNT1 A 1 A_GiveToTarget("AquaJetCollision2",1)
-TNT1 A 0 A_Explode(MBP_AquaJet,64,0,0,64)
+TNT1 A 0 A_Explode(MBP_AquaJet,RAMHITBOX,0,0,RAMHITBOX)
 Terminate:
 TNT1 A 1
 stop
