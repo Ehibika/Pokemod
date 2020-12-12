@@ -1,0 +1,175 @@
+actor BulkUpMove : WepMasterBase
+{
+Tag "BulkUp"
+obituary "$OB_BulkUp"
+Weapon.AmmoUse 1
+Weapon.AmmoGive 25
+weapon.ammotype "BulkUpPP"
+scale 2.0
+Inventory.Pickupmessage "$PU_MEGABUSTER"
+States
+{
+Spawn:
+WEAP X 1
+stop
+
+
+Fire:
+"####" BBB 1 A_Jumpif(CallACS("CheckWeaponFire",RC_C)==1,"Fire.Begin")
+"####" B 0 A_Jump(256,"NoAmmo")
+Goto NoAmmo
+
+Fire.Begin:
+"####" B 0
+"####" B 0 A_JumpIfInventory("STF_BulkUp",1,"Fire.Off")
+"####" B 0 A_Jump(256,"Fire.On")
+Goto Fire.On
+
+Fire.On:
+"####" B 0 A_PlaySoundEx("Move/DragonDance","Soundslot6")
+"####" BBBBB 3 A_GiveInventory("BulkUpParticleSpawn")
+"####" B 5 //A_PlaySoundEx("Move/BulkUp","Soundslot6")
+"####" B 0 A_PlaySoundEx("Support/Statup","Soundslot7")
+"####" B 0 A_GiveInventory("BulkUpBuffInitiate")
+"####" B 0 A_TakeInventory("BulkUpPP",1)
+"####" B 0 A_Jump(256,"Fire.After")
+Goto Fire.After
+
+Fire.Off:
+"####" B 0 A_TakeInventory("BulkUp_Active",99)
+"####" B 0 A_GiveInventory("PartRecovery_C")
+"####" B 0 A_Jump(256,"Fire.After")
+Goto Fire.After
+
+Fire.After:
+"####" B 1 A_GiveInventory("HalfRecovery_C")
+"####" C 0 A_REfire("Fire")
+"####" B 0 A_Jump(256,"Fire.End")
+Goto Fire.End
+
+}
+}
+
+actor BulkUpMove1 : BulkUpMove {Weapon.SlotNumber 1}
+actor BulkUpMove2 : BulkUpMove {Weapon.SlotNumber 2}
+actor BulkUpMove3 : BulkUpMove {Weapon.SlotNumber 3}
+actor BulkUpMove4 : BulkUpMove {Weapon.SlotNumber 4}
+
+actor BulkUpMove5 : BulkUpMove 
+{
+Weapon.SlotNumber 5
+States
+{
+Fire.End:
+TNT1 A 0
+TNT1 A 0 A_TakeInventory("BulkUpMove5",9)
+TNT1 A 0 A_Jump(256,"Ready")
+Goto Ready
+}
+}
+
+//[+]========================================================================[+]
+//-----------------------------|Ammo & Inventory|------------------------------
+//[+]========================================================================[+]
+actor BulkUpPP : Ammo {inventory.amount 1 inventory.Maxamount 25}
+actor STF_BulkUp : Powerup {inventory.amount 1 Powerup.Duration 40}
+actor BulkUp_Active : Inventory {inventory.amount 1 inventory.Maxamount 1}
+
+actor BulkUpBuffInitiate : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_Jumpifinventory("BulkUp_Active",1,"Sustain")
+TNT1 A 0 A_GiveInventory("BulkUp_Active",1)
+TNT1 A 0 A_SpawnitemEX("BulkUpBuffWatcher")
+TNT1 A 0 A_GiveInventory("StatUpdator",1)
+stop
+
+Sustain:
+TNT1 A 0 A_GiveInventory("STF_BulkUp",1)
+stop
+Nope:
+TNT1 A 0
+stop
+}
+}
+
+
+actor BulkUpBuffWatcher : BasicHelper 
+{
+Var int user_TickTime;
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_JumpIfInTargetInventory("CutterFlag",999,"Death")
+TNT1 A 0 A_JumpIfInTargetInventory("IsDead",1,"Death")
+TNT1 A 0 A_JumpIfInTargetInventory("HazeFlag",1,"Death")
+TNT1 A 5 A_GiveToTarget("STF_BulkUp")
+TNT1 A 0 A_GiveToTarget("SDefUpFXSpawn")
+TNT1 A 0 A_GiveToTarget("SATKUpFXSpawn")
+TNT1 A 0 A_SetUserVar("user_TickTime",user_TickTime+5)
+TNT1 A 0 A_JumpIf(user_TickTime>=35,"SpawnTick")
+TNT1 A 0 A_JumpIfInTargetInventory("BulkUp_Active",1,"Spawn")
+Goto Death
+
+SpawnTick:
+TNT1 A 0 A_SetUserVar("user_TickTime",0)
+TNT1 A 0 A_TakeFromTarget("BulkUpPP",1)
+TNT1 A 0 A_JumpIfInTargetInventory("BulkUpPP",1,"Spawn")
+Goto Death
+
+Death:
+TNT1 A 0 A_GiveToTarget("StatUpdator")
+TNT1 A 0 A_GiveToTarget("BuffLossSoundCue")
+TNT1 A 0 A_TakeFromTarget("STF_BulkUp",9)
+TNT1 A 0 A_TakeFromTarget("BulkUp_Active",99)
+TNT1 A 2 
+stop
+}
+}
+
+actor BulkUpParticle : BasicClientside
+{
+scale 5.0
+speed 7
+ReactionTime 8
+States
+{
+Spawn:
+TNT1 A 0
+HITG H 1 A_Warp(AAPTR_TARGET,0,0,28,0,WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE)
+HITG H 0 A_SetScale(ScaleX-0.5)
+TNT1 A 0 A_CountDown
+loop
+Death:
+TNT1 A 0
+stop
+}
+}
+
+actor BulkUpParticleSpawn : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_SpawnItemEx ("BulkUpParticle", 0, 0, 54, momx, momy, momz, 0,SXF_NOCHECKPOSITION|SXF_ABSOLUTEMOMENTUM|SXF_TRANSFERTRANSLATION)
+stop
+Nope:
+TNT1 A 0
+stop
+}
+}

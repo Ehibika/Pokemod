@@ -6446,6 +6446,74 @@ OptionMenu "MoveMenu_MorningSun"
     StaticText ""
     StaticText"===============================================================",1
 } 
+OptionMenu "MoveMenu_MeteorMash"
+{
+    
+    Title "$M274_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M274_TYPE"
+    StaticText "$M274_CATEGORY"
+    StaticText "$M2744_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M274_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+} 
+OptionMenu "MoveMenu_IronHead"
+{
+    
+    Title "$M275_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M275_TYPE"
+    StaticText "$M275_CATEGORY"
+    StaticText "$M2754_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M275_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+} 
+OptionMenu "MoveMenu_Acid"
+{
+    
+    Title "$M276_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M276_TYPE"
+    StaticText "$M276_CATEGORY"
+    StaticText "$M2764_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M276_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+} 
+OptionMenu "MoveMenu_AcidSpray"
+{
+    
+    Title "$M277_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M277_TYPE"
+    StaticText "$M277_CATEGORY"
+    StaticText "$M2774_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M277_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+} 
 //--[NewMove]--
 
 OptionMenu "MoveMenu_Sketch"

@@ -298,6 +298,10 @@ const int Move_SoftBoiled = 270;
 const int Move_FuryCutter = 271;
 const int Move_DarkPulse = 272;
 const int Move_MorningSun = 273;
+const int Move_MeteorMash = 274;
+const int Move_IronHead = 275;
+const int Move_Acid = 276;
+const int Move_AcidSpray = 277;
 //--[NewMove]--
 //=======|Pokedex Constants|==========
 const int Dex_SMEARGLE = 0;
