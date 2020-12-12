@@ -44,7 +44,7 @@ actor PokeMoney : CustomInventory
 //+ALWAYSRESPAWN
 inventory.amount 1
 inventory.maxamount 5
-inventory.pickupmessage "Picked Up some BP"
+inventory.pickupmessage "Picked Up 1 BP"
 Tag "Battle Points"
 inventory.icon "BBERI"
 Inventory.PickupSound "Misc/GetBP"
@@ -63,7 +63,52 @@ EBAL E 0 A_JumpIf(CallACS("ItemUseCheck")==1,"Pickup1")
 fail
 
 Pickup1:
-TNT1 A 0 ACS_NamedExecuteAlways("BPPickup",0)
+TNT1 A 0 ACS_NamedExecuteAlways("BPPickup",0,1)
+stop
+}
+}
+
+
+actor PokeMoney_5 : PokeMoney 
+{
+inventory.pickupmessage "Picked Up 5 BP"
+Tag "5 Battle Points"
+Inventory.PickupSound "Misc/GetBP"
+scale 2.0
+States
+{
+Spawn:
+PITM A 0 
+PITM I 6
+Goto Spawn
+Pickup:
+EBAL E 0 A_JumpIf(CallACS("ItemUseCheck")==1,"Pickup1")
+fail
+
+Pickup1:
+TNT1 A 0 ACS_NamedExecuteAlways("BPPickup",0,5)
+stop
+}
+}
+
+actor PokeMoney_10 : PokeMoney 
+{
+inventory.pickupmessage "Picked Up 10 BP"
+Tag "5 Battle Points"
+Inventory.PickupSound "Misc/GetBP"
+scale 2.0
+States
+{
+Spawn:
+PITM A 0 
+PITM J 6
+Goto Spawn
+Pickup:
+EBAL E 0 A_JumpIf(CallACS("ItemUseCheck")==1,"Pickup1")
+fail
+
+Pickup1:
+TNT1 A 0 ACS_NamedExecuteAlways("BPPickup",0,10)
 stop
 }
 }

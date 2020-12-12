@@ -395,7 +395,7 @@ str weapons_ammo[MAX_WEAPONS_GLOBAL][7] =
 {"ShadowSneakMove", "ShadowSneakPP", "ShadowSneak", 1.0, "NO", "NO", "SLOT_NONE"},
 {"DestinyBondMove", "DestinyBondPP", "DestinyBond", 1.0, "NO", "NO", "SLOT_NONE"},
 {"<BlankMove>Move", "<BlankMove>PP", "<BlankMove>", 1.0, "NO", "NO", "SLOT_NONE"},
-{"DrainingKissMove", "DrainingKissPP", "DrainingKiss", 1.0, "NO", "NO", "SLOT_NONE"},
+{"DrainingKissMove", "DrainingKissPP", "DrainingKiss", 1.0, "YES", "NO", "SLOT_NONE"},
 {"ImprisonMove", "ImprisonPP", "Imprison", 1.0, "NO", "NO", "SLOT_NONE"},
 {"WishMove", "WishPP", "Wish", 1.0, "NO", "YES", "SLOT_NONE"},
 {"StoredPowerMove", "StoredPowerPP", "StoredPower", 1.0, "NO", "NO", "SLOT_NONE"},
@@ -983,6 +983,7 @@ Script "MoveSetup" (void)
 				Case DREAMEATER: ACS_NamedExecuteAlways("TracerTargeter",0,TG_ENEMY,550); break;
 				Case CURSE: ACS_NamedExecuteAlways("TracerTargeter",0,TG_ENEMY,800); break;
 				Case THUNDERWAVE: ACS_NamedExecuteAlways("TracerTargeter",0,TG_ENEMY,800); break;
+				Case DrainingKiss: ACS_NamedExecuteAlways("TracerTargeter",0,TG_ENEMY,550); break;
 				default: ACS_NamedExecuteAlways("TracerTargeter",0,TG_TEAM,630); break;
 			}
 			

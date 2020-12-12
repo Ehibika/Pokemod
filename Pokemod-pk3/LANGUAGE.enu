@@ -1684,6 +1684,237 @@ D112_EVO = "\c[MenuRed]Does not evolve";
 //#endregion
 
 
+//#region -=- Cleffa-=-
+D113_NAME = "\cjCleffa";
+D113_TYPE = "\cjFairy/Null";
+D113_STATS1 = "\cfATK:\cj 25 \cfDEF:\cj 26";
+D113_STATS2 = "\cfSP.ATK:\cj 45 \cfSP.DEF:\cj 55";
+D113_STATS3 = "\cfHP:\cj 50";
+D113_ARC = "\cj <Archetype> ";
+D113_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+
+//#region -=- Clefairy-=-
+D114_NAME = "\cjClefairy";
+D114_TYPE = "\cjFairy/Null";
+D114_STATS1 = "\cfATK:\cj 45 \cfDEF:\cj 48";
+D114_STATS2 = "\cfSP.ATK:\cj 60 \cfSP.DEF:\cj 65";
+D114_STATS3 = "\cfHP:\cj 70";
+D114_ARC = "\cj <Archetype> ";
+D114_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+
+//#region -=- Clefable-=-
+D115_NAME = "\cjClefable";
+D115_TYPE = "\cjFairy/Null";
+D115_STATS1 = "\cfATK:\cj 70 \cfDEF:\cj 73";
+D115_STATS2 = "\cfSP.ATK:\cj 95 \cfSP.DEF:\cj 90";
+D115_STATS3 = "\cfHP:\cj 95";
+D115_ARC = "\cj <Archetype> ";
+D115_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+
+//#region -=- Igglybuff-=-
+D116_NAME = "\cjIgglybuff";
+D116_TYPE = "\cjNormal/Fairy";
+D116_STATS1 = "\cfATK:\cj 30 \cfDEF:\cj 15";
+D116_STATS2 = "\cfSP.ATK:\cj 40 \cfSP.DEF:\cj 20";
+D116_STATS3 = "\cfHP:\cj 90";
+D116_ARC = "\cj <Archetype> ";
+D116_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+
+//#region -=- JigglyPuff-=-
+D117_NAME = "\cjJigglyPuff";
+D117_TYPE = "\cjNormal/Fairy";
+D117_STATS1 = "\cfATK:\cj 45 \cfDEF:\cj 20";
+D117_STATS2 = "\cfSP.ATK:\cj 45 \cfSP.DEF:\cj 25";
+D117_STATS3 = "\cfHP:\cj 115";
+D117_ARC = "\cj <Archetype> ";
+D117_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+
+//#region -=- Wigglytuff-=-
+D118_NAME = "\cjWigglytuff";
+D118_TYPE = "\cjNormal/Fairy";
+D118_STATS1 = "\cfATK:\cj 70 \cfDEF:\cj 45";
+D118_STATS2 = "\cfSP.ATK:\cj 85 \cfSP.DEF:\cj 50";
+D118_STATS3 = "\cfHP:\cj 140";
+D118_ARC = "\cj <Archetype> ";
+D118_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+
+//#region -=- Audino-=-
+D119_NAME = "\cjAudino";
+D119_TYPE = "\cjNormal/Null";
+D119_STATS1 = "\cfATK:\cj 60 \cfDEF:\cj 86";
+D119_STATS2 = "\cfSP.ATK:\cj 60 \cfSP.DEF:\cj 86";
+D119_STATS3 = "\cfHP:\cj 103";
+D119_ARC = "\cj <Archetype> ";
+D119_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+
+//#region -=- Alomomola-=-
+D120_NAME = "\cjAlomomola";
+D120_TYPE = "\cjWater/Null";
+D120_STATS1 = "\cfATK:\cj 75 \cfDEF:\cj 80";
+D120_STATS2 = "\cfSP.ATK:\cj 40 \cfSP.DEF:\cj 45";
+D120_STATS3 = "\cfHP:\cj 165";
+D120_ARC = "\cj <Archetype> ";
+D120_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+
+//#region -=- Bergmite-=-
+D121_NAME = "\cjBergmite";
+D121_TYPE = "\cjIce/Null";
+D121_STATS1 = "\cfATK:\cj 69 \cfDEF:\cj 85";
+D121_STATS2 = "\cfSP.ATK:\cj 32 \cfSP.DEF:\cj 35";
+D121_STATS3 = "\cfHP:\cj 55";
+D121_ARC = "\cj <Archetype> ";
+D121_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+
+//#region -=- avalugg-=-
+D122_NAME = "\cjavalugg";
+D122_TYPE = "\cjIce/Null";
+D122_STATS1 = "\cfATK:\cj 117 \cfDEF:\cj 184";
+D122_STATS2 = "\cfSP.ATK:\cj 44 \cfSP.DEF:\cj 46";
+D122_STATS3 = "\cfHP:\cj 95";
+D122_ARC = "\cj <Archetype> ";
+D122_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+
+//#region -=- Croagunk-=-
+D123_NAME = "\cjCroagunk";
+D123_TYPE = "\cjPoison/Fighting";
+D123_STATS1 = "\cfATK:\cj 61 \cfDEF:\cj 40";
+D123_STATS2 = "\cfSP.ATK:\cj 61 \cfSP.DEF:\cj 40";
+D123_STATS3 = "\cfHP:\cj 48";
+D123_ARC = "\cj <Archetype> ";
+D123_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+
+//#region -=- Toxicroak-=-
+D124_NAME = "\cjToxicroak";
+D124_TYPE = "\cjPoison/Fighting";
+D124_STATS1 = "\cfATK:\cj 106 \cfDEF:\cj 65";
+D124_STATS2 = "\cfSP.ATK:\cj 86 \cfSP.DEF:\cj 65";
+D124_STATS3 = "\cfHP:\cj 83";
+D124_ARC = "\cj <Archetype> ";
+D124_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+
+//#region -=- Ekans-=-
+D125_NAME = "\cjEkans";
+D125_TYPE = "\cjPoison/Null";
+D125_STATS1 = "\cfATK:\cj 60 \cfDEF:\cj 44";
+D125_STATS2 = "\cfSP.ATK:\cj 40 \cfSP.DEF:\cj 54";
+D125_STATS3 = "\cfHP:\cj 35";
+D125_ARC = "\cj <Archetype> ";
+D125_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+
+//#region -=- Arbok-=-
+D126_NAME = "\cjArbok";
+D126_TYPE = "\cjPoison/Null";
+D126_STATS1 = "\cfATK:\cj 95 \cfDEF:\cj 69";
+D126_STATS2 = "\cfSP.ATK:\cj 65 \cfSP.DEF:\cj 79";
+D126_STATS3 = "\cfHP:\cj 60";
+D126_ARC = "\cj <Archetype> ";
+D126_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+
+//#region -=- Stunky-=-
+D127_NAME = "\cjStunky";
+D127_TYPE = "\cjPoison/Dark";
+D127_STATS1 = "\cfATK:\cj 63 \cfDEF:\cj 47";
+D127_STATS2 = "\cfSP.ATK:\cj 41 \cfSP.DEF:\cj 41";
+D127_STATS3 = "\cfHP:\cj 63";
+D127_ARC = "\cj <Archetype> ";
+D127_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+
+//#region -=- Skuntank-=-
+D128_NAME = "\cjSkuntank";
+D128_TYPE = "\cjPoison/Dark";
+D128_STATS1 = "\cfATK:\cj 93 \cfDEF:\cj 67";
+D128_STATS2 = "\cfSP.ATK:\cj 71 \cfSP.DEF:\cj 61";
+D128_STATS3 = "\cfHP:\cj 103";
+D128_ARC = "\cj <Archetype> ";
+D128_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+
+//#region -=- Gulpin-=-
+D129_NAME = "\cjGulpin";
+D129_TYPE = "\cjPoison/Normal";
+D129_STATS1 = "\cfATK:\cj 43 \cfDEF:\cj 53";
+D129_STATS2 = "\cfSP.ATK:\cj 43 \cfSP.DEF:\cj 53";
+D129_STATS3 = "\cfHP:\cj 70";
+D129_ARC = "\cj <Archetype> ";
+D129_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+
+//#region -=- Swalot-=-
+D130_NAME = "\cjSwalot";
+D130_TYPE = "\cjPoison/Normal";
+D130_STATS1 = "\cfATK:\cj 73 \cfDEF:\cj 83";
+D130_STATS2 = "\cfSP.ATK:\cj 73 \cfSP.DEF:\cj 83";
+D130_STATS3 = "\cfHP:\cj 100";
+D130_ARC = "\cj <Archetype> ";
+D130_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+
+//#region -=- Gastly-=-
+D131_NAME = "\cjGastly";
+D131_TYPE = "\cjGhost/Poison";
+D131_STATS1 = "\cfATK:\cj 35 \cfDEF:\cj 30";
+D131_STATS2 = "\cfSP.ATK:\cj 100 \cfSP.DEF:\cj 35";
+D131_STATS3 = "\cfHP:\cj 30";
+D131_ARC = "\cj <Archetype> ";
+D131_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+
+//#region -=- Haunter-=-
+D132_NAME = "\cjHaunter";
+D132_TYPE = "\cjGhost/Poison";
+D132_STATS1 = "\cfATK:\cj 50 \cfDEF:\cj 45";
+D132_STATS2 = "\cfSP.ATK:\cj 115 \cfSP.DEF:\cj 55";
+D132_STATS3 = "\cfHP:\cj 45";
+D132_ARC = "\cj <Archetype> ";
+D132_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+
+//#region -=- Gengar-=-
+D133_NAME = "\cjGengar";
+D133_TYPE = "\cjGhost/Poison";
+D133_STATS1 = "\cfATK:\cj 65 \cfDEF:\cj 60";
+D133_STATS2 = "\cfSP.ATK:\cj 130 \cfSP.DEF:\cj 75";
+D133_STATS3 = "\cfHP:\cj 60";
+D133_ARC = "\cj <Archetype> ";
+D133_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+
 //--[NewPokemon]--
 
 //#endregion

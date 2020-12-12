@@ -438,6 +438,27 @@ const int Dex_SEVIPER = 109;
 const int Dex_BELDUM = 110;
 const int Dex_METANG = 111;
 const int Dex_METAGROSS = 112;
+const int Dex_CLEFFA = 113;
+const int Dex_CLEFAIRY = 114;
+const int Dex_CLEFABLE = 115;
+const int Dex_IGGLYBUFF = 116;
+const int Dex_JIGGLYPUFF = 117;
+const int Dex_WIGGLYTUFF = 118;
+const int Dex_AUDINO = 119;
+const int Dex_ALOMOMOLA = 120;
+const int Dex_BERGMITE = 121;
+const int Dex_AVALUGG = 122;
+const int Dex_CROAGUNK = 123;
+const int Dex_TOXICROAK = 124;
+const int Dex_EKANS = 125;
+const int Dex_ARBOK = 126;
+const int Dex_STUNKY = 127;
+const int Dex_SKUNTANK = 128;
+const int Dex_GULPIN = 129;
+const int Dex_SWALOT = 130;
+const int Dex_GASTLY = 131;
+const int Dex_HAUNTER = 132;
+const int Dex_GENGAR = 133;
 //--[NewPokemon]--
 //=======|TM Type Flags|==========
 const int TMT_NULL = 0;

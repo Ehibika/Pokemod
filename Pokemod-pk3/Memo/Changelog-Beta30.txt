@@ -8,6 +8,8 @@
  * Adjusted the scaling of all active stats for the purposes of creating a greater difference between low stats and high stats at
  * higher levels
  * 
+ * Adjusted item spawning, and added 5 and 10 BP pickups
+ * 
  * ===|Move Changes|===
  * [NEW MOVES]
  *  Block
@@ -74,6 +76,8 @@
  * 
  * [surf]
  * projectile recoded for clean up, and to ensure it can be reliably blocked by block.
+ * projectile speed reduced
+ * recovery time increased
  * 
  * [doubleEdge]
  * reduced hitbox size
@@ -103,7 +107,43 @@
  * 
  * [thunderwave]
  * is now a targeted move rather than a projectile
+ * 
+ * [DrainingKiss]
+ * is now a targeted move
+ * recovery time reduced
+ * 
+ * [MagicalLeaf]
+ * damage increased
+ * 
+ * [DisarmingVoice]
+ * damage increased
+ * 
+ * [DazzlingGleam]
+ * no longer halts movement
+ * cast time and aftercast delay reduced
+ * 
  * ===|TM Changes|===
+ * 
+ * All TM Costs were reduced by around half
+ * 
+ * the following TM's were removed
+ *  SlackOff
+ * 
+ * [NEW TMs]
+ * rage
+ * meditate
+ * cosmicPower
+ * CalmMind
+ * 
+ * SwordDance
+ * NastyPlot
+ * IronDefense
+ * Amnesia
+ * Agility
+ * 
+ * Dig
+ * Bulldoze
+ * Hone claws
  * ===|Pokemon Changes|===
  * 
  * [leveling rate changes]

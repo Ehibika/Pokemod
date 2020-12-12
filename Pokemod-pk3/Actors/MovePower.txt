@@ -64,7 +64,7 @@ const int MBP_FrostBreath = MBP_MidPower1;
 const int MBP_Blizzard = MBP_HighPower1;
 const int MBP_PetalBlizzard = MBP_HighPower1;
 
-const int MBP_MagicalLeaf = MBP_MidPower1;
+const int MBP_MagicalLeaf = MBP_StandardPower;
 const int MBP_BulletSeed = MBP_RapidLow;
 const int MBP_Pursuit = MBP_Low1;
 const int MBP_LeafBlade1 = MBP_MidPower2;
@@ -223,7 +223,7 @@ const int MBP_Swagger = MBP_MidPower1;
 const int MBP_Flatter = MBP_MidPower1;
 const int MBP_Assist = MBP_MidPower1;
 const int MBP_Nightmare = MBP_MidPower1;
-const int MBP_DisarmingVoice = MBP_MidPower1;
+const int MBP_DisarmingVoice = MBP_StandardPower;
 const int MBP_ShadowSneak = MBP_MidPower1;
 const int MBP_DestinyBond = MBP_MidPower1;
 //const int MBP_<BlankMove>= MBP_MidPower1;

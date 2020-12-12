@@ -165,5 +165,36 @@ str SkinDEX [MAXDEX][2] = {
     /*|110|*/{"Beldum","Base"},
     /*|111|*/{"Metang","Metang"},
     /*|112|*/{"Metagross","Metagross"},
+
+    /*|113|*/{"Cleffa","Base"},
+    /*|114|*/{"Clefairy","Clefairy"},
+    /*|115|*/{"Clefable","Clefable"},
+
+    /*|116|*/{"Igglybuff","Base"},
+    /*|117|*/{"JigglyPuff","JigglyPuff"},
+    /*|118|*/{"Wigglytuff","Wigglytuff"},
+
+    /*|119|*/{"Audino","Base"},
+    
+    /*|120|*/{"Alomomola","Base"},
+    
+    /*|121|*/{"Bergmite","Base"},
+    /*|122|*/{"avalugg","avalugg"},
+
+    /*|123|*/{"Croagunk","Base"},
+    /*|124|*/{"Toxicroak","Toxicroak"},
+
+    /*|125|*/{"Ekans","Base"},
+    /*|126|*/{"Arbok","Arbok"},
+
+    /*|127|*/{"Stunky","Base"},
+    /*|128|*/{"Skuntank","Skuntank"},
+
+    /*|129|*/{"Gulpin","Base"},
+    /*|130|*/{"Swalot","Swalot"},
+
+    /*|131|*/{"Gastly","Base"},
+    /*|132|*/{"Haunter","Haunter"},
+    /*|133|*/{"Gengar","Gengar"},
     //--[NewPokemon]--
     };

@@ -54,6 +54,17 @@ AddPlayerClass Scyther
 AddPlayerClass Zangoose
 AddPlayerClass Seviper
 AddPlayerClass Beldum
+AddPlayerClass Cleffa
+AddPlayerClass Igglybuff
+AddPlayerClass Audino
+AddPlayerClass Alomomola
+AddPlayerClass Bergmite
+AddPlayerClass Croagunk
+AddPlayerClass Ekans
+AddPlayerClass Stunky
+AddPlayerClass Gulpin
+AddPlayerClass Gastly
+AddPlayerClass Haunter
 //--[NewPokemon]--
 
 alias TriggerEvo "CloseMenu; Use EvoStartItem" 

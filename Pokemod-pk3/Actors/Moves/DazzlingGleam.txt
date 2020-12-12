@@ -25,12 +25,12 @@ Fire.Begin:
 Goto Fire.Quake
 
 Fire.Quake:
-"####" A 0 A_GiveInventory("DashSet_B")
+//"####" A 0 A_GiveInventory("DashSet_B")
 "####" B 0 A_PlaySoundEx("Move/Dazzlinggleam","Weapon")
 
-"####" BBB 3 A_SpawnItemEX("DazzlingGlow")
+//"####" BBB 3 A_SpawnItemEX("DazzlingGlow")
 "####" B 0 A_FireCustomMissile("DazzlinggleamExplosion",0,1,0,0)
-"####" BBBBBB 3 A_SpawnItemEX("DazzlingGlow")
+"####" BBB 3 A_SpawnItemEX("DazzlingGlow")
 "####" B 0 A_Jump(256,"Fire.After")
 Goto Fire.After
 
