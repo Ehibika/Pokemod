@@ -276,6 +276,7 @@ if (NewMove == Move1
 	||NewMove == Move4)
 	{
 	print(s:"Move ",s:weapons_ammo[NewMove][2], s:" Already Known!"); 
+	TakeInventory("NetCheck_Freeze",99);
 	while(!CheckInventory("NetCheck_Freeze")){NamedRequestScriptPuke("NET_FreezePlayer",0);Delay(1);} 
 	Terminate;
 	}
