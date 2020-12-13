@@ -2,7 +2,7 @@ actor MorningSunMove : WepMasterBase
 {
 Tag "MorningSun"
 Weapon.AmmoUse 1
-Weapon.AmmoGive 10
+Weapon.AmmoGive 5
 weapon.ammotype "MorningSunPP"
 scale 2.0
 Inventory.Pickupmessage "$PU_MEGABUSTER"
@@ -70,12 +70,12 @@ Goto Ready
 //[+]========================================================================[+]
 //-----------------------------|Ammo & Inventory|------------------------------
 //[+]========================================================================[+]
-actor MorningSunPP : Ammo {inventory.amount 1 inventory.Maxamount 10}
+actor MorningSunPP : Ammo {inventory.amount 1 inventory.Maxamount 5}
 
 
 Const int MorningSunRad = 300;
 
-actor MorningSun_Recovery_C : FullRecovery_A{Powerup.Duration 70}
+actor MorningSun_Recovery_C : FullRecovery_C{Powerup.Duration 87}
 //[+]========================================================================[+]
 //--------------------------------|Projectiles |--------------------------------
 //[+]========================================================================[+]

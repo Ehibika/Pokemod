@@ -184,13 +184,13 @@ Int StatDEX [MAXDEX][10] = {
 /*|111|*/{ 60, 75, 100, 55,        80,    NORM_SPD,    15, Type_Steel,Type_Psychic,  LVLSPD_Trudging},
 /*|112|*/{ 80, 135, 130, 95,        90,    NORM_SPD,    25, Type_Steel,Type_Psychic,  LVLSPD_Trudging},
 
-/*|113|*/{ 50, 25, 26, 45,        55,    SLOW_SPD,    5, Type_Fairy,Type_Null,  LVLSPD_Swift},
-/*|114|*/{ 70, 45, 48, 60,        65,    SLOW_SPD,    15, Type_Fairy,Type_Null,  LVLSPD_Swift},
-/*|115|*/{ 95, 70, 73, 95,        90,    SLOW_SPD,    25, Type_Fairy,Type_Null,  LVLSPD_Swift},
+/*|113|*/{ 50, 25, 26, 45,        55,    SLOW_SPD,    5, Type_Fairy,Type_Null,  LVLSPD_Normal},
+/*|114|*/{ 70, 45, 48, 60,        65,    SLOW_SPD,    15, Type_Fairy,Type_Null,  LVLSPD_Normal},
+/*|115|*/{ 95, 70, 73, 95,        90,    SLOW_SPD,    25, Type_Fairy,Type_Null,  LVLSPD_Normal},
 
-/*|116|*/{ 90, 30, 15, 40,        20,    SLOW_SPD,    5, Type_Normal,Type_Fairy,  LVLSPD_Rapid},
-/*|117|*/{ 115, 45, 45, 45,        50,    SLOW_SPD,    15, Type_Normal,Type_Fairy,  LVLSPD_Rapid},
-/*|118|*/{ 140, 70, 65, 85,        75,    SLOW_SPD,    25, Type_Normal,Type_Fairy,  LVLSPD_Rapid},
+/*|116|*/{ 90, 30, 15, 40,        20,    SLOW_SPD,    5, Type_Normal,Type_Fairy,  LVLSPD_Normal},
+/*|117|*/{ 115, 45, 45, 45,        50,    SLOW_SPD,    15, Type_Normal,Type_Fairy,  LVLSPD_Normal},
+/*|118|*/{ 140, 70, 65, 85,        75,    SLOW_SPD,    25, Type_Normal,Type_Fairy,  LVLSPD_Normal},
 
 /*|119|*/{ 103, 60, 86, 60,        86,    SLOW_SPD,    15, Type_Normal,Type_Null,  LVLSPD_Rapid},
 

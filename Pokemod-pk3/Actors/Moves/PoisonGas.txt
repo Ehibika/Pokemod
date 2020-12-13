@@ -184,7 +184,7 @@ stop
 }
 }
 
-
+/*
 actor PoisonGasField : BasicHelper
 {
 ReactionTime 25
@@ -252,12 +252,105 @@ TOXI GGGG 2 A_Fadeout
 stop
 }
 }
+*/
+
+
+actor PoisonGasField : BasicHelper
+{
+ReactionTime 35
+DamageType "PoisonGas"
+obituary "$OB_PoisonGas"
+var int user_angle;
+var int user_Pitch;
+var int user_Tick;
+states
+{
+Spawn:
+TNT1 A 0
+TNT1 A 2 A_GiveInventory("ProjectileCodeSyncTarget",1)
+TNT1 A 0 A_SpawnItemEx("SmokeScreenRing",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS)
+
+
+SpawnLoop:
+TNT1 AA 0 A_SpawnItemEx("PoisonGasPetal",Random2(PsnGasRad),Random2(PsnGasRad),random(0,PsnGasRad),0,0,2,user_angle,SXF_TRANSFERPITCH|SXF_ABSOLUTEANGLE|SXF_NOCHECKPOSITION|SXF_TRANSFERPOINTERS|SXF_TRANSFERTRANSLATION)
+TNT1 A 5 A_CountDown
+TNT1 AA 0 A_SpawnItemEx("PoisonGasPetal",Random2(PsnGasRad),Random2(PsnGasRad),random(0,PsnGasRad),0,0,2,user_angle,SXF_TRANSFERPITCH|SXF_ABSOLUTEANGLE|SXF_NOCHECKPOSITION|SXF_TRANSFERPOINTERS|SXF_TRANSFERTRANSLATION)
+TNT1 A 5 A_CountDown
+TNT1 AA 0 A_SpawnItemEx("PoisonGasPetal",Random2(PsnGasRad),Random2(PsnGasRad),random(0,PsnGasRad),0,0,2,user_angle,SXF_TRANSFERPITCH|SXF_ABSOLUTEANGLE|SXF_NOCHECKPOSITION|SXF_TRANSFERPOINTERS|SXF_TRANSFERTRANSLATION)
+TNT1 A 5 A_CountDown
+TNT1 A 0 A_Explode(1,PsnGasRad+25,0,0,PsnGasRad+25)
+Loop 
+
+Death:
+TNT1 A 1 
+stop
+}
+}
+
+
+actor PoisonGassCloud2 //: BasicClientside
+{
+    PROJECTILE
+    +NOTARGETSWITCH
+    +NOINTERACTION
+    +NOCLIP
+    +FORCEXYBILLBOARD
+    +CLIENTSIDEONLY
+    radius 8
+    height 8
+    Damage (0)
+    scale 2.5
+    Reactiontime 75
+    Renderstyle "Translucent"
+    Alpha 0.2
+States
+{
+Spawn:
+TNT1 A 0 
+SMKK ABC 5
+Spawn2:
+SMKK DE 5 A_CountDown
+loop
+Death:
+SMKK FGH 3 A_Fadeout(0.2)
+stop
+}
+}
+
+actor PoisonGassRing //: BasicHelper
+{
+translation "198:198=220:220", "192:192=229:229"
+	reactiontime 3
+    var int user_angle;
+    PROJECTILE
+    +NOINTERACTION
+    +NOCLIP
+    +CLIENTSIDEONLY
+    +NOTARGETSWITCH
+	States
+	{
+		Spawn:
+		TNT1 A 0
+        TNT1 A 0 //A_SetUserVar("user_angle", random(0, 30))
+        TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+        TNT1 A 1 A_SpawnItemEx("PoisonGassCloud2",0,0,64,0,0,0,0,1061|SXF_TRANSFERPOINTERS)
+        SpawnLoop:
+        TNT1 A 0 A_SpawnItemEx("PoisonGassCloud2",96,0,0,0,0,0,user_angle,1061|SXF_TRANSFERPOINTERS)
+        TNT1 A 0 A_SpawnItemEx("PoisonGassCloud2",-96,0,0,0,0,0,user_angle,1061|SXF_TRANSFERPOINTERS)
+		TNT1 A 1 A_SetUserVar("user_angle", user_angle + 60)
+		TNT1 A 0 A_Countdown
+		loop
+		Death:
+		TNT1 A 0
+		stop
+	}
+}
 
 actor PoisonGasPetal : BasicClientside
 {
-scale 0.5
+scale 0.8
 RenderStyle "Translucent"
-Alpha 0.5
+Alpha 1.0
 ReactionTime 3
 -NOINTERACTION
 States
