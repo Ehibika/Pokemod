@@ -166,7 +166,7 @@ script "TeamSmoke"  (VOID) CLIENTSIDE
 	int FiringPlayer= ACS_ExecuteWithResult(257, 0) - 1000;
     if( GetPlayerInfo(cln, PLAYERINFO_TEAM) == GetPlayerInfo(FiringPlayer, PLAYERINFO_TEAM))//(PlayerClass((consolePlayerNumber() >= SUPPORTSTART) && PlayerClass((consolePlayerNumber()) <= SUPPORTEND)))
     {
-       SetActorProperty(0,APROP_ALPHA,0.05);
+       SetActorProperty(0,APROP_ALPHA,0.3);
     }
 }
 

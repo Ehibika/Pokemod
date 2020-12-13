@@ -113,7 +113,7 @@ stop
 
 DeathSpawn:
 TNT1 A 0 A_GiveInventory("ProjectileDCode",1)
-TNT1 A 0 A_SpawnItemEx("SmokeScreenField",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS)
+TNT1 A 0 A_SpawnItemEx("SmokeScreenRing",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS)
 SMK2 ABCDEEFFGG 2
 stop
 }
@@ -208,4 +208,64 @@ SMKC CCCCCCC 2 A_SetScale(Scalex+0.1)
 SMKC CCCCCCC 2 A_Fadeout(0.2)
 stop
 }
+}
+
+
+actor SmokeScreenCloud2 //: BasicClientside
+{
+    PROJECTILE
+    +NOTARGETSWITCH
+    +NOINTERACTION
+    +NOCLIP
+    +FORCEXYBILLBOARD
+    +CLIENTSIDEONLY
+    radius 8
+    height 8
+    Damage (0)
+    scale 2.5
+    Reactiontime 35
+    Renderstyle "Translucent"
+    Alpha 0.9
+States
+{
+Spawn:
+TNT1 A 0 
+TNT1 AA 1 ACS_NamedExecuteAlways("TeamSmoke",0)
+SMKK ABC 5
+Spawn2:
+SMKK DE 5 A_CountDown
+loop
+Death:
+SMKK FGH 3 A_Fadeout(0.2)
+stop
+}
+}
+
+actor SmokeScreenRing //: BasicHelper
+{
+translation "198:198=220:220", "192:192=229:229"
+	reactiontime 3
+    var int user_angle;
+    PROJECTILE
+    +NOINTERACTION
+    +NOCLIP
+    +CLIENTSIDEONLY
+    +NOTARGETSWITCH
+	States
+	{
+		Spawn:
+		TNT1 A 0
+        TNT1 A 0 //A_SetUserVar("user_angle", random(0, 30))
+        TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+        TNT1 A 1 A_SpawnItemEx("SmokeScreenCloud2",0,0,64,0,0,0,0,1061|SXF_TRANSFERPOINTERS)
+        SpawnLoop:
+        TNT1 A 0 A_SpawnItemEx("SmokeScreenCloud2",96,0,0,0,0,0,user_angle,1061|SXF_TRANSFERPOINTERS)
+        TNT1 A 0 A_SpawnItemEx("SmokeScreenCloud2",-96,0,0,0,0,0,user_angle,1061|SXF_TRANSFERPOINTERS)
+		TNT1 A 1 A_SetUserVar("user_angle", user_angle + 60)
+		TNT1 A 0 A_Countdown
+		loop
+		Death:
+		TNT1 A 0
+		stop
+	}
 }

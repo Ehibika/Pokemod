@@ -2,7 +2,7 @@ actor MoonlightMove : WepMasterBase
 {
 Tag "Moonlight"
 Weapon.AmmoUse 1
-Weapon.AmmoGive 10
+Weapon.AmmoGive 5
 weapon.ammotype "MoonlightPP"
 scale 2.0
 Inventory.Pickupmessage "$PU_MEGABUSTER"
@@ -70,12 +70,12 @@ Goto Ready
 //[+]========================================================================[+]
 //-----------------------------|Ammo & Inventory|------------------------------
 //[+]========================================================================[+]
-actor MoonlightPP : Ammo {inventory.amount 1 inventory.Maxamount 10}
+actor MoonlightPP : Ammo {inventory.amount 1 inventory.Maxamount 5}
 
 
 Const int MoonlightRad = 300;
 
-actor Moonlight_Recovery_C : FullRecovery_A{Powerup.Duration 70}
+actor Moonlight_Recovery_C : FullRecovery_C{Powerup.Duration 87}
 //[+]========================================================================[+]
 //--------------------------------|Projectiles |--------------------------------
 //[+]========================================================================[+]
