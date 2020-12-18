@@ -253,19 +253,36 @@ function bool IsPlayer(int tid) {
 	return ((ClassifyActor(tid)&ACTOR_PLAYER)>0);
 }
 
-/*
-// -=- so much for this... -=-
 
-Script "ReticuleColorizer" (void)
+
+Script "ReticuleColorizer" (int ColNum) CLIENTSIDE
 {
 int selfNumber = ConsolePlayerNumber();
-//
-//
-SetActorPRoperty(0,APROP_StencilColor,GetUserCVarString(selfNumber,"sv_CamReticuleColor"));
-//SetResultValue(GetUserCVarString(selfNumber,"sv_CamReticuleColor"));
-log(s:GetActorProperty(0,APROP_StencilColor));
+if(ColNum==0){SetActorPRoperty(0,APROP_StencilColor,GetUserCVar(selfNumber,"sv_CamReticuleColor"));}
+else{SetActorPRoperty(0,APROP_StencilColor,ColNum);}
+SetActorPRoperty(0,APROP_ALPHA,GetUserCVar(selfNumber,"sv_CamReticuleAlpha"));
 }
-*/
+
+
+script "Check_ReticuleTeamColor" (void)
+{
+SetResultValue(GetReticuleTeamColor());
+}
+
+function bool GetReticuleTeamColor(void)
+{
+	return (getUserCvar(ConsolePlayerNumber(),"sv_CamReticuleTeamColor")>0);
+}
+
+script "Check_ReticuleType" (void)
+{
+SetResultValue(GetReticuleType());
+}
+
+function bool GetReticuleType(void)
+{
+	return (getUserCvar(ConsolePlayerNumber(),"Sv_CamReticuleType"));
+}
 
 Script "CamGrabObject" (void)
 {

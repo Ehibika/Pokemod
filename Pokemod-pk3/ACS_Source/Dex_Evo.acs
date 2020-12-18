@@ -203,5 +203,31 @@ Int EvoDEX [MAXDEX][6] = {
     /*|131|*/{ 1,      MIDSTAGE,             HAUNTER,  NULLEVO,     NULLEVO,52 },
     /*|132|*/{ 1,      FINALSTAGE,             GENGAR,  NULLEVO,     NULLEVO,52 },
     /*|133|*/{ 0,      0,             NULLEVO,  NULLEVO,     NULLEVO,52 },
+
+    /*|134|*/{ 1,      FINALSTAGE2,             TENTACRUEL,  NULLEVO,     NULLEVO,53 },
+    /*|135|*/{ 0,      0,             NULLEVO,  NULLEVO,     NULLEVO,53 },
+    
+    /*|136|*/{ 1,      FINALSTAGE2,             GYARADOS,  NULLEVO,     NULLEVO,54 },
+    /*|137|*/{ 0,      0,             NULLEVO,  NULLEVO,     NULLEVO,54 },
+    
+    /*|138|*/{ 0,      0,             NULLEVO,  NULLEVO,     NULLEVO,55 },
+    
+    /*|139|*/{ 0,      0,             NULLEVO,  NULLEVO,     NULLEVO,56 },
+
+    /*|140|*/{ 1,      FINALSTAGE2,             VOLCARONA,  NULLEVO,     NULLEVO,57 },
+    /*|141|*/{ 0,      0,             NULLEVO,  NULLEVO,     NULLEVO,57 },
+    
+    /*|142|*/{ 1,      FINALSTAGE2,             MANTINE,  NULLEVO,     NULLEVO,58 },
+    /*|143|*/{ 0,      0,             NULLEVO,  NULLEVO,     NULLEVO,58 },
+    
+    /*|144|*/{ 1,      MIDSTAGE,             VIBRAVA,  NULLEVO,     NULLEVO,59 },
+    /*|145|*/{ 1,      FINALSTAGE,             FLYGON,  NULLEVO,     NULLEVO,59 },
+    /*|146|*/{ 0,      0,             NULLEVO,  NULLEVO,     NULLEVO,59 },
+    
+    /*|147|*/{ 1,      FINALSTAGE2,             CACTURNE,  NULLEVO,     NULLEVO,60 },
+    /*|148|*/{ 0,      0,             NULLEVO,  NULLEVO,     NULLEVO,60 },
+    
+    /*|149|*/{ 1,      FINALSTAGE2,             SNORLAX,  NULLEVO,     NULLEVO,61 },
+    /*|150|*/{ 0,      0,             NULLEVO,  NULLEVO,     NULLEVO,61 },
     //--[NewPokemon]--
 };

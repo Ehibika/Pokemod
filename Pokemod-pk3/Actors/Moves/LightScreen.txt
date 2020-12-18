@@ -72,7 +72,7 @@ Goto Ready
 //[+]========================================================================[+]
 actor LightScreenPP : Ammo {inventory.amount 1 inventory.Maxamount 10}
 
-actor LightScreenPower : SDef { damagefactor "Normal", 0.25 powerup.Duration -15}
+actor LightScreenPower : SDef { damagefactor "Normal", 0.5 powerup.Duration -15}
 
 Const int LightScreenRad = 1000;
 Const int LightScreen_Item = 11;

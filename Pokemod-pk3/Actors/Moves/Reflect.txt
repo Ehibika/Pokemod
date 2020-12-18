@@ -72,7 +72,7 @@ Goto Ready
 //[+]========================================================================[+]
 actor ReflectPP : Ammo {inventory.amount 1 inventory.Maxamount 10}
 
-actor ReflectPower : PDef { damagefactor "Normal", 0.25 powerup.Duration -15}
+actor ReflectPower : PDef { damagefactor "Normal", 0.5 powerup.Duration -15}
 
 Const int ReflectRad = 1000;
 Const int Reflect_Item = 10;

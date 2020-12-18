@@ -1,0 +1,87 @@
+
+/*
+[+]===================================[+]
+
+[+]===================================[+]
+*/
+
+Actor Cacnea : ClassBase 
+{
+Player.DisplayName "Cacnea"
+Player.SoundClass "Cacnea"
++NOSKIN
+player.startitem "PKMNStarterKit"
+//============|
+Player.StartItem "Base_HP", 50
+Player.StartItem "Base_PAttack", 85
+Player.StartItem "Base_PDefense", 40
+Player.StartItem "Base_SAttack", 85
+Player.StartItem "Base_SDefense", 40
+
+//============|
+
+States
+{
+Spawn: 
+P147 A 0
+P147 B 1 
+P147 A 1
+GoTo Spawn+2
+See:
+P147 BCDE 5
+GoTo Spawn+1
+Missile:
+P147 A 0 A_JumpIfInventory("ConshotTimer",1,"Missile2")
+P147 F 5 
+P147 G 4
+GoTo Spawn+2
+Missile2:
+P147 G 9
+GoTo Spawn+2
+
+PainFix:
+P147 H 0 
+GoTo PainFrames
+}
+}
+
+actor CacneaStarterMoves : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_JumpIfInventory("isbot",1,"BotWep")
+
+TNT1 A 0 A_GiveInventory("AbsorbMove1")
+TNT1 A 0 A_GiveInventory("AcidMove2")
+TNT1 A 0 A_GiveInventory("GrowthMove3")
+TNT1 A 0 A_GiveInventory("BlockMove4")
+stop
+
+BotWep:
+TNT1 A 0 A_GiveInventory("AbsorbMove1")
+stop
+}
+}
+
+actor CacneaSetupItem : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 ACS_NamedExecuteAlways("PKMNACS_StartupScript",0,Dex_Cacnea)
+stop
+}
+}

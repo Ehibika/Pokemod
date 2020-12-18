@@ -1919,6 +1919,193 @@ D133_EVO = "\c[MenuRed]Does not evolve";
 //#endregion
 
 
+//#region -=- Tentacool-=-
+D134_NAME = "\cjTentacool";
+D134_TYPE = "\cjWater/Poison";
+D134_STATS1 = "\cfATK:\cj 40 \cfDEF:\cj 35";
+D134_STATS2 = "\cfSP.ATK:\cj 50 \cfSP.DEF:\cj 100";
+D134_STATS3 = "\cfHP:\cj 40";
+D134_ARC = "\cj <Archetype> ";
+D134_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+
+//#region -=- Tentacool-=-
+D135_NAME = "\cjTentacool";
+D135_TYPE = "\cjWater/Poison";
+D135_STATS1 = "\cfATK:\cj 70 \cfDEF:\cj 65";
+D135_STATS2 = "\cfSP.ATK:\cj 80 \cfSP.DEF:\cj 120";
+D135_STATS3 = "\cfHP:\cj 80";
+D135_ARC = "\cj <Archetype> ";
+D135_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+
+//#region -=- Magikarp-=-
+D136_NAME = "\cjMagikarp";
+D136_TYPE = "\cjWater/Null";
+D136_STATS1 = "\cfATK:\cj 10 \cfDEF:\cj 55";
+D136_STATS2 = "\cfSP.ATK:\cj 15 \cfSP.DEF:\cj 20";
+D136_STATS3 = "\cfHP:\cj 20";
+D136_ARC = "\cj <Archetype> ";
+D136_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+
+//#region -=- Gyarados-=-
+D137_NAME = "\cjGyarados";
+D137_TYPE = "\cjWater/Flying";
+D137_STATS1 = "\cfATK:\cj 125 \cfDEF:\cj 79";
+D137_STATS2 = "\cfSP.ATK:\cj 60 \cfSP.DEF:\cj 100";
+D137_STATS3 = "\cfHP:\cj 95";
+D137_ARC = "\cj <Archetype> ";
+D137_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+
+//#region -=- Qwilfish-=-
+D138_NAME = "\cjQwilfish";
+D138_TYPE = "\cjWater/Poison";
+D138_STATS1 = "\cfATK:\cj 95 \cfDEF:\cj 85";
+D138_STATS2 = "\cfSP.ATK:\cj 55 \cfSP.DEF:\cj 55";
+D138_STATS3 = "\cfHP:\cj 65";
+D138_ARC = "\cj <Archetype> ";
+D138_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+
+//#region -=- Skarmory-=-
+D139_NAME = "\cjSkarmory";
+D139_TYPE = "\cjSteel/Flying";
+D139_STATS1 = "\cfATK:\cj 80 \cfDEF:\cj 140";
+D139_STATS2 = "\cfSP.ATK:\cj 40 \cfSP.DEF:\cj 70";
+D139_STATS3 = "\cfHP:\cj 65";
+D139_ARC = "\cj <Archetype> ";
+D139_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+
+//#region -=- Larvesta-=-
+D140_NAME = "\cjLarvesta";
+D140_TYPE = "\cjBug/Fire";
+D140_STATS1 = "\cfATK:\cj 85 \cfDEF:\cj 55";
+D140_STATS2 = "\cfSP.ATK:\cj 50 \cfSP.DEF:\cj 55";
+D140_STATS3 = "\cfHP:\cj 55";
+D140_ARC = "\cj <Archetype> ";
+D140_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+
+//#region -=- Volcarona-=-
+D141_NAME = "\cjVolcarona";
+D141_TYPE = "\cjBug/Fire";
+D141_STATS1 = "\cfATK:\cj 60 \cfDEF:\cj 65";
+D141_STATS2 = "\cfSP.ATK:\cj 135 \cfSP.DEF:\cj 105";
+D141_STATS3 = "\cfHP:\cj 85";
+D141_ARC = "\cj <Archetype> ";
+D141_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+
+//#region -=- Mantyke-=-
+D142_NAME = "\cjMantyke";
+D142_TYPE = "\cjWater/Flying";
+D142_STATS1 = "\cfATK:\cj 20 \cfDEF:\cj 50";
+D142_STATS2 = "\cfSP.ATK:\cj 60 \cfSP.DEF:\cj 120";
+D142_STATS3 = "\cfHP:\cj 45";
+D142_ARC = "\cj <Archetype> ";
+D142_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+
+//#region -=- Mantine-=-
+D143_NAME = "\cjMantine";
+D143_TYPE = "\cjWater/Flying";
+D143_STATS1 = "\cfATK:\cj 40 \cfDEF:\cj 70";
+D143_STATS2 = "\cfSP.ATK:\cj 80 \cfSP.DEF:\cj 140";
+D143_STATS3 = "\cfHP:\cj 85";
+D143_ARC = "\cj <Archetype> ";
+D143_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+
+//#region -=- Trapinch-=-
+D144_NAME = "\cjTrapinch";
+D144_TYPE = "\cjGround/Null";
+D144_STATS1 = "\cfATK:\cj 100 \cfDEF:\cj 45";
+D144_STATS2 = "\cfSP.ATK:\cj 45 \cfSP.DEF:\cj 45";
+D144_STATS3 = "\cfHP:\cj 45";
+D144_ARC = "\cj <Archetype> ";
+D144_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+
+//#region -=- Vibrava-=-
+D145_NAME = "\cjVibrava";
+D145_TYPE = "\cjGround/Dragon";
+D145_STATS1 = "\cfATK:\cj 70 \cfDEF:\cj 50";
+D145_STATS2 = "\cfSP.ATK:\cj 50 \cfSP.DEF:\cj 50";
+D145_STATS3 = "\cfHP:\cj 50";
+D145_ARC = "\cj <Archetype> ";
+D145_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+
+//#region -=- Flygon-=-
+D146_NAME = "\cjFlygon";
+D146_TYPE = "\cjGround/Dragon";
+D146_STATS1 = "\cfATK:\cj 100 \cfDEF:\cj 80";
+D146_STATS2 = "\cfSP.ATK:\cj 80 \cfSP.DEF:\cj 80";
+D146_STATS3 = "\cfHP:\cj 80";
+D146_ARC = "\cj <Archetype> ";
+D146_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+
+//#region -=- Cacnea-=-
+D147_NAME = "\cjCacnea";
+D147_TYPE = "\cjGrass/Null";
+D147_STATS1 = "\cfATK:\cj 85 \cfDEF:\cj 40";
+D147_STATS2 = "\cfSP.ATK:\cj 85 \cfSP.DEF:\cj 40";
+D147_STATS3 = "\cfHP:\cj 50";
+D147_ARC = "\cj <Archetype> ";
+D147_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+
+//#region -=- Cacturne-=-
+D148_NAME = "\cjCacturne";
+D148_TYPE = "\cjGrass/Dark";
+D148_STATS1 = "\cfATK:\cj 115 \cfDEF:\cj 60";
+D148_STATS2 = "\cfSP.ATK:\cj 115 \cfSP.DEF:\cj 60";
+D148_STATS3 = "\cfHP:\cj 70";
+D148_ARC = "\cj <Archetype> ";
+D148_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+
+//#region -=- Munchlax-=-
+D149_NAME = "\cjMunchlax";
+D149_TYPE = "\cjNormal/Null";
+D149_STATS1 = "\cfATK:\cj 85 \cfDEF:\cj 40";
+D149_STATS2 = "\cfSP.ATK:\cj 40 \cfSP.DEF:\cj 85";
+D149_STATS3 = "\cfHP:\cj 135";
+D149_ARC = "\cj <Archetype> ";
+D149_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+
+//#region -=- Snorlax-=-
+D150_NAME = "\cjSnorlax";
+D150_TYPE = "\cjNormal/Null";
+D150_STATS1 = "\cfATK:\cj 110 \cfDEF:\cj 65";
+D150_STATS2 = "\cfSP.ATK:\cj 65 \cfSP.DEF:\cj 110";
+D150_STATS3 = "\cfHP:\cj 160";
+D150_ARC = "\cj <Archetype> ";
+D150_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+
 //--[NewPokemon]--
 
 //#endregion

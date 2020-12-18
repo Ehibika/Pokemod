@@ -1805,4 +1805,243 @@ gender = male
 }
 
 
+{
+name = "Tentacool"
+sprite = P134
+class = Tentacool
+dsnoway = LAND
+dsoof = LAND
+dspldeth = MEGADEAT
+dspdiehi = MEGADEAT
+dsplpain = MEGAPAIN
+dstaunt = Cry134
+gender = male
+}
+
+
+{
+name = "Tentacruel"
+sprite = P135
+class = Tentacool
+dsnoway = FATLAND
+dsoof = FATLAND
+dspldeth = MEGADEAT
+dspdiehi = MEGADEAT
+dsplpain = MEGAPAIN
+dstaunt = Cry135
+gender = male
+}
+
+
+{
+name = "Magikarp"
+sprite = P136
+class = Magikarp
+dsnoway = LAND
+dsoof = LAND
+dspldeth = MEGADEAT
+dspdiehi = MEGADEAT
+dsplpain = MEGAPAIN
+dstaunt = Cry136
+gender = male
+}
+
+
+{
+name = "Gyarados"
+sprite = P137
+class = Magikarp
+Scale = 1.5
+dsnoway = FATLAND
+dsoof = FATLAND
+dspldeth = MEGADEAT
+dspdiehi = MEGADEAT
+dsplpain = MEGAPAIN
+dstaunt = Cry137
+gender = male
+}
+
+
+{
+name = "Qwilfish"
+sprite = P138
+class = Qwilfish
+dsnoway = LAND
+dsoof = LAND
+dspldeth = MEGADEAT
+dspdiehi = MEGADEAT
+dsplpain = MEGAPAIN
+dstaunt = Cry138
+gender = male
+}
+
+
+{
+name = "Skarmory"
+sprite = P139
+class = Skarmory
+dsnoway = LAND
+dsoof = LAND
+dspldeth = MEGADEAT
+dspdiehi = MEGADEAT
+dsplpain = MEGAPAIN
+dstaunt = Cry139
+gender = male
+}
+
+
+{
+name = "Larvesta"
+sprite = P140
+class = Larvesta
+dsnoway = LAND
+dsoof = LAND
+dspldeth = MEGADEAT
+dspdiehi = MEGADEAT
+dsplpain = MEGAPAIN
+dstaunt = Cry140
+gender = male
+}
+
+
+{
+name = "Volcarona"
+sprite = P141
+class = Larvesta
+dsnoway = FATLAND
+dsoof = FATLAND
+dspldeth = MEGADEAT
+dspdiehi = MEGADEAT
+dsplpain = MEGAPAIN
+dstaunt = Cry141
+gender = male
+}
+
+
+{
+name = "Mantyke"
+sprite = P142
+class = Mantyke
+dsnoway = LAND
+dsoof = LAND
+dspldeth = MEGADEAT
+dspdiehi = MEGADEAT
+dsplpain = MEGAPAIN
+dstaunt = Cry142
+gender = male
+}
+
+
+{
+name = "Mantine"
+sprite = P143
+class = Mantyke
+dsnoway = FATLAND
+dsoof = FATLAND
+dspldeth = MEGADEAT
+dspdiehi = MEGADEAT
+dsplpain = MEGAPAIN
+dstaunt = Cry143
+gender = male
+}
+
+
+{
+name = "Trapinch"
+sprite = P144
+class = Trapinch
+dsnoway = LAND
+dsoof = LAND
+dspldeth = MEGADEAT
+dspdiehi = MEGADEAT
+dsplpain = MEGAPAIN
+dstaunt = Cry144
+gender = male
+}
+
+
+{
+name = "Vibrava"
+sprite = P145
+class = Trapinch
+dsnoway = LAND
+dsoof = LAND
+dspldeth = MEGADEAT
+dspdiehi = MEGADEAT
+dsplpain = MEGAPAIN
+dstaunt = Cry145
+gender = male
+}
+
+
+{
+name = "Flygon"
+sprite = P146
+class = Trapinch
+dsnoway = FATLAND
+dsoof = FATLAND
+dspldeth = MEGADEAT
+dspdiehi = MEGADEAT
+dsplpain = MEGAPAIN
+dstaunt = Cry146
+gender = male
+}
+
+
+{
+name = "Cacnea"
+sprite = P147
+class = Cacnea
+dsnoway = LAND
+dsoof = LAND
+dspldeth = MEGADEAT
+dspdiehi = MEGADEAT
+dsplpain = MEGAPAIN
+dstaunt = Cry147
+gender = male
+}
+
+
+{
+name = "Cacturne"
+sprite = P148
+class = Cacnea
+dsnoway = FATLAND
+dsoof = FATLAND
+dspldeth = MEGADEAT
+dspdiehi = MEGADEAT
+dsplpain = MEGAPAIN
+dstaunt = Cry148
+gender = male
+}
+
+
+{
+name = "Munchlax"
+sprite = P149
+class = Munchlax
+dsnoway = LAND
+dsoof = LAND
+dspldeth = MEGADEAT
+dspdiehi = MEGADEAT
+dsplpain = MEGAPAIN
+dstaunt = Cry149
+gender = male
+}
+
+
+{
+name = "Snorlax"
+sprite = P150
+class = Munchlax
+dsnoway = FATLAND
+dsoof = FATLAND
+dspldeth = MEGADEAT
+dspdiehi = MEGADEAT
+dsplpain = MEGAPAIN
+dstaunt = Cry150
+gender = male
+}
+
+
 //--[NewPokemon]--

@@ -179,7 +179,7 @@ bool playerDisguised[S_MAX_PLAYERS];
 int playerDisguise[S_MAX_PLAYERS];
 int playerCurrentSkin[S_MAX_PLAYERS];
 
-#DEFINE KEYCONF_CLASSCOUNT 54 //18
+#DEFINE KEYCONF_CLASSCOUNT 63 //18
 #DEFINE SKIN_OFFSET 133 + KEYCONF_CLASSCOUNT //128 // 
 
 script "SetPokeSkin" (int Skin, int update) //CLIENTSIDE

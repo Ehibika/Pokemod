@@ -29,7 +29,11 @@ User float SV_ZoomCamPlayerAlpha = 0.3;
 User int sv_CamReticuleMode = 1;
 User int sv_ZoomCamReticuleMode = 1;
 
-User color sv_CamReticuleColor = "FFFFFF";
+User color sv_CamReticuleColor = 0xFFFFFF;
+User float sv_CamReticuleAlpha = 6.5;
+user bool sv_CamReticuleTeamColor = true;
+User int Sv_CamReticuleType = 0;
+
 User int Sv_ZoomToggle = 0;
 User noarchive int ZoomToggle = 0;
 

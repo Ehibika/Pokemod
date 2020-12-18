@@ -463,6 +463,23 @@ const int Dex_SWALOT = 130;
 const int Dex_GASTLY = 131;
 const int Dex_HAUNTER = 132;
 const int Dex_GENGAR = 133;
+const int Dex_TENTACOOL = 134;
+const int Dex_TENTACRUEL = 135;
+const int Dex_MAGIKARP = 136;
+const int Dex_GYARADOS = 137;
+const int Dex_QWILFISH = 138;
+const int Dex_SKARMORY = 139;
+const int Dex_LARVESTA = 140;
+const int Dex_VOLCARONA = 141;
+const int Dex_MANTYKE = 142;
+const int Dex_MANTINE = 143;
+const int Dex_TRAPINCH = 144;
+const int Dex_VIBRAVA = 145;
+const int Dex_FLYGON = 146;
+const int Dex_CACNEA = 147;
+const int Dex_CACTURNE = 148;
+const int Dex_MUNCHLAX = 149;
+const int Dex_SNORLAX = 150;
 //--[NewPokemon]--
 //=======|TM Type Flags|==========
 const int TMT_NULL = 0;

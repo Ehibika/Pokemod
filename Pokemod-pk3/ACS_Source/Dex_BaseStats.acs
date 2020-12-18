@@ -214,5 +214,31 @@ Int StatDEX [MAXDEX][10] = {
 /*|131|*/{ 30, 35, 30, 100,        35,    FAST_SPD,    5, Type_Ghost,Type_Poison,  LVLSPD_Normal},
 /*|132|*/{ 45, 50, 45, 115,        55,    FAST_SPD,    15, Type_Ghost,Type_Poison,  LVLSPD_Normal},
 /*|133|*/{ 60, 65, 60, 130,        75,    FAST_SPD,    25, Type_Ghost,Type_Poison,  LVLSPD_Normal},
+
+/*|134|*/{ 40, 40, 35, 50,        100,    FAST_SPD,    5, Type_Water,Type_Poison,  LVLSPD_Normal},
+/*|135|*/{ 80, 70, 65, 80,        120,    FAST_SPD,    25, Type_Water,Type_Poison,  LVLSPD_Normal},
+
+/*|136|*/{ 20, 10, 55, 15,        20,    SLOW_SPD,    25, Type_Water,Type_Null,  LVLSPD_Normal},
+/*|137|*/{ 95, 125, 79, 60,        100,    SLOW_SPD,    25, Type_Water,Type_Flying,  LVLSPD_Normal},
+
+/*|138|*/{ 65, 95, 85, 55,        55,    NORM_SPD,    15, Type_Water,Type_Poison,  LVLSPD_Normal},
+
+/*|139|*/{ 65, 80, 140, 40,        70,    SLOW_SPD,    15, Type_Steel,Type_Flying,  LVLSPD_Normal},
+
+/*|140|*/{ 55, 85, 55, 50,        55,    FAST_SPD,    5, Type_Bug,Type_Fire,  LVLSPD_Normal},
+/*|141|*/{ 85, 60, 65, 135,        105,    FAST_SPD,    25, Type_Bug,Type_Fire,  LVLSPD_Normal},
+
+/*|142|*/{ 45, 20, 50, 60,        120,    SLOW_SPD,    5, Type_Water,Type_Flying,  LVLSPD_Normal},
+/*|143|*/{ 85, 40, 70, 80,        140,    SLOW_SPD,    25, Type_Water,Type_Flying,  LVLSPD_Normal},
+
+/*|144|*/{ 45, 100, 45, 45,        45,    SLOW_SPD,    5, Type_Ground,Type_Null,  LVLSPD_Normal},
+/*|145|*/{ 50, 70, 50, 50,        50,    FAST_SPD,    15, Type_Ground,Type_Dragon,  LVLSPD_Normal},
+/*|146|*/{ 80, 100, 80, 80,        80,    FAST_SPD,    25, Type_Ground,Type_Dragon,  LVLSPD_Normal},
+
+/*|147|*/{ 50, 85, 40, 85,        40,    SLOW_SPD,    5, Type_Grass,Type_Null,  LVLSPD_Normal},
+/*|148|*/{ 70, 115, 60, 115,        60,    SLOW_SPD,    25, Type_Grass,Type_Dark,  LVLSPD_Normal},
+
+/*|149|*/{ 135, 85, 40, 40,        85,    SLOW_SPD,    5, Type_Normal,Type_Null,  LVLSPD_Normal},
+/*|150|*/{ 160, 110, 65, 65,        110,    SLOW_SPD,    25, Type_Normal,Type_Null,  LVLSPD_Normal},
 //--[NewPokemon]--
 };

@@ -196,5 +196,31 @@ str SkinDEX [MAXDEX][2] = {
     /*|131|*/{"Gastly","Base"},
     /*|132|*/{"Haunter","Haunter"},
     /*|133|*/{"Gengar","Gengar"},
+    
+    /*|134|*/{"Tentacool","Base"},
+    /*|135|*/{"Tentacruel","Tentacruel"},
+
+    /*|136|*/{"Magikarp","Base"},
+    /*|137|*/{"Gyarados","Gyarados"},
+
+    /*|138|*/{"Qwilfish","Base"},
+
+    /*|139|*/{"Skarmory","Base"},
+
+    /*|140|*/{"Larvesta","Base"},
+    /*|141|*/{"Volcarona","Volcarona"},
+
+    /*|142|*/{"Mantyke","Base"},
+    /*|143|*/{"Mantine","Mantine"},
+    
+    /*|144|*/{"Trapinch","Base"},
+    /*|145|*/{"Vibrava","Vibrava"},
+    /*|146|*/{"Flygon","Flygon"},
+    
+    /*|147|*/{"Cacnea","Base"},
+    /*|148|*/{"Cacturne","Cacturne"},
+    
+    /*|149|*/{"Munchlax","Base"},
+    /*|150|*/{"Snorlax","Snorlax"},
     //--[NewPokemon]--
     };

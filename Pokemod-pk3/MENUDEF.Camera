@@ -43,6 +43,7 @@ OptionMenu ZA_MultiplayerOptions
 	Option		"Toggle Reticule",			"sv_CamReticuleMode",			"OnOff"
 	Command		"Reset Camera to Default", "DefaultCam"
 	Submenu 	"Zoom Mode Options",			"ZoomCameraMenu"
+	Submenu 	"Reticule Settings",			"ReticuleMenu"
 	
 }
 
@@ -105,10 +106,34 @@ OptionMenu "OptionsMenu"
 	Option		"Toggle Reticule",			"sv_CamReticuleMode",			"OnOff"
 	Command		"Reset Camera to Default", "DefaultCam"
 	Submenu 	"Zoom Mode Options",			"ZoomCameraMenu"
-	//ColorPicker "Reticule Color", 			"sv_CamReticuleColor"
+	Submenu 	"Reticule Settings",			"ReticuleMenu"
+
+
 
 }
 
+OptionMenu "ReticuleMenu"
+{
+	Title "Reticule Settings"
+	StaticText ""
+	StaticText ""
+	StaticText ""
+	StaticText ""
+	StaticText ""
+	Option		"Reticule Type",			"Sv_CamReticuleType",			"ReticuleType"
+	Option		"Toggle Reticule",			"sv_CamReticuleMode",			"OnOff"
+	Option		"TeamColor Reticule",			"sv_CamReticuleTeamColor",			"OnOff"
+	ColorPicker "Reticule Color", 			"sv_CamReticuleColor"
+	Slider		"Reticule Transperancy",		"sv_CamReticuleAlpha",			0.0, 1.0, 0.1
+
+}
+
+OptionValue ReticuleType
+{
+0, "Standard"
+1, "Circle"
+2, "Dot"
+}
 
 OptionMenu "ZoomCameraMenu"
 {
@@ -147,11 +172,12 @@ OptionMenu "CameraMenu"
 	Option		"Toggle Reticule",			"sv_CamReticuleMode",			"OnOff"
 	Command		"Reset Camera to Default", "DefaultCam"
 	Submenu 	"Zoom Mode Options",			"ZoomCameraMenu"
+	Submenu 	"Reticule Settings",			"ReticuleMenu"
 	StaticText ""
 	Option		"Don't Show this menu again",			"Sv_DisableStartupCamMenu",			"OnOff"
+	Submenu 	"Reticule Settings",			"ReticuleMenu"
 	Command		"Exit", "CloseMenuCommand"
 	
 	
-	//ColorPicker "Reticule Color", 			"sv_CamReticuleColor"
 
 }

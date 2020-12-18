@@ -65,6 +65,16 @@ AddPlayerClass Stunky
 AddPlayerClass Gulpin
 AddPlayerClass Gastly
 AddPlayerClass Haunter
+AddPlayerClass Tentacool
+AddPlayerClass Magikarp
+AddPlayerClass Qwilfish
+AddPlayerClass Skarmory
+AddPlayerClass Larvesta
+AddPlayerClass Mantyke
+AddPlayerClass Trapinch
+AddPlayerClass Vibrava
+AddPlayerClass Cacnea
+AddPlayerClass Munchlax
 //--[NewPokemon]--
 
 alias TriggerEvo "CloseMenu; Use EvoStartItem" 
