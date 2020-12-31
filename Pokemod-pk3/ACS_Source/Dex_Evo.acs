@@ -207,7 +207,7 @@ Int EvoDEX [MAXDEX][6] = {
     /*|134|*/{ 1,      FINALSTAGE2,             TENTACRUEL,  NULLEVO,     NULLEVO,53 },
     /*|135|*/{ 0,      0,             NULLEVO,  NULLEVO,     NULLEVO,53 },
     
-    /*|136|*/{ 1,      FINALSTAGE2,             GYARADOS,  NULLEVO,     NULLEVO,54 },
+    /*|136|*/{ 1,      MIDSTAGE,             GYARADOS,  NULLEVO,     NULLEVO,54 },
     /*|137|*/{ 0,      0,             NULLEVO,  NULLEVO,     NULLEVO,54 },
     
     /*|138|*/{ 0,      0,             NULLEVO,  NULLEVO,     NULLEVO,55 },
@@ -229,5 +229,26 @@ Int EvoDEX [MAXDEX][6] = {
     
     /*|149|*/{ 1,      FINALSTAGE2,             SNORLAX,  NULLEVO,     NULLEVO,61 },
     /*|150|*/{ 0,      0,             NULLEVO,  NULLEVO,     NULLEVO,61 },
+    
+    /*|151|*/{ 1,      MIDSTAGE,             NUZLEAF,  NULLEVO,     NULLEVO,64 },
+    /*|152|*/{ 1,      FINALSTAGE,             SHIFTRY,  NULLEVO,     NULLEVO,64 },
+    /*|153|*/{ 0,      0,             NULLEVO,  NULLEVO,     NULLEVO,64 },
+    
+    /*|154|*/{ 1,      MIDSTAGE,             MAGNETON,  NULLEVO,     NULLEVO,65 },
+    /*|155|*/{ 1,      FINALSTAGE,             MAGNEZONE,  NULLEVO,     NULLEVO,65 },
+    /*|156|*/{ 0,      0,             NULLEVO,  NULLEVO,     NULLEVO,65 },
+    
+    /*|157|*/{ 1,      FINALSTAGE2,             HONCHKROW,  NULLEVO,     NULLEVO,66 },
+    /*|158|*/{ 0,      0,             NULLEVO,  NULLEVO,     NULLEVO,66 },
+    
+    /*|159|*/{ 1,      FINALSTAGE2,             TANGROWTH,  NULLEVO,     NULLEVO,67 },
+    /*|160|*/{ 0,      0,             NULLEVO,  NULLEVO,     NULLEVO,67 },
+    
+    /*|161|*/{ 1,      FINALSTAGE2,             GALVANTULA,  NULLEVO,     NULLEVO,68 },
+    /*|162|*/{ 0,      FINALSTAGE2,             NULLEVO,  NULLEVO,     NULLEVO,68 },
+    
+    /*|163|*/{ 1,      MIDSTAGE,             FLAAFFY,  NULLEVO,     NULLEVO,69 },
+    /*|164|*/{ 1,      FINALSTAGE,             AMPHAROS,  NULLEVO,     NULLEVO,69 },
+    /*|165|*/{ 0,      0,             NULLEVO,  NULLEVO,     NULLEVO,69 },
     //--[NewPokemon]--
 };

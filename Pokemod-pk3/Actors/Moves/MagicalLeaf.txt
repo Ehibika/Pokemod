@@ -90,12 +90,12 @@ TNT1 A 0 A_GiveInventory("ProjectileCode",1)
 TNT1 A 0 A_SpawnItemEx("MagicalLeafFX",0,0,0,0,0,0,0,1)
 Spawn2: // -=- Seeking Target -=-
 MLEF B 1 A_SeekerMissile (2, 10, SMF_LOOK|SMF_PRECISE, 256, 2)
-MLEF B 1 A_SpawnItemEx("AquaRingSparkle",random(-10,10),random(-10,10),random(-10,10),0,0,0,0,1)
+MLEF B 1 A_SpawnItemEx("MagicalLeafSparkle",random(-10,10),random(-10,10),random(-10,10),0,0,0,0,1)
 MLEF A 0 A_Countdown
-MLEF C 1 A_SpawnItemEx("AquaRingSparkle",random(-10,10),random(-10,10),random(-10,10),0,0,0,0,1)
+MLEF C 1 A_SpawnItemEx("MagicalLeafSparkle",random(-10,10),random(-10,10),random(-10,10),0,0,0,0,1)
 MLEF C 1 A_SeekerMissile (2, 10, SMF_LOOK|SMF_PRECISE, 256, 2)
 MLEF A 0 A_Countdown
-MLEF D 1 A_SpawnItemEx("AquaRingSparkle",random(-10,10),random(-10,10),random(-10,10),0,0,0,0,1)
+MLEF D 1 A_SpawnItemEx("MagicalLeafSparkle",random(-10,10),random(-10,10),random(-10,10),0,0,0,0,1)
 MLEF D 1 A_SeekerMissile (2, 10, SMF_LOOK|SMF_PRECISE, 256, 2)
 MLEF A 0 A_Countdown
 
@@ -113,11 +113,11 @@ Goto Spawn4
 
 Spawn4: // -=- target acquired -=-
 TNT1 A 0 A_SeekerMissile (2, 10, SMF_PRECISE)
-MLEF B 2 A_SpawnItemEx("AquaRingSparkle",random(-10,10),random(-10,10),random(-10,10),0,0,0,0,1)
+MLEF B 2 A_SpawnItemEx("MagicalLeafSparkle",random(-10,10),random(-10,10),random(-10,10),0,0,0,0,1)
 TNT1 A 0 A_SeekerMissile (2, 10, SMF_PRECISE)
-MLEF C 2 A_SpawnItemEx("AquaRingSparkle",random(-10,10),random(-10,10),random(-10,10),0,0,0,0,1)
+MLEF C 2 A_SpawnItemEx("MagicalLeafSparkle",random(-10,10),random(-10,10),random(-10,10),0,0,0,0,1)
 TNT1 A 0 A_SeekerMissile (2, 10, SMF_PRECISE)
-MLEF D 2 A_SpawnItemEx("AquaRingSparkle",random(-10,10),random(-10,10),random(-10,10),0,0,0,0,1)
+MLEF D 2 A_SpawnItemEx("MagicalLeafSparkle",random(-10,10),random(-10,10),random(-10,10),0,0,0,0,1)
 MLEF A 0 A_Countdown
 loop
 
@@ -125,7 +125,7 @@ loop
 Death:
 TNT1 A 0 A_GiveInventory("ProjectileDCode",1)
 BSTG AAAAAA 0 A_SpawnItemEx("MagicalLeafParticle", 0, 0, 28, 256/24, 256/24, random2(256/24), random(0, 359),1)
-BSTG AAAAAA 0 A_SpawnItemEx("AquaRingSparkle", 0, 0, 28, 256/24, 256/24, random2(256/24), random(0, 359),1)
+BSTG AA 0 A_SpawnItemEx("MagicalLeafSparkle", 0, 0, 28, 256/24, 256/24, random2(256/24), random(0, 359),1)
 SPKH ABCD 2
 stop
 }
@@ -169,6 +169,23 @@ WOOB Y 2 A_ScaleVelocity (0.8)
 TNT1 A 2 A_ScaleVelocity (0.8)
 WOOB W 2 A_ScaleVelocity (0.8)
 TNT1 A 2 A_ScaleVelocity (0.8)
+stop
+}
+}
+
+actor MagicalLeafSparkle : BasicClientside
+{
+scale 1.2
+ReactionTime 2
+Renderstyle "ADD"
+Alpha 0.9
+States
+{
+Spawn:
+TNT1 A 0
+BMBU D 0 Thrustthingz(0,random(2,6),0,0)
+Spawn2:
+FX01 ABCDEFGHI 2 
 stop
 }
 }

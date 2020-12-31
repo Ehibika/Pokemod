@@ -197,7 +197,7 @@ TNT1 A 1
 TNT1 A 0 //A_PlaySoundEx("support/CraftyShield","SoundSlot7")
 TNT1 A 0 ACS_NamedExecuteAlways("PKMNACS_RadiusGive",0,CraftyShield_Item,CraftyShieldRad,RG_TEAM|RG_SELF)
 Spawn2:
-TNT1 AAAA 0 A_SpawnItemEx("AquaRingSparkle", CraftyShieldRad, 0, -(z-floorz)+24, 0, 0, 0, Random(0,360), 1061)
+TNT1 A 0 A_SpawnItemEx("AquaRingSparkle", CraftyShieldRad, 0, -(z-floorz)+24, 0, 0, 0, Random(0,360), 1061)
 TNT1 A 5 A_CountDown
 loop 
 

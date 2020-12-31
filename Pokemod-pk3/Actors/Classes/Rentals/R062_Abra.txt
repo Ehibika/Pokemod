@@ -1,0 +1,90 @@
+
+/*
+[+]===================================[+]
+
+[+]===================================[+]
+*/
+
+Actor R_Abra : ClassBaseRentals 
+{
+Player.DisplayName "Abra"
+Player.SoundClass "Abra"
++NOSKIN
+
+Player.StartItem "PKMNRentalKit"
+//============|
+Player.StartItem "AbraRentalSetupItem"
+//============|
+Player.StartItem "Base_HP", 25
+Player.StartItem "Base_PAttack", 25
+Player.StartItem "Base_PDefense", 15
+Player.StartItem "Base_SAttack", 105
+Player.StartItem "Base_SDefense", 55
+
+//============|
+
+States
+{
+Spawn: 
+P062 A 0
+P062 B 1 
+P062 A 1
+GoTo Spawn+2
+See:
+P062 BCDE 5
+GoTo Spawn+1
+Missile:
+P062 A 0 A_JumpIfInventory("ConshotTimer",1,"Missile2")
+P062 F 5 
+P062 G 4
+GoTo Spawn+2
+Missile2:
+P062 G 9
+GoTo Spawn+2
+
+PainFix:
+P062 H 0 
+GoTo PainFrames
+}
+}
+
+actor AbraRentalMoves : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_JumpIf(CallACS("RentalBotCheck") == 1,"BotWep")
+
+TNT1 A 0 A_GiveInventory("PsychocutMove1")
+TNT1 A 0 A_GiveInventory("MeditateMove2")
+TNT1 A 0 A_GiveInventory("IcePunchMove3")
+TNT1 A 0 A_GiveInventory("CloseCombatMove4")
+stop
+
+BotWep:
+TNT1 A 0 A_GiveInventory("PsychocutMove1")
+stop
+}
+}
+
+actor AbraRentalSetupItem : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 ACS_NamedExecuteAlways("PKMN_RentalsSetup",0,Dex_Abra)
+stop
+}
+}

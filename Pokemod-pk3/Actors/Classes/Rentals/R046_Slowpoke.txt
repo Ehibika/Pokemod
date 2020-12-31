@@ -14,11 +14,11 @@ Player.StartItem "PKMNRentalKit"
 //============|
 Player.StartItem "SlowpokeRentalSetupItem"
 //============|
-Player.StartItem "Base_HP", 95
-Player.StartItem "Base_PAttack", 135
-Player.StartItem "Base_PDefense", 80
-Player.StartItem "Base_SAttack", 110
-Player.StartItem "Base_SDefense", 80
+Player.StartItem "Base_HP", 90
+Player.StartItem "Base_PAttack", 65
+Player.StartItem "Base_PDefense", 65
+Player.StartItem "Base_SAttack", 40
+Player.StartItem "Base_SDefense", 40
 
 //============|
 

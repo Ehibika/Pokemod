@@ -8,11 +8,16 @@ OptionMenu "ShopMenu"
 	//Submenu "		   		   		   TM Shop", "TM_Menu"
     Command "		   		  		    Item Shop", "OpenItemShop"
     Command "		   		  		    TM Shop", "OpenTMShop"
+    StaticText ""
     StaticText "$SHOP_SERVICES"
     Command "		   		  		    View Status", "ShowStatusScreen"
     Command "		   		   		   Trigger Evolution", "TriggerEvo"
 	Command "		   		   		   Learn Levelup Move", "MoveTutor"
 	Command "		   		   		   Change Move Order", "MoveShift"
+    StaticText ""
+    StaticText "$PKMN_OPT"
+    Submenu "		   		   		   Options", "PKMN_Options"
+    Command "		   		Unstick The Player", "UnstuckCommand"
     StaticText "===============================================================",1
 }
 

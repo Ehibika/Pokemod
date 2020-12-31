@@ -1,0 +1,191 @@
+const Int PMSPRD = 2.6;
+
+actor PinMissileMove : WepMasterBase
+{
+Tag "PinMissile"
+obituary "$OB_PinMissile"
+Weapon.AmmoUse 1
+Weapon.AmmoGive 20
+weapon.ammotype "PinMissilePP"
+scale 2.0
+Inventory.Pickupmessage "$PU_MEGABUSTER"
+States
+{
+Spawn:
+WEAP X 1
+stop
+
+
+Fire:
+"####" BBB 1 A_Jumpif(CallACS("CheckWeaponFire",RC_A)==1,"Fire.Begin")
+"####" B 0 A_Jump(256,"NoAmmo")
+Goto NoAmmo
+
+Fire.Begin:
+TNT1 A 0 
+TNT1 A 0 A_PlaySoundEx("Weapon/CrashLand","Soundslot6")
+TNT1 A 0 A_Jump(256,"Fire.Charge0")
+Goto Fire.Charge0
+
+Fire.Charge0: //Initiation
+TNT1 A 0 A_JumpIfInventory("WeaponCharge",17,"Fire.Charge1")
+TNT1 A 0 A_GiveInventory("WeaponCharge",1)
+TNT1 A 0 A_GiveInventory("ChannelingSpeed")
+TNT1 A 1
+TNT1 A 0 A_REfire("Fire.Charge0")
+TNT1 A 0 A_Jump(256,"Fire.After")
+Goto Fire.After
+
+Fire.Charge1: //Preparing a stack
+TNT1 A 0 A_JumpIfInventory("MultiShotCounter",5,"Fire.Charge3")
+TNT1 A 0 A_JumpIfInventory("WeaponCharge",10,"Fire.Charge2")
+TNT1 A 0 A_GiveInventory("WeaponCharge",1)
+TNT1 A 0 A_GiveInventory("ChannelingSpeed")
+TNT1 A 0 //A_PlaySoundEx("Weapon/Heat1","Soundslot6")
+TNT1 A 1
+TNT1 A 0 A_REfire("Fire.Charge1")
+TNT1 A 0 A_Jump(256,"Fire.Launch")
+Goto Fire.Launch
+
+Fire.Charge2: //Make a stack
+TNT1 A 0 A_GiveInventory("ChannelingSpeed")
+TNT1 A 0 A_GiveInventory("Give_MultiShotCounter",1)
+TNT1 A 0 ACS_NamedExecuteAlways("TakePP",0,Move_PinMissile,1)
+TNT1 A 0 A_TakeInventory("WeaponCharge",99)
+TNT1 A 0 A_PlaySoundEx("Weapon/rminestick","Soundslot6")
+
+TNT1 A 1
+TNT1 A 0 A_JumpifNoAmmo("Fire.Charge3")
+TNT1 A 0 A_REfire("Fire.Charge1")
+TNT1 A 0 A_Jump(256,"Fire.Launch")
+Goto Fire.Launch
+
+Fire.Charge3: //Maximum stacks
+TNT1 A 0 A_GiveInventory("ChannelingSpeed")
+TNT1 A 1
+TNT1 A 0 A_REfire("Fire.Charge3")
+TNT1 A 0 A_Jump(256,"Fire.Launch")
+Goto Fire.Launch
+
+
+Fire.Launch:
+TNT1 A 0
+TNT1 A 0 A_GiveInventory("MultiShotTimer")
+TNT1 A 0 A_Jumpifinventory("MultiShotCounter",1,"Fire.Bullet")
+TNT1 A 0 A_Jump(256,"Fire.After")
+Goto Fire.After
+
+Fire.Bullet:
+TNT1 A 0 A_PlaySoundEx("weapon/RapidBuster","Weapon")
+TNT1 A 2 A_FireCustomMissile("PinMissileShot",0,0,0,0,0,PMSPRD/2)
+TNT1 A 0 A_PlaySoundEx("weapon/RapidBuster","Weapon")
+TNT1 A 2 A_FireCustomMissile("PinMissileShot",-PMSPRD,0,0,0,0,-PMSPRD/2)
+TNT1 A 0 A_PlaySoundEx("weapon/RapidBuster","Weapon")
+TNT1 A 2 A_FireCustomMissile("PinMissileShot",PMSPRD,0,0,0,0,-PMSPRD/2)
+
+TNT1 A 0 A_GiveInventory("ChannelingSpeed")
+//TNT1 A 0 A_Jumpifinventory("MultiShotTimer",1,"Fire.Bullet")
+TNT1 A 0 A_TakeInventory("MultiShotCounter",1)
+TNT1 A 0 A_Jump(256,"Fire.Launch")
+Goto Fire.Launch
+
+Fire.After:
+"####" B 1 A_GiveInventory("HalfRecovery_A")
+"####" B 0 A_TakeInventory("MultiShotTimer",99)
+"####" B 0 A_TakeInventory("MultiShotCounter",99)
+"####" B 0 A_TakeInventory("WeaponCharge",99)
+"####" B 0 A_Jump(256,"Fire.End")
+Goto Fire.End
+}
+}
+
+actor PinMissileMove1 : PinMissileMove {Weapon.SlotNumber 1}
+actor PinMissileMove2 : PinMissileMove {Weapon.SlotNumber 2}
+actor PinMissileMove3 : PinMissileMove {Weapon.SlotNumber 3}
+actor PinMissileMove4 : PinMissileMove {Weapon.SlotNumber 4}
+
+actor PinMissileMove5 : PinMissileMove 
+{
+Weapon.SlotNumber 5
+States
+{
+Fire.End:
+TNT1 A 0
+TNT1 A 0 A_TakeInventory("PinMissileMove5",9)
+TNT1 A 0 A_Jump(256,"Ready")
+Goto Ready
+}
+}
+//[+]========================================================================[+]
+//-----------------------------|Ammo & Inventory|------------------------------
+//[+]========================================================================[+]
+actor PinMissilePP : Ammo {inventory.amount 1 inventory.Maxamount 20}
+
+actor PinMissileCST : PowerupGiver
+{
++INVENTORY.AUTOACTIVATE
+Powerup.Duration 35
+powerup.type "ConShotTimer"
+}
+//[+]========================================================================[+]
+//--------------------------------|Projectiles |--------------------------------
+//[+]========================================================================[+]
+
+actor PinMissileShot : BasicFastProjectile
+{
+Speed 45
+Damage (MBP_PinMissile)
+DamageType "PinMissile"
+obituary "$OB_PinMissile"
+Reactiontime 10
+radius 8
+height 10
+scale 2.0
+States
+{
+Spawn:
+TNT1 A 0 
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+Spawn2:
+TNT1 A 0 
+FX13 AAA 2 //A_SpawnItemEx("PinMissileParticle",random(-10,10),random(-10,10),random(-10,10),0,0,0,0,1)
+TBLA A 0 
+TBLA A 0 A_Countdown
+loop
+
+Death:
+TNT1 A 0 A_GiveInventory("ProjectileDCode",1)
+TNT1 A 0 A_PlaySoundEx("Weapon/icewavebreak","Weapon")
+TNT1 A 0 A_SpawnItemEx("PinMissileImpact",0,0,0,0,0,0,0,1)
+BSTG AAAAAA 0 A_SpawnItemEx("PinMissileParticle", 0, 0, 0, 256/24, 256/24, random2(256/24), random(0, 359),1)
+TNT1 A 8
+stop
+}
+}
+
+
+actor PinMissileParticle : BasicClientside
+{
+scale 2.0
+States
+{
+Spawn:
+TNT1 A 0 
+FCRA ABC 1
+FCRA CC 1 A_Fadeout(0.3)
+stop
+}
+}
+
+actor PinMissileImpact : BasicClientside
+{
+scale 4.5
+States
+{
+Spawn:
+TNT1 A 0 
+NDFX A 1
+NDFX AAAA 1 A_SetScale(ScaleX-0.5)
+stop
+}
+}

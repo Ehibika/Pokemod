@@ -1,0 +1,115 @@
+//#region -=-=- Beta 35 -=-=-
+/*
+ *
+ *
+ * ===|Gameplay Changes|===
+ * the HP cap has been increased into the 4 digits, HP values have also been adjusted to reach higher values than before.
+ * 
+ * this does not mean that everyone will now be in the 1000's however.
+ * 
+ * Defense stat calculation has been adjusted futher, this is to account for the common trend of 
+ * pokemon having high defenses but low HP. higher devense values will now have a more accute reduction to damage
+ * on that side, this will also mean that defense boosting moves will have a more noticeable impact.
+ * 
+ * Keybinds for many menu functions have now been added in the customize controls screen
+ * 
+ * ===|Item Changes|===
+ * Escape orbs now have a max limit of 10
+ * All orbs beyond the escape orb now have a maximum cap of 5
+ * All wands now have a maximum cap of 10
+ * 
+ * Slumber wand cost reduced to 5
+ * Shrink wand cost reduced to 5
+ * Somarian wand cost reduced to 10
+ * Eraser orb cost reduced to 10
+ * Escape orb cost reduced to 1
+ * 
+ * ===|Move Changes|===
+ * 
+ * The following moves now offer resistance to knockback,knockup, and push/pull.
+ *  Curse
+ *  IronDefense
+ *  Amnesia
+ *  DefenseCurl
+ *  CosmicPower
+ *  Safeguard
+ *  CraftyShield
+ * 
+ * 
+ * many moves have had their damage values adjusted, for the sake of simplicity, I'll list them
+ * all here. 
+ * 
+ * Moves with a damage increase:
+ * Flamethrower
+ * Blizzard
+ * BubbleBeam
+ * BulletSeed
+ * Pursuit
+ * SkyDrop
+ * woodhammer
+ * GyroBall
+ * Peck
+ * Crunch
+ * DrillPeck
+ * MuddyWater
+ * Liquidation
+ * Scald
+ * Dive
+ * PhantomForce
+ * HeadButt
+ * ZenHeadbutt
+ * IceShard
+ * IcicleCrash
+ * IcicleSpear
+ * SpikeCannon
+ * DreamEater
+ * StoneEdge
+ * Dig
+ * BullDoze
+ * 
+ * Moves with a damage decrease:
+ * EnergyBall
+ * solarbeam
+ * FireBlast
+ * FlashCannon
+ * PetalBlizzard
+ * NightSlash
+ * MudBomb
+ * Surf
+ * sludge
+ * SludgeBomb
+ * ShadowBall
+ * Psychic
+ * FutureSight
+ * FocusBlast
+ * MoonBlast
+ * Thunder
+ * ElectroBall
+ * Discharge
+ * 
+ * [safeguard]
+ * now blocks damage from trapping moves (whirlpool/sandTomb/FireSpin)
+ * 
+ * [CraftyShield]
+ * now blocks damage from trapping moves (whirlpool/sandTomb/FireSpin)
+ * 
+ * [SkyDrop]
+ * has seen some functional improvements, can also work on grounded foes now
+ * can be used while flying, but turns off flying after a successfull grab.
+ * 
+ * [sludge]
+ * sludge puddles now deal half of the damage a direct shot would have instead of the whole damage
+ * 
+ * [SludgeBomb]
+ * only creates sludge puddles when it lands on the ground
+ * 
+ * sludge puddles in flight cannot hit players anymore
+ * 
+ * sludge puddles deal half their usual damage
+ * 
+ * [Wideguard]
+ * Fixed a bug where wideguard isn't properly removed by the escape orb
+ * 
+ * [recover]
+ * heal rate increased from 2% > 10%
+ * 

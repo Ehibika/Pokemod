@@ -119,6 +119,8 @@ sprinkler/place SPRPUT
 sprinkler/shot SPRSHT
 
 Weapon/Trample MADWALK 
+Weapon/FlyFlap FLY2 
+Weapon/FlyDive FLY1
 Weapon/WindBlow WINDBLOW 
 weapon/Bounce1	coil1a
 weapon/Bounce2	coil2a
@@ -162,6 +164,9 @@ Move/FutureSight FUTRSGT
 Move/PetalBlizzard PETBLIZ
 Move/Curse2 WRAP
 Move/Curse3 GCURSE
+Move/Fly FLY3
+Move/Haze HAZE
+Move/Mist MIST
 
 Move/Confusion PSILOVE1
 Move/Psychic1 PSILOVE2

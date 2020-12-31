@@ -243,7 +243,16 @@ script "S_Reticule_C" OPEN CLIENTSIDE {
 		//log(i:(camNumber-C_TID) + 1000);
 		if(IsPlayer(selfTID) && ThirdCamNumber == camNumber) 
 		{
-		if(GetReticuleSetting(selfNumber,ZoomMode)){ GiveActorInventory(selfTID,"ReticulePickup",1); }
+		if(GetReticuleSetting(selfNumber,ZoomMode))
+				{
+				Switch(GetReticuleType())
+					{
+						case 1: GiveActorInventory(selfTID,"ReticulePickup_Circle",1); break;
+						case 2: GiveActorInventory(selfTID,"ReticulePickup_Dot",1); break;
+						default: GiveActorInventory(selfTID,"ReticulePickup",1); break;
+					}
+				 
+				}
 		}
 		delay(1);
 	}
@@ -279,7 +288,7 @@ script "Check_ReticuleType" (void)
 SetResultValue(GetReticuleType());
 }
 
-function bool GetReticuleType(void)
+function int GetReticuleType(void)
 {
 	return (getUserCvar(ConsolePlayerNumber(),"Sv_CamReticuleType"));
 }

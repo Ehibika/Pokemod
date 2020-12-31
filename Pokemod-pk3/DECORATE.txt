@@ -296,6 +296,25 @@
 #include "actors/Moves/IronHead.txt"
 #include "actors/Moves/Acid.txt"
 #include "actors/Moves/AcidSpray.txt"
+#include "actors/Moves/StringShot.txt"
+#include "actors/Moves/Splash.txt"
+#include "actors/Moves/PoisonSting.txt"
+#include "actors/Moves/ElectroWeb.txt"
+#include "actors/Moves/ElectroBall.txt"
+#include "actors/Moves/Discharge.txt"
+#include "actors/Moves/BugBite.txt"
+#include "actors/Moves/Pluck.txt"
+#include "actors/Moves/AirCutter.txt"
+#include "actors/Moves/Gust.txt"
+#include "actors/Moves/Fly.txt"
+// #include "actors/Moves/ElectroLevitate.txt"
+#include "actors/Moves/BugBuzz.txt"
+#include "actors/Moves/SilverWind.txt"
+// #include "actors/Moves/QuiverDance.txt"
+#include "actors/Moves/PoisonJab.txt"
+#include "actors/Moves/EarthPower.txt"
+#include "actors/Moves/PinMissile.txt"
+#include "actors/Moves/FaintAttack.txt"
 //--[NewMove]--
 
 #include "Actors/inventory/Shop/ShopActors/shopact.txt"
@@ -388,6 +407,12 @@
 #include "Actors/Classes/Pokemon/144_Trapinch.txt"
 #include "Actors/Classes/Pokemon/147_Cacnea.txt"
 #include "Actors/Classes/Pokemon/149_Munchlax.txt"
+#include "Actors/Classes/Pokemon/151_Seedot.txt"
+#include "Actors/Classes/Pokemon/154_Magnemite.txt"
+#include "Actors/Classes/Pokemon/157_Murkrow.txt"
+#include "Actors/Classes/Pokemon/159_Tangela.txt"
+#include "Actors/Classes/Pokemon/161_Joltik.txt"
+#include "Actors/Classes/Pokemon/163_Mareep.txt"
 //--[NewPokemon]--
 
 // -=- Rentals -=-
@@ -453,6 +478,46 @@
 
 #Include "Actors/Classes/Rentals/R049_Staryu.Txt"
 #Include "Actors/Classes/Rentals/R050_Starmie.Txt"
+
+#Include "Actors/Classes/Rentals/R051_Shellder.Txt"
+#Include "Actors/Classes/Rentals/R052_Cloyster.Txt"
+
+#Include "Actors/Classes/Rentals/R053_VULPIX.Txt"
+#Include "Actors/Classes/Rentals/R054_NINETALES.Txt"
+
+#Include "Actors/Classes/Rentals/R055_VULPIX_A.Txt"
+#Include "Actors/Classes/Rentals/R056_NINETALES_A.Txt"
+
+#Include "Actors/Classes/Rentals/R057_SNOVER.Txt"
+#Include "Actors/Classes/Rentals/R058_ABOMASNOW.Txt"
+
+#Include "Actors/Classes/Rentals/R059_SWINUB.Txt"
+#Include "Actors/Classes/Rentals/R060_PILOSWINE.Txt"
+#Include "Actors/Classes/Rentals/R061_MAMOSWINE.Txt"
+
+#Include "Actors/Classes/Rentals/R062_ABRA.Txt"
+#Include "Actors/Classes/Rentals/R063_KADABRA.Txt"
+#Include "Actors/Classes/Rentals/R064_ALAKAZAM.Txt"
+
+#Include "Actors/Classes/Rentals/R065_DROWZEE.Txt"
+#Include "Actors/Classes/Rentals/R066_HYPNO.Txt"
+
+#Include "Actors/Classes/Rentals/R067_RALTS.Txt"
+#Include "Actors/Classes/Rentals/R068_KIRLIA.Txt"
+#Include "Actors/Classes/Rentals/R069_GARDEVOIR.Txt"
+#Include "Actors/Classes/Rentals/R070_GALLADE.Txt"
+
+#Include "Actors/Classes/Rentals/R071_EXEGGCUTE.Txt"
+#Include "Actors/Classes/Rentals/R072_EXEGGUTOR.Txt"
+
+#Include "Actors/Classes/Rentals/R073_TORKOAL.Txt"
+
+#Include "Actors/Classes/Rentals/R074_SLUGMA.Txt"
+#Include "Actors/Classes/Rentals/R075_MAGCARGO.Txt"
+
+#Include "Actors/Classes/Rentals/R076_PICHU.Txt"
+#Include "Actors/Classes/Rentals/R077_PIKACHU.Txt"
+#Include "Actors/Classes/Rentals/R078_RAICHU.Txt"
 //  #Include "Actors/Classes/Rentals/R079_Ferroseed.Txt"
 //  #Include "Actors/Classes/Rentals/R080_Ferrothorn.Txt"
 
@@ -530,4 +595,19 @@
 //  #Include "Actors/Classes/Rentals/R148_Cacturne.Txt"
 //  #Include "Actors/Classes/Rentals/R149_Munchlax.Txt"
 //  #Include "Actors/Classes/Rentals/R150_Snorlax.Txt"
+//  #Include "Actors/Classes/Rentals/R151_Seedot.Txt"
+//  #Include "Actors/Classes/Rentals/R152_Nuzleaf.Txt"
+//  #Include "Actors/Classes/Rentals/R153_Shiftry.Txt"
+//  #Include "Actors/Classes/Rentals/R154_Magnemite.Txt"
+//  #Include "Actors/Classes/Rentals/R155_Magneton.Txt"
+//  #Include "Actors/Classes/Rentals/R156_Magnezone.Txt"
+//  #Include "Actors/Classes/Rentals/R157_Murkrow.Txt"
+//  #Include "Actors/Classes/Rentals/R158_Honchkrow.Txt"
+//  #Include "Actors/Classes/Rentals/R159_Tangela.Txt"
+//  #Include "Actors/Classes/Rentals/R160_Tangrowth.Txt"
+//  #Include "Actors/Classes/Rentals/R161_Joltik.Txt"
+//  #Include "Actors/Classes/Rentals/R162_Galvantula.Txt"
+//  #Include "Actors/Classes/Rentals/R163_Mareep.Txt"
+//  #Include "Actors/Classes/Rentals/R164_Flaaffy.Txt"
+//  #Include "Actors/Classes/Rentals/R165_Ampharos.Txt"
 //--[NewPokemon]--

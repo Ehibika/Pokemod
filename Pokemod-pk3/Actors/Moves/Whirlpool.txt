@@ -78,7 +78,7 @@ Const int WhlPolRad1 = 200;
 Const int WhlPolRad2 = 125;
 Const int WhlPol_Pull = 7;
 Const int WhlPolEntiTID = 6;
-Const int WhlPol_Time = 80;
+Const int WhlPol_Time = 40;
 
 //[+]========================================================================[+]
 //--------------------------------|Projectiles |--------------------------------

@@ -182,7 +182,7 @@ loop
 
 actor PursuitImpactParticle : BasicClientside
 {
--NOINTERACTION
+//-NOINTERACTION
 scale 1.5
 Gravity 0.5
 Alpha 0.5

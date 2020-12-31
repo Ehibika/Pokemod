@@ -12,19 +12,26 @@
 //#region -=- General Constants & Variables
 #LIBDEFINE HPVAL1 50
 #LIBDEFINE HPVAL2 250
-#LIBDEFINE HPVAL3 1500 //force capped at 999 anyways, so this just expedites HP scaling
+#LIBDEFINE HPVAL3 2500 //
 
 #LIBDEFINE ATKVAL1 1
-#LIBDEFINE ATKVAL2 100
-#LIBDEFINE ATKVAL3 200
+#LIBDEFINE ATKVAL2 50
+#LIBDEFINE ATKVAL3 100
+#LIBDEFINE ATKVAL4 500
 
 #LIBDEFINE DEFVAL1 1
-#LIBDEFINE DEFVAL2 100
-#LIBDEFINE DEFVAL3 200
+#LIBDEFINE DEFVAL2 50
+#LIBDEFINE DEFVAL3 100
+#LIBDEFINE DEFVAL4 500
 
 #LIBDEFINE STATMIN 1
-#LIBDEFINE STATBASELINE 250 // ATTACK, formerly 80
-#LIBDEFINE STATBASELINE2 250 // DEFENSE 
+#LIBDEFINE STATBASELINE 300 // 
+
+#LIBDEFINE ATKSTATBASELINE1 300 // ATTACK
+#LIBDEFINE ATKSTATBASELINE2 400 // ATTACK
+
+#LIBDEFINE DEFSTATBASELINE1 300 // DEFENSE 
+#LIBDEFINE DEFSTATBASELINE2 400 // DEFENSE 
 #LIBDEFINE STATBASELINE3 175 // HP 
 #LIBDEFINE STATMAX 999
 
@@ -33,6 +40,7 @@
 
 #LIBDEFINE TestLevel 10
 
+Int PlayerSpeedTiers[64] = {};
 
 Int SpeedTable[15][2] = {
     {31,78},
@@ -55,7 +63,7 @@ Int SpeedTable[15][2] = {
 
 
 
-#LIBDEFINE STATITEMNUM 63
+#LIBDEFINE STATITEMNUM 65
 
 Str StatEffectName[STATITEMNUM][2] = {
     {"Growth","GOOD"},
@@ -121,6 +129,8 @@ Str StatEffectName[STATITEMNUM][2] = {
     {"BulkUp","GOOD"},
     {"Acid","BAD"},
     {"AcidSpray","BAD"},
+    {"StringShot","BAD"},
+    {"ElectroWeb","BAD"},
 
 };
 
@@ -195,6 +205,8 @@ Int StatEffectValue[STATITEMNUM][5] = {
 {   1,      0,      1,      0,      0}, //BulkUp
 {   0,      0,      -1,      0,      0}, //acid
 {   0,      0,      0,      -2,      0}, //acidspray
+{   0,      0,      0,      0,      -2}, //StringShot
+{   0,      0,      0,      0,      -1}, //ElectroWeb
 
 
 };

@@ -1,0 +1,90 @@
+
+/*
+[+]===================================[+]
+
+[+]===================================[+]
+*/
+
+Actor R_Raichu : ClassBaseRentals 
+{
+Player.DisplayName "Raichu"
+Player.SoundClass "Raichu"
++NOSKIN
+
+Player.StartItem "PKMNRentalKit"
+//============|
+Player.StartItem "RaichuRentalSetupItem"
+//============|
+Player.StartItem "Base_HP", 70
+Player.StartItem "Base_PAttack", 105
+Player.StartItem "Base_PDefense", 60
+Player.StartItem "Base_SAttack", 105
+Player.StartItem "Base_SDefense", 90
+
+//============|
+
+States
+{
+Spawn: 
+P078 A 0
+P078 B 1 
+P078 A 1
+GoTo Spawn+2
+See:
+P078 BCDE 5
+GoTo Spawn+1
+Missile:
+P078 A 0 A_JumpIfInventory("ConshotTimer",1,"Missile2")
+P078 F 5 
+P078 G 4
+GoTo Spawn+2
+Missile2:
+P078 G 9
+GoTo Spawn+2
+
+PainFix:
+P078 H 0 
+GoTo PainFrames
+}
+}
+
+actor RaichuRentalMoves : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_JumpIf(CallACS("RentalBotCheck") == 1,"BotWep")
+
+TNT1 A 0 A_GiveInventory("ThunderboltMove1")
+TNT1 A 0 A_GiveInventory("IronTailMove2")
+TNT1 A 0 A_GiveInventory("SurfMove3")
+TNT1 A 0 A_GiveInventory("ThunderMove4")
+stop
+
+BotWep:
+TNT1 A 0 A_GiveInventory("ThunderboltMove1")
+stop
+}
+}
+
+actor RaichuRentalSetupItem : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 ACS_NamedExecuteAlways("PKMN_RentalsSetup",0,Dex_Raichu)
+stop
+}
+}

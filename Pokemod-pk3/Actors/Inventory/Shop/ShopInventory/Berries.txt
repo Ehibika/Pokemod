@@ -122,3 +122,51 @@ stop
 }
 }
 actor MaxBigPPBerry : Ammo {inventory.maxamount 3}
+
+//#region -=- stolen berries -=-
+
+actor StealHPBerry : HPBerry 
+{
++INVENTORY.AUTOACTIVATE
+States
+{
+Pickup:
+TNT1 A 0 A_Jump(256,"Success")
+goto Success
+}
+}
+
+actor StealBigHPBerry : BigHPBerry 
+{
++INVENTORY.AUTOACTIVATE
+States
+{
+Pickup:
+TNT1 A 0 A_Jump(256,"Success")
+goto Success
+}
+}
+
+actor StealPPBerry : PPBerry 
+{
++INVENTORY.AUTOACTIVATE
+States
+{
+Pickup:
+TNT1 A 0 A_Jump(256,"Success")
+goto Success
+}
+}
+
+actor StealBigPPBerry : BigPPBerry 
+{
++INVENTORY.AUTOACTIVATE
+States
+{
+Pickup:
+TNT1 A 0 A_Jump(256,"Success")
+goto Success
+}
+}
+
+//#endregion

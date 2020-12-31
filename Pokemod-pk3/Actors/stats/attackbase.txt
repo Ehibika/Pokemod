@@ -45,6 +45,10 @@ damagefactor "Glare", 1.0
 damagefactor "SoftBoiled", 1.0
 damagefactor "MorningSun", 1.0
 damagefactor "Curse", 1.0
+damagefactor "StringShot", 1.0
+damagefactor "Splash", 1.0
+damagefactor "ElectroLevitate", 1.0
+damagefactor "QuiverDance", 1.0
 //--[NewStatusMove]--
 }
 
@@ -141,6 +145,14 @@ damagefactor "ClearSmog", 1.0
 damagefactor "DarkPulse", 1.0
 damagefactor "Acid", 1.0
 damagefactor "AcidSpray", 1.0
+damagefactor "ElectroWeb", 1.0
+damagefactor "ElectroBall", 1.0
+damagefactor "Discharge", 1.0
+damagefactor "AirCutter", 1.0
+damagefactor "Gust", 1.0
+damagefactor "BugBuzz", 1.0
+damagefactor "SilverWind", 1.0
+damagefactor "EarthPower", 1.0
 //--[NewSpecialMove]--
 }
 
@@ -262,5 +274,12 @@ damagefactor "FlameCharge", 1.0
 damagefactor "FuryCutter", 1.0
 damagefactor "MeteorMash", 1.0
 damagefactor "IronHead", 1.0
+damagefactor "PoisonSting", 1.0
+damagefactor "BugBite", 1.0
+damagefactor "Pluck", 1.0
+damagefactor "Fly", 1.0
+damagefactor "PoisonJab", 1.0
+damagefactor "PinMissile", 1.0
+damagefactor "FaintAttack", 1.0
 //--[NewPhysicalMove]--
 }

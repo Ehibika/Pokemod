@@ -1,3 +1,6 @@
+
+const int WideGuardEntiTID = 8;
+
 actor WideGuardMove : WepMasterBase
 {
 Tag "WideGuard"
@@ -39,6 +42,7 @@ Fire.ScreenSpawn:
 Goto Fire.After
 
 Fire.ScreenKill:
+"####" B 1 A_Jumpif(CallACS("CheckEntiTID",0,WideGuardEntiTID)==0,"Fire.QuickClear")
 "####" B 0 A_PlaySoundEx("Misc/Usemove","Weapon")
 "####" B 1 A_GiveInventory("WideScreenKiller")
 TNT1 A 0 A_TakeInventory("WideScreenActive",99)
@@ -46,6 +50,13 @@ TNT1 A 0 A_TakeInventory("WideScreenActive",99)
 "####" B 1 A_GiveInventory("HalfRecovery_C")
 "####" B 0 A_Jump(256,"Fire.End")
 Goto Fire.End
+
+Fire.QuickClear:
+"####" B 1 A_GiveInventory("WideScreenKiller")
+"####" B 0 A_TakeInventory("WideScreenActive",99)
+"####" C 0 A_REfire("Fire")
+"####" B 0 A_Jump(256,"Fire.After")
+Goto Fire.After
 
 Fire.After:
 "####" B 1 A_GiveInventory("FullRecovery_C")
@@ -91,7 +102,7 @@ const int WideGuard2_PARTMAX = 12;
 const int WGA = 6;
 const int WG_ExpandTime = 30;
 const int WideGuardRad = WGA*WG_ExpandTime;
-const int WideGuardEntiTID = 8;
+
 
 actor WideGuard2Spawner
 {
@@ -106,8 +117,10 @@ actor WideGuard2Spawner
     Spawn:
         TNT1 A 0
         TNT1 A 0 A_RearrangePointers(AAPTR_DEFAULT, AAPTR_DEFAULT, AAPTR_TARGET)
+        BHOL B 0 ACS_NamedExecuteAlways("GiveEntiTID",0,WideGuardEntiTID)
+        TNT1 A 3
         TNT1 A 0 A_SetUserVar(user_InFloor, (z-floorz < 32))
-        TNT1 A 0 A_SpawnItemEx("WideGuard2Core", 0, 0, !user_InFloor * -32 + user_InFloor * -(z-floorz), 0, 0, 0, 0, SXF_TRANSFERPOINTERS)
+        TNT1 A 0 A_SpawnItemEx("WideGuard2Core", 0, 0, !user_InFloor * -32 + user_InFloor * -(z-floorz), 0, 0, 0, 0, SXF_TRANSFERPOINTERS,0,TID)
         TNT1 A 0 A_SetUserVar(user_part, WIDEGUARD2_PARTMAX)
     SpawnWait:
         TNT1 A 0 A_JumpIf(ACS_NamedExecuteWithResult("core_targetexists")==0,"End")
@@ -167,40 +180,39 @@ actor WideGuard2Core
         WGUA C 0 A_RearrangePointers(AAPTR_TRACER, AAPTR_DEFAULT, AAPTR_DEFAULT)
         BHOL B 0 A_SetUserVar(user_partmax, 16)
         BHOL B 0 A_SetUserVar(user_part, user_partmax)
-        BHOL B 0 ACS_NamedExecuteAlways("GiveEntiTID",0,WideGuardEntiTID)
     SpawnParts:
     BLTR C 0 A_Jumpifintargetinventory("LightTeamFlag",1,"SpawnBLUE")
     BLTR C 0 A_Jumpifintargetinventory("WilyTeamFlag",1,"SpawnRED")
     BLTR C 0 A_Jumpifintargetinventory("CossackTeamFlag",1,"SpawnGREEN")
     BLTR C 0 A_Jumpifintargetinventory("KingTeamFlag",1,"SpawnYELLOW")
 
-    BHOL B 0 A_SpawnItemEx("WideGuard2Part", 0, 0, 0, 0, 0, 0, user_part*(360/WIDEGUARD2_PARTMAX), SXF_SETMASTER|SXF_TRANSFERPOINTERS)
-    BHOL B 0 A_SpawnItemEx("WideGuard2Part2", 0, 0, 32, 0, 0, 0, user_part*(360/WIDEGUARD2_PARTMAX), SXF_SETMASTER|SXF_TRANSFERPOINTERS)
-    BHOL B 0 A_SpawnItemEx("WideGuard2Part", 0, 0, 64, 0, 0, 0, user_part*(360/WIDEGUARD2_PARTMAX), SXF_SETMASTER|SXF_TRANSFERPOINTERS)
+    BHOL B 0 A_SpawnItemEx("WideGuard2Part", 0, 0, 0, 0, 0, 0, user_part*(360/WIDEGUARD2_PARTMAX), SXF_SETMASTER|SXF_TRANSFERPOINTERS,0,tid)
+    BHOL B 0 A_SpawnItemEx("WideGuard2Part2", 0, 0, 32, 0, 0, 0, user_part*(360/WIDEGUARD2_PARTMAX), SXF_SETMASTER|SXF_TRANSFERPOINTERS,0,tid)
+    BHOL B 0 A_SpawnItemEx("WideGuard2Part", 0, 0, 64, 0, 0, 0, user_part*(360/WIDEGUARD2_PARTMAX), SXF_SETMASTER|SXF_TRANSFERPOINTERS,0,tid)
     goto SpawnPartsDone
 
     SpawnBLUE:
-    BHOL B 0 A_SpawnItemEx("WideGuard2Part_B", 0, 0, 0, 0, 0, 0, user_part*(360/WIDEGUARD2_PARTMAX), SXF_SETMASTER|SXF_TRANSFERPOINTERS)
-    BHOL B 0 A_SpawnItemEx("WideGuard2Part2_B", 0, 0, 32, 0, 0, 0, user_part*(360/WIDEGUARD2_PARTMAX), SXF_SETMASTER|SXF_TRANSFERPOINTERS)
-    BHOL B 0 A_SpawnItemEx("WideGuard2Part_B", 0, 0, 64, 0, 0, 0, user_part*(360/WIDEGUARD2_PARTMAX), SXF_SETMASTER|SXF_TRANSFERPOINTERS)
+    BHOL B 0 A_SpawnItemEx("WideGuard2Part_B", 0, 0, 0, 0, 0, 0, user_part*(360/WIDEGUARD2_PARTMAX), SXF_SETMASTER|SXF_TRANSFERPOINTERS,0,tid)
+    BHOL B 0 A_SpawnItemEx("WideGuard2Part2_B", 0, 0, 32, 0, 0, 0, user_part*(360/WIDEGUARD2_PARTMAX), SXF_SETMASTER|SXF_TRANSFERPOINTERS,0,tid)
+    BHOL B 0 A_SpawnItemEx("WideGuard2Part_B", 0, 0, 64, 0, 0, 0, user_part*(360/WIDEGUARD2_PARTMAX), SXF_SETMASTER|SXF_TRANSFERPOINTERS,0,tid)
     goto SpawnPartsDone
 
     SpawnRED:
-    BHOL B 0 A_SpawnItemEx("WideGuard2Part_r", 0, 0, 0, 0, 0, 0, user_part*(360/WIDEGUARD2_PARTMAX), SXF_SETMASTER|SXF_TRANSFERPOINTERS)
-    BHOL B 0 A_SpawnItemEx("WideGuard2Part2_r", 0, 0, 32, 0, 0, 0, user_part*(360/WIDEGUARD2_PARTMAX), SXF_SETMASTER|SXF_TRANSFERPOINTERS)
-    BHOL B 0 A_SpawnItemEx("WideGuard2Part_r", 0, 0, 64, 0, 0, 0, user_part*(360/WIDEGUARD2_PARTMAX), SXF_SETMASTER|SXF_TRANSFERPOINTERS)
+    BHOL B 0 A_SpawnItemEx("WideGuard2Part_r", 0, 0, 0, 0, 0, 0, user_part*(360/WIDEGUARD2_PARTMAX), SXF_SETMASTER|SXF_TRANSFERPOINTERS,0,tid)
+    BHOL B 0 A_SpawnItemEx("WideGuard2Part2_r", 0, 0, 32, 0, 0, 0, user_part*(360/WIDEGUARD2_PARTMAX), SXF_SETMASTER|SXF_TRANSFERPOINTERS,0,tid)
+    BHOL B 0 A_SpawnItemEx("WideGuard2Part_r", 0, 0, 64, 0, 0, 0, user_part*(360/WIDEGUARD2_PARTMAX), SXF_SETMASTER|SXF_TRANSFERPOINTERS,0,tid)
     goto SpawnPartsDone
 
     SpawnGREEN:
-    BHOL B 0 A_SpawnItemEx("WideGuard2Part_g", 0, 0, 0, 0, 0, 0, user_part*(360/WIDEGUARD2_PARTMAX), SXF_SETMASTER|SXF_TRANSFERPOINTERS)
-    BHOL B 0 A_SpawnItemEx("WideGuard2Part2_g", 0, 0, 32, 0, 0, 0, user_part*(360/WIDEGUARD2_PARTMAX), SXF_SETMASTER|SXF_TRANSFERPOINTERS)
-    BHOL B 0 A_SpawnItemEx("WideGuard2Part_g", 0, 0, 64, 0, 0, 0, user_part*(360/WIDEGUARD2_PARTMAX), SXF_SETMASTER|SXF_TRANSFERPOINTERS)
+    BHOL B 0 A_SpawnItemEx("WideGuard2Part_g", 0, 0, 0, 0, 0, 0, user_part*(360/WIDEGUARD2_PARTMAX), SXF_SETMASTER|SXF_TRANSFERPOINTERS,0,tid)
+    BHOL B 0 A_SpawnItemEx("WideGuard2Part2_g", 0, 0, 32, 0, 0, 0, user_part*(360/WIDEGUARD2_PARTMAX), SXF_SETMASTER|SXF_TRANSFERPOINTERS,0,tid)
+    BHOL B 0 A_SpawnItemEx("WideGuard2Part_g", 0, 0, 64, 0, 0, 0, user_part*(360/WIDEGUARD2_PARTMAX), SXF_SETMASTER|SXF_TRANSFERPOINTERS,0,tid)
     goto SpawnPartsDone
 
     SpawnYELLOW:
-    BHOL B 0 A_SpawnItemEx("WideGuard2Part_y", 0, 0, 0, 0, 0, 0, user_part*(360/WIDEGUARD2_PARTMAX), SXF_SETMASTER|SXF_TRANSFERPOINTERS)
-    BHOL B 0 A_SpawnItemEx("WideGuard2Part2_y", 0, 0, 32, 0, 0, 0, user_part*(360/WIDEGUARD2_PARTMAX), SXF_SETMASTER|SXF_TRANSFERPOINTERS)
-    BHOL B 0 A_SpawnItemEx("WideGuard2Part_y", 0, 0, 64, 0, 0, 0, user_part*(360/WIDEGUARD2_PARTMAX), SXF_SETMASTER|SXF_TRANSFERPOINTERS)
+    BHOL B 0 A_SpawnItemEx("WideGuard2Part_y", 0, 0, 0, 0, 0, 0, user_part*(360/WIDEGUARD2_PARTMAX), SXF_SETMASTER|SXF_TRANSFERPOINTERS,0,tid)
+    BHOL B 0 A_SpawnItemEx("WideGuard2Part2_y", 0, 0, 32, 0, 0, 0, user_part*(360/WIDEGUARD2_PARTMAX), SXF_SETMASTER|SXF_TRANSFERPOINTERS,0,tid)
+    BHOL B 0 A_SpawnItemEx("WideGuard2Part_y", 0, 0, 64, 0, 0, 0, user_part*(360/WIDEGUARD2_PARTMAX), SXF_SETMASTER|SXF_TRANSFERPOINTERS,0,tid)
     goto SpawnPartsDone
 
     SpawnPartsDone:
@@ -615,7 +627,9 @@ DamageFactor "Normal" , 0.2
     TNT1 A 0 HealThing(9999)
 	HEXA BB 1 A_Stop
 	Goto Shield
-	Perish:
+  Perish:
+  TNT1 A 0 A_GiveToTarget("WideScreenKiller",1)
+  TNT1 A 0 A_TakeFromTarget("WideScreenActive",99)
   Death:
     TNT1 A 2
     stop
@@ -1131,6 +1145,8 @@ TNT1 A 1 A_TakeFromTarget("WideScreenActive",99)
     TNT1 A 0 //A_SpawnItemEX("WideGuardKiller")
 Terminate:
 Perish:
+TNT1 A 0 A_GiveToTarget("WideScreenKiller",1)
+TNT1 A 0 A_TakeFromTarget("WideScreenActive",99)
 TNT1 A 0
 stop
 }

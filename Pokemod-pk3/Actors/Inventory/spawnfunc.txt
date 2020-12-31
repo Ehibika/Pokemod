@@ -70,21 +70,25 @@ actor MM8BDMFlagSpawnFunc : CustomInventory
 states
 {
 Pickup:
-TNT1 A 0 A_JumpIf(ACS_NamedExecuteWithResult("mm8bdm_ctf_FIRSTTICCHECK"),"SpawnHealZone")
-stop
-SpawnHealZone:
+//TNT1 A 0 A_JumpIf(ACS_NamedExecuteWithResult("mm8bdm_ctf_FIRSTTICCHECK"),"SpawnHealZone")
+//stop
+//SpawnHealZone:
 TNT1 A 0 A_JumpIF(CheckClass("BlueFlag"),"SpawnBlueHealZone")
 TNT1 A 0 A_JumpIF(CheckClass("MegaBlueFlag"),"SpawnBlueHealZone")
+TNT1 A 0 A_JumpIF(CheckClass("SpawnFunc_BlueFlag"),"SpawnBlueHealZone")
 
 TNT1 A 0 A_JumpIF(CheckClass("RedFlag"),"SpawnRedHealZone")
 TNT1 A 0 A_JumpIF(CheckClass("MegaRedFlag"),"SpawnRedHealZone")
+TNT1 A 0 A_JumpIF(CheckClass("SpawnFunc_RedFlag"),"SpawnRedHealZone")
 stop
 
 SpawnBlueHealZone:
+TNT1 A 0 A_JumpIf(ACS_NamedExecuteWithResult("PKMN_CheckHealStation",0) != 0,"end")
 TNT1 A 0 A_SpawnItemEx("MegaBlueFlag_TeamHealZone",0,0,0,0,0,0,0,0,0,0)
 goto end
 
 SpawnRedHealZone:
+TNT1 A 0 A_JumpIf(ACS_NamedExecuteWithResult("PKMN_CheckHealStation",1) != 0,"end")
 TNT1 A 0 A_SpawnItemEx("MegaRedFlag_TeamHealZone",0,0,0,0,0,0,0,0,0,0)
 goto end
 

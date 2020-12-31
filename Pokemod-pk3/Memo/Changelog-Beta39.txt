@@ -1,0 +1,63 @@
+//#region -=-=- Beta 37 -=-=-
+/*
+ *
+ *
+ * 
+ * ===|Gameplay Changes|===
+ * 
+ * Minor scaling adjustments made to the attack stat for the early game
+ * 
+ * introduced a tip system, to inform players on the many mechanics of the mod
+ * 
+ * added an option to allow players to free themselves if they get stuck after using a menu
+ * 
+ * ===|Move Changes|===
+ * 
+ * When operating a remote move, taking damage will take you out of the remote state.
+ * 
+ * [Thunder]
+ * PP increased from 5 > 10
+ * 
+ * [EarthQuake]
+ * PP increased from 5 > 10
+ * 
+ * [Haze]
+ * is now a ground targeted move
+ * AOE increased from 150 > 200
+ * 
+ * [Mist]
+ * now casts immediately in an AOE around you
+ * AOE increased from 150 > 1000
+ * 
+ * [Whirlpool]
+ * Duration reduced by half
+ * 
+ * [CraftyShield]
+ * now only blocks major statuses
+ * can now be purged by haze
+ * 
+ * [substitute]
+ * Fixed so it that you can push the doll again
+ * 
+ * [HelpingHand]
+ * now when the targeted player deals damage, the helper gains half the EXP they do.
+ * 
+ * [Fakeout]
+ * radius increased from 75 > 150
+ * 
+ * [Pursuit]
+ * Damage reduced
+ * 
+ * [Recover]
+ * Heal rate increased from 4% > 6%
+ * 
+ * ===|Pokemon Changes|===
+ * 
+ * Fixed a definition issue where Swalot was Poison/Normal and not pure poison
+ * 
+ * Moved Trapinch from the slow speed tier to the fast speed tier, to match with his other Evos
+ * 
+ * [Level up changes]
+ * Audino has been moved from Rapid > Normal
+ * Quilfish has been moved from Normal > Swift
+ * Geodude family has been moved from Normal > Swift

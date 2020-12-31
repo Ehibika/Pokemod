@@ -1,8 +1,23 @@
-LISTMENU "PKMNMainMenu"
+OptionMenu "PKMN_Options"
 {
-Position 97, 72
-Font "DBIGFONT", "MenuBlue" //[Trill]
-//TextItem "Status", "c", "PKMNStatus"
-TextItem "PokeDex", "D", "PKMNInfo"
+	Title "Pokemon Settings"
+	StaticText "===============================================================",1
+	Option "Show Damage/Healing Numbers",			"PKMN_CV_DamageDisplay", "OnOff"
+	Option "Show Stat Particles",			"PKMN_ShowStatParticles", "OnOff"
+	Option "Enable Status Scanner",			"PKMN_StatScanner", "OnOff"
+	Option "Enable Game Tips",			"PKMN_EnableTips", "OnOff"
+	StaticText ""
+	StaticText "$PKMN_CUSTCONT"
+	Control 	"Zoom Key",			"+Zoom"
+	control "PP Recover", "+Reload"
+	StaticText ""
+	control "Open Item Shop", "OpenItemShop"
+	control "Open TM Shop", "OpenTMShop"
+	control "Open Levelup moves", "MoveTutor"
+	control "Initiate Evolution", "TriggerEvo"
+	control "Adjust Move order", "MoveShift"
+	control "Show Stats", "ShowStatusScreen"
+	control "Use an escape orb", "UseEscapeorb"
+    StaticText "===============================================================",1
 
 }

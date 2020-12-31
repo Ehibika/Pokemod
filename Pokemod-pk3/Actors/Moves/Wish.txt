@@ -200,7 +200,7 @@ Spawn2:
 TNT1 A 0 A_ChangeFlag("RIPPER", 0)
 TNT1 A 0 A_ChangeFlag("NOINTERACTION",0)
 TNT1 A 0
-STRP AABBCCDD 1 A_SpawnItemEx("WishStarParticle",random(-10,10),random(-10,10),random(-10,10),0,0,0,0,1)
+STRP ABCD 1 A_SpawnItemEx("WishStarParticle",random(-10,10),random(-10,10),random(-10,10),0,0,0,0,1)
 Goto Spawn2+2
 Death:
 TNT1 A 0 A_GiveInventory("ProjectileDCode",1)
@@ -248,7 +248,7 @@ TNT1 A 0 A_PlaySoundEx("support/LifeDew","SoundSlot7")
 //TNT1 A 0 A_SetArg(1,CallACS("StatValueRamp2",STAT_HP,1,500))
 TNT1 A 0 ACS_NamedExecuteAlways("MoveAreaHeal",0,CallACS("PKMNACS_HealthPercent",AAPTR_TARGET,1,50),WishRad,Move_Wish)
 Spawn2:
-TNT1 AAAA 0 A_SpawnItemEx("AquaRingSparkle", WishRad, 0, -(z-floorz)+24, 0, 0, 0, Random(0,360), 1061)
+TNT1 A 0 A_SpawnItemEx("LifeDewSparkle", WishRad, 0, -(z-floorz)+24, 0, 0, 0, Random(0,360), 1061)
 TNT1 A 5 A_CountDown
 loop 
 
@@ -267,9 +267,31 @@ States
 Spawn:
 STAP A 0
 TNT1 A 0 A_GiveInventory("ProjectileCode",1)
-STAP A 2 A_SetScale(Frandom(2.0,2.5))
+TNT1 A 0 A_SetScale(Frandom(2.0,2.5))
 STAP ABCD 2 A_SetScale(Scalex-0.1)
 STAP ABCD 2 A_SetScale(Scalex-0.1)
+stop
+}
+}
+
+actor WishStarParticle2 : BasicClientside
+{
+scale 1.5
+States
+{
+Spawn:
+STAP A 0
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+TNT1 A 0 A_SetScale(Frandom(2.0,2.5))
+FX02 ABC 2 A_SetScale(Scalex-0.1)
+FX02 DEFG 2 A_SetScale(Scalex-0.1)
+FX02 DEFG 2 A_SetScale(Scalex-0.1)
+FX02 CBA 2 A_SetScale(Scalex-0.1)
+
+/*
+STAP ABCD 2 A_SetScale(Scalex-0.1)
+STAP ABCD 2 A_SetScale(Scalex-0.1)
+*/
 stop
 }
 }
@@ -285,8 +307,8 @@ States
 Spawn:
 AQBA A 0
 TNT1 A 0 A_GiveInventory("ProjectileCode",1)
-STAP EEEEEE 0 A_SpawnItemEx("WishStarParticle",0,0,0,random(2,5),0,random(2,8),random(1,360),SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION)
-STAP EEFFGG 2 A_SpawnItemEx("WishStarParticle",0,0,0,random(2,5),0,random(2,8),random(1,360),SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION)
+TNT1 AA 0 A_SpawnItemEx("WishStarParticle2",Random2(64),0,0,0,0,random(2,4),random(1,360),SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION)
+TNT1 AAA 2 A_SpawnItemEx("WishStarParticle2",Random2(64),0,0,0,0,random(2,4),random(1,360),SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION)
 stop
 }
 }

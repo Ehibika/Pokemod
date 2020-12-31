@@ -2,6 +2,16 @@ addkeysection "Extra Controls" PKMNKeys
 addmenukey "Alt Camera" +Zoom
 addmenukey "PP Recover" +Reload
 
+addmenukey "Open Item Shop" OpenItemShop
+addmenukey "Open TM Shop" OpenTMShop
+addmenukey "Open Levelup moves" MoveTutor
+addmenukey "Initiate Evolution" TriggerEvo
+addmenukey "Adjust Move order" MoveShift
+addmenukey "Show Stats" ShowStatusScreen
+addmenukey "Use an escape orb" UseEscapeorb
+addmenukey "Unstuck" UnstuckCommand
+
+
 clearplayerclasses
 AddPlayerClass Smeargle 
 AddPlayerClass Bulbasaur 
@@ -64,7 +74,6 @@ AddPlayerClass Ekans
 AddPlayerClass Stunky
 AddPlayerClass Gulpin
 AddPlayerClass Gastly
-AddPlayerClass Haunter
 AddPlayerClass Tentacool
 AddPlayerClass Magikarp
 AddPlayerClass Qwilfish
@@ -72,15 +81,23 @@ AddPlayerClass Skarmory
 AddPlayerClass Larvesta
 AddPlayerClass Mantyke
 AddPlayerClass Trapinch
-AddPlayerClass Vibrava
 AddPlayerClass Cacnea
 AddPlayerClass Munchlax
+AddPlayerClass Seedot
+AddPlayerClass Magnemite
+AddPlayerClass Murkrow
+AddPlayerClass Tangela
+AddPlayerClass Joltik
+AddPlayerClass Mareep
 //--[NewPokemon]--
+
+alias !pkmn_justjoin "closemenu;join"
 
 alias TriggerEvo "CloseMenu; Use EvoStartItem" 
 alias MoveTutor "CloseMenu; Use MoveTutorStartItem"
 alias MoveShift "CloseMenu; Use MoveShiftStartItem"
 alias ShowStatusScreen "CloseMenu; Use PlayerStatusItem" 
+alias UnstuckCommand "CloseMenu; Pukename NET_Unstuck" 
 
 alias DefaultCam "sv_CameraAng 0.0; sv_CameraHeight 0.0; sv_CameraZoom 130; SV_CameraPitch 0.3; sv_CamReticuleMode 1;"
 alias DefaultZoomCam "sv_ZoomCameraAng -6.0; sv_ZoomCameraHeight -0.6; sv_ZoomCameraZoom 60; SV_ZoomCameraPitch 0.0; sv_ZoomCamReticuleMode 1;"
@@ -89,6 +106,8 @@ alias CloseMenuCommand "CloseMenu"
 
 alias OpenItemShop "CloseMenu; Use ShopGuardItem; Use ItemShopStartItem"
 alias OpenTMShop "CloseMenu; Use ShopGuardItem; Use TMShopStartItem"
+
+alias UseEscapeorb "Use Escapeorb"
 
 //===|Shop
 alias BuySmallEXPCandy "CloseMenu; Use BuySmallEXPCandy; Openmenu Item_Menu"

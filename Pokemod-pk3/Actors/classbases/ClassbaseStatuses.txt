@@ -1261,6 +1261,17 @@ stop
 }
 
 
+actor FrightFXSpawn : CustomInventory
+{
+States
+{
+Pickup:
+TNT1 A 0
+TNT1 A 0 A_SpawnItemEX("FrightFX",0,0,40)
+stop
+}
+}
+
 //[+]=========================[+]
 //----------|Fatigue|-------------
 //[+]=========================[+]

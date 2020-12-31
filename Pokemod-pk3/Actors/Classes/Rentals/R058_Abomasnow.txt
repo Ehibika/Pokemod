@@ -1,0 +1,90 @@
+
+/*
+[+]===================================[+]
+
+[+]===================================[+]
+*/
+
+Actor R_Abomasnow : ClassBaseRentals 
+{
+Player.DisplayName "Abomasnow"
+Player.SoundClass "Abomasnow"
++NOSKIN
+
+Player.StartItem "PKMNRentalKit"
+//============|
+Player.StartItem "AbomasnowRentalSetupItem"
+//============|
+Player.StartItem "Base_HP", 90
+Player.StartItem "Base_PAttack", 92
+Player.StartItem "Base_PDefense", 75
+Player.StartItem "Base_SAttack", 92
+Player.StartItem "Base_SDefense", 85
+
+//============|
+
+States
+{
+Spawn: 
+P058 A 0
+P058 B 1 
+P058 A 1
+GoTo Spawn+2
+See:
+P058 BCDE 5
+GoTo Spawn+1
+Missile:
+P058 A 0 A_JumpIfInventory("ConshotTimer",1,"Missile2")
+P058 F 5 
+P058 G 4
+GoTo Spawn+2
+Missile2:
+P058 G 9
+GoTo Spawn+2
+
+PainFix:
+P058 H 0 
+GoTo PainFrames
+}
+}
+
+actor AbomasnowRentalMoves : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_JumpIf(CallACS("RentalBotCheck") == 1,"BotWep")
+
+TNT1 A 0 A_GiveInventory("BlizzardMove1")
+TNT1 A 0 A_GiveInventory("WoodHammerMove2")
+TNT1 A 0 A_GiveInventory("SynthesisMove3")
+TNT1 A 0 A_GiveInventory("ProtectMove4")
+stop
+
+BotWep:
+TNT1 A 0 A_GiveInventory("BlizzardMove1")
+stop
+}
+}
+
+actor AbomasnowRentalSetupItem : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 ACS_NamedExecuteAlways("PKMN_RentalsSetup",0,Dex_Abomasnow)
+stop
+}
+}

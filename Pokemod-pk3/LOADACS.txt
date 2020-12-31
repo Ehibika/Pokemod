@@ -12,6 +12,7 @@ A_Moves
 A_Targeter
 A_Type
 A_TM
+A_TIPS
 PKMNACS
 projtra1
 projtran

@@ -284,6 +284,7 @@ Script "RemoteControlActor" (int ActorSpeed, int MaxRange)
     }
 
     Thing_Remove(0);
+    if(CheckActorInventory(OwnerTID,"RemoteKiller")){GiveActorInventory(OwnerTID,"FrightFXSpawn",1);}
 }
 
 
@@ -333,30 +334,38 @@ Script "SubstituteSetup" (void)
     SetActorPRoperty(0,APROP_SPAWNHEALTH,SubsHP);
     SetActorPRoperty(0,APROP_HEALTH,SubsHP);
     SetActorProperty(OwnerTID, APROP_HEALTH,OwnerHP-SubsHP);
-    //Log(i:SubsHP);
+    Log(i:SubsHP);
 
     ModStat = SubsPDEF;
 
-if(ModStat >= STATBASELINE)
+    if(ModStat >= DEFSTATBASELINE2)
     {
-    StatValue = Noneg(ValueMap(ModStat,STATMAX,STATBASELINE,DEFVAL1,DEFVAL2));
+    StatValue = Noneg(ValueMap(ModStat,STATMAX,DEFSTATBASELINE2,DEFVAL1,DEFVAL2));
+    }
+else if(ModStat >= DEFSTATBASELINE1)
+    {
+    StatValue = Noneg(ValueMap(ModStat,DEFSTATBASELINE2,DEFSTATBASELINE1,DEFVAL2,DEFVAL3));
     }
 else
     {
-    StatValue = Noneg(ValueMap(ModStat,STATBASELINE,STATMIN,DEFVAL2,DEFVAL3));    
+    StatValue = Noneg(ValueMap(ModStat,DEFSTATBASELINE1,STATMIN,DEFVAL3,DEFVAL4));    
     }
 if(StatValue < 10){StatValue = 10;}
 GiveInventory(StrParam(s:"PDEF",i:StatValue),1);
 
 ModStat = SubsSDEF;
 
-if(ModStat >= STATBASELINE)
+if(ModStat >= DEFSTATBASELINE2)
     {
-    StatValue = Noneg(ValueMap(ModStat,STATMAX,STATBASELINE,DEFVAL1,DEFVAL2));
+    StatValue = Noneg(ValueMap(ModStat,STATMAX,DEFSTATBASELINE2,DEFVAL1,DEFVAL2));
     }
-    else
+else if(ModStat >= DEFSTATBASELINE1)
     {
-    StatValue = Noneg(ValueMap(ModStat,STATBASELINE,STATMIN,DEFVAL2,DEFVAL3));    
+    StatValue = Noneg(ValueMap(ModStat,DEFSTATBASELINE2,DEFSTATBASELINE1,DEFVAL2,DEFVAL3));
+    }
+else
+    {
+    StatValue = Noneg(ValueMap(ModStat,DEFSTATBASELINE1,STATMIN,DEFVAL3,DEFVAL4));    
     }
 if(StatValue < 10){StatValue = 10;}
 GiveInventory(StrParam(s:"SDEF",i:StatValue),1);
@@ -371,9 +380,14 @@ Script "SubstituteActive" (int Dist)
     Int DollTID = ActivatorTID();
     Int DollState = 0;
     int DollNewState = 0;
-	
+    
+    SetPointer(AAPTR_TRACER, Player);
+
 	// Loop if shield is active
 	while(GetActorProperty(0, APROP_HEALTH)>0 && GetActorProperty(Player, APROP_HEALTH)>0){
+
+        if(IsPointerEqual(AAPTR_TARGET, AAPTR_TRACER) == FALSE){Delay(1); SetPointer(AAPTR_TARGET, Player); continue;}
+
         //log(i:xyzDistance(0,Player),s:"   ",i:Dist);
         if(CheckSight(DollTID,Player,0) && xyzDistance(DollTID,Player) < Dist)
             {
@@ -397,7 +411,9 @@ Script "SubstituteActive" (int Dist)
                  DollState = DollNewState;
                  
             }
-		Delay(1);
+            
+        Delay(1);
+        
     }
     
     if(GetActorProperty(Player, APROP_HEALTH)<=0 || !PlayerInGame(Player-1000)){SpawnSpotForced("SubPoofFXSpawn",DollTID,0,0); Thing_remove(DollTID);}
@@ -505,7 +521,8 @@ if(CheckInventory("SleepMark")
 ||CheckInventory("FreezeMark")
 ||CheckInventory("RestMark")
 ||CheckInventory("CureAll")
-||CheckInventory("FeelingFine"))
+||CheckInventory("FeelingFine")
+||CheckInventory("CraftyShieldPower"))
 {Output = Output | STATUS_MAJOR;}
 
 if(CheckInventory("ProtectGuard")
@@ -513,8 +530,7 @@ if(CheckInventory("ProtectGuard")
 ||CheckInventory("SubGuard"))
 {Output = Output | STATUS_MAJOR | STATUS_MINOR | STATUS_STATS;}
 
-    if(CheckInventory("SafeguardPower")
-    ||CheckInventory("CraftyShieldPower"))
+    if(CheckInventory("SafeguardPower"))
     {Output = Output | STATUS_MAJOR | STATUS_MINOR | STATUS_SPECIALTY | STATUS_TAUNT;}
 
     if(CheckInventory("MistFlag"))
@@ -784,3 +800,68 @@ Script "CurseHarm" (int Damage)
 {
     Thing_Damage2(0,Damage,"Curse");
 }
+
+script "Check_ShowStatParticles" (void)
+{
+SetResultValue(GetStatParticles());
+}
+
+function bool GetStatParticles(void)
+{
+	return (getUserCvar(ConsolePlayerNumber(),"PKMN_ShowStatParticles")>0);
+}
+
+Script "ElectroBallSpeedDamage" (int Base)
+{
+    int TargTID = ACS_NamedExecuteWithResult("core_gettarget",0);
+    int TracTID = ACS_NamedExecuteWithResult("core_gettracer",0);
+
+    int TargSPDT = PlayerSpeedTiers[TargTID-1000];
+    int TracSPDT = PlayerSpeedTiers[TracTID-1000];
+
+    int SPDTDiff = TargSPDT-TracSPDT;
+    if(SPDTDiff<1){SPDTDiff = 1;}
+
+    int Damage = Base*SPDTDiff;
+
+    Thing_Damage2(TracTID,Damage,"ElectroBall");
+}
+
+Script "BerrySteal" (void)
+{
+    int TargTID = ACS_NamedExecuteWithResult("core_gettarget",0);
+    str StealBerry = BerryStealPriority();
+
+    if(StealBerry != "none")
+        {
+            takeInventory(StealBerry,1);
+            GiveActorInventory(TargTID,StrParam(s:"Steal",s:StealBerry),1);
+            ACS_NamedExecuteAlways("Write_Inventory",0,2);
+        }
+}
+
+function Str BerryStealPriority (void)
+{
+
+if(CheckInventory("BigHPBerry")){return "BigHPBerry";}
+if(CheckInventory("HPBerry")){return "HPBerry";}
+if(CheckInventory("BigPPBerry")){return "BigPPBerry";}
+if(CheckInventory("PPBerry")){return "PPBerry";}
+
+return "none";
+}
+
+Script "FlightWorthy" (int Pointer)
+{
+    if(Pointer!=0){SetActivator(0,Pointer);}
+
+    Bool output = true;
+    if(CheckInventory("ParalysisMark")) output = false;
+    if(CheckInventory("SleepMark"))  output = false;
+    if(CheckInventory("RestMark"))  output = false;
+    if(CheckInventory("SemiFreezeMark"))  output = false;
+    if(CheckInventory("FreezeMark"))  output = false;
+    if(CheckInventory("CringeMark"))  output = false;
+    SetResultValue(Output);
+}
+

@@ -84,6 +84,10 @@ Powerup.duration 35
 DamageFactor "Toxic", 0.0
 DamageFactor "PoisonPowder", 0.0
 DamageFactor "PoisonGas", 0.0
+
+DamageFactor "Whirlpool", 0.0
+DamageFactor "SandTomb", 0.0
+DamageFactor "FireSpin", 0.0
 }
 
 

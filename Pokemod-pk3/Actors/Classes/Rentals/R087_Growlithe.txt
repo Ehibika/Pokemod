@@ -1,0 +1,90 @@
+
+/*
+[+]===================================[+]
+
+[+]===================================[+]
+*/
+
+Actor R_Growlithe : ClassBaseRentals 
+{
+Player.DisplayName "Growlithe"
+Player.SoundClass "Growlithe"
++NOSKIN
+
+Player.StartItem "PKMNRentalKit"
+//============|
+Player.StartItem "GrowlitheRentalSetupItem"
+//============|
+Player.StartItem "Base_HP", 55
+Player.StartItem "Base_PAttack", 70
+Player.StartItem "Base_PDefense", 45
+Player.StartItem "Base_SAttack", 70
+Player.StartItem "Base_SDefense", 50
+
+//============|
+
+States
+{
+Spawn: 
+P087 A 0
+P087 B 1 
+P087 A 1
+GoTo Spawn+2
+See:
+P087 BCDE 5
+GoTo Spawn+1
+Missile:
+P087 A 0 A_JumpIfInventory("ConshotTimer",1,"Missile2")
+P087 F 5 
+P087 G 4
+GoTo Spawn+2
+Missile2:
+P087 G 9
+GoTo Spawn+2
+
+PainFix:
+P087 H 0 
+GoTo PainFrames
+}
+}
+
+actor GrowlitheRentalMoves : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_JumpIf(CallACS("RentalBotCheck") == 1,"BotWep")
+
+TNT1 A 0 A_GiveInventory("FireBlastMove1")
+TNT1 A 0 A_GiveInventory("HelpingHandMove2")
+TNT1 A 0 A_GiveInventory("MorningSunMove3")
+TNT1 A 0 A_GiveInventory("QuickAttackMove4")
+stop
+
+BotWep:
+TNT1 A 0 A_GiveInventory("FireBlastMove1")
+stop
+}
+}
+
+actor GrowlitheRentalSetupItem : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 ACS_NamedExecuteAlways("PKMN_RentalsSetup",0,Dex_Growlithe)
+stop
+}
+}

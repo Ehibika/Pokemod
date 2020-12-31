@@ -93,7 +93,7 @@ stop
 actor SlumberWand : ConsumableBase 
 {
 inventory.amount 1
-inventory.maxamount 3
+inventory.maxamount 10
 inventory.pickupmessage "$PU_SLUMBERWAND"
 Tag "$TAG_SLUMBERWAND"
 inventory.icon "SWNDI"
@@ -113,7 +113,7 @@ TNT1 A 0 A_SpawnitemEX("SlumberWandCast",0,0,0,0,0,0,0,0)
 stop
 }
 }
-actor MaxSlumberWand : Ammo {inventory.maxamount 3}
+actor MaxSlumberWand : Ammo {inventory.maxamount 10}
 
 actor SlumberWandCast : BasicHelper
 {
@@ -156,7 +156,7 @@ Goto Death
 actor ShrinkWand : ConsumableBase 
 {
 inventory.amount 1
-inventory.maxamount 3
+inventory.maxamount 10
 inventory.pickupmessage "$PU_SHRINKWAND"
 Tag "$TAG_SHRINKWAND"
 inventory.icon "SRNDI"
@@ -176,7 +176,7 @@ TNT1 A 0 A_SpawnitemEX("ShrinkWandCast",0,0,0,0,0,0,0,0)
 stop
 }
 }
-actor MaxShrinkWand : Ammo {inventory.maxamount 3}
+actor MaxShrinkWand : Ammo {inventory.maxamount 10}
 
 actor ShrinkWandCast : BasicHelper
 {
@@ -272,7 +272,7 @@ stop
 actor SomarianWand : ConsumableBase 
 {
 inventory.amount 1
-inventory.maxamount 3
+inventory.maxamount 10
 inventory.pickupmessage "$PU_SOMARIANWAND"
 Tag "$TAG_SOMARIANWAND"
 inventory.icon "SMNDI"
@@ -292,7 +292,7 @@ TNT1 A 0 A_SpawnitemEX("SomarianWandCast",0,0,0,0,0,0,0,0)
 stop
 }
 }
-actor MaxSomarianWand : Ammo {inventory.maxamount 3}
+actor MaxSomarianWand : Ammo {inventory.maxamount 10}
 
 actor SomarianWandCast : BasicHelper
 {

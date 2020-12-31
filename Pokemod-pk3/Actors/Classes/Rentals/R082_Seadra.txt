@@ -1,0 +1,90 @@
+
+/*
+[+]===================================[+]
+
+[+]===================================[+]
+*/
+
+Actor R_Seadra : ClassBaseRentals 
+{
+Player.DisplayName "Seadra"
+Player.SoundClass "Seadra"
++NOSKIN
+
+Player.StartItem "PKMNRentalKit"
+//============|
+Player.StartItem "SeadraRentalSetupItem"
+//============|
+Player.StartItem "Base_HP", 55
+Player.StartItem "Base_PAttack", 65
+Player.StartItem "Base_PDefense", 95
+Player.StartItem "Base_SAttack", 95
+Player.StartItem "Base_SDefense", 45
+
+//============|
+
+States
+{
+Spawn: 
+P082 A 0
+P082 B 1 
+P082 A 1
+GoTo Spawn+2
+See:
+P082 BCDE 5
+GoTo Spawn+1
+Missile:
+P082 A 0 A_JumpIfInventory("ConshotTimer",1,"Missile2")
+P082 F 5 
+P082 G 4
+GoTo Spawn+2
+Missile2:
+P082 G 9
+GoTo Spawn+2
+
+PainFix:
+P082 H 0 
+GoTo PainFrames
+}
+}
+
+actor SeadraRentalMoves : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_JumpIf(CallACS("RentalBotCheck") == 1,"BotWep")
+
+TNT1 A 0 A_GiveInventory("BrineMove1")
+TNT1 A 0 A_GiveInventory("ClearSmogMove2")
+TNT1 A 0 A_GiveInventory("SmokeScreenMove3")
+TNT1 A 0 A_GiveInventory("DragonRageMove4")
+stop
+
+BotWep:
+TNT1 A 0 A_GiveInventory("BrineMove1")
+stop
+}
+}
+
+actor SeadraRentalSetupItem : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 ACS_NamedExecuteAlways("PKMN_RentalsSetup",0,Dex_Seadra)
+stop
+}
+}

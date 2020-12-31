@@ -98,11 +98,13 @@ Spawn:
 TNT1 A 0
 TNT1 A 0 A_GiveInventory("ProjectileCode",1)
 TNT1 A 1 
+goto spawnloop
 SpawnLoop:
 TNT1 A 0 A_SpawnItemEx("GigaDrainSapper1",0,0,8,-25,0,0,user_angle,1)
 TNT1 A 0 A_SpawnItemEx("GigaDrainSapper1",0,0,8,-20,0,0,user_angle+16,1)
 TNT1 A 0 A_SetUserVar("user_angle",user_angle+36)
 TNT1 A 0 A_CountDown
+TNT1 A 1 A_Jump(256,"SpawnLoop")
 Loop
 Death:
 TNT1 A 0 //A_PlaySoundEX("wep_L/commandowave","Body")

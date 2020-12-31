@@ -222,5 +222,26 @@ str SkinDEX [MAXDEX][2] = {
     
     /*|149|*/{"Munchlax","Base"},
     /*|150|*/{"Snorlax","Snorlax"},
+    
+    /*|151|*/{"Seedot","Base"},
+    /*|152|*/{"Nuzleaf","Nuzleaf"},
+    /*|153|*/{"Shiftry","Shiftry"},
+    
+    /*|154|*/{"Magnemite","Base"},
+    /*|155|*/{"Magneton","Magneton"},
+    /*|156|*/{"Magnezone","Magnezone"},
+    
+    /*|157|*/{"Murkrow","Base"},
+    /*|158|*/{"Honchkrow","Honchkrow"},
+    
+    /*|159|*/{"Tangela","Base"},
+    /*|160|*/{"Tangrowth","Tangrowth"},
+    
+    /*|161|*/{"Joltik","Base"},
+    /*|162|*/{"Galvantula","Galvantula"},
+    
+    /*|163|*/{"Mareep","Base"},
+    /*|164|*/{"Flaaffy","Flaaffy"},
+    /*|165|*/{"Ampharos","Ampharos"},
     //--[NewPokemon]--
     };

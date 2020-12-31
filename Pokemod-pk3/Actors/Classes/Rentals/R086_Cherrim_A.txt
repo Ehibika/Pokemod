@@ -1,0 +1,90 @@
+
+/*
+[+]===================================[+]
+
+[+]===================================[+]
+*/
+
+Actor R_Cherrim_A : ClassBaseRentals 
+{
+Player.DisplayName "Cherrim_A"
+Player.SoundClass "Cherrim_A"
++NOSKIN
+
+Player.StartItem "PKMNRentalKit"
+//============|
+Player.StartItem "Cherrim_ARentalSetupItem"
+//============|
+Player.StartItem "Base_HP", 80
+Player.StartItem "Base_PAttack", 85
+Player.StartItem "Base_PDefense", 50
+Player.StartItem "Base_SAttack", 100
+Player.StartItem "Base_SDefense", 90
+
+//============|
+
+States
+{
+Spawn: 
+P086 A 0
+P086 B 1 
+P086 A 1
+GoTo Spawn+2
+See:
+P086 BCDE 5
+GoTo Spawn+1
+Missile:
+P086 A 0 A_JumpIfInventory("ConshotTimer",1,"Missile2")
+P086 F 5 
+P086 G 4
+GoTo Spawn+2
+Missile2:
+P086 G 9
+GoTo Spawn+2
+
+PainFix:
+P086 H 0 
+GoTo PainFrames
+}
+}
+
+actor Cherrim_ARentalMoves : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_JumpIf(CallACS("RentalBotCheck") == 1,"BotWep")
+
+TNT1 A 0 A_GiveInventory("SolarBeamMove1")
+TNT1 A 0 A_GiveInventory("GrowthMove2")
+TNT1 A 0 A_GiveInventory("MorningSunMove3")
+TNT1 A 0 A_GiveInventory("DazzlingGleamMove4")
+stop
+
+BotWep:
+TNT1 A 0 A_GiveInventory("SolarBeamMove1")
+stop
+}
+}
+
+actor Cherrim_ARentalSetupItem : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 ACS_NamedExecuteAlways("PKMN_RentalsSetup",0,Dex_Cherrim_A)
+stop
+}
+}

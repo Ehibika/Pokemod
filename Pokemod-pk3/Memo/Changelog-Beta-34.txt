@@ -1,0 +1,83 @@
+//#region -=-=- Beta 34 -=-=-
+/*
+ *
+ *
+ * ===|Gameplay Changes|===
+ * 
+ * Various moves have had their visuals changed to reduce the number of actors spawned in order to improve performance.
+ * 
+ * there are new options in the options menu to allow players to toggle damage numbers, the status scanner, and stat particles.
+ * 
+ * the reticule has also seen an upgrade, now players can customize the color of it, and choose between one of 3 reticule styles.
+ * 
+ * adjusted item spawning to make gummies appear more often
+ * 
+ * Adjusted item spawning, and added 5 and 10 BP pickups
+ * 
+ * ===|Move Changes|===
+ * [NEW MOVES]
+ * StringShot
+ * Splash
+ * PoisonSting
+ * ElectroWeb
+ * ElectroBall
+ * Discharge
+ * BugBite
+ * Pluck
+ * AirCutter
+ * Gust
+ * Fly
+ * BugBuzz
+ * SilverWind
+ * QuiverDance
+ * PoisonJab
+ * EarthPower
+ * PinMissile
+ * FaintAttack
+ * 
+ * [bite]
+ * recovery time reduced
+ * 
+ * [fire fang]
+ * recovery time reduced
+ * 
+ * [ice fang]
+ * recovery time reduced
+ * 
+ * [reflect]
+ * fixed an error that made it reduce physical damage by 75% and not by 25%
+ * 
+ * [lightScreen]
+ * fixed an error that made it reduce Special damage by 75% and not by 25%
+ * 
+ * [dracoMeteor]
+ * reduced duration of sp.atk debuff from 15 seconds > 7 seconds
+ * updated spawning method of meteors
+ * meteors now fall faster
+ * 
+ * ===|TM Changes|===
+ * The Following TM's were added:
+ *  heatwave
+ *  EarthPower
+ *  
+ * TM compatibilities were updated
+ * 
+ * ===|Pokemon Changes|===
+ * 
+ * [NEW POKEMON]
+ *  Tentacool
+ *  Magikarp
+ *  Qwilfish
+ *  Skarmory
+ *  Larvesta
+ *  Mantyke
+ *  Trapinch
+ *  Cacnea
+ *  Munchlax
+ *  Seedot
+ *  Magnemite
+ *  Murkrow
+ *  Tangela
+ *  Joltik
+ *  Mareep
+ * 

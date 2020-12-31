@@ -103,17 +103,18 @@ TNT1 A 0
 stop
 Pickup:
 TNT1 A 0 A_JumpIFCloser(70,2)
-TNT1 A 0 A_CustomMissile("SubstituteLinkFX",height/2,0,0,CMF_TRACKOWNER)
+//TNT1 A 0 A_CustomMissile("SubstituteLinkFX",height/2,0,0,0)
+TNT1 A 0 A_SpawnItemEX("SubLinkBeamStart",0,0,height/2,0,0,0,0,SXF_TRANSFERPOINTERS)
 TNT1 A 0
-TNT1 A 0 A_JumpIfInTargetInventory("SubGuard",1,"Pickup.B")
+TNT1 A 0 A_JumpIfInventory("SubGuard",1,"Pickup.B",AAPTR_TRACER)
 Goto Pickup.A
 
 Pickup.A:
-TNT1 A 0 A_GiveToTarget("SubstituteGuardGiver_A",1)
+TNT1 A 0 A_GiveToTarget("SubstituteGuardGiver_A",1,AAPTR_TRACER)
 stop
 
 Pickup.B:
-TNT1 A 0 A_GiveToTarget("SubstituteGuardGiver_B",1)
+TNT1 A 0 A_GiveToTarget("SubstituteGuardGiver_B",1,AAPTR_TRACER)
 stop
 }}
 
@@ -136,6 +137,22 @@ States
 }}
 
 
+actor SubLinkBeamStart : BasicProjectile
+{
+speed 0
++NOINTERACTION
+damage (0)
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_ReArrangePointers(AAPTR_TRACER,AAPTR_DEFAULT,AAPTR_DEFAULT)
+TNT1 A 0 A_CustomMissile("SubstituteLinkFX",height/2,0,0,CMF_TRACKOWNER)
+TNT1 A 0
+stop
+}}
+
+
 actor SubstituteLinkBeamItem : CustomInventory
 {
 States
@@ -144,7 +161,7 @@ Spawn:
 TNT1 A 0
 stop
 Pickup:
-TNT1 A 0 A_CustomMissile("SubstituteLinkFX",height/2,0,0,CMF_TRACKOWNER)
+TNT1 A 0 A_CustomMissile("SubstituteLinkFX",height/2,0,0,0)
 TNT1 A 0
 stop
 }}
@@ -287,8 +304,10 @@ stop
 
 Actor SubstituteDecoy : BasicDeployable 
 {
+-MISSILE
+//+ISMONSTER
 -SOLID
--SHOOTABLE
++NONSHOOTABLE
 +DONTRIP
 +PUSHABLE
 +SLIDESONWALLS
@@ -296,6 +315,7 @@ Actor SubstituteDecoy : BasicDeployable
 +THRUSPECIES
 +MTHRUSPECIES
 +NOTARGETSWITCH
+
 
 Var int User_DecoyState;
 Mass 0
@@ -308,7 +328,7 @@ Spawn:
 SUBD A 0
 TNT1 A 0 A_Spawnitemex("SubPoofFXSpawn")
 TNT1 A 0 A_GiveInventory("TeamTranslationItem",1)
-TNT1 A 0 A_ChangeFlag("MISSILE",0)
+//TNT1 A 0 A_ChangeFlag("MISSILE",0)
 TNT1 A 0 ACS_NamedExecuteAlways("SubstituteSetup",0)
 Spawn.Setup1:
 TNT1 A 1 A_CheckFloor("Spawn.Setup2")
@@ -319,7 +339,10 @@ TNT1 A 1 A_CheckRange(70,"Spawn.Setup3")
 Wait
 Spawn.Setup3:
 TNT1 A 3 
-TNT1 A 0 A_ChangeFlag("SHOOTABLE",1)
+TNT1 A 0 A_ChangeFlag("NONSHOOTABLE",0)
+TNT1 A 0 A_ChangeFlag("NOTARGETSWITCH",0)
+TNT1 A 0 A_ChangeFlag("QUICKTORETALIATE",1)
+TNT1 A 0 A_GiveInventory("ProtectGuard")
 goto Spawn.Basic
 
 Spawn.State:
@@ -362,6 +385,7 @@ Deploy.Pain:
 TNT1 A 0 A_SetArg(1,0)
 TNT1 A 0 A_PlaySoundEX("Weapon/ObjectHit","Voice")
 SUBD H 2 A_JumpIf(User_DecoyState == 1,"Deploy.LinkPain")
+//TNT1 A 0 A_RearrangePointers(AAPTR_TRACER,AAPTR_DEFAULT,AAPTR_DEFAULT)
 SUBD HHHHHHHHH 2 A_SpawnItemEx("PainFX",-5,0,3,0,0,0)
 SUBD A 1
 goto Spawn.Basic
@@ -371,6 +395,7 @@ SUBD A 0 A_JumpIf(User_DecoyState == 0,2)
 SUBD A 0 A_GiveInventory("SubstituteFunction_A",1)
 TNT1 A 0
 SUBD H 2 A_SpawnItemEx("PainFX",-5,0,3,0,0,0)
+//TNT1 A 0 A_RearrangePointers(AAPTR_TRACER,AAPTR_DEFAULT,AAPTR_DEFAULT)
 TNT1 A 0 A_SetArg(1,Args[1]+1)
 SUBD H 1 A_JumpIf(Args[1] < 9,"Deploy.LinkPain")
 goto Spawn.Basic
@@ -406,19 +431,19 @@ TNT1 A 0 A_JumpIfInTargetInventory("WilyTeamFlag",1,"RFire")
 TNT1 A 0 A_JumpIfInTargetInventory("CossackTeamFlag",1,"GFire")
 TNT1 A 0 A_JumpIfInTargetInventory("KingTeamFlag",1,"YFire")
 
-TNT1 A 0 A_SpawnItemEx("SubstituteDecoy",0,0,-(z-floorz)+1,0,0,0,0,0)//SXF_TRANSFERPOINTERS
+TNT1 A 0 A_SpawnItemEx("SubstituteDecoy",0,0,-(z-floorz)+1,0,0,0,0,SXF_TRANSFERPOINTERS)//SXF_TRANSFERPOINTERS
 stop
 BFire:
-TNT1 A 0 A_SpawnItemEx("SubstituteDecoy_B",0,0,-(z-floorz)+1,0,0,0,0,0)
+TNT1 A 0 A_SpawnItemEx("SubstituteDecoy_B",0,0,-(z-floorz)+1,0,0,0,0,SXF_TRANSFERPOINTERS)
 stop
 RFire:
-TNT1 A 0 A_SpawnItemEx("SubstituteDecoy_R",0,0,-(z-floorz)+1,0,0,0,0,0)
+TNT1 A 0 A_SpawnItemEx("SubstituteDecoy_R",0,0,-(z-floorz)+1,0,0,0,0,SXF_TRANSFERPOINTERS)
 stop
 GFire:
-TNT1 A 0 A_SpawnItemEx("SubstituteDecoy_G",0,0,-(z-floorz)+1,0,0,0,0,0)
+TNT1 A 0 A_SpawnItemEx("SubstituteDecoy_G",0,0,-(z-floorz)+1,0,0,0,0,SXF_TRANSFERPOINTERS)
 stop
 YFire:
-TNT1 A 0 A_SpawnItemEx("SubstituteDecoy_O",0,0,-(z-floorz)+1,0,0,0,0,0)
+TNT1 A 0 A_SpawnItemEx("SubstituteDecoy_O",0,0,-(z-floorz)+1,0,0,0,0,SXF_TRANSFERPOINTERS)
 stop
 }
 }

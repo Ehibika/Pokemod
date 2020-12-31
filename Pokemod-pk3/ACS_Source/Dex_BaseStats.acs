@@ -22,7 +22,7 @@
 #LIBDEFINE SUPERFAST_SPD 6 //120+
 #LIBDEFINE FAST_SPD 5 // 90-119
 #LIBDEFINE NORM_SPD 4 // <=89  (formerly 70-89)
-#LIBDEFINE SLOW_SPD 4 // (formerly <=69) maintained for legacy
+#LIBDEFINE SLOW_SPD 3 // formerly <=6) 
 #endregion
 //#endregion
 
@@ -163,9 +163,9 @@ Int StatDEX [MAXDEX][10] = {
 /*|96|*/{ 250, 5, 5, 35,        105,    SLOW_SPD,    10, Type_Normal,Type_Null,  LVLSPD_Rapid},
 /*|97|*/{ 255, 10, 10, 75,        135,    SLOW_SPD,    20, Type_Normal,Type_Null,  LVLSPD_Rapid},
 
-/*|98|*/{ 40, 80, 100, 30,        30,    SLOW_SPD,    5, Type_Rock,Type_Ground,  LVLSPD_Normal},
-/*|99|*/{ 55, 95, 115, 45,        45,    SLOW_SPD,    10, Type_Rock,Type_Ground,  LVLSPD_Normal},
-/*|100|*/{ 80, 110, 130, 55,        65,    SLOW_SPD,    20, Type_Rock,Type_Ground,  LVLSPD_Normal},
+/*|98|*/{ 40, 80, 100, 30,        30,    SLOW_SPD,    5, Type_Rock,Type_Ground,  LVLSPD_Swift},
+/*|99|*/{ 55, 95, 115, 45,        45,    SLOW_SPD,    10, Type_Rock,Type_Ground,  LVLSPD_Swift},
+/*|100|*/{ 80, 110, 130, 55,        65,    SLOW_SPD,    20, Type_Rock,Type_Ground,  LVLSPD_Swift},
 
 /*|101|*/{ 40, 80, 100, 30,        30,    SLOW_SPD,    5, Type_Rock,Type_Electric,  LVLSPD_Normal},
 /*|102|*/{ 55, 95, 115, 45,        45,    SLOW_SPD,    15, Type_Rock,Type_Electric,  LVLSPD_Normal},
@@ -192,7 +192,7 @@ Int StatDEX [MAXDEX][10] = {
 /*|117|*/{ 115, 45, 45, 45,        50,    SLOW_SPD,    15, Type_Normal,Type_Fairy,  LVLSPD_Normal},
 /*|118|*/{ 140, 70, 65, 85,        75,    SLOW_SPD,    25, Type_Normal,Type_Fairy,  LVLSPD_Normal},
 
-/*|119|*/{ 103, 60, 86, 60,        86,    SLOW_SPD,    15, Type_Normal,Type_Null,  LVLSPD_Rapid},
+/*|119|*/{ 103, 60, 86, 60,        86,    SLOW_SPD,    15, Type_Normal,Type_Null,  LVLSPD_Normal},
 
 /*|120|*/{ 165, 75, 80, 40,        45,    SLOW_SPD,    15, Type_Water,Type_Null,  LVLSPD_Normal},
 
@@ -208,8 +208,8 @@ Int StatDEX [MAXDEX][10] = {
 /*|127|*/{ 63, 63, 47, 41,        41,    NORM_SPD,    5, Type_Poison,Type_Dark,  LVLSPD_Normal},
 /*|128|*/{ 103, 93, 67, 71,        61,    NORM_SPD,    25, Type_Poison,Type_Dark,  LVLSPD_Normal},
 
-/*|129|*/{ 70, 43, 53, 43,        53,    SLOW_SPD,    5, Type_Poison,Type_Normal,  LVLSPD_Normal},
-/*|130|*/{ 100, 73, 83, 73,        83,    SLOW_SPD,    25, Type_Poison,Type_Normal,  LVLSPD_Normal},
+/*|129|*/{ 70, 43, 53, 43,        53,    SLOW_SPD,    5, Type_Poison,Type_Null,  LVLSPD_Normal},
+/*|130|*/{ 100, 73, 83, 73,        83,    SLOW_SPD,    25, Type_Poison,Type_Null,  LVLSPD_Normal},
 
 /*|131|*/{ 30, 35, 30, 100,        35,    FAST_SPD,    5, Type_Ghost,Type_Poison,  LVLSPD_Normal},
 /*|132|*/{ 45, 50, 45, 115,        55,    FAST_SPD,    15, Type_Ghost,Type_Poison,  LVLSPD_Normal},
@@ -218,10 +218,10 @@ Int StatDEX [MAXDEX][10] = {
 /*|134|*/{ 40, 40, 35, 50,        100,    FAST_SPD,    5, Type_Water,Type_Poison,  LVLSPD_Normal},
 /*|135|*/{ 80, 70, 65, 80,        120,    FAST_SPD,    25, Type_Water,Type_Poison,  LVLSPD_Normal},
 
-/*|136|*/{ 20, 10, 55, 15,        20,    SLOW_SPD,    25, Type_Water,Type_Null,  LVLSPD_Normal},
-/*|137|*/{ 95, 125, 79, 60,        100,    SLOW_SPD,    25, Type_Water,Type_Flying,  LVLSPD_Normal},
+/*|136|*/{ 20, 10, 55, 15,        20,    NORM_SPD,    25, Type_Water,Type_Null,  LVLSPD_Normal},
+/*|137|*/{ 95, 125, 79, 60,        100,    NORM_SPD,    25, Type_Water,Type_Flying,  LVLSPD_Normal},
 
-/*|138|*/{ 65, 95, 85, 55,        55,    NORM_SPD,    15, Type_Water,Type_Poison,  LVLSPD_Normal},
+/*|138|*/{ 65, 95, 85, 55,        55,    NORM_SPD,    15, Type_Water,Type_Poison,  LVLSPD_Swift},
 
 /*|139|*/{ 65, 80, 140, 40,        70,    SLOW_SPD,    15, Type_Steel,Type_Flying,  LVLSPD_Normal},
 
@@ -231,7 +231,7 @@ Int StatDEX [MAXDEX][10] = {
 /*|142|*/{ 45, 20, 50, 60,        120,    SLOW_SPD,    5, Type_Water,Type_Flying,  LVLSPD_Normal},
 /*|143|*/{ 85, 40, 70, 80,        140,    SLOW_SPD,    25, Type_Water,Type_Flying,  LVLSPD_Normal},
 
-/*|144|*/{ 45, 100, 45, 45,        45,    SLOW_SPD,    5, Type_Ground,Type_Null,  LVLSPD_Normal},
+/*|144|*/{ 45, 100, 45, 45,        45,    FAST_SPD,    5, Type_Ground,Type_Null,  LVLSPD_Normal},
 /*|145|*/{ 50, 70, 50, 50,        50,    FAST_SPD,    15, Type_Ground,Type_Dragon,  LVLSPD_Normal},
 /*|146|*/{ 80, 100, 80, 80,        80,    FAST_SPD,    25, Type_Ground,Type_Dragon,  LVLSPD_Normal},
 
@@ -240,5 +240,26 @@ Int StatDEX [MAXDEX][10] = {
 
 /*|149|*/{ 135, 85, 40, 40,        85,    SLOW_SPD,    5, Type_Normal,Type_Null,  LVLSPD_Normal},
 /*|150|*/{ 160, 110, 65, 65,        110,    SLOW_SPD,    25, Type_Normal,Type_Null,  LVLSPD_Normal},
+
+/*|151|*/{ 40, 40, 50, 30,        30,    NORM_SPD,    5, Type_Grass,Type_Null,  LVLSPD_Normal},
+/*|152|*/{ 70, 70, 40, 60,        40,    NORM_SPD,    15, Type_Grass,Type_Dark,  LVLSPD_Normal},
+/*|153|*/{ 90, 100, 60, 90,        60,    NORM_SPD,    25, Type_Grass,Type_Dark,  LVLSPD_Normal},
+
+/*|154|*/{ 25, 35, 70, 95,        55,    SLOW_SPD,    5, Type_Electric,Type_Steel,  LVLSPD_Normal},
+/*|155|*/{ 50, 60, 95, 120,        70,    SLOW_SPD,    15, Type_Electric,Type_Steel,  LVLSPD_Normal},
+/*|156|*/{ 70, 70, 115, 130,        90,    SLOW_SPD,    25, Type_Electric,Type_Steel,  LVLSPD_Normal},
+
+/*|157|*/{ 60, 85, 42, 85,        42,    FAST_SPD,    5, Type_Dark,Type_Flying,  LVLSPD_Normal},
+/*|158|*/{ 100, 125, 52, 105,        52,    NORM_SPD,    25, Type_Dark,Type_Flying,  LVLSPD_Normal},
+
+/*|159|*/{ 65, 55, 115, 100,        40,    SLOW_SPD,    5, Type_Grass,Type_Null,  LVLSPD_Normal},
+/*|160|*/{ 100, 100, 125, 110,        50,    SLOW_SPD,    25, Type_Grass,Type_Null,  LVLSPD_Normal},
+
+/*|161|*/{ 50, 47, 50, 57,        50,    FAST_SPD,    5, Type_Bug,Type_Electric,  LVLSPD_Normal},
+/*|162|*/{ 70, 77, 60, 97,        60,    FAST_SPD,    25, Type_Bug,Type_Electric,  LVLSPD_Normal},
+
+/*|163|*/{ 55, 40, 40, 65,        45,    SLOW_SPD,    5, Type_Electric,Type_Null,  LVLSPD_Normal},
+/*|164|*/{ 70, 55, 55, 80,        60,    SLOW_SPD,    15, Type_Electric,Type_Null,  LVLSPD_Normal},
+/*|165|*/{ 90, 75, 86, 115,        90,    SLOW_SPD,    25, Type_Electric,Type_Null,  LVLSPD_Normal},
 //--[NewPokemon]--
 };

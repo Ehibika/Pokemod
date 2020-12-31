@@ -51,20 +51,29 @@ actor ReticulePickup : CustomInventory
 states
 {
 Pickup:
-TNT1 A 0 A_JumpIf(CallACS("Check_ReticuleType") == 2,"Dot")
-TNT1 A 0 A_JumpIf(CallACS("Check_ReticuleType") == 1,"Circle")
-
 TNT1 A 0 A_FireCustomMissile("ReticuleFireA",0,0,0,0)
 TNT1 A 0 A_FireCustomMissile("ReticuleFireB",0,0,0,0)
 TNT1 A 0 A_FireCustomMissile("ReticuleFireC",0,0,0,0)
 stop
+}
+}
 
-Circle:
+actor ReticulePickup_Circle : CustomInventory
+{
+states
+{
+Pickup:
 TNT1 A 0 A_FireCustomMissile("CircleReticuleFireA",0,0,0,0)
 TNT1 A 0 A_FireCustomMissile("CircleReticuleFireB",0,0,0,0)
 stop
+}
+}
 
-Dot:
+actor ReticulePickup_Dot : CustomInventory
+{
+states
+{
+Pickup:
 TNT1 A 0 A_FireCustomMissile("DotReticuleFireA",0,0,0,0)
 TNT1 A 0 A_FireCustomMissile("DotReticuleFireB",0,0,0,0)
 stop

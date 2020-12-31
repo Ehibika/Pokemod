@@ -1,0 +1,90 @@
+
+/*
+[+]===================================[+]
+
+[+]===================================[+]
+*/
+
+Actor R_Pichu : ClassBaseRentals 
+{
+Player.DisplayName "Pichu"
+Player.SoundClass "Pichu"
++NOSKIN
+
+Player.StartItem "PKMNRentalKit"
+//============|
+Player.StartItem "PichuRentalSetupItem"
+//============|
+Player.StartItem "Base_HP", 35
+Player.StartItem "Base_PAttack", 55
+Player.StartItem "Base_PDefense", 40
+Player.StartItem "Base_SAttack", 50
+Player.StartItem "Base_SDefense", 75
+
+//============|
+
+States
+{
+Spawn: 
+P076 A 0
+P076 B 1 
+P076 A 1
+GoTo Spawn+2
+See:
+P076 BCDE 5
+GoTo Spawn+1
+Missile:
+P076 A 0 A_JumpIfInventory("ConshotTimer",1,"Missile2")
+P076 F 5 
+P076 G 4
+GoTo Spawn+2
+Missile2:
+P076 G 9
+GoTo Spawn+2
+
+PainFix:
+P076 H 0 
+GoTo PainFrames
+}
+}
+
+actor PichuRentalMoves : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_JumpIf(CallACS("RentalBotCheck") == 1,"BotWep")
+
+TNT1 A 0 A_GiveInventory("ElectroballMove1")
+TNT1 A 0 A_GiveInventory("ThunderwaveMove2")
+TNT1 A 0 A_GiveInventory("CharmMove3")
+TNT1 A 0 A_GiveInventory("QuickAttackMove4")
+stop
+
+BotWep:
+TNT1 A 0 A_GiveInventory("ElectroballMove1")
+stop
+}
+}
+
+actor PichuRentalSetupItem : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 ACS_NamedExecuteAlways("PKMN_RentalsSetup",0,Dex_Pichu)
+stop
+}
+}

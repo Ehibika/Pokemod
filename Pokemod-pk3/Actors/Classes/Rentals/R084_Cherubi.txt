@@ -1,0 +1,90 @@
+
+/*
+[+]===================================[+]
+
+[+]===================================[+]
+*/
+
+Actor R_Cherubi : ClassBaseRentals 
+{
+Player.DisplayName "Cherubi"
+Player.SoundClass "Cherubi"
++NOSKIN
+
+Player.StartItem "PKMNRentalKit"
+//============|
+Player.StartItem "CherubiRentalSetupItem"
+//============|
+Player.StartItem "Base_HP", 60
+Player.StartItem "Base_PAttack", 35
+Player.StartItem "Base_PDefense", 45
+Player.StartItem "Base_SAttack", 60
+Player.StartItem "Base_SDefense", 50
+
+//============|
+
+States
+{
+Spawn: 
+P084 A 0
+P084 B 1 
+P084 A 1
+GoTo Spawn+2
+See:
+P084 BCDE 5
+GoTo Spawn+1
+Missile:
+P084 A 0 A_JumpIfInventory("ConshotTimer",1,"Missile2")
+P084 F 5 
+P084 G 4
+GoTo Spawn+2
+Missile2:
+P084 G 9
+GoTo Spawn+2
+
+PainFix:
+P084 H 0 
+GoTo PainFrames
+}
+}
+
+actor CherubiRentalMoves : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_JumpIf(CallACS("RentalBotCheck") == 1,"BotWep")
+
+TNT1 A 0 A_GiveInventory("SeedBombMove1")
+TNT1 A 0 A_GiveInventory("LifeDewMove2")
+TNT1 A 0 A_GiveInventory("LeechSeedMove3")
+TNT1 A 0 A_GiveInventory("GrowthMove4")
+stop
+
+BotWep:
+TNT1 A 0 A_GiveInventory("SeedBombMove1")
+stop
+}
+}
+
+actor CherubiRentalSetupItem : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 ACS_NamedExecuteAlways("PKMN_RentalsSetup",0,Dex_Cherubi)
+stop
+}
+}

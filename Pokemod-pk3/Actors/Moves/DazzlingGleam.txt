@@ -93,11 +93,13 @@ Spawn:
 TNT1 A 0
 TNT1 A 0 A_GiveInventory("ProjectileCode",1)
 TNT1 A 1 
+goto Spawnloop
 SpawnLoop:
 TNT1 A 0 A_SpawnItemEx("Dazzlinggleam_WaveTrail",20,0,16,25,0,0,user_angle,1)
 TNT1 A 0 A_SpawnItemEx("Dazzlinggleam_WaveTrail",20,0,16,20,0,0,user_angle+16,1)
 TNT1 A 0 A_SetUserVar("user_angle",user_angle+36)
 TNT1 A 0 A_CountDown
+TNT1 A 1 A_Jump(256,"SpawnLoop")
 Loop
 Death:
 TNT1 A 0 //A_PlaySoundEX("wep_L/commandowave","Body")
@@ -175,14 +177,14 @@ States
 Spawn:
 TNT1 A 0
 TNT1 A 0 A_GiveInventory("ProjectileCodeSyncTarget",1)
-TNT1 A 0 A_SpawnItemEX("Dazzlinggleam_Particle1",Random2(16),Random2(16),Random2(16),0,0,0,0,1)
-TNT1 AA 0 A_SpawnItemEX("Dazzlinggleam_Particle2",Random2(32),Random2(32),Random2(32),0,0,0,0,1)
+TNT1 A 0 A_SpawnItemEX("Dazzlinggleam_Particle",Random2(16),Random2(16),Random2(16),0,0,0,0,1)
+//TNT1 AA 0 A_SpawnItemEX("Dazzlinggleam_Particle2",Random2(32),Random2(32),Random2(32),0,0,0,0,1)
 TNT1 A 1
 stop
 }
 }
 
-
+/*
 actor Dazzlinggleam_Particle1 : BasicClientside
 {
 Scale 2.5
@@ -203,8 +205,9 @@ TNT1 A 0 A_CountDown
 loop
 }
 }
+*/
 
-actor Dazzlinggleam_Particle2 : BasicClientside
+actor Dazzlinggleam_Particle : BasicClientside
 {
 Scale 2.5
 Alpha 1.0
@@ -219,15 +222,15 @@ TNT1 A 0 A_Jump(256,"Spawn1","Spawn2","Spawn3")
 Goto SpawnLoop
 
 Spawn1:
-FLEX C 1 
+FX07 A 1 
 Goto SpawnLoop
 
 Spawn2:
-FLEX H 1 
+FX07 B 1 
 Goto SpawnLoop
 
 Spawn3:
-FLEZ C 1 
+FX07 C 1 
 Goto SpawnLoop
 
 SpawnLoop:
@@ -247,8 +250,8 @@ Spawn:
 TNT1 A 0
 TNT1 A 0 A_GiveInventory("ProjectileCode",1)
 TNT1 A 0 A_SpawnItemEx("Dazzlinggleam_GlowFX",0,0,0,0,0,0,0,1)
-TNT1 AAA 0 A_SpawnItemEX("Dazzlinggleam_Particle1",Random2(96),Random2(96),Random2(96),0,0,0,0,1)
-TNT1 AA 0 A_SpawnItemEX("Dazzlinggleam_Particle2",Random2(96),Random2(96),Random2(96),0,0,0,0,1)
+TNT1 AA 0 A_SpawnItemEX("Dazzlinggleam_Particle",Random2(96),Random2(96),Random2(96),0,0,0,0,1)
+//TNT1 AA 0 A_SpawnItemEX("Dazzlinggleam_Particle2",Random2(96),Random2(96),Random2(96),0,0,0,0,1)
 TNT1 A 1
 stop
 }

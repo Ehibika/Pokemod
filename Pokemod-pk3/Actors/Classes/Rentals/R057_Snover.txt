@@ -1,0 +1,90 @@
+
+/*
+[+]===================================[+]
+
+[+]===================================[+]
+*/
+
+Actor R_Snover : ClassBaseRentals 
+{
+Player.DisplayName "Snover"
+Player.SoundClass "Snover"
++NOSKIN
+
+Player.StartItem "PKMNRentalKit"
+//============|
+Player.StartItem "SnoverRentalSetupItem"
+//============|
+Player.StartItem "Base_HP", 60
+Player.StartItem "Base_PAttack", 62
+Player.StartItem "Base_PDefense", 50
+Player.StartItem "Base_SAttack", 60
+Player.StartItem "Base_SDefense", 60
+
+//============|
+
+States
+{
+Spawn: 
+P057 A 0
+P057 B 1 
+P057 A 1
+GoTo Spawn+2
+See:
+P057 BCDE 5
+GoTo Spawn+1
+Missile:
+P057 A 0 A_JumpIfInventory("ConshotTimer",1,"Missile2")
+P057 F 5 
+P057 G 4
+GoTo Spawn+2
+Missile2:
+P057 G 9
+GoTo Spawn+2
+
+PainFix:
+P057 H 0 
+GoTo PainFrames
+}
+}
+
+actor SnoverRentalMoves : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_JumpIf(CallACS("RentalBotCheck") == 1,"BotWep")
+
+TNT1 A 0 A_GiveInventory("RazorLeafMove1")
+TNT1 A 0 A_GiveInventory("LeechSeedMove2")
+TNT1 A 0 A_GiveInventory("IcyWindMove3")
+TNT1 A 0 A_GiveInventory("GrassWhistleMove4")
+stop
+
+BotWep:
+TNT1 A 0 A_GiveInventory("RazorLeafMove1")
+stop
+}
+}
+
+actor SnoverRentalSetupItem : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 ACS_NamedExecuteAlways("PKMN_RentalsSetup",0,Dex_Snover)
+stop
+}
+}

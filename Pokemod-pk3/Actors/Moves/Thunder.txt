@@ -2,7 +2,7 @@ actor ThunderMove : WepMasterBase
 {
 Tag "Thunder"
 Weapon.AmmoUse 1
-Weapon.AmmoGive 5
+Weapon.AmmoGive 10
 weapon.ammotype "ThunderPP"
 scale 2.0
 Inventory.Pickupmessage "$PU_MEGABUSTER"
@@ -70,7 +70,7 @@ Goto Ready
 //[+]========================================================================[+]
 //-----------------------------|Ammo & Inventory|------------------------------
 //[+]========================================================================[+]
-actor ThunderPP : Ammo {inventory.amount 1 inventory.Maxamount 5}
+actor ThunderPP : Ammo {inventory.amount 1 inventory.Maxamount 10}
 
 actor ThunderRCFlag : Powerup {inventory.amount 1 powerup.duration 35 }
 

@@ -13,7 +13,7 @@
 
 int PlayerClassWepMem[64];
 
-#LIBDEFINE MAX_WEAPONS_GLOBAL 280 //[Trill] Keep buffer room here for patches
+#LIBDEFINE MAX_WEAPONS_GLOBAL 350 //[Trill] Keep buffer room here for patches
 
 //#DEFINE MAX_WEAPONS_GLOBAL 87 // Maximum number of weapons for the following arrays
 // v6's weapon total would be 94
@@ -441,6 +441,25 @@ str weapons_ammo[MAX_WEAPONS_GLOBAL][7] =
 {"IronHeadMove", "IronHeadPP", "IronHead", 1.0, "NO", "NO", "SLOT_NONE"},
 {"AcidMove", "AcidPP", "Acid", 1.0, "NO", "NO", "SLOT_NONE"},
 {"AcidSprayMove", "AcidSprayPP", "AcidSpray", 1.0, "NO", "NO", "SLOT_NONE"},
+{"StringShotMove", "StringShotPP", "StringShot", 1.0, "NO", "NO", "SLOT_NONE"},
+{"SplashMove", "SplashPP", "Splash", 1.0, "NO", "NO", "SLOT_NONE"},
+{"PoisonStingMove", "PoisonStingPP", "PoisonSting", 1.0, "NO", "NO", "SLOT_NONE"},
+{"ElectroWebMove", "ElectroWebPP", "ElectroWeb", 1.0, "NO", "NO", "SLOT_NONE"},
+{"ElectroBallMove", "ElectroBallPP", "ElectroBall", 1.0, "NO", "NO", "SLOT_NONE"},
+{"DischargeMove", "DischargePP", "Discharge", 1.0, "NO", "NO", "SLOT_NONE"},
+{"BugBiteMove", "BugBitePP", "BugBite", 1.0, "NO", "NO", "SLOT_NONE"},
+{"PluckMove", "PluckPP", "Pluck", 1.0, "NO", "NO", "SLOT_NONE"},
+{"AirCutterMove", "AirCutterPP", "AirCutter", 1.0, "NO", "NO", "SLOT_NONE"},
+{"GustMove", "GustPP", "Gust", 1.0, "NO", "NO", "SLOT_NONE"},
+{"FlyMove", "FlyPP", "Fly", 1.0, "NO", "NO", "SLOT_NONE"},
+{"ElectroLevitateMove", "ElectroLevitatePP", "ElectroLevitate", 1.0, "NO", "NO", "SLOT_NONE"},
+{"BugBuzzMove", "BugBuzzPP", "BugBuzz", 1.0, "NO", "NO", "SLOT_NONE"},
+{"SilverWindMove", "SilverWindPP", "SilverWind", 1.0, "NO", "NO", "SLOT_NONE"},
+{"QuiverDanceMove", "QuiverDancePP", "QuiverDance", 1.0, "NO", "NO", "SLOT_NONE"},
+{"PoisonJabMove", "PoisonJabPP", "PoisonJab", 1.0, "NO", "NO", "SLOT_NONE"},
+{"EarthPowerMove", "EarthPowerPP", "EarthPower", 1.0, "NO", "NO", "SLOT_NONE"},
+{"PinMissileMove", "PinMissilePP", "PinMissile", 1.0, "NO", "NO", "SLOT_NONE"},
+{"FaintAttackMove", "FaintAttackPP", "FaintAttack", 1.0, "YES", "NO", "SLOT_NONE"},
 //--[NewMove]--
 };
 #endregion
@@ -988,6 +1007,7 @@ Script "MoveSetup" (void)
 				Case CURSE: ACS_NamedExecuteAlways("TracerTargeter",0,TG_ENEMY,800); break;
 				Case THUNDERWAVE: ACS_NamedExecuteAlways("TracerTargeter",0,TG_ENEMY,800); break;
 				Case DrainingKiss: ACS_NamedExecuteAlways("TracerTargeter",0,TG_ENEMY,350); break;
+				Case FaintAttack: ACS_NamedExecuteAlways("TracerTargeter",0,TG_ENEMY,350); break;
 				default: ACS_NamedExecuteAlways("TracerTargeter",0,TG_TEAM,630); break;
 			}
 			
@@ -1104,6 +1124,17 @@ if(CheckInventory(WepAmmoName)<1) return false;
 if(CheckInventory("DisableMark"))
 	{if(CheckInventory("DisableFlag") == ThisWeapon){return false;}}
 
+if(CheckInventory("RemoteKiller"))
+{switch(ThisWeapon) {
+	Case CONFUSION: return false; break;
+	Case PSYCHIC: return false; break;
+	Case WISH: return false; break;
+	Case DRACOMETEOR: return false; break;
+	Case THUNDER: return false; break;
+	default: break;
+	}
+}
+
 if(CheckInventory("HazeFlag"))
     {switch(ThisWeapon) {
 		Case GROWTH: return false; break;
@@ -1124,6 +1155,8 @@ if(CheckInventory("HazeFlag"))
 		Case HONECLAWS: return false; break;
 		Case REFLECT: return false; break;
 		Case LIGHTSCREEN: return false; break;
+		Case CRAFTYSHIELD: return false; break;
+		Case QUIVERDANCE: return false; break;
         default: break;
     }
 }
@@ -1161,6 +1194,7 @@ if(CheckInventory("ParalysisMark"))
 		Case WildCharge: acs_execute(979,0); return false;
 		Case TakeDown: acs_execute(979,0); return false;
 		Case DIG: acs_execute(979,0); return false;
+		Case FLY: acs_execute(979,0); return false;
     }
 }
 
@@ -1274,6 +1308,8 @@ if(CheckInventory("TauntFlag"))
 	Case ROCKPOLISH: return false; break;
 	Case HONECLAWS: return false; break;
 	Case CRAFTYSHIELD: return false; break;
+	Case STRINGSHOT: return false; break;
+	Case QUIVERDANCE: return false; break;
     }
 }
 

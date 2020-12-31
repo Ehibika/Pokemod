@@ -145,7 +145,7 @@ TNT1 A 0 A_GiveInventory("ProjectileCode",1)
 BEWA B 1 A_Fadeout
 BEWA B 0 A_SetScale(ScaleX+0.3)
 BEWA B 0 A_CountDown
-BEWA BBB 0 A_SpawnItemEx("GyroBallFX", random2(64), random2(64), random2(64), 0, 0, 0, 0,SXF_TRANSFERTRANSLATION)
+BEWA B 0 A_SpawnItemEx("GyroBallFX", random2(64), random2(64), random2(64), 0, 0, 0, 0,SXF_TRANSFERTRANSLATION)
 Spawn2:
 BEWA B 1 A_Fadeout
 BEWA B 0 A_SetScale(ScaleX+0.3)

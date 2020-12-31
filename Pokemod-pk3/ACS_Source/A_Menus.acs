@@ -1398,6 +1398,23 @@ Script "MenuFreeze" (void)
 	SetPlayerProperty(0, 0, PROP_TOTALLYFROZEN);
 }
 
+
+script "NET_Unstuck" (void) NET
+{
+if(Playernumber() != ConsolePlayerNumber() )Terminate;
+if(CheckInventory("UnstuckCooldown")){Log(s:"Must wait a few minutes to Unstuck again");Terminate;}
+
+TakeInventory("InMenu", 99);
+SetPlayerProperty(0, 0, PROP_TOTALLYFROZEN);
+SetPlayerProperty(0, 0, PROP_FROZEN);
+GiveInventory("UnstuckCooldown", 1);
+}
+
+Script "UnstuckFailMessage" (void) CLIENTSIDE
+{
+if(Playernumber() == ConsolePlayerNumber() ) {Log(s:"Must wait a few minutes to Unstuck again");}
+}
+
 //#region -=- Menu Backing
 #region -=- Menu Backing 
 

@@ -29,9 +29,12 @@ OptionMenu ZA_MultiplayerOptions
 	Option		"Show spawn spots",			"cl_showspawns",			"YesNo"
 	Slider		"Spectator move speed",		"cl_spectatormove",			0.1, 5.0, 0.1
 
-	StaticText	"PKMN Options", 1
+	StaticText "$PKMN_OPT", 1
 	StaticText " "
 	Option "Show Damage/Healing Numbers",			"PKMN_CV_DamageDisplay", "OnOff"
+	Option "Show Stat Particles",			"PKMN_ShowStatParticles", "OnOff"
+	Option "Enable Status Scanner",			"PKMN_StatScanner", "OnOff"
+	Option "Enable Game Tips",			"PKMN_EnableTips", "OnOff"
 
 	StaticText	"Camera Options", 1
 	StaticText " "
@@ -92,9 +95,13 @@ OptionMenu "OptionsMenu"
 	Option "Show Map Creator Cards",		"mm8bdm_mapcards", "8BDM_MapCards"
 	Option "CTF Objective Compass",			"mm8bdm_noctfradar", "OffOn"
 
-	StaticText	"PKMN Options", 1
+	StaticText "$PKMN_OPT", 1
 	StaticText " "
 	Option "Show Damage/Healing Numbers",			"PKMN_CV_DamageDisplay", "OnOff"
+	Option "Show Stat Particles",			"PKMN_ShowStatParticles", "OnOff"
+	Option "Enable Status Scanner",			"PKMN_StatScanner", "OnOff"
+	Option "Enable Game Tips",			"PKMN_EnableTips", "OnOff"
+	
 
 	StaticText	"Camera Options", 1
 	StaticText " "

@@ -1,0 +1,90 @@
+
+/*
+[+]===================================[+]
+
+[+]===================================[+]
+*/
+
+Actor R_Vulpix_A : ClassBaseRentals 
+{
+Player.DisplayName "Vulpix_A"
+Player.SoundClass "Vulpix_A"
++NOSKIN
+
+Player.StartItem "PKMNRentalKit"
+//============|
+Player.StartItem "Vulpix_ARentalSetupItem"
+//============|
+Player.StartItem "Base_HP", 38
+Player.StartItem "Base_PAttack", 41
+Player.StartItem "Base_PDefense", 40
+Player.StartItem "Base_SAttack", 50
+Player.StartItem "Base_SDefense", 65
+
+//============|
+
+States
+{
+Spawn: 
+P055 A 0
+P055 B 1 
+P055 A 1
+GoTo Spawn+2
+See:
+P055 BCDE 5
+GoTo Spawn+1
+Missile:
+P055 A 0 A_JumpIfInventory("ConshotTimer",1,"Missile2")
+P055 F 5 
+P055 G 4
+GoTo Spawn+2
+Missile2:
+P055 G 9
+GoTo Spawn+2
+
+PainFix:
+P055 H 0 
+GoTo PainFrames
+}
+}
+
+actor Vulpix_ARentalMoves : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_JumpIf(CallACS("RentalBotCheck") == 1,"BotWep")
+
+TNT1 A 0 A_GiveInventory("IcebeamMove1")
+TNT1 A 0 A_GiveInventory("DazzlingGleamMove2")
+TNT1 A 0 A_GiveInventory("CharmMove3")
+TNT1 A 0 A_GiveInventory("CraftyShieldMove4")
+stop
+
+BotWep:
+TNT1 A 0 A_GiveInventory("IcebeamMove1")
+stop
+}
+}
+
+actor Vulpix_ARentalSetupItem : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 ACS_NamedExecuteAlways("PKMN_RentalsSetup",0,Dex_Vulpix_A)
+stop
+}
+}

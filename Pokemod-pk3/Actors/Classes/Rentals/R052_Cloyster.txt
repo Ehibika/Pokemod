@@ -1,0 +1,90 @@
+
+/*
+[+]===================================[+]
+
+[+]===================================[+]
+*/
+
+Actor R_Cloyster : ClassBaseRentals 
+{
+Player.DisplayName "Cloyster"
+Player.SoundClass "Cloyster"
++NOSKIN
+
+Player.StartItem "PKMNRentalKit"
+//============|
+Player.StartItem "CloysterRentalSetupItem"
+//============|
+Player.StartItem "Base_HP", 50
+Player.StartItem "Base_PAttack", 95
+Player.StartItem "Base_PDefense", 180
+Player.StartItem "Base_SAttack", 85
+Player.StartItem "Base_SDefense", 45
+
+//============|
+
+States
+{
+Spawn: 
+P052 A 0
+P052 B 1 
+P052 A 1
+GoTo Spawn+2
+See:
+P052 BCDE 5
+GoTo Spawn+1
+Missile:
+P052 A 0 A_JumpIfInventory("ConshotTimer",1,"Missile2")
+P052 F 5 
+P052 G 4
+GoTo Spawn+2
+Missile2:
+P052 G 9
+GoTo Spawn+2
+
+PainFix:
+P052 H 0 
+GoTo PainFrames
+}
+}
+
+actor CloysterRentalMoves : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_JumpIf(CallACS("RentalBotCheck") == 1,"BotWep")
+
+TNT1 A 0 A_GiveInventory("IceBeamMove1")
+TNT1 A 0 A_GiveInventory("RapidSpinMove2")
+TNT1 A 0 A_GiveInventory("SpikesMove3")
+TNT1 A 0 A_GiveInventory("SpikeCannonMove4")
+stop
+
+BotWep:
+TNT1 A 0 A_GiveInventory("IceBeamMove1")
+stop
+}
+}
+
+actor CloysterRentalSetupItem : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 ACS_NamedExecuteAlways("PKMN_RentalsSetup",0,Dex_Cloyster)
+stop
+}
+}

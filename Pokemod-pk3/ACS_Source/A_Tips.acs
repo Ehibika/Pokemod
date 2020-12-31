@@ -1,0 +1,127 @@
+//TIP SYSTEM
+//Stolen from Gummy, who stole it from Internal Conflict
+
+
+#library "A_Tips"
+#include "zcommon.acs"
+#include "8bdmlib.acs"
+
+#DEFINE TIPCOUNT 66
+
+/* ====
+\cg \cf
+
+"",
+===== */
+str Tips[TIPCOUNT] = { 
+
+"Flying Types take \cgNeutral \cfDamage from Ground moves, it's being off the ground that makes them immune to them!",
+"Type immunities now act like 2X resistances, some immunities have been changed however",
+"The move \cgHaze \cfcan wipe out all buffs on a target, and prevent them from reapplying them, this includes \cgLightScreen \cf and \cgReflect \cf among others",
+"Most Self buffs like \cgSword Dance \cfwork on a PP timer, draining PP overtime while active, others like \cgRage \cf and \cgMeditate \cf work on their own timer",
+"Some moves like \cgWideGuard \cf and \cgAquaRing \cf conjure stationary effects that drain PP while active, you can turn them off at any time but getting \cgTaunted \cf will cause you to drop them anyways.",
+"All forms of healing work off the HP stat of either the caster, or the recipient, High health pokemon as a result, make the best healers.",
+"Stat debuffs are all mutually exclusive and do not stack on themselves, moves like \cgLeer \cf can only ever drop DEF by one stage",
+"\cgRest \cfis a handy recovery tool as it clenses statuses and can even be used \cgwhen you are already asleep. \cf",
+"Remember that there are 2 types of defense, Physical and Special. some pokemon are strong against one but weak to the other.",
+"Type Weaknesses aren't everything, Strong neutral damage can get the job done just as well, especially if the move matches the type of your pokemon",
+"\cgVulpix and Ninetales \cfare currently Fire/Psychic types in this mod",
+"The move \cgLeech Seed \cfrequires that the user maintains line of sight with their host, if you can break line of sight with someone that has you seeded, it will fade away.",
+"The flinch status is known as 'Cringe' in this mod, it stuns the victim and then makes them alert afterwards, alert pokemon are immune to further Cringe attempts and cannot fall asleep",
+"Pokemon that evolve 3 times will evolve at lvl 5, and then again at lvl 10",
+"Pokemon that evolve only once will evolve at lvl 7",
+"Magikarp can evolve at lvl 5 but learns no offensive moves whatsoever, fortunately he \cg can still use TMs \cf",
+"A general rule with TM's here is that \cgif the TM is the same type as you, you can learn it. \cfSome exceptions apply, like not having arms for \cgIce Punch \cf",
+"\cgThunderbolt \cf has exceptional reach, deals damage instantaneously, and has a high chance to paralyze. even if you do low damage with it, it can be great to have for the sake of inflicting paralysis",
+"Paralysis drops speed by 2 stages and makes you unable to jump, it also disables \cgRamming \cf and \cgMotion \cf based moves, like \cgQuick Attack \cf or \cgFly \cf",
+"the \cgEraser Orb \cf removes all entities around you, be they allied or from the opponent.",
+"Instead of boosting DEF, \cgBarrer \cf creates a psychic wall that blocks opponents and their projectiles. use it to create cover or make an impass",
+"the move \cgBlock \cf works like a shield, and can block an infinite amount of damage in front of you, beware of area attacks however.",
+"the mvoe \cgWide guard \cf creates a spinning bunker similar to core's Black hole, it can block infinite damage but beware of attacks from above or below.",
+"the move \cgShadow Ball \cf can bore right through walls, and ignores physical barriers like \cgBarrier \cf, \cgWideGuard \cf, and \cgBlock \cf.",
+"the move \cgSubstitute \cfCreates a decoy doll that protects you from damage and statuses so long as you are near it, it can be pushed and destroyed however.",
+"TM \cgSubstitute \cf is universal and can be learned by all pokemon, use it to safely peek out from cover, or to make a defensive stance by bodyblocking for the doll.",
+"The Freeze status exists in 2 forms, \cgPartial Freeze \cfcomes from certain damaging ice moves and will eventually lead to a \cgFull Freeze \cf",
+"Fully Frozen pokemon are immune to ice attacks until they defrost",
+"TM \cgFly \cf can be used by all winged pokemon, including some bugs! most winged pokemon naturally learn it as some point though",
+"TM \cgWaterfall \cf unleashes a rising spiral attack that leaves a geyser behind, allies can use the geyser as a spring to reach high places.",
+"Even if you aren't playing as a tank, investing in defensive moves is always worthwhile. TM \cgProtect \cf can be learned by anyone, and makes you immune to damage on demand.",
+"Badly poison doesn't exist as a status, it's mechanics are actually tied to the move \cgToxic \cf, which on top of poisoning, deals increasing damage that disregards defenses.",
+"Defensive moves like \cgCurse \cf, \cgIronDefense \cf, and \cgAmnesia \cf make you immune to displacement, allowing you to stand undeterred against \cgIcyWind \cf or \cgWhirlpool \cf",
+"TM \cgAcrobatics \cf is a ramming attack that isn't effected by your inventory, and deals high damage at any angle. many slim and limber pokemon can learn it.",
+"Healing yields good EXP, sometimes it may be worth starting off as a team healer with TM \cgLife Dew \cf or TM \cgHealPulse \cf before building into a more offense oriented setup.",
+"TM \cgHelping Hand \cf is a universal TM and quite handy, it boosts damage output of an ally by 50% and lets the helper gain EXP as their target deals damage. usefull for pokemon that don't do a lot of damage themselves.",
+"TM \cgHaze \cf is compatible with both Water and Ice types, use it to shut down opponents that want to run stat boosting moves or screens",
+"TM \cgClear Smog \cf Deals poison damage while also hazing buffs and screens off of them, Fire types can learn it too!",
+"The move \cgSmokescreen \cf may look transparent to you and your team, but it is totally opaque to enemies, use this to your advantage!",
+"the Poison status deals percentage based damage over time, great for wearing down high health opponents.",
+"TM \cgPoison Jab \cf deals heavy physical poison damage with a high likelyhood to poison. many pokemon capable of pugilism can learn it even without being poison typed themselves",
+"TM \cgElectroBall \cf deals more damage the faster you are than the victim, this is effected by moves like \cgAgility \cf or \cgScary Face \cf",
+"TM \cgCaptivate \cf launches an aluring wave that drops SP.ATK by 2 stages, use it to defange any potent ranged attackers.",
+"Moves like \cgEarthquake \cf  or \cgGiga drain \cfcan be jumped over.",
+"The Burn status deals percentage based damage over time, and cuts Physical attack damage in half, use it to suppress physical attackers who may otherwise trample you and your team.",
+"The vast majority of projectiles are Special attacks, so special defense translates to 'ranged defense' to a degree.",
+"Random Critical Hits do not exist in this mod, however some moves have their own conditions for critical damage.",
+"All 'Blade style' moves like \cgLeafBlade \cf and \cgNightSlash \cf deal bonus damage from the tip.",
+"TM \cgRefresh \cf Clears all major statuses and can be used on yourself or on allies. it can also be learned by anyone.",
+"What are traditionally called 'non volatile' statuses are called Major statuses here, this includes poison, burn, paralysis, sleep, and freeze. you can only ever have one of these 5 at any given time, and all will wear off eventually.",
+"What are traditionally called 'volatile' statuses are called Minor statuses here, this includes Cringe, Confusion, LeechSeed, and Taunt among others.",
+"TM \cgMist \cf Shrouds you and allies in a mist that blocks stat drops and minor statuses, many water and ice types can learn it.",
+"TM \cgBrine \cf is a mortar style move that does extra damage to opponent at half health, it is also compatible with poison types",
+"TM \cgFake Out \cf Stuns an opponent by clapping at them, causing them to cringe. unlike the traditional games, this move can work repetedly so long as the target isn't alert",
+"TM \cgHeal Pulse \cf can restore half of a target's health with the press of a button, even across great distances. you cannot use it on yourself though.",
+"TM \cgIncinerate \cf creates small fire fields that can hit multiple times and destroy inventory items on the victim.",
+"TM \cgFocus Blast \cf is compatible with many fighting and psychic types, and it's accuracy is within your hands, so don't miss!",
+"TM \cgBulldoze \cf Pounds the area to do immediate ground damage while also reducing speed. it can be used successively.",
+"Having issues with a flying opponent, Paralysis or even partial freeze can bring them out of the sky.",
+"TM \cgHeadbutt \cf can be learned by any pokemon and is a quick, ramming attack with a high chance to cause cringe. it can be used to engage or make an escape by stunning and running.",
+"TM \cgIcy Wind \cf blows foes back and drops speed by 1 stage, it is a powerfull tool for space control, and can be learned by water, ice, and even flying types",
+"TM \cgTaunt \cf can be used to target an opponent and render the unable to use status moves, it also causes them to drop active AOE's. this TM is also universal",
+"Defense curl boosts the power of rolling moves, which includes \cgRollout \cf,\cgGyroBall \cf, and \cgFlame Wheel \cf",
+"As of right now, \cgEarthquak \cfe and \cgSurf \cf cannot hit opponents using \cgDig \cf or \cgDive \cf respectively",
+"TM \cgSafeguard \cf Creates a ward that protects everyone in it from all kinds of unplesant things as well as from homing attacks, it won't prevent stat drops however.",
+"Same Type Attack Bonus, Also known as 'STAB' increases the power of moves that are the same type as you by 30%",
+};
+
+#DEFINE TIPMIN 35*60
+#DEFINE TIPTIME TIPMIN*5
+Script "EnterTip" ENTER CLIENTSIDE
+{
+    ACS_NamedExecuteAlways("GiveATip",0);
+    int TipTimer = TIPTIME;
+    while(GetActorProperty(0, APROP_HEALTH)>0)
+    {
+        TipTimer--;
+        if(TipTimer<1)
+            {
+                ACS_NamedExecuteAlways("GiveATip",0);
+                TipTimer = TIPTIME;
+            }
+            Delay(1);
+    }
+}
+
+Script "RespawnTip" RESPAWN CLIENTSIDE
+{
+    ACS_NamedExecuteAlways("EnterTip",0);
+}
+
+Script "DeathTip" DEATH CLIENTSIDE
+{
+    ACS_NamedExecuteAlways("GiveATip",0);
+}
+
+script "GiveATip" (void) CLIENTSIDE
+{
+Int cln = PlayerNumber();
+if(!GetUserCVar(ConsolePlayerNumber(),"PKMN_EnableTips")){Terminate;}
+
+if(PlayerClass(cln) == -1 || PlayerIsBot(cln)){TERMINATE;}
+
+SetHudSize(656,496,0);
+SetFont("SMALLFONT");
+//hudmessage(s:"PROTIP: ",s:Tips[random(0,TIPCOUNT)]; HUDMSG_FADEINOUT|HUDMSG_LOG, 665, CR_GREEN, 400.0, 585.0, 5.0, 3.5, 1.0);
+
+hudmessage(s:"Tip: \cf",s:Tips[random(0,TIPCOUNT-1)]; HUDMSG_FADEINOUT|HUDMSG_LOG, 3665, CR_YELLOW, 328.0, 485.0, 5.0, 3.5, 1.0);
+
+}

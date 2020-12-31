@@ -249,8 +249,9 @@ states
 {
 Spawn:
 TNT1 A 0
+TNT1 A 1
 TNT1 A 0 ACS_NamedExecuteAlways("MultishotCountWarper",0)
-TNT1 A 0 A_GiveInventory("ProjectileCodeSyncTarget",1)
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
 Goto Count0
 Count0:
 TNT1 A 0

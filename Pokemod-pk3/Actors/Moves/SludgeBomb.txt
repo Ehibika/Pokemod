@@ -87,7 +87,7 @@ obituary "$OB_SludgeBomb"
 +BOUNCEONCEILINGS
 -NoGravity
 Gravity 1.5
-damage (1)
+damage (MBP_SludgeBomb1)
 Radius 8
 Height 8
 speed 35
@@ -104,21 +104,33 @@ TNT1 A 0 A_Countdown
 SMKB A 1 A_SpawnItemEx("SludgeBombShotTrail",random2(12),random2(12),random2(12),0,0,-5,0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION)
 loop
 Death:
+TNT1 A 0 A_CheckFloor("Death2")
+Crash:
+XDeath:
 TNT1 A 0 A_GiveInventory("ProjectileDCode",1)
 TNT1 A 0 A_Stop
 TNT1 A 0 A_SpawnItemEx("SludgeBombBlast",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION)
+stop
+
+Death2:
+TNT1 A 0 A_GiveInventory("ProjectileDCode",1)
+TNT1 A 0 A_Stop
+TNT1 A 0 A_SpawnItemEx("SludgeBombBlast",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION)
+TNT1 A 0 A_SpawnItemEx("SludgePuddleSpawner",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION)
 stop
 }
 }
 
 
-actor SludgeBombProjectile : BasicProjectile
+actor SludgeBombHazardProjectile : BasicProjectile
 {
-DamageType "Sludge"
-obituary "$OB_Sludge"
+DamageType "SludgeBomb"
+obituary "$OB_SludgeBomb"
 -NOGRAVITY
++BOUNCEONWALLS
++THRUACTORS
 Speed 40
-Damage (MBP_SludgeBomb1)
+Damage (0)
 Height 10
 Radius 12
 ReactionTime 12
@@ -155,9 +167,9 @@ Actor SludgeBombHazard : BasicProjectile
 +DONTSPLASH
 +NOEXPLODEFLOOR
 +NOTARGETSWITCH
-Damage (MBP_Sludge)
-DamageType "Sludge"
-obituary "$OB_Sludge"
+Damage (MBP_Sludge/2)
+DamageType "SludgeBomb"
+obituary "$OB_SludgeBomb"
 Height 10
 Radius 12
 scale 3.5
@@ -198,9 +210,21 @@ TNT1 A 0
 TNT1 A 0 A_GiveInventory("ProjectileCode",1)
 TNT1 A 0 A_Explode(MBP_SludgeBomb2,SLUDGEBOMB_AREA1,0,0,SLUDGEBOMB_AREA2)
 NAPC A 0 A_PlaySoundEx("weapon/napalm", "Weapon")
-TNT1 AAAAAAAAA 0 A_SpawnItemEx("SludgeBombProjectile",0,0,35,random(5,10),0,random(5,15),Random(1,360),SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION)
 TNT1 A 0 A_SpawnItemEx("SludgeBombImpactFX",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION)
 TNT1 A 0 A_SpawnItemEx("SludgeBombImpactFX2",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION)
+stop
+}
+}
+
+actor SludgePuddleSpawner : BasicExplosion
+{
+DamageType "SludgeBomb"
+obituary "$OB_SludgeBomb"
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 AAAAAAAAA 0 A_SpawnItemEx("SludgeBombHazardProjectile",0,0,35,random(5,10),0,random(5,15),Random(1,360),SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION)
 stop
 }
 }

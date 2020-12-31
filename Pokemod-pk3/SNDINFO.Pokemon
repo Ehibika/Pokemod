@@ -2195,4 +2195,229 @@ $playersound    Snorlax male *usefail    FATLAND
 $playersound    Snorlax male *taunt      CRY150
 
 
+$playersound    Seedot male *death      MEGADEAT
+$playersound    Seedot male *xdeath     MEGADEAT
+$playersound    Seedot male *gibbed     MEGADEAT
+$playersound    Seedot male *pain100    MEGAPAIN
+$playersound    Seedot male *pain75     MEGAPAIN
+$playersound    Seedot male *pain50     MEGAPAIN
+$playersound    Seedot male *pain25     MEGAPAIN
+$playersound    Seedot male *grunt      LAND
+$playersound    Seedot male *land       LAND
+$playersound    Seedot male *jump       dsnone
+$playersound    Seedot male *fist       dsnone
+$playersound    Seedot male *usefail    LAND
+$playersound    Seedot male *taunt      CRY151
+
+
+$playersound    Nuzleaf male *death      MEGADEAT
+$playersound    Nuzleaf male *xdeath     MEGADEAT
+$playersound    Nuzleaf male *gibbed     MEGADEAT
+$playersound    Nuzleaf male *pain100    MEGAPAIN
+$playersound    Nuzleaf male *pain75     MEGAPAIN
+$playersound    Nuzleaf male *pain50     MEGAPAIN
+$playersound    Nuzleaf male *pain25     MEGAPAIN
+$playersound    Nuzleaf male *grunt      LAND
+$playersound    Nuzleaf male *land       LAND
+$playersound    Nuzleaf male *jump       dsnone
+$playersound    Nuzleaf male *fist       dsnone
+$playersound    Nuzleaf male *usefail    LAND
+$playersound    Nuzleaf male *taunt      CRY152
+
+
+$playersound    Shiftry male *death      MEGADEAT
+$playersound    Shiftry male *xdeath     MEGADEAT
+$playersound    Shiftry male *gibbed     MEGADEAT
+$playersound    Shiftry male *pain100    MEGAPAIN
+$playersound    Shiftry male *pain75     MEGAPAIN
+$playersound    Shiftry male *pain50     MEGAPAIN
+$playersound    Shiftry male *pain25     MEGAPAIN
+$playersound    Shiftry male *grunt      FATLAND
+$playersound    Shiftry male *land       FATLAND
+$playersound    Shiftry male *jump       dsnone
+$playersound    Shiftry male *fist       dsnone
+$playersound    Shiftry male *usefail    FATLAND
+$playersound    Shiftry male *taunt      CRY153
+
+
+$playersound    Magnemite male *death      MEGADEAT
+$playersound    Magnemite male *xdeath     MEGADEAT
+$playersound    Magnemite male *gibbed     MEGADEAT
+$playersound    Magnemite male *pain100    MEGAPAIN
+$playersound    Magnemite male *pain75     MEGAPAIN
+$playersound    Magnemite male *pain50     MEGAPAIN
+$playersound    Magnemite male *pain25     MEGAPAIN
+$playersound    Magnemite male *grunt      LAND
+$playersound    Magnemite male *land       LAND
+$playersound    Magnemite male *jump       dsnone
+$playersound    Magnemite male *fist       dsnone
+$playersound    Magnemite male *usefail    LAND
+$playersound    Magnemite male *taunt      CRY154
+
+
+$playersound    Magneton male *death      MEGADEAT
+$playersound    Magneton male *xdeath     MEGADEAT
+$playersound    Magneton male *gibbed     MEGADEAT
+$playersound    Magneton male *pain100    MEGAPAIN
+$playersound    Magneton male *pain75     MEGAPAIN
+$playersound    Magneton male *pain50     MEGAPAIN
+$playersound    Magneton male *pain25     MEGAPAIN
+$playersound    Magneton male *grunt      LAND
+$playersound    Magneton male *land       LAND
+$playersound    Magneton male *jump       dsnone
+$playersound    Magneton male *fist       dsnone
+$playersound    Magneton male *usefail    LAND
+$playersound    Magneton male *taunt      CRY155
+
+
+$playersound    Magnezone male *death      MEGADEAT
+$playersound    Magnezone male *xdeath     MEGADEAT
+$playersound    Magnezone male *gibbed     MEGADEAT
+$playersound    Magnezone male *pain100    MEGAPAIN
+$playersound    Magnezone male *pain75     MEGAPAIN
+$playersound    Magnezone male *pain50     MEGAPAIN
+$playersound    Magnezone male *pain25     MEGAPAIN
+$playersound    Magnezone male *grunt      FATLAND
+$playersound    Magnezone male *land       FATLAND
+$playersound    Magnezone male *jump       dsnone
+$playersound    Magnezone male *fist       dsnone
+$playersound    Magnezone male *usefail    FATLAND
+$playersound    Magnezone male *taunt      CRY156
+
+
+$playersound    Murkrow male *death      MEGADEAT
+$playersound    Murkrow male *xdeath     MEGADEAT
+$playersound    Murkrow male *gibbed     MEGADEAT
+$playersound    Murkrow male *pain100    MEGAPAIN
+$playersound    Murkrow male *pain75     MEGAPAIN
+$playersound    Murkrow male *pain50     MEGAPAIN
+$playersound    Murkrow male *pain25     MEGAPAIN
+$playersound    Murkrow male *grunt      LAND
+$playersound    Murkrow male *land       LAND
+$playersound    Murkrow male *jump       dsnone
+$playersound    Murkrow male *fist       dsnone
+$playersound    Murkrow male *usefail    LAND
+$playersound    Murkrow male *taunt      CRY157
+
+
+$playersound    Honchkrow male *death      MEGADEAT
+$playersound    Honchkrow male *xdeath     MEGADEAT
+$playersound    Honchkrow male *gibbed     MEGADEAT
+$playersound    Honchkrow male *pain100    MEGAPAIN
+$playersound    Honchkrow male *pain75     MEGAPAIN
+$playersound    Honchkrow male *pain50     MEGAPAIN
+$playersound    Honchkrow male *pain25     MEGAPAIN
+$playersound    Honchkrow male *grunt      FATLAND
+$playersound    Honchkrow male *land       FATLAND
+$playersound    Honchkrow male *jump       dsnone
+$playersound    Honchkrow male *fist       dsnone
+$playersound    Honchkrow male *usefail    FATLAND
+$playersound    Honchkrow male *taunt      CRY158
+
+
+$playersound    Tangela male *death      MEGADEAT
+$playersound    Tangela male *xdeath     MEGADEAT
+$playersound    Tangela male *gibbed     MEGADEAT
+$playersound    Tangela male *pain100    MEGAPAIN
+$playersound    Tangela male *pain75     MEGAPAIN
+$playersound    Tangela male *pain50     MEGAPAIN
+$playersound    Tangela male *pain25     MEGAPAIN
+$playersound    Tangela male *grunt      LAND
+$playersound    Tangela male *land       LAND
+$playersound    Tangela male *jump       dsnone
+$playersound    Tangela male *fist       dsnone
+$playersound    Tangela male *usefail    LAND
+$playersound    Tangela male *taunt      CRY159
+
+
+$playersound    Tangrowth male *death      MEGADEAT
+$playersound    Tangrowth male *xdeath     MEGADEAT
+$playersound    Tangrowth male *gibbed     MEGADEAT
+$playersound    Tangrowth male *pain100    MEGAPAIN
+$playersound    Tangrowth male *pain75     MEGAPAIN
+$playersound    Tangrowth male *pain50     MEGAPAIN
+$playersound    Tangrowth male *pain25     MEGAPAIN
+$playersound    Tangrowth male *grunt      FATLAND
+$playersound    Tangrowth male *land       FATLAND
+$playersound    Tangrowth male *jump       dsnone
+$playersound    Tangrowth male *fist       dsnone
+$playersound    Tangrowth male *usefail    FATLAND
+$playersound    Tangrowth male *taunt      CRY160
+
+
+$playersound    Joltik male *death      MEGADEAT
+$playersound    Joltik male *xdeath     MEGADEAT
+$playersound    Joltik male *gibbed     MEGADEAT
+$playersound    Joltik male *pain100    MEGAPAIN
+$playersound    Joltik male *pain75     MEGAPAIN
+$playersound    Joltik male *pain50     MEGAPAIN
+$playersound    Joltik male *pain25     MEGAPAIN
+$playersound    Joltik male *grunt      LAND
+$playersound    Joltik male *land       LAND
+$playersound    Joltik male *jump       dsnone
+$playersound    Joltik male *fist       dsnone
+$playersound    Joltik male *usefail    LAND
+$playersound    Joltik male *taunt      CRY161
+
+
+$playersound    Galvantula male *death      MEGADEAT
+$playersound    Galvantula male *xdeath     MEGADEAT
+$playersound    Galvantula male *gibbed     MEGADEAT
+$playersound    Galvantula male *pain100    MEGAPAIN
+$playersound    Galvantula male *pain75     MEGAPAIN
+$playersound    Galvantula male *pain50     MEGAPAIN
+$playersound    Galvantula male *pain25     MEGAPAIN
+$playersound    Galvantula male *grunt      FATLAND
+$playersound    Galvantula male *land       FATLAND
+$playersound    Galvantula male *jump       dsnone
+$playersound    Galvantula male *fist       dsnone
+$playersound    Galvantula male *usefail    FATLAND
+$playersound    Galvantula male *taunt      CRY162
+
+
+$playersound    Mareep male *death      MEGADEAT
+$playersound    Mareep male *xdeath     MEGADEAT
+$playersound    Mareep male *gibbed     MEGADEAT
+$playersound    Mareep male *pain100    MEGAPAIN
+$playersound    Mareep male *pain75     MEGAPAIN
+$playersound    Mareep male *pain50     MEGAPAIN
+$playersound    Mareep male *pain25     MEGAPAIN
+$playersound    Mareep male *grunt      LAND
+$playersound    Mareep male *land       LAND
+$playersound    Mareep male *jump       dsnone
+$playersound    Mareep male *fist       dsnone
+$playersound    Mareep male *usefail    LAND
+$playersound    Mareep male *taunt      CRY163
+
+
+$playersound    Flaaffy male *death      MEGADEAT
+$playersound    Flaaffy male *xdeath     MEGADEAT
+$playersound    Flaaffy male *gibbed     MEGADEAT
+$playersound    Flaaffy male *pain100    MEGAPAIN
+$playersound    Flaaffy male *pain75     MEGAPAIN
+$playersound    Flaaffy male *pain50     MEGAPAIN
+$playersound    Flaaffy male *pain25     MEGAPAIN
+$playersound    Flaaffy male *grunt      LAND
+$playersound    Flaaffy male *land       LAND
+$playersound    Flaaffy male *jump       dsnone
+$playersound    Flaaffy male *fist       dsnone
+$playersound    Flaaffy male *usefail    LAND
+$playersound    Flaaffy male *taunt      CRY164
+
+
+$playersound    Ampharos male *death      MEGADEAT
+$playersound    Ampharos male *xdeath     MEGADEAT
+$playersound    Ampharos male *gibbed     MEGADEAT
+$playersound    Ampharos male *pain100    MEGAPAIN
+$playersound    Ampharos male *pain75     MEGAPAIN
+$playersound    Ampharos male *pain50     MEGAPAIN
+$playersound    Ampharos male *pain25     MEGAPAIN
+$playersound    Ampharos male *grunt      FATLAND
+$playersound    Ampharos male *land       FATLAND
+$playersound    Ampharos male *jump       dsnone
+$playersound    Ampharos male *fist       dsnone
+$playersound    Ampharos male *usefail    FATLAND
+$playersound    Ampharos male *taunt      CRY165
+
+
 //--[NewPokemon]--

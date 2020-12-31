@@ -302,6 +302,25 @@ const int Move_MeteorMash = 274;
 const int Move_IronHead = 275;
 const int Move_Acid = 276;
 const int Move_AcidSpray = 277;
+const int Move_StringShot = 278;
+const int Move_Splash = 279;
+const int Move_PoisonSting = 280;
+const int Move_ElectroWeb = 281;
+const int Move_ElectroBall = 282;
+const int Move_Discharge = 283;
+const int Move_BugBite = 284;
+const int Move_Pluck = 285;
+const int Move_AirCutter = 286;
+const int Move_Gust = 287;
+const int Move_Fly = 288;
+const int Move_ElectroLevitate = 289;
+const int Move_BugBuzz = 290;
+const int Move_SilverWind = 291;
+const int Move_QuiverDance = 292;
+const int Move_PoisonJab = 293;
+const int Move_EarthPower = 294;
+const int Move_PinMissile = 295;
+const int Move_FaintAttack = 296;
 //--[NewMove]--
 //=======|Pokedex Constants|==========
 const int Dex_SMEARGLE = 0;
@@ -480,6 +499,21 @@ const int Dex_CACNEA = 147;
 const int Dex_CACTURNE = 148;
 const int Dex_MUNCHLAX = 149;
 const int Dex_SNORLAX = 150;
+const int Dex_SEEDOT = 151;
+const int Dex_NUZLEAF = 152;
+const int Dex_SHIFTRY = 153;
+const int Dex_MAGNEMITE = 154;
+const int Dex_MAGNETON = 155;
+const int Dex_MAGNEZONE = 156;
+const int Dex_MURKROW = 157;
+const int Dex_HONCHKROW = 158;
+const int Dex_TANGELA = 159;
+const int Dex_TANGROWTH = 160;
+const int Dex_JOLTIK = 161;
+const int Dex_GALVANTULA = 162;
+const int Dex_MAREEP = 163;
+const int Dex_FLAAFFY = 164;
+const int Dex_AMPHAROS = 165;
 //--[NewPokemon]--
 //=======|TM Type Flags|==========
 const int TMT_NULL = 0;

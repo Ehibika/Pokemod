@@ -69,6 +69,28 @@ Thing_ChangeTID(0,EntityTID+P+EntityID);
 #endregion
 //#endregion
 
+//#region -=- Check EntiTID -=-
+#region -=- Check EntiTID -=-
+
+
+Script "CheckEntiTID" (int Pointer, Int EntityID)
+{
+
+	if(Pointer!=0){SetActivator(0,Pointer);}
+
+Int P = (ActivatorTID()-1000)*100;
+int ETID = EntityTID+P+EntityID;
+
+bool Output = false;
+
+if (ThingCount(T_NONE,ETID)){Output = true;}
+SetResultValue(Output);
+
+}
+
+#endregion
+//#endregion
+
 //#region -=- Multi EntiTID -=-
 #region -=- Multi EntiTID -=-
 
@@ -971,7 +993,11 @@ int SightPlayer;
 int IconNum;
 int j;
 Int StatVal;
+
+int StatScannerMode = ON;
 while(GetActorProperty(0,APROP_HEALTH) > 0) {
+	if(StatScannerMode == ON)
+	{
 		SightPlayer = ACS_NamedExecuteWithResult("PlayerTarget_GetTID");
 		IconNum = checkActorInventory(SightPlayer,"PlayerIconFlag");
 			if(SightPlayer > 999 
@@ -996,8 +1022,25 @@ while(GetActorProperty(0,APROP_HEALTH) > 0) {
 		if(StatVal){DrawStatIcon(800+(10*j),j,k,StatVal,20.0,165.0); j++;}
 		}
 
-		delay(1);
+		//Turn OFF if set to OFF
+		if(!getUserCvar(ConsolePlayerNumber(),"PKMN_StatScanner"))
+			{
+				for (int l = 0; l < 5; l++)
+				{
+					ClearStatIcon(700+(10*l));
+					ClearStatIcon(800+(10*l));
+				}
+				StatScannerMode = OFF;
+
+			}
 	}
+	if(StatScannerMode == OFF)
+	{
+		if(getUserCvar(ConsolePlayerNumber(),"PKMN_StatScanner"))
+			{StatScannerMode = ON;}
+	}
+	delay(1);
+}
 }
 
 Script "PlayerTarget_GetTID" (Void)
@@ -1405,8 +1448,8 @@ Int OutPut;
 
 script "PKMNACS_HitKnockback" (int force, int type, int disabled)
 {
-if(!(ClassifyActor(0) & ACTOR_PLAYER)){terminate;}
-if(CheckInventory("STF_Curse")){terminate;}
+if(!(ClassifyActor(0) & ACTOR_PLAYER) && IsSubDoll() == FALSE){terminate;}
+if(isKBProof()){terminate;}
 if(disabled == 0){GiveInventory("TempPitProtection",1);}
 int pusher = ACS_NamedExecuteWithResult("core_gettarget");
 
@@ -1431,8 +1474,43 @@ ThrustThing(Vang, force, 1, 0);
 
 script "PKMNACS_HitKnockUp" (int force, int SetAdd)
 {
-if(!(ClassifyActor(0) & ACTOR_PLAYER)){terminate;}
+if(!(ClassifyActor(0) & ACTOR_PLAYER) && IsSubDoll() == FALSE){terminate;}
+if(isKBProof()){terminate;}
 ThrustThingZ(0,force,0,SetAdd);
+}
+
+Function bool isKBProof (void)
+{
+	if(CheckInventory("STF_Curse")) return true;
+	if(CheckInventory("STF_IronDefense")) return true;
+	if(CheckInventory("STF_Amnesia")) return true;
+	if(CheckInventory("STF_CosmicPower")) return true;
+	if(CheckInventory("STF_Defensecurl")) return true;
+	//if(CheckInventory("SafeguardPower")) return true;
+	//if(CheckInventory("CraftyShieldPower")) return true;
+return false;
+}
+
+Function bool isTID_KBProof (int TID)
+{
+	if(CheckActorInventory(TID,"STF_Curse")) return true;
+	if(CheckActorInventory(TID,"STF_IronDefense")) return true;
+	if(CheckActorInventory(TID,"STF_Amnesia")) return true;
+	if(CheckActorInventory(TID,"STF_CosmicPower")) return true;
+	if(CheckActorInventory(TID,"STF_Defensecurl")) return true;
+	//if(CheckActorInventory(TID,"SafeguardPower")) return true;
+	//if(CheckActorInventory(TID,"CraftyShieldPower")) return true;
+return false;
+}
+
+Function bool IsSubDoll (void)
+{
+	if(CheckActorClass(0,"SubstituteDecoy")) return true;
+	if(CheckActorClass(0,"SubstituteDecoy_B")) return true;
+	if(CheckActorClass(0,"SubstituteDecoy_R")) return true;
+	if(CheckActorClass(0,"SubstituteDecoy_G")) return true;
+	if(CheckActorClass(0,"SubstituteDecoy_O")) return true;
+return false;
 }
 
 script "PitchGrab" (Void)
@@ -1713,14 +1791,16 @@ script "PKMN_PushPull" (int maxforce, int maxRange, int noFalloff)
 
 		userTID = ACS_NamedExecuteWithResult("Core_GetTarget", 0);
 		userTeam = GetPlayerInfo(userTID - 1000, PLAYERINFO_TEAM);
+		//log(i:userTeam);
 
+		
 	for(int p = 0;p < ServerMax; p++)
 	{
 		if(!PlayerInGame(p))
 		{
 			continue;
 		}
-		if(isTeamGame)
+		if(ACS_ExecuteWithResult(975,1)==1)
 		{
 			if(userTeam == GetPlayerInfo(p, PLAYERINFO_TEAM))
 			{
@@ -1728,9 +1808,10 @@ script "PKMN_PushPull" (int maxforce, int maxRange, int noFalloff)
 			}
 		}
 		
+
 		targetTID = p+1000;
 		if(!CheckActorInventory(targetTID, "NoPushFlag")
-			&&!CheckActorInventory(targetTID, "STF_Curse") 
+			&&!isTID_KBProof(targetTID) 
 			&& xyzDistance(0, targetTID) < maxRange && userTID != targetTID)
 		{	
 			userCount++;

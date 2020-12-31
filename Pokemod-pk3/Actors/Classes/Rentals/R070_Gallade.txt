@@ -1,0 +1,90 @@
+
+/*
+[+]===================================[+]
+
+[+]===================================[+]
+*/
+
+Actor R_Gallade : ClassBaseRentals 
+{
+Player.DisplayName "Gallade"
+Player.SoundClass "Gallade"
++NOSKIN
+
+Player.StartItem "PKMNRentalKit"
+//============|
+Player.StartItem "GalladeRentalSetupItem"
+//============|
+Player.StartItem "Base_HP", 68
+Player.StartItem "Base_PAttack", 125
+Player.StartItem "Base_PDefense", 65
+Player.StartItem "Base_SAttack", 65
+Player.StartItem "Base_SDefense", 115
+
+//============|
+
+States
+{
+Spawn: 
+P070 A 0
+P070 B 1 
+P070 A 1
+GoTo Spawn+2
+See:
+P070 BCDE 5
+GoTo Spawn+1
+Missile:
+P070 A 0 A_JumpIfInventory("ConshotTimer",1,"Missile2")
+P070 F 5 
+P070 G 4
+GoTo Spawn+2
+Missile2:
+P070 G 9
+GoTo Spawn+2
+
+PainFix:
+P070 H 0 
+GoTo PainFrames
+}
+}
+
+actor GalladeRentalMoves : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_JumpIf(CallACS("RentalBotCheck") == 1,"BotWep")
+
+TNT1 A 0 A_GiveInventory("PsychoCutMove1")
+TNT1 A 0 A_GiveInventory("CloseCombatMove2")
+TNT1 A 0 A_GiveInventory("SwordDanceMove3")
+TNT1 A 0 A_GiveInventory("BarrierMove4")
+stop
+
+BotWep:
+TNT1 A 0 A_GiveInventory("PsychoCutMove1")
+stop
+}
+}
+
+actor GalladeRentalSetupItem : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 ACS_NamedExecuteAlways("PKMN_RentalsSetup",0,Dex_Gallade)
+stop
+}
+}

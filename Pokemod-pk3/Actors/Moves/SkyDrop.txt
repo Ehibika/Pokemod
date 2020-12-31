@@ -25,13 +25,15 @@ Goto Fire.GrabStart
 
 Fire.GrabStart:
 JARM F 0 A_TakeInventory("SkyDropPP",1)
-TNT1 A 1 A_GiveInventory("SkydropGroundGuardFunc",1)
+//TNT1 A 1 A_GiveInventory("SkydropGroundGuardFunc",1)
 JARM F 0 A_GiveInventory("SkyDropGrabTimer",1)
 FSTO D 0 A_TakeInventory("SuplexID",999)
-SAKH C 0 ThrustThingZ(0,45,0,1)
+//SAKH C 0 ThrustThingZ(0,45,0,1)
+TNT1 A 0 A_PlaySound("weapon/BreakDash")
+"####" A 0 A_GiveInventory("DashSet_B")
 SkyDropWalk:
 JARM F 0 A_GiveInventory("SkyDropWalkThrust",1)
-TNT1 A 1 A_GiveInventory("SkydropGroundGuardFunc",1)
+//TNT1 A 1 A_GiveInventory("SkydropGroundGuardFunc",1)
 JARM F 1 A_GiveInventory("SkyDropGrabFunc",1)
 JARM F 0 A_JumpIfInventory("SuplexID",1,"SkyDrop")
 JARM F 0 A_JumpIfInventory("SkyDropGrabTimer",1,"SkyDropWalk")
@@ -40,7 +42,8 @@ Goto Fire.After
 
 SkyDrop:
 TNT1 A 0 A_PlaySound("weapon/crashland")
-TNT1 A 0 A_GiveInventory("DashSet_B")
+//TNT1 A 0 A_GiveInventory("DashSet_B")
+TNT1 A 0 A_TakeInventory("Fly_Active",255)
 TNT1 A 0 A_TakeInventory("ZangiefAngle",255)
 TNT1 A 0 A_GiveInventory("ZangiefAngle",CallACS("GetAngleToTid",CallACS("Get_SuplexID_TID")))
 TNT1 A 0 A_SetAngle(CallACS("GetAngleToTid",CallACS("Get_SuplexID_TID"))*360/256)
@@ -48,19 +51,19 @@ TOPH A 0 A_ChangeFlag("SHOOTABLE",0)
 TNT1 A 0 A_ChangeFlag("SOLID",0)
 TNT1 A 0 A_SetPitch(0)
 JARM E 1 ACS_NamedExecuteWithResult("Grasp_TID",CallACS("Get_SuplexID_TID"))
-SAKH C 0 ThrustThingZ(0,15,0,0)
-JARM E 1
+SAKH C 0 ThrustThingZ(0,55,0,0)
+JARM E 2
 TNT1 A 0 A_JumpIf(momz<0,"GoingDownSpin")
 goto GoingUpSpin
 
 GoingUpSpin:
-SAKH C 0 ThrustThingZ(0,1,1,1)
+SAKH C 0 ThrustThingZ(0,1,1,0)
 TNT1 A 0 A_SetAngle(angle+20.0)
 JARM E 1 A_Jumpif(!CallACS("Grasp_TID",CallACS("Get_SuplexID_TID")),"SkyDropSlam")
 TNT1 A 0 A_CheckFloor("SkyDropSlam")
 TNT1 A 0 A_JumpIf(momz>0,"GoingUpSpin")
 GoingDownSpin:
-SAKH C 0 ThrustThingZ(0,1,1,1)
+SAKH C 0 ThrustThingZ(0,15,1,1)
 TNT1 A 0 A_SetAngle(angle+20.0)
 JARM E 1 A_Jumpif(!CallACS("Grasp_TID",CallACS("Get_SuplexID_TID")),"SkyDropSlam")
 TNT1 A 0 A_CheckFloor("SkyDropSlam")
@@ -82,12 +85,14 @@ goto SkyDropSlamEnd
 SkyDropSlamEnd:
 TOPH A 0 A_ChangeFlag("INVULNERABLE",0)
 TNT1 A 0 A_GiveInventory("DashSetOff")
-TOPH A 0 A_ChangeFlag("SOLID",1) //More elegant solution later
+TNT1 A 0 A_SpawnItemEx("ReSolidifier") // here it is
+//TOPH A 0 A_ChangeFlag("SOLID",1) //More elegant solution later
 "####" B 0 A_Jump(256,"Fire.After")
 Goto Fire.After
 
 Fire.After:
 "####" B 1 A_GiveInventory("HalfRecovery_B")
+"####" A 0 A_GiveInventory("DashSetOff")
 "####" C 0 A_REfire("Fire")
 "####" B 0 A_Jump(256,"Fire.End")
 Goto Fire.End
@@ -121,23 +126,40 @@ actor SkyDropGrabTimer : Powerup {inventory.amount 1 powerup.duration 17}
 Const int SkyDropRad = 120;
 Const int SkyDrop_Item = 14;
 
+/*
 actor SkyDropWalkThrust : CustomInventory
 {
 states
 {
 pickup:
-TNT1 A 0 A_GiveInventory("SkyDropWalkSlow",1)
-TNT1 A 0 A_CheckFloor("Ground")
-TNT1 A 0 A_Recoil(-2)
+//TNT1 A 0 A_GiveInventory("SkyDropWalkSlow",1)
+//TNT1 A 0 A_CheckFloor("Ground")
+TNT1 A 0 A_Recoil(-5)
 TNT1 A 0
 //TNT1 A 0 A_JumpIf(momz>0, "GoDown")
-TNT1 A 0 ThrustThingZ(0,2,1,1)
+//TNT1 A 0 ThrustThingZ(0,2,1,1)
 stop
 GoDown:
 TNT1 A 0 ThrustThingZ(0,2,1,0)
 stop
 Ground:
 TNT1 A 0 A_Recoil(-2)
+stop
+}
+}
+*/
+
+actor SkyDropWalkThrust : CustomInventory
+{
+states
+{
+Pickup:
+TNT1 A 0 A_JumpIfInventory("CutterFlag",999,"Nope")
+TNT1 A 0 A_ChangeVelocity(cos(-pitch)*32,0,sin(-pitch)*32,CVF_RELATIVE|CVF_REPLACE)
+//BASB A 1 A_SpawnitemEx("QuickAttackWave",cos(-pitch)*30,0,(25)+(sin(pitch)*30),0,0,0,0,SXF_TRANSFERTRANSLATION)
+stop
+Nope:
+TNT1 A 0
 stop
 }
 }

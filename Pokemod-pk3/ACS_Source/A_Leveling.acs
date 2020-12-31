@@ -127,6 +127,7 @@ if(SelfEXPBounty)
         if(SelfEXPBounty < Output){Output = SelfEXPBounty;}
         TakeInventory("EXPBountyitem",Output);
         ACS_NamedExecuteAlways("GivePlayerEXP",0,EnemyPlN,Output,1);
+        if(CheckActorInventory(EnemyPlayer,"HelpingHandPower")){GiveActorInventory(EnemyPlayer,"HelperEXPItem",Output/2);}
     }
 
     //Log(i:Damage, s:" : ",i:Output);
@@ -139,6 +140,18 @@ Script "GivePlayerEXP" (int Pnum, int EXPAward, int Override)
     ACS_NamedExecuteAlways("GiveEXP",0,EXPAward,Override);
 }
 
+Script "GrabHelperEXP" (int TargPointer)
+{
+int HelperTID = ActivatorTID();
+if(TargPointer!=0){SetActivator(0,TargPointer);}
+else{Terminate;}
+
+if(CheckInventory("HelperEXPItem"))
+    {
+        ACS_NamedExecuteAlways("GivePlayerEXP",0,HelperTID-1000,CheckInventory("HelperEXPItem"));
+        TakeInventory("HelperEXPItem",9999);
+    }
+}
 
 Script "GiveEXP" (int EXPAward, Int Override)
 {

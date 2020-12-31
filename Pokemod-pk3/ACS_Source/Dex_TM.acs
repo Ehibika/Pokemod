@@ -77,7 +77,7 @@
 
 
 
-#LIBDEFINE MAXTMLIST 89
+#LIBDEFINE MAXTMLIST 94
 //#endregion
 
 //#region -=- TM Reference -=-
@@ -135,7 +135,7 @@ int TMList [MAXTMLIST][5] = {
 {WideGuard      ,TMF_NULL           ,TMT_GROUND|TMT_ROCK|TMT_STEEL              ,TMP_2  ,TML_ALL},
 {SafeGuard      ,TMF_NULL           ,TMT_NORMAL|TMT_PSYCHIC|TMT_FAIRY           ,TMP_2  ,TML_ALL},
 {Reflect        ,TMF_NULL           ,TMT_PSYCHIC|TMT_FAIRY                      ,TMP_2  ,TML_ALL},
-{CraftyShield   ,TMF_NULL           ,TMT_PSYCHIC|TMT_FAIRY                      ,TMP_2  ,TML_ALL},
+//{CraftyShield   ,TMF_NULL           ,TMT_PSYCHIC|TMT_FAIRY                      ,TMP_2  ,TML_ALL},
 {LightScreen    ,TMF_NULL           ,TMT_PSYCHIC|TMT_FAIRY                      ,TMP_2  ,TML_ALL},
 {HealPulse      ,TMF_NULL           ,TMT_PSYCHIC|TMT_FAIRY                      ,TMP_2  ,TML_ALL},
 {LifeDew        ,TMF_NULL           ,TMT_WATER|TMT_PSYCHIC|TMT_FAIRY            ,TMP_2  ,TML_ALL},
@@ -146,7 +146,8 @@ int TMList [MAXTMLIST][5] = {
 {BulletSeed     ,TMF_NULL           ,TMT_GRASS|TMT_BUG                          ,TMP_2  ,TML_ALL},
 {Swift          ,TMF_NULL           ,TMT_NORMAL|TMT_PSYCHIC|TMT_FAIRY           ,TMP_2  ,TML_ALL},
 {HeadButt       ,TMF_UNIVERSAL      ,TMT_NORMAL                                 ,TMP_2  ,TML_ALL},
-{IcyWind        ,TMF_NULL           ,TMT_WATER|TMT_ICE                          ,TMP_2  ,TML_LOW},
+{IcyWind        ,TMF_NULL           ,TMT_WATER|TMT_ICE|TMT_FLYING               ,TMP_2  ,TML_LOW},
+{Heatwave       ,TMF_NULL           ,TMT_FIRE|TMT_FLYING                        ,TMP_2  ,TML_LOW},
 {FlameBurst     ,TMF_NULL           ,TMT_FIRE|TMT_DRAGON                        ,TMP_2  ,TML_MID},
 {LavaPlume      ,TMF_NULL           ,TMT_FIRE|TMT_DRAGON                        ,TMP_2  ,TML_MID},
 {WaterPulse     ,TMF_NULL           ,TMT_WATER                                  ,TMP_2  ,TML_MID},
@@ -171,15 +172,18 @@ int TMList [MAXTMLIST][5] = {
 {DarkPulse      ,TMF_NULL           ,TMT_DARK|TMT_GHOST                         ,TMP_4  ,TML_MID2},
 {Dig            ,TMF_NULL           ,TMT_ROCK|TMT_GROUND                        ,TMP_4  ,TML_MID2},
 {Bulldoze       ,TMF_NULL           ,TMT_ROCK|TMT_GROUND|TMT_Steel              ,TMP_4  ,TML_MID2},
+{EarthPower     ,TMF_NULL           ,TMT_ROCK|TMT_GROUND|TMT_Steel|TMT_GRASS    ,TMP_4  ,TML_MID2},
 {IronHead       ,TMF_NULL           ,TMT_ROCK|TMT_GROUND|TMT_Steel              ,TMP_4  ,TML_MID2},
+{PoisonJab      ,TMF_NULL           ,TMT_POISON                                 ,TMP_4  ,TML_MID2},
+{ElectroBall    ,TMF_NULL           ,TMT_ELECTRIC                               ,TMP_4  ,TML_MID2},
+{Psyshock       ,TMF_NULL           ,TMT_PSYCHIC|TMT_FAIRY                      ,TMP_4  ,TML_MID2},
 
 {IceBeam        ,TMF_NULL           ,TMT_WATER|TMT_ICE                          ,TMP_4  ,TML_MID2},
 {Flamethrower   ,TMF_NULL           ,TMT_FIRE|TMT_DRAGON                        ,TMP_4  ,TML_MID2},
 {ThunderBolt    ,TMF_NULL           ,TMT_ELECTRIC                               ,TMP_4  ,TML_MID2},
 {ShadowBall     ,TMF_NULL           ,TMT_GHOST|TMT_PSYCHIC                      ,TMP_4  ,TML_MID2},
 {Toxic          ,TMF_NULL           ,TMT_POISON                                 ,TMP_4  ,TML_ALL},
-{SludgeBomb     ,TMF_NULL           ,TMT_POISON                                 ,TMP_4  ,TML_MID2},
-{Surf           ,TMF_NULL           ,TMT_WATER                                  ,TMP_4  ,TML_MID2},
+{SludgeBomb     ,TMF_NULL           ,TMT_POISON|TMT_GRASS                       ,TMP_4  ,TML_MID2},
 {Waterfall      ,TMF_NULL           ,TMT_WATER                                  ,TMP_4  ,TML_MID2},
 {DragonPulse    ,TMF_NULL           ,TMT_DRAGON                                 ,TMP_4  ,TML_MID2},
 {Dazzlinggleam  ,TMF_NULL           ,TMT_FAIRY|TMT_PSYCHIC                      ,TMP_4  ,TML_ALL},
@@ -188,10 +192,12 @@ int TMList [MAXTMLIST][5] = {
 {HammerArm      ,TMF_NULL           ,TMT_FIGHTING                               ,TMP_4  ,TML_MID2},
 {RockSlide      ,TMF_NULL           ,TMT_ROCK|TMT_GROUND|TMT_Steel              ,TMP_4  ,TML_MID2},
 
+{Fly            ,TMF_NULL           ,TMT_FLYING                                 ,TMP_5  ,TML_HIGH},
+{Surf           ,TMF_NULL           ,TMT_WATER                                  ,TMP_5  ,TML_HIGH},
 {EarthQuake     ,TMF_UNIVERSAL      ,TMT_GROUND|TMT_ROCK|TMT_STEEL              ,TMP_5  ,TML_HIGH},
 {FireBlast      ,TMF_NULL           ,TMT_FIRE|TMT_DRAGON                        ,TMP_5  ,TML_HIGH},
 {SolarBeam      ,TMF_NULL           ,TMT_GRASS|TMT_FIRE                         ,TMP_5  ,TML_HIGH},
-{GigaDrain      ,TMF_NULL           ,TMT_GRASS                                  ,TMP_5  ,TML_HIGH},
+{GigaDrain      ,TMF_NULL           ,TMT_GRASS|TMT_BUG                          ,TMP_5  ,TML_HIGH},
 {Psychic        ,TMF_NULL           ,TMT_PSYCHIC|TMT_GHOST                      ,TMP_5  ,TML_HIGH},
 {Blizzard       ,TMF_NULL           ,TMT_ICE                                    ,TMP_5  ,TML_HIGH},
 {Overheat       ,TMF_NULL           ,TMT_FIRE                                   ,TMP_5  ,TML_HIGH},
@@ -417,7 +423,11 @@ int output = 0;
         case RockPolish: output = TMR_RockPolish(Dexnum); break;    
         case BulkUp: output = TMR_BulkUp(Dexnum); break;    
         case IronHead: output = TMR_IronHead(Dexnum); break;    
-
+        case EarthPower: output = TMR_EarthPower(Dexnum); break;    
+        case PoisonJab: output = TMR_PoisonJab(Dexnum); break;    
+        case GigaDrain: output = TMR_GigaDrain(Dexnum); break;    
+        
+        
         
         
         //case sworddance: output = TMR_sworddance(Dexnum); break; 
@@ -626,6 +636,7 @@ int output = 0;
     }
     if(TMArch_Pugilist(Dexnum)){output = 1;}
     if(TMArch_Generalist(Dexnum)){output = 1;}
+    if(TMDeq_Armless(Dexnum)){output = 0;}
 
     
 return output;
@@ -845,6 +856,11 @@ Function int TMR_ThunderBolt (int Dexnum)
     case GALLADE: output = 1; break;
     case STARYU: output = 1; break;
     case STARMIE: output = 1; break;
+    case GASTLY: output = 1; break;
+    case HAUNTER: output = 1; break;
+    case GENGAR: output = 1; break;
+    case GYARADOS: output = 1; break;
+
     }
     if(TMArch_Generalist(Dexnum)){output = 1;}
 return output;
@@ -871,6 +887,10 @@ Function int TMR_Thunder (int Dexnum)
     case SOLOSIS: output = 1; break;
     case DUOSION: output = 1; break;
     case REUNICLUS: output = 1; break;
+    case GASTLY: output = 1; break;
+    case HAUNTER: output = 1; break;
+    case GENGAR: output = 1; break;
+    case GYARADOS: output = 1; break;
     }
     if(TMArch_Generalist(Dexnum)){output = 1;}
 return output;
@@ -942,6 +962,9 @@ Function int TMR_Flamethrower (int Dexnum)
         case GEODUDE_A: output = 1; break;
         case GRAVELER_A: output = 1; break;
         case GOLEM_A: output = 1; break;
+        case STUNKY: output = 1; break;
+        case SKUNTANK: output = 1; break;
+
     }
 
     if(TMArch_Draconic(Dexnum)){output = 1;}
@@ -950,7 +973,6 @@ Function int TMR_Flamethrower (int Dexnum)
 return output;
 }
 //#endregion
-
 
 //#region -=- TM Rules : FireBlast -=-
 Function int TMR_FireBlast (int Dexnum) 
@@ -967,6 +989,8 @@ Function int TMR_FireBlast (int Dexnum)
         case GEODUDE_A: output = 1; break;
         case GRAVELER_A: output = 1; break;
         case GOLEM_A: output = 1; break;
+        case STUNKY: output = 1; break;
+        case SKUNTANK: output = 1; break;
     }
 
     if(TMArch_Draconic(Dexnum)){output = 1;}
@@ -1169,6 +1193,24 @@ int output = 0;
     case ARCANINE: output = 1; break;
     }
     if(TMArch_Pugilist(Dexnum)){output = 1;}
+    if(TMDeq_Armless(Dexnum)){output = 0;}
+    
+return output;
+}
+//#endregion
+
+//#region -=- TM Rules : PoisonJab -=-
+Function int TMR_PoisonJab (int Dexnum) 
+{
+
+int output = 0;
+    Switch (Dexnum)
+    {
+    case GROWLITHE: output = 1; break;
+    case ARCANINE: output = 1; break;
+    }
+    if(TMArch_Pugilist(Dexnum)){output = 1;}
+    if(TMArch_Sharp(Dexnum)){output = 1;}
     
 return output;
 }
@@ -1254,6 +1296,24 @@ Function int TMR_Bulldoze (int Dexnum)
 int output = 0;
     Switch (Dexnum)
     {
+    }
+    if(TMArch_Terrestrial(Dexnum)){output = 1;}
+
+return output;
+}
+//#endregion
+
+//#region -=- TM Rules : EarthPower -=-
+Function int TMR_EarthPower (int Dexnum) 
+{
+
+int output = 0;
+    Switch (Dexnum)
+    {
+        case DEINO: output = 1; break;
+        case ZWEILOUS: output = 1; break;
+        case HYDREIGON: output = 1; break;
+
     }
     if(TMArch_Terrestrial(Dexnum)){output = 1;}
 
@@ -1401,7 +1461,7 @@ return output;
 }
 //#endregion
 
-//#region -=- TM IronHead : BulkUp -=-
+//#region -=- TM Rules : BulkUp -=-
 Function int TMR_IronHead (int Dexnum) 
 {
 
@@ -1418,6 +1478,40 @@ int output = 0;
 return output;
 }
 //#endregion
+
+//#region -=- TM Rules : GigaDrain -=-
+Function int TMR_GigaDrain (int Dexnum) 
+{
+
+int output = 0;
+    Switch (Dexnum)
+    {
+        case EKANS: output = 1; break;
+        case ARBOK: output = 1; break;
+        case TENTACOOL: output = 1; break;
+        case TENTACRUEL: output = 1; break;
+        case GASTLY: output = 1; break;
+        case HAUNTER: output = 1; break;
+        case GENGAR: output = 1; break;
+        case TRAPINCH: output = 1; break;
+        case VIBRAVA: output = 1; break;
+        case FLYGON: output = 1; break;
+        case GULPIN: output = 1; break;
+        case SWALOT: output = 1; break;
+        case ZANGOOSE: output = 1; break;
+        case SEVIPER: output = 1; break;
+        case TENTACRUEL: output = 1; break;
+        case TENTACRUEL: output = 1; break;
+        case TENTACRUEL: output = 1; break;
+
+    }
+    
+
+return output;
+}
+//#endregion
+
+
 //======
 
 //#region -=- TM Archetype : Draconic
@@ -1446,6 +1540,7 @@ int output = 0;
             case SEVIPER: output = 1; break;
             case EKANS: output = 1; break;
             case ARBOK: output = 1; break;
+            case GYARADOS: output = 1; break;
         }
 return output;
 }
@@ -1526,6 +1621,7 @@ int output = 0;
             case SWALOT: output = 1; break;
             case HAUNTER: output = 1; break;
             case GENGAR: output = 1; break;
+            case TANGROWTH: output = 1; break;
         }
 return output;
 }
@@ -1625,7 +1721,7 @@ return output;
 }
 //#endregion 
 
-//#region -=- Archetype : Terrestrial
+//#region -=- TM Archetype : Terrestrial
 Function int TMArch_Terrestrial (int Dexnum)
 {
 int output = 0;
@@ -1656,6 +1752,115 @@ int output = 0;
             case SEVIPER: output = 1; break;
             case EKANS: output = 1; break;
             case ARBOK: output = 1; break;
+        }
+return output;
+}
+//#endregion 
+
+//#region -=- TM Archetype : Sharp
+Function int TMArch_Sharp (int Dexnum)
+{
+int output = 0;
+    /* Sharp archetype involves pokemon that possess horns or spikes of some kind, and can perform
+     * Jabbing moves
+
+    */
+    Switch (Dexnum)
+        {
+            case CLOYSTER: output = 1; break;
+            case QWILFISH: output = 1; break;
+            case JOLTIK: output = 1; break;
+            case GALVANTULA: output = 1; break;
+        }
+return output;
+}
+//#endregion 
+
+//======
+
+//#region -=- TM Dequalifier : Armless
+Function int TMDeq_Armless (int Dexnum)
+{
+int output = 0;
+    /* acts as the antithesis to the pugilist archetype, and prevents armless pokemon from learning punching moves.
+
+    */
+    Switch (Dexnum)
+        {
+            case BULBASAUR: output = 1; break;
+            case IVYSAUR: output = 1; break;
+            case VENUSAUR: output = 1; break;
+            case HORSEA: output = 1; break;
+            case SEADRA: output = 1; break;
+            case KINGDRA: output = 1; break;
+            case STARYU: output = 1; break;
+            case STARMIE: output = 1; break;
+            case CHIKORITA: output = 1; break;
+            case BAYLEEF: output = 1; break;
+            case MEGANIUM: output = 1; break;
+            case MUDKIP: output = 1; break;
+            case DREEPY: output = 1; break;
+            case DRAKLOAK: output = 1; break;
+            case DRAGAPULT: output = 1; break;
+            case VULPIX: output = 1; break;
+            case NINETALES: output = 1; break;
+            case VULPIX_A: output = 1; break;
+            case NINETALES_A: output = 1; break;
+            case SWINUB: output = 1; break;
+            case PILOSWINE: output = 1; break;
+            case MAMOSWINE: output = 1; break;
+            case BAGON: output = 1; break;
+            case SHELGON: output = 1; break;
+            case SALAMENCE: output = 1; break;
+            case EXEGGCUTE: output = 1; break;
+            case EXEGGUTOR: output = 1; break;
+            case TORKOAL: output = 1; break;
+            case SLUGMA: output = 1; break;
+            case MAGCARGO: output = 1; break;
+            case FERROSEED: output = 1; break;
+            case CHERUBI: output = 1; break;
+            case CHERRIM_O: output = 1; break;
+            case CHERRIM_S: output = 1; break;
+            case GROWLITHE: output = 1; break;
+            case ARCANINE: output = 1; break;
+            case DEINO: output = 1; break;
+            case ZWEILOUS: output = 1; break;
+            case HYDREIGON: output = 1; break;
+            case SOLOSIS: output = 1; break;
+            case DUOSION: output = 1; break;
+            case ONIX: output = 1; break;
+            case STEELIX: output = 1; break;
+            case SCYTHER: output = 1; break;
+            case SEVIPER: output = 1; break;
+            case BELDUM: output = 1; break;
+            case BERGMITE: output = 1; break;
+            case AVALUGG: output = 1; break;
+            case EKANS: output = 1; break;
+            case ARBOK: output = 1; break;
+            case GASTLY: output = 1; break;
+            case TENTACOOL: output = 1; break;
+            case TENTACRUEL: output = 1; break;
+            case MAGIKARP: output = 1; break;
+            case GYARADOS: output = 1; break;
+            case QWILFISH: output = 1; break;
+            case SKARMORY: output = 1; break;
+            case LARVESTA: output = 1; break;
+            case VOLCARONA: output = 1; break;
+            case MANTYKE: output = 1; break;
+            case MANTINE: output = 1; break;
+            case TRAPINCH: output = 1; break;
+            case VIBRAVA: output = 1; break;
+            case SEEDOT: output = 1; break;
+            case MAGNEMITE: output = 1; break;
+            case MAGNETON: output = 1; break;
+            case MAGNEZONE: output = 1; break;
+            case MURKROW: output = 1; break;
+            case HONCHKROW: output = 1; break;
+            case MAREEP: output = 1; break;
+            case SHELLDER: output = 1; break;
+            case CLOYSTER: output = 1; break;
+            case JOLTIK: output = 1; break;
+            case GALVANTULA: output = 1; break;
         }
 return output;
 }

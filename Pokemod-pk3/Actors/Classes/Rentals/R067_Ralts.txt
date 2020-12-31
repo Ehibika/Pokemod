@@ -1,0 +1,90 @@
+
+/*
+[+]===================================[+]
+
+[+]===================================[+]
+*/
+
+Actor R_Ralts : ClassBaseRentals 
+{
+Player.DisplayName "Ralts"
+Player.SoundClass "Ralts"
++NOSKIN
+
+Player.StartItem "PKMNRentalKit"
+//============|
+Player.StartItem "RaltsRentalSetupItem"
+//============|
+Player.StartItem "Base_HP", 28
+Player.StartItem "Base_PAttack", 25
+Player.StartItem "Base_PDefense", 25
+Player.StartItem "Base_SAttack", 45
+Player.StartItem "Base_SDefense", 35
+
+//============|
+
+States
+{
+Spawn: 
+P067 A 0
+P067 B 1 
+P067 A 1
+GoTo Spawn+2
+See:
+P067 BCDE 5
+GoTo Spawn+1
+Missile:
+P067 A 0 A_JumpIfInventory("ConshotTimer",1,"Missile2")
+P067 F 5 
+P067 G 4
+GoTo Spawn+2
+Missile2:
+P067 G 9
+GoTo Spawn+2
+
+PainFix:
+P067 H 0 
+GoTo PainFrames
+}
+}
+
+actor RaltsRentalMoves : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_JumpIf(CallACS("RentalBotCheck") == 1,"BotWep")
+
+TNT1 A 0 A_GiveInventory("ConfusionMove1")
+TNT1 A 0 A_GiveInventory("WishMove2")
+TNT1 A 0 A_GiveInventory("CraftyShieldMove3")
+TNT1 A 0 A_GiveInventory("BarrierMove4")
+stop
+
+BotWep:
+TNT1 A 0 A_GiveInventory("ConfusionMove1")
+stop
+}
+}
+
+actor RaltsRentalSetupItem : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 ACS_NamedExecuteAlways("PKMN_RentalsSetup",0,Dex_Ralts)
+stop
+}
+}

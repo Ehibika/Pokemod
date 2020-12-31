@@ -484,6 +484,7 @@ TNT1 A 0 A_GiveInventory("ItemShopStartItem",1)
 TNT1 A 0 A_GiveInventory("MoveShiftStartItem",1)
 TNT1 A 0 A_GiveInventory("PlayerStatusItem",1)
 TNT1 A 0 A_GiveInventory("ShopGuardItem",1)
+TNT1 A 0 A_GiveInventory("UnstuckItem",1)
 
 TNT1 A 0 A_GiveInventory("PPRecovery",1)
 
@@ -501,6 +502,7 @@ TNT1 A 0 A_GiveInventory("MoveTutorStartItem",1)
 TNT1 A 0 A_GiveInventory("MoveShiftStartItem",1)
 TNT1 A 0 A_GiveInventory("PlayerStatusItem",1)
 TNT1 A 0 A_GiveInventory("ShopGuardItem",1)
+TNT1 A 0 A_GiveInventory("UnstuckItem",1)
 
 TNT1 A 0 A_GiveInventory("PPRecovery",1)
 
@@ -765,6 +767,34 @@ fail
 }
 }
 
+actor UnstuckCooldown : Powerup {inventory.amount 1 Powerup.Duration -180}
+
+actor UnstuckItem : CustomInventory
+{
+inventory.amount 1
+inventory.maxamount 1
+inventory.pickupmessage "Unstuck"
+Tag "Unstuck"
+Inventory.PickupSound "item/1up"
+scale 2.0
+states
+{
+Spawn:
+WEAP X 1
+loop
+Use:
+TNT1 A 0
+TNT1 A 0 A_JumpIfInventory("UnstuckCooldown",1,"Nope")
+TNT1 A 0 A_GiveInventory("InMenu",0)
+TNT1 A 0 A_GiveInventory("UnstuckCooldown",0)
+TNT1 A 0 SetPlayerProperty(0, 0, 0)
+TNT1 A 0 SetPlayerProperty(0, 0, 4)
+fail
+Nope:
+TNT1 A 0 ACS_NamedExecuteAlways("UnstuckFailMessage",0)
+fail
+}
+}
 
 actor PKMN_WhiteFlagDropper : CustomInventory
 {
@@ -782,6 +812,26 @@ TNT1 A 0 A_JumpIf(CallACS("HasFlagBall") == 1,"DropFlag")
 stop
 DropFlag:
 SCRW A 1 ACS_NamedExecuteAlways("FlagFumble",0)
+stop
+}
+}
+
+actor PKMN_WhiteFlagThrower : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0
+TNT1 A 0 A_JumpIf(CallACS("HasFlagBall") == 1,"DropFlag")
+stop
+DropFlag:
+SCRW A 1 ACS_NamedExecuteAlways("FlagToss",0)
 stop
 }
 }

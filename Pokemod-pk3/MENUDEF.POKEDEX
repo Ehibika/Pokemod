@@ -6514,6 +6514,329 @@ OptionMenu "MoveMenu_AcidSpray"
     StaticText ""
     StaticText"===============================================================",1
 } 
+OptionMenu "MoveMenu_StringShot"
+{
+    
+    Title "$M278_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M278_TYPE"
+    StaticText "$M278_CATEGORY"
+    StaticText "$M2784_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M278_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+} 
+OptionMenu "MoveMenu_Splash"
+{
+    
+    Title "$M279_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M279_TYPE"
+    StaticText "$M279_CATEGORY"
+    StaticText "$M2794_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M279_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+} 
+OptionMenu "MoveMenu_PoisonSting"
+{
+    
+    Title "$M280_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M280_TYPE"
+    StaticText "$M280_CATEGORY"
+    StaticText "$M2804_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M280_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+} 
+OptionMenu "MoveMenu_ElectroWeb"
+{
+    
+    Title "$M281_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M281_TYPE"
+    StaticText "$M281_CATEGORY"
+    StaticText "$M2814_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M281_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+} 
+OptionMenu "MoveMenu_ElectroBall"
+{
+    
+    Title "$M282_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M282_TYPE"
+    StaticText "$M282_CATEGORY"
+    StaticText "$M2824_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M282_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+} 
+OptionMenu "MoveMenu_Discharge"
+{
+    
+    Title "$M283_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M283_TYPE"
+    StaticText "$M283_CATEGORY"
+    StaticText "$M2834_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M283_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+} 
+OptionMenu "MoveMenu_BugBite"
+{
+    
+    Title "$M284_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M284_TYPE"
+    StaticText "$M284_CATEGORY"
+    StaticText "$M2844_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M284_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+} 
+OptionMenu "MoveMenu_Pluck"
+{
+    
+    Title "$M285_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M285_TYPE"
+    StaticText "$M285_CATEGORY"
+    StaticText "$M2854_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M285_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+} 
+OptionMenu "MoveMenu_AirCutter"
+{
+    
+    Title "$M286_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M286_TYPE"
+    StaticText "$M286_CATEGORY"
+    StaticText "$M2864_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M286_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+} 
+OptionMenu "MoveMenu_Gust"
+{
+    
+    Title "$M287_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M287_TYPE"
+    StaticText "$M287_CATEGORY"
+    StaticText "$M2874_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M287_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+} 
+OptionMenu "MoveMenu_Fly"
+{
+    
+    Title "$M288_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M288_TYPE"
+    StaticText "$M288_CATEGORY"
+    StaticText "$M2884_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M288_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+} 
+OptionMenu "MoveMenu_ElectroLevitate"
+{
+    
+    Title "$M289_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M289_TYPE"
+    StaticText "$M289_CATEGORY"
+    StaticText "$M2894_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M289_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+} 
+OptionMenu "MoveMenu_BugBuzz"
+{
+    
+    Title "$M290_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M290_TYPE"
+    StaticText "$M290_CATEGORY"
+    StaticText "$M2904_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M290_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+} 
+OptionMenu "MoveMenu_SilverWind"
+{
+    
+    Title "$M291_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M291_TYPE"
+    StaticText "$M291_CATEGORY"
+    StaticText "$M2914_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M291_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+} 
+OptionMenu "MoveMenu_QuiverDance"
+{
+    
+    Title "$M292_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M292_TYPE"
+    StaticText "$M292_CATEGORY"
+    StaticText "$M2924_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M292_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+} 
+OptionMenu "MoveMenu_PoisonJab"
+{
+    
+    Title "$M293_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M293_TYPE"
+    StaticText "$M293_CATEGORY"
+    StaticText "$M2934_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M293_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+} 
+OptionMenu "MoveMenu_EarthPower"
+{
+    
+    Title "$M294_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M294_TYPE"
+    StaticText "$M294_CATEGORY"
+    StaticText "$M2944_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M294_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+} 
+OptionMenu "MoveMenu_PinMissile"
+{
+    
+    Title "$M295_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M295_TYPE"
+    StaticText "$M295_CATEGORY"
+    StaticText "$M2954_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M295_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+} 
+OptionMenu "MoveMenu_FaintAttack"
+{
+    
+    Title "$M296_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M296_TYPE"
+    StaticText "$M296_CATEGORY"
+    StaticText "$M2964_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M296_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+} 
 //--[NewMove]--
 
 OptionMenu "MoveMenu_Sketch"

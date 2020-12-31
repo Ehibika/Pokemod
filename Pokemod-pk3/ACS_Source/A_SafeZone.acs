@@ -24,6 +24,11 @@ Script "SafeZone_Enter" ENTER
     if(GetGameModeState() == 1){GiveInventory("SpawnSafeZone",1);}
     Terminate;
     }
+    if(GetCvar("Game_Arena")==1 && GetCvar("Game_GameState")!=0)
+    {
+    GiveInventory("SpawnSafeZone",1);
+    Terminate;
+    }
     if(PlayerIsBot(pln)) Terminate;
 
     
@@ -58,7 +63,7 @@ Script "EscapeToSpawn" (void)
 
 
 
-    if(GetCvar("lastmanstanding")==1||GetCvar("teamlms")==1)
+    if(GetCvar("lastmanstanding")==1||GetCvar("teamlms")==1 ) //&& mode>0
     {
     if(GetGameModeState() == 2){GiveInventory("TLMSOrbEscape",1);}
     ACS_Execute(979,0);
@@ -86,4 +91,20 @@ script "pkmn_isMySafezone" (void)
 	{
 		SetResultValue(0);
 	}
+}
+
+Script "PKMN_CheckHealStation" (int Team)
+{
+
+int Name;
+
+Switch(Team)
+    {
+        Case 0: Name = "MegaBlueFlag_TeamHealZone"; break;
+        Case 1: Name = "MegaRedFlag_TeamHealZone"; break;
+    }
+
+
+SetResultValue(ThingCountName(Name,0));
+
 }

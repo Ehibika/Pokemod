@@ -204,6 +204,7 @@ Script "StatItemNuke" (int ItemType)
         {
             if(CheckInventory("ReflectPower"))TakeInventory("ReflectPower",999);
             if(CheckInventory("LightScreenPower"))TakeInventory("LightScreenPower",999);
+            if(CheckInventory("CraftyShieldPower"))TakeInventory("CraftyShieldPower",999);
             if(CheckInventory("MistFlag"))TakeInventory("MistFlag",999);
         }
 
@@ -243,13 +244,17 @@ Int PlayeLVL = GetPokeValue(POKELEVEL);
 
 
 ModStat = StatModifier(CheckInventory("Active_PAttack"),PATK_ID);
-if(ModStat >= STATBASELINE)
+if(ModStat >= ATKSTATBASELINE2)
     {
-    StatValue = ValueMap(ModStat,STATMAX,STATBASELINE,ATKVAL3,ATKVAL2);
+    StatValue = ValueMap(ModStat,STATMAX,ATKSTATBASELINE2,ATKVAL4,ATKVAL3);
+    }
+else if(ModStat >= ATKSTATBASELINE1)
+    {
+    StatValue = ValueMap(ModStat,STATMAX,ATKSTATBASELINE1,ATKVAL3,ATKVAL2);
     }
 else
     {
-    StatValue = Noneg(ValueMap(ModStat,STATBASELINE,STATMIN,ATKVAL2,ATKVAL1));    
+    StatValue = Noneg(ValueMap(ModStat,ATKSTATBASELINE1,STATMIN,ATKVAL2,ATKVAL1));    
     }
 if(StatValue < 10){StatValue = 10;}
 if(StatValue>1000){StatValue=1000;}
@@ -257,13 +262,17 @@ GiveInventory(StrParam(s:"PATK",i:StatValue),1);
 
 ModStat = StatModifier(CheckInventory("Active_SAttack"),SATK_ID);
 
-if(ModStat >= STATBASELINE)
+if(ModStat >= ATKSTATBASELINE2)
     {
-    StatValue = ValueMap(ModStat,STATMAX,STATBASELINE,ATKVAL3,ATKVAL2);
+    StatValue = ValueMap(ModStat,STATMAX,ATKSTATBASELINE2,ATKVAL4,ATKVAL3);
+    }
+else if(ModStat >= ATKSTATBASELINE1)
+    {
+    StatValue = ValueMap(ModStat,STATMAX,ATKSTATBASELINE1,ATKVAL3,ATKVAL2);
     }
 else
     {
-    StatValue = Noneg(ValueMap(ModStat,STATBASELINE,STATMIN,ATKVAL2,ATKVAL1));    
+    StatValue = Noneg(ValueMap(ModStat,ATKSTATBASELINE1,STATMIN,ATKVAL2,ATKVAL1));    
     }
 if(StatValue < 10){StatValue = 10;}
 if(StatValue>1000){StatValue=1000;}
@@ -284,13 +293,17 @@ ranges of 80 and 1.
 
 ModStat = StatModifier(CheckInventory("Active_PDefense"),PDEF_ID);
 
-if(ModStat >= STATBASELINE2)
+if(ModStat >= DEFSTATBASELINE2)
     {
-    StatValue = Noneg(ValueMap(ModStat,STATMAX,STATBASELINE2,DEFVAL1,DEFVAL2));
+    StatValue = Noneg(ValueMap(ModStat,STATMAX,DEFSTATBASELINE2,DEFVAL1,DEFVAL2));
+    }
+else if(ModStat >= DEFSTATBASELINE1)
+    {
+    StatValue = Noneg(ValueMap(ModStat,DEFSTATBASELINE2,DEFSTATBASELINE1,DEFVAL2,DEFVAL3));
     }
 else
     {
-    StatValue = Noneg(ValueMap(ModStat,STATBASELINE2,STATMIN,DEFVAL2,DEFVAL3));    
+    StatValue = Noneg(ValueMap(ModStat,DEFSTATBASELINE1,STATMIN,DEFVAL3,DEFVAL4));    
     }
 if(StatValue < 10){StatValue = 10;}
 if(StatValue>1000){StatValue=1000;}
@@ -298,13 +311,17 @@ GiveInventory(StrParam(s:"PDEF",i:StatValue),1);
 
 ModStat = StatModifier(CheckInventory("Active_SDefense"),SDEF_ID);
 
-if(ModStat >= STATBASELINE2)
+if(ModStat >= DEFSTATBASELINE2)
     {
-    StatValue = Noneg(ValueMap(ModStat,STATMAX,STATBASELINE2,DEFVAL1,DEFVAL2));
+    StatValue = Noneg(ValueMap(ModStat,STATMAX,DEFSTATBASELINE2,DEFVAL1,DEFVAL2));
     }
-    else
+else if(ModStat >= DEFSTATBASELINE1)
     {
-    StatValue = Noneg(ValueMap(ModStat,STATBASELINE2,STATMIN,DEFVAL2,DEFVAL3));    
+    StatValue = Noneg(ValueMap(ModStat,DEFSTATBASELINE2,DEFSTATBASELINE1,DEFVAL2,DEFVAL3));
+    }
+else
+    {
+    StatValue = Noneg(ValueMap(ModStat,DEFSTATBASELINE1,STATMIN,DEFVAL3,DEFVAL4));    
     }
 if(StatValue < 10){StatValue = 10;}
 if(StatValue>1000){StatValue=1000;}
@@ -326,11 +343,11 @@ If (Mode == 0)
         StatValue = ValueMap(CheckInventory("Active_HP"),STATBASELINE3,STATMIN,HPVAL2,HPVAL1);
         }
     if(StatValue < 50){StatValue = 50;}
-    if(StatValue>999){StatValue=999;}
+    //if(StatValue>999){StatValue=999;}
     SetActorPRoperty(0,APROP_SPAWNHEALTH,StatValue);
     //if(GetActorProperty(0,APROP_HEALTH) > GetActorProperty(0,APROP_SPAWNHEALTH)){SetActorPRoperty(0,APROP_HEALTH,StatValue);}
     if(HPHeal){SetActorPRoperty(0,APROP_HEALTH,StatValue);}
-    TakeInventory("SBAR_HP",999);
+    TakeInventory("SBAR_HP",9999);
     GiveInventory("SBAR_HP",StatValue);
     }
 
@@ -391,6 +408,7 @@ SpeedTier += ModCount;
     Case 10: Output = SPEEDTIER_10; break;
     }
 //log(s:"SpeedTier: ",i:SpeedTier, s:" Speed: ",f:Output);
+PlayerSpeedTiers[PlayerNumber()] = SpeedTier;
 Return Output;
 
 }

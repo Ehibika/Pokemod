@@ -72,7 +72,7 @@ Goto Ready
 //[+]========================================================================[+]
 actor LightScreenPP : Ammo {inventory.amount 1 inventory.Maxamount 10}
 
-actor LightScreenPower : SDef { damagefactor "Normal", 0.5 powerup.Duration -15}
+actor LightScreenPower : SDef { damagefactor "Normal", 0.8 powerup.Duration -15}
 
 Const int LightScreenRad = 1000;
 Const int LightScreen_Item = 11;
@@ -197,7 +197,7 @@ TNT1 A 1
 TNT1 A 0 //A_PlaySoundEx("support/LightScreen","SoundSlot7")
 TNT1 A 0 ACS_NamedExecuteAlways("PKMNACS_RadiusGive",0,LightScreen_Item,LightScreenRad,RG_TEAM|RG_SELF)
 Spawn2:
-TNT1 AAAA 0 A_SpawnItemEx("AquaRingSparkle", LightScreenRad, 0, -(z-floorz)+24, 0, 0, 0, Random(0,360), 1061)
+TNT1 A 0 A_SpawnItemEx("AquaRingSparkle", LightScreenRad, 0, -(z-floorz)+24, 0, 0, 0, Random(0,360), 1061)
 TNT1 A 5 A_CountDown
 loop 
 

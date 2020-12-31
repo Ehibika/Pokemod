@@ -1,0 +1,322 @@
+actor DischargeMove : WepMasterBase
+{
+Tag "Discharge"
+obituary "$OB_DISCHARGE"
+Weapon.AmmoUse 1
+Weapon.AmmoGive 10
+weapon.ammotype "DischargePP"
+scale 2.0
+Inventory.Pickupmessage "$PU_MEGABUSTER"
+States
+{
+Spawn:
+WEAP X 1
+stop
+
+
+Fire:
+"####" BBB 1 A_Jumpif(CallACS("CheckWeaponFire",RC_B)==1,"Fire.Begin")
+"####" B 0 A_Jump(256,"NoAmmo")
+Goto NoAmmo
+
+Fire.Begin:
+"####" B 0
+"####" B 0 
+Goto Fire.Quake
+
+Fire.Quake:
+//"####" A 0 A_GiveInventory("DashSet_B")
+"####" B 0 A_PlaySoundEx("Move/Discharge","Weapon")
+
+"####" B 0 A_SpawnItemEX("DischargeWarper")
+"####" BBBBB 2 A_PlaySoundEx("weapon/electricshockSpark","Weapon")
+"####" B 0 A_PlaySoundEx("weapon/electricshock","Weapon")
+"####" B 0 A_FireCustomMissile("DischargeExplosion",0,1,0,0)
+"####" B 0 A_Jump(256,"Fire.After")
+Goto Fire.After
+
+Fire.After:
+"####" B 1 A_GiveInventory("FullRecovery_B")
+"####" A 0 A_GiveInventory("DashSetOff")
+"####" C 0 A_REfire("Fire")
+"####" B 0 A_Jump(256,"Fire.End")
+Goto Fire.End
+
+
+
+
+
+}
+}
+
+actor DischargeMove1 : DischargeMove {Weapon.SlotNumber 1}
+actor DischargeMove2 : DischargeMove {Weapon.SlotNumber 2}
+actor DischargeMove3 : DischargeMove {Weapon.SlotNumber 3}
+actor DischargeMove4 : DischargeMove {Weapon.SlotNumber 4}
+
+actor DischargeMove5 : DischargeMove 
+{
+Weapon.SlotNumber 5
+States
+{
+Fire.End:
+TNT1 A 0
+TNT1 A 0 A_TakeInventory("DischargeMove5",9)
+TNT1 A 0 A_Jump(256,"Ready")
+Goto Ready
+}
+}
+
+//[+]========================================================================[+]
+//-----------------------------|Ammo & Inventory|------------------------------
+//[+]========================================================================[+]
+actor DischargePP : Ammo {inventory.amount 1 inventory.Maxamount 10}
+
+Actor DischargeProtect : powerprotection
+{
+Powerup.duration 17
+Damagefactor "Discharge", 0
+}
+
+actor DischargeParaChance : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_Jump(124,"Paralyse")
+stop
+Paralyse:
+TNT1 A 0 A_GiveInventory("Zap_ParalysisStatusProc2")
+stop
+
+Nope:
+TNT1 A 0
+stop
+}
+}
+
+//[+]========================================================================[+]
+//--------------------------------|Projectiles |--------------------------------
+//[+]========================================================================[+]
+actor DischargeExplosion : BasicExplosion
+{
+translation "202:202=210:210"//90
+Damagetype "Discharge"
+Obituary "$OB_DISCHARGE"
+scale 2.5
+Var int user_angle;
+Reactiontime 20
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+TNT1 A 1 
+goto Spawnloop
+SpawnLoop:
+TNT1 A 0 A_SpawnItemEx("Discharge_WaveTrail",20,0,16,25,0,0,user_angle,1)
+TNT1 A 0 A_SpawnItemEx("Discharge_WaveTrail",20,0,16,20,0,0,user_angle+16,1)
+TNT1 A 0 A_SetUserVar("user_angle",user_angle+36)
+TNT1 A 0 A_CountDown
+TNT1 A 1 A_Jump(256,"SpawnLoop")
+Loop
+Death:
+TNT1 A 0 //A_PlaySoundEX("wep_L/commandowave","Body")
+TNT1 A 0 //A_PlaySoundEx("weapon/napalm","Weapon")
+TNT1 A 17 
+//TN_B EFGHIJKLMNOPQRS 1
+stop
+}
+}
+
+actor Discharge_WaveTrail : BasicProjectile
+{
+Damagetype "Discharge"
+Obituary "$OB_DISCHARGE"
++DONTBLAST
++DONTREFLECT
++RIPPER
+//+FLOORHUGGER
++STEPMISSILE
++NOEXPLODEFLOOR
+maxstepheight 16
+gravity 5.0
+Damage (0)
+Radius 20
+Height 12
+Speed 50
+ReactionTime 5
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+Spawn2:
+TNT1 A 2 A_SpawnItemEX("Discharge_WaveFX",0,0,0,0,0,0,0,1)
+TNT1 A 1 A_SpawnItemEx("Discharge_Damager",0,0,0,0,0,0,0,1)
+TNT1 A 0 
+TNT1 A 0 A_CountDown
+loop
+}
+}
+
+
+actor Discharge_Damager : BasicProjectile
+{
+Damagetype "Discharge"
+Obituary "$OB_DISCHARGE"
++DONTBLAST
++DONTREFLECT
++THRUGHOST
++RIPPER
+Radius 20
+Height 26
+Damage (0)
+Speed 0
+Scale 2.5
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+TNT1 A 1
+TNT1 A 1 A_Explode(MBP_Discharge,64,0,0,64)
+Goto Death
+Death:
+TNT1 A 0 
+stop
+}
+}
+
+actor Discharge_WaveFX : BasicClientside
+{
+Scale 2.5
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_GiveInventory("ProjectileCodeSyncTarget",1)
+TNT1 A 0 A_SpawnItemEX("Discharge_Particle",0,0,0,0,0,0,0,1)
+//TNT1 A 0 A_SpawnItemEX("Discharge_Particle2",Random2(32),Random2(32),Random2(32),0,0,0,0,1)
+TNT1 A 1
+stop
+}
+}
+
+
+actor Discharge_Particle : BasicClientside
+{
+Scale 2.5
+Alpha 1.0
+Renderstyle "Add"
+ReactionTime 17
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_GiveInventory("ProjectileCodeSyncTarget",1)
+TNT1 A 0 A_SetScale(Frandom(1.5,2.5))
+TNT1 A 0 A_Jump(256,"Spawn1","Spawn2","Spawn3")
+
+Spawn1:
+FX06 A 2 
+stop
+
+Spawn2:
+FX06 B 2 
+stop
+
+Spawn3:
+FX06 C 2 
+stop
+/*
+SpawnLoop:
+FX06 AA 1 A_Fadeout(0.4)
+FX06 A 0 A_CountDown
+FX06 BB 1 A_Fadeout(0.4)
+FX06 B 0 A_CountDown
+FX06 CC 1 A_Fadeout(0.4)
+FX06 C 0 A_CountDown
+loop
+*/
+}
+}
+
+actor Discharge_Particle2 : BasicClientside
+{
+Scale 2.5
+Alpha 1.0
+Renderstyle "Add"
+ReactionTime 17
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_GiveInventory("ProjectileCodeSyncTarget",1)
+TNT1 A 0 A_Jump(256,"Spawn1","Spawn2","Spawn3")
+Goto SpawnLoop
+
+Spawn1:
+DSCP A 1 
+Goto SpawnLoop
+
+Spawn2:
+DSCP B 1 
+Goto SpawnLoop
+
+Spawn3:
+DSCP C 1 
+Goto SpawnLoop
+
+SpawnLoop:
+"####" "#" 1 
+"####" "#" 0 A_Fadeout(0.4)
+"####" "#" 0 A_CountDown
+loop
+}
+}
+
+
+actor DischargeWarper : BasicClientside
+{
++FORCEXYBILLBOARD
+Renderstyle "Add"
+ReactionTime 15
+Alpha 0.6
+Scale 2.0
+states
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+DSCH AABBAABBAABB 1 A_Warp(AAPTR_TARGET,0,0,16,0,72)
+Spawn2:
+DSCH A 1 A_Warp(AAPTR_TARGET,0,0,16,0,72)
+TNT1 A 0 A_SetScale(Scalex+0.3)
+TNT1 A 0 A_Fadeout
+TNT1 A 0 A_CountDown
+DSCH A 1 A_Warp(AAPTR_TARGET,0,0,16,0,72)
+TNT1 A 0 A_SetScale(Scalex+0.3)
+TNT1 A 0 A_Fadeout
+TNT1 A 0 A_CountDown
+
+DSCH B 1 A_Warp(AAPTR_TARGET,0,0,16,0,72)
+TNT1 A 0 A_SetScale(Scalex+0.3)
+TNT1 A 0 A_Fadeout
+TNT1 A 0 A_CountDown
+DSCH B 1 A_Warp(AAPTR_TARGET,0,0,16,0,72)
+TNT1 A 0 A_SetScale(Scalex+0.3)
+TNT1 A 0 A_Fadeout
+TNT1 A 0 A_CountDown
+loop
+Death:
+TNT1 A 0
+stop
+}
+}

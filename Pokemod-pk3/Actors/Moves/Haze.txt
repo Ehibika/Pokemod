@@ -26,14 +26,14 @@ Fire.Begin:
 Goto Fire.Aim
 
 Fire.Aim:
-"####" B 1 A_FireCustomMissile("HazeAimPath",0,0,0,0,0,Aim_ArcOverHead+(Aim_ArcScale*Sin(-pitch)))
+"####" B 1 A_FireCustomMissile("HazeRingSpawner",0,0,0,Aim_OverHead)
 "####" C 0 A_REfire("Fire.Aim")
 "####" B 0 A_Jump(256,"Fire.Bullet")
 Goto Fire.Bullet
 
 Fire.Bullet:
-"####" B 0 A_PlaySoundEx("weapon/GrenadeLauncher","Weapon")
-"####" B 0 A_FireCustomMissile("HazeShot",0,1,0,0,0,Aim_ArcOverHead+(Aim_ArcScale*Sin(-pitch)))
+"####" B 0 A_PlaySoundEx("Misc/UseMove","Weapon")
+"####" B 0 A_FireCustomMissile("HazeSpawner",0,1,0,Aim_OverHead)
 "####" B 0 A_Jump(256,"Fire.After")
 Goto Fire.After
 
@@ -76,9 +76,10 @@ actor HazePP : Ammo {inventory.amount 1 inventory.Maxamount 10}
 actor HazeFieldKiller : Powerup {inventory.amount 1 Powerup.Duration 7}
 actor HazedFlagAlly : Powerup {inventory.amount 1 Powerup.Duration -7}
 actor HazeFlag : Powerup {inventory.amount 1 Powerup.Duration -7}
+actor HazeFXFlag : inventory {inventory.amount 1 inventory.Maxamount 1}
 
 
-Const int HazeRad = 150;
+Const int HazeRad = 200;
 Const int Haze_ItemA = 8;
 Const int Haze_ItemB = 9;
 
@@ -110,6 +111,84 @@ stop
 //[+]========================================================================[+]
 //--------------------------------|Projectiles |--------------------------------
 //[+]========================================================================[+]
+
+actor HazeRingGuide : BasicHelper
+{
+translation "198:198=220:220", "192:192=229:229"
+	reactiontime 15
+	var int user_angle;
+	States
+	{
+		Spawn:
+		TNT1 A 0
+		TNT1 A 0 //A_SetUserVar("user_angle", random(0, 30))
+		SpawnLoop:
+		TNT1 A 0 A_SpawnItemEx("HazeGuideDot", HazeRad, 0, -(z-floorz)+24, 0, 0, 0, user_angle, 1061)
+		TNT1 A 0 A_SpawnItemEx("HazeGuideDot", -HazeRad, 0, -(z-floorz)+24, 0, 0, 0, user_angle, 1061)
+		TNT1 A 0 A_SetUserVar("user_angle", user_angle + 12)
+		TNT1 A 0 A_Countdown
+		loop
+		Death:
+		TNT1 A 0
+		stop
+	}
+}
+
+
+actor HazeRingSpawner : BasicFastProjectile
+{
+translation "198:198=220:220", "192:192=229:229"
++DONTBLAST
++SKYEXPLODE
++THRUACTORS
++CLIENTSIDEONLY
+reactiontime 1
+damage (0)
+radius 3
+height 3
+speed 550
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 1 A_CountDown
+loop
+Death:
+TNT1 A 0 A_SpawnItemEx("HazeRingGuide",0,0,0,0,0,0,0,1)
+stop
+}
+}
+
+actor HazeGuideDot : BasicGuideDot {}
+
+actor HazeSpawner : BasicFastProjectile
+{
++DONTBLAST
++SKYEXPLODE
++THRUACTORS
+reactiontime 1
+damage (0)
+radius 3
+height 3
+speed 550
+States
+{
+Spawn:
+TNT1 A 0 
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+TNT1 A 1 A_CountDown
+loop
+Death:
+TNT1 A 0
+TNT1 A 0 A_GiveInventory("ProjectileDCode",1)
+TNT1 A 2
+TNT1 A 0 A_SpawnItemEx("HazeField",0,0,-(z-floorz)+24,0,0,0,0,SXF_TRANSFERPOINTERS)
+TNT1 A 1
+stop
+}
+}
+
+//#region 
 actor HazeShot : BasicProjectile
 {
 Obituary "$OB_HAZE"
@@ -156,6 +235,37 @@ stop
 
 actor HazeAimPath : GolfBallAimInstantStarter3 { Speed 48 Gravity 1.5}
 
+//#endregion
+
+actor HazeField : BasicHelper
+{
+ReactionTime 6
+DamageType "Haze"
+obituary "$OB_Haze"
+states
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_GiveInventory("ProjectileDCode",1)
+TNT1 A 0 A_PlaySoundEx("Move/Haze","Weapon")
+TNT1 A 0 ACS_NamedExecuteAlways("PKMNACS_RadiusGive",0,Haze_ItemA,HazeRad,RG_ENEMY)
+TNT1 A 3 A_SpawnItemEx("HazeRing",0,0,24,0,0,0,0,SXF_NOCHECKPOSITION|SXF_TRANSFERPOINTERS|SXF_TRANSFERTRANSLATION)
+Goto SpawnLoop_1
+
+SpawnLoop_1:
+TNT1 A 1 //A_SpawnItemEx("HazeCloud2",HazeRad,0,24+Random2(8),0,0,0,random(0,360),SXF_NOCHECKPOSITION|SXF_TRANSFERPOINTERS|SXF_TRANSFERTRANSLATION)
+TNT1 A 0 A_CountDown
+loop
+
+Death:
+TNT1 A 0 ACS_NamedExecuteAlways("PKMNACS_RadiusGive",0,Haze_ItemA,HazeRad,RG_ENEMY)
+TNT1 A 17 
+stop
+}
+}
+
+//#region -=- depreciated -=-
+/*
 actor HazeField : BasicHelper
 {
 ReactionTime 6
@@ -210,7 +320,7 @@ stop
 }
 }
 
-/*
+
 actor HazeField : BasicHelper
 {
 ReactionTime 6
@@ -267,14 +377,44 @@ stop
 }
 
 */
+//#endregion
 
+
+actor HazeRing //: BasicHelper
+{
+translation "198:198=220:220", "192:192=229:229"
+	reactiontime 3
+    var int user_angle;
+    PROJECTILE
+    +NOINTERACTION
+    +NOCLIP
+    +CLIENTSIDEONLY
+    +NOTARGETSWITCH
+	States
+	{
+		Spawn:
+		TNT1 A 0
+        TNT1 A 0 //A_SetUserVar("user_angle", random(0, 30))
+        TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+        TNT1 A 1 A_SpawnItemEx("HazeCloud2",0,0,64,0,0,0,0,1061|SXF_TRANSFERPOINTERS)
+        SpawnLoop:
+        TNT1 A 0 A_SpawnItemEx("HazeCloud2",HazeRad,0,0,0,0,0,user_angle,1061|SXF_TRANSFERPOINTERS)
+        TNT1 A 0 A_SpawnItemEx("HazeCloud2",-HazeRad,0,0,0,0,0,user_angle,1061|SXF_TRANSFERPOINTERS)
+		TNT1 A 1 A_SetUserVar("user_angle", user_angle + 60)
+		TNT1 A 0 A_Countdown
+		loop
+		Death:
+		TNT1 A 0
+		stop
+	}
+}
 
 actor HazeCloud : BasicClientside
 {
-scale 2.5
+scale 3.0
 RenderStyle "Translucent"
 +FORCEXYBILLBOARD
-Alpha 0.9
+Alpha 0.7
 States
 {
 Spawn:
@@ -289,6 +429,23 @@ stop
 }
 }
 
+actor HazeCloud2 : BasicClientside
+{
+scale 2.5
+RenderStyle "Translucent"
++FORCEXYBILLBOARD
+Alpha 0.9
+States
+{
+Spawn:
+TNT1 A 0 
+//TNT1 A 1 ACS_NamedExecuteAlways("TeamSmoke",0)
+FX14 ABCD 4 
+FX14 EEFFGGHH 2 A_Fadeout(0.2)
+stop
+}
+}
+
 
 actor HazedEffectWatcher : BasicHelper 
 {
@@ -297,15 +454,14 @@ States
 {
 Spawn:
 TNT1 A 0
-TNT1 A 2 A_GiveToTarget("HazeParticleSpawn")
-TNT1 A 0 A_JumpIfInTargetInventory("HazeFlag",1,"Spawn")
-TNT1 A 0 A_JumpIfInTargetInventory("HazedFlagAlly",1,"Spawn")
-TNT1 A 1 A_GiveToTarget("StatUpdator")
+TNT1 A 0 A_GiveToTarget("HazeFXSpawn")
+Spawn2:
 TNT1 A 5
+TNT1 A 0 A_JumpIfInTargetInventory("HazeFlag",1,"Spawn2")
 Goto Death
 
 Death:
-TNT1 A 0 
+TNT1 A 0 A_TakeFromTarget("HazeFXFlag",99)
 stop
 }
 }
@@ -328,7 +484,7 @@ stop
 }
 }
 
-actor HazeParticleSpawn : CustomInventory
+actor HazeFXSpawn : CustomInventory
 {
 inventory.amount 1
 Inventory.MaxAmount 100
@@ -339,10 +495,45 @@ Spawn:
 TNT1 A 0
 stop
 Pickup:
-TNT1 A 0 A_SpawnItemEx ("HazeParticle", random(-32,32), random(-32,32), random(32,48), 0, 0, 2, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION)
+TNT1 A 0 A_GiveInventory("HazeFXFlag",1)
+TNT1 A 0 A_SpawnItemEx ("HazeFX", 32, 0, 48, 0, 0, 0, random(0,360),SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION)
 stop
 Nope:
 TNT1 A 0
 stop
 }
+}
+
+actor HazeFX //: BasicHelper
+{
+    +MISSILE
+    -SOLID
+    +NOCLIP
+    +NOINTERACTION
+    +NOGRAVITY
+    +DONTBLAST
+    +DONTREFLECT
+    +THRUACTORS
+    RenderStyle "Translucent"
+    Alpha 0.7
+    scale 1.5
+    Radius 2
+    Height 2
+    Args 7
+    Speed 15
+    States
+    {
+    Spawn:
+        TNT1 A 0
+        //TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+        TNT1 A 0 ACS_NamedExecuteAlways("GeneralWarper2",0)    
+    Warp:
+        FX14 DDDDEEEE 1 A_Warp(2,-1,0,0,0,WARPF_INTERPOLATE|WARPF_NOCHECKPOSITION)
+        loop
+    Death:
+    FX14 FGH 2 
+    TNT1 A 0
+    stop
+
+    }
 }

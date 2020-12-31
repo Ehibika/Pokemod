@@ -1,16 +1,16 @@
 //VERTICAL BARS
 height 0;
-
-statusbar fullscreen, forcescaled
+//Resolution 320, 200;
+statusbar fullscreen, forcescaled, FullScreenOffsets
 {
 	InInventory not NoHud, 1
 	{
 	InInventory not NoHealthBar, 1
 	{
-	DrawImage "PKMNHUD", 5, 140;
-	DrawImage "PKMNHP", 16, 172;
-	Drawbar "PKMNHPB", "PKMNHPE", Health, horizontal, 32, 172;
-	DrawNumber 3, "CBMF", yellow, "SBAR_LVL", alignment(left)|prefix("", "lv:"), 15, 164;
+	DrawImage "PKMNHUD", 5, -50;
+	DrawImage "PKMNHP", 16, -25;
+	Drawbar "PKMNHPB", "PKMNHPE", Health, horizontal, 32, -25;
+	DrawNumber 3, "CBMF", yellow, "SBAR_LVL", alignment(left)|prefix("", "lv:"), 15, -33;
 	InInventory SkullShieldCheck, 1{DrawBar "VARFLS5", "VNOBAR", SkullShieldCheck, horizontal, 130, 184;}
 	InInventory SkullBarrierProtection, 1{DrawBar "VARFLS5", "VNOBAR", SkullShieldCheck, horizontal, 130, 184;}
 	InInventory not NoArmorBar, 1
@@ -18,20 +18,20 @@ statusbar fullscreen, forcescaled
 		InInventory BasicArmor, 1{DrawBar "VARAMT31", "VNOBAR", Armor, horizontal, 130, 184; InInventory HealthNumberFlag, 1{DrawNumber 3, "CBMF", Untranslated, Armor, alignment(left), 152, 170;}}
 		}
 	
-	DrawString "SMALLFONT",White,WeaponTag, 15, 140,0,alignment(left);
+	DrawString "SMALLFONT",White,WeaponTag, 15, -55,0,alignment(left);
 	//InInventory AmmoNumberFlag, 1
 	//{
 		WeaponAmmo not BusterAmmo
 		{
 			//DrawNumber 5,CMBHPFONT,Untranslated,Health,/*interpolate(10),*/alignment(left),150,177;
 			//DrawNumber 3, "8BDMAFONT", Untranslated, Ammo1, alignment(left), 80, 177;
-			DrawString "CBMF",yellow,"pp:", 15, 147,0,alignment(left);
-			DrawNumber 3, "CBMF", Green, Ammo1, alignment(right), 42, 147;
-			DrawNumber 3, "CBMF", white, Ammo1Capacity, alignment(left)|prefix("", "/"), 42, 147;
+			DrawString "CBMF",yellow,"pp:", 15, -48,0,alignment(left);
+			DrawNumber 3, "CBMF", Green, Ammo1, alignment(right), 42, -48;
+			DrawNumber 3, "CBMF", white, Ammo1Capacity, alignment(left)|prefix("", "/"), 42, -48;
 
-			DrawImage "PKMNPP", 16, 155;
-			Drawbar "PKMNHPB", "PKMNHPE", PPRecoveryMeter, horizontal, 32, 155;
-			InInventory PPRecoveryMeter, 100{ DrawImage "PKMNRELO", 40, 155;}
+			DrawImage "PKMNPP", 16, -40;
+			Drawbar "PKMNHPB", "PKMNHPE", PPRecoveryMeter, horizontal, 32, -40;
+			InInventory PPRecoveryMeter, 100{ DrawImage "PKMNRELO", 40, -40;}
 		}
 	//}
 	
@@ -40,8 +40,8 @@ statusbar fullscreen, forcescaled
 	//{
 		//DrawNumber 5,CMBHPFONT,Untranslated,Health,/*interpolate(10),*/alignment(left),150,177;
 		//DrawNumber 3, "8BDMAFONT", Untranslated, Health, alignment(left), 152, 177;
-		DrawNumber 3, "CBMF", Green, Health, alignment(right), 56, 164;
-		DrawNumber 3, "CBMF", white, "SBAR_HP", alignment(left)|prefix("", "/"), 56, 164;
+		DrawNumber 4, "CBMF", Green, Health, alignment(right), 62, -33;
+		DrawNumber 4, "CBMF", white, "SBAR_HP", alignment(left)|prefix("", "/"), 62, -33;
 	//}
 	}
 	

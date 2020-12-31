@@ -145,7 +145,7 @@ States
 Spawn:
 TNT1 A 0
 TNT1 A 0 A_SetScale(Frandom(1.5,3.5))
-TMPK DDCCCBBA 2 A_ScaleVelocity(0.8)
+FX00 ABCDEFGHIJ 2 //A_ScaleVelocity(0.8)
 stop
 }
 }
@@ -161,7 +161,8 @@ Spawn:
 TNT1 A 0
 stop
 Pickup:
-TNT1 AAA 0 A_SpawnItemEx ("IronDefenseParticle", 0, 0, 24, random(5,10), 0, random(-2,2), random(0,360),SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION)
+//TNT1 A 0 A_SpawnItemEx ("IronDefenseParticle", 0, 0, 24, random(5,10), 0, random(-2,2), random(0,360),SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION)
+TNT1 A 0 A_SpawnItemEx ("IronDefenseParticle", random2(32), random2(32), 24, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION)
 stop
 Nope:
 TNT1 A 0

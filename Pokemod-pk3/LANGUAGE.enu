@@ -583,6 +583,25 @@ OB_METEORMASH = "%k Defeated %o using METEORMASH!";
 OB_IRONHEAD = "%k Defeated %o using IRONHEAD!";
 OB_ACID = "%k Defeated %o using ACID!";
 OB_ACIDSPRAY = "%k Defeated %o using ACIDSPRAY!";
+OB_STRINGSHOT = "%k Defeated %o using STRINGSHOT!";
+OB_SPLASH = "%k Defeated %o using SPLASH!";
+OB_POISONSTING = "%k Defeated %o using POISONSTING!";
+OB_ELECTROWEB = "%k Defeated %o using ELECTROWEB!";
+OB_ELECTROBALL = "%k Defeated %o using ELECTROBALL!";
+OB_DISCHARGE = "%k Defeated %o using DISCHARGE!";
+OB_BUGBITE = "%k Defeated %o using BUGBITE!";
+OB_PLUCK = "%k Defeated %o using PLUCK!";
+OB_AIRCUTTER = "%k Defeated %o using AIRCUTTER!";
+OB_GUST = "%k Defeated %o using GUST!";
+OB_FLY = "%k Defeated %o using FLY!";
+OB_ELECTROLEVITATE = "%k Defeated %o using ELECTROLEVITATE!";
+OB_BUGBUZZ = "%k Defeated %o using BUGBUZZ!";
+OB_SILVERWIND = "%k Defeated %o using SILVERWIND!";
+OB_QUIVERDANCE = "%k Defeated %o using QUIVERDANCE!";
+OB_POISONJAB = "%k Defeated %o using POISONJAB!";
+OB_EARTHPOWER = "%k Defeated %o using EARTHPOWER!";
+OB_PINMISSILE = "%k Defeated %o using PINMISSILE!";
+OB_FAINTATTACK = "%k Defeated %o using FAINTATTACK!";
 //--[NewMove]--
 
 //#endregion
@@ -604,7 +623,7 @@ MNU_JOIN11 = "\c[MenuGreen]Choose your \c[MenuRed]Pokemon!";
 MNU_JOIN2 = "\c[MenuCyan]Auto Select \c[MenuGreen]picks a team for you.";
 
 MNU_JOIN3 = "\c[MenuRed]Pokemon \c-Select";
-MNU_JOIN4 = "\c[MenuGreen]Starter Moves";
+MNU_JOIN4 = "\c[MenuGreen]Type name::";
 MNU_JOIN5 = "\c[MenuGreen]Archetypes";
 MNU_JOIN6 = "\c[MenuCyan]Auto Select";//"\c[MenuBlue]Auto\c--Select";
 MNU_JOIN7 = "\c[MenuCyan]Original Selection";
@@ -618,6 +637,9 @@ MNU_JOIN7 = "\c[MenuWhite]More information on pokemon and moves\n"
             "\c[MenuRed] Do not choose 'Random', you risk crashing if you do.";
 
 //#endregion
+//██████████████████████████████████████████Options████████████████████████████████████████
+PKMN_OPT = "\c[MenuGreen]Pokemod Options";
+PKMN_CUSTCONT = "\c[MenuYellow]Custom Controls";
 //██████████████████████████████████████████Class Help████████████████████████████████████████
 
 //#region 
@@ -2103,6 +2125,171 @@ D150_STATS2 = "\cfSP.ATK:\cj 65 \cfSP.DEF:\cj 110";
 D150_STATS3 = "\cfHP:\cj 160";
 D150_ARC = "\cj <Archetype> ";
 D150_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+
+//#region -=- Seedot-=-
+D151_NAME = "\cjSeedot";
+D151_TYPE = "\cjGrass/Null";
+D151_STATS1 = "\cfATK:\cj 40 \cfDEF:\cj 50";
+D151_STATS2 = "\cfSP.ATK:\cj 30 \cfSP.DEF:\cj 30";
+D151_STATS3 = "\cfHP:\cj 40";
+D151_ARC = "\cj <Archetype> ";
+D151_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+
+//#region -=- Nuzleaf-=-
+D152_NAME = "\cjNuzleaf";
+D152_TYPE = "\cjGrass/Dark";
+D152_STATS1 = "\cfATK:\cj 70 \cfDEF:\cj 40";
+D152_STATS2 = "\cfSP.ATK:\cj 60 \cfSP.DEF:\cj 40";
+D152_STATS3 = "\cfHP:\cj 70";
+D152_ARC = "\cj <Archetype> ";
+D152_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+
+//#region -=- Shiftry-=-
+D153_NAME = "\cjShiftry";
+D153_TYPE = "\cjGrass/Dark";
+D153_STATS1 = "\cfATK:\cj 100 \cfDEF:\cj 60";
+D153_STATS2 = "\cfSP.ATK:\cj 90 \cfSP.DEF:\cj 60";
+D153_STATS3 = "\cfHP:\cj 90";
+D153_ARC = "\cj <Archetype> ";
+D153_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+
+//#region -=- Magnemite-=-
+D154_NAME = "\cjMagnemite";
+D154_TYPE = "\cjElectric/Steel";
+D154_STATS1 = "\cfATK:\cj 35 \cfDEF:\cj 70";
+D154_STATS2 = "\cfSP.ATK:\cj 95 \cfSP.DEF:\cj 55";
+D154_STATS3 = "\cfHP:\cj 25";
+D154_ARC = "\cj <Archetype> ";
+D154_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+
+//#region -=- Magneton-=-
+D155_NAME = "\cjMagneton";
+D155_TYPE = "\cjElectric/Steel";
+D155_STATS1 = "\cfATK:\cj 60 \cfDEF:\cj 95";
+D155_STATS2 = "\cfSP.ATK:\cj 120 \cfSP.DEF:\cj 70";
+D155_STATS3 = "\cfHP:\cj 50";
+D155_ARC = "\cj <Archetype> ";
+D155_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+
+//#region -=- Magnezone-=-
+D156_NAME = "\cjMagnezone";
+D156_TYPE = "\cjElectric/Steel";
+D156_STATS1 = "\cfATK:\cj 70 \cfDEF:\cj 115";
+D156_STATS2 = "\cfSP.ATK:\cj 130 \cfSP.DEF:\cj 90";
+D156_STATS3 = "\cfHP:\cj 70";
+D156_ARC = "\cj <Archetype> ";
+D156_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+
+//#region -=- Murkrow-=-
+D157_NAME = "\cjMurkrow";
+D157_TYPE = "\cjDark/Flying";
+D157_STATS1 = "\cfATK:\cj 85 \cfDEF:\cj 42";
+D157_STATS2 = "\cfSP.ATK:\cj 85 \cfSP.DEF:\cj 42";
+D157_STATS3 = "\cfHP:\cj 60";
+D157_ARC = "\cj <Archetype> ";
+D157_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+
+//#region -=- Honchkrow-=-
+D158_NAME = "\cjHonchkrow";
+D158_TYPE = "\cjDark/Flying";
+D158_STATS1 = "\cfATK:\cj 125 \cfDEF:\cj 52";
+D158_STATS2 = "\cfSP.ATK:\cj 105 \cfSP.DEF:\cj 52";
+D158_STATS3 = "\cfHP:\cj 100";
+D158_ARC = "\cj <Archetype> ";
+D158_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+
+//#region -=- Tangela-=-
+D159_NAME = "\cjTangela";
+D159_TYPE = "\cjGrass/Null";
+D159_STATS1 = "\cfATK:\cj 55 \cfDEF:\cj 115";
+D159_STATS2 = "\cfSP.ATK:\cj 100 \cfSP.DEF:\cj 40";
+D159_STATS3 = "\cfHP:\cj 65";
+D159_ARC = "\cj <Archetype> ";
+D159_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+
+//#region -=- Tangrowth-=-
+D160_NAME = "\cjTangrowth";
+D160_TYPE = "\cjGrass/Null";
+D160_STATS1 = "\cfATK:\cj 100 \cfDEF:\cj 125";
+D160_STATS2 = "\cfSP.ATK:\cj 110 \cfSP.DEF:\cj 50";
+D160_STATS3 = "\cfHP:\cj 100";
+D160_ARC = "\cj <Archetype> ";
+D160_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+
+//#region -=- Joltik-=-
+D161_NAME = "\cjJoltik";
+D161_TYPE = "\cjBug/Electric";
+D161_STATS1 = "\cfATK:\cj 47 \cfDEF:\cj 50";
+D161_STATS2 = "\cfSP.ATK:\cj 57 \cfSP.DEF:\cj 50";
+D161_STATS3 = "\cfHP:\cj 50";
+D161_ARC = "\cj <Archetype> ";
+D161_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+
+//#region -=- Galvantula-=-
+D162_NAME = "\cjGalvantula";
+D162_TYPE = "\cjBug/Electric";
+D162_STATS1 = "\cfATK:\cj 77 \cfDEF:\cj 60";
+D162_STATS2 = "\cfSP.ATK:\cj 97 \cfSP.DEF:\cj 60";
+D162_STATS3 = "\cfHP:\cj 70";
+D162_ARC = "\cj <Archetype> ";
+D162_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+
+//#region -=- Mareep-=-
+D163_NAME = "\cjMareep";
+D163_TYPE = "\cjElectric/Null";
+D163_STATS1 = "\cfATK:\cj 40 \cfDEF:\cj 40";
+D163_STATS2 = "\cfSP.ATK:\cj 65 \cfSP.DEF:\cj 45";
+D163_STATS3 = "\cfHP:\cj 55";
+D163_ARC = "\cj <Archetype> ";
+D163_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+
+//#region -=- Flaaffy-=-
+D164_NAME = "\cjFlaaffy";
+D164_TYPE = "\cjElectric/Null";
+D164_STATS1 = "\cfATK:\cj 55 \cfDEF:\cj 55";
+D164_STATS2 = "\cfSP.ATK:\cj 80 \cfSP.DEF:\cj 60";
+D164_STATS3 = "\cfHP:\cj 70";
+D164_ARC = "\cj <Archetype> ";
+D164_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+
+//#region -=- Ampharos-=-
+D165_NAME = "\cjAmpharos";
+D165_TYPE = "\cjElectric/Null";
+D165_STATS1 = "\cfATK:\cj 75 \cfDEF:\cj 86";
+D165_STATS2 = "\cfSP.ATK:\cj 115 \cfSP.DEF:\cj 90";
+D165_STATS3 = "\cfHP:\cj 90";
+D165_ARC = "\cj <Archetype> ";
+D165_EVO = "\c[MenuRed]Does not evolve";
 //#endregion
 
 
@@ -4529,6 +4716,193 @@ M277_CATEGORY = "\cf Special";
 M277_POWER = "\cfPower:\cj --";
 M277_DESC = "\cjLob an acid bomb that Harshly lowers\n"
 "SP.DEF";
+//#endregion
+
+
+//#region -=- 278: StringShot -=-
+M278_NAME = "\cj StringShot";
+M278_TYPE = "\cj Bug";
+M278_CATEGORY = "\cf Status";
+M278_POWER = "\cfPower:\cj --";
+M278_DESC = "\cjSpray a wave of sticky string that\n"
+"harshly lower's SPD.";
+//#endregion
+
+
+//#region -=- 279: Splash -=-
+M279_NAME = "\cj Splash";
+M279_TYPE = "\cj Bug";
+M279_CATEGORY = "\cf Status";
+M279_POWER = "\cfPower:\cj --";
+M279_DESC = "\cjDescription needed\n"
+//#endregion
+
+
+//#region -=- 280: PoisonSting -=-
+M280_NAME = "\cj PoisonSting";
+M280_TYPE = "\cj Poison";
+M280_CATEGORY = "\cf Physical";
+M280_POWER = "\cfPower:\cj --";
+M280_DESC = "\cjJab with a poisonous appendage.\n"
+//#endregion
+
+
+//#region -=- 281: ElectroWeb -=-
+M281_NAME = "\cj ElectroWeb";
+M281_TYPE = "\cj Electric";
+M281_CATEGORY = "\cf Special";
+M281_POWER = "\cfPower:\cj --";
+M281_DESC = "\cjLaunch a projectile that becomes an\n"
+"electrical web that deals damage and\n"
+"slows.";
+//#endregion
+
+
+//#region -=- 282: ElectroBall -=-
+M282_NAME = "\cj ElectroBall";
+M282_TYPE = "\cj Electric";
+M282_CATEGORY = "\cf Special";
+M282_POWER = "\cfPower:\cj --";
+M282_DESC = "\cjLaunch an electrical projectile, the\n"
+"faster you are than the victim, the more\n"
+"damage it does.";
+//#endregion
+
+
+//#region -=- 283: Discharge -=-
+M283_NAME = "\cj Discharge";
+M283_TYPE = "\cj Electric";
+M283_CATEGORY = "\cf Special";
+M283_POWER = "\cfPower:\cj --";
+M283_DESC = "\cjUnleash electricity all around you, may\n"
+"cause paralysis.";
+//#endregion
+
+
+//#region -=- 284: BugBite -=-
+M284_NAME = "\cj BugBite";
+M284_TYPE = "\cj Bug";
+M284_CATEGORY = "\cf Physical";
+M284_POWER = "\cfPower:\cj --";
+M284_DESC = "\cjMunch on the opponent, may eat any\n"
+"berries they are carrying.";
+//#endregion
+
+
+//#region -=- 285: Pluck -=-
+M285_NAME = "\cj Pluck";
+M285_TYPE = "\cj Flying";
+M285_CATEGORY = "\cf Physical";
+M285_POWER = "\cfPower:\cj --";
+M285_DESC = "\cjDive at high speeds at an opponent, may\n"
+"snatch any berries they are carrying.";
+//#endregion
+
+
+//#region -=- 286: AirCutter -=-
+M286_NAME = "\cj AirCutter";
+M286_TYPE = "\cj Flying";
+M286_CATEGORY = "\cf Special";
+M286_POWER = "\cfPower:\cj --";
+M286_DESC = "\cjUnleash a flurry of razor sharp air\n"
+"waves.";
+//#endregion
+
+
+//#region -=- 287: Gust -=-
+M287_NAME = "\cj Gust";
+M287_TYPE = "\cj Flying";
+M287_CATEGORY = "\cf Special";
+M287_POWER = "\cfPower:\cj --";
+M287_DESC = "\cjErect a high reaching air tunnel that can\n"
+"launch friends and foes alike.";
+//#endregion
+
+
+//#region -=- 288: Fly -=-
+M288_NAME = "\cj Fly";
+M288_TYPE = "\cj Flying";
+M288_CATEGORY = "\cf Physical";
+M288_POWER = "\cfPower:\cj --";
+M288_DESC = "\cjTake to the sky and dive bomb opponents,\n"
+"can use other moves while in flight.";
+//#endregion
+
+
+//#region -=- 289: ElectroLevitate -=-
+M289_NAME = "\cj ElectroLevitate";
+M289_TYPE = "\cj Electric";
+M289_CATEGORY = "\cf Status";
+M289_POWER = "\cfPower:\cj --";
+M289_DESC = "\cf<Desc>";
+//#endregion
+
+
+//#region -=- 290: BugBuzz -=-
+M290_NAME = "\cj BugBuzz";
+M290_TYPE = "\cj Bug";
+M290_CATEGORY = "\cf Special";
+M290_POWER = "\cfPower:\cj --";
+M290_DESC = "\cjLaunch irritating insect noises at an\n"
+"opponent.";
+//#endregion
+
+
+//#region -=- 291: SilverWind -=-
+M291_NAME = "\cj SilverWind";
+M291_TYPE = "\cj Bug";
+M291_CATEGORY = "\cf Special";
+M291_POWER = "\cfPower:\cj --";
+M291_DESC = "\cjunleash waves of powdery wind.\n"
+//#endregion
+
+
+//#region -=- 292: QuiverDance -=-
+M292_NAME = "\cj QuiverDance";
+M292_TYPE = "\cj Bug";
+M292_CATEGORY = "\cf Status";
+M292_POWER = "\cfPower:\cj --";
+M292_DESC = "\cf<Desc>";
+//#endregion
+
+
+//#region -=- 293: PoisonJab -=-
+M293_NAME = "\cj PoisonJab";
+M293_TYPE = "\cj Poison";
+M293_CATEGORY = "\cf Physical";
+M293_POWER = "\cfPower:\cj --";
+M293_DESC = "\cjRapidly strike foes with poisonous\n"
+"apendaged.";
+//#endregion
+
+
+//#region -=- 294: EarthPower -=-
+M294_NAME = "\cj EarthPower";
+M294_TYPE = "\cj Ground";
+M294_CATEGORY = "\cf Special";
+M294_POWER = "\cfPower:\cj --";
+M294_DESC = "\cjTarget the ground to bring forth\n"
+"geothermal power!";
+//#endregion
+
+
+//#region -=- 295: PinMissile -=-
+M295_NAME = "\cj PinMissile";
+M295_TYPE = "\cj Bug";
+M295_CATEGORY = "\cf Physical";
+M295_POWER = "\cfPower:\cj --";
+M295_DESC = "\cjCharge to launch a volley of sharp pins.\n"
+//#endregion
+
+
+//#region -=- 296: FaintAttack -=-
+M296_NAME = "\cj FaintAttack";
+M296_TYPE = "\cj Dark";
+M296_CATEGORY = "\cf Physical";
+M296_POWER = "\cfPower:\cj --";
+M296_DESC = "\cjTarget the foe to vanish and strike them\n"
+"unknowingly, can dodge attacks if timed\n"
+"right.";
 //#endregion
 
 

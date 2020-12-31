@@ -31,14 +31,14 @@ TNT1 A 0 A_Jump(256,"Fire.Bullet")
 Goto Fire.Bullet
 
 Fire.Bullet:
-TNT1 A 3 //A_GiveInventory("HelpingHandPowerGive",1,AAPTR_TRACER)
+TNT1 A 5 ACS_NamedExecuteAlways("GrabHelperEXP",0,AAPTR_TRACER)
 TNT1 A 0 ACS_NamedExecuteAlways("TakePP",0,Move_HelpingHand,1)
 TNT1 A 0 A_GiveInventory("HelpingHandCST",1)
 TNT1 A 0 A_Jump(256,"Fire.After")
 Goto Fire.After
 
 Fire.Bullet2:
-TNT1 A 3 //A_GiveInventory("HelpingHandPowerGive",1,AAPTR_TRACER)
+TNT1 A 5 ACS_NamedExecuteAlways("GrabHelperEXP",0,AAPTR_TRACER)
 TNT1 A 0 A_Jump(256,"Fire.After")
 Goto Fire.After
 
@@ -85,7 +85,7 @@ Goto Ready
 //-----------------------------|Ammo & Inventory|------------------------------
 //[+]========================================================================[+]
 actor HelpingHandPP : Ammo {inventory.amount 1 inventory.Maxamount 30}
-actor HelpingHandShotLoop : Powerup {inventory.amount 1 Powerup.Duration 5}
+actor HelpingHandShotLoop : Powerup {inventory.amount 1 Powerup.Duration 7}
 
 actor ConShotTimer : Powerup {inventory.amount 1 Powerup.Duration 35}
 

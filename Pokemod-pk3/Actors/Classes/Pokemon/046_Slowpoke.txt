@@ -60,7 +60,7 @@ TNT1 A 0 A_JumpIfInventory("isbot",1,"BotWep")
 
 TNT1 A 0 A_GiveInventory("WatergunMove1")
 TNT1 A 0 A_GiveInventory("SlackOffMove2")
-TNT1 A 0 A_GiveInventory("YawnMove3")
+TNT1 A 0 A_GiveInventory("GrowlMove3")
 TNT1 A 0 A_GiveInventory("CurseMove4")
 stop
 

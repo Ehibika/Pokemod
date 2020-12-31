@@ -1,0 +1,43 @@
+//#region -=-=- Beta 37 -=-=-
+/*
+ *
+ *
+ * ===|Gameplay Changes|===
+ * 
+ * made further adjustments to stat scaling, both for defense stats and offense stats
+ * 
+ * the Slow speed tier has been restored to normal
+ * ===|Move Changes|===
+ * 
+ * [lightscreen]
+ * damage reduction reduced fro 50% > 20%
+ * 
+ * [Reflect]
+ * damage reduction reduced from 50% > 20
+ * 
+ * [recover]
+ * Healing rate reduced from 10% > 4%
+ * Now immobilized the player while in use
+ * 
+ * [Rest]
+ * heal rate reduced from 10% > 4%
+ * Sleep duration increased form 2 seconds > 4 seconds
+ * 
+ * [Safeguard]
+ * no longer grants knockback immunity
+ * 
+ * [Fly]
+ * after dash falling period now runs on a timer in case the player is stuck suspended in midair
+ * 
+ * 
+ * All instances of Yawn in levelup moves were temporarily replaced with Growl
+ * All instances of CraftyShield in levelup moves were removed
+ * 
+ * ===|TM Changes|===
+ * 
+ * The following TM's were Removed:
+ *  Crafty Shield
+ * 
+ * the following TM's were added:
+ *  ElectroBall
+ *  Psyshock

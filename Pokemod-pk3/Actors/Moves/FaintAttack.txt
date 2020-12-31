@@ -1,0 +1,177 @@
+actor FaintAttackMove : WepMasterBase
+{
+Tag "FaintAttack"
+obituary "$OB_FaintAttack"
+Weapon.AmmoUse 1
+Weapon.AmmoGive 35
+weapon.ammotype "FaintAttackPP"
+scale 2.0
+Inventory.Pickupmessage "$PU_MEGABUSTER"
+States
+{
+Spawn:
+WEAP X 1
+stop
+
+Fire:
+"####" BBB 1 A_Jumpif(CallACS("CheckWeaponFire",RC_B)==1,"Fire.Begin")
+"####" B 0 A_Jump(256,"NoAmmo")
+Goto NoAmmo
+
+Fire.Begin:
+"####" B 0
+"####" B 0 A_Jump(256,"Fire.Melee")
+Goto Fire.Melee
+
+Fire.Melee:
+"####" B 1 A_JumpIf(IsPointerEqual(AAPTR_TRACER,AAPTR_NULL) == true, "NoAmmo2")
+TNT1 A 0 A_PlaySoundEx("Move/Pursuit","Weapon")
+TNT1 A 0 A_FireCustomMissile("FaintAttackSeeker",0,1,0,0)
+TNT1 A 0 A_GiveInventory("FaintPoofFXSpawn")
+TNT1 A 0 ACS_NamedExecuteAlways("PKMN_ToggleVisible",0,0,0)
+TNT1 A 0 A_ChangeFlag("NONSHOOTABLE",1)
+TNT1 A 24 A_GiveInventory("TargHolder")
+
+
+TNT1 A 0 A_PlaySoundEx("Move/Amnesia","Weapon")
+TNT1 A 0 A_GiveInventory("FaintPoofFXSpawn")
+TNT1 A 0 ACS_NamedExecuteAlways("PKMN_ToggleVisible",0,0,1)
+TNT1 A 0 A_ChangeFlag("NONSHOOTABLE",0)
+Goto Fire.After
+
+Fire.After:
+"####" B 1 A_GiveInventory("SemiRecovery_B")
+"####" B 0 A_Jump(256,"Fire.End")
+Goto Fire.End
+}
+}
+
+actor FaintAttackMove1 : FaintAttackMove {Weapon.SlotNumber 1}
+actor FaintAttackMove2 : FaintAttackMove {Weapon.SlotNumber 2}
+actor FaintAttackMove3 : FaintAttackMove {Weapon.SlotNumber 3}
+actor FaintAttackMove4 : FaintAttackMove {Weapon.SlotNumber 4}
+
+actor FaintAttackMove5 : FaintAttackMove 
+{
+Weapon.SlotNumber 5
+States
+{
+
+Fire.End:
+TNT1 A 0
+TNT1 A 0 A_TakeInventory("FaintAttackMove5",9)
+TNT1 A 0 A_Jump(256,"Ready")
+Goto Ready
+}
+}
+
+//[+]========================================================================[+]
+//-----------------------------|Ammo & Inventory|------------------------------
+//[+]========================================================================[+]
+actor FaintAttackPP : Ammo {inventory.amount 1 inventory.Maxamount 35}
+Actor Imbue_FaintAttack : Powerup{inventory.amount 1 powerup.duration 0x7FFFFFFF}
+
+
+actor FaintAttackFreezeRate : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_Jumpifinventory("FreezeMark",1,"FreezeUp")
+FreezeUp:
+TNT1 A 0 A_GiveInventory("FreezeValue",random(25,75))
+stop
+
+Nope:
+TNT1 A 0
+stop
+}
+}
+//[+]========================================================================[+]
+//--------------------------------|Projectiles |--------------------------------
+//[+]========================================================================[+]
+
+actor FaintAttackSeeker : BasicExplosion
+{
+Damage(0)
+speed 5
+DamageType "FaintAttack"
+Obituary "$OB_FaintAttack"
+Reactiontime 17
+Args 6, 0, 0
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+TNT1 A 0 A_TransferPointer(AAPTR_TARGET,AAPTR_DEFAULT,AAPTR_TRACER,AAPTR_TRACER)
+//==
+TNT1 A 12 A_Stop
+TNT1 A 1 A_Warp(AAPTR_TRACER,1,0,45,0,WARPF_COPYINTERPOLATION)
+TNT1 A 0 A_Spawnitemex("FaintAttackMelee",0,0,0,0,0,0,0,SXF_TRANSFERTRANSLATION)
+TNT1 A 5
+Goto Death
+
+Death:
+TNT1 A 0 
+stop
+}
+}
+
+
+
+actor FaintAttackMelee : BasicMeleeAttack
+{
+Speed 64
+DamageType "FaintAttack"
+Obituary "$OB_FaintAttack"
+States
+{
+Spawn:
+TNT1 A 0 
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+TNT1 A 0 A_PlaySoundEx("Move/Basic","Weapon")
+TNT1 A 0 A_SpawnItemEX("PursuitImpact",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+TNT1 A 0 A_Explode(MBP_FaintAttack,32,0,0,32)
+TNT1 A 5
+stop
+}
+}
+
+actor FaintPoofFXSpawn : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 1 A_Spawnitemex("FaintPoofFX",0,0,36)
+stop
+}
+}
+
+actor FaintPoofFX : BasicClientside
+{
+scale 3.5
+Translation "146:146=4:4", "148:148=83:83", "15:15=94:94", "1:1=159:159"
+speed 7
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 AAA 0 A_SpawnItemEx("PursuitImpactParticle",Random(-Args[0],Args[0]), Random(-Args[0],Args[0]), Random(-Args[0],Args[0]),random2(2),random2(2),random2(2),0,SXF_TRANSFERTRANSLATION|SXF_TRANSFERPITCH)
+HAZ2 ABC 2 
+HAZ2 DEFG 2 A_Fadeout
+stop
+}
+}

@@ -1,0 +1,90 @@
+
+/*
+[+]===================================[+]
+
+[+]===================================[+]
+*/
+
+Actor R_Drowzee : ClassBaseRentals 
+{
+Player.DisplayName "Drowzee"
+Player.SoundClass "Drowzee"
++NOSKIN
+
+Player.StartItem "PKMNRentalKit"
+//============|
+Player.StartItem "DrowzeeRentalSetupItem"
+//============|
+Player.StartItem "Base_HP", 70
+Player.StartItem "Base_PAttack", 55
+Player.StartItem "Base_PDefense", 45
+Player.StartItem "Base_SAttack", 55
+Player.StartItem "Base_SDefense", 90
+
+//============|
+
+States
+{
+Spawn: 
+P065 A 0
+P065 B 1 
+P065 A 1
+GoTo Spawn+2
+See:
+P065 BCDE 5
+GoTo Spawn+1
+Missile:
+P065 A 0 A_JumpIfInventory("ConshotTimer",1,"Missile2")
+P065 F 5 
+P065 G 4
+GoTo Spawn+2
+Missile2:
+P065 G 9
+GoTo Spawn+2
+
+PainFix:
+P065 H 0 
+GoTo PainFrames
+}
+}
+
+actor DrowzeeRentalMoves : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_JumpIf(CallACS("RentalBotCheck") == 1,"BotWep")
+
+TNT1 A 0 A_GiveInventory("ExtrasensoryMove1")
+TNT1 A 0 A_GiveInventory("HypnosisMove2")
+TNT1 A 0 A_GiveInventory("DreamEaterMove3")
+TNT1 A 0 A_GiveInventory("BarrierMove4")
+stop
+
+BotWep:
+TNT1 A 0 A_GiveInventory("ExtrasensoryMove1")
+stop
+}
+}
+
+actor DrowzeeRentalSetupItem : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 ACS_NamedExecuteAlways("PKMN_RentalsSetup",0,Dex_Drowzee)
+stop
+}
+}

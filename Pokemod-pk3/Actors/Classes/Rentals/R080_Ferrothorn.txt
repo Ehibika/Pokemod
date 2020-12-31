@@ -1,0 +1,90 @@
+
+/*
+[+]===================================[+]
+
+[+]===================================[+]
+*/
+
+Actor R_Ferrothorn : ClassBaseRentals 
+{
+Player.DisplayName "Ferrothorn"
+Player.SoundClass "Ferrothorn"
++NOSKIN
+
+Player.StartItem "PKMNRentalKit"
+//============|
+Player.StartItem "FerrothornRentalSetupItem"
+//============|
+Player.StartItem "Base_HP", 74
+Player.StartItem "Base_PAttack", 94
+Player.StartItem "Base_PDefense", 131
+Player.StartItem "Base_SAttack", 54
+Player.StartItem "Base_SDefense", 116
+
+//============|
+
+States
+{
+Spawn: 
+P080 A 0
+P080 B 1 
+P080 A 1
+GoTo Spawn+2
+See:
+P080 BCDE 5
+GoTo Spawn+1
+Missile:
+P080 A 0 A_JumpIfInventory("ConshotTimer",1,"Missile2")
+P080 F 5 
+P080 G 4
+GoTo Spawn+2
+Missile2:
+P080 G 9
+GoTo Spawn+2
+
+PainFix:
+P080 H 0 
+GoTo PainFrames
+}
+}
+
+actor FerrothornRentalMoves : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_JumpIf(CallACS("RentalBotCheck") == 1,"BotWep")
+
+TNT1 A 0 A_GiveInventory("PowerWhipMove1")
+TNT1 A 0 A_GiveInventory("SpikeCannonMove2")
+TNT1 A 0 A_GiveInventory("LeechSeedMove3")
+TNT1 A 0 A_GiveInventory("StealthRockMove4")
+stop
+
+BotWep:
+TNT1 A 0 A_GiveInventory("PowerWhipMove1")
+stop
+}
+}
+
+actor FerrothornRentalSetupItem : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 ACS_NamedExecuteAlways("PKMN_RentalsSetup",0,Dex_Ferrothorn)
+stop
+}
+}
