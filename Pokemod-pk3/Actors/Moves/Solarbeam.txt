@@ -1,4 +1,4 @@
-const int SolBea_Range = 1200;
+const int SolBea_Range = 3000;
 const int SolBea_SightRange = 16;
 
 actor SolarBeamMove : WepMasterBase
@@ -55,6 +55,8 @@ Goto Fire.After2
 Fire.Charge2:
 "####" B 0 A_GiveInventory("ChannelingSpeed")
 "####" B 0 A_FireCustomMissile("SolarBeamSightStart",0,0,0,0)
+"####" C 0 A_JumpIfInventory("IsBot",1,"Fire.Bullet")
+
 /*
     "####" B 0 A_JumpIfInventory("SolarBeamSightBuffer",1,6)
     "####" B 0 A_GiveInventory("SolarBeamSightBuffer")
@@ -134,7 +136,7 @@ actor SolarBeamSightBuffer : Powerup {inventory.amount 1 powerup.duration 6 }
 //[+]========================================================================[+]
 //--------------------------------|Projectiles |--------------------------------
 //[+]========================================================================[+]
-Const Int SolarBeamRange = 100;
+Const Int SolarBeamRange = 200;
 
 //#region Aim
 
@@ -152,7 +154,7 @@ actor SolarBeamSightStart //: BasicHelper
     Radius 2
     Height 2
 
-    Speed 15
+    Speed 60
     States
     {
     Spawn:
@@ -176,14 +178,14 @@ actor SolarBeamSight : BasicFastProjectile//FastProj to match damager hitbox
     Damage (0)
     Radius 10
     Height 10
-    Speed 15
+    Speed 60
     Scale 2.5
     States
     {
     Spawn:
         TNT1 A 0
         TNT1 A 0 A_GiveInventory("ProjectileCode",1)
-        TNT1 A 0 A_JumpIf(Pitch > SolarBeamRange,"Death2")
+        TNT1 A 0 A_JumpIf(Pitch > SolarBeamRange/4,"Death2")
         TNT1 A 0 A_SetPitch(Pitch+1)
         TNT1 A 0 A_SpawnItemEx("SolarBeamSight",0,0,0,momx,momy,momz,0,552+1)//512+32+8
         TNT1 A 0 A_Stop
@@ -216,7 +218,7 @@ actor SolarBeamDamager : BasicFastProjectile
     Damage (MBP_SolarBeam1)
     Radius 10
     Height 10
-    speed 750 //15 * SolarBeamRange(50)
+    speed 3000 //15 * SolarBeamRange(200)
     scale 2.5
     states
     {
@@ -337,7 +339,7 @@ actor SolarBeamDamager2 : BasicFastProjectile
     Damage (MBP_SolarBeam2)
     Radius 10
     Height 10
-    speed 750 //15 * SolarBeamRange(50)
+    speed 3000 //15 * SolarBeamRange(200)
     scale 2.5
     states
     {

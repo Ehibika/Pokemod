@@ -1,0 +1,90 @@
+
+/*
+[+]===================================[+]
+
+[+]===================================[+]
+*/
+
+Actor R_Gastly : ClassBaseRentals 
+{
+Player.DisplayName "Gastly"
+Player.SoundClass "Gastly"
++NOSKIN
+
+Player.StartItem "PKMNRentalKit"
+//============|
+Player.StartItem "GastlyRentalSetupItem"
+//============|
+Player.StartItem "Base_HP", 30
+Player.StartItem "Base_PAttack", 35
+Player.StartItem "Base_PDefense", 30
+Player.StartItem "Base_SAttack", 100
+Player.StartItem "Base_SDefense", 35
+
+//============|
+
+States
+{
+Spawn: 
+P131 A 0
+P131 B 1 
+P131 A 1
+GoTo Spawn+2
+See:
+P131 BCDE 5
+GoTo Spawn+1
+Missile:
+P131 A 0 A_JumpIfInventory("ConshotTimer",1,"Missile2")
+P131 F 5 
+P131 G 4
+GoTo Spawn+2
+Missile2:
+P131 G 9
+GoTo Spawn+2
+
+PainFix:
+P131 H 0 
+GoTo PainFrames
+}
+}
+
+actor GastlyRentalMoves : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_JumpIf(CallACS("RentalBotCheck") == 1,"BotWep")
+
+TNT1 A 0 A_GiveInventory("HexMove1")
+TNT1 A 0 A_GiveInventory("PoisonGasMove2")
+TNT1 A 0 A_GiveInventory("ClearSmogMove3")
+TNT1 A 0 A_GiveInventory("HypnosisMove4")
+stop
+
+BotWep:
+TNT1 A 0 A_GiveInventory("HexMove1")
+stop
+}
+}
+
+actor GastlyRentalSetupItem : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 ACS_NamedExecuteAlways("PKMN_RentalsSetup",0,Dex_Gastly)
+stop
+}
+}

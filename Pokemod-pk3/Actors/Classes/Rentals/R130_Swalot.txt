@@ -1,0 +1,90 @@
+
+/*
+[+]===================================[+]
+
+[+]===================================[+]
+*/
+
+Actor R_Swalot : ClassBaseRentals 
+{
+Player.DisplayName "Swalot"
+Player.SoundClass "Swalot"
++NOSKIN
+
+Player.StartItem "PKMNRentalKit"
+//============|
+Player.StartItem "SwalotRentalSetupItem"
+//============|
+Player.StartItem "Base_HP", 100
+Player.StartItem "Base_PAttack", 73
+Player.StartItem "Base_PDefense", 83
+Player.StartItem "Base_SAttack", 73
+Player.StartItem "Base_SDefense", 83
+
+//============|
+
+States
+{
+Spawn: 
+P130 A 0
+P130 B 1 
+P130 A 1
+GoTo Spawn+2
+See:
+P130 BCDE 5
+GoTo Spawn+1
+Missile:
+P130 A 0 A_JumpIfInventory("ConshotTimer",1,"Missile2")
+P130 F 5 
+P130 G 4
+GoTo Spawn+2
+Missile2:
+P130 G 9
+GoTo Spawn+2
+
+PainFix:
+P130 H 0 
+GoTo PainFrames
+}
+}
+
+actor SwalotRentalMoves : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_JumpIf(CallACS("RentalBotCheck") == 1,"BotWep")
+
+TNT1 A 0 A_GiveInventory("SludgeBombMove1")
+TNT1 A 0 A_GiveInventory("MudBombMove2")
+TNT1 A 0 A_GiveInventory("GigaDrainMove3")
+TNT1 A 0 A_GiveInventory("SubstituteMove4")
+stop
+
+BotWep:
+TNT1 A 0 A_GiveInventory("SludgeBombMove1")
+stop
+}
+}
+
+actor SwalotRentalSetupItem : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 ACS_NamedExecuteAlways("PKMN_RentalsSetup",0,Dex_Swalot)
+stop
+}
+}

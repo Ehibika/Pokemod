@@ -1,0 +1,90 @@
+
+/*
+[+]===================================[+]
+
+[+]===================================[+]
+*/
+
+Actor R_Zangoose : ClassBaseRentals 
+{
+Player.DisplayName "Zangoose"
+Player.SoundClass "Zangoose"
++NOSKIN
+
+Player.StartItem "PKMNRentalKit"
+//============|
+Player.StartItem "ZangooseRentalSetupItem"
+//============|
+Player.StartItem "Base_HP", 73
+Player.StartItem "Base_PAttack", 115
+Player.StartItem "Base_PDefense", 60
+Player.StartItem "Base_SAttack", 60
+Player.StartItem "Base_SDefense", 60
+
+//============|
+
+States
+{
+Spawn: 
+P108 A 0
+P108 B 1 
+P108 A 1
+GoTo Spawn+2
+See:
+P108 BCDE 5
+GoTo Spawn+1
+Missile:
+P108 A 0 A_JumpIfInventory("ConshotTimer",1,"Missile2")
+P108 F 5 
+P108 G 4
+GoTo Spawn+2
+Missile2:
+P108 G 9
+GoTo Spawn+2
+
+PainFix:
+P108 H 0 
+GoTo PainFrames
+}
+}
+
+actor ZangooseRentalMoves : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_JumpIf(CallACS("RentalBotCheck") == 1,"BotWep")
+
+TNT1 A 0 A_GiveInventory("CrushClawMove1")
+TNT1 A 0 A_GiveInventory("NightSlashMove2")
+TNT1 A 0 A_GiveInventory("DisableMove3")
+TNT1 A 0 A_GiveInventory("FakeoutMove4")
+stop
+
+BotWep:
+TNT1 A 0 A_GiveInventory("CrushClawMove1")
+stop
+}
+}
+
+actor ZangooseRentalSetupItem : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 ACS_NamedExecuteAlways("PKMN_RentalsSetup",0,Dex_Zangoose)
+stop
+}
+}

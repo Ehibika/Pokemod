@@ -4,6 +4,7 @@
 
 */
 #library "DB_Data"
+#Import "DB_Player.acs"
 #include "zcommon.acs"
 
 
@@ -155,16 +156,24 @@ Script "PKMNACS_HealthPercent" (int Pointer, int Type, int perval)
 int HealthPercent;
 int PlayerCurrentHealth;
 int PlayerMaxHealth;
+int MaxHPCache;
 int TargTID;
 
 if(Pointer>0){TargTID = ACS_NamedExecuteWithResult("core_getptrtid",Pointer);}
-
+else if(IsValidPKMNActor(ActivatorTID()) == 2){TargTID = ActivatorTID();}
 
 if(GetActorProperty(TargTID,APROP_HEALTH)<=0){PlayerCurrentHealth = 1; }
 else{PlayerCurrentHealth = GetActorProperty(TargTID,APROP_Health);}
 
-if(GetActorProperty(TargTID,APROP_SpawnHealth)<=0){PlayerMaxHealth = 1; }
-else{PlayerMaxHealth = GetActorProperty(TargTID,APROP_SpawnHealth);}
+Switch(IsValidPKMNActor(TargTID))
+    {
+    Case 0: terminate; Break;
+    Case 1: MaxHPCache = GetActorProperty(TargTID,APROP_SpawnHealth); Break;
+    Case 2: MaxHPCache = CheckActorInventory(TargTID,"SBAR_HP"); Break;
+	}
+	
+if(MaxHPCache<=0){PlayerMaxHealth = 1; }
+else{PlayerMaxHealth = MaxHPCache;}
 
 // Type 0 = current percentage of health
 // Type 1 = Value of Health at that percentage

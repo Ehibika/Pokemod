@@ -56,7 +56,7 @@ Script "DisplayBPAndSlots" OPEN CLIENTSIDE
 {
 int conP = ConsolePlayerNumber();
 while(true) {
-	if(GetCvar("sv_EnableShop") == 1){DisplayBPAndSlotsFunc(conP);}
+	if(GetCvar("sv_EnableShop") == 1 || GetCvar("sv_EnableTM") == 1){DisplayBPAndSlotsFunc(conP);}
 	delay(1);
 }
 }

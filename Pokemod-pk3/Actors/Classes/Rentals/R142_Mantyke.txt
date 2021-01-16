@@ -1,0 +1,90 @@
+
+/*
+[+]===================================[+]
+
+[+]===================================[+]
+*/
+
+Actor R_Mantyke : ClassBaseRentals 
+{
+Player.DisplayName "Mantyke"
+Player.SoundClass "Mantyke"
++NOSKIN
+
+Player.StartItem "PKMNRentalKit"
+//============|
+Player.StartItem "MantykeRentalSetupItem"
+//============|
+Player.StartItem "Base_HP", 45
+Player.StartItem "Base_PAttack", 20
+Player.StartItem "Base_PDefense", 50
+Player.StartItem "Base_SAttack", 60
+Player.StartItem "Base_SDefense", 120
+
+//============|
+
+States
+{
+Spawn: 
+P142 A 0
+P142 B 1 
+P142 A 1
+GoTo Spawn+2
+See:
+P142 BCDE 5
+GoTo Spawn+1
+Missile:
+P142 A 0 A_JumpIfInventory("ConshotTimer",1,"Missile2")
+P142 F 5 
+P142 G 4
+GoTo Spawn+2
+Missile2:
+P142 G 9
+GoTo Spawn+2
+
+PainFix:
+P142 H 0 
+GoTo PainFrames
+}
+}
+
+actor MantykeRentalMoves : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_JumpIf(CallACS("RentalBotCheck") == 1,"BotWep")
+
+TNT1 A 0 A_GiveInventory("BubbleBeamMove1")
+TNT1 A 0 A_GiveInventory("WingAttackMove2")
+TNT1 A 0 A_GiveInventory("TailwindMove3")
+TNT1 A 0 A_GiveInventory("LifeDewMove4")
+stop
+
+BotWep:
+TNT1 A 0 A_GiveInventory("BubbleBeamMove1")
+stop
+}
+}
+
+actor MantykeRentalSetupItem : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 ACS_NamedExecuteAlways("PKMN_RentalsSetup",0,Dex_Mantyke)
+stop
+}
+}

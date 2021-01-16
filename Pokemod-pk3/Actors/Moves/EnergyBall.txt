@@ -109,7 +109,7 @@ actor EnergyBallPP : Ammo {inventory.amount 1 inventory.Maxamount 20}
 
 actor PKMN_SkillShot : BasicProjectile
 {
-Speed 64
+Speed 80 //Check shadowball if you ever change this value
 Reactiontime 10
 radius 12
 height 16

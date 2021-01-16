@@ -1,0 +1,90 @@
+
+/*
+[+]===================================[+]
+
+[+]===================================[+]
+*/
+
+Actor R_Gyarados : ClassBaseRentals 
+{
+Player.DisplayName "Gyarados"
+Player.SoundClass "Gyarados"
++NOSKIN
+Scale 1.5
+Player.StartItem "PKMNRentalKit"
+//============|
+Player.StartItem "GyaradosRentalSetupItem"
+//============|
+Player.StartItem "Base_HP", 95
+Player.StartItem "Base_PAttack", 125
+Player.StartItem "Base_PDefense", 79
+Player.StartItem "Base_SAttack", 60
+Player.StartItem "Base_SDefense", 100
+
+//============|
+
+States
+{
+Spawn: 
+P137 A 0
+P137 B 1 
+P137 A 1
+GoTo Spawn+2
+See:
+P137 BCDE 5
+GoTo Spawn+1
+Missile:
+P137 A 0 A_JumpIfInventory("ConshotTimer",1,"Missile2")
+P137 F 5 
+P137 G 4
+GoTo Spawn+2
+Missile2:
+P137 G 9
+GoTo Spawn+2
+
+PainFix:
+P137 H 0 
+GoTo PainFrames
+}
+}
+
+actor GyaradosRentalMoves : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_JumpIf(CallACS("RentalBotCheck") == 1,"BotWep")
+
+TNT1 A 0 A_GiveInventory("AquaTailMove1")
+TNT1 A 0 A_GiveInventory("DragonDanceMove2")
+TNT1 A 0 A_GiveInventory("WhirlpoolMove3")
+TNT1 A 0 A_GiveInventory("OutrageMove4")
+stop
+
+BotWep:
+TNT1 A 0 A_GiveInventory("AquaTailMove1")
+stop
+}
+}
+
+actor GyaradosRentalSetupItem : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 ACS_NamedExecuteAlways("PKMN_RentalsSetup",0,Dex_Gyarados)
+stop
+}
+}

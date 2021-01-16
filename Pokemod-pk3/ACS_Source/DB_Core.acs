@@ -7,4 +7,4 @@
 #library "DB_Core"
 #include "zcommon.acs"
 
-Bool InWarmup = true;
+Bool InWarmup = false;

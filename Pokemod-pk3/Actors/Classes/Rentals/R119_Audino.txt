@@ -1,0 +1,90 @@
+
+/*
+[+]===================================[+]
+
+[+]===================================[+]
+*/
+
+Actor R_Audino : ClassBaseRentals 
+{
+Player.DisplayName "Audino"
+Player.SoundClass "Audino"
++NOSKIN
+
+Player.StartItem "PKMNRentalKit"
+//============|
+Player.StartItem "AudinoRentalSetupItem"
+//============|
+Player.StartItem "Base_HP", 103
+Player.StartItem "Base_PAttack", 60
+Player.StartItem "Base_PDefense", 86
+Player.StartItem "Base_SAttack", 60
+Player.StartItem "Base_SDefense", 86
+
+//============|
+
+States
+{
+Spawn: 
+P119 A 0
+P119 B 1 
+P119 A 1
+GoTo Spawn+2
+See:
+P119 BCDE 5
+GoTo Spawn+1
+Missile:
+P119 A 0 A_JumpIfInventory("ConshotTimer",1,"Missile2")
+P119 F 5 
+P119 G 4
+GoTo Spawn+2
+Missile2:
+P119 G 9
+GoTo Spawn+2
+
+PainFix:
+P119 H 0 
+GoTo PainFrames
+}
+}
+
+actor AudinoRentalMoves : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_JumpIf(CallACS("RentalBotCheck") == 1,"BotWep")
+
+TNT1 A 0 A_GiveInventory("SwiftMove1")
+TNT1 A 0 A_GiveInventory("HealPulseMove2")
+TNT1 A 0 A_GiveInventory("HelpingHandMove3")
+TNT1 A 0 A_GiveInventory("AromaTherapyMove4")
+stop
+
+BotWep:
+TNT1 A 0 A_GiveInventory("SwiftMove1")
+stop
+}
+}
+
+actor AudinoRentalSetupItem : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 ACS_NamedExecuteAlways("PKMN_RentalsSetup",0,Dex_Audino)
+stop
+}
+}

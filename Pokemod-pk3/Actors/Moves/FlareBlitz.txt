@@ -83,7 +83,7 @@ Goto Ready
 //[+]========================================================================[+]
 //-----------------------------|Ammo & Inventory|------------------------------
 //[+]========================================================================[+]
-actor FlareBlitzPP : Ammo {inventory.amount 1 inventory.Maxamount 10}
+actor FlareBlitzPP : Ammo {inventory.amount 1 inventory.Maxamount 5}
 
 actor FlareBlitzWarmupTimer : Powerup {inventory.amount 1 powerup.duration 10 }
 actor FlareBlitzTimer : Powerup {inventory.amount 1 powerup.duration 35 }

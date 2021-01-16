@@ -76,7 +76,7 @@ actor ConfusionRCFlag : Powerup {inventory.amount 1 powerup.duration 35 }
 
 Const int ConfusionRad = 150;
 Const int Confusion_Forward = 150;
-Const int Confusion_Range = 1000;
+Const int Confusion_Range = 2000;
 
 actor ConfusionPPTaker : CustomInventory
 {
@@ -95,6 +95,29 @@ stop
 }
 
 actor Confusion_Recovery_D : FullRecovery_D{Powerup.Duration 45}
+
+actor ConfusionConfusionChance : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_Jump(255,"Cringe")
+stop
+Cringe:
+TNT1 A 0 A_GiveInventory("ConfusionStatusProc")
+stop
+
+Nope:
+TNT1 A 0
+stop
+}
+}
 //[+]========================================================================[+]
 //--------------------------------|Projectiles |--------------------------------
 //[+]========================================================================[+]

@@ -166,7 +166,7 @@ stop
 //[+]========================================================================[+]
 
 
-Const Int ThunderboltRange = 55;
+Const Int ThunderboltRange = 80;
 
 
 actor MoveThunderBoltBurstStart //: BasicHelper
@@ -325,7 +325,7 @@ actor MoveThunderBoltDamager : BasicFastProjectile
     Damage (MBP_Thunderbolt) 
     Radius 10
     Height 10
-    speed 825 //15 * ThunderboltRange(35)
+    speed 1200 //15 * ThunderboltRange(80)
     scale 2.5
     states
     {

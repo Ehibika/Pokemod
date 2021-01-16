@@ -1,0 +1,90 @@
+
+/*
+[+]===================================[+]
+
+[+]===================================[+]
+*/
+
+Actor R_Hydreigon : ClassBaseRentals 
+{
+Player.DisplayName "Hydreigon"
+Player.SoundClass "Hydreigon"
++NOSKIN
+
+Player.StartItem "PKMNRentalKit"
+//============|
+Player.StartItem "HydreigonRentalSetupItem"
+//============|
+Player.StartItem "Base_HP", 92
+Player.StartItem "Base_PAttack", 105
+Player.StartItem "Base_PDefense", 90
+Player.StartItem "Base_SAttack", 125
+Player.StartItem "Base_SDefense", 90
+
+//============|
+
+States
+{
+Spawn: 
+P091 A 0
+P091 B 1 
+P091 A 1
+GoTo Spawn+2
+See:
+P091 BCDE 5
+GoTo Spawn+1
+Missile:
+P091 A 0 A_JumpIfInventory("ConshotTimer",1,"Missile2")
+P091 F 5 
+P091 G 4
+GoTo Spawn+2
+Missile2:
+P091 G 9
+GoTo Spawn+2
+
+PainFix:
+P091 H 0 
+GoTo PainFrames
+}
+}
+
+actor HydreigonRentalMoves : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_JumpIf(CallACS("RentalBotCheck") == 1,"BotWep")
+
+TNT1 A 0 A_GiveInventory("HydroPumpMove1")
+TNT1 A 0 A_GiveInventory("FireBlastMove2")
+TNT1 A 0 A_GiveInventory("DracoMeteorMove3")
+TNT1 A 0 A_GiveInventory("FlyMove4")
+stop
+
+BotWep:
+TNT1 A 0 A_GiveInventory("HydroPumpMove1")
+stop
+}
+}
+
+actor HydreigonRentalSetupItem : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 ACS_NamedExecuteAlways("PKMN_RentalsSetup",0,Dex_Hydreigon)
+stop
+}
+}

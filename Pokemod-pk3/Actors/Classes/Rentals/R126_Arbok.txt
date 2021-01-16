@@ -1,0 +1,90 @@
+
+/*
+[+]===================================[+]
+
+[+]===================================[+]
+*/
+
+Actor R_Arbok : ClassBaseRentals 
+{
+Player.DisplayName "Arbok"
+Player.SoundClass "Arbok"
++NOSKIN
+
+Player.StartItem "PKMNRentalKit"
+//============|
+Player.StartItem "ArbokRentalSetupItem"
+//============|
+Player.StartItem "Base_HP", 60
+Player.StartItem "Base_PAttack", 95
+Player.StartItem "Base_PDefense", 69
+Player.StartItem "Base_SAttack", 65
+Player.StartItem "Base_SDefense", 79
+
+//============|
+
+States
+{
+Spawn: 
+P126 A 0
+P126 B 1 
+P126 A 1
+GoTo Spawn+2
+See:
+P126 BCDE 5
+GoTo Spawn+1
+Missile:
+P126 A 0 A_JumpIfInventory("ConshotTimer",1,"Missile2")
+P126 F 5 
+P126 G 4
+GoTo Spawn+2
+Missile2:
+P126 G 9
+GoTo Spawn+2
+
+PainFix:
+P126 H 0 
+GoTo PainFrames
+}
+}
+
+actor ArbokRentalMoves : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_JumpIf(CallACS("RentalBotCheck") == 1,"BotWep")
+
+TNT1 A 0 A_GiveInventory("PoisonTailMove1")
+TNT1 A 0 A_GiveInventory("PursuitMove2")
+TNT1 A 0 A_GiveInventory("ToxicMove3")
+TNT1 A 0 A_GiveInventory("VenoshockMove4")
+stop
+
+BotWep:
+TNT1 A 0 A_GiveInventory("PoisonTailMove1")
+stop
+}
+}
+
+actor ArbokRentalSetupItem : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 ACS_NamedExecuteAlways("PKMN_RentalsSetup",0,Dex_Arbok)
+stop
+}
+}

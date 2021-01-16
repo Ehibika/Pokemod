@@ -1,0 +1,405 @@
+
+actor DefogMove : WepMasterBase
+{
+Tag "Defog"
+obituary "$OB_DEFOG"
+Weapon.AmmoUse 1
+Weapon.AmmoGive 10
+weapon.ammotype "DefogPP"
+scale 2.0
+Inventory.Pickupmessage "$PU_MEGABUSTER"
+States
+{
+Spawn:
+WEAP X 1
+stop
+
+
+Fire:
+"####" BBB 1 A_Jumpif(CallACS("CheckWeaponFire",RC_C)==1,"Fire.Begin")
+"####" B 0 A_Jump(256,"NoAmmo")
+Goto NoAmmo
+
+Fire.Begin:
+"####" B 0
+"####" B 0 A_Jump(256,"Fire.Aim")
+Goto Fire.Aim
+
+Fire.Aim:
+"####" B 1 A_FireCustomMissile("DefogRingSpawner",0,0,0,Aim_OverHead)
+"####" C 0 A_REfire("Fire.Aim")
+"####" B 0 A_Jump(256,"Fire.Bullet")
+Goto Fire.Bullet
+
+Fire.Bullet:
+"####" B 0 A_PlaySoundEx("Misc/UseMove","Weapon")
+"####" B 0 A_FireCustomMissile("DefogSpawner",0,1,0,Aim_OverHead)
+"####" B 0 A_Jump(256,"Fire.After")
+Goto Fire.After
+
+Fire.After:
+"####" B 0 //A_TakeInventory("AmmoStaller",9)
+"####" B 20 
+"####" C 0 A_REfire("Fire")
+"####" B 0 A_Jump(256,"Fire.End")
+Goto Fire.End
+
+
+
+
+
+}
+}
+
+actor DefogMove1 : DefogMove {Weapon.SlotNumber 1}
+actor DefogMove2 : DefogMove {Weapon.SlotNumber 2}
+actor DefogMove3 : DefogMove {Weapon.SlotNumber 3}
+actor DefogMove4 : DefogMove {Weapon.SlotNumber 4}
+
+actor DefogMove5 : DefogMove 
+{
+Weapon.SlotNumber 5
+States
+{
+Fire.End:
+TNT1 A 0
+TNT1 A 0 A_TakeInventory("DefogMove5",9)
+TNT1 A 0 A_Jump(256,"Ready")
+Goto Ready
+}
+}
+
+//[+]========================================================================[+]
+//-----------------------------|Ammo & Inventory|------------------------------
+//[+]========================================================================[+]
+actor DefogPP : Ammo {inventory.amount 1 inventory.Maxamount 10}
+
+Const int DefogRad = 200;
+Const int Defog_Item = 29;
+
+
+actor DefogPower : PowerupGiver
+{
+inventory.amount 1
+inventory.maxamount 1
++INVENTORY.AUTOACTIVATE
+Powerup.Duration 35
+powerup.type "HazeFlag"
+}
+
+
+actor DefogPurge : CustomInventory
+{ // - Removes net Positive effects on Enemies
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0
+TNT1 A 0 A_GiveInventory("DefogPower",1)
+TNT1 A 0 ACS_NamedExecuteAlways("StatItemNuke",0,SB_GOOD)
+TNT1 A 0 A_GiveInventory("StatUpdator",1)
+stop
+
+Nope:
+TNT1 A 0
+stop
+}
+}
+//[+]========================================================================[+]
+//--------------------------------|Projectiles |--------------------------------
+//[+]========================================================================[+]
+
+actor DefogRingGuide : BasicHelper
+{
+translation "198:198=220:220", "192:192=229:229"
+	reactiontime 15
+	var int user_angle;
+	States
+	{
+		Spawn:
+		TNT1 A 0
+		TNT1 A 0 //A_SetUserVar("user_angle", random(0, 30))
+		SpawnLoop:
+		TNT1 A 0 A_SpawnItemEx("DefogGuideDot", DefogRad, 0, -(z-floorz)+24, 0, 0, 0, user_angle, 1061)
+		TNT1 A 0 A_SpawnItemEx("DefogGuideDot", -DefogRad, 0, -(z-floorz)+24, 0, 0, 0, user_angle, 1061)
+		TNT1 A 0 A_SetUserVar("user_angle", user_angle + 12)
+		TNT1 A 0 A_Countdown
+		loop
+		Death:
+		TNT1 A 0
+		stop
+	}
+}
+
+
+actor DefogRingSpawner : BasicFastProjectile
+{
+translation "198:198=220:220", "192:192=229:229"
++DONTBLAST
++SKYEXPLODE
++THRUACTORS
++CLIENTSIDEONLY
+reactiontime 1
+damage (0)
+radius 3
+height 3
+speed 550
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 1 A_CountDown
+loop
+Death:
+TNT1 A 0 A_SpawnItemEx("DefogRingGuide",0,0,0,0,0,0,0,1)
+stop
+}
+}
+
+actor DefogGuideDot : BasicGuideDot {}
+
+actor DefogSpawner : BasicFastProjectile
+{
++DONTBLAST
++SKYEXPLODE
++THRUACTORS
+reactiontime 1
+damage (0)
+radius 3
+height 3
+speed 550
+States
+{
+Spawn:
+TNT1 A 0 
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+TNT1 A 1 A_CountDown
+loop
+Death:
+TNT1 A 0
+TNT1 A 0 A_GiveInventory("ProjectileDCode",1)
+TNT1 A 2
+TNT1 A 0 A_SpawnItemEx("DefogField",0,0,-(z-floorz)+24,0,0,0,0,SXF_TRANSFERPOINTERS)
+TNT1 A 1
+stop
+}
+}
+
+//#region 
+actor DefogShot : BasicProjectile
+{
+Obituary "$OB_DEFOG"
+DamageType "Defog"
+-NoGravity
++SLIDESONWALLS
++BOUNCEONWALLS
++BOUNCEONCEILINGS
++ALLOWBOUNCEONACTORS
++RIPPER
++THRUGHOST
+//+BOUNCEONACTORS
+Bouncefactor 1.0
+Gravity 1.5
+damage (0)
+Radius 8
+Height 8
+speed 48
+Scale 3.0
+ReactionTime 4
+States
+{
+Spawn:
+TNT1 A 0 
+TNT1 A 0 A_GiveInventory("ProjectileDCode",1)
+
+Spawn2:
+TNT1 A 0
+HAZB A 1 //A_SpawnItemEx("DefogShotTrail",0,0,8,0,0,0,0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION)
+loop
+Death:
+AQBA C 0 A_Stop
+TNT1 A 0 A_CheckFloor("DeathSpawn")
+stop
+
+DeathSpawn:
+TNT1 A 0 A_SpawnItemEx("DefogField",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION)
+TNT1 A 0 A_PlaySoundEx("weapon/crackerexplode", "Weapon")
+HAZ2 ABCDEEFFGG 2
+stop
+}
+}
+
+
+actor DefogAimPath : GolfBallAimInstantStarter3 { Speed 48 Gravity 1.5}
+
+//#endregion
+
+actor DefogField : BasicHelper
+{
+ReactionTime 17
+DamageType "Defog"
+obituary "$OB_Defog"
+states
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_GiveInventory("ProjectileDCode",1)
+TNT1 A 0 A_PlaySoundEx("weapon/TornadoBlow","Weapon")
+TNT1 A 0 ACS_NamedExecuteAlways("PKMNACS_RadiusGive",0,Defog_Item,DefogRad,RG_ENEMY)
+TNT1 A 0 ACS_NamedExecuteAlways("MasterScrub",0,DefogRad)
+TNT1 A 0 ACS_NamedExecuteAlways("MasterScrub_Client",0,DefogRad)
+TNT1 A 3 A_SpawnItemEx("DefogRing",0,0,24,0,0,0,0,SXF_NOCHECKPOSITION|SXF_TRANSFERPOINTERS|SXF_TRANSFERTRANSLATION)
+Goto SpawnLoop_1
+
+SpawnLoop_1:
+TNT1 A 1 
+TNT1 AAAAA 0 A_SpawnItemEx("DefogParticle",DefogRad,0,24+Random2(8),0,0,0,random(0,360),SXF_NOCHECKPOSITION|SXF_TRANSFERPOINTERS|SXF_TRANSFERTRANSLATION)
+TNT1 A 0 A_CountDown
+loop
+
+Death:
+TNT1 A 0 ACS_NamedExecuteAlways("PKMNACS_RadiusGive",0,Defog_Item,DefogRad,RG_ENEMY)
+TNT1 A 0 ACS_NamedExecuteAlways("MasterScrub",0,DefogRad)
+TNT1 A 0 ACS_NamedExecuteAlways("MasterScrub_Client",0,DefogRad)
+TNT1 A 17 
+stop
+}
+}
+
+actor DefogRing //: BasicHelper
+{
+translation "198:198=220:220", "192:192=229:229"
+	reactiontime 8
+    var int user_angle;
+    PROJECTILE
+    +NOINTERACTION
+    +NOCLIP
+    +CLIENTSIDEONLY
+    +NOTARGETSWITCH
+	States
+	{
+		Spawn:
+		TNT1 A 0
+        TNT1 A 0 //A_SetUserVar("user_angle", random(0, 30))
+        TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+        SpawnLoop:
+        TNT1 A 0 A_SpawnItemEx("DefogWindEffect",DefogRad,0,0,0,0,0,user_angle,1061|SXF_TRANSFERPOINTERS)
+        TNT1 A 0 A_SpawnItemEx("DefogWindEffect",-DefogRad,0,0,0,0,0,user_angle,1061|SXF_TRANSFERPOINTERS)
+		TNT1 A 1 A_SetUserVar("user_angle", user_angle + 22)
+		TNT1 A 0 A_Countdown
+		loop
+		Death:
+		TNT1 A 0
+		stop
+	}
+}
+
+actor DefogCloud : BasicClientside
+{
+scale 3.0
+RenderStyle "Translucent"
++FORCEXYBILLBOARD
+Alpha 0.7
+States
+{
+Spawn:
+TNT1 A 0 
+//TNT1 A 1 ACS_NamedExecuteAlways("TeamSmoke",0)
+HAZE ABC 2 A_SetScale(Scalex+0.1)
+HAZE CCCCCCC 2 A_SetScale(Scalex+0.1)
+HAZE CCCCCCC 2 A_SetScale(Scalex+0.1)
+HAZE CCCCCCC 2 A_SetScale(Scalex+0.1)
+HAZE CCCCCCC 2 A_Fadeout(0.2)
+stop
+}
+}
+
+actor DefogCloud2 : BasicClientside
+{
+scale 2.5
+RenderStyle "Translucent"
++FORCEXYBILLBOARD
+Alpha 0.9
+States
+{
+Spawn:
+TNT1 A 0 
+//TNT1 A 1 ACS_NamedExecuteAlways("TeamSmoke",0)
+FX14 ABCD 4 
+FX14 EEFFGGHH 2 A_Fadeout(0.2)
+stop
+}
+}
+
+
+actor DefogParticle : BasicClientside
+{
+scale 3.5
+RenderStyle "Translucent"
+Alpha 0.6
+States
+{
+Spawn:
+TNT1 A 0 
+TNT1 A random(1,3)
+MUDB MMNOP random(1,3) A_ScaleVelocity(0.6)
+stop
+}
+}
+
+actor DefogWindEffect
+{
+    +NOINTERACTION
+    ReactionTime 17
+    States
+    {
+    Spawn:
+        TNT1 A 0
+        TNT1 A 1 A_SpawnItemEx("JumpPadParticle", frandom(-32, 32), frandom(-32, 32), 0, 0, 0, 5*frandom(2,3))
+        TNT1 A 0 A_CountDown
+        loop
+    Death:
+    TNT1 A 0 
+    stop
+    }
+}
+
+
+actor DefogFX //: BasicHelper
+{
+    +MISSILE
+    -SOLID
+    +NOCLIP
+    +NOINTERACTION
+    +NOGRAVITY
+    +DONTBLAST
+    +DONTREFLECT
+    +THRUACTORS
+    RenderStyle "Translucent"
+    Alpha 0.7
+    scale 1.5
+    Radius 2
+    Height 2
+    Args 7
+    Speed 15
+    States
+    {
+    Spawn:
+        TNT1 A 0
+        //TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+        TNT1 A 0 ACS_NamedExecuteAlways("GeneralWarper2",0)    
+    Warp:
+        FX14 DDDDEEEE 1 A_Warp(2,-1,0,0,0,WARPF_INTERPOLATE|WARPF_NOCHECKPOSITION)
+        loop
+    Death:
+    FX14 FGH 2 
+    TNT1 A 0
+    stop
+
+    }
+}

@@ -77,7 +77,7 @@ actor ThunderRCFlag : Powerup {inventory.amount 1 powerup.duration 35 }
 Const int ThunderRad = 150;
 Const int ThunderRad2 = 70;
 Const int Thunder_Forward = 150;
-Const int Thunder_Range = 1350;
+Const int Thunder_Range = 1500;
 
 actor ThunderPPTaker : CustomInventory
 {

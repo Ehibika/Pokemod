@@ -76,7 +76,7 @@ actor PsychicRCFlag : Powerup {inventory.amount 1 powerup.duration 35 }
 
 Const int PsychicRad = 175;
 Const int Psychic_Forward = 150;
-Const int Psychic_Range = 1500;
+Const int Psychic_Range = 3000;
 
 actor PsychicPPTaker : CustomInventory
 {

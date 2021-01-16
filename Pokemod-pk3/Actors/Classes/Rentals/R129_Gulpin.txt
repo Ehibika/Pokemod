@@ -1,0 +1,90 @@
+
+/*
+[+]===================================[+]
+
+[+]===================================[+]
+*/
+
+Actor R_Gulpin : ClassBaseRentals 
+{
+Player.DisplayName "Gulpin"
+Player.SoundClass "Gulpin"
++NOSKIN
+
+Player.StartItem "PKMNRentalKit"
+//============|
+Player.StartItem "GulpinRentalSetupItem"
+//============|
+Player.StartItem "Base_HP", 70
+Player.StartItem "Base_PAttack", 43
+Player.StartItem "Base_PDefense", 53
+Player.StartItem "Base_SAttack", 43
+Player.StartItem "Base_SDefense", 53
+
+//============|
+
+States
+{
+Spawn: 
+P129 A 0
+P129 B 1 
+P129 A 1
+GoTo Spawn+2
+See:
+P129 BCDE 5
+GoTo Spawn+1
+Missile:
+P129 A 0 A_JumpIfInventory("ConshotTimer",1,"Missile2")
+P129 F 5 
+P129 G 4
+GoTo Spawn+2
+Missile2:
+P129 G 9
+GoTo Spawn+2
+
+PainFix:
+P129 H 0 
+GoTo PainFrames
+}
+}
+
+actor GulpinRentalMoves : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_JumpIf(CallACS("RentalBotCheck") == 1,"BotWep")
+
+TNT1 A 0 A_GiveInventory("SludgeBombMove1")
+TNT1 A 0 A_GiveInventory("SlackOffMove2")
+TNT1 A 0 A_GiveInventory("MegaDrainMove3")
+TNT1 A 0 A_GiveInventory("AmnesiaMove4")
+stop
+
+BotWep:
+TNT1 A 0 A_GiveInventory("SludgeBombMove1")
+stop
+}
+}
+
+actor GulpinRentalSetupItem : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 ACS_NamedExecuteAlways("PKMN_RentalsSetup",0,Dex_Gulpin)
+stop
+}
+}

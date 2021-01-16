@@ -2,6 +2,7 @@
 #library "A_Targeter"
 #import "Dex_Moves.acs"
 #import "WepACS.acs"
+#import "DB_Player.acs"
 #include "zcommon.acs"
 #include "8bdmlib.acs"
 
@@ -75,14 +76,14 @@ script "TracerTargeter" (int TargType, int TargRange, int TargMove) {
 				for(i=0;i<ownerNumber;i++) {
 					Targeter(x, y, z, angle, pitch, i);
 				}
-				for(i=ownerNumber+1;i<GetMaxPlayers();i++) {
+				for(i=ownerNumber+1;i<GetMaxEntities();i++) {
 					Targeter(x, y, z, angle, pitch, i);
 				}
 			} else if(team!=TEAM_COOP) {
 				for(i=0;i<ownerNumber;i++) {
 					TargeterTeam(team, x, y, z, angle, pitch, i, TargType);
 				}
-				for(i=ownerNumber+1;i<GetMaxPlayers();i++) {
+				for(i=ownerNumber+1;i<GetMaxEntities();i++) {
 					TargeterTeam(team, x, y, z, angle, pitch, i, TargType);
 				}
 			}
@@ -116,12 +117,12 @@ script "TracerTargeter" (int TargType, int TargRange, int TargMove) {
 }
 
 function void TargeterTeam(int team, int x, int y, int z, int angle, int pitch, int i, int TargType) {
-	if(team != GetPlayerInfo(i, PLAYERINFO_TEAM) && (TargType & TG_ENEMY)) 
+	if(team != CheckActorTeam(i+1000) && (TargType & TG_ENEMY)) 
 		{
 		Targeter(x, y, z, angle, pitch, i);
 		}
 		
-	else if(team == GetPlayerInfo(i, PLAYERINFO_TEAM) && (TargType & TG_TEAM)) 
+	else if(team == CheckActorTeam(i+1000) && (TargType & TG_TEAM)) 
 		{
 		Targeter(x, y, z, angle, pitch, i);
 		}
@@ -267,7 +268,7 @@ script 405 ENTER CLIENTSIDE {
 					HudMessageOnActorZPlusAllign(1000+i, PLAYER_CENTER, 200+i, 0, 0, 0, -10, 9000, "JUSTA0", "Discord", 0, CR_UNTRANSLATED);
 				}
 			}
-			for(i=ownerNumber+1;i<ServerMax;i++) {
+			for(i=ownerNumber+1;i<GetMaxEntities();i++) {
 				if(CheckActorInventory(1000+i,"Discorded")) {
 					HudMessageOnActorZPlusAllign(1000+i, PLAYER_CENTER, 200+i, 0, 0, 0, -10, 9000, "JUSTA0", "Discord", 0, CR_UNTRANSLATED);
 				}
@@ -283,7 +284,7 @@ script 406 RESPAWN CLIENTSIDE {
 }
 
 script 409 ENTER { //So joining players see stuff right
-	for(int i=0;i<ServerMax;i++) {
+	for(int i=0;i<GetMaxEntities();i++) {
 		Thing_ChangeTID(1000+i,1000+i);
 	}
 }

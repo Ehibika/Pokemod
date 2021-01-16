@@ -29,7 +29,10 @@ TNT1 A 0 A_PlaySoundEx("Move/Pursuit","Weapon")
 TNT1 A 0 A_FireCustomMissile("FaintAttackSeeker",0,1,0,0)
 TNT1 A 0 A_GiveInventory("FaintPoofFXSpawn")
 TNT1 A 0 ACS_NamedExecuteAlways("PKMN_ToggleVisible",0,0,0)
-TNT1 A 0 A_ChangeFlag("NONSHOOTABLE",1)
+TNT1 A 0 A_TakeInventory("UnSolid",1)
+TNT1 A 0 A_ChangeFlag("NONSHOOTABLE",1) 
+TNT1 A 0 A_ChangeFlag("SOLID",0)
+TNT1 A 0 A_ChangeFlag("PICKUP",0)
 TNT1 A 24 A_GiveInventory("TargHolder")
 
 
@@ -37,6 +40,8 @@ TNT1 A 0 A_PlaySoundEx("Move/Amnesia","Weapon")
 TNT1 A 0 A_GiveInventory("FaintPoofFXSpawn")
 TNT1 A 0 ACS_NamedExecuteAlways("PKMN_ToggleVisible",0,0,1)
 TNT1 A 0 A_ChangeFlag("NONSHOOTABLE",0)
+TNT1 A 0 A_SpawnItemEx("ReSolidifier")
+TNT1 A 0 A_ChangeFlag("PICKUP",1)
 Goto Fire.After
 
 Fire.After:

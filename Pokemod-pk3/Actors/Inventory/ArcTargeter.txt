@@ -527,7 +527,7 @@
 		+CLIENTSIDEONLY
 		Radius 18
 		Height 60
-		Gravity 0.6
+		Gravity 2.0
 		translation "198:198=220:220", "192:192=229:229"
 		States
 		{
@@ -545,7 +545,7 @@
 		+CLIENTSIDEONLY
 		Radius 18
 		Height 60
-		Gravity 0.6
+		Gravity 2.0
 		States
 		{
 		Spawn:
@@ -563,7 +563,7 @@
 		+BOUNCEONCEILINGS
 		Radius 18
 		Height 60
-		Gravity 0.6
+		Gravity 2.0
 		States
 		{
 		Spawn:

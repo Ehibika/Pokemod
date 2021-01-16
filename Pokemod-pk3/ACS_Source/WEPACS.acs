@@ -5,6 +5,7 @@
 #include "8bdmlib.acs"// included with MM8BDM under acs_source.
 					  // See 8bdmlib.acs for details.
 #import "A_Targeter.acs"
+#import "DB_Player.acs"
 #import "Dex_Moves.acs"
 //#Include "CSCCLib.acs" //for StatusTime()
 
@@ -387,14 +388,14 @@ str weapons_ammo[MAX_WEAPONS_GLOBAL][7] =
 {"DreamEaterMove", "DreamEaterPP", "DreamEater", 1.0, "YES", "NO", "SLOT_NONE"},
 {"MeditateMove", "MeditatePP", "Meditate", 1.0, "NO", "NO", "SLOT_NONE"},
 {"PoisonGasMove", "PoisonGasPP", "PoisonGas", 1.0, "NO", "NO", "SLOT_NONE"},
-{"SwaggerMove", "SwaggerPP", "Swagger", 1.0, "NO", "NO", "SLOT_NONE"},
-{"FlatterMove", "FlatterPP", "Flatter", 1.0, "NO", "NO", "SLOT_NONE"},
-{"AssistMove", "AssistPP", "Assist", 1.0, "NO", "NO", "SLOT_NONE"},
-{"NightmareMove", "NightmarePP", "Nightmare", 1.0, "NO", "NO", "SLOT_NONE"},
+{"SwaggerMove", "SwaggerPP", "Swagger", 1.0, "YES", "NO", "SLOT_NONE"},
+{"FlatterMove", "FlatterPP", "Flatter", 1.0, "YES", "NO", "SLOT_NONE"},
+{"AssistMove", "AssistPP", "Assist", 1.0, "YES", "NO", "SLOT_NONE"},
+{"NightmareMove", "NightmarePP", "Nightmare", 1.0, "YES", "NO", "SLOT_NONE"},
 {"DisarmingVoiceMove", "DisarmingVoicePP", "DisarmingVoice", 1.0, "NO", "NO", "SLOT_NONE"},
 {"ShadowSneakMove", "ShadowSneakPP", "ShadowSneak", 1.0, "NO", "NO", "SLOT_NONE"},
 {"DestinyBondMove", "DestinyBondPP", "DestinyBond", 1.0, "NO", "NO", "SLOT_NONE"},
-{"<BlankMove>Move", "<BlankMove>PP", "<BlankMove>", 1.0, "NO", "NO", "SLOT_NONE"},
+{"TailwindMove", "TailwindPP", "Tailwind", 1.0, "NO", "NO", "SLOT_NONE"},
 {"DrainingKissMove", "DrainingKissPP", "DrainingKiss", 1.0, "YES", "NO", "SLOT_NONE"},
 {"ImprisonMove", "ImprisonPP", "Imprison", 1.0, "NO", "NO", "SLOT_NONE"},
 {"WishMove", "WishPP", "Wish", 1.0, "NO", "YES", "SLOT_NONE"},
@@ -460,6 +461,7 @@ str weapons_ammo[MAX_WEAPONS_GLOBAL][7] =
 {"EarthPowerMove", "EarthPowerPP", "EarthPower", 1.0, "NO", "NO", "SLOT_NONE"},
 {"PinMissileMove", "PinMissilePP", "PinMissile", 1.0, "NO", "NO", "SLOT_NONE"},
 {"FaintAttackMove", "FaintAttackPP", "FaintAttack", 1.0, "YES", "NO", "SLOT_NONE"},
+{"DefogMove", "DefogPP", "Defog", 1.0, "NO", "NO", "SLOT_NONE"},
 //--[NewMove]--
 };
 #endregion
@@ -753,7 +755,7 @@ if(PlayerIsBot(PlayerNumber()))
 	int yPos;
 	int d = 10;
 	int BotWeapon;
-	int MaxPlayers = GetMaxPlayers();
+	int MaxPlayers = GetMaxEntities();
 	Delay(35);
 	if(CheckInventory("NoBotFix")==1){terminate;}
 	While(GetActorProperty(ActivatorTID(), APROP_HEALTH) > 0 && !CheckInventory("IsDead")==1)
@@ -1008,6 +1010,9 @@ Script "MoveSetup" (void)
 				Case THUNDERWAVE: ACS_NamedExecuteAlways("TracerTargeter",0,TG_ENEMY,800); break;
 				Case DrainingKiss: ACS_NamedExecuteAlways("TracerTargeter",0,TG_ENEMY,350); break;
 				Case FaintAttack: ACS_NamedExecuteAlways("TracerTargeter",0,TG_ENEMY,350); break;
+				Case Swagger: ACS_NamedExecuteAlways("TracerTargeter",0,TG_ENEMY,350); break;
+				Case Flatter: ACS_NamedExecuteAlways("TracerTargeter",0,TG_ENEMY,350); break;
+				Case Assist: ACS_NamedExecuteAlways("TracerTargeter",0,TG_ENEMY,550); break;
 				default: ACS_NamedExecuteAlways("TracerTargeter",0,TG_TEAM,630); break;
 			}
 			

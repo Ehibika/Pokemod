@@ -97,8 +97,8 @@ Int StatDEX [MAXDEX][10] = {
 /*|49|*/{30, 45, 55, 75,	    55,    FAST_SPD,    5,	Type_Water,Type_NULL,  LVLSPD_Trudging},
 /*|50|*/{60, 75, 85, 100,	    85,    FAST_SPD,    20,	Type_Water,Type_Psychic,  LVLSPD_Trudging},
 
-/*|51|*/{30, 65, 100, 45,	    25,    SLOW_SPD,    5,	Type_Water,Type_NULL,  LVLSPD_Swift},
-/*|52|*/{50, 95, 180, 85,	    45,    SLOW_SPD,    20,	Type_Water,Type_Ice,  LVLSPD_Swift},
+/*|51|*/{30, 65, 80, 45,	    45,    SLOW_SPD,    5,	Type_Water,Type_NULL,  LVLSPD_Swift},
+/*|52|*/{50, 95, 160, 85,	    65,    SLOW_SPD,    20,	Type_Water,Type_Ice,  LVLSPD_Swift},
 
 /*|53|*/{38, 41, 40, 50,	    65,    FAST_SPD,    5,	Type_Fire,Type_Psychic,  LVLSPD_Swift},
 /*|54|*/{73, 76, 75, 81,	    100,    FAST_SPD,    20,	Type_Fire,Type_Psychic,  LVLSPD_Swift},

@@ -1,0 +1,90 @@
+
+/*
+[+]===================================[+]
+
+[+]===================================[+]
+*/
+
+Actor R_Bergmite : ClassBaseRentals 
+{
+Player.DisplayName "Bergmite"
+Player.SoundClass "Bergmite"
++NOSKIN
+
+Player.StartItem "PKMNRentalKit"
+//============|
+Player.StartItem "BergmiteRentalSetupItem"
+//============|
+Player.StartItem "Base_HP", 55
+Player.StartItem "Base_PAttack", 69
+Player.StartItem "Base_PDefense", 85
+Player.StartItem "Base_SAttack", 32
+Player.StartItem "Base_SDefense", 35
+
+//============|
+
+States
+{
+Spawn: 
+P121 A 0
+P121 B 1 
+P121 A 1
+GoTo Spawn+2
+See:
+P121 BCDE 5
+GoTo Spawn+1
+Missile:
+P121 A 0 A_JumpIfInventory("ConshotTimer",1,"Missile2")
+P121 F 5 
+P121 G 4
+GoTo Spawn+2
+Missile2:
+P121 G 9
+GoTo Spawn+2
+
+PainFix:
+P121 H 0 
+GoTo PainFrames
+}
+}
+
+actor BergmiteRentalMoves : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_JumpIf(CallACS("RentalBotCheck") == 1,"BotWep")
+
+TNT1 A 0 A_GiveInventory("IceShardMove1")
+TNT1 A 0 A_GiveInventory("BlockMove2")
+TNT1 A 0 A_GiveInventory("MistMove3")
+TNT1 A 0 A_GiveInventory("RecoverMove4")
+stop
+
+BotWep:
+TNT1 A 0 A_GiveInventory("IceShardMove1")
+stop
+}
+}
+
+actor BergmiteRentalSetupItem : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 ACS_NamedExecuteAlways("PKMN_RentalsSetup",0,Dex_Bergmite)
+stop
+}
+}

@@ -19,8 +19,9 @@ OptionMenu ZA_JoinMenu
 	StaticText""
 	Command "Join Game", "!pkmn_justjoin"
 	Option "$MNU_JOIN3", "playerclass", "PKMN_JoinName"
-	StaticText""
 	TextField "$MNU_JOIN4", "playerclass"
+	StaticText "===============================================================",1
+	JoinMenuPlayerClassOption
 	Command "Join game", "menu_joingamewithclass"
 	StaticText "===============================================================",1
 	//Option "$MNU_JOIN4", "playerclass", "PKMN_JoinMoves", "unselectable"
@@ -50,12 +51,13 @@ OptionMenu ZA_JoinTeamMenu
 	StaticText""
 	StaticText""
 	Command "$MNU_JOIN6", "menu_autoselect"
-	JoinMenuPlayerClassOption
+	StaticText""
+	Option "$MNU_JOIN3", "playerclass", "PKMN_JoinName"
 	StaticText""
 	TextField "$MNU_JOIN4", "playerclass"
-	StaticText""
-	//JoinMenuTeamOption
-	Option "$MNU_JOIN3", "playerclass", "PKMN_JoinName"
+	StaticText "===============================================================",1
+	JoinMenuTeamOption
+	JoinMenuPlayerClassOption
 	Command "Join game", "menu_joingamewithclass"
 	StaticText "===============================================================",1
 	//Option "$MNU_JOIN4", "playerclass", "PKMN_JoinMoves", "unselectable"

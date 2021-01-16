@@ -1,0 +1,87 @@
+
+/*
+[+]===================================[+]
+
+[+]===================================[+]
+*/
+
+Actor R_Magikarp : ClassBaseRentals 
+{
+Player.DisplayName "Magikarp"
+Player.SoundClass "Magikarp"
++NOSKIN
+
+Player.StartItem "PKMNRentalKit"
+//============|
+Player.StartItem "MagikarpRentalSetupItem"
+//============|
+Player.StartItem "Base_HP", 20
+Player.StartItem "Base_PAttack", 10
+Player.StartItem "Base_PDefense", 55
+Player.StartItem "Base_SAttack", 10
+Player.StartItem "Base_SDefense", 20
+
+//============|
+
+States
+{
+Spawn: 
+P136 A 0
+P136 B 1 
+P136 A 1
+GoTo Spawn+2
+See:
+P136 BCDE 5
+GoTo Spawn+1
+Missile:
+P136 A 0 A_JumpIfInventory("ConshotTimer",1,"Missile2")
+P136 F 5 
+P136 G 4
+GoTo Spawn+2
+Missile2:
+P136 G 9
+GoTo Spawn+2
+
+PainFix:
+P136 H 0 
+GoTo PainFrames
+}
+}
+
+actor MagikarpRentalMoves : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_JumpIf(CallACS("RentalBotCheck") == 1,"BotWep")
+
+TNT1 A 0 A_GiveInventory("HydroPumpMove1")
+stop
+
+BotWep:
+TNT1 A 0 A_GiveInventory("HydroPumpMove1")
+stop
+}
+}
+
+actor MagikarpRentalSetupItem : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 ACS_NamedExecuteAlways("PKMN_RentalsSetup",0,Dex_Magikarp)
+stop
+}
+}

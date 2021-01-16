@@ -15,12 +15,12 @@ Spawn:
 TNT1 A 0
 stop
 Pickup:
+TNT1 A 0 A_Jumpifinventory("PoisonMark",1,"Sustain")
 TNT1 A 0 A_Jumpif(CallACS("CheckStatusGuard",0,STATUS_MAJOR),"Nope") //Blocked by protect|Detect|Substitute|Safeguard
 TNT1 A 0 A_Jumpifinventory("PoisonGuard",1,"Nope")
 TNT1 A 0 A_Jumpifinventory("TempPoisonGuard",1,"Nope")
 TNT1 A 0 A_Jumpifinventory("PoisonProof",1,"Nope")
 //==
-TNT1 A 0 A_Jumpifinventory("PoisonMark",1,"Sustain")
 TNT1 A 0 A_GiveInventory("PoisonMark",1)
 TNT1 A 0 A_SpawnItemEX("PoisonWatcher")
 TNT1 A 0 A_Playsoundex("status/poison","Soundslot8")
@@ -58,7 +58,7 @@ LASH A 0 A_Setuservar("user_OwnerTID",ACS_ExecuteWithResult(257,0))
 LASH A 0 A_TransferPointer(AAPTR_TARGET,AAPTR_DEFAULT,AAPTR_TARGET,AAPTR_MASTER,PTROP_NOSAFEGUARDS)
 LASH A 0 A_ReArrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
 //LASH A 0 A_Setuservar("user_TickDamage",CallACS("PKMNACS_HealthPercent",user_OwnerTID,1,8)) //ACS_ExecuteWithResult(GetTargValueHPPerc,6)
-LASH A 0 A_Setuservar("user_TickDamage",CallACS("PKMNACS_HealthPercent",AAPTR_TARGET,1,8))
+LASH A 0 A_Setuservar("user_TickDamage",CallACS("PKMNACS_HealthPercent",AAPTR_TARGET,1,4))
 Spawn2:
 
     TNT1 A 1 A_JumpIfInTargetInventory("CutterFlag",999,"DeathTake")
@@ -306,7 +306,7 @@ stop
 
 actor BurnMark : PAtk
 {
-powerup.duration -15
+powerup.duration -10
 damagefactor "Normal", 0.5
 //Powerup.Color Green, 0.15
 }
@@ -322,12 +322,12 @@ Spawn:
 TNT1 A 0
 stop
 Pickup:
+TNT1 A 0 A_Jumpifinventory("BurnMark",1,"Sustain")
 TNT1 A 0 A_Jumpif(CallACS("CheckStatusGuard",0,STATUS_MAJOR),"Nope") //Blocked by protect|Detect|Substitute|Safeguard
 TNT1 A 0 A_Jumpifinventory("BurnGuard",1,"Nope")
 TNT1 A 0 A_Jumpifinventory("TempBurnGuard",1,"Nope")
 TNT1 A 0 //A_Jumpifinventory("BurnProof",1,"Nope")
 //==
-TNT1 A 0 A_Jumpifinventory("BurnMark",1,"Sustain")
 TNT1 A 0 A_GiveInventory("BurnMark",1)
 TNT1 A 0 A_SpawnItemEX("BurnWatcher")
 TNT1 A 0 A_Playsoundex("status/burn","Soundslot8")
@@ -365,7 +365,7 @@ LASH A 0 A_Setuservar("user_OwnerTID",ACS_ExecuteWithResult(257,0))
 LASH A 0 A_TransferPointer(AAPTR_TARGET,AAPTR_DEFAULT,AAPTR_TARGET,AAPTR_MASTER,PTROP_NOSAFEGUARDS)
 LASH A 0 A_ReArrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
 //LASH A 0 A_Setuservar("user_TickDamage",CallACS("PKMNACS_HealthPercent",user_OwnerTID,1,6)) //ACS_ExecuteWithResult(GetTargValueHPPerc,6)
-LASH A 0 A_Setuservar("user_TickDamage",CallACS("PKMNACS_HealthPercent",AAPTR_TARGET,1,6))
+LASH A 0 A_Setuservar("user_TickDamage",CallACS("PKMNACS_HealthPercent",AAPTR_TARGET,1,3))
 Spawn2:
 
     TNT1 A 1 A_JumpIfInTargetInventory("CutterFlag",999,"DeathTake")
@@ -480,12 +480,12 @@ Spawn:
 TNT1 A 0
 stop
 Pickup:
+TNT1 A 0 A_Jumpifinventory("ParalysisMark",1,"Sustain")
 TNT1 A 0 A_Jumpif(CallACS("CheckStatusGuard",0,STATUS_MAJOR),"Nope") //Blocked by protect|Detect|Substitute|Safeguard
 TNT1 A 0 A_Jumpifinventory("ParalysisGuard",1,"Nope")
 TNT1 A 0 A_Jumpifinventory("TempParalysisGuard",1,"Nope")
 TNT1 A 0 A_Jumpifinventory("ParalyzeProof",1,"Nope")
 //==
-TNT1 A 0 A_Jumpifinventory("ParalysisMark",1,"Sustain")
 TNT1 A 0 A_GiveInventory("LongPara",1)
 TNT1 A 0 A_SpawnItemEX("ParalysisWatcher")
 TNT1 A 0 ACS_NamedExecuteAlways("PKMN_JumpToggle",0,0)
@@ -513,12 +513,12 @@ Spawn:
 TNT1 A 0
 stop
 Pickup:
+TNT1 A 0 A_Jumpifinventory("ParalysisMark",1,"Sustain")
 TNT1 A 0 A_Jumpif(CallACS("CheckStatusGuard",0,STATUS_MAJOR),"Nope") //Blocked by protect|Detect|Substitute|Safeguard
 TNT1 A 0 A_Jumpifinventory("ParalysisGuard",1,"Nope")
 TNT1 A 0 A_Jumpifinventory("TempParalysisGuard",1,"Nope")
 TNT1 A 0 A_Jumpifinventory("ParalyzeProof",1,"Nope")
 //==
-TNT1 A 0 A_Jumpifinventory("ParalysisMark",1,"Sustain")
 TNT1 A 0 A_GiveInventory("ShortPara",1)
 TNT1 A 0 A_SpawnItemEX("ParalysisWatcher")
 TNT1 A 0 ACS_NamedExecuteAlways("PKMN_JumpToggle",0,0)
@@ -546,12 +546,12 @@ Spawn:
 TNT1 A 0
 stop
 Pickup:
+TNT1 A 0 A_Jumpifinventory("ParalysisMark",1,"Sustain")
 TNT1 A 0 A_Jumpif(CallACS("CheckStatusGuard",0,STATUS_MAJOR),"Nope") //Blocked by protect|Detect|Substitute|Safeguard
 TNT1 A 0 A_Jumpifinventory("Zap_ParalysisGuard",1,"Nope")
 TNT1 A 0 A_Jumpifinventory("TempZap_ParalysisGuard",1,"Nope")
 TNT1 A 0 A_Jumpifinventory("ParalyzeProof",1,"Nope")
 //==
-TNT1 A 0 A_Jumpifinventory("ParalysisMark",1,"Sustain")
 TNT1 A 0 A_GiveInventory("LongPara",1)
 TNT1 A 0 A_SpawnItemEX("ParalysisWatcher")
 TNT1 A 0 ACS_NamedExecuteAlways("PKMN_JumpToggle",0,0)
@@ -579,12 +579,12 @@ Spawn:
 TNT1 A 0
 stop
 Pickup:
+TNT1 A 0 A_Jumpifinventory("ParalysisMark",1,"Sustain")
 TNT1 A 0 A_Jumpif(CallACS("CheckStatusGuard",0,STATUS_MAJOR),"Nope") //Blocked by protect|Detect|Substitute|Safeguard
 TNT1 A 0 A_Jumpifinventory("Zap_ParalysisGuard",1,"Nope")
 TNT1 A 0 A_Jumpifinventory("TempZap_ParalysisGuard",1,"Nope")
 TNT1 A 0 A_Jumpifinventory("ParalyzeProof",1,"Nope")
 //==
-TNT1 A 0 A_Jumpifinventory("ParalysisMark",1,"Sustain")
 TNT1 A 0 A_GiveInventory("ShortPara",1)
 TNT1 A 0 A_SpawnItemEX("ParalysisWatcher")
 TNT1 A 0 ACS_NamedExecuteAlways("PKMN_JumpToggle",0,0)
@@ -1386,6 +1386,121 @@ Spawn:
 TNT1 A 0
 TAUN ABCCCCBA 3
 TAUN AAA 2 A_SetScale(Scalex-0.5) 
+stop
+}
+}
+
+//[+]=========================[+]
+//----------|Confusion|-------------
+//[+]=========================[+]
+
+actor ConfusionStatusProc : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_Jumpifinventory("ConfusionMark",1,"Sustain")
+TNT1 A 0 A_Jumpif(CallACS("CheckStatusGuard",0,STATUS_MINOR),"Nope")
+//==
+TNT1 A 0 A_PlaySoundEX("support/Negative","SoundSlot8")
+TNT1 A 0 A_GiveInventory("ConfusionMark",1)
+TNT1 A 0 A_SpawnItemEX("ConfusionWatcher")
+stop
+
+Sustain:
+TNT1 A 0 A_GiveInventory("ConfusionMark",1)
+stop
+
+Nope:
+TNT1 A 0
+stop
+}
+}
+
+
+actor ConfusionWatcher //: CustomInventory
+{
++MISSILE
++RIPPER
++NOGRAVITY
++NOINTERACTION
+Reactiontime 5
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_GiveToTarget("ConfusionTagPickup")
+Spawn2:
+TNT1 A 5
+TNT1 A 0 A_JumpIfInTargetInventory("CutterFlag",999,"DeathTake")
+TNT1 A 0 A_JumpIfInTargetInventory("ConfusionMark",1,"Spawn2")
+Goto Death
+Death:
+DeathTake:
+TNT1 A 0
+TNT1 A 1 A_TakefromTarget("ConfusionMark",999)
+TNT1 A 1 A_GiveToTarget("ConfusionBreaker")
+stop
+}
+}
+
+actor ConfusionMark : Powerup
+{
+powerup.duration -7
+//Powerup.Color Green, 0.15
+}
+
+actor ConfusionBreaker : CustomInventory
+{
+States
+{
+Pickup:
+TNT1 A 0
+TNT1 A 0 A_TakeInventory("ConfusionMark", 999)
+TNT1 A 0 A_TakeInventory("ConfusionEffectFlag", 999)
+TNT1 A 0 A_JumpifHealthLower(1,2)
+TNT1 A 0 A_PlaySoundEX("support/Heal3","SoundSlot8")
+TNT1 A 0
+stop
+}
+}
+
+actor ConfusionTagPickup : CustomInventory
+{
+States
+{
+Pickup:
+TNT1 A 0
+TNT1 A 1 A_GiveInventory("ConfusionEffectFlag")
+TNT1 A 0 A_SpawnItemEx("ConfusionEffect")
+stop
+}
+}
+
+actor ConfusionEffectFlag : inventory {inventory.amount 1 inventory.Maxamount 1}
+
+
+actor ConfusionEffect : BasicClientside
+{
+scale 2.5
+speed 7
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 ACS_NamedExecuteAlways("GeneralWarper2",0)
+Spawn2:
+CNBR AABBCCDD 1 A_Warp(AAPTR_TARGET,0,0,64,0,WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE)
+loop
+Death:
+CNBR AZBZCZDZ 1 A_Warp(AAPTR_TARGET,0,0,64,0,WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE)
+CNBR AZBZCZDZ 1 A_Warp(AAPTR_TARGET,0,0,64,0,WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE)
 stop
 }
 }

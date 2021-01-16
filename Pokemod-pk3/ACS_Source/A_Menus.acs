@@ -32,6 +32,9 @@ Script "PromptItemShop" (void)
 // - Pre Start Up -
 //==================[+]
 if(StatusTime() == 0){print(s:"Unsafe to buy items now"); Terminate;}
+if(GetCvar("sv_RentalsMode") == 1 &&
+	GetCvar("sv_EnableShop") == 0){print(s:"Item Shop is unavailable"); Terminate;}
+
 GiveInventory("SpawnSafeZone",1);
 ACS_NamedExecuteAlways("Menu_ItemShop",0);
 }
@@ -45,9 +48,7 @@ Script "Menu_ItemShop" (void) CLIENTSIDE
 	//=======================[+]
 	int PlayerLVL = GetCvar(StrParam(s:"PlayerLevel_",i:PlayerNumber()));
 	int PlayerDEXNum = GetCvar(StrParam(s:"PlayerDEXNum_",i:PlayerNumber()));
-	
-	if(PlayerDEXNum == SMEARGLE){print(s:"Smeargle Cannot use TMs"); Terminate;}
-	if(PlayerDEXNum == BELDUM){print(s:"beldum Cannot use TMs"); Terminate;}
+
 	
 	
 	Int MoveFrameCap =6;
@@ -222,6 +223,8 @@ Script "PromptMoveLearn" (int Moveid, int MoveCost)
 // - Pre Start Up -
 //==================[+]
 if(StatusTime() == 0){print(s:"Unsafe to Learn Moves now"); Terminate;}
+
+
 //setplayerproperty(0,1,4);
 GiveInventory("SpawnSafeZone",1);
 
@@ -719,6 +722,9 @@ Script "PromptLevelUpMove" (Void)
 // - Pre Start Up -
 //==================[+]
 if(StatusTime() == 0){print(s:"Unsafe Adjust moves right now"); Terminate;}
+if(GetCvar("sv_RentalsMode") == 1 &&
+	GetCvar("sv_EnableMoveTutor") == 0){print(s:"Cannot Change moves"); Terminate;}
+
 GiveInventory("SpawnSafeZone",1);
 ACS_NamedExecuteAlways("Menu_LevelUpMove",0);
 }
@@ -912,6 +918,9 @@ int PlayerDEXNum = GetCvar(StrParam(s:"PlayerDEXNum_",i:PlayerNumber()));
 if(PlayerDEXNum == SMEARGLE){print(s:"Smeargle Cannot use TMs"); Terminate;}
 if(PlayerDEXNum == BELDUM){print(s:"beldum Cannot use TMs"); Terminate;}
 if(StatusTime() == 0){print(s:"Unsafe to learn TMs right now"); Terminate;}
+if(GetCvar("sv_RentalsMode") == 1 &&
+	GetCvar("sv_EnableTM") == 0){print(s:"TMs are unavailable"); Terminate;}
+
 GiveInventory("SpawnSafeZone",1);
 ACS_NamedExecuteAlways("Menu_TMShop",0);
 }

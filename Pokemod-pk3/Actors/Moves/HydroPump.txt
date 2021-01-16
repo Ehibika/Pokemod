@@ -170,7 +170,7 @@ powerup.type "ConShotTimer"
 //--------------------------------|Projectiles |--------------------------------
 //[+]========================================================================[+]
 
-Const Int HydroPumpRange = 50;
+Const Int HydroPumpRange = 80;
 actor HydroPumpDamager : BasicFastProjectile
 {
     PROJECTILE
@@ -182,7 +182,7 @@ actor HydroPumpDamager : BasicFastProjectile
     Damage (MBP_HydroPump) 
     Radius 10
     Height 10
-    speed 750 //15 * HydroPumpRange(50)
+    speed 1200 //15 * HydroPumpRange(80)
     scale 2.5
     states
     {

@@ -364,8 +364,14 @@ Script "PokeSpeed_Handler" (Void)
 /*
 ======| Speed Stats | =======
 */
-
-int PlayerDexNum = GetCvar(StrParam(s:"PlayerDEXNum_",i:PlayerNumber()));
+int PlayerDexNum;
+Switch(IsValidPKMNActor(ActivatorTID()))
+    {
+    Case 0: terminate; Break;
+    Case 1: PlayerDexNum = GetCvar(StrParam(s:"PlayerDEXNum_",i:PlayerNumber())); Break;
+    Case 2: PlayerDexNum = CheckInventory("MobDexNum"); Break;
+    }
+ 
 
 SetActorPRoperty(0,APROP_SPEED,GetSpeedTier(PlayerDexNum,StatModCount(SPD_ID)));
 }
@@ -499,3 +505,123 @@ script "CLEAR_STATUSVARS" (int p)
 }
 
 
+Script "ObjectATKstat" (int level, int BaseATK, int BaseSATK)
+{
+
+int Act_ATK = ActStatCalc(BaseATK,level);
+int Act_SATK = ActStatCalc(BaseSATK,level);
+int ModStat;
+int StatValue;
+
+GiveInventory("Active_PAttack",Act_ATK);
+GiveInventory("Active_SAttack",Act_SATK);
+
+ModStat = Act_ATK;
+if(ModStat >= ATKSTATBASELINE2)
+    {
+    StatValue = ValueMap(ModStat,STATMAX,ATKSTATBASELINE2,ATKVAL4,ATKVAL3);
+    }
+else if(ModStat >= ATKSTATBASELINE1)
+    {
+    StatValue = ValueMap(ModStat,STATMAX,ATKSTATBASELINE1,ATKVAL3,ATKVAL2);
+    }
+else
+    {
+    StatValue = Noneg(ValueMap(ModStat,ATKSTATBASELINE1,STATMIN,ATKVAL2,ATKVAL1));    
+    }
+if(StatValue < 10){StatValue = 10;}
+if(StatValue>1000){StatValue=1000;}
+GiveInventory(StrParam(s:"PATK",i:StatValue),1);
+
+ModStat = Act_SATK;
+
+if(ModStat >= ATKSTATBASELINE2)
+    {
+    StatValue = ValueMap(ModStat,STATMAX,ATKSTATBASELINE2,ATKVAL4,ATKVAL3);
+    }
+else if(ModStat >= ATKSTATBASELINE1)
+    {
+    StatValue = ValueMap(ModStat,STATMAX,ATKSTATBASELINE1,ATKVAL3,ATKVAL2);
+    }
+else
+    {
+    StatValue = Noneg(ValueMap(ModStat,ATKSTATBASELINE1,STATMIN,ATKVAL2,ATKVAL1));    
+    }
+if(StatValue < 10){StatValue = 10;}
+if(StatValue>1000){StatValue=1000;}
+GiveInventory(StrParam(s:"SATK",i:StatValue),1);
+log(s:StrParam(s:"SATK",i:StatValue));
+}
+
+Script "ObjectDEFstat" (int level, int BaseDEF, int BaseSDEF)
+{
+
+    int Act_DEF = ActStatCalc(BaseDEF,level);
+    int Act_SDEF = ActStatCalc(BaseSDEF,level);
+    int ModStat;
+    int StatValue;
+
+    GiveInventory("Active_PDefense",Act_DEF);
+    GiveInventory("Active_SDefense",Act_SDEF);
+
+    ModStat = Act_DEF;
+
+    if(ModStat >= DEFSTATBASELINE2)
+        {
+        StatValue = Noneg(ValueMap(ModStat,STATMAX,DEFSTATBASELINE2,DEFVAL1,DEFVAL2));
+        }
+    else if(ModStat >= DEFSTATBASELINE1)
+        {
+        StatValue = Noneg(ValueMap(ModStat,DEFSTATBASELINE2,DEFSTATBASELINE1,DEFVAL2,DEFVAL3));
+        }
+    else
+        {
+        StatValue = Noneg(ValueMap(ModStat,DEFSTATBASELINE1,STATMIN,DEFVAL3,DEFVAL4));    
+        }
+    if(StatValue < 10){StatValue = 10;}
+    if(StatValue>1000){StatValue=1000;}
+    GiveInventory(StrParam(s:"PDEF",i:StatValue),1);
+    
+    ModStat = Act_SDEF;
+    
+    if(ModStat >= DEFSTATBASELINE2)
+        {
+        StatValue = Noneg(ValueMap(ModStat,STATMAX,DEFSTATBASELINE2,DEFVAL1,DEFVAL2));
+        }
+    else if(ModStat >= DEFSTATBASELINE1)
+        {
+        StatValue = Noneg(ValueMap(ModStat,DEFSTATBASELINE2,DEFSTATBASELINE1,DEFVAL2,DEFVAL3));
+        }
+    else
+        {
+        StatValue = Noneg(ValueMap(ModStat,DEFSTATBASELINE1,STATMIN,DEFVAL3,DEFVAL4));    
+        }
+    if(StatValue < 10){StatValue = 10;}
+    if(StatValue>1000){StatValue=1000;}
+    GiveInventory(StrParam(s:"SDEF",i:StatValue),1);    
+}
+
+
+Script "ObjectHPstat" (int level, int BaseHP)
+{
+    Delay(1);
+    int Act_HP = ActStatCalc(BaseHP,level);
+    int ModStat;
+    int StatValue;
+
+    GiveInventory("Active_HP",Act_HP);
+
+    if(Act_HP >= STATBASELINE3)
+        {
+        StatValue = ValueMap(Act_HP,STATMAX,STATBASELINE3,HPVAL3,HPVAL2);
+        }
+    else
+        {
+        StatValue = ValueMap(Act_HP,STATBASELINE3,STATMIN,HPVAL2,HPVAL1);
+        }
+    if(StatValue < 50){StatValue = 50;}
+    SetActorPRoperty(0,APROP_HEALTH,StatValue);
+    //log(i:StatValue,s:"   ::    ",i:GetActorPRoperty(0,APROP_HEALTH));
+    TakeInventory("SBAR_HP",9999);
+    GiveInventory("SBAR_HP",StatValue);
+}

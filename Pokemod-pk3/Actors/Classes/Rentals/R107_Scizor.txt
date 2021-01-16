@@ -1,0 +1,90 @@
+
+/*
+[+]===================================[+]
+
+[+]===================================[+]
+*/
+
+Actor R_Scizor : ClassBaseRentals 
+{
+Player.DisplayName "Scizor"
+Player.SoundClass "Scizor"
++NOSKIN
+
+Player.StartItem "PKMNRentalKit"
+//============|
+Player.StartItem "ScizorRentalSetupItem"
+//============|
+Player.StartItem "Base_HP", 70
+Player.StartItem "Base_PAttack", 130
+Player.StartItem "Base_PDefense", 100
+Player.StartItem "Base_SAttack", 55
+Player.StartItem "Base_SDefense", 80
+
+//============|
+
+States
+{
+Spawn: 
+P107 A 0
+P107 B 1 
+P107 A 1
+GoTo Spawn+2
+See:
+P107 BCDE 5
+GoTo Spawn+1
+Missile:
+P107 A 0 A_JumpIfInventory("ConshotTimer",1,"Missile2")
+P107 F 5 
+P107 G 4
+GoTo Spawn+2
+Missile2:
+P107 G 9
+GoTo Spawn+2
+
+PainFix:
+P107 H 0 
+GoTo PainFrames
+}
+}
+
+actor ScizorRentalMoves : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_JumpIf(CallACS("RentalBotCheck") == 1,"BotWep")
+
+TNT1 A 0 A_GiveInventory("IronHeadMove1")
+TNT1 A 0 A_GiveInventory("CloseCombatMove2")
+TNT1 A 0 A_GiveInventory("SilverWindMove3")
+TNT1 A 0 A_GiveInventory("SwordDanceMove4")
+stop
+
+BotWep:
+TNT1 A 0 A_GiveInventory("IronHeadMove1")
+stop
+}
+}
+
+actor ScizorRentalSetupItem : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 ACS_NamedExecuteAlways("PKMN_RentalsSetup",0,Dex_Scizor)
+stop
+}
+}

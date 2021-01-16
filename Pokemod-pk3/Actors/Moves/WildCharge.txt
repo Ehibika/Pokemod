@@ -85,7 +85,7 @@ Goto Ready
 //[+]========================================================================[+]
 actor WildChargePP : Ammo {inventory.amount 1 inventory.Maxamount 10}
 
-actor WildChargeWarmupTimer : Powerup {inventory.amount 1 powerup.duration 10 }
+actor WildChargeWarmupTimer : Powerup {inventory.amount 1 powerup.duration 5 }
 actor WildChargeTimer : Powerup {inventory.amount 1 powerup.duration 35 }
 
 

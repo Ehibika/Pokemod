@@ -536,7 +536,7 @@ OB_NIGHTMARE = "%k Defeated %o using NIGHTMARE!";
 OB_DISARMINGVOICE = "%k Defeated %o using DISARMINGVOICE!";
 OB_SHADOWSNEAK = "%k Defeated %o using SHADOWSNEAK!";
 OB_DESTINYBOND = "%k Defeated %o using DESTINYBOND!";
-//OB_<BLANKMOVE> = "%k Defeated %o using <BLANKMOVE>!";
+//OB_Tailwind = "%k Defeated %o using Tailwind!";
 OB_DRAININGKISS = "%k Defeated %o using DRAININGKISS!";
 OB_IMPRISON = "%k Defeated %o using IMPRISON!";
 OB_WISH = "%k Defeated %o using WISH!";
@@ -602,6 +602,7 @@ OB_POISONJAB = "%k Defeated %o using POISONJAB!";
 OB_EARTHPOWER = "%k Defeated %o using EARTHPOWER!";
 OB_PINMISSILE = "%k Defeated %o using PINMISSILE!";
 OB_FAINTATTACK = "%k Defeated %o using FAINTATTACK!";
+OB_DEFOG = "%k Defeated %o using DEFOG!";
 //--[NewMove]--
 
 //#endregion
@@ -2643,7 +2644,8 @@ M041_NAME = "\cj Water Pulse";
 M041_TYPE = "\cj Normal";
 M041_CATEGORY = "\cf Special";
 M041_POWER = "\cfPower:\cj 30";
-M041_DESC = "\cfShot \cja Blast of water that deals area damage";
+M041_DESC = "\cj\cfShot \cja Blast of water that deals\n"
+"area damage and may confuse victims.";
 //#endregion
 
 //#region -=- 042: Haze -=-
@@ -3217,7 +3219,7 @@ M110_CATEGORY = "\cf Physical";
 M110_POWER = "\cfPower:\cj --";
 M110_DESC = "\cjGo into a violent fit and attack\n"
 "everything around you. you'll get\n"
-"fatigued afterwards.";
+"Confused afterwards.";
 //#endregion
 
 //#region -=- 111: Refresh -=-
@@ -3608,7 +3610,9 @@ M154_NAME = "\cj Block";
 M154_TYPE = "\cj Normal";
 M154_CATEGORY = "\cf Status";
 M154_POWER = "\cfPower:\cj --";
-M154_DESC = "\cf<Desc>";
+M154_DESC = "\cjHold to form a shield in front of you,\n"
+"that blocks projectiles and pushed foes\n"
+"back.";
 //#endregion
 
 //#region -=- 155: BellyDrum -=-
@@ -3824,7 +3828,7 @@ M178_CATEGORY = "\cf Physical";
 M178_POWER = "\cfPower:\cj --";
 M178_DESC = "\cjUnleash draconic rage and attack\n"
 "everything around you. you'll get\n"
-"fatigued afterwards.";
+"Confused afterwards.";
 //#endregion
 
 //#region -=- 179: Endure -=-
@@ -3866,7 +3870,9 @@ M183_NAME = "\cj Confusion";
 M183_TYPE = "\cj Psychic";
 M183_CATEGORY = "\cf Special";
 M183_POWER = "\cfPower:\cj --";
-M183_DESC = "\cjremotely cast a small psychic explosion.";
+M183_DESC = "\cjremotely cast a small psychic\n"
+"explosion, has a high chance of causing\n"
+"confusion.";
 //#endregion
 
 //#region -=- 184: Psychic -=-
@@ -4002,7 +4008,8 @@ M199_NAME = "\cj Supersonic";
 M199_TYPE = "\cj Normal";
 M199_CATEGORY = "\cf Status";
 M199_POWER = "\cfPower:\cj --";
-M199_DESC = "\cf<Desc>";
+M199_DESC = "\cjLaunch a headache inducing sound that\n"
+"inflicts confusion.";
 //#endregion
 
 //#region -=- 200: Psybeam -=-
@@ -4207,7 +4214,8 @@ M223_NAME = "\cj PoisonGas";
 M223_TYPE = "\cj Poison";
 M223_CATEGORY = "\cf Status";
 M223_POWER = "\cfPower:\cj --";
-M223_DESC = "\cf<Desc>";
+M223_DESC = "\cjUnleash a cloud of poisonous gas, poisons\n"
+"anyone that enters it.";
 //#endregion
 
 //#region -=- 224: Swagger -=-
@@ -4215,7 +4223,8 @@ M224_NAME = "\cj Swagger";
 M224_TYPE = "\cj Normal";
 M224_CATEGORY = "\cf Status";
 M224_POWER = "\cfPower:\cj --";
-M224_DESC = "\cf<Desc>";
+M224_DESC = "\cjTilt a Target, confusing them and raising\n"
+"their ATK sharply";
 //#endregion
 
 //#region -=- 225: Flatter -=-
@@ -4223,7 +4232,8 @@ M225_NAME = "\cj Flatter";
 M225_TYPE = "\cj Dark";
 M225_CATEGORY = "\cf Status";
 M225_POWER = "\cfPower:\cj --";
-M225_DESC = "\cf<Desc>";
+M225_DESC = "\cjManipulate a target with undue praise,\n"
+"confusing them and droping SP.DEF";
 //#endregion
 
 //#region -=- 226: Assist -=-
@@ -4267,8 +4277,8 @@ M230_POWER = "\cfPower:\cj --";
 M230_DESC = "\cf<Desc>";
 //#endregion
 
-//#region -=- 231: <BlankMove> -=-
-M231_NAME = "\cj <BlankMove>";
+//#region -=- 231: Tailwind -=-
+M231_NAME = "\cj Tailwind";
 M231_TYPE = "\cj <Type>";
 M231_CATEGORY = "\cf <Category>";
 M231_POWER = "\cfPower:\cj --";
@@ -4903,6 +4913,16 @@ M296_POWER = "\cfPower:\cj --";
 M296_DESC = "\cjTarget the foe to vanish and strike them\n"
 "unknowingly, can dodge attacks if timed\n"
 "right.";
+//#endregion
+
+
+//#region -=- 297: Defog -=-
+M297_NAME = "\cj Defog";
+M297_TYPE = "\cj Flying";
+M297_CATEGORY = "\cf Status";
+M297_POWER = "\cfPower:\cj --";
+M297_DESC = "\cjTarget the ground to blow away all\n"
+"entities and buffs.";
 //#endregion
 
 

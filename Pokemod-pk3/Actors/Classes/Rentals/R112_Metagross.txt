@@ -1,0 +1,90 @@
+
+/*
+[+]===================================[+]
+
+[+]===================================[+]
+*/
+
+Actor R_Metagross : ClassBaseRentals 
+{
+Player.DisplayName "Metagross"
+Player.SoundClass "Metagross"
++NOSKIN
+
+Player.StartItem "PKMNRentalKit"
+//============|
+Player.StartItem "MetagrossRentalSetupItem"
+//============|
+Player.StartItem "Base_HP", 80
+Player.StartItem "Base_PAttack", 135
+Player.StartItem "Base_PDefense", 130
+Player.StartItem "Base_SAttack", 95
+Player.StartItem "Base_SDefense", 90
+
+//============|
+
+States
+{
+Spawn: 
+P112 A 0
+P112 B 1 
+P112 A 1
+GoTo Spawn+2
+See:
+P112 BCDE 5
+GoTo Spawn+1
+Missile:
+P112 A 0 A_JumpIfInventory("ConshotTimer",1,"Missile2")
+P112 F 5 
+P112 G 4
+GoTo Spawn+2
+Missile2:
+P112 G 9
+GoTo Spawn+2
+
+PainFix:
+P112 H 0 
+GoTo PainFrames
+}
+}
+
+actor MetagrossRentalMoves : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_JumpIf(CallACS("RentalBotCheck") == 1,"BotWep")
+
+TNT1 A 0 A_GiveInventory("MeteorMashMove1")
+TNT1 A 0 A_GiveInventory("PsyshockMove2")
+TNT1 A 0 A_GiveInventory("EarthquakeMove3")
+TNT1 A 0 A_GiveInventory("AgilityMove4")
+stop
+
+BotWep:
+TNT1 A 0 A_GiveInventory("MeteorMashMove1")
+stop
+}
+}
+
+actor MetagrossRentalSetupItem : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 ACS_NamedExecuteAlways("PKMN_RentalsSetup",0,Dex_Metagross)
+stop
+}
+}

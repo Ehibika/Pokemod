@@ -1,0 +1,90 @@
+
+/*
+[+]===================================[+]
+
+[+]===================================[+]
+*/
+
+Actor R_Onix : ClassBaseRentals 
+{
+Player.DisplayName "Onix"
+Player.SoundClass "Onix"
++NOSKIN
+Scale 1.5
+Player.StartItem "PKMNRentalKit"
+//============|
+Player.StartItem "OnixRentalSetupItem"
+//============|
+Player.StartItem "Base_HP", 35
+Player.StartItem "Base_PAttack", 45
+Player.StartItem "Base_PDefense", 160
+Player.StartItem "Base_SAttack", 30
+Player.StartItem "Base_SDefense", 45
+
+//============|
+
+States
+{
+Spawn: 
+P104 A 0
+P104 B 1 
+P104 A 1
+GoTo Spawn+2
+See:
+P104 BCDE 5
+GoTo Spawn+1
+Missile:
+P104 A 0 A_JumpIfInventory("ConshotTimer",1,"Missile2")
+P104 F 5 
+P104 G 4
+GoTo Spawn+2
+Missile2:
+P104 G 9
+GoTo Spawn+2
+
+PainFix:
+P104 H 0 
+GoTo PainFrames
+}
+}
+
+actor OnixRentalMoves : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_JumpIf(CallACS("RentalBotCheck") == 1,"BotWep")
+
+TNT1 A 0 A_GiveInventory("StoneEdgeMove1")
+TNT1 A 0 A_GiveInventory("SandTombMove2")
+TNT1 A 0 A_GiveInventory("DigMove3")
+TNT1 A 0 A_GiveInventory("RockBlastMove4")
+stop
+
+BotWep:
+TNT1 A 0 A_GiveInventory("StoneEdgeMove1")
+stop
+}
+}
+
+actor OnixRentalSetupItem : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 ACS_NamedExecuteAlways("PKMN_RentalsSetup",0,Dex_Onix)
+stop
+}
+}

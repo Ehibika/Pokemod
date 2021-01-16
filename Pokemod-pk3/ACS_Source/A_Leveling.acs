@@ -102,13 +102,14 @@ Script "PKMN_HitEXP" (Int Damage, int Divisor)
 if(EXPTime() == 0){Terminate;}
 
 Damage = getLastHit(0);
+
 switch(Damage)
     {
         case -3: terminate; break;
         case -2: Delay(1); Restart; break;
         case -1: Delay(1); Restart; break;
     }
-
+    //log(i:Damage);
 int Output;
 int EnemyPlayer = ACS_NamedExecuteWithResult("core_gettarget", 0);
 int EnemyPlN = EnemyPlayer - 1000;
@@ -295,6 +296,7 @@ Script "SetPKMNLevel" (int NewPlayerLevel, int SynchEXP)
 
 Script "PKMN_MassLevelup" (Void)
 {
+    if(GetCvar("PKMN_NoEXP")==1||GetCvar("PKMN_NoRoundLeveling")==1){Terminate;}
     int PlayerDEXNum;
     int EXPRate;
     int CurLevel;
@@ -373,6 +375,7 @@ script "ResetRoundLevel2" UNLOADING
 
 script "IncrementRoundLevel" (Void)
 {
+    if(GetCvar("PKMN_NoEXP")==1||GetCvar("PKMN_NoRoundLeveling")==1){Terminate;}
     SetCVar("PKMN_RoundLevel",GetCvar("PKMN_RoundLevel")+1);
 }
 

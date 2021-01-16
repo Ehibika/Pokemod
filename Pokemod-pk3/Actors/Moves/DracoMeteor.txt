@@ -77,11 +77,11 @@ actor DracoMeteorRCFlag : Powerup {inventory.amount 1 powerup.duration 35 }
 
 Const int DracoMeteorRad = 200;
 Const int DracoMeteor_Forward = 150;
-Const int DracoMeteor_Range = 1000;
+Const int DracoMeteor_Range = 3000;
 
 Actor DracoMeteorProtect : powerprotection
 {
-Powerup.duration 17
+Powerup.duration 5
 Damagefactor "DracoMeteor", 0
 }
 
@@ -240,9 +240,9 @@ TNT1 AAAAAA 4 A_SpawnItemEx("DracoMeteorWarnWave",0,0,0,0,0,0,0,1)
 TNT1 A 0 A_playSoundEx("weapon/astrocrush","SoundSlot6")
 Spawn2:
 TNT1 A 0 A_SpawnItemEx("DracoMeteorWarnWave",0,0,0,0,0,0,0,1)
-TNT1 A 2 A_SpawnItemEx("DracoMeteorMeteorSpawner",random2(DracoMeteorRad),random2(DracoMeteorRad),0,0,0,320,0,1)
+TNT1 AAA 1 A_SpawnItemEx("DracoMeteorMeteorSpawner",random2(DracoMeteorRad),random2(DracoMeteorRad),0,0,0,320,0,1)
 TNT1 A 0 A_Countdown
-TNT1 A 2 A_SpawnItemEx("DracoMeteorMeteorSpawner",random2(DracoMeteorRad),random2(DracoMeteorRad),0,0,0,320,0,1)
+TNT1 AAA 1 A_SpawnItemEx("DracoMeteorMeteorSpawner",random2(DracoMeteorRad),random2(DracoMeteorRad),0,0,0,320,0,1)
 TNT1 A 0 A_Countdown
 loop
 

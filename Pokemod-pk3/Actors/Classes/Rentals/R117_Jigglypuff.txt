@@ -1,0 +1,90 @@
+
+/*
+[+]===================================[+]
+
+[+]===================================[+]
+*/
+
+Actor R_Jigglypuff : ClassBaseRentals 
+{
+Player.DisplayName "Jigglypuff"
+Player.SoundClass "Jigglypuff"
++NOSKIN
+
+Player.StartItem "PKMNRentalKit"
+//============|
+Player.StartItem "JigglypuffRentalSetupItem"
+//============|
+Player.StartItem "Base_HP", 90
+Player.StartItem "Base_PAttack", 30
+Player.StartItem "Base_PDefense", 15
+Player.StartItem "Base_SAttack", 40
+Player.StartItem "Base_SDefense", 20
+
+//============|
+
+States
+{
+Spawn: 
+P117 A 0
+P117 B 1 
+P117 A 1
+GoTo Spawn+2
+See:
+P117 BCDE 5
+GoTo Spawn+1
+Missile:
+P117 A 0 A_JumpIfInventory("ConshotTimer",1,"Missile2")
+P117 F 5 
+P117 G 4
+GoTo Spawn+2
+Missile2:
+P117 G 9
+GoTo Spawn+2
+
+PainFix:
+P117 H 0 
+GoTo PainFrames
+}
+}
+
+actor JigglypuffRentalMoves : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_JumpIf(CallACS("RentalBotCheck") == 1,"BotWep")
+
+TNT1 A 0 A_GiveInventory("DrainingKissMove1")
+TNT1 A 0 A_GiveInventory("HypnosisMove2")
+TNT1 A 0 A_GiveInventory("HelpingHandMove3")
+TNT1 A 0 A_GiveInventory("SubstituteMove4")
+stop
+
+BotWep:
+TNT1 A 0 A_GiveInventory("DrainingKissMove1")
+stop
+}
+}
+
+actor JigglypuffRentalSetupItem : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 ACS_NamedExecuteAlways("PKMN_RentalsSetup",0,Dex_Jigglypuff)
+stop
+}
+}

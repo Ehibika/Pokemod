@@ -98,8 +98,55 @@ SetResultValue(output);
 
 function int getLastHit(int TID)
 {
-if(!((ClassifyActor(TID) & ACTOR_ALIVE))){Return -3;} //Actor died, terminate script function
+//if(!((ClassifyActor(TID) & ACTOR_ALIVE))){Return -3;} //Actor died, terminate script function
 if(GetUserVariable(TID,"user_HitFrame") == 0){Return -2;} //not on HitFrame
 if(GetUserVariable(TID,"user_HitMemory") == 0){Return -1;} //no Hitmemory data
 Return GetUserVariable(TID,"user_HitMemory");
+}
+
+Function Int IsValidPKMNActor(int TID)
+{
+//Returns if the actor in question is a pokemon
+if(ClassifyActor(TID) & ACTOR_PLAYER) {Return 1;}
+
+if(ClassifyActor(TID) & ACTOR_MONSTER)
+	{
+		int ret = GetCVAR("sv_MaxClients");
+	
+		if(PlayerCount()>ret){ret = PlayerCount();}// admins can join above the max player limit.
+		//log(i:ret+1000);
+		//log(i:ret+GetCvar("Sv_MaxEntities")+1000);
+		if(TID >= ret+1000 && TID <= ret+GetCvar("Sv_MaxEntities")+1000) {Return 2;}
+	}
+
+	return 0;
+}
+
+Function bool GetMaxEntities(void)
+{
+	int ret = GetCVAR("sv_MaxClients");
+	
+	if(PlayerCount()>ret) // admins can join above the max player limit.
+	{
+		ret = PlayerCount();
+	}
+
+	int output = ret+GetCvar("Sv_MaxEntities");
+	return output;
+}
+
+
+Function bool CheckActorTeam(int TID)
+{
+	if(ClassifyActor(TID) & ACTOR_PLAYER) {return GetPlayerInfo(TID-1000, PLAYERINFO_TEAM);}
+
+	if(ClassifyActor(TID) & ACTOR_MONSTER)
+		{
+			if(CheckActorInventory(TID,"LightTeamFlag")) {Return 0;}
+			if(CheckActorInventory(TID,"WilyTeamFlag")) {Return 1;}
+			if(CheckActorInventory(TID,"CossackTeamFlag")) {Return 2;}
+			if(CheckActorInventory(TID,"KingTeamFlag")) {Return 3;}
+		}
+
+		return -1;
 }

@@ -1,0 +1,90 @@
+
+/*
+[+]===================================[+]
+
+[+]===================================[+]
+*/
+
+Actor R_Tentacool : ClassBaseRentals 
+{
+Player.DisplayName "Tentacool"
+Player.SoundClass "Tentacool"
++NOSKIN
+
+Player.StartItem "PKMNRentalKit"
+//============|
+Player.StartItem "TentacoolRentalSetupItem"
+//============|
+Player.StartItem "Base_HP", 40
+Player.StartItem "Base_PAttack", 40
+Player.StartItem "Base_PDefense", 35
+Player.StartItem "Base_SAttack", 50
+Player.StartItem "Base_SDefense", 100
+
+//============|
+
+States
+{
+Spawn: 
+P134 A 0
+P134 B 1 
+P134 A 1
+GoTo Spawn+2
+See:
+P134 BCDE 5
+GoTo Spawn+1
+Missile:
+P134 A 0 A_JumpIfInventory("ConshotTimer",1,"Missile2")
+P134 F 5 
+P134 G 4
+GoTo Spawn+2
+Missile2:
+P134 G 9
+GoTo Spawn+2
+
+PainFix:
+P134 H 0 
+GoTo PainFrames
+}
+}
+
+actor TentacoolRentalMoves : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_JumpIf(CallACS("RentalBotCheck") == 1,"BotWep")
+
+TNT1 A 0 A_GiveInventory("BubbleBeamMove1")
+TNT1 A 0 A_GiveInventory("AquaRingMove2")
+TNT1 A 0 A_GiveInventory("BarrierMove3")
+TNT1 A 0 A_GiveInventory("AcidSprayMove4")
+stop
+
+BotWep:
+TNT1 A 0 A_GiveInventory("BubbleBeamMove1")
+stop
+}
+}
+
+actor TentacoolRentalSetupItem : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 ACS_NamedExecuteAlways("PKMN_RentalsSetup",0,Dex_Tentacool)
+stop
+}
+}

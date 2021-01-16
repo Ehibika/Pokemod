@@ -1,0 +1,90 @@
+
+/*
+[+]===================================[+]
+
+[+]===================================[+]
+*/
+
+Actor R_Golem_A : ClassBaseRentals 
+{
+Player.DisplayName "Golem_A"
+Player.SoundClass "Golem_A"
++NOSKIN
+
+Player.StartItem "PKMNRentalKit"
+//============|
+Player.StartItem "Golem_ARentalSetupItem"
+//============|
+Player.StartItem "Base_HP", 80
+Player.StartItem "Base_PAttack", 110
+Player.StartItem "Base_PDefense", 130
+Player.StartItem "Base_SAttack", 55
+Player.StartItem "Base_SDefense", 65
+
+//============|
+
+States
+{
+Spawn: 
+P103 A 0
+P103 B 1 
+P103 A 1
+GoTo Spawn+2
+See:
+P103 BCDE 5
+GoTo Spawn+1
+Missile:
+P103 A 0 A_JumpIfInventory("ConshotTimer",1,"Missile2")
+P103 F 5 
+P103 G 4
+GoTo Spawn+2
+Missile2:
+P103 G 9
+GoTo Spawn+2
+
+PainFix:
+P103 H 0 
+GoTo PainFrames
+}
+}
+
+actor Golem_ARentalMoves : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_JumpIf(CallACS("RentalBotCheck") == 1,"BotWep")
+
+TNT1 A 0 A_GiveInventory("GyroBallMove1")
+TNT1 A 0 A_GiveInventory("DischargeMove2")
+TNT1 A 0 A_GiveInventory("RockBlastMove3")
+TNT1 A 0 A_GiveInventory("SubstituteMove4")
+stop
+
+BotWep:
+TNT1 A 0 A_GiveInventory("GyroBallMove1")
+stop
+}
+}
+
+actor Golem_ARentalSetupItem : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 ACS_NamedExecuteAlways("PKMN_RentalsSetup",0,Dex_Golem_A)
+stop
+}
+}

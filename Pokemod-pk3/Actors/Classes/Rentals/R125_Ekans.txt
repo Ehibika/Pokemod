@@ -1,0 +1,90 @@
+
+/*
+[+]===================================[+]
+
+[+]===================================[+]
+*/
+
+Actor R_Ekans : ClassBaseRentals 
+{
+Player.DisplayName "Ekans"
+Player.SoundClass "Ekans"
++NOSKIN
+
+Player.StartItem "PKMNRentalKit"
+//============|
+Player.StartItem "EkansRentalSetupItem"
+//============|
+Player.StartItem "Base_HP", 35
+Player.StartItem "Base_PAttack", 60
+Player.StartItem "Base_PDefense", 44
+Player.StartItem "Base_SAttack", 40
+Player.StartItem "Base_SDefense", 54
+
+//============|
+
+States
+{
+Spawn: 
+P125 A 0
+P125 B 1 
+P125 A 1
+GoTo Spawn+2
+See:
+P125 BCDE 5
+GoTo Spawn+1
+Missile:
+P125 A 0 A_JumpIfInventory("ConshotTimer",1,"Missile2")
+P125 F 5 
+P125 G 4
+GoTo Spawn+2
+Missile2:
+P125 G 9
+GoTo Spawn+2
+
+PainFix:
+P125 H 0 
+GoTo PainFrames
+}
+}
+
+actor EkansRentalMoves : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_JumpIf(CallACS("RentalBotCheck") == 1,"BotWep")
+
+TNT1 A 0 A_GiveInventory("AcidSprayMove1")
+TNT1 A 0 A_GiveInventory("GlareMove2")
+TNT1 A 0 A_GiveInventory("DisableMove3")
+TNT1 A 0 A_GiveInventory("HazeMove4")
+stop
+
+BotWep:
+TNT1 A 0 A_GiveInventory("AcidSprayMove1")
+stop
+}
+}
+
+actor EkansRentalSetupItem : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 ACS_NamedExecuteAlways("PKMN_RentalsSetup",0,Dex_Ekans)
+stop
+}
+}

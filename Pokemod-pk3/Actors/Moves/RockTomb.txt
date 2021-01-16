@@ -29,6 +29,7 @@ Goto Fire.Aim
 
 Fire.Aim:
 "####" B 1 A_FireCustomMissile("RockTombAimPath",0,0,0,0,0,Aim_ArcOverHead+(Aim_ArcScale*Sin(-pitch)))
+"####" C 0 A_JumpIfInventory("IsBot",1,"Fire.Bullet")
 "####" C 0 A_REfire("Fire.Aim")
 "####" B 0 A_Jump(256,"Fire.Bullet")
 Goto Fire.Bullet
@@ -102,7 +103,7 @@ stop
 }
 
 
-Const int RockTombEntiTID = 9;
+Const int RockTombM_EntiTID = 2;
 
 //[+]========================================================================[+]
 //--------------------------------|Projectiles |--------------------------------
@@ -302,7 +303,7 @@ Wait
 Spawn.Setup2:
 BROK A 0 ACS_NamedExecuteAlways("DeployableDefenseSet",0,150)
 BROK A 0 ACS_NamedExecuteAlways("SetObjectType",0,Type_Rock,Type_Null)
-SEDG D 0 ACS_NamedExecuteAlways("GiveM_EntiTID",0,RockTombEntiTID,3)
+SEDG D 0 ACS_NamedExecuteAlways("GiveM_EntiTID",0,RockTombM_EntiTID,3)
 BROK A 1 A_CheckRange(70,"Spawn.Setup3")
 Wait
 Spawn.Setup3:

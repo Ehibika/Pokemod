@@ -5,15 +5,15 @@
 [+]===================================[+]
 */
 
-Actor R_Cherrim_A : ClassBaseRentals 
+Actor R_Cherrim_S : ClassBaseRentals 
 {
-Player.DisplayName "Cherrim_A"
-Player.SoundClass "Cherrim_A"
+Player.DisplayName "Cherrim_S"
+Player.SoundClass "Cherrim_S"
 +NOSKIN
 
 Player.StartItem "PKMNRentalKit"
 //============|
-Player.StartItem "Cherrim_ARentalSetupItem"
+Player.StartItem "Cherrim_SRentalSetupItem"
 //============|
 Player.StartItem "Base_HP", 80
 Player.StartItem "Base_PAttack", 85
@@ -48,7 +48,7 @@ GoTo PainFrames
 }
 }
 
-actor Cherrim_ARentalMoves : CustomInventory
+actor Cherrim_SRentalMoves : CustomInventory
 {
 inventory.amount 1
 Inventory.MaxAmount 100
@@ -73,7 +73,7 @@ stop
 }
 }
 
-actor Cherrim_ARentalSetupItem : CustomInventory
+actor Cherrim_SRentalSetupItem : CustomInventory
 {
 inventory.amount 1
 Inventory.MaxAmount 100
@@ -84,7 +84,7 @@ Spawn:
 TNT1 A 0
 stop
 Pickup:
-TNT1 A 0 ACS_NamedExecuteAlways("PKMN_RentalsSetup",0,Dex_Cherrim_A)
+TNT1 A 0 ACS_NamedExecuteAlways("PKMN_RentalsSetup",0,Dex_Cherrim_S)
 stop
 }
 }

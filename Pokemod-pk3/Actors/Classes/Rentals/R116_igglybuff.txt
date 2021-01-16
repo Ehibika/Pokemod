@@ -1,0 +1,90 @@
+
+/*
+[+]===================================[+]
+
+[+]===================================[+]
+*/
+
+Actor R_igglybuff : ClassBaseRentals 
+{
+Player.DisplayName "igglybuff"
+Player.SoundClass "igglybuff"
++NOSKIN
+
+Player.StartItem "PKMNRentalKit"
+//============|
+Player.StartItem "igglybuffRentalSetupItem"
+//============|
+Player.StartItem "Base_HP", 90
+Player.StartItem "Base_PAttack", 30
+Player.StartItem "Base_PDefense", 15
+Player.StartItem "Base_SAttack", 40
+Player.StartItem "Base_SDefense", 20
+
+//============|
+
+States
+{
+Spawn: 
+P116 A 0
+P116 B 1 
+P116 A 1
+GoTo Spawn+2
+See:
+P116 BCDE 5
+GoTo Spawn+1
+Missile:
+P116 A 0 A_JumpIfInventory("ConshotTimer",1,"Missile2")
+P116 F 5 
+P116 G 4
+GoTo Spawn+2
+Missile2:
+P116 G 9
+GoTo Spawn+2
+
+PainFix:
+P116 H 0 
+GoTo PainFrames
+}
+}
+
+actor igglybuffRentalMoves : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_JumpIf(CallACS("RentalBotCheck") == 1,"BotWep")
+
+TNT1 A 0 A_GiveInventory("DisarmingVoiceMove1")
+TNT1 A 0 A_GiveInventory("HypnosisMove2")
+TNT1 A 0 A_GiveInventory("DisableMove3")
+TNT1 A 0 A_GiveInventory("HealPulseMove4")
+stop
+
+BotWep:
+TNT1 A 0 A_GiveInventory("DisarmingVoiceMove1")
+stop
+}
+}
+
+actor igglybuffRentalSetupItem : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 ACS_NamedExecuteAlways("PKMN_RentalsSetup",0,Dex_igglybuff)
+stop
+}
+}

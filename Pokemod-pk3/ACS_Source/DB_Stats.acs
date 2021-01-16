@@ -16,19 +16,19 @@
 
 #LIBDEFINE ATKVAL1 1
 #LIBDEFINE ATKVAL2 50
-#LIBDEFINE ATKVAL3 100
-#LIBDEFINE ATKVAL4 500
+#LIBDEFINE ATKVAL3 200
+#LIBDEFINE ATKVAL4 300
 
-#LIBDEFINE DEFVAL1 1
+#LIBDEFINE DEFVAL1 10
 #LIBDEFINE DEFVAL2 50
 #LIBDEFINE DEFVAL3 100
-#LIBDEFINE DEFVAL4 500
+#LIBDEFINE DEFVAL4 200
 
 #LIBDEFINE STATMIN 1
 #LIBDEFINE STATBASELINE 300 // 
 
-#LIBDEFINE ATKSTATBASELINE1 300 // ATTACK
-#LIBDEFINE ATKSTATBASELINE2 400 // ATTACK
+#LIBDEFINE ATKSTATBASELINE1 80 // ATTACK
+#LIBDEFINE ATKSTATBASELINE2 300 // ATTACK
 
 #LIBDEFINE DEFSTATBASELINE1 300 // DEFENSE 
 #LIBDEFINE DEFSTATBASELINE2 400 // DEFENSE 
@@ -63,7 +63,7 @@ Int SpeedTable[15][2] = {
 
 
 
-#LIBDEFINE STATITEMNUM 65
+#LIBDEFINE STATITEMNUM 68
 
 Str StatEffectName[STATITEMNUM][2] = {
     {"Growth","GOOD"},
@@ -131,6 +131,9 @@ Str StatEffectName[STATITEMNUM][2] = {
     {"AcidSpray","BAD"},
     {"StringShot","BAD"},
     {"ElectroWeb","BAD"},
+    {"Swagger","GOOD"},
+    {"Flatter","BAD"},
+    {"Tailwind","GOOD"},
 
 };
 
@@ -207,6 +210,9 @@ Int StatEffectValue[STATITEMNUM][5] = {
 {   0,      0,      0,      -2,      0}, //acidspray
 {   0,      0,      0,      0,      -2}, //StringShot
 {   0,      0,      0,      0,      -1}, //ElectroWeb
+{   2,      0,      0,      0,      0}, //Swagger
+{   0,      0,      0,      -1,      0}, //Flatter
+{   0,      0,      0,      0,      1}, //TailWind
 
 
 };

@@ -1,0 +1,90 @@
+
+/*
+[+]===================================[+]
+
+[+]===================================[+]
+*/
+
+Actor R_Alomomola : ClassBaseRentals 
+{
+Player.DisplayName "Alomomola"
+Player.SoundClass "Alomomola"
++NOSKIN
+
+Player.StartItem "PKMNRentalKit"
+//============|
+Player.StartItem "AlomomolaRentalSetupItem"
+//============|
+Player.StartItem "Base_HP", 165
+Player.StartItem "Base_PAttack", 75
+Player.StartItem "Base_PDefense", 80
+Player.StartItem "Base_SAttack", 40
+Player.StartItem "Base_SDefense", 45
+
+//============|
+
+States
+{
+Spawn: 
+P120 A 0
+P120 B 1 
+P120 A 1
+GoTo Spawn+2
+See:
+P120 BCDE 5
+GoTo Spawn+1
+Missile:
+P120 A 0 A_JumpIfInventory("ConshotTimer",1,"Missile2")
+P120 F 5 
+P120 G 4
+GoTo Spawn+2
+Missile2:
+P120 G 9
+GoTo Spawn+2
+
+PainFix:
+P120 H 0 
+GoTo PainFrames
+}
+}
+
+actor AlomomolaRentalMoves : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_JumpIf(CallACS("RentalBotCheck") == 1,"BotWep")
+
+TNT1 A 0 A_GiveInventory("HydroPumpMove1")
+TNT1 A 0 A_GiveInventory("AquaRingMove2")
+TNT1 A 0 A_GiveInventory("DiveMove3")
+TNT1 A 0 A_GiveInventory("IcyWindMove4")
+stop
+
+BotWep:
+TNT1 A 0 A_GiveInventory("HydroPumpMove1")
+stop
+}
+}
+
+actor AlomomolaRentalSetupItem : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 ACS_NamedExecuteAlways("PKMN_RentalsSetup",0,Dex_Alomomola)
+stop
+}
+}

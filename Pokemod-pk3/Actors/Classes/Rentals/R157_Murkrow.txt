@@ -1,0 +1,90 @@
+
+/*
+[+]===================================[+]
+
+[+]===================================[+]
+*/
+
+Actor R_Murkrow : ClassBaseRentals 
+{
+Player.DisplayName "Murkrow"
+Player.SoundClass "Murkrow"
++NOSKIN
+
+Player.StartItem "PKMNRentalKit"
+//============|
+Player.StartItem "MurkrowRentalSetupItem"
+//============|
+Player.StartItem "Base_HP", 60
+Player.StartItem "Base_PAttack", 85
+Player.StartItem "Base_PDefense", 42
+Player.StartItem "Base_SAttack", 85
+Player.StartItem "Base_SDefense", 42
+
+//============|
+
+States
+{
+Spawn: 
+P157 A 0
+P157 B 1 
+P157 A 1
+GoTo Spawn+2
+See:
+P157 BCDE 5
+GoTo Spawn+1
+Missile:
+P157 A 0 A_JumpIfInventory("ConshotTimer",1,"Missile2")
+P157 F 5 
+P157 G 4
+GoTo Spawn+2
+Missile2:
+P157 G 9
+GoTo Spawn+2
+
+PainFix:
+P157 H 0 
+GoTo PainFrames
+}
+}
+
+actor MurkrowRentalMoves : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_JumpIf(CallACS("RentalBotCheck") == 1,"BotWep")
+
+TNT1 A 0 A_GiveInventory("GustMove1")
+TNT1 A 0 A_GiveInventory("FakeoutMove2")
+TNT1 A 0 A_GiveInventory("TauntMove3")
+TNT1 A 0 A_GiveInventory("HazeMove4")
+stop
+
+BotWep:
+TNT1 A 0 A_GiveInventory("GustMove1")
+stop
+}
+}
+
+actor MurkrowRentalSetupItem : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 ACS_NamedExecuteAlways("PKMN_RentalsSetup",0,Dex_Murkrow)
+stop
+}
+}

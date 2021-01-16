@@ -27,6 +27,7 @@ Goto Fire.Aim
 
 Fire.Aim:
 "####" B 1 A_FireCustomMissile("WhirlpoolRingSpawner",0,0,0,Aim_OverHead)
+"####" C 0 A_JumpIfInventory("IsBot",1,"Fire.Bullet")
 "####" C 0 A_REfire("Fire.Aim")
 "####" B 0 A_Jump(256,"Fire.Bullet")
 Goto Fire.Bullet

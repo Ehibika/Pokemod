@@ -1,0 +1,87 @@
+
+/*
+[+]===================================[+]
+
+[+]===================================[+]
+*/
+
+Actor R_Beldum : ClassBaseRentals 
+{
+Player.DisplayName "Beldum"
+Player.SoundClass "Beldum"
++NOSKIN
+
+Player.StartItem "PKMNRentalKit"
+//============|
+Player.StartItem "BeldumRentalSetupItem"
+//============|
+Player.StartItem "Base_HP", 40
+Player.StartItem "Base_PAttack", 55
+Player.StartItem "Base_PDefense", 80
+Player.StartItem "Base_SAttack", 35
+Player.StartItem "Base_SDefense", 60
+
+//============|
+
+States
+{
+Spawn: 
+P110 A 0
+P110 B 1 
+P110 A 1
+GoTo Spawn+2
+See:
+P110 BCDE 5
+GoTo Spawn+1
+Missile:
+P110 A 0 A_JumpIfInventory("ConshotTimer",1,"Missile2")
+P110 F 5 
+P110 G 4
+GoTo Spawn+2
+Missile2:
+P110 G 9
+GoTo Spawn+2
+
+PainFix:
+P110 H 0 
+GoTo PainFrames
+}
+}
+
+actor BeldumRentalMoves : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_JumpIf(CallACS("RentalBotCheck") == 1,"BotWep")
+
+TNT1 A 0 A_GiveInventory("TakeDownMove1")
+stop
+
+BotWep:
+TNT1 A 0 A_GiveInventory("TakeDownMove1")
+stop
+}
+}
+
+actor BeldumRentalSetupItem : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 ACS_NamedExecuteAlways("PKMN_RentalsSetup",0,Dex_Beldum)
+stop
+}
+}

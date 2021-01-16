@@ -110,11 +110,11 @@ TNT1 A 0 A_JumpIfInventory("SubGuard",1,"Pickup.B",AAPTR_TRACER)
 Goto Pickup.A
 
 Pickup.A:
-TNT1 A 0 A_GiveToTarget("SubstituteGuardGiver_A",1,AAPTR_TRACER)
+TNT1 A 0 A_GiveInventory("SubstituteGuardGiver_A",1,AAPTR_TRACER)
 stop
 
 Pickup.B:
-TNT1 A 0 A_GiveToTarget("SubstituteGuardGiver_B",1,AAPTR_TRACER)
+TNT1 A 0 A_GiveInventory("SubstituteGuardGiver_B",1,AAPTR_TRACER)
 stop
 }}
 

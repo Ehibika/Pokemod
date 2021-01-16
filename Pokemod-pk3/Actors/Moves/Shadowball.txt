@@ -91,7 +91,7 @@ actor ShadowBallShot : PKMN_SkillShot
 Damage (MBP_ShadowBall)
 DamageType "ShadowBall"
 obituary "$OB_ShadowBall"
-Args 20, 64
+Args 20, 80 //must be same as speed
 +THRUGHOST
 States
 {

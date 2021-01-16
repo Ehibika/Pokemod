@@ -77,7 +77,7 @@
 
 
 
-#LIBDEFINE MAXTMLIST 94
+#LIBDEFINE MAXTMLIST 100
 //#endregion
 
 //#region -=- TM Reference -=-
@@ -109,6 +109,8 @@ int TMList [MAXTMLIST][5] = {
 {Rest           ,TMF_UNIVERSAL      ,TMT_PSYCHIC                                ,TMP_1  ,TML_ALL},
 {Refresh        ,TMF_UNIVERSAL      ,TMT_NORMAL                                 ,TMP_1  ,TML_ALL},
 {HelpingHand    ,TMF_UNIVERSAL      ,TMT_NORMAL                                 ,TMP_1  ,TML_ALL},
+{Swagger        ,TMF_UNIVERSAL      ,TMT_NORMAL                                 ,TMP_1  ,TML_ALL},
+{Flatter        ,TMF_UNIVERSAL      ,TMT_DARK                                   ,TMP_1  ,TML_ALL},
 
 
 {CalmMind       ,TMF_UNIVERSAL      ,TMT_PSYCHIC                                ,TMP_3  ,TML_ALL},
@@ -141,6 +143,11 @@ int TMList [MAXTMLIST][5] = {
 {LifeDew        ,TMF_NULL           ,TMT_WATER|TMT_PSYCHIC|TMT_FAIRY            ,TMP_2  ,TML_ALL},
 {Barrier        ,TMF_NULL           ,TMT_PSYCHIC                                ,TMP_2  ,TML_ALL},
 {AquaRing       ,TMF_NULL           ,TMT_WATER                                  ,TMP_2  ,TML_ALL},
+
+{Spikes         ,TMF_NULL           ,TMT_GROUND                                 ,TMP_2  ,TML_ALL},
+{ToxicSpikes    ,TMF_NULL           ,TMT_POISON                                 ,TMP_2  ,TML_ALL},
+{StealthRock    ,TMF_NULL           ,TMT_ROCK                                   ,TMP_2  ,TML_ALL},
+{Defog          ,TMF_NULL           ,TMT_FLYING                                 ,TMP_2  ,TML_ALL},
 
 {Magicalleaf    ,TMF_NULL           ,TMT_GRASS|TMT_FAIRY|TMT_PSYCHIC            ,TMP_2  ,TML_ALL},
 {BulletSeed     ,TMF_NULL           ,TMT_GRASS|TMT_BUG                          ,TMP_2  ,TML_ALL},
@@ -182,7 +189,7 @@ int TMList [MAXTMLIST][5] = {
 {Flamethrower   ,TMF_NULL           ,TMT_FIRE|TMT_DRAGON                        ,TMP_4  ,TML_MID2},
 {ThunderBolt    ,TMF_NULL           ,TMT_ELECTRIC                               ,TMP_4  ,TML_MID2},
 {ShadowBall     ,TMF_NULL           ,TMT_GHOST|TMT_PSYCHIC                      ,TMP_4  ,TML_MID2},
-{Toxic          ,TMF_NULL           ,TMT_POISON                                 ,TMP_4  ,TML_ALL},
+{Toxic          ,TMF_UNIVERSAL      ,TMT_POISON                                 ,TMP_4  ,TML_ALL},
 {SludgeBomb     ,TMF_NULL           ,TMT_POISON|TMT_GRASS                       ,TMP_4  ,TML_MID2},
 {Waterfall      ,TMF_NULL           ,TMT_WATER                                  ,TMP_4  ,TML_MID2},
 {DragonPulse    ,TMF_NULL           ,TMT_DRAGON                                 ,TMP_4  ,TML_MID2},
@@ -199,7 +206,7 @@ int TMList [MAXTMLIST][5] = {
 {SolarBeam      ,TMF_NULL           ,TMT_GRASS|TMT_FIRE                         ,TMP_5  ,TML_HIGH},
 {GigaDrain      ,TMF_NULL           ,TMT_GRASS|TMT_BUG                          ,TMP_5  ,TML_HIGH},
 {Psychic        ,TMF_NULL           ,TMT_PSYCHIC|TMT_GHOST                      ,TMP_5  ,TML_HIGH},
-{Blizzard       ,TMF_NULL           ,TMT_ICE                                    ,TMP_5  ,TML_HIGH},
+{Blizzard       ,TMF_NULL           ,TMT_WATER|TMT_ICE                          ,TMP_5  ,TML_HIGH},
 {Overheat       ,TMF_NULL           ,TMT_FIRE                                   ,TMP_5  ,TML_HIGH},
 {Thunder        ,TMF_NULL           ,TMT_ELECTRIC                               ,TMP_5  ,TML_HIGH},
 {CloseCombat    ,TMF_NULL           ,TMT_FIGHTING                               ,TMP_5  ,TML_HIGH},
@@ -383,9 +390,10 @@ int output = 0;
         case Dragonrage: output = TMR_Dragonrage(Dexnum); break;    
         case DragonPulse: output = TMR_Dragonrage(Dexnum); break;    
         case Wideguard: output = TMR_WideGuard(Dexnum); break;    
-        case Spikes: output = TMR_WideGuard(Dexnum); break;    
-        case ToxicSpikes: output = TMR_WideGuard(Dexnum); break;    
-        case StealthRock: output = TMR_WideGuard(Dexnum); break;   
+        case Spikes: output = TMR_Spikes(Dexnum); break;    
+        case ToxicSpikes: output = TMR_ToxicSpikes(Dexnum); break;    
+        case StealthRock: output = TMR_StealthRock(Dexnum); break;   
+        case Defog: output = TMR_Defog(Dexnum); break;   
         case ThunderWave: output = TMR_ThunderWave(Dexnum); break;   
         case Dazzlinggleam: output = TMR_Dazzlinggleam(Dexnum); break; 
         case Acrobatics: output = TMR_Acrobatics(Dexnum); break; 
@@ -426,6 +434,7 @@ int output = 0;
         case EarthPower: output = TMR_EarthPower(Dexnum); break;    
         case PoisonJab: output = TMR_PoisonJab(Dexnum); break;    
         case GigaDrain: output = TMR_GigaDrain(Dexnum); break;    
+        case Fly: output = TMR_Fly(Dexnum); break;    
         
         
         
@@ -1049,6 +1058,73 @@ Function int TMR_WideGuard (int Dexnum)
     {
 
     }
+    if(TMArch_Defensive(Dexnum)){output = 1;}
+return output;
+}
+//#endregion
+
+//#region -=- TM Rules : Spikes -=-
+Function int TMR_Spikes (int Dexnum) 
+{
+    int output = 0;
+    Switch (Dexnum)
+    {
+
+    }
+    if(TMArch_Defensive(Dexnum)){output = 1;}
+return output;
+}
+//#endregion
+
+//#region -=- TM Rules : ToxicSpikes -=-
+Function int TMR_ToxicSpikes (int Dexnum) 
+{
+    int output = 0;
+    Switch (Dexnum)
+    {
+
+    }
+return output;
+}
+//#endregion
+
+//#region -=- TM Rules : StealthRock -=-
+Function int TMR_StealthRock (int Dexnum) 
+{
+    int output = 0;
+    Switch (Dexnum)
+    {
+
+    }
+    if(TMArch_Defensive(Dexnum)){output = 1;}
+return output;
+}
+//#endregion
+
+//#region -=- TM Rules : Defog -=-
+Function int TMR_Defog (int Dexnum) 
+{
+    int output = 0;
+    Switch (Dexnum)
+    {
+        case STUNKY: output = 1; break;
+        case SKUNTANK: output = 1; break;
+        case SHIFTRY: output = 1; break;
+    }
+    if(TMArch_Flyer(Dexnum)){output = 1;}
+return output;
+}
+//#endregion
+
+//#region -=- TM Rules : Fly -=-
+Function int TMR_Fly (int Dexnum) 
+{
+    int output = 0;
+    Switch (Dexnum)
+    {
+
+    }
+    if(TMArch_Flyer(Dexnum)){output = 1;}
 return output;
 }
 //#endregion
@@ -1771,6 +1847,22 @@ int output = 0;
             case QWILFISH: output = 1; break;
             case JOLTIK: output = 1; break;
             case GALVANTULA: output = 1; break;
+        }
+return output;
+}
+//#endregion 
+
+//#region -=- TM Archetype : Flyer
+Function int TMArch_Flyer (int Dexnum)
+{
+int output = 0;
+    /* Flyer archetype involves pokemon that possess wings and are able to fly even if they are not flying type
+
+    */
+    Switch (Dexnum)
+        {
+            case FLYGON: output = 1; break;
+            case VOLCARONA: output = 1; break;
         }
 return output;
 }

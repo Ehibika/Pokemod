@@ -33,6 +33,7 @@ TNT1 A 0 A_JumpifInventory("PlayerPropertyFrozen",1,"NotReady")
 
 TNT1 A 0 A_JumpifInventory("SleepMark",1,"SleepReady")
 TNT1 A 0 A_JumpifInventory("FreezeMark",1,"FreezeReady")
+TNT1 A 0 A_JumpifInventory("ConfusionMark",1,"ConfusionReady")
 TNT1 A 0 A_JumpIf(CallACS("HasFlagBall") == 1,"CarrierReady")
 
 TNT1 A 1 A_WeaponReady(WRF_ALLOWRELOAD|WRF_NOSECONDARY)
@@ -58,6 +59,42 @@ TNT1 A 0 A_Jumpif(CallACS("PKMNACS_ButtonCheck",BT_ALTATTACK) == 1,"CarrierToss"
 Goto Ready
 CarrierToss:
 TNT1 A 17 A_GiveInventory("PKMN_WhiteFlagThrower") 
+Goto Ready
+
+ConfusionReady:
+TNT1 A 1 A_WeaponReady(WRF_NOPRIMARY|WRF_NOSECONDARY)
+TNT1 A 0 A_Refire("ConfusionWack")
+//TNT1 A 0 A_Jumpif(CallACS("PKMNACS_ButtonCheck",BT_ATTACK) == 1,"ConfusionWack")
+TNT1 A 0 A_Jumpif(CallACS("PKMNACS_ButtonCheck",BT_ALTATTACK) == 1,"ConfusionWack")
+Goto Ready
+ConfusionWack:
+TNT1 A 0 A_JumpifInventory("Recovery_A",1,"NoAmmo")
+TNT1 A 0 A_JumpifInventory("Recovery_B",1,"NoAmmo")
+TNT1 A 0 A_JumpifInventory("Recovery_C",1,"NoAmmo")
+TNT1 A 0 A_JumpifInventory("Recovery_D",1,"NoAmmo")
+
+TNT1 A 0 A_PlaySoundEx("Move/Basic","Weapon")
+TNT1 A 0 ACS_NamedExecuteAlways("PKMN_CollisionDamager",0,MBP_StandardPower)
+TNT1 A 0 A_SpawnItemEx("BasicMeleeFX", 0, 0, 0, 0, 0, 0, 0,1)
+TNT1 A 0 A_JumpIfInventory("isbot",1,"ConfusionBot") 
+TNT1 A 0 A_Refire("ConfusionWack_A")
+//TNT1 A 0 A_Jumpif(CallACS("PKMNACS_ButtonCheck",BT_ATTACK) == 1,"ConfusionWack_A")
+TNT1 A 0 A_Jumpif(CallACS("PKMNACS_ButtonCheck",BT_ALTATTACK) == 1,"ConfusionWack_B")
+Goto Ready
+
+ConfusionWack_A:
+TNT1 A 7
+TNT1 A 0 A_Jump(256,"Fire")
+Goto Fire
+
+ConfusionWack_B:
+TNT1 A 7
+TNT1 A 0 A_Jump(256,"Altfire")
+Goto Altfire
+
+ConfusionBot:
+TNT1 A 7
+TNT1 A 0 A_Refire("Fire")
 Goto Ready
 
 Deselect:

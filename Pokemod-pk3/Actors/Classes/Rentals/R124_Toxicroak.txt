@@ -1,0 +1,90 @@
+
+/*
+[+]===================================[+]
+
+[+]===================================[+]
+*/
+
+Actor R_Toxicroak : ClassBaseRentals 
+{
+Player.DisplayName "Toxicroak"
+Player.SoundClass "Toxicroak"
++NOSKIN
+
+Player.StartItem "PKMNRentalKit"
+//============|
+Player.StartItem "ToxicroakRentalSetupItem"
+//============|
+Player.StartItem "Base_HP", 83
+Player.StartItem "Base_PAttack", 106
+Player.StartItem "Base_PDefense", 65
+Player.StartItem "Base_SAttack", 86
+Player.StartItem "Base_SDefense", 65
+
+//============|
+
+States
+{
+Spawn: 
+P124 A 0
+P124 B 1 
+P124 A 1
+GoTo Spawn+2
+See:
+P124 BCDE 5
+GoTo Spawn+1
+Missile:
+P124 A 0 A_JumpIfInventory("ConshotTimer",1,"Missile2")
+P124 F 5 
+P124 G 4
+GoTo Spawn+2
+Missile2:
+P124 G 9
+GoTo Spawn+2
+
+PainFix:
+P124 H 0 
+GoTo PainFrames
+}
+}
+
+actor ToxicroakRentalMoves : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_JumpIf(CallACS("RentalBotCheck") == 1,"BotWep")
+
+TNT1 A 0 A_GiveInventory("PoisonJabMove1")
+TNT1 A 0 A_GiveInventory("CloseCombatMove2")
+TNT1 A 0 A_GiveInventory("VacuumwaveMove3")
+TNT1 A 0 A_GiveInventory("FakeoutMove4")
+stop
+
+BotWep:
+TNT1 A 0 A_GiveInventory("PoisonJabMove1")
+stop
+}
+}
+
+actor ToxicroakRentalSetupItem : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 ACS_NamedExecuteAlways("PKMN_RentalsSetup",0,Dex_Toxicroak)
+stop
+}
+}

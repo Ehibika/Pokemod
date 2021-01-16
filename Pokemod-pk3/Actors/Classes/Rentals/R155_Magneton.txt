@@ -1,0 +1,90 @@
+
+/*
+[+]===================================[+]
+
+[+]===================================[+]
+*/
+
+Actor R_Magneton : ClassBaseRentals 
+{
+Player.DisplayName "Magneton"
+Player.SoundClass "Magneton"
++NOSKIN
+
+Player.StartItem "PKMNRentalKit"
+//============|
+Player.StartItem "MagnetonRentalSetupItem"
+//============|
+Player.StartItem "Base_HP", 50
+Player.StartItem "Base_PAttack", 60
+Player.StartItem "Base_PDefense", 95
+Player.StartItem "Base_SAttack", 120
+Player.StartItem "Base_SDefense", 70
+
+//============|
+
+States
+{
+Spawn: 
+P155 A 0
+P155 B 1 
+P155 A 1
+GoTo Spawn+2
+See:
+P155 BCDE 5
+GoTo Spawn+1
+Missile:
+P155 A 0 A_JumpIfInventory("ConshotTimer",1,"Missile2")
+P155 F 5 
+P155 G 4
+GoTo Spawn+2
+Missile2:
+P155 G 9
+GoTo Spawn+2
+
+PainFix:
+P155 H 0 
+GoTo PainFrames
+}
+}
+
+actor MagnetonRentalMoves : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_JumpIf(CallACS("RentalBotCheck") == 1,"BotWep")
+
+TNT1 A 0 A_GiveInventory("DischargeMove1")
+TNT1 A 0 A_GiveInventory("RockPolishMove2")
+TNT1 A 0 A_GiveInventory("ReflectMove3")
+TNT1 A 0 A_GiveInventory("FlashCannonMove4")
+stop
+
+BotWep:
+TNT1 A 0 A_GiveInventory("DischargeMove1")
+stop
+}
+}
+
+actor MagnetonRentalSetupItem : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 ACS_NamedExecuteAlways("PKMN_RentalsSetup",0,Dex_Magneton)
+stop
+}
+}

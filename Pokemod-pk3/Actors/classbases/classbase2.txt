@@ -188,6 +188,7 @@ Goto FightingPain
 
 Pain.Peck:
 Pain.WingAttack:
+Pain.Defog:
 //--[Move|Flying]--
 "----" H 0 
 goto FlyingPain
@@ -586,10 +587,13 @@ Goto FirePain
 //#region -=- Water -=-
     
 Pain.WaterGun:
-Pain.WaterPulse:
 Pain.Whirlpool:
 //--[Move|Water]--
 "----" H 0
+Goto WaterPain
+
+Pain.WaterPulse:
+"----" H 0 A_GiveInventory("WaterPulseconfusionChance",1)
 Goto WaterPain
 
 Pain.BubbleBeam:
@@ -727,7 +731,7 @@ Goto GrassPain
 
 Pain.WoodHammer:
 "----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,40,Type_Grass)
-"----" H 0 ACS_NamedExecuteAlways("PKMN_RecoilDamager",0,30)
+"----" H 0 //ACS_NamedExecuteAlways("PKMN_RecoilDamager",0,30)
 "----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockUp",0,15,0)
 Goto GrassPain
 
@@ -795,13 +799,16 @@ Goto ElectricPain
 //#endregion
 
 //#region -=- Psychic -=-
-Pain.Confusion:
+
 Pain.Psychic:
 Pain.Extrasensory:
 //--[Move|Psychic]--
 "----" H 0
 Goto PsychicPain
 
+Pain.Confusion:
+"----" H 0 A_GiveInventory("ConfusionconfusionChance",1)
+Goto PsychicPain
 
 Pain.Psywave:
 "----" H 0
@@ -1172,6 +1179,7 @@ Death.DrillPeck:
 Death.AirSlash:
 Death.WingAttack:
 Death.AirCutter:
+Death.Defog:
 //--[Move|Flying]--
 "----" H 0 
 goto FlyingDeath
@@ -1474,7 +1482,7 @@ Death.FlameCharge:
 
     Death.WoodHammer:
     "----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,40,Type_Grass)
-    "----" H 0 ACS_NamedExecuteAlways("PKMN_RecoilDamager",0,30)
+    "----" H 0 //ACS_NamedExecuteAlways("PKMN_RecoilDamager",0,30)
     "----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockUp",0,15,0)
     Goto GrassDeath
 

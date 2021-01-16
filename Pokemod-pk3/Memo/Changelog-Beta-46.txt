@@ -1,0 +1,103 @@
+//#region -=-=- Beta 46 -=-=-
+/*
+ *
+ *
+ * ===|Gameplay Changes|===
+ * 
+ * Updated oil canisters, they now have stats equivalent to a lvl 5 pokemon with base 100 DEF and base 55 SP.DEF
+ * Explosion from oilcanisters now use the same damagetype as flameburst, and can inflict burn.
+ * ===|Move Changes|===
+ * 
+ * [lightscreen]
+ * damage reduction increased fro 33% > 50%
+ * 
+ * [DoubleEdge]
+ * Damage increased
+ * warmup reduced 
+ * 
+ * [wildCharge]
+ * Damage increased
+ * warmup reduced
+ * 
+ * [FlareBlitz]
+ * Damage increased
+ * warmup reduced
+ * 
+ * [Headbutt]
+ * dash speed increased
+ * recovery reduced
+ * 
+ * [ZenHeadbutt]
+ * dash speed increased
+ * recovery reduced
+ * 
+ * [Spark]
+ * dash speed increased
+ * recovery reduced
+ * 
+ * [iron head]
+ * Dash speed increased
+ * recovery reduced
+ * 
+ * [Woodhammer]
+ * Damage increased
+ * Range increased
+ * No longer has recoil damage
+ * 
+ * [HammerArm]
+ * Damage increased
+ * Range increased
+ * No longer inflicts slow
+ * 
+ * [MachPunch]
+ * Dash speed increased
+ * PP increased from 10 > 15
+ * Recovery reduced
+ * 
+ * [Aqua Jet]
+ * PP increased from 10 > 15
+ * Recovery reduced
+ * Recovery class now the same as other physical moves
+ * 
+ * [waterfall]
+ * PP increased from 10 > 15
+ * recovery reduced
+ * 
+ * [Liquidation]
+ * recovery reduced
+ * 
+ * [SkyUppercut]
+ * recovery reduced
+ * damage increased
+ * jump height increased
+ * now can hit successively
+ * 
+ * [CloseCombat]
+ * Range increased
+ * Damage buffer reduced greatly
+ * 
+ * [PoisonJab]
+ * Range increased
+ * Attack Duration Reduced
+ * PP increased from 10 > 15
+ * Damage buffer adjusted, hits more often but following hits deal less damage
+ * recovery time reduced
+ * 
+ * [detect]
+ * Dash Speed increased
+ * Dash duration reduced
+ * Recovery time increased
+ * invincibility now lingers after the dash for a few frames
+ * 
+ * 
+ * [dragon pulse]
+ * fire rate reduced
+ * 
+ * [fakeout]
+ * AOE reduced 
+ * 
+ * 
+ * [Dive]
+ * reduced the height of the jump when surfacing
+ * 
+ * 

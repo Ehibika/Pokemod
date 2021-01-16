@@ -106,7 +106,7 @@ Script "SetClientSpecies" (int Num) Clientside
 		SetActorProperty(0,APROP_SPECIES,"KingMember");
 		break;
 		}
-
+		ACS_NamedExecuteAlways("core_synccolors", 0);
 }
         
        
@@ -337,7 +337,7 @@ else if(BaseLevel < 1)
 
 }
 
-
+/*
 Script "GameTimer" OPEN 
 {
 if(GetCvar("lastmanstanding")==1||GetCvar("teamlms")==1) {Terminate;}
@@ -375,6 +375,7 @@ int timeleftmin;
 	HudMessage(s:""; HUDMSG_PLAIN, 467, CR_White,160.0, 20.0, 0,0.1);
 	HudMessage(s:""; HUDMSG_PLAIN, 468, CR_White,160.0, 20.0, 0,0.1);
 }
+*/
 
 Script "SafeZoneSpawnCheck" (int MenuSpawn)
 {

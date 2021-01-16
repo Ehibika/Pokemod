@@ -87,12 +87,12 @@ powerup.type "ConShotTimer"
 
 actor DragonPulseShot : BasicProjectile
 {
-Speed 45
+Speed 48
 Damage (MBP_DragonPulse) 
 DamageType "DragonPulse"
 obituary "$OB_DragonPulse"
 radius 16
-Reactiontime 10
+Reactiontime 20
 height 16
 scale 3.5
 States

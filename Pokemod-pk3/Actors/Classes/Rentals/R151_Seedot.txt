@@ -1,0 +1,90 @@
+
+/*
+[+]===================================[+]
+
+[+]===================================[+]
+*/
+
+Actor R_Seedot : ClassBaseRentals 
+{
+Player.DisplayName "Seedot"
+Player.SoundClass "Seedot"
++NOSKIN
+
+Player.StartItem "PKMNRentalKit"
+//============|
+Player.StartItem "SeedotRentalSetupItem"
+//============|
+Player.StartItem "Base_HP", 40
+Player.StartItem "Base_PAttack", 40
+Player.StartItem "Base_PDefense", 50
+Player.StartItem "Base_SAttack", 30
+Player.StartItem "Base_SDefense", 30
+
+//============|
+
+States
+{
+Spawn: 
+P151 A 0
+P151 B 1 
+P151 A 1
+GoTo Spawn+2
+See:
+P151 BCDE 5
+GoTo Spawn+1
+Missile:
+P151 A 0 A_JumpIfInventory("ConshotTimer",1,"Missile2")
+P151 F 5 
+P151 G 4
+GoTo Spawn+2
+Missile2:
+P151 G 9
+GoTo Spawn+2
+
+PainFix:
+P151 H 0 
+GoTo PainFrames
+}
+}
+
+actor SeedotRentalMoves : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_JumpIf(CallACS("RentalBotCheck") == 1,"BotWep")
+
+TNT1 A 0 A_GiveInventory("MegaDrainMove1")
+TNT1 A 0 A_GiveInventory("AstonishMove2")
+TNT1 A 0 A_GiveInventory("GrowthMove3")
+TNT1 A 0 A_GiveInventory("DigMove4")
+stop
+
+BotWep:
+TNT1 A 0 A_GiveInventory("MegaDrainMove1")
+stop
+}
+}
+
+actor SeedotRentalSetupItem : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 ACS_NamedExecuteAlways("PKMN_RentalsSetup",0,Dex_Seedot)
+stop
+}
+}

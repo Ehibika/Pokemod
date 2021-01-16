@@ -1,0 +1,90 @@
+
+/*
+[+]===================================[+]
+
+[+]===================================[+]
+*/
+
+Actor R_Stunky : ClassBaseRentals 
+{
+Player.DisplayName "Stunky"
+Player.SoundClass "Stunky"
++NOSKIN
+
+Player.StartItem "PKMNRentalKit"
+//============|
+Player.StartItem "StunkyRentalSetupItem"
+//============|
+Player.StartItem "Base_HP", 63
+Player.StartItem "Base_PAttack", 63
+Player.StartItem "Base_PDefense", 47
+Player.StartItem "Base_SAttack", 41
+Player.StartItem "Base_SDefense", 41
+
+//============|
+
+States
+{
+Spawn: 
+P127 A 0
+P127 B 1 
+P127 A 1
+GoTo Spawn+2
+See:
+P127 BCDE 5
+GoTo Spawn+1
+Missile:
+P127 A 0 A_JumpIfInventory("ConshotTimer",1,"Missile2")
+P127 F 5 
+P127 G 4
+GoTo Spawn+2
+Missile2:
+P127 G 9
+GoTo Spawn+2
+
+PainFix:
+P127 H 0 
+GoTo PainFrames
+}
+}
+
+actor StunkyRentalMoves : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_JumpIf(CallACS("RentalBotCheck") == 1,"BotWep")
+
+TNT1 A 0 A_GiveInventory("FaintAttackMove1")
+TNT1 A 0 A_GiveInventory("PoisonGasMove2")
+TNT1 A 0 A_GiveInventory("SlashMove3")
+TNT1 A 0 A_GiveInventory("ScreechMove4")
+stop
+
+BotWep:
+TNT1 A 0 A_GiveInventory("FaintAttackMove1")
+stop
+}
+}
+
+actor StunkyRentalSetupItem : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 ACS_NamedExecuteAlways("PKMN_RentalsSetup",0,Dex_Stunky)
+stop
+}
+}

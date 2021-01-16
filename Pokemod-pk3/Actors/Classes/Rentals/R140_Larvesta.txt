@@ -1,0 +1,90 @@
+
+/*
+[+]===================================[+]
+
+[+]===================================[+]
+*/
+
+Actor R_Larvesta : ClassBaseRentals 
+{
+Player.DisplayName "Larvesta"
+Player.SoundClass "Larvesta"
++NOSKIN
+
+Player.StartItem "PKMNRentalKit"
+//============|
+Player.StartItem "LarvestaRentalSetupItem"
+//============|
+Player.StartItem "Base_HP", 55
+Player.StartItem "Base_PAttack", 85
+Player.StartItem "Base_PDefense", 55
+Player.StartItem "Base_SAttack", 50
+Player.StartItem "Base_SDefense", 55
+
+//============|
+
+States
+{
+Spawn: 
+P140 A 0
+P140 B 1 
+P140 A 1
+GoTo Spawn+2
+See:
+P140 BCDE 5
+GoTo Spawn+1
+Missile:
+P140 A 0 A_JumpIfInventory("ConshotTimer",1,"Missile2")
+P140 F 5 
+P140 G 4
+GoTo Spawn+2
+Missile2:
+P140 G 9
+GoTo Spawn+2
+
+PainFix:
+P140 H 0 
+GoTo PainFrames
+}
+}
+
+actor LarvestaRentalMoves : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_JumpIf(CallACS("RentalBotCheck") == 1,"BotWep")
+
+TNT1 A 0 A_GiveInventory("IncinerateMove1")
+TNT1 A 0 A_GiveInventory("StringShotMove2")
+TNT1 A 0 A_GiveInventory("CalmMindMove3")
+TNT1 A 0 A_GiveInventory("PsychicMove4")
+stop
+
+BotWep:
+TNT1 A 0 A_GiveInventory("IncinerateMove1")
+stop
+}
+}
+
+actor LarvestaRentalSetupItem : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 ACS_NamedExecuteAlways("PKMN_RentalsSetup",0,Dex_Larvesta)
+stop
+}
+}

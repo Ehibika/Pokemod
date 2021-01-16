@@ -1,5 +1,9 @@
 Server noarchive bool sv_RentalsMode = false;
 Server noarchive bool sv_EnableShop = true;
+Server noarchive bool sv_EnableTM = true;
+Server noarchive bool sv_EnableMoveTutor = true;
+
+Server noarchive int sv_MaxEntities = 50;
 
 user int YOUR_LEVEL;
 user int YOUR_EXP;
@@ -55,8 +59,9 @@ server noarchive int PKMN_WarmupTime = 45;
 
 server noarchive int PKMN_StartingLevel = 1;
 server noarchive int PKMN_AllowFreeSetup = 0;
-server noarchive int PKMN_RoundLevel = 0;
-server noarchive Bool StartingLevelSet = false;
+server noarchive Bool PKMN_NoEXP = false;
+server noarchive Bool PKMN_NoRoundLeveling = false;
+
 
 server noarchive int PKMN_StartingBP = 30;
 server noarchive int PKMN_BPAward = 10;
@@ -71,6 +76,8 @@ server noarchive bool PKMN_TeamTMPurchase = true;
 server noarchive bool PKMN_TeamTMPickup = true;
 
 
+server noarchive int PKMN_RoundLevel = 0;
+server noarchive Bool StartingLevelSet = false;
 
 user int YOUR_BP;
 

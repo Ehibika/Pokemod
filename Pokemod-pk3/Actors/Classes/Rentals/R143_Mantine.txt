@@ -1,0 +1,90 @@
+
+/*
+[+]===================================[+]
+
+[+]===================================[+]
+*/
+
+Actor R_Mantine : ClassBaseRentals 
+{
+Player.DisplayName "Mantine"
+Player.SoundClass "Mantine"
++NOSKIN
+
+Player.StartItem "PKMNRentalKit"
+//============|
+Player.StartItem "MantineRentalSetupItem"
+//============|
+Player.StartItem "Base_HP", 85
+Player.StartItem "Base_PAttack", 40
+Player.StartItem "Base_PDefense", 70
+Player.StartItem "Base_SAttack", 80
+Player.StartItem "Base_SDefense", 140
+
+//============|
+
+States
+{
+Spawn: 
+P143 A 0
+P143 B 1 
+P143 A 1
+GoTo Spawn+2
+See:
+P143 BCDE 5
+GoTo Spawn+1
+Missile:
+P143 A 0 A_JumpIfInventory("ConshotTimer",1,"Missile2")
+P143 F 5 
+P143 G 4
+GoTo Spawn+2
+Missile2:
+P143 G 9
+GoTo Spawn+2
+
+PainFix:
+P143 H 0 
+GoTo PainFrames
+}
+}
+
+actor MantineRentalMoves : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_JumpIf(CallACS("RentalBotCheck") == 1,"BotWep")
+
+TNT1 A 0 A_GiveInventory("SurfMove1")
+TNT1 A 0 A_GiveInventory("DiveMove2")
+TNT1 A 0 A_GiveInventory("TailWindMove3")
+TNT1 A 0 A_GiveInventory("AquaRingMove4")
+stop
+
+BotWep:
+TNT1 A 0 A_GiveInventory("SurfMove1")
+stop
+}
+}
+
+actor MantineRentalSetupItem : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 ACS_NamedExecuteAlways("PKMN_RentalsSetup",0,Dex_Mantine)
+stop
+}
+}

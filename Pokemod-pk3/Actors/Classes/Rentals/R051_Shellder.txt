@@ -17,9 +17,9 @@ Player.StartItem "ShellderRentalSetupItem"
 //============|
 Player.StartItem "Base_HP", 30
 Player.StartItem "Base_PAttack", 65
-Player.StartItem "Base_PDefense", 100
+Player.StartItem "Base_PDefense", 80
 Player.StartItem "Base_SAttack", 45
-Player.StartItem "Base_SDefense", 25
+Player.StartItem "Base_SDefense", 45
 
 //============|
 

@@ -1,0 +1,90 @@
+
+/*
+[+]===================================[+]
+
+[+]===================================[+]
+*/
+
+Actor R_Graveler : ClassBaseRentals 
+{
+Player.DisplayName "Graveler"
+Player.SoundClass "Graveler"
++NOSKIN
+
+Player.StartItem "PKMNRentalKit"
+//============|
+Player.StartItem "GravelerRentalSetupItem"
+//============|
+Player.StartItem "Base_HP", 55
+Player.StartItem "Base_PAttack", 95
+Player.StartItem "Base_PDefense", 115
+Player.StartItem "Base_SAttack", 45
+Player.StartItem "Base_SDefense", 45
+
+//============|
+
+States
+{
+Spawn: 
+P099 A 0
+P099 B 1 
+P099 A 1
+GoTo Spawn+2
+See:
+P099 BCDE 5
+GoTo Spawn+1
+Missile:
+P099 A 0 A_JumpIfInventory("ConshotTimer",1,"Missile2")
+P099 F 5 
+P099 G 4
+GoTo Spawn+2
+Missile2:
+P099 G 9
+GoTo Spawn+2
+
+PainFix:
+P099 H 0 
+GoTo PainFrames
+}
+}
+
+actor GravelerRentalMoves : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_JumpIf(CallACS("RentalBotCheck") == 1,"BotWep")
+
+TNT1 A 0 A_GiveInventory("RockSlideMove1")
+TNT1 A 0 A_GiveInventory("DigMove2")
+TNT1 A 0 A_GiveInventory("HammerArmMove3")
+TNT1 A 0 A_GiveInventory("RockPolishMove4")
+stop
+
+BotWep:
+TNT1 A 0 A_GiveInventory("RockSlideMove1")
+stop
+}
+}
+
+actor GravelerRentalSetupItem : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 ACS_NamedExecuteAlways("PKMN_RentalsSetup",0,Dex_Graveler)
+stop
+}
+}

@@ -1,0 +1,90 @@
+
+/*
+[+]===================================[+]
+
+[+]===================================[+]
+*/
+
+Actor R_Geodude : ClassBaseRentals 
+{
+Player.DisplayName "Geodude"
+Player.SoundClass "Geodude"
++NOSKIN
+
+Player.StartItem "PKMNRentalKit"
+//============|
+Player.StartItem "GeodudeRentalSetupItem"
+//============|
+Player.StartItem "Base_HP", 40
+Player.StartItem "Base_PAttack", 80
+Player.StartItem "Base_PDefense", 100
+Player.StartItem "Base_SAttack", 30
+Player.StartItem "Base_SDefense", 30
+
+//============|
+
+States
+{
+Spawn: 
+P098 A 0
+P098 B 1 
+P098 A 1
+GoTo Spawn+2
+See:
+P098 BCDE 5
+GoTo Spawn+1
+Missile:
+P098 A 0 A_JumpIfInventory("ConshotTimer",1,"Missile2")
+P098 F 5 
+P098 G 4
+GoTo Spawn+2
+Missile2:
+P098 G 9
+GoTo Spawn+2
+
+PainFix:
+P098 H 0 
+GoTo PainFrames
+}
+}
+
+actor GeodudeRentalMoves : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_JumpIf(CallACS("RentalBotCheck") == 1,"BotWep")
+
+TNT1 A 0 A_GiveInventory("RockTombMove1")
+TNT1 A 0 A_GiveInventory("BulldozeMove2")
+TNT1 A 0 A_GiveInventory("WideGuardMove3")
+TNT1 A 0 A_GiveInventory("ProtectMove4")
+stop
+
+BotWep:
+TNT1 A 0 A_GiveInventory("RockTombMove1")
+stop
+}
+}
+
+actor GeodudeRentalSetupItem : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 ACS_NamedExecuteAlways("PKMN_RentalsSetup",0,Dex_Geodude)
+stop
+}
+}

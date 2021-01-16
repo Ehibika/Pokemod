@@ -49,6 +49,7 @@ damagefactor "StringShot", 1.0
 damagefactor "Splash", 1.0
 damagefactor "ElectroLevitate", 1.0
 damagefactor "QuiverDance", 1.0
+damagefactor "Defog", 1.0
 //--[NewStatusMove]--
 }
 

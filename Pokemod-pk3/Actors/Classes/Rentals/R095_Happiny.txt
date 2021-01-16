@@ -1,0 +1,90 @@
+
+/*
+[+]===================================[+]
+
+[+]===================================[+]
+*/
+
+Actor R_Happiny : ClassBaseRentals 
+{
+Player.DisplayName "Happiny"
+Player.SoundClass "Happiny"
++NOSKIN
+
+Player.StartItem "PKMNRentalKit"
+//============|
+Player.StartItem "HappinyRentalSetupItem"
+//============|
+Player.StartItem "Base_HP", 100
+Player.StartItem "Base_PAttack", 5
+Player.StartItem "Base_PDefense", 5
+Player.StartItem "Base_SAttack", 15
+Player.StartItem "Base_SDefense", 65
+
+//============|
+
+States
+{
+Spawn: 
+P095 A 0
+P095 B 1 
+P095 A 1
+GoTo Spawn+2
+See:
+P095 BCDE 5
+GoTo Spawn+1
+Missile:
+P095 A 0 A_JumpIfInventory("ConshotTimer",1,"Missile2")
+P095 F 5 
+P095 G 4
+GoTo Spawn+2
+Missile2:
+P095 G 9
+GoTo Spawn+2
+
+PainFix:
+P095 H 0 
+GoTo PainFrames
+}
+}
+
+actor HappinyRentalMoves : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_JumpIf(CallACS("RentalBotCheck") == 1,"BotWep")
+
+TNT1 A 0 A_GiveInventory("WishMove1")
+TNT1 A 0 A_GiveInventory("HelpingHandMove2")
+TNT1 A 0 A_GiveInventory("RefreshMove3")
+TNT1 A 0 A_GiveInventory("SwiftMove4")
+stop
+
+BotWep:
+TNT1 A 0 A_GiveInventory("WishMove1")
+stop
+}
+}
+
+actor HappinyRentalSetupItem : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 ACS_NamedExecuteAlways("PKMN_RentalsSetup",0,Dex_Happiny)
+stop
+}
+}

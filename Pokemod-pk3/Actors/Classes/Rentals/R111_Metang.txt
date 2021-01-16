@@ -1,0 +1,90 @@
+
+/*
+[+]===================================[+]
+
+[+]===================================[+]
+*/
+
+Actor R_Metang : ClassBaseRentals 
+{
+Player.DisplayName "Metang"
+Player.SoundClass "Metang"
++NOSKIN
+
+Player.StartItem "PKMNRentalKit"
+//============|
+Player.StartItem "MetangRentalSetupItem"
+//============|
+Player.StartItem "Base_HP", 60
+Player.StartItem "Base_PAttack", 75
+Player.StartItem "Base_PDefense", 100
+Player.StartItem "Base_SAttack", 55
+Player.StartItem "Base_SDefense", 80
+
+//============|
+
+States
+{
+Spawn: 
+P111 A 0
+P111 B 1 
+P111 A 1
+GoTo Spawn+2
+See:
+P111 BCDE 5
+GoTo Spawn+1
+Missile:
+P111 A 0 A_JumpIfInventory("ConshotTimer",1,"Missile2")
+P111 F 5 
+P111 G 4
+GoTo Spawn+2
+Missile2:
+P111 G 9
+GoTo Spawn+2
+
+PainFix:
+P111 H 0 
+GoTo PainFrames
+}
+}
+
+actor MetangRentalMoves : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_JumpIf(CallACS("RentalBotCheck") == 1,"BotWep")
+
+TNT1 A 0 A_GiveInventory("MetalClawMove1")
+TNT1 A 0 A_GiveInventory("ExtrasensoryMove2")
+TNT1 A 0 A_GiveInventory("HammerArmMove3")
+TNT1 A 0 A_GiveInventory("ShadowBallMove4")
+stop
+
+BotWep:
+TNT1 A 0 A_GiveInventory("MetalClawMove1")
+stop
+}
+}
+
+actor MetangRentalSetupItem : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 ACS_NamedExecuteAlways("PKMN_RentalsSetup",0,Dex_Metang)
+stop
+}
+}

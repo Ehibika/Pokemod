@@ -159,16 +159,25 @@ ACS_NamedExecuteAlways("GivePlayerEXP",0,TargTID-1000,EXPAward);
 
 
 // Make's Smoke less Opaque for teams
-script "TeamSmoke"  (VOID) CLIENTSIDE
+script "TeamSmoke"  (VOID)
 {
 
     int cln = consolePlayerNumber();
-	int FiringPlayer= ACS_ExecuteWithResult(257, 0) - 1000;
-    if( GetPlayerInfo(cln, PLAYERINFO_TEAM) == GetPlayerInfo(FiringPlayer, PLAYERINFO_TEAM))//(PlayerClass((consolePlayerNumber() >= SUPPORTSTART) && PlayerClass((consolePlayerNumber()) <= SUPPORTEND)))
-    {
-       SetActorProperty(0,APROP_ALPHA,0.3);
-    }
+    int FiringPlayer= ACS_NamedExecuteWithResult("core_gettarget",0) - 1000;
+    ACS_NamedExecuteAlways("TeamSmoke2",0,FiringPlayer);
+
 }
+
+script "TeamSmoke2"  (int Player) CLIENTSIDE
+{
+    int cln = consolePlayerNumber();
+    if( GetPlayerInfo(cln, PLAYERINFO_TEAM) == GetPlayerInfo(Player, PLAYERINFO_TEAM))//(PlayerClass((consolePlayerNumber() >= SUPPORTSTART) && PlayerClass((consolePlayerNumber()) <= SUPPORTEND)))
+    {
+        SetActorProperty(0,APROP_ALPHA,0.3);
+    }
+
+}
+
 
 Script "AbsorbEffect" (int Per)
 {
@@ -509,7 +518,7 @@ Int Output;
 
 if(Pointer!=0){SetActivator(0,Pointer);}
 
-if(!(ClassifyActor(0) & ACTOR_PLAYER)){Output = Output | STATUS_MAJOR | STATUS_MINOR | STATUS_SPECIALTY | STATUS_STATS | STATUS_TAUNT;;}
+if(!IsValidPKMNActor(activatorTID())){Output = Output | STATUS_MAJOR | STATUS_MINOR | STATUS_SPECIALTY | STATUS_STATS | STATUS_TAUNT;;}
 
 
 

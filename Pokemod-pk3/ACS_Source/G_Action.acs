@@ -62,7 +62,7 @@ int ETID = EntityTID+P+EntityID;
 Now, let's kill any actor that already has this ETID
 */
 
-if (ThingCount(T_NONE,ETID)){Thing_Remove(ETID);}
+if (ThingCount(T_NONE,ETID)){Thing_Remove(ETID); /*ACS_NamedExecuteAlways("Client_Thing_Remove",0,ETID);*/}
 Thing_ChangeTID(0,EntityTID+P+EntityID);
 }
 
@@ -117,9 +117,11 @@ while(!SpawnComplete)
 		if(EntityNum >= EntityCap)
 			{
 				Thing_Remove(M_ETID);
+				//ACS_NamedExecuteAlways("Client_Thing_Remove",0,M_ETID);
 				for(int i = 1; i < EntityCap; i++)
 				{
 					Thing_ChangeTID(M_ETID+i,M_ETID+i-1);
+					//ACS_NamedExecuteAlways("Client_Thing_ChangeTID",0,M_ETID+i,M_ETID+i-1);
 				}
 				EntityNum = 0;
 			}
@@ -210,6 +212,12 @@ For(int i; i<HAZMAX;i++)
 
 //#region -=- MasterScrub -=-
 #region -=- MasterScrub -=-
+
+Script "MasterScrub_Client" (int ScrubRange) CLIENTSIDE
+{
+ACS_NamedExecuteAlways("MasterScrub",0,ScrubRange);
+}
+
 Script "MasterScrub" (int ScrubRange)
 {
 	//Clears all entities indiscriminately, regardless of team affiliation
@@ -311,7 +319,7 @@ Function void Kill_M_Entity(int MaxPlayers, int ScrubRange)
 			For( j=0; j<9;j++)
 			{
 			CheckTID = M_ENTITYTID+(k*1000)+(i*100)+j;
-			if(IsTIDUsed(CheckTID) && xyzDistance(0,CheckTID) <= ScrubRange){Thing_Remove(CheckTID);}  
+			if(IsTIDUsed(CheckTID) && xyzDistance(0,CheckTID) <= ScrubRange){Thing_Remove(CheckTID);/*ACS_NamedExecuteAlways("Client_Thing_Remove",0,CheckTID);*/}  
 			}
 			j = 0;         
 		}
@@ -320,6 +328,17 @@ Function void Kill_M_Entity(int MaxPlayers, int ScrubRange)
 }
 #endregion
 //#endregion
+
+
+Script "Client_Thing_Remove" (int TID) CLIENTSIDE
+{
+	Thing_Remove(TID);
+}
+
+Script "Client_Thing_ChangeTID" (int OldTID, int NewTID) CLIENTSIDE
+{
+	Thing_ChangeTID(OldTID,NewTID);
+}
 
 
 #endregion
@@ -356,7 +375,7 @@ else
 	FiringPlayer=ActivatorTID();
 	}
 PlayersTeam = GetPlayerInfo(FiringPlayer-1000, PLAYERINFO_TEAM);
-For(int i = 0;i < ServerMax; i++)
+For(int i = 0;i < GetMaxEntities(); i++)
 	{
 	Target_TID = i+1000;
 	GiveClearance = false;
@@ -468,7 +487,7 @@ Str TinyBarSprite[21] = {
         Delay(1);
         if(Weapon==1 && StrIcmp(GetWeapon(),WeaponRequired)!=0){terminate;}
         PlayersTeam = GetPlayerInfo(ActivatorTID()-1000, PLAYERINFO_TEAM);
-        For(int p = 0; p < ServerMax; p++)
+        For(int p = 0; p < GetMaxEntities(); p++)
             {
             Target_TID = p+1000;
             If(PlayerInGame(p)
@@ -749,7 +768,7 @@ script "PKMNACS_AbraGroupTeleport" (int Range)
 {
 if(ACS_ExecuteWithResult(975,1)==1)
 	{
-	for(int i = 0; i<GetMaxPlayers(); i++)
+	for(int i = 0; i<GetMaxEntities(); i++)
 		{
 		if(PlayerInGame(i) && GetActorProperty(0,APROP_Health)>0 && i!=ActivatorTID()-1000)
 			{
@@ -816,7 +835,7 @@ Bool CanThrust;
 //int ThrustDrop = NoNeg( (Dist/10) - MaxRadius) << 16;
 //SetActivatorToTarget(0);
 
-For(int q = 0;q < ServerMax; q++)
+For(int q = 0;q < GetMaxEntities(); q++)
 	{
         targetTID = q+1000;
         CanThrust = True;
@@ -1573,7 +1592,14 @@ int OverhealMax = Overheal+100;
 if(OverhealMax<=100){OverhealMax=101;}
 if(OverhealMax>150){OverhealMax=150;}
 if(Pointer!=0){SetActivator(0,Pointer);}
-int MaxHealth = GetActorProperty(0,APROP_SPAWNHEALTH);
+int MaxHealth;
+Switch(IsValidPKMNActor(ActivatorTID()))
+    {
+    Case 0: terminate; Break;
+    Case 1: MaxHealth = GetActorProperty(0,APROP_SPAWNHEALTH); Break;
+    Case 2: MaxHealth = CheckInventory("SBAR_HP"); Break;
+	}
+
 if(MaxHealth==0){MaxHealth=100;}
 for(int g=1;g<=HealAmount;g++)
     {
@@ -1589,9 +1615,16 @@ SetPointer(pointer,TID);
   
 Script "PKMN_PainSound" (Int PainType)
 {
-	if(!(ClassifyActor(0) & ACTOR_PLAYER)){Terminate;}
+	//if(!(ClassifyActor(0) & ACTOR_PLAYER) && !(ClassifyActor(0) & ACTOR_MONSTER)){Terminate;}
+	if(!IsValidPKMNActor(ActivatorTID())){Terminate;}
 //Detects the appropriate pain sound by weakness
-int PlayerDEXNum = GetPokeValue(POKEDEXNUM);
+int PlayerDexNum;
+Switch(IsValidPKMNActor(ActivatorTID()))
+    {
+    Case 0: terminate; Break;
+    Case 1: PlayerDexNum = GetPokeValue(POKEDEXNUM); Break;
+    Case 2: PlayerDexNum = CheckInventory("MobDexNum"); Break;
+    }
 int TypeA = StatDEX[PlayerDEXNum][7];
 int TypeB = StatDEX[PlayerDEXNum][8];
 str Typename;
@@ -1676,7 +1709,7 @@ else If(ActivatorTID() >= EntityTID && ActivatorTID() <= (EntityTID+6499)){Firin
 else{FiringPlayer=ActivatorTID();}
 
 PlayersTeam = GetPlayerInfo(FiringPlayer-1000, PLAYERINFO_TEAM);
-For(int i = 0;i < ServerMax; i++)
+For(int i = 0;i < GetMaxEntities(); i++)
 	{
 	Target_TID = i+1000;
 	TargetTeam = GetPlayerInfo(i, PLAYERINFO_TEAM);
@@ -1696,7 +1729,13 @@ Script "PKMNACS_HealTID" (int TargTID, int HealAmount, int GetEXP)
 int HealerTID = ACS_NamedExecuteWithResult("core_gettarget");
 int PayEXP;
 SetActivator(TargTID);
-int MaxHealth = GetActorProperty(0,APROP_SPAWNHEALTH);
+int MaxHealth;
+Switch(IsValidPKMNActor(ActivatorTID()))
+    {
+    Case 0: terminate; Break;
+    Case 1: MaxHealth = GetActorProperty(0,APROP_SPAWNHEALTH); Break;
+    Case 2: MaxHealth = CheckInventory("SBAR_HP"); Break;
+	}
 if(MaxHealth==0){MaxHealth=100;}
 for(int g=1;g<=HealAmount;g++)
     {
@@ -1711,7 +1750,13 @@ Script "PKMNACS_HealPointer" (int Pointer, int HealAmount, int GetEXP)
 int HealerTID = ACS_NamedExecuteWithResult("core_gettarget");
 int PayEXP;
 if(Pointer!=0){SetActivator(0,Pointer);}
-int MaxHealth = GetActorProperty(0,APROP_SPAWNHEALTH);
+int MaxHealth;
+Switch(IsValidPKMNActor(ActivatorTID()))
+    {
+    Case 0: terminate; Break;
+    Case 1: MaxHealth = GetActorProperty(0,APROP_SPAWNHEALTH); Break;
+    Case 2: MaxHealth = CheckInventory("SBAR_HP"); Break;
+	}
 if(MaxHealth==0){MaxHealth=100;}
 for(int g=1;g<=HealAmount;g++)
     {
@@ -1794,7 +1839,7 @@ script "PKMN_PushPull" (int maxforce, int maxRange, int noFalloff)
 		//log(i:userTeam);
 
 		
-	for(int p = 0;p < ServerMax; p++)
+	for(int p = 0;p < GetMaxEntities(); p++)
 	{
 		if(!PlayerInGame(p))
 		{

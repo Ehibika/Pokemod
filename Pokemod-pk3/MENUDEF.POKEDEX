@@ -5700,7 +5700,7 @@ OptionMenu "MoveMenu_DestinyBond"
     StaticText"===============================================================",1
 }
 
-OptionMenu "MoveMenu_<BlankMove>"
+OptionMenu "MoveMenu_Tailwind"
 {
 	
 	Title "$M231_NAME"
@@ -6830,6 +6830,23 @@ OptionMenu "MoveMenu_FaintAttack"
     StaticText "$M2964_POWER"
     StaticText"===============================================================",1
     StaticText "$M296_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+} 
+OptionMenu "MoveMenu_Defog"
+{
+    
+    Title "$M297_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M297_TYPE"
+    StaticText "$M297_CATEGORY"
+    StaticText "$M2974_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M297_DESC"
     StaticText ""
     StaticText ""
     StaticText ""

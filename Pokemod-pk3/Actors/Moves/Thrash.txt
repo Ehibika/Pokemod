@@ -49,7 +49,7 @@ Goto Fire.Rampage
 
 Fire.After:
 "####" B 1 A_GiveInventory("FullRecovery_A")
-"####" B 0 A_GiveInventory("FatigueStatusProc")
+"####" B 0 A_GiveInventory("ConfusionStatusProc")
 "####" B 0 A_TakeInventory("ThrashTimer",99)
 "####" B 0 A_Jump(256,"Fire.End")
 Goto Fire.End

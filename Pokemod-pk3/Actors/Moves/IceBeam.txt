@@ -170,7 +170,7 @@ stop
 Pickup:
 TNT1 A 0 A_Jumpifinventory("FreezeMark",1,"FreezeUp")
 FreezeUp:
-TNT1 A 0 A_GiveInventory("FreezeValue",random(20,35))
+TNT1 A 0 A_GiveInventory("FreezeValue",random(45,65))
 stop
 
 Nope:
@@ -361,7 +361,7 @@ TNT1 A 0 A_CountDown
 loop
 
 Death:
-TNT1 A 0 A_Explode(MBP_IceBeam,28,0,0,28)
+TNT1 A 0 A_Explode(MBP_IceBeam,32,0,0,32)
 TNT1 A 0 A_SpawnItemEx("IceBeamImpactFX",0,-1,4,0,0,0,0,1)
 stop
 }

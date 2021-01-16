@@ -20,6 +20,12 @@ const Int P_SafeZoneSize = 60;
 
 actor inSafeZone : PowerProtection {inventory.amount 1 Powerup.Duration 35 DamageFactor "Normal", 0}
 
+actor InSafeSpace : PowerupGiver
+{
++INVENTORY.AUTOACTIVATE
+Powerup.Duration 0x7FFFFFFD 
+powerup.type "inSafeZone"
+}
 
 actor SpawnSafeZone : CustomInventory
 {

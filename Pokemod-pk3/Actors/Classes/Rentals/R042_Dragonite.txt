@@ -58,9 +58,9 @@ Pickup:
 TNT1 A 0 A_JumpIf(CallACS("RentalBotCheck") == 1,"BotWep")
 
 TNT1 A 0 A_GiveInventory("HydroPumpMove1")
-TNT1 A 0 A_GiveInventory("WaterfallMove2")
-TNT1 A 0 A_GiveInventory("YawnMove3")
-TNT1 A 0 A_GiveInventory("WhirlpoolMove4")
+TNT1 A 0 A_GiveInventory("DragonPulseMove2")
+TNT1 A 0 A_GiveInventory("FlyMove3")
+TNT1 A 0 A_GiveInventory("DracoMeteorMove4")
 stop
 
 BotWep:

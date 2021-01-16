@@ -81,7 +81,7 @@ actor CloseCombatTimer : Powerup {inventory.amount 1 powerup.duration 25 }
 
 Actor CloseCombatProtect : powerprotection
 {
-Powerup.duration 8
+Powerup.duration 1
 Damagefactor "CloseCombat", 0
 }
 
@@ -119,10 +119,10 @@ stop
 
 actor CloseCombatMelee : BasicMeleeAttack
 {
-Speed 44
+Speed 80
 Scale 5.0
-Radius 4
-Height 4
+Radius 8
+Height 8
 DamageType "CloseCombat"
 Obituary "$OB_CloseCombat"
 Damage(MBP_CloseCombat)

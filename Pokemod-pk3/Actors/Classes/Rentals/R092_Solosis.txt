@@ -1,0 +1,90 @@
+
+/*
+[+]===================================[+]
+
+[+]===================================[+]
+*/
+
+Actor R_Solosis : ClassBaseRentals 
+{
+Player.DisplayName "Solosis"
+Player.SoundClass "Solosis"
++NOSKIN
+
+Player.StartItem "PKMNRentalKit"
+//============|
+Player.StartItem "SolosisRentalSetupItem"
+//============|
+Player.StartItem "Base_HP", 45
+Player.StartItem "Base_PAttack", 30
+Player.StartItem "Base_PDefense", 40
+Player.StartItem "Base_SAttack", 105
+Player.StartItem "Base_SDefense", 50
+
+//============|
+
+States
+{
+Spawn: 
+P092 A 0
+P092 B 1 
+P092 A 1
+GoTo Spawn+2
+See:
+P092 BCDE 5
+GoTo Spawn+1
+Missile:
+P092 A 0 A_JumpIfInventory("ConshotTimer",1,"Missile2")
+P092 F 5 
+P092 G 4
+GoTo Spawn+2
+Missile2:
+P092 G 9
+GoTo Spawn+2
+
+PainFix:
+P092 H 0 
+GoTo PainFrames
+}
+}
+
+actor SolosisRentalMoves : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_JumpIf(CallACS("RentalBotCheck") == 1,"BotWep")
+
+TNT1 A 0 A_GiveInventory("ConfusionMove1")
+TNT1 A 0 A_GiveInventory("ReflectMove2")
+TNT1 A 0 A_GiveInventory("RecoverMove3")
+TNT1 A 0 A_GiveInventory("RefreshMove4")
+stop
+
+BotWep:
+TNT1 A 0 A_GiveInventory("ConfusionMove1")
+stop
+}
+}
+
+actor SolosisRentalSetupItem : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 ACS_NamedExecuteAlways("PKMN_RentalsSetup",0,Dex_Solosis)
+stop
+}
+}

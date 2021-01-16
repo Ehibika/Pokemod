@@ -1,0 +1,90 @@
+
+/*
+[+]===================================[+]
+
+[+]===================================[+]
+*/
+
+Actor R_Steelix : ClassBaseRentals 
+{
+Player.DisplayName "Steelix"
+Player.SoundClass "Steelix"
++NOSKIN
+Scale 1.5
+Player.StartItem "PKMNRentalKit"
+//============|
+Player.StartItem "SteelixRentalSetupItem"
+//============|
+Player.StartItem "Base_HP", 75
+Player.StartItem "Base_PAttack", 85
+Player.StartItem "Base_PDefense", 200
+Player.StartItem "Base_SAttack", 55
+Player.StartItem "Base_SDefense", 65
+
+//============|
+
+States
+{
+Spawn: 
+P105 A 0
+P105 B 1 
+P105 A 1
+GoTo Spawn+2
+See:
+P105 BCDE 5
+GoTo Spawn+1
+Missile:
+P105 A 0 A_JumpIfInventory("ConshotTimer",1,"Missile2")
+P105 F 5 
+P105 G 4
+GoTo Spawn+2
+Missile2:
+P105 G 9
+GoTo Spawn+2
+
+PainFix:
+P105 H 0 
+GoTo PainFrames
+}
+}
+
+actor SteelixRentalMoves : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_JumpIf(CallACS("RentalBotCheck") == 1,"BotWep")
+
+TNT1 A 0 A_GiveInventory("IronTailMove1")
+TNT1 A 0 A_GiveInventory("EarthquakeMove2")
+TNT1 A 0 A_GiveInventory("RockSlideMove3")
+TNT1 A 0 A_GiveInventory("RockPolishMove4")
+stop
+
+BotWep:
+TNT1 A 0 A_GiveInventory("IronTailMove1")
+stop
+}
+}
+
+actor SteelixRentalSetupItem : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 ACS_NamedExecuteAlways("PKMN_RentalsSetup",0,Dex_Steelix)
+stop
+}
+}

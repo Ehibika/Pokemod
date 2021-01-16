@@ -229,7 +229,7 @@ Nightmare
 DisarmingVoice
 ShadowSneak
 DestinyBond
-<BlankMove>
+Tailwind
 DrainingKiss
 Imprison
 Wish
@@ -295,4 +295,5 @@ PoisonJab
 EarthPower
 PinMissile
 FaintAttack
+Defog
 //--[NewMove]--

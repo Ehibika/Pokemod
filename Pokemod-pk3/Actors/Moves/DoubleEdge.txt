@@ -86,7 +86,7 @@ Goto Ready
 actor DoubleEdgePP : Ammo {inventory.amount 1 inventory.Maxamount 10}
 
 actor DoubleEdgeTimer : Powerup {inventory.amount 1 powerup.duration 35 }
-actor DoubleEdgeWarmupTimer : Powerup {inventory.amount 1 powerup.duration 10 }
+actor DoubleEdgeWarmupTimer : Powerup {inventory.amount 1 powerup.duration 5 }
 
 Actor DoubleEdgeDelay : powerprotection
 {

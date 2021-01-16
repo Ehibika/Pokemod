@@ -1,0 +1,90 @@
+
+/*
+[+]===================================[+]
+
+[+]===================================[+]
+*/
+
+Actor R_Honchkrow : ClassBaseRentals 
+{
+Player.DisplayName "Honchkrow"
+Player.SoundClass "Honchkrow"
++NOSKIN
+
+Player.StartItem "PKMNRentalKit"
+//============|
+Player.StartItem "HonchkrowRentalSetupItem"
+//============|
+Player.StartItem "Base_HP", 100
+Player.StartItem "Base_PAttack", 125
+Player.StartItem "Base_PDefense", 52
+Player.StartItem "Base_SAttack", 105
+Player.StartItem "Base_SDefense", 52
+
+//============|
+
+States
+{
+Spawn: 
+P158 A 0
+P158 B 1 
+P158 A 1
+GoTo Spawn+2
+See:
+P158 BCDE 5
+GoTo Spawn+1
+Missile:
+P158 A 0 A_JumpIfInventory("ConshotTimer",1,"Missile2")
+P158 F 5 
+P158 G 4
+GoTo Spawn+2
+Missile2:
+P158 G 9
+GoTo Spawn+2
+
+PainFix:
+P158 H 0 
+GoTo PainFrames
+}
+}
+
+actor HonchkrowRentalMoves : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_JumpIf(CallACS("RentalBotCheck") == 1,"BotWep")
+
+TNT1 A 0 A_GiveInventory("AirSlashMove1")
+TNT1 A 0 A_GiveInventory("DarkPulseMove2")
+TNT1 A 0 A_GiveInventory("FlyMove3")
+TNT1 A 0 A_GiveInventory("NastyPlotMove4")
+stop
+
+BotWep:
+TNT1 A 0 A_GiveInventory("AirSlashMove1")
+stop
+}
+}
+
+actor HonchkrowRentalSetupItem : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 ACS_NamedExecuteAlways("PKMN_RentalsSetup",0,Dex_Honchkrow)
+stop
+}
+}

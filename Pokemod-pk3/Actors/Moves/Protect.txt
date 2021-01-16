@@ -29,6 +29,7 @@ Goto Fire.Initiate
 Fire.Initiate:
 "####" B 0 A_PlaySoundEx("Support/Barrier","Soundslot6")
 "####" B 0 A_SpawnItemEx("ProtectFX", 0, 0, 0, 0, 0, 0, 0,SXF_NOCHECKPOSITION)
+"####" B 0 A_SpawnItemEx("ProtectPickupHandler", 0, 0, 0, 0, 0, 0, 0,SXF_NOCHECKPOSITION)
 "####" B 0 A_GiveInventory("ProtectGuard")
 "####" B 0 A_TakeInventory("ProtectPP",1)
 "####" B 0 A_GiveInventory("ProtectCST")
@@ -89,6 +90,7 @@ actor ProtectPP : Ammo {inventory.amount 1 inventory.Maxamount 10}
 actor ProtectGuard : PowerProtection 
 {
     +NOPAIN
+    -PICKUP
     inventory.amount 1 
     Powerup.Duration 17
     DamageFactor "Normal", 0
@@ -139,16 +141,18 @@ stop
 }
 }
 
-actor ProtectRecoveryWatcher : BasicHelper 
+actor ProtectPickupHandler : BasicHelper 
 {
 Var int user_DashTime;
 States
 {
 Spawn:
 TNT1 A 0
+TNT1 A 1 A_GiveToTarget("PickupOff",1)
+Spawn2:
 TNT1 A 1
-TNT1 A 0 A_JumpIfInTargetInventory("ProtectRecoveryFlag",1,"Spawn")
-TNT1 A 1 A_TakeFromTarget("ProtectRecoveryCount",99)
+TNT1 A 0 A_JumpIfInTargetInventory("ProtectGuard",1,"Spawn")
+TNT1 A 1 A_GiveToTarget("PickupOn",1)
 TNT1 A 5
 Goto Death
 

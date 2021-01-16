@@ -1,0 +1,90 @@
+
+/*
+[+]===================================[+]
+
+[+]===================================[+]
+*/
+
+Actor R_Qwilfish : ClassBaseRentals 
+{
+Player.DisplayName "Qwilfish"
+Player.SoundClass "Qwilfish"
++NOSKIN
+
+Player.StartItem "PKMNRentalKit"
+//============|
+Player.StartItem "QwilfishRentalSetupItem"
+//============|
+Player.StartItem "Base_HP", 65
+Player.StartItem "Base_PAttack", 95
+Player.StartItem "Base_PDefense", 85
+Player.StartItem "Base_SAttack", 55
+Player.StartItem "Base_SDefense", 55
+
+//============|
+
+States
+{
+Spawn: 
+P138 A 0
+P138 B 1 
+P138 A 1
+GoTo Spawn+2
+See:
+P138 BCDE 5
+GoTo Spawn+1
+Missile:
+P138 A 0 A_JumpIfInventory("ConshotTimer",1,"Missile2")
+P138 F 5 
+P138 G 4
+GoTo Spawn+2
+Missile2:
+P138 G 9
+GoTo Spawn+2
+
+PainFix:
+P138 H 0 
+GoTo PainFrames
+}
+}
+
+actor QwilfishRentalMoves : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_JumpIf(CallACS("RentalBotCheck") == 1,"BotWep")
+
+TNT1 A 0 A_GiveInventory("HydroPumpMove1")
+TNT1 A 0 A_GiveInventory("SpikeCannonMove2")
+TNT1 A 0 A_GiveInventory("ToxicSpikesMove3")
+TNT1 A 0 A_GiveInventory("DiveMove4")
+stop
+
+BotWep:
+TNT1 A 0 A_GiveInventory("HydroPumpMove1")
+stop
+}
+}
+
+actor QwilfishRentalSetupItem : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 ACS_NamedExecuteAlways("PKMN_RentalsSetup",0,Dex_Qwilfish)
+stop
+}
+}

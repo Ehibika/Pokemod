@@ -41,7 +41,7 @@ goto Fire.DashEnd
 Fire.DashEnd:
 "####" B 0 A_ScaleVelocity(0.2)
 "####" B 0 A_GiveInventory("DashSetOff")
-"####" B 1 A_GiveInventory("FullRecovery_B")
+"####" B 1 A_GiveInventory("HalfRecovery_B")
 "####" B 0 A_Jump(256,"Fire.End")
 Goto Fire.End
 
@@ -82,7 +82,7 @@ Powerup.duration 5
 Damagefactor "Spark", 0
 }
 
-const int SPDBT_Thrust = 32;
+const int SPDBT_Thrust = 48;
 
 actor SparkParaChance : CustomInventory
 {
@@ -112,7 +112,7 @@ stop
 
 actor SparkBumper : BasicProjectile
 {
-Speed 35 
+Speed 48 
 Damage (0)
 radius 6
 height 6

@@ -17,9 +17,9 @@ Player.StartItem "CloysterRentalSetupItem"
 //============|
 Player.StartItem "Base_HP", 50
 Player.StartItem "Base_PAttack", 95
-Player.StartItem "Base_PDefense", 180
+Player.StartItem "Base_PDefense", 160
 Player.StartItem "Base_SAttack", 85
-Player.StartItem "Base_SDefense", 45
+Player.StartItem "Base_SDefense", 65
 
 //============|
 

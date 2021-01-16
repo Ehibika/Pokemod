@@ -255,7 +255,7 @@ const int Move_Nightmare = 227;
 const int Move_DisarmingVoice = 228;
 const int Move_ShadowSneak = 229;
 const int Move_DestinyBond = 230;
-//const int Move_<BlankMove>= 231;
+const int Move_Tailwind= 231;
 const int Move_DrainingKiss = 232;
 const int Move_Imprison = 233;
 const int Move_Wish = 234;
@@ -321,6 +321,7 @@ const int Move_PoisonJab = 293;
 const int Move_EarthPower = 294;
 const int Move_PinMissile = 295;
 const int Move_FaintAttack = 296;
+const int Move_Defog = 297;
 //--[NewMove]--
 //=======|Pokedex Constants|==========
 const int Dex_SMEARGLE = 0;

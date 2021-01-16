@@ -1,0 +1,90 @@
+
+/*
+[+]===================================[+]
+
+[+]===================================[+]
+*/
+
+Actor R_Chansey : ClassBaseRentals 
+{
+Player.DisplayName "Chansey"
+Player.SoundClass "Chansey"
++NOSKIN
+
+Player.StartItem "PKMNRentalKit"
+//============|
+Player.StartItem "ChanseyRentalSetupItem"
+//============|
+Player.StartItem "Base_HP", 250
+Player.StartItem "Base_PAttack", 5
+Player.StartItem "Base_PDefense", 5
+Player.StartItem "Base_SAttack", 35
+Player.StartItem "Base_SDefense", 105
+
+//============|
+
+States
+{
+Spawn: 
+P096 A 0
+P096 B 1 
+P096 A 1
+GoTo Spawn+2
+See:
+P096 BCDE 5
+GoTo Spawn+1
+Missile:
+P096 A 0 A_JumpIfInventory("ConshotTimer",1,"Missile2")
+P096 F 5 
+P096 G 4
+GoTo Spawn+2
+Missile2:
+P096 G 9
+GoTo Spawn+2
+
+PainFix:
+P096 H 0 
+GoTo PainFrames
+}
+}
+
+actor ChanseyRentalMoves : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_JumpIf(CallACS("RentalBotCheck") == 1,"BotWep")
+
+TNT1 A 0 A_GiveInventory("SoftboiledMove1")
+TNT1 A 0 A_GiveInventory("EggbombMove2")
+TNT1 A 0 A_GiveInventory("FakeoutMove3")
+TNT1 A 0 A_GiveInventory("ThunderboltMove4")
+stop
+
+BotWep:
+TNT1 A 0 A_GiveInventory("SoftboiledMove1")
+stop
+}
+}
+
+actor ChanseyRentalSetupItem : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 ACS_NamedExecuteAlways("PKMN_RentalsSetup",0,Dex_Chansey)
+stop
+}
+}

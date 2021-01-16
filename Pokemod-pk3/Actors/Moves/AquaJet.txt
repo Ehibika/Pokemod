@@ -6,7 +6,7 @@ actor AquaJetMove : WepMasterBase
 Tag "AquaJet"
 obituary "$OB_AQUAJET"
 Weapon.AmmoUse 1
-Weapon.AmmoGive 10
+Weapon.AmmoGive 15
 weapon.ammotype "AquaJetPP"
 scale 2.0
 Inventory.Pickupmessage "$PU_MEGABUSTER"
@@ -18,7 +18,7 @@ stop
 
 
 Fire:
-"####" BBB 1 A_Jumpif(CallACS("CheckWeaponFire",RC_A)==1,"Fire.Begin")
+"####" BBB 1 A_Jumpif(CallACS("CheckWeaponFire",RC_B)==1,"Fire.Begin")
 "####" B 0 A_Jump(256,"NoAmmo")
 Goto NoAmmo
 
@@ -44,7 +44,7 @@ goto Fire.DashEnd
 Fire.DashEnd:
 "####" B 0 A_ScaleVelocity(0.2)
 "####" B 0 //A_GiveInventory("DashSetOff")
-"####" B 1 A_GiveInventory("FullRecovery_A")
+"####" B 1 A_GiveInventory("SemiRecovery_B")
 "####" B 0 A_Jump(256,"Fire.End")
 Goto Fire.End
 
@@ -77,7 +77,7 @@ Goto Ready
 //[+]========================================================================[+]
 //-----------------------------|Ammo & Inventory|------------------------------
 //[+]========================================================================[+]
-actor AquaJetPP : Ammo {inventory.amount 1 inventory.Maxamount 10}
+actor AquaJetPP : Ammo {inventory.amount 1 inventory.Maxamount 15}
 
 Actor AquaJetDelay : powerprotection
 {

@@ -118,6 +118,7 @@ stop
 Pickup:
 TNT1 A 0 A_JumpIf(CallACS("PKMNACS_HealthPercent",0)>=100,"Nope")
 LASH A 0 A_JumpIf(ACS_NamedExecuteWithResult("PKMNACS_ActorClassifier",0,2) == TRUE, "HealMe")
+LASH A 0 A_JumpIf(ACS_NamedExecuteWithResult("PKMNACS_ActorClassifier",0,5) == TRUE, "HealMe")
 stop
 
 HealMe:

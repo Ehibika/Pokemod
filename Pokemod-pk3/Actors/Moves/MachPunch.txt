@@ -3,7 +3,7 @@ actor MachpunchMove : WepMasterBase
 Tag "Machpunch"
 obituary "$OB_MACHPUNCH"
 Weapon.AmmoUse 1
-Weapon.AmmoGive 10
+Weapon.AmmoGive 15
 weapon.ammotype "MachpunchPP"
 scale 2.0
 Inventory.Pickupmessage "$PU_MEGABUSTER"
@@ -37,7 +37,7 @@ goto Fire.DashEnd
 
 Fire.DashEnd:
 "####" B 0 A_GiveInventory("DashSetOff")
-"####" B 1 A_GiveInventory("FullRecovery_C")
+"####" B 1 A_GiveInventory("SemiRecovery_C")
 "####" B 0 A_Jump(256,"Fire.End")
 Goto Fire.End
 
@@ -65,7 +65,7 @@ Goto Ready
 //[+]========================================================================[+]
 //-----------------------------|Ammo & Inventory|------------------------------
 //[+]========================================================================[+]
-actor MachpunchPP : Ammo {inventory.amount 1 inventory.Maxamount 10}
+actor MachpunchPP : Ammo {inventory.amount 1 inventory.Maxamount 15}
 
 Actor MachpunchDelay : powerprotection
 {
@@ -82,7 +82,7 @@ Powerup.duration 7
 //[+]========================================================================[+]
 actor MachpunchBumper : BasicProjectile
 {
-Speed 55
+Speed 80
 Damage (0)
 radius 12
 height 12
@@ -95,14 +95,14 @@ States
 Spawn:
 TNT1 A 0 
 TNT1 A 0 A_JumpIfInTargetInventory("DashBreaker",1,"Terminate")
-TNT1 A 1 A_Explode(MBP_Machpunch,32,0,0,32)//A_SpawnItemEX("MachpunchDamager",0,0,0,Momx,Momy,MomZ,0,SXF_ABSOLUTEMOMENTUM)
+TNT1 A 1 A_Explode(MBP_Machpunch,RAMHITBOX,0,0,RAMHITBOX)//A_SpawnItemEX("MachpunchDamager",0,0,0,Momx,Momy,MomZ,0,SXF_ABSOLUTEMOMENTUM)
 TNT1 A 1 
 stop
 Death:
 XDeath:
 Crash:
 TNT1 A 1 A_GiveToTarget("MachpunchCollision2",1)
-TNT1 A 0 A_Explode(MBP_Machpunch,32,0,0,32)
+TNT1 A 0 A_Explode(MBP_Machpunch,RAMHITBOX,0,0,RAMHITBOX)
 Terminate:
 TNT1 A 1
 stop
@@ -209,7 +209,7 @@ TNT1 A 0 A_ChangeVelocity(cos(-pitch)*80,0,sin(-pitch)*80,CVF_RELATIVE|CVF_REPLA
 TNT1 A 0 A_FireCustomMissile("MachpunchBumper",15,0,0,0)
 TNT1 A 0 A_FireCustomMissile("MachpunchBumper",-15,0,0,0)
 TNT1 A 1 A_FireCustomMissile("MachpunchBumper",0,0,0,0)
-BASB A 1 A_SpawnitemEx("MachpunchFist",cos(-pitch)*55,0,(25)+(sin(pitch)*40),0,0,0,0)
+BASB A 1 A_SpawnitemEx("MachpunchFist",cos(-pitch)*80,0,(25)+(sin(pitch)*40),0,0,0,0)
 stop
 Nope:
 TNT1 A 0

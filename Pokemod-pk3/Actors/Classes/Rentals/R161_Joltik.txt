@@ -1,0 +1,90 @@
+
+/*
+[+]===================================[+]
+
+[+]===================================[+]
+*/
+
+Actor R_Joltik : ClassBaseRentals 
+{
+Player.DisplayName "Joltik"
+Player.SoundClass "Joltik"
++NOSKIN
+
+Player.StartItem "PKMNRentalKit"
+//============|
+Player.StartItem "JoltikRentalSetupItem"
+//============|
+Player.StartItem "Base_HP", 50
+Player.StartItem "Base_PAttack", 47
+Player.StartItem "Base_PDefense", 50
+Player.StartItem "Base_SAttack", 57
+Player.StartItem "Base_SDefense", 50
+
+//============|
+
+States
+{
+Spawn: 
+P161 A 0
+P161 B 1 
+P161 A 1
+GoTo Spawn+2
+See:
+P161 BCDE 5
+GoTo Spawn+1
+Missile:
+P161 A 0 A_JumpIfInventory("ConshotTimer",1,"Missile2")
+P161 F 5 
+P161 G 4
+GoTo Spawn+2
+Missile2:
+P161 G 9
+GoTo Spawn+2
+
+PainFix:
+P161 H 0 
+GoTo PainFrames
+}
+}
+
+actor JoltikRentalMoves : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_JumpIf(CallACS("RentalBotCheck") == 1,"BotWep")
+
+TNT1 A 0 A_GiveInventory("FuryCutterMove1")
+TNT1 A 0 A_GiveInventory("StringShotMove2")
+TNT1 A 0 A_GiveInventory("ElectroBallMove3")
+TNT1 A 0 A_GiveInventory("EnergyBallMove4")
+stop
+
+BotWep:
+TNT1 A 0 A_GiveInventory("FuryCutterMove1")
+stop
+}
+}
+
+actor JoltikRentalSetupItem : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 ACS_NamedExecuteAlways("PKMN_RentalsSetup",0,Dex_Joltik)
+stop
+}
+}
