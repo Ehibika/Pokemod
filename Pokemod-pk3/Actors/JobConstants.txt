@@ -322,6 +322,15 @@ const int Move_EarthPower = 294;
 const int Move_PinMissile = 295;
 const int Move_FaintAttack = 296;
 const int Move_Defog = 297;
+const int Move_SeismicToss = 298;
+const int Move_StormThrow = 299;
+const int Move_VitalThrow = 300;
+const int Move_Submission = 301;
+const int Move_SuperPower = 302;
+const int Move_SignalBeam = 303;
+const int Move_BrickBreak = 304;
+const int Move_Megahorn = 305;
+const int Move_LeechLife = 306;
 //--[NewMove]--
 //=======|Pokedex Constants|==========
 const int Dex_SMEARGLE = 0;

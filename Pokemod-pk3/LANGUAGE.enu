@@ -603,6 +603,15 @@ OB_EARTHPOWER = "%k Defeated %o using EARTHPOWER!";
 OB_PINMISSILE = "%k Defeated %o using PINMISSILE!";
 OB_FAINTATTACK = "%k Defeated %o using FAINTATTACK!";
 OB_DEFOG = "%k Defeated %o using DEFOG!";
+OB_SEISMICTOSS = "%k Defeated %o using SEISMICTOSS!";
+OB_STORMTHROW = "%k Defeated %o using STORMTHROW!";
+OB_VITALTHROW = "%k Defeated %o using VITALTHROW!";
+OB_SUBMISSION = "%k Defeated %o using SUBMISSION!";
+OB_SUPERPOWER = "%k Defeated %o using SUPERPOWER!";
+OB_SIGNALBEAM = "%k Defeated %o using SIGNALBEAM!";
+OB_BRICKBREAK = "%k Defeated %o using BRICKBREAK!";
+OB_MEGAHORN = "%k Defeated %o using MEGAHORN!";
+OB_LEECHLIFE = "%k Defeated %o using LEECHLIFE!";
 //--[NewMove]--
 
 //#endregion
@@ -4923,6 +4932,87 @@ M297_CATEGORY = "\cf Status";
 M297_POWER = "\cfPower:\cj --";
 M297_DESC = "\cjTarget the ground to blow away all\n"
 "entities and buffs.";
+//#endregion
+
+
+//#region -=- 298: SeismicToss -=-
+M298_NAME = "\cj SeismicToss";
+M298_TYPE = "\cj Fighting";
+M298_CATEGORY = "\cf Physical";
+M298_POWER = "\cfPower:\cj --";
+M298_DESC = "\cf<Desc>";
+//#endregion
+
+
+//#region -=- 299: StormThrow -=-
+M299_NAME = "\cj StormThrow";
+M299_TYPE = "\cj Fighting";
+M299_CATEGORY = "\cf Physical";
+M299_POWER = "\cfPower:\cj --";
+M299_DESC = "\cf<Desc>";
+//#endregion
+
+
+//#region -=- 300: VitalThrow -=-
+M300_NAME = "\cj VitalThrow";
+M300_TYPE = "\cj Fighting";
+M300_CATEGORY = "\cf Physical";
+M300_POWER = "\cfPower:\cj --";
+M300_DESC = "\cf<Desc>";
+//#endregion
+
+
+//#region -=- 301: Submission -=-
+M301_NAME = "\cj Submission";
+M301_TYPE = "\cj Fighting";
+M301_CATEGORY = "\cf Physical";
+M301_POWER = "\cfPower:\cj --";
+M301_DESC = "\cf<Desc>";
+//#endregion
+
+
+//#region -=- 302: SuperPower -=-
+M302_NAME = "\cj SuperPower";
+M302_TYPE = "\cj Fighting";
+M302_CATEGORY = "\cf Physical";
+M302_POWER = "\cfPower:\cj --";
+M302_DESC = "\cf<Desc>";
+//#endregion
+
+
+//#region -=- 303: SignalBeam -=-
+M303_NAME = "\cj SignalBeam";
+M303_TYPE = "\cj Bug";
+M303_CATEGORY = "\cf Special";
+M303_POWER = "\cfPower:\cj --";
+M303_DESC = "\cf<Desc>";
+//#endregion
+
+
+//#region -=- 304: BrickBreak -=-
+M304_NAME = "\cj BrickBreak";
+M304_TYPE = "\cj Fighting";
+M304_CATEGORY = "\cf Physical";
+M304_POWER = "\cfPower:\cj --";
+M304_DESC = "\cf<Desc>";
+//#endregion
+
+
+//#region -=- 305: Megahorn -=-
+M305_NAME = "\cj Megahorn";
+M305_TYPE = "\cj Bug";
+M305_CATEGORY = "\cf Physical";
+M305_POWER = "\cfPower:\cj --";
+M305_DESC = "\cf<Desc>";
+//#endregion
+
+
+//#region -=- 306: LeechLife -=-
+M306_NAME = "\cj LeechLife";
+M306_TYPE = "\cj Bug";
+M306_CATEGORY = "\cf Physical";
+M306_POWER = "\cfPower:\cj --";
+M306_DESC = "\cf<Desc>";
 //#endregion
 
 

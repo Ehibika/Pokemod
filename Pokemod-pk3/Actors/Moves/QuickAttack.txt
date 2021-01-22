@@ -29,7 +29,7 @@ Fire.Dash:
 "####" A 0 ACS_NamedExecuteAlways("TakePP",0,Move_QuickAttack,1)
 "####" B 0 A_PlaySoundEx("weapon/ChargeKick","Soundslot6")
 "####" A 0 A_GiveInventory("QuickAttackInitiate")
-"####" A 0 A_FireCustomMissile("GroundDustFX",-25,0,z-Floorz,0)
+"####" A 0 A_FireCustomMissile("GroundDustFX",0,0,0,0)
 "####" AAAAAAA 1 A_Jumpifinventory("DashBreaker",1,"Fire.DashEnd")
 "####" B 0 A_ScaleVelocity(0.2)
 goto Fire.DashEnd

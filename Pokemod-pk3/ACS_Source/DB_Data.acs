@@ -141,6 +141,14 @@ int Output = 360 * (GetActorPitch(FiringPlayer));
 Setresultvalue(Output >> 16);
 //--
 }
+
+script "PKMNACS_TracerPitchGrab" (Void)
+{
+int FiringPlayer= ACS_NamedExecuteWithResult("Tracer_GetTID",0);
+int Output = 360 * (GetActorPitch(FiringPlayer));
+Setresultvalue(Output >> 16);
+//--
+}
            
 Script "PKMNACS_GetTeamPointer" (int Pointer)
 {

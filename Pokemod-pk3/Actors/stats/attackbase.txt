@@ -50,6 +50,12 @@ damagefactor "Splash", 1.0
 damagefactor "ElectroLevitate", 1.0
 damagefactor "QuiverDance", 1.0
 damagefactor "Defog", 1.0
+damagefactor "SeismicToss1", 1.0
+damagefactor "SeismicToss2", 1.0
+damagefactor "StormThrow1", 1.0
+damagefactor "Submission1", 1.0
+damagefactor "SuperPower1", 1.0
+
 //--[NewStatusMove]--
 }
 
@@ -154,6 +160,9 @@ damagefactor "Gust", 1.0
 damagefactor "BugBuzz", 1.0
 damagefactor "SilverWind", 1.0
 damagefactor "EarthPower", 1.0
+damagefactor "SignalBeam", 1.0
+damagefactor "Infestation", 1.0
+
 //--[NewSpecialMove]--
 }
 
@@ -282,5 +291,12 @@ damagefactor "Fly", 1.0
 damagefactor "PoisonJab", 1.0
 damagefactor "PinMissile", 1.0
 damagefactor "FaintAttack", 1.0
+damagefactor "StormThrow2", 1.0
+damagefactor "VitalThrow", 1.0
+damagefactor "Submission2", 1.0
+damagefactor "SuperPower2", 1.0
+damagefactor "BrickBreak", 1.0
+damagefactor "Megahorn", 1.0
+damagefactor "LeechLife", 1.0
 //--[NewPhysicalMove]--
 }

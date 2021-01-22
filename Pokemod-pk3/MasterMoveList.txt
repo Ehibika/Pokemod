@@ -296,4 +296,13 @@ EarthPower
 PinMissile
 FaintAttack
 Defog
+SeismicToss
+StormThrow
+VitalThrow
+Submission
+SuperPower
+SignalBeam
+BrickBreak
+Megahorn
+LeechLife
 //--[NewMove]--

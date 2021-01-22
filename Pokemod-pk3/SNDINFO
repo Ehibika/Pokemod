@@ -125,6 +125,8 @@ Weapon/WindBlow WINDBLOW
 weapon/Bounce1	coil1a
 weapon/Bounce2	coil2a
 class/ToadCroak S_M4TOA1 
+weapon/HornStab	STAB1
+weapon/HornToss	TOSS1
 
 weapon/IceManShot ICESHOT
 weapon/Ice_Cloud ICESHOTA

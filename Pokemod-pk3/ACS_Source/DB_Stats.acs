@@ -63,7 +63,7 @@ Int SpeedTable[15][2] = {
 
 
 
-#LIBDEFINE STATITEMNUM 68
+#LIBDEFINE STATITEMNUM 70
 
 Str StatEffectName[STATITEMNUM][2] = {
     {"Growth","GOOD"},
@@ -134,6 +134,8 @@ Str StatEffectName[STATITEMNUM][2] = {
     {"Swagger","GOOD"},
     {"Flatter","BAD"},
     {"Tailwind","GOOD"},
+    {"SuperPower","BAD"},
+    {"QuiverDance","GOOD"},
 
 };
 
@@ -213,6 +215,8 @@ Int StatEffectValue[STATITEMNUM][5] = {
 {   2,      0,      0,      0,      0}, //Swagger
 {   0,      0,      0,      -1,      0}, //Flatter
 {   0,      0,      0,      0,      1}, //TailWind
+{   -1,      0,      -1,      0,      0}, //SuperPower
+{   0,      1,      0,      1,      1}, //QuiverDance
 
 
 };

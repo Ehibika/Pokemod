@@ -207,7 +207,7 @@ str weapons_ammo[MAX_WEAPONS_GLOBAL][7] =
 {"SkullBashMove", "SkullBashPP", "SkullBash", 1.0, "NO", "NO", "SLOT_NONE"},
 {"FlashCannonMove", "FlashCannonPP", "FlashCannon", 1.0, "NO", "NO", "SLOT_NONE"},
 {"ShellSmashMove", "ShellSmashPP", "ShellSmash", 1.0, "NO", "NO", "SLOT_NONE"},
-{"YawnMove", "YawnPP", "Yawn", 1.0, "NO", "NO", "SLOT_NONE"},
+{"YawnMove", "YawnPP", "Yawn", 1.0, "YES", "NO", "SLOT_NONE"},
 {"RapidSpinMove", "RapidSpinPP", "RapidSpin", 1.0, "NO", "NO", "SLOT_NONE"},
 {"BubbleBeamMove", "BubbleBeamPP", "BubbleBeam", 1.0, "NO", "NO", "SLOT_NONE"},
 {"AmnesiaMove", "AmnesiaPP", "Amnesia", 1.0, "NO", "NO", "SLOT_NONE"},
@@ -462,6 +462,15 @@ str weapons_ammo[MAX_WEAPONS_GLOBAL][7] =
 {"PinMissileMove", "PinMissilePP", "PinMissile", 1.0, "NO", "NO", "SLOT_NONE"},
 {"FaintAttackMove", "FaintAttackPP", "FaintAttack", 1.0, "YES", "NO", "SLOT_NONE"},
 {"DefogMove", "DefogPP", "Defog", 1.0, "NO", "NO", "SLOT_NONE"},
+{"SeismicTossMove", "SeismicTossPP", "SeismicToss", 1.0, "NO", "NO", "SLOT_NONE"},
+{"StormThrowMove", "StormThrowPP", "StormThrow", 1.0, "NO", "NO", "SLOT_NONE"},
+{"VitalThrowMove", "VitalThrowPP", "VitalThrow", 1.0, "NO", "NO", "SLOT_NONE"},
+{"SubmissionMove", "SubmissionPP", "Submission", 1.0, "NO", "NO", "SLOT_NONE"},
+{"SuperPowerMove", "SuperPowerPP", "SuperPower", 1.0, "NO", "NO", "SLOT_NONE"},
+{"SignalBeamMove", "SignalBeamPP", "SignalBeam", 1.0, "NO", "NO", "SLOT_NONE"},
+{"BrickBreakMove", "BrickBreakPP", "BrickBreak", 1.0, "NO", "NO", "SLOT_NONE"},
+{"MegahornMove", "MegahornPP", "Megahorn", 1.0, "NO", "NO", "SLOT_NONE"},
+{"LeechLifeMove", "LeechLifePP", "LeechLife", 1.0, "NO", "NO", "SLOT_NONE"},
 //--[NewMove]--
 };
 #endregion
@@ -1013,6 +1022,7 @@ Script "MoveSetup" (void)
 				Case Swagger: ACS_NamedExecuteAlways("TracerTargeter",0,TG_ENEMY,350); break;
 				Case Flatter: ACS_NamedExecuteAlways("TracerTargeter",0,TG_ENEMY,350); break;
 				Case Assist: ACS_NamedExecuteAlways("TracerTargeter",0,TG_ENEMY,550); break;
+				Case YAWN: ACS_NamedExecuteAlways("TracerTargeter",0,TG_ENEMY,350); break;
 				default: ACS_NamedExecuteAlways("TracerTargeter",0,TG_TEAM,630); break;
 			}
 			
@@ -1199,7 +1209,10 @@ if(CheckInventory("ParalysisMark"))
 		Case WildCharge: acs_execute(979,0); return false;
 		Case TakeDown: acs_execute(979,0); return false;
 		Case DIG: acs_execute(979,0); return false;
-		Case FLY: acs_execute(979,0); return false;
+		Case SEISMICTOSS: acs_execute(979,0); return false;
+		Case STORMTHROW: acs_execute(979,0); return false;
+		Case SUPERPOWER: acs_execute(979,0); return false;
+		Case MEGAHORN: acs_execute(979,0); return false;
     }
 }
 

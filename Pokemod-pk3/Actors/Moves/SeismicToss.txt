@@ -1,0 +1,314 @@
+actor SeismicTossMove : WepMasterBase
+{
+Tag "SeismicToss"
+obituary "$OB_SEISMICTOSS"
+Weapon.AmmoUse 1
+Weapon.AmmoGive 10
+weapon.ammotype "SeismicTossPP"
+scale 2.0
+Inventory.Pickupmessage "$PU_MEGABUSTER"
+States
+{
+Spawn:
+WEAP X 1
+stop
+
+Fire:
+"####" BBB 1 A_Jumpif(CallACS("CheckWeaponFire",RC_B)==1,"Fire.Begin")
+"####" B 0 A_Jump(256,"NoAmmo")
+Goto NoAmmo
+
+Fire.Begin:
+"####" B 0
+"####" B 0 A_Jump(256,"Fire.GrabStart")
+Goto Fire.GrabStart
+
+Fire.GrabStart:
+JARM F 0 A_TakeInventory("SeismicTossPP",1)
+//TNT1 A 1 A_GiveInventory("SeismicTossGroundGuardFunc",1)
+JARM F 0 A_GiveInventory("SeismicTossGrabTimer",1)
+FSTO D 0 A_TakeInventory("SuplexID",999)
+//SAKH C 0 ThrustThingZ(0,45,0,1)
+TNT1 A 0 A_PlaySound("weapon/BreakDash")
+"####" A 0 A_GiveInventory("DashSet_B")
+SeismicTossWalk:
+JARM F 0 A_GiveInventory("SeismicTossWalkThrust",1)
+//TNT1 A 1 A_GiveInventory("SeismicTossGroundGuardFunc",1)
+JARM F 1 A_GiveInventory("SeismicTossGrabFunc",1)
+JARM F 0 A_JumpIfInventory("SuplexID",1,"SeismicToss")
+JARM F 0 A_JumpIfInventory("SeismicTossGrabTimer",1,"SeismicTossWalk")
+"####" B 0 A_Jump(256,"Fire.After")
+Goto Fire.After
+
+SeismicToss:
+TNT1 A 0 A_PlaySound("weapon/crashland")
+//TNT1 A 0 A_GiveInventory("DashSet_B")
+TNT1 A 0 A_TakeInventory("Fly_Active",255)
+TNT1 A 0 A_TakeInventory("ZangiefAngle",255)
+TNT1 A 0 A_GiveInventory("ZangiefAngle",CallACS("GetAngleToTid",CallACS("Get_SuplexID_TID")))
+TNT1 A 0 A_SetAngle(CallACS("GetAngleToTid",CallACS("Get_SuplexID_TID"))*360/256)
+TOPH A 0 A_ChangeFlag("SHOOTABLE",0)
+TNT1 A 0 A_ChangeFlag("SOLID",0)
+TNT1 A 0 A_SetPitch(0)
+JARM E 1 ACS_NamedExecuteWithResult("Grasp_TID",CallACS("Get_SuplexID_TID"))
+SAKH C 0 ThrustThingZ(0,120,0,0)
+JARM E 2
+TNT1 A 0 A_JumpIf(momz<0,"GoingDownSpin")
+goto GoingUpSpin
+
+GoingUpSpin:
+SAKH C 0 ThrustThingZ(0,1,1,1)
+TNT1 A 0 A_SetAngle(angle+20.0)
+TNT1 A 1 A_Jumpif(!CallACS("Grasp_TID",CallACS("Get_SuplexID_TID")),"SeismicTossSlam")
+TNT1 A 0 A_CheckFloor("SeismicTossSlam")
+TNT1 A 0 A_JumpIf(momz>0,"GoingUpSpin")
+GoingDownSpin:
+TNT1 A 0 ThrustThingZ(0,15,1,1)
+TNT1 A 0 A_SetAngle(angle+20.0)
+TNT1 A 1 A_Jumpif(!CallACS("Grasp_TID",CallACS("Get_SuplexID_TID")),"SeismicTossSlam")
+TNT1 A 0 A_CheckFloor("SeismicTossSlam")
+TNT1 A 0 A_JumpIf(momz<0,"GoingDownSpin")
+goto SeismicTossSlamJump
+
+SeismicTossSlamJump:
+TNT1 A 0 
+TNT1 A 1 A_Jump(256, "SeismicTossSlam")
+wait
+
+SeismicTossSlam:
+TOPH A 0 A_ChangeFlag("SHOOTABLE",1)
+TOPH A 0 A_ChangeFlag("INVULNERABLE",1)
+TNT1 A 0 ACS_NamedExecuteWithResult("Give_AntiInvincible_ToTID",CallACS("Get_SuplexID_TID"))
+TNT1 A 0 A_SpawnItemEX("SeismicToss", 0,0,0, 0,0,0, 0, SXF_ABSOLUTEMOMENTUM|SXF_NOCHECKPOSITION, 0)
+goto SeismicTossSlamEnd
+
+SeismicTossSlamEnd:
+TOPH A 0 A_ChangeFlag("INVULNERABLE",0)
+TNT1 A 0 A_GiveInventory("DashSetOff")
+TNT1 A 0 A_SpawnItemEx("ReSolidifier") // here it is
+//TOPH A 0 A_ChangeFlag("SOLID",1) //More elegant solution later
+"####" B 0 A_Jump(256,"Fire.After")
+Goto Fire.After
+
+Fire.After:
+"####" B 1 A_GiveInventory("HalfRecovery_B")
+"####" A 0 A_GiveInventory("DashSetOff")
+"####" C 0 A_REfire("Fire")
+"####" B 0 A_Jump(256,"Fire.End")
+Goto Fire.End
+}
+}
+
+actor SeismicTossMove1 : SeismicTossMove {Weapon.SlotNumber 1}
+actor SeismicTossMove2 : SeismicTossMove {Weapon.SlotNumber 2}
+actor SeismicTossMove3 : SeismicTossMove {Weapon.SlotNumber 3}
+actor SeismicTossMove4 : SeismicTossMove {Weapon.SlotNumber 4}
+
+actor SeismicTossMove5 : SeismicTossMove 
+{
+Weapon.SlotNumber 5
+States
+{
+Fire.End:
+TNT1 A 0
+TNT1 A 0 A_TakeInventory("SeismicTossMove5",9)
+TNT1 A 0 A_Jump(256,"Ready")
+Goto Ready
+}
+}
+
+//[+]========================================================================[+]
+//-----------------------------|Ammo & Inventory|------------------------------
+//[+]========================================================================[+]
+actor SeismicTossPP : Ammo {inventory.amount 1 inventory.Maxamount 10}
+actor SeismicTossGrabTimer : Powerup {inventory.amount 1 powerup.duration 17}
+
+Const int SeismicTossRad = 120;
+Const int SeismicToss_Item = 14;
+
+actor SeismicTossWalkThrust : CustomInventory
+{
+states
+{
+Pickup:
+TNT1 A 0 A_JumpIfInventory("CutterFlag",999,"Nope")
+TNT1 A 0 A_ChangeVelocity(cos(-pitch)*32,0,sin(-pitch)*32,CVF_RELATIVE|CVF_REPLACE)
+stop
+Nope:
+TNT1 A 0
+stop
+}
+}
+
+
+actor SeismicTossGrabFunc : CustomInventory
+{
+states
+{
+pickup:
+TNT1 A 0 A_JumpIf(pitch<350 && pitch>=270, "UpLimit")
+goto Pickup2
+UpLimit:
+TNT1 A 0 A_SetPitch(350)
+Pickup2:
+TNT1 A 0 A_FireCustomMissile("SeismicTossGrab",0,0,0,0)
+stop
+}
+}
+
+
+actor SeismicTossGroundGuardFunc : CustomInventory
+{
+states
+{
+pickup:
+TNT1 A 0 ACS_NamedExecuteAlways("PKMNACS_RadiusGive",0,SeismicToss_Item,SeismicTossRad,RG_ENEMY)
+stop
+}
+}
+
+actor SeismicTossGroundGuard : CustomInventory
+{
+states
+{
+pickup:
+TNT1 A 0 A_CheckFloor("Ground")
+stop
+Ground:
+TNT1 A 0 A_GiveInventory("SeismicTossProtect")
+stop
+}
+}
+
+actor SeismicTossProtect : PowerProtection 
+{
+    inventory.amount 1 
+    powerup.duration 3
+    DamageFactor "SeismicToss1", 0.0
+
+}
+
+//[+]========================================================================[+]
+//--------------------------------|Projectiles |--------------------------------
+//[+]========================================================================[+]
+
+actor SeismicTossGrab
+{
+PROJECTILE
+Radius 20
+Height 20
+scale 2.5
+Obituary "$OB_SEISMICTOSS"
+speed 55
+damage (MBP_SeismicToss1)
+reactiontime 1
+damagetype "SeismicToss1"
+States
+{
+Spawn:
+MMFX C 0
+MMFX C 1 A_CountDown
+goto Spawn+1
+Death:
+MMFX C 0 A_Explode(MBP_SeismicToss1,40,0)
+goto XDeath
+XDeath:
+MMFX C 0 A_Stop
+MMFX CBCD 2
+stop
+}
+}
+
+
+actor SeismicToss
+{
+PROJECTILE
+scale 5.0
+Obituary "$OB_SEISMICTOSS"
+damagetype "SeismicToss2"
+Speed 0
++DONTBLAST
+height 0
+radius 0
+
++NOINTERACTION
++NOCLIP
++NOTARGETSWITCH
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 Thing_Move(0,CallACS("Get_Target_SuplexID_TID"),1)
+TNT1 A 0 A_Explode(CallACS("LevelPower",MBP_SeismicToss2), 300, 0,0,300)
+goto Spawn2
+Spawn2:
+TNT1 A 0 A_PlaySoundEx("weapon/crackerexplode", "Weapon")
+TNT1 A 0 A_SpawnItemEx("HammerArmPoundFX",0,0,-(z-floorz),0,0,0,0,1)
+TNT1 A 0 A_SpawnItemEx("StoneEdgeImpactFX",0,0,32,0,0,0,0,1)
+TNT1 A 5
+//NAPA EFGHIJKLMNOPQRS 1
+stop
+}
+}
+
+actor SeismicTossSuplexStart : CustomInventory
+{
+states
+{
+pickup:
+TNT1 A 0 A_SpawnItemEx("SeismicTossSuplexHit")
+stop
+}
+}
+
+actor SeismicTossHitBase
+{
+Height 0
+Radius 0
++NOINTERACTION
+-SOLID
++NOGRAVITY
++MISSILE
+}
+
+actor SeismicTossSuplexHit : SeismicTossHitBase
+{
+states
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_TransferPointer(AAPTR_TARGET,AAPTR_DEFAULT,AAPTR_TARGET,AAPTR_TRACER) //target's target to self's tracer
+TNT1 A 0 A_RearrangePointers(AAPTR_TRACER,AAPTR_DEFAULT,AAPTR_TARGET) //target <-> tracer
+TNT1 A 0 A_JumpIfInTargetInventory("SuplexID",1,"SpawnNo")
+TNT1 A 0 A_GiveToTarget("SuplexID",CallACS("core_gettracer",0)-1000+1)
+TNT1 A 1
+stop
+SpawnNo:
+TNT1 A 1
+stop
+}
+}
+
+actor SeismicTossPushStart : CustomInventory
+{
+states
+{
+pickup:
+TNT1 A 0 A_SpawnItemEx("SeismicTossPusher")
+stop
+}
+}
+
+actor SeismicTossPusher : SeismicTossHitBase
+{
+states
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_TransferPointer(AAPTR_TARGET,AAPTR_DEFAULT,AAPTR_TARGET,AAPTR_TRACER) //target's target to self's tracer
+TNT1 A 0 A_FaceTracer
+TNT1 A 0 //A_GiveToTarget("TempPitProtect",1)
+TNT1 A 0 ThrustThing(angle*256/360,-20,0,ACS_ExecuteWithResult(257,0))
+stop
+}
+}

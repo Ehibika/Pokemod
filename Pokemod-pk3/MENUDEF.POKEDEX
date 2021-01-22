@@ -6854,6 +6854,159 @@ OptionMenu "MoveMenu_Defog"
     StaticText ""
     StaticText"===============================================================",1
 } 
+OptionMenu "MoveMenu_SeismicToss"
+{
+    
+    Title "$M298_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M298_TYPE"
+    StaticText "$M298_CATEGORY"
+    StaticText "$M2984_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M298_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+} 
+OptionMenu "MoveMenu_StormThrow"
+{
+    
+    Title "$M299_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M299_TYPE"
+    StaticText "$M299_CATEGORY"
+    StaticText "$M2994_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M299_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+} 
+OptionMenu "MoveMenu_VitalThrow"
+{
+    
+    Title "$M300_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M300_TYPE"
+    StaticText "$M300_CATEGORY"
+    StaticText "$M3004_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M300_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+} 
+OptionMenu "MoveMenu_Submission"
+{
+    
+    Title "$M301_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M301_TYPE"
+    StaticText "$M301_CATEGORY"
+    StaticText "$M3014_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M301_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+} 
+OptionMenu "MoveMenu_SuperPower"
+{
+    
+    Title "$M302_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M302_TYPE"
+    StaticText "$M302_CATEGORY"
+    StaticText "$M3024_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M302_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+} 
+OptionMenu "MoveMenu_SignalBeam"
+{
+    
+    Title "$M303_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M303_TYPE"
+    StaticText "$M303_CATEGORY"
+    StaticText "$M3034_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M303_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+} 
+OptionMenu "MoveMenu_BrickBreak"
+{
+    
+    Title "$M304_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M304_TYPE"
+    StaticText "$M304_CATEGORY"
+    StaticText "$M3044_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M304_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+} 
+OptionMenu "MoveMenu_Megahorn"
+{
+    
+    Title "$M305_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M305_TYPE"
+    StaticText "$M305_CATEGORY"
+    StaticText "$M3054_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M305_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+} 
+OptionMenu "MoveMenu_LeechLife"
+{
+    
+    Title "$M306_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M306_TYPE"
+    StaticText "$M306_CATEGORY"
+    StaticText "$M3064_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M306_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+} 
 //--[NewMove]--
 
 OptionMenu "MoveMenu_Sketch"

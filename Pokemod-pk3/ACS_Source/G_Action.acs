@@ -1148,7 +1148,7 @@ script "Grasp_TID" (int otherTID)
 script "SuplexGrasp_TID" (int pitch, int angle, int target) //Pitch is given as x/360, Angle is given as x/255
 {
 	if (target==999) { SetResultValue(1); terminate; }
-	angle = angle<<8;
+	angle = (angle-360)*1.0/360;//angle<<8;
 	pitch = (pitch-360)*1.0/360;
 	int xDiff = (getActorX(0)+fixedMul(GRAB_DISTANCE*cos(angle),cos(pitch))) - getActorX(target);
 	int yDiff = (getActorY(0)+fixedMul(GRAB_DISTANCE*sin(angle),cos(pitch))) - getActorY(target);
@@ -1173,6 +1173,7 @@ Script "Count_ZangiefAngle" (void)
 {
 SetResultValue(CheckInventory("ZangiefAngle"));
 }
+
 
 //#endregion
 

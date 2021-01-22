@@ -874,3 +874,28 @@ Script "FlightWorthy" (int Pointer)
     SetResultValue(Output);
 }
 
+Script "LevelPower" (int Damage)
+{
+    int Player = ACS_NamedExecuteWithResult("core_gettarget",0);
+    int PlayerLVL = GetPlayerPokeValue(Player-1000,POKELEVEL);
+    int Output = (Damage*PlayerLVL);
+    SetResultValue(Output);
+}
+
+script "Give_SubmissinInvis_ToTID" (int tid)
+{
+	if (tid==999) { terminate; }
+	giveActorInventory(tid,"SubmissionInvisFunc",1);
+}
+
+script "Give_SubmissinRevis_ToTID" (int tid)
+{
+	if (tid==999) { terminate; }
+	giveActorInventory(tid,"SubmissionReVisibleFunc",1);
+}
+
+script "Give_MegahornToss_ToTID" (int tid)
+{
+	if (tid==999) { terminate; }
+	giveActorInventory(tid,"MegahornPushStart",1);
+}

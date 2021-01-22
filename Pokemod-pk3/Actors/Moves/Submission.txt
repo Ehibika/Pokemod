@@ -1,0 +1,383 @@
+actor SubmissionMove : WepMasterBase
+{
+Tag "Submission"
+obituary "$OB_SUBMISSION"
+Weapon.AmmoUse 1
+Weapon.AmmoGive 10
+weapon.ammotype "SubmissionPP"
+scale 2.0
+Inventory.Pickupmessage "$PU_MEGABUSTER"
+States
+{
+Spawn:
+WEAP X 1
+stop
+
+Fire:
+"####" BBB 1 A_Jumpif(CallACS("CheckWeaponFire",RC_B)==1,"Fire.Begin")
+"####" B 0 A_Jump(256,"NoAmmo")
+Goto NoAmmo
+
+Fire.Begin:
+"####" B 0
+"####" B 0 A_Jump(256,"Fire.GrabStart")
+Goto Fire.GrabStart
+
+Fire.GrabStart:
+JARM F 0 A_TakeInventory("SubmissionPP",1)
+//TNT1 A 1 A_GiveInventory("SubmissionGroundGuardFunc",1)
+JARM F 0 A_GiveInventory("SubmissionGrabTimer",1)
+FSTO D 0 A_TakeInventory("SuplexID",999)
+//SAKH C 0 ThrustThingZ(0,45,0,1)
+TNT1 A 0 A_PlaySound("weapon/BreakDash")
+//"####" A 0 A_GiveInventory("DashSet_B")
+SubmissionWalk:
+JARM F 0 A_GiveInventory("SubmissionWalkThrust",1)
+//TNT1 A 1 A_GiveInventory("SubmissionGroundGuardFunc",1)
+JARM F 1 A_GiveInventory("SubmissionGrabFunc",1)
+JARM F 0 A_JumpIfInventory("SuplexID",1,"Submission")
+JARM F 0 A_JumpIfInventory("SubmissionGrabTimer",1,"SubmissionWalk")
+JARM F 0 A_Stop
+"####" B 0 A_Jump(256,"Fire.After")
+Goto Fire.After
+
+Submission:
+TNT1 A 0 A_PlaySound("weapon/crashland")
+//TNT1 A 0 A_GiveInventory("DashSet_B")
+TNT1 A 0 A_TakeInventory("Fly_Active",255)
+TNT1 A 0 A_TakeInventory("ZangiefAngle",255)
+TNT1 A 0 A_GiveInventory("ZangiefAngle",CallACS("GetAngleToTid",CallACS("Get_SuplexID_TID")))
+TNT1 A 0 A_SetAngle(CallACS("GetAngleToTid",CallACS("Get_SuplexID_TID"))*360/256)
+TOPH A 0 A_ChangeFlag("SHOOTABLE",0)
+TNT1 A 0 A_ChangeFlag("SOLID",0)
+TNT1 A 0 A_SetPitch(0)
+TNT1 A 1 ACS_NamedExecuteWithResult("SuplexGrasp_TID",0,angle,CallACS("Get_SuplexID_TID"))
+
+TNT1 A 0 ThrustThingZ(0,80,0,0)
+TNT1 A 0 A_PlaySoundEx("Misc/spin","Weapon")
+TNT1 A 0 A_GiveInventory("SubmissionInvisFunc")
+TNT1 A 0 ACS_NamedExecuteWithResult("Give_SubmissinInvis_ToTID",CallACS("Get_SuplexID_TID"))
+TNT1 A 0 A_SpawnItemEx("SubmissionRollingFX", 0, 0, 0, 0, 0, 0, 0,1)
+TNT1 A 2
+TNT1 A 0 A_JumpIf(momz<0,"GoingDownSpin")
+goto GoingUpSpin
+
+GoingUpSpin:
+SAKH C 0 ThrustThingZ(0,1,1,1)
+TNT1 A 1 A_Jumpif(!CallACS("Grasp_TID",CallACS("Get_SuplexID_TID")),"SubmissionSlam")
+TNT1 A 0 A_CheckFloor("SubmissionSlam")
+TNT1 A 0 A_JumpIf(momz>0,"GoingUpSpin")
+GoingDownSpin:
+TNT1 A 0 ThrustThingZ(0,15,1,1)
+TNT1 A 1 A_Jumpif(!CallACS("Grasp_TID",CallACS("Get_SuplexID_TID")),"SubmissionSlam")
+TNT1 A 0 A_CheckFloor("SubmissionSlam")
+TNT1 A 0 A_JumpIf(momz<0,"GoingDownSpin")
+goto SubmissionSlamJump
+
+SubmissionSlamJump:
+TNT1 A 0 
+TNT1 A 1 A_Jump(256, "SubmissionSlam")
+wait
+
+SubmissionSlam:
+TNT1 A 0 A_ChangeFlag("SHOOTABLE",1)
+TNT1 A 0 A_ChangeFlag("INVULNERABLE",1)
+TNT1 A 0 ACS_NamedExecuteWithResult("Give_AntiInvincible_ToTID",CallACS("Get_SuplexID_TID"))
+TNT1 A 0 ACS_NamedExecuteWithResult("Give_SubmissinRevis_ToTID",CallACS("Get_SuplexID_TID"))
+TNT1 A 0 A_SpawnItemEX("Submission", 0,0,0, 0,0,0, 0, SXF_ABSOLUTEMOMENTUM|SXF_NOCHECKPOSITION, 0)
+goto SubmissionSlamEnd
+
+SubmissionSlamEnd:
+TNT1 A 0 A_ChangeFlag("INVULNERABLE",0)
+TNT1 A 0 ACS_NamedExecuteAlways("PKMN_ToggleVisible",0,0,1)
+//TNT1 A 0 A_GiveInventory("DashSetOff")
+TNT1 A 0 A_SpawnItemEx("ReSolidifier") // here it is
+//TOPH A 0 A_ChangeFlag("SOLID",1) //More elegant solution later
+"####" B 0 A_Jump(256,"Fire.After")
+Goto Fire.After
+
+Fire.After:
+"####" B 1 A_GiveInventory("FullRecovery_B")
+//"####" A 0 A_GiveInventory("DashSetOff")
+"####" A 0 A_TakeInventory("SubmissionFXTimer",99)
+"####" C 0 A_REfire("Fire")
+"####" B 0 A_Jump(256,"Fire.End")
+Goto Fire.End
+}
+}
+
+actor SubmissionMove1 : SubmissionMove {Weapon.SlotNumber 1}
+actor SubmissionMove2 : SubmissionMove {Weapon.SlotNumber 2}
+actor SubmissionMove3 : SubmissionMove {Weapon.SlotNumber 3}
+actor SubmissionMove4 : SubmissionMove {Weapon.SlotNumber 4}
+
+actor SubmissionMove5 : SubmissionMove 
+{
+Weapon.SlotNumber 5
+States
+{
+Fire.End:
+TNT1 A 0
+TNT1 A 0 A_TakeInventory("SubmissionMove5",9)
+TNT1 A 0 A_Jump(256,"Ready")
+Goto Ready
+}
+}
+
+//[+]========================================================================[+]
+//-----------------------------|Ammo & Inventory|------------------------------
+//[+]========================================================================[+]
+actor SubmissionPP : Ammo {inventory.amount 1 inventory.Maxamount 10}
+actor SubmissionGrabTimer : Powerup {inventory.amount 1 powerup.duration 10}
+actor SubmissionFXTimer : Powerup {inventory.amount 1 powerup.duration -7 }
+
+Const int SubmissionRad = 120;
+Const int Submission_Item = 14;
+
+actor SubmissionWalkThrust : CustomInventory
+{
+states
+{
+Pickup:
+TNT1 A 0 A_JumpIfInventory("CutterFlag",999,"Nope")
+TNT1 A 0 A_ChangeVelocity(cos(-pitch)*32,0,sin(-pitch)*32,CVF_RELATIVE|CVF_REPLACE)
+stop
+Nope:
+TNT1 A 0
+stop
+}
+}
+
+
+actor SubmissionGrabFunc : CustomInventory
+{
+states
+{
+pickup:
+TNT1 A 0 A_JumpIf(pitch<350 && pitch>=270, "UpLimit")
+goto Pickup2
+UpLimit:
+TNT1 A 0 A_SetPitch(350)
+Pickup2:
+TNT1 A 0 A_FireCustomMissile("SubmissionGrab",0,0,0,0)
+stop
+}
+}
+
+actor SubmissionInvisFunc : CustomInventory
+{
+states
+{
+pickup:
+TNT1 A 0 A_JumpIfInventory("SubmissionFXTimer",1,"Pickup2")
+TNT1 A 0 ACS_NamedExecuteAlways("PKMN_ToggleVisible",0,0,0)
+TNT1 A 0 A_SpawnItemEx("Acrobatics_VWatcher")
+TNT1 A 0 A_GiveInventory("SubmissionFXTimer")
+goto Pickup2
+Pickup2:
+TNT1 A 0 A_GiveInventory("SubmissionFXTimer")
+stop
+}
+}
+
+
+actor SubmissionReVisibleFunc : CustomInventory
+{
+states
+{
+pickup:
+TNT1 A 0 ACS_NamedExecuteAlways("PKMN_ToggleVisible",0,0,1)
+TNT1 A 0 A_TakeInventory("SubmissionFXTimer",99)
+stop
+}
+}
+
+actor SubmissionGroundGuardFunc : CustomInventory
+{
+states
+{
+pickup:
+TNT1 A 0 ACS_NamedExecuteAlways("PKMNACS_RadiusGive",0,Submission_Item,SubmissionRad,RG_ENEMY)
+stop
+}
+}
+
+actor SubmissionGroundGuard : CustomInventory
+{
+states
+{
+pickup:
+TNT1 A 0 A_CheckFloor("Ground")
+stop
+Ground:
+TNT1 A 0 A_GiveInventory("SubmissionProtect")
+stop
+}
+}
+
+actor SubmissionProtect : PowerProtection 
+{
+    inventory.amount 1 
+    powerup.duration 3
+    DamageFactor "Submission1", 0.0
+
+}
+
+//[+]========================================================================[+]
+//--------------------------------|Projectiles |--------------------------------
+//[+]========================================================================[+]
+
+actor SubmissionGrab
+{
+PROJECTILE
+Radius 20
+Height 20
+scale 2.5
+Obituary "$OB_SUBMISSION"
+speed 55
+damage (MBP_Submission1)
+reactiontime 1
+damagetype "Submission1"
+States
+{
+Spawn:
+MMFX C 0
+MMFX C 1 A_CountDown
+goto Spawn+1
+Death:
+MMFX C 0 A_Explode(MBP_Submission1,40,0)
+goto XDeath
+XDeath:
+MMFX C 0 A_Stop
+MMFX CBCD 2
+stop
+}
+}
+
+
+actor Submission
+{
+PROJECTILE
+scale 5.0
+Obituary "$OB_SUBMISSION"
+damagetype "Submission2"
+Speed 0
++DONTBLAST
+height 0
+radius 0
+
++NOINTERACTION
++NOCLIP
++NOTARGETSWITCH
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 Thing_Move(0,CallACS("Get_Target_SuplexID_TID"),1)
+TNT1 A 0 A_Explode(MBP_Submission2, 300, 0,0,300)
+goto Spawn2
+Spawn2:
+TNT1 A 0 A_PlaySoundEx("weapon/crackerexplode", "Weapon")
+TNT1 A 0 A_SpawnItemEx("HammerArmPoundFX",0,0,-(z-floorz),0,0,0,0,1)
+TNT1 A 0 A_SpawnItemEx("StoneEdgeImpactFX",0,0,32,0,0,0,0,1)
+TNT1 A 0 A_Quake(8,17,0,400)
+TNT1 A 35
+//NAPA EFGHIJKLMNOPQRS 1
+stop
+}
+}
+
+actor SubmissionSuplexStart : CustomInventory
+{
+states
+{
+pickup:
+TNT1 A 0 A_SpawnItemEx("SubmissionSuplexHit")
+stop
+}
+}
+
+actor SubmissionHitBase
+{
+Height 0
+Radius 0
++NOINTERACTION
+-SOLID
++NOGRAVITY
++MISSILE
+}
+
+actor SubmissionSuplexHit : SubmissionHitBase
+{
+states
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_TransferPointer(AAPTR_TARGET,AAPTR_DEFAULT,AAPTR_TARGET,AAPTR_TRACER) //target's target to self's tracer
+TNT1 A 0 A_RearrangePointers(AAPTR_TRACER,AAPTR_DEFAULT,AAPTR_TARGET) //target <-> tracer
+TNT1 A 0 A_JumpIfInTargetInventory("SuplexID",1,"SpawnNo")
+TNT1 A 0 A_GiveToTarget("SuplexID",CallACS("core_gettracer",0)-1000+1)
+TNT1 A 1
+stop
+SpawnNo:
+TNT1 A 1
+stop
+}
+}
+
+actor SubmissionPushStart : CustomInventory
+{
+states
+{
+pickup:
+TNT1 A 0 A_SpawnItemEx("SubmissionPusher")
+stop
+}
+}
+
+actor SubmissionPusher : SubmissionHitBase
+{
+states
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_TransferPointer(AAPTR_TARGET,AAPTR_DEFAULT,AAPTR_TARGET,AAPTR_TRACER) //target's target to self's tracer
+TNT1 A 0 A_FaceTracer
+TNT1 A 0 //A_GiveToTarget("TempPitProtect",1)
+TNT1 A 0 ThrustThing(angle*256/360,-20,0,ACS_ExecuteWithResult(257,0))
+stop
+}
+}
+
+actor SubmissionRollingFX : BasicClientside
+{
+Renderstyle "Translucent"
++FORCEXYBILLBOARD
+Alpha 1.0
+scale 2.5
+speed 7
+States
+{
+Spawn:
+TNT1 A 0
+Spawn2:
+ROLO RST 1 A_Warp(AAPTR_TARGET,0,0,0,0,WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE)
+"####" "####" 1 A_JumpIfInTargetInventory("SubmissionFXTimer",1,"Spawn2")
+Goto Death
+Death:
+ROLO RST 1 A_Warp(AAPTR_TARGET,0,0,0,0,WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE)
+KBAR F 0 
+stop
+}
+}
+
+Actor Submission_VWatcher : VisibilityWatcher
+{
+ReactionTime 15
+States
+{
+CheckInv:
+TNT1 AAAA 1 A_JumpIfInTargetInventory("SubmissionFXTimer",1,"Reloop")
+Goto Death
+}
+}

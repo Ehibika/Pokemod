@@ -226,6 +226,16 @@ actor FightingWeakness : TypeBase
     damagefactor "Vacuumwave", 1.5 //W
     damagefactor "CloseCombat", 1.5 //W
     damagefactor "HammerArm", 1.5 //W
+    damagefactor "SeismicToss1", 1.0 //Static
+    damagefactor "SeismicToss2", 1.0 //Static
+damagefactor "StormThrow1", 1.0 //Static
+damagefactor "StormThrow2", 1.5 //W
+damagefactor "VitalThrow", 1.5 //W
+damagefactor "Submission1", 1.0 //Static
+damagefactor "Submission2", 1.5 //W
+damagefactor "SuperPower1", 1.0 //Static
+damagefactor "SuperPower2", 1.5 //W
+damagefactor "BrickBreak", 1.5 //W
     //--[Move|Fighting]--
 }
 
@@ -238,6 +248,16 @@ actor Fighting2xWeakness : TypeBase
     damagefactor "Vacuumwave", 2.0 //2W
     damagefactor "CloseCombat", 2.0 //2W
     damagefactor "HammerArm", 2.0 //2W
+    damagefactor "SeismicToss1", 1.0 //Static
+    damagefactor "SeismicToss2", 1.0 //Static
+damagefactor "StormThrow1", 1.0 //Static
+damagefactor "StormThrow2", 1.75 //2W
+damagefactor "VitalThrow", 1.75 //2W
+damagefactor "Submission1", 1.0 //Static
+damagefactor "Submission2", 1.75 //2W
+damagefactor "SuperPower1", 1.0 //Static
+damagefactor "SuperPower2", 1.75 //2W
+damagefactor "BrickBreak", 1.75 //2W
     //--[Move|Fighting]--
 }
 
@@ -250,6 +270,16 @@ actor FightingResistance : TypeBase
     damagefactor "Vacuumwave", 0.5 //R
     damagefactor "CloseCombat", 0.5 //R
     damagefactor "HammerArm", 0.5 //R
+    damagefactor "SeismicToss1", 1.0 //Static
+    damagefactor "SeismicToss2",1.0 //Static
+damagefactor "StormThrow1", 1.0 //Static
+damagefactor "StormThrow2", 0.5 //R
+damagefactor "VitalThrow", 0.5 //R
+damagefactor "Submission1", 1.0 //Static
+damagefactor "Submission2", 0.5 //R
+damagefactor "SuperPower1", 1.0 //Static
+damagefactor "SuperPower2", 0.5 //R
+damagefactor "BrickBreak", 0.5 //R
     //--[Move|Fighting]--
 }
 
@@ -262,6 +292,16 @@ actor Fighting2xResistance : TypeBase
     damagefactor "Vacuumwave", 0.25 //2R
     damagefactor "CloseCombat", 0.25 //2R
     damagefactor "HammerArm", 0.25 //2R
+    damagefactor "SeismicToss1", 1.0 //Static
+    damagefactor "SeismicToss2", 1.0 //Static
+damagefactor "StormThrow1", 1.0 //Static
+damagefactor "StormThrow2", 0.25 //2R
+damagefactor "VitalThrow", 0.25 //2R
+damagefactor "Submission1", 1.0 //Static
+damagefactor "Submission2", 0.25 //2R
+damagefactor "SuperPower1", 1.0 //Static
+damagefactor "SuperPower2", 0.25 //2R
+damagefactor "BrickBreak", 0.25 //2R
     //--[Move|Fighting]--
 }
 
@@ -274,6 +314,16 @@ actor FightingImmunity : TypeBase
     damagefactor "Vacuumwave", 0.1 //I
     damagefactor "CloseCombat", 0.1 //I
     damagefactor "HammerArm", 0.1 //I
+    damagefactor "SeismicToss1", 1.0 //Static
+    damagefactor "SeismicToss2", 1.0 //Static
+damagefactor "StormThrow1", 1.0 //Static
+damagefactor "StormThrow2", 0.0 //I
+damagefactor "VitalThrow", 0.0 //I
+damagefactor "Submission1", 1.0 //Static
+damagefactor "Submission2", 0.0 //I
+damagefactor "SuperPower1", 1.0 //Static
+damagefactor "SuperPower2", 0.0 //I
+damagefactor "BrickBreak", 0.0 //I
     //--[Move|Fighting]--
 }
 
@@ -286,6 +336,16 @@ actor FightingSTAB : STABBase
     damagefactor "Vacuumwave", 1.3 //S
     damagefactor "CloseCombat", 1.3 //S
     damagefactor "HammerArm", 1.3 //S
+    damagefactor "SeismicToss1", 1.0 //Static
+    damagefactor "SeismicToss2", 1.0 //Static
+damagefactor "StormThrow1", 1.0 //Static
+damagefactor "StormThrow2", 1.3 //S
+damagefactor "VitalThrow", 1.3 //S
+damagefactor "Submission1", 1.0 //Static
+damagefactor "Submission2", 1.3 //S
+damagefactor "SuperPower1", 1.0 //Static
+damagefactor "SuperPower2", 1.3 //S
+damagefactor "BrickBreak", 1.3 //S
     //--[Move|Fighting]--
 }
 //[+]========================================================================[+]
@@ -695,6 +755,10 @@ damagefactor "BugBuzz", 1.5 //W
 damagefactor "SilverWind", 1.5 //W
 damagefactor "QuiverDance", 1.5 //W
 damagefactor "PinMissile", 1.5 //W
+damagefactor "SignalBeam", 1.5 //W
+damagefactor "Megahorn", 1.5 //W
+damagefactor "LeechLife", 1.5 //W
+damagefactor "Infestation", 1.5 //W
 //--[Move|Bug]--
 
 }
@@ -711,6 +775,10 @@ damagefactor "BugBuzz", 2.0 //2W
 damagefactor "SilverWind", 2.0 //2W
 damagefactor "QuiverDance", 2.0 //2W
 damagefactor "PinMissile", 2.0 //2W
+damagefactor "SignalBeam", 1.75 //2W
+damagefactor "Megahorn", 1.75 //2W
+damagefactor "LeechLife", 1.75 //2W
+damagefactor "Infestation", 1.75 //2W
 //--[Move|Bug]--
 }
 
@@ -726,6 +794,10 @@ damagefactor "BugBuzz", 0.5 //R
 damagefactor "SilverWind", 0.5 //R
 damagefactor "QuiverDance", 0.5 //R
 damagefactor "PinMissile", 0.5 //R
+damagefactor "SignalBeam", 0.5 //R
+damagefactor "Megahorn", 0.5 //R
+damagefactor "LeechLife", 0.5 //R
+damagefactor "Infestation", 0.5 //R
 //--[Move|Bug]--
 }
 
@@ -741,6 +813,10 @@ damagefactor "BugBuzz", 0.25 //2R
 damagefactor "SilverWind", 0.25 //2R
 damagefactor "QuiverDance", 0.25 //2R
 damagefactor "PinMissile", 0.25 //2R
+damagefactor "SignalBeam", 0.25 //2R
+damagefactor "Megahorn", 0.25 //2R
+damagefactor "LeechLife", 0.25 //2R
+damagefactor "Infestation", 0.25 //2R
 //--[Move|Bug]--
 }
 
@@ -756,6 +832,10 @@ damagefactor "BugBuzz", 0.1 //I
 damagefactor "SilverWind", 0.1 //I
 damagefactor "QuiverDance", 0.1 //I
 damagefactor "PinMissile", 0.1 //I
+damagefactor "SignalBeam", 0.0 //I
+damagefactor "Megahorn", 0.0 //I
+damagefactor "LeechLife", 0.0 //I
+damagefactor "Infestation", 0.0 //I
 //--[Move|Bug]--
 }
 
@@ -771,6 +851,10 @@ damagefactor "BugBuzz", 1.3 //S
 damagefactor "SilverWind", 1.3 //S
 damagefactor "QuiverDance", 1.3 //S
 damagefactor "PinMissile", 1.3 //S
+damagefactor "SignalBeam", 1.3 //S
+damagefactor "Megahorn", 1.3 //S
+damagefactor "LeechLife", 1.3 //S
+damagefactor "Infestation", 1.3 //S
 //--[Move|Bug]--
 }
 //[+]========================================================================[+]

@@ -250,7 +250,7 @@ actor WideGuard2Part
     +DONTSPLASH
     +DONTBLAST
     +DONTRIP
-    +INVULNERABLE
+    //+INVULNERABLE
     +NOBLOOD
     +FORCEXYBILLBOARD
     +MOVEWITHSECTOR
@@ -258,7 +258,10 @@ actor WideGuard2Part
     +BRIGHT
     +MTHRUSPECIES
     +GHOST
-    painchance 255
+    painchance 0
+    DamageFactor "normal", 0.0
+    DamageFactor "BrickBreak", 1.0
+    painchance "BrickBreak", 256
     maxstepheight 0
     Scale 0.5
     height 56
@@ -315,6 +318,8 @@ actor WideGuard2Part
       WGUA B 0 A_JumpIfInTargetInventory("TauntFlag", 1, "Detonate")
       WGUA B 0 A_JumpIfInTargetInventory("HazeFlag", 1, "Detonate")
     loop
+    Pain.BrickBreak:
+    WGUA B 0 A_GiveToTarget("WideScreenKiller",1)
     Death:
     Detonate:
         WGUA B 0 A_SetUserVar(user_radius, user_radius-16)
