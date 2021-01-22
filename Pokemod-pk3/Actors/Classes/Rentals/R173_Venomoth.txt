@@ -1,0 +1,90 @@
+
+/*
+[+]===================================[+]
+
+[+]===================================[+]
+*/
+
+Actor R_Venomoth : ClassBaseRentals 
+{
+Player.DisplayName "Venomoth"
+Player.SoundClass "Venomoth"
++NOSKIN
+
+Player.StartItem "PKMNRentalKit"
+//============|
+Player.StartItem "VenomothRentalSetupItem"
+//============|
+Player.StartItem "Base_HP", 70
+Player.StartItem "Base_PAttack", 65
+Player.StartItem "Base_PDefense", 60
+Player.StartItem "Base_SAttack", 90
+Player.StartItem "Base_SDefense", 75
+
+//============|
+
+States
+{
+Spawn: 
+P173 A 0
+P173 B 1 
+P173 A 1
+GoTo Spawn+2
+See:
+P173 BCDE 5
+GoTo Spawn+1
+Missile:
+P173 A 0 A_JumpIfInventory("ConshotTimer",1,"Missile2")
+P173 F 5 
+P173 G 4
+GoTo Spawn+2
+Missile2:
+P173 G 9
+GoTo Spawn+2
+
+PainFix:
+P173 H 0 
+GoTo PainFrames
+}
+}
+
+actor VenomothRentalMoves : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_JumpIf(CallACS("RentalBotCheck") == 1,"BotWep")
+
+TNT1 A 0 A_GiveInventory("BugBuzzMove1")
+TNT1 A 0 A_GiveInventory("PsychicMove2")
+TNT1 A 0 A_GiveInventory("SleepPowderMove3")
+TNT1 A 0 A_GiveInventory("QuiverDanceMove4")
+stop
+
+BotWep:
+TNT1 A 0 A_GiveInventory("BugBuzzMove1")
+stop
+}
+}
+
+actor VenomothRentalSetupItem : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 ACS_NamedExecuteAlways("PKMN_RentalsSetup",0,Dex_Venomoth)
+stop
+}
+}

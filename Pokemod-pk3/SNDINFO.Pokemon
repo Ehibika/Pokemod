@@ -2420,4 +2420,154 @@ $playersound    Ampharos male *usefail    FATLAND
 $playersound    Ampharos male *taunt      CRY165
 
 
+$playersound    Pinsir male *death      MEGADEAT
+$playersound    Pinsir male *xdeath     MEGADEAT
+$playersound    Pinsir male *gibbed     MEGADEAT
+$playersound    Pinsir male *pain100    MEGAPAIN
+$playersound    Pinsir male *pain75     MEGAPAIN
+$playersound    Pinsir male *pain50     MEGAPAIN
+$playersound    Pinsir male *pain25     MEGAPAIN
+$playersound    Pinsir male *grunt      LAND
+$playersound    Pinsir male *land       LAND
+$playersound    Pinsir male *jump       dsnone
+$playersound    Pinsir male *fist       dsnone
+$playersound    Pinsir male *usefail    LAND
+$playersound    Pinsir male *taunt      CRY166
+
+
+$playersound    Heracross male *death      MEGADEAT
+$playersound    Heracross male *xdeath     MEGADEAT
+$playersound    Heracross male *gibbed     MEGADEAT
+$playersound    Heracross male *pain100    MEGAPAIN
+$playersound    Heracross male *pain75     MEGAPAIN
+$playersound    Heracross male *pain50     MEGAPAIN
+$playersound    Heracross male *pain25     MEGAPAIN
+$playersound    Heracross male *grunt      LAND
+$playersound    Heracross male *land       LAND
+$playersound    Heracross male *jump       dsnone
+$playersound    Heracross male *fist       dsnone
+$playersound    Heracross male *usefail    LAND
+$playersound    Heracross male *taunt      CRY167
+
+
+$playersound    Yanma male *death      MEGADEAT
+$playersound    Yanma male *xdeath     MEGADEAT
+$playersound    Yanma male *gibbed     MEGADEAT
+$playersound    Yanma male *pain100    MEGAPAIN
+$playersound    Yanma male *pain75     MEGAPAIN
+$playersound    Yanma male *pain50     MEGAPAIN
+$playersound    Yanma male *pain25     MEGAPAIN
+$playersound    Yanma male *grunt      LAND
+$playersound    Yanma male *land       LAND
+$playersound    Yanma male *jump       dsnone
+$playersound    Yanma male *fist       dsnone
+$playersound    Yanma male *usefail    LAND
+$playersound    Yanma male *taunt      CRY168
+
+
+$playersound    Yanmega male *death      MEGADEAT
+$playersound    Yanmega male *xdeath     MEGADEAT
+$playersound    Yanmega male *gibbed     MEGADEAT
+$playersound    Yanmega male *pain100    MEGAPAIN
+$playersound    Yanmega male *pain75     MEGAPAIN
+$playersound    Yanmega male *pain50     MEGAPAIN
+$playersound    Yanmega male *pain25     MEGAPAIN
+$playersound    Yanmega male *grunt      FATLAND
+$playersound    Yanmega male *land       FATLAND
+$playersound    Yanmega male *jump       dsnone
+$playersound    Yanmega male *fist       dsnone
+$playersound    Yanmega male *usefail    FATLAND
+$playersound    Yanmega male *taunt      CRY169
+
+
+$playersound    Shuckle male *death      MEGADEAT
+$playersound    Shuckle male *xdeath     MEGADEAT
+$playersound    Shuckle male *gibbed     MEGADEAT
+$playersound    Shuckle male *pain100    MEGAPAIN
+$playersound    Shuckle male *pain75     MEGAPAIN
+$playersound    Shuckle male *pain50     MEGAPAIN
+$playersound    Shuckle male *pain25     MEGAPAIN
+$playersound    Shuckle male *grunt      LAND
+$playersound    Shuckle male *land       LAND
+$playersound    Shuckle male *jump       dsnone
+$playersound    Shuckle male *fist       dsnone
+$playersound    Shuckle male *usefail    LAND
+$playersound    Shuckle male *taunt      CRY170
+
+
+$playersound    Durant male *death      MEGADEAT
+$playersound    Durant male *xdeath     MEGADEAT
+$playersound    Durant male *gibbed     MEGADEAT
+$playersound    Durant male *pain100    MEGAPAIN
+$playersound    Durant male *pain75     MEGAPAIN
+$playersound    Durant male *pain50     MEGAPAIN
+$playersound    Durant male *pain25     MEGAPAIN
+$playersound    Durant male *grunt      LAND
+$playersound    Durant male *land       LAND
+$playersound    Durant male *jump       dsnone
+$playersound    Durant male *fist       dsnone
+$playersound    Durant male *usefail    LAND
+$playersound    Durant male *taunt      CRY171
+
+
+$playersound    Venonat male *death      MEGADEAT
+$playersound    Venonat male *xdeath     MEGADEAT
+$playersound    Venonat male *gibbed     MEGADEAT
+$playersound    Venonat male *pain100    MEGAPAIN
+$playersound    Venonat male *pain75     MEGAPAIN
+$playersound    Venonat male *pain50     MEGAPAIN
+$playersound    Venonat male *pain25     MEGAPAIN
+$playersound    Venonat male *grunt      LAND
+$playersound    Venonat male *land       LAND
+$playersound    Venonat male *jump       dsnone
+$playersound    Venonat male *fist       dsnone
+$playersound    Venonat male *usefail    LAND
+$playersound    Venonat male *taunt      CRY172
+
+
+$playersound    Venomoth male *death      MEGADEAT
+$playersound    Venomoth male *xdeath     MEGADEAT
+$playersound    Venomoth male *gibbed     MEGADEAT
+$playersound    Venomoth male *pain100    MEGAPAIN
+$playersound    Venomoth male *pain75     MEGAPAIN
+$playersound    Venomoth male *pain50     MEGAPAIN
+$playersound    Venomoth male *pain25     MEGAPAIN
+$playersound    Venomoth male *grunt      FATLAND
+$playersound    Venomoth male *land       FATLAND
+$playersound    Venomoth male *jump       dsnone
+$playersound    Venomoth male *fist       dsnone
+$playersound    Venomoth male *usefail    FATLAND
+$playersound    Venomoth male *taunt      CRY173
+
+
+$playersound    Wimpod male *death      MEGADEAT
+$playersound    Wimpod male *xdeath     MEGADEAT
+$playersound    Wimpod male *gibbed     MEGADEAT
+$playersound    Wimpod male *pain100    MEGAPAIN
+$playersound    Wimpod male *pain75     MEGAPAIN
+$playersound    Wimpod male *pain50     MEGAPAIN
+$playersound    Wimpod male *pain25     MEGAPAIN
+$playersound    Wimpod male *grunt      LAND
+$playersound    Wimpod male *land       LAND
+$playersound    Wimpod male *jump       dsnone
+$playersound    Wimpod male *fist       dsnone
+$playersound    Wimpod male *usefail    LAND
+$playersound    Wimpod male *taunt      CRY174
+
+
+$playersound    Golisopod male *death      MEGADEAT
+$playersound    Golisopod male *xdeath     MEGADEAT
+$playersound    Golisopod male *gibbed     MEGADEAT
+$playersound    Golisopod male *pain100    MEGAPAIN
+$playersound    Golisopod male *pain75     MEGAPAIN
+$playersound    Golisopod male *pain50     MEGAPAIN
+$playersound    Golisopod male *pain25     MEGAPAIN
+$playersound    Golisopod male *grunt      FATLAND
+$playersound    Golisopod male *land       FATLAND
+$playersound    Golisopod male *jump       dsnone
+$playersound    Golisopod male *fist       dsnone
+$playersound    Golisopod male *usefail    FATLAND
+$playersound    Golisopod male *taunt      CRY175
+
+
 //--[NewPokemon]--

@@ -315,5 +315,5 @@ const int MBP_SignalBeam2 = MBP_StandardPower;
 const int MBP_BrickBreak1 = MBP_Low2;
 const int MBP_BrickBreak2 = MBP_StandardPower;
 const int MBP_Megahorn = MBP_HighPower3;
-const int MBP_LeechLife = MBP_StandardPower;
+const int MBP_LeechLife = MBP_HighPower1;
 //--[NewMove]--

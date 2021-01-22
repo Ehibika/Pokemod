@@ -299,8 +299,11 @@ Spawn:
 TNT1 A 0
 TNT1 A 0 A_TransferPointer(AAPTR_TARGET,AAPTR_DEFAULT,AAPTR_TARGET,AAPTR_TRACER) //target's target to self's tracer
 TNT1 A 5 A_FaceTracer
-TNT1 A 0 //A_GiveToTarget("TempPitProtect",1)
+TNT1 A 0 A_JumpIfInventory("GrappledFlag",1,"Spawn2",AAPTR_TRACER)
 TNT1 A 0 ThrustThing(angle*256/360,80,1,ACS_ExecuteWithResult(257,0))
+stop
+Spawn2:
+TNT1 A 0
 stop
 }
 }

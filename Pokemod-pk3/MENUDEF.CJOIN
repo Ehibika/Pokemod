@@ -168,6 +168,14 @@ OptionString PKMN_JoinName
 "Tangela", "Tangela"
 "Joltik", "Joltik"
 "Mareep", "Mareep"
+
+"Pinsir", "Pinsir"
+"Heracross", "Heracross"
+"Yanma", "Yanma"
+"Shuckle", "Shuckle"
+"Durant", "Durant"
+"Venonat", "Venonat"
+"Wimpod", "Wimpod"
 //--[NewPokemon]--
 }
 

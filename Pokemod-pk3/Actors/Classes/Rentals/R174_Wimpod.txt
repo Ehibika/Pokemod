@@ -1,0 +1,90 @@
+
+/*
+[+]===================================[+]
+
+[+]===================================[+]
+*/
+
+Actor R_Wimpod : ClassBaseRentals 
+{
+Player.DisplayName "Wimpod"
+Player.SoundClass "Wimpod"
++NOSKIN
+
+Player.StartItem "PKMNRentalKit"
+//============|
+Player.StartItem "WimpodRentalSetupItem"
+//============|
+Player.StartItem "Base_HP", 25
+Player.StartItem "Base_PAttack", 35
+Player.StartItem "Base_PDefense", 40
+Player.StartItem "Base_SAttack", 20
+Player.StartItem "Base_SDefense", 30
+
+//============|
+
+States
+{
+Spawn: 
+P174 A 0
+P174 B 1 
+P174 A 1
+GoTo Spawn+2
+See:
+P174 BCDE 5
+GoTo Spawn+1
+Missile:
+P174 A 0 A_JumpIfInventory("ConshotTimer",1,"Missile2")
+P174 F 5 
+P174 G 4
+GoTo Spawn+2
+Missile2:
+P174 G 9
+GoTo Spawn+2
+
+PainFix:
+P174 H 0 
+GoTo PainFrames
+}
+}
+
+actor WimpodRentalMoves : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_JumpIf(CallACS("RentalBotCheck") == 1,"BotWep")
+
+TNT1 A 0 A_GiveInventory("LeechLifeMove1")
+TNT1 A 0 A_GiveInventory("ScaldMove2")
+TNT1 A 0 A_GiveInventory("WideGuardMove3")
+TNT1 A 0 A_GiveInventory("SubstituteMove4")
+stop
+
+BotWep:
+TNT1 A 0 A_GiveInventory("LeechLifeMove1")
+stop
+}
+}
+
+actor WimpodRentalSetupItem : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 ACS_NamedExecuteAlways("PKMN_RentalsSetup",0,Dex_Wimpod)
+stop
+}
+}

@@ -261,5 +261,22 @@ Int StatDEX [MAXDEX][10] = {
 /*|163|*/{ 55, 40, 40, 65,        45,    SLOW_SPD,    5, Type_Electric,Type_Null,  LVLSPD_Normal},
 /*|164|*/{ 70, 55, 55, 80,        60,    SLOW_SPD,    15, Type_Electric,Type_Null,  LVLSPD_Normal},
 /*|165|*/{ 90, 75, 86, 115,        90,    SLOW_SPD,    25, Type_Electric,Type_Null,  LVLSPD_Normal},
+
+/*|166|*/{ 65, 125, 100, 55,        70,    NORM_SPD,    20, Type_Bug,Type_Null,  LVLSPD_Slow},
+
+/*|167|*/{ 80, 125, 75, 40,        95,    NORM_SPD,    20, Type_Bug,Type_Fighting,  LVLSPD_Slow},
+
+/*|168|*/{ 65, 65, 45, 75,        45,    FAST_SPD,    5, Type_Bug,Type_Flying,  LVLSPD_Normal},
+/*|169|*/{ 86, 76, 86, 116,        56,    FAST_SPD,    20, Type_Bug,Type_Flying,  LVLSPD_Normal},
+
+/*|170|*/{ 20, 10, 230, 10,        230,    SLOW_SPD,    20, Type_Bug,Type_Rock,  LVLSPD_Rapid},
+
+/*|171|*/{ 58, 109, 112, 48,        48,    FAST_SPD,    20, Type_Bug,Type_Steel,  LVLSPD_Swift},
+
+/*|172|*/{ 60, 55, 50, 40,        55,    FAST_SPD,    5, Type_Bug,Type_Poison,  LVLSPD_Swift},
+/*|173|*/{ 70, 65, 60, 90,        75,    FAST_SPD,    20, Type_Bug,Type_Poison,  LVLSPD_Swift},
+
+/*|174|*/{ 25, 35, 40, 20,        30,    NORM_SPD,    5, Type_Bug,Type_Water,  LVLSPD_Normal},
+/*|175|*/{ 75, 125, 140, 60,        90,    SLOW_SPD,    20, Type_Bug,Type_Water,  LVLSPD_Normal},
 //--[NewPokemon]--
 };

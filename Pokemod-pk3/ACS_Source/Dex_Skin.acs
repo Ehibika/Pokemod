@@ -243,5 +243,15 @@ str SkinDEX [MAXDEX][2] = {
     /*|163|*/{"Mareep","Base"},
     /*|164|*/{"Flaaffy","Flaaffy"},
     /*|165|*/{"Ampharos","Ampharos"},
+    /*|166|*/{"Pinsir","Base"},
+    /*|167|*/{"Heracross","Base"},
+    /*|168|*/{"Yanma","Base"},
+    /*|169|*/{"Yanmega","Yanmega"},
+    /*|170|*/{"Shuckle","Base"},
+    /*|171|*/{"Durant","Base"},
+    /*|172|*/{"Venonat","Base"},
+    /*|173|*/{"Venomoth","Venomoth"},
+    /*|174|*/{"Wimpod","Base"},
+    /*|175|*/{"Golisopod","Golisopod"},
     //--[NewPokemon]--
     };

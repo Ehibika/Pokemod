@@ -1,0 +1,87 @@
+
+/*
+[+]===================================[+]
+
+[+]===================================[+]
+*/
+
+Actor Pinsir : ClassBase 
+{
+Player.DisplayName "Pinsir"
+Player.SoundClass "Pinsir"
++NOSKIN
+player.startitem "PKMNStarterKit"
+//============|
+Player.StartItem "Base_HP", 65
+Player.StartItem "Base_PAttack", 125
+Player.StartItem "Base_PDefense", 100
+Player.StartItem "Base_SAttack", 55
+Player.StartItem "Base_SDefense", 70
+
+//============|
+
+States
+{
+Spawn: 
+P166 A 0
+P166 B 1 
+P166 A 1
+GoTo Spawn+2
+See:
+P166 BCDE 5
+GoTo Spawn+1
+Missile:
+P166 A 0 A_JumpIfInventory("ConshotTimer",1,"Missile2")
+P166 F 5 
+P166 G 4
+GoTo Spawn+2
+Missile2:
+P166 G 9
+GoTo Spawn+2
+
+PainFix:
+P166 H 0 
+GoTo PainFrames
+}
+}
+
+actor PinsirStarterMoves : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_JumpIfInventory("isbot",1,"BotWep")
+
+TNT1 A 0 A_GiveInventory("BugBiteMove1")
+TNT1 A 0 A_GiveInventory("QuickAttackMove2")
+TNT1 A 0 A_GiveInventory("LeerMove3")
+TNT1 A 0 A_GiveInventory("DefenseCurlMove4")
+stop
+
+BotWep:
+TNT1 A 0 A_GiveInventory("BugBiteMove1")
+stop
+}
+}
+
+actor PinsirSetupItem : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 ACS_NamedExecuteAlways("PKMNACS_StartupScript",0,Dex_Pinsir)
+stop
+}
+}

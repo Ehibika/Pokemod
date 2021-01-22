@@ -1,0 +1,90 @@
+
+/*
+[+]===================================[+]
+
+[+]===================================[+]
+*/
+
+Actor R_Durant : ClassBaseRentals 
+{
+Player.DisplayName "Durant"
+Player.SoundClass "Durant"
++NOSKIN
+
+Player.StartItem "PKMNRentalKit"
+//============|
+Player.StartItem "DurantRentalSetupItem"
+//============|
+Player.StartItem "Base_HP", 58
+Player.StartItem "Base_PAttack", 109
+Player.StartItem "Base_PDefense", 112
+Player.StartItem "Base_SAttack", 48
+Player.StartItem "Base_SDefense", 48
+
+//============|
+
+States
+{
+Spawn: 
+P171 A 0
+P171 B 1 
+P171 A 1
+GoTo Spawn+2
+See:
+P171 BCDE 5
+GoTo Spawn+1
+Missile:
+P171 A 0 A_JumpIfInventory("ConshotTimer",1,"Missile2")
+P171 F 5 
+P171 G 4
+GoTo Spawn+2
+Missile2:
+P171 G 9
+GoTo Spawn+2
+
+PainFix:
+P171 H 0 
+GoTo PainFrames
+}
+}
+
+actor DurantRentalMoves : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_JumpIf(CallACS("RentalBotCheck") == 1,"BotWep")
+
+TNT1 A 0 A_GiveInventory("IronHeadMove1")
+TNT1 A 0 A_GiveInventory("XScissorMove2")
+TNT1 A 0 A_GiveInventory("DigMove3")
+TNT1 A 0 A_GiveInventory("InfestationMove4")
+stop
+
+BotWep:
+TNT1 A 0 A_GiveInventory("IronHeadMove1")
+stop
+}
+}
+
+actor DurantRentalSetupItem : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 ACS_NamedExecuteAlways("PKMN_RentalsSetup",0,Dex_Durant)
+stop
+}
+}

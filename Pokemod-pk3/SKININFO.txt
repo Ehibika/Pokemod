@@ -2254,4 +2254,144 @@ gender = male
 }
 
 
+{
+name = "Pinsir"
+sprite = P166
+class = Pinsir
+dsnoway = LAND
+dsoof = LAND
+dspldeth = MEGADEAT
+dspdiehi = MEGADEAT
+dsplpain = MEGAPAIN
+dstaunt = Cry166
+gender = male
+}
+
+
+{
+name = "Heracross"
+sprite = P167
+class = Heracross
+dsnoway = LAND
+dsoof = LAND
+dspldeth = MEGADEAT
+dspdiehi = MEGADEAT
+dsplpain = MEGAPAIN
+dstaunt = Cry167
+gender = male
+}
+
+
+{
+name = "Yanma"
+sprite = P168
+class = Yanma
+dsnoway = LAND
+dsoof = LAND
+dspldeth = MEGADEAT
+dspdiehi = MEGADEAT
+dsplpain = MEGAPAIN
+dstaunt = Cry168
+gender = male
+}
+
+
+{
+name = "Yanmega"
+sprite = P169
+class = Yanma
+dsnoway = FATLAND
+dsoof = FATLAND
+dspldeth = MEGADEAT
+dspdiehi = MEGADEAT
+dsplpain = MEGAPAIN
+dstaunt = Cry169
+gender = male
+}
+
+
+{
+name = "Shuckle"
+sprite = P170
+class = Shuckle
+dsnoway = LAND
+dsoof = LAND
+dspldeth = MEGADEAT
+dspdiehi = MEGADEAT
+dsplpain = MEGAPAIN
+dstaunt = Cry170
+gender = male
+}
+
+
+{
+name = "Durant"
+sprite = P171
+class = Durant
+dsnoway = LAND
+dsoof = LAND
+dspldeth = MEGADEAT
+dspdiehi = MEGADEAT
+dsplpain = MEGAPAIN
+dstaunt = Cry171
+gender = male
+}
+
+
+{
+name = "Venonat"
+sprite = P172
+class = Venonat
+dsnoway = LAND
+dsoof = LAND
+dspldeth = MEGADEAT
+dspdiehi = MEGADEAT
+dsplpain = MEGAPAIN
+dstaunt = Cry172
+gender = male
+}
+
+
+{
+name = "Venomoth"
+sprite = P173
+class = Venonat
+dsnoway = FATLAND
+dsoof = FATLAND
+dspldeth = MEGADEAT
+dspdiehi = MEGADEAT
+dsplpain = MEGAPAIN
+dstaunt = Cry173
+gender = male
+}
+
+
+{
+name = "Wimpod"
+sprite = P174
+class = Wimpod
+dsnoway = LAND
+dsoof = LAND
+dspldeth = MEGADEAT
+dspdiehi = MEGADEAT
+dsplpain = MEGAPAIN
+dstaunt = Cry174
+gender = male
+}
+
+
+{
+name = "Golisopod"
+sprite = P175
+class = Wimpod
+dsnoway = FATLAND
+dsoof = FATLAND
+dspldeth = MEGADEAT
+dspdiehi = MEGADEAT
+dsplpain = MEGAPAIN
+dstaunt = Cry175
+gender = male
+}
+
+
 //--[NewPokemon]--

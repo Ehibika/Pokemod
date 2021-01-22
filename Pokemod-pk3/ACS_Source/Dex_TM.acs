@@ -77,7 +77,7 @@
 
 
 
-#LIBDEFINE MAXTMLIST 100
+#LIBDEFINE MAXTMLIST 102
 //#endregion
 
 //#region -=- TM Reference -=-
@@ -184,6 +184,8 @@ int TMList [MAXTMLIST][5] = {
 {PoisonJab      ,TMF_NULL           ,TMT_POISON                                 ,TMP_4  ,TML_MID2},
 {ElectroBall    ,TMF_NULL           ,TMT_ELECTRIC                               ,TMP_4  ,TML_MID2},
 {Psyshock       ,TMF_NULL           ,TMT_PSYCHIC|TMT_FAIRY                      ,TMP_4  ,TML_MID2},
+{SeismicToss    ,TMF_UNIVERSAL      ,TMT_FIGHTING                               ,TMP_4  ,TML_MID2},
+{SuperPower     ,TMF_NULL           ,TMT_FIGHTING|TMT_Ground                    ,TMP_4  ,TML_MID2},
 
 {IceBeam        ,TMF_NULL           ,TMT_WATER|TMT_ICE                          ,TMP_4  ,TML_MID2},
 {Flamethrower   ,TMF_NULL           ,TMT_FIRE|TMT_DRAGON                        ,TMP_4  ,TML_MID2},
@@ -435,7 +437,10 @@ int output = 0;
         case PoisonJab: output = TMR_PoisonJab(Dexnum); break;    
         case GigaDrain: output = TMR_GigaDrain(Dexnum); break;    
         case Fly: output = TMR_Fly(Dexnum); break;    
-        
+        case SeismicToss: output = TMR_SeismicToss(Dexnum); break;    
+        case ElectroBall: output = TMR_Thunderbolt(Dexnum); break; 
+        case SuperPower: output = TMR_SuperPower(Dexnum); break; 
+
         
         
         
@@ -570,6 +575,7 @@ int output = 0;
     case DRAKLOAK: output = 1; break;
     case DRAGAPULT: output = 1; break;
     }
+    if(TMArch_Mystic(Dexnum)){output = 1;}
 return output;
 }
 //#endregion
@@ -628,6 +634,7 @@ int output = 0;
     case PIKACHU: output = 1; break;
     case RAICHU: output = 1; break;
     }
+    if(TMArch_Mystic(Dexnum)){output = 1;}
 return output;
 }
 //#endregion
@@ -698,6 +705,7 @@ int output = 0;
     case DRAGONITE: output = 1; break;
     }
     if(TMArch_Succor(Dexnum)){output = 1;}
+    if(TMArch_Mystic(Dexnum)){output = 1;}
 return output;
 }
 //#endregion
@@ -739,6 +747,7 @@ int output = 0;
     case DRAGONITE: output = 1; break;
     }
     if(TMArch_Succor(Dexnum)){output = 1;}
+    if(TMArch_Mystic(Dexnum)){output = 1;}
 return output;
 }
 //#endregion
@@ -776,6 +785,7 @@ int output = 0;
 
     }
     if(TMArch_Succor(Dexnum)){output = 1;}
+    if(TMArch_Mystic(Dexnum)){output = 1;}
 return output;
 }
 //#endregion
@@ -813,6 +823,7 @@ int output = 0;
 
     }
     if(TMArch_Succor(Dexnum)){output = 1;}
+    if(TMArch_Mystic(Dexnum)){output = 1;}
 return output;
 }
 //#endregion
@@ -837,6 +848,7 @@ Function int TMR_Psychic (int Dexnum)
     case BLISSEY: output = 1; break;
     }
     if(TMArch_Generalist(Dexnum)){output = 1;}
+    if(TMArch_Mystic(Dexnum)){output = 1;}
 
 return output;
 }
@@ -1447,6 +1459,7 @@ Function int TMR_BulkUp (int Dexnum)
 int output = 0;
     Switch (Dexnum)
     {
+        case GOLISOPOD: output = 1; break;
     }
     if(TMArch_Pugilist(Dexnum)){output = 1;}
 
@@ -1537,7 +1550,7 @@ return output;
 }
 //#endregion
 
-//#region -=- TM Rules : BulkUp -=-
+//#region -=- TM Rules : IronHead -=-
 Function int TMR_IronHead (int Dexnum) 
 {
 
@@ -1577,8 +1590,9 @@ int output = 0;
         case ZANGOOSE: output = 1; break;
         case SEVIPER: output = 1; break;
         case TENTACRUEL: output = 1; break;
-        case TENTACRUEL: output = 1; break;
-        case TENTACRUEL: output = 1; break;
+        case VENONAT: output = 1; break;
+        case VENOMOTH: output = 1; break;
+        case GOLISOPOD: output = 1; break;
 
     }
     
@@ -1587,7 +1601,60 @@ return output;
 }
 //#endregion
 
+//#region -=- TM Rules : SeismicToss -=-
+Function int TMR_SeismicToss (int Dexnum) 
+{
 
+int output = 0;
+    Switch (Dexnum)
+    {
+
+        case CHARMANDER: output = 1; break;
+        case CHARMELEON: output = 1; break;
+        case CHARIZARD: output = 1; break;
+        case SQUIRTLE: output = 1; break;
+        case WARTORTLE: output = 1; break;
+        case BLASTOISE: output = 1; break;
+        case PICHU: output = 1; break;
+        case PIKACHU: output = 1; break;
+        case RAICHU: output = 1; break;
+        case CLEFAIRY: output = 1; break;
+        case CLEFABLE: output = 1; break;
+        case JIGGLYPUFF: output = 1; break;
+        case WIGGLYTUFF: output = 1; break;
+
+    }
+    if(TMArch_Generalist(Dexnum)){output = 1;}
+
+return output;
+}
+//#endregion
+
+//#region -=- TM Rules : SuperPower -=-
+Function int TMR_SuperPower (int Dexnum) 
+{
+
+int output = 0;
+    Switch (Dexnum)
+    {
+
+        case ARCANINE: output = 1; break;
+        case SNORLAX: output = 1; break;
+        case DRAGONITE: output = 1; break;
+        case SCIZOR: output = 1; break;
+        case TORKOAL: output = 1; break;
+        case DEINO: output = 1; break;
+        case ZWEILOUS: output = 1; break;
+        case HYDREIGON: output = 1; break;
+
+    }
+    if(TMArch_Pugilist(Dexnum)){output = 1;}
+    if(TMArch_Terrestrial(Dexnum)){output = 1;}
+    if(TMArch_Generalist(Dexnum)){output = 1;}
+
+return output;
+}
+//#endregion
 //======
 
 //#region -=- TM Archetype : Draconic
@@ -1698,6 +1765,7 @@ int output = 0;
             case HAUNTER: output = 1; break;
             case GENGAR: output = 1; break;
             case TANGROWTH: output = 1; break;
+            case HERACROSS: output = 1; break;
         }
 return output;
 }
@@ -1726,6 +1794,7 @@ int output = 0;
         case SEVIPER: output = 1; break;
         case SKUNTANK: output = 1; break;
         case ZANGOOSE: output = 1; break;
+        case GOLISOPOD: output = 1; break;
         }
 return output;
 }
@@ -1791,6 +1860,7 @@ int output = 0;
             case AVALUGG: output = 1; break;
             case GULPIN: output = 1; break;
             case SWALOT: output = 1; break;
+            case SHUCKLE: output = 1; break;
 
         }
 return output;
@@ -1828,6 +1898,9 @@ int output = 0;
             case SEVIPER: output = 1; break;
             case EKANS: output = 1; break;
             case ARBOK: output = 1; break;
+            case DURANT: output = 1; break;
+            case HERACROSS: output = 1; break;
+            case PINSIR: output = 1; break;
         }
 return output;
 }
@@ -1847,6 +1920,9 @@ int output = 0;
             case QWILFISH: output = 1; break;
             case JOLTIK: output = 1; break;
             case GALVANTULA: output = 1; break;
+            case GOLISOPOD: output = 1; break;
+            case PINSIR: output = 1; break;
+            case HERACROSS: output = 1; break;
         }
 return output;
 }
@@ -1863,6 +1939,32 @@ int output = 0;
         {
             case FLYGON: output = 1; break;
             case VOLCARONA: output = 1; break;
+            case VENOMOTH: output = 1; break;
+        }
+return output;
+}
+//#endregion 
+
+//#region -=- TM Archetype : Mystic
+Function int TMArch_Mystic (int Dexnum)
+{
+int output = 0;
+    /* Mystic archetype involves pokemon that possess supernatural qualities despite not being psychic or fairy typed, this
+    gives them access to those types of moves
+
+    */
+    Switch (Dexnum)
+        {
+            case DRAGONITE: output = 1; break;
+
+            case GASTLY: output = 1; break;
+            case HAUNTER: output = 1; break;
+            case GENGAR: output = 1; break;
+
+            case NUZLEAF: output = 1; break;
+            case SHIFTRY: output = 1; break;
+            case VOLCARONA: output = 1; break;
+            case VENOMOTH: output = 1; break;
         }
 return output;
 }
@@ -1953,10 +2055,18 @@ int output = 0;
             case CLOYSTER: output = 1; break;
             case JOLTIK: output = 1; break;
             case GALVANTULA: output = 1; break;
+            case WIMPOD: output = 1; break;
+            case YANMA: output = 1; break;
+            case YANMEGA: output = 1; break;
+            case VENONAT: output = 1; break;
+            case VENOMOTH: output = 1; break;
         }
 return output;
 }
 //#endregion 
+
+
+
 
 //#region -=-=-= Depreciated -=-=-=
 

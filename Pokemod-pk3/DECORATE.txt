@@ -424,6 +424,13 @@
 #include "Actors/Classes/Pokemon/159_Tangela.txt"
 #include "Actors/Classes/Pokemon/161_Joltik.txt"
 #include "Actors/Classes/Pokemon/163_Mareep.txt"
+#include "Actors/Classes/Pokemon/166_Pinsir.txt"
+#include "Actors/Classes/Pokemon/167_Heracross.txt"
+#include "Actors/Classes/Pokemon/168_Yanma.txt"
+#include "Actors/Classes/Pokemon/170_Shuckle.txt"
+#include "Actors/Classes/Pokemon/171_Durant.txt"
+#include "Actors/Classes/Pokemon/172_Venonat.txt"
+#include "Actors/Classes/Pokemon/174_Wimpod.txt"
 //--[NewPokemon]--
 
 // -=- Rentals -=-
@@ -655,4 +662,14 @@
 #Include "Actors/Classes/Rentals/R163_Mareep.Txt"
 #Include "Actors/Classes/Rentals/R164_Flaaffy.Txt"
 #Include "Actors/Classes/Rentals/R165_Ampharos.Txt"
+#Include "Actors/Classes/Rentals/R166_Pinsir.Txt"
+#Include "Actors/Classes/Rentals/R167_Heracross.Txt"
+#Include "Actors/Classes/Rentals/R168_Yanma.Txt"
+#Include "Actors/Classes/Rentals/R169_Yanmega.Txt"
+#Include "Actors/Classes/Rentals/R170_Shuckle.Txt"
+#Include "Actors/Classes/Rentals/R171_Durant.Txt"
+#Include "Actors/Classes/Rentals/R172_Venonat.Txt"
+#Include "Actors/Classes/Rentals/R173_Venomoth.Txt"
+#Include "Actors/Classes/Rentals/R174_Wimpod.Txt"
+#Include "Actors/Classes/Rentals/R175_Golisopod.Txt"
 //--[NewPokemon]--

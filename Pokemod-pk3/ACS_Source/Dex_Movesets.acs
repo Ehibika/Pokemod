@@ -223,7 +223,7 @@ int MoveDex2[MAXDEX][15][4] = {
 	{
 		/*|1|*/{Watergun,Bite,RapidSpin,Protect},
 		/*|2|*/{AquaJet,Bubble,NullMove},
-		/*|3|*/{Growl,Refresh,NullMove},
+		/*|3|*/{Yawn,Refresh,NullMove},
 		/*|4|*/{LifeDew,AquaRing,NullMove},
 		/*|5|*/{BubbleBeam,Crunch,Block,Dive},
 		/*|6|*/{Mist,Fakeout,Amnesia,IronDefense},
@@ -242,7 +242,7 @@ int MoveDex2[MAXDEX][15][4] = {
 	{
 		/*|1|*/{Watergun,Bite,RapidSpin,Protect},
 		/*|2|*/{AquaJet,Bubble,NullMove},
-		/*|3|*/{Growl,Refresh,NullMove},
+		/*|3|*/{Yawn,Refresh,NullMove},
 		/*|4|*/{LifeDew,AquaRing,NullMove},
 		/*|5|*/{BubbleBeam,Crunch,Block,Dive},
 		/*|6|*/{Mist,Fakeout,Amnesia,IronDefense},
@@ -261,7 +261,7 @@ int MoveDex2[MAXDEX][15][4] = {
 	{
 		/*|1|*/{Watergun,Bite,RapidSpin,Protect},
 		/*|2|*/{AquaJet,Bubble,NullMove},
-		/*|3|*/{Growl,Refresh,NullMove},
+		/*|3|*/{Yawn,Refresh,NullMove},
 		/*|4|*/{LifeDew,AquaRing,NullMove},
 		/*|5|*/{BubbleBeam,Crunch,Block,Dive},
 		/*|6|*/{Mist,Fakeout,Amnesia,IronDefense},
@@ -401,7 +401,7 @@ int MoveDex2[MAXDEX][15][4] = {
 		/*|6|*/{Dive,Screech,Flatter,NullMove},
 		/*|7|*/{AquaTail,WaterPulse,ScaryFace,DragonPulse},
 		/*|8|*/{HammerArm,NightSlash,Liquidation,Thrash},
-		/*|9|*/{Agility,Hammerarm,NullMove},
+		/*|9|*/{Agility,Hammerarm,SuperPower,NullMove},
 		/*|10|*/{WideGuard,NullMove},
 		/*|11|*/{Outrage,NullMove},
 		/*|12|*/{DragonClaw,NullMove},
@@ -420,7 +420,7 @@ int MoveDex2[MAXDEX][15][4] = {
 		/*|6|*/{Dive,Screech,Flatter,NullMove},
 		/*|7|*/{AquaTail,WaterPulse,ScaryFace,DragonPulse},
 		/*|8|*/{HammerArm,NightSlash,Liquidation,Thrash},
-		/*|9|*/{Agility,Hammerarm,NullMove},
+		/*|9|*/{Agility,Hammerarm,SuperPower,NullMove},
 		/*|10|*/{WideGuard,NullMove},
 		/*|11|*/{Outrage,NullMove},
 		/*|12|*/{DragonClaw,NullMove},
@@ -439,7 +439,7 @@ int MoveDex2[MAXDEX][15][4] = {
 		/*|6|*/{Dive,Screech,Flatter,NullMove},
 		/*|7|*/{AquaTail,WaterPulse,ScaryFace,DragonPulse},
 		/*|8|*/{HammerArm,NightSlash,Liquidation,Thrash},
-		/*|9|*/{Agility,Hammerarm,NullMove},
+		/*|9|*/{Agility,Hammerarm,SuperPower,NullMove},
 		/*|10|*/{WideGuard,NullMove},
 		/*|11|*/{Outrage,NullMove},
 		/*|12|*/{DragonClaw,NullMove},
@@ -565,7 +565,7 @@ int MoveDex2[MAXDEX][15][4] = {
 		//#endregion
 	//#region -=- 025 : Mudkip -=-
 	{
-		/*|1|*/{Watergun,RockThrow,Growl,Bite},
+		/*|1|*/{Watergun,RockThrow,Yawn,Bite},
 		/*|2|*/{Curse,NullMove},
 		/*|3|*/{Protect,NullMove},
 		/*|4|*/{Refresh,NullMove},
@@ -584,7 +584,7 @@ int MoveDex2[MAXDEX][15][4] = {
 		//#endregion
 	//#region -=- 026 : Marshtomp -=-
 	{
-		/*|1|*/{Watergun,RockThrow,Growl,Bite},
+		/*|1|*/{Watergun,RockThrow,Yawn,Bite},
 		/*|2|*/{Curse,NullMove},
 		/*|3|*/{Protect,NullMove},
 		/*|4|*/{Refresh,NullMove},
@@ -603,7 +603,7 @@ int MoveDex2[MAXDEX][15][4] = {
 		//#endregion
 	//#region -=- 027 : Swampert -=-
 	{
-		/*|1|*/{Watergun,RockThrow,Growl,Bite},
+		/*|1|*/{Watergun,RockThrow,Yawn,Bite},
 		/*|2|*/{Curse,NullMove},
 		/*|3|*/{Protect,NullMove},
 		/*|4|*/{Refresh,NullMove},
@@ -737,7 +737,7 @@ int MoveDex2[MAXDEX][15][4] = {
 		//#endregion
 	//#region -=- 034 : Piplup -=-
 	{
-		/*|1|*/{Watergun,Peck,AquaJet,Growl},
+		/*|1|*/{Watergun,Peck,AquaJet,Yawn},
 		/*|2|*/{Protect,NullMove},
 		/*|3|*/{bubble,NullMove},
 		/*|4|*/{AquaRing,NullMove},
@@ -756,7 +756,7 @@ int MoveDex2[MAXDEX][15][4] = {
 		//#endregion
 	//#region -=- 035 : Prinplup -=-
 	{
-		/*|1|*/{Watergun,Peck,AquaJet,Growl},
+		/*|1|*/{Watergun,Peck,AquaJet,Yawn},
 		/*|2|*/{Protect,NullMove},
 		/*|3|*/{bubble,NullMove},
 		/*|4|*/{AquaRing,NullMove},
@@ -775,7 +775,7 @@ int MoveDex2[MAXDEX][15][4] = {
 		//#endregion
 	//#region -=- 036 : Empoleon -=-
 	{
-		/*|1|*/{Watergun,Peck,AquaJet,Growl},
+		/*|1|*/{Watergun,Peck,AquaJet,Yawn},
 		/*|2|*/{Protect,NullMove},
 		/*|3|*/{bubble,NullMove},
 		/*|4|*/{AquaRing,NullMove},
@@ -969,7 +969,7 @@ int MoveDex2[MAXDEX][15][4] = {
 
 	//#region -=- 046 : Slowpoke -=-
 	{
-		/*|1|*/{Watergun,SlackOff,Growl,Curse},
+		/*|1|*/{Watergun,SlackOff,Yawn,Curse},
 		/*|2|*/{Psywave,NullMove},
 		/*|3|*/{Disable,NullMove},
 		/*|4|*/{Barrier,NullMove},
@@ -988,7 +988,7 @@ int MoveDex2[MAXDEX][15][4] = {
 		//#endregion
 	//#region -=- 047 : Slowbro -=-
 	{
-		/*|1|*/{Watergun,SlackOff,Growl,Curse},
+		/*|1|*/{Watergun,SlackOff,Yawn,Curse},
 		/*|2|*/{Psywave,NullMove},
 		/*|3|*/{Disable,NullMove},
 		/*|4|*/{Barrier,NullMove},
@@ -1007,7 +1007,7 @@ int MoveDex2[MAXDEX][15][4] = {
 		//#endregion
 	//#region -=- 048 : Slowking -=-
 	{
-		/*|1|*/{Watergun,SlackOff,Growl,Curse},
+		/*|1|*/{Watergun,SlackOff,Yawn,Curse},
 		/*|2|*/{Psywave,NullMove},
 		/*|3|*/{Disable,NullMove},
 		/*|4|*/{Barrier,NullMove},
@@ -1150,7 +1150,7 @@ int MoveDex2[MAXDEX][15][4] = {
 		/*|4|*/{IceShard,NullMove},
 		/*|5|*/{AuroraBeam,Dazzlinggleam,FaintAttack,NullMove},
 		/*|6|*/{Hex,Safeguard,NullMove},
-		/*|7|*/{Extrasensory,CalmMind,NullMove},
+		/*|7|*/{Extrasensory,CalmMind,CraftyShield,NullMove},
 		/*|8|*/{IceBeam,NullMove},
 		/*|9|*/{MoonBlast,Blizzard,NullMove},
 		/*|10|*/{Haze,NullMove},
@@ -1169,7 +1169,7 @@ int MoveDex2[MAXDEX][15][4] = {
 		/*|4|*/{IceShard,NullMove},
 		/*|5|*/{AuroraBeam,Dazzlinggleam,FaintAttack,NullMove},
 		/*|6|*/{Hex,Safeguard,NullMove},
-		/*|7|*/{Extrasensory,CalmMind,NullMove},
+		/*|7|*/{Extrasensory,CalmMind,CraftyShield,NullMove},
 		/*|8|*/{IceBeam,NullMove},
 		/*|9|*/{MoonBlast,Blizzard,NullMove},
 		/*|10|*/{Haze,NullMove},
@@ -1342,7 +1342,7 @@ int MoveDex2[MAXDEX][15][4] = {
 		/*|2|*/{Disable,NullMove},
 		/*|3|*/{Headbutt,NullMove},
 		/*|4|*/{Meditate,NullMove},
-		/*|5|*/{Confusion,Hex,FutureSight,NullMove},
+		/*|5|*/{Confusion,Hex,FutureSight,CraftyShield},
 		/*|6|*/{Psybeam,Swagger,Flatter,NullMove},
 		/*|7|*/{ZenHeadbutt,Psychic,NullMove},
 		/*|8|*/{Psyshock,DrainPunch,NullMove},
@@ -1361,7 +1361,7 @@ int MoveDex2[MAXDEX][15][4] = {
 		/*|2|*/{Disable,NullMove},
 		/*|3|*/{Headbutt,NullMove},
 		/*|4|*/{Meditate,NullMove},
-		/*|5|*/{Confusion,Hex,NullMove},
+		/*|5|*/{Confusion,Hex,FutureSight,CraftyShield},
 		/*|6|*/{Psybeam,Swagger,Flatter,NullMove},
 		/*|7|*/{ZenHeadbutt,Psychic,NullMove},
 		/*|8|*/{Psyshock,DrainPunch,NullMove},
@@ -1381,7 +1381,7 @@ int MoveDex2[MAXDEX][15][4] = {
 		/*|2|*/{Disable,NullMove},
 		/*|3|*/{Barrier,NullMove},
 		/*|4|*/{Hypnosis,NullMove},
-		/*|5|*/{HealPulse,Confusion,NullMove},
+		/*|5|*/{HealPulse,Confusion,CraftyShield,NullMove},
 		/*|6|*/{DrainingKiss,CalmMind,NullMove},
 		/*|7|*/{Wish,Dazzlinggleam,NullMove},
 		/*|8|*/{Psybeam,Charm,NullMove},
@@ -1400,7 +1400,7 @@ int MoveDex2[MAXDEX][15][4] = {
 		/*|2|*/{Disable,NullMove},
 		/*|3|*/{Barrier,NullMove},
 		/*|4|*/{Hypnosis,NullMove},
-		/*|5|*/{HealPulse,Confusion,NullMove},
+		/*|5|*/{HealPulse,Confusion,CraftyShield,NullMove},
 		/*|6|*/{DrainingKiss,CalmMind,NullMove},
 		/*|7|*/{Wish,Dazzlinggleam,NullMove},
 		/*|8|*/{Psybeam,Charm,NullMove},
@@ -1419,7 +1419,7 @@ int MoveDex2[MAXDEX][15][4] = {
 		/*|2|*/{Disable,NullMove},
 		/*|3|*/{Barrier,NullMove},
 		/*|4|*/{Hypnosis,NullMove},
-		/*|5|*/{HealPulse,Confusion,NullMove},
+		/*|5|*/{HealPulse,Confusion,CraftyShield,NullMove},
 		/*|6|*/{DrainingKiss,CalmMind,NullMove},
 		/*|7|*/{Wish,Dazzlinggleam,NullMove},
 		/*|8|*/{Psybeam,Charm,NullMove},
@@ -1438,7 +1438,7 @@ int MoveDex2[MAXDEX][15][4] = {
 		/*|2|*/{Disable,NullMove},
 		/*|3|*/{Barrier,NullMove},
 		/*|4|*/{Hypnosis,NullMove},
-		/*|5|*/{HealPulse,Confusion,NullMove},
+		/*|5|*/{HealPulse,Confusion,CraftyShield,NullMove},
 		/*|6|*/{DrainingKiss,CalmMind,NullMove},
 		/*|7|*/{Wish,Dazzlinggleam,Vacuumwave,NullMove},
 		/*|8|*/{Psybeam,Charm,NullMove},
@@ -1496,7 +1496,7 @@ int MoveDex2[MAXDEX][15][4] = {
 		/*|1|*/{Ember,Protect,RapidSpin,SmokeScreen},
 		/*|2|*/{Curse,NullMove},
 		/*|3|*/{Incinerate,NullMove},
-		/*|4|*/{Growl,NullMove},
+		/*|4|*/{Yawn,NullMove},
 		/*|5|*/{LavaPlume,ClearSmog,NullMove},
 		/*|6|*/{FlameWheel,Toxic,NullMove},
 		/*|7|*/{FlameThrower,Haze,NullMove},
@@ -1513,7 +1513,7 @@ int MoveDex2[MAXDEX][15][4] = {
 
 	//#region -=- 074 : Slugma -=-
 	{
-		/*|1|*/{Ember,Growl,Leer,RockThrow},
+		/*|1|*/{Ember,Yawn,Leer,RockThrow},
 		/*|2|*/{Recover,NullMove},
 		/*|3|*/{Incinerate,NullMove},
 		/*|4|*/{Curse,NullMove},
@@ -1532,7 +1532,7 @@ int MoveDex2[MAXDEX][15][4] = {
 		//#endregion
 	//#region -=- 075 : Magcargo -=-
 	{
-		/*|1|*/{Ember,Growl,Leer,RockThrow},
+		/*|1|*/{Ember,Yawn,Leer,RockThrow},
 		/*|2|*/{Recover,NullMove},
 		/*|3|*/{Incinerate,NullMove},
 		/*|4|*/{Curse,NullMove},
@@ -1650,7 +1650,7 @@ int MoveDex2[MAXDEX][15][4] = {
     //#region -=- 081 : Horsea-=-
 {
         /*|1|*/{Bubble,leer,smokescreen,twister},
-		/*|2|*/{Growl,NullMove},
+		/*|2|*/{Yawn,NullMove},
 		/*|3|*/{DragonRage,NullMove},
 		/*|4|*/{Disable,NullMove},
 		/*|5|*/{BubbleBeam,Agility,NullMove},
@@ -1669,7 +1669,7 @@ int MoveDex2[MAXDEX][15][4] = {
     //#region -=- 082 : Seadra-=-
 {
         /*|1|*/{Bubble,leer,smokescreen,twister},
-		/*|2|*/{Growl,NullMove},
+		/*|2|*/{Yawn,NullMove},
 		/*|3|*/{DragonRage,NullMove},
 		/*|4|*/{Disable,NullMove},
 		/*|5|*/{BubbleBeam,Agility,NullMove},
@@ -1688,7 +1688,7 @@ int MoveDex2[MAXDEX][15][4] = {
     //#region -=- 083 : Kingdra-=-
 {
         /*|1|*/{Bubble,leer,smokescreen,twister},
-		/*|2|*/{Growl,NullMove},
+		/*|2|*/{Yawn,NullMove},
 		/*|3|*/{DragonRage,NullMove},
 		/*|4|*/{Disable,NullMove},
 		/*|5|*/{BubbleBeam,Agility,NullMove},
@@ -2278,7 +2278,7 @@ int MoveDex2[MAXDEX][15][4] = {
         /*|5|*/{DazzlingGleam,GrassWhistle,HealPulse,CosmicPower},
         /*|6|*/{Reflect,LightScreen,NullMove},
         /*|7|*/{AromaTherapy,NullMove},
-        /*|8|*/{Moonlight,MoonBlast,MeteorMash,NullMove},
+        /*|8|*/{Moonlight,MoonBlast,MeteorMash,CraftyShield},
         /*|9|*/{NullMove},
         /*|10|*/{NullMove},
         /*|11|*/{NullMove},
@@ -2297,7 +2297,7 @@ int MoveDex2[MAXDEX][15][4] = {
         /*|5|*/{DazzlingGleam,GrassWhistle,HealPulse,CosmicPower},
         /*|6|*/{Reflect,LightScreen,NullMove},
         /*|7|*/{AromaTherapy,NullMove},
-        /*|8|*/{Moonlight,MoonBlast,MeteorMash,NullMove},
+        /*|8|*/{Moonlight,MoonBlast,MeteorMash,CraftyShield},
         /*|9|*/{NullMove},
         /*|10|*/{NullMove},
         /*|11|*/{NullMove},
@@ -2316,7 +2316,7 @@ int MoveDex2[MAXDEX][15][4] = {
         /*|5|*/{DazzlingGleam,GrassWhistle,HealPulse,CosmicPower},
         /*|6|*/{Reflect,LightScreen,NullMove},
         /*|7|*/{AromaTherapy,NullMove},
-        /*|8|*/{Moonlight,MoonBlast,MeteorMash,NullMove},
+        /*|8|*/{Moonlight,MoonBlast,MeteorMash,CraftyShield},
         /*|9|*/{NullMove},
         /*|10|*/{NullMove},
         /*|11|*/{NullMove},
@@ -2333,7 +2333,7 @@ int MoveDex2[MAXDEX][15][4] = {
         /*|2|*/{Disable,HelpingHand,NullMove},
         /*|3|*/{DefenseCurl,NullMove},
         /*|4|*/{Rest,FakeTears,FaintAttack},
-        /*|5|*/{Swift,Rollout,DazzlingGleam,NullMove},
+        /*|5|*/{Swift,Rollout,DazzlingGleam,CraftyShield},
         /*|6|*/{Captivate,GyroBall,HealPulse,Substitute},
         /*|7|*/{DoubleEdge,Moonblast,NullMove},
         /*|8|*/{DreamEater,Moonlight,NullMove},
@@ -2352,7 +2352,7 @@ int MoveDex2[MAXDEX][15][4] = {
         /*|2|*/{Disable,HelpingHand,NullMove},
         /*|3|*/{DefenseCurl,NullMove},
         /*|4|*/{Rest,FakeTears,FaintAttack},
-        /*|5|*/{Swift,Rollout,DazzlingGleam,NullMove},
+        /*|5|*/{Swift,Rollout,DazzlingGleam,CraftyShield},
         /*|6|*/{Captivate,GyroBall,HealPulse,Substitute},
         /*|7|*/{DoubleEdge,Moonblast,NullMove},
         /*|8|*/{DreamEater,Moonlight,NullMove},
@@ -2371,7 +2371,7 @@ int MoveDex2[MAXDEX][15][4] = {
         /*|2|*/{Disable,HelpingHand,NullMove},
         /*|3|*/{DefenseCurl,NullMove},
         /*|4|*/{Rest,FakeTears,FaintAttack},
-        /*|5|*/{Swift,Rollout,DazzlingGleam,NullMove},
+        /*|5|*/{Swift,Rollout,DazzlingGleam,CraftyShield},
         /*|6|*/{Captivate,GyroBall,HealPulse,Substitute},
         /*|7|*/{DoubleEdge,Moonblast,NullMove},
         /*|8|*/{DreamEater,Moonlight,NullMove},
@@ -2392,7 +2392,7 @@ int MoveDex2[MAXDEX][15][4] = {
         /*|3|*/{Charm,GrassWhistle,NullMove},
         /*|4|*/{Captivate,FakeTears,NullMove},
         /*|5|*/{TakeDown,ZenHeadbutt,Swift,NullMove},
-        /*|6|*/{Reflect,LightScreen,DoubleEdge},
+        /*|6|*/{Reflect,LightScreen,DoubleEdge,CraftyShield},
         /*|7|*/{Amnesia,DrainingKiss,NullMove},
         /*|8|*/{Aromatherapy,Wish,NullMove},
         /*|9|*/{NullMove},
@@ -2412,7 +2412,7 @@ int MoveDex2[MAXDEX][15][4] = {
         /*|3|*/{WideGuard,NullMove},
         /*|4|*/{Protect,NullMove},
         /*|5|*/{WaterPulse,Refresh,Scald,NullMove},
-        /*|6|*/{Safeguard,Wish,Whirlpool,NullMove},
+        /*|6|*/{Safeguard,Wish,Whirlpool,CraftyShield},
         /*|7|*/{Brine,Mist,NullMove},
         /*|8|*/{HydroPump,NullMove},
         /*|9|*/{Liquidation,Waterfall,NullMove},
@@ -2583,7 +2583,7 @@ int MoveDex2[MAXDEX][15][4] = {
 
 	//#region -=- 0129 : Gulpin-=-
 {
-        /*|1|*/{Acid,MudSlap,PoisonGas,Growl},
+        /*|1|*/{Acid,MudSlap,PoisonGas,Yawn},
         /*|2|*/{Amnesia,NullMove},
         /*|3|*/{SlackOff,NullMove},
         /*|4|*/{Curse,NullMove},
@@ -2602,7 +2602,7 @@ int MoveDex2[MAXDEX][15][4] = {
 //#endregion
     //#region -=- 0130 : Swalot-=-
 {
-        /*|1|*/{Acid,MudSlap,PoisonGas,Growl},
+        /*|1|*/{Acid,MudSlap,PoisonGas,Yawn},
         /*|2|*/{Amnesia,NullMove},
         /*|3|*/{SlackOff,NullMove},
         /*|4|*/{Curse,NullMove},
@@ -2883,7 +2883,7 @@ int MoveDex2[MAXDEX][15][4] = {
         /*|5|*/{SandTomb,Dig,Crunch,NullMove},
         /*|6|*/{BullDoze,FaintAttack,NullMove},
         /*|7|*/{EarthPower,NullMove},
-        /*|8|*/{NullMove},
+        /*|8|*/{SuperPower,NullMove},
         /*|9|*/{Earthquake,NullMove},
         /*|10|*/{NullMove},
         /*|11|*/{NullMove},
@@ -2902,7 +2902,7 @@ int MoveDex2[MAXDEX][15][4] = {
         /*|5|*/{SandTomb,Dig,Crunch,DragonBreath},
         /*|6|*/{BullDoze,FaintAttack,NullMove},
         /*|7|*/{EarthPower,Slam,BugBite,NullMove},
-        /*|8|*/{DragonRush,DragonPulse,BugBuzz,NullMove},
+        /*|8|*/{DragonRush,DragonPulse,BugBuzz,SuperPower},
         /*|9|*/{Earthquake,Outrage,NullMove},
         /*|10|*/{DracoMeteor,NullMove},
         /*|11|*/{NullMove},
@@ -2921,7 +2921,7 @@ int MoveDex2[MAXDEX][15][4] = {
         /*|5|*/{SandTomb,Dig,Crunch,DragonBreath},
         /*|6|*/{BullDoze,FaintAttack,NullMove},
         /*|7|*/{EarthPower,Slam,BugBite,NullMove},
-        /*|8|*/{DragonRush,DragonPulse,BugBuzz,NullMove},
+        /*|8|*/{DragonRush,DragonPulse,BugBuzz,SuperPower},
         /*|9|*/{Earthquake,Outrage,NullMove},
         /*|10|*/{DracoMeteor,Fly,NullMove},
         /*|11|*/{NullMove},
@@ -2980,7 +2980,7 @@ int MoveDex2[MAXDEX][15][4] = {
         /*|5|*/{TakeDown,NullMove},
         /*|6|*/{Crunch,Charm,NullMove},
         /*|7|*/{HammerArm,Rest,NullMove},
-        /*|8|*/{DoubleEdge,Rollout,NullMove},
+        /*|8|*/{DoubleEdge,Rollout,SuperPower,NullMove},
         /*|9|*/{NullMove},
         /*|10|*/{NullMove},
         /*|11|*/{NullMove},
@@ -2999,7 +2999,7 @@ int MoveDex2[MAXDEX][15][4] = {
         /*|5|*/{TakeDown,NullMove},
         /*|6|*/{Crunch,Charm,NullMove},
         /*|7|*/{HammerArm,Rest,NullMove},
-        /*|8|*/{DoubleEdge,Rollout,NullMove},
+        /*|8|*/{DoubleEdge,Rollout,SuperPower,NullMove},
         /*|9|*/{NullMove},
         /*|10|*/{NullMove},
         /*|11|*/{NullMove},
@@ -3301,6 +3301,202 @@ int MoveDex2[MAXDEX][15][4] = {
 }, 
 //#endregion
 
+    //#region -=- 0166 : Pinsir-=-
+{
+        /*|1|*/{BugBite,QuickAttack,Leer,DefenseCurl},
+        /*|2|*/{FuryCutter,NullMove},
+        /*|3|*/{ScaryFace,NullMove},
+        /*|4|*/{NullMove},
+        /*|5|*/{SeismicToss,XScissor,FaintAttack,NullMove},
+        /*|6|*/{BrickBreak,Thrash,NullMove},
+        /*|7|*/{StormThrow,CloseCombat,SwordDance,NullMove},
+        /*|8|*/{Submission,Megahorn,NullMove},
+        /*|9|*/{SuperPower,NullMove},
+        /*|10|*/{NullMove},
+        /*|11|*/{NullMove},
+        /*|12|*/{NullMove},
+        /*|13|*/{NullMove},
+        /*|14|*/{NullMove},
+        /*|15|*/{NullMove},
+}, 
+//#endregion
+
+    //#region -=- 0167 : Heracross-=-
+{
+        /*|1|*/{BugBite,BulletSeed,Leer,DefenseCurl},
+        /*|2|*/{FuryCutter,NullMove},
+        /*|3|*/{Detect,NullMove},
+        /*|4|*/{Dig,NullMove},
+        /*|5|*/{BrickBreak,PinMissile,Pursuit,Curse},
+        /*|6|*/{Thrash,Megahorn,NightSlash,RockBlast},
+        /*|7|*/{CloseCombat,SwordDance,IronDefense,VacuumWave},
+        /*|8|*/{SeismicToss,DoubleEdge,NullMove},
+        /*|9|*/{NullMove},
+        /*|10|*/{NullMove},
+        /*|11|*/{NullMove},
+        /*|12|*/{NullMove},
+        /*|13|*/{NullMove},
+        /*|14|*/{NullMove},
+        /*|15|*/{NullMove},
+}, 
+//#endregion
+
+    //#region -=- 0168 : Yanma-=-
+{
+        /*|1|*/{QuickAttack,BugBite,Detect,WingAttack},
+        /*|2|*/{Detect,NullMove},
+        /*|3|*/{SuperSonic,NullMove},
+        /*|4|*/{Pursuit,NullMove},
+        /*|5|*/{AirCutter,Hypnosis,SignalBeam,TailWind},
+        /*|6|*/{LeechLife,FaintAttack,SilverWind,Defog},
+        /*|7|*/{AirSlash,BugBuzz,Screech,Fly},
+        /*|8|*/{DoubleEdge,GigaDrain,NullMove},
+        /*|9|*/{NullMove},
+        /*|10|*/{NullMove},
+        /*|11|*/{NullMove},
+        /*|12|*/{NullMove},
+        /*|13|*/{NullMove},
+        /*|14|*/{NullMove},
+        /*|15|*/{NullMove},
+}, 
+//#endregion
+    //#region -=- 0169 : Yanmega-=-
+{
+        /*|1|*/{QuickAttack,BugBite,Detect,WingAttack},
+        /*|2|*/{Detect,Slash,NullMove},
+        /*|3|*/{SuperSonic,NightSlash,NullMove},
+        /*|4|*/{Pursuit,NullMove},
+        /*|5|*/{AirCutter,Hypnosis,SignalBeam,TailWind},
+        /*|6|*/{LeechLife,FaintAttack,SilverWind,Defog},
+        /*|7|*/{AirSlash,BugBuzz,Screech,Fly},
+        /*|8|*/{DoubleEdge,GigaDrain,NullMove},
+        /*|9|*/{NullMove},
+        /*|10|*/{NullMove},
+        /*|11|*/{NullMove},
+        /*|12|*/{NullMove},
+        /*|13|*/{NullMove},
+        /*|14|*/{NullMove},
+        /*|15|*/{NullMove},
+}, 
+//#endregion
+
+    //#region -=- 0170 : Shuckle-=-
+{
+        /*|1|*/{BugBite,Acid,RockThrow,Rollout},
+        /*|2|*/{StealthRock,HelpingHand,NullMove},
+        /*|3|*/{Infestation,Protect,NullMove},
+        /*|4|*/{Rest,StringShot,NullMove},
+        /*|5|*/{Safeguard,Rockslide,AcidSpray,SandTomb},
+        /*|6|*/{EarthPower,Curse,RockBlast,Toxic},
+        /*|7|*/{StoneEdge,ShellSmash,SweetScent,NullMove},
+        /*|8|*/{NullMove},
+        /*|9|*/{NullMove},
+        /*|10|*/{NullMove},
+        /*|11|*/{NullMove},
+        /*|12|*/{NullMove},
+        /*|13|*/{NullMove},
+        /*|14|*/{NullMove},
+        /*|15|*/{NullMove},
+}, 
+//#endregion
+
+    //#region -=- 0171 : Durant-=-
+{
+        /*|1|*/{FuryCutter,MetalClaw,Bite,Leer},
+        /*|2|*/{Agility,NullMove},
+        /*|3|*/{BugBite,NullMove},
+        /*|4|*/{HoneClaws,NullMove},
+        /*|5|*/{Crunch,Dig,FaintAttack,NullMove},
+        /*|6|*/{IronHead,IronDefense,Xscissor,NullMove},
+        /*|7|*/{Infestation,NullMove},
+        /*|8|*/{SuperPower,NullMove},
+        /*|9|*/{NullMove},
+        /*|10|*/{NullMove},
+        /*|11|*/{NullMove},
+        /*|12|*/{NullMove},
+        /*|13|*/{NullMove},
+        /*|14|*/{NullMove},
+        /*|15|*/{NullMove},
+}, 
+//#endregion
+
+    //#region -=- 0172 : Venonat-=-
+{
+        /*|1|*/{Psywave,BugBite,Disable,SuperSonic},
+        /*|2|*/{PoisonPowder,NullMove},
+        /*|3|*/{StunSpore,StringShot,NullMove},
+        /*|4|*/{SleepPowder,Screech,NullMove},
+        /*|5|*/{Psybeam,Confusion,ToxicSpikes,MegaDrain},
+        /*|6|*/{LeechLife,SignalBeam,ZenHeadbutt,NullMove},
+        /*|7|*/{Psychic,Morningsun,GigaDrain,NullMove},
+        /*|8|*/{NullMove},
+        /*|9|*/{NullMove},
+        /*|10|*/{NullMove},
+        /*|11|*/{NullMove},
+        /*|12|*/{NullMove},
+        /*|13|*/{NullMove},
+        /*|14|*/{NullMove},
+        /*|15|*/{NullMove},
+}, 
+//#endregion
+    //#region -=- 0173 : Venomoth-=-
+{
+        /*|1|*/{Psywave,BugBite,Disable,SuperSonic},
+        /*|2|*/{PoisonPowder,NullMove},
+        /*|3|*/{StunSpore,StringShot,Defog,TailWind},
+        /*|4|*/{SleepPowder,Screech,Gust,NullMove},
+        /*|5|*/{Psybeam,Confusion,ToxicSpikes,MegaDrain},
+        /*|6|*/{LeechLife,SignalBeam,ZenHeadbutt,QuiverDance},
+        /*|7|*/{Psychic,Morningsun,GigaDrain,BugBuzz},
+        /*|8|*/{NullMove},
+        /*|9|*/{NullMove},
+        /*|10|*/{NullMove},
+        /*|11|*/{NullMove},
+        /*|12|*/{NullMove},
+        /*|13|*/{NullMove},
+        /*|14|*/{NullMove},
+        /*|15|*/{NullMove},
+}, 
+//#endregion
+
+    //#region -=- 0174 : Wimpod-=-
+{
+        /*|1|*/{BugBite,AquaJet,DefenseCurl,Spikes},
+        /*|2|*/{MetalClaw,NullMove},
+        /*|3|*/{WideGuard,NullMove},
+        /*|4|*/{Rollout,NullMove},
+        /*|5|*/{NullMove},
+        /*|6|*/{NullMove},
+        /*|7|*/{NullMove},
+        /*|8|*/{NullMove},
+        /*|9|*/{NullMove},
+        /*|10|*/{NullMove},
+        /*|11|*/{NullMove},
+        /*|12|*/{NullMove},
+        /*|13|*/{NullMove},
+        /*|14|*/{NullMove},
+        /*|15|*/{NullMove},
+}, 
+//#endregion
+    //#region -=- 0175 : Golisopod-=-
+{
+        /*|1|*/{BugBite,AquaJet,DefenseCurl,Spikes},
+        /*|2|*/{MetalClaw,NullMove},
+        /*|3|*/{WideGuard,NullMove},
+        /*|4|*/{Rollout,NullMove},
+        /*|5|*/{FuryCutter,MudShot,Slash,PinMissile},
+        /*|6|*/{Liquidation,LeechLife,NullMove},
+        /*|7|*/{NullMove},
+        /*|8|*/{NullMove},
+        /*|9|*/{NullMove},
+        /*|10|*/{NullMove},
+        /*|11|*/{NullMove},
+        /*|12|*/{NullMove},
+        /*|13|*/{NullMove},
+        /*|14|*/{NullMove},
+        /*|15|*/{NullMove},
+}, 
+//#endregion
 //--[NewPokemon]--
 
 //[End of 3D Array]

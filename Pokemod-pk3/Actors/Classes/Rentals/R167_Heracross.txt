@@ -1,0 +1,90 @@
+
+/*
+[+]===================================[+]
+
+[+]===================================[+]
+*/
+
+Actor R_Heracross : ClassBaseRentals 
+{
+Player.DisplayName "Heracross"
+Player.SoundClass "Heracross"
++NOSKIN
+
+Player.StartItem "PKMNRentalKit"
+//============|
+Player.StartItem "HeracrossRentalSetupItem"
+//============|
+Player.StartItem "Base_HP", 80
+Player.StartItem "Base_PAttack", 125
+Player.StartItem "Base_PDefense", 75
+Player.StartItem "Base_SAttack", 40
+Player.StartItem "Base_SDefense", 95
+
+//============|
+
+States
+{
+Spawn: 
+P167 A 0
+P167 B 1 
+P167 A 1
+GoTo Spawn+2
+See:
+P167 BCDE 5
+GoTo Spawn+1
+Missile:
+P167 A 0 A_JumpIfInventory("ConshotTimer",1,"Missile2")
+P167 F 5 
+P167 G 4
+GoTo Spawn+2
+Missile2:
+P167 G 9
+GoTo Spawn+2
+
+PainFix:
+P167 H 0 
+GoTo PainFrames
+}
+}
+
+actor HeracrossRentalMoves : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_JumpIf(CallACS("RentalBotCheck") == 1,"BotWep")
+
+TNT1 A 0 A_GiveInventory("MegahornMove1")
+TNT1 A 0 A_GiveInventory("BrickBreakMove2")
+TNT1 A 0 A_GiveInventory("PinMissileMove3")
+TNT1 A 0 A_GiveInventory("RockSlideMove4")
+stop
+
+BotWep:
+TNT1 A 0 A_GiveInventory("MegahornMove1")
+stop
+}
+}
+
+actor HeracrossRentalSetupItem : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 ACS_NamedExecuteAlways("PKMN_RentalsSetup",0,Dex_Heracross)
+stop
+}
+}

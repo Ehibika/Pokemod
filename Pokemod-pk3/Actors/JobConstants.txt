@@ -524,6 +524,16 @@ const int Dex_GALVANTULA = 162;
 const int Dex_MAREEP = 163;
 const int Dex_FLAAFFY = 164;
 const int Dex_AMPHAROS = 165;
+const int Dex_PINSIR = 166;
+const int Dex_HERACROSS = 167;
+const int Dex_YANMA = 168;
+const int Dex_YANMEGA = 169;
+const int Dex_SHUCKLE = 170;
+const int Dex_DURANT = 171;
+const int Dex_VENONAT = 172;
+const int Dex_VENOMOTH = 173;
+const int Dex_WIMPOD = 174;
+const int Dex_GOLISOPOD = 175;
 //--[NewPokemon]--
 //=======|TM Type Flags|==========
 const int TMT_NULL = 0;

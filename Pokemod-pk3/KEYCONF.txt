@@ -89,6 +89,13 @@ AddPlayerClass Murkrow
 AddPlayerClass Tangela
 AddPlayerClass Joltik
 AddPlayerClass Mareep
+AddPlayerClass Pinsir
+AddPlayerClass Heracross
+AddPlayerClass Yanma
+AddPlayerClass Shuckle
+AddPlayerClass Durant
+AddPlayerClass Venonat
+AddPlayerClass Wimpod
 //--[NewPokemon]--
 
 alias !pkmn_justjoin "closemenu;join"

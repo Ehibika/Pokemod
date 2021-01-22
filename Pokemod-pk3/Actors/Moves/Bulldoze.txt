@@ -118,7 +118,7 @@ Damagetype "Bulldoze"
 Obituary "$OB_BULLDOZE"
 scale 2.5
 Var int user_angle;
-Reactiontime 20
+Reactiontime 5
 States
 {
 Spawn:
@@ -127,9 +127,9 @@ TNT1 A 0 A_GiveInventory("ProjectileCode",1)
 TNT1 A 1 
 goto SpawnLoop
 SpawnLoop:
-TNT1 A 0 A_SpawnItemEx("Bulldoze_WaveTrail",64,0,16,32,0,0,user_angle,1)
+TNT1 A 0 A_SpawnItemEx("Bulldoze_WaveTrail",64,0,16,64,0,0,user_angle-45,1)
 //TNT1 A 0 A_SpawnItemEx("Bulldoze_WaveTrail",20,0,32,20,0,0,user_angle+16,1)
-TNT1 A 0 A_SetUserVar("user_angle",user_angle+36)
+TNT1 A 0 A_SetUserVar("user_angle",user_angle+18)
 TNT1 A 0 A_CountDown
 TNT1 A 1 A_Jump(256,"SpawnLoop")
 Loop
@@ -149,10 +149,10 @@ Obituary "$OB_BULLDOZE"
 +DONTBLAST
 +DONTREFLECT
 +RIPPER
-//+FLOORHUGGER
++FLOORHUGGER
 +STEPMISSILE
 +NOEXPLODEFLOOR
-maxstepheight 16
+maxstepheight 64
 gravity 5.0
 Damage (0)
 Radius 20
@@ -163,7 +163,7 @@ States
 Spawn:
 TNT1 A 0
 TNT1 A 0 A_GiveInventory("ProjectileCode",1)
-TNT1 AAA 1 A_SpawnItemEx("Bulldoze_Wave",0,0,0,0,0,0,0,1)
+TNT1 AAAAAA 1 A_SpawnItemEx("Bulldoze_Wave",0,0,0,0,0,0,0,1)
 stop
 
 Death:
@@ -194,7 +194,7 @@ TNT1 A 0
 TNT1 A 0 A_GiveInventory("ProjectileCode",1)
 TNT1 A 0 A_SpawnItemEX("Bulldoze_WaveFX",0,0,0,0,0,0,0,1)
 TNT1 A 1
-TNT1 A 1 A_Explode(MBP_Bulldoze,32,0,0,32)
+TNT1 A 1 A_Explode(MBP_Bulldoze,64,0,0,64)
 Goto Death
 Death:
 TNT1 A 0 

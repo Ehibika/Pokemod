@@ -1,0 +1,90 @@
+
+/*
+[+]===================================[+]
+
+[+]===================================[+]
+*/
+
+Actor R_Yanma : ClassBaseRentals 
+{
+Player.DisplayName "Yanma"
+Player.SoundClass "Yanma"
++NOSKIN
+
+Player.StartItem "PKMNRentalKit"
+//============|
+Player.StartItem "YanmaRentalSetupItem"
+//============|
+Player.StartItem "Base_HP", 65
+Player.StartItem "Base_PAttack", 65
+Player.StartItem "Base_PDefense", 47
+Player.StartItem "Base_SAttack", 75
+Player.StartItem "Base_SDefense", 45
+
+//============|
+
+States
+{
+Spawn: 
+P168 A 0
+P168 B 1 
+P168 A 1
+GoTo Spawn+2
+See:
+P168 BCDE 5
+GoTo Spawn+1
+Missile:
+P168 A 0 A_JumpIfInventory("ConshotTimer",1,"Missile2")
+P168 F 5 
+P168 G 4
+GoTo Spawn+2
+Missile2:
+P168 G 9
+GoTo Spawn+2
+
+PainFix:
+P168 H 0 
+GoTo PainFrames
+}
+}
+
+actor YanmaRentalMoves : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_JumpIf(CallACS("RentalBotCheck") == 1,"BotWep")
+
+TNT1 A 0 A_GiveInventory("AirSlashMove1")
+TNT1 A 0 A_GiveInventory("SignalBeamMove2")
+TNT1 A 0 A_GiveInventory("TailwindMove3")
+TNT1 A 0 A_GiveInventory("DefogMove4")
+stop
+
+BotWep:
+TNT1 A 0 A_GiveInventory("AirSlashMove1")
+stop
+}
+}
+
+actor YanmaRentalSetupItem : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 ACS_NamedExecuteAlways("PKMN_RentalsSetup",0,Dex_Yanma)
+stop
+}
+}

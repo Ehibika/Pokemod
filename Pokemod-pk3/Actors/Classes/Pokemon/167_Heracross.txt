@@ -1,0 +1,87 @@
+
+/*
+[+]===================================[+]
+
+[+]===================================[+]
+*/
+
+Actor Heracross : ClassBase 
+{
+Player.DisplayName "Heracross"
+Player.SoundClass "Heracross"
++NOSKIN
+player.startitem "PKMNStarterKit"
+//============|
+Player.StartItem "Base_HP", 80
+Player.StartItem "Base_PAttack", 125
+Player.StartItem "Base_PDefense", 75
+Player.StartItem "Base_SAttack", 40
+Player.StartItem "Base_SDefense", 95
+
+//============|
+
+States
+{
+Spawn: 
+P167 A 0
+P167 B 1 
+P167 A 1
+GoTo Spawn+2
+See:
+P167 BCDE 5
+GoTo Spawn+1
+Missile:
+P167 A 0 A_JumpIfInventory("ConshotTimer",1,"Missile2")
+P167 F 5 
+P167 G 4
+GoTo Spawn+2
+Missile2:
+P167 G 9
+GoTo Spawn+2
+
+PainFix:
+P167 H 0 
+GoTo PainFrames
+}
+}
+
+actor HeracrossStarterMoves : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_JumpIfInventory("isbot",1,"BotWep")
+
+TNT1 A 0 A_GiveInventory("BugBiteMove1")
+TNT1 A 0 A_GiveInventory("BulletSeedMove2")
+TNT1 A 0 A_GiveInventory("LeerMove3")
+TNT1 A 0 A_GiveInventory("DefenseCurlMove4")
+stop
+
+BotWep:
+TNT1 A 0 A_GiveInventory("BugBiteMove1")
+stop
+}
+}
+
+actor HeracrossSetupItem : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 ACS_NamedExecuteAlways("PKMNACS_StartupScript",0,Dex_Heracross)
+stop
+}
+}

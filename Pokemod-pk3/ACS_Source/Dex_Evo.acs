@@ -250,5 +250,22 @@ Int EvoDEX [MAXDEX][6] = {
     /*|163|*/{ 1,      MIDSTAGE,             FLAAFFY,  NULLEVO,     NULLEVO,69 },
     /*|164|*/{ 1,      FINALSTAGE,             AMPHAROS,  NULLEVO,     NULLEVO,69 },
     /*|165|*/{ 0,      0,             NULLEVO,  NULLEVO,     NULLEVO,69 },
+
+    /*|166|*/{ 0,      0,             NULLEVO,  NULLEVO,     NULLEVO,70 },
+
+    /*|167|*/{ 0,      0,             NULLEVO,  NULLEVO,     NULLEVO,71 },
+
+    /*|168|*/{ 1,      FINALSTAGE2,             YANMEGA,  NULLEVO,     NULLEVO,72 },
+    /*|169|*/{ 0,      0,             NULLEVO,  NULLEVO,     NULLEVO,72 },
+
+    /*|170|*/{ 0,      0,             NULLEVO,  NULLEVO,     NULLEVO,73 },
+
+    /*|171|*/{ 0,      0,             NULLEVO,  NULLEVO,     NULLEVO,74 },
+
+    /*|172|*/{ 1,      FINALSTAGE2,             VENOMOTH,  NULLEVO,     NULLEVO,75 },
+    /*|173|*/{ 0,      0,             NULLEVO,  NULLEVO,     NULLEVO,75 },
+    
+    /*|174|*/{ 1,      FINALSTAGE2,             GOLISOPOD,  NULLEVO,     NULLEVO,76 },
+    /*|175|*/{ 0,      0,             NULLEVO,  NULLEVO,     NULLEVO,76 },
     //--[NewPokemon]--
 };

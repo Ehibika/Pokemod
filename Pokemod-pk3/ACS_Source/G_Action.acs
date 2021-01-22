@@ -1131,6 +1131,7 @@ SetResultValue(CheckInventory("SuplexID")-1+1000);
 script "Grasp_TID" (int otherTID)
 {
 	if (otherTID==999) { SetResultValue(1); terminate; }
+	if (CheckInventory("GrappledFlag")) { SetResultValue(1); terminate; }
 	int angle = getActorAngle(0);
 	int xDiff = (getActorX(0)+GRAB_DISTANCE*cos(angle)) - getActorX(otherTID);
 	int yDiff = (getActorY(0)+GRAB_DISTANCE*sin(angle)) - getActorY(otherTID);
@@ -1148,6 +1149,7 @@ script "Grasp_TID" (int otherTID)
 script "SuplexGrasp_TID" (int pitch, int angle, int target) //Pitch is given as x/360, Angle is given as x/255
 {
 	if (target==999) { SetResultValue(1); terminate; }
+	if (CheckInventory("GrappledFlag")) { SetResultValue(1); terminate; }
 	angle = (angle-360)*1.0/360;//angle<<8;
 	pitch = (pitch-360)*1.0/360;
 	int xDiff = (getActorX(0)+fixedMul(GRAB_DISTANCE*cos(angle),cos(pitch))) - getActorX(target);

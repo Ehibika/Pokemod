@@ -2303,6 +2303,116 @@ D165_EVO = "\c[MenuRed]Does not evolve";
 //#endregion
 
 
+//#region -=- Pinsir-=-
+D166_NAME = "\cjPinsir";
+D166_TYPE = "\cjBug/Null";
+D166_STATS1 = "\cfATK:\cj 125 \cfDEF:\cj 100";
+D166_STATS2 = "\cfSP.ATK:\cj 55 \cfSP.DEF:\cj 70";
+D166_STATS3 = "\cfHP:\cj 65";
+D166_ARC = "\cj <Archetype> ";
+D166_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+
+//#region -=- Heracross-=-
+D167_NAME = "\cjHeracross";
+D167_TYPE = "\cjBug/Fighting";
+D167_STATS1 = "\cfATK:\cj 125 \cfDEF:\cj 75";
+D167_STATS2 = "\cfSP.ATK:\cj 40 \cfSP.DEF:\cj 95";
+D167_STATS3 = "\cfHP:\cj 80";
+D167_ARC = "\cj <Archetype> ";
+D167_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+
+//#region -=- Yanma-=-
+D168_NAME = "\cjYanma";
+D168_TYPE = "\cjBug/Flying";
+D168_STATS1 = "\cfATK:\cj 65 \cfDEF:\cj 45";
+D168_STATS2 = "\cfSP.ATK:\cj 75 \cfSP.DEF:\cj 45";
+D168_STATS3 = "\cfHP:\cj 65";
+D168_ARC = "\cj <Archetype> ";
+D168_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+
+//#region -=- Yanmega-=-
+D169_NAME = "\cjYanmega";
+D169_TYPE = "\cjBug/Flying";
+D169_STATS1 = "\cfATK:\cj 76 \cfDEF:\cj 86";
+D169_STATS2 = "\cfSP.ATK:\cj 116 \cfSP.DEF:\cj 56";
+D169_STATS3 = "\cfHP:\cj 86";
+D169_ARC = "\cj <Archetype> ";
+D169_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+
+//#region -=- Shuckle-=-
+D170_NAME = "\cjShuckle";
+D170_TYPE = "\cjBug/Rock";
+D170_STATS1 = "\cfATK:\cj 10 \cfDEF:\cj 230";
+D170_STATS2 = "\cfSP.ATK:\cj 10 \cfSP.DEF:\cj 230";
+D170_STATS3 = "\cfHP:\cj 20";
+D170_ARC = "\cj <Archetype> ";
+D170_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+
+//#region -=- Durant-=-
+D171_NAME = "\cjDurant";
+D171_TYPE = "\cjBug/Steel";
+D171_STATS1 = "\cfATK:\cj 109 \cfDEF:\cj 112";
+D171_STATS2 = "\cfSP.ATK:\cj 48 \cfSP.DEF:\cj 48";
+D171_STATS3 = "\cfHP:\cj 58";
+D171_ARC = "\cj <Archetype> ";
+D171_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+
+//#region -=- Venonat-=-
+D172_NAME = "\cjVenonat";
+D172_TYPE = "\cjBug/Poison";
+D172_STATS1 = "\cfATK:\cj 55 \cfDEF:\cj 50";
+D172_STATS2 = "\cfSP.ATK:\cj 40 \cfSP.DEF:\cj 55";
+D172_STATS3 = "\cfHP:\cj 60";
+D172_ARC = "\cj <Archetype> ";
+D172_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+
+//#region -=- Venomoth-=-
+D173_NAME = "\cjVenomoth";
+D173_TYPE = "\cjBug/Poison";
+D173_STATS1 = "\cfATK:\cj 65 \cfDEF:\cj 60";
+D173_STATS2 = "\cfSP.ATK:\cj 90 \cfSP.DEF:\cj 75";
+D173_STATS3 = "\cfHP:\cj 70";
+D173_ARC = "\cj <Archetype> ";
+D173_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+
+//#region -=- Wimpod-=-
+D174_NAME = "\cjWimpod";
+D174_TYPE = "\cjBug/Water";
+D174_STATS1 = "\cfATK:\cj 35 \cfDEF:\cj 40";
+D174_STATS2 = "\cfSP.ATK:\cj 20 \cfSP.DEF:\cj 30";
+D174_STATS3 = "\cfHP:\cj 25";
+D174_ARC = "\cj <Archetype> ";
+D174_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+
+//#region -=- Golisopod-=-
+D175_NAME = "\cjGolisopod";
+D175_TYPE = "\cjBug/Water";
+D175_STATS1 = "\cfATK:\cj 125 \cfDEF:\cj 140";
+D175_STATS2 = "\cfSP.ATK:\cj 60 \cfSP.DEF:\cj 90";
+D175_STATS3 = "\cfHP:\cj 75";
+D175_ARC = "\cj <Archetype> ";
+D175_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+
 //--[NewPokemon]--
 
 //#endregion
@@ -3177,7 +3287,7 @@ M104_NAME = "\cj CloseCombat";
 M104_TYPE = "\cj Fighting";
 M104_CATEGORY = "\cf Physical";
 M104_POWER = "\cfPower:\cj --";
-M104_DESC = "\cjGo on a cframpage \cjand pummel anything \nin front of you violently, you'll be \nfatigued afterwards";
+M104_DESC = "\cjGo on a \cframpage \cjand pummel anything \nin front of you violently, you'll be \nfatigued afterwards";
 //#endregion
 
 //#region -=- 0105: Acrobatics -=-
@@ -4602,8 +4712,10 @@ M264_NAME = "\cj Bulldoze";
 M264_TYPE = "\cj Ground";
 M264_CATEGORY = "\cf Physical";
 M264_POWER = "\cfPower:\cj --";
-M264_DESC = "\cjPound the ground to deal area damage and\n"
-"lower speed.";
+M264_DESC = "\cjPound the ground to create an expanding\n"
+"shockwave in front of you. reduces speed\n"
+"and can even reach foes on high\n"
+"elevations.";
 //#endregion
 
 
@@ -4704,8 +4816,8 @@ M274_NAME = "\cj MeteorMash";
 M274_TYPE = "\cj Steel";
 M274_CATEGORY = "\cf Physical";
 M274_POWER = "\cfPower:\cj --";
-M274_DESC = "\cjPound the ground with the force of a\n"
-"meteor, can raise ATK";
+M274_DESC = "\cjThrow a forward punch with the might of a\n"
+"meteor, can raise ATK.";
 //#endregion
 
 
@@ -4881,7 +4993,9 @@ M292_NAME = "\cj QuiverDance";
 M292_TYPE = "\cj Bug";
 M292_CATEGORY = "\cf Status";
 M292_POWER = "\cfPower:\cj --";
-M292_DESC = "\cf<Desc>";
+M292_DESC = "\cjRaise Sp.ATK, SP.DEF, and SPEED with an\n"
+"intricate, butterfly dance (moths\n"
+"included)";
 //#endregion
 
 
@@ -4940,7 +5054,8 @@ M298_NAME = "\cj SeismicToss";
 M298_TYPE = "\cj Fighting";
 M298_CATEGORY = "\cf Physical";
 M298_POWER = "\cfPower:\cj --";
-M298_DESC = "\cf<Desc>";
+M298_DESC = "\cjGrapple the opponent and slam them on the\n"
+"ground, damage is based on your level.";
 //#endregion
 
 
@@ -4949,7 +5064,9 @@ M299_NAME = "\cj StormThrow";
 M299_TYPE = "\cj Fighting";
 M299_CATEGORY = "\cf Physical";
 M299_POWER = "\cfPower:\cj --";
-M299_DESC = "\cf<Desc>";
+M299_DESC = "\cjA grapple with short reach that throws\n"
+"the victim overhead, damage ignores\n"
+"defense modifiers.";
 //#endregion
 
 
@@ -4967,7 +5084,9 @@ M301_NAME = "\cj Submission";
 M301_TYPE = "\cj Fighting";
 M301_CATEGORY = "\cf Physical";
 M301_POWER = "\cfPower:\cj --";
-M301_DESC = "\cf<Desc>";
+M301_DESC = "\cjA grapple move that takes the opponent\n"
+"for a spin, Deals heavy damage and recoil\n"
+"to the user.";
 //#endregion
 
 
@@ -4976,7 +5095,9 @@ M302_NAME = "\cj SuperPower";
 M302_TYPE = "\cj Fighting";
 M302_CATEGORY = "\cf Physical";
 M302_POWER = "\cfPower:\cj --";
-M302_DESC = "\cf<Desc>";
+M302_DESC = "\cjGather all of your might into a powerfull\n"
+"grapple that punts the foe far away,\n"
+"lowers ATK and DEF afterwards.";
 //#endregion
 
 
@@ -4985,7 +5106,8 @@ M303_NAME = "\cj SignalBeam";
 M303_TYPE = "\cj Bug";
 M303_CATEGORY = "\cf Special";
 M303_POWER = "\cfPower:\cj --";
-M303_DESC = "\cf<Desc>";
+M303_DESC = "\cjSend a pair of spiraling pulses that\n"
+"explode on impact, may cause confusion.";
 //#endregion
 
 
@@ -4994,7 +5116,8 @@ M304_NAME = "\cj BrickBreak";
 M304_TYPE = "\cj Fighting";
 M304_CATEGORY = "\cf Physical";
 M304_POWER = "\cfPower:\cj --";
-M304_DESC = "\cf<Desc>";
+M304_DESC = "\cjA precision Strike that can also shatter\n"
+"barriers and obstacles.";
 //#endregion
 
 
@@ -5003,7 +5126,8 @@ M305_NAME = "\cj Megahorn";
 M305_TYPE = "\cj Bug";
 M305_CATEGORY = "\cf Physical";
 M305_POWER = "\cfPower:\cj --";
-M305_DESC = "\cf<Desc>";
+M305_DESC = "\cjDash and skewer an opponent with your\n"
+"horn, vaulting them overhead afterwards.";
 //#endregion
 
 
@@ -5012,7 +5136,8 @@ M306_NAME = "\cj LeechLife";
 M306_TYPE = "\cj Bug";
 M306_CATEGORY = "\cf Physical";
 M306_POWER = "\cfPower:\cj --";
-M306_DESC = "\cf<Desc>";
+M306_DESC = "\cjBite down and suck the life out of an\n"
+"opponent";
 //#endregion
 
 
