@@ -1,0 +1,64 @@
+//#region -=-=- Beta 48 -=-=-
+/*
+ *
+ *
+ * ===|Gameplay Changes|===
+ * 
+ * ===|Pokemon Changes|===
+ * [New Pokemon]
+ * Pinsir
+ * Heracross
+ * Shuckle
+ * Durant
+ * Venonat family
+ * Yanma family
+ * Wimpod family
+ * 
+ * ===|Move Changes|===
+ * 
+ * [Flamethrower]
+ * Recoded for more reach
+ * 
+ * [MeteorMash]
+ * utilizing the code for brick break, is now a direct punch move
+ * PP increased from 10 > 20
+ * 
+ * [Bulldoze]
+ * Now launches a fast moving shockwave in a fan in front of you, shockwave can scale even the highest incline.
+ * 
+ * [Yawn]
+ * Restored back into the game, now functions similar to hypnosis
+ * 
+ * [CraftyShield]
+ * Restored back into the game, can now be broken by brick break and hazed
+ * 
+ * [Thunderbolt]
+ * PP increased from 10 > 15
+ * 
+ * [HydroPump]
+ * PP increased from 10 > 15
+ * 
+ * [Rest]
+ * fixed a bug where using it while asleep cured the sleep status entirely, rather than transitioning it to rest
+ * 
+ * [NEW MOVES]
+ *  Seismic Toss
+ *  Storm Throw
+ *  Superpower
+ *  Submission
+ *  Megahorn
+ *  LeechLife
+ *  SignalBeam
+ *  Infestation
+ *  QuiverDance
+ *  
+ * 
+ * ===|TM Changes|===
+ * 
+ * the following TM's have been added
+ *  SeismicToss
+ *  SuperPower
+ * 
+ * [ElectroBall]
+ * now share's TM compatibility with Thunderbolt
+ * 
