@@ -1,0 +1,518 @@
+actor ExplosionMove : WepMasterBase
+{
+Tag "Explosion"
+obituary "$OB_EXPLOSION"
+Weapon.AmmoUse 1
+Weapon.AmmoGive 30
+weapon.ammotype "ExplosionPP"
+scale 2.0
+Inventory.Pickupmessage "$PU_MEGABUSTER"
+States
+{
+Spawn:
+WEAP X 1
+stop
+
+
+Fire:
+"####" BBB 1 A_Jumpif(CallACS("CheckWeaponFire",RC_A)==1,"Fire.Begin")
+"####" B 0 A_Jump(256,"NoAmmo")
+Goto NoAmmo
+
+Fire.Begin:
+"####" B 0
+"####" B 1 A_JumpifInventory("ExplosionTrigger",1,"Fire.Off")
+"####" B 1 A_JumpifInventory("SelfDestructTrigger",1,"Fire.Off")
+"####" B 0 A_Jump(256,"Fire.On")
+Goto Fire.On
+
+Fire.On:
+"####" B 0 A_PlaySoundEx("Misc/UseMove","Weapon")
+"####" B 1 A_GiveInventory("ExplosionTrigger")
+"####" B 0 A_GiveInventory("ExplosionPPTimer")
+"####" B 0 A_SpawnItemEX("ExplosionPPWatcher")
+"####" B 0 A_SpawnItemEX("ExplosionWatcher",48,0,0,0,0,0,0)
+"####" B 0 A_Jump(256,"Fire.After")
+Goto Fire.After
+
+Fire.Off:
+"####" B 1 A_JumpifInventory("IsBot",1,"Fire.After")
+"####" B 0 A_PlaySoundEx("Misc/UseMove","Weapon")
+"####" B 0 A_TakeInventory("ExplosionTrigger",99)
+"####" B 0 A_TakeInventory("SelfDestructTrigger",99)
+"####" B 17 
+"####" B 0 A_Jump(256,"Fire.After")
+Goto Fire.After
+
+Fire.After:
+"####" B 1 A_GiveInventory("HalfRecovery_A")
+"####" C 0 A_REfire("Fire")
+"####" B 0 A_Jump(256,"Fire.End")
+Goto Fire.End
+
+}
+}
+
+actor ExplosionMove1 : ExplosionMove {Weapon.SlotNumber 1}
+actor ExplosionMove2 : ExplosionMove {Weapon.SlotNumber 2}
+actor ExplosionMove3 : ExplosionMove {Weapon.SlotNumber 3}
+actor ExplosionMove4 : ExplosionMove {Weapon.SlotNumber 4}
+
+actor ExplosionMove5 : ExplosionMove 
+{
+Weapon.SlotNumber 5
+States
+{
+Fire.End:
+TNT1 A 0
+TNT1 A 0 A_TakeInventory("ExplosionMove5",9)
+TNT1 A 0 A_Jump(256,"Ready")
+Goto Ready
+}
+}
+
+//[+]========================================================================[+]
+//-----------------------------|Ammo & Inventory|------------------------------
+//[+]========================================================================[+]
+actor ExplosionPP : Ammo {inventory.amount 1 inventory.Maxamount 30}
+
+Actor ExplosionProtect : powerprotection
+{
+Powerup.duration 17
+Damagefactor "Explosion", 0
+}
+
+Actor ExplosionBuffer : powerprotection
+{
+Powerup.duration 19
+Damagefactor "Explosion", 0.1
+}
+
+actor ExplosionTrigger : inventory {inventory.amount 1 inventory.Maxamount 1} 
+
+actor ExplosionPPTimer : Powerup {inventory.amount 1 Powerup.Duration 35}
+
+actor ExplosionGiver : BasicHelper 
+{
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 1 A_JumpIfInTargetInventory("SuicideFlag",1,"Nope")
+TNT1 A 1 A_JumpIfInTargetInventory("ExplosionTrigger",1,"Give")
+stop
+
+Give:
+TNT1 A 1 
+TNT1 A 0 A_GiveToTarget("ExplosionSensor")
+stop
+
+Nope:
+TNT1 A 0
+stop
+}
+}
+
+actor ExplosionSensor : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+
+Pickup:
+TNT1 A 0 A_SpawnItemEX("Explosion_Blast",0,0,0,0,0,0,0)
+stop
+
+Nope:
+TNT1 A 0
+stop
+}
+}
+
+
+Const int Explosion_RAD = 500;
+Const int Explosion_RAD2 = 350;
+Const int Explosion_RAD3 = 150;
+//[+]========================================================================[+]
+//--------------------------------|Projectiles |--------------------------------
+//[+]========================================================================[+]
+
+
+actor ExplosionWatcher : BasicHelper
+{
+    States
+    {
+    Spawn:
+        TNT1 A 0 
+        TNT1 A 5 A_GiveToTarget("ExplosionParticleSpawn")
+        TNT1 A 0 A_JumpIfInTargetInventory("ExplosionTrigger",1,"Spawn")
+    Death:
+        TNT1 A 0
+        stop
+
+    }
+}
+
+actor ExplosionPPWatcher : BasicHelper 
+{
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 5 
+TNT1 A 0 A_JumpIfInTargetInventory("ExplosionPPTimer",1,"Spawn")
+TNT1 A 0 A_JumpIfInTargetInventory("isDead",1,"Death")
+TNT1 A 0 A_GiveToTarget("ExplosionPPTimer")
+Goto Check1
+
+Check1:
+TNT1 A 0 A_JumpIfInTargetInventory("ExplosionTrigger",1,"Check2")
+TNT1 A 0
+Goto Death
+
+Check2:
+TNT1 A 0 A_TakeFromTarget("ExplosionPP",1)
+TNT1 A 0 A_JumpIfInTargetInventory("ExplosionPP",1,"Spawn")
+TNT1 A 0
+Goto Death
+
+Death:
+TNT1 A 0 A_TakeFromTarget("ExplosionTrigger",99)
+TNT1 A 0 
+stop
+}
+}
+
+
+actor ExplosionPrimeParticle : BasicClientSide
+{
++FORCEXYBILLBOARD
++BRIGHT
+renderstyle "add"
+scale 1.0
+States
+{
+
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+TNT1 A 1 A_Jump(256,"Spawn1","Spawn2")
+Goto Spawn1
+
+
+Spawn1:
+HARD BCDE 2
+stop
+
+Spawn2:
+HARD EDCB 2
+stop
+
+}
+}
+
+actor ExplosionPrimeParticle2 : BasicClientSide
+{
++FORCEXYBILLBOARD
++BRIGHT
+renderstyle "Translucent"
+scale 1.5
+States
+{
+
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+TNT1 A 1 A_Jump(256,"Spawn1","Spawn2","Spawn3","Spawn4")
+Goto Spawn1
+
+
+Spawn1:
+MUDB MMMMM 2 A_Fadeout
+stop
+
+Spawn2:
+MUDB NNNNN 2 A_Fadeout
+stop
+
+Spawn3:
+MUDB OOOOO 2 A_Fadeout
+stop
+
+Spawn4:
+MUDB PPPPP 2 A_Fadeout
+stop
+}
+}
+
+actor ExplosionParticleSpawn : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 AAAAAA 0 A_SpawnItemEx ("ExplosionPrimeParticle", random2(8), random2(8), 64, 0, 0, random(3,6), 0,SXF_NOCHECKPOSITION|SXF_ABSOLUTEMOMENTUM|SXF_TRANSFERTRANSLATION)
+TNT1 AA 0 A_SpawnItemEx ("ExplosionPrimeParticle2", random2(8), random2(8), 64, 0, 0, random(3,6), 0,SXF_NOCHECKPOSITION|SXF_ABSOLUTEMOMENTUM|SXF_TRANSFERTRANSLATION)
+stop
+Nope:
+TNT1 A 0
+stop
+}
+}
+
+actor Explosion_Blast : BasicExplosion
+{
+damagetype "Explosion"
+Obituary "$OB_EXPLOSION"
+States
+{
+Spawn:
+TNT1 A 0
+//TNT1 A 0 A_SpawnItemEx("ExplosionBlastFX_H0",0,0,0,0,0,0,0,1)
+TNT1 A 0 A_SpawnItemEx("ExplosionBlastFX_H1",0,0,0,0,0,0,0,1)
+TNT1 A 0 A_SpawnItemEx("ExplosionBlastFX_H2",0,0,0,0,0,0,0,1)
+TNT1 A 0 A_SpawnItemEx("ExplosionBlastFX_H3",0,0,0,0,0,0,0,1)
+TNT1 A 0 A_SpawnItemEx("ExplosionBlastFX_H4",0,0,0,0,0,0,0,1)
+TNT1 A 0 A_SpawnItemEx("ExplosionBlastFX_H5",0,0,0,0,0,0,0,1)
+TNT1 A 0 A_SpawnItemEx("ExplosionBlastFX_H6",0,0,0,0,0,0,0,1)
+TNT1 A 0 A_SpawnItemEx("ExplosionBlastFX",0,0,2,0,0,17,0,33)
+TNT1 A 0 A_SpawnItemEx("ExplosionBlastFX",0,0,-2,0,0,-17,0,33)
+//110
+TNT1 A 0 A_Explode(MBP_Explosion,Explosion_RAD,0,0,Explosion_RAD2)
+TNT1 A 0 A_Playsoundex("weapon/TimeBombSplode","Soundslot5")
+TNT1 A 5 A_Quake(6,17,0,300+Explosion_RAD)
+TNT1 A 12 A_SpawnItemEx("ExplosionWhirl",0,0,28,0,0,0,0,1)
+stop
+}
+}
+
+actor ExplosionBlastFX_H0 : BasicClientSide
+{
+renderstyle none
+Reactiontime 12//Sections
+Args 20,6
+//Speed/lines
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_SetArg(3,Args[1]+1)
+TNT1 A 0 A_SetArg(4,Reactiontime)
+SpawnL:
+TNT1 A 0 A_SpawnItemEx("ExplosionBlastFX",Cos(90-180/Args[3]*Args[1])*Args[0],0,Sin(90-180/Args[3]*Args[1])*Args[0],Cos(90-180/Args[3]*Args[1])*Args[0],0,Sin(90-180/Args[3]*Args[1])*Args[0],360/Args[4]*Reactiontime,33)
+TNT1 A 0 A_SetArg(1,Args[1]-1)
+TNT1 A 0 A_JumpIf(Args[1]<=0,1)
+loop
+TNT1 A 0 A_Countdown
+TNT1 A 0 A_SetArg(1,Args[3]-1)
+loop
+Death:
+TNT1 A 0 A_SpawnItemEx("ExplosionBlastFX",0,0,Args[0],0,0,Args[0],0,33)
+TNT1 A 0 A_SpawnItemEx("ExplosionBlastFX",0,0,-Args[0],0,0,-Args[0],0,33)
+TNT1 A 1
+stop
+}
+}
+
+actor ExplosionBlastFX_H1 : BasicClientSide
+{
+var int user_RT;
+var int user_A;
+
+Mass 100
+MeleeRange 0
+accuracy 6
+renderstyle none
+reactiontime 15//18
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_SetUserVar("user_RT",360/reactiontime)
+TNT1 A 0 A_SetUserVar("user_A",random(0,user_RT))
+TNT1 A 0 A_SpawnItemEx("ExplosionBlastFX",Mass/accuracy,0,0,Mass/accuracy,0,MeleeRange/accuracy,user_A,37)
+TNT1 A 0 A_SetUserVar("user_A",user_A+user_RT)
+TNT1 A 0 A_Countdown
+goto Spawn+3
+Death:
+TNT1 A 1
+stop
+}
+}
+actor ExplosionBlastFX_H2 : ExplosionBlastFX_H1
+{
+Mass 96
+MeleeRange 26
+reactiontime 12//15
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_SetUserVar("user_RT",360/reactiontime)
+TNT1 A 0 A_SetUserVar("user_A",random(0,user_RT))
+TNT1 A 0 A_SpawnItemEx("ExplosionBlastFX",Mass/accuracy,0,MeleeRange/accuracy,Mass/accuracy,0,MeleeRange/accuracy,user_A,37)
+TNT1 A 0 A_SpawnItemEx("ExplosionBlastFX",Mass/accuracy,0,MeleeRange/-accuracy,Mass/accuracy,0,MeleeRange/-accuracy,user_A,37)
+TNT1 A 0 A_SetUserVar("user_A",user_A+user_RT)
+TNT1 A 0 A_Countdown
+goto Spawn+3
+Death:
+TNT1 A 1
+stop
+}
+}
+
+actor ExplosionBlastFX_H3 : ExplosionBlastFX_H2
+{
+Mass 87
+MeleeRange 50
+reactiontime 10//12
+}
+actor ExplosionBlastFX_H4 : ExplosionBlastFX_H2
+{
+Mass 70
+MeleeRange 70
+reactiontime 8//9
+}
+actor ExplosionBlastFX_H5 : ExplosionBlastFX_H2
+{
+Mass 50
+MeleeRange 87
+reactiontime 6
+}
+actor ExplosionBlastFX_H6 : ExplosionBlastFX_H2
+{
+Mass 26
+MeleeRange 96
+reactiontime 4//3
+}
+
+actor ExplosionBlastFX : BasicClientSide
+{
++FORCEXYBILLBOARD
++BRIGHT
+renderstyle "add"
+States
+{
+
+    Spawn:
+TNT1 A 0
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+HARD CBA 1
+ASEX ABBCD 1
+ASEX EEFFF 1 A_Fadeout
+stop
+
+}
+}
+
+
+actor ExplosionWhirl : BasicExplosion
+{
+translation "202:202=210:210"//90
+Damagetype "Explosion"
+Obituary "$OB_EXPLOSION"
+scale 2.5
+Var int user_angle;
+Reactiontime 6
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+TNT1 A 1 
+goto SpawnLoop
+SpawnLoop:
+TNT1 A 0 A_SpawnItemEx("ExplosionWhirlShot",20,0,16,25,0,0,user_angle,1)
+TNT1 A 0 A_SpawnItemEx("ExplosionWhirlShot",20,0,16,20,0,0,user_angle+16,1)
+TNT1 A 0 A_SetUserVar("user_angle",user_angle+60)
+TNT1 A 0 A_CountDown
+TNT1 A 1 A_Jump(256,"SpawnLoop")
+Loop
+Death:
+TNT1 A 0 A_PlaySoundEX("wep_L/commandowave","Body")
+TNT1 A 0 A_PlaySoundEx("weapon/napalm","Weapon")
+TNT1 A 17 //A_Quake(8,17,0,300)
+//TN_B EFGHIJKLMNOPQRS 1
+stop
+}
+}
+
+
+actor ExplosionWhirlShot : BasicProjectile
+{
+    scale 3.5
+    Reactiontime 35
+    speed 7
+    +RIPPER
+    +SPECTRAL //Spectral Breeching
+    var int user_speed;
+    var int user_maxturn;
+    var int user_turndivisor;
+    var int user_turndivisor_add;
+
+Damagetype "Explosion"
+Obituary "$OB_EXPLOSION"
+reactiontime 40
+States
+{
+Spawn:
+POWS A 0
+TNT1 A 0 A_SetUserVar("user_speed", 60)
+TNT1 A 0 A_SetUserVar("user_maxturn", 1500)
+TNT1 A 0 A_SetUserVar("user_turndivisor", 50)
+TNT1 A 0 A_SetUserVar("user_turndivisor_add", 24)
+Spawn2:
+TNT1 A 0 A_Setangle(angle-user_maxturn/user_turndivisor)
+HEAT F 1 A_ChangeVelocity(user_speed,0,0,CVF_RELATIVE|CVF_REPLACE)
+TNT1 A 0 A_SetUserVar("user_turndivisor",user_turndivisor+user_turndivisor_add)
+TNT1 A 0 A_Explode(MBP_Explosion,Explosion_RAD3,0,0,Explosion_RAD3)
+TNT1 A 0 A_SpawnItemEx("ExplosionWhirlFX",0,0,0,0,0,0,0,1)
+TNT1 AA 0 A_SpawnItemEx("ExplosionWhirlTrailFX", random2(55), random2(55), random2(55), 0, 0,0, 0,SXF_TRANSFERTRANSLATION)
+
+HEAT F 1 A_CountDown
+loop
+Death:
+POWS A 0 A_SpawnItemEx("ExplosionWhirlFX",0,0,0,0,0,0,0,1)
+stop
+}
+}
+
+actor ExplosionWhirlFX
+{
+PROJECTILE
+Scale 2.5
++CLIENTSIDEONLY
++NOINTERACTION
+States
+{
+Spawn:
+TNT1 A 0
+NAPA A 0 A_PlaySoundEx("weapon/napalm", "Weapon")
+ASEX ABCDEFG 1
+stop
+}
+}
+
+actor ExplosionWhirlTrailFX : BasicClientside
+{
+scale 3.5
+Alpha 0.9
+Renderstyle "add"
+States
+{
+Spawn:
+CRBM A 0
+HARD EDCB 2 A_SetScale(ScaleX-0.2)
+stop
+}
+}

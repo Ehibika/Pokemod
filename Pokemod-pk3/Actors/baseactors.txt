@@ -105,6 +105,11 @@ stop
 }
 }
 
+actor BasicExplosion2 : BasicExplosion
+{
++SPECTRAL //version with spectral breeching
+}
+
 Actor BasicHelper
 {
 +NOINTERACTION
@@ -126,6 +131,9 @@ TNT1 A 1
 stop
 }
 }
+
+Actor BasicServerSideHelper : BasicHelper
+{+SERVERSIDEONLY}
 
 actor BasicClientSide
 {
@@ -825,3 +833,46 @@ STAR AABBCCDD 1 A_Warp(AAPTR_TARGET, 0, 0, 16, 0, 24)//WARPF_INTERPOLATE|WARPF_N
 loop
 }
 }
+
+
+actor BasePowerDamage : PowerDamage
+{//Make sure damage increases don't increase these
+Powerup.Duration 0x7FFFFFFC
+damagefactor "Normal", 1.0
+}
+
+actor BasePowerWeak : PowerProtection
+{//Make sure taking more damage doesn't increase these
+Powerup.Duration 0x7FFFFFFC
+damagefactor "Normal", 1.0
+}
+
+actor BasePowerPro : PowerProtection
+{//Make sure damage reduction doesn't reduce these
+Powerup.Duration 0x7FFFFFFC
+damagefactor "Normal", 1.0
+damagefactor "Crush", 1.0
+
+damagefactor "Drowning", 1.0
+damagefactor "Fire", 1.0
+damagefactor "Falling", 1.0
+damagefactor "BurnWave", 1.0
+damagefactor "Beam", 1.0
+damagefactor "Spiney", 1.0
+damagefactor "Ice", 1.0
+damagefactor "Slime", 1.0
+
+DamageFactor "Instagib", 1.0
+DamageFactor "Telefrag", 1.0
+DamageFactor "Suicide", 1.0
+DamageFactor "Poison", 1.0
+
+DamageFactor "PoisonDamage", 1.0
+
+
+//damagefactor "FlameSwordSpark", 1.0
+}
+
+actor BaseSTatusFlag : Powerup {inventory.amount 1 Powerup.Duration -30}
+actor BaseSTatusFlag2 : Powerup {inventory.amount 1 Powerup.Duration 30} //Timer Buffs
+actor BaseSTatusFlag3 : Powerup {inventory.amount 1 Powerup.Duration -10} //Self Debuffs

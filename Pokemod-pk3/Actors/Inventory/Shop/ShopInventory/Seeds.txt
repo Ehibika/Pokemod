@@ -69,7 +69,7 @@ stop
 actor MaxPowerSeed : Ammo {inventory.maxamount 3}
 
 
-actor STF_PowerSeed : Powerup {inventory.amount 1 Powerup.Duration -15}
+actor STF_PowerSeed : BaseSTatusFlag {Powerup.Duration -15}
 
 actor PowerSeedBuffInitiate : CustomInventory
 {
@@ -146,7 +146,7 @@ stop
 }
 actor MaxGuardSeed : Ammo {inventory.maxamount 3}
 
-actor STF_GuardSeed : Powerup {inventory.amount 1 Powerup.Duration -15}
+actor STF_GuardSeed : BaseSTatusFlag { Powerup.Duration -15}
 
 actor GuardSeedBuffInitiate : CustomInventory
 {
@@ -223,7 +223,7 @@ stop
 }
 actor MaxHasteSeed : Ammo {inventory.maxamount 3}
 
-actor STF_HasteSeed : Powerup {inventory.amount 1 Powerup.Duration -15}
+actor STF_HasteSeed : BaseSTatusFlag { Powerup.Duration -15}
 
 actor HasteSeedBuffInitiate : CustomInventory
 {

@@ -3,7 +3,7 @@ actor LeechLifeMove : WepMasterBase
 Tag "LeechLife"
 obituary "$OB_LEECHLIFE"
 Weapon.AmmoUse 1
-Weapon.AmmoGive 20
+Weapon.AmmoGive 35
 weapon.ammotype "LeechLifePP"
 scale 2.0
 Inventory.Pickupmessage "$PU_MEGABUSTER"
@@ -25,22 +25,16 @@ Fire.Begin:
 Goto Fire.Bullet
 
 Fire.Bullet:
-"####" B 0 //A_PlaySoundEx("weapon/coilfire1","Weapon")
-"####" BBBBBBB 1 A_FireCustomMissile("LeechLiferFXSpawner_A",0,0,0,0)
-"####" B 0 A_FireCustomMissile("LeechLiferSpawner",0,1,0,0)
-"####" BBBBBBBB 1 A_FireCustomMissile("LeechLiferFXSpawner_B",0,0,0,0)
+"####" B 0 A_PlaySoundEx("weapon/ChargeKick","Weapon")
+"####" B 0 A_FireCustomMissile("LeechLifeMelee",0,1,0,0,0,CallACS("PitchClamp",Pitch,55))
 "####" B 0 A_Jump(256,"Fire.After")
 Goto Fire.After
 
 Fire.After:
-"####" B 1 A_GiveInventory("PartRecovery_B")
+"####" B 1 A_GiveInventory("HalfRecovery_B")
 "####" C 0 A_REfire("Fire")
 "####" B 0 A_Jump(256,"Fire.End")
 Goto Fire.End
-
-
-
-
 
 }
 }
@@ -72,29 +66,36 @@ actor LeechLifePP : Ammo {inventory.amount 1 inventory.Maxamount 20}
 //--------------------------------|Projectiles |--------------------------------
 //[+]========================================================================[+]
 
-actor LeechLiferSpawner : FastProjectile
+actor LeechLifeMelee : BasicMeleeAttack
 {
-+DONTBLAST
-+SKYEXPLODE
-+THRUACTORS
-reactiontime 1
-damage (0)
-radius 3
-height 3
-speed 75
+Speed 40
+radius 24
+Scale 2.0
+DamageType "LeechLife"
+Obituary "$OB_LeechLife"
+Damage(0)
 States
 {
 Spawn:
-TNT1 A 0
-TNT1 A 1 A_Stop
-Goto Death
+TNT1 A 0 
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+Spawn2:
+TNT1 A 0 
+FANG AAAAA 1 A_SpawnItemEx("LeechLifeFXTrail", 0, 0, 0, 0, 0, 0, 0,1)
+goto Death
+
+Crash:
+XDeath:
+TNT1 A 0 A_Stop
+TNT1 A 0 A_GiveInventory("ProjectileDCode",1)
+TNT1 A 0 A_SpawnItemEx("LeechLifeMeleeImpact",0,0,0,0,0,0,0,1)
 Death:
-TNT1 A 0 A_SpawnItemEx("LeechLifeMelee",0,0,0,0,0,0,0,1)
+TNT1 A 1 A_Stop
 stop
 }
 }
 
-actor LeechLifeMelee : BasicExplosion
+actor LeechLifeMeleeImpact : BasicExplosion
 {
     DamageType "LeechLife"
     obituary "$OB_LeechLife"
@@ -108,87 +109,16 @@ TNT1 A 0 A_GiveInventory("ProjectileCode",1)
 TNT1 A 0 A_PlaySoundEx("weapon/CentaurFlash", "SoundSlot5",0)
 TNT1 AAAAAAAAAA 0 A_SpawnItemEx("LeechLifeParticle", 0, 0, 28, 256/24, 256/24, random2(256/24), random(0, 359))
 FANG B 0 A_Explode(MBP_LeechLife,55,0,0,55)
-TNT1 AA 1 
+FANG B 5
+FANG BZBZBZ 2
 stop
 }
 }
 
-actor LeechLiferFXSpawner_A : FastProjectile
-{
-+DONTBLAST
-+SKYEXPLODE
-+THRUACTORS
-reactiontime 1
-damage (0)
-radius 3
-height 3
-speed 75
-States
-{
-Spawn:
-TNT1 A 0
-TNT1 A 1 A_Stop
-Goto Death
-Death:
-TNT1 A 0 A_SpawnItemEx("FangsGraphic2_A",0,0,0,0,0,0,0,0)
-stop
-}
-}
-
-actor LeechLiferFXSpawner_B : FastProjectile
-{
-+DONTBLAST
-+SKYEXPLODE
-+THRUACTORS
-reactiontime 1
-damage (0)
-radius 3
-height 3
-speed 75
-States
-{
-Spawn:
-TNT1 A 0
-TNT1 A 1 A_Stop
-Goto Death
-Death:
-TNT1 A 0 A_SpawnItemEx("FangsGraphic2_B",0,0,0,0,0,0,0,0)
-stop
-}
-}
-
-
-actor FangsGraphic2_A : BasicClientside
-{
-Scale 2.5
-XScale 1.5
-States
-{
-Spawn:
-TNT1 A 0
-TNT1 A 0 A_GiveInventory("ProjectileFXCode",1)
-FANG A 1
-stop
-}
-}
-
-actor FangsGraphic2_B : BasicClientside
-{
-Scale 2.5
-XScale 1.5
-States
-{
-Spawn:
-TNT1 A 0
-TNT1 A 0 A_GiveInventory("ProjectileFXCode",1)
-FANG B 1
-stop
-}
-}
 
 actor LeechLifeParticle : BasicGraphicEffect
 {
-scale 2.5
+scale 2.0
 States
 {
 Spawn:
@@ -205,6 +135,21 @@ GRBU MNO 1
 stop
 Death:
 TNT1 A 0
+stop
+}
+}
+
+actor LeechLifeFXTrail : BasicExplosion
+{
+    DamageType "LeechLife"
+    Obituary "$OB_LeechLife"
+States
+{
+Spawn:
+TNT1 A 0
+AQBA L 0 A_GiveInventory("ProjectileCode",1)
+TNT1 A 0 A_SpawnItemEx("BiteFXTrail",0,0,0,0,0,0,0,1)
+TNT1 AA 0 A_SpawnItemEx("LeechLifeParticle", random2(32), random2(32), random(0,16), 0, 0, 0, random(0, 359))
 stop
 }
 }

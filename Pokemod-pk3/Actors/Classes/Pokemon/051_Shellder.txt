@@ -12,11 +12,11 @@ Player.SoundClass "Shellder"
 player.startitem "PKMNStarterKit"
 
 //============|
-Player.StartItem "Base_HP", 30
-Player.StartItem "Base_PAttack", 65
+Player.StartItem "Base_HP", 50
+Player.StartItem "Base_PAttack", 45
 Player.StartItem "Base_PDefense", 100
-Player.StartItem "Base_SAttack", 45
-Player.StartItem "Base_SDefense", 25
+Player.StartItem "Base_SAttack", 40
+Player.StartItem "Base_SDefense", 50
 
 //============|
 

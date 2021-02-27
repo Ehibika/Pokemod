@@ -12,11 +12,11 @@ Player.SoundClass "Ekans"
 player.startitem "PKMNStarterKit"
 
 //============|
-Player.StartItem "Base_HP", 55
-Player.StartItem "Base_PAttack", 69
-Player.StartItem "Base_PDefense", 85
-Player.StartItem "Base_SAttack", 32
-Player.StartItem "Base_SDefense", 35
+Player.StartItem "Base_HP", 50
+Player.StartItem "Base_PAttack", 60
+Player.StartItem "Base_PDefense", 50
+Player.StartItem "Base_SAttack", 45
+Player.StartItem "Base_SDefense", 60
 
 //============|
 

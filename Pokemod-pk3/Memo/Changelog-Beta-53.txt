@@ -1,0 +1,266 @@
+//#region -=-=- Beta 53 -=-=-
+/*
+ *
+ *
+ * ===|Gameplay Changes|===
+ * 
+ * Stat changes now work on fixed times,
+ *  Normal stat debuffs all last 30 seconds
+ *  Self inflicted stat debuffs all last 10 seconds
+ * 
+ * Grind buffs (hone claws/Rock polish) and conditional buffs (Rage/Meditate) retain their normal durations
+ * 
+ * Fixed a bug where weakness damage caused frozen players to move again
+ * 
+ * fixed a bug that caused ice moves to continuously extend the freeze status (most noticeable with blizzard)
+ * 
+ * ===|Pokemon Changes|===
+ * 
+ * The following have seen major moveset adjustments
+ * Ralts family
+ * Cleffa family
+ * Igglybuff family
+ * Slugma Family
+ * Scyther Family
+ * Cyndaquil Family
+ * 
+ * the following have seen minor moveset adjustments
+ * Slowpoke family
+ * Drowzee family
+ * Munchlax family
+ * Makuhita family
+ * Vulpix family
+ * Vulpix_A Family
+ * Geodude family
+ * Geodude_A Family
+ * Turtwig Family
+ * Staryu Family
+ * solosis family
+ * Exeggcute family
+ * Squirtle Family
+ * Snover family
+ * Torkoal
+ * ferroseed family
+ * Onix family
+ * Seviper
+ * 
+ * 
+ * 
+ * ===|Move Changes|===
+ * 
+ * Status effects procced by damaging moves now work on a buildup system, thus requiring consecutive
+ * hits from status proccing move unless that move is indended to guarantee a status proc.
+ * 
+ * Paralysis status duration was changed, short paralysis from 3 seconds to 5, long paralysis from 6 seconds to 10
+ * 
+ * New indicator was made for targeted moves, and some targeted moves can be used without a target
+ * 
+ * Many biting class moves have now been recoded, working like large, short ranged projectiles
+ * that are ground locked when aiming down while grounded. moves effected include:
+ *  Bite
+ *  Crunch
+ *  FireFang
+ *  IceFang
+ *  ThunderFang
+ *  DrainingKiss
+ *  LeechLife
+ *  BugBite
+ * 
+ * Damaging moves that dropped sp.def in cannon now work under a cumulative system, where successive
+ * hits from any of these moves will result in a SP.def drop, this specific debuff is shared across
+ * all moves under this, which includes:
+ *  energyball
+ *  Flashcannon
+ *  BugBuzz
+ *  ShadowBall
+ *  Psychic
+ *  FocusBlast
+ *  EarthPower
+ * 
+ * Total number of hazards per player increased from 30 > 60
+ * 
+ * [New Moves]
+ *  BodySlam
+ *  FairyWind
+ * 
+ * [Bite]
+ * Pulls enemies towards you on hit
+ * 
+ * [Crunch]
+ * Pulls enemies towards you on hit
+ * Can now lower defense on hit
+ * 
+ * [FireFang]
+ * Pulls enemies towards you on hit
+ * 
+ * [IceFang]
+ * Pulls enemies towards you on hit
+ * 
+ * [ThunderFang]
+ *  *NEW MOVE*
+ * Pulls enemies towards you on hit
+ * 
+ * [Leer]
+ * FX were changed to make it clear that the move is NOT a damaging attack
+ * Hitbox increased 
+ * 
+ * [Glare]
+ * Similar FX changes to leer
+ * Hitbox increased
+ * 
+ * [Growl]
+ * now effects all surounding opponents in an AOE
+ * new VFX
+ * 
+ * [TailWhip]
+ * now effects all surrounding opponents in an AOE
+ * new VFX
+ * 
+ * [MoonBlast]
+ * Can now reduce SP.Atk on hit
+ * 
+ * [Inferno]
+ * Can now proc burn
+ * 
+ * [FlameWheel]
+ * PP increased from 10 > 35
+ * 
+ * [Stealth rock]
+ * Spread increased for more coverage
+ * PP increased from 5 > 20
+ * 
+ * [Spikes]
+ * PP increased from 5 > 20
+ * 
+ * [Toxic Spikes]
+ * PP increased from 5 > 20
+ * 
+ * [Captivate]
+ * Reworked to be a targeted move
+ * 
+ * [Fake Tears]
+ * Reworked to be a targeted move
+ * 
+ * [Swift]
+ * Power increased
+ * Damage is now buffered, Each consecutive hit only dealing 1/10 of the first hit's damage
+ * 
+ * [Psyshock]
+ * Power increased
+ * Damage is now buffered, Each consecutive hit only dealing 1/10 of the first hit's damage
+ * 
+ * [MegaDrain]
+ * No longer a targeted move, but has a long hitbox similar to flamethrower
+ * Damage increased
+ * Hit intervals increased
+ * 
+ * [MudBomb]
+ * Updated arc aiming code
+ * 
+ * [MudShot]
+ * Now fires in a shotgun spread
+ * damage adjusted
+ * 
+ * [Hydropump]
+ * Power increased
+ * 
+ * [CloseCombat]
+ * Power Increased
+ * Damage is now buffered, Each consecutive hit only dealing 1/10 of the first hit's damage
+ * 
+ * [Thrash]
+ * Power Increased
+ * Damage is now buffered, Each consecutive hit only dealing 1/10 of the first hit's damage
+ * 
+ * [Outrage]
+ * Power Increased
+ * Damage is now buffered, Each consecutive hit only dealing 1/10 of the first hit's damage
+ * 
+ * [IcicleSpear]
+ * Power Increased
+ * Stack charge time reduced
+ * 
+ * [RockBlast]
+ * Power Increased
+ * 
+ * [Bubble]
+ * Power Increased
+ * Damage is now buffered, Each consecutive hit only dealing 1/10 of the first hit's damage
+ * 
+ * [BubbleBeam]
+ * now works similar to Flamethrower, being a long hitbox instead of a spray of projectiles
+ * Damage decreased
+ * can now lower speed
+ * 
+ * [Blizzard]
+ * Power Increased
+ * Damage is now buffered, Each consecutive hit only dealing 1/10 of the first hit's damage
+ * 
+ * [PetalBlizzard]
+ * Power Increased
+ * Damage is now buffered, Each consecutive hit only dealing 1/10 of the first hit's damage
+ * 
+ * [Razorleaf]
+ * Power Increased
+ * Damage is now buffered, Each consecutive hit only dealing 1/10 of the first hit's damage
+ * 
+ * [AirCutter]
+ * Power Increased
+ * Damage is now buffered, Each consecutive hit only dealing 1/10 of the first hit's damage
+ * 
+ * [SilverWind]
+ * Power Increased
+ * Damage is now buffered, Each consecutive hit only dealing 1/10 of the first hit's damage
+ * now may boost a random stat upon hit
+ * 
+ * [PoisonJab]
+ * Power Increased
+ * Damage is now buffered, Each consecutive hit only dealing 1/10 of the first hit's damage
+ * projectile spread reduced
+ * 
+ * [IronTail]
+ * can now lower defense on hit
+ * 
+ * [Mist]
+ * Can now block/purge all self inflicted stat debuffs
+ * Will now absorb one haze attempt, removing mist but protecting your status
+ * Mist duration increased from 7 > 30 seconds
+ * Can now block taunt
+ * 
+ * [Haze]
+ * Haze duration increased from 7 > 30 seconds
+ * 
+ * [Taunt]
+ * Now Shuts off all timer buffs upon use.
+ * Duration increased from 7 > 15 seconds
+ * 
+ * [Reflect]
+ * duration increased from 15 > 30 seconds
+ * PP reduced from 10 > 5
+ * 
+ * [LightScreen]
+ * duration increased from 15 > 30 seconds
+ * PP reduced from 10 > 5
+ * 
+ * [CraftyShield]
+ * duration increased from 15 > 30 seconds
+ * PP reduced from 10 > 5
+ * 
+ * [Smokescreen]
+ * Now give allies within it the same evasion state as detect, allowing them to dodge
+ * projectiles but not AOE attacks
+ * 
+ * [Future Sight]
+ * can now leave behind 3 traps
+ * 
+ * can now only have 1 smokescreen out.
+ * 
+ * [DracoMeteor]
+ * Power Increased
+ * Damage is now buffered, Each consecutive hit only dealing 1/10 of the first hit's damage
+ * 
+ * ===|TM Changes|===
+ * TM Thrash has been replaced with TM Bodyslam
+ * TM Firefang added
+ * TM IceFang added
+ * TM ThunderFang added

@@ -97,7 +97,7 @@ script "TracerTargeter" (int TargType, int TargRange, int TargMove) {
 			{
 			setpointer(AAPTR_TRACER,getuservariable(0,"User_STargTID")+1000);
 			}
-			else {setpointer(AAPTR_TRACER,0,AAPTR_NULL);}
+			else {setpointer(AAPTR_TRACER,0,AAPTR_NULL); GiveInventory("NoTargFlag",1);}
 		
 			adjustInventory("TargetingFlag",getuservariable(0,"User_STargTID")+1);
 			if (TargRange!=checkinventory("TargetingRangeFlag"))
@@ -161,6 +161,9 @@ function void Targeter(int x, int y, int z, int angle, int pitch, int i) {
 		}
 	}
 }
+
+Script "ClientTargeterReticule" (Void) CLIENTSIDE
+{Giveinventory("ReticulePickup_Targeter",1);}
 
 function int fDistanceVal1(int ang, int x, int y)
 {
@@ -258,7 +261,9 @@ script 405 ENTER CLIENTSIDE {
 					HudMessageOnActorZPlusAllign(1000-1+t, PLAYER_CENTER, 105, 0, 0, -40, -40, T_Range, -1, weapons_ammo[TheirWeapon][2], 0, CR_UNTRANSLATED);
 				}
 				//
+				if(CheckInventory("NoTargFlag")){Giveinventory("ReticulePickup_Targeter",1);}
 			}
+			else if(CheckInventory("NoTargFlag")){Giveinventory("ReticulePickup_Targeter",1);}
 			
 			//apparently these two for loops are done in a way that excludes the
 			//script activator. possibly for potential desynch maybe? -Bika
@@ -358,7 +363,11 @@ function void HudMessageOnActorZPlusAllign(int tid, int ZPlus, int msgID, int hu
 	
 }
 
-
+function str GrabConsoleColor(void) 
+{
+int selfNumber = ConsolePlayerNumber();
+return GetUserCVar(selfNumber,"sv_CamReticuleColor");
+}
 
 //#region -=- Depreciated -=-
 function void hudmessageonactor(int tid, int msgID, int hudX, int hudY, int xOffset, int yOffset, int range, str sprite, str text, int holdTime, str colour, int swap)

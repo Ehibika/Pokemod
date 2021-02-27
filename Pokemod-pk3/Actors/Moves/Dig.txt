@@ -63,11 +63,13 @@ TNT1 A 0 A_PlaySoundEx("weapon/deepdiggerdig","Voice")
 TNT1 A 0 A_SpawnItemEx("DigSplash",0,0,0,0,0,0,0,1)
 //===
 TNT1 A 0 A_ChangeFlag("THRUACTORS",0)
-TNT1 A 0 A_GiveInventory("InvulnerableOn_Pickup",1)
+//TNT1 A 0 A_GiveInventory("InvulnerableOn_Pickup",1)
+TNT1 A 0 A_GiveInventory("DigGuard",1)
 TNT1 A 0 A_SpawnItemEx("Dig_VWatcher")
 TNT1 A 0 
 TNT1 A 0 A_TakeInventory("UnSolid",1)
-TNT1 A 0 A_ChangeFlag("NONSHOOTABLE",1) 
+
+TNT1 A 0 A_ChangeFlag("SPECTRAL",1) 
 TNT1 A 0 A_ChangeFlag("SOLID",0)
 TNT1 A 0 A_ChangeFlag("PICKUP",0)
 TNT1 A 0 A_ChangeFlag("FLOORHUGGER",1)
@@ -112,10 +114,11 @@ TNT1 A 0 A_ChangeFlag("PICKUP",1)
 TNT1 A 0 ACS_NamedExecuteAlways("PKMN_JumpToggle",0,1)
 TNT1 A 0 A_ChangeFlag("THRUACTORS",1)
 TNT1 A 4 ThrustThingZ(0,20,0,0)
-TNT1 A 0 A_ChangeFlag("NONSHOOTABLE",0)
+TNT1 A 0 A_ChangeFlag("SPECTRAL",0)
 TNT1 A 0 A_ChangeFlag("THRUACTORS",0)
 TNT1 A 0 A_SpawnItemEx("ReSolidifier")
-TNT1 A 0 A_GiveInventory("InvulnerableOff_Pickup",1)
+//TNT1 A 0 A_GiveInventory("InvulnerableOff_Pickup",1)
+TNT1 A 0 A_TakeInventory("DigGuard",99)
 TNT1 A 0 A_TakeInventory("NoJumpCancel",1)
 Goto Fire.DigRelease2
 
@@ -169,6 +172,25 @@ CheckInv:
 TNT1 AAAAAAAA 1 A_JumpIfInTargetInventory("DigPPTimer",1,"Reloop")
 Goto Death
 }
+}
+
+actor DigGuard : BasePowerPro 
+{
+    -PICKUP
+    inventory.amount 1 
+    Powerup.Duration -3
+    /*
+    Dig will be using the same Spectral flag as Detect, however it will naturally be
+    Vulnerable to the AOEs of ground moves
+    */
+   DamageFactor "Normal", 0.0
+   DamageFactor "Earthquake", 1.0
+   DamageFactor "Bulldoze", 1.0
+   DamageFactor "EarthPower", 1.0
+
+   //Let's have the psychic AOE's hit hidden foes too
+   DamageFactor "Confusion", 1.0
+   DamageFactor "Psychic", 1.0
 }
 //[+]========================================================================[+]
 //--------------------------------|Projectiles |--------------------------------

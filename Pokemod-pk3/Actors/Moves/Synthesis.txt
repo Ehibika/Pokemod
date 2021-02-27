@@ -72,6 +72,8 @@ actor SynthesisParticle : Basicprojectile
 {
 scale 1.2
 +SeekerMissile
+Damage (0)
++NOINTERACTION
 speed 7
 Damage 0
 +THRUACTORS

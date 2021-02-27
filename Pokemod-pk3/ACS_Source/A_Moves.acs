@@ -543,7 +543,7 @@ if(CheckInventory("ProtectGuard")
     {Output = Output | STATUS_MAJOR | STATUS_MINOR | STATUS_SPECIALTY | STATUS_TAUNT;}
 
     if(CheckInventory("MistFlag"))
-    {Output = Output | STATUS_STATS  | STATUS_MINOR;}
+    {Output = Output | STATUS_STATS  | STATUS_MINOR | STATUS_TAUNT;}
 
 SetResultValue(Output & Input);
 }
@@ -810,7 +810,7 @@ Script "CurseHarm" (int Damage)
     Thing_Damage2(0,Damage,"Curse");
 }
 
-script "Check_ShowStatParticles" (void)
+script "Check_ShowStatParticles" (void) CLIENTSIDE
 {
 SetResultValue(GetStatParticles());
 }
@@ -898,4 +898,80 @@ script "Give_MegahornToss_ToTID" (int tid)
 {
 	if (tid==999) { terminate; }
 	giveActorInventory(tid,"MegahornPushStart",1);
+}
+
+Script "DetectFlicker" (void)
+{
+
+bool FlickerState;
+
+SetActorProperty(0,Aprop_Renderstyle,STYLE_None);
+FlickerState = false;
+
+while(GetActorProperty(0, APROP_HEALTH)>0
+&& CheckInventory("DetectGuard") > 0
+    ){
+        Delay(2);
+
+        Switch(FlickerState)
+            {
+                case 0: SetActorProperty(0,Aprop_Renderstyle,STYLE_Translucent); FlickerState = true; break;
+                case 1: SetActorProperty(0,Aprop_Renderstyle,STYLE_None); FlickerState = false; break;
+            }
+    }
+
+    SetActorProperty(0,Aprop_Renderstyle,STYLE_Translucent);
+}
+
+Script "ToxicDamage" (int DamagePer)
+{
+    int TargTID = ACS_NamedExecuteWithResult("core_gettarget",0);
+    int SelfHP = GetActorProperty(0, APROP_HEALTH);
+    if(SelfHP<=1){Terminate;}
+    int Damage = ACS_NamedExecuteWithResult("PKMNACS_HealthPercent",0,1,DamagePer);
+    if(Damage > SelfHP){Damage = SelfHP-1;}
+
+    Thing_Damage2(0,Damage,"PoisonDamage");
+}
+
+
+Script "CheckSilverWindBuff" (int Pointer)
+{
+    if(Pointer!=0){SetActivator(0,Pointer);}
+
+    bool output;
+    if(CheckInventory("STF_SilverwindA")) output = true;
+    if(CheckInventory("STF_SilverwindB")) output = true;
+    if(CheckInventory("STF_SilverwindC")) output = true;
+    if(CheckInventory("STF_SilverwindD")) output = true;
+    if(CheckInventory("STF_SilverwindE")) output = true;
+    SetResultValue(Output);
+}
+
+Script "TeleportSpotMark" (void)
+{
+    int pln = PlayerNumber();
+    int tid = pln+1000;
+    int ang = GetActorAngle(tid);
+    If(ThingCount(0, pln+PLN_EXITUNITIMAGE)>0)
+    {
+        Thing_Remove(pln+PLN_EXITUNITIMAGE);
+    }
+    SpawnSpotForced("ExitUnitGhost",ActivatorTID(),pln+PLN_EXITUNITIMAGE,ang>>8);
+
+    If(ThingCount(0, pln+PLN_EXITUNITPOINT)>0)
+    {
+        Thing_Remove(pln+PLN_EXITUNITPOINT);
+    }
+    SpawnSpotForced("TeleportDest2",ActivatorTID(),pln+PLN_EXITUNITPOINT,ang>>8);
+}
+
+Script "SetFlyTakeoffZ" (void)
+{
+SetUserVariable(0,"user_FlyStartZ",GetActorZ(0)>>16);
+}
+
+Script "GetFlyTakeoffZ" (void)
+{
+    SetResultValue(GetUserVariable(0,"user_FlyStartZ"));
 }

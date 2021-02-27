@@ -130,8 +130,8 @@ actor GlareBeam : BasicFastProjectile//FastProj to match damager hitbox
     +CLIENTSIDEONLY
     RenderStyle None
     Damage (0)
-    Radius 10
-    Height 10
+    Radius 15
+    Height 15
     Speed 15
     Scale 2.5
     States
@@ -206,8 +206,8 @@ actor GlareEffector : BasicFastProjectile
     +HITTRACER
     RenderStyle None
     Damage (0) 
-    Radius 10
-    Height 10
+    Radius 15
+    Height 15
     speed 975 //15 * GlareRange(65)
     scale 2.5
     states

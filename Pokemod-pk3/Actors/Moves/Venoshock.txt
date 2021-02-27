@@ -211,7 +211,7 @@ stop
 }
 
 
-actor VenoshockBurst : BasicExplosion
+actor VenoshockBurst : BasicExplosion2
 {
 translation "202:202=210:210"//90
 Damagetype "Venoshock"

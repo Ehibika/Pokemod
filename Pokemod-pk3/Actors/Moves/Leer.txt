@@ -1,4 +1,4 @@
-const int Leer_Range = 32;
+const int Leer_Range = 65;
 
 actor LeerMove : WepMasterBase
 {
@@ -61,7 +61,7 @@ Goto Ready
 //[+]========================================================================[+]
 actor LeerPP : Ammo {inventory.amount 1 inventory.Maxamount 35}
 
-actor STF_Leer : Powerup {inventory.amount 1 Powerup.Duration -6}
+actor STF_Leer : BaseSTatusFlag {}
 
 actor LeerNerfInitiate : CustomInventory
 {
@@ -76,6 +76,7 @@ stop
 Pickup:
 TNT1 A 0 A_Jumpif(CallACS("CheckStatusGuard",0,STATUS_STATS),"Nope") //Blocked by Protect|Detect|Substitute|Mist
 TNT1 A 0 A_Jumpifinventory("STF_Leer",1,"Sustain")
+TNT1 A 0 A_PlaySoundEx("support/StatDown","Weapon")
 TNT1 A 0 A_GiveInventory("STF_Leer",1)
 TNT1 A 0 A_SpawnItemEX("LeerNerfWatcher")
 TNT1 A 0 A_GiveInventory("StatUpdator",1)
@@ -391,8 +392,8 @@ actor LeerBeam : BasicFastProjectile//FastProj to match damager hitbox
     +CLIENTSIDEONLY
     RenderStyle None
     Damage (0)
-    Radius 10
-    Height 10
+    Radius 15
+    Height 15
     Speed 15
     Scale 2.5
     States
@@ -421,6 +422,8 @@ actor LeerBeam : BasicFastProjectile//FastProj to match damager hitbox
 actor LeerPuff : BasicClientside//BulletPuff
 {
 scale 2.5
+RenderStyle "Add"
+Alpha 0.8
 //+PUFFONACTORS
 //+PUFFGETSOWNER
 //+MTHRUSPECIES
@@ -435,7 +438,7 @@ States
 Spawn:
 CRBM A 0
 CRBM A 0 //A_Explode(50,10,0,0,10)
-TNT1 A 0 A_PlaySoundEx("weapon/Mirrordeflect","Weapon")
+TNT1 A 0 //A_PlaySoundEx("weapon/Mirrordeflect","Weapon")
 Hard BBCCDDEE 1 
 stop
 }
@@ -446,6 +449,8 @@ stop
 actor LeerBeamFX : BasicClientside
 {
 scale 2.5
+RenderStyle "Add"
+Alpha 0.8
 speed 7
 States
 {
@@ -467,8 +472,8 @@ actor LeerEffector : BasicFastProjectile
     +HITTRACER
     RenderStyle None
     Damage (0) 
-    Radius 10
-    Height 10
+    Radius 15
+    Height 15
     speed 975 //15 * LeerRange(65)
     scale 2.5
     states

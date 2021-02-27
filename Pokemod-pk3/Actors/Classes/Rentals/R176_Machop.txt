@@ -1,0 +1,90 @@
+
+/*
+[+]===================================[+]
+
+[+]===================================[+]
+*/
+
+Actor R_Machop : ClassBaseRentals 
+{
+Player.DisplayName "Machop"
+Player.SoundClass "Machop"
++NOSKIN
+
+Player.StartItem "PKMNRentalKit"
+//============|
+Player.StartItem "MachopRentalSetupItem"
+//============|
+Player.StartItem "Base_HP", 70
+Player.StartItem "Base_PAttack", 80
+Player.StartItem "Base_PDefense", 50
+Player.StartItem "Base_SAttack", 30
+Player.StartItem "Base_SDefense", 30
+
+//============|
+
+States
+{
+Spawn: 
+P176 A 0
+P176 B 1 
+P176 A 1
+GoTo Spawn+2
+See:
+P176 BCDE 5
+GoTo Spawn+1
+Missile:
+P176 A 0 A_JumpIfInventory("ConshotTimer",1,"Missile2")
+P176 F 5 
+P176 G 4
+GoTo Spawn+2
+Missile2:
+P176 G 9
+GoTo Spawn+2
+
+PainFix:
+P176 H 0 
+GoTo PainFrames
+}
+}
+
+actor MachopRentalMoves : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_JumpIf(CallACS("RentalBotCheck") == 1,"BotWep")
+
+TNT1 A 0 A_GiveInventory("HammerArmMove1")
+TNT1 A 0 A_GiveInventory("StoneEdgeMove2")
+TNT1 A 0 A_GiveInventory("BulldozeMove3")
+TNT1 A 0 A_GiveInventory("BulkUpMove4")
+stop
+
+BotWep:
+TNT1 A 0 A_GiveInventory("HammerArmMove1")
+stop
+}
+}
+
+actor MachopRentalSetupItem : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 ACS_NamedExecuteAlways("PKMN_RentalsSetup",0,Dex_Machop)
+stop
+}
+}

@@ -15,11 +15,11 @@ Player.StartItem "PKMNRentalKit"
 //============|
 Player.StartItem "Vulpix_ARentalSetupItem"
 //============|
-Player.StartItem "Base_HP", 38
-Player.StartItem "Base_PAttack", 41
+Player.StartItem "Base_HP", 30
+Player.StartItem "Base_PAttack", 30
 Player.StartItem "Base_PDefense", 40
-Player.StartItem "Base_SAttack", 50
-Player.StartItem "Base_SDefense", 65
+Player.StartItem "Base_SAttack", 60
+Player.StartItem "Base_SDefense", 60
 
 //============|
 

@@ -5178,7 +5178,7 @@ OptionMenu "MoveMenu_Clamp"
     StaticText"===============================================================",1
 }
 
-OptionMenu "MoveMenu_Feintattack"
+OptionMenu "MoveMenu_ThunderFang"
 {
 	
 	Title "$M202_NAME"
@@ -6701,7 +6701,7 @@ OptionMenu "MoveMenu_Fly"
     StaticText ""
     StaticText"===============================================================",1
 } 
-OptionMenu "MoveMenu_ElectroLevitate"
+OptionMenu "MoveMenu_MagnetRise"
 {
     
     Title "$M289_NAME"
@@ -7000,6 +7000,346 @@ OptionMenu "MoveMenu_LeechLife"
     StaticText "$M3064_POWER"
     StaticText"===============================================================",1
     StaticText "$M306_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+} 
+OptionMenu "MoveMenu_LowKick"
+{
+    
+    Title "$M307_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M307_TYPE"
+    StaticText "$M307_CATEGORY"
+    StaticText "$M3074_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M307_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+} 
+OptionMenu "MoveMenu_KarateChop"
+{
+    
+    Title "$M308_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M308_TYPE"
+    StaticText "$M308_CATEGORY"
+    StaticText "$M3084_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M308_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+} 
+OptionMenu "MoveMenu_Revenge"
+{
+    
+    Title "$M309_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M309_TYPE"
+    StaticText "$M309_CATEGORY"
+    StaticText "$M3094_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M309_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+} 
+OptionMenu "MoveMenu_ArmThrust"
+{
+    
+    Title "$M310_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M310_TYPE"
+    StaticText "$M310_CATEGORY"
+    StaticText "$M3104_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M310_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+} 
+OptionMenu "MoveMenu_ForcePalm"
+{
+    
+    Title "$M311_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M311_TYPE"
+    StaticText "$M311_CATEGORY"
+    StaticText "$M3114_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M311_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+} 
+OptionMenu "MoveMenu_DynamicPunch"
+{
+    
+    Title "$M312_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M312_TYPE"
+    StaticText "$M312_CATEGORY"
+    StaticText "$M3124_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M312_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+} 
+OptionMenu "MoveMenu_AuraSphere"
+{
+    
+    Title "$M313_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M313_TYPE"
+    StaticText "$M313_CATEGORY"
+    StaticText "$M3134_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M313_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+} 
+OptionMenu "MoveMenu_RollingKick"
+{
+    
+    Title "$M314_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M314_TYPE"
+    StaticText "$M314_CATEGORY"
+    StaticText "$M3144_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M314_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+} 
+OptionMenu "MoveMenu_TripleKick"
+{
+    
+    Title "$M315_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M315_TYPE"
+    StaticText "$M315_CATEGORY"
+    StaticText "$M3154_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M315_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+} 
+OptionMenu "MoveMenu_JumpKick"
+{
+    
+    Title "$M316_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M316_TYPE"
+    StaticText "$M316_CATEGORY"
+    StaticText "$M3164_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M316_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+} 
+OptionMenu "MoveMenu_BodySlam"
+{
+    
+    Title "$M317_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M317_TYPE"
+    StaticText "$M317_CATEGORY"
+    StaticText "$M3174_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M317_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+} 
+OptionMenu "MoveMenu_FairyWind"
+{
+    
+    Title "$M318_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M318_TYPE"
+    StaticText "$M318_CATEGORY"
+    StaticText "$M3184_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M318_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+} 
+OptionMenu "MoveMenu_Spite"
+{
+    
+    Title "$M319_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M319_TYPE"
+    StaticText "$M319_CATEGORY"
+    StaticText "$M3194_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M319_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+} 
+OptionMenu "MoveMenu_UTurn"
+{
+    
+    Title "$M320_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M320_TYPE"
+    StaticText "$M320_CATEGORY"
+    StaticText "$M3204_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M320_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+} 
+OptionMenu "MoveMenu_FlipTurn"
+{
+    
+    Title "$M321_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M321_TYPE"
+    StaticText "$M321_CATEGORY"
+    StaticText "$M3214_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M321_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+} 
+OptionMenu "MoveMenu_Sing"
+{
+    
+    Title "$M322_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M322_TYPE"
+    StaticText "$M322_CATEGORY"
+    StaticText "$M3224_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M322_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+} 
+OptionMenu "MoveMenu_ShoreUp"
+{
+    
+    Title "$M323_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M323_TYPE"
+    StaticText "$M323_CATEGORY"
+    StaticText "$M3234_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M323_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+} 
+OptionMenu "MoveMenu_Roost"
+{
+    
+    Title "$M324_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M324_TYPE"
+    StaticText "$M324_CATEGORY"
+    StaticText "$M3244_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M324_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+} 
+OptionMenu "MoveMenu_SelfDestruct"
+{
+    
+    Title "$M325_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M325_TYPE"
+    StaticText "$M325_CATEGORY"
+    StaticText "$M3254_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M325_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+} 
+OptionMenu "MoveMenu_Explosion"
+{
+    
+    Title "$M326_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M326_TYPE"
+    StaticText "$M326_CATEGORY"
+    StaticText "$M3264_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M326_DESC"
     StaticText ""
     StaticText ""
     StaticText ""

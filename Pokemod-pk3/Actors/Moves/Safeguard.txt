@@ -77,12 +77,13 @@ Const int SafeGuardRad = 200;
 Const int SafeGuard_Item = 13;
 Const int SafeGuardEntiTID = 5;
 
-actor SafeguardPower : PowerProtection
+actor SafeguardPower : BasePowerPro
 {
 inventory.amount 1
 Powerup.duration 35
 DamageFactor "Toxic", 0.0
 DamageFactor "PoisonPowder", 0.0
+Damagefactor "WillOWisp", 0.0
 DamageFactor "PoisonGas", 0.0
 
 DamageFactor "Whirlpool", 0.0

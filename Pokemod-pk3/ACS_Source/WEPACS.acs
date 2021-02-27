@@ -297,7 +297,7 @@ str weapons_ammo[MAX_WEAPONS_GLOBAL][7] =
 {"SludgeBombMove", "SludgeBombPP", "SludgeBomb", 1.0, "NO", "NO", "SLOT_NONE"},
 {"VenoshockMove", "VenoshockPP", "Venoshock", 1.0, "NO", "NO", "SLOT_NONE"},
 {"AbsorbMove", "AbsorbPP", "Absorb", 1.0, "NO", "NO", "SLOT_NONE"},
-{"MegaDrainMove", "MegaDrainPP", "MegaDrain", 1.0, "YES", "NO", "SLOT_NONE"},
+{"MegaDrainMove", "MegaDrainPP", "MegaDrain", 1.0, "NO", "NO", "SLOT_NONE"},
 {"GigaDrainMove", "GigaDrainPP", "GigaDrain", 1.0, "NO", "NO", "SLOT_NONE"},
 {"LeafStormMove", "LeafStormPP", "LeafStorm", 1.0, "NO", "NO", "SLOT_NONE"},
 {"GrassKnotMove", "GrassKnotPP", "GrassKnot", 1.0, "NO", "NO", "SLOT_NONE"},
@@ -312,7 +312,7 @@ str weapons_ammo[MAX_WEAPONS_GLOBAL][7] =
 {"InfernoMove", "InfernoPP", "Inferno", 1.0, "NO", "NO", "SLOT_NONE"},
 {"HeatCrashMove", "HeatCrashPP", "HeatCrash", 1.0, "NO", "NO", "SLOT_NONE"},
 {"IncinerateMove", "IncineratePP", "Incinerate", 1.0, "NO", "NO", "SLOT_NONE"},
-{"WillOWispMove", "WillOWispPP", "WillOWisp", 1.0, "NO", "NO", "SLOT_NONE"},
+{"WillOWispMove", "WillOWispPP", "WillOWisp", 1.0, "YES", "NO", "SLOT_NONE"},
 {"MysticalFireMove", "MysticalFirePP", "MysticalFire", 1.0, "NO", "NO", "SLOT_NONE"},
 {"RestMove", "RestPP", "Rest", 1.0, "NO", "NO", "SLOT_NONE"},
 {"SlackOffMove", "SlackOffPP", "SlackOff", 1.0, "NO", "NO", "SLOT_NONE"},
@@ -323,7 +323,7 @@ str weapons_ammo[MAX_WEAPONS_GLOBAL][7] =
 
 {"AstonishMove", "AstonishPP", "Astonish", 1.0, "NO", "NO", "SLOT_NONE"},
 {"InfestationMove", "InfestationPP", "Infestation", 1.0, "NO", "NO", "SLOT_NONE"},
-{"ConfuserayMove", "ConfuserayPP", "Confuseray", 1.0, "NO", "NO", "SLOT_NONE"},
+{"ConfuseRayMove", "ConfuseRayPP", "ConfuseRay", 1.0, "YES", "NO", "SLOT_NONE"},
 {"DisableMove", "DisablePP", "Disable", 1.0, "NO", "NO", "SLOT_NONE"},
 {"GrudgeMove", "GrudgePP", "Grudge", 1.0, "NO", "NO", "SLOT_NONE"},
 {"HexMove", "HexPP", "Hex", 1.0, "NO", "NO", "SLOT_NONE"},
@@ -366,9 +366,9 @@ str weapons_ammo[MAX_WEAPONS_GLOBAL][7] =
 {"SupersonicMove", "SupersonicPP", "Supersonic", 1.0, "NO", "NO", "SLOT_NONE"},
 {"PsyBeamMove", "PsyBeamPP", "PsyBeam", 1.0, "NO", "NO", "SLOT_NONE"},
 {"ClampMove", "ClampPP", "Clamp", 1.0, "NO", "NO", "SLOT_NONE"},
-{"FeintattackMove", "FeintattackPP", "Feintattack", 1.0, "NO", "NO", "SLOT_NONE"},
+{"ThunderFangMove", "ThunderFangPP", "ThunderFang", 1.0, "NO", "NO", "SLOT_NONE"},
 {"CharmMove", "CharmPP", "Charm", 1.0, "NO", "NO", "SLOT_NONE"},
-{"CaptivateMove", "CaptivatePP", "Captivate", 1.0, "NO", "NO", "SLOT_NONE"},
+{"CaptivateMove", "CaptivatePP", "Captivate", 1.0, "YES", "NO", "SLOT_NONE"},
 {"DrainPunchMove", "DrainPunchPP", "DrainPunch", 1.0, "NO", "NO", "SLOT_NONE"},
 {"RecoverMove", "RecoverPP", "Recover", 1.0, "NO", "NO", "SLOT_NONE"},
 {"PowerSwapMove", "PowerSwapPP", "PowerSwap", 1.0, "NO", "NO", "SLOT_NONE"},
@@ -396,7 +396,7 @@ str weapons_ammo[MAX_WEAPONS_GLOBAL][7] =
 {"ShadowSneakMove", "ShadowSneakPP", "ShadowSneak", 1.0, "NO", "NO", "SLOT_NONE"},
 {"DestinyBondMove", "DestinyBondPP", "DestinyBond", 1.0, "NO", "NO", "SLOT_NONE"},
 {"TailwindMove", "TailwindPP", "Tailwind", 1.0, "NO", "NO", "SLOT_NONE"},
-{"DrainingKissMove", "DrainingKissPP", "DrainingKiss", 1.0, "YES", "NO", "SLOT_NONE"},
+{"DrainingKissMove", "DrainingKissPP", "DrainingKiss", 1.0, "NO", "NO", "SLOT_NONE"},
 {"ImprisonMove", "ImprisonPP", "Imprison", 1.0, "NO", "NO", "SLOT_NONE"},
 {"WishMove", "WishPP", "Wish", 1.0, "NO", "YES", "SLOT_NONE"},
 {"StoredPowerMove", "StoredPowerPP", "StoredPower", 1.0, "NO", "NO", "SLOT_NONE"},
@@ -453,7 +453,7 @@ str weapons_ammo[MAX_WEAPONS_GLOBAL][7] =
 {"AirCutterMove", "AirCutterPP", "AirCutter", 1.0, "NO", "NO", "SLOT_NONE"},
 {"GustMove", "GustPP", "Gust", 1.0, "NO", "NO", "SLOT_NONE"},
 {"FlyMove", "FlyPP", "Fly", 1.0, "NO", "NO", "SLOT_NONE"},
-{"ElectroLevitateMove", "ElectroLevitatePP", "ElectroLevitate", 1.0, "NO", "NO", "SLOT_NONE"},
+{"MagnetRiseMove", "MagnetRisePP", "MagnetRise", 1.0, "NO", "NO", "SLOT_NONE"},
 {"BugBuzzMove", "BugBuzzPP", "BugBuzz", 1.0, "NO", "NO", "SLOT_NONE"},
 {"SilverWindMove", "SilverWindPP", "SilverWind", 1.0, "NO", "NO", "SLOT_NONE"},
 {"QuiverDanceMove", "QuiverDancePP", "QuiverDance", 1.0, "NO", "NO", "SLOT_NONE"},
@@ -471,6 +471,26 @@ str weapons_ammo[MAX_WEAPONS_GLOBAL][7] =
 {"BrickBreakMove", "BrickBreakPP", "BrickBreak", 1.0, "NO", "NO", "SLOT_NONE"},
 {"MegahornMove", "MegahornPP", "Megahorn", 1.0, "NO", "NO", "SLOT_NONE"},
 {"LeechLifeMove", "LeechLifePP", "LeechLife", 1.0, "NO", "NO", "SLOT_NONE"},
+{"LowKickMove", "LowKickPP", "LowKick", 1.0, "NO", "NO", "SLOT_NONE"},
+{"KarateChopMove", "KarateChopPP", "KarateChop", 1.0, "NO", "NO", "SLOT_NONE"},
+{"RevengeMove", "RevengePP", "Revenge", 1.0, "YES", "NO", "SLOT_NONE"},
+{"ArmThrustMove", "ArmThrustPP", "ArmThrust", 1.0, "NO", "NO", "SLOT_NONE"},
+{"ForcePalmMove", "ForcePalmPP", "ForcePalm", 1.0, "NO", "NO", "SLOT_NONE"},
+{"DynamicPunchMove", "DynamicPunchPP", "DynamicPunch", 1.0, "NO", "NO", "SLOT_NONE"},
+{"AuraSphereMove", "AuraSpherePP", "AuraSphere", 1.0, "YES", "NO", "SLOT_NONE"},
+{"RollingKickMove", "RollingKickPP", "RollingKick", 1.0, "NO", "NO", "SLOT_NONE"},
+{"TripleKickMove", "TripleKickPP", "TripleKick", 1.0, "NO", "NO", "SLOT_NONE"},
+{"JumpKickMove", "JumpKickPP", "JumpKick", 1.0, "NO", "NO", "SLOT_NONE"},
+{"BodySlamMove", "BodySlamPP", "BodySlam", 1.0, "NO", "NO", "SLOT_NONE"},
+{"FairyWindMove", "FairyWindPP", "FairyWind", 1.0, "NO", "NO", "SLOT_NONE"},
+{"SpiteMove", "SpitePP", "Spite", 1.0, "YES", "NO", "SLOT_NONE"},
+{"UTurnMove", "UTurnPP", "UTurn", 1.0, "NO", "NO", "SLOT_NONE"},
+{"FlipTurnMove", "FlipTurnPP", "FlipTurn", 1.0, "NO", "NO", "SLOT_NONE"},
+{"SingMove", "SingPP", "Sing", 1.0, "NO", "NO", "SLOT_NONE"},
+{"ShoreUpMove", "ShoreUpPP", "ShoreUp", 1.0, "NO", "NO", "SLOT_NONE"},
+{"RoostMove", "RoostPP", "Roost", 1.0, "NO", "NO", "SLOT_NONE"},
+{"SelfDestructMove", "SelfDestructPP", "SelfDestruct", 1.0, "NO", "NO", "SLOT_NONE"},
+{"ExplosionMove", "ExplosionPP", "Explosion", 1.0, "NO", "NO", "SLOT_NONE"},
 //--[NewMove]--
 };
 #endregion
@@ -1015,7 +1035,7 @@ Script "MoveSetup" (void)
 				Case MEGADRAIN: ACS_NamedExecuteAlways("TracerTargeter",0,TG_ENEMY,350); break;
 				Case HYPNOSIS: ACS_NamedExecuteAlways("TracerTargeter",0,TG_ENEMY,550); break;
 				Case DREAMEATER: ACS_NamedExecuteAlways("TracerTargeter",0,TG_ENEMY,550); break;
-				Case CURSE: ACS_NamedExecuteAlways("TracerTargeter",0,TG_ENEMY,800); break;
+				Case CURSE: if(CheckInventory("GhostSTAB")){ACS_NamedExecuteAlways("TracerTargeter",0,TG_ENEMY,800);} break;
 				Case THUNDERWAVE: ACS_NamedExecuteAlways("TracerTargeter",0,TG_ENEMY,800); break;
 				Case DrainingKiss: ACS_NamedExecuteAlways("TracerTargeter",0,TG_ENEMY,350); break;
 				Case FaintAttack: ACS_NamedExecuteAlways("TracerTargeter",0,TG_ENEMY,350); break;
@@ -1023,6 +1043,13 @@ Script "MoveSetup" (void)
 				Case Flatter: ACS_NamedExecuteAlways("TracerTargeter",0,TG_ENEMY,350); break;
 				Case Assist: ACS_NamedExecuteAlways("TracerTargeter",0,TG_ENEMY,550); break;
 				Case YAWN: ACS_NamedExecuteAlways("TracerTargeter",0,TG_ENEMY,350); break;
+				Case REVENGE: ACS_NamedExecuteAlways("TracerTargeter",0,TG_ENEMY,150); break;
+				Case AURASPHERE: ACS_NamedExecuteAlways("TracerTargeter",0,TG_ENEMY,1200); break;
+				Case FAKETEARS: ACS_NamedExecuteAlways("TracerTargeter",0,TG_ENEMY,800); break;
+				Case CAPTIVATE: ACS_NamedExecuteAlways("TracerTargeter",0,TG_ENEMY,800); break;
+				Case WILLOWISP: ACS_NamedExecuteAlways("TracerTargeter",0,TG_ENEMY,800); break;
+				Case CONFUSERAY: ACS_NamedExecuteAlways("TracerTargeter",0,TG_ENEMY,800); break;
+				Case SPITE: ACS_NamedExecuteAlways("TracerTargeter",0,TG_ENEMY,800); break;
 				default: ACS_NamedExecuteAlways("TracerTargeter",0,TG_TEAM,630); break;
 			}
 			
@@ -1213,6 +1240,7 @@ if(CheckInventory("ParalysisMark"))
 		Case STORMTHROW: acs_execute(979,0); return false;
 		Case SUPERPOWER: acs_execute(979,0); return false;
 		Case MEGAHORN: acs_execute(979,0); return false;
+		Case TRIPLEKICK: acs_execute(979,0); return false;
     }
 }
 
@@ -1281,7 +1309,7 @@ if(CheckInventory("TauntFlag"))
 	Case CONFUSERAY: return false; break;
 	Case DISABLE: return false; break;
 	Case GRUDGE: return false; break;
-	//Case SPITE: return false; break;
+	Case SPITE: return false; break;
 	Case RECOVER: return false; break;
 	Case IMPRISON: return false; break;
 	Case BARRIER: return false; break;
@@ -1328,6 +1356,7 @@ if(CheckInventory("TauntFlag"))
 	Case CRAFTYSHIELD: return false; break;
 	Case STRINGSHOT: return false; break;
 	Case QUIVERDANCE: return false; break;
+	Case WILLOWISP: return false; break;
     }
 }
 

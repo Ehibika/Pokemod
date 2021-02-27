@@ -133,7 +133,7 @@ stop
 }
 }
 
-actor LavaPlumePuff : BasicExplosion
+actor LavaPlumePuff : BasicExplosion2
 {
 scale 4.5
 DamageType "LavaPlume"

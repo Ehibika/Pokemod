@@ -1,0 +1,37 @@
+//#region -=-=- Beta 51 -=-=-
+/*
+ *
+ *
+ * ===|Gameplay Changes|===
+ * 
+ * ===|Pokemon Changes|===
+ * 
+ * Changed the evolution level for Tyrogue from 5 to 7
+ * 
+ * ===|Move Changes|===
+ * 
+ * [psywave]
+ * cappped the lifetime of the projectile
+ * 
+ * [Aura Sphere]
+ * Fixed the issue of the move dealing no damage
+ * 
+ * [TailWind]
+ * Buff duration increased from 7 seconds to 20 seconds
+ * 
+ * [Reflect]
+ * Damage reduction boosted from 33% > 50%
+ * 
+ * [LightScreen]
+ * Damage Reduction boosted from 33% > 50%
+ * 
+ * [SeismicToss]
+ * reduced the startup delay
+ * 
+ * [StormThrow]
+ * reduced the startup delay
+ * 
+ * [Submission]
+ * reduced the startup delay
+ * ===|TM Changes|===
+ * 

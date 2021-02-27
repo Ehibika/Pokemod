@@ -1,0 +1,90 @@
+
+/*
+[+]===================================[+]
+
+[+]===================================[+]
+*/
+
+Actor R_Hitmonchan : ClassBaseRentals 
+{
+Player.DisplayName "Hitmonchan"
+Player.SoundClass "Hitmonchan"
++NOSKIN
+
+Player.StartItem "PKMNRentalKit"
+//============|
+Player.StartItem "HitmonchanRentalSetupItem"
+//============|
+Player.StartItem "Base_HP", 50
+Player.StartItem "Base_PAttack", 105
+Player.StartItem "Base_PDefense", 79
+Player.StartItem "Base_SAttack", 35
+Player.StartItem "Base_SDefense", 110
+
+//============|
+
+States
+{
+Spawn: 
+P183 A 0
+P183 B 1 
+P183 A 1
+GoTo Spawn+2
+See:
+P183 BCDE 5
+GoTo Spawn+1
+Missile:
+P183 A 0 A_JumpIfInventory("ConshotTimer",1,"Missile2")
+P183 F 5 
+P183 G 4
+GoTo Spawn+2
+Missile2:
+P183 G 9
+GoTo Spawn+2
+
+PainFix:
+P183 H 0 
+GoTo PainFrames
+}
+}
+
+actor HitmonchanRentalMoves : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_JumpIf(CallACS("RentalBotCheck") == 1,"BotWep")
+
+TNT1 A 0 A_GiveInventory("SkyUppercutMove1")
+TNT1 A 0 A_GiveInventory("MachPunchMove2")
+TNT1 A 0 A_GiveInventory("IcePunchMove3")
+TNT1 A 0 A_GiveInventory("DetectMove4")
+stop
+
+BotWep:
+TNT1 A 0 A_GiveInventory("SkyUppercutMove1")
+stop
+}
+}
+
+actor HitmonchanRentalSetupItem : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 ACS_NamedExecuteAlways("PKMN_RentalsSetup",0,Dex_Hitmonchan)
+stop
+}
+}

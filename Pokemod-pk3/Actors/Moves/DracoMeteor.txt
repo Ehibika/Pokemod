@@ -85,6 +85,12 @@ Powerup.duration 5
 Damagefactor "DracoMeteor", 0
 }
 
+Actor DracoMeteorBuffer : powerprotection
+{
+Powerup.duration 17
+Damagefactor "DracoMeteor", 0.1
+}
+
 actor DracoMeteorPPTaker : CustomInventory
 {
 inventory.amount 1
@@ -103,7 +109,7 @@ stop
 
 actor DracoMeteor_Recovery_D : FullRecovery_D{Powerup.Duration -4} 
 
-actor STF_DracoMeteor : Powerup {inventory.amount 1 Powerup.Duration -7}
+actor STF_DracoMeteor : BaseSTatusFlag3 {}
 
 actor DracoMeteorBuffPurge : CustomInventory
 {
@@ -117,7 +123,7 @@ TNT1 A 0
 stop
 Pickup:
 TNT1 A 0 A_GiveInventory("Overheated")
-TNT1 A 0 ACS_NamedExecuteAlways("StatItemNuke",0,SB_GOOD)
+TNT1 A 0 ACS_NamedExecuteAlways("StatItemNuke",0,SB_GOOD,1)
 TNT1 A 0 A_GiveInventory("StatUpdator",1)
 stop
 }
@@ -134,12 +140,13 @@ Spawn:
 TNT1 A 0
 stop
 Pickup:
-//Self inflicted, not blocked by mist
+TNT1 A 0 A_Jumpif(CallACS("CheckStatusGuard",0,STATUS_STATS),"Nope") //Blocked by Protect|Detect|Substitute|Mist
 TNT1 A 0 A_Jumpifinventory("STF_DracoMeteor",1,"Sustain")
+TNT1 A 0 A_PlaySoundEx("support/StatDown","Weapon")
 TNT1 A 0 A_GiveInventory("STF_DracoMeteor",1)
 TNT1 A 0 A_SpawnItemEX("DracoMeteorNerfWatcher")
 TNT1 A 0 A_GiveInventory("Overheated")
-TNT1 A 0 ACS_NamedExecuteAlways("StatItemNuke",0,SB_GOOD)
+TNT1 A 0 ACS_NamedExecuteAlways("StatItemNuke",0,SB_GOOD,1)
 TNT1 A 0 A_GiveInventory("StatUpdator",1)
 stop
 
@@ -324,6 +331,8 @@ PROJECTILE
 +RIPPER
 +NOINTERACTION
 +DONTBLAST
+
++SPECTRAL //Spectral Breeching
 Damagetype "DracoMeteor"
 Obituary "$OB_DRACOMETEOR"
 damage (0)

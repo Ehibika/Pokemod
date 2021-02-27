@@ -60,6 +60,7 @@ server noarchive int PKMN_WarmupTime = 45;
 server noarchive int PKMN_StartingLevel = 1;
 server noarchive int PKMN_AllowFreeSetup = 0;
 server noarchive Bool PKMN_NoEXP = false;
+server noarchive Bool PKMN_NoQuad = True;
 server noarchive Bool PKMN_NoRoundLeveling = false;
 
 

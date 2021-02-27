@@ -75,7 +75,7 @@ Goto Ready
 actor HazePP : Ammo {inventory.amount 1 inventory.Maxamount 10}
 actor HazeFieldKiller : Powerup {inventory.amount 1 Powerup.Duration 7}
 actor HazedFlagAlly : Powerup {inventory.amount 1 Powerup.Duration -7}
-actor HazeFlag : Powerup {inventory.amount 1 Powerup.Duration -7}
+actor HazeFlag : Powerup {inventory.amount 1 Powerup.Duration -30}
 actor HazeFXFlag : inventory {inventory.amount 1 inventory.Maxamount 1}
 
 
@@ -112,7 +112,7 @@ stop
 //--------------------------------|Projectiles |--------------------------------
 //[+]========================================================================[+]
 
-actor HazeRingGuide : BasicHelper
+actor HazeRingGuide : BasicServerSideHelper
 {
 translation "198:198=220:220", "192:192=229:229"
 	reactiontime 15
@@ -237,7 +237,7 @@ actor HazeAimPath : GolfBallAimInstantStarter3 { Speed 48 Gravity 1.5}
 
 //#endregion
 
-actor HazeField : BasicHelper
+actor HazeField : BasicServerSideHelper
 {
 ReactionTime 6
 DamageType "Haze"
@@ -447,7 +447,7 @@ stop
 }
 
 
-actor HazedEffectWatcher : BasicHelper 
+actor HazedEffectWatcher : BasicServerSideHelper 
 {
 Var int user_DashTime;
 States

@@ -1,0 +1,183 @@
+Const int BODYSLAM_AREA1 = 200;
+Const int BODYSLAM_AREA2 = 100;
+Const int BOD_FX1 = 45;
+
+actor BodySlamMove : WepMasterBase
+{
+Tag "BodySlam"
+Weapon.AmmoUse 1
+Weapon.AmmoGive 15
+weapon.ammotype "BodySlamPP"
+scale 2.0
+Inventory.Pickupmessage "$PU_MEGABUSTER"
+States
+{
+Spawn:
+WEAP X 1
+stop
+
+
+Fire:
+"####" BBB 1 A_Jumpif(CallACS("CheckWeaponFire",RC_C)==1,"Fire.Begin")
+"####" B 0 A_Jump(256,"NoAmmo")
+Goto NoAmmo
+
+Fire.Begin:
+"####" B 0
+"####" B 0 A_Jump(256,"Fire.Aim")
+Goto Fire.Aim
+
+
+Fire.Aim:
+"####" B 1 A_FireCustomMissile("BodySlamAimPath",0,0,0,0,0,Aim_BodyCheck)
+"####" C 0 A_REfire("Fire.Aim")
+"####" B 0 A_Jump(256,"Fire.BodyCheckStart")
+Goto Fire.BodyCheckStart
+
+Fire.BodyCheckStart:
+"####" B 0 A_PlaySoundEx("weapon/GrenadeLauncher","Weapon")
+"####" B 0 A_TakeInventory("UnSolid",1)
+"####" B 0 A_ChangeFlag("SOLID",0)
+"####" B 0 A_ChangeFlag("NOGRAVITY",1)
+"####" B 0 A_FireCustomMissile("BodySlam_BodyCheck",0,1,0,0,0,Aim_BodyCheck)
+"####" BBB 2 A_SpawnItemEx("QuickAttackWave",20,0,16,0,0,0,0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION)
+Fire.BodyCheckLoop:
+"####" B 2 
+"####" B 0 A_SpawnItemEx("QuickAttackWave",20,0,16,0,0,0,0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION)
+"####" B 0 A_JumpifInventory("BodyCheckFlag",1,"Fire.BodyCheckLoop")
+"####" B 15
+"####" B 0 A_Jump(256,"Fire.After")
+Goto Fire.After
+
+Fire.After:
+"####" B 1 A_GiveInventory("FullRecovery_C")
+"####" B 0 A_SpawnItemEx("ReSolidifier")
+"####" B 0 A_ChangeFlag("NOGRAVITY",0)
+"####" C 0// A_REfire("Fire")
+"####" B 0 A_Jump(256,"Fire.End")
+Goto Fire.End
+}
+}
+
+actor BodySlamMove1 : BodySlamMove {Weapon.SlotNumber 1}
+actor BodySlamMove2 : BodySlamMove {Weapon.SlotNumber 2}
+actor BodySlamMove3 : BodySlamMove {Weapon.SlotNumber 3}
+actor BodySlamMove4 : BodySlamMove {Weapon.SlotNumber 4}
+
+actor BodySlamMove5 : BodySlamMove 
+{
+Weapon.SlotNumber 5
+States
+{
+Fire.End:
+TNT1 A 0
+TNT1 A 0 A_TakeInventory("BodySlamMove5",9)
+TNT1 A 0 A_Jump(256,"Ready")
+Goto Ready
+}
+}
+
+//[+]========================================================================[+]
+//-----------------------------|Ammo & Inventory|------------------------------
+//[+]========================================================================[+]
+actor BodySlamPP : Ammo {inventory.amount 1 inventory.Maxamount 15}
+
+//[+]========================================================================[+]
+//--------------------------------|Projectiles |--------------------------------
+//[+]========================================================================[+]
+
+actor BodySlam_BodyCheck : BasicProjectile
+{
+DamageType "BodySlam"
+obituary "$OB_BodySlam"
++BOUNCEONCEILINGS
++SERVERSIDEONLY
++SkyExplode
+-NoGravity
+Gravity 2.0
+damage (1)
+Radius 18
+Height 60
+speed 50
+Scale 3.0
+ReactionTime 4
+States
+{
+Spawn:
+TNT1 A 0 
+TNT1 A 0 ACS_namedExecuteAlways("ProjectilePort",0,200)
+TNT1 A 1 //A_Warp(2,0,0,2,0,16+8)
+
+Spawn2:
+TNT1 A 0
+AQBA C 0 A_GiveToTarget("BodyCheckFlag")
+TNT1 A  1 
+loop
+Death:
+AQBA C 0 A_Stop
+AQBA C 0 A_GiveToTarget("BodyCheckStopper")
+AQBA C 0 A_GiveToTarget("BodySlam_Slam")
+stop
+}
+}
+
+
+actor BodySlamAimPath : GolfBallAimInstantStarter4 { Speed 50 }
+
+
+actor BodySlam_Slam : CustomInventory 
+{
+states
+{
+pickup:
+TNT1 A 0 A_SpawnItemEx("BodySlamBlast",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION)
+TNT1 A 0 A_Stop
+stop
+}
+}
+
+actor BodySlamBlast : BasicExplosion
+{
+DamageType "BodySlam"
+obituary "$OB_BodySlam"
+ReactionTime 5
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+TNT1 A 0 A_Explode(MBP_BodySlam,BODYSLAM_AREA1,0,0,BODYSLAM_AREA2)
+TNT1 A 0 A_PlaySoundEx("Move/RolloutImpact","SoundSlot5")
+TNT1 A 0 A_SpawnItemEx("BodySlamImpactFX",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION)
+Spawn2:
+TNT1 A 2 A_CountDown
+TNT1 AAAA 0 A_SpawnItemEx("BodySlamImpactFX", Random(-BODYSLAM_AREA1,BODYSLAM_AREA1), 0, Random(0,BODYSLAM_AREA2), 0, 0, 0, random(0,360),1)
+loop
+
+Death:
+TNT1 A 5
+stop
+}
+}
+
+
+actor BodySlamImpactFX : BasicClientside
+{
+scale 4.5
+States
+{
+Spawn:
+TNT1 A 0 
+TNT1 A 0 A_Quake(4,12,0,250)
+HITG FGH 1
+HITG H 1 A_SetScale(ScaleX+0.5)
+HITG H 0 A_Fadeout(0.3)
+HITG H 1 A_SetScale(ScaleX+0.5)
+HITG H 0 A_Fadeout(0.3)
+HITG H 1 A_SetScale(ScaleX+0.5)
+HITG H 0 A_Fadeout(0.3)
+TNT1 A 6
+stop
+}
+}
+

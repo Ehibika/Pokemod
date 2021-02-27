@@ -507,7 +507,7 @@ OB_ROCKBLAST = "%k Defeated %o using ROCKBLAST!";
 OB_SUPERSONIC = "%k Defeated %o using SUPERSONIC!";
 OB_PSYBEAM = "%k Defeated %o using PSYBEAM!";
 OB_CLAMP = "%k Defeated %o using CLAMP!";
-OB_FEINTATTACK = "%k Defeated %o using FEINTATTACK!";
+OB_ThunderFang = "%k Defeated %o using ThunderFang!";
 OB_CHARM = "%k Defeated %o using CHARM!";
 OB_CAPTIVATE = "%k Defeated %o using CAPTIVATE!";
 OB_DRAINPUNCH = "%k Defeated %o using DRAINPUNCH!";
@@ -594,7 +594,7 @@ OB_PLUCK = "%k Defeated %o using PLUCK!";
 OB_AIRCUTTER = "%k Defeated %o using AIRCUTTER!";
 OB_GUST = "%k Defeated %o using GUST!";
 OB_FLY = "%k Defeated %o using FLY!";
-OB_ELECTROLEVITATE = "%k Defeated %o using ELECTROLEVITATE!";
+OB_MagnetRise = "%k Defeated %o using MagnetRise!";
 OB_BUGBUZZ = "%k Defeated %o using BUGBUZZ!";
 OB_SILVERWIND = "%k Defeated %o using SILVERWIND!";
 OB_QUIVERDANCE = "%k Defeated %o using QUIVERDANCE!";
@@ -612,6 +612,26 @@ OB_SIGNALBEAM = "%k Defeated %o using SIGNALBEAM!";
 OB_BRICKBREAK = "%k Defeated %o using BRICKBREAK!";
 OB_MEGAHORN = "%k Defeated %o using MEGAHORN!";
 OB_LEECHLIFE = "%k Defeated %o using LEECHLIFE!";
+OB_LOWKICK = "%k Defeated %o using LOWKICK!";
+OB_KARATECHOP = "%k Defeated %o using KARATECHOP!";
+OB_REVENGE = "%k Defeated %o using REVENGE!";
+OB_ARMTHRUST = "%k Defeated %o using ARMTHRUST!";
+OB_FORCEPALM = "%k Defeated %o using FORCEPALM!";
+OB_DYNAMICPUNCH = "%k Defeated %o using DYNAMICPUNCH!";
+OB_AURASPHERE = "%k Defeated %o using AURASPHERE!";
+OB_ROLLINGKICK = "%k Defeated %o using ROLLINGKICK!";
+OB_TRIPLEKICK = "%k Defeated %o using TRIPLEKICK!";
+OB_JUMPKICK = "%k Defeated %o using JUMPKICK!";
+OB_BODYSLAM = "%k Defeated %o using BODYSLAM!";
+OB_FAIRYWIND = "%k Defeated %o using FAIRYWIND!";
+OB_SPITE = "%k Defeated %o using SPITE!";
+OB_UTURN = "%k Defeated %o using UTURN!";
+OB_FLIPTURN = "%k Defeated %o using FLIPTURN!";
+OB_SING = "%k Defeated %o using SING!";
+OB_SHOREUP = "%k Defeated %o using SHOREUP!";
+OB_ROOST = "%k Defeated %o using ROOST!";
+OB_SELFDESTRUCT = "%k Defeated %o using SELFDESTRUCT!";
+OB_EXPLOSION = "%k Defeated %o using EXPLOSION!";
 //--[NewMove]--
 
 //#endregion
@@ -2413,6 +2433,127 @@ D175_EVO = "\c[MenuRed]Does not evolve";
 //#endregion
 
 
+//#region -=- Machop-=-
+D176_NAME = "\cjMachop";
+D176_TYPE = "\cjFighting/Null";
+D176_STATS1 = "\cfATK:\cj 80 \cfDEF:\cj 50";
+D176_STATS2 = "\cfSP.ATK:\cj 30 \cfSP.DEF:\cj 30";
+D176_STATS3 = "\cfHP:\cj 70";
+D176_ARC = "\cj <Archetype> ";
+D176_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+
+//#region -=- Machoke-=-
+D177_NAME = "\cjMachoke";
+D177_TYPE = "\cjFighting/Null";
+D177_STATS1 = "\cfATK:\cj 100 \cfDEF:\cj 70";
+D177_STATS2 = "\cfSP.ATK:\cj 50 \cfSP.DEF:\cj 60";
+D177_STATS3 = "\cfHP:\cj 80";
+D177_ARC = "\cj <Archetype> ";
+D177_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+
+//#region -=- Machamp-=-
+D178_NAME = "\cjMachamp";
+D178_TYPE = "\cjFighting/Null";
+D178_STATS1 = "\cfATK:\cj 130 \cfDEF:\cj 80";
+D178_STATS2 = "\cfSP.ATK:\cj 65 \cfSP.DEF:\cj 85";
+D178_STATS3 = "\cfHP:\cj 90";
+D178_ARC = "\cj <Archetype> ";
+D178_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+
+//#region -=- Makuhita-=-
+D179_NAME = "\cjMakuhita";
+D179_TYPE = "\cjFighting/Null";
+D179_STATS1 = "\cfATK:\cj 60 \cfDEF:\cj 30";
+D179_STATS2 = "\cfSP.ATK:\cj 20 \cfSP.DEF:\cj 30";
+D179_STATS3 = "\cfHP:\cj 72";
+D179_ARC = "\cj <Archetype> ";
+D179_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+
+//#region -=- Hariyama-=-
+D180_NAME = "\cjHariyama";
+D180_TYPE = "\cjFighting/Null";
+D180_STATS1 = "\cfATK:\cj 120 \cfDEF:\cj 60";
+D180_STATS2 = "\cfSP.ATK:\cj 40 \cfSP.DEF:\cj 60";
+D180_STATS3 = "\cfHP:\cj 144";
+D180_ARC = "\cj <Archetype> ";
+D180_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+
+//#region -=- Tyrogue-=-
+D181_NAME = "\cjTyrogue";
+D181_TYPE = "\cjFighting/Null";
+D181_STATS1 = "\cfATK:\cj 35 \cfDEF:\cj 35";
+D181_STATS2 = "\cfSP.ATK:\cj 35 \cfSP.DEF:\cj 35";
+D181_STATS3 = "\cfHP:\cj 35";
+D181_ARC = "\cj <Archetype> ";
+D181_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+
+//#region -=- Hitmonlee-=-
+D182_NAME = "\cjHitmonlee";
+D182_TYPE = "\cjFighting/Null";
+D182_STATS1 = "\cfATK:\cj 120 \cfDEF:\cj 53";
+D182_STATS2 = "\cfSP.ATK:\cj 35 \cfSP.DEF:\cj 110";
+D182_STATS3 = "\cfHP:\cj 50";
+D182_ARC = "\cj <Archetype> ";
+D182_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+
+//#region -=- HitmonChan-=-
+D183_NAME = "\cjHitmonChan";
+D183_TYPE = "\cjFighting/Null";
+D183_STATS1 = "\cfATK:\cj 105 \cfDEF:\cj 79";
+D183_STATS2 = "\cfSP.ATK:\cj 35 \cfSP.DEF:\cj 110";
+D183_STATS3 = "\cfHP:\cj 50";
+D183_ARC = "\cj <Archetype> ";
+D183_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+
+//#region -=- HitmonTop-=-
+D184_NAME = "\cjHitmonTop";
+D184_TYPE = "\cjFighting/Null";
+D184_STATS1 = "\cfATK:\cj 95 \cfDEF:\cj 95";
+D184_STATS2 = "\cfSP.ATK:\cj 35 \cfSP.DEF:\cj 110";
+D184_STATS3 = "\cfHP:\cj 50";
+D184_ARC = "\cj <Archetype> ";
+D184_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+
+//#region -=- Riolu-=-
+D185_NAME = "\cjRiolu";
+D185_TYPE = "\cjFighting/Null";
+D185_STATS1 = "\cfATK:\cj 70 \cfDEF:\cj 40";
+D185_STATS2 = "\cfSP.ATK:\cj 70 \cfSP.DEF:\cj 60";
+D185_STATS3 = "\cfHP:\cj 40";
+D185_ARC = "\cj <Archetype> ";
+D185_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+
+//#region -=- Lucario-=-
+D186_NAME = "\cjLucario";
+D186_TYPE = "\cjFighting/Steel";
+D186_STATS1 = "\cfATK:\cj 110 \cfDEF:\cj 70";
+D186_STATS2 = "\cfSP.ATK:\cj 115 \cfSP.DEF:\cj 70";
+D186_STATS3 = "\cfHP:\cj 70";
+D186_ARC = "\cj <Archetype> ";
+D186_EVO = "\c[MenuRed]Does not evolve";
+//#endregion
+
+
 //--[NewPokemon]--
 
 //#endregion
@@ -2458,7 +2599,8 @@ M004_NAME = "\cj Bite";
 M004_TYPE = "\cj Dark";
 M004_CATEGORY = "\cf Physical";
 M004_POWER = "\cfPower:\cj 50";
-M004_DESC = "\cjbare your teeth down infront of you, a delayed \cfstrike.";
+M004_DESC = "\cjReach out and Bite a fow, dragging them\n"
+"towards you";
 //#endregion
 
 //#region -=- 005: QuickAttack -=-
@@ -2576,7 +2718,8 @@ M018_NAME = "\cj Energy Ball";
 M018_TYPE = "\cj Grass";
 M018_CATEGORY = "\cf Special";
 M018_POWER = "\cfPower:\cj 60";
-M018_DESC = "\cfCharge to shoot \cja sphere of natural energy";
+M018_DESC = "\cjLaunch a sphere of natural energy, may\n"
+"lower SP.def";
 //#endregion
 
 //#region -=- 019: DoubleEdge -=-
@@ -2616,7 +2759,9 @@ M023_NAME = "\cj SmokeScreen";
 M023_TYPE = "\cj Normal";
 M023_CATEGORY = "\cf Status";
 M023_POWER = "\cfPower:\cj --";
-M023_DESC = "\cfLob \cja sphere of Condensed smoke that \nobscures vision";
+M023_DESC = "\cjLob a sphere of condensed smoke that foes\n"
+"cannot see through, allies inside are\n"
+"protected from projectiles.";
 //#endregion
 
 //#region -=- 024: ScaryFace -=-
@@ -2646,15 +2791,16 @@ M026_DESC = "\cjTarget the ground to cast a ring of fire.\n"
 
 //#region -=- 027: Fire Fang -=-
 M027_NAME = "\cj Fire Fang";
-M027_TYPE = "\cj Normal";
+M027_TYPE = "\cj Fire";
 M027_CATEGORY = "\cf Physical";
 M027_POWER = "\cfPower:\cj 30";
-M027_DESC = "\cjbare Flame covered teeth down infront of you, a delayed \cfstrike.";
+M027_DESC = "\cjReach out and Bite a fow with flaming\n"
+"teeth that may inflict burn.";
 //#endregion
 
 //#region -=- 028: Flamethrower -=-
 M028_NAME = "\cj Flamethrower";
-M028_TYPE = "\cj Normal";
+M028_TYPE = "\cj Fire";
 M028_CATEGORY = "\cf Special";
 M028_POWER = "\cfPower:\cj 20 DPS";
 M028_DESC = "\cfContinuously shoot \cjflames before you";
@@ -2662,7 +2808,7 @@ M028_DESC = "\cfContinuously shoot \cjflames before you";
 
 //#region -=- 029: Dragon Rush -=-
 M029_NAME = "\cj Dragon Rush";
-M029_TYPE = "\cj Normal";
+M029_TYPE = "\cj Dragon";
 M029_CATEGORY = "\cf Physical";
 M029_POWER = "\cfPower:\cj 30";
 M029_DESC = "\cja Forcefull \cfRamming \cjAttack with increadible knockback.";
@@ -2670,7 +2816,7 @@ M029_DESC = "\cja Forcefull \cfRamming \cjAttack with increadible knockback.";
 
 //#region -=- 030: Dragon Pulse -=-
 M030_NAME = "\cj Dragon Pulse";
-M030_TYPE = "\cj Normal";
+M030_TYPE = "\cj Dragon";
 M030_CATEGORY = "\cf Special";
 M030_POWER = "\cfPower:\cj 35 DPS";
 M030_DESC = "\cfContinuously shoot \cj a volley of draconic projectiles";
@@ -2678,7 +2824,7 @@ M030_DESC = "\cfContinuously shoot \cj a volley of draconic projectiles";
 
 //#region -=- 031: FlareBlitz -=-
 M031_NAME = "\cj FlareBlitz";
-M031_TYPE = "\cj Normal";
+M031_TYPE = "\cj Fire";
 M031_CATEGORY = "\cf Special";
 M031_POWER = "\cfPower:\cj 120";
 M031_DESC = "\cja dangerous and reckless Fiery \cfRamming \cjAttack \nthat defys gravity, has severe recoil damage";
@@ -2686,7 +2832,7 @@ M031_DESC = "\cja dangerous and reckless Fiery \cfRamming \cjAttack \nthat defys
 
 //#region -=- 032: Dragon Dance -=-
 M032_NAME = "\cj Dragon Dance";
-M032_TYPE = "\cj Normal";
+M032_TYPE = "\cj Dragon";
 M032_CATEGORY = "\cf Status";
 M032_POWER = "\cfPower:\cj --";
 M032_DESC = "\cjCast a \cfSelf \cjBuff that \nBoosts ATK and SPD through a rigorous, ancient dance";
@@ -2702,7 +2848,7 @@ M033_DESC = "\cjLaunch a high powered explosive missile.\n"
 
 //#region -=- 034: Flame Burst -=-
 M034_NAME = "\cj Flame Burst";
-M034_TYPE = "\cj Normal";
+M034_TYPE = "\cj Dragon";
 M034_CATEGORY = "\cf Special";
 M034_POWER = "\cfPower:\cj 25";
 M034_DESC = "\cfShot \cja ball of exploding fire that deals area damage";
@@ -2710,7 +2856,7 @@ M034_DESC = "\cfShot \cja ball of exploding fire that deals area damage";
 
 //#region -=- 035: Dragon Rage -=-
 M035_NAME = "\cj Dragon Rage";
-M035_TYPE = "\cj Normal";
+M035_TYPE = "\cj Dragon";
 M035_CATEGORY = "\cf Special";
 M035_POWER = "\cfPower:\cj 40~";
 M035_DESC = "\cfShot \cj a Blast of Draconic might, that deals vebatim damage.";
@@ -2718,7 +2864,7 @@ M035_DESC = "\cfShot \cj a Blast of Draconic might, that deals vebatim damage.";
 
 //#region -=- 036: Metal Claw -=-
 M036_NAME = "\cj Metal Claw";
-M036_TYPE = "\cj Normal";
+M036_TYPE = "\cj Steel";
 M036_CATEGORY = "\cf Physical";
 M036_POWER = "\cfPower:\cj 25";
 M036_DESC = "\cfImbue \cjyour claws with the power of steel, \cfgeneric melee becomes Metal Claw";
@@ -2726,7 +2872,7 @@ M036_DESC = "\cfImbue \cjyour claws with the power of steel, \cfgeneric melee be
 
 //#region -=- 037: Dragon Claw -=-
 M037_NAME = "\cj Dragon Claw";
-M037_TYPE = "\cj Normal";
+M037_TYPE = "\cj Dragon";
 M037_CATEGORY = "\cf Physical";
 M037_POWER = "\cfPower:\cj 25";
 M037_DESC = "\cfImbue \cjyour claws with the Draconic Power, \cfgeneric melee becomes Dragon Claw";
@@ -2734,7 +2880,7 @@ M037_DESC = "\cfImbue \cjyour claws with the Draconic Power, \cfgeneric melee be
 
 //#region -=- 038: Withdraw -=-
 M038_NAME = "\cj Withdraw";
-M038_TYPE = "\cj Normal";
+M038_TYPE = "\cj Water";
 M038_CATEGORY = "\cf Status";
 M038_POWER = "\cfPower:\cj --";
 M038_DESC = "\cjCast a \cfSelf \cjBuff that \nboosts DEF";
@@ -2750,7 +2896,7 @@ M039_DESC = "\cjGuard \cfYourself \cjAgainst all harm \nwhile held, movement is 
 
 //#region -=- 040: Aqua Ring -=-
 M040_NAME = "\cj Aqua Ring";
-M040_TYPE = "\cj Normal";
+M040_TYPE = "\cj Water";
 M040_CATEGORY = "\cf Status";
 M040_POWER = "\cfPower:\cj --";
 M040_DESC = "\cjConjur a ring of healing water at the\n"
@@ -2760,7 +2906,7 @@ M040_DESC = "\cjConjur a ring of healing water at the\n"
 
 //#region -=- 041: Water Pulse -=-
 M041_NAME = "\cj Water Pulse";
-M041_TYPE = "\cj Normal";
+M041_TYPE = "\cj Water";
 M041_CATEGORY = "\cf Special";
 M041_POWER = "\cfPower:\cj 30";
 M041_DESC = "\cj\cfShot \cja Blast of water that deals\n"
@@ -2785,7 +2931,7 @@ M043_DESC = "\cjCast a \cfSelf \cjBuff that \nSharply Boosts DEF";
 
 //#region -=- 044: Life Dew -=-
 M044_NAME = "\cj Life Dew";
-M044_TYPE = "\cj Normal";
+M044_TYPE = "\cj Water";
 M044_CATEGORY = "\cf Status";
 M044_POWER = "\cfPower:\cj --";
 M044_DESC = "\cjSprinkle healing water on the \cfGround \n\cjyou target, heals for 25% of the user's health";
@@ -2793,7 +2939,7 @@ M044_DESC = "\cjSprinkle healing water on the \cfGround \n\cjyou target, heals f
 
 //#region -=- 045: Hydro Pump -=-
 M045_NAME = "\cj Hydro Pump";
-M045_TYPE = "\cj Normal";
+M045_TYPE = "\cj Water";
 M045_CATEGORY = "\cf Special";
 M045_POWER = "\cfPower:\cj 110 DPS";
 M045_DESC = "\cfContinuously shoot \cja jetstream of \nwater, has considerable range and \nknockback.";
@@ -2812,7 +2958,8 @@ M047_NAME = "\cj Flash Cannon";
 M047_TYPE = "\cj Steel";
 M047_CATEGORY = "\cf Special";
 M047_POWER = "\cfPower:\cj 50";
-M047_DESC = "\cfCharge to shoot \cja sphere of Radient Light energy";
+M047_DESC = "\cjLaunch a sphere of radiant Light energy\n"
+"may lower SP.def";
 //#endregion
 
 //#region -=- 048: Shell Smash -=-
@@ -2843,10 +2990,11 @@ M050_DESC = "\cj Spin Rapidly to \cfCleave \cj surrounding opponents, knocking t
 
 //#region -=- 051: Bubble Beam -=-
 M051_NAME = "\cj Bubble Beam";
-M051_TYPE = "\cj Normal";
+M051_TYPE = "\cj Water";
 M051_CATEGORY = "\cf Special";
 M051_POWER = "\cfPower:\cj 35 DPS";
-M051_DESC = "\cfContinuously shoot \cja stream of exploding bubbles";
+M051_DESC = "\cjUnleash a continuous spray of bubbles\n"
+"that can lower speed.";
 //#endregion
 
 //#region -=- 052: Amnesia -=-
@@ -2905,8 +3053,8 @@ M058_NAME = "\cj IceFang";
 M058_TYPE = "\cj Ice";
 M058_CATEGORY = "\cf Physical";
 M058_POWER = "\cfPower:\cj --";
-M058_DESC = "\cjBites down with icy fangs that can freeze\n"
-"opponents";
+M058_DESC = "\cjReach out and Bite a fow with Freezing\n"
+"teeth that may inflict Freeze.";
 //#endregion
 
 //#region -=- 059: IceBeam -=-
@@ -3004,7 +3152,9 @@ M070_NAME = "\cj Detect";
 M070_TYPE = "\cj Fighting";
 M070_CATEGORY = "\cf Status";
 M070_POWER = "\cfPower:\cj --";
-M070_DESC = "\cfan evasive dash that allows the user to \nescape from harm.";
+M070_DESC = "\cjEnter an evasive state and dodge\n"
+"projectiles and melee attacks, cannot\n"
+"evade splash damage however.";
 //#endregion
 
 //#region -=- 071: Pursuit -=-
@@ -3155,7 +3305,7 @@ M088_NAME = "\cj Extrasensory";
 M088_TYPE = "\cj Psychic";
 M088_CATEGORY = "\cf Special";
 M088_POWER = "\cfPower:\cj --";
-M088_DESC = "<Desc>";
+M088_DESC = "\cjLaunch an exploding, psychic missile.\n"
 //#endregion
 
 //#region -=- 089: GyroBall -=-
@@ -3311,8 +3461,8 @@ M107_NAME = "\cj FakeTears";
 M107_TYPE = "\cj Dark";
 M107_CATEGORY = "\cf Status";
 M107_POWER = "\cfPower:\cj --";
-M107_DESC = "\cjFeign crying to Lowers SP.DEF of all\n"
-"surrounding enemies while active.";
+M107_DESC = "\cjTarget a foe and feign crying to harshly\n"
+"lower SP.Def.";
 //#endregion
 
 //#region -=- 0108: AquaTail -=-
@@ -3328,7 +3478,8 @@ M109_NAME = "\cj Crunch";
 M109_TYPE = "\cj Dark";
 M109_CATEGORY = "\cf Physical";
 M109_POWER = "\cfPower:\cj --";
-M109_DESC = "\cjbare your teeth down infront of you, a Powerfull \ndelayed \cfstrike.";
+M109_DESC = "\cjReach out and Bite a fow, dragging them\n"
+"towards you and lowering DEF";
 //#endregion
 
 //#region -=- 110: Thrash -=-
@@ -3426,7 +3577,9 @@ M121_NAME = "\cj Taunt";
 M121_TYPE = "\cj Dark";
 M121_CATEGORY = "\cf Status";
 M121_POWER = "\cfPower:\cj --";
-M121_DESC = "\cfTarget an opponent to Taunt them out of \nusing non-damaging moves.";
+M121_DESC = "\cjTarget an opponent to taunt them out of\n"
+"using Status moves and dropping timer\n"
+"buffs.";
 //#endregion
 
 //#region -=- 122: WHIRLPOOL -=-
@@ -3504,7 +3657,7 @@ M129_TYPE = "\cj Water";
 M129_CATEGORY = "\cf Special";
 M129_POWER = "\cfPower:\cj --";
 M129_DESC = "\cjSpray bubbles that linger around for a\n"
-"while.";
+"while. may lower Speed.";
 //#endregion
 
 //#region -=- 130: Sludge -=-
@@ -3542,7 +3695,7 @@ M133_NAME = "\cj Absorb";
 M133_TYPE = "\cj Grass";
 M133_CATEGORY = "\cf Special";
 M133_POWER = "\cfPower:\cj --";
-M133_DESC = "\cjLaunch a life draining projectile.\n"
+M133_DESC = "\cjLaunch a life draining projectile.\n";
 //#endregion
 
 //#region -=- 134: MegaDrain -=-
@@ -3550,8 +3703,8 @@ M134_NAME = "\cj MegaDrain";
 M134_TYPE = "\cj Grass";
 M134_CATEGORY = "\cf Special";
 M134_POWER = "\cfPower:\cj --";
-M134_DESC = "\cjsiphon health from a target infront of\n"
-"you.";
+M134_DESC = "\cjSiphon health from all enemies in front\n"
+"of you.";
 //#endregion
 
 //#region -=- 135: GigaDrain -=-
@@ -3603,7 +3756,8 @@ M140_NAME = "\cj PowerWhip";
 M140_TYPE = "\cj Grass";
 M140_CATEGORY = "\cf Physical";
 M140_POWER = "\cfPower:\cj --";
-M140_DESC = "\cf<Desc>";
+M140_DESC = "\cjCleave foes with a long vine or\n"
+"appendage.";
 //#endregion
 
 //#region -=- 141: LeafTornado -=-
@@ -3766,7 +3920,8 @@ M158_NAME = "\cj Infestation";
 M158_TYPE = "\cj Bug";
 M158_CATEGORY = "\cf Special";
 M158_POWER = "\cfPower:\cj --";
-M158_DESC = "\cf<Desc>";
+M158_DESC = "\cjTarget the ground and conjur a Culex to\n"
+"suck foes in.";
 //#endregion
 
 //#region -=- 159: Confuseray -=-
@@ -3813,7 +3968,7 @@ M163_POWER = "\cfPower:\cj --";
 M163_DESC = "\cjlaunch a shadowy sphere that bores\n"
 "through solid walls to hit foes from\n"
 "behind it. can even get past \cfbarrier \cjand\n"
-"\cfwideguard\cj.";
+"\cfwideguard\cj. may lower SP.def";
 //#endregion
 
 //#region -=- 164: SuckerPunch -=-
@@ -3999,7 +4154,8 @@ M184_NAME = "\cj Psychic";
 M184_TYPE = "\cj Psychic";
 M184_CATEGORY = "\cf Special";
 M184_POWER = "\cfPower:\cj --";
-M184_DESC = "\cjremotely cast a great psychic explosion.";
+M184_DESC = "\cjRemotely cast a great psychic explosion\n"
+"that may lower SP.Def";
 //#endregion
 
 //#region -=- 185: Psycheup -=-
@@ -4015,8 +4171,8 @@ M186_NAME = "\cj Powergem";
 M186_TYPE = "\cj Rock";
 M186_CATEGORY = "\cf Special";
 M186_POWER = "\cfPower:\cj --";
-M186_DESC = "\cjLaunch a power imbued bouncing stone that\n"
-"grows in strength with each bounce.";
+M186_DESC = "\cjSpawn up to 3 jewels that fires beams at\n"
+"enemies that may lower Sp.Def.";
 //#endregion
 
 //#region -=- 187: Magiccoat -=-
@@ -4148,12 +4304,13 @@ M201_POWER = "\cfPower:\cj --";
 M201_DESC = "\cf<Desc>";
 //#endregion
 
-//#region -=- 202: Feintattack -=-
-M202_NAME = "\cj Feintattack";
+//#region -=- 202: ThunderFang -=-
+M202_NAME = "\cj ThunderFang";
 M202_TYPE = "\cj Dark";
 M202_CATEGORY = "\cf Physical";
 M202_POWER = "\cfPower:\cj --";
-M202_DESC = "\cf<Desc>";
+M202_DESC = "\cjReach out and Bite a fow with Electrified\n"
+"teeth that may inflict Paralysis.";
 //#endregion
 
 //#region -=- 203: Charm -=-
@@ -4170,8 +4327,8 @@ M204_NAME = "\cj Captivate";
 M204_TYPE = "\cj Normal";
 M204_CATEGORY = "\cf Status";
 M204_POWER = "\cfPower:\cj --";
-M204_DESC = "\cjCaptivate foes to Lowers SP.ATK of all\n"
-"surrounding enemies while active.";
+M204_DESC = "\cjTarget a foe to entrance them into\n"
+"harshly lowering their SP.Atk";
 //#endregion
 
 //#region -=- 205: Drainpunch -=-
@@ -4229,7 +4386,9 @@ M211_NAME = "\cj FutureSight";
 M211_TYPE = "\cj Psychic";
 M211_CATEGORY = "\cf Special";
 M211_POWER = "\cfPower:\cj --";
-M211_DESC = "\cf<Desc>";
+M211_DESC = "\cjDeploy a psychic trap on the ground that\n"
+"detonates when an enemy comes near.\n"
+"Can lower SP.Def";
 //#endregion
 
 //#region -=- 212: CalmMind -=-
@@ -4264,7 +4423,8 @@ M215_NAME = "\cj BulkUp";
 M215_TYPE = "\cj Fighting";
 M215_CATEGORY = "\cf Status";
 M215_POWER = "\cfPower:\cj --";
-M215_DESC = "\cf<Desc>";
+M215_DESC = "\cjCast a self buff that boosts ATK and DEF\n"
+"through Toughening up.";
 //#endregion
 
 //#region -=- 216: FocusBlast -=-
@@ -4273,7 +4433,7 @@ M216_TYPE = "\cj Fighting";
 M216_CATEGORY = "\cf Special";
 M216_POWER = "\cfPower:\cj --";
 M216_DESC = "\cjCharge up to unleash a powerful energy\n"
-"blast!";
+"blast! may lower SP.def";
 //#endregion
 
 //#region -=- 217: PsychoCut -=-
@@ -4398,10 +4558,11 @@ M230_DESC = "\cf<Desc>";
 
 //#region -=- 231: Tailwind -=-
 M231_NAME = "\cj Tailwind";
-M231_TYPE = "\cj <Type>";
-M231_CATEGORY = "\cf <Category>";
+M231_TYPE = "\cj Flying";
+M231_CATEGORY = "\cf Status";
 M231_POWER = "\cfPower:\cj --";
-M231_DESC = "\cf<Desc>";
+M231_DESC = "\cjConjure up a tailwind to boost the speed\n"
+"of yourself and allies.";
 //#endregion
 
 //#region -=- 232: DrainingKiss -=-
@@ -4452,8 +4613,9 @@ M237_NAME = "\cj Moonblast";
 M237_TYPE = "\cj Fairy";
 M237_CATEGORY = "\cf Special";
 M237_POWER = "\cfPower:\cj --";
-M237_DESC = "\cjdraw energy from to moon to launch a\n"
-"powerfull fairy typed projectile.";
+M237_DESC = "\cjDraw energy from the moon to launch a\n"
+"powerfull fairy typed projectile, may\n"
+"lower SP.Atk.";
 //#endregion
 
 //#region -=- 238: EggBomb -=-
@@ -4580,7 +4742,7 @@ M251_NAME = "\cj MudShot";
 M251_TYPE = "\cj Ground";
 M251_CATEGORY = "\cf Special";
 M251_POWER = "\cfPower:\cj --";
-M251_DESC = "\cjShoot a pile of mud that can slow foes\n"
+M251_DESC = "\cjShoot a Spread of mud that can slow foes\n"
 "down.";
 //#endregion
 
@@ -4661,7 +4823,8 @@ M259_NAME = "\cj IronTail";
 M259_TYPE = "\cj Steel";
 M259_CATEGORY = "\cf Physical";
 M259_POWER = "\cfPower:\cj --";
-M259_DESC = "\cjCleave foes with a tail as hard as iron.\n"
+M259_DESC = "\cjCleave fows with a tail as hard as iron,\n"
+"can drop DEF.";
 //#endregion
 
 
@@ -4836,7 +4999,7 @@ M276_NAME = "\cj Acid";
 M276_TYPE = "\cj Poison";
 M276_CATEGORY = "\cf Special";
 M276_POWER = "\cfPower:\cj --";
-M276_DESC = "\cjSpray corrosive liquid that lowers DEF\n"
+M276_DESC = "\cjSpray corrosive liquid that lowers SP.DEF\n";
 //#endregion
 
 
@@ -4865,7 +5028,7 @@ M279_NAME = "\cj Splash";
 M279_TYPE = "\cj Bug";
 M279_CATEGORY = "\cf Status";
 M279_POWER = "\cfPower:\cj --";
-M279_DESC = "\cjDescription needed\n"
+M279_DESC = "\cjDescription needed\n";
 //#endregion
 
 
@@ -4874,7 +5037,7 @@ M280_NAME = "\cj PoisonSting";
 M280_TYPE = "\cj Poison";
 M280_CATEGORY = "\cf Physical";
 M280_POWER = "\cfPower:\cj --";
-M280_DESC = "\cjJab with a poisonous appendage.\n"
+M280_DESC = "\cjJab with a poisonous appendage.\n";
 //#endregion
 
 
@@ -4960,8 +5123,8 @@ M288_DESC = "\cjTake to the sky and dive bomb opponents,\n"
 //#endregion
 
 
-//#region -=- 289: ElectroLevitate -=-
-M289_NAME = "\cj ElectroLevitate";
+//#region -=- 289: MagnetRise -=-
+M289_NAME = "\cj MagnetRise";
 M289_TYPE = "\cj Electric";
 M289_CATEGORY = "\cf Status";
 M289_POWER = "\cfPower:\cj --";
@@ -4975,7 +5138,7 @@ M290_TYPE = "\cj Bug";
 M290_CATEGORY = "\cf Special";
 M290_POWER = "\cfPower:\cj --";
 M290_DESC = "\cjLaunch irritating insect noises at an\n"
-"opponent.";
+"opponent. may lower SP.DEF";
 //#endregion
 
 
@@ -4984,7 +5147,8 @@ M291_NAME = "\cj SilverWind";
 M291_TYPE = "\cj Bug";
 M291_CATEGORY = "\cf Special";
 M291_POWER = "\cfPower:\cj --";
-M291_DESC = "\cjunleash waves of powdery wind.\n"
+M291_DESC = "\cjUnleash a wave of powdery wind,\n"
+"successfull hits may raise a random stat";
 //#endregion
 
 
@@ -5015,7 +5179,7 @@ M294_TYPE = "\cj Ground";
 M294_CATEGORY = "\cf Special";
 M294_POWER = "\cfPower:\cj --";
 M294_DESC = "\cjTarget the ground to bring forth\n"
-"geothermal power!";
+"geothermal power! may lower SP.Def";
 //#endregion
 
 
@@ -5024,7 +5188,7 @@ M295_NAME = "\cj PinMissile";
 M295_TYPE = "\cj Bug";
 M295_CATEGORY = "\cf Physical";
 M295_POWER = "\cfPower:\cj --";
-M295_DESC = "\cjCharge to launch a volley of sharp pins.\n"
+M295_DESC = "\cjCharge to launch a volley of sharp pins.\n";
 //#endregion
 
 
@@ -5075,7 +5239,8 @@ M300_NAME = "\cj VitalThrow";
 M300_TYPE = "\cj Fighting";
 M300_CATEGORY = "\cf Physical";
 M300_POWER = "\cfPower:\cj --";
-M300_DESC = "\cf<Desc>";
+M300_DESC = "\cjReach out and Grapple an opponent,\n"
+"throwing them overhead";
 //#endregion
 
 
@@ -5138,6 +5303,197 @@ M306_CATEGORY = "\cf Physical";
 M306_POWER = "\cfPower:\cj --";
 M306_DESC = "\cjBite down and suck the life out of an\n"
 "opponent";
+//#endregion
+
+
+//#region -=- 307: LowKick -=-
+M307_NAME = "\cj LowKick";
+M307_TYPE = "\cj Fighting";
+M307_CATEGORY = "\cf Physical";
+M307_POWER = "\cfPower:\cj --";
+M307_DESC = "\cjBasic fighting type attack\n"
+//#endregion
+
+
+//#region -=- 308: KarateChop -=-
+M308_NAME = "\cj KarateChop";
+M308_TYPE = "\cj Fighting";
+M308_CATEGORY = "\cf Physical";
+M308_POWER = "\cfPower:\cj --";
+M308_DESC = "\cjTarget the ground with a verticle chop,\n"
+"deals extra damage at the epicenter.";
+//#endregion
+
+
+//#region -=- 309: Revenge -=-
+M309_NAME = "\cj Revenge";
+M309_TYPE = "\cj Fighting";
+M309_CATEGORY = "\cf Physical";
+M309_POWER = "\cfPower:\cj --";
+M309_DESC = "\cjHold to prepare an attack, power\n"
+"increases if you recently took damage.";
+//#endregion
+
+
+//#region -=- 310: ArmThrust -=-
+M310_NAME = "\cj ArmThrust";
+M310_TYPE = "\cj Fighting";
+M310_CATEGORY = "\cf Physical";
+M310_POWER = "\cfPower:\cj --";
+M310_DESC = "\cjUnleash a rapid volley of open hand\n"
+"thrusts.";
+//#endregion
+
+
+//#region -=- 311: ForcePalm -=-
+M311_NAME = "\cj ForcePalm";
+M311_TYPE = "\cj Fighting";
+M311_CATEGORY = "\cf Physical";
+M311_POWER = "\cfPower:\cj --";
+M311_DESC = "\cjUnleash a paralyzing shockwave from the\n"
+"palm of your hand.";
+//#endregion
+
+
+//#region -=- 312: DynamicPunch -=-
+M312_NAME = "\cj DynamicPunch";
+M312_TYPE = "\cj Fighting";
+M312_CATEGORY = "\cf Physical";
+M312_POWER = "\cfPower:\cj --";
+M312_DESC = "\cjCharge up and unleash an explosive punch\n"
+"that can confuse opponents.";
+//#endregion
+
+
+//#region -=- 313: AuraSphere -=-
+M313_NAME = "\cj AuraSphere";
+M313_TYPE = "\cj Fighting";
+M313_CATEGORY = "\cf Special";
+M313_POWER = "\cfPower:\cj --";
+M313_DESC = "\cjLaunch a projectile that can home onto\n"
+"opponents.";
+//#endregion
+
+
+//#region -=- 314: RollingKick -=-
+M314_NAME = "\cj RollingKick";
+M314_TYPE = "\cj Fighting";
+M314_CATEGORY = "\cf Physical";
+M314_POWER = "\cfPower:\cj --";
+M314_DESC = "\cjDeliver a roundhouse kick that can cause\n"
+"foes to cringe.";
+//#endregion
+
+
+//#region -=- 315: TripleKick -=-
+M315_NAME = "\cj TripleKick";
+M315_TYPE = "\cj Fighting";
+M315_CATEGORY = "\cf Physical";
+M315_POWER = "\cfPower:\cj --";
+M315_DESC = "\cjExecute a rapid spiral of kicks, boosts\n"
+"speed while attacking.";
+//#endregion
+
+
+//#region -=- 316: JumpKick -=-
+M316_NAME = "\cj JumpKick";
+M316_TYPE = "\cj Fighting";
+M316_CATEGORY = "\cf Physical";
+M316_POWER = "\cfPower:\cj --";
+M316_DESC = "\cjExecute a powerful but risky drop kick,\n"
+"you're safe if you land on the ground.";
+//#endregion
+
+
+//#region -=- 317: BodySlam -=-
+M317_NAME = "\cj BodySlam";
+M317_TYPE = "\cj Normal";
+M317_CATEGORY = "\cf Physical";
+M317_POWER = "\cfPower:\cj --";
+M317_DESC = "\cjHold to aim, and release to launch\n"
+"yourself in an arc, doing high physical\n"
+"damage and possibly paralysing";
+//#endregion
+
+
+//#region -=- 318: FairyWind -=-
+M318_NAME = "\cj FairyWind";
+M318_TYPE = "\cj Fairy";
+M318_CATEGORY = "\cf Special";
+M318_POWER = "\cfPower:\cj --";
+M318_DESC = "\cjShoot a magical breeze.\n";
+//#endregion
+
+
+//#region -=- 319: Spite -=-
+M319_NAME = "\cj Spite";
+M319_TYPE = "\cj Ghost";
+M319_CATEGORY = "\cf Status";
+M319_POWER = "\cfPower:\cj --";
+M319_DESC = "\cf<Desc>";
+//#endregion
+
+
+//#region -=- 320: UTurn -=-
+M320_NAME = "\cj UTurn";
+M320_TYPE = "\cj Bug";
+M320_CATEGORY = "\cf Physical";
+M320_POWER = "\cfPower:\cj --";
+M320_DESC = "\cf<Desc>";
+//#endregion
+
+
+//#region -=- 321: FlipTurn -=-
+M321_NAME = "\cj FlipTurn";
+M321_TYPE = "\cj Water";
+M321_CATEGORY = "\cf Physical";
+M321_POWER = "\cfPower:\cj --";
+M321_DESC = "\cf<Desc>";
+//#endregion
+
+
+//#region -=- 322: Sing -=-
+M322_NAME = "\cj Sing";
+M322_TYPE = "\cj Normal";
+M322_CATEGORY = "\cf Status";
+M322_POWER = "\cfPower:\cj --";
+M322_DESC = "\cf<Desc>";
+//#endregion
+
+
+//#region -=- 323: ShoreUp -=-
+M323_NAME = "\cj ShoreUp";
+M323_TYPE = "\cj Ground";
+M323_CATEGORY = "\cf Status";
+M323_POWER = "\cfPower:\cj --";
+M323_DESC = "\cf<Desc>";
+//#endregion
+
+
+//#region -=- 324: Roost -=-
+M324_NAME = "\cj Roost";
+M324_TYPE = "\cj Flying";
+M324_CATEGORY = "\cf Status";
+M324_POWER = "\cfPower:\cj --";
+M324_DESC = "\cf<Desc>";
+//#endregion
+
+
+//#region -=- 325: SelfDestruct -=-
+M325_NAME = "\cj SelfDestruct";
+M325_TYPE = "\cj Normal";
+M325_CATEGORY = "\cf Special";
+M325_POWER = "\cfPower:\cj --";
+M325_DESC = "\cf<Desc>";
+//#endregion
+
+
+//#region -=- 326: Explosion -=-
+M326_NAME = "\cj Explosion";
+M326_TYPE = "\cj Normal";
+M326_CATEGORY = "\cf Special";
+M326_POWER = "\cfPower:\cj --";
+M326_DESC = "\cf<Desc>";
 //#endregion
 
 

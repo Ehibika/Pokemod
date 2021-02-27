@@ -211,7 +211,6 @@ stop
 
 actor InfestationFXSpawner : BasicProjectile
 {  
--SERVERSIDEONLY
 reactiontime 40
 DamageType "Infestation"
 obituary "$OB_Infestation"
@@ -222,6 +221,7 @@ speed 7
 +RIPPER
 +NOINTERACTION
 +NOCLIP
++CLIENTSIDEONLY
 States
 {
 Spawn:

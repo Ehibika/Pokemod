@@ -229,7 +229,7 @@ stop
 }
 }
 
-actor LeafBladeEdgeFX : BasicClientside
+actor LeafBladeEdgeFX : BasicNOTClientside
 {
 scale 2.5
 XScale 4.0

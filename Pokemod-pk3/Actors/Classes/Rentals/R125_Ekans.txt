@@ -15,11 +15,11 @@ Player.StartItem "PKMNRentalKit"
 //============|
 Player.StartItem "EkansRentalSetupItem"
 //============|
-Player.StartItem "Base_HP", 35
+Player.StartItem "Base_HP", 50
 Player.StartItem "Base_PAttack", 60
-Player.StartItem "Base_PDefense", 44
-Player.StartItem "Base_SAttack", 40
-Player.StartItem "Base_SDefense", 54
+Player.StartItem "Base_PDefense", 50
+Player.StartItem "Base_SAttack", 45
+Player.StartItem "Base_SDefense", 60
 
 //============|
 

@@ -12,11 +12,11 @@ Player.SoundClass "Croagunk"
 player.startitem "PKMNStarterKit"
 
 //============|
-Player.StartItem "Base_HP", 55
-Player.StartItem "Base_PAttack", 69
-Player.StartItem "Base_PDefense", 85
-Player.StartItem "Base_SAttack", 32
-Player.StartItem "Base_SDefense", 35
+Player.StartItem "Base_HP", 48
+Player.StartItem "Base_PAttack", 61
+Player.StartItem "Base_PDefense", 40
+Player.StartItem "Base_SAttack", 61
+Player.StartItem "Base_SDefense", 40
 
 //============|
 

@@ -73,35 +73,6 @@ Goto Ready
 actor PoisonGasPP : Ammo {inventory.amount 1 inventory.Maxamount 10}
 actor PsnGasFieldKiller : Powerup {inventory.amount 1 Powerup.Duration 7}
 
-actor STF_PoisonGas : Powerup {inventory.amount 1 Powerup.Duration 35 } //Speed 0.4
-
-actor PoisonGasNerfInitiate : CustomInventory
-{
-inventory.amount 1
-Inventory.MaxAmount 100
-+AUTOACTIVATE
-States
-{
-Spawn:
-TNT1 A 0
-stop
-Pickup:
-TNT1 A 0 A_Jumpif(CallACS("CheckStatusGuard",0,STATUS_STATS),"Nope") //Blocked by Protect|Detect|Substitute|Mist
-TNT1 A 0 A_Jumpifinventory("STF_PoisonGas",1,"Sustain")
-TNT1 A 0 A_GiveInventory("STF_PoisonGas",1)
-TNT1 A 0 A_SpawnItemEX("PoisonGasNerfWatcher")
-TNT1 A 0 A_GiveInventory("StatUpdator",1)
-stop
-
-Sustain:
-TNT1 A 0 A_GiveInventory("STF_PoisonGas",1)
-stop
-Nope:
-TNT1 A 0
-stop
-}
-}
-
 Const int PsnGasRad = 150;
 Const int PsnGas_Item = 3;
 Const int PsnGasM_EntiTID = 3;
@@ -257,7 +228,7 @@ stop
 
 actor PoisonGasField : BasicHelper
 {
-ReactionTime 35
+ReactionTime 55
 DamageType "PoisonGas"
 obituary "$OB_PoisonGas"
 var int user_angle;
@@ -301,7 +272,7 @@ actor PoisonGassCloud2 //: BasicClientside
     height 8
     Damage (0)
     scale 2.5
-    Reactiontime 35
+    Reactiontime 55
     Renderstyle "Translucent"
     Alpha 0.4
 States
@@ -359,27 +330,8 @@ States
 {
 Spawn:
 TNT1 A 0 
-WAVB GGGGG 2
-WAVB H 3 A_Stop
-stop
-}
-}
-
-actor PoisonGasNerfWatcher : BasicHelper 
-{
-Var int user_DashTime;
-States
-{
-Spawn:
-TNT1 A 0
-TNT1 A 5 A_GiveToTarget("SpdDownFXSpawn")
-TNT1 A 0 A_JumpIfInTargetInventory("STF_PoisonGas",1,"Spawn")
-TNT1 A 1 A_GiveToTarget("StatUpdator")
-TNT1 A 5
-Goto Death
-
-Death:
-TNT1 A 0 
+PSBB ABCDEFG 2
+PSBB H 3 A_Stop
 stop
 }
 }

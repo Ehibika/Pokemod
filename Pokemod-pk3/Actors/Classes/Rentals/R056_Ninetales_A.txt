@@ -15,11 +15,11 @@ Player.StartItem "PKMNRentalKit"
 //============|
 Player.StartItem "Ninetales_ARentalSetupItem"
 //============|
-Player.StartItem "Base_HP", 73
-Player.StartItem "Base_PAttack", 76
-Player.StartItem "Base_PDefense", 75
-Player.StartItem "Base_SAttack", 81
-Player.StartItem "Base_SDefense", 100
+Player.StartItem "Base_HP", 60
+Player.StartItem "Base_PAttack", 65
+Player.StartItem "Base_PDefense", 60
+Player.StartItem "Base_SAttack", 100
+Player.StartItem "Base_SDefense", 120
 
 //============|
 

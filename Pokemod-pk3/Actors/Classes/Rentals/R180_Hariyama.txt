@@ -1,0 +1,90 @@
+
+/*
+[+]===================================[+]
+
+[+]===================================[+]
+*/
+
+Actor R_Hariyama : ClassBaseRentals 
+{
+Player.DisplayName "Hariyama"
+Player.SoundClass "Hariyama"
++NOSKIN
+
+Player.StartItem "PKMNRentalKit"
+//============|
+Player.StartItem "HariyamaRentalSetupItem"
+//============|
+Player.StartItem "Base_HP", 144
+Player.StartItem "Base_PAttack", 120
+Player.StartItem "Base_PDefense", 60
+Player.StartItem "Base_SAttack", 40
+Player.StartItem "Base_SDefense", 60
+
+//============|
+
+States
+{
+Spawn: 
+P180 A 0
+P180 B 1 
+P180 A 1
+GoTo Spawn+2
+See:
+P180 BCDE 5
+GoTo Spawn+1
+Missile:
+P180 A 0 A_JumpIfInventory("ConshotTimer",1,"Missile2")
+P180 F 5 
+P180 G 4
+GoTo Spawn+2
+Missile2:
+P180 G 9
+GoTo Spawn+2
+
+PainFix:
+P180 H 0 
+GoTo PainFrames
+}
+}
+
+actor HariyamaRentalMoves : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_JumpIf(CallACS("RentalBotCheck") == 1,"BotWep")
+
+TNT1 A 0 A_GiveInventory("BrickBreakMove1")
+TNT1 A 0 A_GiveInventory("FakeOutMove2")
+TNT1 A 0 A_GiveInventory("CloseCombatMove3")
+TNT1 A 0 A_GiveInventory("DetectMove4")
+stop
+
+BotWep:
+TNT1 A 0 A_GiveInventory("BrickBreakMove1")
+stop
+}
+}
+
+actor HariyamaRentalSetupItem : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 ACS_NamedExecuteAlways("PKMN_RentalsSetup",0,Dex_Hariyama)
+stop
+}
+}

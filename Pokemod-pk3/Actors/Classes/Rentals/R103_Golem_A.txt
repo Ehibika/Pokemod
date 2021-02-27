@@ -15,11 +15,11 @@ Player.StartItem "PKMNRentalKit"
 //============|
 Player.StartItem "Golem_ARentalSetupItem"
 //============|
-Player.StartItem "Base_HP", 80
+Player.StartItem "Base_HP", 100
 Player.StartItem "Base_PAttack", 110
 Player.StartItem "Base_PDefense", 130
 Player.StartItem "Base_SAttack", 55
-Player.StartItem "Base_SDefense", 65
+Player.StartItem "Base_SDefense", 90
 
 //============|
 

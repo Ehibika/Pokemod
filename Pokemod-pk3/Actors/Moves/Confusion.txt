@@ -195,7 +195,7 @@ stop
 }
 
 
-actor ConfusionHitbox : BasicExplosion
+actor ConfusionHitbox : BasicExplosion2
 {
 Damage(0)
 DamageType "Confusion"

@@ -78,30 +78,15 @@ Powerup.duration 7
 Damagefactor "PetalBlizzard", 0
 }
 
+Actor PetalBlizzardBuffer : powerprotection
+{
+Powerup.duration 17
+Damagefactor "PetalBlizzard", 0.1
+}
+
 Const int PETALBLIZZARD_RAD = 100;
 Const int PETALBLIZZARD_RAD2 = 32;
 
-actor PetalBlizzardFreezeRate : CustomInventory
-{
-inventory.amount 1
-Inventory.MaxAmount 100
-+AUTOACTIVATE
-States
-{
-Spawn:
-TNT1 A 0
-stop
-Pickup:
-TNT1 A 0 A_Jumpifinventory("FreezeMark",1,"FreezeUp")
-FreezeUp:
-TNT1 A 0 A_GiveInventory("FreezeValue",random(25,35))
-stop
-
-Nope:
-TNT1 A 0
-stop
-}
-}
 
 actor PetalBlizzard_Recovery_C : FullRecovery_C{Powerup.Duration -3} //87
 //[+]========================================================================[+]
@@ -197,7 +182,7 @@ stop
 }
 
 
-actor PetalBlizzardDamager : BasicExplosion
+actor PetalBlizzardDamager : BasicExplosion2
 {
 Damagetype "PetalBlizzard"
 Obituary "$OB_PETALBLIZZARD"
@@ -219,7 +204,7 @@ stop
 }
 }
 
-actor PetalBlizzardHitBox1 : BasicExplosion
+actor PetalBlizzardHitBox1 : BasicExplosion2
 {
 Damagetype "PetalBlizzard"
 Obituary "$OB_PETALBLIZZARD"

@@ -2,7 +2,7 @@ actor ReflectMove : WepMasterBase
 {
 Tag "Reflect"
 Weapon.AmmoUse 1
-Weapon.AmmoGive 10
+Weapon.AmmoGive 5
 weapon.ammotype "ReflectPP"
 scale 2.0
 Inventory.Pickupmessage "$PU_MEGABUSTER"
@@ -70,9 +70,9 @@ Goto Ready
 //[+]========================================================================[+]
 //-----------------------------|Ammo & Inventory|------------------------------
 //[+]========================================================================[+]
-actor ReflectPP : Ammo {inventory.amount 1 inventory.Maxamount 10}
+actor ReflectPP : Ammo {inventory.amount 1 inventory.Maxamount 5}
 
-actor ReflectPower : PDef { damagefactor "Normal", 0.67 powerup.Duration -15}
+actor ReflectPower : PDef { damagefactor "Normal", 0.5 powerup.Duration -30}
 
 Const int ReflectRad = 1000;
 Const int Reflect_Item = 10;
@@ -107,7 +107,7 @@ stop
 //[+]========================================================================[+]
 //--------------------------------|Projectiles |--------------------------------
 //[+]========================================================================[+]
-actor ReflectRingGuide : BasicHelper
+actor ReflectRingGuide : BasicServerSideHelper
 {
 translation "198:198=220:220", "192:192=229:229"
 	reactiontime 15
@@ -207,7 +207,7 @@ stop
 }
 }
 
-actor ReflectWatcher : BasicHelper 
+actor ReflectWatcher : BasicServerSideHelper 
 {
 Var int user_DashTime;
 States
@@ -232,7 +232,7 @@ stop
 }
 }
 
-actor ReflectWatcher2 : BasicHelper 
+actor ReflectWatcher2 : BasicServerSideHelper 
 {
 Var int user_DashTime;
 States

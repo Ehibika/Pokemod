@@ -200,7 +200,7 @@ stop
 actor SludgeBombAimPath : GolfBallAimInstantStarter2 { Speed 35 Gravity 1.5}
 
 
-actor SludgeBombBlast : BasicExplosion
+actor SludgeBombBlast : BasicExplosion2
 {
 DamageType "SludgeBomb"
 obituary "$OB_SludgeBomb"

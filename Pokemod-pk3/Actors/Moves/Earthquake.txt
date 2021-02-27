@@ -152,6 +152,8 @@ Obituary "$OB_EARTHQUAKE"
 +THRUGHOST
 +RIPPER
 +FLOORHUGGER
+
++SPECTRAL //to hit certain actors
 Radius 20
 Height 26
 Damage (0)

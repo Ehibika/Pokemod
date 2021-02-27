@@ -5,7 +5,7 @@ actor FlameWheelMove : WepMasterBase
 Tag "FlameWheel"
 obituary "$OB_FLAMEWHEEL"
 Weapon.AmmoUse 1
-Weapon.AmmoGive 10
+Weapon.AmmoGive 35
 weapon.ammotype "FlameWheelPP"
 scale 2.0
 Inventory.Pickupmessage "$PU_MEGABUSTER"
@@ -110,7 +110,7 @@ Goto Ready
 //[+]========================================================================[+]
 //-----------------------------|Ammo & Inventory|------------------------------
 //[+]========================================================================[+]
-actor FlameWheelPP : Ammo {inventory.amount 1 inventory.Maxamount 10}
+actor FlameWheelPP : Ammo {inventory.amount 1 inventory.Maxamount 35}
 
 actor FlameWheelWarmupTimer : Powerup {inventory.amount 1 powerup.duration 10 }
 actor FlameWheelTimer : Powerup {inventory.amount 1 powerup.duration -10 }

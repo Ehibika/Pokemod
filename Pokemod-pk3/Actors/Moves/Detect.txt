@@ -3,7 +3,7 @@ actor DetectMove : WepMasterBase
 Tag "Detect"
 obituary "$OB_DETECT"
 Weapon.AmmoUse 1
-Weapon.AmmoGive 15
+Weapon.AmmoGive 5
 weapon.ammotype "DetectPP"
 scale 2.0
 Inventory.Pickupmessage "$PU_MEGABUSTER"
@@ -21,36 +21,19 @@ Goto NoAmmo
 
 Fire.Begin:
 "####" B 0
+"####" B 0 A_Jumpifinventory("DetectGuard",1,"NoAmmo2")
 "####" B 0 A_Jump(256,"Fire.Initiate")
 Goto Fire.Initiate
 
 Fire.Initiate:
-"####" B 0 A_PlaySoundEx("weapon/ChargeKick","Soundslot6")
-"####" B 0 A_GiveInventory("DetectGuard")
-"####" B 0 A_GiveInventory("AfterImageFX")
-"####" B 0 A_GiveInventory("DetectDashTimer")
-"####" A 0 A_SpawnItemEx("Detect_VWatcher")
+"####" B 0 A_PlaySoundEx("move/Detect","Soundslot6")
+"####" B 0 A_SpawnItemEx("DetectGlintFX",16,8,32)
+"####" B 0 A_GiveInventory("DetectState_On")
 "####" B 0 A_TakeInventory("DetectPP",1)
-"####" A 0 A_GiveInventory("DashSet_B")
-"####" A 0 A_SetTranslucent(0.2,0)
-"####" A 0 A_ChangeFlag("SHADOW",1)
-"####" B 0 A_Jump(256,"Fire.Dash")
-Goto Fire.Dash
+goto Fire.After
 
-Fire.Dash:
-"####" A 0 A_SpawnItemEX("GroundDustFX",-25,0,-(z-floorz),0)
-"####" A 1 A_ChangeVelocity(cos(-pitch)*120,0,sin(-pitch)*120,CVF_RELATIVE|CVF_REPLACE)
-"####" A 0 A_Jumpifinventory("DetectDashTimer",1,"Fire.Dash")
-"####" B 0 A_ScaleVelocity(0.2)
-goto Fire.DashEnd
-
-Fire.DashEnd:
-"####" B 0 A_TakeInventory("AfterImageFX",9)
-//"####" B 0 A_TakeInventory("DetectGuard",99)
-"####" A 0 A_SetTranslucent(1.0,0)
-"####" A 0 A_ChangeFlag("SHADOW",0)
-"####" B 0 A_GiveInventory("DashSetOff")
-"####" B 1 A_GiveInventory("semiRecovery_C")
+Fire.After:
+"####" B 1 A_GiveInventory("FullRecovery_C")
 "####" B 0 A_Jump(256,"Fire.End")
 Goto Fire.End
 
@@ -78,8 +61,29 @@ Goto Ready
 //[+]========================================================================[+]
 //-----------------------------|Ammo & Inventory|------------------------------
 //[+]========================================================================[+]
-actor DetectPP : Ammo {inventory.amount 1 inventory.Maxamount 15}
-actor DetectGuard : ProtectGuard {inventory.amount 1 Powerup.Duration 17}
+actor DetectPP : Ammo {inventory.amount 1 inventory.Maxamount 5}
+actor DetectGuard : BasePowerPro 
+{
+    -PICKUP
+    inventory.amount 1 
+    Powerup.Duration -3
+    /*
+    no point in defining painstates, the spectral flag protects from all harm except
+    for missiles with spectral. so attacks that breech the evasion state of detect
+    just need to have that flag
+
+    I think I may use this for dig and dive to make them succeptible to surf, where there,
+    I do use a painstate that blocks all spectral breeching moves but those.
+    */
+}
+
+actor SmokeScreenGuard : PowerupGiver
+{ //gotta put it here because smokescreen is defined before detect
++INVENTORY.AUTOACTIVATE
+Powerup.Duration 35
+powerup.type "DetectGuard"
+}
+
 actor AfterImageFX : PowerSpeed {inventory.amount 1 Powerup.Duration 17}
 actor DetectDashTimer : Powerup {inventory.amount 1 Powerup.Duration 5}
 
@@ -93,5 +97,87 @@ CheckInv:
 TNT1 A 1 A_JumpIfInTargetInventory("DetectGuard",1,"Reloop")
 TNT1 A 1 A_JumpIfInTargetInventory("DetectDashTimer",1,"Reloop")
 Goto Death
+}
+}
+
+
+
+
+actor DetectState_On : CustomInventory
+{
+inventory.amount 1
+inventory.maxamount 1
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 1
+loop
+Pickup:
+TNT1 A 1 A_ChangeFlag("Spectral",1)
+TNT1 A 0 A_GiveInventory("DetectGuard")
+TNT1 A 0 A_SpawnItemEx("DetectWatcher")
+TNT1 A 0 ACS_NamedExecuteAlways("DetectFlicker",0)
+
+stop
+}
+}
+
+actor DetectState_Off : CustomInventory
+{
+inventory.amount 1
+inventory.maxamount 1
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 1
+loop
+Pickup:
+TNT1 A 1 A_ChangeFlag("Spectral",0)
+stop
+}
+}
+
+actor DetectWatcher //: CustomInventory
+{
++MISSILE
++RIPPER
++NOGRAVITY
++NOINTERACTION
+Reactiontime 5
+States
+{
+Spawn:
+TNT1 A 0
+Spawn2:
+TNT1 A 1 
+TNT1 A 1 A_JumpIfInTargetInventory("DetectGuard",1,"Spawn2")
+Goto Spawn3
+
+Spawn3:
+TNT1 A 0 A_GiveToTarget("DetectState_Off")
+Goto Death
+
+Death:
+DeathTake:
+TNT1 A 0
+TNT1 A 1 A_TakefromTarget("HypnoMark",999)
+TNT1 A 1 A_TakefromTarget("HypnoRate",999)
+stop
+}
+}
+
+actor DetectGlintFX : BasicClientside
+{
+scale 2.5
+ReactionTime 3
+States
+{
+Spawn:
+CRBM A 0
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+GLNT ABCCDE 1 A_Warp(AAPTR_TARGET,16,32,64,0,WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE)
+stop
 }
 }

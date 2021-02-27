@@ -68,7 +68,7 @@ Goto Ready
 actor MuddyWaterPP : Ammo {inventory.amount 1 inventory.Maxamount 25}
 
 
-actor STF_MuddyWater : Powerup {inventory.amount 1 Powerup.Duration -6}
+actor STF_MuddyWater : BaseSTatusFlag {}
 
 actor MuddyWaterNerfInitiate : CustomInventory
 {
@@ -83,6 +83,7 @@ stop
 Pickup:
 TNT1 A 0 A_Jumpif(CallACS("CheckStatusGuard",0,STATUS_STATS),"Nope") //Blocked by Protect|Detect|Substitute|Mist
 TNT1 A 0 A_Jumpifinventory("STF_MuddyWater",1,"Sustain")
+TNT1 A 0 A_PlaySoundEx("support/StatDown","Weapon")
 TNT1 A 0 A_GiveInventory("STF_MuddyWater",1)
 TNT1 A 0 A_SpawnItemEX("MuddyWaterNerfWatcher")
 TNT1 A 0 A_GiveInventory("StatUpdator",1)
@@ -129,6 +130,7 @@ obituary "$OB_MuddyWater"
 Damage (MBP_MuddyWater)
 +MTHRUSPECIES
 +STEPMISSILE
++SPECTRAL 
 maxstepheight 16
 States
 {

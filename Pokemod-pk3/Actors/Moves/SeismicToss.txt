@@ -14,7 +14,7 @@ WEAP X 1
 stop
 
 Fire:
-"####" BBB 1 A_Jumpif(CallACS("CheckWeaponFire",RC_B)==1,"Fire.Begin")
+"####" BBB 1 A_Jumpif(CallACS("CheckWeaponFire",RC_D)==1,"Fire.Begin")
 "####" B 0 A_Jump(256,"NoAmmo")
 Goto NoAmmo
 
@@ -24,13 +24,12 @@ Fire.Begin:
 Goto Fire.GrabStart
 
 Fire.GrabStart:
-JARM F 0 A_TakeInventory("SeismicTossPP",1)
-//TNT1 A 1 A_GiveInventory("SeismicTossGroundGuardFunc",1)
-JARM F 0 A_GiveInventory("SeismicTossGrabTimer",1)
-FSTO D 0 A_TakeInventory("SuplexID",999)
-//SAKH C 0 ThrustThingZ(0,45,0,1)
-TNT1 A 0 A_PlaySound("weapon/BreakDash")
-"####" A 0 A_GiveInventory("DashSet_B")
+TNT1 A 0 A_GiveInventory("GrappleGuard")
+TNT1 A 0 A_TakeInventory("SeismicTossPP",1)
+TNT1 A 0 A_TakeInventory("SuplexID",999)
+TNT1 A 0 A_GiveInventory("DashSet_B")
+TNT1 A 2 A_PlaySound("weapon/BreakDash")
+TNT1 A 0 A_GiveInventory("SeismicTossGrabTimer",1)
 SeismicTossWalk:
 JARM F 0 A_GiveInventory("SeismicTossWalkThrust",1)
 //TNT1 A 1 A_GiveInventory("SeismicTossGroundGuardFunc",1)
@@ -57,7 +56,7 @@ TNT1 A 0 A_JumpIf(momz<0,"GoingDownSpin")
 goto GoingUpSpin
 
 GoingUpSpin:
-SAKH C 0 ThrustThingZ(0,1,1,1)
+SAKH C 0 ThrustThingZ(0,15,1,1)
 TNT1 A 0 A_SetAngle(angle+20.0)
 TNT1 A 1 A_Jumpif(!CallACS("Grasp_TID",CallACS("Get_SuplexID_TID")),"SeismicTossSlam")
 TNT1 A 0 A_CheckFloor("SeismicTossSlam")
@@ -91,7 +90,7 @@ TNT1 A 0 A_SpawnItemEx("ReSolidifier") // here it is
 Goto Fire.After
 
 Fire.After:
-"####" B 1 A_GiveInventory("HalfRecovery_B")
+"####" B 1 A_GiveInventory("HalfRecovery_D")
 "####" A 0 A_GiveInventory("DashSetOff")
 "####" C 0 A_REfire("Fire")
 "####" B 0 A_Jump(256,"Fire.End")
@@ -121,7 +120,7 @@ Goto Ready
 //-----------------------------|Ammo & Inventory|------------------------------
 //[+]========================================================================[+]
 actor SeismicTossPP : Ammo {inventory.amount 1 inventory.Maxamount 10}
-actor SeismicTossGrabTimer : Powerup {inventory.amount 1 powerup.duration 17}
+actor SeismicTossGrabTimer : Powerup {inventory.amount 1 powerup.duration 8}
 
 Const int SeismicTossRad = 120;
 Const int SeismicToss_Item = 14;
@@ -152,6 +151,7 @@ UpLimit:
 TNT1 A 0 A_SetPitch(350)
 Pickup2:
 TNT1 A 0 A_FireCustomMissile("SeismicTossGrab",0,0,0,0)
+TNT1 A 0 A_GiveInventory("GrappleGuard")
 stop
 }
 }

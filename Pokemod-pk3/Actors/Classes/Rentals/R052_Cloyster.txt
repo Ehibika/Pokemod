@@ -15,11 +15,11 @@ Player.StartItem "PKMNRentalKit"
 //============|
 Player.StartItem "CloysterRentalSetupItem"
 //============|
-Player.StartItem "Base_HP", 50
-Player.StartItem "Base_PAttack", 95
-Player.StartItem "Base_PDefense", 160
-Player.StartItem "Base_SAttack", 85
-Player.StartItem "Base_SDefense", 65
+Player.StartItem "Base_HP", 80
+Player.StartItem "Base_PAttack", 75
+Player.StartItem "Base_PDefense", 150
+Player.StartItem "Base_SAttack", 60
+Player.StartItem "Base_SDefense", 90
 
 //============|
 

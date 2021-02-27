@@ -1,4 +1,4 @@
-actor Atk : PowerDamage
+actor Atk : BasePowerDamage
 {
 Powerup.Duration 0x7FFFFFFF
 
@@ -47,7 +47,7 @@ damagefactor "MorningSun", 1.0
 damagefactor "Curse", 1.0
 damagefactor "StringShot", 1.0
 damagefactor "Splash", 1.0
-damagefactor "ElectroLevitate", 1.0
+damagefactor "MagnetRise", 1.0
 damagefactor "QuiverDance", 1.0
 damagefactor "Defog", 1.0
 damagefactor "SeismicToss1", 1.0
@@ -55,7 +55,14 @@ damagefactor "SeismicToss2", 1.0
 damagefactor "StormThrow1", 1.0
 damagefactor "Submission1", 1.0
 damagefactor "SuperPower1", 1.0
+damagefactor "VitalThrow1", 1.0 
+Damagefactor "WillOWisp", 1.0
 
+
+damagefactor "Spite", 1.0
+damagefactor "Sing", 1.0
+damagefactor "ShoreUp", 1.0
+damagefactor "Roost", 1.0
 //--[NewStatusMove]--
 }
 
@@ -163,6 +170,10 @@ damagefactor "EarthPower", 1.0
 damagefactor "SignalBeam", 1.0
 damagefactor "Infestation", 1.0
 
+damagefactor "AuraSphere", 1.0
+damagefactor "FairyWind", 1.0
+damagefactor "SelfDestruct", 1.0
+damagefactor "Explosion", 1.0
 //--[NewSpecialMove]--
 }
 
@@ -253,7 +264,7 @@ damagefactor "IcicleSpear", 1.0
 damagefactor "SpikeCannon", 1.0
 damagefactor "RockBlast", 1.0
 damagefactor "Clamp", 1.0
-damagefactor "Feintattack", 1.0
+damagefactor "ThunderFang", 1.0
 damagefactor "Drainpunch", 1.0
 damagefactor "PsychoCut", 1.0
 damagefactor "MegaPunch", 1.0
@@ -292,11 +303,23 @@ damagefactor "PoisonJab", 1.0
 damagefactor "PinMissile", 1.0
 damagefactor "FaintAttack", 1.0
 damagefactor "StormThrow2", 1.0
-damagefactor "VitalThrow", 1.0
+damagefactor "VitalThrow2", 1.0
 damagefactor "Submission2", 1.0
 damagefactor "SuperPower2", 1.0
 damagefactor "BrickBreak", 1.0
 damagefactor "Megahorn", 1.0
 damagefactor "LeechLife", 1.0
+damagefactor "LowKick", 1.0
+damagefactor "KarateChop", 1.0
+damagefactor "Revenge", 1.0
+damagefactor "ArmThrust", 1.0
+damagefactor "ForcePalm", 1.0
+damagefactor "DynamicPunch", 1.0
+damagefactor "RollingKick", 1.0
+damagefactor "TripleKick", 1.0
+damagefactor "JumpKick", 1.0
+damagefactor "BodySlam", 1.0
+damagefactor "UTurn", 1.0
+damagefactor "FlipTurn", 1.0
 //--[NewPhysicalMove]--
 }

@@ -15,11 +15,11 @@ Player.StartItem "PKMNRentalKit"
 //============|
 Player.StartItem "MagcargoRentalSetupItem"
 //============|
-Player.StartItem "Base_HP", 60
+Player.StartItem "Base_HP", 80
 Player.StartItem "Base_PAttack", 50
-Player.StartItem "Base_PDefense", 120
-Player.StartItem "Base_SAttack", 90
-Player.StartItem "Base_SDefense", 80
+Player.StartItem "Base_PDefense", 90
+Player.StartItem "Base_SAttack", 150
+Player.StartItem "Base_SDefense", 90
 
 //============|
 

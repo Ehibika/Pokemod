@@ -71,7 +71,8 @@ Spawn:
 TNT1 A 0
 stop
 Pickup:
-TNT1 A 0 A_Jumpifinventory("FreezeMark",1,"FreezeUp")
+TNT1 A 0 A_Jumpifinventory("SemiFreezeMark",1,"FreezeUp")
+stop
 FreezeUp:
 TNT1 A 0 A_GiveInventory("FreezeValue",random(20,25))
 stop

@@ -9,13 +9,14 @@
 #Import "WEPACS.acs"
 #Import "Dex_Pokemon.acs"
 #Import "Dex_Moves.acs"
-#Import "Dex_Movesets.acs"
+#import "Dex_Movesets.acs"
 #Import "Dex_Evo.acs."
 #Import "Dex_Skin.acs."
 #Import "Dex_TM.acs."
 #Import "DB_Data.acs"
 #Import "DB_Shop.acs"
 #Import "DB_Leveling.acs"
+#import "DB_Action.acs"
 
 #define MNL 8.0 //menu line spacing
 #define MenuXOrigin 120.1
@@ -1390,7 +1391,7 @@ script "NET_freezeplayer" (int toggle) NET
 	if(toggle == 0){
 		if(CheckInventory("InMenu")>0){
 		TakeInventory("InMenu", 99);
-		SetPlayerProperty(0, 0, PROP_TOTALLYFROZEN);
+		ACS_NamedExecuteAlways("PKMN_FreezePlayer",0,PLAYER_UNFREEZE,FREEZE_MENU);
 		if(!CheckInventory("InMenu")){GiveInventory("NetCheck_Freeze",1);}
 			
 		}
@@ -1401,10 +1402,10 @@ script "NET_freezeplayer" (int toggle) NET
 Script "MenuFreeze" (void)
 {
 	GiveInventory("InMenu", 1);
-	SetPlayerProperty(0, 1, PROP_TOTALLYFROZEN);
+	ACS_NamedExecuteAlways("PKMN_FreezePlayer",0,PLAYER_FULLFREEZE,FREEZE_MENU);
 
 	While(CheckInventory("InMenu")){Delay(1);}
-	SetPlayerProperty(0, 0, PROP_TOTALLYFROZEN);
+	ACS_NamedExecuteAlways("PKMN_FreezePlayer",0,PLAYER_UNFREEZE,FREEZE_MENU);
 }
 
 
@@ -1414,8 +1415,8 @@ if(Playernumber() != ConsolePlayerNumber() )Terminate;
 if(CheckInventory("UnstuckCooldown")){Log(s:"Must wait a few minutes to Unstuck again");Terminate;}
 
 TakeInventory("InMenu", 99);
-SetPlayerProperty(0, 0, PROP_TOTALLYFROZEN);
-SetPlayerProperty(0, 0, PROP_FROZEN);
+ACS_NamedExecuteAlways("PKMN_FreezePlayer",0,PLAYER_UNFREEZE,FREEZE_MENU);
+//SetPlayerProperty(0, 0, PROP_FROZEN);
 GiveInventory("UnstuckCooldown", 1);
 }
 

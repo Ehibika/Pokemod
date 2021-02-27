@@ -1,6 +1,6 @@
-Const int POISONJAB_SPD = 55;
+Const int POISONJAB_SPD = 25;
 Const int POISONJAB_SPD2 = -20;
-Const int POISONJAB_SPD3 = 55;
+Const int POISONJAB_SPD3 = 25;
 
 actor PoisonJabMove : WepMasterBase
 {
@@ -33,7 +33,7 @@ Goto Fire.Rampage
 
 Fire.Rampage:
 "####" B 2 A_PlaySoundEx("misc/darkleap","Weapon")
-"####" BBB 0 A_FireCustomMissile("PoisonJabMelee",0,0,random(-POISONJAB_SPD,POISONJAB_SPD),random(POISONJAB_SPD2,POISONJAB_SPD3),0,0)
+"####" BBB 0 A_FireCustomMissile("PoisonJabMelee",0,0,random(-POISONJAB_SPD,POISONJAB_SPD),random(POISONJAB_SPD2,POISONJAB_SPD3),0,CallACS("PitchClamp",Pitch,55))
 "####" B 1 A_Jumpifinventory("PoisonJabTimer",1,"Fire.RampageCheck")
 "####" B 1 A_Jump(256,"Fire.After")
 Goto Fire.After
@@ -81,7 +81,13 @@ actor PoisonJabTimer : Powerup {inventory.amount 1 powerup.duration 15 }
 Actor PoisonJabProtect : powerprotection
 {
 Powerup.duration 4
-Damagefactor "PoisonJab", 0.3
+Damagefactor "PoisonJab", 0
+}
+
+Actor PoisonJabBuffer : powerprotection
+{
+Powerup.duration 17
+Damagefactor "PoisonJab", 0.1
 }
 
 //[+]========================================================================[+]

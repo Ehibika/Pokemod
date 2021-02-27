@@ -15,11 +15,11 @@ Player.StartItem "PKMNRentalKit"
 //============|
 Player.StartItem "SkuntankRentalSetupItem"
 //============|
-Player.StartItem "Base_HP", 103
-Player.StartItem "Base_PAttack", 93
-Player.StartItem "Base_PDefense", 67
-Player.StartItem "Base_SAttack", 71
-Player.StartItem "Base_SDefense", 61
+Player.StartItem "Base_HP", 110
+Player.StartItem "Base_PAttack", 110
+Player.StartItem "Base_PDefense", 60
+Player.StartItem "Base_SAttack", 60
+Player.StartItem "Base_SDefense", 60
 
 //============|
 

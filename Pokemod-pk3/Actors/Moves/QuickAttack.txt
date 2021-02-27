@@ -25,7 +25,7 @@ Fire.Begin:
 Goto Fire.Dash
 
 Fire.Dash:
-"####" A 0 A_GiveInventory("DashSet_B")
+"####" A 1 A_GiveInventory("DashSet_B")
 "####" A 0 ACS_NamedExecuteAlways("TakePP",0,Move_QuickAttack,1)
 "####" B 0 A_PlaySoundEx("weapon/ChargeKick","Soundslot6")
 "####" A 0 A_GiveInventory("QuickAttackInitiate")
@@ -85,7 +85,7 @@ height 12
 DamageType "QuickAttack"
 Obituary "$OB_QUICKATTACK"
 scale 1.5
-//+NOINTERACTION
++NOINTERACTION
 States
 {
 Spawn:
@@ -241,7 +241,7 @@ TNT1 A 0 A_JumpIfInTargetInventory("DashBreaker",1,"Death")
 TNT1 A 0 A_SetUserVar("user_DashTime",user_DashTime+1)
 TNT1 A 0 A_JumpIfInTargetInventory("CutterFlag",999,"DeathTake")
 TNT1 A 1 A_GiveToTarget("QuickAttackThrust")
-TNT1 A 0 A_Jumpif(user_DashTime <= 6,"Spawn")
+TNT1 A 0 A_Jumpif(user_DashTime < 6,"Spawn")
 Goto Death
 Check2:
 TNT1 A 0 A_JumpIfInTargetInventory("DashBreaker",1,"Spawn")

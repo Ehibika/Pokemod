@@ -191,8 +191,16 @@ ACS_NamedExecuteAlways("ActiveStatUpdate",0,1);
 
 
 
-Script "StatItemNuke" (int ItemType)
+Script "StatItemNuke" (int ItemType, int MistBlock)
 {
+
+    //first, if the player has a mist, the mist is removed but everything else is safe
+    if(CheckInventory("MistFlag") && ItemType & SB_GOOD)
+        {
+        if(!MistBlock){TakeInventory("MistFlag",999);}
+        else{Terminate;}
+        //if mistblock is true, then this stat nuke is blocked entirely
+        }
     for (int t = 0; t < STATITEMNUM; t++)
     {
         if((ItemType & SB_GOOD) && (StatEffectName[t][1] == "GOOD")){TakeInventory(StrParam(s:"STF_",s:StatEffectName[t][0]),999);}
@@ -391,8 +399,8 @@ int Output = 0.0;
 
 int SpeedTier = StatDEX[DexNum][BASE_SPD];
 
-if(ModCount > 0 && SpeedTier < SUPERFAST_SPD){SpeedTier = SUPERFAST_SPD;}
-if(ModCount < 0 && SpeedTier > SLOW_SPD){SpeedTier = SLOW_SPD;}
+//if(ModCount > 0 && SpeedTier < SUPERFAST_SPD){SpeedTier = SUPERFAST_SPD;}
+//if(ModCount < 0 && SpeedTier > SLOW_SPD){SpeedTier = SLOW_SPD;}
 
 SpeedTier += ModCount;
 
@@ -507,6 +515,7 @@ script "CLEAR_STATUSVARS" (int p)
 
 Script "ObjectATKstat" (int level, int BaseATK, int BaseSATK)
 {
+    if(Level<1){Level = GetCvar(StrParam(s:"PlayerLevel_",i:ACS_NamedExecuteWithResult("core_gettarget",0)-1000));}
 
 int Act_ATK = ActStatCalc(BaseATK,level);
 int Act_SATK = ActStatCalc(BaseSATK,level);
@@ -555,6 +564,7 @@ log(s:StrParam(s:"SATK",i:StatValue));
 
 Script "ObjectDEFstat" (int level, int BaseDEF, int BaseSDEF)
 {
+    if(Level<1){Level = GetCvar(StrParam(s:"PlayerLevel_",i:ACS_NamedExecuteWithResult("core_gettarget",0)-1000));}
 
     int Act_DEF = ActStatCalc(BaseDEF,level);
     int Act_SDEF = ActStatCalc(BaseSDEF,level);
@@ -605,6 +615,8 @@ Script "ObjectDEFstat" (int level, int BaseDEF, int BaseSDEF)
 Script "ObjectHPstat" (int level, int BaseHP)
 {
     Delay(1);
+    if(Level<1){Level = GetCvar(StrParam(s:"PlayerLevel_",i:ACS_NamedExecuteWithResult("core_gettarget",0)-1000));}
+
     int Act_HP = ActStatCalc(BaseHP,level);
     int ModStat;
     int StatValue;
@@ -621,7 +633,7 @@ Script "ObjectHPstat" (int level, int BaseHP)
         }
     if(StatValue < 50){StatValue = 50;}
     SetActorPRoperty(0,APROP_HEALTH,StatValue);
-    //log(i:StatValue,s:"   ::    ",i:GetActorPRoperty(0,APROP_HEALTH));
+    //log(i:level,s:"  :  ",i:StatValue,s:"   ::    ",i:GetActorPRoperty(0,APROP_HEALTH));
     TakeInventory("SBAR_HP",9999);
     GiveInventory("SBAR_HP",StatValue);
 }

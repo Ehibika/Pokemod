@@ -71,7 +71,7 @@ Goto Ready
 //-----------------------------|Ammo & Inventory|------------------------------
 //[+]========================================================================[+]
 actor DefenseCurlPP : Ammo {inventory.amount 1 inventory.Maxamount 25}
-actor STF_DefenseCurl : PowerDamage 
+actor STF_DefenseCurl : BasePowerDamage 
 {
     inventory.amount 1 Powerup.Duration 40
     DamageFactor "FlameWheel", 2.0
@@ -117,6 +117,7 @@ TNT1 A 0
 TNT1 A 0 A_JumpIfInTargetInventory("CutterFlag",999,"Death")
 TNT1 A 0 A_JumpIfInTargetInventory("IsDead",1,"Death")
 TNT1 A 0 A_JumpIfInTargetInventory("HazeFlag",1,"Death")
+TNT1 A 0 A_JumpIfInTargetInventory("TauntFlag",1,"Death")
 TNT1 A 5 A_GiveToTarget("STF_DefenseCurl")
 TNT1 A 0 A_GiveToTarget("PDEFUpFXSpawn")
 TNT1 A 0 A_SetUserVar("user_TickTime",user_TickTime+5)

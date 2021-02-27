@@ -291,6 +291,8 @@ actor FireProof : TypeBase
 {
     //damagefactor "Incinerate", 0.0
     damagefactor "FireSpin", 0.0
+    Damagefactor "WillOWisp", 0.0
+
 }
 
 //#endregion

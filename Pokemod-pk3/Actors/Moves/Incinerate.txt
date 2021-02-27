@@ -166,7 +166,7 @@ stop
 actor IncinerateAimPath : GolfBallAimInstantStarter3 { Speed 32 Gravity 1.5}
 
 
-actor IncinerateField : BasicExplosion
+actor IncinerateField : BasicExplosion2
 {
 DamageType "Incinerate"
 obituary "$OB_Incinerate"

@@ -83,7 +83,7 @@ Goto Ready
 actor MetalClawPP : Ammo {inventory.amount 1 inventory.Maxamount 35}
 Actor Imbue_MetalClaw : Powerup{inventory.amount 1 powerup.duration 0x7FFFFFFF}
 
-actor STF_MetalClaw : Powerup {inventory.amount 1 Powerup.Duration -6}
+actor STF_MetalClaw : BaseSTatusFlag {}
 
 actor MetalClawNerfInitiate : CustomInventory
 {
@@ -98,6 +98,7 @@ stop
 Pickup:
 TNT1 A 0 A_Jumpif(CallACS("CheckStatusGuard",0,STATUS_STATS),"Nope") //Blocked by Protect|Detect|Substitute|Mist
 TNT1 A 0 A_Jumpifinventory("STF_MetalClaw",1,"Sustain")
+TNT1 A 0 A_PlaySoundEx("support/StatDown","Weapon")
 TNT1 A 0 A_GiveInventory("STF_MetalClaw",1)
 TNT1 A 0 A_SpawnItemEX("MetalClawNerfWatcher")
 TNT1 A 0 A_GiveInventory("StatUpdator",1)

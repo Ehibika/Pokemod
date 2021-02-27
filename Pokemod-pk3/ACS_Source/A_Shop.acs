@@ -473,10 +473,10 @@ int Output = 1;
 if(CheckInventory("SleepMark")
     ||CheckInventory("FreezeMark")
     ||CheckInventory("ConShotTimer")
-    ||CheckInventory("EmbargoFlag")){Output = 0;}
+    ||CheckInventory("EmbargoFlag")){Output = 0; }
 
     if(GetCvar("lastmanstanding")==1||GetCvar("teamlms")==1)
-    {if(GetGameModeState()!=GAMESTATE_INPROGRESS){Output = 0;}}
+    {if(GetGameModeState()!=GAMESTATE_INPROGRESS){Output = 0; }}
 
     if (GetCvar("Game_Arena")==1){if(GetCvar("Game_GameState")==0){output = 0;}}
 setresultvalue(Output);

@@ -211,7 +211,7 @@ stop
 }
 
 
-actor EarthPowerBurst : BasicExplosion
+actor EarthPowerBurst : BasicExplosion2
 {
 translation "202:202=210:210"//90
 Damagetype "EarthPower"

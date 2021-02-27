@@ -176,6 +176,8 @@ stop
 actor GigaDrainSapper2 : GigaDrainSapper1
 {
 -SERVERSIDEONLY
+
++SPECTRAL //Spectral Breeching
 DamageType "GigaDrain"
 obituary "$OB_GigaDrain"
 States

@@ -85,6 +85,12 @@ Actor OutrageProtect : powerprotection
 Powerup.duration 6
 Damagefactor "Outrage", 0
 }
+
+Actor OutrageBuffer : powerprotection
+{
+Powerup.duration 17
+Damagefactor "Outrage", 0.1
+}
 //[+]========================================================================[+]
 //--------------------------------|Projectiles |--------------------------------
 //[+]========================================================================[+]

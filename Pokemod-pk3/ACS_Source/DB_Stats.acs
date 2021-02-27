@@ -17,7 +17,7 @@
 #LIBDEFINE ATKVAL1 1
 #LIBDEFINE ATKVAL2 50
 #LIBDEFINE ATKVAL3 200
-#LIBDEFINE ATKVAL4 300
+#LIBDEFINE ATKVAL4 400
 
 #LIBDEFINE DEFVAL1 10
 #LIBDEFINE DEFVAL2 50
@@ -63,7 +63,7 @@ Int SpeedTable[15][2] = {
 
 
 
-#LIBDEFINE STATITEMNUM 70
+#LIBDEFINE STATITEMNUM 83
 
 Str StatEffectName[STATITEMNUM][2] = {
     {"Growth","GOOD"},
@@ -136,6 +136,19 @@ Str StatEffectName[STATITEMNUM][2] = {
     {"Tailwind","GOOD"},
     {"SuperPower","BAD"},
     {"QuiverDance","GOOD"},
+    {"TripleKick","GOOD"},
+    {"SdefDown","BAD"},
+    {"MoonBlast","BAD"},
+    {"Bubble","BAD"},
+    {"BubbleBeam","BAD"},
+    {"SilverwindA","GOOD"},
+    {"SilverwindB","GOOD"},
+    {"SilverwindC","GOOD"},
+    {"SilverwindD","GOOD"},
+    {"SilverwindE","GOOD"},
+    {"Crunch","BAD"},
+    {"IronTail","BAD"},
+    {"MysticalFire","BAD"},
 
 };
 
@@ -177,7 +190,7 @@ Int StatEffectValue[STATITEMNUM][5] = {
 {   0,      0,      0,      0,      -1}, 
 {   0,      0,      -1,      0,      0}, 
 {   0,      0,      0,      0,      1}, 
-{   0,      0,      0,      0,      -3}, 
+{   0,      0,      0,      0,      -3}, //SweetScent
 {   -2,      0,      0,      0,      0}, 
 {   0,      -2,      0,      0,      0}, 
 {   0,      0,      0,      0,      -1}, 
@@ -191,7 +204,7 @@ Int StatEffectValue[STATITEMNUM][5] = {
 {   2,      0,      0,      0,      0}, //Meditate2
 {   3,      0,      0,      0,      0}, //Meditate3
 {   0,      0,      1,      1,      0}, //CosmicPower
-{   -1,      0,      0,      0,      0}, //Mudshot
+{   0,      0,      0,      0,      -1}, //Mudshot
 {   0,      0,      -1,      -1,      0}, //CloseCombat
 {   0,      -2,      0,      0,      0}, //Overheat
 {   0,      0,      0,      0,      -1}, //RockTomb
@@ -204,11 +217,11 @@ Int StatEffectValue[STATITEMNUM][5] = {
 {   0,      0,      0,      0,      1}, //RockPolish2
 {   0,      0,      0,      0,      1}, //RockPolish3
 {   0,      0,      0,      0,      -1}, //Bulldoze
-{   0,      0,      0,      0,      3}, //Bulldoze
+{   0,      0,      0,      0,      3}, //QuickOrb
 {   -1,      -1,      -1,      -1,      -1}, //shrink
 {   0,      0,      0,      0,      1}, //FlameCharge
 {   1,      0,      1,      0,      0}, //BulkUp
-{   0,      0,      -1,      0,      0}, //acid
+{   0,      0,      0,      -1,      0}, //acid
 {   0,      0,      0,      -2,      0}, //acidspray
 {   0,      0,      0,      0,      -2}, //StringShot
 {   0,      0,      0,      0,      -1}, //ElectroWeb
@@ -217,7 +230,23 @@ Int StatEffectValue[STATITEMNUM][5] = {
 {   0,      0,      0,      0,      1}, //TailWind
 {   -1,      0,      -1,      0,      0}, //SuperPower
 {   0,      1,      0,      1,      1}, //QuiverDance
+{   0,      0,      0,      0,      2}, //TripleKick
 
+{   0,      0,      0,      -1,      0}, //Sdef Down
+{   0,      -1,      0,      0,      0}, //MoonBlast
+
+{   0,      0,      0,      0,      -1}, //Bubble
+{   0,      0,      0,      0,      -1}, //BubbleBeam
+
+{   1,      0,      0,      0,      0}, //SilverWindA
+{   0,      1,      0,      0,      0}, //SilverWindB
+{   0,      0,      1,      0,      0}, //SilverWindC
+{   0,      0,      0,      1,      0}, //SilverWindD
+{   0,      0,      0,      0,      1}, //SilverWindE
+
+{   0,      0,      -1,      0,      0}, //Crunch
+{   0,      0,      -1,      0,      0}, //IronTail
+{   0,      -1,      0,      0,      0}, //MysticalFire
 
 };
 

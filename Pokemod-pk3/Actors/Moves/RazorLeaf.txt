@@ -77,6 +77,12 @@ Actor RazorLeafProtect : powerprotection
 Powerup.duration 5
 Damagefactor "RazorLeaf", 0
 }
+
+Actor RazorLeafBuffer : powerprotection
+{
+Powerup.duration 17
+Damagefactor "RazorLeaf", 0.1
+}
 //[+]========================================================================[+]
 //--------------------------------|Projectiles |--------------------------------
 //[+]========================================================================[+]

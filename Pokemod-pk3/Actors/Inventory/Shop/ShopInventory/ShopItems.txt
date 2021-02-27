@@ -8,7 +8,7 @@ inventory.icon "ETANK"
 Inventory.PickupSound "Misc/GetItem"
 +INVBAR
 +COUNTITEM
-+INVENTORY.UNDROPPABLE
+//+INVENTORY.UNDROPPABLE
 scale 2.0
 States
 {

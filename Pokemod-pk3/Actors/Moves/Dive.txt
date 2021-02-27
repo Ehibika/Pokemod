@@ -54,7 +54,8 @@ TNT1 A 0 A_PlaySoundEx("misc/splash","Voice")
 TNT1 A 0 A_SpawnItemEx("DiveSplash",0,0,0,0,0,0,0,1)
 //===
 TNT1 A 0 A_ChangeFlag("THRUACTORS",0)
-TNT1 A 0 A_GiveInventory("InvulnerableOn_Pickup",1)
+//TNT1 A 0 A_GiveInventory("InvulnerableOn_Pickup",1)
+TNT1 A 0 A_GiveInventory("DiveGuard",1)
 TNT1 A 0 A_SpawnItemEx("Dive_VWatcher")
 TNT1 A 0 
 TNT1 A 0 A_TakeInventory("UnSolid",1)
@@ -107,7 +108,8 @@ TNT1 A 4 ThrustThingZ(0,20,0,0)
 TNT1 A 0 A_ChangeFlag("NONSHOOTABLE",0)
 TNT1 A 0 A_ChangeFlag("THRUACTORS",0)
 TNT1 A 0 A_SpawnItemEx("ReSolidifier")
-TNT1 A 0 A_GiveInventory("InvulnerableOff_Pickup",1)
+//TNT1 A 0 A_GiveInventory("InvulnerableOff_Pickup",1)
+TNT1 A 0 A_TakeInventory("DiveGuard",99)
 TNT1 A 0 A_TakeInventory("NoJumpCancel",1)
 Goto Fire.DiveRelease2
 
@@ -143,6 +145,24 @@ Goto Ready
 }
 }
 
+
+actor DiveGuard : BasePowerPro 
+{
+    -PICKUP
+    inventory.amount 1 
+    Powerup.Duration -3
+    /*
+    Dive will be using the same Spectral flag as Detect, however it will naturally be
+    Vulnerable to the AOEs of Water moves
+    */
+   DamageFactor "Normal", 0.0
+   DamageFactor "Surf", 1.0
+   DamageFactor "MuddyWater", 1.0 //probably won't work
+
+    //Let's have the psychic AOE's hit hidden foes too
+    DamageFactor "Confusion", 1.0
+    DamageFactor "Psychic", 1.0
+}
 //[+]========================================================================[+]
 //-----------------------------|Ammo & Inventory|------------------------------
 //[+]========================================================================[+]
@@ -152,7 +172,7 @@ actor DiveBuffer : Powerup {inventory.amount 1 Powerup.Duration 30}
 actor DivePPTimer : Powerup {inventory.amount 1 Powerup.Duration 35}
 actor DiveFXBuffer : Powerup {inventory.amount 1 Powerup.Duration 7}
 
-actor STF_Dive : Powerup {inventory.amount 1 Powerup.Duration 17}
+actor STF_Dive : BaseSTatusFlag2 {Powerup.Duration 17}
 
 actor DiveBuffInitiate : CustomInventory
 {

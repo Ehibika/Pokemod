@@ -61,14 +61,14 @@ stop
 Pickup:
 TNT1 A 0 A_JumpIf(CallACS("RentalBotCheck") == 1,"BotWep")
 
-TNT1 A 0 A_GiveInventory("DisarmingVoiceMove1")
+TNT1 A 0 A_GiveInventory("FairyWindMove1")
 TNT1 A 0 A_GiveInventory("HypnosisMove2")
 TNT1 A 0 A_GiveInventory("DisableMove3")
 TNT1 A 0 A_GiveInventory("HealPulseMove4")
 stop
 
 BotWep:
-TNT1 A 0 A_GiveInventory("DisarmingVoiceMove1")
+TNT1 A 0 A_GiveInventory("FairyWindMove1")
 stop
 }
 }

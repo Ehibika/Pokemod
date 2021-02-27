@@ -76,6 +76,81 @@ Actor SilverWindProtect : powerprotection
 Powerup.duration 5
 Damagefactor "SilverWind", 0
 }
+
+Actor SilverWindBuffer : powerprotection
+{
+Powerup.duration 17
+Damagefactor "SilverWind", 0.1
+}
+
+
+Actor SilverWindBuffDelay : powerUp
+{
+inventory.amount 1
+Powerup.duration 17
+}
+
+actor STF_SilverWindA : BaseSTatusFlag {}
+actor STF_SilverWindB : BaseSTatusFlag {}
+actor STF_SilverWindC : BaseSTatusFlag {}
+actor STF_SilverWindD : BaseSTatusFlag {}
+actor STF_SilverWindE : BaseSTatusFlag {}
+
+actor SilverWindBuffInitiate : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_JumpifInventory("SilverWindBuffDelay",1,"Nope")
+TNT1 A 0 A_Jump(64,"Pickup1")
+Goto Nope
+
+Pickup1:
+TNT1 A 0 A_JumpIf(CallACS("CheckSilverWindBuff")==1,"Pickup2")
+TNT1 A 0 A_SpawnItemEX("SilverWindBuffWatcher")
+goto Pickup2
+
+Pickup2:
+TNT1 A 0 A_Jump(256,"Pickup_A","Pickup_B","Pickup_C","Pickup_D","Pickup_E")
+Goto Nope
+
+Pickup_A: //Patk
+TNT1 A 0 A_GiveInventory("STF_SilverWindA",1)
+Goto Pickup_End
+
+Pickup_B: //Satk
+TNT1 A 0 A_GiveInventory("STF_SilverWindB",1)
+Goto Pickup_End
+
+Pickup_C: //PDef
+TNT1 A 0 A_GiveInventory("STF_SilverWindC",1)
+Goto Pickup_End
+
+Pickup_D: //SDef
+TNT1 A 0 A_GiveInventory("STF_SilverWindD",1)
+Goto Pickup_End
+
+Pickup_E: //Spd
+TNT1 A 0 A_GiveInventory("STF_SilverWindE",1)
+Goto Pickup_End
+
+Pickup_End:
+TNT1 A 0 A_GiveInventory("StatUpdator",1)
+TNT1 A 0 A_GiveInventory("SilverWindBuffDelay",1)
+TNT1 A 0 A_PlaySoundEx("Support/Statup","Soundslot7")
+stop
+
+Nope:
+TNT1 A 0
+stop
+}
+}
 //[+]========================================================================[+]
 //--------------------------------|Projectiles |--------------------------------
 //[+]========================================================================[+]
@@ -197,6 +272,95 @@ States
 Spawn:
 TNT1 A 0 
 AIRS GHIJ 2
+stop
+}
+}
+
+
+actor SilverWindBuffWatcher : BasicHelper 
+{
+Var int user_DashTime;
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_GiveToTarget("SilverWindBuffFX_A")
+TNT1 A 0 A_GiveToTarget("SilverWindBuffFX_B")
+TNT1 A 0 A_GiveToTarget("SilverWindBuffFX_C")
+TNT1 A 0 A_GiveToTarget("SilverWindBuffFX_D")
+TNT1 A 5 A_GiveToTarget("SilverWindBuffFX_E")
+TNT1 A 1 A_JumpIf(CallACS("CheckSilverWindBuff",AAPTR_TARGET)==1,"Spawn")
+TNT1 A 1 A_GiveToTarget("StatUpdator")
+TNT1 A 5
+Goto Death
+
+Death:
+TNT1 A 0 
+stop
+}
+}
+
+actor SilverWindBuffFX_A : StatUpFXSpawn
+{
+States
+{
+Pickup:
+TNT1 A 0 A_Jumpifinventory("STF_SilverWindA",1,"Pickup2")
+Goto Nope
+Pickup2:
+TNT1 A 0 A_GiveInventory("PATKUPFXSpawn",1)
+stop
+}
+}
+
+actor SilverWindBuffFX_B : StatUpFXSpawn
+{
+States
+{
+Pickup:
+TNT1 A 0 A_Jumpifinventory("STF_SilverWindB",1,"Pickup2")
+Goto Nope
+Pickup2:
+TNT1 A 0 A_GiveInventory("SATKUPFXSpawn",1)
+stop
+}
+}
+
+actor SilverWindBuffFX_C : StatUpFXSpawn
+{
+States
+{
+Pickup:
+TNT1 A 0 A_Jumpifinventory("STF_SilverWindC",1,"Pickup2")
+Goto Nope
+Pickup2:
+TNT1 A 0 A_GiveInventory("PDefUPFXSpawn",1)
+stop
+}
+}
+
+actor SilverWindBuffFX_D : StatUpFXSpawn
+{
+States
+{
+Pickup:
+TNT1 A 0 A_Jumpifinventory("STF_SilverWindD",1,"Pickup2")
+Goto Nope
+Pickup2:
+TNT1 A 0 A_GiveInventory("SDefUPFXSpawn",1)
+stop
+}
+}
+
+actor SilverWindBuffFX_E : StatUpFXSpawn
+{
+States
+{
+Pickup:
+TNT1 A 0 A_Jumpifinventory("STF_SilverWindE",1,"Pickup2")
+Goto Nope
+Pickup2:
+TNT1 A 0 A_GiveInventory("SpdUPFXSpawn",1)
 stop
 }
 }

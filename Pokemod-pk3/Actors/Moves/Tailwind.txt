@@ -61,7 +61,7 @@ Goto Ready
 //-----------------------------|Ammo & Inventory|------------------------------
 //[+]========================================================================[+]
 actor TailwindPP : Ammo {inventory.amount 1 inventory.Maxamount 10}
-actor STF_Tailwind : Powerup {inventory.amount 1 Powerup.Duration -7}
+actor STF_Tailwind : BaseSTatusFlag {}
 
 actor TailwindFXFlag : inventory {inventory.amount 1 inventory.Maxamount 1}
 

@@ -124,7 +124,7 @@ stop
 }
 }
 
-actor DragonBreathPuff1 : BasicExplosion
+actor DragonBreathPuff1 : BasicExplosion2
 {
 scale 4.5
 DamageType "DragonBreath"

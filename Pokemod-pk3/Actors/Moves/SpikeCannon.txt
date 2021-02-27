@@ -126,6 +126,7 @@ TNT1 A 0 A_Jump(256,"Fire.After")
 Goto Fire.After
 
 Fire.Charge1: //Preparing a stack
+TNT1 A 0 A_Jumpif(CallACS("CheckWeaponFire",RC_A)!=1,"NoAmmo")
 TNT1 A 0 A_JumpIfInventory("MultiShotCounter",5,"Fire.Charge3")
 TNT1 A 0 A_JumpIfInventory("WeaponCharge",10,"Fire.Charge2")
 TNT1 A 0 A_GiveInventory("WeaponCharge",1)

@@ -288,7 +288,7 @@ actor PoisonTailBackstabImmune : SpecialDamageImmune
 damagefactor "PoisonTail3", 0.0
 }
 */
-actor PoisonTailEdgeFX : BasicClientside
+actor PoisonTailEdgeFX : BasicNOTClientside
 {
 scale 2.5
 XScale 4.0

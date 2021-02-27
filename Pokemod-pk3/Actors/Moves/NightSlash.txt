@@ -295,7 +295,7 @@ actor NightSlashBackstabImmune : SpecialDamageImmune
 damagefactor "NightSlash3", 0.0
 }
 
-actor NightSlashEdgeFX : BasicClientside
+actor NightSlashEdgeFX : BasicNOTClientside
 {
 scale 2.5
 XScale 4.0

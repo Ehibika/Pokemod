@@ -1,3 +1,4 @@
+/*
 actor CaptivateMove : WepMasterBase
 {
 Tag "Captivate"
@@ -53,7 +54,7 @@ Fire.Off:
 "####" B 17 
 "####" B 0 A_Jump(256,"Fire.After")
 Goto Fire.After
-*/
+
 
 Fire.After:
 "####" B 1 A_GiveInventory("HalfRecovery_A")
@@ -61,6 +62,51 @@ Fire.After:
 "####" B 0 A_Jump(256,"Fire.End")
 Goto Fire.End
 
+}
+}
+*/
+
+actor CaptivateMove : WepMasterBase
+{
+Tag "Captivate"
+obituary "$OB_CAPTIVATE"
+Weapon.AmmoUse 1
+Weapon.AmmoGive 10
+weapon.ammotype "CaptivatePP"
+scale 2.0
+Inventory.Pickupmessage "$PU_MEGABUSTER"
++WEAPON.EXPLOSIVE
+States
+{
+Spawn:
+WEAP X 1
+stop
+
+
+Fire:
+"####" BBB 1 A_Jumpif(CallACS("CheckWeaponFire",RC_A)==1,"Fire.Begin")
+"####" B 0 A_Jump(256,"NoAmmo")
+Goto NoAmmo
+
+Fire.Begin:
+"####" B 0
+"####" B 0 A_Jump(256,"Fire.Bullet")
+Goto Fire.Bullet
+
+Fire.Bullet:
+//"####" B 1 A_JumpIf(IsPointerEqual(AAPTR_TRACER,AAPTR_NULL) == true, "NoAmmo2")
+"####" B 0 A_PlaySoundEx("Misc/UseMove","Weapon")
+
+"####" B 0 A_FireCustomMissile("CaptivateSeeker",0,1,0,0)
+"####" BBBBB 2 A_GiveInventory("CaptivateFXSpawn")
+"####" B 0 A_Jump(256,"Fire.After")
+Goto Fire.After
+
+Fire.After:
+"####" B 1 A_GiveInventory("SemiRecovery_A")
+"####" C 0 A_REfire("Fire")
+"####" B 0 A_Jump(256,"Fire.End")
+Goto Fire.End
 }
 }
 
@@ -87,7 +133,7 @@ Goto Ready
 //[+]========================================================================[+]
 actor CaptivatePP : Ammo {inventory.amount 1 inventory.Maxamount 25}
 
-actor STF_Captivate : Powerup {inventory.amount 1 Powerup.Duration -6}
+actor STF_Captivate : BaseSTatusFlag {}
 actor CaptivateAuraFlag : inventory {inventory.amount 1 inventory.Maxamount 1}
 actor CaptivatePPTimer : Powerup {inventory.amount 1 Powerup.Duration 35}
 
@@ -103,8 +149,10 @@ TNT1 A 0
 stop
 Pickup:
 TNT1 A 0 A_Jumpif(CallACS("CheckStatusGuard",0,STATUS_STATS),"Nope") //Blocked by Protect|Detect|Substitute|Mist
-TNT1 A 0 A_Jumpifinventory("STF_Captivate",1,"Sustain")
 TNT1 A 0 A_PlaySoundEx("support/StatDown","Weapon")
+TNT1 A 0 A_GiveInventory("CaptivateFXSpawn2")
+
+TNT1 A 0 A_Jumpifinventory("STF_Captivate",1,"Sustain")
 TNT1 A 0 A_GiveInventory("STF_Captivate",1)
 TNT1 A 0 A_SpawnItemEX("CaptivateNerfWatcher")
 TNT1 A 0 A_GiveInventory("StatUpdator",1)
@@ -124,6 +172,35 @@ Const int Captivate_RAD = 96;
 //[+]========================================================================[+]
 //--------------------------------|Projectiles |--------------------------------
 //[+]========================================================================[+]
+
+actor CaptivateSeeker : BasicExplosion
+{
+Damage(0)
+DamageType "Captivate"
+obituary "$OB_CAPTIVATE"
+Reactiontime 17
+Args 6, 0, 0
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 //A_GiveInventory("ProjectileCode",1)
+TNT1 A 0 A_TransferPointer(AAPTR_TARGET,AAPTR_DEFAULT,AAPTR_TRACER,AAPTR_TRACER)
+//==
+TNT1 A 1 
+TNT1 A 0 A_Jumpif(CallACS("CheckStatusGuard",AAPTR_TRACER,STATUS_STATS),"Death")
+//TNT1 A 1 A_Warp(AAPTR_TRACER,1,0,45,0,WARPF_COPYINTERPOLATION)
+TNT1 A 0 A_GiveInventory("CaptivateNerfInitiate",1,AAPTR_TRACER)
+//TNT1 A 0 A_Spawnitemex("CaptivateFXSpawn",0,0,0,0,0,0,0,SXF_TRANSFERTRANSLATION)
+TNT1 A 5
+Goto Death
+
+Death:
+TNT1 A 0 
+stop
+}
+}
+
 //#region 
 /*
 actor CaptivateAura //: BasicHelper
@@ -235,19 +312,9 @@ actor CaptivateGuideDot : BasicGuideDot {Renderstyle Add
     }
 }
 
-actor CaptivateFXSpawn : CustomInventory
-{
-States
-{
-Pickup:
-TNT1 A 0
-TNT1 AA 0 A_SpawnItemEx("CaptivateParticle",random(Captivate_RAD/2,Captivate_RAD),0,-(z-floorz)+Random(24,44),0,0,4,random(0,360))
-TNT1 AA 0 A_SpawnItemEx("Dazzlinggleam_Particle1",random(Captivate_RAD/2,Captivate_RAD),0,-(z-floorz)+Random(24,44),0,0,0,random(0,360))
-stop
-}
-}
+
 */
-//#endregion
+
 
 actor CaptivateProjectile : BasicProjectile
 {
@@ -296,7 +363,31 @@ TNT1 A 0 //A_SpawnItemEX("CaptivateImpact",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
 stop
 }
 }
+//#endregion
 
+
+actor CaptivateFXSpawn : CustomInventory
+{
+States
+{
+Pickup:
+TNT1 A 0
+TNT1 AA 0 A_SpawnItemEx("CaptivateParticle",random2(64),random2(64),random(0,32),0,0,4,0)
+TNT1 AA 0 A_SpawnItemEx("Dazzlinggleam_Particle",random2(64),random2(64),random(0,32),0,0,4,0)
+stop
+}
+}
+
+actor CaptivateFXSpawn2 : CustomInventory
+{
+States
+{
+Pickup:
+TNT1 A 0
+TNT1 AAAAAAA 0 A_SpawnItemEx("CaptivateTrail",random2(64),random2(64),random(0,32),0,0,4,0)
+stop
+}
+}
 
 actor CaptivateTrail : BasicClientside
 {

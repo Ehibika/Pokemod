@@ -147,13 +147,13 @@ TNT1 A 0
 TNT1 A 0 A_Jumpif(pitch > 6,"SpawnTip")
 TNT1 A 0 A_setPitch(Pitch+1)
 TNT1 A 0 A_SpawnItemEx("SlashStart",0,0,0,momx,momy,momz,0,SXF_ABSOLUTEMOMENTUM|SXF_TRANSFERPITCH)
-TNT1 A 1 A_SpawnItemEx("SlashEdgeFX2")
+TNT1 A 1 A_SpawnItemEx("SlashEdgeFX2",0,0,0,0,0,0,0,SXF_ABSOLUTEMOMENTUM)
 Goto Death
 
 SpawnTip:
 TNT1 A 0 A_setPitch(Pitch+1)
 TNT1 A 0 A_SpawnItemEx("SlashTip",0,0,0,momx,momy,momz,0,SXF_ABSOLUTEMOMENTUM|SXF_TRANSFERPITCH)
-TNT1 A 1 A_SpawnItemEx("SlashTipFX2")
+TNT1 A 1 A_SpawnItemEx("SlashTipFX2",0,0,0,0,0,0,0,SXF_ABSOLUTEMOMENTUM)
 Goto Death
 
 Death:
@@ -179,7 +179,7 @@ TNT1 A 0
 TNT1 A 0 A_Jumpif(pitch > 8,"Death")
 TNT1 A 0 A_setPitch(Pitch+1)
 TNT1 A 0 A_SpawnItemEx("SlashTip",0,0,0,momx,momy,momz,0,SXF_ABSOLUTEMOMENTUM|SXF_TRANSFERPITCH)
-TNT1 A 1 A_SpawnItemEx("SlashTipFX2")
+TNT1 A 1 A_SpawnItemEx("SlashTipFX2",0,0,0,0,0,0,0,SXF_ABSOLUTEMOMENTUM)
 Goto Death
 Death:
 TNT1 A 0 A_SpawnItemEx("OilPitIgnite",0,0,8)
@@ -187,49 +187,7 @@ stop
 }
 }
 
-//nonvisible hitbox
-actor SlashStart2 : SlashStart
-{
-states
-{
-Spawn:
-TNT1 A 0
-TNT1 A 0 A_Jumpif(pitch > 6,"SpawnTip")
-TNT1 A 0 A_setPitch(Pitch+1)
-TNT1 A 0 A_SpawnItemEx("SlashStart2",0,0,0,momx,momy,momz,0,SXF_ABSOLUTEMOMENTUM|SXF_TRANSFERPITCH)
-TNT1 A 1 A_SpawnItemEx("SlashEdgeFX2")
-Goto Death
-
-SpawnTip:
-TNT1 A 0 A_setPitch(Pitch+1)
-TNT1 A 0 A_SpawnItemEx("SlashTip2",0,0,0,momx,momy,momz,0,SXF_ABSOLUTEMOMENTUM|SXF_TRANSFERPITCH)
-TNT1 A 1 A_SpawnItemEx("SlashTipFX2")
-Goto Death
-
-Death:
-TNT1 A 0 A_SpawnItemEx("OilPitIgnite",0,0,8)
-stop
-}
-}
-
-actor SlashTip2 : SlashTip
-{
-states
-{
-Spawn:
-TNT1 A 0
-TNT1 A 0 A_Jumpif(pitch > 8,"Death")
-TNT1 A 0 A_setPitch(Pitch+1)
-TNT1 A 0 A_SpawnItemEx("SlashTip2",0,0,0,momx,momy,momz,0,SXF_ABSOLUTEMOMENTUM|SXF_TRANSFERPITCH)
-TNT1 A 1 
-Goto Death
-Death:
-TNT1 A 0 A_SpawnItemEx("OilPitIgnite",0,0,8)
-stop
-}
-}
-
-actor SlashEdgeFX : BasicClientside
+actor SlashEdgeFX : BasicNOTClientside
 {
 scale 2.5
 XScale 4.0
@@ -240,7 +198,7 @@ States
 {
 Spawn:
 TNT1 A 0
-TNT1 A 0 A_GiveInventory("ProjectileDCode",1)
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
 BASB U 1
 Spawn2:
 BASB U 1 A_Fadeout
@@ -259,7 +217,7 @@ States
 {
 Spawn:
 TNT1 A 0
-TNT1 A 0 A_GiveInventory("ProjectileDCode",1)
+TNT1 A 0 A_GiveInventory("ProjectileCodeSyncTarget",1)
 BASB W 1
 Spawn2:
 BASB W 1 A_Fadeout

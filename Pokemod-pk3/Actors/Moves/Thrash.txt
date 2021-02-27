@@ -85,6 +85,12 @@ Actor ThrashProtect : powerprotection
 Powerup.duration 3
 Damagefactor "Thrash", 0
 }
+
+Actor ThrashBuffer : powerprotection
+{
+Powerup.duration 17
+Damagefactor "Thrash", 0.1
+}
 //[+]========================================================================[+]
 //--------------------------------|Projectiles |--------------------------------
 //[+]========================================================================[+]

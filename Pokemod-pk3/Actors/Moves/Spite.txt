@@ -1,0 +1,229 @@
+
+actor SpiteMove : WepMasterBase
+{
+Tag "Spite"
+obituary "$OB_Spite"
+Weapon.AmmoUse 1
+Weapon.AmmoGive 20
+weapon.ammotype "SpitePP"
+scale 2.0
+Inventory.Pickupmessage "$PU_MEGABUSTER"
+States
+{
+Spawn:
+WEAP X 1
+stop
+
+
+Fire:
+"####" BBB 1 A_Jumpif(CallACS("CheckWeaponFire",RC_A)==1,"Fire.Begin")
+"####" B 0 A_Jump(256,"NoAmmo")
+Goto NoAmmo
+
+Fire.Begin:
+"####" B 0
+TNT1 A 0 A_Jumpifinventory("ConShotTimer",1,"Fire.Bullet2")
+"####" B 0 A_Jump(256,"Fire.Bullet")
+Goto Fire.Bullet
+
+Fire.Bullet:
+"####" B 0 A_PlaySoundEx("support/Ubercharge2","Weapon")
+"####" B 0 A_FireCustomMissile("SpiteHitbox",0,1,0,0,0,0)
+"####" B 0 A_FireCustomMissile("SpiteLaunchFX",0,0,0,0,0,0)
+"####" B 0 A_GiveInventory("SpiteCST",1)
+"####" B 0 A_Jump(256,"Fire.After")
+Goto Fire.After
+
+Fire.Bullet2:
+"####" B 0 A_PlaySoundEx("support/Ubercharge2","Weapon")
+"####" B 0 A_FireCustomMissile("SpiteHitbox",0,0,0,0,0,0)
+"####" B 0 A_FireCustomMissile("SpiteLaunchFX",0,0,0,0,0,0)
+"####" B 0 A_Jump(256,"Fire.After")
+Goto Fire.After
+
+Fire.After:
+"####" B 1 A_GiveInventory("3Recovery_A")
+"####" C 0 A_REfire("Fire")
+"####" B 0 A_TakeInventory("ConShotTimer",99)
+"####" B 0 A_Jump(256,"Fire.End")
+Goto Fire.End
+
+}
+}
+
+actor SpiteMove1 : SpiteMove {Weapon.SlotNumber 1}
+actor SpiteMove2 : SpiteMove {Weapon.SlotNumber 2}
+actor SpiteMove3 : SpiteMove {Weapon.SlotNumber 3}
+actor SpiteMove4 : SpiteMove {Weapon.SlotNumber 4}
+
+actor SpiteMove5 : SpiteMove 
+{
+Weapon.SlotNumber 5
+States
+{
+Fire.End:
+TNT1 A 0
+TNT1 A 0 A_TakeInventory("SpiteMove5",9)
+TNT1 A 0 A_Jump(256,"Ready")
+Goto Ready
+}
+}
+
+//[+]========================================================================[+]
+//-----------------------------|Ammo & Inventory|------------------------------
+//[+]========================================================================[+]
+actor SpitePP : Ammo {inventory.amount 1 inventory.Maxamount 20}
+
+actor SpiteCST : PowerupGiver
+{
++INVENTORY.AUTOACTIVATE
+Powerup.Duration 70
+powerup.type "ConShotTimer"
+}
+
+
+actor SpiteBurn : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_Jumpif(CallACS("CheckStatusGuard",0,STATUS_MINOR),"Nope") 
+//==
+TNT1 A 0 A_Jumpifinventory("SpiteBuffer",1,"Nope")
+TNT1 A 0 A_GiveInventory("SpiteBuffer",1)
+TNT1 AAA 0 A_SpawnItemEx("SpiteBurnParticle", random2(32), random2(32), random(0,32), 0, 0, random(1,3), random(0, 359),0)
+TNT1 A 0 ACS_NamedExecuteAlways("TakePP",0,-1,1)
+TNT1 A 0 A_Playsoundex("misc/gammafire","Soundslot5")
+stop
+
+Nope:
+TNT1 A 0
+stop
+}
+}
+
+
+actor SpiteBuffer : Powerup
+{
+powerup.duration 17
+//Powerup.Color Green, 0.15
+}
+//[+]========================================================================[+]
+//--------------------------------|Projectiles |--------------------------------
+//[+]========================================================================[+]
+
+actor SpiteLaunchFX : BasicProjectile
+{
+Speed 10
++RIPPER
++SEEKERMISSILE
+Renderstyle "translucent"
+Damage (0)
+DamageType "Spite"
+obituary "$OB_Spite"
+radius 16
+Reactiontime 15
+height 16
+scale 1.0
+States
+{
+Spawn:
+TNT1 A 0 
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+TNT1 A 0 A_TransferPointer(AAPTR_TARGET,AAPTR_DEFAULT,AAPTR_TRACER,AAPTR_TRACER)
+//==
+PYSM A 1 
+PYSM A 1 A_JumpIf(IsPointerEqual(AAPTR_TRACER,AAPTR_NULL) == False, "Seek")
+PYSM AABBCC 1 A_SetScale(ScaleX+0.1)
+TNT1 A 0 A_Stop
+Goto Death
+
+Seek:
+TNT1 A 0 A_SeekerMissile (2, 10, SMF_PRECISE)
+PYSM A 1 A_SetScale(ScaleX+0.1)
+TNT1 A 0 A_SeekerMissile (2, 10, SMF_PRECISE)
+PYSM A 1 A_SetScale(ScaleX+0.1)
+
+TNT1 A 0 A_SeekerMissile (2, 10, SMF_PRECISE)
+PYSM B 1 A_SetScale(ScaleX+0.1)
+TNT1 A 0 A_SeekerMissile (2, 10, SMF_PRECISE)
+PYSM B 1 A_SetScale(ScaleX+0.1)
+
+TNT1 A 0 A_SeekerMissile (2, 10, SMF_PRECISE)
+PYSM C 1 A_SetScale(ScaleX+0.1)
+TNT1 A 0 A_SeekerMissile (2, 10, SMF_PRECISE)
+PYSM C 1 A_SetScale(ScaleX+0.1)
+
+Death:
+TNT1 A 0 
+TNT1 A 0 A_GiveInventory("ProjectileDCode",1)
+TNT1 A 4
+stop
+}
+}
+
+actor SpiteHitbox : BasicExplosion
+{
+Damage(0)
+DamageType "Spite"
+obituary "$OB_Spite"
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+TNT1 A 0 A_TransferPointer(AAPTR_TARGET,AAPTR_DEFAULT,AAPTR_TRACER,AAPTR_TRACER)
+//==
+TNT1 A 1 
+TNT1 A 1 A_JumpIf(IsPointerEqual(AAPTR_TRACER,AAPTR_NULL) == False, "SpiteBurn")
+Goto Death
+
+SpiteBurn:
+TNT1 A 1 A_Warp(AAPTR_TRACER,0,0,28,0,WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE)
+NAPC A 0 //A_PlaySoundEx("weapon/Noisecrush1", "Weapon")
+TNT1 A 3 A_SpawnItemEx("SpiteFX",random2(16),random2(16),32,0,0,random(1,4),0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION)
+TNT1 A 0 A_GiveInventory("SpiteBurn",1,AAPTR_TRACER)
+stop
+
+Death:
+TNT1 A 0 
+stop
+}
+}
+
+
+actor SpiteFX : BasicClientside
+{
+scale 2.5
+Reactiontime 10
+Renderstyle "Subtract"
+Alpha 0.8
+States
+{
+Spawn:
+TNT1 A 0 
+PYSM AABBCC 1 A_SetScale(ScaleX-0.1)
+stop
+}
+}
+
+
+actor SpiteBurnParticle : BasicClientside
+{
+scale 2
+Reactiontime 8
+translation "192:192=236:236", "193:193=58:58", "207:207=249:249"
+States
+{
+Spawn:
+TNT1 A 0
+WLOW ABCDEFGHIJKLMNO 1 
+stop
+}
+}

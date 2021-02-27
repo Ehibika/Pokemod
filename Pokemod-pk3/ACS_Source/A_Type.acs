@@ -31,6 +31,7 @@ For (int i; i < TYPECOUNT; i++)
 Function Void GiveTypeData (Int TypeNum)
 {
 str Typename = PKMNTypeList[TypeNum];
+int NoQuad = GetCvar("PKMN_NoQuad");
 GiveInventory(StrParam(s:Typename,s:"STAB"),1);
 
 For (int i; i < TYPECOUNT; i++)
@@ -40,7 +41,7 @@ For (int i; i < TYPECOUNT; i++)
             {
             Case T_NEU: break;
             Case T_WEA: 
-                If(CheckInventory(StrParam(s:PKMNTypeList[i],s:"Weakness")))
+                If(CheckInventory(StrParam(s:PKMNTypeList[i],s:"Weakness")) && !NoQuad)
                     {GiveInventory(StrParam(s:PKMNTypeList[i],s:"2xWeakness"),1);
                     TakeInventory(StrParam(s:PKMNTypeList[i],s:"Weakness"),99);
                     }
@@ -54,7 +55,7 @@ For (int i; i < TYPECOUNT; i++)
                 break;
 
             Case T_RES: 
-                If(CheckInventory(StrParam(s:PKMNTypeList[i],s:"Resistance")))
+                If(CheckInventory(StrParam(s:PKMNTypeList[i],s:"Resistance"))&& !NoQuad)
                 {GiveInventory(StrParam(s:PKMNTypeList[i],s:"2xResistance"),1);
                 TakeInventory(StrParam(s:PKMNTypeList[i],s:"Resistance"),99);
                 }               

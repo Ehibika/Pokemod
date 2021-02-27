@@ -2,7 +2,7 @@ actor LightScreenMove : WepMasterBase
 {
 Tag "LightScreen"
 Weapon.AmmoUse 1
-Weapon.AmmoGive 10
+Weapon.AmmoGive 5
 weapon.ammotype "LightScreenPP"
 scale 2.0
 Inventory.Pickupmessage "$PU_MEGABUSTER"
@@ -70,9 +70,9 @@ Goto Ready
 //[+]========================================================================[+]
 //-----------------------------|Ammo & Inventory|------------------------------
 //[+]========================================================================[+]
-actor LightScreenPP : Ammo {inventory.amount 1 inventory.Maxamount 10}
+actor LightScreenPP : Ammo {inventory.amount 1 inventory.Maxamount 5}
 
-actor LightScreenPower : SDef { damagefactor "Normal", 0.67 powerup.Duration -15}
+actor LightScreenPower : SDef { damagefactor "Normal", 0.5 powerup.Duration -30}
 
 Const int LightScreenRad = 1000;
 Const int LightScreen_Item = 11;
@@ -107,7 +107,7 @@ stop
 //[+]========================================================================[+]
 //--------------------------------|Projectiles |--------------------------------
 //[+]========================================================================[+]
-actor LightScreenRingGuide : BasicHelper
+actor LightScreenRingGuide : BasicServerSideHelper
 {
 translation "198:198=220:220", "192:192=229:229"
 	reactiontime 15
@@ -207,7 +207,7 @@ stop
 }
 }
 
-actor LightScreenWatcher : BasicHelper 
+actor LightScreenWatcher : BasicServerSideHelper 
 {
 Var int user_DashTime;
 States
@@ -232,7 +232,7 @@ stop
 }
 }
 
-actor LightScreenWatcher2 : BasicHelper 
+actor LightScreenWatcher2 : BasicServerSideHelper 
 {
 Var int user_DashTime;
 States

@@ -111,7 +111,7 @@ stop
 }
 }
 
-actor FlameBurstPuff1 : BasicExplosion
+actor FlameBurstPuff1 : BasicExplosion2
 {
 scale 4.5
 DamageType "FlameBurst"

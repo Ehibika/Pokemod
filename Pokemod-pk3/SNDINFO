@@ -76,6 +76,7 @@ Status/Poison S_PSN
 status/Burn S_BURN
 status/Paralyze S_PARA
 status/sleep S_SLEEP
+status/Confused S_CONF
 
 support/Ubercharge1 UBRCHR1
 support/Ubercharge2 UBRCHR2
@@ -133,6 +134,7 @@ weapon/Ice_Cloud ICESHOTA
 weapon/IceManLaser ICESHOTL
 weapon/IceManBit ICESHOTB
 weapon/IceManBreak ICESHOTC
+weapon/cfire2	cbusfir2
 
 Move/Yawn YAWN 
 Move/BulletSeed PTUEY 
@@ -169,11 +171,18 @@ Move/Curse3 GCURSE
 Move/Fly FLY3
 Move/Haze HAZE
 Move/Mist MIST
+Move/Detect DETECT
+Move/ConfuseRay1 CONRAY1
+Move/ConfuseRay2 CONRAY2
+Move/Sing SING
 
 Move/Confusion PSILOVE1
 Move/Psychic1 PSILOVE2
 Move/Psychic2 PSILOVE3
 Move/Extrasensory PSILOVE4
+Move/Extrasensory1 STORM1
+Move/Extrasensory2 STORM2
+Move/SweetScent SWTSNT
 
 Move/ThunderBolt S_MV_E4
 

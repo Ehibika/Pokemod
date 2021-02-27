@@ -1,0 +1,125 @@
+actor ExitUnitItem : BaseMM8BDMItem 10160
+{
+    //$Category MM8BDM-Assists
+    //$Title Exit Unit
+    //$Sprite EXITB0
+    //Inventory.RespawnTics 300
+    inventory.amount 1
+    inventory.maxamount 1
+    inventory.pickupmessage "$PU_EXITUNIT"
+    inventory.icon "EXITSI"
+    Inventory.PickupSound "item/1up"
+    Tag "$TAG_EXITUNIT"
+    scale 2.0
+    States
+    {
+    SpawnLoop:
+        EXIT BC 6
+        Loop
+    Use:
+        EXIT C 0 ACS_NamedExecuteAlways("core_exitunit", 0)
+        stop
+    Death:
+        EXIT A 1
+        stop
+    }
+}
+
+actor ExitUnitGhost
+{
+    +NOCLIP
+    +NOGRAVITY
+    Radius 1
+    Height 1
+    renderstyle "translucent"
+    Scale 2.5
+    States
+    {
+    Spawn:
+        TNT1 A 1
+        wait
+    Appear:
+        EXIT D 0 A_SetTranslucent(1.0)
+        EXIT DEFG 1
+        EXIT H 2 A_SetTranslucent(0.9)
+        EXIT I 2 A_SetTranslucent(0.7)
+        EXIT J 2 A_SetTranslucent(0.9)
+        EXIT I 2 A_SetTranslucent(0.7)
+        goto Appear+5
+    Vanish:
+        EXIT D 0 A_SetTranslucent(1.0)
+        EXIT KL 2
+        goto Spawn
+    }
+}
+
+actor ExitUnitAuto : ArtiTeleport
+{
+    +INVENTORY.AUTOACTIVATE
+}
+
+// LEGACY EXIT UNIT -------------------------
+actor ExitUnit : ArtiTeleport //10160
+{
+//$Category MM8BDM-Assists
+//$Title Exit Unit
+//Inventory.RespawnTics 300
+inventory.amount 1
+inventory.maxamount 1
+inventory.pickupmessage "$PU_EXITUNIT"
+inventory.icon "EXITSI"
+Inventory.PickupSound "item/1up"
+Tag "$TAG_EXITUNIT"
+scale 2.0
++COUNTITEM
+-FLOATBOB
+-NOGRAVITY
++INVBAR
+states
+{
+Spawn:
+EXIT BC 6
+Loop
+Death:
+EXIT A 1
+stop
+}
+}
+// ------------------------------------------
+
+//Energy Balancer
+actor EnergyBalancer : BaseMM8BDMUseItem 10008
+{
+//$Category MM8BDM-Assists
+//$Title Energy Balancer
+//$Sprite NRGBA0
++ACTIVATEMCROSS
++INVENTORY.AUTOACTIVATE
+-FLOORCLIP
+Inventory.RespawnTics 245
+inventory.pickupmessage "$PU_ENERGYBALANCER"
+inventory.pickupsound "item/1up"
+Scale 2.0
+States
+{
+SpawnLoop:
+NRGB AB 6
+loop
+Pickup:
+NRGB A 0 A_JumpIfInventory("EnergyBalancerActive",1,"Failed")
+NRGB A 1 A_GiveInventory("EnergyBalancerActive", 1)
+stop
+Failed:
+NRGB A 0 
+fail
+}
+}
+
+actor EnergyBalancerActive : Once {}
+
+actor EnergyBalancerFullDelay : Powerup
+{
+//Powerup.Duration 35
+Powerup.Duration 20
+//Powerup.Duration 15
+}

@@ -134,6 +134,17 @@ if(SelfEXPBounty)
     //Log(i:Damage, s:" : ",i:Output);
 }
 
+
+Script "GiveBlockEXP" (int TID, int EXPAward, int Override)
+{
+    if(TID>999)
+        {
+            //Log(i:TID);
+            SetActivator(TID);
+            ACS_NamedExecuteAlways("GiveEXP",0,EXPAward,Override);
+        }    
+}
+
 Script "GivePlayerEXP" (int Pnum, int EXPAward, int Override)
 {
 

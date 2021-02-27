@@ -42,6 +42,7 @@ actor PoisonWatcher //: CustomInventory
 +RIPPER
 +NOGRAVITY
 +NOINTERACTION
++SPECTRAL
 Reactiontime 5
 DamageType "PoisonDamage"
 Obituary "$OB_RANGERPOISON"
@@ -118,8 +119,8 @@ Alpha 0.9
 States
 {
 Spawn:
-WAVB GGGGG 2
-WAVB H 3 A_Stop
+PSBB ABCDEFG 2
+PSBB H 3 A_Stop
 stop
 }
 }
@@ -176,7 +177,7 @@ TNT1 A 0 A_Jumpifinventory("CringeGuard",1,"Nope")
 //==
 TNT1 A 0 A_Jumpifinventory("SleepMark",1,"Sustain")
 TNT1 A 0 A_GiveInventory("SleepMark",1)
-TNT1 A 0 SetPlayerProperty(0,1,0)
+TNT1 A 0 ACS_NamedExecuteAlways("PKMN_FreezePlayer",0,PLAYER_FREEZE,FREEZE_STATUS)
 TNT1 A 0 ACS_NamedExecuteAlways("PKMN_JumpToggle",0,0)
 TNT1 A 0 A_SpawnItemEX("HaltPlayer")
 TNT1 A 0 ACS_NamedExecuteAlways("PKMN_SleepHandler",0)
@@ -277,6 +278,7 @@ States
 Pickup:
 TNT1 A 0
 TNT1 A 0 A_Jumpifinventory("CringeMark",1,"Cringed")
+TNT1 A 0 A_Jumpifinventory("FreezeMark",1,"Frozen")
 TNT1 A 0 A_Jumpifinventory("SleepMark",1,"Spook")
 goto EndSleed
 
@@ -286,12 +288,51 @@ TNT1 A 0 A_SpawnItemEX("FrightFX",0,0,40)
 goto EndSleed
 
 EndSleed:
-TNT1 A 0 SetPlayerProperty(0,0,0)
+TNT1 A 0 ACS_NamedExecuteAlways("PKMN_FreezePlayer",0,PLAYER_UNFREEZE,FREEZE_STATUS)
 TNT1 A 0 ACS_NamedExecuteAlways("PKMN_JumpToggle",0,1)
 TNT1 A 0 A_GiveInventory("StatUpdator",1)
 stop
 
 Cringed:
+TNT1 A 0
+TNT1 A 0 A_TakeInventory("SleepMark", 999)
+stop
+
+Frozen:
+TNT1 A 0
+TNT1 A 0 A_TakeInventory("SleepMark", 999)
+stop
+}
+}
+
+actor HitSleepBreaker : CustomInventory
+{
+States
+{
+Pickup:
+TNT1 A 0
+TNT1 A 0 A_Jumpifinventory("CringeMark",1,"Cringed")
+TNT1 A 0 A_Jumpifinventory("FreezeMark",1,"Frozen")
+TNT1 A 0 A_Jumpifinventory("SleepMark",1,"Spook")
+stop
+
+Spook:
+TNT1 A 0 A_TakeInventory("SleepMark", 999)
+TNT1 A 0 A_SpawnItemEX("FrightFX",0,0,40)
+goto EndSleed
+
+EndSleed:
+TNT1 A 0 ACS_NamedExecuteAlways("PKMN_FreezePlayer",0,PLAYER_UNFREEZE,FREEZE_STATUS)
+TNT1 A 0 ACS_NamedExecuteAlways("PKMN_JumpToggle",0,1)
+TNT1 A 0 A_GiveInventory("StatUpdator",1)
+stop
+
+Cringed:
+TNT1 A 0
+TNT1 A 0 A_TakeInventory("SleepMark", 999)
+stop
+
+Frozen:
 TNT1 A 0
 TNT1 A 0 A_TakeInventory("SleepMark", 999)
 stop
@@ -349,6 +390,7 @@ actor BurnWatcher //: CustomInventory
 +RIPPER
 +NOGRAVITY
 +NOINTERACTION
++SPECTRAL
 Reactiontime 5
 DamageType "BurnDamage"
 Obituary "$OB_RANGERBurn"
@@ -458,14 +500,14 @@ powerup.duration -6
 actor LongPara : PowerupGiver
 {
 +INVENTORY.AUTOACTIVATE
-Powerup.Duration -6
+Powerup.Duration -10
 powerup.type "ParalysisMark"
 }
 
 actor ShortPara : PowerupGiver
 {
 +INVENTORY.AUTOACTIVATE
-Powerup.Duration -3
+Powerup.Duration -5
 powerup.type "ParalysisMark"
 }
 
@@ -601,7 +643,7 @@ stop
 }
 }
 
-actor STF_Paralyze : Powerup
+actor STF_Paralyze : BaseSTatusFlag
 {
 powerup.duration 35
 }
@@ -743,12 +785,12 @@ powerup.duration -5
 //Powerup.Color Green, 0.15
 }
 
-actor STF_Freeze1 : Powerup
+actor STF_Freeze1 : BaseSTatusFlag
 {
 powerup.duration 35
 }
 
-actor STF_Freeze2 : Powerup
+actor STF_Freeze2 : BaseSTatusFlag
 {
 powerup.duration 35
 }
@@ -782,6 +824,7 @@ TNT1 A 0 A_Playsoundex("support/Negative","Soundslot8")
 stop
 
 Sustain:
+TNT1 A 0 A_Jumpifinventory("FreezeMark",1,"Nope")
 TNT1 A 0 A_GiveInventory("SemiFreezeMark",1)
 TNT1 A 0 A_GiveInventory("FreezeValue",1)
 stop
@@ -804,7 +847,7 @@ Spawn:
 TNT1 A 0
 stop
 Pickup:
-TNT1 A 0 SetPlayerProperty(0,1,0)
+TNT1 A 0 ACS_NamedExecuteAlways("PKMN_FreezePlayer",0,PLAYER_FREEZE,FREEZE_STATUS)
 TNT1 A 0 ACS_NamedExecuteAlways("PKMN_JumpToggle",0,0)
 TNT1 A 0 A_SpawnItemEX("HaltPlayer")
 TNT1 A 0 A_GiveInventory("FreezeMark",1)
@@ -996,7 +1039,7 @@ TNT1 A 1 A_TakeInventory("FreezeValue",999)
 Goto End
 
 Defrost:
-TNT1 A 0 SetPlayerProperty(0,0,0)
+TNT1 A 0 ACS_NamedExecuteAlways("PKMN_FreezePlayer",0,PLAYER_UNFREEZE,FREEZE_STATUS)
 TNT1 A 0 ACS_NamedExecuteAlways("PKMN_JumpToggle",0,1)
 TNT1 A 0 A_TakeInventory("IceImmunity",999)
 Goto End
@@ -1086,7 +1129,7 @@ TNT1 A 0 A_Jumpifinventory("CringeGuard",1,"Nope")
 TNT1 A 0 A_PlaySoundEX("Move/Fakeout2","SoundSlot8")
 TNT1 A 0 A_GiveInventory("CringeMark",1)
 TNT1 A 0 A_GiveInventory("HaltPlayer",1)
-TNT1 A 0 SetPlayerProperty(0,1,0)
+TNT1 A 0 ACS_NamedExecuteAlways("PKMN_FreezePlayer",0,PLAYER_FREEZE,FREEZE_STATUS)
 TNT1 A 0 ACS_NamedExecuteAlways("PKMN_JumpToggle",0,0)
 TNT1 A 0 A_SpawnItemEX("CringeWatcher")
 stop
@@ -1164,7 +1207,7 @@ States
 Pickup:
 TNT1 A 0
 //TNT1 A 0 //A_Stop
-TNT1 A 0 SetPlayerProperty(0,1,0)
+TNT1 A 0 ACS_NamedExecuteAlways("PKMN_FreezePlayer",0,PLAYER_FREEZE,FREEZE_STATUS)
 TNT1 A 0 ACS_NamedExecuteAlways("PKMN_JumpToggle",0,0)
 TNT1 A 0 A_SpawnItemEX("FrightFX",0,0,40)
 TNT1 A 0 A_SpawnItemEX("FrightFX2",0,0,40)
@@ -1181,8 +1224,7 @@ TNT1 A 0
 TNT1 A 0 A_TakeInventory("CringeMark", 999)
 TNT1 A 1 A_GiveInventory("CringeGuard")
 TNT1 A 0 A_SpawnItemEX("AlertFX")
-TNT1 A 0 SetPlayerProperty(0,0,4)
-TNT1 A 0 SetPlayerProperty(0,0,0)
+TNT1 A 0 ACS_NamedExecuteAlways("PKMN_FreezePlayer",0,PLAYER_UNFREEZE,FREEZE_STATUS)
 TNT1 A 0 A_GiveInventory("StatUpdator",1)
 TNT1 A 0 ACS_NamedExecuteAlways("PKMN_JumpToggle",0,1)
 stop
@@ -1408,7 +1450,7 @@ Pickup:
 TNT1 A 0 A_Jumpifinventory("ConfusionMark",1,"Sustain")
 TNT1 A 0 A_Jumpif(CallACS("CheckStatusGuard",0,STATUS_MINOR),"Nope")
 //==
-TNT1 A 0 A_PlaySoundEX("support/Negative","SoundSlot8")
+TNT1 A 0 A_PlaySoundEX("status/confused","SoundSlot8")
 TNT1 A 0 A_GiveInventory("ConfusionMark",1)
 TNT1 A 0 A_SpawnItemEX("ConfusionWatcher")
 stop

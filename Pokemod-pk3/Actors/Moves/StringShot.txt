@@ -64,7 +64,7 @@ Goto Ready
 //[+]========================================================================[+]
 actor StringShotPP : Ammo {inventory.amount 1 inventory.Maxamount 25}
 
-actor STF_StringShot : Powerup {inventory.amount 1 Powerup.Duration -6}
+actor STF_StringShot : BaseSTatusFlag {}
 
 actor StringShotNerfInitiate : CustomInventory
 {

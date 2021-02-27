@@ -96,6 +96,10 @@ AddPlayerClass Shuckle
 AddPlayerClass Durant
 AddPlayerClass Venonat
 AddPlayerClass Wimpod
+AddPlayerClass Machop
+AddPlayerClass Makuhita
+AddPlayerClass Tyrogue
+AddPlayerClass Riolu
 //--[NewPokemon]--
 
 alias !pkmn_justjoin "closemenu;join"

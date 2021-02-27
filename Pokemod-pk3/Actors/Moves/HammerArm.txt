@@ -79,7 +79,7 @@ actor HammerArmPP : Ammo {inventory.amount 1 inventory.Maxamount 10}
 
 Const int HammerArmRad = 75;
 
-actor STF_HammerArm : Powerup {inventory.amount 1 Powerup.Duration -2}
+actor STF_HammerArm : BaseSTatusFlag3 {}
 
 actor HammerArmNerfInitiate : CustomInventory
 {
@@ -92,7 +92,7 @@ Spawn:
 TNT1 A 0
 stop
 Pickup:
-// Self inflicted, not blocked by mist
+TNT1 A 0 A_Jumpif(CallACS("CheckStatusGuard",0,STATUS_STATS),"Nope") //Blocked by Protect|Detect|Substitute|Mist
 TNT1 A 0 A_Jumpifinventory("STF_HammerArm",1,"Sustain")
 TNT1 A 0 A_GiveInventory("STF_HammerArm",1)
 TNT1 A 0 A_SpawnItemEX("HammerArmNerfWatcher")
@@ -248,7 +248,7 @@ stop
 }
 
 
-actor HammerArmPound : BasicExplosion
+actor HammerArmPound : BasicExplosion2
 {
 translation "202:202=210:210"//90
 Damagetype "HammerArm"

@@ -133,8 +133,6 @@ actor PhantomForceBuffer : Powerup {inventory.amount 1 Powerup.Duration 30}
 actor PhantomForcePPTimer : Powerup {inventory.amount 1 Powerup.Duration 35}
 actor PhantomForceFXBuffer : Powerup {inventory.amount 1 Powerup.Duration 7}
 
-actor STF_PhantomForce : Powerup {inventory.amount 1 Powerup.Duration 17}
-
 Actor PhantomForce_VWatcher : VisibilityWatcher
 {
 ReactionTime 70

@@ -474,8 +474,12 @@ States
 {
 Spawn:
 ICMS A 0
+TNT1 A 1 A_JumpIf(CallACS("Check_ShowStatParticles")!=1,"Death")
 POWU CDCD 2
 POWU CDCD 2 A_Fadeout
+stop
+Death:
+TNT1 A 1
 stop
 }
 }
@@ -497,10 +501,6 @@ Spawn:
 TNT1 A 0
 stop
 Pickup:
-TNT1 A 0 
-TNT1 A 0 A_JumpIf(CallACS("Check_ShowStatParticles"),"Pickup2")
-stop
-Pickup2:
 TNT1 A 0 A_SpawnItemEx("StatDownFX",Stat_X,0,Stat_DownZ,0,0,Stat_DownS,random(0,360))
 stop
 Nope:
@@ -514,7 +514,7 @@ actor PatkDownFXSpawn : StatDownFXSpawn
 {
 States
 {
-Pickup2:
+Pickup:
 TNT1 A 0 A_SpawnItemEx("PatkDownFX",Stat_X,0,Stat_DownZ,0,0,Stat_DownS,random(0,360))
 stop
 }}
@@ -523,7 +523,7 @@ actor SatkDownFXSpawn : StatDownFXSpawn
 {
 States
 {
-Pickup2:
+Pickup:
 TNT1 A 0 A_SpawnItemEx("SatkDownFX",Stat_X,0,Stat_DownZ,0,0,Stat_DownS,random(0,360))
 stop
 }}
@@ -532,7 +532,7 @@ actor PdefDownFXSpawn : StatDownFXSpawn
 {
 States
 {
-Pickup2:
+Pickup:
 TNT1 A 0 A_SpawnItemEx("PdefDownFX",Stat_X,0,Stat_DownZ,0,0,Stat_DownS,random(0,360))
 stop
 }}
@@ -541,7 +541,7 @@ actor SdefDownFXSpawn : StatDownFXSpawn
 {
 States
 {
-Pickup2:
+Pickup:
 TNT1 A 0 A_SpawnItemEx("SdefDownFX",Stat_X,0,Stat_DownZ,0,0,Stat_DownS,random(0,360))
 stop
 }}
@@ -550,7 +550,7 @@ actor SpdDownFXSpawn : StatDownFXSpawn
 {
 States
 {
-Pickup2:
+Pickup:
 TNT1 A 0 A_SpawnItemEx("SpdDownFX",Stat_X,0,Stat_DownZ,0,0,Stat_DownS,random(0,360))
 stop
 }}
@@ -561,8 +561,12 @@ States
 {
 Spawn:
 ICMS A 0
+TNT1 A 1 A_JumpIf(CallACS("Check_ShowStatParticles")!=1,"Death")
 POWU ABAB 2
 POWU ABAB 2 A_Fadeout
+stop
+Death:
+TNT1 A 1
 stop
 }
 }
@@ -585,10 +589,6 @@ Spawn:
 TNT1 A 0
 stop
 Pickup:
-TNT1 A 0 
-TNT1 A 0 A_JumpIf(CallACS("Check_ShowStatParticles"),"Pickup2")
-stop
-Pickup2:
 TNT1 A 0 A_SpawnItemEx("StatUpFX",Stat_X,0,0,0,0,3,random(0,360))
 stop
 Nope:
@@ -602,7 +602,7 @@ actor PatkUpFXSpawn : StatUpFXSpawn
 {
 States
 {
-Pickup2:
+Pickup:
 TNT1 A 0 A_SpawnItemEx("PatkUpFX",Stat_X,0,Stat_UpZ,0,0,Stat_UpS,random(0,360))
 stop
 }}
@@ -611,7 +611,7 @@ actor SatkUpFXSpawn : StatUpFXSpawn
 {
 States
 {
-Pickup2:
+Pickup:
 TNT1 A 0 A_SpawnItemEx("SatkUpFX",Stat_X,0,Stat_UpZ,0,0,Stat_UpS,random(0,360))
 stop
 }}
@@ -620,7 +620,7 @@ actor PdefUpFXSpawn : StatUpFXSpawn
 {
 States
 {
-Pickup2:
+Pickup:
 TNT1 A 0 A_SpawnItemEx("PdefUpFX",Stat_X,0,Stat_UpZ,0,0,Stat_UpS,random(0,360))
 stop
 }}
@@ -629,7 +629,7 @@ actor SdefUpFXSpawn : StatUpFXSpawn
 {
 States
 {
-Pickup2:
+Pickup:
 TNT1 A 0 A_SpawnItemEx("SdefUpFX",Stat_X,0,Stat_UpZ,0,0,Stat_UpS,random(0,360))
 stop
 }}
@@ -638,7 +638,7 @@ actor SpdUpFXSpawn : StatUpFXSpawn
 {
 States
 {
-Pickup2:
+Pickup:
 TNT1 A 0 A_SpawnItemEx("SpdUpFX",Stat_X,0,Stat_UpZ,0,0,Stat_UpS,random(0,360))
 stop
 }}

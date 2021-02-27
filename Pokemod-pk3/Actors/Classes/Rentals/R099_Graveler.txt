@@ -15,11 +15,11 @@ Player.StartItem "PKMNRentalKit"
 //============|
 Player.StartItem "GravelerRentalSetupItem"
 //============|
-Player.StartItem "Base_HP", 55
-Player.StartItem "Base_PAttack", 95
-Player.StartItem "Base_PDefense", 115
+Player.StartItem "Base_HP", 85
+Player.StartItem "Base_PAttack", 110
+Player.StartItem "Base_PDefense", 120
 Player.StartItem "Base_SAttack", 45
-Player.StartItem "Base_SDefense", 45
+Player.StartItem "Base_SDefense", 85
 
 //============|
 

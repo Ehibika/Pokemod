@@ -183,7 +183,7 @@ Powerup.Duration 70
 powerup.type "ConShotTimer"
 }
 
-actor STF_Yawn : Powerup {inventory.amount 1 Powerup.Duration -6}
+actor STF_Yawn : BaseSTatusFlag {Powerup.Duration -6}
 
 actor YawnEffectInitiate : CustomInventory
 {

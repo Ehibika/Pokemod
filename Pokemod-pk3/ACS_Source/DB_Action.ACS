@@ -1,0 +1,18 @@
+/* -=- Action script Database -=-
+ * Variables and functions for G_Action
+ *
+ * 
+
+*/
+
+#library "DB_Action"
+#include "zcommon.acs"
+
+
+#LIBDEFINE FREEZE_DASH  1
+#LIBDEFINE FREEZE_STATUS  2
+#LIBDEFINE FREEZE_MENU  3
+
+#LIBDEFINE PLAYER_UNFREEZE  0
+#LIBDEFINE PLAYER_FREEZE  1
+#LIBDEFINE PLAYER_FULLFREEZE  2

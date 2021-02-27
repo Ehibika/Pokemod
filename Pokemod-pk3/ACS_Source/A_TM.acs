@@ -7,7 +7,7 @@
 #library "A_TM"
 #import "Dex_Pokemon.acs"
 #import "Dex_moves.acs"
-#import "Dex_movesets.acs"
+#import "Dex_Movesets.acs"
 #import "Dex_Types.acs"
 #import "Dex_Leveling.acs"
 #import "Dex_BaseStats.acs"

@@ -176,6 +176,11 @@ OptionString PKMN_JoinName
 "Durant", "Durant"
 "Venonat", "Venonat"
 "Wimpod", "Wimpod"
+
+"Machop", "Machop"
+"Makuhita", "Makuhita"
+"Tyrogue", "Tyrogue"
+"Riolu", "Riolu"
 //--[NewPokemon]--
 }
 

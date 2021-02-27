@@ -50,7 +50,7 @@ Fire.BodyCheckLoop:
 Goto Fire.After
 
 Fire.After:
-"####" B 1 A_GiveInventory("SemiRecovery_C")
+"####" B 1 A_GiveInventory("FullRecovery_C")
 "####" B 0 A_SpawnItemEx("ReSolidifier")
 "####" B 0 A_ChangeFlag("NOGRAVITY",0)
 "####" C 0// A_REfire("Fire")
@@ -96,7 +96,7 @@ stop
 }
 
 
-actor STF_Liquidation : Powerup {inventory.amount 1 Powerup.Duration -6}
+actor STF_Liquidation : BaseSTatusFlag {}
 
 actor LiquidationNerfInitiate : CustomInventory
 {
@@ -111,6 +111,7 @@ stop
 Pickup:
 TNT1 A 0 A_Jumpif(CallACS("CheckStatusGuard",0,STATUS_STATS),"Nope") //Blocked by Protect|Detect|Substitute|Mist
 TNT1 A 0 A_Jumpifinventory("STF_Liquidation",1,"Sustain")
+TNT1 A 0 A_PlaySoundEx("support/StatDown","Weapon")
 TNT1 A 0 A_GiveInventory("STF_Liquidation",1)
 TNT1 A 0 A_SpawnItemEX("LiquidationNerfWatcher")
 TNT1 A 0 A_GiveInventory("StatUpdator",1)

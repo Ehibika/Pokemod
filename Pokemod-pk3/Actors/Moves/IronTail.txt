@@ -87,6 +87,36 @@ Powerup.Duration 10
 damagefactor "IronTail", 0.0
 }
 
+
+actor STF_IronTail : BaseSTatusFlag {}
+
+actor IronTailNerfInitiate : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_Jumpif(CallACS("CheckStatusGuard",0,STATUS_STATS),"Nope") //Blocked by Protect|Detect|Substitute|Mist
+TNT1 A 0 A_Jumpifinventory("STF_IronTail",1,"Sustain")
+TNT1 A 0 A_PlaySoundEx("support/StatDown","Weapon")
+TNT1 A 0 A_GiveInventory("STF_IronTail",1)
+TNT1 A 0 A_SpawnItemEX("IronTailNerfWatcher")
+TNT1 A 0 A_GiveInventory("StatUpdator",1)
+stop
+
+Sustain:
+TNT1 A 0 A_GiveInventory("STF_IronTail",1)
+stop
+Nope:
+TNT1 A 0
+stop
+}
+}
 //[+]========================================================================[+]
 //--------------------------------|Projectiles |--------------------------------
 //[+]========================================================================[+]
@@ -171,7 +201,7 @@ stop
 }
 
 
-actor IronTailEdgeFX : BasicClientside
+actor IronTailEdgeFX : BasicNOTClientside
 {
 scale 2.5
 XScale 4.0
@@ -277,3 +307,23 @@ stop
 }
 }
 
+
+
+actor IronTailNerfWatcher : BasicHelper 
+{
+Var int user_DashTime;
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 5 A_GiveToTarget("PDefDownFXSpawn")
+TNT1 A 0 A_JumpIfInTargetInventory("STF_IronTail",1,"Spawn")
+TNT1 A 1 A_GiveToTarget("StatUpdator")
+TNT1 A 5
+Goto Death
+
+Death:
+TNT1 A 0 
+stop
+}
+}

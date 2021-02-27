@@ -71,7 +71,7 @@ Goto Ready
 //[+]========================================================================[+]
 actor FlameChargePP : Ammo {inventory.amount 1 inventory.Maxamount 25}
 
-actor STF_FlameCharge : Powerup {inventory.amount 1 Powerup.Duration -6}
+actor STF_FlameCharge : BaseSTatusFlag2 {}
 
 actor FlameChargeAuraFlag : inventory {inventory.amount 1 inventory.Maxamount 1}
 actor FlameChargePPTimer : Powerup {inventory.amount 1 Powerup.Duration 35}

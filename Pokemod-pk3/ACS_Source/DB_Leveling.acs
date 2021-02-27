@@ -49,6 +49,8 @@ Function Int EXPTime (void)
 //Returns when you are allowed to earn EXP
 int Output;
 
+if(GetActorProperty(0,APROP_HEALTH)<1){return 0;}
+
 if(GetCvar("PKMN_NoEXP")==1){return 0;}
 
 if(GetCvar("lastmanstanding")==1||GetCvar("teamlms")==1)

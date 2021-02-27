@@ -175,6 +175,8 @@ Obituary "$OB_DISCHARGE"
 +DONTREFLECT
 +THRUGHOST
 +RIPPER
+
++SPECTRAL //Spectral Breeching
 Radius 20
 Height 26
 Damage (0)

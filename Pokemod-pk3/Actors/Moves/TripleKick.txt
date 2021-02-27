@@ -1,0 +1,207 @@
+actor TripleKickMove : WepMasterBase
+{
+Tag "TripleKick"
+obituary "$OB_TRIPLEKICK"
+Weapon.AmmoUse 1
+Weapon.AmmoGive 35
+weapon.ammotype "TripleKickPP"
+scale 2.0
+Inventory.Pickupmessage "$PU_MEGABUSTER"
+States
+{
+Spawn:
+WEAP X 1
+stop
+
+
+Fire:
+"####" BBB 1 A_Jumpif(CallACS("CheckWeaponFire",RC_B)==1,"Fire.Begin")
+"####" B 0 A_Jump(256,"NoAmmo")
+Goto NoAmmo
+
+Fire.Begin:
+"####" B 0
+"####" B 0 A_JumpifInventory("ConShotTimer",1,"Fire.Bullet2")
+"####" B 0 A_JumpifInventory("TripleKickPower",1,"Fire.Bullet")
+"####" B 0 A_FireCustomMissile("TripleKickMelee",0,0,0,0)
+"####" B 0 A_Gunflash("Flash.Sound")
+"####" B 0 A_Jump(256,"Fire.Bullet")
+Goto Fire.Bullet
+
+Fire.Bullet:
+"####" A 1 ACS_NamedExecuteAlways("TakePP",0,Move_TripleKick,1)
+"####" B 0 A_GiveInventory("TripleKickCST")
+"####" B 0 A_GiveInventory("TripleKickPower")
+"####" B 0 A_Jump(256,"Fire.After")
+Goto Fire.After
+
+Fire.Bullet2:
+"####" B 1  
+"####" B 0 A_GiveInventory("TripleKickBuffInitiate")
+"####" B 0 A_GiveInventory("TripleKickPower")
+"####" B 0 A_Jump(256,"Fire.After")
+Goto Fire.After
+
+Fire.After:
+"####" B 1
+"####" C 0 A_REfire("Fire")
+"####" B 1 A_GiveInventory("SemiRecovery_B")
+"####" B 0 A_TakeInventory("ConShotTimer",99)
+"####" B 0 A_Jump(256,"Fire.End")
+Goto Fire.End
+
+Flash.Sound:
+TNT1 A 5 A_PlaySoundEx("weapon/SlashClaw", "SoundSlot5",0)
+TNT1 A  0 A_JumpifInventory("TripleKickPower",1,"Flash.Sound")
+stop
+}
+}
+
+actor TripleKickMove1 : TripleKickMove {Weapon.SlotNumber 1}
+actor TripleKickMove2 : TripleKickMove {Weapon.SlotNumber 2}
+actor TripleKickMove3 : TripleKickMove {Weapon.SlotNumber 3}
+actor TripleKickMove4 : TripleKickMove {Weapon.SlotNumber 4}
+
+actor TripleKickMove5 : TripleKickMove 
+{
+Weapon.SlotNumber 5
+States
+{
+Fire.End:
+TNT1 A 0
+TNT1 A 0 A_TakeInventory("TripleKickMove5",9)
+TNT1 A 0 A_Jump(256,"Ready")
+Goto Ready
+}
+}
+
+//[+]========================================================================[+]
+//-----------------------------|Ammo & Inventory|------------------------------
+//[+]========================================================================[+]
+actor TripleKickPP : Ammo {inventory.amount 1 inventory.Maxamount 35}
+
+Actor TripleKickPower: powerUp 
+{
+Powerup.duration 17
+}
+
+actor TripleKickCST : PowerupGiver
+{
++INVENTORY.AUTOACTIVATE
+Powerup.Duration 35
+powerup.type "ConShotTimer"
+}
+
+Actor TripleKickProtect : powerprotection
+{
+Powerup.duration 5
+Damagefactor "TripleKick", 0
+}
+
+actor STF_TripleKick : BaseSTatusFlag {Powerup.Duration -2}
+
+actor TripleKickBuffInitiate : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_Jumpifinventory("STF_TripleKick",1,"Sustain")
+TNT1 A 0 A_GiveInventory("STF_TripleKick",1)
+TNT1 A 0 A_SpawnitemEX("TripleKickBuffWatcher")
+TNT1 A 0 A_GiveInventory("StatUpdator",1)
+stop
+
+Sustain:
+TNT1 A 0 A_GiveInventory("STF_TripleKick",1)
+stop
+Nope:
+TNT1 A 0
+stop
+}
+}
+//[+]========================================================================[+]
+//--------------------------------|Projectiles |--------------------------------
+//[+]========================================================================[+]
+
+actor TripleKickMelee : BasicProjectile
+{
++NOINTERACTION
+Speed 35
+Damage (0)
+DamageType "TripleKick"
+obituary "$OB_TripleKick"
+height 16
+scale 2.5
+Args 35, 0
+ReactionTime 12
+States
+{
+Spawn:
+TNT1 A 0 
+TNT1 A 0 A_GiveInventory("ProjectileDCode",1)
+TNT1 A 1
+TNT1 A 0 A_Stop
+Goto Spawn.Spin
+
+Spawn.Spin:
+TNT1 A 0 A_Warp(AAPTR_TARGET,0,0,15)
+TNT1 A 0 A_SpawnItemEx("TripleKickFX",60,0,16,8,0,0,Args[0],1)
+TNT1 A 0 A_SpawnItemEx("TripleKickFX",60,0,16,8,0,0,Args[0]+120,1)
+TNT1 A 0 A_SpawnItemEx("TripleKickFX",60,0,16,8,0,0,Args[0]+240,1)
+TNT1 A 0 A_SetArg(0,args[0]+20)
+TNT1 A 0 A_SetArg(1,args[1]-1)
+Goto Spawn.SpinHit
+
+Spawn.SpinHit:
+TNT1 A 0 A_Explode(MBP_TripleKick,90,0,0,90)
+TNT1 A 1 //A_CountDown
+Goto Spawn.SpinCheck
+
+Spawn.SpinCheck:
+TNT1 AAA 1 A_JumpIfInTargetInventory("TripleKickPower",1,"Spawn.Spin")
+Goto Death
+
+Death:
+TNT1 A 0
+stop
+}
+}
+
+actor TripleKickFX : BasicClientside
+{
+Scale 3.5
+States
+{
+Spawn:
+HITG D 1 A_FadeOut(0.2)
+HITG D 0 A_ScaleVelocity(0.6)
+loop
+}
+}
+
+actor TripleKickBuffWatcher : BasicHelper 
+{
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_JumpIfInTargetInventory("CutterFlag",999,"Death")
+TNT1 A 0 A_JumpIfInTargetInventory("IsDead",1,"Death")
+TNT1 A 0 A_JumpIfInTargetInventory("HazeFlag",1,"Death")
+TNT1 A 0 A_JumpIfInTargetInventory("HazeFlag",1,"Death")
+TNT1 A 5 A_GiveToTarget("SPDUpFXSpawn")
+TNT1 A 0 A_JumpIfInTargetInventory("STF_TripleKick",1,"Spawn")
+Goto Death
+
+Death:
+TNT1 A 0 A_GiveToTarget("StatUpdator")
+TNT1 A 2 
+stop
+}
+}

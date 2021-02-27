@@ -2570,4 +2570,169 @@ $playersound    Golisopod male *usefail    FATLAND
 $playersound    Golisopod male *taunt      CRY175
 
 
+$playersound    Machop male *death      MEGADEAT
+$playersound    Machop male *xdeath     MEGADEAT
+$playersound    Machop male *gibbed     MEGADEAT
+$playersound    Machop male *pain100    MEGAPAIN
+$playersound    Machop male *pain75     MEGAPAIN
+$playersound    Machop male *pain50     MEGAPAIN
+$playersound    Machop male *pain25     MEGAPAIN
+$playersound    Machop male *grunt      LAND
+$playersound    Machop male *land       LAND
+$playersound    Machop male *jump       dsnone
+$playersound    Machop male *fist       dsnone
+$playersound    Machop male *usefail    LAND
+$playersound    Machop male *taunt      CRY176
+
+
+$playersound    Machoke male *death      MEGADEAT
+$playersound    Machoke male *xdeath     MEGADEAT
+$playersound    Machoke male *gibbed     MEGADEAT
+$playersound    Machoke male *pain100    MEGAPAIN
+$playersound    Machoke male *pain75     MEGAPAIN
+$playersound    Machoke male *pain50     MEGAPAIN
+$playersound    Machoke male *pain25     MEGAPAIN
+$playersound    Machoke male *grunt      LAND
+$playersound    Machoke male *land       LAND
+$playersound    Machoke male *jump       dsnone
+$playersound    Machoke male *fist       dsnone
+$playersound    Machoke male *usefail    LAND
+$playersound    Machoke male *taunt      CRY177
+
+
+$playersound    Machamp male *death      MEGADEAT
+$playersound    Machamp male *xdeath     MEGADEAT
+$playersound    Machamp male *gibbed     MEGADEAT
+$playersound    Machamp male *pain100    MEGAPAIN
+$playersound    Machamp male *pain75     MEGAPAIN
+$playersound    Machamp male *pain50     MEGAPAIN
+$playersound    Machamp male *pain25     MEGAPAIN
+$playersound    Machamp male *grunt      FATLAND
+$playersound    Machamp male *land       FATLAND
+$playersound    Machamp male *jump       dsnone
+$playersound    Machamp male *fist       dsnone
+$playersound    Machamp male *usefail    FATLAND
+$playersound    Machamp male *taunt      CRY178
+
+
+$playersound    Makuhita male *death      MEGADEAT
+$playersound    Makuhita male *xdeath     MEGADEAT
+$playersound    Makuhita male *gibbed     MEGADEAT
+$playersound    Makuhita male *pain100    MEGAPAIN
+$playersound    Makuhita male *pain75     MEGAPAIN
+$playersound    Makuhita male *pain50     MEGAPAIN
+$playersound    Makuhita male *pain25     MEGAPAIN
+$playersound    Makuhita male *grunt      LAND
+$playersound    Makuhita male *land       LAND
+$playersound    Makuhita male *jump       dsnone
+$playersound    Makuhita male *fist       dsnone
+$playersound    Makuhita male *usefail    LAND
+$playersound    Makuhita male *taunt      CRY179
+
+
+$playersound    Hariyama male *death      MEGADEAT
+$playersound    Hariyama male *xdeath     MEGADEAT
+$playersound    Hariyama male *gibbed     MEGADEAT
+$playersound    Hariyama male *pain100    MEGAPAIN
+$playersound    Hariyama male *pain75     MEGAPAIN
+$playersound    Hariyama male *pain50     MEGAPAIN
+$playersound    Hariyama male *pain25     MEGAPAIN
+$playersound    Hariyama male *grunt      FATLAND
+$playersound    Hariyama male *land       FATLAND
+$playersound    Hariyama male *jump       dsnone
+$playersound    Hariyama male *fist       dsnone
+$playersound    Hariyama male *usefail    FATLAND
+$playersound    Hariyama male *taunt      CRY180
+
+
+$playersound    Tyrogue male *death      MEGADEAT
+$playersound    Tyrogue male *xdeath     MEGADEAT
+$playersound    Tyrogue male *gibbed     MEGADEAT
+$playersound    Tyrogue male *pain100    MEGAPAIN
+$playersound    Tyrogue male *pain75     MEGAPAIN
+$playersound    Tyrogue male *pain50     MEGAPAIN
+$playersound    Tyrogue male *pain25     MEGAPAIN
+$playersound    Tyrogue male *grunt      LAND
+$playersound    Tyrogue male *land       LAND
+$playersound    Tyrogue male *jump       dsnone
+$playersound    Tyrogue male *fist       dsnone
+$playersound    Tyrogue male *usefail    LAND
+$playersound    Tyrogue male *taunt      CRY181
+
+
+$playersound    Hitmonlee male *death      MEGADEAT
+$playersound    Hitmonlee male *xdeath     MEGADEAT
+$playersound    Hitmonlee male *gibbed     MEGADEAT
+$playersound    Hitmonlee male *pain100    MEGAPAIN
+$playersound    Hitmonlee male *pain75     MEGAPAIN
+$playersound    Hitmonlee male *pain50     MEGAPAIN
+$playersound    Hitmonlee male *pain25     MEGAPAIN
+$playersound    Hitmonlee male *grunt      FATLAND
+$playersound    Hitmonlee male *land       FATLAND
+$playersound    Hitmonlee male *jump       dsnone
+$playersound    Hitmonlee male *fist       dsnone
+$playersound    Hitmonlee male *usefail    FATLAND
+$playersound    Hitmonlee male *taunt      CRY182
+
+
+$playersound    HitmonChan male *death      MEGADEAT
+$playersound    HitmonChan male *xdeath     MEGADEAT
+$playersound    HitmonChan male *gibbed     MEGADEAT
+$playersound    HitmonChan male *pain100    MEGAPAIN
+$playersound    HitmonChan male *pain75     MEGAPAIN
+$playersound    HitmonChan male *pain50     MEGAPAIN
+$playersound    HitmonChan male *pain25     MEGAPAIN
+$playersound    HitmonChan male *grunt      FATLAND
+$playersound    HitmonChan male *land       FATLAND
+$playersound    HitmonChan male *jump       dsnone
+$playersound    HitmonChan male *fist       dsnone
+$playersound    HitmonChan male *usefail    FATLAND
+$playersound    HitmonChan male *taunt      CRY183
+
+
+$playersound    HitmonTop male *death      MEGADEAT
+$playersound    HitmonTop male *xdeath     MEGADEAT
+$playersound    HitmonTop male *gibbed     MEGADEAT
+$playersound    HitmonTop male *pain100    MEGAPAIN
+$playersound    HitmonTop male *pain75     MEGAPAIN
+$playersound    HitmonTop male *pain50     MEGAPAIN
+$playersound    HitmonTop male *pain25     MEGAPAIN
+$playersound    HitmonTop male *grunt      FATLAND
+$playersound    HitmonTop male *land       FATLAND
+$playersound    HitmonTop male *jump       dsnone
+$playersound    HitmonTop male *fist       dsnone
+$playersound    HitmonTop male *usefail    FATLAND
+$playersound    HitmonTop male *taunt      CRY184
+
+
+$playersound    Riolu male *death      MEGADEAT
+$playersound    Riolu male *xdeath     MEGADEAT
+$playersound    Riolu male *gibbed     MEGADEAT
+$playersound    Riolu male *pain100    MEGAPAIN
+$playersound    Riolu male *pain75     MEGAPAIN
+$playersound    Riolu male *pain50     MEGAPAIN
+$playersound    Riolu male *pain25     MEGAPAIN
+$playersound    Riolu male *grunt      LAND
+$playersound    Riolu male *land       LAND
+$playersound    Riolu male *jump       dsnone
+$playersound    Riolu male *fist       dsnone
+$playersound    Riolu male *usefail    LAND
+$playersound    Riolu male *taunt      CRY185
+
+
+$playersound    Lucario male *death      MEGADEAT
+$playersound    Lucario male *xdeath     MEGADEAT
+$playersound    Lucario male *gibbed     MEGADEAT
+$playersound    Lucario male *pain100    MEGAPAIN
+$playersound    Lucario male *pain75     MEGAPAIN
+$playersound    Lucario male *pain50     MEGAPAIN
+$playersound    Lucario male *pain25     MEGAPAIN
+$playersound    Lucario male *grunt      FATLAND
+$playersound    Lucario male *land       FATLAND
+$playersound    Lucario male *jump       dsnone
+$playersound    Lucario male *fist       dsnone
+$playersound    Lucario male *usefail    FATLAND
+$playersound    Lucario male *taunt      CRY186
+
+
 //--[NewPokemon]--

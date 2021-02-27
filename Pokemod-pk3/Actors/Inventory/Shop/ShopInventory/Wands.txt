@@ -215,7 +215,7 @@ Goto Death
 }
 
 
-actor STF_Shrink : Powerup {inventory.amount 1 Powerup.Duration -6}
+actor STF_Shrink : BaseSTatusFlag { Powerup.Duration -6}
 
 actor ShrinkNerfInitiate : CustomInventory
 {

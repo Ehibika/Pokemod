@@ -14,7 +14,7 @@ WEAP X 1
 stop
 
 Fire:
-"####" BBB 1 A_Jumpif(CallACS("CheckWeaponFire",RC_B)==1,"Fire.Begin")
+"####" BBB 1 A_Jumpif(CallACS("CheckWeaponFire",RC_D)==1,"Fire.Begin")
 "####" B 0 A_Jump(256,"NoAmmo")
 Goto NoAmmo
 
@@ -31,9 +31,10 @@ Fire.PreCharge:
 Goto Fire.Charge1
 
 Fire.Charge1:
+"####" B 0 A_Jumpif(CallACS("CheckWeaponFire",RC_D)!=1,"NoAmmo")
 "####" B 0 A_JumpIfInventory("WeaponCharge",35,"Fire.Charge2")
 "####" B 0 A_GiveInventory("WeaponCharge",1)
-"####" B 0 A_GiveInventory("ChannelingSpeed")
+"####" B 0 //A_GiveInventory("ChannelingSpeed")
 "####" B 1
 "####" C 0 A_REfire("Fire.Charge1")
 "####" B 0 A_StopSoundEX("Soundslot6")
@@ -41,7 +42,7 @@ Fire.Charge1:
 Goto Fire.After2
 
 Fire.Charge2:
-"####" B 0 A_GiveInventory("ChannelingSpeed")
+"####" B 0 //A_GiveInventory("ChannelingSpeed")
 "####" B 1
 "####" C 0 A_REfire("Fire.Charge1")
 "####" B 0 A_Jump(256,"Fire.GrabStart")
@@ -76,7 +77,7 @@ TOPH A 0 A_ChangeFlag("SHOOTABLE",0)
 TNT1 A 0 A_ChangeFlag("SOLID",0)
 TNT1 A 0 A_Stop
 
-TNT1 AAAAAAAAAAAAAAAAA 1 A_Jumpif(!CallACS("SuplexGrasp_TID",pitch,angle,CallACS("Get_SuplexID_TID")),"SuperPowerSlam")
+TNT1 AAAAAAAAAAAAAAAAA 1 A_Jumpif(!CallACS("SuplexGrasp_TID",pitch,angle,CallACS("Get_SuplexID_TID")),"SuperPowerSlamEnd")
 goto SuperPowerSlamJump
 
 SuperPowerSlamJump:
@@ -89,7 +90,7 @@ TOPH A 0 A_ChangeFlag("SHOOTABLE",1)
 TOPH A 0 A_ChangeFlag("INVULNERABLE",1)
 TNT1 A 0 ACS_NamedExecuteWithResult("Give_AntiInvincible_ToTID",CallACS("Get_SuplexID_TID"))
 TNT1 A 0 A_SpawnItemEX("SuperPower", 0,0,0, 0,0,0, 0, SXF_ABSOLUTEMOMENTUM|SXF_NOCHECKPOSITION, 0)
-TNT1 A 1 A_Jumpif(!CallACS("SuplexGrasp_TID",pitch,angle,CallACS("Get_SuplexID_TID")),"SuperPowerSlam")
+TNT1 A 1 A_Jumpif(!CallACS("SuplexGrasp_TID",pitch,angle,CallACS("Get_SuplexID_TID")),"SuperPowerSlamEnd")
 goto SuperPowerSlamEnd
 
 SuperPowerSlamEnd:
@@ -101,10 +102,10 @@ TNT1 A 0 A_SpawnItemEx("ReSolidifier") // here it is
 Goto Fire.After
 
 Fire.After:
-"####" B 0 A_GiveInventory("HalfRecovery_B")
-"####" B 0 A_GiveInventory("SuperPowerNerfInitiate")
+"####" B 0 A_GiveInventory("HalfRecovery_D")
+"####" B 0 //A_GiveInventory("SuperPowerNerfInitiate")
 Fire.After2:
-"####" B 1 A_GiveInventory("5Recovery_B")
+"####" B 1 A_GiveInventory("5Recovery_D")
 "####" A 0 A_GiveInventory("DashSetOff")
 "####" B 0 A_TakeInventory("WeaponCharge",999)
 "####" C 0 A_REfire("Fire")
@@ -166,11 +167,12 @@ UpLimit:
 TNT1 A 0 A_SetPitch(350)
 Pickup2:
 TNT1 A 0 A_FireCustomMissile("SuperPowerGrab",0,0,0,0)
+TNT1 A 0 A_GiveInventory("GrappleGuard")
 stop
 }
 }
 
-actor STF_SuperPower : Powerup {inventory.amount 1 Powerup.Duration -5}
+actor STF_SuperPower : BaseSTatusFlag3 {}
 
 actor SuperPowerNerfInitiate : CustomInventory
 {
@@ -183,8 +185,9 @@ Spawn:
 TNT1 A 0
 stop
 Pickup:
-//Self inflicted, not blocked by mist
+TNT1 A 0 A_Jumpif(CallACS("CheckStatusGuard",0,STATUS_STATS),"Nope") //Blocked by Protect|Detect|Substitute|Mist
 TNT1 A 0 A_Jumpifinventory("STF_SuperPower",1,"Sustain")
+TNT1 A 0 A_PlaySoundEx("support/StatDown","Weapon")
 TNT1 A 0 A_GiveInventory("STF_SuperPower",1)
 TNT1 A 0 A_SpawnItemEX("SuperPowerNerfWatcher")
 TNT1 A 0 A_GiveInventory("StatUpdator",1)
@@ -328,6 +331,7 @@ actor SuperPowerChargeWatcher
 {
     PROJECTILE
     +NOINTERACTION
+    +CLIENTSIDEONLY
     renderstyle "ADD"
     speed 32
     height 1

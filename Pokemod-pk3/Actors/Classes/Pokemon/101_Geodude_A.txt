@@ -12,11 +12,11 @@ Player.SoundClass "Geodude_A"
 player.startitem "PKMNStarterKit"
 
 //============|
-Player.StartItem "Base_HP", 40
+Player.StartItem "Base_HP", 60
 Player.StartItem "Base_PAttack", 80
 Player.StartItem "Base_PDefense", 100
 Player.StartItem "Base_SAttack", 30
-Player.StartItem "Base_SDefense", 30
+Player.StartItem "Base_SDefense", 50
 
 //============|
 

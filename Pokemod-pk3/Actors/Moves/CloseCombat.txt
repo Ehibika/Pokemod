@@ -34,7 +34,7 @@ Goto Fire.Rampage
 
 Fire.Rampage:
 "####" B 2 A_PlaySoundEx("misc/darkleap","Weapon")
-"####" BBB 0 A_FireCustomMissile("CloseCombatMelee",0,0,random(-CLOSECOMBAT_SPD,CLOSECOMBAT_SPD),random(CLOSECOMBAT_SPD2,CLOSECOMBAT_SPD3),0,0)
+"####" BBB 0 A_FireCustomMissile("CloseCombatMelee",0,0,random(-CLOSECOMBAT_SPD,CLOSECOMBAT_SPD),random(CLOSECOMBAT_SPD2,CLOSECOMBAT_SPD3),0,CallACS("PitchClamp",Pitch,55))
 "####" B 1 A_Jumpifinventory("CloseCombatTimer",1,"Fire.RampageCheck")
 "####" B 1 A_Jump(256,"Fire.After")
 Goto Fire.After
@@ -85,7 +85,13 @@ Powerup.duration 1
 Damagefactor "CloseCombat", 0
 }
 
-actor STF_CloseCombat : Powerup {inventory.amount 1 Powerup.Duration -3}
+Actor CloseCombatBuffer : powerprotection
+{
+Powerup.duration 10
+Damagefactor "CloseCombat", 0.1
+}
+
+actor STF_CloseCombat : BaseSTatusFlag3 {}
 
 actor CloseCombatNerfInitiate : CustomInventory
 {
@@ -98,8 +104,9 @@ Spawn:
 TNT1 A 0
 stop
 Pickup:
-//Self inflicted, not blocked by mist
+TNT1 A 0 A_Jumpif(CallACS("CheckStatusGuard",0,STATUS_STATS),"Nope") //Blocked by Protect|Detect|Substitute|Mist
 TNT1 A 0 A_Jumpifinventory("STF_CloseCombat",1,"Sustain")
+TNT1 A 0 A_PlaySoundEx("support/StatDown","Weapon")
 TNT1 A 0 A_GiveInventory("STF_CloseCombat",1)
 TNT1 A 0 A_SpawnItemEX("CloseCombatNerfWatcher")
 TNT1 A 0 A_GiveInventory("StatUpdator",1)

@@ -174,7 +174,7 @@ stop
 }
 
 
-actor GustBurst : BasicExplosion
+actor GustBurst : BasicExplosion2
 {
 translation "202:202=210:210"//90
 Damagetype "Gust"

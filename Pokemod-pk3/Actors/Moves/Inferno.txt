@@ -121,7 +121,7 @@ Actor InfernoBuffer : Powerup {inventory.amount 1 Powerup.duration 3}
 
 Actor InfernoProtect : powerprotection
 {
-Powerup.duration 11
+Powerup.duration 7
 Damagefactor "Inferno", 0
 }
 

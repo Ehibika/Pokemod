@@ -15,11 +15,11 @@ Player.StartItem "PKMNRentalKit"
 //============|
 Player.StartItem "ArbokRentalSetupItem"
 //============|
-Player.StartItem "Base_HP", 60
+Player.StartItem "Base_HP", 80
 Player.StartItem "Base_PAttack", 95
-Player.StartItem "Base_PDefense", 69
-Player.StartItem "Base_SAttack", 65
-Player.StartItem "Base_SDefense", 79
+Player.StartItem "Base_PDefense", 75
+Player.StartItem "Base_SAttack", 80
+Player.StartItem "Base_SDefense", 95
 
 //============|
 

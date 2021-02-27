@@ -159,7 +159,7 @@ stop
 actor BrineAimPath : GolfBallAimInstantStarter2 { Speed 35 Gravity 1.5}
 
 
-actor BrineBlast : BasicExplosion
+actor BrineBlast : BasicExplosion2
 {
 DamageType "Brine"
 obituary "$OB_Brine"

@@ -77,6 +77,12 @@ Actor AirCutterProtect : powerprotection
 Powerup.duration 5
 Damagefactor "AirCutter", 0
 }
+
+Actor AirCutterBuffer : powerprotection
+{
+Powerup.duration 17
+Damagefactor "AirCutter", 0.1
+}
 //[+]========================================================================[+]
 //--------------------------------|Projectiles |--------------------------------
 //[+]========================================================================[+]

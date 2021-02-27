@@ -1,0 +1,89 @@
+//#region -=-=- Beta 48 -=-=-
+/*
+ *
+ *
+ * ===|Gameplay Changes|===
+ * 
+ * ===|Pokemon Changes|===
+ * [NEW POKEMON]
+ * Machop family
+ * Makuhita family
+ * Tyrogue and the Hitmons
+ * Riolu family
+ * 
+ * [Base Stat Changes]
+ *  HP/ATK/DEF/S.ATK/S.DEF
+ * 
+ * Vulpix & Vulpix_A
+ *  from 38/41/40/50/50
+ *  to 30/30/40/60/60
+ * 
+ * Ninetales & Ninetales_A
+ *  From 73/76/75/81/100
+ *  To 60/65/60/100/120
+ * 
+ * Shellder
+ *  from 30/65/80/45/45 
+ *  to 50/45/80/40/50
+ * 
+ * Cloyster
+ *  from 50/95/160/85/65
+ *  to 80/75/150/60/90
+ * 
+ * Geodude & Geodude_A
+ *  from 40/80/100/30/30
+ *  to 60/80/100/30/50
+ * 
+ * Graveler & Graveler_A
+ *  from 55/95/115/45/45
+ *  to 85/110/120/45/85
+ * 
+ * Golem & Golem_A
+ *  from 80/120/130/55/65
+ *  to 100/120/130/55/90
+ * 
+ * Ekans
+ * from 35/60/44/40/54
+ * to 50/60/50/45/60
+ * 
+ * Arbok
+ *  from 60/95/69/65/79
+ *  to 80/95/75/80/95
+ * 
+ *  ===|Move Changes|===
+ * [NEW MOVES]
+ *  Lowkick 
+ *  Karatechop 
+ *  Revenge 
+ *  Armthrust 
+ *  Forcepalm 
+ *  Dynamicpunch 
+ *  Aurasphere 
+ *  Rollingkick 
+ *  Triplekick 
+ *  Jumpkick 
+ * 
+ * 
+ * [Hi Jump Kick]
+ * Damage increased
+ * hitbox position adjusted
+ * Recovery group changed
+ * 
+ * [DragonDarts]
+ * Damage increased
+ * adjusted rate stacks are built
+ * with 2 stats, shots are fired near simultaneously
+ * adjusted homing properties
+ * 
+ * [sky uppercut]
+ * Changed recovery group
+ * 
+ * [Detect]
+ * Reworked to have a new function, grants an evasion state that causes projectiles and melee attacks to not hit 
+ * you, however you are still vulnerable to splash damage and AOe attacks
+ * 
+ * 
+ * ===|TM Changes|===
+ * [New TMs]
+ * AuraSphere
+ * ZenHeadbutt

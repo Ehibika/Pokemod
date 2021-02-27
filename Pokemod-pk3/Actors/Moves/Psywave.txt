@@ -83,7 +83,7 @@ actor PsywaveFireball : PKMN_EarlyGameProjectile
     Damage (0)
     DamageType "Psywave"
     obituary "$OB_PSYWAVE"
-    Reactiontime 15
+    Reactiontime 2
     scale 1.5
     +RIPPER
     +NOINTERACTION
@@ -146,6 +146,7 @@ actor PsywaveFireball : PKMN_EarlyGameProjectile
         TBOL M 1 A_Spawnitemex("PsywaveTrail",0,0,0,0,0,0,0,SXF_TRANSFERTRANSLATION|SXF_ABSOLUTEVELOCITY)
         TNT1 A 0 A_Spawnitemex("PsywaveDamager")
         TBOL N 1 A_Spawnitemex("PsywaveTrail",0,0,0,0,0,0,0,SXF_TRANSFERTRANSLATION|SXF_ABSOLUTEVELOCITY)
+        TNT1 A 0 A_CountDown
         //---
         TBOL M 1 A_Changevelocity(0,user_SPEED*user_DIRECTION,0,1)
         TNT1 A 0 A_Spawnitemex("PsywaveDamager")
@@ -171,7 +172,7 @@ actor PsywaveFireball : PKMN_EarlyGameProjectile
         TNT1 A 0 A_Spawnitemex("PsywaveDamager")
         TBOL N 1 A_Spawnitemex("PsywaveTrail",0,0,0,0,0,0,0,SXF_TRANSFERTRANSLATION|SXF_ABSOLUTEVELOCITY)
         TNT1 A 0 A_Spawnitemex("PsywaveDamager")
-
+        TNT1 A 0 A_CountDown
         //TBOL MM 3 A_Changevelocity(0,user_SPEED*user_DIRECTION,0,1)
         //TBOL NN 3 A_Changevelocity(0,user_SPEED*user_DIRECTION,0,1)
         loop

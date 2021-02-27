@@ -498,7 +498,7 @@ gender = male
 {
 name = "Drakloak"
 sprite = P038
-Scale = 2.0
+Scale = 1.5
 class = dreepy
 dsnoway = LAND
 dsoof = LAND
@@ -512,7 +512,7 @@ gender = male
 {
 name = "Dragapult"
 sprite = P039
-Scale = 2.0
+Scale = 1.5
 class = dreepy
 dsnoway = LAND
 dsoof = LAND
@@ -2390,6 +2390,160 @@ dspldeth = MEGADEAT
 dspdiehi = MEGADEAT
 dsplpain = MEGAPAIN
 dstaunt = Cry175
+gender = male
+}
+
+
+{
+name = "Machop"
+sprite = P176
+class = Machop
+dsnoway = LAND
+dsoof = LAND
+dspldeth = MEGADEAT
+dspdiehi = MEGADEAT
+dsplpain = MEGAPAIN
+dstaunt = Cry176
+gender = male
+}
+
+
+{
+name = "Machoke"
+sprite = P177
+class = Machop
+dsnoway = LAND
+dsoof = LAND
+dspldeth = MEGADEAT
+dspdiehi = MEGADEAT
+dsplpain = MEGAPAIN
+dstaunt = Cry177
+gender = male
+}
+
+
+{
+name = "Machamp"
+sprite = P178
+class = Machop
+dsnoway = FATLAND
+dsoof = FATLAND
+dspldeth = MEGADEAT
+dspdiehi = MEGADEAT
+dsplpain = MEGAPAIN
+dstaunt = Cry178
+gender = male
+}
+
+
+{
+name = "Makuhita"
+sprite = P179
+class = Makuhita
+dsnoway = LAND
+dsoof = LAND
+dspldeth = MEGADEAT
+dspdiehi = MEGADEAT
+dsplpain = MEGAPAIN
+dstaunt = Cry179
+gender = male
+}
+
+
+{
+name = "Hariyama"
+sprite = P180
+class = Makuhita
+dsnoway = FATLAND
+dsoof = FATLAND
+dspldeth = MEGADEAT
+dspdiehi = MEGADEAT
+dsplpain = MEGAPAIN
+dstaunt = Cry180
+gender = male
+}
+
+
+{
+name = "Tyrogue"
+sprite = P181
+class = Tyrogue
+dsnoway = LAND
+dsoof = LAND
+dspldeth = MEGADEAT
+dspdiehi = MEGADEAT
+dsplpain = MEGAPAIN
+dstaunt = Cry181
+gender = male
+}
+
+
+{
+name = "Hitmonlee"
+sprite = P182
+class = Tyrogue
+dsnoway = FATLAND
+dsoof = FATLAND
+dspldeth = MEGADEAT
+dspdiehi = MEGADEAT
+dsplpain = MEGAPAIN
+dstaunt = Cry182
+gender = male
+}
+
+
+{
+name = "HitmonChan"
+sprite = P183
+class = Tyrogue
+dsnoway = FATLAND
+dsoof = FATLAND
+dspldeth = MEGADEAT
+dspdiehi = MEGADEAT
+dsplpain = MEGAPAIN
+dstaunt = Cry183
+gender = male
+}
+
+
+{
+name = "HitmonTop"
+sprite = P184
+class = Tyrogue
+dsnoway = FATLAND
+dsoof = FATLAND
+dspldeth = MEGADEAT
+dspdiehi = MEGADEAT
+dsplpain = MEGAPAIN
+dstaunt = Cry184
+gender = male
+}
+
+
+{
+name = "Riolu"
+sprite = P185
+class = Riolu
+dsnoway = LAND
+dsoof = LAND
+dspldeth = MEGADEAT
+dspdiehi = MEGADEAT
+dsplpain = MEGAPAIN
+dstaunt = Cry185
+gender = male
+}
+
+
+{
+name = "Lucario"
+sprite = P186
+class = Riolu
+dsnoway = FATLAND
+dsoof = FATLAND
+dspldeth = MEGADEAT
+dspdiehi = MEGADEAT
+dsplpain = MEGAPAIN
+dstaunt = Cry186
 gender = male
 }
 

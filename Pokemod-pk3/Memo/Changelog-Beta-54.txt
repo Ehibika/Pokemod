@@ -1,0 +1,216 @@
+//#region -=-=- Beta 54 -=-=-
+/*
+ *
+ *
+ * ===|Gameplay Changes|===
+ * 
+ * Added an Svar that caps double weakneses/resistances into being singular weakneses/resistances
+ * 
+ * Weakness multiplier increased from 1.5 > 2.0
+ * 2xWeakness multiplier increased from 2.0 > 4.0
+ * 
+ * Adjusted High end attack damage scaling from 300% to 400%
+ * 
+ * 
+ * 
+ * ===|Pokemon Changes|===
+ * 
+ * [Type changes]
+ * Audino from Normal to Normal/Fairy
+ * 
+ * Pokemon with minor moveset changes
+ * Onix Family
+ * Slugma family
+ * Shuckle
+ * Venonat Family
+ * Tentacool Family
+ * Croagunk Family
+ * Bulbasaur family
+ * Ferroseed Family
+ * Magikarp
+ * Seedot Family
+ * Beldam family
+ * Dragonite
+ * 
+ * 
+ * Pokemon with major moveset changes
+ * Squirtle Family
+ * Mudkip Family
+ * Turtwig Family
+ * Dreepy Family
+ * Tangela Family
+ * Alomomola
+ * Audino
+ * igglybuff Family
+ * Cleffa Family
+ * Happiny Family
+ * Geodude family
+ * Geodude_A family
+ * Gastly Family
+ * Tentacool Family
+ * Gyarados
+ * Shellder Family
+ * Exeggcute Family
+ * Quilfish
+ * Skarmory
+ * Larvesta Family
+ * 
+ * [Base Stat Changes]
+ *  HP/ATK/DEF/S.ATK/S.DEF
+ * 
+ * Magcargo
+ *  from 60/50/120/90/80
+ *  to   80/50/90/150/90
+ *  
+ * SkunTank
+ *  from 103/93/67/71/61
+ *  to   110/110/60/60/60
+ * 
+ * [Speed Changes]
+ * 
+ * Scyther from Fast > SuperFast
+ * Scizor from Normal > Fast
+ * Gastly Family from Fast > SuperFast
+ * HonchKrow from Normal > Fast
+ * Yanma Family from Fast > SuperFast
+ * Makuhita Family from Slow > Normal
+ * Golisopod from Slow > Normal
+ * Chimchar Family from Fast > SuperFast
+ * 
+ * ===|Move Changes|===
+ * 
+ * [SuperPower]
+ * Fixed a bug where lossing grasp on a player causes an infinite loop
+ * 
+ * [Rockslide]
+ * Damage increased
+ * adjusted damage buffering to work like other buffered moves
+ * Changed recovery group
+ * Reduced spawning time of rocks
+ * 
+ * [RockBlast]
+ * Fire rate increased
+ * Spread increased
+ * PP increased from 20 > 30
+ * Projectile speed increased from 45 > 80
+ * 
+ * [IcicleSpear]
+ * Fire rate increased
+ * PP increased from 20 > 30
+ * Projectile speed increased from 45 > 80
+ * 
+ * [Hex]
+ * Fixed the issue with the move's 2x damage on status mechanic not working
+ * PP increased from 10 > 20
+ * Fixed the issue of Hex not proccing pain sounds
+ * 
+ * [Astonish]
+ * Power increased
+ * now procs Cringe through successive hits, with back attacks having a near guaranteed chance to cause cringe
+ * 
+ * [Headbutt]
+ * Now procs Cringe through successive hits.
+ * 
+ * [ZenHeadbutt]
+ * Now procs Cringe through successive hits.
+ * 
+ * [IronHead]
+ * Now procs Cringe through successive hits.
+ * 
+ * [RollingKick]
+ * Now procs Cringe through successive hits.
+ * 
+ * [Bite]
+ * Now procs Cringe through successive hits.
+ * 
+ * [Twister]
+ * the updraft now procs Cringe through successive hits
+ * 
+ * [DarkPulse]
+ * Now procs Cringe through successive hits irregardless of range.
+ * 
+ * [Extrasensory]
+ * Now procs Cringe through successive hits.
+ * 
+ * [PowerGem]
+ * Reworked from being a bouncing projectile to being a turret style move, spawns jems that fire beams at
+ * enemy players, each shot draining from that gem's health till they eventually break.
+ * 
+ * Can now proc a sp.def drop
+ * 
+ * [Acid]
+ * now lowers SP.def instead of Def
+ * Changed VFX for better visibility
+ * 
+ * [Acid Spray]
+ * Reworked into being a missile move instead of a lob move
+ * Changed VFX for better visibility
+ * 
+ * [Future Sight]
+ * can now proc a sp.def drop
+ * 
+ * [Psychic]
+ * Recovery time reduced
+ * Power increased
+ * 
+ * [Inferno]
+ * increased hit rate
+ * 
+ * [Dig]
+ * submerged players are now succeptible to the following:
+ *  Earthquake
+ *  Bulldoze
+ *  Earthpower
+ *  Confusion
+ *  Psychic
+ * 
+ * [Dive]
+ * submerged players are now succeptible to the following:
+ *  Surf
+ *  Confusion
+ *  Psychic
+ * 
+ * [Liquidation]
+ * Recovery time reduced
+ * 
+ * [Bodyslam]
+ * Recovery time reduced
+ * 
+ * [SeismicToss]
+ * reduced airtime
+ * 
+ * [Fly]
+ * Height limit is now based on the takeoff point
+ * 
+ * [Block]
+ * Blocking hits now earns exp
+ * 
+ * [Overheat]
+ * Fixed an issue where the move didn't actually deal damage based on it's
+ * damagetype, now it properly deals fire typed damage that respects weakness
+ * multipliers and STAB multipliers.
+ * 
+ * [Waterfall]
+ * Now can proc Cringe on successive hits
+ * 
+ * [New Moves]
+ *  Spite
+ *  Grudge
+ *  Sing
+ *  MysticFire
+ *  ConfuseRay
+ *  Teleport
+ *  UTurn
+ *  Roost
+ *  ShorUp
+ *  SelfDestruct
+ *  Explosion
+ * 
+ * ===|TM Changes|===
+ * TM Bodyslam is now marked as Universal
+ * 
+ * [added TMs]
+ * PowerGem
+ * SignalBeam
+ * SkyDrop
+ * 

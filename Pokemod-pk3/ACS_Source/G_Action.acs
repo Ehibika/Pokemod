@@ -7,6 +7,7 @@
 #library "G_Action"
 //#import "tools.acs"
 #import "DB_Player.acs"
+#import "DB_Action.acs"
 #import "DB_Data.acs"
 #import "Dex_Pokemon.acs"
 #import "Dex_Types.acs"
@@ -95,7 +96,7 @@ SetResultValue(Output);
 #region -=- Multi EntiTID -=-
 
 #LIBDEFINE M_ENTITYTID 4900000
-#LIBDEFINE M_ENTITY_CAP 5 //for masterscrub, to reduce the loops
+#LIBDEFINE M_ENTITY_CAP 6 //for masterscrub, to reduce the loops
 int M_EntityRecord[64];
 Script "GiveM_EntiTID" (Int EntityID, int EntityCap)
 {
@@ -138,7 +139,7 @@ Thing_ChangeTID(0,M_ETID+EntityNum);
 
 
 #DEFINE HAZTID 3700000 // 37| TeamNum | PlayerNum | Hazard num
-#DEFINE HAZMAX 30
+#DEFINE HAZMAX 60
 int HazTIDRecord[64];
 
 Script "HazardTID" (Void)
@@ -995,13 +996,13 @@ setResultValue(returnAngle);
 
 
 Str StatIcons[7] = {
-	"STICO0",
-	"STICO2",
-	"STICO1",
-	"STICO3",
-	"STICO4",
-	"STICO5",
-	"STICO6",
+	"STICO7",
+	"STICO8",
+	"STICO9",
+	"STICO10",
+	"STICO11",
+	"STICO12",
+	"STICO13",
 	};
 
 
@@ -1073,7 +1074,7 @@ SetResultValue(ActivatorTID());
 Function Void DrawStatIcon (int M_id, int M_Place, int StatID, int StatLevel, int HudX, int HudY)
 {
 Int j;
-Int Xpos = HudX + (15.0*M_Place);
+Int Xpos = HudX + (17.0*M_Place);
 Int Ypos = HudY;
 Int StatDir = 6;
 if (StatLevel < 0)
@@ -1089,7 +1090,7 @@ if (StatLevel < 0)
 	SetFont(StatIcons[StatDir]);
 	for (int t = 1; t < StatLevel+1; t++)
     {
-	HudMessage(s:"A"; HUDMSG_FADEOUT, M_id-t, CR_red,Xpos, Ypos-(5.0*j), 2.0,1.0 / 35 + 5);
+	HudMessage(s:"A"; HUDMSG_FADEOUT, M_id-t, CR_red,Xpos, Ypos-(2.0*j), 2.0,1.0 / 35 + 5);
 	j++;
     }
 }  
@@ -1131,7 +1132,7 @@ SetResultValue(CheckInventory("SuplexID")-1+1000);
 script "Grasp_TID" (int otherTID)
 {
 	if (otherTID==999) { SetResultValue(1); terminate; }
-	if (CheckInventory("GrappledFlag")) { SetResultValue(1); terminate; }
+	if (CheckInventory("GrappledFlag")||CheckActorInventory(otherTID,"GrappleGuard")) { SetResultValue(1); terminate; }
 	int angle = getActorAngle(0);
 	int xDiff = (getActorX(0)+GRAB_DISTANCE*cos(angle)) - getActorX(otherTID);
 	int yDiff = (getActorY(0)+GRAB_DISTANCE*sin(angle)) - getActorY(otherTID);
@@ -1149,7 +1150,7 @@ script "Grasp_TID" (int otherTID)
 script "SuplexGrasp_TID" (int pitch, int angle, int target) //Pitch is given as x/360, Angle is given as x/255
 {
 	if (target==999) { SetResultValue(1); terminate; }
-	if (CheckInventory("GrappledFlag")) { SetResultValue(1); terminate; }
+	if (CheckInventory("GrappledFlag")||CheckActorInventory(target,"GrappleGuard")) { SetResultValue(1); terminate; }
 	angle = (angle-360)*1.0/360;//angle<<8;
 	pitch = (pitch-360)*1.0/360;
 	int xDiff = (getActorX(0)+fixedMul(GRAB_DISTANCE*cos(angle),cos(pitch))) - getActorX(target);
@@ -1884,3 +1885,106 @@ script "PKMN_PushPull" (int maxforce, int maxRange, int noFalloff)
 
 #endregion
 //#endregion
+
+
+Script "PKMN_FreezePlayer" (int Type, int Priority)
+{
+	/*
+	So a lot of things need to freeze the player, and if things overlap the wrong way, players
+	can often end up mobile when they should be frozen, or left perpetually frozen. so now,
+	all effort to freeze the player will go through this one script.
+	*/
+
+	if(Type == PLAYER_UNFREEZE)
+		{
+			Switch(Priority)
+			{
+			case FREEZE_DASH: 
+				if(!CheckInventory("SleepMark")
+					&& !CheckInventory("RestMark")
+					&& !CheckInventory("FreezeMark")
+					&& !CheckInventory("CringeMark")
+					&& !CheckInventory("InMenu"))
+					{SetPlayerFreezeState(0); /*log(s:"Dash Defeeeze");*/}
+				break;
+			case FREEZE_STATUS:
+				if(!CheckInventory("InMenu"))
+					{SetPlayerFreezeState(0); /*log(s:"status Defeeeze");*/}
+				break;
+			case FREEZE_MENU:
+					if(!CheckInventory("InMenu"))
+						{SetPlayerFreezeState(0);}
+					break;
+			default: SetPlayerFreezeState(0); break;
+			}
+		}
+	//========
+	if(Type == PLAYER_FREEZE)
+	{//log(s:"FreezeType: ",i:Type);
+		if(!CheckInventory("PKMN_PlayerFullFreeze"))
+			{
+				if(!CheckInventory("PKMN_PlayerFreeze"))
+					{
+					SetPlayerFreezeState(1);
+					ACS_NamedExecuteAlways("PKMN_DeFreezePlayer",0);
+					}
+			}
+	}
+
+	if(Type == PLAYER_FULLFREEZE)
+	{//log(s:"FreezeType: ",i:Type);
+		if(!CheckInventory("PKMN_PlayerFullFreeze"))
+		{
+			SetPlayerFreezeState(2);
+			if(!CheckInventory("PKMN_PlayerFreeze")){ACS_NamedExecuteAlways("PKMN_DeFreezePlayer",0);}
+		}
+	}
+
+
+
+}
+
+
+Script "PKMN_DeFreezePlayer" (void)
+{
+	int FreezeTimer = 35*15;
+
+	while(GetActorProperty(0, APROP_HEALTH) > 0 
+		&& CheckPlayerFreezeState()
+		&& FreezeTimer>0)
+		{
+			//log(s:"Count ",i:FreezeTimer);
+			if(!CheckInventory("InMenu")){FreezeTimer--;}
+			Delay(1);
+		}
+	if(CheckPlayerFreezeState()){SetPlayerFreezeState(0); /*log(s:"Defreezer ");*/}
+
+}
+
+Function Bool CheckPlayerFreezeState(void)
+{
+	if(CheckInventory("PKMN_PlayerFreeze") || CheckInventory("PKMN_PlayerFullFreeze")){return 1;}
+
+	return 0;
+}
+
+Function void SetPlayerFreezeState(int Mode)
+{
+
+	//log(s:"FreezeState ",i:Mode);
+Switch(Mode)
+	{
+		case 0: TakeInventory("PKMN_PlayerFreeze",99);
+		TakeInventory("PKMN_PlayerFullFreeze",99);
+		SetPlayerProperty(0,0,4);
+		SetPlayerProperty(0,0,0);
+		break;
+		case 1: GiveInventory("PKMN_PlayerFreeze",1);
+		SetPlayerProperty(0,1,0);
+		break;
+		case 2: GiveInventory("PKMN_PlayerFullFreeze",1);
+		SetPlayerProperty(0,1,4);
+		break;
+	}
+
+}

@@ -70,6 +70,42 @@ Powerup.duration 2
 Damagefactor "Bubble", 0
 }
 
+Actor BubbleBuffer : powerprotection
+{
+Powerup.duration 17
+Damagefactor "Bubble", 0.1
+}
+
+
+actor STF_Bubble : BaseSTatusFlag {}
+
+actor BubbleNerfInitiate : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_Jumpif(CallACS("CheckStatusGuard",0,STATUS_STATS),"Nope") //Blocked by Protect|Detect|Substitute|Mist
+TNT1 A 0 A_Jumpifinventory("STF_Bubble",1,"Sustain")
+TNT1 A 0 A_PlaySoundEx("support/StatDown","Weapon")
+TNT1 A 0 A_GiveInventory("STF_Bubble",1)
+TNT1 A 0 A_SpawnItemEX("BubbleNerfWatcher")
+TNT1 A 0 A_GiveInventory("StatUpdator",1)
+stop
+
+Sustain:
+TNT1 A 0 A_GiveInventory("STF_Bubble",1)
+stop
+Nope:
+TNT1 A 0
+stop
+}
+}
 //[+]========================================================================[+]
 //--------------------------------|Projectiles |--------------------------------
 //[+]========================================================================[+]
@@ -129,6 +165,26 @@ States
 Spawn:
 TNT1 A 0 
 BMBU C 5
+stop
+}
+}
+
+
+actor BubbleNerfWatcher : BasicHelper 
+{
+Var int user_DashTime;
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 5 A_GiveToTarget("SpdDownFXSpawn")
+TNT1 A 0 A_JumpIfInTargetInventory("STF_Bubble",1,"Spawn")
+TNT1 A 1 A_GiveToTarget("StatUpdator")
+TNT1 A 5
+Goto Death
+
+Death:
+TNT1 A 0 
 stop
 }
 }

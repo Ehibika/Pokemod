@@ -1,0 +1,272 @@
+Const int ROLK_SwingSPD = 18;
+
+actor RollingKickMove : WepMasterBase
+{
+Tag "RollingKick"
+obituary "$OB_RollingKick"
+Weapon.AmmoUse 1
+Weapon.AmmoGive 25
+weapon.ammotype "RollingKickPP"
+scale 2.0
+Inventory.Pickupmessage "$PU_MEGABUSTER"
+States
+{
+Spawn:
+WEAP X 1
+stop
+
+
+Fire:
+"####" BBB 1 A_Jumpif(CallACS("CheckWeaponFire",RC_B)==1,"Fire.Begin")
+"####" B 0 A_Jump(256,"NoAmmo")
+Goto NoAmmo
+
+Fire.Begin:
+"####" B 0
+"####" B 0 A_SetUserVar("user_wepangle2",90)
+"####" B 0 A_GiveInventory("RollingKickSwingTimer")
+"####" B 0 A_Playsoundex("misc/kingswing","Weapon")
+"####" A 0 ACS_NamedExecuteAlways("TakePP",0,Move_RollingKick,1)
+"####" B 0 A_CheckFloor("Fire.PitchCheck")
+"####" B 0 A_Jump(256,"Fire.Blade")
+Goto Fire.Blade
+
+Fire.PitchCheck:
+"####" B 0 A_Jumpif(Pitch < 55,"Fire.Blade2")
+"####" B 0 A_Jump(256,"Fire.Blade")
+Goto Fire.Blade
+
+Fire.Blade:
+"####" B 1 A_SpawnItemEx("RollingKickWatcher", cos(-pitch)*16, 0, 32+(sin(-pitch)*16), 0, 0, 0, 0, SXF_TRANSFERPITCH)
+"####" B 0 A_Jump(256,"Fire.After")
+Goto Fire.After
+
+Fire.Blade2: //Locked to lateral position
+"####" B 1 A_SpawnItemEx("RollingKickWatcher")
+"####" B 0 A_Jump(256,"Fire.After")
+Goto Fire.After
+
+Fire.After:
+"####" B 1 A_GiveInventory("HalfRecovery_B")
+"####" C 0 A_REfire("Fire")
+"####" B 0 A_Jump(256,"Fire.End")
+Goto Fire.End
+}
+}
+
+actor RollingKickMove1 : RollingKickMove {Weapon.SlotNumber 1}
+actor RollingKickMove2 : RollingKickMove {Weapon.SlotNumber 2}
+actor RollingKickMove3 : RollingKickMove {Weapon.SlotNumber 3}
+actor RollingKickMove4 : RollingKickMove {Weapon.SlotNumber 4}
+
+actor RollingKickMove5 : RollingKickMove 
+{
+Weapon.SlotNumber 5
+States
+{
+Fire.End:
+TNT1 A 0
+TNT1 A 0 A_TakeInventory("RollingKickMove5",9)
+TNT1 A 0 A_Jump(256,"Ready")
+Goto Ready
+}
+}
+
+//[+]========================================================================[+]
+//-----------------------------|Ammo & Inventory|------------------------------
+//[+]========================================================================[+]
+actor RollingKickPP : Ammo {inventory.amount 1 inventory.Maxamount 25}
+
+actor RollingKickSwingTimer : PowerUp
+{
+inventory.amount 1
+Powerup.Duration 11
+}
+
+actor RollingKickProtect : PowerProtection
+{
+Powerup.Duration 10
+damagefactor "RollingKick", 0.0
+}
+
+actor RollingKickCringeChance : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_Jump(170,"Cringe")
+stop
+Cringe:
+TNT1 A 0 A_GiveInventory("CringeStatusProc")
+stop
+
+Nope:
+TNT1 A 0
+stop
+}
+}
+//[+]========================================================================[+]
+//--------------------------------|Projectiles |--------------------------------
+//[+]========================================================================[+]
+actor RollingKickWatcher
+{
+    PROJECTILE
+    +NOINTERACTION
+    renderstyle none
+    speed 32
+    height 1
+    radius 1
+    States
+    {
+    Spawn:
+        TNT1 A 0
+        TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+    Spawn1:
+        TNT1 A 1 A_Warp(AAPTR_TARGET, cos(-pitch)*16,0,16+(sin(-pitch)*16), 0, WARPF_USECALLERANGLE)
+        TNT1 A 0 A_SpawnItemEx("RollingKickStart", 0, 0, 0, cos(pitch), 0, sin(-pitch), 90-(10*args[0]), SXF_MULTIPLYSPEED)
+        TNT1 A 0 A_SpawnItemEx("RollingKickStart", 0, 0, 0, cos(pitch), 0, sin(-pitch), 80-(10*args[0]), SXF_MULTIPLYSPEED)
+        TNT1 A 0 A_SpawnItemEx("RollingKickStart", 0, 0, 0, cos(pitch), 0, sin(-pitch), 70-(10*args[0]), SXF_MULTIPLYSPEED)
+        //TNT1 A 0 A_SpawnItemEx("RollingKickSlashFX1", 0, 0, 0, cos(pitch), 0, sin(-pitch), 90-(10*args[0]), SXF_MULTIPLYSPEED)
+		TNT1 A 0 A_SetArg(0,args[0]+3)
+		TNT1 A 0 A_JumpIf(args[0] < 18,"Spawn1")
+		TNT1 A 0 A_SetArg(0,0)
+        stop
+    WindDown1:
+        TNT1 A 0
+        stop
+    }
+}
+
+
+actor RollingKickStart 
+{
+PROJECTILE
++RIPPER
+damagetype "RollingKick"
+damage (0)
+height 5
+radius 5
+Speed 25
+scale 3.5
+XScale 7.0
+states
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+TNT1 A 0 A_Jumpif(pitch > 4,"Death2")
+TNT1 A 0 A_setPitch(Pitch+1)
+TNT1 A 0 A_SpawnItemEx("RollingKickStart",0,0,0,momx,momy,momz,0,SXF_ABSOLUTEMOMENTUM|SXF_TRANSFERPITCH|SXF_TRANSFERSCALE)
+TNT1 A 1 A_SpawnItemEx("RollingKickDamager",0,0,0,0,0,0,0,SXF_TRANSFERSCALE)
+Goto Death
+
+Death:
+TNT1 A 0
+stop
+
+Death2:
+TNT1 A 0
+TNT1 A 0 A_SpawnItemEx("RollingKickEdgeFX",0,0,0,0,0,0,0,SXF_TRANSFERSCALE)
+stop
+}
+}
+
+actor RollingKickDamager : BasicProjectile
+{
+Speed 0
+Damage (0)
+radius 15
+height 10
+DamageType "RollingKick"
+Obituary "$OB_ROLLINGKICK"
+scale 1.5
++RIPPER
++SERVERSIDEONLY
+States
+{
+Spawn:
+TNT1 A 0 
+TNT1 A 1 A_Explode(MBP_RollingKick,64,0,0,64)
+stop
+}
+}
+
+
+actor RollingKickEdgeFX : BasicNOTClientside
+{
+scale 2.5
+XScale 4.0
+Alpha 1.0
+ReactionTime 8
+renderstyle "Translucent"
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+HITG M 1
+Spawn2:
+HITG M 1  A_CountDown
+HITG M 0 A_Fadeout(0.3)
+loop
+
+Death:
+TNT1 A 0
+stop
+}
+}
+
+/*
+actor RollingKickSlashFX1 : BasicHelper
+{
++MISSILE
++CLIENTSIDEONLY
+reactiontime 4
+var int user_angle;
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_GiveInventory("ProjectileCodeSyncTarget",1)
+TNT1 A 0 A_SetUserVar("user_angle", 10)
+SpawnLoop:
+"####" B 0 A_SpawnItemEx("RollingKickEdgeFX", cos(pitch)*150, 0, 12-(sin(pitch)*150), 0, 0, 0, user_angle, SXF_TRANSFERTRANSLATION|SXF_TRANSFERPITCH)
+"####" B 0 A_SpawnItemEx("RollingKickEdgeFX2", cos(pitch)*125, 0, 12-(sin(pitch)*125), 0, 0, 0, user_angle, SXF_TRANSFERTRANSLATION|SXF_TRANSFERPITCH)
+"####" B 0 A_SpawnItemEx("RollingKickEdgeFX3", cos(pitch)*200, 0, 12-(sin(pitch)*200), 0, 0, 0, user_angle, SXF_TRANSFERTRANSLATION|SXF_TRANSFERPITCH)
+TNT1 A 0 A_SetUserVar("user_angle", user_angle - 5)
+TNT1 A 0 A_Countdown
+loop
+Death:
+TNT1 A 0
+stop
+}
+}
+
+
+
+actor RollingKickImpactPuff : BasicClientside
+{
+scale 4.5
+States
+{
+Spawn:
+TNT1 A 0 
+HITG FGH 1 A_SpawnItemEx("AquaTaikSplashFX")
+HITG H 1 A_SetScale(ScaleX+0.5)
+HITG H 0 A_Fadeout(0.3)
+HITG H 1 A_SetScale(ScaleX+0.5)
+HITG H 0 A_Fadeout(0.3)
+HITG H 1 A_SetScale(ScaleX+0.5)
+HITG H 0 A_Fadeout(0.3)
+TNT1 A 6
+stop
+}
+}
+
+*/

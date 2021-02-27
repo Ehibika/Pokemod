@@ -6,4 +6,5 @@
 
 #include "actors/classbases/classbase-flags.txt"
 #include "actors/classbases/classbaseStatuses.txt"
+#include "actors/classbases/classbaseStatuses2.txt"
 #include "actors/classbases/classbaseDeployable.txt"

@@ -209,7 +209,7 @@ stop
 }
 }
 
-actor STF_QuickOrb : Powerup {inventory.amount 1 Powerup.Duration -7}
+actor STF_QuickOrb : BaseSTatusFlag {Powerup.Duration -7}
 
 
 actor QuickOrbBuffInitiate : CustomInventory

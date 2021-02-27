@@ -2,7 +2,7 @@ actor CraftyShieldMove : WepMasterBase
 {
 Tag "CraftyShield"
 Weapon.AmmoUse 1
-Weapon.AmmoGive 10
+Weapon.AmmoGive 5
 weapon.ammotype "CraftyShieldPP"
 scale 2.0
 Inventory.Pickupmessage "$PU_MEGABUSTER"
@@ -70,9 +70,9 @@ Goto Ready
 //[+]========================================================================[+]
 //-----------------------------|Ammo & Inventory|------------------------------
 //[+]========================================================================[+]
-actor CraftyShieldPP : Ammo {inventory.amount 1 inventory.Maxamount 15}
+actor CraftyShieldPP : Ammo {inventory.amount 1 inventory.Maxamount 5}
 
-actor CraftyShieldPower : SafeguardPower { powerup.Duration -10}
+actor CraftyShieldPower : SafeguardPower { powerup.Duration -30}
 
 Const int CraftyShieldRad = 1000;
 Const int CraftyShield_Item = 24;
@@ -107,7 +107,7 @@ stop
 //[+]========================================================================[+]
 //--------------------------------|Projectiles |--------------------------------
 //[+]========================================================================[+]
-actor CraftyShieldRingGuide : BasicHelper
+actor CraftyShieldRingGuide : BasicServerSideHelper
 {
 translation "198:198=220:220", "192:192=229:229"
 	reactiontime 15
@@ -207,7 +207,7 @@ stop
 }
 }
 
-actor CraftyShieldWatcher : BasicHelper 
+actor CraftyShieldWatcher : BasicServerSideHelper 
 {
 Var int user_DashTime;
 States
@@ -232,7 +232,7 @@ stop
 }
 }
 
-actor CraftyShieldWatcher2 : BasicHelper 
+actor CraftyShieldWatcher2 : BasicServerSideHelper 
 {
 Var int user_DashTime;
 States

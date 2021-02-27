@@ -19,6 +19,10 @@ actor NetCheck_DD : Powerup{powerup.duration 3}
 
 actor InMenu : Once{}
 
+
+actor PKMN_PlayerFreeze : Once{}
+actor PKMN_PlayerFullFreeze : Once{}
+
 //[+]========================================================================[+]
 //------------------------------|Player Resources|---------------------------
 //[+]========================================================================[+]
@@ -194,6 +198,20 @@ stop
 
 Actor GrappledFlag : Powerup{inventory.amount 1 powerup.duration 7}
 
+actor GrappleGuard : BasePowerPro 
+{
+    -PICKUP
+    inventory.amount 1 
+    Powerup.Duration 17
+    DamageFactor "SkyDrop1", 0.0
+    DamageFactor "SeismicToss1", 0.0
+    DamageFactor "VitalThrow1", 0.0
+    DamageFactor "StormThrow1", 0.0
+    DamageFactor "Submission1", 0.0
+    DamageFactor "SuperPower1", 0.0
+    DamageFactor "Megahorn", 0.0
+}
+
 //[+]========================================================================[+]
 //--------------------------------|Targeting Script|---------------------------
 //[+]========================================================================[+]
@@ -204,6 +222,7 @@ Actor TargScriptActive : Powerup{inventory.amount 1 powerup.duration 3}
 Actor TargHolder : Powerup{inventory.amount 1 powerup.duration 7}
 
 actor WepScanFlag : once{}
+Actor NoTargFlag : Powerup{inventory.amount 1 powerup.duration 7}
 
 //[+]========================================================================[+]
 
@@ -232,7 +251,7 @@ TNT1 A 0 A_Jumpifinventory("CringeMark",1,"Nope")
 Goto Pickup2
 
 Pickup2:
-TNT1 A 0 SetPlayerProperty(0,1,0)
+TNT1 A 0 ACS_NamedExecuteAlways("PKMN_FreezePlayer",0,PLAYER_FREEZE,FREEZE_DASH)
 stop
 
 Nope:
@@ -252,7 +271,7 @@ TNT1 A 0 A_Jumpifinventory("CringeMark",1,"Nope")
 Goto Pickup2
 
 Pickup2:
-TNT1 A 0 SetPlayerProperty(0,1,4)
+TNT1 A 0 ACS_NamedExecuteAlways("PKMN_FreezePlayer",0,PLAYER_FULLFREEZE,FREEZE_DASH)
 stop
 
 Nope:
@@ -272,7 +291,7 @@ TNT1 A 0 A_Jumpifinventory("CringeMark",1,"Nope")
 Goto Pickup2
 
 Pickup2:
-TNT1 A 0 SetPlayerProperty(0,1,0)
+TNT1 A 0 ACS_NamedExecuteAlways("PKMN_FreezePlayer",0,PLAYER_FREEZE,FREEZE_DASH)
 TNT1 A 0 ACS_NamedExecuteAlways("PKMN_JumpToggle",0,0)
 stop
 
@@ -287,7 +306,7 @@ actor DashSetOff : CustomInventory
 states
 {
 pickup:
-TNT1 A 0 SetPlayerProperty(0,0,0)
+TNT1 A 0 ACS_NamedExecuteAlways("PKMN_FreezePlayer",0,PLAYER_UNFREEZE,FREEZE_DASH)
 TNT1 A 0 A_Jumpifinventory("ParalysisMark",1,2)
 TNT1 A 0 ACS_NamedExecuteAlways("PKMN_JumpToggle",0,1)
 TNT1 A 0
@@ -298,7 +317,7 @@ TNT1 A 0 A_Jumpifinventory("CringeMark",1,"Nope")
 Goto Pickup2
 
 Pickup2:
-TNT1 A 0 SetPlayerProperty(0,0,4)
+TNT1 A 0 //SetPlayerProperty(0,0,4)
 stop
 
 Nope:
