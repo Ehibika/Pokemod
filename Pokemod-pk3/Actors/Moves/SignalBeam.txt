@@ -180,6 +180,7 @@ actor SignalBeamShot_1 : PKMN_Missile
 actor SignalBeamShot_2 : SignalBeamShot_1
 {
     RenderStyle "Normal"
+    Args 1
     States
     {
     Spawn:
@@ -228,9 +229,9 @@ States
 Spawn:
 TNT1 A 0
 TNT1 A 0 A_GiveInventory("ProjectileDCode",1)
-BASB V 1
+BASB U 1
 Spawn2:
-BASB V 1 A_Fadeout
+BASB U 1 A_Fadeout
 TNT1 A 0 A_CountDown
 loop
 
@@ -245,7 +246,7 @@ actor SignalBeamTrail_2 : BasicNOTClientside
 scale 2.5
 Alpha 1.0
 ReactionTime 8
-renderstyle "Add"
+renderstyle "Normal"
 States
 {
 Spawn:
@@ -258,17 +259,20 @@ stop
 }
 }
 
-actor SignalBeamTrail_2_2 : SignalBeamTrail_1
+actor SignalBeamTrail_2_2 : BasicClientside
 {
-renderstyle "Add"
+scale 2.5
+Alpha 1.0
+ReactionTime 8
+renderstyle "Normal"
 States
 {
 Spawn:
 TNT1 A 0
 TNT1 A 0 A_GiveInventory("ProjectileDCode",1)
-BASB U 1
+BASB W 1
 Spawn2:
-BASB U 1 A_Fadeout
+BASB W 1 A_Fadeout
 TNT1 A 0 A_CountDown
 loop
 
@@ -285,12 +289,16 @@ actor SignalBeamTrailSpawn : CustomInventory
     {
         Pickup:
         TNT1 A 1
+        TNT1 A 0 A_JumpIF(CheckClass("SignalBeamShot_1"),"Pickup1")
         TNT1 A 0 A_JumpIF(CheckClass("SignalBeamShot_2"),"Pickup2")
         TNT1 A 0 A_SpawnItemEx("SignalBeamTrail_1",0,0,0,0,0,0,0,1)
         stop
-        Pickup2:
-        TNT1 A 0 A_SpawnItemEx("SignalBeamTrail_2",0,0,0,0,0,0,0,1)
+        Pickup1:
+        TNT1 A 0 A_SpawnItemEx("SignalBeamTrail_1",0,0,0,0,0,0,0,1)
     stop
+    Pickup2:
+    TNT1 A 0 A_SpawnItemEx("SignalBeamTrail_2",0,0,0,0,0,0,0,1)
+stop
     }
 }
 

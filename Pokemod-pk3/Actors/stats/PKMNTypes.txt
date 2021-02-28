@@ -99,9 +99,9 @@ damagefactor "Glare", 2.0 //W
 damagefactor "SoftBoiled", 2.0 //W
 damagefactor "MorningSun", 2.0 //W
 damagefactor "BodySlam", 2.0 //W
-damagefactor "Sing", 1.5 //W
-damagefactor "SelfDestruct", 1.5 //W
-damagefactor "Explosion", 1.5 //W
+damagefactor "Sing", 2.0 //W
+damagefactor "SelfDestruct", 2.0 //W
+damagefactor "Explosion", 2.0 //W
 //--[Move|Normal]--
 }
 
@@ -125,9 +125,9 @@ damagefactor "Glare", 4.0 //2W
 damagefactor "SoftBoiled", 4.0 //2W
 damagefactor "MorningSun", 4.0 //2W
 damagefactor "BodySlam", 4.0 //2W
-damagefactor "Sing", 1.75 //2W
-damagefactor "SelfDestruct", 1.75 //2W
-damagefactor "Explosion", 1.75 //2W
+damagefactor "Sing", 4.0 //2W
+damagefactor "SelfDestruct", 4.0 //2W
+damagefactor "Explosion", 4.0 //2W
 //--[Move|Normal]--
 
 }
@@ -205,10 +205,10 @@ damagefactor "TakeDown", 0.1 //I
 damagefactor "Glare", 0.1 //I
 damagefactor "SoftBoiled", 0.1 //I
 damagefactor "MorningSun", 0.1 //I
-damagefactor "BodySlam", 0.0 //I
-damagefactor "Sing", 0.0 //I
-damagefactor "SelfDestruct", 0.0 //I
-damagefactor "Explosion", 0.0 //I
+damagefactor "BodySlam", 0.1 //I
+damagefactor "Sing", 0.1 //I
+damagefactor "SelfDestruct", 0.1 //I
+damagefactor "Explosion", 0.1 //I
 //--[Move|Normal]--
 
 }
@@ -386,24 +386,24 @@ actor FightingImmunity : TypeBase
     damagefactor "SeismicToss1", 1.0 //Static
     damagefactor "SeismicToss2", 1.0 //Static
 damagefactor "StormThrow1", 1.0 //Static
-damagefactor "StormThrow2", 0.0 //I
+damagefactor "StormThrow2", 0.1 //I
 damagefactor "VitalThrow1",1.0 //Static
-damagefactor "VitalThrow2", 0.0 //I
+damagefactor "VitalThrow2", 0.1 //I
 damagefactor "Submission1", 1.0 //Static
-damagefactor "Submission2", 0.0 //I
+damagefactor "Submission2", 0.1 //I
 damagefactor "SuperPower1", 1.0 //Static
-damagefactor "SuperPower2", 0.0 //I
-damagefactor "BrickBreak", 0.0 //I
-damagefactor "LowKick", 0.0 //I
-damagefactor "KarateChop", 0.0 //I
-damagefactor "Revenge", 0.0 //I
-damagefactor "ArmThrust", 0.0 //I
-damagefactor "ForcePalm", 0.0 //I
-damagefactor "DynamicPunch", 0.0 //I
-damagefactor "AuraSphere", 0.0 //I
-damagefactor "RollingKick", 0.0 //I
-damagefactor "TripleKick", 0.0 //I
-damagefactor "JumpKick", 0.0 //I
+damagefactor "SuperPower2", 0.1 //I
+damagefactor "BrickBreak", 0.1 //I
+damagefactor "LowKick", 0.1 //I
+damagefactor "KarateChop", 0.1 //I
+damagefactor "Revenge", 0.1 //I
+damagefactor "ArmThrust", 0.1 //I
+damagefactor "ForcePalm", 0.1 //I
+damagefactor "DynamicPunch", 0.1 //I
+damagefactor "AuraSphere", 0.1 //I
+damagefactor "RollingKick", 0.1 //I
+damagefactor "TripleKick", 0.1 //I
+damagefactor "JumpKick", 0.1 //I
     //--[Move|Fighting]--
 }
 
@@ -457,7 +457,7 @@ damagefactor "AirCutter", 2.0 //W
 damagefactor "Gust", 2.0 //W
 damagefactor "Fly", 2.0 //W
 damagefactor "Defog", 2.0 //W
-damagefactor "Roost", 1.5 //W
+damagefactor "Roost", 2.0 //W
     //--[Move|Flying]--
 }
 
@@ -476,7 +476,7 @@ damagefactor "AirCutter", 4.0 //2W
 damagefactor "Gust", 4.0 //2W
 damagefactor "Fly", 4.0 //2W
 damagefactor "Defog", 4.0 //2W
-damagefactor "Roost", 1.75 //2W
+damagefactor "Roost", 4.0 //2W
     //--[Move|Flying]--
 }
 
@@ -533,7 +533,7 @@ damagefactor "AirCutter", 0.1 //I
 damagefactor "Gust", 0.1 //I
 damagefactor "Fly", 0.1 //I
 damagefactor "Defog", 0.1 //I
-damagefactor "Roost", 0.0 //I
+damagefactor "Roost", 0.1 //I
     //--[Move|Flying]--
 }
 
@@ -688,7 +688,7 @@ damagefactor "SandTomb", 2.0 //W
 damagefactor "Dig", 2.0 //W
 damagefactor "Bulldoze", 2.0 //W
 damagefactor "EarthPower", 2.0 //W
-damagefactor "ShoreUp", 1.5 //W
+damagefactor "ShoreUp", 2.0 //W
 //--[Move|Ground]--
 }
 
@@ -703,7 +703,7 @@ damagefactor "SandTomb", 4.0 //2W
 damagefactor "Dig", 4.0 //2W
 damagefactor "Bulldoze", 4.0 //2W
 damagefactor "EarthPower", 4.0 //2W
-damagefactor "ShoreUp", 1.75 //2W
+damagefactor "ShoreUp", 4.0 //2W
 //--[Move|Ground]--
 }
 
@@ -748,7 +748,7 @@ damagefactor "SandTomb", 0.1 //I
 damagefactor "Dig", 0.1 //I
 damagefactor "Bulldoze", 0.1 //I
 damagefactor "EarthPower", 0.1 //I
-damagefactor "ShoreUp", 0.0 //I
+damagefactor "ShoreUp", 0.1 //I
 //--[Move|Ground]--
 }
 
@@ -862,7 +862,7 @@ damagefactor "SignalBeam", 2.0 //W
 damagefactor "Megahorn", 2.0 //W
 damagefactor "LeechLife", 2.0 //W
 damagefactor "Infestation", 2.0 //W
-damagefactor "UTurn", 1.5 //W
+damagefactor "UTurn", 2.0 //W
 //--[Move|Bug]--
 
 }
@@ -883,7 +883,7 @@ damagefactor "SignalBeam", 4.0 //2W
 damagefactor "Megahorn", 4.0 //2W
 damagefactor "LeechLife", 4.0 //2W
 damagefactor "Infestation", 4.0 //2W
-damagefactor "UTurn", 1.75 //2W
+damagefactor "UTurn", 4.0 //2W
 //--[Move|Bug]--
 }
 
@@ -939,11 +939,11 @@ damagefactor "BugBuzz", 0.1 //I
 damagefactor "SilverWind", 0.1 //I
 damagefactor "QuiverDance", 0.1 //I
 damagefactor "PinMissile", 0.1 //I
-damagefactor "SignalBeam", 0.0 //I
-damagefactor "Megahorn", 0.0 //I
-damagefactor "LeechLife", 0.0 //I
-damagefactor "Infestation", 0.0 //I
-damagefactor "UTurn", 0.0 //I
+damagefactor "SignalBeam", 0.1 //I
+damagefactor "Megahorn", 0.1 //I
+damagefactor "LeechLife", 0.1 //I
+damagefactor "Infestation", 0.1 //I
+damagefactor "UTurn", 0.1 //I
 //--[Move|Bug]--
 }
 
@@ -976,7 +976,7 @@ actor GhostWeakness : TypeBase
     damagefactor "ShadowBall", 2.0 //W
     damagefactor "ShadowSneak", 2.0 //W
     damagefactor "PhantomForce", 2.0 //W
-damagefactor "Spite", 1.5 //W
+damagefactor "Spite", 2.0 //W
 //--[Move|Ghost]--
 }
 
@@ -987,7 +987,7 @@ actor Ghost2xWeakness : TypeBase
     damagefactor "ShadowBall", 4.0 //2W
     damagefactor "ShadowSneak", 4.0 //2W
     damagefactor "PhantomForce", 4.0 //2W
-damagefactor "Spite", 1.75 //2W
+damagefactor "Spite", 4.0 //2W
 //--[Move|Ghost]--
 }
 
@@ -1020,7 +1020,7 @@ actor GhostImmunity : TypeBase
     damagefactor "ShadowBall", 0.1 //I
     damagefactor "ShadowSneak", 0.1 //I
     damagefactor "PhantomForce", 0.1 //I
-damagefactor "Spite", 0.0 //I
+damagefactor "Spite", 0.1 //I
 //--[Move|Ghost]--
 }
 
@@ -1281,7 +1281,7 @@ damagefactor "Liquidation", 2.0 //W
 damagefactor "Scald", 2.0 //W
 damagefactor "Dive", 2.0 //W
 damagefactor "Bubble", 2.0 //W
-damagefactor "FlipTurn", 1.5 //W
+damagefactor "FlipTurn", 2.0 //W
 //--[Move|Water]--
 }
 
@@ -1303,7 +1303,7 @@ damagefactor "Liquidation", 4.0 //2W
 damagefactor "Scald", 4.0 //2W
 damagefactor "Dive", 4.0 //2W
 damagefactor "Bubble", 4.0 //2W
-damagefactor "FlipTurn", 1.75 //2W
+damagefactor "FlipTurn", 4.0 //2W
 //--[Move|Water]--
 }
 
@@ -1369,7 +1369,7 @@ damagefactor "Liquidation", 0.1 //I
 damagefactor "Scald", 0.1 //I
 damagefactor "Dive", 0.1 //I
 damagefactor "Bubble", 0.1 //I
-damagefactor "FlipTurn", 0.0 //I
+damagefactor "FlipTurn", 0.1 //I
 //--[Move|Water]--
 }
 
@@ -2066,7 +2066,7 @@ damagefactor "Dazzlinggleam", 0.1 //I
 damagefactor "MoonBlast", 0.1 //I
 damagefactor "DrainingKiss", 0.1 //I
 damagefactor "CraftyShield", 0.1 //I
-damagefactor "FairyWind", 0.0 //I
+damagefactor "FairyWind", 0.1 //I
 //--[Move|Fairy]--
 }
 

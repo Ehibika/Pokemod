@@ -81,6 +81,8 @@ actor SubGuard : BasePowerPro
     +NOPAIN
     inventory.amount 1 
     Powerup.Duration 35
+	DamageFactor "Normal", 0
+
 }
 
 actor SubstituteFunction_A : CustomInventory
@@ -301,7 +303,7 @@ Actor SubstituteDecoy : BasicDeployable
 +PUSHABLE
 +SLIDESONWALLS
 //+ALLOWBOUNCEONACTORS
-+THRUSPECIES
+//+THRUSPECIES
 +MTHRUSPECIES
 +NOTARGETSWITCH
 

@@ -77,7 +77,7 @@
 
 
 
-#LIBDEFINE MAXTMLIST 111
+#LIBDEFINE MAXTMLIST 117
 //#endregion
 
 //#region -=- TM Reference -=-
@@ -133,6 +133,7 @@ int TMList [MAXTMLIST][5] = {
 
 {Haze           ,TMF_NULL           ,TMT_WATER|TMT_ICE|TMT_FAIRY|TMT_GHOST      ,TMP_1  ,TML_ALL},
 {Mist           ,TMF_NULL           ,TMT_WATER|TMT_ICE|TMT_FAIRY|TMT_GHOST      ,TMP_1  ,TML_ALL},
+{Teleport_M           ,TMF_NULL       ,TMT_PSYCHIC                                ,TMP_1  ,TML_ALL},
 
 {WideGuard      ,TMF_NULL           ,TMT_GROUND|TMT_ROCK|TMT_STEEL              ,TMP_2  ,TML_ALL},
 {SafeGuard      ,TMF_NULL           ,TMT_NORMAL|TMT_PSYCHIC|TMT_FAIRY           ,TMP_2  ,TML_ALL},
@@ -143,6 +144,7 @@ int TMList [MAXTMLIST][5] = {
 {LifeDew        ,TMF_NULL           ,TMT_WATER|TMT_PSYCHIC|TMT_FAIRY            ,TMP_2  ,TML_ALL},
 {Barrier        ,TMF_NULL           ,TMT_PSYCHIC                                ,TMP_2  ,TML_ALL},
 {AquaRing       ,TMF_NULL           ,TMT_WATER                                  ,TMP_2  ,TML_ALL},
+{Roost          ,TMF_NULL           ,TMT_FLYING                                 ,TMP_2  ,TML_ALL},
 
 {Spikes         ,TMF_NULL           ,TMT_GROUND                                 ,TMP_2  ,TML_ALL},
 {ToxicSpikes    ,TMF_NULL           ,TMT_POISON                                 ,TMP_2  ,TML_ALL},
@@ -150,6 +152,7 @@ int TMList [MAXTMLIST][5] = {
 {Defog          ,TMF_NULL           ,TMT_FLYING                                 ,TMP_2  ,TML_ALL},
 
 {Magicalleaf    ,TMF_NULL           ,TMT_GRASS|TMT_FAIRY|TMT_PSYCHIC            ,TMP_2  ,TML_ALL},
+{EnergyBall    ,TMF_NULL           ,TMT_GRASS|TMT_FAIRY|TMT_PSYCHIC            ,TMP_2  ,TML_ALL},
 {BulletSeed     ,TMF_NULL           ,TMT_GRASS|TMT_BUG                          ,TMP_2  ,TML_ALL},
 {Swift          ,TMF_NULL           ,TMT_NORMAL|TMT_PSYCHIC|TMT_FAIRY           ,TMP_2  ,TML_ALL},
 {HeadButt       ,TMF_UNIVERSAL      ,TMT_NORMAL                                 ,TMP_2  ,TML_ALL},
@@ -179,6 +182,7 @@ int TMList [MAXTMLIST][5] = {
 {RockTomb       ,TMF_NULL           ,TMT_ROCK|TMT_GROUND|TMT_Steel              ,TMP_2  ,TML_MID},
 {FlameCharge    ,TMF_NULL           ,TMT_FIRE                                   ,TMP_2  ,TML_LOW},
 {FuryCutter     ,TMF_NULL           ,TMT_BUG                                    ,TMP_2  ,TML_LOW},
+{BugBite        ,TMF_NULL           ,TMT_BUG                                    ,TMP_2  ,TML_LOW},
 {DarkPulse      ,TMF_NULL           ,TMT_DARK|TMT_GHOST                         ,TMP_4  ,TML_MID2},
 {Dig            ,TMF_NULL           ,TMT_ROCK|TMT_GROUND                        ,TMP_4  ,TML_MID2},
 {Bulldoze       ,TMF_NULL           ,TMT_ROCK|TMT_GROUND|TMT_Steel              ,TMP_4  ,TML_MID2},
@@ -193,6 +197,8 @@ int TMList [MAXTMLIST][5] = {
 {ZenHeadbutt    ,TMF_NULL           ,TMT_PSYCHIC|TMT_FIGHTING                   ,TMP_4  ,TML_MID2},
 {PowerGem       ,TMF_NULL           ,TMT_ROCK|TMT_PSYCHIC|TMT_FAIRY             ,TMP_4  ,TML_MID2},
 {SignalBeam     ,TMF_NULL           ,TMT_BUG|TMT_ELECTRIC|TMT_PSYCHIC|TMT_FAIRY ,TMP_4  ,TML_MID2},
+{WillOWisp      ,TMF_NULL           ,TMT_FIRE|TMT_PSYCHIC|TMT_GHOST             ,TMP_4  ,TML_MID2},
+{MysticalFire   ,TMF_NULL           ,TMT_FIRE|TMT_PSYCHIC|TMT_FAIRY             ,TMP_4  ,TML_MID2},
 
 {IceBeam        ,TMF_NULL           ,TMT_WATER|TMT_ICE                          ,TMP_4  ,TML_MID2},
 {Flamethrower   ,TMF_NULL           ,TMT_FIRE|TMT_DRAGON                        ,TMP_4  ,TML_MID2},
@@ -386,6 +392,7 @@ int output = 0;
     Switch (MoveID)
     {
         case MagicalLeaf: output = TMR_MagicalLeaf(Dexnum); break;    
+        case EnergyBall: output = TMR_EnergyBall(Dexnum); break;    
         case WaterPulse: output = TMR_WaterPulse(Dexnum); break;    
         case Brine: output = TMR_WaterPulse(Dexnum); break;    
         case Scald: output = TMR_WaterPulse(Dexnum); break;    
@@ -435,6 +442,7 @@ int output = 0;
         case StoneEdge: output = TMR_StoneEdge(Dexnum); break;    
         case RockTomb: output = TMR_RockTomb(Dexnum); break;    
         case FuryCutter: output = TMR_FuryCutter(Dexnum); break;    
+        case BugBite: output = TMR_BugBite(Dexnum); break;    
         case DarkPulse: output = TMR_DarkPulse(Dexnum); break;    
         case FocusBlast: output = TMR_FocusBlast(Dexnum); break;    
         case HoneClaws: output = TMR_HoneClaws(Dexnum); break;    
@@ -458,7 +466,11 @@ int output = 0;
         case ThunderFang: output = TMR_FireFang(Dexnum); break;     
         case PowerGem: output = TMR_PowerGem(Dexnum); break;     
         case SignalBeam: output = TMR_SignalBeam(Dexnum); break;     
-        
+        case WilloWisp: output = TMR_WilloWisp(Dexnum); break;     
+        case MysticalFire: output = TMR_MysticalFire(Dexnum); break;     
+        case Roost: output = TMR_Roost(Dexnum); break;     
+        case Teleport_M: output = TMR_Teleport(Dexnum); break;     
+
         //case sworddance: output = TMR_sworddance(Dexnum); break; 
         //case NastyPlot: output = TMR_NastyPlot(Dexnum); break; 
         
@@ -582,6 +594,21 @@ return output;
 
 //#region -=- TM Rules : MagicalLeaf -=-
 Function int TMR_MagicalLeaf (int Dexnum) 
+{
+int output = 0;
+    Switch (Dexnum)
+    {
+    case DREEPY: output = 1; break;
+    case DRAKLOAK: output = 1; break;
+    case DRAGAPULT: output = 1; break;
+    }
+    if(TMArch_Mystic(Dexnum)){output = 1;}
+return output;
+}
+//#endregion
+
+//#region -=- TM Rules : EnergyBall -=-
+Function int TMR_EnergyBall (int Dexnum) 
 {
 int output = 0;
     Switch (Dexnum)
@@ -1584,6 +1611,22 @@ return output;
 }
 //#endregion
 
+//#region -=- TM Rules : BugBite -=-
+Function int TMR_BugBite (int Dexnum) 
+{
+
+int output = 0;
+    Switch (Dexnum)
+    {
+        case TRAPINCH: output = 1; break;
+        case VIBRAVA: output = 1; break;
+        case FLYGON: output = 1; break;
+    }
+    //if(TMArch_Slasher(Dexnum)){output = 1;}
+return output;
+}
+//#endregion
+
 //#region -=- TM Rules : DarkPulse -=-
 Function int TMR_DarkPulse (int Dexnum) 
 {
@@ -1819,6 +1862,59 @@ Function int TMR_SignalBeam (int Dexnum)
         case HYDREIGON: output = 1; break;
     }
     if(TMArch_Mystic(Dexnum)){output = 1;}
+return output;
+}
+//#endregion
+
+//#region -=- TM Rules : WillOWisp -=-
+Function int TMR_WillOWisp (int Dexnum) 
+{
+    int output = 0;
+    Switch (Dexnum)
+    {
+
+    }
+    if(TMArch_Mystic(Dexnum)){output = 1;}
+return output;
+}
+//#endregion
+
+//#region -=- TM Rules : MysticalFire -=-
+Function int TMR_MysticalFire (int Dexnum) 
+{
+    int output = 0;
+    Switch (Dexnum)
+    {
+        
+    }
+    if(TMArch_Mystic(Dexnum)){output = 1;}
+return output;
+}
+//#endregion
+
+
+//#region -=- TM Rules : Roost -=-
+Function int TMR_Roost (int Dexnum) 
+{
+    int output = 0;
+    Switch (Dexnum)
+    {
+        
+    }
+    if(TMArch_Flyer(Dexnum)){output = 1;}
+return output;
+}
+//#endregion
+
+//#region -=- TM Rules : Teleport -=-
+Function int TMR_Teleport (int Dexnum) 
+{
+    int output = 0;
+    Switch (Dexnum)
+    {
+        
+    }
+    if(TMArch_Flyer(Dexnum)){output = 1;}
 return output;
 }
 //#endregion

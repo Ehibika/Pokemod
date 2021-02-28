@@ -2644,7 +2644,7 @@ M009_NAME = "\cj Growl";
 M009_TYPE = "\cj Normal";
 M009_CATEGORY = "\cf Status";
 M009_POWER = "\cfPower:\cj 30";
-M009_DESC = "\cjreduce ATK against all foes in a \cfWave \cjin front of you.";
+M009_DESC = "\cjReduce ATK for all surrounding opponents\n";
 //#endregion
 
 //#region -=- 010: Tail Whip -=-
@@ -2652,7 +2652,7 @@ M010_NAME = "\cj Tail Whip";
 M010_TYPE = "\cj Normal";
 M010_CATEGORY = "\cf Status";
 M010_POWER = "\cfPower:\cj --";
-M010_DESC = "\cjreduce DEF against all foes in a \cfWave \cjin front of you.";
+M010_DESC = "\cjReduce DEF for all surrounding opponents\n";
 //#endregion
 
 //#region -=- 011: Leech Seed -=-
@@ -2670,7 +2670,7 @@ M012_NAME = "\cj RazorLeaf";
 M012_TYPE = "\cj Grass";
 M012_CATEGORY = "\cf Physical";
 M012_POWER = "\cfPower:\cj 15";
-M012_DESC = "\cjunleash a volley of razor sharp leaves.\n"
+M012_DESC = "\cjunleash a volley of razor sharp leaves.\n";
 //#endregion
 
 //#region -=- 013: SweetScent -=-
@@ -2786,7 +2786,7 @@ M026_NAME = "\cj Fire Spin";
 M026_TYPE = "\cj Normal";
 M026_CATEGORY = "\cf Special";
 M026_POWER = "\cfPower:\cj 35 DPS";
-M026_DESC = "\cjTarget the ground to cast a ring of fire.\n"
+M026_DESC = "\cjTarget the ground to cast a ring of fire.\n";
 //#endregion
 
 //#region -=- 027: Fire Fang -=-
@@ -2843,7 +2843,7 @@ M033_NAME = "\cj Fire Blast";
 M033_TYPE = "\cj Fire";
 M033_CATEGORY = "\cf Special";
 M033_POWER = "\cfPower:\cj 160";
-M033_DESC = "\cjLaunch a high powered explosive missile.\n"
+M033_DESC = "\cjLaunch a high powered explosive missile.\n";
 //#endregion
 
 //#region -=- 034: Flame Burst -=-
@@ -3838,7 +3838,8 @@ M149_NAME = "\cj WillOWisp";
 M149_TYPE = "\cj Fire";
 M149_CATEGORY = "\cf Status";
 M149_POWER = "\cfPower:\cj --";
-M149_DESC = "\cf<Desc>";
+M149_DESC = "\cjTarget an enemy with mysterious flame\n"
+"that inflict a burn.";
 //#endregion
 
 //#region -=- 150: MysticalFire -=-
@@ -3846,7 +3847,8 @@ M150_NAME = "\cj MysticalFire";
 M150_TYPE = "\cj Fire";
 M150_CATEGORY = "\cf Special";
 M150_POWER = "\cfPower:\cj --";
-M150_DESC = "\cf<Desc>";
+M150_DESC = "\cjhold to control a guided fireball,\n"
+"release to detonate it. can lower SP.Atk.";
 //#endregion
 
 //#region -=- 151: Rest -=-
@@ -3929,7 +3931,8 @@ M159_NAME = "\cj Confuseray";
 M159_TYPE = "\cj Ghost";
 M159_CATEGORY = "\cf Status";
 M159_POWER = "\cfPower:\cj --";
-M159_DESC = "\cf<Desc>";
+M159_DESC = "\cjTarget a fow to confound them with eerie\n"
+"lights, inflicting confusion.";
 //#endregion
 
 //#region -=- 160: Disable -=-
@@ -3947,7 +3950,8 @@ M161_NAME = "\cj Grudge";
 M161_TYPE = "\cj Ghost";
 M161_CATEGORY = "\cf Status";
 M161_POWER = "\cfPower:\cj --";
-M161_DESC = "\cf<Desc>";
+M161_DESC = "\cjWhen active, drains PP from opponents\n"
+"upon hit or defeat.";
 //#endregion
 
 //#region -=- 162: Hex -=-
@@ -4128,7 +4132,8 @@ M181_NAME = "\cj Teleport";
 M181_TYPE = "\cj Psychic";
 M181_CATEGORY = "\cf Status";
 M181_POWER = "\cfPower:\cj --";
-M181_DESC = "\cf<Desc>";
+M181_DESC = "\cjMark your current location, and then\n"
+" back to it at most any time!";
 //#endregion
 
 //#region -=- 182: Allyswitch -=-
@@ -4762,7 +4767,7 @@ M253_NAME = "\cj RockThrow";
 M253_TYPE = "\cj Rock";
 M253_CATEGORY = "\cf Physical";
 M253_POWER = "\cfPower:\cj --";
-M253_DESC = "\cjThrow a rock\n"
+M253_DESC = "\cjThrow a rock\n";
 //#endregion
 
 
@@ -5430,7 +5435,8 @@ M319_NAME = "\cj Spite";
 M319_TYPE = "\cj Ghost";
 M319_CATEGORY = "\cf Status";
 M319_POWER = "\cfPower:\cj --";
-M319_DESC = "\cf<Desc>";
+M319_DESC = "\cjTarget an opponent and Burn away the PP\n"
+"of their active move.";
 //#endregion
 
 
@@ -5439,7 +5445,7 @@ M320_NAME = "\cj UTurn";
 M320_TYPE = "\cj Bug";
 M320_CATEGORY = "\cf Physical";
 M320_POWER = "\cfPower:\cj --";
-M320_DESC = "\cf<Desc>";
+M320_DESC = "\cjA ramming move with high rebound.\n"
 //#endregion
 
 
@@ -5457,7 +5463,8 @@ M322_NAME = "\cj Sing";
 M322_TYPE = "\cj Normal";
 M322_CATEGORY = "\cf Status";
 M322_POWER = "\cfPower:\cj --";
-M322_DESC = "\cf<Desc>";
+M322_DESC = "\cjHold to sing and lul nearby enemies\n"
+"asleep.";
 //#endregion
 
 
@@ -5466,7 +5473,8 @@ M323_NAME = "\cj ShoreUp";
 M323_TYPE = "\cj Ground";
 M323_CATEGORY = "\cf Status";
 M323_POWER = "\cfPower:\cj --";
-M323_DESC = "\cf<Desc>";
+M323_DESC = "\cjReconstitute onself with nearby earth\n"
+"material, gradually restoring health.";
 //#endregion
 
 
@@ -5475,7 +5483,8 @@ M324_NAME = "\cj Roost";
 M324_TYPE = "\cj Flying";
 M324_CATEGORY = "\cf Status";
 M324_POWER = "\cfPower:\cj --";
-M324_DESC = "\cf<Desc>";
+M324_DESC = "\cjSettle down and rest to restore HP,\n"
+"cannot be used while flying.";
 //#endregion
 
 
@@ -5484,7 +5493,8 @@ M325_NAME = "\cj SelfDestruct";
 M325_TYPE = "\cj Normal";
 M325_CATEGORY = "\cf Special";
 M325_POWER = "\cfPower:\cj --";
-M325_DESC = "\cf<Desc>";
+M325_DESC = "\cjPrime yourself to detonate on defeat,\n"
+"dealing intense area damage";
 //#endregion
 
 
@@ -5493,7 +5503,9 @@ M326_NAME = "\cj Explosion";
 M326_TYPE = "\cj Normal";
 M326_CATEGORY = "\cf Special";
 M326_POWER = "\cfPower:\cj --";
-M326_DESC = "\cf<Desc>";
+M326_DESC = "\cjPrime yourself to detonate on defeat,\n"
+"dealing Incredible damage across a\n"
+"massive area.";
 //#endregion
 
 

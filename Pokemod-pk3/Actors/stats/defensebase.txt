@@ -175,8 +175,7 @@ damagefactor "SignalBeam", 1.0
 damagefactor "Infestation", 1.0
 damagefactor "AuraSphere", 1.0
 damagefactor "FairyWind", 1.0
-damagefactor "SelfDestruct", 2.0 //half defense against explosions
-damagefactor "Explosion", 2.0 //half defense against explosions
+
 //--[NewSpecialMove]--
 }
 
@@ -323,5 +322,7 @@ damagefactor "JumpKick", 1.0
 damagefactor "BodySlam", 1.0
 damagefactor "UTurn", 1.0
 damagefactor "FlipTurn", 1.0
+damagefactor "SelfDestruct", 1.0 
+damagefactor "Explosion", 1.0 
 //--[NewPhysicalMove]--
 }

@@ -1,0 +1,28 @@
+//#region -=-=- Beta A0.2 -=-=-
+/*
+ *
+ *
+ * ===|Gameplay Changes|===
+ * 
+ * 
+ * 
+ * 
+ * ===|Pokemon Changes|===
+ * 
+ * 
+ * ===|Move Changes|===
+ * 
+ * [SelfDestruct & Explosion]
+ * No longer have a double damage modifier
+ * 
+ * total Blast radius reduced from 500 > 300
+ * max damage blast radius reduced from 350 > 150
+ * 
+ * Sleep status now disarms prone pokemon
+ * 
+ * Freeze status now disarms prone pokemon (Full Freeze only)
+ * 
+ * [Explosion]
+ * Blast radius of explosion whirl reduced from 150 > 64
+ * 
+ * 

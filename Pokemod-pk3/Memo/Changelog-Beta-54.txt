@@ -22,7 +22,6 @@
  * Onix Family
  * Slugma family
  * Shuckle
- * Venonat Family
  * Tentacool Family
  * Croagunk Family
  * Bulbasaur family
@@ -31,7 +30,9 @@
  * Seedot Family
  * Beldam family
  * Dragonite
- * 
+ * Slowpoke Family
+ * Machop Family
+ * Makuhita Family
  * 
  * Pokemon with major moveset changes
  * Squirtle Family
@@ -54,6 +55,9 @@
  * Quilfish
  * Skarmory
  * Larvesta Family
+ * Solosis Family
+ * Venonat Family
+ * Wimpod Family
  * 
  * [Base Stat Changes]
  *  HP/ATK/DEF/S.ATK/S.DEF
@@ -192,6 +196,11 @@
  * 
  * [Waterfall]
  * Now can proc Cringe on successive hits
+ * 
+ * [AquaRing]
+ * Now Heals for 10% per tick instead of 5%
+ * PP increased from 25 > 30
+ * Radius increased from 150 > 250
  * 
  * [New Moves]
  *  Spite

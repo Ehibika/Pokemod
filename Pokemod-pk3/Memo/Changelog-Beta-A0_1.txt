@@ -1,0 +1,45 @@
+//#region -=-=- Beta A0.1 -=-=-
+/*
+ *
+ *
+ * ===|Gameplay Changes|===
+ * 
+ * 
+ * 
+ * 
+ * ===|Pokemon Changes|===
+ * 
+ * Abra now knows how to teleport again
+ * 
+ * ===|Move Changes|===
+ * 
+ * Applied a safety mechanism to prevent players from getting stuck after using dash moves
+ * 
+ * [Substitute]
+ * Fixed a bug causin substitute to not actually protect you
+ * 
+ * substitute can now be pushed by it's owner
+ * 
+ * [SignalBeam]
+ * Confusion is now procced on successive hits
+ * 
+ * Fixed translation issue of projectile
+ * 
+ * Adjusted visuals for better Visibility
+ * 
+ * [WaterPulse]
+ * Confusion is now procced on successive hits
+ * 
+ * [Confusion]
+ * Confusion is now procced on successive hits
+ * 
+ * [PowerGem]
+ * Damage reduced
+ * 
+ * [PowderSnow]
+ * Freeze rate increased
+ * 
+ * ===|TM Changes|===
+ * [New TMs]
+ * EnergyBall
+ * BugBite
