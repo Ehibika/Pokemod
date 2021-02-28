@@ -13,6 +13,9 @@
 #import "DB_Data.acs"
 #import "Dex_Pokemon.acs"
 #import "Dex_Types.acs"
+#import "Dex_Moves.acs"
+#import "Dex_MoveSets.acs"
+#import "Dex_Rentals.acs"
 #import "Dex_Evo.acs"
 #import "Dex_Leveling.acs"
 #import "Dex_BaseStats.acs"
@@ -49,9 +52,25 @@ if(PlayerIsBot(PlayerNumber())){GiveInventory("InSafeZone",1); ACS_NamedExecuteA
 
 }   
  
-Function Void GiveStartingMoves (void)
+Function Void GiveStartingMoves (int Dexnum)
 {
-	GiveInventory(StrParam(s:GetActorClass(0),s:"StarterMoves"),1);
+
+	int M1,M2,M3,M4;
+
+	if(PlayerIsBot(PlayerNumber()))
+	{
+	M1 = MoveDex2[Dexnum][0][0];	
+	}
+	else
+	{
+	M1 = MoveDex2[Dexnum][0][0];
+	M2 = MoveDex2[Dexnum][0][1];
+	M3 = MoveDex2[Dexnum][0][2];
+	M4 = MoveDex2[Dexnum][0][3];
+	}
+	GiveMoveset(M1,M2,M3,M4);
+
+	//GiveInventory(StrParam(s:GetActorClass(0),s:"StarterMoves"),1);
 	//if(GetCvar("lastmanstanding")==1||GetCvar("teamlms")==1)
    // {
 	//if(CheckLMSAttendance(PlayerNumber()) != 1){GiveInventory(StrParam(s:GetActorClass(0),s:"StarterMoves"),1);}
@@ -186,7 +205,7 @@ Script "PKMNACS_StartupScript" (int BaseDex)
 			//ACS_NamedExecuteAlways("SetPokeSkin",0,BaseDex);
 			ACS_NamedExecuteAlways("GiveStartingFund",0);
 			ACS_NamedExecuteWithResult("SetUnDisguise",PlayerNumber());
-			GiveStartingMoves();
+			GiveStartingMoves(BaseDex);
 			Terminate;
 			break;
 			Case 2: //Evolved
@@ -207,7 +226,7 @@ Script "PKMNACS_StartupScript" (int BaseDex)
 			ACS_NamedExecuteAlways("SetPKMNLevel",0,GetSpawnLevel(),1);
 			//ACS_NamedExecuteAlways("SetPokeSkin",0,BaseDex);
 			ACS_NamedExecuteWithResult("SetUnDisguise",PlayerNumber());
-			GiveStartingMoves();
+			GiveStartingMoves(BaseDex);
 			GiveInventory("PersistentLoadout",1);
 			break;
 		}
@@ -409,7 +428,7 @@ Script "PKMN_RentalsSetup" (Int BaseDex)
 		{
 		ClearPlayerCVars(PlayerNumber(),GetSpawnLevel());
 		ClearPersistentLoadout(PlayerNumber());
-		GiveRentalMoves();
+		GiveRentalMoves(BaseDex);
 		SetCvar(StrParam(s:"PlayerDEXNum_",i:PlayerNumber()),BaseDex);
 		}
 
@@ -424,10 +443,42 @@ GiveInventory("PersistentLoadout",1);
 //GiveInventory("SpawnSafeZone",1);
 }   
 
-Function Void GiveRentalMoves (void)
+Function int FindRentalDataSpot (int Dexnum)
 {
-	int PokemonName = StrRight(GetActorClass(0),StrLen(GetActorClass(0))-2);
-	GiveInventory(StrParam(s:PokemonName,s:"RentalMoves"),1);
+	int output = -1;
+	for(int i; i<MAXDEX; i++)
+	{
+	if(Dexnum == RentalMoveDex[i][0]) {output = i; break;}
+	}
+
+	return output;
+}
+
+Function Void GiveRentalMoves (int Dexnum)
+{
+	//int PokemonName = StrRight(GetActorClass(0),StrLen(GetActorClass(0))-2);
+	//GiveInventory(StrParam(s:PokemonName,s:"RentalMoves"),1);
+
+	int RentalNum = FindRentalDataSpot(Dexnum);
+	int M1,M2,M3,M4;
+
+		if(RentalNum>=0)
+			{ 
+				if(PlayerIsBot(PlayerNumber()))
+					{
+					M1 = RentalMoveDex[RentalNum][5];	
+					}
+				else
+					{
+					M1 = RentalMoveDex[RentalNum][1];
+					M2 = RentalMoveDex[RentalNum][2];
+					M3 = RentalMoveDex[RentalNum][3];
+					M4 = RentalMoveDex[RentalNum][4];
+					}
+			GiveMoveset(M1,M2,M3,M4);
+			}
+
+
 }
 
 Script "RentalBotCheck" (void)

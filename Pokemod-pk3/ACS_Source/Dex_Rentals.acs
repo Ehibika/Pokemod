@@ -1,0 +1,252 @@
+/* -=- Rentals Moveset Dex -=-
+ * Contains the moveset definitions for rental pokemon, rental mods can redefine this 
+ * DEX file for their own formats.
+ * 
+ * The way this works is that the array behaves like a dictionary, the 0th element refers to the dex number
+ * of the pokemon class, and elements 1-4 hold the constants for moves 1-4. the 5th element contains the Botweapon
+ * 
+ * 
+
+*/
+#library "Dex_Rentals"
+#import "Dex_Pokemon.acs"
+#import "Dex_Moves.acs"
+#include "zcommon.acs"
+
+Int RentalMoveDex [MAXDEX][6] = {
+/*|0|*/{SMEARGLE,/**/Sketch,NullMove,NullMove,NullMove,/**/ Sketch},
+
+/*|1|*/{BULBASAUR,/**/Leafage,Sludge,LeechSeed,SleepPowder,/**/ Leafage},
+/*|2|*/{IVYSAUR,/**/EnergyBall,Venoshock,ToxicSpikes,SweetScent,/**/ EnergyBall},
+/*|3|*/{VENUSAUR,/**/SolarBeam,EarthPower,SleepPowder,Synthesis,/**/ SolarBeam},
+/*|4|*/{CHARMANDER,/**/Ember,Bite,MetalClaw,Leer,/**/ NullMove},
+/*|5|*/{CHARMELEON,/**/FlameBurst,Slash,Pursuit,ScaryFace,/**/ FlameBurst},
+/*|6|*/{CHARIZARD,/**/FireBlast,AirSlash,Fly,TailWind,/**/ FlameThrower},
+/*|7|*/{SQUIRTLE,/**/Watergun,Bite,Growl,Protect,/**/ NullMove},
+/*|8|*/{WARTORTLE,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+/*|9|*/{BLASTOISE,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+
+/*|10|*/{CHIKORITA,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+/*|11|*/{BAYLEEF,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+/*|12|*/{MEGANIUM,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+/*|13|*/{CYNDAQUIL,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+/*|14|*/{QUILAVA,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+/*|15|*/{TYPHLOSION,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+/*|16|*/{TOTODILE,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+/*|17|*/{CROCONAW,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+/*|18|*/{FERALIGATR,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+
+/*|19|*/{TREECKO,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+/*|20|*/{GROVYLE,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+/*|21|*/{SCEPTILE,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+/*|22|*/{TORCHIC,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+/*|23|*/{COMBUSKEN,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+/*|24|*/{BLAZIKEN,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+/*|25|*/{MUDKIP,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+/*|26|*/{MARSHTOMP,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+/*|27|*/{SWAMPERT,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+
+/*|28|*/{TURTWIG,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+/*|29|*/{GROTLE,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+/*|30|*/{TORTERRA,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+/*|31|*/{CHIMCHAR,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+/*|32|*/{MONFERNO,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+/*|33|*/{INFERNAPE,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+/*|34|*/{PIPLUP,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+/*|35|*/{PRINPLUP,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+/*|36|*/{EMPOLEON,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+
+/*|37|*/{DREEPY,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+/*|38|*/{DRAKLOAK,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+/*|39|*/{DRAGAPULT,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+
+/*|40|*/{DRATINI,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+/*|41|*/{DRAGONAIR,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+/*|42|*/{DRAGONITE,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+
+/*|43|*/{BAGON,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+/*|44|*/{SHELGON,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+/*|45|*/{SALAMENCE,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+
+/*|46|*/{SLOWPOKE,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+/*|47|*/{SLOWBRO,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+/*|48|*/{SLOWKING,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+
+/*|49|*/{STARYU,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+/*|50|*/{STARMIE,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+
+/*|51|*/{SHELLDER,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+/*|52|*/{CLOYSTER,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+
+/*|53|*/{VULPIX,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+/*|54|*/{NINETALES,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+
+/*|55|*/{VULPIX_A,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+/*|56|*/{NINETALES_A,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+
+/*|57|*/{SNOVER,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+/*|58|*/{ABOMASNOW,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+
+/*|59|*/{SWINUB,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+/*|60|*/{PILOSWINE,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+/*|61|*/{MAMOSWINE,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+
+/*|62|*/{ABRA,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+/*|63|*/{KADABRA,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+/*|64|*/{ALAKAZAM,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+
+/*|65|*/{DROWZEE,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+/*|66|*/{HYPNO,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+
+/*|67|*/{RALTS,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+/*|68|*/{KIRLIA,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+/*|69|*/{GARDEVOIR,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+/*|70|*/{GALLADE,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+
+/*|71|*/{EXEGGCUTE,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+/*|72|*/{EXEGGUTOR,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+
+/*|73|*/{TORKOAL,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+
+/*|74|*/{SLUGMA,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+/*|75|*/{MAGCARGO,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+
+/*|76|*/{PICHU,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+/*|77|*/{PIKACHU,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+/*|78|*/{RAICHU,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+
+/*|79|*/{FERROSEED,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+/*|80|*/{FERROTHORN,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+/*|81|*/{HORSEA,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+/*|82|*/{SEADRA,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+/*|83|*/{KINGDRA,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+
+/*|84|*/{CHERUBI,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+/*|85|*/{CHERRIM_O,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+/*|86|*/{CHERRIM_S,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+
+/*|87|*/{GROWLITHE,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+/*|88|*/{ARCANINE,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+
+/*|89|*/{DEINO,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+/*|90|*/{ZWEILOUS,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+/*|91|*/{HYDREIGON,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+
+/*|92|*/{SOLOSIS,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+/*|93|*/{DUOSION,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+/*|94|*/{REUNICLUS,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+
+/*|95|*/{HAPPINY,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+/*|96|*/{CHANSEY,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+/*|97|*/{BLISSEY,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+
+/*|98|*/{GEODUDE,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+/*|99|*/{GRAVELER,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+/*|100|*/{GOLEM,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+
+/*|101|*/{GEODUDE_A,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+/*|102|*/{GRAVELER_A,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+/*|103|*/{GOLEM_A,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+/*|104|*/{ONIX,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+/*|105|*/{STEELIX,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+/*|106|*/{SCYTHER,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+/*|107|*/{SCIZOR,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+/*|108|*/{ZANGOOSE,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+/*|109|*/{SEVIPER,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+/*|110|*/{BELDUM,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+/*|111|*/{METANG,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+/*|112|*/{METAGROSS,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+/*|113|*/{CLEFFA,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+/*|114|*/{CLEFAIRY,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+/*|115|*/{CLEFABLE,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+/*|116|*/{IGGLYBUFF,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+/*|117|*/{JIGGLYPUFF,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+/*|118|*/{WIGGLYTUFF,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+/*|119|*/{AUDINO,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+/*|120|*/{ALOMOMOLA,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+/*|121|*/{BERGMITE,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+/*|122|*/{AVALUGG,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+/*|123|*/{CROAGUNK,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+/*|124|*/{TOXICROAK,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+/*|125|*/{EKANS,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+/*|126|*/{ARBOK,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+/*|127|*/{STUNKY,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+/*|128|*/{SKUNTANK,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+/*|129|*/{GULPIN,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+/*|130|*/{SWALOT,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+/*|131|*/{GASTLY,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+/*|132|*/{HAUNTER,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+/*|133|*/{GENGAR,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+/*|134|*/{TENTACOOL,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+/*|135|*/{TENTACRUEL,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+/*|136|*/{MAGIKARP,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+/*|137|*/{GYARADOS,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+/*|138|*/{QWILFISH,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+
+/*|139|*/{SKARMORY,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+/*|140|*/{LARVESTA,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+
+/*|141|*/{VOLCARONA,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+
+/*|142|*/{MANTYKE,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+/*|143|*/{MANTINE,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+
+/*|144|*/{TRAPINCH,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+/*|145|*/{VIBRAVA,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+/*|146|*/{FLYGON,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+
+/*|147|*/{CACNEA,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+/*|148|*/{CACTURNE,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+
+/*|149|*/{MUNCHLAX,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+/*|150|*/{SNORLAX,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+
+/*|151|*/{SEEDOT,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+/*|152|*/{NUZLEAF,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+/*|153|*/{SHIFTRY,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+
+/*|154|*/{MAGNEMITE,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+/*|155|*/{MAGNETON,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+/*|156|*/{MAGNEZONE,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+
+/*|157|*/{MURKROW,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+/*|158|*/{HONCHKROW,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+
+/*|159|*/{TANGELA,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+/*|160|*/{TANGROWTH,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+
+/*|161|*/{JOLTIK,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+/*|162|*/{GALVANTULA,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+
+/*|163|*/{MAREEP,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+/*|164|*/{FLAAFFY,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+/*|165|*/{AMPHAROS,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+
+/*|166|*/{PINSIR,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+
+/*|167|*/{HERACROSS,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+
+/*|168|*/{YANMA,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+/*|169|*/{YANMEGA,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+
+/*|170|*/{SHUCKLE,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+
+/*|171|*/{DURANT,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+
+/*|172|*/{VENONAT,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+/*|173|*/{VENOMOTH,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+
+/*|174|*/{WIMPOD,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+/*|175|*/{GOLISOPOD,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+/*|176|*/{MACHOP,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+/*|177|*/{MACHOKE,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+/*|178|*/{MACHAMP,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+/*|179|*/{MAKUHITA,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+/*|180|*/{HARIYAMA,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+/*|181|*/{TYROGUE,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+/*|182|*/{HITMONLEE,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+/*|183|*/{HITMONCHAN,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+/*|184|*/{HITMONTOP,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+/*|185|*/{RIOLU,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+/*|186|*/{LUCARIO,/**/Sketch,NullMove,NullMove,NullMove,/**/ NullMove},
+};

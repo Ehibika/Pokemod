@@ -1000,6 +1000,24 @@ SetResultValue(GetCvar("instagib")==1);
 //#endregion
 
 
+Function void GiveMoveset (int M1, int M2, int M3, int M4)
+{
+str WepString;
+if(M1>=0)
+	{
+		WepString = StrParam(s:weapons_ammo[M1][0],i:1);
+		GiveInventory(WepString,1);	
+		SetWeapon(WepString);
+	}
+
+	if(!PlayerIsBot(PlayerNumber()))
+		{
+		if(M2>=0){GiveInventory(StrParam(s:weapons_ammo[M2][0],i:2),1);}
+		if(M3>=0){GiveInventory(StrParam(s:weapons_ammo[M3][0],i:3),1);}
+		if(M4>=0){GiveInventory(StrParam(s:weapons_ammo[M4][0],i:4),1);}	
+		}
+}
+
 Script "TakePP" (Int MoveID, Int Ammount)
 {
 /* -=-=-=-=-=-
