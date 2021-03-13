@@ -20,6 +20,7 @@
 #import "Dex_Leveling.acs"
 #import "Dex_BaseStats.acs"
 #import "A_Skins.acs"
+#import "A_Leveling.acs"
 
 #include "zcommon.acs"
 
@@ -181,11 +182,12 @@ Script "PKMNACS_StartupScript" (int BaseDex)
 		{
 			Case 0: //Base
 			//Log(s:"Base");
-			ACS_NamedExecuteAlways("StatInitializer",0);
+			ACS_NamedExecuteAlways("StatInitializer",0,BaseDex);
 			ACS_NamedExecuteAlways("SetPlayerType",0);
-			//ACS_NamedExecuteAlways("SetPokeSkin",0,BaseDex);
+			ACS_NamedExecuteAlways("GetGenericAttack",0,BaseDex);
 			GiveInventory("PersistentLoadout",1);
 			GiveInventory("ReloadShopInventory",1);
+			UpdateSbarEXP();
 				//For TLMS's map reset
 			if( (GetCvar("lastmanstanding")==1||GetCvar("teamlms")==1)
 				&& CheckLMSAttendance(PlayerNumber()) == 1)
@@ -199,35 +201,39 @@ Script "PKMNACS_StartupScript" (int BaseDex)
 			ClearPersistentLoadout(PlayerNumber());
 			GiveInventory("PersistentLoadout",1);
 			SetCvar(StrParam(s:"PlayerDEXNum_",i:PlayerNumber()),BaseDex);
-			ACS_NamedExecuteAlways("StatInitializer",0);
+			ACS_NamedExecuteAlways("StatInitializer",0,BaseDex);
 			ACS_NamedExecuteAlways("SetPlayerType",0);
 			ACS_NamedExecuteAlways("SetPKMNLevel",0,GetSpawnLevel(),1);
-			//ACS_NamedExecuteAlways("SetPokeSkin",0,BaseDex);
+			ACS_NamedExecuteAlways("GetGenericAttack",0,BaseDex);
 			ACS_NamedExecuteAlways("GiveStartingFund",0);
 			ACS_NamedExecuteWithResult("SetUnDisguise",PlayerNumber());
 			GiveStartingMoves(BaseDex);
+			UpdateSbarEXP();
 			Terminate;
 			break;
 			Case 2: //Evolved
 			//Log(s:"Evolved: Match Passed");  
 			ACS_NamedExecuteAlways("PlayerFormChange",0,PlayerDEXNum);
-			ACS_NamedExecuteAlways("StatInitializer",0);
+			ACS_NamedExecuteAlways("StatInitializer",0,PlayerDEXNum);
 			ACS_NamedExecuteAlways("SetPlayerType",0);
+			ACS_NamedExecuteAlways("GetGenericAttack",0,PlayerDEXNum);
 			GiveInventory("PersistentLoadout",1);
 			GiveInventory("ReloadShopInventory",1);
+			UpdateSbarEXP();
 			break;
 			Case 3: //Changed
 			//Log(s:"Changed: Match Failed"); 
 			ClearPlayerCVars(PlayerNumber(),1);
 			ClearPersistentLoadout(PlayerNumber());
 			SetCvar(StrParam(s:"PlayerDEXNum_",i:PlayerNumber()),BaseDex);
-			ACS_NamedExecuteAlways("StatInitializer",0);
+			ACS_NamedExecuteAlways("StatInitializer",0,BaseDex);
 			ACS_NamedExecuteAlways("SetPlayerType",0);
 			ACS_NamedExecuteAlways("SetPKMNLevel",0,GetSpawnLevel(),1);
-			//ACS_NamedExecuteAlways("SetPokeSkin",0,BaseDex);
+			ACS_NamedExecuteAlways("GetGenericAttack",0,BaseDex);
 			ACS_NamedExecuteWithResult("SetUnDisguise",PlayerNumber());
 			GiveStartingMoves(BaseDex);
 			GiveInventory("PersistentLoadout",1);
+			UpdateSbarEXP();
 			break;
 		}
 
@@ -437,7 +443,8 @@ GiveInventory("SpawnInBuffer",1);
 if(GetCvar("sv_EnableShop") == 1){GiveInventory("SetupShop",1);}
 GiveInventory("EXPBountyitem",1000);
 ACS_NamedExecuteAlways("SetPKMNLevel",0,GetSpawnLevel(),1);
-ACS_NamedExecuteAlways("StatInitializer",0);
+ACS_NamedExecuteAlways("StatInitializer",0,BaseDex);
+ACS_NamedExecuteAlways("GetGenericAttack",0,BaseDex);
 ACS_NamedExecuteAlways("SetPlayerType",0);
 GiveInventory("PersistentLoadout",1);
 //GiveInventory("SpawnSafeZone",1);
@@ -486,6 +493,7 @@ Script "RentalBotCheck" (void)
 
     SetResultValue(PlayerIsBot(PlayerNumber()));
 }
+
 
 #endregion
 //#endregion

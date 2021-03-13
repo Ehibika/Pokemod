@@ -3,7 +3,7 @@ actor ThunderboltMove : WepMasterBase
 Tag "Thunderbolt"
 obituary "$OB_Thunderbolt"
 Weapon.AmmoUse 1
-Weapon.AmmoGive 15
+Weapon.AmmoGive 20
 weapon.ammotype "ThunderboltPP"
 scale 2.0
 Inventory.Pickupmessage "$PU_MEGABUSTER"
@@ -121,7 +121,7 @@ Goto Ready
 //[+]========================================================================[+]
 //-----------------------------|Ammo & Inventory|------------------------------
 //[+]========================================================================[+]
-actor ThunderboltPP : Ammo {inventory.amount 1 inventory.Maxamount 15}
+actor ThunderboltPP : Ammo {inventory.amount 1 inventory.Maxamount 20}
 
 Actor DoubleThunderbolt : Powerup{inventory.amount 1 powerup.duration 0x7FFFFFFF}
 

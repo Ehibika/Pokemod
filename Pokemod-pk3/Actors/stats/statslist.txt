@@ -8,6 +8,8 @@
 
 
 #include "Actors/stats/PKMNTypes.txt"
+//#include "Actors/stats/PKMNTypes2.txt"
+//#include "Actors/stats/PKMNTypes3.txt"
 #include "Actors/stats/PKMNTypeSpecials.txt"
 
 Actor Base_Stat : Inventory {Inventory.amount 1 inventory.maxamount 250 }
@@ -30,6 +32,9 @@ Actor Active_Speed : Active_Stat {}
 
 Actor SBAR_HP : Active_Stat {inventory.maxamount 9999}
 Actor SBAR_LVL : Active_Stat {}
+Actor Sbar_EXP : Inventory {Inventory.amount 1 inventory.maxamount 100}
+Actor Sbar_BP : Inventory {Inventory.amount 1 inventory.maxamount 99999}
 
 Actor EXPBountyitem : Inventory {Inventory.amount 1 inventory.maxamount 9999 }
 Actor HelperEXPItem : Inventory {Inventory.amount 1 inventory.maxamount 9999 }
+

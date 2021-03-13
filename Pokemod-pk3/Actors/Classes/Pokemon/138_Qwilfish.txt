@@ -12,11 +12,7 @@ Player.SoundClass "Qwilfish"
 +NOSKIN
 player.startitem "PKMNStarterKit"
 //============|
-Player.StartItem "Base_HP", 65
-Player.StartItem "Base_PAttack", 95
-Player.StartItem "Base_PDefense", 85
-Player.StartItem "Base_SAttack", 55
-Player.StartItem "Base_SDefense", 55
+
 
 //============|
 
@@ -45,30 +41,7 @@ GoTo PainFrames
 }
 }
 
-actor QwilfishStarterMoves : CustomInventory
-{
-inventory.amount 1
-Inventory.MaxAmount 100
-+AUTOACTIVATE
-States
-{
-Spawn:
-TNT1 A 0
-stop
-Pickup:
-TNT1 A 0 A_JumpIfInventory("isbot",1,"BotWep")
 
-TNT1 A 0 A_GiveInventory("PoisonStingMove1")
-TNT1 A 0 A_GiveInventory("WaterGunMove2")
-TNT1 A 0 A_GiveInventory("AstonishMove3")
-TNT1 A 0 A_GiveInventory("SpikesMove4")
-stop
-
-BotWep:
-TNT1 A 0 A_GiveInventory("PoisonStingMove1")
-stop
-}
-}
 
 actor QwilfishSetupItem : CustomInventory
 {

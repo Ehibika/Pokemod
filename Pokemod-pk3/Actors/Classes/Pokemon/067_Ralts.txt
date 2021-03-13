@@ -12,11 +12,7 @@ Player.SoundClass "Ralts"
 player.startitem "PKMNStarterKit"
 
 //============|
-Player.StartItem "Base_HP", 28
-Player.StartItem "Base_PAttack", 25
-Player.StartItem "Base_PDefense", 25
-Player.StartItem "Base_SAttack", 45
-Player.StartItem "Base_SDefense", 35
+
 
 //============|
 
@@ -45,30 +41,7 @@ GoTo PainFrames
 }
 }
 
-actor RaltsStarterMoves : CustomInventory
-{
-inventory.amount 1
-Inventory.MaxAmount 100
-+AUTOACTIVATE
-States
-{
-Spawn:
-TNT1 A 0
-stop
-Pickup:
-TNT1 A 0 A_JumpIfInventory("isbot",1,"BotWep")
 
-TNT1 A 0 A_GiveInventory("FairyWindMove1")
-TNT1 A 0 A_GiveInventory("PsywaveMove2")
-TNT1 A 0 A_GiveInventory("LifeDewMove3")
-TNT1 A 0 A_GiveInventory("MagicalLeafMove4")
-stop
-
-BotWep:
-TNT1 A 0 A_GiveInventory("FairyWindMove1")
-stop
-}
-}
 
 actor RaltsSetupItem : CustomInventory
 {

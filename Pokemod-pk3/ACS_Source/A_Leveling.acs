@@ -99,7 +99,7 @@ Script "AddToBPAward" (int ammount)
 
 Script "PKMN_HitEXP" (Int Damage, int Divisor)
 {
-if(EXPTime() == 0){Terminate;}
+//if(EXPTime() == 0){Terminate;}
 
 Damage = getLastHit(0);
 
@@ -113,6 +113,48 @@ switch(Damage)
 int Output;
 int EnemyPlayer = ACS_NamedExecuteWithResult("core_gettarget", 0);
 int EnemyPlN = EnemyPlayer - 1000;
+
+if(Divisor<1){Divisor = 1;}
+//log(i:EnemyPlN);
+int PlayerLVL = GetCvar(StrParam(s:"PlayerLevel_",i:PlayerNumber()));
+int PlayerDexNum = GetCvar(StrParam(s:"PlayerDEXNum_",i:PlayerNumber()));
+//int SelfDexBounty = StatDEX[PlayerDexNum][6];
+
+int SelfEXPBounty = CheckInventory("EXPBountyitem");
+Output = 1 + Damage/Divisor;
+//Output = 1 + PlayerLVL + Damage/Divisor;
+if(SelfEXPBounty)
+    {
+        if(SelfEXPBounty < Output){Output = SelfEXPBounty;}
+        TakeInventory("EXPBountyitem",Output);
+        ACS_NamedExecuteAlways("GivePlayerEXP",0,EnemyPlN,Output,1);
+        if(CheckActorInventory(EnemyPlayer,"HelpingHandPower")){GiveActorInventory(EnemyPlayer,"HelperEXPItem",Output/2);}
+    }
+
+    //Log(i:Damage, s:" : ",i:Output);
+}
+
+Script "PKMN_LastHitEXP" (Int Damage, int Divisor)
+{
+//if(EXPTime() == 0){Terminate;}
+
+//Damage = getLastHit(0);
+/*
+switch(Damage)
+    {
+        case -3: terminate; break;
+        case -2: Delay(1); Restart; break;
+        case -1: Delay(1); Restart; break;
+    }
+    */
+    //log(i:Damage);
+
+
+int Output;
+int EnemyPlayer = ACS_NamedExecuteWithResult("core_gettarget", 0);
+int EnemyPlN = EnemyPlayer - 1000;
+if(EnemyPlayer == ActivatorTID()){Terminate;}
+
 
 if(Divisor<1){Divisor = 1;}
 //log(i:EnemyPlN);
@@ -187,6 +229,7 @@ if(PlayerLVL >= PKMN_MaxLVL){SetCvar(PLAYER_EXPCV,LevelUpTable[LvlRate][PKMN_Max
 
 PlayerEXP = PlayerEXP+EXPAward;
 SetCvar(PLAYER_EXPCV,PlayerEXP);
+UpdateSbarEXP();
 
 for(int i = 1; i<PKMN_MaxLVL; i++)
     {
@@ -300,6 +343,7 @@ Script "SetPKMNLevel" (int NewPlayerLevel, int SynchEXP)
         }
 
         if(PlayerInGame(PlayerNumber()))ACS_NamedExecuteAlways("ActiveStatUpdate",0);
+        UpdateSbarEXP();
         }
         //Else{ACS_NamedExecuteAlways("StatusMenuUpdate",0);}
 
@@ -324,6 +368,7 @@ Script "PKMN_MassLevelup" (Void)
             CurLevel = GetCVar(StrParam(s:"PlayerLevel_",i:i));
             SetCVar(StrParam(s:"PlayerLevel_",i:i),CurLevel+1);
             if(CurLevel+1 < PKMN_MaxLVL){SetCvar(StrParam(s:"PlayerEXP_",i:i),LevelUpTable[EXPRate][CurLevel+1]);}
+            UpdateSbarEXP();
         }
     }    
 }
@@ -342,6 +387,7 @@ if(CurLevel<PKMN_MaxLVL)
     {
     ACS_NamedExecuteAlways("SetPKMNLevel",0,CurLevel+1,1);
     if(PlayerInGame(PlayerNumber()))GiveInventory("LevelupCue",1);
+    UpdateSbarEXP();
     }
 }
 
@@ -451,8 +497,33 @@ Script "PlayerFormChange" (Int NextForm)
 ACS_NamedExecuteAlways("ChangeBaseStat",0,NextForm);
 ACS_NamedExecuteAlways("SetDexNumber",0,NextForm);
 ACS_NamedExecuteAlways("SetPlayerType",0);
+ACS_NamedExecuteAlways("GetGenericAttack",0,NextForm);
+UpdateSbarEXP();
 }
 
 #endregion
 //#endregion
 
+Function void UpdateSbarEXP (void)
+{ //Updates the activator's EXP SBar
+Int LvlRate = StatDEX[GetPokeValue(POKEDEXNUM)][9];
+int CurrentLevel = GetPokeValue(POKELEVEL);
+
+if(CurrentLevel<15)
+    {
+    Int FloorEXP = LevelUpTable[LvlRate][CurrentLevel-1];
+    Int CurrentEXP = GetPokeValue(POKEEXP)-FloorEXP;
+    Int GoalEXP = LevelUpTable[LvlRate][CurrentLevel]-FloorEXP;
+
+    //Remember that on the EXP table, in each element based on your level, the value returned is the EXP neexed
+    //to reach the next level. element 0 is always 0, element 1 is usually 15, meaning at lvl 1 you need 15
+    //exp to get to lvl 2.
+
+    int EXPPercent = ((CurrentEXP*100)/GoalEXP);
+    //log(i:CurrentEXP,s:" ",i:GoalEXP,s:"exp percent is ",i:EXPPercent,s:" Floor is ",i:FloorEXP);
+    TakeInventory("Sbar_EXP",999);
+    GiveInventory("Sbar_EXP",EXPPercent);   
+    }
+else{if(CheckInventory("Sbar_EXP") < 100 ){GiveInventory("Sbar_EXP",100);}}
+
+}

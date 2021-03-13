@@ -5,7 +5,7 @@ actor AquaTailMove : WepMasterBase
 Tag "AquaTail"
 obituary "$OB_AquaTail"
 Weapon.AmmoUse 1
-Weapon.AmmoGive 25
+Weapon.AmmoGive 10
 weapon.ammotype "AquaTailPP"
 scale 2.0
 Inventory.Pickupmessage "$PU_MEGABUSTER"
@@ -73,7 +73,7 @@ Goto Ready
 //[+]========================================================================[+]
 //-----------------------------|Ammo & Inventory|------------------------------
 //[+]========================================================================[+]
-actor AquaTailPP : Ammo {inventory.amount 1 inventory.Maxamount 25}
+actor AquaTailPP : Ammo {inventory.amount 1 inventory.Maxamount 10}
 
 actor AquaTailSwingTimer : PowerUp
 {

@@ -930,7 +930,7 @@ Pain.WildCharge:
 "----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,40,Type_Fire)
 "----" H 0 ACS_NamedExecuteAlways("PKMN_RecoilDamager",0,30)
 "----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockUp",0,15,0)
-Goto FirePain
+Goto ElectricPain
 
 Pain.Spark:
 "----" H 0 A_GiveInventory("SparkDelay",1)
@@ -994,7 +994,7 @@ Pain.Psychic:
 Goto PsychicPain
 
 Pain.Confusion:
-"----" H 0 A_GiveInventory("ConfusionStatusFastBuild",1)
+"----" H 0 A_GiveInventory("ConfusionStatusBuild",1)
 Goto PsychicPain
 
 Pain.Psywave:
@@ -1010,6 +1010,7 @@ Goto PsychicPain
 
 Pain.PsyBeam:
 "----" H 0
+"----" H 0 A_GiveInventory("ConfusionStatusFastBuild",1)
 "----" H 0 A_GiveInventory("PsyBeamProtect",1)
 Goto PsychicPain
 
@@ -1128,7 +1129,7 @@ Pain.DracoMeteor:
 "----" H 0
 Goto DragonPain
 
-
+/*
 Pain.DragonRush:
 "----" H 0 A_GiveInventory("DragonRushDelay",1)
 "----" H 1
@@ -1136,6 +1137,13 @@ Pain.DragonRush:
 "----" H 0 A_PlaySoundEx("weapon/Rebound","SoundSlot5")
 "----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,60,Type_Dragon)
 "----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockUp",0,15,0)
+Goto DragonPain
+*/
+
+
+Pain.DragonRush:
+"----" H 0 A_GiveInventory("CringeStatusFastBuild",1)
+"----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,15,Type_Null)
 Goto DragonPain
 
 Pain.Twister:
@@ -1223,9 +1231,24 @@ Goto FairyPain
 //#endregion
 
 //#region -=- Typeless -=-
-
+Pain.Tackle:
+"----" H 0 A_GiveInventory("TackleDelay",1)
+"----" H 1
+"----" H 0 A_GiveToTarget("TackleCollision",1)
+"----" H 0 A_PlaySoundEx("Move/Basic","SoundSlot5")
+"----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,30,Type_Normal)
+"----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockUp",0,15,0)
 Pain.Melee:
 "----" H 0
+"----" H 0 A_Jump(256,"NormalPain")
+"----" H 0 A_Jump(256,"PainNormal")
+Goto PainNormal
+
+Pain.Lash:
+"----" H 0
+"----" H 0 A_GiveInventory("LashProtect",1)
+"----" H 0 A_SpawnItemEX("LashImpactPuff")
+"----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,25,Type_Null)
 "----" H 0 A_Jump(256,"NormalPain")
 "----" H 0 A_Jump(256,"PainNormal")
 Goto PainNormal
@@ -1821,10 +1844,10 @@ Death.MagnetRise:
 Goto ElectricDeath
 
 Death.WildCharge:
-"----" A 0 ACS_NamedExecuteAlways("PKMN_PainSound",0,Type_Fire) 
+"----" A 0 ACS_NamedExecuteAlways("PKMN_PainSound",0,Type_Electric) 
 "----" H 0 A_GiveToTarget("WildChargeCollision",1)
 "----" H 0 A_PlaySoundEx("weapon/Rebound","SoundSlot5")
-"----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,50,Type_Fire)
+"----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,50,Type_Electric)
 "----" H 0 ACS_NamedExecuteAlways("PKMN_RecoilDamager",0,30)
 "----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockUp",0,35,0)
 "----" H 5
@@ -1894,10 +1917,12 @@ Goto PsychicDeath
     Death.Outrage:
     Death.DragonDarts:
     Death.Twister:
+    Death.DragonRush:
     //--[Move|Dragon]--
     "----" H 0
     Goto DragonDeath
 
+    /*
     Death.DragonRush:
     "----" A 0 ACS_NamedExecuteAlways("PKMN_PainSound",0,Type_Dragon) 
     "----" H 0 A_GiveToTarget("DragonRushCollision",1)
@@ -1906,6 +1931,7 @@ Goto PsychicDeath
     "----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockUp",0,35,0)
     "----" H 5
     Goto Death
+    */
 
     Death.DragonRage:
     "----" H 0
@@ -1961,6 +1987,19 @@ Death.Spikes:
 Death.ToxicSpikes:
 Death.Melee:
 "----" H 0 A_Stop
+Goto Death
+
+Death.Tackle:
+"----" A 0 ACS_NamedExecuteAlways("PKMN_PainSound",0,Type_Normal) 
+"----" H 0 A_GiveToTarget("TackleCollision",1)
+"----" H 0 A_PlaySoundEx("Move/Basic","SoundSlot5")
+"----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,35,Type_Normal)
+"----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockUp",0,35,0)
+"----" H 5
+Goto Death
+
+Death.Lash:
+"----" H 0 A_SpawnItemEX("LashImpactPuff")
 Goto Death
 //#endregion
 

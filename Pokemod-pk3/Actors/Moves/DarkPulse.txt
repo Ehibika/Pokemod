@@ -3,7 +3,7 @@ actor DarkPulseMove : WepMasterBase
 Tag "DarkPulse"
 obituary "$OB_DarkPulse"
 Weapon.AmmoUse 1
-Weapon.AmmoGive 15
+Weapon.AmmoGive 10
 weapon.ammotype "DarkPulsePP"
 scale 2.0
 Inventory.Pickupmessage "$PU_MEGABUSTER"
@@ -71,7 +71,7 @@ Goto Ready
 //[+]========================================================================[+]
 //-----------------------------|Ammo & Inventory|------------------------------
 //[+]========================================================================[+]
-actor DarkPulsePP : Ammo {inventory.amount 1 inventory.Maxamount 15}
+actor DarkPulsePP : Ammo {inventory.amount 1 inventory.Maxamount 10}
 
 Actor DarkPulseProtect : powerprotection
 {

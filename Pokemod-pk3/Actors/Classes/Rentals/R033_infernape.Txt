@@ -14,11 +14,6 @@ Player.StartItem "PKMNRentalKit"
 //============|
 Player.StartItem "InfernapeRentalSetupItem"
 //============|
-Player.StartItem "Base_HP", 76
-Player.StartItem "Base_PAttack", 104
-Player.StartItem "Base_PDefense", 71 
-Player.StartItem "Base_SAttack", 104
-Player.StartItem "Base_SDefense", 71 
 
 //============|
 
@@ -44,30 +39,7 @@ GoTo PainFrames
 }
 }
 
-actor InfernapeRentalMoves : CustomInventory
-{
-inventory.amount 1
-Inventory.MaxAmount 100
-+AUTOACTIVATE
-States
-{
-Spawn:
-TNT1 A 0
-stop
-Pickup:
-TNT1 A 0 A_JumpIf(CallACS("RentalBotCheck") == 1,"BotWep")
 
-TNT1 A 0 A_GiveInventory("MachPunchMove1")
-TNT1 A 0 A_GiveInventory("BlazeKickMove2")
-TNT1 A 0 A_GiveInventory("CloseCombatMove3")
-TNT1 A 0 A_GiveInventory("AcrobaticsMove4")
-stop
-
-BotWep:
-TNT1 A 0 A_GiveInventory("MachPunchMove1")
-stop
-}
-}
 
  actor InfernapeRentalSetupItem : CustomInventory
 {

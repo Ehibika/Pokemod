@@ -12,11 +12,6 @@ Player.SoundClass "Chikorita"
 player.startitem "PKMNStarterKit"
 
 //============|
-Player.StartItem "Base_HP", 45
-Player.StartItem "Base_PAttack", 49
-Player.StartItem "Base_PDefense", 65 
-Player.StartItem "Base_SAttack", 49
-Player.StartItem "Base_SDefense", 65 
 
 //============|
 
@@ -45,30 +40,7 @@ GoTo PainFrames
 }
 }
 
-actor ChikoritaStarterMoves : CustomInventory
-{
-inventory.amount 1
-Inventory.MaxAmount 100
-+AUTOACTIVATE
-States
-{
-Spawn:
-TNT1 A 0
-stop
-Pickup:
-TNT1 A 0 A_JumpIfInventory("isbot",1,"BotWep")
 
-TNT1 A 0 A_GiveInventory("VineWhipMove1")
-TNT1 A 0 A_GiveInventory("LifeDewMove2")
-TNT1 A 0 A_GiveInventory("PoisonPowderMove3")
-TNT1 A 0 A_GiveInventory("SynthesisMove4")
-stop
-
-BotWep:
-TNT1 A 0 A_GiveInventory("VineWhipMove1")
-stop
-}
-}
 
 actor ChikoritaSetupItem : CustomInventory
 {

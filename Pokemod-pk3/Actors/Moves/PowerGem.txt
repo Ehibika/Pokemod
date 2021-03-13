@@ -3,7 +3,7 @@ actor PowerGemMove : WepMasterBase
 Tag "PowerGem"
 obituary "$OB_POWERGEM"
 Weapon.AmmoUse 1
-Weapon.AmmoGive 20
+Weapon.AmmoGive 5
 weapon.ammotype "PowerGemPP"
 scale 2.0
 Inventory.Pickupmessage "$PU_MEGABUSTER"
@@ -63,7 +63,7 @@ Goto Ready
 //[+]========================================================================[+]
 //-----------------------------|Ammo & Inventory|------------------------------
 //[+]========================================================================[+]
-actor PowerGemPP : Ammo {inventory.amount 1 inventory.Maxamount 20}
+actor PowerGemPP : Ammo {inventory.amount 1 inventory.Maxamount 5}
 
 Actor PowerGemShotDelay : PowerUp {inventory.amount 1 Powerup.duration 17}
 

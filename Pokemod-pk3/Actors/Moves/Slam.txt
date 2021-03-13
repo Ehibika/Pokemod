@@ -5,7 +5,7 @@ actor SlamMove : WepMasterBase
 Tag "Slam"
 obituary "$OB_Slam"
 Weapon.AmmoUse 1
-Weapon.AmmoGive 25
+Weapon.AmmoGive 10
 weapon.ammotype "SlamPP"
 scale 2.0
 Inventory.Pickupmessage "$PU_MEGABUSTER"
@@ -73,7 +73,7 @@ Goto Ready
 //[+]========================================================================[+]
 //-----------------------------|Ammo & Inventory|------------------------------
 //[+]========================================================================[+]
-actor SlamPP : Ammo {inventory.amount 1 inventory.Maxamount 25}
+actor SlamPP : Ammo {inventory.amount 1 inventory.Maxamount 10}
 
 actor SlamSwingTimer : PowerUp
 {

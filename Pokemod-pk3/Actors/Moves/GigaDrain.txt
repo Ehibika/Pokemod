@@ -3,7 +3,7 @@ actor GigaDrainMove : WepMasterBase
 Tag "GigaDrain"
 obituary "$OB_GigaDrain"
 Weapon.AmmoUse 1
-Weapon.AmmoGive 20
+Weapon.AmmoGive 10
 weapon.ammotype "GigaDrainPP"
 scale 2.0
 Inventory.Pickupmessage "$PU_MEGABUSTER"
@@ -74,7 +74,7 @@ Goto Ready
 //[+]========================================================================[+]
 //-----------------------------|Ammo & Inventory|------------------------------
 //[+]========================================================================[+]
-actor GigaDrainPP : Ammo {inventory.amount 1 inventory.Maxamount 5}
+actor GigaDrainPP : Ammo {inventory.amount 1 inventory.Maxamount 10}
 
 Actor GigaDrainProtect : powerprotection
 {

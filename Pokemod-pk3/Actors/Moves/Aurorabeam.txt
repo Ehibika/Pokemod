@@ -3,7 +3,7 @@ actor AuroraBeamMove : WepMasterBase
 Tag "AuroraBeam"
 obituary "$OB_AURORABEAM"
 Weapon.AmmoUse 1
-Weapon.AmmoGive 25
+Weapon.AmmoGive 20
 weapon.ammotype "AuroraBeamPP"
 scale 2.0
 Inventory.Pickupmessage "$PU_MEGABUSTER"
@@ -61,7 +61,7 @@ Goto Ready
 //[+]========================================================================[+]
 //-----------------------------|Ammo & Inventory|------------------------------
 //[+]========================================================================[+]
-actor AuroraBeamPP : Ammo {inventory.amount 1 inventory.Maxamount 25}
+actor AuroraBeamPP : Ammo {inventory.amount 1 inventory.Maxamount 20}
 
 Actor AuroraBeamProtect : powerprotection
 {

@@ -5,7 +5,7 @@ actor IronTailMove : WepMasterBase
 Tag "IronTail"
 obituary "$OB_IronTail"
 Weapon.AmmoUse 1
-Weapon.AmmoGive 25
+Weapon.AmmoGive 10
 weapon.ammotype "IronTailPP"
 scale 2.0
 Inventory.Pickupmessage "$PU_MEGABUSTER"
@@ -73,7 +73,7 @@ Goto Ready
 //[+]========================================================================[+]
 //-----------------------------|Ammo & Inventory|------------------------------
 //[+]========================================================================[+]
-actor IronTailPP : Ammo {inventory.amount 1 inventory.Maxamount 25}
+actor IronTailPP : Ammo {inventory.amount 1 inventory.Maxamount 10}
 
 actor IronTailSwingTimer : PowerUp
 {

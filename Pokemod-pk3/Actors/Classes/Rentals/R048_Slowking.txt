@@ -14,11 +14,7 @@ Player.StartItem "PKMNRentalKit"
 //============|
 Player.StartItem "SlowkingRentalSetupItem"
 //============|
-Player.StartItem "Base_HP", 95
-Player.StartItem "Base_PAttack", 75
-Player.StartItem "Base_PDefense", 80
-Player.StartItem "Base_SAttack", 100
-Player.StartItem "Base_SDefense", 110
+
 
 //============|
 
@@ -44,30 +40,7 @@ GoTo PainFrames
 }
 }
 
-actor SlowkingRentalMoves : CustomInventory
-{
-inventory.amount 1
-Inventory.MaxAmount 100
-+AUTOACTIVATE
-States
-{
-Spawn:
-TNT1 A 0
-stop
-Pickup:
-TNT1 A 0 A_JumpIf(CallACS("RentalBotCheck") == 1,"BotWep")
 
-TNT1 A 0 A_GiveInventory("SurfMove1")
-TNT1 A 0 A_GiveInventory("PsychicMove2")
-TNT1 A 0 A_GiveInventory("NastyPlotMove3")
-TNT1 A 0 A_GiveInventory("LightScreenMove4")
-stop
-
-BotWep:
-TNT1 A 0 A_GiveInventory("SurfMove1")
-stop
-}
-}
 
  actor SlowkingRentalSetupItem : CustomInventory
 {

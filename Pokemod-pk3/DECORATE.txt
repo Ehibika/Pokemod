@@ -17,7 +17,7 @@
 #include "Actors/inventory/CTFWarpers.txt"
 
 #include "actors/Moves/MoveBase/MasterMoveBase.txt"
-#include "actors/Moves/MoveBase/ImbueMoveBase.txt"
+#include "actors/Moves/MoveBase/GATKMoveBase.txt"
 #include "actors/Moves/Swift.txt"
 #include "actors/Moves/Ember.txt"
 #include "actors/Moves/ThunderShock.txt"

@@ -1,0 +1,376 @@
+/* -=- Data Import -=-
+ * This offers tools for addon Wads to import data into the static dex arrays
+ *
+ * 
+
+*/
+#library "A_Import"
+#import "Dex_Pokemon.acs"
+#import "Dex_Evo.acs"
+#import "Dex_Skin.acs"
+#import "Dex_Types.acs"
+#import "Dex_Leveling.acs"
+#import "Dex_BaseStats.acs"
+#import "Dex_Moves.acs"
+#import "Dex_Movesets.acs"
+#import "Dex_Rentals.acs"
+#import "DEX_Gattack.acs"
+
+#include "zcommon.acs"
+
+
+
+//#region -=- Failed attempt -=-
+/*
+Script "CheckImports" OPEN
+{
+Delay(1);
+log(i:getCvar("ImportCount"));
+For(int i = 0;i<getCvar("ImportCount");i++)
+{
+if(StrIcmp(GetCvarString(StrParam(s:"Import_",i:i)),"")!=0) 
+	{
+	ACS_NamedExecute(GetCvarString(StrParam(s:"Import_",i:i)),0);
+	}
+}	
+
+}
+*/
+//#endregion
+
+
+//#region -=- Script Arrangement -=-
+int MAX_SCRIPTS = 0;
+#DEFINE MAX_SCRIPTS_MAX 500
+
+str script_names[MAX_SCRIPTS_MAX];
+
+Script "GetCvarsDefineScript" (void)
+{
+DefineScript(GetCvarString("ScriptImport"));
+}
+
+function void DefineScript(str name)
+{
+	if(MAX_SCRIPTS<MAX_SCRIPTS_MAX) {
+		script_names[MAX_SCRIPTS] = name;
+		MAX_SCRIPTS++;
+	} else {
+		printbold(s:"too many things, increase limit");
+	}
+}
+
+Script "ExecuteScriptsInArray" OPEN
+{
+//for(int i = 0; i<MAX_SCRIPTS; i++) ACS_NamedExecuteWithResult(script_names[i]);
+for(int i = MAX_SCRIPTS-1; i>-1; i--) ACS_NamedExecuteWithResult(script_names[i]);
+}
+
+//#endregion
+
+int MAX_THINGS = 0;
+
+int DEXOFFSET = 0;
+int LASTDEX = 0;
+
+str SkinImport_1;
+str SkinImport_2;
+
+//#region -=- Importation functions -=-
+
+Script "GrabGlobalDexNum" (void)
+{
+SetResultValue(MAX_THINGS);
+}
+
+Function int getEmptyDex (void)
+{
+int output = -1;
+int StartAt;
+
+if((LASTDEX+1)>ENDDEX) StartAt = LASTDEX+1;
+else StartAt = ENDDEX;
+for(int i = StartAt; i<MAXDEX; i++)
+	{
+		//log(s:"check ",i:i);
+		if(StatDEX[i][0] <= 0){output = i; break;}
+	}
+return output;
+}
+
+
+Script "ImportClassData" (int LocalDex)
+{
+
+int NewDex = getEmptyDex();
+if(NewDex<0)
+	{
+	printbold(s:"too many things, increase limit"); 
+	SetResultValue(NewDex);
+	terminate;
+	}
+if(LocalDex==0){DEXOFFSET = NewDex;}
+	MAX_THINGS = NewDex;
+	LASTDEX = NewDex;
+ImportTo_DexEvo(
+GetCvar("DexEvo_0"),
+GetCvar("DexEvo_1"),
+GetCvar("DexEvo_2"),
+GetCvar("DexEvo_3"),
+GetCvar("DexEvo_4"),
+GetCvar("DexEvo_5")
+);
+//=======
+ImportTo_DexBaseStats(
+GetCvar("DexBaseStats_0"),
+GetCvar("DexBaseStats_1"),
+GetCvar("DexBaseStats_2"),
+GetCvar("DexBaseStats_3"),
+GetCvar("DexBaseStats_4"),
+GetCvar("DexBaseStats_5"),
+GetCvar("DexBaseStats_6"),
+GetCvar("DexBaseStats_7"),
+GetCvar("DexBaseStats_8"),
+GetCvar("DexBaseStats_9")
+);
+//=======
+ImportTo_DexSkin(
+GetCvarString("DexSkin_0"),
+GetCvarString("DexSkin_1")
+);
+//ACS_NamedExecuteAlways("ImportTo_DexSkinClient_A",0,NewDex);
+//=======	
+ImportTo_DexGATK(GetCvar("DexGAtk_0"));
+//=======	
+ImportTo_DexMoveSet();
+//=======
+//=======
+SetResultValue(NewDex);
+}
+
+Script "Import_DexEvo" (void) 
+{
+ImportTo_DexEvo(
+GetCvar("DexEvo_0"),
+GetCvar("DexEvo_1"),
+GetCvar("DexEvo_2"),
+GetCvar("DexEvo_3"),
+GetCvar("DexEvo_4"),
+GetCvar("DexEvo_5")
+);
+
+}
+
+
+function void ImportTo_DexEvo(int N0,int N1,int N2,int N3,int N4,int N5)
+{
+	//if(MAX_THINGS<MAXDEX) {
+
+	if(N2 != -1){N2+=+DEXOFFSET;}
+	if(N3 != -1){N3+=+DEXOFFSET;}
+	if(N4 != -1){N4+=+DEXOFFSET;}
+
+		EvoDEX[MAX_THINGS][0] = N0;
+		EvoDEX[MAX_THINGS][1] = N1;
+		EvoDEX[MAX_THINGS][2] = N2;
+        EvoDEX[MAX_THINGS][3] = N3;
+		EvoDEX[MAX_THINGS][4] = N4;
+		EvoDEX[MAX_THINGS][5] = N5;
+		//MAX_THINGS++;
+	//} else {
+	//	printbold(s:"too many things, increase limit");
+	//}
+}
+
+Script "Import_DexSkin" (void) 
+{
+ImportTo_DexSkin(
+GetCvarString("DexSkin_0"),
+GetCvarString("DexSkin_1")
+);
+
+}
+
+//#region -=- attempt 1 -=-
+/*
+Script "ImportTo_DexSkinClient_A" ENTER NET
+{
+	for(int i = ENDDEX-5; i<MAXDEX; i++)
+    { 
+        //if(Strcmp("Base",SkinDEX[i][1])==0) 
+        log(s:"Send ",s:SkinDEX[i][0]);
+        //if(StrIcmp("",SkinDEX[i][1])==0) Break;
+		//ConsoleCommand(strParam(s:"set SKImport_1 ",s:SkinDEX[i][0]));
+		//ConsoleCommand(strParam(s:"set SKImport_2 ",s:SkinDEX[i][1]));
+		SetCvarString("SKImport_1",SkinDEX[i][0]);
+		SetCvarString("SKImport_2",SkinDEX[i][1]);
+		ACS_NamedExecuteAlways("ImportTo_DexSkinClient_B",0,i);
+		delay(1);
+    }
+
+}
+
+Script "ImportTo_DexSkinClient_B" (int EntrySpot) CLIENTSIDE
+{
+	SkinDEX[EntrySpot][0] = GetCvarString("SKImport_1");
+	SkinDEX[EntrySpot][1] = GetCvarString("SKImport_2");
+	log(s:SkinDEX[EntrySpot][0]);
+}
+*/
+//#endregion
+
+
+Script "ImportTo_DexSkinClient_A" ENTER NET
+{
+	int j;
+	for(int i = ENDDEX+1; i<MAXDEX; i++)
+    { 
+        //if(Strcmp("Base",SkinDEX[i][1])==0) 
+        //log(s:"Send ",s:SkinDEX[i][0]);
+        //SetNoSaveCvarString(StrParam(s:"SKI_",i:i,i:0),SkinDEX[i][0]);
+		//SetNoSaveCvarString(StrParam(s:"SKI_",i:i,i:1),SkinDEX[i][1]);
+
+		SetCvarString(StrParam(s:"SKI_",i:j,s:"_",i:0),SkinDEX[i][0]);
+		SetCvarString(StrParam(s:"SKI_",i:j,s:"_",i:1),SkinDEX[i][1]);
+		j++;
+		//ACS_NamedExecuteAlways("ImportTo_DexSkinClient_B",0,i);
+		//delay(1);
+    }
+	ACS_NamedExecuteAlways("ImportTo_DexSkinClient_B",0,i);
+}
+
+Script "ImportTo_DexSkinClient_B" (int EntrySpot) CLIENTSIDE
+{
+	int j;
+	for(int i = ENDDEX+1; i<MAXDEX; i++)
+    { 
+	SkinDEX[i][0] = GetCvarString(StrParam(s:"SKI_",i:j,s:"_",i:0));
+	SkinDEX[i][1] = GetCvarString(StrParam(s:"SKI_",i:j,s:"_",i:1));
+	//log(s:SkinDEX[i][0]);
+	j++;
+	}
+}
+
+
+function void ImportTo_DexSkin(str N0, str N1)
+{
+	//if(MAX_THINGS<MAXDEX) {
+		SkinDEX[MAX_THINGS][0] = N0;
+		SkinDEX[MAX_THINGS][1] = N1;
+		//MAX_THINGS++;
+	//} else {
+	//	printbold(s:"too many things, increase limit");
+	//}
+}
+
+
+Script "Import_DexBaseStats" (void) 
+{
+ImportTo_DexBaseStats(
+GetCvar("DexBaseStats_0"),
+GetCvar("DexBaseStats_1"),
+GetCvar("DexBaseStats_2"),
+GetCvar("DexBaseStats_3"),
+GetCvar("DexBaseStats_4"),
+GetCvar("DexBaseStats_5"),
+GetCvar("DexBaseStats_6"),
+GetCvar("DexBaseStats_7"),
+GetCvar("DexBaseStats_8"),
+GetCvar("DexBaseStats_9")
+);
+}
+
+function void ImportTo_DexBaseStats(int N0,int N1,int N2,int N3,int N4,int N5,int N6,int N7,int N8,int N9)
+{
+	//if(MAX_THINGS<MAXDEX) {
+		//log(s:"HP ",i:N0);
+		StatDEX[MAX_THINGS][0] = N0;
+		StatDEX[MAX_THINGS][1] = N1;
+		StatDEX[MAX_THINGS][2] = N2;
+		StatDEX[MAX_THINGS][3] = N3;
+		StatDEX[MAX_THINGS][4] = N4;
+		StatDEX[MAX_THINGS][5] = N5;
+		StatDEX[MAX_THINGS][6] = N6;
+		StatDEX[MAX_THINGS][7] = N7;
+		StatDEX[MAX_THINGS][8] = N8;
+        StatDEX[MAX_THINGS][9] = N9;
+		//MAX_THINGS++;
+	//} else {
+	//	printbold(s:"too many things, increase limit");
+	//}
+}
+
+Script "Import_DexMoveSet" (void) 
+{
+	//ImportTo_DexMoveSet(3);
+
+}
+
+function void ImportTo_DexMoveSet(void)
+{
+int MoveVal;
+	For(int l = 0;l<15;l++)
+	{
+		//log(s:"Row ",i:l);
+		For(int m = 0;m<4;m++)
+		{
+		MoveVal = GetCvar(StrParam(s:"DexMove_",i:l,s:"_",i:m));
+		MoveDex2[MAX_THINGS][l][m] = MoveVal;
+		//log(i:MoveDex2[MAX_THINGS][l][m]);
+
+		if (MoveVal == -1) break;
+		}
+	}
+
+}
+
+
+Script "Import_DexRentals" (void) 
+{
+ImportTo_DexRentals(
+GetCvar("DexRentals_0"),
+GetCvar("DexRentals_1"),
+GetCvar("DexRentals_2"),
+GetCvar("DexRentals_3"),
+GetCvar("DexRentals_4"),
+GetCvar("DexRentals_5"),
+GetCvar("DexRentals_6")
+);
+}
+
+function void ImportTo_DexRentals(int N0,int N1,int N2,int N3,int N4,int N5,int N6)
+{
+		RentalMoveDex[MAX_THINGS][0] = N0;
+		RentalMoveDex[MAX_THINGS][1] = N1;
+		RentalMoveDex[MAX_THINGS][2] = N2;
+		RentalMoveDex[MAX_THINGS][3] = N3;
+		RentalMoveDex[MAX_THINGS][4] = N4;
+		RentalMoveDex[MAX_THINGS][5] = N5;
+		RentalMoveDex[MAX_THINGS][6] = N6;
+}
+
+
+Script "Import_DexGATK" (void) 
+{
+ImportTo_DexGATK(
+GetCvar("DexGAtk_0"),
+);
+}
+
+function void ImportTo_DexGATK(int N0)
+{
+	GATK_Dex[MAX_THINGS] = N0;
+}
+
+//#endregion
+
+
+function void SetNoSaveCvarInt(str cvar, int value)
+{
+ConsoleCommand(StrParam(s:"set ",s:cvar,s:" ",i:value));
+}
+
+function void SetNoSaveCvarString(str cvar, str value)
+{
+ConsoleCommand(StrParam(s:"set ",s:cvar,s:" \"",s:value,s:"\""));
+}

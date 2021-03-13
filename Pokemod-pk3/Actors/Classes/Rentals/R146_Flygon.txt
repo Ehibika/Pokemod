@@ -15,11 +15,7 @@ Player.StartItem "PKMNRentalKit"
 //============|
 Player.StartItem "FlygonRentalSetupItem"
 //============|
-Player.StartItem "Base_HP", 80
-Player.StartItem "Base_PAttack", 100
-Player.StartItem "Base_PDefense", 80
-Player.StartItem "Base_SAttack", 80
-Player.StartItem "Base_SDefense", 80
+
 
 //============|
 
@@ -48,30 +44,7 @@ GoTo PainFrames
 }
 }
 
-actor FlygonRentalMoves : CustomInventory
-{
-inventory.amount 1
-Inventory.MaxAmount 100
-+AUTOACTIVATE
-States
-{
-Spawn:
-TNT1 A 0
-stop
-Pickup:
-TNT1 A 0 A_JumpIf(CallACS("RentalBotCheck") == 1,"BotWep")
 
-TNT1 A 0 A_GiveInventory("DragonPulseMove1")
-TNT1 A 0 A_GiveInventory("StoneEdgeMove2")
-TNT1 A 0 A_GiveInventory("FlyMove3")
-TNT1 A 0 A_GiveInventory("EarthPowerMove4")
-stop
-
-BotWep:
-TNT1 A 0 A_GiveInventory("DragonPulseMove1")
-stop
-}
-}
 
 actor FlygonRentalSetupItem : CustomInventory
 {

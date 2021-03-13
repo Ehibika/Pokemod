@@ -3,7 +3,7 @@ actor WildChargeMove : WepMasterBase
 Tag "WildCharge"
 obituary "$OB_WILDCHARGE"
 Weapon.AmmoUse 1
-Weapon.AmmoGive 10
+Weapon.AmmoGive 5
 weapon.ammotype "WildChargePP"
 scale 2.0
 Inventory.Pickupmessage "$PU_MEGABUSTER"
@@ -55,7 +55,7 @@ Fire.DashEnd:
 "####" B 0 A_ScaleVelocity(0.2)
 "####" B 0 A_GiveInventory("DashSetOff")
 "####" A 0 A_GiveInventory("DashSetOff")
-"####" B 1 A_GiveInventory("HalfRecovery_B")
+"####" B 1 A_GiveInventory("FullRecovery_B")
 "####" B 0 A_Jump(256,"Fire.End")
 Goto Fire.End
 
@@ -85,8 +85,8 @@ Goto Ready
 //[+]========================================================================[+]
 actor WildChargePP : Ammo {inventory.amount 1 inventory.Maxamount 10}
 
-actor WildChargeWarmupTimer : Powerup {inventory.amount 1 powerup.duration 5 }
-actor WildChargeTimer : Powerup {inventory.amount 1 powerup.duration 35 }
+actor WildChargeWarmupTimer : Powerup {inventory.amount 1 powerup.duration 10 }
+actor WildChargeTimer : Powerup {inventory.amount 1 powerup.duration 17 }
 
 
 Actor WildChargeDelay : powerprotection
@@ -95,16 +95,16 @@ Powerup.duration 5
 Damagefactor "WildCharge", 0
 }
 
-const int WLDCHR_Thrust = 30;
+const int WLDCHR_Thrust = 64;
 //[+]========================================================================[+]
 //--------------------------------|Projectiles |--------------------------------
 //[+]========================================================================[+]
 actor WildChargeBumper : BasicProjectile
 {
-Speed 30 
+Speed 64 
 Damage (0)
-radius 10
-height 20
+radius 6
+height 6
 DamageType "WildCharge"
 Obituary "$OB_WILDCHARGE"
 scale 1.5
@@ -211,10 +211,10 @@ TNT1 A 0 A_JumpIfInventory("CutterFlag",999,"Nope")
 TNT1 A 0 A_JumpIfInventory("DashBreaker",1,"Nope")
 TNT1 A 0 A_PlaySoundEx("weapon/Trample","SoundSlot5")
 TNT1 A 0 A_ChangeVelocity(cos(-pitch)*WLDCHR_Thrust,0,sin(-pitch)*WLDCHR_Thrust,CVF_RELATIVE|CVF_REPLACE)//cos(-pitch)* , sin(-pitch)*WLDCHR_Thrust
-TNT1 A 1 A_FireCustomMissile("WildChargeBumper",0,0,0,15,0,0)
+TNT1 A 1 A_FireCustomMissile("WildChargeBumper",0,0,0,15,0,CallACS("PitchClamp",Pitch,55))
 BASB A 1 A_SpawnitemEx("WildChargeWave",cos(-pitch)*30,0,(25),0,0,0,0,SXF_TRANSFERTRANSLATION) //+(sin(pitch)*30)
-BASB AAA 0 A_SpawnItemEx("MoveThunderBoltFX", 0, 0, 28, 256/24, 256/24, random2(256/24), random(0, 359))
-BASB AAA 0 A_SpawnItemEx("DragonBreathParticle2", 0, 0, 28, 256/24, 256/24, random2(256/24), random(0, 359))
+BASB AAA 0 A_SpawnItemEx("MoveThunderBoltFX", random2(32), random2(32), random2(32), 0, 0, 0, random(0, 359))
+BASB AAA 0 A_SpawnItemEx("DragonBreathParticle2", random2(32), random2(32), random2(32), 0, 0, 0, random(0, 359))
 stop
 Nope:
 TNT1 A 0

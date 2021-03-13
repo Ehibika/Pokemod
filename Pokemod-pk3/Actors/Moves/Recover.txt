@@ -3,7 +3,7 @@ actor RecoverMove : WepMasterBase
 Tag "Recover"
 obituary "$OB_SYNTHESIS"
 Weapon.AmmoUse 1
-Weapon.AmmoGive 20
+Weapon.AmmoGive 10
 weapon.ammotype "RecoverPP"
 scale 2.0
 Inventory.Pickupmessage "$PU_MEGABUSTER"
@@ -76,7 +76,7 @@ Goto Ready
 //[+]========================================================================[+]
 //-----------------------------|Ammo & Inventory|------------------------------
 //[+]========================================================================[+]
-actor RecoverPP : Ammo {inventory.amount 1 inventory.Maxamount 20}
+actor RecoverPP : Ammo {inventory.amount 1 inventory.Maxamount 10}
 
 actor RecoverCST : PowerupGiver
 {

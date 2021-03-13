@@ -4,7 +4,7 @@ actor BlockMove : WepMasterBase
 Tag "Block"
 obituary "$OB_BLOCK"
 Weapon.AmmoUse 1
-Weapon.AmmoGive 30
+Weapon.AmmoGive 10
 weapon.ammotype "BlockPP"
 scale 2.0
 Inventory.Pickupmessage "$PU_MEGABUSTER"
@@ -85,7 +85,7 @@ Goto Ready
 //[+]========================================================================[+]
 //-----------------------------|Ammo & Inventory|------------------------------
 //[+]========================================================================[+]
-actor BlockPP : Ammo {inventory.amount 1 inventory.Maxamount 30}
+actor BlockPP : Ammo {inventory.amount 1 inventory.Maxamount 10}
 
 actor BlockWarperFlag : Powerup
 {

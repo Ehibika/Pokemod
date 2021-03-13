@@ -12,11 +12,7 @@ Player.SoundClass "Megaman"
 Player.StartItem "BasicBuster"
 
 //============|
-Player.StartItem "Base_HP", 95
-Player.StartItem "Base_PAttack", 65
-Player.StartItem "Base_PDefense", 110
-Player.StartItem "Base_SAttack", 60
-Player.StartItem "Base_SDefense", 130
+
 
 //============|
 

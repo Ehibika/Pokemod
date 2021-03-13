@@ -12,11 +12,7 @@ Player.SoundClass "Shuckle"
 +NOSKIN
 player.startitem "PKMNStarterKit"
 //============|
-Player.StartItem "Base_HP", 20
-Player.StartItem "Base_PAttack", 10
-Player.StartItem "Base_PDefense", 230
-Player.StartItem "Base_SAttack", 10
-Player.StartItem "Base_SDefense", 230
+
 
 //============|
 
@@ -45,30 +41,7 @@ GoTo PainFrames
 }
 }
 
-actor ShuckleStarterMoves : CustomInventory
-{
-inventory.amount 1
-Inventory.MaxAmount 100
-+AUTOACTIVATE
-States
-{
-Spawn:
-TNT1 A 0
-stop
-Pickup:
-TNT1 A 0 A_JumpIfInventory("isbot",1,"BotWep")
 
-TNT1 A 0 A_GiveInventory("BugBiteMove1")
-TNT1 A 0 A_GiveInventory("AcidMove2")
-TNT1 A 0 A_GiveInventory("RockThrowMove3")
-TNT1 A 0 A_GiveInventory("RolloutMove4")
-stop
-
-BotWep:
-TNT1 A 0 A_GiveInventory("BugBiteMove1")
-stop
-}
-}
 
 actor ShuckleSetupItem : CustomInventory
 {

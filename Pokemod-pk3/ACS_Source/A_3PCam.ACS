@@ -31,7 +31,7 @@ Script "CameraSetup" ENTER CLIENTSIDE
 	&& !GetUserCvar(ConsolePlayerNumber(),"Sv_DisableStartupCamMenu")) 
 	{
 		ConsoleCommand("Openmenu CameraMenu");
-		log(s:"New Camera");
+		//log(s:"New Camera");
 		cam_Setup[PlayerNumber ()] = ON;
 	}
 }

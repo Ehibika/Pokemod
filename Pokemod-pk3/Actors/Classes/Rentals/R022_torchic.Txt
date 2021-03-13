@@ -14,11 +14,7 @@ Player.StartItem "PKMNRentalKit"
 //============|
 Player.StartItem "TorchicRentalSetupItem"
 //============|
-Player.StartItem "Base_HP", 45
-Player.StartItem "Base_PAttack", 60
-Player.StartItem "Base_PDefense", 40
-Player.StartItem "Base_SAttack", 70
-Player.StartItem "Base_SDefense", 50
+
 
 //============|
 
@@ -44,30 +40,7 @@ GoTo PainFrames
 }
 }
 
-actor TorchicRentalMoves : CustomInventory
-{
-inventory.amount 1
-Inventory.MaxAmount 100
-+AUTOACTIVATE
-States
-{
-Spawn:
-TNT1 A 0
-stop
-Pickup:
-TNT1 A 0 A_JumpIf(CallACS("RentalBotCheck") == 1,"BotWep")
 
-TNT1 A 0 A_GiveInventory("FlameBurstMove1")
-TNT1 A 0 A_GiveInventory("DrillPeckMove2")
-TNT1 A 0 A_GiveInventory("FireSpinMove3")
-TNT1 A 0 A_GiveInventory("GrowlMove4")
-stop
-
-BotWep:
-TNT1 A 0 A_GiveInventory("FlameBurstMove1")
-stop
-}
-}
 
  actor TorchicRentalSetupItem : CustomInventory
 {

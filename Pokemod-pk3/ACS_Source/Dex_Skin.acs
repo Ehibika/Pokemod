@@ -8,6 +8,7 @@
 #library "Dex_Skin"
 #import "Dex_Pokemon.acs"
 #include "zcommon.acs"
+
 str SkinDEX [MAXDEX][2] = {
     /*|0|*/{"Smeargle","Base"},
     

@@ -702,7 +702,8 @@ SetResultValue(Output);
 
 Script "GenericAttackPower" (int Rate)
 {
-    int PlayerLVL = GetCvar(StrParam(s:"PlayerLevel_",i:PlayerNumber()));
+    int OwnerTID = ACS_NamedExecuteWithResult("core_gettarget",0);
+    int PlayerLVL = GetCvar(StrParam(s:"PlayerLevel_",i:OwnerTID-1000));
     setResultValue(Rate*(PlayerLVL-1));
 
 }
@@ -974,4 +975,18 @@ SetUserVariable(0,"user_FlyStartZ",GetActorZ(0)>>16);
 Script "GetFlyTakeoffZ" (void)
 {
     SetResultValue(GetUserVariable(0,"user_FlyStartZ"));
+}
+
+Script "GetMoveRecoveryLVL" (int Pointer)
+{
+    if(Pointer!=0){SetActivator(0,Pointer);}
+
+    int output;
+    if(CheckInventory("Recovery_A")) output++;
+    if(CheckInventory("Recovery_B")) output++;
+    if(CheckInventory("Recovery_C")) output++;
+    if(CheckInventory("Recovery_D")) output++;
+    if(CheckInventory("ChannelingSpeed")) output++;
+    if(CheckInventory("ConShotTimer")) output++;
+    SetResultValue(Output);
 }

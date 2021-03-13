@@ -12,11 +12,7 @@ Player.SoundClass "Pichu"
 player.startitem "PKMNStarterKit"
 
 //============|
-Player.StartItem "Base_HP", 35
-Player.StartItem "Base_PAttack", 55
-Player.StartItem "Base_PDefense", 40
-Player.StartItem "Base_SAttack", 50
-Player.StartItem "Base_SDefense", 50
+
 
 //============|
 
@@ -45,30 +41,7 @@ GoTo PainFrames
 }
 }
 
-actor PichuStarterMoves : CustomInventory
-{
-inventory.amount 1
-Inventory.MaxAmount 100
-+AUTOACTIVATE
-States
-{
-Spawn:
-TNT1 A 0
-stop
-Pickup:
-TNT1 A 0 A_JumpIfInventory("isbot",1,"BotWep")
 
-TNT1 A 0 A_GiveInventory("ThunderShockMove1")
-TNT1 A 0 A_GiveInventory("QuickAttackMove2")
-TNT1 A 0 A_GiveInventory("CharmMove3")
-TNT1 A 0 A_GiveInventory("TailWhipMove4")
-stop
-
-BotWep:
-TNT1 A 0 A_GiveInventory("EmberMove1")
-stop
-}
-}
 
 actor PichuSetupItem : CustomInventory
 {

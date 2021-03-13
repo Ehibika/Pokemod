@@ -12,11 +12,7 @@ Player.SoundClass "Makuhita"
 +NOSKIN
 player.startitem "PKMNStarterKit"
 //============|
-Player.StartItem "Base_HP", 72
-Player.StartItem "Base_PAttack", 60
-Player.StartItem "Base_PDefense", 30
-Player.StartItem "Base_SAttack", 20
-Player.StartItem "Base_SDefense", 30
+
 
 //============|
 
@@ -45,30 +41,7 @@ GoTo PainFrames
 }
 }
 
-actor MakuhitaStarterMoves : CustomInventory
-{
-inventory.amount 1
-Inventory.MaxAmount 100
-+AUTOACTIVATE
-States
-{
-Spawn:
-TNT1 A 0
-stop
-Pickup:
-TNT1 A 0 A_JumpIfInventory("isbot",1,"BotWep")
 
-TNT1 A 0 A_GiveInventory("ArmThrustMove1")
-TNT1 A 0 A_GiveInventory("FakeoutMove2")
-TNT1 A 0 A_GiveInventory("BlockMove3")
-TNT1 A 0 A_GiveInventory("DetectMove4")
-stop
-
-BotWep:
-TNT1 A 0 A_GiveInventory("ArmThrustMove1")
-stop
-}
-}
 
 actor MakuhitaSetupItem : CustomInventory
 {

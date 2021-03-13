@@ -10,11 +10,7 @@ Player.DisplayName "Ditto"
 Player.SoundClass "Megaman"
 
 //============|
-Player.StartItem "Base_HP", 65
-Player.StartItem "Base_PAttack", 75
-Player.StartItem "Base_PDefense", 70
-Player.StartItem "Base_SAttack", 65
-Player.StartItem "Base_SDefense", 85
+
 
 //============|
 

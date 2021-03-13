@@ -14,11 +14,6 @@ Player.StartItem "PKMNRentalKit"
 //============|
 Player.StartItem "MonfernoRentalSetupItem"
 //============|
-Player.StartItem "Base_HP", 64
-Player.StartItem "Base_PAttack", 78
-Player.StartItem "Base_PDefense", 52 
-Player.StartItem "Base_SAttack", 78
-Player.StartItem "Base_SDefense", 52 
 
 //============|
 
@@ -44,30 +39,7 @@ GoTo PainFrames
 }
 }
 
-actor MonfernoRentalMoves : CustomInventory
-{
-inventory.amount 1
-Inventory.MaxAmount 100
-+AUTOACTIVATE
-States
-{
-Spawn:
-TNT1 A 0
-stop
-Pickup:
-TNT1 A 0 A_JumpIf(CallACS("RentalBotCheck") == 1,"BotWep")
 
-TNT1 A 0 A_GiveInventory("FlameThrowerMove1")
-TNT1 A 0 A_GiveInventory("VacuumWaveMove2")
-TNT1 A 0 A_GiveInventory("NastyPlotMove3")
-TNT1 A 0 A_GiveInventory("SmokeScreenMove4")
-stop
-
-BotWep:
-TNT1 A 0 A_GiveInventory("FlameThrowerMove1")
-stop
-}
-}
 
  actor MonfernoRentalSetupItem : CustomInventory
 {

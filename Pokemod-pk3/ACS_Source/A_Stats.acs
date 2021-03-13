@@ -18,7 +18,7 @@
 #include "zcommon.acs"
 
 
-Script "StatInitializer" (Void) 
+Script "StatInitializer" (int DexNum) 
 {
     Int PLevel = GetCVar(StrParam(s:"PlayerLevel_",i:PlayerNumber()));
         if(PLevel <= 0)
@@ -26,6 +26,7 @@ Script "StatInitializer" (Void)
                 PLevel = 1;
                 SetCVar(StrParam(s:"PlayerLevel_",i:PlayerNumber()),PLevel);
             }
+    ACS_NamedExecuteAlways("ChangeBaseStat",0,DexNum);   
     GetActiveStats(PLevel);
     ACS_NamedExecuteAlways("PokeSpeed_Handler",0,1);
     ACS_NamedExecuteAlways("ActiveStat_Handler",0,0,1);
@@ -399,8 +400,8 @@ int Output = 0.0;
 
 int SpeedTier = StatDEX[DexNum][BASE_SPD];
 
-//if(ModCount > 0 && SpeedTier < SUPERFAST_SPD){SpeedTier = SUPERFAST_SPD;}
-//if(ModCount < 0 && SpeedTier > SLOW_SPD){SpeedTier = SLOW_SPD;}
+if(ModCount > 0 && SpeedTier < SUPERFAST_SPD){SpeedTier = SUPERFAST_SPD;}
+if(ModCount < 0 && SpeedTier > SLOW_SPD){SpeedTier = SLOW_SPD;}
 
 SpeedTier += ModCount;
 

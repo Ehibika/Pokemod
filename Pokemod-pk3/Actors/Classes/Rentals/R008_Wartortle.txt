@@ -14,11 +14,6 @@ Player.StartItem "PKMNRentalKit"
 //============|
 Player.StartItem "WartortleRentalSetupItem"
 //============|
-Player.StartItem "Base_HP", 70
-Player.StartItem "Base_PAttack", 52
-Player.StartItem "Base_PDefense", 84 
-Player.StartItem "Base_SAttack", 65
-Player.StartItem "Base_SDefense", 84 
 
 //============|
 
@@ -44,30 +39,7 @@ GoTo PainFrames
 }
 }
 
-actor WartortleRentalMoves : CustomInventory
-{
-inventory.amount 1
-Inventory.MaxAmount 100
-+AUTOACTIVATE
-States
-{
-Spawn:
-TNT1 A 0
-stop
-Pickup:
-TNT1 A 0 A_JumpIf(CallACS("RentalBotCheck") == 1,"BotWep")
 
-TNT1 A 0 A_GiveInventory("ScaldMove1")
-TNT1 A 0 A_GiveInventory("FlashCannonMove2")
-TNT1 A 0 A_GiveInventory("IcyWindMove3")
-TNT1 A 0 A_GiveInventory("AmnesiaMove4")
-stop
-
-BotWep:
-TNT1 A 0 A_GiveInventory("ScaldMove1")
-stop
-}
-}
 
  actor WartortleRentalSetupItem : CustomInventory
 {

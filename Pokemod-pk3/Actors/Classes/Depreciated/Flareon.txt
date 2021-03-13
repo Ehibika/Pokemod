@@ -12,11 +12,7 @@ Player.SoundClass "Megaman"
 Player.StartItem "EmberMove"
 
 //============|
-Player.StartItem "Base_HP", 65
-Player.StartItem "Base_PAttack", 130
-Player.StartItem "Base_PDefense", 65
-Player.StartItem "Base_SAttack", 95
-Player.StartItem "Base_SDefense", 110
+
 
 //============|
 

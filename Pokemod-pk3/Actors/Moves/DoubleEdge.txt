@@ -3,7 +3,7 @@ actor DoubleEdgeMove : WepMasterBase
 Tag "DoubleEdge"
 obituary "$OB_DOUBLEEDGE"
 Weapon.AmmoUse 1
-Weapon.AmmoGive 10
+Weapon.AmmoGive 5
 weapon.ammotype "DoubleEdgePP"
 scale 2.0
 Inventory.Pickupmessage "$PU_MEGABUSTER"
@@ -51,7 +51,7 @@ goto Fire.DashEnd
 Fire.DashEnd:
 "####" B 0 A_ScaleVelocity(0.2)
 "####" B 0 A_GiveInventory("DashSetOff")
-"####" B 1 A_GiveInventory("HalfRecovery_B")
+"####" B 1 A_GiveInventory("FullRecovery_B")
 "####" B 0 A_Jump(256,"Fire.End")
 Goto Fire.End
 
@@ -82,10 +82,10 @@ Goto Ready
 //[+]========================================================================[+]
 //-----------------------------|Ammo & Inventory|------------------------------
 //[+]========================================================================[+]
-actor DoubleEdgePP : Ammo {inventory.amount 1 inventory.Maxamount 10}
+actor DoubleEdgePP : Ammo {inventory.amount 1 inventory.Maxamount 5}
 
-actor DoubleEdgeTimer : Powerup {inventory.amount 1 powerup.duration 35 }
-actor DoubleEdgeWarmupTimer : Powerup {inventory.amount 1 powerup.duration 5 }
+actor DoubleEdgeTimer : Powerup {inventory.amount 1 powerup.duration 17 }
+actor DoubleEdgeWarmupTimer : Powerup {inventory.amount 1 powerup.duration 10 }
 
 Actor DoubleEdgeDelay : powerprotection
 {
@@ -93,13 +93,13 @@ Powerup.duration 5
 Damagefactor "DoubleEdge", 0
 }
 
-const int DBLEDG_Thrust = 25;
+const int DBLEDG_Thrust = 64;
 //[+]========================================================================[+]
 //--------------------------------|Projectiles |--------------------------------
 //[+]========================================================================[+]
 actor DoubleEdgeBumper : BasicProjectile
 {
-Speed 25 
+Speed 64 
 Damage (0)
 radius 6
 height 6

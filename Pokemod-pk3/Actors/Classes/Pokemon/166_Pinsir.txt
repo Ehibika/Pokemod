@@ -12,11 +12,7 @@ Player.SoundClass "Pinsir"
 +NOSKIN
 player.startitem "PKMNStarterKit"
 //============|
-Player.StartItem "Base_HP", 65
-Player.StartItem "Base_PAttack", 125
-Player.StartItem "Base_PDefense", 100
-Player.StartItem "Base_SAttack", 55
-Player.StartItem "Base_SDefense", 70
+
 
 //============|
 
@@ -45,30 +41,7 @@ GoTo PainFrames
 }
 }
 
-actor PinsirStarterMoves : CustomInventory
-{
-inventory.amount 1
-Inventory.MaxAmount 100
-+AUTOACTIVATE
-States
-{
-Spawn:
-TNT1 A 0
-stop
-Pickup:
-TNT1 A 0 A_JumpIfInventory("isbot",1,"BotWep")
 
-TNT1 A 0 A_GiveInventory("BugBiteMove1")
-TNT1 A 0 A_GiveInventory("QuickAttackMove2")
-TNT1 A 0 A_GiveInventory("LeerMove3")
-TNT1 A 0 A_GiveInventory("DefenseCurlMove4")
-stop
-
-BotWep:
-TNT1 A 0 A_GiveInventory("BugBiteMove1")
-stop
-}
-}
 
 actor PinsirSetupItem : CustomInventory
 {

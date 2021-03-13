@@ -11,7 +11,8 @@
 //#region -=- General Variables & Constants
 #region -=- General Variables & Constants
 #LIBDEFINE NULLEVO -1
-#LIBDEFINE MAXDEX 200
+#LIBDEFINE MAXDEX 250
+#LIBDEFINE ENDDEX 186 //Last point where core data exists
 
 int Blah; //Needed to compile properly, can't have only LIBDEFINEs
 #endregion

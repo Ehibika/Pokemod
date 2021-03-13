@@ -12,11 +12,7 @@ Player.SoundClass "Abra"
 player.startitem "PKMNStarterKit"
 
 //============|
-Player.StartItem "Base_HP", 25
-Player.StartItem "Base_PAttack", 20
-Player.StartItem "Base_PDefense", 15
-Player.StartItem "Base_SAttack", 105
-Player.StartItem "Base_SDefense", 55
+
 
 //============|
 
@@ -45,30 +41,7 @@ GoTo PainFrames
 }
 }
 
-actor AbraStarterMoves : CustomInventory
-{
-inventory.amount 1
-Inventory.MaxAmount 100
-+AUTOACTIVATE
-States
-{
-Spawn:
-TNT1 A 0
-stop
-Pickup:
-TNT1 A 0 A_JumpIfInventory("isbot",1,"BotWep")
 
-TNT1 A 0 A_GiveInventory("PsywaveMove1")
-TNT1 A 0 A_GiveInventory("BarrierMove2")
-TNT1 A 0 A_GiveInventory("BiteMove3")
-TNT1 A 0 A_GiveInventory("TeleportMove4")
-stop
-
-BotWep:
-TNT1 A 0 A_GiveInventory("PsywaveMove1")
-stop
-}
-}
 
 actor AbraSetupItem : CustomInventory
 {

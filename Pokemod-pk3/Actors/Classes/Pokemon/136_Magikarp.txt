@@ -12,11 +12,7 @@ Player.SoundClass "Magikarp"
 +NOSKIN
 player.startitem "PKMNStarterKit"
 //============|
-Player.StartItem "Base_HP", 20
-Player.StartItem "Base_PAttack", 10
-Player.StartItem "Base_PDefense", 55
-Player.StartItem "Base_SAttack", 15
-Player.StartItem "Base_SDefense", 20
+
 
 //============|
 

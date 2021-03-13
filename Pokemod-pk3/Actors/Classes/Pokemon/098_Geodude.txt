@@ -12,11 +12,7 @@ Player.SoundClass "Geodude"
 player.startitem "PKMNStarterKit"
 
 //============|
-Player.StartItem "Base_HP", 60
-Player.StartItem "Base_PAttack", 80
-Player.StartItem "Base_PDefense", 100
-Player.StartItem "Base_SAttack", 30
-Player.StartItem "Base_SDefense", 50
+
 
 //============|
 
@@ -45,30 +41,7 @@ GoTo PainFrames
 }
 }
 
-actor GeodudeStarterMoves : CustomInventory
-{
-inventory.amount 1
-Inventory.MaxAmount 100
-+AUTOACTIVATE
-States
-{
-Spawn:
-TNT1 A 0
-stop
-Pickup:
-TNT1 A 0 A_JumpIfInventory("isbot",1,"BotWep")
 
-TNT1 A 0 A_GiveInventory("RockThrowMove1")
-TNT1 A 0 A_GiveInventory("DefenseCurlMove2")
-TNT1 A 0 A_GiveInventory("RolloutMove3")
-TNT1 A 0 A_GiveInventory("StealthRockMove4")
-stop
-
-BotWep:
-TNT1 A 0 A_GiveInventory("RockThrowMove1")
-stop
-}
-}
 
 actor GeodudeSetupItem : CustomInventory
 {

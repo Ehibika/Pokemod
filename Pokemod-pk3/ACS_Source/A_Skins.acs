@@ -13,6 +13,7 @@
 #import "DB_Player.acs"
 #include "zcommon.acs"
 
+#DEFINE THE_COOLDOWN 180
 //#region -=- depreciated -=-
 int YourTrueForm;
 /*
@@ -25,7 +26,7 @@ playerDisguise[p] = GetSkinNum(EnemyInfo[wep][1]);
 }
 */
 
-#DEFINE THE_COOLDOWN 180 //40
+ //40
 
 Script "Wait_PokeSkinHandler" (void)
 {
@@ -179,16 +180,19 @@ bool playerDisguised[S_MAX_PLAYERS];
 int playerDisguise[S_MAX_PLAYERS];
 int playerCurrentSkin[S_MAX_PLAYERS];
 
-#DEFINE KEYCONF_CLASSCOUNT 80 //18
-#DEFINE SKIN_OFFSET 133 + KEYCONF_CLASSCOUNT //128 // 
+//#DEFINE KEYCONF_CLASSCOUNT 80 
+#DEFINE SKIN_OFFSET 133 // + KEYCONF_CLASSCOUNT;  
+
+#DEFINE SKIN_START 213
 
 script "SetPokeSkin" (int Skin, int update) //CLIENTSIDE
 {
 //if(PlayerNumber()==ConsolePlayerNumber()) YourTrueForm = skin;
 
-if(SkinDEX[Skin][1] == "Base"){log(s:"Boop") ;Terminate;}
+if(SkinDEX[Skin][1] == "Base"){/*log(s:"Boop")*/ ;Terminate;}
 
 GiveInventory("SkinEnabler",1);
+//log(s:"setting disguise to ",s:SkinDEX[Skin][1]);
 ConsoleCommand(strParam(s:"set theDisguise ",s:SkinDEX[Skin][1]));
 ACS_NamedExecuteWithResult("SetDisguise",PlayerNumber());
 }
@@ -207,15 +211,27 @@ script "SetUnDisguise" (int p)
 	playerDisguised[p] = false;
 }
 
+Function int CountBaseClass(void)
+{
+int output;
+for(int i = 0; i<MAXDEX; i++)
+    { 
+        if(Strcmp("Base",SkinDEX[i][1])==0) output++;
+        //if(StrIcmp("",SkinDEX[i][1])==0) Break;
+    }
+    //log(s:"Number of Base Pokemon",i:output);
+return output;
+}
+
 function str GetSkinNum(str skinName) {
 	//for(int i = 0; i<MAXDEX; i++) if(skinName==SkinDEX[i]) return (i+SKIN_OFFSET);
-	for(int i = 0; i<MAXDEX; i++) if(StrIcmp(skinName,SkinDEX[i][1])==0) return (i+SKIN_OFFSET);
+	for(int i = 0; i<MAXDEX; i++) if(StrIcmp(skinName,SkinDEX[i][1])==0) return (i+SKIN_OFFSET+GetCvar("MaxClasses"));
 	return 0;
 }
 
 function str GetSkinName(int theSkin) {
 	if(theSkin == 0) return "Base";
-	theSkin -= SKIN_OFFSET;
+	theSkin -= SKIN_OFFSET+GetCvar("MaxClasses");
 	if(theSkin>-1&&theSkin<MAXDEX) return SkinDEX[theSkin][1];
 	return "unlisted";
 }
@@ -271,7 +287,7 @@ function str GetSkinName(int theSkin) {
 Script "Disguise_O" OPEN
 {
 if(GetCvar("sv_RentalsMode") == 1){Terminate;}
-
+SetCvar("MaxClasses",CountBaseClass());
 DisguiseFuncStart();
 while(true) {
 	DisguiseFunc();
@@ -281,12 +297,12 @@ while(true) {
 
 function void DisguiseFuncStart(void)
 {
-for(int i = 0; i<S_MAX_PLAYERS; i++) playerCooldown[i] = THE_COOLDOWN;
+for(int i = 0; i<PlayerCount(); i++) playerCooldown[i] = THE_COOLDOWN;
 }
 
 function void DisguiseFunc(void)
 {
-for(int i = 0; i<S_MAX_PLAYERS; i++) DisguiseFunc2(i);
+for(int i = 0; i<PlayerCount(); i++) DisguiseFunc2(i);
 }
 
 function void DisguiseFunc2(int i)
@@ -311,7 +327,8 @@ function void DisguiseFunc2c(int i)
 {
 int disguise = playerDisguise[i];
 if(disguise!=playerCurrentSkin[i]) {
-    //log(i:disguise,s:" ",i:playerCurrentSkin[i]);
+    log(s:"Current Skin is: ",i:playerCurrentSkin[i],s:" Goal Skin is: ",i:disguise);
+    SetCvar("MaxClasses",CountBaseClass());
 	ACS_NamedExecuteAlways("DisguisePlayer",0,disguise,i);
 	playerCooldown[i] = THE_COOLDOWN;
 }
@@ -358,11 +375,29 @@ while(true) {
 }
 }
 
-/*
-Script "CheckSkinContinuity" (DexNumber)
+
+Script "CheckSkinContinuity" (void)
 {
-    int currentSkin = GetUserCVar(i,"skin");
+    int currentSkin = GetUserCVar(playernumber(),"skin");
+
+    Log(s:"Skin Number",i:currentSkin);
 
 
 }
-*/
+
+script "ShowClientSkinlist" (void) CLIENTSIDE
+{
+
+    for(int i = 0; i<MAXDEX; i++)
+    { 
+        //if(Strcmp("Base",SkinDEX[i][1])==0) 
+        
+        if(StrIcmp("",SkinDEX[i][1])==0) Break;
+        Log(i:i,s:" : ",s:SkinDEX[i][1],s:" : ",i:i+SKIN_OFFSET+GetCvar("MaxClasses"));
+    }
+}
+
+script "SCKL" (void) CLIENTSIDE
+{
+ACS_NamedExecuteAlways("ShowClientSkinlist",0);
+}

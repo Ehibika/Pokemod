@@ -3,7 +3,7 @@ actor HydroPumpMove : WepMasterBase
 Tag "HydroPump"
 obituary "$OB_HYDROPUMP"
 Weapon.AmmoUse 1
-Weapon.AmmoGive 15
+Weapon.AmmoGive 20
 weapon.ammotype "HydroPumpPP"
 scale 2.0
 Inventory.Pickupmessage "$PU_MEGABUSTER"
@@ -148,7 +148,7 @@ Goto Ready
 //[+]========================================================================[+]
 //-----------------------------|Ammo & Inventory|------------------------------
 //[+]========================================================================[+]
-actor HydroPumpPP : Ammo {inventory.amount 1 inventory.Maxamount 15}
+actor HydroPumpPP : Ammo {inventory.amount 1 inventory.Maxamount 20}
 Actor HydroPumpBuffer : Powerup {inventory.amount 1 Powerup.duration 3}
 
 Actor DoubleHydroPump : Powerup{inventory.amount 1 powerup.duration 0x7FFFFFFF}

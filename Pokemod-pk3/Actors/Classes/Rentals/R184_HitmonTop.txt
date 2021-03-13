@@ -15,11 +15,7 @@ Player.StartItem "PKMNRentalKit"
 //============|
 Player.StartItem "HitmonTopRentalSetupItem"
 //============|
-Player.StartItem "Base_HP", 50
-Player.StartItem "Base_PAttack", 95
-Player.StartItem "Base_PDefense", 95
-Player.StartItem "Base_SAttack", 35
-Player.StartItem "Base_SDefense", 110
+
 
 //============|
 
@@ -48,30 +44,7 @@ GoTo PainFrames
 }
 }
 
-actor HitmonTopRentalMoves : CustomInventory
-{
-inventory.amount 1
-Inventory.MaxAmount 100
-+AUTOACTIVATE
-States
-{
-Spawn:
-TNT1 A 0
-stop
-Pickup:
-TNT1 A 0 A_JumpIf(CallACS("RentalBotCheck") == 1,"BotWep")
 
-TNT1 A 0 A_GiveInventory("TripleKickMove1")
-TNT1 A 0 A_GiveInventory("RapidSpinMove2")
-TNT1 A 0 A_GiveInventory("RevengeMove3")
-TNT1 A 0 A_GiveInventory("PursuitMove4")
-stop
-
-BotWep:
-TNT1 A 0 A_GiveInventory("DoubleKickMove1")
-stop
-}
-}
 
 actor HitmonTopRentalSetupItem : CustomInventory
 {

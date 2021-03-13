@@ -180,6 +180,9 @@ actor SAtk : Atk
 {
 //Physical Attacks go here
 damagefactor "Melee", 1.0
+damagefactor "Tackle", 1.0 
+damagefactor "Lash", 1.0 
+
 damagefactor "Bite", 1.0
 damagefactor "QuickAttack", 1.0
 damagefactor "VineWhip", 1.0

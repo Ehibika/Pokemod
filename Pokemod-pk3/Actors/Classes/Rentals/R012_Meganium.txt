@@ -14,11 +14,6 @@ Player.StartItem "PKMNRentalKit"
 //============|
 Player.StartItem "MeganiumRentalSetupItem"
 //============|
-Player.StartItem "Base_HP", 80
-Player.StartItem "Base_PAttack", 82
-Player.StartItem "Base_PDefense", 100 
-Player.StartItem "Base_SAttack", 83
-Player.StartItem "Base_SDefense", 100 
 
 //============|
 
@@ -44,30 +39,7 @@ GoTo PainFrames
 }
 }
 
-actor MeganiumRentalMoves : CustomInventory
-{
-inventory.amount 1
-Inventory.MaxAmount 100
-+AUTOACTIVATE
-States
-{
-Spawn:
-TNT1 A 0
-stop
-Pickup:
-TNT1 A 0 A_JumpIf(CallACS("RentalBotCheck") == 1,"BotWep")
 
-TNT1 A 0 A_GiveInventory("SeedBombMove1")
-TNT1 A 0 A_GiveInventory("LifeDewMove2")
-TNT1 A 0 A_GiveInventory("WideGuardMove3")
-TNT1 A 0 A_GiveInventory("EarthquakeMove4")
-stop
-
-BotWep:
-TNT1 A 0 A_GiveInventory("MagicalleafMove1")
-stop
-}
-}
 
  actor MeganiumRentalSetupItem : CustomInventory
 {

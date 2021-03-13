@@ -5,7 +5,7 @@ actor RollingKickMove : WepMasterBase
 Tag "RollingKick"
 obituary "$OB_RollingKick"
 Weapon.AmmoUse 1
-Weapon.AmmoGive 25
+Weapon.AmmoGive 10
 weapon.ammotype "RollingKickPP"
 scale 2.0
 Inventory.Pickupmessage "$PU_MEGABUSTER"
@@ -75,7 +75,7 @@ Goto Ready
 //[+]========================================================================[+]
 //-----------------------------|Ammo & Inventory|------------------------------
 //[+]========================================================================[+]
-actor RollingKickPP : Ammo {inventory.amount 1 inventory.Maxamount 25}
+actor RollingKickPP : Ammo {inventory.amount 1 inventory.Maxamount 10}
 
 actor RollingKickSwingTimer : PowerUp
 {

@@ -12,11 +12,6 @@ Player.SoundClass "Squirtle"
 player.startitem "PKMNStarterKit"
 
 //============|
-Player.StartItem "Base_HP", 44
-Player.StartItem "Base_PAttack", 48
-Player.StartItem "Base_PDefense", 65 
-Player.StartItem "Base_SAttack", 50
-Player.StartItem "Base_SDefense", 64 
 
 //============|
 
@@ -45,30 +40,7 @@ GoTo PainFrames
 }
 }
 
-actor SquirtleStarterMoves : CustomInventory
-{
-inventory.amount 1
-Inventory.MaxAmount 100
-+AUTOACTIVATE
-States
-{
-Spawn:
-TNT1 A 0
-stop
-Pickup:
-TNT1 A 0 A_JumpIfInventory("isbot",1,"BotWep")
 
-TNT1 A 0 A_GiveInventory("WaterGunMove1")
-TNT1 A 0 A_GiveInventory("BiteMove2")
-TNT1 A 0 A_GiveInventory("GrowlMove3")
-TNT1 A 0 A_GiveInventory("ProtectMove4")
-stop
-
-BotWep:
-TNT1 A 0 A_GiveInventory("WaterGunMove1")
-stop
-}
-}
 
 actor SquirtleSetupItem : CustomInventory
 {

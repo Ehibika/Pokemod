@@ -11,11 +11,6 @@ Player.SoundClass "Megaman"
 +NOSKIN
 player.startitem "PKMNStarterKit"
 //============|
-Player.StartItem "Base_HP", 80
-Player.StartItem "Base_PAttack", 60
-Player.StartItem "Base_PDefense", 80
-Player.StartItem "Base_SAttack", 60
-Player.StartItem "Base_SDefense", 95
 
 //============|
 
@@ -44,21 +39,6 @@ GoTo PainFrames
 }
 }
 
-actor SmeargleStarterMoves : CustomInventory
-{
-inventory.amount 1
-Inventory.MaxAmount 100
-+AUTOACTIVATE
-States
-{
-Spawn:
-TNT1 A 0
-stop
-Pickup:
-TNT1 A 0 A_GiveInventory("SketchMove1")
-stop
-}
-}
 
 actor SmeargleSetupItem : CustomInventory
 {

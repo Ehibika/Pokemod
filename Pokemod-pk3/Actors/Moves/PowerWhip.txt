@@ -5,7 +5,7 @@ actor PowerWhipMove : WepMasterBase
 Tag "PowerWhip"
 obituary "$OB_PowerWhip"
 Weapon.AmmoUse 1
-Weapon.AmmoGive 25
+Weapon.AmmoGive 10
 weapon.ammotype "PowerWhipPP"
 scale 2.0
 Inventory.Pickupmessage "$PU_MEGABUSTER"
@@ -73,7 +73,7 @@ Goto Ready
 //[+]========================================================================[+]
 //-----------------------------|Ammo & Inventory|------------------------------
 //[+]========================================================================[+]
-actor PowerWhipPP : Ammo {inventory.amount 1 inventory.Maxamount 25}
+actor PowerWhipPP : Ammo {inventory.amount 1 inventory.Maxamount 10}
 
 actor PowerWhipSwingTimer : PowerUp
 {

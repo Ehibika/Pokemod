@@ -12,11 +12,7 @@ Player.SoundClass "Horsea"
 player.startitem "PKMNStarterKit"
 
 //============|
-Player.StartItem "Base_HP", 30
-Player.StartItem "Base_PAttack", 40
-Player.StartItem "Base_PDefense", 70
-Player.StartItem "Base_SAttack", 70
-Player.StartItem "Base_SDefense", 25
+
 
 //============|
 
@@ -45,30 +41,7 @@ GoTo PainFrames
 }
 }
 
-actor HorseaStarterMoves : CustomInventory
-{
-inventory.amount 1
-Inventory.MaxAmount 100
-+AUTOACTIVATE
-States
-{
-Spawn:
-TNT1 A 0
-stop
-Pickup:
-TNT1 A 0 A_JumpIfInventory("isbot",1,"BotWep")
 
-TNT1 A 0 A_GiveInventory("BubbleMove1")
-TNT1 A 0 A_GiveInventory("LeerMove2")
-TNT1 A 0 A_GiveInventory("SmokescreenMove3")
-TNT1 A 0 A_GiveInventory("TwisterMove4")
-stop
-
-BotWep:
-TNT1 A 0 A_GiveInventory("BubbleMove1")
-stop
-}
-}
 
 actor HorseaSetupItem : CustomInventory
 {

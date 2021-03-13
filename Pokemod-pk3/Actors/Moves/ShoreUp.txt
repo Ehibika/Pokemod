@@ -3,7 +3,7 @@ actor ShoreUpMove : WepMasterBase
 Tag "ShoreUp"
 obituary "$OB_SYNTHESIS"
 Weapon.AmmoUse 1
-Weapon.AmmoGive 20
+Weapon.AmmoGive 10
 weapon.ammotype "ShoreUpPP"
 scale 2.0
 Inventory.Pickupmessage "$PU_MEGABUSTER"
@@ -76,7 +76,7 @@ Goto Ready
 //[+]========================================================================[+]
 //-----------------------------|Ammo & Inventory|------------------------------
 //[+]========================================================================[+]
-actor ShoreUpPP : Ammo {inventory.amount 1 inventory.Maxamount 20}
+actor ShoreUpPP : Ammo {inventory.amount 1 inventory.Maxamount 10}
 
 actor ShoreUpCST : PowerupGiver
 {

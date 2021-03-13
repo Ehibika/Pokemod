@@ -14,11 +14,6 @@ Player.StartItem "PKMNRentalKit"
 //============|
 Player.StartItem "TyphlosionRentalSetupItem"
 //============|
-Player.StartItem "Base_HP", 110
-Player.StartItem "Base_PAttack", 90
-Player.StartItem "Base_PDefense", 89 
-Player.StartItem "Base_SAttack", 90
-Player.StartItem "Base_SDefense", 85 
 
 //============|
 
@@ -44,30 +39,7 @@ GoTo PainFrames
 }
 }
 
-actor TyphlosionRentalMoves : CustomInventory
-{
-inventory.amount 1
-Inventory.MaxAmount 100
-+AUTOACTIVATE
-States
-{
-Spawn:
-TNT1 A 0
-stop
-Pickup:
-TNT1 A 0 A_JumpIf(CallACS("RentalBotCheck") == 1,"BotWep")
 
-TNT1 A 0 A_GiveInventory("FlameThrowerMove1")
-TNT1 A 0 A_GiveInventory("RockSlideMove2")
-TNT1 A 0 A_GiveInventory("EarthquakeMove3")
-TNT1 A 0 A_GiveInventory("RolloutMove4")
-stop
-
-BotWep:
-TNT1 A 0 A_GiveInventory("FlameBurstMove1")
-stop
-}
-}
 
  actor TyphlosionRentalSetupItem : CustomInventory
 {

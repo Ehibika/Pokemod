@@ -14,11 +14,7 @@ Player.StartItem "PKMNRentalKit"
 //============|
 Player.StartItem "MarshtompRentalSetupItem"
 //============|
-Player.StartItem "Base_HP", 70
-Player.StartItem "Base_PAttack", 80
-Player.StartItem "Base_PDefense", 70
-Player.StartItem "Base_SAttack", 60
-Player.StartItem "Base_SDefense", 70
+
 
 //============|
 
@@ -44,30 +40,7 @@ GoTo PainFrames
 }
 }
 
-actor MarshtompRentalMoves : CustomInventory
-{
-inventory.amount 1
-Inventory.MaxAmount 100
-+AUTOACTIVATE
-States
-{
-Spawn:
-TNT1 A 0
-stop
-Pickup:
-TNT1 A 0 A_JumpIf(CallACS("RentalBotCheck") == 1,"BotWep")
 
-TNT1 A 0 A_GiveInventory("HammerArmMove1")
-TNT1 A 0 A_GiveInventory("LiquidationMove2")
-TNT1 A 0 A_GiveInventory("EarthquakeMove3")
-TNT1 A 0 A_GiveInventory("CurseMove4")
-stop
-
-BotWep:
-TNT1 A 0 A_GiveInventory("HammerArmMove1")
-stop
-}
-}
 
  actor MarshtompRentalSetupItem : CustomInventory
 {

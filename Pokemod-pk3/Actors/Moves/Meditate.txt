@@ -67,7 +67,7 @@ Goto Ready
 //-----------------------------|Ammo & Inventory|------------------------------
 //[+]========================================================================[+]
 actor MeditatePP : Ammo {inventory.amount 1 inventory.Maxamount 10}
-actor STF_Meditate1 : PowerUp { inventory.amount 1 Powerup.Duration -7}
+actor STF_Meditate1 : PowerUp { inventory.amount 1 Powerup.Duration -5}
 actor STF_Meditate2 : STF_Meditate1 {}
 actor STF_Meditate3 : STF_Meditate1 {}
 

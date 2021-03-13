@@ -5,7 +5,7 @@ actor WideGuardMove : WepMasterBase
 {
 Tag "WideGuard"
 Weapon.AmmoUse 1
-Weapon.AmmoGive 30
+Weapon.AmmoGive 20
 weapon.ammotype "WideGuardPP"
 scale 2.0
 Inventory.Pickupmessage "$PU_MEGABUSTER"
@@ -92,7 +92,7 @@ Goto Ready
 //[+]========================================================================[+]
 //-----------------------------|Ammo & Inventory|------------------------------
 //[+]========================================================================[+]
-actor WideGuardPP : Ammo {inventory.amount 1 inventory.Maxamount 30}
+actor WideGuardPP : Ammo {inventory.amount 1 inventory.Maxamount 20}
 
 
 //[+]========================================================================[+]

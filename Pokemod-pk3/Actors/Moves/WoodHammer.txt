@@ -2,7 +2,7 @@ actor WoodHammerMove : WepMasterBase
 {
 Tag "WoodHammer"
 Weapon.AmmoUse 1
-Weapon.AmmoGive 20
+Weapon.AmmoGive 10
 weapon.ammotype "WoodHammerPP"
 scale 2.0
 Inventory.Pickupmessage "$PU_MEGABUSTER"
@@ -73,7 +73,7 @@ Goto Ready
 //[+]========================================================================[+]
 //-----------------------------|Ammo & Inventory|------------------------------
 //[+]========================================================================[+]
-actor WoodHammerPP : Ammo {inventory.amount 1 inventory.Maxamount 20}
+actor WoodHammerPP : Ammo {inventory.amount 1 inventory.Maxamount 10}
 
 
 Const int WoodHammrRad = 125;

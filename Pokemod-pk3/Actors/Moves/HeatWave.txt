@@ -3,7 +3,7 @@ actor HeatWaveMove : WepMasterBase
 Tag "HeatWave"
 obituary "$OB_HeatWave"
 Weapon.AmmoUse 1
-Weapon.AmmoGive 15
+Weapon.AmmoGive 10
 weapon.ammotype "HeatWavePP"
 scale 2.0
 Inventory.Pickupmessage "$PU_MEGABUSTER"
@@ -71,7 +71,7 @@ Goto Ready
 //[+]========================================================================[+]
 //-----------------------------|Ammo & Inventory|------------------------------
 //[+]========================================================================[+]
-actor HeatWavePP : Ammo {inventory.amount 1 inventory.Maxamount 15}
+actor HeatWavePP : Ammo {inventory.amount 1 inventory.Maxamount 10}
 
 Actor HeatWaveProtect : powerprotection
 {

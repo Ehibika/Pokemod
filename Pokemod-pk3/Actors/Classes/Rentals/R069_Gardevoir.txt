@@ -15,11 +15,7 @@ Player.StartItem "PKMNRentalKit"
 //============|
 Player.StartItem "GardevoirRentalSetupItem"
 //============|
-Player.StartItem "Base_HP", 68
-Player.StartItem "Base_PAttack", 65
-Player.StartItem "Base_PDefense", 65
-Player.StartItem "Base_SAttack", 125
-Player.StartItem "Base_SDefense", 115
+
 
 //============|
 
@@ -48,30 +44,7 @@ GoTo PainFrames
 }
 }
 
-actor GardevoirRentalMoves : CustomInventory
-{
-inventory.amount 1
-Inventory.MaxAmount 100
-+AUTOACTIVATE
-States
-{
-Spawn:
-TNT1 A 0
-stop
-Pickup:
-TNT1 A 0 A_JumpIf(CallACS("RentalBotCheck") == 1,"BotWep")
 
-TNT1 A 0 A_GiveInventory("MoonBlastMove1")
-TNT1 A 0 A_GiveInventory("PsychicMove2")
-TNT1 A 0 A_GiveInventory("MoonlightMove3")
-TNT1 A 0 A_GiveInventory("SafeguardMove4")
-stop
-
-BotWep:
-TNT1 A 0 A_GiveInventory("MoonBlastMove1")
-stop
-}
-}
 
 actor GardevoirRentalSetupItem : CustomInventory
 {

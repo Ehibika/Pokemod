@@ -12,11 +12,7 @@ Player.SoundClass "Wimpod"
 +NOSKIN
 player.startitem "PKMNStarterKit"
 //============|
-Player.StartItem "Base_HP", 25
-Player.StartItem "Base_PAttack", 35
-Player.StartItem "Base_PDefense", 40
-Player.StartItem "Base_SAttack", 20
-Player.StartItem "Base_SDefense", 30
+
 
 //============|
 
@@ -45,30 +41,7 @@ GoTo PainFrames
 }
 }
 
-actor WimpodStarterMoves : CustomInventory
-{
-inventory.amount 1
-Inventory.MaxAmount 100
-+AUTOACTIVATE
-States
-{
-Spawn:
-TNT1 A 0
-stop
-Pickup:
-TNT1 A 0 A_JumpIfInventory("isbot",1,"BotWep")
 
-TNT1 A 0 A_GiveInventory("BugBiteMove1")
-TNT1 A 0 A_GiveInventory("AquaJetMove2")
-TNT1 A 0 A_GiveInventory("DefenseCurlMove3")
-TNT1 A 0 A_GiveInventory("SpikesMove4")
-stop
-
-BotWep:
-TNT1 A 0 A_GiveInventory("BugBiteMove1")
-stop
-}
-}
 
 actor WimpodSetupItem : CustomInventory
 {

@@ -3,7 +3,7 @@ actor IcyWindMove : WepMasterBase
 Tag "IcyWind"
 obituary "$OB_IcyWind"
 Weapon.AmmoUse 1
-Weapon.AmmoGive 15
+Weapon.AmmoGive 10
 weapon.ammotype "IcyWindPP"
 scale 2.0
 Inventory.Pickupmessage "$PU_MEGABUSTER"
@@ -70,7 +70,7 @@ Goto Ready
 //[+]========================================================================[+]
 //-----------------------------|Ammo & Inventory|------------------------------
 //[+]========================================================================[+]
-actor IcyWindPP : Ammo {inventory.amount 1 inventory.Maxamount 15}
+actor IcyWindPP : Ammo {inventory.amount 1 inventory.Maxamount 10}
 
 actor STF_IcyWind : BaseSTatusFlag {}
 

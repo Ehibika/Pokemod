@@ -3,7 +3,7 @@ actor OverheatMove : WepMasterBase
 Tag "Overheat"
 obituary "$OB_OVERHEAT"
 Weapon.AmmoUse 1
-Weapon.AmmoGive 20
+Weapon.AmmoGive 1
 weapon.ammotype "OverheatPP"
 scale 2.0
 Inventory.Pickupmessage "$PU_MEGABUSTER"
@@ -110,7 +110,7 @@ powerup.type "HazeFlag"
 //[+]========================================================================[+]
 //-----------------------------|Ammo & Inventory|------------------------------
 //[+]========================================================================[+]
-actor OverheatPP : Ammo {inventory.amount 1 inventory.Maxamount 5}
+actor OverheatPP : Ammo {inventory.amount 1 inventory.Maxamount 1}
 
 Actor OverheatProtect : powerprotection
 {

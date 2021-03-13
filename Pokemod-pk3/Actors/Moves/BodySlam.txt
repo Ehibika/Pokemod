@@ -6,7 +6,7 @@ actor BodySlamMove : WepMasterBase
 {
 Tag "BodySlam"
 Weapon.AmmoUse 1
-Weapon.AmmoGive 15
+Weapon.AmmoGive 5
 weapon.ammotype "BodySlamPP"
 scale 2.0
 Inventory.Pickupmessage "$PU_MEGABUSTER"
@@ -80,7 +80,7 @@ Goto Ready
 //[+]========================================================================[+]
 //-----------------------------|Ammo & Inventory|------------------------------
 //[+]========================================================================[+]
-actor BodySlamPP : Ammo {inventory.amount 1 inventory.Maxamount 15}
+actor BodySlamPP : Ammo {inventory.amount 1 inventory.Maxamount 5}
 
 //[+]========================================================================[+]
 //--------------------------------|Projectiles |--------------------------------

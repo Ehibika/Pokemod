@@ -1039,7 +1039,7 @@ while(GetActorProperty(0,APROP_HEALTH) > 0) {
 		{
 		ClearStatIcon(800+(10*k));
 		StatVal = GetStatMod(0,k);
-		if(StatVal){DrawStatIcon(800+(10*j),j,k,StatVal,20.0,165.0); j++;}
+		if(StatVal){DrawStatIcon(800+(10*j),j,k,StatVal,20.0,155.0); j++;}
 		}
 
 		//Turn OFF if set to OFF

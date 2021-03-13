@@ -12,11 +12,7 @@ Player.SoundClass "Solosis"
 player.startitem "PKMNStarterKit"
 
 //============|
-Player.StartItem "Base_HP", 45
-Player.StartItem "Base_PAttack", 30
-Player.StartItem "Base_PDefense", 40
-Player.StartItem "Base_SAttack", 105
-Player.StartItem "Base_SDefense", 50
+
 
 //============|
 
@@ -45,30 +41,7 @@ GoTo PainFrames
 }
 }
 
-actor SolosisStarterMoves : CustomInventory
-{
-inventory.amount 1
-Inventory.MaxAmount 100
-+AUTOACTIVATE
-States
-{
-Spawn:
-TNT1 A 0
-stop
-Pickup:
-TNT1 A 0 A_JumpIfInventory("isbot",1,"BotWep")
 
-TNT1 A 0 A_GiveInventory("PsywaveMove1")
-TNT1 A 0 A_GiveInventory("ProtectMove2")
-TNT1 A 0 A_GiveInventory("CharmMove3")
-TNT1 A 0 A_GiveInventory("RecoverMove4")
-stop
-
-BotWep:
-TNT1 A 0 A_GiveInventory("PsywaveMove1")
-stop
-}
-}
 
 actor SolosisSetupItem : CustomInventory
 {

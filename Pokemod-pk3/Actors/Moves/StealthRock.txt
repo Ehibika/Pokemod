@@ -5,7 +5,7 @@ actor StealthRockMove : WepMasterBase
 Tag "StealthRock"
 obituary "$OB_STEALTHROCK"
 Weapon.AmmoUse 1
-Weapon.AmmoGive 20
+Weapon.AmmoGive 5
 weapon.ammotype "StealthRockPP"
 scale 2.0
 Inventory.Pickupmessage "$PU_MEGABUSTER"
@@ -74,7 +74,7 @@ Goto Ready
 //[+]========================================================================[+]
 //-----------------------------|Ammo & Inventory|------------------------------
 //[+]========================================================================[+]
-actor StealthRockPP : Ammo {inventory.amount 1 inventory.Maxamount 20}
+actor StealthRockPP : Ammo {inventory.amount 1 inventory.Maxamount 5}
 
 
 //[+]========================================================================[+]

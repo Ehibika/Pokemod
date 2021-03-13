@@ -3,7 +3,7 @@ actor ZenheadbuttMove : WepMasterBase
 Tag "Zenheadbutt"
 obituary "$OB_ZENHEADBUTT"
 Weapon.AmmoUse 1
-Weapon.AmmoGive 30
+Weapon.AmmoGive 10
 weapon.ammotype "ZenheadbuttPP"
 scale 2.0
 Inventory.Pickupmessage "$PU_MEGABUSTER"
@@ -72,7 +72,7 @@ Goto Ready
 //[+]========================================================================[+]
 //-----------------------------|Ammo & Inventory|------------------------------
 //[+]========================================================================[+]
-actor ZenheadbuttPP : Ammo {inventory.amount 1 inventory.Maxamount 30}
+actor ZenheadbuttPP : Ammo {inventory.amount 1 inventory.Maxamount 10}
 
 actor ZenheadbuttTimer : Powerup {inventory.amount 1 powerup.duration 10 }
 

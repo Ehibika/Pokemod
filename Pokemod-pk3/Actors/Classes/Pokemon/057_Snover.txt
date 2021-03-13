@@ -12,11 +12,7 @@ Player.SoundClass "Snover"
 player.startitem "PKMNStarterKit"
 
 //============|
-Player.StartItem "Base_HP", 60
-Player.StartItem "Base_PAttack", 62
-Player.StartItem "Base_PDefense", 50
-Player.StartItem "Base_SAttack", 62
-Player.StartItem "Base_SDefense", 60
+
 
 //============|
 
@@ -45,30 +41,7 @@ GoTo PainFrames
 }
 }
 
-actor SnoverStarterMoves : CustomInventory
-{
-inventory.amount 1
-Inventory.MaxAmount 100
-+AUTOACTIVATE
-States
-{
-Spawn:
-TNT1 A 0
-stop
-Pickup:
-TNT1 A 0 A_JumpIfInventory("isbot",1,"BotWep")
 
-TNT1 A 0 A_GiveInventory("PowderSnowMove1")
-TNT1 A 0 A_GiveInventory("LeafageMove2")
-TNT1 A 0 A_GiveInventory("LeerMove3")
-TNT1 A 0 A_GiveInventory("GrowthMove4")
-stop
-
-BotWep:
-TNT1 A 0 A_GiveInventory("PowderSnowMove1")
-stop
-}
-}
 
 actor SnoverSetupItem : CustomInventory
 {

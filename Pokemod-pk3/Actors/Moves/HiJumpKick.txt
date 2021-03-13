@@ -5,7 +5,7 @@ actor HiJumpKickMove : WepMasterBase
 Tag "HiJumpKick"
 obituary "$OB_HiJumpKick"
 Weapon.AmmoUse 1
-Weapon.AmmoGive 10
+Weapon.AmmoGive 5
 weapon.ammotype "HiJumpKickPP"
 scale 2.0
 Inventory.Pickupmessage "$PU_MEGABUSTER"
@@ -97,7 +97,7 @@ Goto Ready
 //[+]========================================================================[+]
 //-----------------------------|Ammo & Inventory|------------------------------
 //[+]========================================================================[+]
-actor HiJumpKickPP : Ammo {inventory.amount 1 inventory.Maxamount 10}
+actor HiJumpKickPP : Ammo {inventory.amount 1 inventory.Maxamount 5}
 
 actor HiJumpKickTimer : Powerup {inventory.amount 1 powerup.duration -3 }
 actor HiJumpKickWarmupTimer : Powerup {inventory.amount 1 powerup.duration 5 }

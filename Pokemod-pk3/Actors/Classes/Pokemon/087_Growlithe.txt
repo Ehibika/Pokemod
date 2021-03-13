@@ -12,11 +12,7 @@ Player.SoundClass "Growlithe"
 player.startitem "PKMNStarterKit"
 
 //============|
-Player.StartItem "Base_HP", 50
-Player.StartItem "Base_PAttack", 70
-Player.StartItem "Base_PDefense", 45
-Player.StartItem "Base_SAttack", 70
-Player.StartItem "Base_SDefense", 50
+
 
 //============|
 
@@ -45,30 +41,7 @@ GoTo PainFrames
 }
 }
 
-actor GrowlitheStarterMoves : CustomInventory
-{
-inventory.amount 1
-Inventory.MaxAmount 100
-+AUTOACTIVATE
-States
-{
-Spawn:
-TNT1 A 0
-stop
-Pickup:
-TNT1 A 0 A_JumpIfInventory("isbot",1,"BotWep")
 
-TNT1 A 0 A_GiveInventory("BiteMove1")
-TNT1 A 0 A_GiveInventory("EmberMove2")
-TNT1 A 0 A_GiveInventory("LeerMove3")
-TNT1 A 0 A_GiveInventory("HelpingHandMove4")
-stop
-
-BotWep:
-TNT1 A 0 A_GiveInventory("BiteMove1")
-stop
-}
-}
 
 actor GrowlitheSetupItem : CustomInventory
 {

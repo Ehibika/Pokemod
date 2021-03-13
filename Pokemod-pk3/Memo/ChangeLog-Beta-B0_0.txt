@@ -1,0 +1,187 @@
+//#region -=-=- Beta B0.0 -=-=-
+/*
+ *
+ * Added support for addon files that can introduce new pokemon classes
+ * 
+ * Updated system for defining rental pokemon
+ * 
+ * made core changes to the way player class data is distributed
+ *
+ * ===|Gameplay Changes|===
+ * 
+ * PP recovery rates are now on a move by move basic, indicated by the color of the PP recovery bar.
+ * green bar moves have standard PP recovery, restoring 30% of PP per natural recovery
+ * Orange bar moves have half PP recovery, restoring 50% of PP per natural recovery
+ * Blue bar moves have full PP recovery, restoring 100% of PP per natural recovery
+ * 
+ * refined the PP slowdown mechanics when under move recovery
+ * 
+ * Restored the speed tier rounding at the first speed increase/drop
+ * 
+ * Fixed discrepancies with the fighting type, no longer resists poison, and now properly resists rock
+ * 
+ * Fixed the free TM exploit
+ * 
+ * ===|Pokemon Changes|===
+ * 
+ * [Pokemon with minor moveset changes]
+ * Mareep Family
+ * Trapinch Family
+ * Tyrogue Family
+ * 
+ * [Pokemon with Major Moveset Changes]
+ * Croagunk Family
+ * Gulpin Family
+ * Magnemite Family
+ * Joltik Family
+ * Dratini Family
+ * Bagon Family
+ * 
+ * ===|Move Changes|===
+ * 
+ * [StealthRock/Spikes/ToxicSpikes]
+ * PP reduced from 20 > 5 (has full PP recovery)
+ * 
+ * [Blizzard/DracoMeteor]
+ * PP reduced from 5 > 1 (has full PP recovery)
+ * 
+ * [Overheat]
+ * PP reduced from 5 > 1 (has full PP recovery)
+ * 
+ * [GigaDrain]
+ * PP increased from 5 > 10 (has Half PP recovery)
+ * Damage increased
+ * 
+ * [Earthquake]
+ * PP reduced from 10 > 5 (has half PP recovery)
+ * 
+ * [woodhammer]
+ * PP reduced from 20 > 10 (has half PP recovery)
+ * 
+ * [Recover/ShoreUp]
+ * PP reduced from 20 > 10 (has half PP recovery)
+ * 
+ * [Fly]
+ * PP increased from 25 > 30 (has Half PP recovery)
+ * 
+ * [Thunderbolt/Flamethrower/ShadowBall/HydroPump/BubbleBeam]
+ * PP increased from 15 > 20 (has Half PP recovery)
+ * 
+ * [AuroraBeam]
+ * PP reduced from 25 > 20 (has half PP recovery)
+ * 
+ * [IcyWind/HeatWave/DarkPulse]
+ * PP reduced from 15 > 10 (has half PP recovery)
+ * 
+ * [Headbutt/ZenHeadbutt/IronHead/Spark]
+ * PP reduced from 30 > 10 (has half PP recovery)
+ * 
+ * [Spark]
+ * Power increased
+ * 
+ * [FlareBlitz/WildCharge/DoubleEdge]
+ * Dash Speed increased
+ * Dash time reduced
+ * Recovery Time increased
+ * 
+ * [WildCharge/DoubleEdge]
+ * PP reduced from 10 > 5 (has half PP recovery)
+ * Warmup time increased slightly
+ * 
+ * [BodySlam/Liquidation]
+ * PP reduced from 15 > 5 (has half PP recovery)
+ * 
+ * [HiJumpKick]
+ * PP reduced from 10 > 5 (has half PP recovery)
+ * 
+ * [FireSpin]
+ * PP reduced from 10 > 5 (has full PP recovery)
+ * 
+ * [DragonRush]
+ * Reworked to function like a bodycheck move similar to bodyslam
+ * can now proc cringe
+ * PP reduced from 10 > 5 (has half PP recovery)
+ * Power increased
+ * 
+ * [DragonPulse]
+ * has been reworked visually
+ * fire rate increased
+ * damage increased
+ * 
+ * [BulletSeed/SpikeCannon/Pinmissile/IcicleSpear/RockBlast]
+ * Greatly increased operation speed.
+ * can now build more stacks during firing
+ * can cancel out of firing state with altfire
+ * adjusted firing and projectile speeds
+ * 
+ * [rockblast/icicleSpear]
+ * PP reduced from 30 > 20 (has full PP recovery)
+ * 
+ * [AquaTail/IronTail/PowerWhip/Slam/RollingKick]
+ * PP reduced from 25 > 10 (has half PP recovery)
+ * 
+ * [PowerGem]
+ * PP reduced from 20 > 5 (has full PP recovery)
+ * 
+ * [Block]
+ * PP reduced from 30 > 10 (has half PP recovery)
+ * 
+ * [WideGuard]
+ * PP reduced from 30 > 20 (has half PP recovery)
+ * 
+ * [Surf]
+ * PP reduced from 10 > 5 (has full PP recovery)
+ * 
+ * [DragonClaw]
+ * Damage increased
+ * 
+ * [Rage]
+ * Reworked, now instead of boosting attack, it reduces the recovery for Generic Attacks.
+ * 
+ * [Meditate]
+ * Attack boost duration decreased from 7 seconds > 5 seconds
+ * 
+ * [PsyBeam]
+ * Can now Proc Confusion
+ * 
+ * [Confusion]
+ * Confusion Proc rate reduced
+ * 
+ * ===|TM Changes|===
+ * 
+ * [TM Removals]
+ *  Meditate
+ *  DragonDance
+ *  RockPolish
+ *  MagicalLeaf
+ *  Swift
+ *  DragonRage
+ *  FlameBurst
+ *  WaterPulse
+ *  DrainingKiss
+ * 
+ * 
+ * [TM Additions]
+ * SwordDance
+ * NastyPlot
+ * Agility
+ * SmokeScreen
+ * FutureSight
+ * MoonBlast
+ * Block
+ * Disable
+ * Pluck
+ * whirlpool
+ * dive
+ * sandtomb
+ * infestation
+ * Megadrain
+ * DrainPunch
+ * MetalClaw
+ * CrushClaw
+ * DragonClaw
+ * FlareBlitz
+ * WildCharge
+ * AcidSpray
+ * BrickBreak
+ * MeteorMash

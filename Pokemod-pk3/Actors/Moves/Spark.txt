@@ -3,7 +3,7 @@ actor SparkMove : WepMasterBase
 Tag "Spark"
 obituary "$OB_SPARK"
 Weapon.AmmoUse 1
-Weapon.AmmoGive 30
+Weapon.AmmoGive 10
 weapon.ammotype "SparkPP"
 scale 2.0
 Inventory.Pickupmessage "$PU_MEGABUSTER"
@@ -72,7 +72,7 @@ Goto Ready
 //[+]========================================================================[+]
 //-----------------------------|Ammo & Inventory|------------------------------
 //[+]========================================================================[+]
-actor SparkPP : Ammo {inventory.amount 1 inventory.Maxamount 30}
+actor SparkPP : Ammo {inventory.amount 1 inventory.Maxamount 10}
 
 actor SparkTimer : Powerup {inventory.amount 1 powerup.duration 10 }
 

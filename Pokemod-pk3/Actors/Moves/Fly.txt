@@ -5,7 +5,7 @@ actor FlyMove : WepMasterBase
 Tag "Fly"
 obituary "$OB_FLY"
 Weapon.AmmoUse 1
-Weapon.AmmoGive 25
+Weapon.AmmoGive 30
 weapon.ammotype "FlyPP"
 scale 2.0
 Inventory.Pickupmessage "$PU_MEGABUSTER"
@@ -101,7 +101,7 @@ Goto Ready
 //[+]========================================================================[+]
 //-----------------------------|Ammo & Inventory|------------------------------
 //[+]========================================================================[+]
-actor FlyPP : Ammo {inventory.amount 1 inventory.Maxamount 25}
+actor FlyPP : Ammo {inventory.amount 1 inventory.Maxamount 30}
 actor Fly_Active : Inventory {inventory.amount 1 inventory.Maxamount 1}
 actor FlyPPTimer : Powerup {inventory.amount 1 Powerup.Duration 35}
 

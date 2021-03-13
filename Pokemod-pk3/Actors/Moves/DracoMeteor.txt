@@ -2,7 +2,7 @@ actor DracoMeteorMove : WepMasterBase
 {
 Tag "DracoMeteor"
 Weapon.AmmoUse 1
-Weapon.AmmoGive 5
+Weapon.AmmoGive 1
 weapon.ammotype "DracoMeteorPP"
 scale 2.0
 Inventory.Pickupmessage "$PU_MEGABUSTER"
@@ -71,7 +71,7 @@ Goto Ready
 //[+]========================================================================[+]
 //-----------------------------|Ammo & Inventory|------------------------------
 //[+]========================================================================[+]
-actor DracoMeteorPP : Ammo {inventory.amount 1 inventory.Maxamount 5}
+actor DracoMeteorPP : Ammo {inventory.amount 1 inventory.Maxamount 1}
 
 actor DracoMeteorRCFlag : Powerup {inventory.amount 1 powerup.duration 35 }
 

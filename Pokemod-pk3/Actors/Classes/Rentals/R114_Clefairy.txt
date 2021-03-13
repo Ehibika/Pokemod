@@ -15,11 +15,7 @@ Player.StartItem "PKMNRentalKit"
 //============|
 Player.StartItem "ClefairyRentalSetupItem"
 //============|
-Player.StartItem "Base_HP", 70
-Player.StartItem "Base_PAttack", 45
-Player.StartItem "Base_PDefense", 48
-Player.StartItem "Base_SAttack", 60
-Player.StartItem "Base_SDefense", 65
+
 
 //============|
 
@@ -48,30 +44,7 @@ GoTo PainFrames
 }
 }
 
-actor ClefairyRentalMoves : CustomInventory
-{
-inventory.amount 1
-Inventory.MaxAmount 100
-+AUTOACTIVATE
-States
-{
-Spawn:
-TNT1 A 0
-stop
-Pickup:
-TNT1 A 0 A_JumpIf(CallACS("RentalBotCheck") == 1,"BotWep")
 
-TNT1 A 0 A_GiveInventory("DazzlingGleamMove1")
-TNT1 A 0 A_GiveInventory("MoonlightMove2")
-TNT1 A 0 A_GiveInventory("ThunderBoltMove3")
-TNT1 A 0 A_GiveInventory("SubstituteMove4")
-stop
-
-BotWep:
-TNT1 A 0 A_GiveInventory("DazzlingGleamMove1")
-stop
-}
-}
 
 actor ClefairyRentalSetupItem : CustomInventory
 {

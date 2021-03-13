@@ -12,11 +12,7 @@ Player.SoundClass "Trapinch"
 +NOSKIN
 player.startitem "PKMNStarterKit"
 //============|
-Player.StartItem "Base_HP", 45
-Player.StartItem "Base_PAttack", 100
-Player.StartItem "Base_PDefense", 45
-Player.StartItem "Base_SAttack", 45
-Player.StartItem "Base_SDefense", 45
+
 
 //============|
 
@@ -45,30 +41,7 @@ GoTo PainFrames
 }
 }
 
-actor TrapinchStarterMoves : CustomInventory
-{
-inventory.amount 1
-Inventory.MaxAmount 100
-+AUTOACTIVATE
-States
-{
-Spawn:
-TNT1 A 0
-stop
-Pickup:
-TNT1 A 0 A_JumpIfInventory("isbot",1,"BotWep")
 
-TNT1 A 0 A_GiveInventory("MudSlapMove1")
-TNT1 A 0 A_GiveInventory("BiteMove2")
-TNT1 A 0 A_GiveInventory("AstonishMove3")
-TNT1 A 0 A_GiveInventory("QuickAttackMove4")
-stop
-
-BotWep:
-TNT1 A 0 A_GiveInventory("MudSlapMove1")
-stop
-}
-}
 
 actor TrapinchSetupItem : CustomInventory
 {

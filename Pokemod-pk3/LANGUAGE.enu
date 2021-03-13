@@ -2562,6 +2562,8 @@ D186_EVO = "\c[MenuRed]Does not evolve";
 //██████████████████████████████████████████Movedex████████████████████████████████████████
 //#region 
 
+//  "\cf<Desc>";
+
 //#region -=- 000: Swift -=-
 M000_NAME = "\cj Swift";
 M000_TYPE = "\cj Normal";
@@ -2575,7 +2577,7 @@ M001_NAME = "\cj Ember";
 M001_TYPE = "\cj Normal";
 M001_CATEGORY = "\cf Special";
 M001_POWER = "\cfPower:\cj 15";
-M001_DESC = "\cfShot \cja Ball of fire.";
+M001_DESC = "\cjLaunch a ball of fire that may burn\n";
 //#endregion
 
 //#region -=- 002: ThunderShock -=-
@@ -2583,7 +2585,8 @@ M002_NAME = "\cj ThunderShock";
 M002_TYPE = "\cj Electric";
 M002_CATEGORY = "\cf Special";
 M002_POWER = "\cfPower:\cj 30";
-M002_DESC = "\cjCall a small bolt of lightning to strike the \cfground \cj that you target";
+M002_DESC = "\cjLaunch a Jolt of electricity that may\n"
+"paralyze.";
 //#endregion
 
 //#region -=- 003: watergun -=-
@@ -2751,7 +2754,8 @@ M022_NAME = "\cj Petal Blizzard";
 M022_TYPE = "\cj Grass";
 M022_CATEGORY = "\cf Special";
 M022_POWER = "\cfPower:\cj --";
-M022_DESC = "--";
+M022_DESC = "\cjunleashe a blizzard of petals, dealing\n"
+"damage across a large area.";
 //#endregion
 
 //#region -=- 023: SmokeScreen -=-
@@ -2811,7 +2815,9 @@ M029_NAME = "\cj Dragon Rush";
 M029_TYPE = "\cj Dragon";
 M029_CATEGORY = "\cf Physical";
 M029_POWER = "\cfPower:\cj 30";
-M029_DESC = "\cja Forcefull \cfRamming \cjAttack with increadible knockback.";
+M029_DESC = "\cjHold to aim, and release to launch\n"
+"yourself in an arc, doing high physical\n"
+"damage that may cause cringe.";
 //#endregion
 
 //#region -=- 030: Dragon Pulse -=-
@@ -3453,7 +3459,8 @@ M106_NAME = "\cj Rage";
 M106_TYPE = "\cj Normal";
 M106_CATEGORY = "\cf Status";
 M106_POWER = "\cfPower:\cj --";
-M106_DESC = "\cjCast a \cfSelf \cjBuff that \nBoosts ATK Relative to your current health";
+M106_DESC = "\cjFly into a rage, boosting the fire rate\n"
+"of generic attacks.";
 //#endregion
 
 //#region -=- 0107: FakeTears -=-
@@ -4298,7 +4305,8 @@ M200_TYPE = "\cj Psychic";
 M200_CATEGORY = "\cf Special";
 M200_POWER = "\cfPower:\cj --";
 M200_DESC = "\cjLaunch a fast moving psychic laser that\n"
-"can ricochet off walls.";
+"can ricochet off walls and inflict\n"
+"Confusion!";
 //#endregion
 
 //#region -=- 201: Clamp -=-

@@ -15,11 +15,7 @@ Player.StartItem "PKMNRentalKit"
 //============|
 Player.StartItem "RioluRentalSetupItem"
 //============|
-Player.StartItem "Base_HP", 40
-Player.StartItem "Base_PAttack", 70
-Player.StartItem "Base_PDefense", 40
-Player.StartItem "Base_SAttack", 35
-Player.StartItem "Base_SDefense", 40
+
 
 //============|
 
@@ -48,30 +44,7 @@ GoTo PainFrames
 }
 }
 
-actor RioluRentalMoves : CustomInventory
-{
-inventory.amount 1
-Inventory.MaxAmount 100
-+AUTOACTIVATE
-States
-{
-Spawn:
-TNT1 A 0
-stop
-Pickup:
-TNT1 A 0 A_JumpIf(CallACS("RentalBotCheck") == 1,"BotWep")
 
-TNT1 A 0 A_GiveInventory("MetalClawMove1")
-TNT1 A 0 A_GiveInventory("VacuumWaveMove2")
-TNT1 A 0 A_GiveInventory("IcePunchMove3")
-TNT1 A 0 A_GiveInventory("QuickAttackMove4")
-stop
-
-BotWep:
-TNT1 A 0 A_GiveInventory("MetalClawMove1")
-stop
-}
-}
 
 actor RioluRentalSetupItem : CustomInventory
 {

@@ -12,11 +12,7 @@ Player.SoundClass "Beldum"
 player.startitem "PKMNStarterKit"
 
 //============|
-Player.StartItem "Base_HP", 40
-Player.StartItem "Base_PAttack", 55
-Player.StartItem "Base_PDefense", 80
-Player.StartItem "Base_SAttack", 35
-Player.StartItem "Base_SDefense", 60
+
 
 //============|
 

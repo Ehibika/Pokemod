@@ -12,11 +12,7 @@ Player.SoundClass "Magnemite"
 +NOSKIN
 player.startitem "PKMNStarterKit"
 //============|
-Player.StartItem "Base_HP", 25
-Player.StartItem "Base_PAttack", 35
-Player.StartItem "Base_PDefense", 70
-Player.StartItem "Base_SAttack", 95
-Player.StartItem "Base_SDefense", 55
+
 
 //============|
 
@@ -45,30 +41,7 @@ GoTo PainFrames
 }
 }
 
-actor MagnemiteStarterMoves : CustomInventory
-{
-inventory.amount 1
-Inventory.MaxAmount 100
-+AUTOACTIVATE
-States
-{
-Spawn:
-TNT1 A 0
-stop
-Pickup:
-TNT1 A 0 A_JumpIfInventory("isbot",1,"BotWep")
 
-TNT1 A 0 A_GiveInventory("ThunderShockMove1")
-TNT1 A 0 A_GiveInventory("ThunderWaveMove2")
-TNT1 A 0 A_GiveInventory("SwiftMove3")
-TNT1 A 0 A_GiveInventory("ScreechMove4")
-stop
-
-BotWep:
-TNT1 A 0 A_GiveInventory("ThunderShockMove1")
-stop
-}
-}
 
 actor MagnemiteSetupItem : CustomInventory
 {

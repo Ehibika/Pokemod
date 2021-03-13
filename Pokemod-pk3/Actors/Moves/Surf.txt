@@ -3,7 +3,7 @@ actor SurfMove : WepMasterBase
 Tag "Surf"
 obituary "$OB_Surf"
 Weapon.AmmoUse 1
-Weapon.AmmoGive 10
+Weapon.AmmoGive 5
 weapon.ammotype "SurfPP"
 scale 2.0
 Inventory.Pickupmessage "$PU_MEGABUSTER"
@@ -68,7 +68,7 @@ Goto Ready
 //[+]========================================================================[+]
 //-----------------------------|Ammo & Inventory|------------------------------
 //[+]========================================================================[+]
-actor SurfPP : Ammo {inventory.amount 1 inventory.Maxamount 10}
+actor SurfPP : Ammo {inventory.amount 1 inventory.Maxamount 5}
 
 Actor SurfProtect : powerprotection
 {

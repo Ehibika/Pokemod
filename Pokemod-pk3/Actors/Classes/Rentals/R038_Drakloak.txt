@@ -14,11 +14,6 @@ Player.StartItem "PKMNRentalKit"
 //============|
 Player.StartItem "DrakloakRentalSetupItem"
 //============|
-Player.StartItem "Base_HP", 68
-Player.StartItem "Base_PAttack", 80
-Player.StartItem "Base_PDefense", 50 
-Player.StartItem "Base_SAttack", 60
-Player.StartItem "Base_SDefense", 50 
 
 //============|
 
@@ -44,30 +39,7 @@ GoTo PainFrames
 }
 }
 
-actor DrakloakRentalMoves : CustomInventory
-{
-inventory.amount 1
-Inventory.MaxAmount 100
-+AUTOACTIVATE
-States
-{
-Spawn:
-TNT1 A 0
-stop
-Pickup:
-TNT1 A 0 A_JumpIf(CallACS("RentalBotCheck") == 1,"BotWep")
 
-TNT1 A 0 A_GiveInventory("ShadowBallMove1")
-TNT1 A 0 A_GiveInventory("DragonRushMove2")
-TNT1 A 0 A_GiveInventory("FlatterMove3")
-TNT1 A 0 A_GiveInventory("DisableMove4")
-stop
-
-BotWep:
-TNT1 A 0 A_GiveInventory("HydroPumpMove1")
-stop
-}
-}
 
  actor DrakloakRentalSetupItem : CustomInventory
 {

@@ -3,7 +3,7 @@ actor EarthquakeMove : WepMasterBase
 Tag "Earthquake"
 obituary "$OB_EARTHQUAKE"
 Weapon.AmmoUse 1
-Weapon.AmmoGive 10
+Weapon.AmmoGive 5
 weapon.ammotype "EarthquakePP"
 scale 2.0
 Inventory.Pickupmessage "$PU_MEGABUSTER"
@@ -74,7 +74,7 @@ Goto Ready
 //[+]========================================================================[+]
 //-----------------------------|Ammo & Inventory|------------------------------
 //[+]========================================================================[+]
-actor EarthquakePP : Ammo {inventory.amount 1 inventory.Maxamount 10}
+actor EarthquakePP : Ammo {inventory.amount 1 inventory.Maxamount 5}
 
 Actor EarthQuakeProtect : powerprotection
 {

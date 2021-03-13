@@ -52,7 +52,7 @@ setResultValue(Output);
 
 //#region -=- Shop Display -=-
 #region -=- Shop Display -=-
-Script "DisplayBPAndSlots" OPEN CLIENTSIDE
+Script "DisplayBPAndSlots" (Void) CLIENTSIDE //OPEN
 {
 int conP = ConsolePlayerNumber();
 while(true) {
@@ -153,6 +153,7 @@ for(int i = 0; i < SHOP_MAX_PLAYERS; i++) ResetPlayerBP(i);
 function void ResetPlayerBP(int p)
 {
 SetCvar(StrParam(s:"PLAYER",i:p,s:"_BP"),GetCvar("PKMN_StartingBP"));
+UpdateSbar(p);
 }
 
 script "BPCheck" (int cost)
@@ -163,6 +164,7 @@ SetResultValue(GetCvar(StrParam(s:"PLAYER",i:PlayerNumber(),s:"_BP"))>=cost);
 script "BPPay" (int cost)
 {
 AdjustCvar(StrParam(s:"PLAYER",i:PlayerNumber(),s:"_BP"),-cost);
+UpdateSbar(PlayerNumber());
 }
 
 function void AdjustCvar(str cvar, int amount)
@@ -170,9 +172,17 @@ function void AdjustCvar(str cvar, int amount)
 SetCvar(cvar,GetCvar(cvar)+amount);
 }
 
+function void UpdateSbar(int Player)
+{
+int Current = GetCvar(StrParam(s:"PLAYER",i:Player,s:"_BP"));
+TakeActorInventory(Player+1000,"Sbar_BP",99999);
+GiveActorInventory(Player+1000,"Sbar_BP",Current);
+}
+
 script "GivePlayerBP" (int p, int wage)
 {
 AdjustCvar(StrParam(s:"PLAYER",i:p,s:"_BP"),wage);
+UpdateSbar(PlayerNumber());
 }
 
 script "BPGameOver" UNLOADING
@@ -185,6 +195,17 @@ script "BPPlayerSpec" (int p) DISCONNECT
 ACS_NamedExecuteWithResult("RESET_PLAYER_BP",p);
 }
 
+Script "BPSBAR_ENTER" ENTER
+{
+Delay(2);
+UpdateSbar(PlayerNumber());
+}
+
+Script "BPSBAR_RESPAWN" RESPAWN
+{
+Delay(2);
+UpdateSbar(PlayerNumber());
+}
 
 #endregion
 //#endregion

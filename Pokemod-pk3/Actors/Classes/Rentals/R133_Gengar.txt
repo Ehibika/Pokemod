@@ -15,11 +15,7 @@ Player.StartItem "PKMNRentalKit"
 //============|
 Player.StartItem "GengarRentalSetupItem"
 //============|
-Player.StartItem "Base_HP", 60
-Player.StartItem "Base_PAttack", 65
-Player.StartItem "Base_PDefense", 60
-Player.StartItem "Base_SAttack", 130
-Player.StartItem "Base_SDefense", 75
+
 
 //============|
 
@@ -48,30 +44,7 @@ GoTo PainFrames
 }
 }
 
-actor GengarRentalMoves : CustomInventory
-{
-inventory.amount 1
-Inventory.MaxAmount 100
-+AUTOACTIVATE
-States
-{
-Spawn:
-TNT1 A 0
-stop
-Pickup:
-TNT1 A 0 A_JumpIf(CallACS("RentalBotCheck") == 1,"BotWep")
 
-TNT1 A 0 A_GiveInventory("ShadowBallMove1")
-TNT1 A 0 A_GiveInventory("DarkPulseMove2")
-TNT1 A 0 A_GiveInventory("SludgeBombMove3")
-TNT1 A 0 A_GiveInventory("DisableMove4")
-stop
-
-BotWep:
-TNT1 A 0 A_GiveInventory("ShadowBallMove1")
-stop
-}
-}
 
 actor GengarRentalSetupItem : CustomInventory
 {

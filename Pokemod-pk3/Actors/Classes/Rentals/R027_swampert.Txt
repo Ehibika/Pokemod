@@ -14,11 +14,7 @@ Player.StartItem "PKMNRentalKit"
 //============|
 Player.StartItem "SwampertRentalSetupItem"
 //============|
-Player.StartItem "Base_HP", 100
-Player.StartItem "Base_PAttack", 110
-Player.StartItem "Base_PDefense", 90
-Player.StartItem "Base_SAttack", 85
-Player.StartItem "Base_SDefense", 90
+
 
 //============|
 
@@ -44,30 +40,7 @@ GoTo PainFrames
 }
 }
 
-actor SwampertRentalMoves : CustomInventory
-{
-inventory.amount 1
-Inventory.MaxAmount 100
-+AUTOACTIVATE
-States
-{
-Spawn:
-TNT1 A 0
-stop
-Pickup:
-TNT1 A 0 A_JumpIf(CallACS("RentalBotCheck") == 1,"BotWep")
 
-TNT1 A 0 A_GiveInventory("MuddyWaterMove1")
-TNT1 A 0 A_GiveInventory("EarthquakeMove2")
-TNT1 A 0 A_GiveInventory("WideGuardMove3")
-TNT1 A 0 A_GiveInventory("WaterfallMove4")
-stop
-
-BotWep:
-TNT1 A 0 A_GiveInventory("MuddyWaterMove1")
-stop
-}
-}
 
  actor SwampertRentalSetupItem : CustomInventory
 {

@@ -15,11 +15,7 @@ Player.StartItem "PKMNRentalKit"
 //============|
 Player.StartItem "MagnezoneRentalSetupItem"
 //============|
-Player.StartItem "Base_HP", 70
-Player.StartItem "Base_PAttack", 70
-Player.StartItem "Base_PDefense", 115
-Player.StartItem "Base_SAttack", 130
-Player.StartItem "Base_SDefense", 90
+
 
 //============|
 
@@ -48,30 +44,7 @@ GoTo PainFrames
 }
 }
 
-actor MagnezoneRentalMoves : CustomInventory
-{
-inventory.amount 1
-Inventory.MaxAmount 100
-+AUTOACTIVATE
-States
-{
-Spawn:
-TNT1 A 0
-stop
-Pickup:
-TNT1 A 0 A_JumpIf(CallACS("RentalBotCheck") == 1,"BotWep")
 
-TNT1 A 0 A_GiveInventory("ThunderBoltMove1")
-TNT1 A 0 A_GiveInventory("ThunderMove2")
-TNT1 A 0 A_GiveInventory("FlashCannonMove3")
-TNT1 A 0 A_GiveInventory("ProtectMove4")
-stop
-
-BotWep:
-TNT1 A 0 A_GiveInventory("ThunderBoltMove1")
-stop
-}
-}
 
 actor MagnezoneRentalSetupItem : CustomInventory
 {

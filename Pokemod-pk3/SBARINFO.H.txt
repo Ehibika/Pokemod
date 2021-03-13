@@ -32,7 +32,16 @@ DrawString "SMALLFONT",White,WeaponTag, 15, 140,0,alignment(left);
 		
 		DrawImage "PKMNPP", 16, 155;
 		Drawbar "PKMNHPB", "PKMNHPE", PPRecoveryMeter, horizontal, 32, 155;
+		InInventory HalfPPFlag, 1{Drawbar "PKMNHPB2", "PKMNHPE", PPRecoveryMeter, horizontal, 32, 155;}
+		InInventory FullPPFlag, 1{Drawbar "PKMNHPB3", "PKMNHPE", PPRecoveryMeter, horizontal, 32, 155;}
 		InInventory PPRecoveryMeter, 100{ DrawImage "PKMNRELO", 40, 155;}
+
+		DrawImage "PKMNXP", 16, 132;
+		Drawbar "PKMNHPB3", "PKMNHPE", Sbar_EXP, horizontal, 32, 132;
+
+		DrawString "CBMF",yellow,"bp:", 15, 124,0,alignment(left);
+		DrawNumber 3, "CBMF", Green, Sbar_BP, alignment(right), 42, 124;
+
 	}
 //}
 

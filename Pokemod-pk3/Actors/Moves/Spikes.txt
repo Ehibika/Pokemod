@@ -6,7 +6,7 @@ actor SpikesMove : WepMasterBase
 Tag "Spikes"
 obituary "$OB_SPIKES"
 Weapon.AmmoUse 1
-Weapon.AmmoGive 20
+Weapon.AmmoGive 5
 weapon.ammotype "SpikesPP"
 scale 2.0
 Inventory.Pickupmessage "$PU_MEGABUSTER"
@@ -68,7 +68,7 @@ Goto Ready
 //[+]========================================================================[+]
 //-----------------------------|Ammo & Inventory|------------------------------
 //[+]========================================================================[+]
-actor SpikesPP : Ammo {inventory.amount 1 inventory.Maxamount 20}
+actor SpikesPP : Ammo {inventory.amount 1 inventory.Maxamount 5}
 
 
 //[+]========================================================================[+]
