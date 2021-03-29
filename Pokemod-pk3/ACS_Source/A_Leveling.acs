@@ -19,6 +19,7 @@
 #import "A_Shop.acs"
 #import "WEPACS.acs"
 #include "zcommon.acs"
+#include "8bdmlib.acs"
 
 //#region -=- Experience And Levels -=-
 #region -=- Experience And Levels -=-
@@ -51,7 +52,8 @@ script "TeamAward" (Void)
     for(int i = 0; i < PlayerCount(); i++)
     {
         Pteam = GetPlayerInfo(i, PLAYERINFO_TEAM);
-        ACS_NamedExecuteAlways("GivePlayerEXP",0,i,TeamEXPAward[Pteam],1);
+        //ACS_NamedExecuteAlways("GivePlayerEXP",0,i,TeamEXPAward[Pteam],1);
+        EXP_Increment(i,TeamEXPAward[Pteam]);
         ACS_NamedExecuteAlways("GivePlayerBP",0,i,TeamBPAward[Pteam],1);
     }
     for(int j = 0; j < 4; j++)
@@ -99,7 +101,7 @@ Script "AddToBPAward" (int ammount)
 
 Script "PKMN_HitEXP" (Int Damage, int Divisor)
 {
-//if(EXPTime() == 0){Terminate;}
+if(EXPTime(HITEXP) == 0){Terminate;}
 
 Damage = getLastHit(0);
 
@@ -136,7 +138,7 @@ if(SelfEXPBounty)
 
 Script "PKMN_LastHitEXP" (Int Damage, int Divisor)
 {
-//if(EXPTime() == 0){Terminate;}
+if(EXPTime(HITEXP) == 0){Terminate;}
 
 //Damage = getLastHit(0);
 /*
@@ -202,7 +204,8 @@ else{Terminate;}
 
 if(CheckInventory("HelperEXPItem"))
     {
-        ACS_NamedExecuteAlways("GivePlayerEXP",0,HelperTID-1000,CheckInventory("HelperEXPItem"));
+        //ACS_NamedExecuteAlways("GivePlayerEXP",0,HelperTID-1000,CheckInventory("HelperEXPItem"));
+        EXP_Increment(HelperTID-1000,CheckInventory("HelperEXPItem"));
         TakeInventory("HelperEXPItem",9999);
     }
 }
@@ -210,13 +213,32 @@ if(CheckInventory("HelperEXPItem"))
 Script "GiveEXP" (int EXPAward, Int Override)
 {
 if(!(ClassifyActor(ActivatorTID()) & ACTOR_PLAYER)){Terminate;}
-int p = Playernumber();
-int PlayerDexNum = GetCvar(StrParam(s:"PlayerDEXNum_",i:PlayerNumber()));
-Int LvlRate = StatDEX[PlayerDexNum][9];
-if(EXPTime() == 0 && Override == 0){Terminate;}
+if(EXPTime(0) == 0 && Override == 0){Terminate;}
 
+int p = Playernumber();
 While(PlayerIsSpectator(p) == 2){Delay(1);}
 if(PlayerIsSpectator(p) == 1){Terminate;}
+
+//TeamEXPBank[GetPlayerInfo(p, PLAYERINFO_TEAM)] += EXPAward/2;
+SetEXPBank(GetPlayerInfo(p, PLAYERINFO_TEAM),EXPAward/2);
+EXP_Increment(P,EXPAward);
+
+
+//EXP Share
+for(int i = 0; i < 64; i++)
+{
+    if(i != P
+        && ClassifyActor(i+1000) & ACTOR_ALIVE
+        && GetPlayerInfo(p, PLAYERINFO_TEAM) == GetPlayerInfo(i, PLAYERINFO_TEAM)
+        && xyzDistance(P+1000,i+1000) <= EXPSHARERANGE) {
+        ACS_NamedExecuteAlways("GetShareEXP",0,i,EXPAward/2);
+    }
+}   
+
+//#region -=- depreciated -=-
+/*
+int PlayerDexNum = GetCvar(StrParam(s:"PlayerDEXNum_",i:PlayerNumber()));
+Int LvlRate = StatDEX[PlayerDexNum][9];
 Bool LevelLoopDone;
 str PLAYER_EXPCV = StrParam(s:"PlayerEXP_",i:PlayerNumber());
 
@@ -246,50 +268,79 @@ for(int i = 1; i<PKMN_MaxLVL; i++)
             ReportNewMoves(PlayerDexNum,PlayerLVL,levelGoal);
             }
         }
-//#region OLD
-/*
-if(PlayerLVL >= PKMN_MaxLVL){LevelLoopDone = true; Terminate;}
-
-//Just in case
-if(GetCVar(PLAYER_EXPCV) >= LevelUpTable[LvlRate][9]){LevelLoopDone = true; Terminate;}
-
-
-SetCvar(PLAYER_EXPCV,PlayerEXP+EXPAward);
-// check if this passes the next level threshold
-Until(LevelLoopDone)
-    {
-    if(GetCVar(PLAYER_EXPCV) >= LevelUpTable[LvlRate][PlayerLVL] && PlayerLVL < PKMN_MaxLVL)
-        {
-            PlayerLVL++;
-            GiveInventory("LevelupCue",1);
-            Log(n:0,s:"\cf Grew to LVL ",i:PlayerLVL);
-
-        }
-    else
-        {
-        ACS_NamedExecuteAlways("SetPKMNLevel",0,PlayerLVL);
-        //if(PlayerIsBot(p)){ACS_NamedExecuteAlways("EvolveTrigger",0);}
-        LevelLoopDone = true;
-        }
-
-    }
-    */
+*/
 //#endregion
 
 }
 
+Script "GetShareEXP" (int P, int EXPAward)
+{
+
+SetActivator(P+1000);
+EXP_Increment(P,EXPAward);
+}
+
+Script "GetBankEXP" (int P)
+{
+
+SetActivator(P+1000);
+EXP_Increment(P,-1);
+}
+
+Function void EXP_Increment (Int Pnum, int EXPAward)
+{
+
+    int levelGoal = 1;
+    int PlayerEXP = GetPlayerPokeValue(Pnum,POKEEXP);
+    int PlayerDexNum = GetPlayerPokeValue(Pnum,POKEDEXNUM);
+    int PlayerLVL = GetPlayerPokeValue(Pnum,POKELEVEL);
+    Int LvlRate = StatDEX[PlayerDexNum][9];
+
+    if(EXPAward>=0)
+        {
+        PlayerEXP = PlayerEXP+EXPAward;
+        }
+    else //Get BankEXP
+        {
+        int BankEXP = GetEXPBank(GetPlayerInfo(Pnum, PLAYERINFO_TEAM));//TeamEXPBank[GetPlayerInfo(Pnum, PLAYERINFO_TEAM)];
+        PlayerEXP = PlayerEXP+BankEXP;
+        }
+
+    UpdateSbarEXP();
+    SetPlayerPokeValue(Pnum,POKEEXP,PlayerEXP);
+
+    for(int i = 1; i<PKMN_MaxLVL; i++) { if(PlayerEXP >= LevelUpTable[LvlRate][i]){levelGoal++;}}
+
+    if(levelGoal > PlayerLVL)
+        {
+            if(!CheckInventory("LevelupBuffer"))
+            {
+            GiveInventory("LevelupCue",1);
+            Log(n:0,s:"\cf Grew to LVL ",i:levelGoal);//,s:"  ",i:PKMN_MaxLVL
+            ACS_NamedExecuteAlways("SetPKMNLevel",0,levelGoal);  
+            ReportNewMoves(PlayerDexNum,PlayerLVL,levelGoal);
+            }
+        }
+}
 
 
-Script "GummiEXP" (int EXPAward, Int TypeMatch)
+Script "GummiEXP" (int EXPAwardPer, Int TypeMatch)
 {
 // -=- Script called by Gummy Pickups, gives EXP based on type matchup
+
+// -=- Also now gives EXP by percentage -=-
+Int LvlRate = StatDEX[GetPokeValue(POKEDEXNUM)][9];
+Int CurrentLevel = GetPokeValue(POKELEVEL);
+Int EXPDiff = LevelUpTable[LvlRate][CurrentLevel] - LevelUpTable[LvlRate][CurrentLevel-1];
+Int EXPAward = (fixeddiv(EXPDiff,100)*EXPAwardPer) >> 16;
+//
 int PlayerDEXNum = GetPokeValue(POKEDEXNUM);
 int TypeA = StatDEX[PlayerDEXNum][7];
 int TypeB = StatDEX[PlayerDEXNum][8];
 int MatchVal;
 int EXPMult = 1.0;
 int EXPOutput;
-if(TypeA == TypeMatch || TypeB == TypeMatch){EXPMult = 2.0;}
+if(TypeA == TypeMatch || TypeB == TypeMatch){EXPMult = 4.0;}
 else 
     {    
         switch(PKMNTypeList2[TypeA][TypeMatch])
@@ -312,10 +363,11 @@ else
         }
     }
 
-    if(MatchVal > 0){EXPMult = 1.5;}
+    if(MatchVal > 0){EXPMult = 2.0;}
     if(MatchVal < 0){EXPMult = 0.5;}
     EXPOutput = EXPAward*EXPMult >> 16;
-    ACS_NamedExecuteAlways("GiveEXP",0,EXPOutput,1);
+    //log(f:EXPAward,s:" ",i:EXPAward,s:" ",i:EXPOutput);
+    ACS_NamedExecuteAlways("GetShareEXP",0,PlayerNumber(),EXPOutput,1);
 
 }
 
@@ -393,7 +445,7 @@ if(CurLevel<PKMN_MaxLVL)
 
 Script "FragEXPAward" (int VictimPN)
 {
-if(EXPTime() == 0){Terminate;}
+if(EXPTime(0) == 0){Terminate;}
 //Int SelfTID = ActivatorTID();
 
     int PlayerLVL = GetCvar(StrParam(s:"PlayerLevel_",i:VictimPN));
@@ -450,7 +502,7 @@ Script "SetDexNumber" (int Dexnum)
 
 Script "EvolveTrigger" (void)
 {
-if(StatusTime() == 0){print(s:"Unsafe to Evolve Right now"); Terminate;}
+if(StatusTime() == 0){print(s:"Cannot Evolve Right now"); Terminate;}
 
 
 //First, Check if you're Eevee, Run a different script if you are
@@ -525,5 +577,25 @@ if(CurrentLevel<15)
     GiveInventory("Sbar_EXP",EXPPercent);   
     }
 else{if(CheckInventory("Sbar_EXP") < 100 ){GiveInventory("Sbar_EXP",100);}}
+
+}
+
+script "ClearBank" OPEN 
+{
+
+    ClearEXPBank(0);
+    ClearEXPBank(1);
+    ClearEXPBank(2);
+    ClearEXPBank(3);
+
+}
+
+script "ClearBank2" UNLOADING 
+{
+
+    ClearEXPBank(0);
+    ClearEXPBank(1);
+    ClearEXPBank(2);
+    ClearEXPBank(3);
 
 }

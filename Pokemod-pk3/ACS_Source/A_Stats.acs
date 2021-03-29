@@ -16,7 +16,7 @@
 #Import "Dex_Basestats.acs"
 #Import "WEPACS.acs"
 #include "zcommon.acs"
-
+#include "8bdmlib.acs"
 
 Script "StatInitializer" (int DexNum) 
 {
@@ -41,7 +41,7 @@ a = inputStat*4;
 b = a * inputLevel;
 c = (b / PKMN_MaxLVL);
 d = c + 30;
-
+if(d > 999){d=999;}
 Return (d);
 
 }
@@ -253,36 +253,15 @@ Int PlayeLVL = GetPokeValue(POKELEVEL);
 
 
 ModStat = StatModifier(CheckInventory("Active_PAttack"),PATK_ID);
-if(ModStat >= ATKSTATBASELINE2)
-    {
-    StatValue = ValueMap(ModStat,STATMAX,ATKSTATBASELINE2,ATKVAL4,ATKVAL3);
-    }
-else if(ModStat >= ATKSTATBASELINE1)
-    {
-    StatValue = ValueMap(ModStat,STATMAX,ATKSTATBASELINE1,ATKVAL3,ATKVAL2);
-    }
-else
-    {
-    StatValue = Noneg(ValueMap(ModStat,ATKSTATBASELINE1,STATMIN,ATKVAL2,ATKVAL1));    
-    }
+StatValue = PieceWiseStatCalc(ModStat,STATMIN,ATKSTATBASELINE1,ATKSTATBASELINE2,STATMAX,ATKVAL1,ATKVAL2,ATKVAL3,ATKVAL4);
+
 if(StatValue < 10){StatValue = 10;}
 if(StatValue>1000){StatValue=1000;}
 GiveInventory(StrParam(s:"PATK",i:StatValue),1);
 
 ModStat = StatModifier(CheckInventory("Active_SAttack"),SATK_ID);
+StatValue = PieceWiseStatCalc(ModStat,STATMIN,ATKSTATBASELINE1,ATKSTATBASELINE2,STATMAX,ATKVAL1,ATKVAL2,ATKVAL3,ATKVAL4);
 
-if(ModStat >= ATKSTATBASELINE2)
-    {
-    StatValue = ValueMap(ModStat,STATMAX,ATKSTATBASELINE2,ATKVAL4,ATKVAL3);
-    }
-else if(ModStat >= ATKSTATBASELINE1)
-    {
-    StatValue = ValueMap(ModStat,STATMAX,ATKSTATBASELINE1,ATKVAL3,ATKVAL2);
-    }
-else
-    {
-    StatValue = Noneg(ValueMap(ModStat,ATKSTATBASELINE1,STATMIN,ATKVAL2,ATKVAL1));    
-    }
 if(StatValue < 10){StatValue = 10;}
 if(StatValue>1000){StatValue=1000;}
 GiveInventory(StrParam(s:"SATK",i:StatValue),1);
@@ -301,37 +280,15 @@ ranges of 80 and 1.
 */
 
 ModStat = StatModifier(CheckInventory("Active_PDefense"),PDEF_ID);
+StatValue = PieceWiseStatCalc(ModStat,STATMIN,DEFSTATBASELINE1,DEFSTATBASELINE2,STATMAX,DEFVAL4,DEFVAL3,DEFVAL2,DEFVAL1);
 
-if(ModStat >= DEFSTATBASELINE2)
-    {
-    StatValue = Noneg(ValueMap(ModStat,STATMAX,DEFSTATBASELINE2,DEFVAL1,DEFVAL2));
-    }
-else if(ModStat >= DEFSTATBASELINE1)
-    {
-    StatValue = Noneg(ValueMap(ModStat,DEFSTATBASELINE2,DEFSTATBASELINE1,DEFVAL2,DEFVAL3));
-    }
-else
-    {
-    StatValue = Noneg(ValueMap(ModStat,DEFSTATBASELINE1,STATMIN,DEFVAL3,DEFVAL4));    
-    }
 if(StatValue < 10){StatValue = 10;}
 if(StatValue>1000){StatValue=1000;}
 GiveInventory(StrParam(s:"PDEF",i:StatValue),1);
 
 ModStat = StatModifier(CheckInventory("Active_SDefense"),SDEF_ID);
+StatValue = PieceWiseStatCalc(ModStat,STATMIN,DEFSTATBASELINE1,DEFSTATBASELINE2,STATMAX,DEFVAL4,DEFVAL3,DEFVAL2,DEFVAL1);
 
-if(ModStat >= DEFSTATBASELINE2)
-    {
-    StatValue = Noneg(ValueMap(ModStat,STATMAX,DEFSTATBASELINE2,DEFVAL1,DEFVAL2));
-    }
-else if(ModStat >= DEFSTATBASELINE1)
-    {
-    StatValue = Noneg(ValueMap(ModStat,DEFSTATBASELINE2,DEFSTATBASELINE1,DEFVAL2,DEFVAL3));
-    }
-else
-    {
-    StatValue = Noneg(ValueMap(ModStat,DEFSTATBASELINE1,STATMIN,DEFVAL3,DEFVAL4));    
-    }
 if(StatValue < 10){StatValue = 10;}
 if(StatValue>1000){StatValue=1000;}
 GiveInventory(StrParam(s:"SDEF",i:StatValue),1);
@@ -343,14 +300,18 @@ HP is also piecewise
 */
 If (Mode == 0)
     {
-    if(CheckInventory("Active_HP") >= STATBASELINE3)
+        StatValue = PieceWiseStatCalc(CheckInventory("Active_HP"),STATMIN,HPSTATBASELINE1,HPSTATBASELINE2,STATMAX,HPVAL1,HPVAL2,HPVAL3,HPVAL4);
+        StatValue = HPRound(StatValue);
+        /*
+    if(CheckInventory("Active_HP") >= HPSTATBASELINE2)
         {
-        StatValue = ValueMap(CheckInventory("Active_HP"),STATMAX,STATBASELINE3,HPVAL3,HPVAL2);
+        StatValue = ValueMap(CheckInventory("Active_HP"),STATMAX,HPSTATBASELINE2,HPVAL3,HPVAL2);
         }
     else
         {
-        StatValue = ValueMap(CheckInventory("Active_HP"),STATBASELINE3,STATMIN,HPVAL2,HPVAL1);
+        StatValue = ValueMap(CheckInventory("Active_HP"),HPSTATBASELINE2,STATMIN,HPVAL2,HPVAL1);
         }
+    */
     if(StatValue < 50){StatValue = 50;}
     //if(StatValue>999){StatValue=999;}
     SetActorPRoperty(0,APROP_SPAWNHEALTH,StatValue);
@@ -367,6 +328,28 @@ Else{GiveInventory("SBAR_LVL",PKMN_MaxLVL);}
 //log(i:PlayeLVL);
     
 }
+
+//#region -=- piecewise function -=-
+Function int PieceWiseStatCalc(int Input,int range0, Int Range1, int Range2, int Range3, int OutPut1, int Output2, int Output3, int Output4)
+{
+int ReturnVal;
+
+if(Input >= Range2)
+    {
+        ReturnVal = Noneg(ValueMap(Input,Range3,Range2,Output4,Output3));
+    }
+else if(Input >= Range1)
+    {
+        ReturnVal = Noneg(ValueMap(Input,Range2,Range1,Output3,Output2));
+    }
+else
+    {
+        ReturnVal = Noneg(ValueMap(Input,Range1,range0,Output2,OutPut1));    
+    }
+
+    return ReturnVal;
+}
+//#endregion
 
 Script "PokeSpeed_Handler" (Void)
 {
@@ -527,40 +510,19 @@ GiveInventory("Active_PAttack",Act_ATK);
 GiveInventory("Active_SAttack",Act_SATK);
 
 ModStat = Act_ATK;
-if(ModStat >= ATKSTATBASELINE2)
-    {
-    StatValue = ValueMap(ModStat,STATMAX,ATKSTATBASELINE2,ATKVAL4,ATKVAL3);
-    }
-else if(ModStat >= ATKSTATBASELINE1)
-    {
-    StatValue = ValueMap(ModStat,STATMAX,ATKSTATBASELINE1,ATKVAL3,ATKVAL2);
-    }
-else
-    {
-    StatValue = Noneg(ValueMap(ModStat,ATKSTATBASELINE1,STATMIN,ATKVAL2,ATKVAL1));    
-    }
+StatValue = PieceWiseStatCalc(ModStat,STATMIN,ATKSTATBASELINE1,ATKSTATBASELINE2,STATMAX,ATKVAL1,ATKVAL2,ATKVAL3,ATKVAL4);
+
 if(StatValue < 10){StatValue = 10;}
 if(StatValue>1000){StatValue=1000;}
 GiveInventory(StrParam(s:"PATK",i:StatValue),1);
 
 ModStat = Act_SATK;
+StatValue = PieceWiseStatCalc(ModStat,STATMIN,ATKSTATBASELINE1,ATKSTATBASELINE2,STATMAX,ATKVAL1,ATKVAL2,ATKVAL3,ATKVAL4);
 
-if(ModStat >= ATKSTATBASELINE2)
-    {
-    StatValue = ValueMap(ModStat,STATMAX,ATKSTATBASELINE2,ATKVAL4,ATKVAL3);
-    }
-else if(ModStat >= ATKSTATBASELINE1)
-    {
-    StatValue = ValueMap(ModStat,STATMAX,ATKSTATBASELINE1,ATKVAL3,ATKVAL2);
-    }
-else
-    {
-    StatValue = Noneg(ValueMap(ModStat,ATKSTATBASELINE1,STATMIN,ATKVAL2,ATKVAL1));    
-    }
 if(StatValue < 10){StatValue = 10;}
 if(StatValue>1000){StatValue=1000;}
 GiveInventory(StrParam(s:"SATK",i:StatValue),1);
-log(s:StrParam(s:"SATK",i:StatValue));
+//log(s:StrParam(s:"SATK",i:StatValue));
 }
 
 Script "ObjectDEFstat" (int level, int BaseDEF, int BaseSDEF)
@@ -576,37 +538,15 @@ Script "ObjectDEFstat" (int level, int BaseDEF, int BaseSDEF)
     GiveInventory("Active_SDefense",Act_SDEF);
 
     ModStat = Act_DEF;
+    StatValue = PieceWiseStatCalc(ModStat,STATMIN,DEFSTATBASELINE1,DEFSTATBASELINE2,STATMAX,DEFVAL4,DEFVAL3,DEFVAL2,DEFVAL1);
 
-    if(ModStat >= DEFSTATBASELINE2)
-        {
-        StatValue = Noneg(ValueMap(ModStat,STATMAX,DEFSTATBASELINE2,DEFVAL1,DEFVAL2));
-        }
-    else if(ModStat >= DEFSTATBASELINE1)
-        {
-        StatValue = Noneg(ValueMap(ModStat,DEFSTATBASELINE2,DEFSTATBASELINE1,DEFVAL2,DEFVAL3));
-        }
-    else
-        {
-        StatValue = Noneg(ValueMap(ModStat,DEFSTATBASELINE1,STATMIN,DEFVAL3,DEFVAL4));    
-        }
     if(StatValue < 10){StatValue = 10;}
     if(StatValue>1000){StatValue=1000;}
     GiveInventory(StrParam(s:"PDEF",i:StatValue),1);
     
     ModStat = Act_SDEF;
-    
-    if(ModStat >= DEFSTATBASELINE2)
-        {
-        StatValue = Noneg(ValueMap(ModStat,STATMAX,DEFSTATBASELINE2,DEFVAL1,DEFVAL2));
-        }
-    else if(ModStat >= DEFSTATBASELINE1)
-        {
-        StatValue = Noneg(ValueMap(ModStat,DEFSTATBASELINE2,DEFSTATBASELINE1,DEFVAL2,DEFVAL3));
-        }
-    else
-        {
-        StatValue = Noneg(ValueMap(ModStat,DEFSTATBASELINE1,STATMIN,DEFVAL3,DEFVAL4));    
-        }
+    StatValue = PieceWiseStatCalc(ModStat,STATMIN,DEFSTATBASELINE1,DEFSTATBASELINE2,STATMAX,DEFVAL4,DEFVAL3,DEFVAL2,DEFVAL1);
+
     if(StatValue < 10){StatValue = 10;}
     if(StatValue>1000){StatValue=1000;}
     GiveInventory(StrParam(s:"SDEF",i:StatValue),1);    
@@ -623,15 +563,9 @@ Script "ObjectHPstat" (int level, int BaseHP)
     int StatValue;
 
     GiveInventory("Active_HP",Act_HP);
+    StatValue = PieceWiseStatCalc(CheckInventory("Active_HP"),STATMIN,HPSTATBASELINE1,HPSTATBASELINE2,STATMAX,HPVAL1,HPVAL2,HPVAL3,HPVAL4);
+    StatValue = HPRound(StatValue);
 
-    if(Act_HP >= STATBASELINE3)
-        {
-        StatValue = ValueMap(Act_HP,STATMAX,STATBASELINE3,HPVAL3,HPVAL2);
-        }
-    else
-        {
-        StatValue = ValueMap(Act_HP,STATBASELINE3,STATMIN,HPVAL2,HPVAL1);
-        }
     if(StatValue < 50){StatValue = 50;}
     SetActorPRoperty(0,APROP_HEALTH,StatValue);
     //log(i:level,s:"  :  ",i:StatValue,s:"   ::    ",i:GetActorPRoperty(0,APROP_HEALTH));

@@ -139,7 +139,7 @@ SetPlayerProperty(0, State, PROP_BUDDHA);
 
 Script "FalseEXPAward" (void)
 {
-if(EXPTime() == 0){Terminate;}
+if(EXPTime(0) == 0){Terminate;}
 int TargTID = ACS_NamedExecuteWithResult("core_gettarget",0);
 int VictimPN = Playernumber();
     int PlayerLVL = GetCvar(StrParam(s:"PlayerLevel_",i:VictimPN));
@@ -343,7 +343,7 @@ Script "SubstituteSetup" (void)
     SetActorPRoperty(0,APROP_SPAWNHEALTH,SubsHP);
     SetActorPRoperty(0,APROP_HEALTH,SubsHP);
     SetActorProperty(OwnerTID, APROP_HEALTH,OwnerHP-SubsHP);
-    Log(i:SubsHP);
+    //Log(i:SubsHP);
 
     ModStat = SubsPDEF;
 

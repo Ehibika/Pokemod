@@ -15,6 +15,10 @@
 #import "Dex_Movesets.acs"
 #import "Dex_Rentals.acs"
 #import "DEX_Gattack.acs"
+#import "WepACS.acs"
+#import "DB_Player.acs"
+
+
 
 #include "zcommon.acs"
 
@@ -324,6 +328,32 @@ int MoveVal;
 
 }
 
+Script "ImportTo_DexMovesetClient_A" (void) NET
+{
+int DexNum = GetPokeValue(POKEDEXNUM);
+		for(int j = 0; j<15; j++)
+		{
+			SetCvar(StrParam(s:"MSI_",i:j,s:"_",i:0),MoveDex2[DexNum][j][0]);
+			SetCvar(StrParam(s:"MSI_",i:j,s:"_",i:1),MoveDex2[DexNum][j][1]);
+			SetCvar(StrParam(s:"MSI_",i:j,s:"_",i:2),MoveDex2[DexNum][j][2]);
+			SetCvar(StrParam(s:"MSI_",i:j,s:"_",i:3),MoveDex2[DexNum][j][3]);
+		}
+		log(s:weapons_ammo[MoveDex2[DexNum][j][0]][0]);
+		ACS_NamedExecuteAlways("ImportTo_DexMovesetClient_B",0,DexNum);
+}
+
+Script "ImportTo_DexMovesetClient_B" (int DexNum) CLIENTSIDE
+{
+		for(int j = 0; j<15; j++)
+		{
+			MoveDex2[DexNum][j][0] = GetCvar(StrParam(s:"MSI_",i:j,s:"_",i:0));
+			MoveDex2[DexNum][j][1] = GetCvar(StrParam(s:"MSI_",i:j,s:"_",i:1));
+			MoveDex2[DexNum][j][2] = GetCvar(StrParam(s:"MSI_",i:j,s:"_",i:2));
+			MoveDex2[DexNum][j][3] = GetCvar(StrParam(s:"MSI_",i:j,s:"_",i:3));
+		}
+
+    
+}
 
 Script "Import_DexRentals" (void) 
 {

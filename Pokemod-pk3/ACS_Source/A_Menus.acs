@@ -32,11 +32,11 @@ Script "PromptItemShop" (void)
 //==================[+]
 // - Pre Start Up -
 //==================[+]
-if(StatusTime() == 0){print(s:"Unsafe to buy items now"); Terminate;}
+if(ShopTime() == 0){print(s:"Cannot open the Item shop here"); Terminate;}
 if(GetCvar("sv_RentalsMode") == 1 &&
 	GetCvar("sv_EnableShop") == 0){print(s:"Item Shop is unavailable"); Terminate;}
 
-GiveInventory("SpawnSafeZone",1);
+//GiveInventory("SpawnSafeZone",1);
 ACS_NamedExecuteAlways("Menu_ItemShop",0);
 }
 
@@ -71,19 +71,26 @@ Script "Menu_ItemShop" (void) CLIENTSIDE
 	int InputOldButtons; 
 	int UpInput;
 	int DownInput;
+	int SideInput;
 	Int ConfirmInput;
 	Int CancelInput;
 	Int MenuStates = 0;
+	Int ShopState = 0;
 	Int MenuNextState; 
 	int i;
 	int j;
 	int h;
 	Bool MenuUp = true;
 	Bool BGUp;
+
+	str ItemGameName;
+	str ItemLang;
+	str ChoiceItemMaxName;
+	int ItemQuantity;
 	//=======================[+]
 	// - Menu Loop Begin -
 	//=======================[+]
-	while (MenuUp) {
+	while (MenuUp && GetActorProperty(0,APROP_HEALTH) > 0) {
 		SetHudSize(320, 200, 0);
 		SetFont("STCFN");
 		MenuStates = MenuNextState;
@@ -137,15 +144,19 @@ Script "Menu_ItemShop" (void) CLIENTSIDE
 				HudMessage(s: ">>"; HUDMSG_FADEOUT, 515, 0, MenuX - 16.0, Menuy + (MNL * CursorY), 0.2, 0);
 	
 				//Draw Description
-				str ItemGameName = ShopItemList[ChoiceID][0];
-				str ItemLang = strParam(s:"DESC_",s:ItemGameName);
+				ItemGameName = ShopItemList[ChoiceID][0];
+				ItemLang = strParam(s:"DESC_",s:ItemGameName);
 				if(ChoiceID < MAX_SHOP)HudMessage(l:ItemLang; HUDMSG_FADEOUT, 517, CR_White, MenuX- (MNL * 10) , Menuy - (MNL * 8), 0.2, 0);
+
+				ItemQuantity = CheckInventory(ItemGameName);
+				HudMessage(s:"\cG<< Buy >>    Quantity: ",i:ItemQuantity; HUDMSG_FADEOUT, 518, CR_White, MenuX- (MNL * 4) , Menuy - (MNL * 3 + 6.0), 0.2, 0);
 			
 	
 			// - Grab Inputs -
 			InputButtons = GetPlayerInput(-1, INPUT_BUTTONS);
 			UpInput = ButtonCheck(InputButtons, InputOldButtons, BT_FORWARD);
 			DownInput = ButtonCheck(InputButtons, InputOldButtons, BT_BACK);
+			SideInput = ButtonCheck(InputButtons, InputOldButtons, BT_MOVELEFT) + ButtonCheck(InputButtons, InputOldButtons, BT_MOVERIGHT);
 			ConfirmInput = ButtonCheck(InputButtons, InputOldButtons, BT_ATTACK);
 			CancelInput = ButtonCheck(InputButtons, InputOldButtons, BT_AltATTACK);
 			if (UpInput != DownInput) {
@@ -158,11 +169,12 @@ Script "Menu_ItemShop" (void) CLIENTSIDE
 			}
 			if (ChoiceID > ChoiceCap) { ChoiceID = 0; }
 			if (ChoiceID < 0) { ChoiceID = ChoiceCap; }
+			if (SideInput == 1) {MenuNextState = 1;} //Swap to sell menu 
 			if (CancelInput == 1 || ConfirmInput == 1 && ChoiceID == MAX_SHOP) {break;} //MenuUp = false;
 			if (ConfirmInput == 1 && ChoiceID < MAX_SHOP) 
 					{ //Item Purchase
 						ChoiceItemName = ShopItemList[ChoiceID][0];
-						str ChoiceItemMaxName = strParam(s:"Max",s:ChoiceItemName);
+						ChoiceItemMaxName = strParam(s:"Max",s:ChoiceItemName);
 						ChoiceItemCost = ShopItemList[ChoiceID][2]>>16;
 						if(ACS_NamedExecuteWithResult("BPCheck",ChoiceItemCost)
 							&& CheckInventory(ChoiceItemName) < GetAmmoCapacity(ChoiceItemMaxName))
@@ -177,12 +189,112 @@ Script "Menu_ItemShop" (void) CLIENTSIDE
 						}
 
 					} 
+		}
 			// #------------------
 			// # End Menustate 0
 			// #------------------
+
+			// #------------------
+			// # Begin Menustate 1
+			// #------------------
+			if (MenuStates == 1) {
+		
+				j = 0;
+				// - Print the list of items -
+				For(i = 0; i < MAX_SHOP; i++)
+				{
+					if(ChoiceID >= 3 && ChoiceID < MAX_SHOP-3)
+					{
+						if(i < ChoiceID-3){continue;}
+						if(i > ChoiceID+3){break;}
+					}
+					if(ChoiceID < 3)
+					{
+						if(i > 6){break;}
+					}
+					if(ChoiceID > MAX_SHOP-4)
+					{
+						if(i < MAX_SHOP-6){continue;}
+					}
+					ItemName = ShopItemList[i][1];
+					itemSpace = StrLeft("                ",16-StrLen(ItemName));
+					ItemCost = ShopItemList[i][2]>>16;
+					if(ItemCost>1){ItemCost = ItemCost/2;}
+						HudMessage(s:ItemName,s:itemSpace,i:ItemCost,s:" \cfBP"; HUDMSG_FADEOUT, 500 + j, CR_WHITE, MenuX, Menuy + (MNL * j), 0.2, 0);
+						j++;
+				}
+		
+					if(!BGUp)
+						{DrawMenuFrame(MenuX-(8.0*3),MenuY-(8.0*0),21,6+MoveFrameCap,0); 
+						//DrawMenuFrame(MenuX-(8.0*3),MenuY-(8.0*3),21,2,PastMenuSize);
+						DrawMenuFrame(MenuX-(8.0*12),MenuY-(8.0*8),38,7,PastMenuSize);
+						BGup = True;}
+
+					ChoiceCap = MAX_SHOP;
+					if(MAX_SHOP>6)
+					{
+					if (ChoiceID > 3 && ChoiceID < MAX_SHOP-3){ CursorY = 3;}
+					else if(ChoiceID >= MAX_SHOP-3){CursorY = 3 + (ChoiceID-(MAX_SHOP-3));}	
+					else{CursorY = ChoiceID;}
+					}
+					else{CursorY = ChoiceID;}
+					
+					if(ChoiceID >= MAX_SHOP-3 && MAX_SHOP>6){HudMessage(s: "Exit"; HUDMSG_FADEOUT, 500 + (6), CR_ORANGE, MenuX, Menuy + (MNL * 6), 0.2, 0);}
+					else if(MAX_SHOP<=6){HudMessage(s: "Exit"; HUDMSG_FADEOUT, 500 + (MAX_SHOP), CR_ORANGE, MenuX, Menuy + (MNL * MAX_SHOP), 0.2, 0);}
+					HudMessage(s: ">>"; HUDMSG_FADEOUT, 515, 0, MenuX - 16.0, Menuy + (MNL * CursorY), 0.2, 0);
+		
+					//Draw Description
+					ItemGameName = ShopItemList[ChoiceID][0];
+					ItemLang = strParam(s:"DESC_",s:ItemGameName);
+					if(ChoiceID < MAX_SHOP)HudMessage(l:ItemLang; HUDMSG_FADEOUT, 517, CR_White, MenuX- (MNL * 10) , Menuy - (MNL * 8), 0.2, 0);
+				
+					ItemQuantity = CheckInventory(ItemGameName);
+					HudMessage(s:"\cd<< Sell >>    Quantity: ",i:ItemQuantity; HUDMSG_FADEOUT, 518, CR_White, MenuX- (MNL * 4) , Menuy - (MNL * 3 + 6.0), 0.2, 0);
+
+		
+				// - Grab Inputs -
+				InputButtons = GetPlayerInput(-1, INPUT_BUTTONS);
+				UpInput = ButtonCheck(InputButtons, InputOldButtons, BT_FORWARD);
+				DownInput = ButtonCheck(InputButtons, InputOldButtons, BT_BACK);
+				SideInput = ButtonCheck(InputButtons, InputOldButtons, BT_MOVELEFT) + ButtonCheck(InputButtons, InputOldButtons, BT_MOVERIGHT);
+				ConfirmInput = ButtonCheck(InputButtons, InputOldButtons, BT_ATTACK);
+				CancelInput = ButtonCheck(InputButtons, InputOldButtons, BT_AltATTACK);
+				if (UpInput != DownInput) {
+					if (UpInput == 1) {
+						ChoiceID--;
+					}
+					if (DownInput == 1) {
+						ChoiceID++;
+					}
+				}
+				if (ChoiceID > ChoiceCap) { ChoiceID = 0; }
+				if (ChoiceID < 0) { ChoiceID = ChoiceCap; }
+				if (SideInput == 1) {MenuNextState = 0;} //Swap to Buy menu 
+				if (CancelInput == 1 || ConfirmInput == 1 && ChoiceID == MAX_SHOP) {break;} //MenuUp = false;
+				if (ConfirmInput == 1 && ChoiceID < MAX_SHOP) 
+						{ //Item Sell
+							ChoiceItemName = ShopItemList[ChoiceID][0];
+							ChoiceItemMaxName = strParam(s:"Max",s:ChoiceItemName);
+							ChoiceItemCost = ShopItemList[ChoiceID][2]>>16;
+							if(ChoiceItemCost>1){ChoiceItemCost = ChoiceItemCost/2;}
+							if(CheckInventory(ChoiceItemName))
+							{
+								while(!CheckInventory("NetCheck_A")){NamedRequestScriptPuke("NET_ItemShop_Sell",ChoiceItemName,ChoiceItemCost);Delay(3);}
+							}
+							else
+							{
+								ACS_NamedExecuteAlways("ShopFailSound",0);
+								ACS_NamedExecuteAlways("ShopSellFailQuantityMsg",0);
+							}
+
+						} 
+				// #------------------
+				// # End Menustate 1
+				// #------------------
+			}
 			Delay(1);
 			InputOldButtons = InputButtons;
-		}
+		
 	} 
 	
 	//=======================[+]
@@ -200,6 +312,17 @@ Script "NET_ItemShop_Buy" (int ChoiceItemName, int ChoiceItemCost) NET
 
 	GiveInventory(ChoiceItemName,1);
 	ACS_NamedExecuteAlways("BPPay",0,ChoiceItemCost);
+	ACS_NamedExecuteAlways("ShopSuccessSound",0);
+GiveInventory("NetCheck_A",1);
+}
+
+Script "NET_ItemShop_Sell" (int ChoiceItemName, int ChoiceItemCost) NET
+{
+	if(!CheckInventory("InMenu")){Print(s:"Illegal netscript call!!");GiveInventory("NetCheck_A",1);Terminate;}
+	if(CheckInventory("NetCheck_A")) Terminate;
+
+	TakeInventory(ChoiceItemName,1);
+	ACS_NamedExecuteAlways("GivePlayerBP",0,PlayerNumber(),ChoiceItemCost);
 	ACS_NamedExecuteAlways("ShopSuccessSound",0);
 GiveInventory("NetCheck_A",1);
 }
@@ -224,11 +347,11 @@ int PlayerDEXNum = GetCvar(StrParam(s:"PlayerDEXNum_",i:PlayerNumber()));
 
 if(PlayerDEXNum == SMEARGLE){print(s:"Smeargle Cannot use TMs"); Terminate;}
 if(PlayerDEXNum == BELDUM){print(s:"beldum Cannot use TMs"); Terminate;}
-if(StatusTime() == 0){print(s:"Unsafe to learn TMs right now"); Terminate;}
+if(ShopTime() == 0){print(s:"Cannot open the TM shop here"); Terminate;}
 if(GetCvar("sv_RentalsMode") == 1 &&
 	GetCvar("sv_EnableTM") == 0){print(s:"TMs are unavailable"); Terminate;}
 
-GiveInventory("SpawnSafeZone",1);
+//GiveInventory("SpawnSafeZone",1);
 ACS_NamedExecuteAlways("Menu_TMShop",0);
 }
 
@@ -273,7 +396,7 @@ Bool BGUp;
 //=======================[+]
 // - Menu Loop Begin -
 //=======================[+]
-while (MenuUp) {
+while (MenuUp && GetActorProperty(0,APROP_HEALTH) > 0) {
 	SetHudSize(320, 200, 0);
 	SetFont("STCFN");
 	MenuStates = MenuNextState;
@@ -480,11 +603,11 @@ Script "PromptMoveLearn" (int Moveid, int MoveCost)
 //==================[+]
 // - Pre Start Up -
 //==================[+]
-if(StatusTime() == 0){print(s:"Unsafe to Learn Moves now"); Terminate;}
+if(StatusTime() == 0){print(s:"Cannot Learn Moves now"); Terminate;}
 
 
 //setplayerproperty(0,1,4);
-GiveInventory("SpawnSafeZone",1);
+//GiveInventory("SpawnSafeZone",1);
 
 ACS_NamedExecuteAlways("Menu_MoveLearn",0,Moveid,MoveCost);
 //NamedScriptWait("Menu_MoveLearn");
@@ -559,7 +682,7 @@ Bool MenuUp = true;
 // - Menu Loop Begin -
 //=======================[+]
 DrawMenuFrame(MenuX-(8.0*3),MenuY-(8.0*0),15,10,0);
-while(MenuUp)
+while(MenuUp && GetActorProperty(0,APROP_HEALTH) > 0)
 	{
 	MenuStates = MenuNextState;
 	// #------------------
@@ -713,8 +836,10 @@ Script "PromptMoveReposition" (Void)
 //==================[+]
 // - Pre Start Up -
 //==================[+]
-if(StatusTime() == 0){print(s:"Unsafe Adjust moves right now"); Terminate;}
-GiveInventory("SpawnSafeZone",1);
+if(StatusTime() == 0){print(s:"Cannot Adjust moves right now"); Terminate;}
+
+while(CheckInventory("NetCheck_Freeze")){Delay(1);}
+//GiveInventory("SpawnSafeZone",1);
 ACS_NamedExecuteAlways("Menu_MoveReposition",0);
 }
 
@@ -769,7 +894,7 @@ Bool MenuUp = true;
 //=======================[+]
 // - Menu Loop Begin -
 //=======================[+]
-while(MenuUp)
+while(MenuUp && GetActorProperty(0,APROP_HEALTH) > 0)
 {		
 	DrawMenuFrame(MenuX-(8.0*3),MenuY-(8.0*0),15,10,0);
 	SetHudSize(320,200,0);
@@ -987,11 +1112,15 @@ Script "PromptLevelUpMove" (Void)
 //==================[+]
 // - Pre Start Up -
 //==================[+]
-if(StatusTime() == 0){print(s:"Unsafe Adjust moves right now"); Terminate;}
+if(StatusTime() == 0){print(s:"Cannot Adjust moves right now"); Terminate;}
 if(GetCvar("sv_RentalsMode") == 1 &&
 	GetCvar("sv_EnableMoveTutor") == 0){print(s:"Cannot Change moves"); Terminate;}
+while(CheckInventory("NetCheck_Freeze")){Delay(1);}
 
-GiveInventory("SpawnSafeZone",1);
+//GiveInventory("SpawnSafeZone",1);
+int PlayerDEXNum = GetCvar(StrParam(s:"PlayerDEXNum_",i:PlayerNumber()));
+
+if(PlayerDEXNum > ENDDEX){ACS_NamedExecuteAlways("ImportTo_DexMovesetClient_A",0); Delay(1);}
 ACS_NamedExecuteAlways("Menu_LevelUpMove",0);
 }
 
@@ -1032,7 +1161,7 @@ Bool BGUp;
 //=======================[+]
 // - Menu Loop Begin -
 //=======================[+]
-while (MenuUp) {
+while (MenuUp && GetActorProperty(0,APROP_HEALTH) > 0) {
 	SetHudSize(320, 200, 0);
 	SetFont("STCFN");
 	MenuStates = MenuNextState;
@@ -1175,7 +1304,7 @@ Script "PromptBranchEvo_Standard" (Void)
 //==================[+]
 // - Pre Start Up -
 //==================[+]
-if(StatusTime() == 0){print(s:"Unsafe to evolve right now"); Terminate;}
+if(StatusTime() == 0){print(s:"Cannot evolve right now"); Terminate;}
 //if(!PlayerInGame(PlayerNumber())){Terminate;}
 //=======================[+]
 // - Define Variables -
@@ -1224,8 +1353,8 @@ Bool BGUp;
 // - Menu Loop Begin -
 //=======================[+]
 setplayerproperty(0,1,4);
-GiveInventory("SpawnSafeZone",1);
-while (MenuUp) {
+//GiveInventory("SpawnSafeZone",1);
+while (MenuUp && GetActorProperty(0,APROP_HEALTH) > 0) {
 	SetHudSize(320, 200, 0);
 	SetFont("STCFN");
 	MenuStates = MenuNextState;
@@ -1344,7 +1473,7 @@ Bool BGUp;
 // - Menu Loop Begin -
 //=======================[+]
 setplayerproperty(0,1,4);
-while (MenuUp) {
+while (MenuUp && GetActorProperty(0,APROP_HEALTH) > 0) {
 	SetHudSize(320, 200, 0);
 	SetFont("STCFN");
 	MenuStates = MenuNextState;
@@ -1536,3 +1665,16 @@ log(s:"DownRight Is ",i:(1<<1)|(1<<4));
 
 #endregion
 //#endregion
+
+Function int ScrollValue (int Input,int Dir, Int min, int Max)
+{
+
+Switch(Dir)
+	{
+	Case -1:
+	Case 0: Input--; if(Input<min){Input = Max;}	break;
+	Case 1: Input++; if(Input>Max){Input = min;} break;
+	}
+
+	return Input;
+}

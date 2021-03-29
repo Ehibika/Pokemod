@@ -75,7 +75,7 @@ LISTMENU "MainMenu"
 		Font "DBIGFONT", "MenuGreen" 
 		TextItem "PKMN Setup", "h", "ShopMenu"
 		Font "DBIGFONT", "MenuBlue" //[Trill]
-		//TextItem "Status", "c", "PKMNStatus"
+		TextItem "Camera Options", "c", "CameraMenu"
 		//TextItem "PokeDex", "D", "PKMNInfo"
 		//TextItem "PKMN", "c", "PKMNMainMenu"
 		Font "DBIGFONT", "MenuWhite"

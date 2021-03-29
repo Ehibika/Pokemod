@@ -193,6 +193,9 @@ if(SkinDEX[Skin][1] == "Base"){/*log(s:"Boop")*/ ;Terminate;}
 
 GiveInventory("SkinEnabler",1);
 //log(s:"setting disguise to ",s:SkinDEX[Skin][1]);
+
+if(PlayerIsBot(PlayerNumber())) {SetUserCvar(PlayerNumber(),"Skin",SkinDEX[Skin][1]);Terminate;}
+
 ConsoleCommand(strParam(s:"set theDisguise ",s:SkinDEX[Skin][1]));
 ACS_NamedExecuteWithResult("SetDisguise",PlayerNumber());
 }
@@ -302,7 +305,7 @@ for(int i = 0; i<PlayerCount(); i++) playerCooldown[i] = THE_COOLDOWN;
 
 function void DisguiseFunc(void)
 {
-for(int i = 0; i<PlayerCount(); i++) DisguiseFunc2(i);
+for(int i = 0; i<PlayerCount(); i++) if(!PlayerIsBot(i)) DisguiseFunc2(i);
 }
 
 function void DisguiseFunc2(int i)
@@ -327,7 +330,7 @@ function void DisguiseFunc2c(int i)
 {
 int disguise = playerDisguise[i];
 if(disguise!=playerCurrentSkin[i]) {
-    log(s:"Current Skin is: ",i:playerCurrentSkin[i],s:" Goal Skin is: ",i:disguise);
+    //log(s:"Current Skin is: ",i:playerCurrentSkin[i],s:" Goal Skin is: ",i:disguise);
     SetCvar("MaxClasses",CountBaseClass());
 	ACS_NamedExecuteAlways("DisguisePlayer",0,disguise,i);
 	playerCooldown[i] = THE_COOLDOWN;
@@ -393,7 +396,7 @@ script "ShowClientSkinlist" (void) CLIENTSIDE
         //if(Strcmp("Base",SkinDEX[i][1])==0) 
         
         if(StrIcmp("",SkinDEX[i][1])==0) Break;
-        Log(i:i,s:" : ",s:SkinDEX[i][1],s:" : ",i:i+SKIN_OFFSET+GetCvar("MaxClasses"));
+        //Log(i:i,s:" : ",s:SkinDEX[i][1],s:" : ",i:i+SKIN_OFFSET+GetCvar("MaxClasses"));
     }
 }
 

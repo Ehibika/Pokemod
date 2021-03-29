@@ -1,0 +1,79 @@
+//#region -=-=- Beta B1.0 -=-=-
+/*
+ *
+ * ===|Gameplay Changes|===
+ * 
+ * Implemented new EXP mechanics, now players that gain EXP through damage will share 50% of it with nearby active
+ * teammates, as well as storing it into a team EXP bank, new players that spawn in, or players that switch pokemon will
+ * be jumpstarted in EXP from the EXP bank
+ * 
+ * EXP values have all been readjusted to account for the new EXP mechanics
+ * 
+ * Implemented visual scaling on damage numbers
+ * 
+ * Readjusted stat scaling, now, rather than the lowest point being a negative multiplier, the absolute lowest 
+ * point of any stat results in a 1.0 modifier to damage and damage mitigation
+ * 
+ * Code for menues have been changed, now areas marked as safe for status changes (such as near a team flag) do not spawn 
+ * a safezone, and you can be killed in the middle of performing status changes in these locations.
+ * 
+ * Players can now Freely evolve, shift moves, and set levelup moves at any time
+ * 
+ * Confusion mechanics have been adjusted.
+ * 
+ * Minimum HP in HP scaling increased from 50 > 100
+ * HP calculations have been adjusted, now there are 2 main benchmarks, both at lvl 10.
+ *  a pokemon with base 60 HP will have 300 HP at lvl 10
+ *  a pokemon with base 80 HP will have 550 HP by lvl 10
+ * HP now rounds to the nearest 10th place
+ * 
+ * Type multipliers have been changed:
+ * Weakness damage from 2.0 > 1.3
+ * 2x weakness damage from 4.0 > 1.6
+ * Resistances from 0.5 > 0.8
+ * 2x Resistances from 0.25 > 0.6
+ * STAB from 1.3 > 1.2
+ * 
+ * Fixed a bug where apparently, ACS can give items beyond their set limit, which resulted in some stat overflow.
+ * 
+ * Fixed the default values on the zoom mode camera
+ * 
+ * Players can now sell items in the item shop, you can alternate between buying and selling by pressing left or right.
+ * 
+ * ===|Pokemon Changes|===
+ * 
+ * ===|Item Changes|===
+ * Berries now have new sprites
+ * 
+ * HP berries now heal over time instead of at once.
+ * 
+ * reintroduced the Power, Guard, and haste seeds, now you can only have the effects of one of them at any given point.
+ * 
+ * Gummies now give EXP by percentages
+ * 
+ * [New Items]
+ *  Evasion Seed
+ *  Blast wand
+ *  Haze orb
+ *  Mist orb
+ *  Freeze orb
+ *  Geddon orb
+ *  FloralIncense
+ *  SeaIncense
+ *  FullIncense
+ * 
+ * ===|Move Changes|===
+ * Altfires mechanics have been changed, and are now properly disabled when players are afflicted with statuses that disable mainfires
+ * 
+ * GAtk Tackle is now disabled under paralysis.
+ * 
+ * [SelfDestruct]
+ * Minimum Explosion radius increased from 150 > 200
+ * Smolder particles now match the player's alpha
+ * 
+ * [Explosion]
+ * Core explosion no longar has damage falloff
+ * Explosion whirl hitbox increased from 64 > 128
+ * Smolder particles now match the player's alpha
+ * 
+ * 

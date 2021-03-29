@@ -111,12 +111,19 @@ alias ShowStatusScreen "CloseMenu; Use PlayerStatusItem"
 alias UnstuckCommand "CloseMenu; Pukename NET_Unstuck" 
 
 alias DefaultCam "sv_CameraAng 0.0; sv_CameraHeight 0.0; sv_CameraZoom 130; SV_CameraPitch 0.3; sv_CamReticuleMode 1;"
-alias DefaultZoomCam "sv_ZoomCameraAng -6.0; sv_ZoomCameraHeight -0.6; sv_ZoomCameraZoom 60; SV_ZoomCameraPitch 0.0; sv_ZoomCamReticuleMode 1;"
+alias DefaultZoomCam "sv_ZoomCameraAng -0.6; sv_ZoomCameraHeight -0.6; sv_ZoomCameraZoom 60; SV_ZoomCameraPitch 0.0; sv_ZoomCamReticuleMode 1;"
 alias StartCameraMenu "Openmenu CameraMenu"
 alias CloseMenuCommand "CloseMenu"
 
-alias OpenItemShop "CloseMenu; Use ShopGuardItem; Use ItemShopStartItem"
-alias OpenTMShop "CloseMenu; Use ShopGuardItem; Use TMShopStartItem"
+alias SplatoonCam "sv_CameraAng 0.0; sv_CameraHeight 0.7; sv_CameraZoom 180; SV_CameraPitch 0.3; sv_CamReticuleMode 1;"
+alias RnCCam "sv_CameraAng 0.0; sv_CameraHeight 1.0; sv_CameraZoom 130; SV_CameraPitch 0.3; sv_CamReticuleMode 1;"
+alias WarFrameCam "sv_CameraAng 0.4; sv_CameraHeight -1.0; sv_CameraZoom 110; SV_CameraPitch 0.2; sv_CamReticuleMode 1;"
+alias PvZCam "sv_CameraAng 1.0; sv_CameraHeight -1.0; sv_CameraZoom 90; SV_CameraPitch 0.0; sv_CamReticuleMode 1;"
+alias FortniteCam "sv_CameraAng 0.5; sv_CameraHeight -0.9; sv_CameraZoom 120; SV_CameraPitch 0.1; sv_CamReticuleMode 1;"
+
+//Use ShopGuardItem;
+alias OpenItemShop "CloseMenu; Use ItemShopStartItem"
+alias OpenTMShop "CloseMenu; Use TMShopStartItem"
 
 alias UseEscapeorb "Use Escapeorb"
 

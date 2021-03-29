@@ -2,6 +2,7 @@ Server noarchive bool sv_RentalsMode = false;
 Server noarchive bool sv_EnableShop = true;
 Server noarchive bool sv_EnableTM = true;
 Server noarchive bool sv_EnableMoveTutor = true;
+Server noarchive bool sv_RandomCatcher = true;
 
 Server noarchive int sv_MaxEntities = 50;
 
@@ -41,7 +42,7 @@ User int sv_CameraZoom = 130;
 User float SV_CameraPitch = 0.3;
 User float SV_CamPlayerAlpha = 0.75;
 
-User float sv_ZoomCameraAng = -6.0;
+User float sv_ZoomCameraAng = -0.6;
 User float sv_ZoomCameraHeight = -0.6;
 User int sv_ZoomCameraZoom = 60;
 User float SV_ZoomCameraPitch = 0.0;
@@ -79,19 +80,23 @@ server noarchive int PKMN_AllowFreeSetup = 0;
 server noarchive Bool PKMN_NoEXP = false;
 server noarchive Bool PKMN_NoQuad = True;
 server noarchive Bool PKMN_NoRoundLeveling = false;
-
-
+server noarchive bool PKMN_NoAttackInSafezone = false;
+server noarchive bool PKMN_TeamTMPurchase = true;
+server noarchive bool PKMN_TeamTMPickup = true;
 server noarchive int PKMN_StartingBP = 30;
 server noarchive int PKMN_BPAward = 10;
 server noarchive int PKMN_BPWinAward = 10;
 server noarchive int PKMN_BPLoseAward = 5;
+
+
 user noarchive bool auto_false = false;
 server noarchive bool BP_INIT = false;
 server noarchive bool Player_INIT = false;
 
-server noarchive bool PKMN_NoAttackInSafezone = false;
-server noarchive bool PKMN_TeamTMPurchase = true;
-server noarchive bool PKMN_TeamTMPickup = true;
+server noarchive int EXPBank_BLUE = 0;
+server noarchive int EXPBank_RED = 0;
+server noarchive int EXPBank_GREEN = 0;
+server noarchive int EXPBank_YELLOW = 0;
 
 
 server noarchive int PKMN_RoundLevel = 0;
@@ -992,3 +997,4 @@ Server noarchive string SKI_148_0;
 Server noarchive string SKI_148_1;
 Server noarchive string SKI_149_0;
 Server noarchive string SKI_149_1;
+

@@ -22,6 +22,10 @@
 Int TeamEXPAward [4] = {};
 Int TeamBPAward [4] = {};
 
+Int TeamEXPBank[4] = {};
+
+#LIBDEFINE EXPSHARERANGE 600
+
 #endregion
 //#endregion
 
@@ -44,12 +48,14 @@ For(j = Startlvl; j < Endlvl; j++)
 
 }
 
-Function Int EXPTime (void)
+
+#LIBDEFINE HITEXP 1
+Function Int EXPTime (int mod)
 {
 //Returns when you are allowed to earn EXP
 int Output;
 
-if(GetActorProperty(0,APROP_HEALTH)<1){return 0;}
+if(GetActorProperty(0,APROP_HEALTH)<1 && mod != HITEXP){return 0;}
 
 if(GetCvar("PKMN_NoEXP")==1){return 0;}
 
@@ -63,10 +69,9 @@ else{output = 1;}
 return Output;
 }
 
-Function Int StatusTime (Void)
+Function Int ShopTime (Void)
 {
-//Returns when you are allowed to perform status functions like
-//Evolutions or learning new moves
+//Returns when you are allowed to access Shops
 int Output;
 if(CheckInventory("PKMN_AllowFreeSetup")){output = 1;}
 if(CheckInventory("InSafeZone")){output = 1;}
@@ -81,7 +86,67 @@ if (GetCvar("Game_Arena")==1){if(GetCvar("Game_GameState")==0){output = 1;}}
 	return Output;
 }
 
+Function Int StatusTime (Void)
+{
+//Returns when you are allowed to perform status functions like
+//Evolutions or learning new moves
+int Output = 1;
+
+if(GetCvar("lastmanstanding")==1||GetCvar("teamlms")==1)
+    {
+    Output = 0;
+    if(GetGameModeState() != 2){output = 1;}
+    if(CheckInventory("PKMN_AllowFreeSetup")){output = 1;}
+    if(PlayerIsSpectator(PlayerNumber()) == 2){output = 1;}
+	}
+if (GetCvar("Game_Arena")==1){if(GetCvar("Game_GameState")!=0){output = 0;}}
+
+	return Output;
+}
+
 Script "CheckStatusTime" (void)
 {
 setResultValue(StatusTime());
+}
+
+Function int GetEXPBank (int Team)
+{
+    Switch(Team)
+    {
+        Case 0: return GetCvar("EXPBank_BLUE"); break;
+        Case 1: return GetCvar("EXPBank_RED"); break;
+        Case 2: return GetCvar("EXPBank_GREEN"); break;
+        Case 3: return GetCvar("EXPBank_YELLOW"); break;
+    }
+    return 0;
+}
+
+Function void SetEXPBank (int Team, int Ammount)
+{
+Str Cvar;
+Switch(Team)
+    {
+        Case 0: Cvar = "EXPBank_BLUE"; break;
+        Case 1: Cvar = "EXPBank_RED"; break;
+        Case 2: Cvar = "EXPBank_GREEN"; break;
+        Case 3: Cvar = "EXPBank_YELLOW"; break;
+    }
+
+    SetCvar(Cvar,GetEXPBank(Team)+Ammount);
+
+}
+
+Function void ClearEXPBank (int Team)
+{
+Str Cvar;
+Switch(Team)
+    {
+        Case 0: Cvar = "EXPBank_BLUE"; break;
+        Case 1: Cvar = "EXPBank_RED"; break;
+        Case 2: Cvar = "EXPBank_GREEN"; break;
+        Case 3: Cvar = "EXPBank_YELLOW"; break;
+    }
+
+    SetCvar(Cvar,0);
+
 }

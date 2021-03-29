@@ -38,6 +38,7 @@ OptionMenu ZA_MultiplayerOptions
 
 	StaticText	"Camera Options", 1
 	StaticText " "
+	Submenu 	"$MNU_3PCAM01",			"CameraPresetMenu"
 	Slider		"Camera Position",			"sv_CameraAng",			-1.0, 1.0, 0.1
 	Slider		"Camera Height",			"sv_CameraHeight",		-1.0, 1.0, 0.1
 	Slider		"Camera Angle",				"SV_CameraPitch",		0.0, 1.0, 0.1 
@@ -105,6 +106,7 @@ OptionMenu "OptionsMenu"
 
 	StaticText	"Camera Options", 1
 	StaticText " "
+	Submenu 	"$MNU_3PCAM01",			"CameraPresetMenu"
 	Slider		"Camera Position",			"sv_CameraAng",			-1.0, 1.0, 0.1
 	Slider		"Camera Height",			"sv_CameraHeight",		-1.0, 1.0, 0.1
 	Slider		"Camera Angle",				"SV_CameraPitch",		0.0, 1.0, 0.1 
@@ -171,6 +173,7 @@ OptionMenu "CameraMenu"
 	StaticText ""
 	StaticText ""
 	StaticText ""
+	Submenu 	"$MNU_3PCAM01",			"CameraPresetMenu"
 	Slider		"Camera Position",			"sv_CameraAng",			-1.0, 1.0, 0.1
 	Slider		"Camera Height",			"sv_CameraHeight",		-1.0, 1.0, 0.1
 	Slider		"Camera Angle",				"SV_CameraPitch",		0.0, 1.0, 0.1 
@@ -181,10 +184,23 @@ OptionMenu "CameraMenu"
 	Submenu 	"Zoom Mode Options",			"ZoomCameraMenu"
 	Submenu 	"Reticule Settings",			"ReticuleMenu"
 	StaticText ""
-	Option		"Don't Show this menu again",			"Sv_DisableStartupCamMenu",			"OnOff"
+	Option		"Don't Show this menu at start again",			"Sv_DisableStartupCamMenu",			"OnOff"
 	Submenu 	"Reticule Settings",			"ReticuleMenu"
 	Command		"Exit", "CloseMenuCommand"
-	
-	
+
+}
+
+
+OptionMenu "CameraPresetMenu"
+{
+	Title "Camera Presets"
+	StaticText ""
+	Command		"Reset Camera to Default", "DefaultCam"
+	Command		"Splatoon Style", "SplatoonCam"
+	Command		"Rachet & Clank Style", "RnCCam"
+	Command		"WarFrame Style", "WarFrameCam"
+	Command		"PvZ Garden Warfare/BFN Style", "PvZCam"
+	Command		"Fortnite Style", "FortniteCam"
+	StaticText ""
 
 }

@@ -204,8 +204,8 @@ actor GemTurretSpawner : FastProjectile
 +DOOMBOUNCE
 reactiontime 5
 damage (0)
-radius 12
-height 12
+Radius 25
+Height 55
 speed 40
 scale 2.5
 States
@@ -255,8 +255,8 @@ PainChance "BrickBreak", 256
 Mass 1
 Health 150
 Scale 2.5
-radius 12
-height 12
+Radius 25
+Height 55
 speed 0
 States
 {

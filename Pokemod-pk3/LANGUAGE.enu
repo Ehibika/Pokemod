@@ -6,6 +6,7 @@
 SHOP_OPEN = "\c[MenuGreen]Shop's Open! Open the shop menu!";
 SHOP_BUY = "\c[MenuGreen]Purchase Success!";
 SHOP_BUYFAIL_MONEY = "\c[MenuRed]Purchase Fail! Not Enough Money!";
+SHOP_SELLFAIL_QUANTITY = "\c[MenuRed]You don't have any of those to sell!";
 SHOP_BUYFAIL_POSSESS = "\c[MenuRed]Purchase Fail! Already Possessed!";
 SHOP_BUYFAIL_SPACE = "\c[MenuRed]Purchase Fail! Can't carry any more!";
 SHOP_BUYFAIL_LVL = "\c[MenuRed]Purchase Fail! You are at max level!";
@@ -190,9 +191,9 @@ TAG_BIGPPBERRY = "Big PP Berry : Replenishes all PP";
 DESC_BIGPPBERRY = "Replenishes all PP";
 
 PU_CLENSESEED = "Picked up a Clense Seed!";
-TAG_CLENSESEED = "Clense Seed : Removes negative effects";
-DESC_CLENSESEED = "Cures Poison, Paralysis, burn, sleep,\n" 
-"and freeze.";
+TAG_CLENSESEED = "Clense Seed : Restores condition to normal";
+DESC_CLENSESEED = "Restores condition by clearing negative,\n" 
+"effects and stat changes.";
 
 PU_POWERSEED = "Picked up a Power Seed!";
 TAG_POWERSEED = "Power Seed : Boosts Atk and S.Atk";
@@ -207,6 +208,12 @@ DESC_GUARDSEED = "Grants a 1 stage boost to Defense and\n"
 PU_HASTESEED = "Picked up a Haste Seed!";
 TAG_HASTESEED = "Haste Seed : Boosts Speed";
 DESC_HASTESEED = "Grants a 1 stage speed boost";
+
+PU_EVASIONSEED = "Picked up a Evasion Seed!";
+TAG_EVASIONSEED = "Evasion Seed : Become evasive";
+DESC_EVASIONSEED = "Enter an evasion state to avoid projectiles\n" 
+"and melee attack, watch out for \n"
+"area damage!";
 
 PU_ESCAPEORB = "Picked up an Escape Orb!";
 TAG_ESCAPEORB = "Escape Orb : Warps the user to (relative) Safety";
@@ -232,6 +239,28 @@ TAG_SEALORB = "Seal Orb : Disable enemy moves!";
 DESC_SEALORB = "Disables the current move on all \n" 
 "surrounding opponents";
 
+PU_HAZEORB = "Picked up an Haze Orb!";
+TAG_HAZEORB = "Haze Orb : Purge and Prevent enemy stat buffs!";
+DESC_HAZEORB = "Clear and prevents enemy stat buffs\n" 
+"on surrounding opponents";
+
+PU_MISTORB = "Picked up an Mist Orb!";
+TAG_MISTORB = "Mist Orb : Clears and guards against minor debuffs!";
+DESC_MISTORB = "Clear and prevents minor statuses and stat debuffs\n" 
+"for surrounding Teammates";
+
+PU_GEDDONORB = "Picked up an Geddon Orb!";
+TAG_GEDDONORB = "Geddon Orb : Rain utter destruction on your surroundings!";
+DESC_GEDDONORB = "Calls forth meteors to destroy\n" 
+"everything at theCast point, be sure\n"
+"to get out safely!";
+OB_GEDDONORB = = "%k Defeated %o using a Geddon Orb!";
+
+PU_FREEZEORB = "Picked up an Freeze Orb!";
+TAG_FREEZEORB = "Freeze Orb : Freeze self and nearby enemies!";
+DESC_FREEZEORB = "Freezes enemies around you, as\n" 
+"well as yourself!";
+
 PU_SLUMBERWAND = "Picked up a Slumber Wand!";
 TAG_SLUMBERWAND = "Slumber Wand: Cast a sleep inducing projectile";
 DESC_SLUMBERWAND = "fires a projectile that inflicts sleep \n" 
@@ -246,6 +275,27 @@ PU_SOMARIANWAND = "Picked up a Somarian Wand!";
 TAG_SOMARIANWAND = "Somarian wand: Cast a projectile that spawns a stone block";
 DESC_SOMARIANWAND = "Fires an intangible projectile that \n" 
 "spawns a 3x3x3 block wherever it lands";
+
+PU_BLASTWAND = "Picked up a Blast Wand!";
+TAG_BLASTWAND = "Blast wand: Cast a projectile that spawns a powerful explosion!";
+DESC_BLASTWAND = "Fires an intangible projectile that \n" 
+"Create a massive explosion on impact";
+OB_BLASTWAND = = "%k Defeated %o using a Blast Wand!";
+
+PU_FLORALINCENSE = "Picked up a Floral Incense!";
+TAG_FLORALINCENSE = "Floral Incense: Place an incense that cures statuses!";
+DESC_FLORALINCENSE = "Place an incense that generates \n" 
+"a status curing aroma";
+
+PU_SEAINCENSE = "Picked up a Sea Incense!";
+TAG_SEAINCENSE = "Sea Incense: Place an incense that Heals over time!";
+DESC_SEAINCENSE = "Place an incense that generates \n" 
+"a healing aroma";
+
+PU_FULLINCENSE = "Picked up a Full Incense!";
+TAG_FULLINCENSE = "Full Incense: Place an incense that slows down enemies!";
+DESC_FULLINCENSE = "Place a Hostile incense that generates \n" 
+"a slowing aroma";
 
 PU_G_NORMAL = "Found a White Gummi!";
 TAG_G_NORMAL = "White Gummi";
@@ -660,13 +710,15 @@ MNU_JOIN7 = "\c[MenuCyan]Original Selection";
 
 MNU_JOIN7 = "\c[MenuWhite]More information on pokemon and moves\n" 
             "can be found in the \c[MenuCyan]Pokedex,\c[MenuWhite] you can\n"
-            "Also learn moves and evolve in  \c[MenuGreen]PKMN Setup\c[MenuWhite] in the\n"
-            "Esc menu.\n\n"
-            "\c[MenuGreen]Setup\c[MenuWhite] can be performed in \c[MenuCyan]safe zone\c[MenuWhite] or \c[MenuCyan]recovery \n"
+            "Also \c[MenuCyan]learn moves and evolve\c[MenuWhite] in  \c[MenuGreen]PKMN Setup\c[MenuWhite] in the\n"
+            "Esc menu \c[MenuCyan]at any time.\c[MenuWhite]\n\n"
+            "\c[MenuGreen]Shops\c[MenuWhite] can be accessed in \c[MenuCyan]safe zone\c[MenuWhite] or \c[MenuCyan]recovery \n"
             "fields (in Koth)\c[MenuWhite], or during \c[MenuCyan]designated setup time\c[MenuWhite].\n\n"
             "\c[MenuRed] Do not choose 'Random', you risk crashing if you do.";
 
 //#endregion
+//██████████████████████████████████████████Camera████████████████████████████████████████
+MNU_3PCAM01 = "\c[MenuCyan]Camera Presets";
 //██████████████████████████████████████████Options████████████████████████████████████████
 PKMN_OPT = "\c[MenuGreen]Pokemod Options";
 PKMN_CUSTCONT = "\c[MenuYellow]Custom Controls";

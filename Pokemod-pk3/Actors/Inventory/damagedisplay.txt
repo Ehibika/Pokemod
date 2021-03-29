@@ -6,6 +6,7 @@ actor DamageNumberBase
 PROJECTILE
 +NOINTERACTION
 +CLIENTSIDEONLY
++FORCEXYBILLBOARD
 //translation "192:192=4:4" 
 scale 2.5
 renderstyle "translucent"

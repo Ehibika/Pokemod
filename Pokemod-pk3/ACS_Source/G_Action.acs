@@ -1746,7 +1746,7 @@ for(int g=1;g<=HealAmount;g++)
     if(GetActorProperty(0,APROP_Health)<MaxHealth){HealThing(1,MaxHealth); PayEXP++;}
 	}
 	
-	if(GetEXP){ACS_NamedExecuteAlways("GivePlayerEXP",0,HealerTID-1000,PayEXP/2,0);}
+	if(GetEXP){ACS_NamedExecuteAlways("GetShareEXP",0,HealerTID-1000,PayEXP/2,0);}
 }
 
 Script "PKMNACS_HealPointer" (int Pointer, int HealAmount, int GetEXP)
@@ -1767,7 +1767,7 @@ for(int g=1;g<=HealAmount;g++)
     if(GetActorProperty(0,APROP_Health)<MaxHealth){HealThing(1,MaxHealth); PayEXP++;}
 	}
 	
-	if(GetEXP){ACS_NamedExecuteAlways("GivePlayerEXP",0,HealerTID-1000,PayEXP/2,0);}
+	if(GetEXP){ACS_NamedExecuteAlways("GetShareEXP",0,HealerTID-1000,PayEXP/2,0);}
 }
 
 

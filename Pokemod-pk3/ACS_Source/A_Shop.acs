@@ -52,7 +52,7 @@ setResultValue(Output);
 
 //#region -=- Shop Display -=-
 #region -=- Shop Display -=-
-Script "DisplayBPAndSlots" (Void) CLIENTSIDE //OPEN
+Script "DisplayBPAndSlots" (Void) CLIENTSIDE // OPEN
 {
 int conP = ConsolePlayerNumber();
 while(true) {
@@ -450,6 +450,12 @@ if(ActivatorTID()==CheckPlayerCamera(ConsolePlayerNumber())
     || (ActivatorTID()-1000+C_TID)==CheckPlayerCamera(ConsolePlayerNumber()) ) {Log(l:"SHOP_BUYFAIL_MONEY");}
 }
 
+Script "ShopSellFailQuantityMsg" (void) CLIENTSIDE
+{
+if(ActivatorTID()==CheckPlayerCamera(ConsolePlayerNumber())
+    || (ActivatorTID()-1000+C_TID)==CheckPlayerCamera(ConsolePlayerNumber()) ) {Log(l:"SHOP_SELLFAIL_QUANTITY");}
+}
+
 Script "ShopBuyFailPossessMsg" (void) CLIENTSIDE
 {
 if(ActivatorTID()==CheckPlayerCamera(ConsolePlayerNumber())
@@ -541,10 +547,10 @@ int ItemCount; //number of different items found
     InvCount = CheckInventory(ShopItemList[i][0]);
     if(InvCount)
         {
-            if(i<15){ItemID = StrParam(s:"0",x:i);}
+            if(i<16){ItemID = StrParam(s:"0",x:i);}
             else{ItemID = StrParam(x:i);}
 
-            if(InvCount<15){ItemQ = StrParam(s:"0",x:InvCount);}
+            if(InvCount<16){ItemQ = StrParam(s:"0",x:InvCount);}
             else{ItemQ = StrParam(x:InvCount);}  
             //log(s:ItemID,s:ItemQ);
 

@@ -2,7 +2,7 @@
 //----------------------------------|Gummies|-----------------------------------
 //[+]========================================================================[+]
 
-Const int GummiEXP = 10;
+Const int GummiEXP = 25;
 
 actor GummieBase : CustomInventory
 {
@@ -28,7 +28,7 @@ TNT1 A 0 A_JumpIf(CallACS("checkEXPtoMax")==0,"Failure")
 TNT1 A 0 A_Jump(256,"Pickup2")
 stop
 Pickup2:
-TNT1 A 0 ACS_NamedExecuteAlways("GummiEXP",0,GummiEXP*(CallACS("RoundCount")+1),Type_Normal)
+TNT1 A 0 ACS_NamedExecuteAlways("GummiEXP",0,GummiEXP+(CallACS("RoundCount")*2),Type_Normal)
 stop
 
 
@@ -46,7 +46,7 @@ Translation "250:250=81:81", "192:192=83:83", "198:198=86:86"
 States
 {
 Pickup2:
-TNT1 A 0 ACS_NamedExecuteAlways("GummiEXP",0,GummiEXP*(CallACS("RoundCount")+1),Type_Normal)
+TNT1 A 0 ACS_NamedExecuteAlways("GummiEXP",0,GummiEXP+(CallACS("RoundCount")*2),Type_Normal)
 stop
 }
 }
@@ -59,7 +59,7 @@ Translation "250:250=177:177", "192:192=186:186", "198:198=189:189"
 States
 {
 Pickup2:
-TNT1 A 0 ACS_NamedExecuteAlways("GummiEXP",0,GummiEXP*(CallACS("RoundCount")+1),Type_Fighting)
+TNT1 A 0 ACS_NamedExecuteAlways("GummiEXP",0,GummiEXP+(CallACS("RoundCount")*2),Type_Fighting)
 stop
 }
 }
@@ -72,7 +72,7 @@ Translation "250:250=64:64", "192:192=68:68", "198:198=70:70"
 States
 {
 Pickup2:
-TNT1 A 0 ACS_NamedExecuteAlways("GummiEXP",0,GummiEXP*(CallACS("RoundCount")+1),Type_Flying)
+TNT1 A 0 ACS_NamedExecuteAlways("GummiEXP",0,GummiEXP+(CallACS("RoundCount")*2),Type_Flying)
 stop
 }
 }
@@ -85,7 +85,7 @@ Translation "250:250=61:61", "192:192=246:246", "198:198=79:79"
 States
 {
 Pickup2:
-TNT1 A 0 ACS_NamedExecuteAlways("GummiEXP",0,GummiEXP*(CallACS("RoundCount")+1),Type_Poison)
+TNT1 A 0 ACS_NamedExecuteAlways("GummiEXP",0,GummiEXP+(CallACS("RoundCount")*2),Type_Poison)
 stop
 }
 }
@@ -98,7 +98,7 @@ Translation "250:250=16:16", "192:192=19:19", "198:198=24:24"
 States
 {
 Pickup2:
-TNT1 A 0 ACS_NamedExecuteAlways("GummiEXP",0,GummiEXP*(CallACS("RoundCount")+1),Type_Ground)
+TNT1 A 0 ACS_NamedExecuteAlways("GummiEXP",0,GummiEXP+(CallACS("RoundCount")*2),Type_Ground)
 stop
 }
 }
@@ -111,7 +111,7 @@ Translation "250:250=232:232", "192:192=233:233", "198:198=235:235"
 States
 {
 Pickup2:
-TNT1 A 0 ACS_NamedExecuteAlways("GummiEXP",0,GummiEXP*(CallACS("RoundCount")+1),Type_Rock)
+TNT1 A 0 ACS_NamedExecuteAlways("GummiEXP",0,GummiEXP+(CallACS("RoundCount")*2),Type_Rock)
 stop
 }
 }
@@ -124,7 +124,7 @@ Translation "250:250=136:136", "192:192=104:104", "198:198=105:105"
 States
 {
 Pickup2:
-TNT1 A 0 ACS_NamedExecuteAlways("GummiEXP",0,GummiEXP*(CallACS("RoundCount")+1),Type_Bug)
+TNT1 A 0 ACS_NamedExecuteAlways("GummiEXP",0,GummiEXP+(CallACS("RoundCount")*2),Type_Bug)
 stop
 }
 }
@@ -137,7 +137,7 @@ Translation "250:250=65:65", "192:192=59:59", "198:198=60:60"
 States
 {
 Pickup2:
-TNT1 A 0 ACS_NamedExecuteAlways("GummiEXP",0,GummiEXP*(CallACS("RoundCount")+1),Type_Ghost)
+TNT1 A 0 ACS_NamedExecuteAlways("GummiEXP",0,GummiEXP+(CallACS("RoundCount")*2),Type_Ghost)
 stop
 }
 }
@@ -150,7 +150,7 @@ Translation "250:250=70:70", "192:192=77:77", "198:198=78:78"
 States
 {
 Pickup2:
-TNT1 A 0 ACS_NamedExecuteAlways("GummiEXP",0,GummiEXP*(CallACS("RoundCount")+1),Type_Steel)
+TNT1 A 0 ACS_NamedExecuteAlways("GummiEXP",0,GummiEXP+(CallACS("RoundCount")*2),Type_Steel)
 stop
 }
 }
@@ -163,7 +163,7 @@ Translation "250:250=173:173", "192:192=175:175", "198:198=182:182"
 States
 {
 Pickup2:
-TNT1 A 0 ACS_NamedExecuteAlways("GummiEXP",0,GummiEXP*(CallACS("RoundCount")+1),Type_Fire)
+TNT1 A 0 ACS_NamedExecuteAlways("GummiEXP",0,GummiEXP+(CallACS("RoundCount")*2),Type_Fire)
 stop
 }
 }
@@ -176,7 +176,7 @@ Translation "250:250=198:198", "192:192=199:199", "198:198=241:241"
 States
 {
 Pickup2:
-TNT1 A 0 ACS_NamedExecuteAlways("GummiEXP",0,GummiEXP*(CallACS("RoundCount")+1),Type_Water)
+TNT1 A 0 ACS_NamedExecuteAlways("GummiEXP",0,GummiEXP+(CallACS("RoundCount")*2),Type_Water)
 stop
 }
 }
@@ -189,7 +189,7 @@ Translation "250:250=106:106", "192:192=112:112", "198:198=113:113"
 States
 {
 Pickup2:
-TNT1 A 0 ACS_NamedExecuteAlways("GummiEXP",0,GummiEXP*(CallACS("RoundCount")+1),Type_Grass)
+TNT1 A 0 ACS_NamedExecuteAlways("GummiEXP",0,GummiEXP+(CallACS("RoundCount")*2),Type_Grass)
 stop
 }
 }
@@ -202,7 +202,7 @@ Translation "250:250=160:160", "192:192=161:161", "198:198=162:162"
 States
 {
 Pickup2:
-TNT1 A 0 ACS_NamedExecuteAlways("GummiEXP",0,GummiEXP*(CallACS("RoundCount")+1),Type_Electric)
+TNT1 A 0 ACS_NamedExecuteAlways("GummiEXP",0,GummiEXP+(CallACS("RoundCount")*2),Type_Electric)
 stop
 }
 }
@@ -215,7 +215,7 @@ Translation "250:250=237:237", "192:192=238:238", "198:198=239:239"
 States
 {
 Pickup2:
-TNT1 A 0 ACS_NamedExecuteAlways("GummiEXP",0,GummiEXP*(CallACS("RoundCount")+1),Type_Psychic)
+TNT1 A 0 ACS_NamedExecuteAlways("GummiEXP",0,GummiEXP+(CallACS("RoundCount")*2),Type_Psychic)
 stop
 }
 }
@@ -228,7 +228,7 @@ Translation "250:250=196:196", "192:192=204:204", "198:198=197:197"
 States
 {
 Pickup2:
-TNT1 A 0 ACS_NamedExecuteAlways("GummiEXP",0,GummiEXP*(CallACS("RoundCount")+1),Type_Ice)
+TNT1 A 0 ACS_NamedExecuteAlways("GummiEXP",0,GummiEXP+(CallACS("RoundCount")*2),Type_Ice)
 stop
 }
 }
@@ -241,7 +241,7 @@ Translation "250:250=238:238", "192:192=251:251", "198:198=254:254"
 States
 {
 Pickup2:
-TNT1 A 0 ACS_NamedExecuteAlways("GummiEXP",0,GummiEXP*(CallACS("RoundCount")+1),Type_Dragon)
+TNT1 A 0 ACS_NamedExecuteAlways("GummiEXP",0,GummiEXP+(CallACS("RoundCount")*2),Type_Dragon)
 stop
 }
 }
@@ -254,7 +254,7 @@ Translation "250:250=3:3", "192:192=9:9", "198:198=11:11"
 States
 {
 Pickup2:
-TNT1 A 0 ACS_NamedExecuteAlways("GummiEXP",0,GummiEXP*(CallACS("RoundCount")+1),Type_Dark)
+TNT1 A 0 ACS_NamedExecuteAlways("GummiEXP",0,GummiEXP+(CallACS("RoundCount")*2),Type_Dark)
 stop
 }
 }
@@ -267,7 +267,7 @@ Translation "250:250=35:35", "192:192=236:236", "198:198=237:237"
 States
 {
 Pickup2:
-TNT1 A 0 ACS_NamedExecuteAlways("GummiEXP",0,GummiEXP*(CallACS("RoundCount")+1),Type_Fairy)
+TNT1 A 0 ACS_NamedExecuteAlways("GummiEXP",0,GummiEXP+(CallACS("RoundCount")*2),Type_Fairy)
 stop
 }
 }

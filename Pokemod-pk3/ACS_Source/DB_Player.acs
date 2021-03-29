@@ -38,6 +38,19 @@ Function Int GetPokeValue (Int Mode)
 return OutPut;
 }
 
+Function void SetPokeValue (Int Mode, Int Value)
+{
+	int OutPut;
+	switch(Mode)
+	{
+	Case POKEDEXNUM:  SetCvar(StrParam(s:"PlayerDEXNum_",i:PlayerNumber()),Value); Break;
+	Case POKELEVEL: SetCvar(StrParam(s:"PlayerLevel_",i:PlayerNumber()),Value); Break;
+	Case POKEEXP: SetCvar(StrParam(s:"PlayerEXP_",i:PlayerNumber()),Value); Break;
+	Case POKEBP: SetCvar(StrParam(s:"Player",i:PlayerNumber(),s:"_BP"),Value); Break;
+	}
+
+
+}
 
 Function Int GetPlayerPokeValue (Int P, Int Mode)
 {
@@ -50,9 +63,22 @@ Function Int GetPlayerPokeValue (Int P, Int Mode)
 	Case POKEBP: OutPut = GetCvar(StrParam(s:"Player",i:P,s:"_BP")); Break;
 	}
 
-
-
 return OutPut;
+}
+
+
+Function void SetPlayerPokeValue (Int P, Int Mode, Int Value)
+{
+	int OutPut;
+	switch(Mode)
+	{
+	Case POKEDEXNUM:  SetCvar(StrParam(s:"PlayerDEXNum_",i:P),Value); Break;
+	Case POKELEVEL: SetCvar(StrParam(s:"PlayerLevel_",i:P),Value); Break;
+	Case POKEEXP: SetCvar(StrParam(s:"PlayerEXP_",i:P),Value); Break;
+	Case POKEBP: SetCvar(StrParam(s:"Player",i:P,s:"_BP"),Value); Break;
+	}
+
+
 }
 
 Script "GetPokeValue" (Int Mode)

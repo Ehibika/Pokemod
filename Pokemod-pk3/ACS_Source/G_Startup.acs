@@ -19,6 +19,7 @@
 #import "Dex_Evo.acs"
 #import "Dex_Leveling.acs"
 #import "Dex_BaseStats.acs"
+#import "Dex_Skin.acs"
 #import "A_Skins.acs"
 #import "A_Leveling.acs"
 
@@ -157,6 +158,12 @@ Script "PKMNACS_StartupScript" (int BaseDex)
 
 	Int PlayerDEXNum = GetPokeValue(POKEDEXNUM);
 
+	/*Anti-random mechanism, if the player is on random, set them to the first class
+	they roll*/
+
+	//log(i:GetUserCvar(Playernumber(),"PlayerClass"));
+	//ACS_NamedExecuteAlways("SetRandomToClass",0);
+
 
 	if(PlayerDEXNum == -1){CaseNum = Fresh;} //PlayerDexNum is -1, so we are fresh
 	Else if(BaseDex == PlayerDEXNum){CaseNum = Base;}//Everything is in order
@@ -206,6 +213,7 @@ Script "PKMNACS_StartupScript" (int BaseDex)
 			ACS_NamedExecuteAlways("SetPKMNLevel",0,GetSpawnLevel(),1);
 			ACS_NamedExecuteAlways("GetGenericAttack",0,BaseDex);
 			ACS_NamedExecuteAlways("GiveStartingFund",0);
+			ACS_NamedExecuteAlways("GetBankEXP",0,PlayerNumber());
 			ACS_NamedExecuteWithResult("SetUnDisguise",PlayerNumber());
 			GiveStartingMoves(BaseDex);
 			UpdateSbarEXP();
@@ -229,6 +237,7 @@ Script "PKMNACS_StartupScript" (int BaseDex)
 			ACS_NamedExecuteAlways("StatInitializer",0,BaseDex);
 			ACS_NamedExecuteAlways("SetPlayerType",0);
 			ACS_NamedExecuteAlways("SetPKMNLevel",0,GetSpawnLevel(),1);
+			ACS_NamedExecuteAlways("GetBankEXP",0,PlayerNumber());
 			ACS_NamedExecuteAlways("GetGenericAttack",0,BaseDex);
 			ACS_NamedExecuteWithResult("SetUnDisguise",PlayerNumber());
 			GiveStartingMoves(BaseDex);
@@ -497,3 +506,15 @@ Script "RentalBotCheck" (void)
 
 #endregion
 //#endregion
+
+Script "SetRandomToClass" ENTER CLIENTSIDE
+{
+	if(Playernumber() == ConsolePlayerNumber() && GetCVar("sv_RandomCatcher"))
+	{
+	delay(5);
+	//log(i:GetUserCvar(Playernumber(),"PlayerClass"));
+	if(GetUserCvar(Playernumber(),"PlayerClass") == -1){ConsoleCommand(StrParam(s:"PlayerClass ",s:SkinDEX[GetPokeValue(POKEDEXNUM)][0]));}
+	//log(i:GetUserCvar(Playernumber(),"PlayerClass"));
+	}
+	
+}

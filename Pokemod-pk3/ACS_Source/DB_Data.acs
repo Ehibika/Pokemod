@@ -31,7 +31,8 @@ Function int CSCCButtonCheck (int NewButtons, int OldButtons, int Which)
 
 Script "PKMNACS_ButtonCheck" (int theButton)
 {
-SetResultValue(PressingButton(theButton));
+if(!CheckInventory("NetCheck_Freeze")){SetResultValue(PressingButton(theButton));}
+else SetResultValue(0);
 }
 
 Script "PKMNACS_PressingBothAttack" (void)

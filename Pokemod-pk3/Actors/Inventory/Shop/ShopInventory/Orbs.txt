@@ -366,3 +366,302 @@ stop
 
 //#endregion
 
+//#region -=- Haze orb -=-
+
+actor HazeOrb : ConsumableBase 
+{
+inventory.amount 1
+inventory.maxamount 5
+inventory.pickupmessage "$PU_HAZEORB"
+Tag "$TAG_HAZEORB"
+inventory.icon "EORBI"
+Inventory.PickupSound "Misc/GetItem"
++INVBAR
++COUNTITEM
+Translation "250:250=202:202", "192:192=74:74", "198:198=197:197"
+scale 2.0
+States
+{
+Spawn:
+PITM F 0 
+PITM F 6
+Goto Spawn
+use1:
+TNT1 A 0 A_SpawnitemEX("HazeOrbCast",0,0,0,0,0,0,0,0)
+stop
+}
+}
+actor MaxHazeOrb : Ammo {inventory.maxamount 5}
+
+actor HazeOrbCast : BasicHelper
+{
+scale 2.5
+Renderstyle "Normal"
++MISSILE
+ReactionTime 12
+Alpha 0.2
+speed 7
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_PlaySoundEX("weapon/mirrorabsorb","Voice")
+CRYE AAAAAABBCCDDEEAAAA 1 A_Warp(AAPTR_TARGET,0,0,80,0,WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE)
+TNT1 A 5 A_SpawnitemEX("OrbFlashFX",0,0,0,0,0,0,0,0)
+TNT1 A 0 A_PlaySoundEx("Move/Haze","Voice")
+TNT1 A 3 ACS_NamedExecuteAlways("PKMNACS_RadiusGive",0,Haze_ItemA,500,RG_ENEMY)
+TNT1 A 10
+stop
+}
+}
+
+//#endregion
+
+//#region -=- Mist orb -=-
+
+actor MistOrb : ConsumableBase 
+{
+inventory.amount 1
+inventory.maxamount 5
+inventory.pickupmessage "$PU_MISTORB"
+Tag "$TAG_MISTORB"
+inventory.icon "EORBI"
+Inventory.PickupSound "Misc/GetItem"
++INVBAR
++COUNTITEM
+Translation "250:250=202:202", "192:192=74:74", "198:198=197:197"
+scale 2.0
+States
+{
+Spawn:
+PITM F 0 
+PITM F 6
+Goto Spawn
+use1:
+TNT1 A 0 A_SpawnitemEX("MistOrbCast",0,0,0,0,0,0,0,0)
+stop
+}
+}
+actor MaxMistOrb : Ammo {inventory.maxamount 5}
+
+actor MistOrbCast : BasicHelper
+{
+scale 2.5
+Renderstyle "Normal"
++MISSILE
+ReactionTime 12
+Alpha 0.2
+speed 7
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_PlaySoundEX("weapon/mirrorabsorb","Voice")
+CRYE AAAAAABBCCDDEEAAAA 1 A_Warp(AAPTR_TARGET,0,0,80,0,WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE)
+TNT1 A 5 A_SpawnitemEX("OrbFlashFX",0,0,0,0,0,0,0,0)
+TNT1 A 0 A_PlaySoundEx("Move/Mist","Voice")
+TNT1 A 3 ACS_NamedExecuteAlways("PKMNACS_RadiusGive",0,Mist_Item,500,RG_TEAM|RG_SELF)
+TNT1 A 10
+stop
+}
+}
+
+//#endregion
+
+//#region -=- Geddon orb -=-
+
+actor GeddonOrb : ConsumableBase 
+{
+inventory.amount 1
+inventory.maxamount 5
+inventory.pickupmessage "$PU_GEDDONORB"
+Tag "$TAG_GEDDONORB"
+inventory.icon "EORBI"
+Inventory.PickupSound "Misc/GetItem"
++INVBAR
++COUNTITEM
+Translation "250:250=202:202", "192:192=74:74", "198:198=197:197"
+scale 2.0
+States
+{
+Spawn:
+PITM F 0 
+PITM F 6
+Goto Spawn
+use1:
+TNT1 A 0 A_SpawnitemEX("GeddonOrbCast",0,0,0,0,0,0,0,0)
+stop
+}
+}
+actor MaxGeddonOrb : Ammo {inventory.maxamount 2}
+
+actor GeddonOrbCast : BasicHelper
+{
+scale 2.5
+Renderstyle "Normal"
++MISSILE
+ReactionTime 12
+Alpha 0.2
+speed 7
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_PlaySoundEX("weapon/mirrorabsorb","Voice")
+CRYE AAAAAABBCCDDEEAAAA 1 A_Warp(AAPTR_TARGET,0,0,80,0,WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE)
+TNT1 A 5 A_SpawnitemEX("OrbFlashFX",0,0,0,0,0,0,0,0)
+TNT1 A 0 A_SpawnitemEX("Geddon_Hitbox",0,0,0,0,0,0,0,0)
+TNT1 A 10
+stop
+}
+}
+
+Const int GeddonRad = 400;
+
+
+actor Geddon_Hitbox : DracoMeteorHitbox
+{
+DamageType "SelfDestruct"
+obituary "$OB_GEDDONORB"
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_playSoundEx("misc/alarmlong","Weapon")
+TNT1 AAAAAA 4 A_SpawnItemEx("GeddonWarnWave",0,0,0,0,0,0,0,1)
+TNT1 A 0 A_playSoundEx("weapon/astrocrush","SoundSlot6")
+Spawn2:
+TNT1 A 0 A_SpawnItemEx("GeddonWarnWave",0,0,0,0,0,0,0,1)
+TNT1 AAA 1 A_SpawnItemEx("GeddonMeteorSpawner",random(-GeddonRad,GeddonRad),random(-GeddonRad,GeddonRad),0,0,0,320,0,1)
+TNT1 A 0 //A_Countdown
+TNT1 AAA 1 A_SpawnItemEx("GeddonMeteorSpawner",random(-GeddonRad,GeddonRad),random(-GeddonRad,GeddonRad),0,0,0,320,0,1)
+TNT1 A 0 A_Countdown
+loop
+
+Death:
+TNT1 A 0 
+stop
+}
+}
+
+actor GeddonWarnWave : BasicHelper
+{
+translation "198:198=45:45", "192:192=45:45"
++CLIENTSIDEONLY
+	reactiontime 15
+	var int user_angle;
+	States
+	{
+		Spawn:
+		TNT1 A 0
+		TNT1 A 0 //A_SetUserVar("user_angle", random(0, 30))
+		SpawnLoop:
+		TNT1 A 0 A_SpawnItemEx("DracoMeteorWarnFX", GeddonRad*0.75, 0, -(z-floorz)+24, 5, 0, 0, angle+user_angle, 1061)
+		TNT1 A 0 A_SpawnItemEx("DracoMeteorWarnFX", -GeddonRad*0.75, 0, -(z-floorz)+24, -5, 0, 0, angle+user_angle, 1061)
+		TNT1 A 0 A_SetUserVar("user_angle", user_angle + 12)
+		TNT1 A 0 A_Countdown
+		loop
+		Death:
+		TNT1 A 0
+		stop
+	}
+}
+
+actor GeddonMeteorSpawner : DracoMeteorMeteorSpawner
+{
+States
+{
+Spawn:
+TNT1 A 0 
+TNT1 A 1 A_CountDown
+loop
+Death:
+TNT1 A 0
+TNT1 A 1
+TNT1 A 0 A_SpawnItemEx("GeddonMeteor",0,0,0,0,0,-35,0,1)
+TNT1 A 1
+stop
+}
+}
+
+actor GeddonMeteor : DracoMeteor
+{
+DamageType "SelfDestruct"
+obituary "$OB_GEDDONORB"
+States
+{
+Spawn:
+DMTO B 0
+DMTO BBBCCCDDD 1 A_JumpIf(ceilingz-z>8, "Spawn2")
+DMTO B 0 A_JumpIf(momz==0,"Death")
+DMTO B 0 A_CountDown
+Goto Spawn+2
+Spawn2:
+DMTO B 0 A_ChangeFlag("RIPPER", 0)
+DMTO B 0 A_ChangeFlag("NOINTERACTION",0)
+DMTO BCD 3 
+DMTO B 0 A_JumpIf(momz==0,"Death")
+DMTO B 0 A_CountDown
+Goto Spawn2+2
+Death:
+ASEX A 0 A_playSoundEx("weapon/astrocrush2","Weapon")
+ASEX A 0 A_ChangeFlag(NOGRAVITY,1)
+ASEX A 0 A_Explode(MBP_Dracometeor,128,1,0,128)
+ASEX ABCDEF 2
+stop
+}
+}
+//#endregion
+
+//#region -=- Freeze orb -=-
+
+actor FreezeOrb : ConsumableBase 
+{
+inventory.amount 1
+inventory.maxamount 5
+inventory.pickupmessage "$PU_FREEZEORB"
+Tag "$TAG_FREEZEORB"
+inventory.icon "EORBI"
+Inventory.PickupSound "Misc/GetItem"
++INVBAR
++COUNTITEM
+Translation "250:250=202:202", "192:192=74:74", "198:198=197:197"
+scale 2.0
+States
+{
+Spawn:
+PITM F 0 
+PITM F 6
+Goto Spawn
+use1:
+TNT1 A 0 A_SpawnitemEX("FreezeOrbCast",0,0,0,0,0,0,0,0)
+stop
+}
+}
+actor MaxFreezeOrb : Ammo {inventory.maxamount 2}
+
+Const int FreezeOrb_Item = 34;
+
+actor FreezeOrbCast : BasicHelper
+{
+scale 2.5
+Renderstyle "Normal"
++MISSILE
+ReactionTime 12
+Alpha 0.2
+speed 7
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_PlaySoundEX("weapon/mirrorabsorb","Voice")
+CRYE AAAAAABBCCDDEEAAAA 1 A_Warp(AAPTR_TARGET,0,0,80,0,WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE)
+TNT1 A 5 A_SpawnitemEX("OrbFlashFX",0,0,0,0,0,0,0,0)
+TNT1 A 0 A_PlaySoundEx("Move/Freeze","Voice")
+TNT1 A 3 ACS_NamedExecuteAlways("PKMNACS_RadiusGive",0,FreezeOrb_Item,500,RG_ENEMY|RG_SELF)
+TNT1 A 10
+stop
+}
+}
+
+//#endregion

@@ -1,0 +1,13 @@
+//#region -=-=- Beta B1.2 -=-=-
+/*
+ *
+ * ===|Gameplay Changes|===
+ * 
+ * ===|Move Changes|===
+ * 
+ * Fixed missing type definitions for the following moves
+ *  Psywave
+ *  Psybeam
+ *  
+ * 
+ */

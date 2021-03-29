@@ -1,6 +1,8 @@
 
 #library "DB_DamageDisplay"
+#Import "DB_Data.acs"
 #include "zcommon.acs"
+#include "8bdmlib.acs"
 
 script "PKMNACS_DDINITIATE" RESPAWN
 {
@@ -158,6 +160,15 @@ script "PKMNACS_DDTEXTCOL" (void) CLIENTSIDE
 			SetActorVelocity(0,0,0,2.0,FALSE, FALSE);
 		Thing_SetTranslation(0, ActivatorTID()-DDNUMTID);
 		SetActorProperty(0,APROP_ALPHA,0.8);
+
+		//Now also handles addaptive scaling
+		int TextScale = ValueMap(xyzDistance(CPLN+1000,0),1000,0,50,10);
+		if(TextScale > 100)TextScale = 100;
+
+		TextScale = TextScale << 16;
+		TextScale = Fixedmul(TextScale,0.1);
+		SetActorProperty(0,APROP_ScaleX,TextScale);
+		SetActorProperty(0,APROP_Scaley,TextScale);
 		}
 	else{Thing_Remove(0);}
 }

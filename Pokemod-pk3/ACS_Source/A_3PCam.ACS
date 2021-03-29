@@ -113,7 +113,7 @@ Script "3rdCameraHandler" (int p_num) ClientSide
 		//ZoomMode = PressingButton2(GetPlayerInput(-1, INPUT_BUTTONS),BT_ZOOM);
 		int RoofDist = GetActorCeilingZ (HostTID) - GetActorZ (HostTID);
 		int PlayerHeight = 30.0;
-		int a = GetActorAngle (0);
+		int a = GetActorAngle (0) + Fixedmul(AOFFSET,GetCamSetting(3,ZoomMode));
 		int p = GetActorPitch (0) + Fixedmul(POFFSET,GetCamSetting(1,ZoomMode));
 		int x = GetActorX (HostTID) ;
 		int y = GetActorY (HostTID) ;
@@ -300,4 +300,36 @@ Script "CamGrabObject" (void)
 
 }
 
+Function int CheckZoomMode (int SelfNumber)
+{
+	int OutPut;
+	int ZoomKey = PressingButton2(GetPlayerInput(selfNumber, INPUT_BUTTONS),BT_ZOOM);
+	if(GetUserCVar(selfNumber,"Sv_ZoomToggle")) {OutPut = GetUserCVar(selfNumber,"ZoomToggle");}
+	else{OutPut = ZoomKey;}
+
+	return OutPut;
+
+}
+
+Script "ClientsideAlpha" (void) CLIENTSIDE
+{
+	//For use with particle actors to have them match the alpha of the player
+	int selfNumber = ConsolePlayerNumber();
+	int ZoomMode = CheckZoomMode(selfNumber);
+	Bool Result;
+
+	if(CheckCamAlphaSet(0)
+	&& GetActorproperty(0,APROP_ALPHA) > GetCamPlayerAlphaSetting(selfNumber,ZoomMode))
+	{
+		if(GetActorproperty(0,APROP_RenderStyle) == STYLE_Translucent
+		|| GetActorproperty(0,APROP_RenderStyle) == STYLE_Add
+		|| GetActorproperty(0,APROP_RenderStyle) == STYLE_Subtract)
+		{SetActorProperty(0,Aprop_renderstyle,STYLE_Translucent);}
+	
+	SetActorProperty(0,APROP_ALPHA,GetCamPlayerAlphaSetting(selfNumber,ZoomMode));
+	Result = true;
+	}
+
+	SetResultValue(Result);
+}
 

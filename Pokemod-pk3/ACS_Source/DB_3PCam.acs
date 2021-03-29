@@ -16,6 +16,7 @@
 #libdefine ADJUST_R	8	//Amount to adjust the camera by
 #libdefine VIEW_HEIGHT	72.0	//The approximate height of the player's view 41
 #libdefine POFFSET 0.10 //Pitch offset
+#libdefine AOFFSET 0.014 //Angle offset
 
 #LIBDEFINE OFFSET_LEFT -0.08
 #LIBDEFINE OFFSET_RIGHT 0.08
