@@ -3,6 +3,18 @@
  *
  * ===|Gameplay Changes|===
  * 
+ * =Pokemon Changes=
+ * [treeco family]
+ * base stats shifted, having ATK and sp.atk flipped
+ * 
+ * [Blastoise]
+ * Base stats changed to make blastoise more of a bulky sp.atker
+ * 
+ * =Pokemon with minor moveset changes=
+ * 
+ * =Pokemon with major moveset changes=
+ * Treecko Family
+ * 
  * ===|Move Changes|===
  * 
  * Fixed missing type definitions for the following moves
