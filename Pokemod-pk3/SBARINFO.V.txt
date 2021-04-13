@@ -19,6 +19,8 @@ statusbar fullscreen, forcescaled, FullScreenOffsets
 		}
 	
 	DrawString "SMALLFONT",White,WeaponTag, 15, -55,0,alignment(left);
+	InInventory AltAttackMove, 1{DrawString "SMALLFONT",MenuCyan,WeaponTag, 15, -55,0,alignment(left);}
+	InInventory AltAttackMove2, 1{DrawImage "MOICONR", 4, -55;}
 	//InInventory AmmoNumberFlag, 1
 	//{
 		WeaponAmmo not BusterAmmo

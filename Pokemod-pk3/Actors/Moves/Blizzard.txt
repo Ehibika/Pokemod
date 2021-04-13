@@ -3,7 +3,7 @@ actor BlizzardMove : WepMasterBase
 Tag "Blizzard"
 obituary "$OB_BLIZZARD"
 Weapon.AmmoUse 1
-Weapon.AmmoGive 1
+Weapon.AmmoGive 5
 weapon.ammotype "BlizzardPP"
 scale 2.0
 Inventory.Pickupmessage "$PU_MEGABUSTER"
@@ -70,7 +70,7 @@ Goto Ready
 //[+]========================================================================[+]
 //-----------------------------|Ammo & Inventory|------------------------------
 //[+]========================================================================[+]
-actor BlizzardPP : Ammo {inventory.amount 1 inventory.Maxamount 1}
+actor BlizzardPP : Ammo {inventory.amount 1 inventory.Maxamount 5}
 
 Actor BlizzardProtect : powerprotection
 {

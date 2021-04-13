@@ -1900,6 +1900,7 @@ Script "PKMN_FreezePlayer" (int Type, int Priority)
 			Switch(Priority)
 			{
 			case FREEZE_DASH: 
+			case FREEZE_REMOTE: 
 				if(!CheckInventory("SleepMark")
 					&& !CheckInventory("RestMark")
 					&& !CheckInventory("FreezeMark")
@@ -1954,7 +1955,7 @@ Script "PKMN_DeFreezePlayer" (void)
 		&& FreezeTimer>0)
 		{
 			//log(s:"Count ",i:FreezeTimer);
-			if(!CheckInventory("InMenu")){FreezeTimer--;}
+			if(!CheckInventory("InMenu") && !CheckInventory("InRemoteMode")){FreezeTimer--;}
 			Delay(1);
 		}
 	if(CheckPlayerFreezeState()){SetPlayerFreezeState(0); /*log(s:"Defreezer ");*/}

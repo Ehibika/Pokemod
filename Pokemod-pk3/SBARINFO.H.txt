@@ -19,6 +19,8 @@ InInventory not NoArmorBar, 1
 	}
 
 DrawString "SMALLFONT",White,WeaponTag, 15, 140,0,alignment(left);
+InInventory AltAttackMove, 1{DrawString "SMALLFONT",MenuCyan,WeaponTag, 15, 140,0,alignment(left);}
+InInventory AltAttackMove2, 1{DrawImage "MOICONR", 4, 140;}
 //InInventory AmmoNumberFlag, 1
 //{
 	WeaponAmmo not BusterAmmo

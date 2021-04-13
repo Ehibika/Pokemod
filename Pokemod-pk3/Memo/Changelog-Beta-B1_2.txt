@@ -8,6 +8,51 @@
  * Fixed missing type definitions for the following moves
  *  Psywave
  *  Psybeam
+ * 
+ * several moves now have their own altfires to expand their functionality moves with altfire changes will be mentioned as below
+ * 
+ * [Thunderbolt]
+ * Now has a ground targeted altfire for burst damage
+ * 
+ * [Thunder]
+ * Main fire ground targets, altfire remote targets
  *  
+ * [Confusion]
+ * Main fire ground targets, altfire remote targets
+ * Confusion proc rate increased
+ * 
+ * [Psychic]
+ * Main fire ground targets, altfire remote targets
+ * 
+ * [Psyshock]
+ * Main fire ground targets, altfire remote targets
+ * 
+ * [Barrier]
+ * Main fire ground targets, altfire remote targets
+ * 
+ * [FutureSight]
+ * Main fire ground targets, altfire remote targets
+ * 
+ * [Earthpower/Venoshock]
+ * Altfire now leaves a landmine version of the mainfire
+ * 
+ * [DracoMeteor]
+ * Main fire ground targets, altfire remote targets
+ * PP increased from 1 to 5
+ * PP recovery is set to standard
+ * 
+ * [Blizzard]
+ * PP increased from 1 to 5
+ * PP recovery is set to standard
+ * 
+ * [PowerGem]
+ * Main fire now launches a stronger energy beam
+ * Altfire spawns turret gems
+ * PP increased from 5 to 20
+ * PP recovery is set to half
+ * 
+ * [DreamEater]
+ * Power increased
+ * 
  * 
  */

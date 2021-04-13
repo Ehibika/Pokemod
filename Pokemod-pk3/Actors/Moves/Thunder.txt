@@ -52,7 +52,7 @@ Goto NoAmmo
 AltFire.Begin:
 "####" B 1
 "####" C 0 A_REfire("AltFire.Begin")
-"####" A 0 A_GiveInventory("DashSet_A")
+"####" A 0 A_GiveInventory("RemoteMoveLock")
 "####" A 0 A_GiveInventory("ThunderRCFlag")
 "####" A 0 A_Stop
 "####" A 0 A_SpawnItemEX("Thunder_Remote")
@@ -71,7 +71,7 @@ Goto AltFire.Remote
 
 AltFire.After:
 "####" B 1 A_GiveInventory("FullRecovery_D")
-"####" A 0 A_GiveInventory("DashSetOff")
+"####" A 0 A_GiveInventory("RemoteMoveUnLock")
 AltFire.After2:
 "####" B 1
 "####" B 0 A_Jumpif(CallACS("PKMNACS_ButtonCheck",BT_ALTATTACK)==1,"AltFire.After2")

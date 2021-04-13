@@ -27,7 +27,6 @@ Goto Fire.Aim
 
 Fire.Aim:
 "####" B 1 A_FireCustomMissile("PsyshockRingSpawner",0,0,0,Aim_OverHead)
-//"####" B 0 A_FireCustomMissile("PsyshockGraphicSpawner",0,0,0,Aim_OverHead)
 "####" C 0 A_JumpIfInventory("IsBot",1,"Fire.Bullet")
 "####" C 0 A_REfire("Fire.Aim")
 "####" B 0 A_Jump(256,"Fire.Bullet")
@@ -45,6 +44,40 @@ Fire.After:
 "####" B 0 A_Jump(256,"Fire.End")
 Goto Fire.End
 
+
+AltFire:
+"####" BBB 1 A_Jumpif(CallACS("CheckWeaponFire",RC_A)==1,"Altfire.Begin")
+"####" B 0 A_Jump(256,"NoAmmo")
+Goto NoAmmo
+
+Altfire.Begin:
+"####" B 1
+"####" C 0 A_REfire("Altfire.Begin")
+"####" A 0 A_GiveInventory("RemoteMoveLock")
+"####" A 0 A_GiveInventory("PsyshockRCFlag")
+"####" A 0 A_Stop
+"####" A 0 A_SpawnItemEX("Psyshock_Remote")
+"####" B 0 A_Jump(256,"Altfire.Remote")
+Goto Altfire.Remote
+
+
+Altfire.Remote:
+"####" B 1 A_Jumpif(CallACS("PKMNACS_ButtonCheck",BT_ALTATTACK)==1,"Altfire.After")
+"####" B 1 A_Jumpif(CallACS("PKMNACS_ButtonCheck",BT_RELOAD)==1,"Altfire.RemoteReload")
+"####" B 0 A_JumpifInventory("PsyshockRCFlag",1,"Altfire.Remote")
+Goto Altfire.After
+Altfire.RemoteReload:
+TNT1 A 0 A_GiveInventory("PPRecoveryItem") 
+Goto Altfire.Remote
+
+Altfire.After:
+"####" B 1 A_GiveInventory("Psyshock_Recovery_D")
+"####" A 0 A_GiveInventory("RemoteMoveUnLock")
+Altfire.After2:
+"####" B 1
+"####" B 0 A_Jumpif(CallACS("PKMNACS_ButtonCheck",BT_ALTATTACK)==1,"Altfire.After2")
+"####" B 0 A_Jump(256,"Fire.End")
+Goto Fire.End
 }
 }
 
@@ -71,8 +104,28 @@ Goto Ready
 //[+]========================================================================[+]
 actor PsyshockPP : Ammo {inventory.amount 1 inventory.Maxamount 10}
 
+actor PsyshockRCFlag : Powerup {inventory.amount 1 powerup.duration 35 }
 
 Const int PsyshockRad = 150;
+Const int Psyshock_Forward = 150;
+Const int Psyshock_Range = 3000;
+
+actor PsyshockPPTaker : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 ACS_NamedExecuteAlways("TakePP",0,Move_Psyshock,1)
+stop
+}
+}
+
 
 Actor PsyshockProtect : powerprotection
 {
@@ -92,6 +145,75 @@ actor Psyshock_Recovery_D : FullRecovery_D{Powerup.Duration 70}
 //[+]========================================================================[+]
 //--------------------------------|Projectiles |--------------------------------
 //[+]========================================================================[+]
+actor Psyshock_Remote 
+{
+Speed 5
++MISSILE
++THRUACTORS
++NOCLIP
++FLOORHUGGER
++NOEXPLODEFLOOR
+//+SLIDESONWALLS
+//+BOUNCEONWALLS 
++NOGRAVITY
+Health 5
+Damage (0)
+DamageType "Psyshock"
+obituary "$OB_Psyshock"
+radius 5
+Reactiontime 50
+height 16
+scale 3.5
+Args 0, 60
+States
+{
+Spawn:
+TNT1 A 0 
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+TNT1 A 0 ACS_NamedExecuteAlways("CamGrabObject",0)
+TNT1 A 0 ACS_NamedExecuteAlways("RemoteControlActor",0,15.0,Psyshock_Range)
+TNT1 A 0 A_TransferPointer(AAPTR_TARGET,AAPTR_DEFAULT,AAPTR_TRACER,AAPTR_DEFAULT)
+Spawn2:
+TNT1 A 1 A_JumpIfCloser(Psyshock_Range-1,"Spawn3")
+TNT1 A 0 A_SpawnItemEx("PsyshockRingGuide2",Psyshock_Forward,0,0,0,0,0,0,1)
+TNT1 A 0 A_GiveToTarget("PsyshockRCFlag",1)
+TBLA A 0
+loop
+Spawn3:
+TNT1 A 1 A_SpawnItemEx("PsyshockRingGuide",Psyshock_Forward,0,0,0,0,0,0,1)
+
+TNT1 A 0 A_GiveToTarget("PsyshockRCFlag",1)
+TBLA A 0
+goto Spawn2
+
+Trigger: //Check PP
+TNT1 A 0 A_JumpifInTargetInventory("PsyshockPP",1,"Trigger2")
+goto Decline
+Trigger2: // Check Recovery Frame
+TNT1 A 0 A_JumpifInTargetInventory("Recovery_D",1,"Decline")
+goto Detonate
+
+Detonate: // Cast the attack!
+TNT1 A 0 A_GiveToTarget("PsyshockPPTaker",1)
+TNT1 A 0 A_SpawnItemEx("PsyshockBurst",Psyshock_Forward,0,-(z-floorz),0,0,0,0,1)
+TNT1 A 0 A_GiveToTarget("Psyshock_Recovery_D",1)
+goto PostTrigger
+
+Decline: //Cannot cast the attack
+TNT1 A 0 A_GiveToTarget("DeclineSoundCue",1)
+goto PostTrigger
+
+PostTrigger:
+TNT1 AAAAA 1 A_SpawnItemEx("PsyshockRingGuide",Psyshock_Forward,0,0,0,0,0,0,1)
+Goto Spawn2
+
+Death:
+BSTG AAAAAA 0 A_SpawnItemEx("RazorLeafParticle", 0, 0, 28, 256/24, 256/24, random2(256/24), random(0, 359),1)
+SPKH ABCD 2
+stop
+}
+}
+
 actor PsyshockRingGuide : BasicHelper
 {
 translation "198:198=220:220", "192:192=229:229"
@@ -114,6 +236,27 @@ translation "198:198=220:220", "192:192=229:229"
 	}
 }
 
+actor PsyshockRingGuide2 : BasicHelper
+{
+	+CLIENTSIDEONLY
+	reactiontime 15
+	var int user_angle;
+	States
+	{
+		Spawn:
+		TNT1 A 0
+		TNT1 A 0 //A_SetUserVar("user_angle", random(0, 30))
+		SpawnLoop:
+		TNT1 A 0 A_SpawnItemEx("PsyshockGuideDot2", PsyshockRad, 0, -(z-floorz)+24, 0, 0, 0, angle+user_angle, 1061)
+		TNT1 A 0 A_SpawnItemEx("PsyshockGuideDot2", -PsyshockRad, 0, -(z-floorz)+24, 0, 0, 0, angle+user_angle, 1061)
+		TNT1 A 0 A_SetUserVar("user_angle", user_angle + 12)
+		TNT1 A 0 A_Countdown
+		loop
+		Death:
+		TNT1 A 0
+		stop
+	}
+}
 
 actor PsyshockRingSpawner : FastProjectile
 {
@@ -165,6 +308,8 @@ stop
 }
 */
 actor PsyshockGuideDot : BasicGuideDot {}
+
+actor PsyshockGuideDot2 : BasicGuideDot {StencilColor "#F42A0C"}
 
 actor PsyshockSpawner : FastProjectile
 {

@@ -45,8 +45,39 @@ Fire.After:
 Goto Fire.End
 
 
+AltFire:
+"####" BBB 1 A_Jumpif(CallACS("CheckWeaponFire",RC_A)==1,"Altfire.Begin")
+"####" B 0 A_Jump(256,"NoAmmo")
+Goto NoAmmo
+
+Altfire.Begin:
+"####" B 1
+"####" C 0 A_REfire("Altfire.Begin")
+"####" A 0 A_GiveInventory("RemoteMoveLock")
+"####" A 0 A_GiveInventory("FutureSightRCFlag")
+"####" A 0 A_Stop
+"####" A 0 A_SpawnItemEX("FutureSight_Remote")
+"####" B 0 A_Jump(256,"Altfire.Remote")
+Goto Altfire.Remote
 
 
+Altfire.Remote:
+"####" B 1 A_Jumpif(CallACS("PKMNACS_ButtonCheck",BT_ALTATTACK)==1,"Altfire.After")
+"####" B 1 A_Jumpif(CallACS("PKMNACS_ButtonCheck",BT_RELOAD)==1,"Altfire.RemoteReload")
+"####" B 0 A_JumpifInventory("FutureSightRCFlag",1,"Altfire.Remote")
+Goto Altfire.After
+Altfire.RemoteReload:
+TNT1 A 0 A_GiveInventory("PPRecoveryItem") 
+Goto Altfire.Remote
+
+Altfire.After:
+"####" B 1 A_GiveInventory("FutureSight_Recovery_C")
+"####" A 0 A_GiveInventory("RemoteMoveUnLock")
+Altfire.After2:
+"####" B 1
+"####" B 0 A_Jumpif(CallACS("PKMNACS_ButtonCheck",BT_ALTATTACK)==1,"Altfire.After2")
+"####" B 0 A_Jump(256,"Fire.End")
+Goto Fire.End
 
 }
 }
@@ -74,12 +105,103 @@ Goto Ready
 //[+]========================================================================[+]
 actor FutureSightPP : Ammo {inventory.amount 1 inventory.Maxamount 10}
 
+actor FutureSightRCFlag : Powerup {inventory.amount 1 powerup.duration 35 }
 
 Const int FutureSightRad = 150;
 Const int FutureSightEntiTID = 11;
+Const int FutureSight_Forward = 150;
+Const int FutureSight_Range = 3000;
+
+actor FutureSightPPTaker : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 ACS_NamedExecuteAlways("TakePP",0,Move_FutureSight,1)
+stop
+}
+}
+
+actor FutureSight_Recovery_C : FullRecovery_C{Powerup.Duration 52}
 //[+]========================================================================[+]
 //--------------------------------|Projectiles |--------------------------------
 //[+]========================================================================[+]
+actor FutureSight_Remote 
+{
+Speed 5
++MISSILE
++THRUACTORS
++NOCLIP
++FLOORHUGGER
++NOEXPLODEFLOOR
+//+SLIDESONWALLS
+//+BOUNCEONWALLS 
++NOGRAVITY
+Health 5
+Damage (0)
+DamageType "FutureSight"
+obituary "$OB_FutureSight"
+radius 5
+Reactiontime 50
+height 16
+scale 3.5
+Args 0, 60
+States
+{
+Spawn:
+TNT1 A 0 
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+TNT1 A 0 ACS_NamedExecuteAlways("CamGrabObject",0)
+TNT1 A 0 ACS_NamedExecuteAlways("RemoteControlActor",0,15.0,FutureSight_Range)
+TNT1 A 0 A_TransferPointer(AAPTR_TARGET,AAPTR_DEFAULT,AAPTR_TRACER,AAPTR_DEFAULT)
+Spawn2:
+TNT1 A 1 A_JumpIfCloser(FutureSight_Range-1,"Spawn3")
+TNT1 A 0 A_SpawnItemEx("FutureSightRingGuide2",FutureSight_Forward,0,0,0,0,0,0,1)
+TNT1 A 0 A_GiveToTarget("FutureSightRCFlag",1)
+TBLA A 0
+loop
+Spawn3:
+TNT1 A 1 A_SpawnItemEx("FutureSightRingGuide",FutureSight_Forward,0,0,0,0,0,0,1)
+
+TNT1 A 0 A_GiveToTarget("FutureSightRCFlag",1)
+TBLA A 0
+goto Spawn2
+
+Trigger: //Check PP
+TNT1 A 0 A_JumpifInTargetInventory("FutureSightPP",1,"Trigger2")
+goto Decline
+Trigger2: // Check Recovery Frame
+TNT1 A 0 A_JumpifInTargetInventory("Recovery_C",1,"Decline")
+goto Detonate
+
+Detonate: // Cast the attack!
+TNT1 A 0 A_GiveToTarget("FutureSightPPTaker",1)
+TNT1 A 0 A_SpawnItemEx("FutureSightTrap",FutureSight_Forward,0,-(z-floorz)+60,0,0,0,0,1)
+TNT1 A 0 A_GiveToTarget("FutureSight_Recovery_C",1)
+goto PostTrigger
+
+Decline: //Cannot cast the attack
+TNT1 A 0 A_GiveToTarget("DeclineSoundCue",1)
+goto PostTrigger
+
+PostTrigger:
+TNT1 AAAAA 1 A_SpawnItemEx("FutureSightRingGuide",FutureSight_Forward,0,0,0,0,0,0,1)
+Goto Spawn2
+
+Death:
+BSTG AAAAAA 0 A_SpawnItemEx("RazorLeafParticle", 0, 0, 28, 256/24, 256/24, random2(256/24), random(0, 359),1)
+SPKH ABCD 2
+stop
+}
+}
+
+
 actor FutureSightRingGuide : BasicHelper
 {
 translation "198:198=220:220", "192:192=229:229"
@@ -102,6 +224,27 @@ translation "198:198=220:220", "192:192=229:229"
 	}
 }
 
+actor FutureSightRingGuide2 : BasicHelper
+{
+	+CLIENTSIDEONLY
+	reactiontime 15
+	var int user_angle;
+	States
+	{
+		Spawn:
+		TNT1 A 0
+		TNT1 A 0 //A_SetUserVar("user_angle", random(0, 30))
+		SpawnLoop:
+		TNT1 A 0 A_SpawnItemEx("FutureSightGuideDot2", FutureSightRad, 0, -(z-floorz)+24, 0, 0, 0, angle+user_angle, 1061)
+		TNT1 A 0 A_SpawnItemEx("FutureSightGuideDot2", -FutureSightRad, 0, -(z-floorz)+24, 0, 0, 0, angle+user_angle, 1061)
+		TNT1 A 0 A_SetUserVar("user_angle", user_angle + 12)
+		TNT1 A 0 A_Countdown
+		loop
+		Death:
+		TNT1 A 0
+		stop
+	}
+}
 
 actor FutureSightRingSpawner : FastProjectile
 {
@@ -131,27 +274,9 @@ stop
 }
 }
 
-/*
-actor FutureSightGraphicSpawner : FutureSightRingSpawner
-{
-States
-{
-Spawn:
-TNT1 A 0
-TNT1 A 1 A_CountDown
-loop
-Death:
-TNT1 A 0 A_Jumpif(z-floorz > 475,"Terminate")
-TNT1 A 0 A_SpawnItemEx("FutureSight_Graphic1",0,0,-(z-floorz)+60,0,0,0,0,0)
-stop
 
-Terminate:
-TNT1 A 0 
-stop
-}
-}
-*/
 actor FutureSightGuideDot : BasicGuideDot {}
+actor FutureSightGuideDot2 : BasicGuideDot {StencilColor "#F42A0C"}
 
 actor FutureSightSpawner : FastProjectile
 {

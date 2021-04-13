@@ -686,6 +686,7 @@ const int STATUS_TAUNT = 16;
 const int FREEZE_DASH = 1;
 const int FREEZE_STATUS = 2;
 const int FREEZE_MENU = 3;
+const int FREEZE_REMOTE = 4;
 
 const int PLAYER_UNFREEZE = 0;
 const int PLAYER_FREEZE = 1;

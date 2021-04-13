@@ -46,8 +46,66 @@ Fire.After:
 Goto Fire.End
 
 
+AltFire:
+"####" BBB 1 A_Jumpif(CallACS("CheckWeaponFire",RC_A)==1,"Altfire.Begin")
+"####" B 0 A_Jump(256,"NoAmmo")
+Goto NoAmmo
+
+Altfire.Begin:
+"####" B 0
+"####" B 1
+"####" B 0 A_Jump(256,"Altfire.Aim")
+Goto Altfire.Aim
+
+Altfire.Aim:
+"####" B 1 A_FireCustomMissile("EarthPowerRingSpawner",0,0,0,Aim_OverHead)
+"####" C 0 A_JumpIfInventory("IsBot",1,"Altfire.Bullet")
+"####" C 0 A_REfire("Altfire.Aim")
+"####" B 0 A_Jump(256,"Altfire.Bullet")
+Goto Altfire.Bullet
+
+Altfire.Bullet:
+"####" B 0 A_PlaySoundEx("Misc/Usemove","Weapon")
+"####" B 0 A_FireCustomMissile("EarthPowerTrapSpawner",0,1,0,Aim_OverHead)
+"####" B 0 A_Jump(256,"Altfire.After")
+Goto Altfire.After
+
+Altfire.After:
+"####" B 1 A_GiveInventory("FullRecovery_C")
+"####" C 0 A_REfire("Fire")
+"####" B 0 A_Jump(256,"Fire.End")
+Goto Fire.End
+
+/*
+Altfire.Begin:
+"####" B 1
+"####" C 0 A_REfire("Altfire.Begin")
+"####" A 0 A_GiveInventory("RemoteMoveLock")
+"####" A 0 A_GiveInventory("EarthPowerRCFlag")
+"####" A 0 A_Stop
+"####" A 0 A_SpawnItemEX("EarthPower_Remote")
+"####" B 0 A_Jump(256,"Altfire.Remote")
+Goto Altfire.Remote
 
 
+Altfire.Remote:
+"####" B 1 A_Jumpif(CallACS("PKMNACS_ButtonCheck",BT_ALTATTACK)==1,"Altfire.After")
+"####" B 1 A_Jumpif(CallACS("PKMNACS_ButtonCheck",BT_RELOAD)==1,"Altfire.RemoteReload")
+"####" B 0 A_JumpifInventory("EarthPowerRCFlag",1,"Altfire.Remote")
+Goto Altfire.After
+Altfire.RemoteReload:
+TNT1 A 0 A_GiveInventory("PPRecoveryItem") 
+Goto Altfire.Remote
+
+Altfire.After:
+"####" B 1 A_GiveInventory("EarthPower_Recovery_C")
+"####" A 0 A_GiveInventory("DashSetOff")
+Altfire.After2:
+"####" B 1
+"####" B 0 A_Jumpif(CallACS("PKMNACS_ButtonCheck",BT_ALTATTACK)==1,"Altfire.After2")
+"####" B 0 A_Jump(256,"Fire.End")
+Goto Fire.End
+*/
 
 }
 }
@@ -75,10 +133,14 @@ Goto Ready
 //[+]========================================================================[+]
 actor EarthPowerPP : Ammo {inventory.amount 1 inventory.Maxamount 10}
 
+actor EarthPowerRCFlag : Powerup {inventory.amount 1 powerup.duration 35 }
 
 Const int EarthPowerRad = 100;
+Const int EarthPowerEntiTID = 14;
+Const int EarthPower_Forward = 150;
+Const int EarthPower_Range = 3000;
 
-actor EarthPowerCheck : CustomInventory
+actor EarthPowerPPTaker : CustomInventory
 {
 inventory.amount 1
 Inventory.MaxAmount 100
@@ -89,22 +151,164 @@ Spawn:
 TNT1 A 0
 stop
 Pickup:
-TNT1 A 0 A_Jumpif(CallACS("CheckStatusGuard",AAPTR_TRACER,STATUS_MAJOR),"Nope") //Blocked by protect|Detect|Substitute|Safeguard
-TNT1 A 0 A_JumpifInventory("PoisonMark",1,"Crit")
-stop
-
-Crit:
-TNT1 A 0 A_SpawnItemEX("PowerStrikeFX2",0,0,28)
-stop
-
-Nope:
-TNT1 A 0
+TNT1 A 0 ACS_NamedExecuteAlways("TakePP",0,Move_EarthPower,1)
 stop
 }
 }
+
+actor EarthPower_Recovery_C : FullRecovery_C{Powerup.Duration 52}
+
 //[+]========================================================================[+]
 //--------------------------------|Projectiles |--------------------------------
 //[+]========================================================================[+]
+/*
+actor EarthPower_Remote 
+{
+Speed 5
++MISSILE
++THRUACTORS
++NOCLIP
++FLOORHUGGER
++NOEXPLODEFLOOR
+//+SLIDESONWALLS
+//+BOUNCEONWALLS 
++NOGRAVITY
+Health 5
+Damage (0)
+DamageType "EarthPower"
+obituary "$OB_EarthPower"
+radius 5
+Reactiontime 50
+height 16
+scale 3.5
+Args 0, 60
+States
+{
+Spawn:
+TNT1 A 0 
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+TNT1 A 0 ACS_NamedExecuteAlways("CamGrabObject",0)
+TNT1 A 0 ACS_NamedExecuteAlways("RemoteControlActor",0,15.0,EarthPower_Range)
+TNT1 A 0 A_TransferPointer(AAPTR_TARGET,AAPTR_DEFAULT,AAPTR_TRACER,AAPTR_DEFAULT)
+Spawn2:
+TNT1 A 1 A_JumpIfCloser(EarthPower_Range-1,"Spawn3")
+TNT1 A 0 A_SpawnItemEx("EarthPowerRingGuide2",EarthPower_Forward,0,0,0,0,0,0,1)
+TNT1 A 0 A_GiveToTarget("EarthPowerRCFlag",1)
+TBLA A 0
+loop
+Spawn3:
+TNT1 A 1 A_SpawnItemEx("EarthPowerRingGuide",EarthPower_Forward,0,0,0,0,0,0,1)
+
+TNT1 A 0 A_GiveToTarget("EarthPowerRCFlag",1)
+TBLA A 0
+goto Spawn2
+
+Trigger: //Check PP
+TNT1 A 0 A_JumpifInTargetInventory("EarthPowerPP",1,"Trigger2")
+goto Decline
+Trigger2: // Check Recovery Frame
+TNT1 A 0 A_JumpifInTargetInventory("Recovery_C",1,"Decline")
+goto Detonate
+
+Detonate: // Cast the attack!
+TNT1 A 0 A_GiveToTarget("EarthPowerPPTaker",1)
+TNT1 A 0 A_SpawnItemEx("EarthPowerTrap",EarthPower_Forward,0,-(z-floorz)+60,0,0,0,0,1)
+TNT1 A 0 A_GiveToTarget("EarthPower_Recovery_C",1)
+goto PostTrigger
+
+Decline: //Cannot cast the attack
+TNT1 A 0 A_GiveToTarget("DeclineSoundCue",1)
+goto PostTrigger
+
+PostTrigger:
+TNT1 AAAAA 1 A_SpawnItemEx("EarthPowerRingGuide",EarthPower_Forward,0,0,0,0,0,0,1)
+Goto Spawn2
+
+Death:
+BSTG AAAAAA 0 A_SpawnItemEx("RazorLeafParticle", 0, 0, 28, 256/24, 256/24, random2(256/24), random(0, 359),1)
+SPKH ABCD 2
+stop
+}
+}
+*/
+
+actor EarthPowerTrapSpawner : FastProjectile
+{
++DONTBLAST
++SKYEXPLODE
++THRUACTORS
+reactiontime 1
+damage (0)
+radius 3
+height 3
+speed 600
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+TNT1 A 1 A_CountDown
+loop
+Death:
+TNT1 A 0 A_Jumpif(z-floorz > 625,"Terminate")
+TNT1 A 0 A_GiveInventory("ProjectileDCode",1)
+TNT1 A 2
+TNT1 A 0 A_SpawnItemEx("EarthPowerTrap",0,0,-(z-floorz),0,0,0,0,1)
+TNT1 A 1
+stop
+
+Terminate:
+TNT1 A 0 
+stop
+}
+}
+
+actor EarthPowerTrap : BasicHelper
+{
+DamageType "EarthPower"
+obituary "$OB_EarthPower"
+scale 3.5
+ReactionTime 5
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+TNT1 A 0 ACS_NamedExecuteAlways("GiveM_EntiTID",0,EarthPowerEntiTID,3)
+TNT1 A 0 A_PlaySoundEx("Misc/Quake","voice")
+TNT1 AAA 5 A_SpawnItemEx("EarthPowerTrapFX",0,0,-(z-floorz),0,0,0,0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION)
+TNT1 A 5 A_RearrangePointers(AAPTR_DEFAULT, AAPTR_TARGET, AAPTR_DEFAULT)
+
+Scan:
+TNT1 A 0 A_RearrangePointers(AAPTR_MASTER, AAPTR_DEFAULT, AAPTR_DEFAULT)
+Scan1:
+TNT1 A 0 A_SetArg(0,Args[0]+1)
+TNT1 A 4 A_Jumpif(Args[0]>5,"Scan2")
+TNT1 A 1  A_LookEx(LOF_NOSOUNDCHECK, 1, EarthPowerRad, EarthPowerRad, 360, "Targetcheck")
+Goto Scan1
+Scan2: //Blink
+TNT1 AAAAAA 0 A_SpawnItemEx ("EarthPowerTrapParticle", random2(8), random2(8), -(z-floorz), 0, 0, random(3,6), 0,SXF_NOCHECKPOSITION|SXF_ABSOLUTEMOMENTUM|SXF_TRANSFERTRANSLATION)
+TNT1 AA 0 A_SpawnItemEx ("EarthPowerTrapParticle2", random2(8), random2(8), -(z-floorz), 0, 0, random(3,6), 0,SXF_NOCHECKPOSITION|SXF_ABSOLUTEMOMENTUM|SXF_TRANSFERTRANSLATION)
+TNT1 A 0 A_SetArg(0,0)
+Goto Scan1
+Targetcheck:
+TNT1 A 1 A_Jumpifcloser(EarthPowerRad,"Targetcheck2")
+Goto Scan
+Targetcheck2:
+TNT1 A 1 A_Jumpif(CallACS("TrapSensorIdentify")==1,"Scan") //You Are A Teammate
+Goto Explode
+
+Explode:
+TNT1 A 1 A_RearrangePointers(AAPTR_MASTER, AAPTR_DEFAULT, AAPTR_DEFAULT)
+TNT1 A 0 A_SpawnItemEx("EarthPowerBurst",0,0,-(z-floorz),0,0,0,0,1)
+
+Death:
+SEDG D 0 A_GiveInventory("ProjectileDCode",1)
+TNT1 A 3
+stop
+}
+}
+
 actor EarthPowerRingGuide : BasicHelper
 {
 translation "198:198=220:220", "192:192=229:229"
@@ -157,26 +361,7 @@ stop
 }
 }
 
-/*
-actor EarthPowerGraphicSpawner : EarthPowerRingSpawner
-{
-States
-{
-Spawn:
-TNT1 A 0
-TNT1 A 1 A_CountDown
-loop
-Death:
-TNT1 A 0 A_Jumpif(z-floorz > 475,"Terminate")
-TNT1 A 0 A_SpawnItemEx("EarthPower_Graphic1",0,0,-(z-floorz)+60,0,0,0,0,0)
-stop
 
-Terminate:
-TNT1 A 0 
-stop
-}
-}
-*/
 actor EarthPowerGuideDot : BasicGuideDot {}
 
 actor EarthPowerSpawner : FastProjectile
@@ -224,7 +409,6 @@ Spawn:
 TNT1 A 0
 TNT1 A 0 A_GiveInventory("ProjectileCode",1)
 TNT1 A 0 A_PlaySoundEx("Misc/Quake", "Weapon")
-TNT1 A 1 A_RadiusGive("EarthPowerCheck",EarthPowerRad,RGF_PLAYERS|RGF_OBJECTS)
 TNT1 A 0 A_SpawnItemEx("EarthPowerBurstFX",0,0,0,0,0,15,0,1)
 TNT1 A 1 A_Explode(MBP_EarthPower,EarthPowerRad,0,0,EarthPowerRad/2)
 TNT1 A 6 
@@ -285,4 +469,92 @@ stop
 }
 }
 
+
+actor EarthPowerTrapFX : BasicHelper
+{
++CLIENTSIDEONLY
+reactiontime 4
+var int user_angle;
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 //A_GiveInventory("ProjectileCodeSyncTarget",1)
+//TNT1 A 1
+SpawnLoop:
+TNT1 A 0 A_SpawnItemEx("EarthPowerTrapParticle2",EarthPowerRad,0,-(z-floorz),0,0,random(3,6),user_angle,1061) //1061
+TNT1 A 0 A_SpawnItemEx("EarthPowerTrapParticle",EarthPowerRad/2,0,-(z-floorz),0,0,random(3,6),user_angle+22,1061) //1061
+TNT1 A 0 A_SpawnItemEx("EarthPowerTrapParticle2",-EarthPowerRad,0,-(z-floorz),0,0,random(3,6),user_angle,1061) //1061
+TNT1 A 0 A_SpawnItemEx("EarthPowerTrapParticle",-EarthPowerRad/2,0,-(z-floorz),0,0,random(3,6),user_angle+22,1061) //1061
+TNT1 A 0 A_SetUserVar("user_angle", user_angle + 45)
+TNT1 A 1 A_Countdown
+loop
+Death:
+TNT1 A 0
+stop
+}
+}
+
+actor EarthPowerTrapParticle : BasicClientSide
+{
++FORCEXYBILLBOARD
++BRIGHT
+renderstyle "add"
+Alpha 0.9
+scale 1.0
+States
+{
+
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+TNT1 A 1 A_Jump(256,"Spawn1","Spawn2")
+Goto Spawn1
+
+
+Spawn1:
+HARD BCDE 2
+stop
+
+Spawn2:
+HARD EDCB 2
+stop
+
+}
+}
+
+actor EarthPowerTrapParticle2 : BasicClientSide
+{
++FORCEXYBILLBOARD
++BRIGHT
+renderstyle "Translucent"
+Alpha 0.9
+scale 1.5
+States
+{
+
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+TNT1 A 1 A_Jump(256,"Spawn1","Spawn2","Spawn3","Spawn4")
+Goto Spawn1
+
+
+Spawn1:
+MUDB MMMMM 2 A_Fadeout
+stop
+
+Spawn2:
+MUDB NNNNN 2 A_Fadeout
+stop
+
+Spawn3:
+MUDB OOOOO 2 A_Fadeout
+stop
+
+Spawn4:
+MUDB PPPPP 2 A_Fadeout
+stop
+}
+}
 

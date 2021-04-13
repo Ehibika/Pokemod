@@ -106,7 +106,7 @@ str weapons_ammo[MAX_WEAPONS_GLOBAL][9] =
 {"IceFangMove", "IceFangPP", "IceFang", H_RECOV, "NO", "NO", "SLOT_NONE", "PHYSICAL", "ICE"},
 {"IceBeamMove", "IceBeamPP", "IceBeam", H_RECOV, "NO", "NO", "SLOT_NONE", "SPECIAL", "ICE"},
 {"FrostBreathMove", "FrostBreathPP", "FrostBreath", S_RECOV, "NO", "NO", "SLOT_NONE", "SPECIAL", "ICE"},
-{"BlizzardMove", "BlizzardPP", "Blizzard", F_RECOV, "NO", "NO", "SLOT_NONE", "SPECIAL", "ICE"},
+{"BlizzardMove", "BlizzardPP", "Blizzard", S_RECOV, "NO", "NO", "SLOT_NONE", "SPECIAL", "ICE"},
 
 {"ReflectMove", "ReflectPP", "Reflect", S_RECOV, "NO", "NO", "SLOT_NONE", "STATUS", "PSYCHIC"},
 {"MagicalLeafMove", "MagicalLeafPP", "MagicalLeaf", S_RECOV, "NO", "NO", "SLOT_NONE", "SPECIAL", "GRASS"},
@@ -217,7 +217,7 @@ str weapons_ammo[MAX_WEAPONS_GLOBAL][9] =
 {"SuckerPunchMove", "SuckerPunchPP", "SuckerPunch", S_RECOV, "NO", "NO", "SLOT_NONE", "PHYSICAL", "DARL"},
 {"DragonDartsMove", "DragonDartsPP", "DragonDarts", H_RECOV, "NO", "NO", "SLOT_NONE", "PHYSICAL", "DRAGON"},
 {"PhantomForceMove", "PhantomForcePP", "PhantomForce", S_RECOV, "NO", "NO", "SLOT_NONE", "PHYSICAL", "GHOST"},
-{"DracoMeteorMove", "DracoMeteorPP", "DracoMeteor", F_RECOV, "NO", "NO", "SLOT_NONE", "SPECIAL", "DRAGON"},
+{"DracoMeteorMove", "DracoMeteorPP", "DracoMeteor", S_RECOV, "NO", "NO", "SLOT_NONE", "SPECIAL", "DRAGON"},
 {"ThunderWaveMove", "ThunderWavePP", "ThunderWave", S_RECOV, "YES", "NO", "SLOT_NONE", "STATUS", "ELECTRIC"},
 {"TwisterMove", "TwisterPP", "Twister", H_RECOV, "NO", "NO", "SLOT_NONE", "SPECIAL", "DRAGON"},
 {"WrapMove", "WrapPP", "Wrap", S_RECOV, "NO", "NO", "SLOT_NONE", "PHYSICAL", "NORMAL"},
@@ -236,7 +236,7 @@ str weapons_ammo[MAX_WEAPONS_GLOBAL][9] =
 {"ConfusionMove", "ConfusionPP", "Confusion", H_RECOV, "NO", "NO", "SLOT_NONE", "SPECIAL", "PSYCHIC"},
 {"PsychicMove", "PsychicPP", "Psychic", S_RECOV, "NO", "NO", "SLOT_NONE", "SPECIAL", "PSYCHIC"},
 {"PsycheupMove", "PsycheupPP", "Psycheup", S_RECOV, "NO", "NO", "SLOT_NONE", "STATUS", "NORMAL"},
-{"PowerGemMove", "PowerGemPP", "PowerGem", F_RECOV, "NO", "NO", "SLOT_NONE", "SPECIAL", "ROCK"},
+{"PowerGemMove", "PowerGemPP", "PowerGem", H_RECOV, "NO", "NO", "SLOT_NONE", "SPECIAL", "ROCK"},
 {"MagiccoatMove", "MagiccoatPP", "Magiccoat", S_RECOV, "NO", "NO", "SLOT_NONE", "STATUS", "PSYCHIC"},
 {"MinimizeMove", "MinimizePP", "Minimize", S_RECOV, "NO", "NO", "SLOT_NONE", "STATUS", "NORMAL"},
 {"CosmicPowerMove", "CosmicPowerPP", "CosmicPower", F_RECOV, "NO", "NO", "SLOT_NONE", "STATUS", "PSYCHIC"},
@@ -889,6 +889,7 @@ SetResultValue(GetCvar("instagib")==1);
 Function void GiveMoveset (int M1, int M2, int M3, int M4)
 {
 str WepString;
+int Neg;
 if(M1>=0)
 	{
 		WepString = StrParam(s:weapons_ammo[M1][0],i:1);
@@ -898,9 +899,9 @@ if(M1>=0)
 
 	if(!PlayerIsBot(PlayerNumber()))
 		{
-		if(M2>=0){GiveInventory(StrParam(s:weapons_ammo[M2][0],i:2),1);}
-		if(M3>=0){GiveInventory(StrParam(s:weapons_ammo[M3][0],i:3),1);}
-		if(M4>=0){GiveInventory(StrParam(s:weapons_ammo[M4][0],i:4),1);}	
+		if(M2>=0){GiveInventory(StrParam(s:weapons_ammo[M2][0],i:2),1);}else{Neg = 1;}
+		if(M3>=0 && !Neg){GiveInventory(StrParam(s:weapons_ammo[M3][0],i:3),1);}else{Neg = 1;}
+		if(M4>=0 && !Neg){GiveInventory(StrParam(s:weapons_ammo[M4][0],i:4),1);}	
 		}
 }
 
@@ -970,6 +971,9 @@ Script "MoveSetup" (void)
 		&& ACS_NamedExecuteWithResult("GetPokeValue",0) == 9)
 		{GiveInventory("DoubleHydroPump",1);}
 
+		if(CheckAltMove(ThisWeapon)){giveInventory("AltAttackMove",1);giveInventory("AltAttackMove2",1);}
+		else{TakeInventory("AltAttackMove",99); TakeInventory("AltAttackMove2",99);}
+
 }
 
 Script "MoveSwap" (void)
@@ -997,7 +1001,24 @@ Script "MoveSwap" (void)
 		}
 	}
 
-	//if(CheckInventory("DoubleHydroPump")){TakeInventory("DoubleHydroPump",99);}
+}
+
+Function int CheckAltMove (int Wep)
+{
+
+	switch(Wep)
+	{
+		Case WISH: return 1; break;
+		Case CONFUSION: return 1; break;
+		Case PSYCHIC: return 1; break;
+		Case PSYSHOCK: return 1; break;
+		Case FUTURESIGHT: return 1; break;
+		Case BARRIER: return 1; break;
+		Case HEALPULSE: return 1; break;
+		Case THUNDER: return 1; break;
+		Case DRACOMETEOR: return 1; break;
+	}
+	return 0;
 }
 
 Script "ImbueSwitch" (int Movenum)
