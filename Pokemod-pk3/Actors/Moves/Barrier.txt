@@ -43,7 +43,39 @@ Fire.After:
 Goto Fire.End
 
 
+AltFire:
+"####" BBB 1 A_Jumpif(CallACS("CheckWeaponFire",RC_A)==1,"Altfire.Begin")
+"####" B 0 A_Jump(256,"NoAmmo")
+Goto NoAmmo
 
+Altfire.Begin:
+"####" B 1
+"####" C 0 A_REfire("Altfire.Begin")
+"####" A 0 A_GiveInventory("RemoteMoveLock")
+"####" A 0 A_GiveInventory("BarrierRCFlag")
+"####" A 0 A_Stop
+"####" A 0 A_SpawnItemEX("Barrier_Remote")
+"####" B 0 A_Jump(256,"Altfire.Remote")
+Goto Altfire.Remote
+
+
+Altfire.Remote:
+"####" B 1 A_Jumpif(CallACS("PKMNACS_ButtonCheck",BT_ALTATTACK)==1,"Altfire.After")
+"####" B 1 A_Jumpif(CallACS("PKMNACS_ButtonCheck",BT_RELOAD)==1,"Altfire.RemoteReload")
+"####" B 0 A_JumpifInventory("BarrierRCFlag",1,"Altfire.Remote")
+Goto Altfire.After
+Altfire.RemoteReload:
+TNT1 A 0 A_GiveInventory("PPRecoveryItem") 
+Goto Altfire.Remote
+
+Altfire.After:
+"####" B 1 A_GiveInventory("Barrier_Recovery_D")
+"####" A 0 A_GiveInventory("RemoteMoveUnLock")
+Altfire.After2:
+"####" B 1
+"####" B 0 A_Jumpif(CallACS("PKMNACS_ButtonCheck",BT_ALTATTACK)==1,"Altfire.After2")
+"####" B 0 A_Jump(256,"Fire.End")
+Goto Fire.End
 
 
 }
@@ -72,13 +104,127 @@ Goto Ready
 //[+]========================================================================[+]
 actor BarrierPP : Ammo {inventory.amount 1 inventory.Maxamount 10}
 
+actor BarrierRCFlag : Powerup {inventory.amount 1 powerup.duration 35 }
 
 Const int BarrierRad = 75;
 Const int Barrier_Item = 16;
+Const int Barrier_Forward = 150;
+Const int Barrier_Range = 3000;
 
+actor BarrierPPTaker : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 ACS_NamedExecuteAlways("TakePP",0,Move_Barrier,1)
+stop
+}
+}
+
+actor Barrier_Recovery_D : FullRecovery_D{Powerup.Duration 52} 
 //[+]========================================================================[+]
 //--------------------------------|Projectiles |--------------------------------
 //[+]========================================================================[+]
+actor Barrier_Remote 
+{
+Speed 5
++MISSILE
++THRUACTORS
++NOCLIP
++FLOORHUGGER
++NOEXPLODEFLOOR
+//+SLIDESONWALLS
+//+BOUNCEONWALLS 
++NOGRAVITY
+Health 5
+Damage (0)
+DamageType "Barrier"
+obituary "$OB_Barrier"
+radius 5
+Reactiontime 50
+height 16
+scale 3.5
+Args 0, 60
+States
+{
+Spawn:
+TNT1 A 0 
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+TNT1 A 0 ACS_NamedExecuteAlways("CamGrabObject",0)
+TNT1 A 0 ACS_NamedExecuteAlways("RemoteControlActor",0,15.0,Barrier_Range)
+TNT1 A 0 A_TransferPointer(AAPTR_TARGET,AAPTR_DEFAULT,AAPTR_TRACER,AAPTR_DEFAULT)
+Spawn2:
+TNT1 A 1 A_JumpIfCloser(Barrier_Range-1,"Spawn3")
+TNT1 A 0 A_SpawnItemEx("BarrierRemoteGuide",Barrier_Forward,0,-(z-floorz),0,0,0,0,1)
+TNT1 A 0 A_GiveToTarget("BarrierRCFlag",1)
+TBLA A 0
+loop
+Spawn3:
+TNT1 A 1 A_SpawnItemEx("BarrierRemoteGuide",Barrier_Forward,0,-(z-floorz),0,0,0,0,1)
+
+TNT1 A 0 A_GiveToTarget("BarrierRCFlag",1)
+TBLA A 0
+goto Spawn2
+
+Trigger: //Check PP
+TNT1 A 0 A_JumpifInTargetInventory("BarrierPP",1,"Trigger2")
+goto Decline
+Trigger2: // Check Recovery Frame
+TNT1 A 0 A_JumpifInTargetInventory("Recovery_D",1,"Decline")
+goto Detonate
+
+Detonate: // Cast the attack!
+TNT1 A 0 A_GiveToTarget("BarrierPPTaker",1)
+TNT1 A 0 A_GiveInventory("BarrierWallRemoteShooter")
+TNT1 A 0 A_GiveToTarget("Barrier_Recovery_D",1)
+goto PostTrigger
+
+Decline: //Cannot cast the attack
+TNT1 A 0 A_GiveToTarget("DeclineSoundCue",1)
+goto PostTrigger
+
+PostTrigger:
+TNT1 AAAAA 1 A_SpawnItemEx("BarrierRemoteGuide",Barrier_Forward,0,0,0,0,0,0,1)
+Goto Spawn2
+
+Death:
+BSTG AAAAAA 0 A_SpawnItemEx("RazorLeafParticle", 0, 0, 28, 256/24, 256/24, random2(256/24), random(0, 359),1)
+SPKH ABCD 2
+stop
+}
+}
+
+actor BarrierRemoteGuide : BasicHelper
+{
++CLIENTSIDEONLY
++NOINTERACTION
++NOCLIP
+	reactiontime 15
+	var int user_angle;
+	States
+	{
+		Spawn:
+		TNT1 A 0
+    TNT1 A 1
+    TNT1 A 0 ACS_NamedExecuteAlways("GridSnapper",0)
+    TNT1 A 0 ACS_NamedExecuteAlways("AngleSnapper",0)
+    TNT1 A 1
+    TNT1 A 0 A_Spawnitemex("MarkWallSpawner5up",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+    TNT1 A 0 A_Spawnitemex("MarkWallSpawner5up",0,0,32,0,0,0,0,SXF_NOCHECKPOSITION)
+    TNT1 A 0 A_Spawnitemex("MarkWallSpawner5up",0,0,64,0,0,0,0,SXF_NOCHECKPOSITION)
+    TNT1 A 0 A_Spawnitemex("MarkWallSpawner5up",0,0,96,0,0,0,0,SXF_NOCHECKPOSITION)
+		stop
+		Death:
+		TNT1 A 0
+		stop
+	}
+}
 
 actor MarkerShot : FastProjectile
 {
@@ -277,6 +423,7 @@ TNT1 A 0 A_SpawnitemEx("WallSpawner5up",0,0,-96,0,0,0,0,SXF_NOCHECKPOSITION|SXF_
 stop
 }
 }
+
 
 actor WallSpawner5up
 {
@@ -538,7 +685,37 @@ stop
 }
 }
 
-
+actor BarrierWallRemoteShooter : CustomInventory 
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_JumpIfInTargetInventory("LightTeamFlag",1,"BFire")
+TNT1 A 0 A_JumpIfInTargetInventory("WilyTeamFlag",1,"RFire")
+TNT1 A 0 A_JumpIfInTargetInventory("CossackTeamFlag",1,"GFire")
+TNT1 A 0 A_JumpIfInTargetInventory("KingTeamFlag",1,"YFire")
+TNT1 A 0 A_SpawnItemEx("StoneCubeShot",Barrier_Forward,0,-(z-floorz),0,0,0,0,1)
+stop
+RFire:
+TNT1 A 0 A_SpawnItemEx("StoneCubeShot_R",Barrier_Forward,0,-(z-floorz),0,0,0,0,1)
+stop
+BFire:
+TNT1 A 0 A_SpawnItemEx("StoneCubeShot_B",Barrier_Forward,0,-(z-floorz),0,0,0,0,1)
+stop
+GFire:
+TNT1 A 0 A_SpawnItemEx("StoneCubeShot_G",Barrier_Forward,0,-(z-floorz),0,0,0,0,1)
+stop
+YFire:
+TNT1 A 0 A_SpawnItemEx("StoneCubeShot_Y",Barrier_Forward,0,-(z-floorz),0,0,0,0,1)
+stop
+}
+}
 
 actor BarrierBreakFX : BasicClientside
 {

@@ -312,4 +312,18 @@ Texture "INCICO3", 24, 24
 	}
 }
 
+//Mouse icons
+Graphic "MOICONR", 11, 17 
+{
+	XScale 1.000
+	YScale 1.000
+	Patch "TNT1A0", 0, 0
+}
+
+Graphic "MOICONL", 11, 17 
+{
+	XScale 1.000
+	YScale 1.000
+	Patch "TNT1A0", 0, 0
+}
 // End of texture definitions

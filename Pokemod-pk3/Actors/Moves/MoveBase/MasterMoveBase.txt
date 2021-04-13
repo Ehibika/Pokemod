@@ -4,6 +4,8 @@ const int RC_B = 2;
 const int RC_C = 4;
 const int RC_D = 8;
 
+const int RC_Halt = 16;
+
 actor WepMasterBase0 : Weapon
 {
 Weapon.AmmoUse 1

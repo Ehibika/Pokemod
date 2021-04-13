@@ -1,0 +1,8 @@
+//MouseClick
+texture MOICONR
+pic MOUSE tics 8
+pic RCLICK tics 8
+
+texture MOICONL
+pic MOUSE tics 8
+pic LCLICK tics 8

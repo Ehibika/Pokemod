@@ -18,10 +18,17 @@ actor NetCheck_Freeze : Powerup{powerup.duration 7}
 actor NetCheck_DD : Powerup{powerup.duration 3}
 
 actor InMenu : Once{}
+actor InRemoteMode : Once{}
 
 
 actor PKMN_PlayerFreeze : Once{}
 actor PKMN_PlayerFullFreeze : Once{}
+//[+]========================================================================[+]
+//------------------------------|SBar Resources|---------------------------
+//[+]========================================================================[+]
+
+actor AltAttackMove : Once{}
+actor AltAttackMove2 : Powerup{powerup.duration 70}
 
 //[+]========================================================================[+]
 //------------------------------|Player Resources|---------------------------
@@ -350,6 +357,46 @@ states
 Pickup2:
 TNT1 A 0 //SetPlayerProperty(0,0,4)
 stop
+}
+}
+
+actor RemoteMoveLock : CustomInventory 
+{
+states
+{
+pickup:
+TNT1 A 0 ACS_NamedExecuteAlways("PKMN_FreezePlayer",0,PLAYER_FREEZE,FREEZE_REMOTE)
+stop
+
+Nope:
+TNT1 A 0 
+Stop
+}
+}
+
+actor RemoteMoveUnLock : CustomInventory 
+{
+states
+{
+pickup:
+TNT1 A 0 ACS_NamedExecuteAlways("PKMN_FreezePlayer",0,PLAYER_UNFREEZE,FREEZE_REMOTE)
+TNT1 A 0 A_Jumpifinventory("ParalysisMark",1,2)
+TNT1 A 0 ACS_NamedExecuteAlways("PKMN_JumpToggle",0,1)
+TNT1 A 0
+
+TNT1 A 0 A_Jumpifinventory("SleepMark",1,"Nope")
+TNT1 A 0 A_Jumpifinventory("FreezeMark",1,"Nope")
+TNT1 A 0 A_Jumpifinventory("CringeMark",1,"Nope")
+TNT1 A 0 A_Jump(256,"Pickup2")
+Goto Pickup2
+
+Pickup2:
+TNT1 A 0 A_SpawnItemEX("DashOffSafety")
+stop
+
+Nope:
+TNT1 A 0 
+Stop
 }
 }
 
