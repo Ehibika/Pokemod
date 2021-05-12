@@ -130,7 +130,7 @@ obituary "$OB_MuddyWater"
 Damage (MBP_MuddyWater)
 +MTHRUSPECIES
 +STEPMISSILE
-+SPECTRAL 
+//+SPECTRAL 
 maxstepheight 16
 States
 {

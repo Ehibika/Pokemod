@@ -1,7 +1,7 @@
 Const int BRINE_AREA1 = 64;
 Const int BRINE_AREA2 = 64;
 
-Const int BRINE_AIMSPHERE = 5;
+Const int BRINE_AIMSPHERE = 7;
 Const int BAS1 = BRINE_AIMSPHERE;
 actor BrineMove : WepMasterBase
 {
@@ -88,17 +88,20 @@ Spawn:
 TNT1 A 0
 stop
 Pickup:
-TNT1 A 0 A_Jumpif(CallACS("CheckStatusGuard",AAPTR_TRACER,STATUS_MAJOR),"Nope") //Blocked by protect|Detect|Substitute|Safeguard
+TNT1 A 0 A_Jumpif(CallACS("CheckStatusGuard",0,STATUS_MAJOR),"Nope") //Blocked by protect|Detect|Substitute|Safeguard
+TNT1 A 0 A_JumpifInventory("BrineProtect",1,"Nope")
 TNT1 A 0 A_JumpifInventory("BrineBooster",1,"BrineBoost2")
 TNT1 A 0 A_Jumpif(CallACS("PKMNACS_HealthPercent") <= 50,"BrineBoost")
+TNT1 A 0 //A_Log("No")
 stop
 
 BrineBoost:
-TNT1 A 0 A_SpawnItemEX("PowerStrikeFX2",0,0,28)
+TNT1 A 0 A_GiveInventory("BrineBooster",1)
+TNT1 A 0 //A_Log("yes")
 goto BrineBoost2
 
 BrineBoost2:
-TNT1 A 0 A_GiveInventory("BrineBooster",1)
+TNT1 A 0 A_SpawnItemEX("PowerStrikeFX2",0,0,28)
 stop
 Nope:
 TNT1 A 0
@@ -108,7 +111,7 @@ stop
 
 Actor BrineBooster : powerprotection
 {
-Powerup.duration 5
+Powerup.duration 17
 Damagefactor "Brine", 2.0
 }
 
@@ -168,10 +171,11 @@ States
 Spawn:
 TNT1 A 0
 TNT1 A 0 A_GiveInventory("ProjectileCode",1)
-TNT1 A 1 A_RadiusGive("BrineCheck",BRINE_AREA1,RGF_PLAYERS|RGF_OBJECTS)
-TNT1 A 0 A_Explode(MBP_Brine,BRINE_AREA1,0,0,BRINE_AREA2)
-NAPC A 0 A_PlaySoundEx("misc/splash", "Weapon")
+TNT1 A 1 A_RadiusGive("BrineCheck",BRINE_AREA1,RGF_NOTARGET|RGF_PLAYERS|RGF_OBJECTS|RGF_MONSTERS)
+NAPC A 1 A_PlaySoundEx("misc/splash", "Weapon")
 TNT1 A 0 A_SpawnItemEx("BrineImpactFX",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION)
+TNT1 A 0 A_Explode(MBP_Brine,BRINE_AREA1,0,0,BRINE_AREA2)
+TNT1 A 5
 stop
 }
 }

@@ -76,6 +76,63 @@
 	favoriteweapon = "WaterGunMove1"
 }
 
+{
+	name = "Geodude"
+	accuracy = 3
+	intellect = 4
+	evade = 1
+	anticipation = 1
+	reactiontime = 1
+	perception = 1
+	color = "00 00 00"
+	gender = "male"
+	skin = "base"
+	class = "Geodude"
+	revealed = true
+	script = "humanbot"
+	chatlump = "botchats/COPYBOT"
+	chatfrequency = 50
+	favoriteweapon = "RockThrowMove1"
+}
+
+{
+	name = "Riolu"
+	accuracy = 3
+	intellect = 4
+	evade = 1
+	anticipation = 1
+	reactiontime = 1
+	perception = 1
+	color = "00 00 00"
+	gender = "male"
+	skin = "base"
+	class = "Riolu"
+	revealed = true
+	script = "humanbot"
+	chatlump = "botchats/COPYBOT"
+	chatfrequency = 50
+	favoriteweapon = "WaterGunMove1"
+}
+
+{
+	name = "Durant"
+	accuracy = 3
+	intellect = 4
+	evade = 1
+	anticipation = 1
+	reactiontime = 1
+	perception = 1
+	color = "00 00 00"
+	gender = "male"
+	skin = "base"
+	class = "Durant"
+	revealed = true
+	script = "humanbot"
+	chatlump = "botchats/COPYBOT"
+	chatfrequency = 50
+	favoriteweapon = "WaterGunMove1"
+}
+
 /*
 {
 	name = "Jolteon"

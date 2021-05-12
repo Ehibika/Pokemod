@@ -136,7 +136,7 @@ str weapons_ammo[MAX_WEAPONS_GLOBAL][9] =
 {"RolloutMove", "RolloutPP", "Rollout", H_RECOV, "NO", "NO", "SLOT_NONE", "PHYSICAL", "ROCK"},
 {"ExtrasensoryMove", "ExtrasensoryPP", "Extrasensory", H_RECOV, "YES", "NO", "SLOT_NONE", "SPECIAL", "PSYCHIC"},
 {"GyroBallMove", "GyroBallPP", "GyroBall", H_RECOV, "NO", "NO", "SLOT_NONE", "PHYSICAL", "STEEL"},
-{"EruptionMove", "EruptionPP", "Eruption", S_RECOV, "NO", "NO", "SLOT_NONE", "SPECIAL", "FIRE"},
+{"EruptionMove", "EruptionPP", "Eruption", H_RECOV, "NO", "NO", "SLOT_NONE", "SPECIAL", "FIRE"},
 {"PeckMove", "PeckPP", "Peck", H_RECOV, "NO", "NO", "SLOT_NONE", "PHYSICAL", "FLYING"},
 {"DoubleKickMove", "DoubleKickPP", "DoubleKick", H_RECOV, "NO", "NO", "SLOT_NONE", "PHYSICAL", "FIGHTING"},
 {"ThunderPunchMove", "ThunderPunchPP", "ThunderPunch", H_RECOV, "NO", "NO", "SLOT_NONE", "PHYSICAL", "ELECTRIC"},
@@ -1014,7 +1014,7 @@ Function int CheckAltMove (int Wep)
 		Case PSYSHOCK: return 1; break;
 		Case FUTURESIGHT: return 1; break;
 		Case BARRIER: return 1; break;
-		Case HEALPULSE: return 1; break;
+		//Case HEALPULSE: return 1; break;
 		Case THUNDER: return 1; break;
 		Case DRACOMETEOR: return 1; break;
 	}

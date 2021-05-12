@@ -1,6 +1,7 @@
 
 #library "DB_DamageDisplay"
-#Import "DB_Data.acs"
+#import "DB_Data.acs"
+#import "DB_3PCam.acs"
 #include "zcommon.acs"
 #include "8bdmlib.acs"
 
@@ -20,6 +21,7 @@ script "PKMN_CV_DamageDisplay" ENTER NET
 	int DisplayReady = 1;
 	int Damagedigits = 0;
 		int PLN = Playernumber();
+		int CPLN = ACS_NamedExecuteWithResult("GetConsolePlayer");
 		int ColorVal;
 		int HPP = 0; // "Health Point Past/Future"
 		int HPF = 0;
@@ -52,64 +54,71 @@ script "PKMN_CV_DamageDisplay" ENTER NET
 				HPCC = HPC;
 				if(Checkinventory("DaDiBuffer")){HPCC = HPCC - Checkinventory("DaDiBuffer"); TakeInventory("DaDiBuffer",9999);}
 				HPC = 0;
-				
-					if(HPCC <= -1) // Healing Gained
-					{ Damagedigits = GetTotalDigits(-HPCC);
-						//while(!CheckInventory("NetCheck_DD")){NamedRequestScriptPuke("NET_DD_ShowNum",-HPCC,Damagedigits,0);Delay(1);}
-						
-						x = GetActorX(0) + random(-DDNUMDIST, DDNUMDIST);
-						y = GetActorY(0) + random(-DDNUMDIST, DDNUMDIST);
-						z = GetActorZ(0) + random(30.0, 64.0);
-						//if(CheckInventory("OverHealValue")){ColorVal = 56;}
-						 //Else{ColorVal = 232;}
-						 ColorVal = 232;
-						SpawnForced("DNUM_POS",x,y,z,DDNUMTID+ColorVal,0);
-						Switch(Damagedigits)
-						{
-							Case 1: SpawnForced(StrParam(s:"DNUM1_",i:getNthDigit(-HPCC,10,1)),x,y,z,DDNUMTID+ColorVal,0);
-									break;
-							Case 2: SpawnForced(StrParam(s:"DNUM1_",i:getNthDigit(-HPCC,10,2)),x,y,z,DDNUMTID+ColorVal,0);
-									SpawnForced(StrParam(s:"DNUM2_",i:getNthDigit(-HPCC,10,1)),x,y,z,DDNUMTID+ColorVal,0);
-									
-									break;
-							Case 3: SpawnForced(StrParam(s:"DNUM1_",i:getNthDigit(-HPCC,10,3)),x,y,z,DDNUMTID+ColorVal,0);
-									SpawnForced(StrParam(s:"DNUM2_",i:getNthDigit(-HPCC,10,2)),x,y,z,DDNUMTID+ColorVal,0);
-									SpawnForced(StrParam(s:"DNUM3_",i:getNthDigit(-HPCC,10,1)),x,y,z,DDNUMTID+ColorVal,0);
-									break;
-						
+				CPLN = ACS_NamedExecuteWithResult("GetConsolePlayer");
+
+						if(HPCC <= -1) // Healing Gained
+						{ Damagedigits = GetTotalDigits(-HPCC);
+							//while(!CheckInventory("NetCheck_DD")){NamedRequestScriptPuke("NET_DD_ShowNum",-HPCC,Damagedigits,0);Delay(1);}
+							
+							x = GetActorX(0) + random(-DDNUMDIST, DDNUMDIST);
+							y = GetActorY(0) + random(-DDNUMDIST, DDNUMDIST);
+							z = GetActorZ(0) + random(30.0, 64.0);
+							//if(CheckInventory("OverHealValue")){ColorVal = 56;}
+							//Else{ColorVal = 232;}
+							ColorVal = 232;
+							//if(CheckClientSight(CPLN))
+							//{
+								SpawnForced("DNUM_POS",x,y,z,DDNUMTID+ColorVal,0);
+								Switch(Damagedigits)
+								{
+									Case 1: SpawnForced(StrParam(s:"DNUM1_",i:getNthDigit(-HPCC,10,1)),x,y,z,DDNUMTID+ColorVal,0);
+											break;
+									Case 2: SpawnForced(StrParam(s:"DNUM1_",i:getNthDigit(-HPCC,10,2)),x,y,z,DDNUMTID+ColorVal,0);
+											SpawnForced(StrParam(s:"DNUM2_",i:getNthDigit(-HPCC,10,1)),x,y,z,DDNUMTID+ColorVal,0);
+											
+											break;
+									Case 3: SpawnForced(StrParam(s:"DNUM1_",i:getNthDigit(-HPCC,10,3)),x,y,z,DDNUMTID+ColorVal,0);
+											SpawnForced(StrParam(s:"DNUM2_",i:getNthDigit(-HPCC,10,2)),x,y,z,DDNUMTID+ColorVal,0);
+											SpawnForced(StrParam(s:"DNUM3_",i:getNthDigit(-HPCC,10,1)),x,y,z,DDNUMTID+ColorVal,0);
+											break;
+								
+								}
+							//}
 						}
-					}
-					
-					if(HPCC >= 1) // Damage taken
-					{ Damagedigits = GetTotalDigits(HPCC);
-						if(HPCC > 999){HPCC = 999;}
-						//while(!CheckInventory("NetCheck_DD")){NamedRequestScriptPuke("NET_DD_ShowNum",HPCC,Damagedigits,1);Delay(1);}
 						
-						SetUserVariable(0,"User_HitMemory",HPCC);
-						SetUserVariable(0,"user_HitFrame",1);
-						//log(s:"Got hurt,", i:getNthDigit(HPCC,10,3),i:getNthDigit(HPCC,10,2),i:getNthDigit(HPCC,10,1));
-						
-						x = GetActorX(0) + random(-DDNUMDIST, DDNUMDIST);
-						y = GetActorY(0) + random(-DDNUMDIST, DDNUMDIST);
-						z = GetActorZ(0) + random(30.0, 64.0);
-						//if(CheckInventory("OverHealValue")){ColorVal = 177;}
-						 //Else{ColorVal = 25;}
-						 ColorVal = 25;
-						SpawnForced("DNUM_Neg",x,y,z,DDNUMTID+ColorVal,0);
-						Switch(Damagedigits)
-						{
-							Case 1: SpawnForced(StrParam(s:"DNUM1_",i:getNthDigit(HPCC,10,1)),x,y,z,DDNUMTID+ColorVal,0);
-									break;
-							Case 2: SpawnForced(StrParam(s:"DNUM1_",i:getNthDigit(HPCC,10,2)),x,y,z,DDNUMTID+ColorVal,0);
-									SpawnForced(StrParam(s:"DNUM2_",i:getNthDigit(HPCC,10,1)),x,y,z,DDNUMTID+ColorVal,0);
-									break;
-							Case 3: SpawnForced(StrParam(s:"DNUM1_",i:getNthDigit(HPCC,10,3)),x,y,z,DDNUMTID+ColorVal,0);
-									SpawnForced(StrParam(s:"DNUM2_",i:getNthDigit(HPCC,10,2)),x,y,z,DDNUMTID+ColorVal,0);
-									SpawnForced(StrParam(s:"DNUM3_",i:getNthDigit(HPCC,10,1)),x,y,z,DDNUMTID+ColorVal,0);
-									break;
-						
+						if(HPCC >= 1) // Damage taken
+						{ Damagedigits = GetTotalDigits(HPCC);
+							if(HPCC > 999){HPCC = 999;}
+							//while(!CheckInventory("NetCheck_DD")){NamedRequestScriptPuke("NET_DD_ShowNum",HPCC,Damagedigits,1);Delay(1);}
+							
+							SetUserVariable(0,"User_HitMemory",HPCC);
+							SetUserVariable(0,"user_HitFrame",1);
+							//log(s:"Got hurt,", i:getNthDigit(HPCC,10,3),i:getNthDigit(HPCC,10,2),i:getNthDigit(HPCC,10,1));
+							
+							x = GetActorX(0) + random(-DDNUMDIST, DDNUMDIST);
+							y = GetActorY(0) + random(-DDNUMDIST, DDNUMDIST);
+							z = GetActorZ(0) + random(30.0, 64.0);
+							//if(CheckInventory("OverHealValue")){ColorVal = 177;}
+							//Else{ColorVal = 25;}
+							ColorVal = 25;
+							//if(CheckClientSight(CPLN))
+							//{
+								SpawnForced("DNUM_Neg",x,y,z,DDNUMTID+ColorVal,0);
+								Switch(Damagedigits)
+								{
+									Case 1: SpawnForced(StrParam(s:"DNUM1_",i:getNthDigit(HPCC,10,1)),x,y,z,DDNUMTID+ColorVal,0);
+											break;
+									Case 2: SpawnForced(StrParam(s:"DNUM1_",i:getNthDigit(HPCC,10,2)),x,y,z,DDNUMTID+ColorVal,0);
+											SpawnForced(StrParam(s:"DNUM2_",i:getNthDigit(HPCC,10,1)),x,y,z,DDNUMTID+ColorVal,0);
+											break;
+									Case 3: SpawnForced(StrParam(s:"DNUM1_",i:getNthDigit(HPCC,10,3)),x,y,z,DDNUMTID+ColorVal,0);
+											SpawnForced(StrParam(s:"DNUM2_",i:getNthDigit(HPCC,10,2)),x,y,z,DDNUMTID+ColorVal,0);
+											SpawnForced(StrParam(s:"DNUM3_",i:getNthDigit(HPCC,10,1)),x,y,z,DDNUMTID+ColorVal,0);
+											break;
+								
+								}
+							//}
 						}
-					}
 					
 					
 
@@ -151,9 +160,12 @@ GiveInventory("NetCheck_DD",1);
 script "PKMNACS_DDTEXTCOL" (void) CLIENTSIDE
 {
 	int CPLN = consoleplayernumber();
+	int CCam = C_TID + CPLN;
 	bool ShowDamage = GetUserCVar(CPLN,"PKMN_CV_DamageDisplay");
 	//log(i:ShowDamage);
 	//PKMN_CV_DamageDisplay
+
+	if(CCam == -1){CCam = CPLN+1000;}
 	
 	if(ShowDamage)
 		{
@@ -162,7 +174,8 @@ script "PKMNACS_DDTEXTCOL" (void) CLIENTSIDE
 		SetActorProperty(0,APROP_ALPHA,0.8);
 
 		//Now also handles addaptive scaling
-		int TextScale = ValueMap(xyzDistance(CPLN+1000,0),1000,0,50,10);
+		int TextScale = ValueMap(xyzDistance(CCam,0),1000,0,50,10);
+		if(PlayerIsSpectator(CPLN) ) TextScale = 30;
 		if(TextScale > 100)TextScale = 100;
 
 		TextScale = TextScale << 16;
@@ -171,6 +184,30 @@ script "PKMNACS_DDTEXTCOL" (void) CLIENTSIDE
 		SetActorProperty(0,APROP_Scaley,TextScale);
 		}
 	else{Thing_Remove(0);}
+}
+
+Script "GetConsolePlayer" (Void) NET CLIENTSIDE 
+{
+	SetResultValue(ConsolePlayerNumber());
+}
+
+function int CheckClientSight (int CPLN)
+{
+	//int CPLN = PlayerNumber();
+	int CCam = C_TID + CPLN;
+	if(CCam == -1){CCam = CPLN+1000;}
+	int TID = ActivatorTID();
+	int vang, angle;
+
+	vang = VectorAngle (GetActorX (TID) - GetActorX (CCam), GetActorY (TID) - GetActorY (CCam));
+	angle = (vang - GetActorAngle (CCam) + 1.0) % 1.0;
+
+	if (angle < 0.2 || angle > 0.8)
+	{return CheckSight(CCam,TID,0);}
+
+	return 0;
+
+	
 }
 
 function int getNthDigit (int number, int base, int n)

@@ -3286,7 +3286,7 @@ M079_NAME = "\cj Curse";
 M079_TYPE = "\cj Ghost";
 M079_CATEGORY = "\cf Status";
 M079_POWER = "\cfPower:\cj --";
-M079_DESC = "\cjBoost ATK and DEF and makes you immovably\n"
+M079_DESC = "\cjBoost both ATK and DEF and makes you immovably\n"
 "slow, for ghosts it casts a deadly curse\n"
 "on a target.";
 //#endregion

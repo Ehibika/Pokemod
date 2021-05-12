@@ -32,7 +32,7 @@ Goto NormalPain
 
 Pain.Eggbomb:
 "----" H 0
-"----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,25,Type_Null)
+"----" H 0 //ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,25,Type_Null)
 Goto NormalPain
 
 Pain.Slam:

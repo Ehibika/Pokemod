@@ -4,16 +4,9 @@
  * ===|Gameplay Changes|===
  * 
  * =Pokemon Changes=
- * [treeco family]
- * base stats shifted, having ATK and sp.atk flipped
+ * A number of pokemon have seen base stat changes
  * 
- * [Blastoise]
- * Base stats changed to make blastoise more of a bulky sp.atker
- * 
- * =Pokemon with minor moveset changes=
- * 
- * =Pokemon with major moveset changes=
- * Treecko Family
+ * Updated the damage display so that it only spawns numbers when they'd actually be visible to the player.
  * 
  * ===|Move Changes|===
  * 
@@ -66,5 +59,28 @@
  * [DreamEater]
  * Power increased
  * 
+ * [Brine]
+ * Power increased
+ * Fixed crit on low health mechanic
+ * Shot Spread increased
  * 
+ * [Curse]
+ * Now raises all stats by 1 stage, but drops speed by 2
+ * 
+ * [Eruption]
+ * recovery time reduced
+ * 
+ * [Slash/NightSlash/LeafBlade/XScissor/PoisonTail]
+ * Damage increased
+ * 
+ * [EggBomb]
+ * KnockBack Removed
+ * Damage Reduced
+ * PP reduced from 40 > 20
+ * 
+ * 
+ * ===|TM Changes|===
+ * The following TM's have been removed 
+ *  WildCharge
+ *  FlareBlitz
  */
