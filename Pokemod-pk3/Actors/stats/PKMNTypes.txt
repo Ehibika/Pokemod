@@ -1121,7 +1121,8 @@ damagefactor "HeatWave", 1.3 //W
 damagefactor "BlazeKick", 1.3 //W
 
 damagefactor "LavaPlume", 1.3 //W
-damagefactor "FlameCharge", 1.3 //W
+damagefactor "FlameCharge1", 1.3 //W
+damagefactor "FlameCharge2", 1.3 //W
 damagefactor "Overheat", 1.3 //W
 damagefactor "Inferno", 1.3 //W
 damagefactor "HeatCrash", 1.3 //W
@@ -1147,7 +1148,8 @@ damagefactor "HeatWave", 1.6 //2W
 damagefactor "BlazeKick", 1.6 //2W
 
 damagefactor "LavaPlume", 1.6 //2W
-damagefactor "FlameCharge", 1.6 //2W
+damagefactor "FlameCharge1", 1.6 //2W
+damagefactor "FlameCharge2", 1.6 //2W
 damagefactor "Overheat", 1.6 //2W
 damagefactor "Inferno", 1.6 //2W
 damagefactor "HeatCrash", 1.6 //2W
@@ -1173,7 +1175,8 @@ damagefactor "HeatWave", 0.8 //R
 damagefactor "BlazeKick", 0.8 //R
 
 damagefactor "LavaPlume", 0.8 //R
-damagefactor "FlameCharge", 0.8 //R
+damagefactor "FlameCharge1", 0.8 //R
+damagefactor "FlameCharge2", 0.8 //R
 damagefactor "Overheat", 0.8 //R
 damagefactor "Inferno", 0.8 //R
 damagefactor "HeatCrash", 0.8 //R
@@ -1199,7 +1202,8 @@ damagefactor "HeatWave", 0.6 //2R
 damagefactor "BlazeKick", 0.6 //2R
 
 damagefactor "LavaPlume", 0.6 //2R
-damagefactor "FlameCharge", 0.6 //2R
+damagefactor "FlameCharge1", 0.6 //2R
+damagefactor "FlameCharge2", 0.6 //2R
 damagefactor "Overheat", 0.6 //2R
 damagefactor "Inferno", 0.6 //2R
 damagefactor "HeatCrash", 0.6 //2R
@@ -1225,7 +1229,8 @@ damagefactor "HeatWave", 0.1 //I
 damagefactor "BlazeKick", 0.1 //I
 
 damagefactor "LavaPlume", 0.1 //I
-damagefactor "FlameCharge", 0.1 //I
+damagefactor "FlameCharge1", 0.1 //I
+damagefactor "FlameCharge2", 0.1 //I
 damagefactor "Overheat", 0.1 //I
 damagefactor "Inferno", 0.1 //I
 damagefactor "HeatCrash", 0.1 //I
@@ -1250,7 +1255,8 @@ damagefactor "HeatWave", 1.2 //S
 damagefactor "BlazeKick", 1.2 //S
 
 damagefactor "LavaPlume", 1.2 //S
-damagefactor "FlameCharge", 1.2 //S
+damagefactor "FlameCharge1", 1.2 //S
+damagefactor "FlameCharge2", 1.2 //S
 damagefactor "Overheat", 1.2 //S
 damagefactor "Inferno", 1.2 //S
 damagefactor "HeatCrash", 1.2 //S

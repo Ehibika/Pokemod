@@ -4,6 +4,12 @@ actor MM8BDMWepSpawnFunc : CustomInventory
 {
 states
 {
+    /*
+    Pickup:
+    TNT1 A 0 ACS_NamedExecuteWithResult("Spawn_PokeMoney10")
+    TNT1 A 0 Thing_Remove(0)
+    stop
+    */
 Pickup:
 TNT1 A 0 A_JumpIF(CheckClass("TimeStopperWep"),"RareSpawn")
 TNT1 A 0 A_JumpIF(CheckClass("LightningBoltWep"),"RareSpawn")
@@ -31,7 +37,7 @@ TNT1 A 0 A_JumpIF(CheckClass("StarCrashWep"),"WandSpawn")
 Goto ChanceSpawn
 
 ChanceSpawn:
-TNT1 A 0 A_Jump(127,"RareSpawn")
+TNT1 A 0 //A_Jump(127,"RareSpawn")
 TNT1 A 0 A_Jump(256,"BerrySpawn","SeedSpawn","WandSpawn","OrbSpawn","IncenseSpawn")
 stop
 
@@ -70,6 +76,7 @@ RareSpawn:
 TNT1 A 0 A_SpawnItemEx("RareItemSpawner")
 TNT1 A 0 Thing_Remove(0)
 stop
+
 }
 }
 
@@ -78,19 +85,41 @@ actor MM8BDMItemSpawnFunc : CustomInventory
 states
 {
 Pickup:
-TNT1 A 0 A_JumpIf(CheckClass("WeaponEnergy"),"CommonSpawn")
-TNT1 A 0 A_JumpIf(CheckClass("BigWeaponEnergy"),"BerrySpawn")
-TNT1 A 0 A_JumpIf(CheckClass("MegaWeaponEnergy"),"BerrySpawn")
-TNT1 A 0 A_JumpIf(CheckClass("SmallHealth"),"CommonSpawn")
-TNT1 A 0 A_JumpIf(CheckClass("BigHealth"),"BerrySpawn")
-TNT1 A 0 A_JumpIf(CheckClass("MegaHealth"),"BerrySpawn")
-TNT1 A 0 A_JumpIf(CheckClass("ETank"),"GummieSpawn")
-TNT1 A 0 A_JumpIf(CheckClass("MTank"),"GummieSpawn")
-TNT1 A 0 A_JumpIf(CheckClass("WTank"),"GummieSpawn")
-goto GummieSpawn
+TNT1 A 0 A_JumpIf(CheckClass("BigHealth"),"NewBigHealth")
+TNT1 A 0 A_JumpIf(CheckClass("BigWeaponEnergy"),"NewBigWep")
 
-CommonSpawn:
-TNT1 A 0 A_SpawnItemEx("CommonItemSpawner")
+TNT1 A 0 A_JumpIf(CheckClass("WeaponEnergy"),"Pokemoney")
+TNT1 A 0 A_JumpIf(CheckClass("MegaWeaponEnergy"),"Pokemoney10")
+TNT1 A 0 A_JumpIf(CheckClass("SmallHealth"),"Pokemoney")
+TNT1 A 0 A_JumpIf(CheckClass("MegaHealth"),"Pokemoney10")
+TNT1 A 0 A_JumpIf(CheckClass("ETank"),"Pokemoney10")
+TNT1 A 0 A_JumpIf(CheckClass("MTank"),"Pokemoney10")
+TNT1 A 0 A_JumpIf(CheckClass("WTank"),"Pokemoney10")
+TNT1 A 0 A_Jump(256,"NewBigHealth","NewBigWep")
+stop
+
+NewBigHealth:
+TNT1 A 0 ACS_NamedExecuteWithResult("Spawn_BigHealthPKMN")
+TNT1 A 0 Thing_Remove(0)
+stop
+
+NewBigWep:
+TNT1 A 0 ACS_NamedExecuteWithResult("Spawn_BigWeaponEnergyPKMN")
+TNT1 A 0 Thing_Remove(0)
+stop
+
+Pokemoney:
+TNT1 A 0 ACS_NamedExecuteWithResult("Spawn_PokeMoney")
+TNT1 A 0 Thing_Remove(0)
+stop
+
+Pokemoney5:
+TNT1 A 0 ACS_NamedExecuteWithResult("Spawn_PokeMoney5")
+TNT1 A 0 Thing_Remove(0)
+stop
+
+Pokemoney10:
+TNT1 A 0 ACS_NamedExecuteWithResult("Spawn_PokeMoney10")
 TNT1 A 0 Thing_Remove(0)
 stop
 
@@ -103,6 +132,7 @@ GummieSpawn:
 TNT1 A 0 A_SpawnItemEx("GummieSpawner")
 TNT1 A 0 Thing_Remove(0)
 stop
+
 }
 }
 

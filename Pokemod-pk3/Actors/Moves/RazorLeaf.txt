@@ -95,7 +95,7 @@ actor RazorLeafShot : BasicProjectile
 Speed 80
 Damage (MBP_RazorLeaf)
 DamageType "RazorLeaf"
-+RIPPER
+//+RIPPER
 obituary "$OB_RazorLeaf"
 radius 5
 Reactiontime 10

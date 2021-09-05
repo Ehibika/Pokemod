@@ -67,7 +67,7 @@ Goto Ready
 actor EmberPP : Ammo {inventory.amount 1 inventory.Maxamount 40}
 
 
-actor Ember_Recovery_A : FullRecovery_A{Powerup.Duration 17}
+actor Ember_Recovery_A : FullRecovery_A{Powerup.Duration 8}
 //[+]========================================================================[+]
 //--------------------------------|Projectiles |--------------------------------
 //[+]========================================================================[+]

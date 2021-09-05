@@ -295,8 +295,8 @@ damagefactor "PoisonTail2", 1.0
 damagefactor "WingAttack", 1.0
 damagefactor "TakeDown", 1.0
 damagefactor "WildCharge", 1.0
-damagefactor "FlameCharge", 1.0
-
+damagefactor "FlameCharge1", 1.0
+damagefactor "FlameCharge2", 1.0
 damagefactor "FuryCutter", 1.0
 damagefactor "MeteorMash", 1.0
 damagefactor "IronHead", 1.0

@@ -193,7 +193,7 @@ str weapons_ammo[MAX_WEAPONS_GLOBAL][9] =
 {"LeafTornadoMove", "LeafTornadoPP", "LeafTornado", S_RECOV, "NO", "NO", "SLOT_NONE", "SPECIAL", "GRASS"},
 {"LeafageMove", "LeafagePP", "Leafage", H_RECOV, "NO", "NO", "SLOT_NONE", "PHYSICAL", "GRASS"},
 {"LavaPlumeMove", "LavaPlumePP", "LavaPlume", H_RECOV, "NO", "NO", "SLOT_NONE", "SPECIAL", "FIRE"},
-{"FlameChargeMove", "FlameChargePP", "FlameCharge", F_RECOV, "NO", "NO", "SLOT_NONE", "SPECIAL", "FIRE"},
+{"FlameChargeMove", "FlameChargePP", "FlameCharge", H_RECOV, "NO", "NO", "SLOT_NONE", "SPECIAL", "FIRE"},
 {"OverheatMove", "OverheatPP", "Overheat", F_RECOV, "NO", "NO", "SLOT_NONE", "SPECIAL", "FIRE"},
 {"InfernoMove", "InfernoPP", "Inferno", H_RECOV, "NO", "NO", "SLOT_NONE", "SPECIAL", "FIRE"},
 {"HeatCrashMove", "HeatCrashPP", "HeatCrash", S_RECOV, "NO", "NO", "SLOT_NONE", "PHYSICAL", "FIRE"},

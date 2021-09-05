@@ -13,6 +13,7 @@ A_Targeter
 A_Type
 A_TM
 A_TIPS
+A_Items
 PKMNACS
 projtra1
 projtran

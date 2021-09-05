@@ -461,10 +461,13 @@ Goto GroundPain
 
 Pain.RockBlast:
 Pain.RockThrow:
-Pain.RockTomb:
 Pain.RockPolish:
 //--[Move|Rock]--
 "----" H 0
+Goto RockPain
+
+Pain.RockTomb:
+"----" H 0 A_GiveInventory("RockTombNerfInitiate",1)
 Goto RockPain
 
 Pain.PowerGem:
@@ -649,7 +652,17 @@ Pain.MysticalFire:
 Goto FirePain
 
 
-Pain.FlameCharge:
+
+
+Pain.FlameCharge1:
+"----" H 0 A_GiveInventory("FlameChargeProtect",1)
+"----" H 1
+"----" H 0 A_GiveToTarget("FlameChargeCollision",1)
+"----" H 0 A_PlaySoundEx("weapon/Rebound","SoundSlot5")
+"----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,40,Type_Fire)
+"----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockUp",0,15,0)
+Goto FirePain
+Pain.FlameCharge2:
 "----" H 0 A_GiveInventory("FlameChargeProtect",1)
 "----" H 0 
 Goto FirePain
@@ -868,7 +881,7 @@ Goto GrassPain
 
 Pain.RazorLeaf:
 //"----" H 0 A_GiveInventory("RazorLeafProtect", 1)
-"----" H 0 A_GiveInventory("RazorLeafBuffer", 1)
+//"----" H 0 A_GiveInventory("RazorLeafBuffer", 1)
 Goto GrassPain
 
 Pain.Absorb:
@@ -1582,7 +1595,7 @@ Death.RockPolish:
 Goto RockDeath
 
 Death.RockTomb:
-"----" H 0 A_GiveInventory("RockTombNerfInitiate",1)
+"----" H 0 
 Goto RockDeath
 
 
@@ -1706,12 +1719,20 @@ Goto SteelDeath
     Death.Eruption:
     Death.Overheat:
 Death.Firepunch:
-Death.FlameCharge:
+Death.FlameCharge2:
 Death.MysticalFire:
     //--[Move|Fire]--
     "----" H 0
     Goto FireDeath
 
+    Death.FlameCharge1:
+    "----" A 0 ACS_NamedExecuteAlways("PKMN_PainSound",0,Type_Fire) 
+    "----" H 0 A_GiveToTarget("SparkCollision",1)
+    "----" H 0 A_PlaySoundEx("weapon/Rebound","SoundSlot5")
+    "----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,50,Type_Fire)
+    "----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockUp",0,35,0)
+    "----" H 5
+    Goto Death
 
     Death.FlareBlitz:
     "----" A 0 ACS_NamedExecuteAlways("PKMN_PainSound",0,Type_Fire) 

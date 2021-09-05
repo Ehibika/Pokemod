@@ -177,7 +177,8 @@ Script "Menu_ItemShop" (void) CLIENTSIDE
 						ChoiceItemMaxName = strParam(s:"Max",s:ChoiceItemName);
 						ChoiceItemCost = ShopItemList[ChoiceID][2]>>16;
 						if(ACS_NamedExecuteWithResult("BPCheck",ChoiceItemCost)
-							&& CheckInventory(ChoiceItemName) < GetAmmoCapacity(ChoiceItemMaxName))
+							&& CheckInventory(ChoiceItemName) < GetAmmoCapacity(ChoiceItemMaxName)
+							&& ShopItemList[ChoiceID][3] != "NOSELL")
 						{
 							while(!CheckInventory("NetCheck_A")){NamedRequestScriptPuke("NET_ItemShop_Buy",ChoiceItemName,ChoiceItemCost);Delay(3);}
 						}
@@ -186,6 +187,7 @@ Script "Menu_ItemShop" (void) CLIENTSIDE
 							ACS_NamedExecuteAlways("ShopFailSound",0);
 							if(!ACS_NamedExecuteWithResult("BPCheck",ChoiceItemCost)){ACS_NamedExecuteAlways("ShopBuyFailMoneyMsg",0);}
 							else if(CheckInventory(ChoiceItemName) >= GetAmmoCapacity(ChoiceItemMaxName)){ACS_NamedExecuteAlways("ShopBuyFailSpaceMsg",0);}
+							else if(ShopItemList[ChoiceID][3] != "NOSELL"){ACS_NamedExecuteAlways("ShopBuyFailMoneyMsg",0);}
 						}
 
 					} 
