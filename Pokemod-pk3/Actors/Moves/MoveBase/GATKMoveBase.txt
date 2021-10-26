@@ -33,41 +33,78 @@ goto AltFire.DashEnd
 
 AltFire.DashEnd:
 "####" B 0 A_ScaleVelocity(0.2)
+TNT1 A 0 A_JumpifInventory("PKMNRageFlag",1,"AltFire.TackleRage")
+TNT1 A 0 A_GiveInventory("FullRecovery_B") 
 "####" B 0 A_Jump(256,"AltFire.After")
 Goto AltFire.After
+
+AltFire.TackleRage:
+TNT1 A 0 A_GiveInventory("HalfRecovery_B") 
+TNT1 A 0 A_Jump(256,"AltFire.RageAfter")
+Goto AltFire.RageAfter
 
 AltFire.Pound:
 TNT1 A 0 A_PlaySoundEx("weapon/ChargeKick","Weapon")
 TNT1 A 0 A_FireCustomMissile("PoundMelee",0,0,0,0)
+TNT1 A 0 A_JumpifInventory("PKMNRageFlag",1,"AltFire.PoundRage")
+TNT1 A 0 A_GiveInventory("HalfRecovery_B") 
 TNT1 A 0 A_Jump(256,"AltFire.After")
 Goto AltFire.After
+
+AltFire.PoundRage:
+TNT1 A 0 A_GiveInventory("PartRecovery_B") 
+TNT1 A 0 A_Jump(256,"AltFire.RageAfter")
+Goto AltFire.RageAfter
 
 AltFire.Scratch:
 TNT1 A 0 A_PlaySoundEx("weapon/SlashClaw","Weapon")
 TNT1 A 0 A_FireCustomMissile("ScratchMelee",0,0,25,0,0,CallACS("PitchClamp",Pitch,55))
 TNT1 A 0 A_FireCustomMissile("ScratchMelee",0,0,0,0,0,CallACS("PitchClamp",Pitch,55))
 TNT1 A 0 A_FireCustomMissile("ScratchMelee",0,0,-25,0,0,CallACS("PitchClamp",Pitch,55))
+TNT1 A 0 A_JumpifInventory("PKMNRageFlag",1,"AltFire.ScratchRage")
+TNT1 A 0 A_GiveInventory("HalfRecovery_B") 
 TNT1 A 0 A_Jump(256,"AltFire.After")
 Goto AltFire.After
+
+AltFire.ScratchRage:
+TNT1 A 0 A_GiveInventory("PartRecovery_B") 
+TNT1 A 0 A_Jump(256,"AltFire.RageAfter")
+Goto AltFire.RageAfter
 
 AltFire.Jab:
 TNT1 A 0 A_PlaySoundEx("weapon/SlashClaw","Weapon")
 TNT1 A 0 A_FireCustomMissile("JabMelee",0,0,0,0)
+TNT1 A 0 A_JumpifInventory("PKMNRageFlag",1,"AltFire.JabRage")
+TNT1 A 0 A_GiveInventory("HalfRecovery_B") 
 TNT1 A 0 A_Jump(256,"AltFire.After")
 Goto AltFire.After
 
+AltFire.JabRage:
+TNT1 A 0 A_GiveInventory("PartRecovery_B") 
+TNT1 A 0 A_Jump(256,"AltFire.RageAfter")
+Goto AltFire.RageAfter
 
 AltFire.Lash:
 TNT1 A 0 A_PlaySoundEx("misc/KingSwing","Weapon")
 TNT1 A 17 A_FireCustomMissile("LashWatcher",0,0,0,0,0,0)
+TNT1 A 0 A_JumpifInventory("PKMNRageFlag",1,"AltFire.LashRage")
+TNT1 A 0 A_GiveInventory("FullRecovery_B") 
 TNT1 A 0 A_Jump(256,"AltFire.After")
 Goto AltFire.After
 
+AltFire.LashRage:
+TNT1 A 0 A_GiveInventory("HalfRecovery_B") 
+TNT1 A 0 A_Jump(256,"AltFire.RageAfter")
+Goto AltFire.RageAfter
 }
 }
 
-//G.Attack Growth rates
-Const int GAG_Tackle = 10;
+//G.Attack Base Powers
+const int GBP_Tackle = MBP_HighPower3;
+const int GBP_Pound = MBP_HighPower1;
+const int GBP_Scratch = MBP_RapidHigh;
+const int GBP_Jab = MBP_HighPower1;
+const int GBP_Lash = MBP_HighPower2;
 
 //[+]========================================================================[+]
 //--------------------------------|Tackle|--------------------------------
@@ -100,15 +137,15 @@ Spawn:
 TNT1 A 0 
 TNT1 A 0 A_JumpIfInTargetInventory("DashBreaker",1,"Terminate")
 TNT1 A 1 
-TNT1 A 1 A_Explode(MBP_StandardPower+CallACS("GenericAttackPower",5),RAMHITBOX,0,0,RAMHITBOX)
+TNT1 A 1 A_Explode(GBP_Tackle,RAMHITBOX,0,0,RAMHITBOX)
 stop
 Death:
-TNT1 A 0 A_Explode(MBP_StandardPower+CallACS("GenericAttackPower",5),RAMHITBOX,0,0,RAMHITBOX)
+TNT1 A 0 A_Explode(GBP_Tackle,RAMHITBOX,0,0,RAMHITBOX)
 TNT1 A 1 A_GiveInventory("ProjectileDCode",1)
 TNT1 A 0 A_GiveToTarget("TackleCollision2",1)
 TNT1 A 0 A_SpawnItemEx("BasicMeleeFX", 0, 0, 0, 0, 0, 0, 0,1)
 Crash:
-TNT1 A 0 A_Explode(MBP_StandardPower+CallACS("GenericAttackPower",5),RAMHITBOX,0,0,RAMHITBOX)
+TNT1 A 0 A_Explode(GBP_Tackle,RAMHITBOX,0,0,RAMHITBOX)
 Terminate:
 TNT1 A 1
 stop
@@ -246,7 +283,7 @@ actor PoundMelee : BasicFastProjectile
 Speed 48
 Scale 5.0
 DamageType "Melee"
-Damage(MBP_StandardPower+CallACS("GenericAttackPower",5))
+Damage(GBP_Pound)
 States
 {
 Spawn:
@@ -391,7 +428,7 @@ stop
 
 Death:
 TNT1 A 0 A_GiveInventory("ProjectileCode",1)
-NDFX A 1 A_Explode(MBP_RapidLow+CallACS("GenericAttackPower",5),80,0,0,80)
+NDFX A 1 A_Explode(GBP_Scratch,80,0,0,80) //CallACS("GenericAttackPower",5)
 NDFX A 1 A_SpawnItemEx("ScratchImpactFX",0,0,0,0,0,0,0,1)
 stop
 }
@@ -484,7 +521,7 @@ actor JabMelee : BasicFastProjectile
 Speed 80
 Scale 5.0
 DamageType "Melee"
-Damage(MBP_StandardPower+CallACS("GenericAttackPower",5))
+Damage(GBP_Jab)
 States
 {
 Spawn:
@@ -653,7 +690,7 @@ States
 {
 Spawn:
 TNT1 A 0 
-TNT1 A 1 A_Explode(MBP_StandardPower+CallACS("GenericAttackPower",5),64,0,0,64)
+TNT1 A 1 A_Explode(GBP_Lash,64,0,0,64) //CallACS("GenericAttackPower",5)
 stop
 }
 }

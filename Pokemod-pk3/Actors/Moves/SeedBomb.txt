@@ -31,6 +31,7 @@ Goto Fire.Aim
 
 Fire.Aim:
 //"####" C 0 A_REfire("Fire.Aim")
+"####" B 0 A_GiveInventory("ChannelingSpeed")  //Firing Slow
 "####" B 1 A_FireCustomMissile("SeedBombAimPath",0,0,0,0,0,Aim_ArcOverHead+(Aim_ArcScale*Sin(-pitch)))
 "####" C 0 A_Jumpifinventory("SeedBombShotBuffer",1,"Fire.Aim")
 "####" C 0 A_REfire("Fire.Bullet")
@@ -61,6 +62,7 @@ Fire.After:
 "####" C 0 A_REfire("Fire")
 "####" B 0 A_GiveInventory("HalfRecovery_A")
 "####" B 0 A_TakeInventory("ConShotTimer",99)
+"####" B 0 A_TakeInventory("ChannelingSpeed",9) 
 "####" B 0 A_Jump(256,"Fire.End")
 Goto Fire.End
 
@@ -113,11 +115,11 @@ DamageType "SeedBomb"
 obituary "$OB_SeedBomb"
 +BOUNCEONCEILINGS
 -NoGravity
-Gravity 1.5
+Gravity 1.8
 damage (MBP_SeedBomb1)
 Radius 8
 Height 8
-speed 35
+speed 30
 Scale 3.0
 ReactionTime 4
 States

@@ -2629,7 +2629,8 @@ M001_NAME = "\cj Ember";
 M001_TYPE = "\cj Normal";
 M001_CATEGORY = "\cf Special";
 M001_POWER = "\cfPower:\cj 15";
-M001_DESC = "\cjLaunch a ball of fire that may burn\n";
+M001_DESC = "\cjA Basic fire move, Shoot fireballs that\n"
+"may burn";
 //#endregion
 
 //#region -=- 002: ThunderShock -=-
@@ -2637,8 +2638,8 @@ M002_NAME = "\cj ThunderShock";
 M002_TYPE = "\cj Electric";
 M002_CATEGORY = "\cf Special";
 M002_POWER = "\cfPower:\cj 30";
-M002_DESC = "\cjLaunch a Jolt of electricity that may\n"
-"paralyze.";
+M002_DESC = "\cjA Basic Electric move, Shoot Jolts of\n"
+"electricity that may Paralyze";
 //#endregion
 
 //#region -=- 003: watergun -=-
@@ -2646,7 +2647,8 @@ M003_NAME = "\cj watergun";
 M003_TYPE = "\cj Water";
 M003_CATEGORY = "\cf Physical";
 M003_POWER = "\cfPower:\cj 15";
-M003_DESC = "\cfShot \cja ball of water";
+M003_DESC = "\cja Basic Water move, shoot spheres of\n"
+"water.";
 //#endregion
 
 //#region -=- 004: Bite -=-
@@ -2741,7 +2743,9 @@ M014_NAME = "\cj Poison Powder";
 M014_TYPE = "\cj Poison";
 M014_CATEGORY = "\cf Status";
 M014_POWER = "\cfPower:\cj --";
-M014_DESC = "\cjScatter Poisonous Pollen on the \cfGround \cjthat \nInflicts Poison, ineffective on grass types.";
+M014_DESC = "\cjLaunch a condensed ball of poisonous\n"
+"Pollen that cuts HP in half, ineffective\n"
+"on grass types.";
 //#endregion
 
 //#region -=- 015: Sleep Powder -=-
@@ -2749,7 +2753,8 @@ M015_NAME = "\cj Sleep Powder";
 M015_TYPE = "\cj Grass";
 M015_CATEGORY = "\cf Status";
 M015_POWER = "\cfPower:\cj --";
-M015_DESC = "\cjScatter Sleep Inducing Pollen on the \cfGround \cjthat \nInflicts Sleep, ineffective on grass types.";
+M015_DESC = "\cjLaunch a condensed ball of sleep inducing\n"
+"pollen, ineffective on grass types.";
 //#endregion
 
 //#region -=- 016: Seed Bomb -=-
@@ -2757,7 +2762,8 @@ M016_NAME = "\cj Seed Bomb";
 M016_TYPE = "\cj Grass";
 M016_CATEGORY = "\cf Physical";
 M016_POWER = "\cfPower:\cj 70";
-M016_DESC = "\cfLob \cjan Exploding seed that deals \narea damage across a great distance";
+M016_DESC = "\cjUnleash a barrage of seeds that deal\n"
+"damage in an area.";
 //#endregion
 
 //#region -=- 017: Synthesis -=-
@@ -2790,7 +2796,9 @@ M020_NAME = "\cj Toxic";
 M020_TYPE = "\cj Poison";
 M020_CATEGORY = "\cf Status";
 M020_POWER = "\cfPower:\cj --";
-M020_DESC = "\cfLob \cja sphere of Condensed toxins that \ncreate a damaging field that poisons and deals \nincreasing damage to foes within it";
+M020_DESC = "\cjCover the ground with an extra noxious\n"
+"substance that slows and burns through\n"
+"HP.";
 //#endregion
 
 //#region -=- 021: SolarBeam -=-
@@ -2806,8 +2814,9 @@ M022_NAME = "\cj Petal Blizzard";
 M022_TYPE = "\cj Grass";
 M022_CATEGORY = "\cf Special";
 M022_POWER = "\cfPower:\cj --";
-M022_DESC = "\cjunleashe a blizzard of petals, dealing\n"
-"damage across a large area.";
+M022_DESC = "\cjunleash a blizzard of petals, dealing\n"
+"damage across an area and inflicting\n"
+"confusion.";
 //#endregion
 
 //#region -=- 023: SmokeScreen -=-
@@ -2842,7 +2851,9 @@ M026_NAME = "\cj Fire Spin";
 M026_TYPE = "\cj Normal";
 M026_CATEGORY = "\cf Special";
 M026_POWER = "\cfPower:\cj 35 DPS";
-M026_DESC = "\cjTarget the ground to cast a ring of fire.\n";
+M026_DESC = "\cjLaunch a fireball that creates a ring of\n"
+"fire, deals heavy damage and slows anyone\n"
+"that touches it.";
 //#endregion
 
 //#region -=- 027: Fire Fang -=-
@@ -2917,7 +2928,9 @@ M035_NAME = "\cj Dragon Rage";
 M035_TYPE = "\cj Dragon";
 M035_CATEGORY = "\cf Special";
 M035_POWER = "\cfPower:\cj 40~";
-M035_DESC = "\cfShot \cj a Blast of Draconic might, that deals vebatim damage.";
+M035_DESC = "\cjA Blast of draconic might that deals\n"
+"fixed damage based on your level and\n"
+"number of dragon moves.";
 //#endregion
 
 //#region -=- 036: Metal Claw -=-
@@ -2933,7 +2946,8 @@ M037_NAME = "\cj Dragon Claw";
 M037_TYPE = "\cj Dragon";
 M037_CATEGORY = "\cf Physical";
 M037_POWER = "\cfPower:\cj 25";
-M037_DESC = "\cfImbue \cjyour claws with the Draconic Power, \cfgeneric melee becomes Dragon Claw";
+M037_DESC = "\cjSwipe vertically with Dragon empowered\n"
+"claws, deals critical damage at the tip.";
 //#endregion
 
 //#region -=- 038: Withdraw -=-
@@ -3154,7 +3168,8 @@ M063_NAME = "\cj MagicalLeaf";
 M063_TYPE = "\cj Grass";
 M063_CATEGORY = "\cf Special";
 M063_POWER = "\cfPower:\cj --";
-M063_DESC = "\cfShoot\cj a mystical leaf that chases after \ntargets.";
+M063_DESC = "\cjLaunch a pair of mysterious, homing\n"
+"leaves, works best at a distance.";
 //#endregion
 
 //#region -=- 064: LightScreen -=-
@@ -3744,9 +3759,9 @@ M132_NAME = "\cj Venoshock";
 M132_TYPE = "\cj Poison";
 M132_CATEGORY = "\cf Special";
 M132_POWER = "\cfPower:\cj --";
-M132_DESC = "\cjTarget the ground to douse it in special\n"
-"toxins, deals amplified damage to\n"
-"poisoned opponents.";
+M132_DESC = "\cjLaunch a venomous dart or place a\n"
+"venomous mine, both deal increased damage\n"
+"to poisoned targets!";
 //#endregion
 
 //#region -=- 133: Absorb -=-
@@ -3797,9 +3812,8 @@ M138_NAME = "\cj StunSpore";
 M138_TYPE = "\cj Grass";
 M138_CATEGORY = "\cf Status";
 M138_POWER = "\cfPower:\cj --";
-M138_DESC = "\cj\cjScatter Dubious Pollen on the\n"
-"\cfGround \cjthat Inflicts Paralysis,\n"
-"ineffective on grass types.";
+M138_DESC = "\cjLaunch a condensed ball of Paralyzing\n"
+"Pollen, ineffective on grass types.";
 //#endregion
 
 //#region -=- 139: PetalDance -=-
@@ -3832,7 +3846,8 @@ M142_NAME = "\cj Leafage";
 M142_TYPE = "\cj Grass";
 M142_CATEGORY = "\cf Physical";
 M142_POWER = "\cfPower:\cj --";
-M142_DESC = "\cfshoot\cj leaves at a foe.\n";
+M142_DESC = "\cja Basic Grass move, shoot clusters of\n"
+"leaves.";
 //#endregion
 
 //#region -=- 143: LavaPlume -=-
@@ -3897,8 +3912,9 @@ M149_NAME = "\cj WillOWisp";
 M149_TYPE = "\cj Fire";
 M149_CATEGORY = "\cf Status";
 M149_POWER = "\cfPower:\cj --";
-M149_DESC = "\cjTarget an enemy with mysterious flame\n"
-"that inflict a burn.";
+M149_DESC = "\cjTarget an enemy with mysterious Flames\n"
+"that sear off 1/5 of their health and\n"
+"leave them with a burn";
 //#endregion
 
 //#region -=- 150: MysticalFire -=-
@@ -3906,8 +3922,8 @@ M150_NAME = "\cj MysticalFire";
 M150_TYPE = "\cj Fire";
 M150_CATEGORY = "\cf Special";
 M150_POWER = "\cfPower:\cj --";
-M150_DESC = "\cjhold to control a guided fireball,\n"
-"release to detonate it. can lower SP.Atk.";
+M150_DESC = "\cjLaunch balls of magic fire that seek out\n"
+"opponents. can lower SP.ATK.";
 //#endregion
 
 //#region -=- 151: Rest -=-
@@ -4018,9 +4034,9 @@ M162_NAME = "\cj Hex";
 M162_TYPE = "\cj Ghost";
 M162_CATEGORY = "\cf Special";
 M162_POWER = "\cfPower:\cj --";
-M162_DESC = "\cjTarget the ground to cast an evil eye\n"
-"onto the area, deals double damage to\n"
-"those under a major status condition.";
+M162_DESC = "\cjCast a piercing gaze or place a Sinister\n"
+"Trap, both deal increased damage to foes\n"
+"under major statuses.";
 //#endregion
 
 //#region -=- 163: ShadowBall -=-
@@ -4047,7 +4063,7 @@ M165_NAME = "\cj DragonDarts";
 M165_TYPE = "\cj Dragon";
 M165_CATEGORY = "\cf Physical";
 M165_POWER = "\cfPower:\cj --";
-M165_DESC = "\cjhold to queue up 2 dreepy shots that\n"
+M165_DESC = "\cjhold to queue up 5 dreepy shots that\n"
 "sharply home into foes.";
 //#endregion
 
@@ -4066,8 +4082,8 @@ M167_NAME = "\cj Dracometeor";
 M167_TYPE = "\cj Dragon";
 M167_CATEGORY = "\cf Special";
 M167_POWER = "\cfPower:\cj --";
-M167_DESC = "\cjremotely cast a rush of meteors onto a\n"
-"given area.";
+M167_DESC = "\cjCall down meteors to decimate everything\n"
+"in a line before you.";
 //#endregion
 
 //#region -=- 168: ThunderWave -=-
@@ -4084,8 +4100,9 @@ M169_NAME = "\cj Twister";
 M169_TYPE = "\cj Dragon";
 M169_CATEGORY = "\cf Special";
 M169_POWER = "\cfPower:\cj --";
-M169_DESC = "\cjstir up a small vortex that can lift\n"
-"allies, foes may cringe in it's presence.";
+M169_DESC = "\cjWhip up a wind tunnel that tears through\n"
+"foes and creates an updraft if it hits\n"
+"the ground, may cause cringe.";
 //#endregion
 
 //#region -=- 170: Wrap -=-
@@ -4101,8 +4118,9 @@ M171_NAME = "\cj Barrier";
 M171_TYPE = "\cj Psychic";
 M171_CATEGORY = "\cf Status";
 M171_POWER = "\cfPower:\cj --";
-M171_DESC = "\cjLaunch a small vortex, creates a wind\n"
-"tunnle if it hits the floor.";
+M171_DESC = "\cjConjur up a psychic wall that blocks\n"
+"enemies and their attacks. allies can\n"
+"move and shoot past it.";
 //#endregion
 
 //#region -=- 172: DragonBreath -=-
@@ -4110,8 +4128,8 @@ M172_NAME = "\cj DragonBreath";
 M172_TYPE = "\cj Dragon";
 M172_CATEGORY = "\cf Special";
 M172_POWER = "\cfPower:\cj --";
-M172_DESC = "\cjlaunch a projectile that deals area\n"
-"damage and may cause paralysis";
+M172_DESC = "\cjSpew paralyzing breath in a wide fan of\n"
+"shots, strongest up close.";
 //#endregion
 
 //#region -=- 173: Hurricane -=-
@@ -4558,8 +4576,8 @@ M223_NAME = "\cj PoisonGas";
 M223_TYPE = "\cj Poison";
 M223_CATEGORY = "\cf Status";
 M223_POWER = "\cfPower:\cj --";
-M223_DESC = "\cjUnleash a cloud of poisonous gas, poisons\n"
-"anyone that enters it.";
+M223_DESC = "\cjDeploy a cloud of poisonous gas that eats\n"
+"away at the opponent's HP.";
 //#endregion
 
 //#region -=- 224: Swagger -=-

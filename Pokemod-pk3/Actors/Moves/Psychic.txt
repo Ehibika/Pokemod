@@ -13,10 +13,28 @@ WEAP X 1
 stop
 
 Fire:
-"####" BBB 1 A_Jumpif(CallACS("CheckWeaponFire",RC_D)==1,"Fire.Begin")
+"####" BBB 1 A_Jumpif(CallACS("CheckWeaponFire",RC_D|RC_NOCOOL)==1,"Fire.Begin")
 "####" B 0 A_Jump(256,"NoAmmo")
 Goto NoAmmo
 
+Fire.Begin:
+"####" B 0
+"####" B 0 A_Jump(256,"Fire.Bullet")
+Goto Fire.Bullet
+
+Fire.Bullet:
+"####" B 0 A_PlaySoundEx("Move/Extrasensory1","Weapon")
+"####" B 0 A_FireCustomMissile("PsychicShot",0,1,0,0)
+"####" B 0 A_GiveInventory("ChannelingSpeed")  //Firing Slow
+"####" B 0 A_Jump(256,"Fire.After")
+Goto Fire.After
+
+Fire.After:
+"####" B 1 A_GiveInventory("Psychic_Recovery_D")
+"####" B 0 A_Jump(256,"Fire.End")
+Goto Fire.End
+
+/*
 Fire.Begin:
 "####" B 0
 "####" B 1
@@ -41,6 +59,7 @@ Fire.After:
 "####" C 0 A_REfire("Fire")
 "####" B 0 A_Jump(256,"Fire.End")
 Goto Fire.End
+*/
 
 AltFire:
 "####" BBB 1 A_Jumpif(CallACS("CheckWeaponFire",RC_A)==1,"Altfire.Begin")
@@ -102,10 +121,13 @@ Goto Ready
 actor PsychicPP : Ammo {inventory.amount 1 inventory.Maxamount 10}
 
 actor PsychicRCFlag : Powerup {inventory.amount 1 powerup.duration 35 }
+actor Psychic_RemoteCooldown : Powerup {inventory.amount 1 powerup.duration -5}
 
 Const int PsychicRad = 175;
 Const int Psychic_Forward = 150;
-Const int Psychic_Range = 3000;
+Const int Psychic_Range = 1000;
+
+Const int PsychicRad2 = 125;
 
 actor PsychicPPTaker : CustomInventory
 {
@@ -127,6 +149,72 @@ actor Psychic_Recovery_D : FullRecovery_D{Powerup.Duration 52} //87
 //[+]========================================================================[+]
 //--------------------------------|Projectiles |--------------------------------
 //[+]========================================================================[+]
+actor PsychicShot : PKMN_Missile
+{
+Damage (MBP_Psychic2)
+Speed 80
+DamageType "Psychic"
+obituary "$OB_Psychic"
+scale 3.5
+States
+{
+Spawn:
+TNT1 A 0 
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+TBOL MMNNO 1 A_Spawnitemex("PsychicTrail",0,0,0,0,0,0,0,SXF_TRANSFERTRANSLATION|SXF_ABSOLUTEVELOCITY)
+Goto Explode
+
+Death:
+TNT1 A 0 A_GiveInventory("ProjectileDCode",1)
+TNT1 A 0 A_SpawnItemEx("PsyBeamBounce",0,-1,4,0,0,0,0,1)
+TNT1 A 0 A_Stop
+stop
+
+Crash:
+XDeath:
+TNT1 A 0 A_Stop
+TNT1 A 0 A_GiveInventory("ProjectileDCode",1)
+TNT1 A 0 A_SpawnItemEx("PowerStrikeFX",0,0,0,0,0,0,0,33)
+Explode:
+TNT1 A 0 A_Spawnitemex("PsychicPuff1",0,0,0,0,0,0,0,SXF_TRANSFERTRANSLATION)
+stop
+}
+}
+
+actor PsychicPuff1 : BasicExplosion2
+{
+scale 4.5
+DamageType "Psychic"
+obituary "$OB_Psychic"
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+TNT1 A 0 A_Explode(MBP_Psychic1,PsychicRad2,0,0,PsychicRad2)
+NAPC A 0 A_PlaySoundEx("Move/Extrasensory4", "Weapon")
+TNT1 A 0 A_SpawnItemEx("PsychicFX_F",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION)
+TNT1 AAA 3 A_SpawnItemEx("ConfusionFX_C",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION)
+TNT1 A 2
+stop
+}
+}
+
+actor PsychicTrail : BasicClientside
+{
+scale 3.0
+Alpha 0.9
+Renderstyle "add"
+States
+{
+Spawn:
+CRBM A 0
+DWRA CBA 2 A_SpawnItemEx("ExtrasensoryParticle",Random(-16,16),Random(-16,16),Random(-16,16),0,0,0,0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION)
+//BSTG AAAAA 1 A_Fadeout
+stop
+}
+}
+
 actor Psychic_Remote 
 {
 Speed 5
@@ -175,14 +263,17 @@ goto Spawn2
 Trigger: //Check PP
 TNT1 A 0 A_JumpifInTargetInventory("PsychicPP",1,"Trigger2")
 goto Decline
-Trigger2: // Check Recovery Frame
+Trigger2: // Check Recovery Frame / cooldown
 TNT1 A 0 A_JumpifInTargetInventory("Recovery_D",1,"Decline")
+TNT1 A 0 A_JumpifInTargetInventory("Psychic_RemoteCooldown",1,"Decline")
 goto Detonate
 
 Detonate: // Cast the attack!
 TNT1 A 0 A_GiveToTarget("PsychicPPTaker",1)
 TNT1 A 0 A_SpawnItemEx("PsychicHitbox",Psychic_Forward,0,-(z-floorz)+60,0,0,0,0,1)
 TNT1 A 0 A_GiveToTarget("Psychic_Recovery_D",1)
+TNT1 A 0 A_GiveToTarget("Psychic_RemoteCooldown",1)
+TNT1 A 0 A_GiveToTarget("MoveCooldown_5")
 goto PostTrigger
 
 Decline: //Cannot cast the attack
@@ -214,7 +305,7 @@ TNT1 A 0 A_GiveInventory("ProjectileCode",1)
 NAPC A 0 A_PlaySoundEx("Move/Psychic1", "Weapon")
 TNT1 A 2 A_SpawnItemEx("PsychicFX_A1",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION)
 TNT1 A 0 A_SpawnItemEx("PsychicFX_A2",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION)
-TNT1 A 14
+TNT1 A 24
 
 TNT1 A 0 A_SpawnItemEx("PsychicFX_B",250,0,0,-50,0,0,90+(90*0),SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION)
 TNT1 A 0 A_SpawnItemEx("PsychicFX_B",250,0,0,-50,0,0,90+(90*1),SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION)
@@ -227,7 +318,7 @@ TNT1 A 0 A_SpawnItemEx("PsychicFX_B",250,0,0,-50,0,0,45+(90*2),SXF_NOCHECKPOSITI
 TNT1 A 0 A_SpawnItemEx("PsychicFX_B",250,0,0,-50,0,0,45+(90*3),SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION)
 TNT1 A 5
 
-TNT1 A 0 A_Explode(MBP_Psychic,PsychicRad,0,0,PsychicRad)
+TNT1 A 0 A_Explode(MBP_Psychic1+MBP_Psychic2,PsychicRad,0,0,PsychicRad)
 NAPC A 0 A_PlaySoundEx("Move/Psychic2", "Weapon")
 TNT1 A 3 A_SpawnItemEx("PsychicFX_E",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION)
 TNT1 A 0 A_Quake(4,18,0,350)
@@ -260,13 +351,13 @@ stop
 actor PsychicFX_A2 : BasicClientside
 {
 scale 0.05
-reactiontime 4
+reactiontime 8
 Renderstyle "Add"
 States
 {
 Spawn:
 TNT1 A 0 
-PSIK BCDE 1 A_SetScale(ScaleX+0.14)
+PSIK BCDE 1 A_SetScale(ScaleX+0.10)
 TNT1 A 0 A_CountDown
 loop
 }
@@ -340,6 +431,32 @@ translation "198:198=220:220", "192:192=229:229"
         
         TNT1 A 0 A_SpawnItemEx("PsychicFX_D", 32, 0, 0, 36, 0, -15, angle+user_angle, 1061)
         TNT1 A 0 A_SpawnItemEx("PsychicFX_D", -32, 0, 0, -36, 0, -15, angle+user_angle, 1061)
+        
+		TNT1 A 0 A_SetUserVar("user_angle", user_angle + 30)
+		TNT1 A 0 A_Countdown
+		TNT1 A 1 A_Jump(256,"SpawnLoop")
+		loop
+		Death:
+		TNT1 A 0
+		stop
+	}
+}
+
+actor PsychicFX_F : BasicHelper
+{
+translation "198:198=220:220", "192:192=229:229"
++CLIENTSIDEONLY
+	reactiontime 6
+	var int user_angle;
+	States
+	{
+		Spawn:
+		TNT1 A 0
+		TNT1 A 0 //A_SetUserVar("user_angle", random(0, 30))
+		SpawnLoop:
+        
+        TNT1 A 0 A_SpawnItemEx("PsychicFX_D", 32, 0, 0, 32, 0, 0, angle+user_angle, 1061)
+        TNT1 A 0 A_SpawnItemEx("PsychicFX_D", -32, 0, 0, -32, 0, 0, angle+user_angle, 1061)
         
 		TNT1 A 0 A_SetUserVar("user_angle", user_angle + 30)
 		TNT1 A 0 A_Countdown

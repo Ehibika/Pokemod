@@ -15,15 +15,15 @@ stop
 
 
 Fire:
-"####" BBB 1 A_Jumpif(CallACS("CheckWeaponFire",RC_A)==1,"Fire.Begin")
+"####" BBB 1 A_Jumpif(CallACS("CheckWeaponFire",RC_C)==1,"Fire.Begin")
 "####" B 0 A_Jump(256,"NoAmmo")
 Goto NoAmmo
 
 Fire.Begin:
 "####" B 0
-"####" B 0 A_Jump(256,"Fire.PreCharge")
-Goto Fire.PreCharge
-
+"####" B 0 A_Jump(256,"Fire.Bullet")
+Goto Fire.Bullet
+/*
 Fire.PreCharge:
 "####" B 0 A_FireCustomMissile("FireBlastWatcher",0,0)
 "####" B 0 A_Jump(256,"Fire.Charge1")
@@ -46,7 +46,7 @@ Fire.Charge2:
 "####" C 0 A_REfire("Fire.Charge1")
 "####" B 0 A_Jump(256,"Fire.Bullet")
 Goto Fire.Bullet
-
+*/
 Fire.Bullet:
 "####" B 0 A_PlaySoundEx("weapon/magmabazooka","Weapon")
 "####" B 0 A_FireCustomMissile("FireBlastShot",0,1,0,0)
@@ -54,9 +54,10 @@ Fire.Bullet:
 Goto Fire.After
 
 Fire.After:
-"####" B 0 A_GiveInventory("HalfRecovery_A")
-Fire.After2:
-"####" B 1 A_GiveInventory("5Recovery_A")
+//"####" B 0 A_GiveInventory("HalfRecovery_A")
+//Fire.After2:
+"####" B 1 A_GiveInventory("HalfRecovery_C")
+"####" A 0 A_GiveInventory("MoveCooldown_3")
 "####" B 0 A_TakeInventory("WeaponCharge",999)
 "####" B 0 A_TakeInventory("ChannelingSpeed",9) 
 "####" B 0 A_Jump(256,"Fire.End")
@@ -88,8 +89,10 @@ Goto Ready
 actor FireBlastPP : Ammo {inventory.amount 1 inventory.Maxamount 10}
 actor ChannelingSpeed : PowerSpeed {inventory.amount 1 Powerup.Duration 17 Speed 0.5 +POWERSPEED.NOTRAIL}
 
-Const int FireBlastRad = 250;
+Const int FireBlastRad = 100;
 Const int FireBlastRad2 = FireBlastRad/2;
+
+actor FireBlast_Recovery_C : FullRecovery_C{Powerup.Duration 55}
 //[+]========================================================================[+]
 //--------------------------------|Projectiles |--------------------------------
 //[+]========================================================================[+]
@@ -129,9 +132,9 @@ actor FireBlastWatcher
     }
 }
 
-actor FireBlastShot : BasicProjectile
+actor FireBlastShot : BasicFastProjectile
 {
-Speed 32
+Speed 125
 Damage (0)
 DamageType "FireBlast"
 obituary "$OB_FireBlast"
@@ -147,17 +150,17 @@ TNT1 A 0 A_GiveInventory("ProjectileCode",1)
 TNT1 A 0 //A_SpawnItemEx("FireBlastFX",0,0,0,0,0,0,0,1)
 Spawn2:
 TNT1 A 0 
-MGM2 A 2 A_SpawnItemEx("FireBlastSymbolParticle",random(-10,10),random(-10,10),random(-10,10),0,0,0,0,1)
+MGM2 A 2 A_SpawnItemEx("FireBlastTrail",-85,0,0,momx,momy,momz,0,9)
 MGM2 A 0 A_PlaySoundEx("weapon/WaveBurner", "Weapon")
-MGM2 B 2 A_SpawnItemEx("FireBlastSymbolParticle",random(-10,10),random(-10,10),random(-10,10),0,0,0,0,1)
+MGM2 B 2 A_SpawnItemEx("FireBlastTrail",-85,0,0,momx,momy,momz,0,9)
 MGM2 B 0 A_PlaySoundEx("weapon/WaveBurner", "Weapon")
-MGM2 C 2 A_SpawnItemEx("FireBlastSymbolParticle",random(-10,10),random(-10,10),random(-10,10),0,0,0,0,1)
+MGM2 C 2 A_SpawnItemEx("FireBlastTrail",-85,0,0,momx,momy,momz,0,9)
 MGM2 C 0 A_PlaySoundEx("weapon/WaveBurner", "Weapon")
-MGM2 D 2 A_SpawnItemEx("FireBlastSymbolParticle",random(-10,10),random(-10,10),random(-10,10),0,0,0,0,1)
+MGM2 D 2 A_SpawnItemEx("FireBlastTrail",-85,0,0,momx,momy,momz,0,9)
 MGM2 D 0 A_PlaySoundEx("weapon/WaveBurner", "Weapon")
-MGM2 E 2 A_SpawnItemEx("FireBlastSymbolParticle",random(-10,10),random(-10,10),random(-10,10),0,0,0,0,1)
+MGM2 E 2 A_SpawnItemEx("FireBlastTrail",-85,0,0,momx,momy,momz,0,9)
 MGM2 E 0 A_PlaySoundEx("weapon/WaveBurner", "Weapon")
-MGM2 F 2 A_SpawnItemEx("FireBlastSymbolParticle",random(-10,10),random(-10,10),random(-10,10),0,0,0,0,1)
+MGM2 F 2 A_SpawnItemEx("FireBlastTrail",-85,0,0,momx,momy,momz,0,9)
 MGM2 F 0 A_PlaySoundEx("weapon/WaveBurner", "Weapon")
 MGM2 A 0 A_Countdown
 loop
@@ -166,6 +169,24 @@ Death:
 TNT1 A 0 A_GiveInventory("ProjectileDCode",1)
 BSTG A 0 A_SpawnItemEx("FireBlastImpact", 0, 0, 0, 0, 0, 0, 0,1)
 HARD BCDE 2
+stop
+}
+}
+
+actor FireBlastTrail : BasicExplosion
+{
+Obituary "$OB_FIREBLAST"
+damagetype "FireBlast"
+States
+{
+Spawn:
+TNT1 A 0
+AQBA L 0 A_GiveInventory("ProjectileCode",1)
+//TNT1 A 0 A_SpawnItemEx("FireBlastParticle2",random(-10,10),random(-10,10),random(-10,10),0,0,0,0,1)
+TNT1 A 0 A_SpawnItemEx("FireBlastSymbolParticle",random(-10,10),random(-10,10),random(-10,10),-momx*0.2,-momy*0.2,-momz*0.2,0,9)
+TNT1 A 0 A_SpawnItemEx("FireBlastSymbolParticle",random(-10,10),random(-10,10),random(-10,10),-momx*0.4,-momy*0.4,-momz*0.4,0,9)
+//TNT1 A 0 A_SpawnItemEx("FireBlastSymbolParticle",random(-10,10),random(-10,10),random(-10,10),-momx*0.6,-momy*0.6,-momz*0.6,0,9)
+//TNT1 A 1 A_SpawnItemEx("FireBlastSymbolParticle",random(-10,10),random(-10,10),random(-10,10),-momx*0.8,-momy*0.8,-momz*0.8,0,9)
 stop
 }
 }

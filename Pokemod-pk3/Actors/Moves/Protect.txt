@@ -37,7 +37,7 @@ Fire.Initiate:
 Goto Fire.Guard
 
 Fire.Guard:
-"####" B 0 A_GiveInventory("ChannelingSpeed")
+"####" B 0 A_GiveInventory("ChannelingSpeed")  //Firing Slow
 "####" B 0 A_Jumpifinventory("ConShotTimer",1,"Fire.Guard2")
 "####" B 0 A_Jump(256,"Fire.Guard1")
 Goto Fire.Guard1

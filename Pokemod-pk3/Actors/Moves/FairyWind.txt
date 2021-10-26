@@ -67,7 +67,7 @@ Goto Ready
 actor FairyWindPP : Ammo {inventory.amount 1 inventory.Maxamount 40}
 
 
-actor FairyWind_Recovery_A : FullRecovery_A{Powerup.Duration 17}
+actor FairyWind_Recovery_A : FullRecovery_A{Powerup.Duration 8}
 //[+]========================================================================[+]
 //--------------------------------|Projectiles |--------------------------------
 //[+]========================================================================[+]
@@ -77,7 +77,7 @@ actor FairyWindShot : PKMN_EarlyGameProjectile
 Damage (MBP_FairyWind)
 DamageType "FairyWind"
 obituary "$OB_FAIRYWIND"
-Reactiontime 80
+Reactiontime 8
 scale 3.5
 States
 {

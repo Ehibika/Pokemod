@@ -41,8 +41,8 @@ str ShopItemList[MAX_SHOP][4] = {
     {"ShrinkWand", "Shrink Wand", 5.0,""},
     {"SomarianWand", "Somarian Wand", 10.0,""},
     {"BlastWand", "Blast Wand", 50.0,""},
-    {"SmallEXPCandy", "S EXP Candy", 5.0,"NOSELL"},
-    {"MediumEXPCandy", "M EXP Candy", 10.0,"NOSELL"},
+    {"FloralIncense", "Floral Incense", 5.0,""},
+    {"SeaIncense", "Sea Incense", 10.0,""},
     {"FullIncense", "Full Incense", 25.0,""},
 };
 

@@ -311,7 +311,7 @@ Pickup:
 TNT1 A 0 A_Jumpifinventory("STF_SilverWindA",1,"Pickup2")
 Goto Nope
 Pickup2:
-TNT1 A 0 A_GiveInventory("PATKUPFXSpawn",1)
+TNT1 A 0 A_GiveInventory("SpawnStatusParticles",1)
 stop
 }
 }
@@ -324,7 +324,7 @@ Pickup:
 TNT1 A 0 A_Jumpifinventory("STF_SilverWindB",1,"Pickup2")
 Goto Nope
 Pickup2:
-TNT1 A 0 A_GiveInventory("SATKUPFXSpawn",1)
+TNT1 A 0 A_GiveInventory("SpawnStatusParticles",1)
 stop
 }
 }
@@ -337,7 +337,7 @@ Pickup:
 TNT1 A 0 A_Jumpifinventory("STF_SilverWindC",1,"Pickup2")
 Goto Nope
 Pickup2:
-TNT1 A 0 A_GiveInventory("PDefUPFXSpawn",1)
+TNT1 A 0 A_GiveInventory("SpawnStatusParticles",1)
 stop
 }
 }
@@ -350,7 +350,7 @@ Pickup:
 TNT1 A 0 A_Jumpifinventory("STF_SilverWindD",1,"Pickup2")
 Goto Nope
 Pickup2:
-TNT1 A 0 A_GiveInventory("SDefUPFXSpawn",1)
+TNT1 A 0 A_GiveInventory("SpawnStatusParticles",1)
 stop
 }
 }
@@ -363,7 +363,7 @@ Pickup:
 TNT1 A 0 A_Jumpifinventory("STF_SilverWindE",1,"Pickup2")
 Goto Nope
 Pickup2:
-TNT1 A 0 A_GiveInventory("SpdUPFXSpawn",1)
+TNT1 A 0 A_GiveInventory("SpawnStatusParticles",1)
 stop
 }
 }

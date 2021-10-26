@@ -4,7 +4,7 @@ const int RC_B = 2;
 const int RC_C = 4;
 const int RC_D = 8;
 
-const int RC_Halt = 16;
+const int RC_NOCOOL = 16;
 
 actor WepMasterBase0 : Weapon
 {
@@ -51,7 +51,7 @@ Goto Ready
 
 FreezeReady:
 SleepReady:
-TNT1 A 1 A_WeaponReady(WRF_ALLOWRELOAD) //|WRF_NOSECONDARY
+TNT1 A 1 A_WeaponReady(WRF_ALLOWRELOAD|WRF_NOSECONDARY) //|WRF_NOSECONDARY
 //TNT1 A 0 A_Jumpif(CallACS("PKMNACS_ButtonCheck",BT_ATTACK) == 1,"Fire")
 Goto Ready
 
@@ -130,7 +130,7 @@ Goto AltFire.After
 AltFire.After:
 TNT1 A 1 A_JumpifInventory("PKMNRageFlag",1,"AltFire.RageAfter")
 TNT1 A 0 A_GiveInventory("PartRecovery_A") 
-TNT1 A 0 A_GiveInventory("SemiRecovery_B") 
+//TNT1 A 0 A_GiveInventory("FullRecovery_B")  //Now G.attack Specific
 TNT1 A 0 A_GiveInventory("PartRecovery_C") 
 TNT1 A 0 A_Jumpif(CallACS("PKMNACS_ButtonCheck",BT_ALTATTACK) == 1,"Altfire")
 //TNT1 A 0 A_REfire("AltFire")
@@ -139,7 +139,7 @@ Goto Ready
 
 AltFire.RageAfter:
 TNT1 A 1 A_GiveInventory("5Recovery_A") 
-TNT1 A 0 A_GiveInventory("5Recovery_B") 
+//TNT1 A 0 A_GiveInventory("PartRecovery_B")  //Now G.attack Specific
 TNT1 A 0 A_GiveInventory("5Recovery_C") 
 TNT1 A 0 A_Jumpif(CallACS("PKMNACS_ButtonCheck",BT_ALTATTACK) == 1,"Altfire")
 //TNT1 A 0 A_REfire("AltFire")
@@ -485,6 +485,151 @@ const int Stat_X = 30;
 const int Stat_UpZ = 10;
 const int Stat_DownZ = 80;
 
+actor StXFBuffer : Powerup {inventory.amount 1 Powerup.Duration 8}
+
+
+actor SpawnStatusParticles : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_Jumpifinventory("StXFBuffer",1,"Nope")
+TNT1 A 0 A_GiveInventory("SSP_ATK")
+TNT1 A 0 A_GiveInventory("SSP_SATK")
+TNT1 A 0 A_GiveInventory("SSP_DEF")
+TNT1 A 0 A_GiveInventory("SSP_SDEF")
+TNT1 A 0 A_GiveInventory("SSP_SPD")
+TNT1 A 0 A_GiveInventory("StXFBuffer")
+stop
+Nope:
+//BUST B 0 A_PlaySoundEx("weapon/heat3","Item")
+TNT1 A 0
+stop
+}
+}
+
+actor SSP_ATK : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_JumpIf(CallACS("GetStatMod",0,0) > 0,"StatUp")
+TNT1 A 0 A_JumpIf(CallACS("GetStatMod",0,0) < 0,"StatDown")
+stop
+StatDown:
+TNT1 A 0 A_SpawnItemEx("PatkDownFX",Stat_X,0,Stat_DownZ,0,0,Stat_DownS,random(0,360))
+stop
+StatUp:
+TNT1 A 0 A_SpawnItemEx("PatkUpFX",Stat_X,0,0,0,0,3,random(0,360))
+stop
+}
+}
+
+actor SSP_SATK : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_JumpIf(CallACS("GetStatMod",0,1) > 0,"StatUp")
+TNT1 A 0 A_JumpIf(CallACS("GetStatMod",0,1) < 0,"StatDown")
+stop
+StatDown:
+TNT1 A 0 A_SpawnItemEx("SatkDownFX",Stat_X,0,Stat_DownZ,0,0,Stat_DownS,random(0,360))
+stop
+StatUp:
+TNT1 A 0 A_SpawnItemEx("SatkUpFX",Stat_X,0,0,0,0,3,random(0,360))
+stop
+}
+}
+
+actor SSP_DEF : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_JumpIf(CallACS("GetStatMod",0,2) > 0,"StatUp")
+TNT1 A 0 A_JumpIf(CallACS("GetStatMod",0,2) < 0,"StatDown")
+stop
+StatDown:
+TNT1 A 0 A_SpawnItemEx("PdefDownFX",Stat_X,0,Stat_DownZ,0,0,Stat_DownS,random(0,360))
+stop
+StatUp:
+TNT1 A 0 A_SpawnItemEx("PdefUpFX",Stat_X,0,0,0,0,3,random(0,360))
+stop
+}
+}
+
+actor SSP_SDEF : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_JumpIf(CallACS("GetStatMod",0,3) > 0,"StatUp")
+TNT1 A 0 A_JumpIf(CallACS("GetStatMod",0,3) < 0,"StatDown")
+stop
+StatDown:
+TNT1 A 0 A_SpawnItemEx("SdefDownFX",Stat_X,0,Stat_DownZ,0,0,Stat_DownS,random(0,360))
+stop
+StatUp:
+TNT1 A 0 A_SpawnItemEx("SdefUpFX",Stat_X,0,0,0,0,3,random(0,360))
+stop
+}
+}
+
+actor SSP_SPD : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_JumpIf(CallACS("GetStatMod",0,4) > 0,"StatUp")
+TNT1 A 0 A_JumpIf(CallACS("GetStatMod",0,4) < 0,"StatDown")
+stop
+StatDown:
+TNT1 A 0 A_SpawnItemEx("SpdDownFX",Stat_X,0,Stat_DownZ,0,0,Stat_DownS,random(0,360))
+stop
+StatUp:
+TNT1 A 0 A_SpawnItemEx("SpdUpFX",Stat_X,0,0,0,0,3,random(0,360))
+stop
+}
+}
+
+
 actor StatDownFX 
 {
 PROJECTILE
@@ -494,9 +639,9 @@ PROJECTILE
 Speed 0
 radius 5
 height 5
-scale 1.0
+scale 2.0
 Renderstyle "Translucent"
-Alpha 1.0
+Alpha 0.8
 States
 {
 Spawn:
@@ -784,6 +929,230 @@ Goto Death
 
 Death:
 TNT1 A 1 
+stop
+}
+}
+
+actor CooldownSlot1 : Inventory {inventory.amount 3500 inventory.MaxAmount 3500}
+actor CooldownSlot2 : Inventory {inventory.amount 3500 inventory.MaxAmount 3500}
+actor CooldownSlot3 : Inventory {inventory.amount 3500 inventory.MaxAmount 3500}
+actor CooldownSlot4 : Inventory {inventory.amount 3500 inventory.MaxAmount 3500}
+
+actor CooldownWatcherBase : BasicHelper 
+{
++MISSILE
+Args 3,1
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_JumpIfInTargetInventory("CutterFlag",999,"Death")
+TNT1 A 0 A_JumpIfInTargetInventory("isDead",1,"Death")
+TNT1 A 1 //a_log("bing")
+TNT1 A 0 A_JumpIf(Args[1] <= 1,"Slot1Cooldown")
+TNT1 A 0 A_JumpIf(Args[1] == 2,"Slot2Cooldown")
+TNT1 A 0 A_JumpIf(Args[1] == 3,"Slot3Cooldown")
+TNT1 A 0 A_JumpIf(Args[1] >= 4,"Slot4Cooldown")
+loop
+
+Slot1Cooldown:
+TNT1 A 0 //a_log("Bong")
+TNT1 A 0 A_TakeFromTarget("CooldownSlot1",Args[0])
+TNT1 A 1 A_JumpIfInTargetInventory("CooldownSlot1",1,"Spawn")
+Goto Death
+
+Slot2Cooldown:
+TNT1 A 0 //a_log("Bong")
+TNT1 A 0 A_TakeFromTarget("CooldownSlot2",Args[0])
+TNT1 A 1 A_JumpIfInTargetInventory("CooldownSlot2",1,"Spawn")
+Goto Death
+
+Slot3Cooldown:
+TNT1 A 0 //a_log("Bong")
+TNT1 A 0 A_TakeFromTarget("CooldownSlot3",Args[0])
+TNT1 A 1 A_JumpIfInTargetInventory("CooldownSlot3",1,"Spawn")
+Goto Death
+
+Slot4Cooldown:
+TNT1 A 0 //a_log("Bong")
+TNT1 A 0 A_TakeFromTarget("CooldownSlot4",Args[0])
+TNT1 A 1 A_JumpIfInTargetInventory("CooldownSlot4",1,"Spawn")
+Goto Death
+
+Death:
+TNT1 A 0 
+stop
+}
+}
+
+actor Cooldown1_1HalfSec : CooldownWatcherBase {args 66,1}
+actor Cooldown1_3Sec : CooldownWatcherBase {args 33,1}
+actor Cooldown1_5Sec : CooldownWatcherBase {args 20,1}
+actor Cooldown1_7Sec : CooldownWatcherBase {args 14,1}
+actor Cooldown1_10Sec : CooldownWatcherBase {args 10,1}
+actor Cooldown1_12Sec : CooldownWatcherBase {args 8,1}
+
+actor Cooldown2_1HalfSec : CooldownWatcherBase {args 66,2}
+actor Cooldown2_3Sec : CooldownWatcherBase {args 33,2}
+actor Cooldown2_5Sec : CooldownWatcherBase {args 20,2}
+actor Cooldown2_7Sec : CooldownWatcherBase {args 14,2}
+actor Cooldown2_10Sec : CooldownWatcherBase {args 10,2}
+actor Cooldown2_12Sec : CooldownWatcherBase {args 8,2}
+
+actor Cooldown3_1HalfSec : CooldownWatcherBase {args 66,3}
+actor Cooldown3_3Sec : CooldownWatcherBase {args 33,3}
+actor Cooldown3_5Sec : CooldownWatcherBase {args 20,3}
+actor Cooldown3_7Sec : CooldownWatcherBase {args 14,3}
+actor Cooldown3_10Sec : CooldownWatcherBase {args 10,3}
+actor Cooldown3_12Sec : CooldownWatcherBase {args 8,3}
+
+actor Cooldown4_1HalfSec : CooldownWatcherBase {args 66,4}
+actor Cooldown4_3Sec : CooldownWatcherBase {args 33,4}
+actor Cooldown4_5Sec : CooldownWatcherBase {args 20,4}
+actor Cooldown4_7Sec : CooldownWatcherBase {args 14,4}
+actor Cooldown4_10Sec : CooldownWatcherBase {args 10,4}
+actor Cooldown4_12Sec : CooldownWatcherBase {args 8,4}
+
+actor MoveCooldown_10 : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 //ACS_NamedExecuteAlways("StatUpdate",0) GetCurrentWepSlot
+TNT1 A 0 A_JumpIf(CallACS("GetCurrentWepSlot") == 1,"Slot1")
+TNT1 A 0 A_JumpIf(CallACS("GetCurrentWepSlot") == 2,"Slot2")
+TNT1 A 0 A_JumpIf(CallACS("GetCurrentWepSlot") == 3,"Slot3")
+TNT1 A 0 A_JumpIf(CallACS("GetCurrentWepSlot") == 4,"Slot4")
+stop
+
+Slot1:
+TNT1 A 0 A_GiveInventory("CooldownSlot1",3500)
+TNT1 A 0 A_SpawnItemEx("Cooldown1_10Sec")
+stop
+
+Slot2:
+TNT1 A 0 A_GiveInventory("CooldownSlot2",3500)
+TNT1 A 0 A_SpawnItemEx("Cooldown2_10Sec")
+stop
+
+Slot3:
+TNT1 A 0 A_GiveInventory("CooldownSlot3",3500)
+TNT1 A 0 A_SpawnItemEx("Cooldown3_10Sec")
+stop
+
+Slot4:
+TNT1 A 0 A_GiveInventory("CooldownSlot4",3500)
+TNT1 A 0 A_SpawnItemEx("Cooldown4_10Sec")
+stop
+}
+}
+
+actor MoveCooldown_7 : MoveCooldown_10
+{
+States
+{
+Slot1:
+TNT1 A 0 A_GiveInventory("CooldownSlot1",3500)
+TNT1 A 0 A_SpawnItemEx("Cooldown1_7Sec")
+stop
+
+Slot2:
+TNT1 A 0 A_GiveInventory("CooldownSlot2",3500)
+TNT1 A 0 A_SpawnItemEx("Cooldown2_7Sec")
+stop
+
+Slot3:
+TNT1 A 0 A_GiveInventory("CooldownSlot3",3500)
+TNT1 A 0 A_SpawnItemEx("Cooldown3_7Sec")
+stop
+
+Slot4:
+TNT1 A 0 A_GiveInventory("CooldownSlot4",3500)
+TNT1 A 0 A_SpawnItemEx("Cooldown4_7Sec")
+stop
+}
+}
+
+actor MoveCooldown_5 : MoveCooldown_10
+{
+States
+{
+Slot1:
+TNT1 A 0 A_GiveInventory("CooldownSlot1",3500)
+TNT1 A 0 A_SpawnItemEx("Cooldown1_5Sec")
+stop
+
+Slot2:
+TNT1 A 0 A_GiveInventory("CooldownSlot2",3500)
+TNT1 A 0 A_SpawnItemEx("Cooldown2_5Sec")
+stop
+
+Slot3:
+TNT1 A 0 A_GiveInventory("CooldownSlot3",3500)
+TNT1 A 0 A_SpawnItemEx("Cooldown3_5Sec")
+stop
+
+Slot4:
+TNT1 A 0 A_GiveInventory("CooldownSlot4",3500)
+TNT1 A 0 A_SpawnItemEx("Cooldown4_5Sec")
+stop
+}
+}
+
+actor MoveCooldown_3 : MoveCooldown_10
+{
+States
+{
+Slot1:
+TNT1 A 0 A_GiveInventory("CooldownSlot1",3500)
+TNT1 A 0 A_SpawnItemEx("Cooldown1_3Sec")
+stop
+
+Slot2:
+TNT1 A 0 A_GiveInventory("CooldownSlot2",3500)
+TNT1 A 0 A_SpawnItemEx("Cooldown2_3Sec")
+stop
+
+Slot3:
+TNT1 A 0 A_GiveInventory("CooldownSlot3",3500)
+TNT1 A 0 A_SpawnItemEx("Cooldown3_3Sec")
+stop
+
+Slot4:
+TNT1 A 0 A_GiveInventory("CooldownSlot4",3500)
+TNT1 A 0 A_SpawnItemEx("Cooldown4_3Sec")
+stop
+}
+}
+
+actor MoveCooldown_1Half : MoveCooldown_10
+{
+States
+{
+Slot1:
+TNT1 A 0 A_GiveInventory("CooldownSlot1",3500)
+TNT1 A 0 A_SpawnItemEx("Cooldown1_1HalfSec")
+stop
+
+Slot2:
+TNT1 A 0 A_GiveInventory("CooldownSlot2",3500)
+TNT1 A 0 A_SpawnItemEx("Cooldown2_1HalfSec")
+stop
+
+Slot3:
+TNT1 A 0 A_GiveInventory("CooldownSlot3",3500)
+TNT1 A 0 A_SpawnItemEx("Cooldown3_1HalfSec")
+stop
+
+Slot4:
+TNT1 A 0 A_GiveInventory("CooldownSlot4",3500)
+TNT1 A 0 A_SpawnItemEx("Cooldown4_1HalfSec")
 stop
 }
 }

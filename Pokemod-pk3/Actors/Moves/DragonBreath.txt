@@ -3,7 +3,7 @@ actor DragonBreathMove : WepMasterBase
 Tag "DragonBreath"
 obituary "$OB_DRAGONBREATH"
 Weapon.AmmoUse 1
-Weapon.AmmoGive 20
+Weapon.AmmoGive 10
 weapon.ammotype "DragonBreathPP"
 scale 2.0
 Inventory.Pickupmessage "$PU_MEGABUSTER"
@@ -15,7 +15,7 @@ stop
 
 
 Fire:
-"####" BBB 1 A_Jumpif(CallACS("CheckWeaponFire",RC_A)==1,"Fire.Begin")
+"####" BBB 1 A_Jumpif(CallACS("CheckWeaponFire",RC_B)==1,"Fire.Begin")
 "####" B 0 A_Jump(256,"NoAmmo")
 Goto NoAmmo
 
@@ -25,19 +25,20 @@ Fire.Begin:
 Goto Fire.Bullet
 
 Fire.Bullet:
-"####" B 0 A_PlaySoundEx("weapon/FireStorm","Weapon")
-"####" B 0 A_FireCustomMissile("DragonBreathFireball",0,1,0,0)
+"####" B 0 A_PlaySoundEx("misc/dragonbreath","Weapon")
+//"####" B 0 A_FireCustomMissile("DragonBreathFireball",0,1,0,0)
+"####" B 0 A_FireCustomMissile("DragonBreathFireball",0,1,0,0,0,CallACS("PitchClamp",Pitch,65)+5)
+"####" B 0 A_FireCustomMissile("DragonBreathFireball",6,0,0,0,0,CallACS("PitchClamp",Pitch,65)-5)
+"####" B 0 A_FireCustomMissile("DragonBreathFireball",-6,0,0,0,0,CallACS("PitchClamp",Pitch,65)-5)
+"####" B 0 A_FireCustomMissile("DragonBreathFireball",12,0,0,0,0,CallACS("PitchClamp",Pitch,65)+5)
+"####" B 0 A_FireCustomMissile("DragonBreathFireball",-12,0,0,0,0,CallACS("PitchClamp",Pitch,65)+5)
 "####" B 0 A_Jump(256,"Fire.After")
 Goto Fire.After
 
 Fire.After:
-"####" B 1 A_GiveInventory("SemiRecovery_A")
+"####" B 1 A_GiveInventory("FullRecovery_B")
 "####" B 0 A_Jump(256,"Fire.End")
 Goto Fire.End
-
-
-
-
 
 }
 }
@@ -63,7 +64,7 @@ Goto Ready
 //[+]========================================================================[+]
 //-----------------------------|Ammo & Inventory|------------------------------
 //[+]========================================================================[+]
-actor DragonBreathPP : Ammo {inventory.amount 1 inventory.Maxamount 20}
+actor DragonBreathPP : Ammo {inventory.amount 1 inventory.Maxamount 10}
 
 actor DragonBreathParaChance : CustomInventory
 {
@@ -92,12 +93,12 @@ stop
 //[+]========================================================================[+]
 actor DragonBreathFireball : BasicProjectile
 {
-Speed 48
+Speed 60
 Damage (MBP_DragonBreath1)
 DamageType "DragonBreath"
 obituary "$OB_DragonBreath"
 radius 16
-Reactiontime 15
+Reactiontime 4
 height 16
 scale 2.5
 States
@@ -111,15 +112,18 @@ FIRE D 0 A_Countdown
 FIRE AB 1 A_Spawnitemex("DragonBreathTrail",0,0,0,0,0,0,0,SXF_TRANSFERTRANSLATION|SXF_ABSOLUTEVELOCITY)
 loop
 
+Crash:
+XDeath:
+NAPC A 0 A_PlaySoundEx("weapon/napalm", "Weapon")
 Death:
 TNT1 A 0 A_GiveInventory("ProjectileDCode",1)
 FWVE W 0 A_SpawnItemEx("OilPitIgnite",0,0,8)
 FIRE C 0 A_JumpIf(reactiontime >= 1, "Explode")
 TNT1 A 1 A_Stop
-TNT1 AAAAA 1 A_SpawnItemEx("DragonBreathTrail",random(-15,15),random(-15,15),random(-15,15),momx/4,momy/4,momz/4,0,SXF_ABSOLUTEMOMENTUM|SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION) 
+TNT1 AAAAA 1 A_SpawnItemEx("DragonBreathTrail",random(-7,7),random(-7,7),random(-7,7),momx/4,momy/4,momz/4,0,SXF_ABSOLUTEMOMENTUM|SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION) 
 stop
 Explode:
-TNT1 A 1 A_Spawnitemex("DragonBreathPuff1",0,0,0,0,0,0,0,SXF_TRANSFERTRANSLATION)
+TNT1 A 1 A_Spawnitemex("DragonBreathPuff2",0,0,0,0,0,0,0,SXF_TRANSFERTRANSLATION)
 stop
 }
 }
@@ -138,6 +142,23 @@ TNT1 A 0 A_Explode (MBP_DragonBreath2,64,0,0,64)
 FWVE W 0 A_SpawnItemEx("OilPitIgnite",0,0,8)
 NAPC A 0 A_PlaySoundEx("weapon/napalm", "Weapon")
 TNT1 A 0 A_SpawnItemEx("DragonBreathImpactFX",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION)
+TNT1 A 2
+stop
+}
+}
+
+actor DragonBreathPuff2 : BasicExplosion2
+{
+scale 4.5
+DamageType "DragonBreath"
+obituary "$OB_DragonBreath"
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+FWVE W 0 A_SpawnItemEx("OilPitIgnite",0,0,8)
+TNT1 A 0 A_SpawnItemEx("DragonBreathImpactFX2",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION)
 TNT1 A 2
 stop
 }
@@ -161,6 +182,19 @@ stop
 }
 }
 
+actor DragonBreathImpactFX2 : BasicClientside
+{
+translation "192:192=218:218", "198:198=221:221"
+scale 3.0
+Alpha 1.0
+States
+{
+Spawn:
+AQBA A 0
+SPKH ABCD 1 A_SpawnItemEx("DragonBreathFX", 0, 0, 0, 0, 0, 0, 0,SXF_TRANSFERTRANSLATION)
+stop
+}
+}
 
 actor DragonBreathTrail : BasicClientside
 {

@@ -108,7 +108,7 @@ actor PsyshockRCFlag : Powerup {inventory.amount 1 powerup.duration 35 }
 
 Const int PsyshockRad = 150;
 Const int Psyshock_Forward = 150;
-Const int Psyshock_Range = 3000;
+Const int Psyshock_Range = 800;
 
 actor PsyshockPPTaker : CustomInventory
 {
@@ -348,7 +348,7 @@ translation "202:202=210:210"//90
 Damagetype "Psyshock"
 Obituary "$OB_Psyshock"
 scale 2.5
-ReactionTime 15
+ReactionTime 5
 Var int user_angle;
 States
 {
@@ -358,7 +358,7 @@ TNT1 A 0 A_GiveInventory("ProjectileCode",1)
 TNT1 A 0 A_PlaySoundEx("misc/astroplatformappear", "Weapon")
 Spawn2:
 TNT1 A 1 
-TNT1 A 0 A_SpawnItemEx("PsyshockBullet1",random(0,PsyshockRad),0,random(0,PsyshockRad),0,0,1,random(0,360),1)
+TNT1 AAA 0 A_SpawnItemEx("PsyshockBullet1",random(0,PsyshockRad),0,random(0,PsyshockRad),0,0,1,random(0,360),1)
 TNT1 A 1 A_Countdown
 loop
 Death:
@@ -375,7 +375,7 @@ Damage (0)
 Damagetype "Psyshock"
 Obituary "$OB_Psyshock"
 radius 12
-Reactiontime 7
+Reactiontime 3
 height 12
 scale 1.0
 +RIPPER
@@ -412,7 +412,7 @@ Damage (MBP_Psyshock)
 Damagetype "Psyshock"
 Obituary "$OB_Psyshock"
 radius 12
-Reactiontime 15
+Reactiontime 4
 height 12
 scale 1.0
 +SEEKERMISSILE

@@ -33,6 +33,20 @@ script "Spawn_BigWeaponEnergyPKMN" (void)
 SpawnNewWepFunc("BigWeaponEnergyPKMN");
 }
 
+script "Spawn_PowerBerry" (void)
+{
+SpawnNewWepFunc("PowerBerry");
+}
+
+script "Spawn_GuardBerry" (void)
+{
+SpawnNewWepFunc("GuardBerry");
+}
+
+script "Spawn_SpeedBerry" (void)
+{
+SpawnNewWepFunc("SpeedBerry");
+}
 
 
 function int SpawnNewWepFunc(str classname) {

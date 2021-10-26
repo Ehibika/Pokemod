@@ -45,7 +45,8 @@ TNT1 A 0 A_ChangeFlag("PICKUP",1)
 Goto Fire.After
 
 Fire.After:
-"####" B 1 A_GiveInventory("SemiRecovery_B")
+"####" B 1 A_GiveInventory("partRecovery_B")
+"####" A 0 A_GiveInventory("MoveCooldown_3")
 "####" B 0 A_Jump(256,"Fire.End")
 Goto Fire.End
 }
@@ -83,6 +84,8 @@ Actor Imbue_FaintAttack : Powerup{inventory.amount 1 powerup.duration 0x7FFFFFFF
 actor FaintAttackSeeker : BasicExplosion
 {
 Damage(0)
++SEEKERMISSILE
++SCREENSEEKER
 speed 5
 DamageType "FaintAttack"
 Obituary "$OB_FaintAttack"
@@ -95,9 +98,22 @@ TNT1 A 0
 TNT1 A 0 A_GiveInventory("ProjectileCode",1)
 TNT1 A 0 A_TransferPointer(AAPTR_TARGET,AAPTR_DEFAULT,AAPTR_TRACER,AAPTR_TRACER)
 //==
+TNT1 A 0 A_JumpIf(IsPointerEqual(AAPTR_TRACER, AAPTR_NULL) == TRUE, "NoTarg")
 TNT1 A 12 A_Stop
+goto Targ
+
+Targ:
 TNT1 A 1 A_Warp(AAPTR_TRACER,1,0,45,0,WARPF_COPYINTERPOLATION)
 TNT1 A 0 A_Spawnitemex("FaintAttackMelee",0,0,0,0,0,0,0,SXF_TRANSFERTRANSLATION)
+TNT1 A 5
+Goto Death
+
+NoTarg:
+TNT1 A 0 A_Stop
+TNT1 AAA 4 A_SeekerMissile (90, 90, SMF_LOOK|SMF_PRECISE, 256, 6)
+TNT1 A 0 A_JumpIf(IsPointerEqual(AAPTR_TRACER, AAPTR_NULL) == false, "Targ")
+//TNT1 A 1 A_Warp(AAPTR_TARGET,25,0,45,0,WARPF_COPYINTERPOLATION)
+//TNT1 A 0 A_Spawnitemex("FaintAttackMelee",0,0,0,0,0,0,0,SXF_TRANSFERTRANSLATION)
 TNT1 A 5
 Goto Death
 

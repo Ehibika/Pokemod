@@ -209,7 +209,6 @@ actor PowerNormalType : TypeBase
     damagefactor "Inferno", 1.0
     damagefactor "HeatCrash", 1.0
     damagefactor "Incinerate", 1.0
-    damagefactor "WillOWisp", 1.0
     damagefactor "MysticalFire", 1.0
     damagefactor "Firepunch", 1.0
     //--[Move|Fire]--
@@ -580,7 +579,6 @@ actor PowerFightingType : TypeBase
     damagefactor "Inferno", 1.0
     damagefactor "HeatCrash", 1.0
     damagefactor "Incinerate", 1.0
-    damagefactor "WillOWisp", 1.0
     damagefactor "MysticalFire", 1.0
     damagefactor "Firepunch", 1.0
     //--[Move|Fire]--
@@ -952,7 +950,6 @@ actor PowerFlyingType : TypeBase
     damagefactor "Inferno", 1.0
     damagefactor "HeatCrash", 1.0
     damagefactor "Incinerate", 1.0
-    damagefactor "WillOWisp", 1.0
     damagefactor "MysticalFire", 1.0
     damagefactor "Firepunch", 1.0
     //--[Move|Fire]--
@@ -1323,7 +1320,6 @@ actor PowerPoisonType : TypeBase
     damagefactor "Inferno", 1.0
     damagefactor "HeatCrash", 1.0
     damagefactor "Incinerate", 1.0
-    damagefactor "WillOWisp", 1.0
     damagefactor "MysticalFire", 1.0
     damagefactor "Firepunch", 1.0
     //--[Move|Fire]--
@@ -1694,7 +1690,6 @@ actor PowerGroundType : TypeBase
     damagefactor "Inferno", 1.0
     damagefactor "HeatCrash", 1.0
     damagefactor "Incinerate", 1.0
-    damagefactor "WillOWisp", 1.0
     damagefactor "MysticalFire", 1.0
     damagefactor "Firepunch", 1.0
     //--[Move|Fire]--
@@ -2065,7 +2060,6 @@ actor PowerRockType : TypeBase
     damagefactor "Inferno", 1.0
     damagefactor "HeatCrash", 1.0
     damagefactor "Incinerate", 1.0
-    damagefactor "WillOWisp", 1.0
     damagefactor "MysticalFire", 1.0
     damagefactor "Firepunch", 1.0
     //--[Move|Fire]--
@@ -2436,7 +2430,6 @@ actor PowerBugType : TypeBase
     damagefactor "Inferno", 1.0
     damagefactor "HeatCrash", 1.0
     damagefactor "Incinerate", 1.0
-    damagefactor "WillOWisp", 1.0
     damagefactor "MysticalFire", 1.0
     damagefactor "Firepunch", 1.0
     //--[Move|Fire]--
@@ -2807,7 +2800,6 @@ actor PowerGhostType : TypeBase
     damagefactor "Inferno", 1.0
     damagefactor "HeatCrash", 1.0
     damagefactor "Incinerate", 1.0
-    damagefactor "WillOWisp", 1.0
     damagefactor "MysticalFire", 1.0
     damagefactor "Firepunch", 1.0
     //--[Move|Fire]--
@@ -3178,7 +3170,6 @@ actor PowerSteelType : TypeBase
     damagefactor "Inferno", 1.0
     damagefactor "HeatCrash", 1.0
     damagefactor "Incinerate", 1.0
-    damagefactor "WillOWisp", 1.0
     damagefactor "MysticalFire", 1.0
     damagefactor "Firepunch", 1.0
     //--[Move|Fire]--
@@ -3549,7 +3540,6 @@ actor PowerFireType : TypeBase
     damagefactor "Inferno", 1.0
     damagefactor "HeatCrash", 1.0
     damagefactor "Incinerate", 1.0
-    damagefactor "WillOWisp", 1.0
     damagefactor "MysticalFire", 1.0
     damagefactor "Firepunch", 1.0
     //--[Move|Fire]--
@@ -3920,7 +3910,6 @@ actor PowerWaterType : TypeBase
     damagefactor "Inferno", 1.0
     damagefactor "HeatCrash", 1.0
     damagefactor "Incinerate", 1.0
-    damagefactor "WillOWisp", 1.0
     damagefactor "MysticalFire", 1.0
     damagefactor "Firepunch", 1.0
     //--[Move|Fire]--
@@ -4291,7 +4280,6 @@ actor PowerGrassType : TypeBase
     damagefactor "Inferno", 1.0
     damagefactor "HeatCrash", 1.0
     damagefactor "Incinerate", 1.0
-    damagefactor "WillOWisp", 1.0
     damagefactor "MysticalFire", 1.0
     damagefactor "Firepunch", 1.0
     //--[Move|Fire]--
@@ -4662,7 +4650,6 @@ actor PowerElectricType : TypeBase
     damagefactor "Inferno", 1.0
     damagefactor "HeatCrash", 1.0
     damagefactor "Incinerate", 1.0
-    damagefactor "WillOWisp", 1.0
     damagefactor "MysticalFire", 1.0
     damagefactor "Firepunch", 1.0
     //--[Move|Fire]--
@@ -5033,7 +5020,6 @@ actor PowerPsychicType : TypeBase
     damagefactor "Inferno", 1.0
     damagefactor "HeatCrash", 1.0
     damagefactor "Incinerate", 1.0
-    damagefactor "WillOWisp", 1.0
     damagefactor "MysticalFire", 1.0
     damagefactor "Firepunch", 1.0
     //--[Move|Fire]--
@@ -5404,7 +5390,6 @@ actor PowerIceType : TypeBase
     damagefactor "Inferno", 1.0
     damagefactor "HeatCrash", 1.0
     damagefactor "Incinerate", 1.0
-    damagefactor "WillOWisp", 1.0
     damagefactor "MysticalFire", 1.0
     damagefactor "Firepunch", 1.0
     //--[Move|Fire]--
@@ -5775,7 +5760,6 @@ actor PowerDragonType : TypeBase
     damagefactor "Inferno", 1.0
     damagefactor "HeatCrash", 1.0
     damagefactor "Incinerate", 1.0
-    damagefactor "WillOWisp", 1.0
     damagefactor "MysticalFire", 1.0
     damagefactor "Firepunch", 1.0
     //--[Move|Fire]--
@@ -6146,7 +6130,6 @@ actor PowerDarkType : TypeBase
     damagefactor "Inferno", 1.0
     damagefactor "HeatCrash", 1.0
     damagefactor "Incinerate", 1.0
-    damagefactor "WillOWisp", 1.0
     damagefactor "MysticalFire", 1.0
     damagefactor "Firepunch", 1.0
     //--[Move|Fire]--
@@ -6517,7 +6500,6 @@ actor PowerFairyType : TypeBase
     damagefactor "Inferno", 1.0
     damagefactor "HeatCrash", 1.0
     damagefactor "Incinerate", 1.0
-    damagefactor "WillOWisp", 1.0
     damagefactor "MysticalFire", 1.0
     damagefactor "Firepunch", 1.0
     //--[Move|Fire]--

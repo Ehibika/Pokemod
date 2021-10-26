@@ -3,7 +3,7 @@ actor FlashCannonMove : WepMasterBase
 Tag "FlashCannon"
 obituary "$OB_FLASHCANNON"
 Weapon.AmmoUse 1
-Weapon.AmmoGive 10
+Weapon.AmmoGive 20
 weapon.ammotype "FlashCannonPP"
 scale 2.0
 Inventory.Pickupmessage "$PU_MEGABUSTER"
@@ -103,7 +103,7 @@ Goto Ready
 //[+]========================================================================[+]
 //-----------------------------|Ammo & Inventory|------------------------------
 //[+]========================================================================[+]
-actor FlashCannonPP : Ammo {inventory.amount 1 inventory.Maxamount 10}
+actor FlashCannonPP : Ammo {inventory.amount 1 inventory.Maxamount 20}
 
 
 //[+]========================================================================[+]
@@ -122,9 +122,9 @@ TNT1 A 0 A_GiveInventory("ProjectileCode",1)
 TNT1 A 0 //A_SpawnItemEx("FlashCannonFX",0,0,0,0,0,0,0,1)
 Spawn2:
 TNT1 A 0 
-HARD CCC 0 A_SpawnItemEx("FlashCannonSparkle",random(-30,30),random(-30,30),random(-30,30),0,0,0,0,1)
+HARD CCC 0 A_SpawnItemEx("FlashCannonTrail",-85,0,0,momx,momy,momz,0,9)
 HARD C 2 
-HARD CCC 0 A_SpawnItemEx("FlashCannonSparkle",random(-30,30),random(-30,30),random(-30,30),0,0,0,0,1)
+HARD CCC 0 A_SpawnItemEx("FlashCannonTrail",-85,0,0,momx,momy,momz,0,9)
 HARD C 2 
 TBLA A 0 
 TBLA A 0 A_Countdown
@@ -147,6 +147,25 @@ stop
 //[+]========================================================================[+]
 //--------------------------------|Special Actors|------------------------------
 //[+]========================================================================[+]
+actor FlashCannonTrail : BasicExplosion
+{
+    DamageType "FlashCannon"
+    obituary "$OB_FlashCannon"
+States
+{
+Spawn:
+TNT1 A 0
+AQBA L 0 A_GiveInventory("ProjectileCode",1)
+TNT1 A 0 A_SpawnItemEx("FlashCannonSparkle2",random(-10,10),random(-10,10),random(-10,10),0,0,0,0,1)
+TNT1 A 0 A_SpawnItemEx("FlashCannonSparkle2",random(-10,10),random(-10,10),random(-10,10),-momx*0.2,-momy*0.2,-momz*0.2,0,9)
+TNT1 A 0 A_SpawnItemEx("FlashCannonSparkle2",random(-10,10),random(-10,10),random(-10,10),-momx*0.4,-momy*0.4,-momz*0.4,0,9)
+TNT1 A 0 A_SpawnItemEx("FlashCannonSparkle2",random(-10,10),random(-10,10),random(-10,10),-momx*0.6,-momy*0.6,-momz*0.6,0,9)
+TNT1 A 1 A_SpawnItemEx("FlashCannonSparkle2",random(-10,10),random(-10,10),random(-10,10),-momx*0.8,-momy*0.8,-momz*0.8,0,9)
+stop
+}
+}
+
+
 actor FlashCannonFX : BasicHelper
 {
 Args 0
@@ -311,6 +330,28 @@ TNT1 A 0
 BMBU D 0 Thrustthingz(0,random(2,6),0,0)
 Spawn2:
 TMPK DCCBBAA 2 
+TNT1 A 5
+TNT1 A 0 A_CountDown
+loop
+
+Death:
+TNT1 A 0
+stop
+}
+}
+
+actor FlashCannonSparkle2 : FlashCannonSparkle
+{
+ReactionTime 1
+States
+{
+Spawn:
+TNT1 A 0
+TMPK D 1 
+TMPK D 1 A_Stop
+BMBU D 0 Thrustthingz(0,random(2,6),0,0)
+Spawn2:
+TMPK CCBBAA 2 
 TNT1 A 5
 TNT1 A 0 A_CountDown
 loop

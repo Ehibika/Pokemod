@@ -21,7 +21,7 @@ Server noarchive string Import_9 = "";
 Server noarchive string SKImport_1 = "";
 Server noarchive string SKImport_2 = "";
 
-Server noarchive int MaxClasses = 80;
+Server noarchive int MaxClasses = 27; //Total is 80, 
 
 user int YOUR_LEVEL;
 user int YOUR_EXP;
@@ -104,6 +104,8 @@ server noarchive Bool StartingLevelSet = false;
 
 user int YOUR_BP;
 
+server noarchive bool Skin_INIT = false;
+server int PKMNSkinStart = -1;
 
 Server noarchive int PlayerCam_0 = 0;
 Server noarchive int PlayerCam_1 = 0;

@@ -34,7 +34,7 @@ Goto Fire.Bullet
 
 Fire.Bullet:
 "####" B 0 A_PlaySoundEx("Misc/UseMove","Weapon")
-"####" B 0 A_FireCustomMissile("AquaRingSpawner",0,1,0,0)
+"####" B 0 A_FireCustomMissile("AquaRingSpawner",0,1,0,Aim_OverHead)
 
 "####" B 0 A_Jump(256,"Fire.After")
 Goto Fire.After
@@ -85,7 +85,7 @@ actor AquaRingPP : Ammo {inventory.amount 1 inventory.Maxamount 30}
 actor AquaRingFlag : inventory {inventory.amount 1 inventory.Maxamount 1}
 actor AquaRingPPTimer : Powerup {inventory.amount 1 Powerup.Duration 35}
 
-Const int AQRG_RAD = 250;
+Const int AQRG_RAD = 150;
 Const int AQRG_Item = 7;
 Const int AQRGEntiTID = 3;
 //[+]========================================================================[+]
@@ -158,7 +158,7 @@ TNT1 A 0 A_GiveInventory("ProjectileCode",1)
 TNT1 A 1 A_CountDown
 loop
 Death:
-TNT1 A 0
+TNT1 A 0 A_Stop
 TNT1 A 0 A_GiveInventory("ProjectileDCode",1)
 TNT1 A 2
 TNT1 A 0 A_SpawnItemEx("AquaRingField",0,0,-(z-floorz)+24,0,0,0,0,SXF_TRANSFERPOINTERS)
@@ -188,13 +188,16 @@ translation "202:202=248:248", "199:199=41:41"
 
         TNT1 A 1
         SpawnLoop:
+		TNT1 A 1 A_JumpIfInTargetInventory("AquaRingFlag",1,"SpawnLoop2")
+		goto Death
+		SpawnLoop2:
         TNT1 A 2
 		TNT1 A 0 A_SpawnItemEx("AquaRingParticleSpawn", AQRG_RAD, 0, 0, 0, 0, 0, user_angle, SXF_TRANSFERPOINTERS|SXF_ABSOLUTEANGLE|SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION)
 		TNT1 A 0 A_SpawnItemEx("AquaRingParticleSpawn", AQRG_RAD, 0, 0, 0, 0, 0, user_angle+120, SXF_TRANSFERPOINTERS|SXF_ABSOLUTEANGLE|SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION)
 		TNT1 A 0 A_SpawnItemEx("AquaRingParticleSpawn", AQRG_RAD, 0, 0, 0, 0, 0, user_angle+240, SXF_TRANSFERPOINTERS|SXF_ABSOLUTEANGLE|SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION)
         TNT1 A 0 A_SetUserVar("user_angle", user_angle + 6)
         TNT1 A 0 A_SetUserVar("user_Tick", user_Tick + 1)
-		TNT1 A 0 A_JumpIf(user_Tick < 7, "SpawnLoop")
+		TNT1 A 0 A_JumpIf(user_Tick < 35, "SpawnLoop")
 		TNT1 A 0 ACS_NamedExecuteAlways("MoveAreaHeal",0,CallACS("PKMNACS_HealthPercent",AAPTR_TARGET,1,5),AQRG_Rad,Move_AquaRing)
         //TNT1 A 0 ACS_NamedExecuteAlways("PKMNACS_RadiusGive",0,AQRG_Item,AQRG_Rad,RG_TEAM|RG_SELF)
         TNT1 A 0 A_SetUserVar("user_Tick", 0)
@@ -302,7 +305,7 @@ States
 {
 Spawn:
 TNT1 A 0
-WWAV ABCDDCCBBA 3 
+WWAV ABCDDCCBBA 2 
 TNT1 A 5
 TNT1 A 0 A_CountDown
 loop

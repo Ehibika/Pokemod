@@ -876,3 +876,4 @@ DamageFactor "PoisonDamage", 1.0
 actor BaseSTatusFlag : Powerup {inventory.amount 1 Powerup.Duration -30}
 actor BaseSTatusFlag2 : Powerup {inventory.amount 1 Powerup.Duration 30} //Timer Buffs
 actor BaseSTatusFlag3 : Powerup {inventory.amount 1 Powerup.Duration -10} //Self Debuffs
+actor BaseSTatusFlag4 : Powerup {inventory.amount 1 Powerup.Duration -5} //Self Buffs

@@ -318,7 +318,8 @@ Function void EXP_Increment (Int Pnum, int EXPAward)
             GiveInventory("LevelupCue",1);
             Log(n:0,s:"\cf Grew to LVL ",i:levelGoal);//,s:"  ",i:PKMN_MaxLVL
             ACS_NamedExecuteAlways("SetPKMNLevel",0,levelGoal);  
-            ReportNewMoves(PlayerDexNum,PlayerLVL,levelGoal);
+            LevelUpMoveHandler(PlayerDexNum,PlayerLVL,levelGoal);
+            //ReportNewMoves(PlayerDexNum,PlayerLVL,levelGoal);
             }
         }
 }

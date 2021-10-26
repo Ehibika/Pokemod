@@ -120,6 +120,7 @@ Goto Fire.DiveRelease2
 
 Fire.After:
 "####" B 1 A_GiveInventory("FullRecovery_A")
+"####" A 0 A_GiveInventory("MoveCooldown_5")
 "####" C 0 A_REfire("Fire")
 "####" B 0 A_Jump(256,"Fire.End")
 Goto Fire.End
@@ -321,7 +322,7 @@ States
 {
 Spawn:
 TNT1 A 0
-TNT1 A 5 //A_GiveToTarget("SpdUpFXSpawn")
+TNT1 A 5 //A_GiveToTarget("SpawnStatusParticles")
 TNT1 A 0 A_JumpIfInTargetInventory("STF_Dive",1,"Spawn")
 TNT1 A 1 A_GiveToTarget("StatUpdator")
 TNT1 A 5

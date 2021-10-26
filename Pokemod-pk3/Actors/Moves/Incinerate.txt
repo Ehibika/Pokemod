@@ -3,7 +3,7 @@ actor IncinerateMove : WepMasterBase
 Tag "Incinerate"
 obituary "$OB_INCINERATE"
 Weapon.AmmoUse 1
-Weapon.AmmoGive 15
+Weapon.AmmoGive 10
 weapon.ammotype "IncineratePP"
 scale 2.0
 Inventory.Pickupmessage "$PU_MEGABUSTER"
@@ -39,7 +39,7 @@ Fire.Bullet:
 Goto Fire.After
 
 Fire.After:
-"####" B 1 A_GiveInventory("HalfRecovery_A")
+"####" B 1 A_GiveInventory("SemiRecovery_A")
 "####" C 0 A_REfire("Fire")
 "####" B 0 A_Jump(256,"Fire.End")
 Goto Fire.End
@@ -72,14 +72,14 @@ Goto Ready
 //[+]========================================================================[+]
 //-----------------------------|Ammo & Inventory|------------------------------
 //[+]========================================================================[+]
-actor IncineratePP : Ammo {inventory.amount 1 inventory.Maxamount 15}
+actor IncineratePP : Ammo {inventory.amount 1 inventory.Maxamount 10}
 
-Const Int IncArea = 75;
+Const Int IncArea = 125;
 //Const Int ToxEntiTID = 2;
 
 Actor IncinerateProtect : powerprotection
 {
-Powerup.duration 20
+Powerup.duration 17
 Damagefactor "Incinerate", 0
 }
 
@@ -110,6 +110,33 @@ TNT1 A 0 A_SpawnItemEx("IncinerateSounder_2")
 TNT1 AAAAA 0 A_SpawnItemEx("OverheatBodyFX", random2(55), random2(55), random2(55), 0, 0,0, 0,SXF_TRANSFERTRANSLATION)
 TNT1 AAA 0 A_SpawnItemEx("IncinerateParticleFX2", random2(55), random2(55), random(30,45), 0, 0,2, 0,SXF_TRANSFERTRANSLATION)
 TNT1 A 1 A_GiveInventory("IncinerateTorchBuffer")
+stop
+
+Nope:
+TNT1 A 0
+stop
+}
+}
+
+actor IncineratePPTorch : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_Jumpif(CallACS("CheckStatusGuard",0,STATUS_MINOR),"Nope") 
+//==
+TNT1 A 0 A_Jumpifinventory("SpiteBuffer",1,"Nope")
+TNT1 A 0 A_GiveInventory("SpiteBuffer",1)
+TNT1 A 0 A_GiveInventory("PPBurnStall",1)
+TNT1 AAA 0 A_SpawnItemEx("OverheatBodyFX", random2(55), random2(55), random2(55), 0, 0,0, 0,SXF_TRANSFERTRANSLATION)
+TNT1 AAA 0 A_SpawnItemEx("IncinerateParticleFX2", random2(55), random2(55), random(30,45), 0, 0,2, 0,SXF_TRANSFERTRANSLATION)
+TNT1 A 0 ACS_NamedExecuteAlways("TakePP",0,-1,5)
 stop
 
 Nope:

@@ -48,6 +48,66 @@ For(j = Startlvl; j < Endlvl; j++)
 
 }
 
+Function void LevelUpMoveHandler (int Dexnum, int Startlvl, int Endlvl)
+{
+
+    //First, check for empty slots
+int WepSlot1,WepSlot2,WepSlot3,WepSlot4,SlotTotal,SlotChoice;
+Str WN1,WN2,WN3,WN4;
+    For(int i = 0; i < MAX_WEAPONS_GLOBAL; i++)
+    {
+        WN1 = StrParam(s:weapons_ammo[i][0],i:1);
+        WN2 = StrParam(s:weapons_ammo[i][0],i:2);
+        WN3 = StrParam(s:weapons_ammo[i][0],i:3);
+        WN4 = StrParam(s:weapons_ammo[i][0],i:4);
+
+        if(CheckInventory(WN1)){WepSlot1 = 1; SlotTotal++;} 
+        if(CheckInventory(WN2)){WepSlot2 = 1; SlotTotal++;}
+        if(CheckInventory(WN3)){WepSlot3 = 1; SlotTotal++;}
+        if(CheckInventory(WN4)){WepSlot4 = 1; SlotTotal++;}
+
+        if(SlotTotal >=4){break;}
+     }
+
+     //if there are empty slots, let's find the lowest number empty slot
+     if(SlotTotal <4)
+        {
+        if(!WepSlot1){SlotChoice = 1;}
+        else if(!WepSlot2){SlotChoice = 2;}
+        else if(!WepSlot3){SlotChoice = 3;}
+        else if(!WepSlot4){SlotChoice = 4;}
+        }
+
+    // Now to go through available moves, if we have available slots then we will auto learn moves there, otherwise we will just report them
+    // as available to learn.
+
+        int j;
+        int k;
+        int MoveListVal;
+
+        For(j = Startlvl; j < Endlvl; j++) 
+        {
+            For(k = 0; k < 4; k++)
+            {
+                MoveListVal = MoveDex2[Dexnum][j][k];
+                if (MoveListVal != -1) 
+                    {
+                        if(SlotChoice > 0 && SlotChoice <=4)
+                            {
+                                Print(n:0,s:"\cf Learned \cj",s:weapons_ammo[MoveListVal][2]);
+                                GiveInventory(StrParam(s:weapons_ammo[MoveListVal][0],i:SlotChoice),1);
+                                SlotChoice++;
+                                SaveLoadout();
+                            }
+                        else{Print(n:0,s:"\cf can now learn \cj",s:weapons_ammo[MoveListVal][2]);}
+                    }
+                else{break;}
+            }
+}   
+     
+
+}
+
 
 #LIBDEFINE HITEXP 1
 Function Int EXPTime (int mod)

@@ -88,6 +88,35 @@ Fire.After:
 "####" C 0 A_REfire("Fire")
 "####" B 0 A_Jump(256,"Fire.End")
 Goto Fire.End
+
+// =-= Altfire Buff -=-
+
+AltFire:
+"####" BBB 1 A_Jumpif(CallACS("CheckWeaponFire",RC_A)==1,"AltFire.Begin")
+"####" B 0 A_Jump(256,"NoAmmo")
+Goto NoAmmo
+
+AltFire.Begin:
+"####" B 0
+"####" B 0 A_JumpIfInventory("Absorb_Active",1,"AltFire.Off")
+"####" B 0 A_Jump(256,"AltFire.On")
+Goto AltFire.On
+
+AltFire.On:
+"####" B 0 A_PlaySoundEx("Move/ImbueOn","Soundslot6")
+"####" BBB 3 A_GiveInventory("AbsorbFX_Spawn")
+"####" B 0 A_GiveInventory("AbsorbBuffInitiate")
+"####" B 0 A_TakeInventory("AbsorbPP",1)
+"####" B 0 A_Jump(256,"AltFire.After")
+Goto AltFire.After
+
+AltFire.Off:
+"####" B 0 A_PlaySoundEx("Move/ImbueOff","Soundslot6")
+"####" B 0 A_TakeInventory("Absorb_Active",99)
+"####" B 0 A_GiveInventory("PartRecovery_A")
+"####" B 0 A_Jump(256,"Fire.After")
+Goto Fire.After
+
 }
 }
 
@@ -208,6 +237,7 @@ Damage (MBP_Absorb)
 DamageType "Absorb"
 obituary "$OB_Absorb"
 Reactiontime 10
+Speed 75
 scale 3.5
 States
 {
@@ -217,9 +247,15 @@ TNT1 A 0 A_GiveInventory("ProjectileCode",1)
 GRBU B 2
 Spawn2:
 TNT1 A 0 
-GRBU CDED 2 A_SpawnItemEx("AbsorbTrailFX",random(-10,10),random(-10,10),random(-10,10),0,0,0,0,1)
-GRBU A 0 
+GRBU C 2 A_SpawnItemEx("AbsorbTrailFX",random(-10,10),random(-10,10),random(-10,10),momx*0.2,momy*0.2,momz*0.2,0,9)
 GRBU B 0 A_Countdown
+GRBU D 2 A_SpawnItemEx("AbsorbTrailFX",random(-10,10),random(-10,10),random(-10,10),momx*0.2,momy*0.2,momz*0.2,0,9)
+GRBU B 0 A_Countdown
+GRBU E 2 A_SpawnItemEx("AbsorbTrailFX",random(-10,10),random(-10,10),random(-10,10),momx*0.2,momy*0.2,momz*0.2,0,9)
+GRBU B 0 A_Countdown
+GRBU D 2 A_SpawnItemEx("AbsorbTrailFX",random(-10,10),random(-10,10),random(-10,10),momx*0.2,momy*0.2,momz*0.2,0,9)
+GRBU B 0 A_Countdown
+GRBU A 0 
 loop
 
 Death:

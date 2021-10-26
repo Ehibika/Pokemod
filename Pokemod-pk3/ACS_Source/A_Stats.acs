@@ -572,3 +572,10 @@ Script "ObjectHPstat" (int level, int BaseHP)
     TakeInventory("SBAR_HP",9999);
     GiveInventory("SBAR_HP",StatValue);
 }
+
+Script "GetStatMod" (int TID, int StatID)
+{
+    if(TID == 0){TID = ActivatorTID();}
+int Output = GetStatMod(TID,StatID);
+SetResultValue(Output);
+}

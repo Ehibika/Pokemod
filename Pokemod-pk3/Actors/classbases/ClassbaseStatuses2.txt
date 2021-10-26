@@ -215,12 +215,41 @@ stop
 }
 }
 
+actor ParalysisStatus_50Per : ParalysisStatusBuild
+{
+States
+{
+    Pickup:
+    TNT1 A 0 A_Jumpif(CallACS("CheckStatusGuard",0,STATUS_MAJOR),"Nope") 
+    //==
+    TNT1 A 0 A_Jump(128,"Insta")
+    //==
+    TNT1 A 0 A_Jumpifinventory("ParalysisBuildRate",1,"Build")
+    TNT1 A 0 A_GiveInventory("ParalysisBuildRate",5)
+    TNT1 A 0 A_SpawnItemEX("ParalysisBuilder")
+    goto Build
+
+Build:
+TNT1 A 0 A_GiveInventory("ParalysisBuildRate",random(75,100))
+stop
+
+Insta:
+TNT1 A 0 A_GiveInventory("ParalysisStatusProc2")
+stop
+}
+}
+
 actor ParalysisStatusFastBuild : ParalysisStatusBuild
 {
 States
 {
 Build:
+TNT1 A 0 A_Jump(256,"Insta")
 TNT1 A 0 A_GiveInventory("ParalysisBuildRate",random(75,100))
+stop
+
+Insta:
+TNT1 A 0 A_GiveInventory("ParalysisBuildRate",100)
 stop
 }
 }
@@ -445,6 +474,30 @@ stop
 
 Nope:
 TNT1 A 0
+stop
+}
+}
+
+actor CringeStatus_50Per : CringeStatusBuild
+{
+States
+{
+    Pickup:
+    TNT1 A 0 A_Jumpif(CallACS("CheckStatusGuard",0,STATUS_MAJOR),"Nope") 
+    //==
+    TNT1 A 0 A_Jump(128,"Insta")
+    //==
+    TNT1 A 0 A_Jumpifinventory("CringeBuildRate",1,"Build")
+    TNT1 A 0 A_GiveInventory("CringeBuildRate",5)
+    TNT1 A 0 A_SpawnItemEX("CringeBuilder")
+    goto Build
+
+Build:
+TNT1 A 0 A_GiveInventory("CringeBuildRate",random(75,100))
+stop
+
+Insta:
+TNT1 A 0 A_GiveInventory("CringeStatusProc")
 stop
 }
 }

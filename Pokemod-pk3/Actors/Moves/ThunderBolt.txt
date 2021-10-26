@@ -24,7 +24,7 @@ Goto NoAmmo
 
 Fire.Begin:
 "####" B 0
-TNT1 A 0 A_GiveInventory("ChannelingSpeed")
+TNT1 A 0 A_GiveInventory("ChannelingSpeed")  //Firing Slow
 "####" B 0 A_GunFlash("Flash.Sound")
 "####" B 0 A_Jump(256,"Fire.Bullet")
 Goto Fire.Bullet
@@ -121,7 +121,7 @@ Actor DoubleThunderbolt : Powerup{inventory.amount 1 powerup.duration 0x7FFFFFFF
 
 Actor ThunderboltProtect : powerprotection
 {
-Powerup.duration 8
+Powerup.duration 6
 Damagefactor "Thunderbolt", 0
 }
 

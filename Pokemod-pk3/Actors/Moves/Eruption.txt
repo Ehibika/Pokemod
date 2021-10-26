@@ -74,7 +74,7 @@ Goto Ready
 //[+]========================================================================[+]
 //-----------------------------|Ammo & Inventory|------------------------------
 //[+]========================================================================[+]
-actor EruptionPP : Ammo {inventory.amount 1 inventory.Maxamount 5}
+actor EruptionPP : Ammo {inventory.amount 1 inventory.Maxamount 10}
 
 actor Eruption_Recovery_A : FullRecovery_A{} //87
 

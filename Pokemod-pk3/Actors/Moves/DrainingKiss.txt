@@ -25,13 +25,15 @@ Fire.Begin:
 Goto Fire.Bullet
 
 Fire.Bullet:
+//"####" B 0 A_JumpIf(IsPointerEqual(AAPTR_TRACER, AAPTR_NULL) == TRUE, "NoAmmo")
 "####" B 0 A_PlaySoundEx("move/Softboiled1","Weapon")
-"####" B 0 A_FireCustomMissile("DrainingKissMelee",0,1,0,0,0,CallACS("PitchClamp",Pitch,55))
+"####" B 0 A_FireCustomMissile("DrainingKissSeeker",0,1,0,0,0,0)
 "####" B 0 A_Jump(256,"Fire.After")
 Goto Fire.After
 
 Fire.After:
 "####" B 1 A_GiveInventory("HalfRecovery_B")
+"####" A 0 A_GiveInventory("MoveCooldown_5")
 "####" C 0 A_REfire("Fire")
 "####" B 0 A_Jump(256,"Fire.End")
 Goto Fire.End
@@ -66,6 +68,155 @@ actor DrainingKissPP : Ammo {inventory.amount 1 inventory.Maxamount 35}
 //[+]========================================================================[+]
 //--------------------------------|Projectiles |--------------------------------
 //[+]========================================================================[+]
+actor DrainingKissSeeker : BasicProjectile
+{
+Damage(0)
+speed 24
+Scale 2.5
+DamageType "DrainingKiss"
+Obituary "$OB_DrainingKiss"
++SEEKERMISSILE
++SCREENSEEKER
++RIPPER
+Reactiontime 32
+Args 6, 0, 0
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+TNT1 A 0 A_TransferPointer(AAPTR_TARGET,AAPTR_DEFAULT,AAPTR_TRACER,AAPTR_TRACER)
+"####" B 0 A_JumpIf(IsPointerEqual(AAPTR_TRACER, AAPTR_NULL) == FALSE, "Chase")
+Spawn2: // -=- Seeking Target -=-
+SPLQ R 0 A_SeekerMissile (2, 10, SMF_LOOK|SMF_PRECISE, 256, 2)
+KISS AA 2 A_SpawnItemEx("CaptivateParticle",random(-30,30),random(-30,30),random(-30,30),0,0,0,0,1)
+SPLQ R 0 A_Countdown
+
+TNT1 A 0 A_JumpIf(IsPointerEqual(AAPTR_TRACER, AAPTR_NULL) == TRUE, "Spawn2")
+Goto Chase
+
+//==
+TNT1 A 1
+Chase:
+KISS A 2 A_SeekerMissile (99, 99, SMF_PRECISE)
+KISS A 0 A_JumpIfTracerCloser(36,"Explode")
+KISS A 2 A_SeekerMissile (99, 99, SMF_PRECISE)
+KISS A 0 A_JumpIfTracerCloser(36,"Explode")
+TNT1 A 0 A_GiveInventory("D_KissFunction",1)
+KISS A 0 A_SpawnItemEx("CaptivateParticle",random(-30,30),random(-30,30),random(-30,30),0,0,0,0,1)
+KISS A 0 A_CountDown
+Loop
+Explode:
+TNT1 A 0 A_Stop
+TNT1 A 0 A_Spawnitemex("DrainingKissMeleeImpact",0,0,0,0,0,0,0,SXF_TRANSFERTRANSLATION)
+TNT1 A 0 A_SpawnItemEx("KissLipsFX", 0, 0, 0, 0, 0, 0, 0,1)
+TNT1 AAAA 0 A_SpawnItemEx("CaptivateParticle", 0, 0, 0, 1, 1, random2(1), random(0, 359))
+TNT1 A 0 A_Spawnitemex("DrainingKissReturner",0,0,0,MomX,Momy,Momz,0,SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS|SXF_ABSOLUTEMOMENTUM)
+//TNT1 A 1 A_CustomMissile("DrainingKissReturner",0,0,0,CMF_TRACKOWNER,0)
+TNT1 A 5
+Goto Death
+
+Death:
+TNT1 A 0 
+stop
+}
+}
+
+actor DrainingKissReturner : DrainingKissSeeker
+{
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+TNT1 A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_TRACER,AAPTR_TARGET)
+TNT1 A 0 A_FaceTracer
+//TNT1 A 0 A_JumpIf(Pitch >= 2,"Death")
+//TNT1 A 0 A_SetPitch(Pitch+1)
+//==
+TNT1 A 1
+Chase:
+KISS B 2 A_SeekerMissile (99, 99, SMF_PRECISE)
+KISS B 0 A_JumpIfTracerCloser(36,"Explode")
+KISS B 2 A_SeekerMissile (99, 99, SMF_PRECISE)
+KISS B 0 A_JumpIfTracerCloser(36,"Explode")
+TNT1 B 0 A_GiveInventory("D_KissFunction",1)
+KISS B 0 A_SpawnItemEx("CaptivateParticle",random(-30,30),random(-30,30),random(-30,30),0,0,0,0,1)
+KISS A 0 A_CountDown
+Loop
+Explode:
+TNT1 A 0 A_Stop
+//TNT1 A 0 A_Spawnitemex("DrainingKissMeleeImpact",0,0,0,0,0,0,0,SXF_TRANSFERTRANSLATION)
+//TNT1 A 0 A_SpawnItemEx("KissLipsFX", 0, 0, 0, 0, 0, 0, 0,1)
+TNT1 AAAA 0 A_SpawnItemEx("CaptivateParticle", 0, 0, 0, 1, 1, random2(1), random(0, 359))
+TNT1 A 0 A_Spawnitemex("DrainingKissSeeker2",0,0,0,MomX,Momy,Momz,0,SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS|SXF_TRANSFERPITCH|SXF_ABSOLUTEMOMENTUM)
+TNT1 A 5
+Goto Death
+
+Death:
+TNT1 A 0 
+stop
+}
+}
+
+actor DrainingKissSeeker2 : DrainingKissSeeker
+{
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+TNT1 A 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_MASTER)
+TNT1 A 0 A_FaceTracer
+TNT1 A 0 A_JumpIf(Pitch >= 2,"Death")
+TNT1 A 0 A_SetPitch(Pitch+1)
+//==
+TNT1 A 1
+Chase:
+KISS A 2 A_SeekerMissile (99, 99, SMF_PRECISE)
+KISS A 0 A_JumpIfTracerCloser(36,"Explode")
+KISS A 2 A_SeekerMissile (99, 99, SMF_PRECISE)
+KISS A 0 A_JumpIfTracerCloser(36,"Explode")
+TNT1 A 0 A_GiveInventory("D_KissFunction",1)
+KISS A 0 A_SpawnItemEx("CaptivateParticle",random(-30,30),random(-30,30),random(-30,30),0,0,0,0,1)
+KISS A 0 A_CountDown
+Loop
+Explode:
+TNT1 A 0 A_Stop
+TNT1 A 0 A_Spawnitemex("DrainingKissMeleeImpact",0,0,0,0,0,0,0,SXF_TRANSFERTRANSLATION)
+TNT1 A 0 A_SpawnItemEx("KissLipsFX", 0, 0, 0, 0, 0, 0, 0,1)
+TNT1 AAAA 0 A_SpawnItemEx("CaptivateParticle", 0, 0, 0, 1, 1, random2(1), random(0, 359))
+TNT1 A 0 A_Spawnitemex("DrainingKissReturner",0,0,0,-MomX,-Momy,-Momz,0,SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS|SXF_TRANSFERPITCH|SXF_ABSOLUTEMOMENTUM)
+//TNT1 A 1 A_CustomMissile("DrainingKissReturner",0,0,0,CMF_TRACKOWNER,0)
+TNT1 A 5
+Goto Death
+
+Death:
+TNT1 A 0 
+stop
+}
+}
+
+actor D_KissFunction : CustomInventory
+{
+states
+{
+Pickup:
+TNT1 A 1 A_JumpIfInventory("CutterFlag",999,"Perish",AAPTR_TRACER)
+TNT1 A 1 A_JumpIfInventory("IsDead",1,"Perish",AAPTR_TRACER)
+
+TNT1 A 1 A_JumpIfInventory("CutterFlag",999,"Perish",AAPTR_MASTER)
+TNT1 A 1 A_JumpIfInventory("IsDead",1,"Perish",AAPTR_MASTER)
+
+TNT1 A 1 A_JumpIfInventory("CutterFlag",999,"Perish",AAPTR_TARGET)
+TNT1 A 1 A_JumpIfInventory("IsDead",1,"Perish",AAPTR_TARGET)
+Goto Pickup2
+Perish:
+TNT1 A 0 Thing_Remove(0)
+stop
+}
+}
+
 /*
 actor DrainingKissSeeker : BasicExplosion
 {

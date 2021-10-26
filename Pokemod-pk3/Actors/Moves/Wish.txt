@@ -39,14 +39,15 @@ Fire.Bullet:
 Goto Fire.After
 
 Fire.After:
-"####" B 1 A_GiveInventory("fullRecovery_A")
+"####" B 1 A_GiveInventory("PartRecovery_A")
+"####" A 0 A_GiveInventory("MoveCooldown_3")
 "####" C 0 A_REfire("Fire")
 "####" B 0 A_Jump(256,"Fire.End")
 Goto Fire.End
 
 
 AltFire:
-"####" BBB 1 A_Jumpif(CallACS("CheckWeaponFire",RC_A)==1,"AltFire.Begin")
+"####" BBB 1 A_Jumpif(CallACS("CheckWeaponFire",RC_A|RC_NOCOOL)==1,"AltFire.Begin")
 "####" B 0 A_Jump(256,"NoAmmo")
 Goto NoAmmo
 
@@ -71,7 +72,7 @@ TNT1 A 0 A_GiveInventory("PPRecoveryItem")
 Goto AltFire.Remote
 
 AltFire.After:
-"####" B 1 A_GiveInventory("fullRecovery_A")
+"####" B 1 A_GiveInventory("PartRecovery_A")
 "####" A 0 A_GiveInventory("RemoteMoveUnLock")
 AltFire.After2:
 "####" B 1
@@ -126,6 +127,7 @@ stop
 }
 }
 
+actor Wish_RemoteCooldown : Powerup {inventory.amount 1 powerup.duration -3}
 
 //[+]========================================================================[+]
 //--------------------------------|Projectiles |--------------------------------
@@ -173,8 +175,9 @@ goto Spawn2
 Trigger: //Check PP
 TNT1 A 0 A_JumpifInTargetInventory("WishPP",1,"Trigger2")
 goto Decline
-Trigger2: // Check Recovery Frame
+Trigger2: // Check Recovery Frame / Cooldown
 TNT1 A 0 A_JumpifInTargetInventory("Recovery_A",1,"Decline")
+TNT1 A 0 A_JumpifInTargetInventory("Wish_RemoteCooldown",1,"Decline")
 goto Detonate
 
 Detonate: // Cast the attack!
@@ -183,6 +186,8 @@ TNT1 A 0 A_SpawnItemEx("WishStarDrop",Wish_Forward,0,-(z-floorz)+400,0,0,-20,0,S
 //TNT1 A 0 A_SpawnItemEx("WishAreaWarn",Wish_Forward,0,-(z-floorz)+16,0,0,0,0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION)
 TNT1 A 0 A_Spawnitemex("SwiftSounder")
 TNT1 A 0 A_GiveToTarget("fullRecovery_A",1)
+TNT1 A 0 A_GiveToTarget("Wish_RemoteCooldown",1)
+TNT1 A 0 A_GiveToTarget("MoveCooldown_3",1)
 goto PostTrigger
 
 Decline: //Cannot cast the attack

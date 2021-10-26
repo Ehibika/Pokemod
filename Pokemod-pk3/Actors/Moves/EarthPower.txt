@@ -138,7 +138,7 @@ actor EarthPowerRCFlag : Powerup {inventory.amount 1 powerup.duration 35 }
 Const int EarthPowerRad = 100;
 Const int EarthPowerEntiTID = 14;
 Const int EarthPower_Forward = 150;
-Const int EarthPower_Range = 3000;
+Const int EarthPower_Range = 800;
 
 actor EarthPowerPPTaker : CustomInventory
 {

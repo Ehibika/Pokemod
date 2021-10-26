@@ -140,6 +140,7 @@ Goto Fire.After
 Fire.After:
 "####" B 1 A_GiveInventory("3Recovery_A")
 "####" C 0 A_REfire("Fire")
+//TNT1 A 0 A_GiveInventory("MoveCooldown_3")
 "####" B 0 A_TakeInventory("ConShotTimer",99)
 "####" B 0 A_Jump(256,"Fire.End")
 Goto Fire.End
@@ -464,7 +465,7 @@ States
 Spawn:
 TNT1 A 0
 TNT1 A 0 A_SetUserVar("user_NapTime",user_NapTime+5)
-TNT1 A 4 A_GiveToTarget("SpdDownFXSpawn")
+TNT1 A 4 A_GiveToTarget("SpawnStatusParticles")
 TNT1 A 0 A_GiveToTarget("YawnTagPickup")
 TNT1 A 0 A_Jumpif(CallACS("CheckStatusGuard",AAPTR_TARGET,STATUS_MAJOR|STATUS_MINOR),"Death") //Blocked by protect|Detect|Substitute|Safeguard
 TNT1 A 0 A_Jumpif(CallACS("YawnBreakCheck",AAPTR_TARGET),"Death") //Blocked by protect|Detect|Substitute|Safeguard

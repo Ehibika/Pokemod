@@ -33,7 +33,7 @@ Fire.Charge1:
 "####" B 0 A_Jumpif(CallACS("CheckWeaponFire",RC_A)!=1,"NoAmmo")
 "####" B 0 A_JumpIfInventory("WeaponCharge",25,"Fire.Charge2")
 "####" B 0 A_GiveInventory("WeaponCharge",1)
-"####" B 0 A_GiveInventory("ChannelingSpeed")
+"####" B 0 A_GiveInventory("ChannelingSpeed")  //Firing Slow
 "####" B 0 A_PlaySoundEx("Weapon/Heat1","Soundslot6")
 "####" B 1
 "####" C 0 A_REfire("Fire.Charge1")
@@ -41,7 +41,7 @@ Fire.Charge1:
 Goto Fire.After2
 
 Fire.Charge2:
-"####" B 0 A_GiveInventory("ChannelingSpeed")
+"####" B 0 A_GiveInventory("ChannelingSpeed")  //Firing Slow
 "####" B 1
 "####" C 0 A_REfire("Fire.Charge1")
 "####" B 0 A_Jump(256,"Fire.Bullet")
@@ -87,7 +87,7 @@ Goto Ready
 //[+]========================================================================[+]
 actor FocusBlastPP : Ammo {inventory.amount 1 inventory.Maxamount 10}
 
-Const int FocusBlastRad = 250;
+Const int FocusBlastRad = 100;
 Const int FocusBlastRad2 = FocusBlastRad/2;
 //[+]========================================================================[+]
 //--------------------------------|Projectiles |--------------------------------
@@ -127,9 +127,9 @@ actor FocusBlastWatcher
     }
 }
 
-actor FocusBlastShot : BasicProjectile
+actor FocusBlastShot : BasicFastProjectile
 {
-Speed 64
+Speed 125
 Damage (0)
 DamageType "FocusBlast"
 obituary "$OB_FocusBlast"
@@ -159,6 +159,8 @@ HARD BCDE 2
 stop
 }
 }
+
+
 
 
 actor FocusBlastImpact : BasicExplosion2

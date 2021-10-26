@@ -994,3 +994,55 @@ Script "GetMoveRecoveryLVL" (int Pointer)
     if(CheckInventory("ConShotTimer")) output++;
     SetResultValue(Output);
 }
+
+
+
+Script "DragonRagePower" (int BaseDamage, int ModDamage)
+{
+    int Player = ACS_NamedExecuteWithResult("core_gettarget",0);
+    int PlayerLVL = GetPlayerPokeValue(Player-1000,POKELEVEL);
+    int Mult = CheckActorInventory(Player,"DragonPowerFlag");
+    int a = ModDamage*PlayerLVL;
+    int b = a+BaseDamage;
+    int Output = b*Mult;
+    SetResultValue(Output);
+}
+
+
+//Demi Code by Jaxof7, as most of the code here is.
+
+str exploder;
+int exploderOwner;
+
+script "SetExploder" (int Type)
+{
+
+    Switch(Type)
+        {
+            Case 1: exploder = "PoisonPowderSploder"; break;
+            Case 2: exploder = "PoisonGasSploder"; break;
+            default: exploder = "TheDemi"; break;
+        }
+        //print(s:exploder);
+exploderOwner = ACS_NamedExecuteWithResult("core_gettarget",0);
+}
+
+script "ExploderScript" (void)
+{
+int oldTID = ActivatorTID();
+if(oldTID!=exploderOwner) {
+	int u = UniqueTID();
+	Thing_ChangeTID(0,u);
+
+	int u2 = UniqueTID();
+	SpawnForced(exploder,0,0,0,u2,0);
+
+	SetActivator(u2);
+
+	SetPointer(AAPTR_TARGET,exploderOwner);
+	SetPointer(AAPTR_TRACER,u);
+
+	Thing_ChangeTID(0,0);
+	Thing_ChangeTID(u,oldTID);
+}
+}

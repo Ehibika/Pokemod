@@ -31,7 +31,7 @@ Goto Fire.Charge0
 Fire.Charge0: //Initiation
 TNT1 A 0 A_JumpIfInventory("WeaponCharge",5,"Fire.Charge1")
 TNT1 A 0 A_GiveInventory("WeaponCharge",1)
-TNT1 A 0 A_GiveInventory("ChannelingSpeed")
+TNT1 A 0 A_GiveInventory("ChannelingSpeed")  //Firing Slow
 TNT1 A 1
 TNT1 A 0 A_REfire("Fire.Charge0")
 TNT1 A 0 A_Jump(256,"Fire.After")
@@ -42,7 +42,7 @@ TNT1 A 0 A_Jumpif(CallACS("CheckWeaponFire",RC_A)!=1,"Fire.Charge3")
 TNT1 A 0 A_JumpIfInventory("MultiShotCounter",5,"Fire.Charge3")
 TNT1 A 0 A_JumpIfInventory("WeaponCharge",5,"Fire.Charge2")
 TNT1 A 0 A_GiveInventory("WeaponCharge",1)
-TNT1 A 0 A_GiveInventory("ChannelingSpeed")
+TNT1 A 0 A_GiveInventory("ChannelingSpeed")  //Firing Slow
 TNT1 A 0 //A_PlaySoundEx("Weapon/Heat1","Soundslot6")
 TNT1 A 1
 TNT1 A 0 A_REfire("Fire.Charge1")
@@ -50,7 +50,7 @@ TNT1 A 0 A_Jump(256,"Fire.Launch")
 Goto Fire.Launch
 
 Fire.Charge2: //Make a stack
-TNT1 A 0 A_GiveInventory("ChannelingSpeed")
+TNT1 A 0 A_GiveInventory("ChannelingSpeed")  //Firing Slow
 TNT1 A 0 A_GiveInventory("Give_MultiShotCounter",1)
 TNT1 A 0 ACS_NamedExecuteAlways("TakePP",0,Move_SpikeCannon,1)
 TNT1 A 0 A_TakeInventory("WeaponCharge",99)
@@ -63,7 +63,7 @@ TNT1 A 0 A_Jump(256,"Fire.Launch")
 Goto Fire.Launch
 
 Fire.Charge3: //Maximum stacks
-TNT1 A 0 A_GiveInventory("ChannelingSpeed")
+TNT1 A 0 A_GiveInventory("ChannelingSpeed")  //Firing Slow
 TNT1 A 1
 TNT1 A 0 A_REfire("Fire.Charge3")
 TNT1 A 0 A_Jump(256,"Fire.Launch")
@@ -90,7 +90,7 @@ TNT1 A 0 A_Jumpif(CallACS("PKMNACS_ButtonCheck",BT_ALTATTACK)==1,"Fire.After2")
 TNT1 A 0 A_PlaySoundEx("Weapon/RapidBuster","Weapon")
 TNT1 A 2 A_FireCustomMissile("SpikeCannonShot",-SCSPRD,0,0,0,0,0)
 TNT1 A 0 A_Jumpif(CallACS("PKMNACS_ButtonCheck",BT_ALTATTACK)==1,"Fire.After2")
-TNT1 A 0 A_GiveInventory("ChannelingSpeed")
+TNT1 A 0 A_GiveInventory("ChannelingSpeed")  //Firing Slow
 TNT1 A 0 A_REfire("Fire.Charge1")
 TNT1 A 0 A_Jumpifinventory("MultiShotTimer",1,"Fire.Bullet")
 TNT1 A 0 A_TakeInventory("MultiShotCounter",1)

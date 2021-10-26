@@ -39,13 +39,14 @@ Goto Fire.After
 
 Fire.After:
 "####" B 1 A_GiveInventory("Thunder_Recovery_D")
+"####" A 0 A_GiveInventory("MoveCooldown_5")
 "####" C 0 A_REfire("Fire")
 "####" B 0 A_Jump(256,"Fire.End")
 Goto Fire.End
 
 
 AltFire:
-"####" BBB 1 A_Jumpif(CallACS("CheckWeaponFire",RC_D)==1,"AltFire.Begin")
+"####" BBB 1 A_Jumpif(CallACS("CheckWeaponFire",RC_D|RC_NOCOOL)==1,"AltFire.Begin")
 "####" B 0 A_Jump(256,"NoAmmo")
 Goto NoAmmo
 
@@ -108,7 +109,7 @@ actor ThunderRCFlag : Powerup {inventory.amount 1 powerup.duration 35 }
 Const int ThunderRad = 150;
 Const int ThunderRad2 = 70;
 Const int Thunder_Forward = 150;
-Const int Thunder_Range = 1500;
+Const int Thunder_Range = 800;
 
 actor ThunderPPTaker : CustomInventory
 {
@@ -127,6 +128,7 @@ stop
 }
 
 actor Thunder_Recovery_D : FullRecovery_D{Powerup.Duration 52} //87
+actor Thunder_RemoteCooldown : Powerup {inventory.amount 1 powerup.duration -5}
 
 actor Thunder_SweetSpot : Powerup {inventory.amount 1 powerup.duration 17}
 
@@ -202,14 +204,17 @@ goto Spawn2
 Trigger: //Check PP
 TNT1 A 0 A_JumpifInTargetInventory("ThunderPP",1,"Trigger2")
 goto Decline
-Trigger2: // Check Recovery Frame
+Trigger2: // Check Recovery Frame / cooldown
 TNT1 A 0 A_JumpifInTargetInventory("Recovery_D",1,"Decline")
+TNT1 A 0 A_JumpifInTargetInventory("Thunder_RemoteCooldown",1,"Decline")
 goto Detonate
 
 Detonate: // Cast the attack!
 TNT1 A 0 A_GiveToTarget("ThunderPPTaker",1)
 TNT1 A 0 A_SpawnItemEx("ThunderHitbox",Thunder_Forward,0,-(z-floorz)+60,0,0,0,0,1)
 TNT1 A 0 A_GiveToTarget("Thunder_Recovery_D",1)
+TNT1 A 0 A_GiveToTarget("Thunder_RemoteCooldown",1)
+TNT1 A 0 A_GiveToTarget("MoveCooldown_3")
 goto PostTrigger
 
 Decline: //Cannot cast the attack
@@ -221,7 +226,7 @@ TNT1 AAAAA 1 A_SpawnItemEx("ThunderRingGuide",Thunder_Forward,0,0,0,0,0,0,1)
 Goto Spawn2
 
 Death:
-BSTG AAAAAA 0 A_SpawnItemEx("RazorLeafParticle", 0, 0, 28, 256/24, 256/24, random2(256/24), random(0, 359),1)
+BSTG AAAAAA 0 //A_SpawnItemEx("RazorLeafParticle", 0, 0, 28, 256/24, 256/24, random2(256/24), random(0, 359),1)
 SPKH ABCD 2
 stop
 }
