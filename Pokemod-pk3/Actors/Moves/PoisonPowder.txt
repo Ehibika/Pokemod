@@ -20,19 +20,19 @@ Goto NoAmmo
 
 Fire.Begin:
 "####" B 0
-"####" B 0 A_Jump(256,"Fire.Bullet")
-Goto Fire.Bullet
+"####" B 0 A_Jump(256,"Fire.Aim")
+Goto Fire.Aim
 
 
 Fire.Aim:
-"####" B 1 A_FireCustomMissile("PoisonPowderRingSpawner",0,0,0,Aim_OverHead)
+"####" B 1 A_FireCustomMissile("SleepPowderAimPath",0,0,0,0,0,Aim_ArcOverHead+(Aim_ArcScale*Sin(-pitch)))
 "####" C 0 A_REfire("Fire.Aim")
 "####" B 0 A_Jump(256,"Fire.Bullet")
 Goto Fire.Bullet
 
 Fire.Bullet:
 "####" B 0 A_PlaySoundEx("Misc/UseMove","Weapon")
-"####" B 1 A_FireCustomMissile("PoisonPowder_FlareShot",0,1,0,0)
+"####" B 1 A_FireCustomMissile("PoisonPowder_FlareShot",0,1,0,0,0,Aim_ArcOverHead+(Aim_ArcScale*Sin(-pitch)))
 
 //"####" B 0 A_FireCustomMissile("PoisonPowderSpawner",0,1,0,Aim_OverHead)
 "####" B 0 A_Jump(256,"Fire.After")
@@ -91,20 +91,19 @@ obituary "$OB_PoisonPowder"
 +BOUNCEONWALLS
 +BOUNCEONCEILINGS
 +HITTRACER
+-NOGRAVITY
 Speed 40
 Damage (0)
 Height 10
 Radius 8
 ReactionTime 80
-Gravity 1.8
+Gravity 1.5
 scale 2.5
 States
 {
 Spawn:
 TNT1 A 0 
 TNT1 A 0 A_GiveInventory("ProjectileCode",1)
-BASB TT 2 A_Spawnitemex("PoisonPowderFx2",random2(15),random2(15),-5,momX*0.8,momy*0.8,momz*0.8,0,SXF_TRANSFERTRANSLATION|SXF_ABSOLUTEMOMENTUM)
-TNT1 A 0 A_ChangeFlag("NOGRAVITY",0)
 Spawn2: 
 BASB T 2 A_Spawnitemex("PoisonPowderFx2",random2(15),random2(15),-5,momX*0.8,momy*0.8,momz*0.8,0,SXF_TRANSFERTRANSLATION|SXF_ABSOLUTEMOMENTUM)
 TNT1 AA 0 A_CountDown
