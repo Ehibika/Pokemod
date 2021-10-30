@@ -471,6 +471,11 @@ stop
 }
 //#endregion
 
+//#region -=- Lagging Tail -=-
+actor LaggingTail : Inventory {inventory.maxamount 1 inventory.maxamount 10}
+actor MaxLaggingTail : Ammo {inventory.maxamount 10}
+//#endregion
+
 //===============================
 //===============================
 
