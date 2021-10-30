@@ -12,275 +12,288 @@
 #LIBDEFINE MIDSTAGE 5
 #LIBDEFINE FINALSTAGE 10
 #LIBDEFINE FINALSTAGE2 7
+
+#LIBDEFINE EARLYMID 3
+#LIBDEFINE NORMMID 5
+#LIBDEFINE LATEMID 7
+
+#LIBDEFINE EARLYFINAL 8
+#LIBDEFINE NORMFINAL 10
+#LIBDEFINE LATEFINAL 13
+
+#LIBDEFINE EARLYFINAL2 4
+#LIBDEFINE NORMFINAL2 6
+#LIBDEFINE LATEFINAL2 8
+
 Int EvoDEX [MAXDEX][6] = {
     //      Paths  |Level |1st      |2nd      |3rd 	    |FamilyID   |Form Number
-    /*|0|*/{NULLEVO, MIDSTAGE,    NULLEVO,  NULLEVO, NULLEVO	,0},
+    /*|0|*/{NULLEVO, NORMMID,    NULLEVO,  NULLEVO, NULLEVO	,0},
     //Eevee is a special case, he has his own array
 
-    /*|1|*/{1,      MIDSTAGE,     IVYSAUR,  NULLEVO,     NULLEVO,1},
-    /*|2|*/{1,      FINALSTAGE,     VENUSAUR,  NULLEVO,     NULLEVO,1},
+    /*|1|*/{1,      NORMMID,     IVYSAUR,  NULLEVO,     NULLEVO,1},
+    /*|2|*/{1,      NORMFINAL,     VENUSAUR,  NULLEVO,     NULLEVO,1},
     /*|3|*/{0,      0,     NULLEVO,  NULLEVO,     NULLEVO,1},
 
-    /*|4|*/{1,      MIDSTAGE,     CHARMELEON,  NULLEVO,     NULLEVO,2},
-    /*|5|*/{1,      FINALSTAGE,     CHARIZARD,  NULLEVO,     NULLEVO,2},
+    /*|4|*/{1,      NORMMID,     CHARMELEON,  NULLEVO,     NULLEVO,2},
+    /*|5|*/{1,      NORMFINAL,     CHARIZARD,  NULLEVO,     NULLEVO,2},
     /*|6|*/{0,      0,     NULLEVO,  NULLEVO,     NULLEVO,2},
 
-    /*|7|*/{1,      MIDSTAGE,     WARTORTLE,  NULLEVO,     NULLEVO,3},
-    /*|8|*/{1,      FINALSTAGE,     BLASTOISE,  NULLEVO,     NULLEVO,3},
+    /*|7|*/{1,      NORMMID,     WARTORTLE,  NULLEVO,     NULLEVO,3},
+    /*|8|*/{1,      NORMFINAL,     BLASTOISE,  NULLEVO,     NULLEVO,3},
     /*|9|*/{0,      0,     NULLEVO,  NULLEVO,     NULLEVO,3},
 
-    /*|10|*/{1,      MIDSTAGE,     BAYLEEF,  NULLEVO,     NULLEVO,4},
-    /*|11|*/{1,      FINALSTAGE,     MEGANIUM,  NULLEVO,     NULLEVO,4},
+    /*|10|*/{1,      NORMMID,     BAYLEEF,  NULLEVO,     NULLEVO,4},
+    /*|11|*/{1,      NORMFINAL,     MEGANIUM,  NULLEVO,     NULLEVO,4},
     /*|12|*/{0,      0,     NULLEVO,  NULLEVO,     NULLEVO,4},
 
-    /*|13|*/{1,      MIDSTAGE,     QUILAVA,  NULLEVO,     NULLEVO,5},
-    /*|14|*/{1,      FINALSTAGE,     TYPHLOSION,  NULLEVO,     NULLEVO,5},
+    /*|13|*/{1,      NORMMID,     QUILAVA,  NULLEVO,     NULLEVO,5},
+    /*|14|*/{1,      NORMFINAL,     TYPHLOSION,  NULLEVO,     NULLEVO,5},
     /*|15|*/{0,      0,     NULLEVO,  NULLEVO,     NULLEVO,5},
 
-    /*|16|*/{1,      MIDSTAGE,     CROCONAW,  NULLEVO,     NULLEVO,6},
-    /*|17|*/{1,      FINALSTAGE,     FERALIGATR,  NULLEVO,     NULLEVO,6},
+    /*|16|*/{1,      NORMMID,     CROCONAW,  NULLEVO,     NULLEVO,6},
+    /*|17|*/{1,      NORMFINAL,     FERALIGATR,  NULLEVO,     NULLEVO,6},
     /*|18|*/{0,      0,     NULLEVO,  NULLEVO,     NULLEVO,6},
 
-    /*|19|*/{1,      MIDSTAGE,     GROVYLE,  NULLEVO,     NULLEVO,7},
-    /*|20|*/{1,      FINALSTAGE,     SCEPTILE,  NULLEVO,     NULLEVO,7},
+    /*|19|*/{1,      NORMMID,     GROVYLE,  NULLEVO,     NULLEVO,7},
+    /*|20|*/{1,      NORMFINAL,     SCEPTILE,  NULLEVO,     NULLEVO,7},
     /*|21|*/{0,      0,     NULLEVO,  NULLEVO,     NULLEVO,7},
 
-    /*|22|*/{1,      MIDSTAGE,     COMBUSKEN,  NULLEVO,     NULLEVO,8},
-    /*|23|*/{1,      FINALSTAGE,     BLAZIKEN,  NULLEVO,     NULLEVO,8},
+    /*|22|*/{1,      NORMMID,     COMBUSKEN,  NULLEVO,     NULLEVO,8},
+    /*|23|*/{1,      NORMFINAL,     BLAZIKEN,  NULLEVO,     NULLEVO,8},
     /*|24|*/{0,      0,     NULLEVO,  NULLEVO,     NULLEVO,8},
 
-    /*|25|*/{1,      MIDSTAGE,     MARSHTOMP,  NULLEVO,     NULLEVO,9},
-    /*|26|*/{1,      FINALSTAGE,     SWAMPERT,  NULLEVO,     NULLEVO,9},
+    /*|25|*/{1,      NORMMID,     MARSHTOMP,  NULLEVO,     NULLEVO,9},
+    /*|26|*/{1,      NORMFINAL,     SWAMPERT,  NULLEVO,     NULLEVO,9},
     /*|27|*/{0,      0,     NULLEVO,  NULLEVO,     NULLEVO,9},
 
-    /*|28|*/{1,      MIDSTAGE,     GROTLE,  NULLEVO,     NULLEVO,10},
-    /*|29|*/{1,      FINALSTAGE,     TORTERRA,  NULLEVO,     NULLEVO,10},
+    /*|28|*/{1,      NORMMID,     GROTLE,  NULLEVO,     NULLEVO,10},
+    /*|29|*/{1,      NORMFINAL,     TORTERRA,  NULLEVO,     NULLEVO,10},
     /*|30|*/{0,      0,     NULLEVO,  NULLEVO,     NULLEVO,10},
 
-    /*|31|*/{1,      MIDSTAGE,     MONFERNO,  NULLEVO,     NULLEVO,11},
-    /*|32|*/{1,      FINALSTAGE,     INFERNAPE,  NULLEVO,     NULLEVO,11},
+    /*|31|*/{1,      NORMMID,     MONFERNO,  NULLEVO,     NULLEVO,11},
+    /*|32|*/{1,      NORMFINAL,     INFERNAPE,  NULLEVO,     NULLEVO,11},
     /*|33|*/{0,      0,     NULLEVO,  NULLEVO,     NULLEVO,11},
 
-    /*|34|*/{1,      MIDSTAGE,     PRINPLUP,  NULLEVO,     NULLEVO,12},
-    /*|35|*/{1,      FINALSTAGE,     EMPOLEON,  NULLEVO,     NULLEVO,12},
+    /*|34|*/{1,      NORMMID,     PRINPLUP,  NULLEVO,     NULLEVO,12},
+    /*|35|*/{1,      NORMFINAL,     EMPOLEON,  NULLEVO,     NULLEVO,12},
     /*|36|*/{0,      0,     NULLEVO,  NULLEVO,     NULLEVO,12},
 
-    /*|37|*/{1,      MIDSTAGE,     DRAKLOAK,  NULLEVO,     NULLEVO,13},
-    /*|38|*/{1,      FINALSTAGE,     DRAGAPULT,  NULLEVO,     NULLEVO,13},
+    /*|37|*/{1,      LATEMID,     DRAKLOAK,  NULLEVO,     NULLEVO,13},
+    /*|38|*/{1,      NORMFINAL,     DRAGAPULT,  NULLEVO,     NULLEVO,13},
     /*|39|*/{0,      0,     NULLEVO,  NULLEVO,     NULLEVO,13},
 
-    /*|40|*/{1,      MIDSTAGE,     DRAGONAIR,  NULLEVO,     NULLEVO,14},
-    /*|41|*/{1,      FINALSTAGE,     DRAGONITE,  NULLEVO,     NULLEVO,14},
+    /*|40|*/{1,      EARLYMID,     DRAGONAIR,  NULLEVO,     NULLEVO,14},
+    /*|41|*/{1,      LATEFINAL,     DRAGONITE,  NULLEVO,     NULLEVO,14},
     /*|42|*/{0,      0,     NULLEVO,  NULLEVO,     NULLEVO,14},
 
-    /*|43|*/{1,      MIDSTAGE,     SHELGON,  NULLEVO,     NULLEVO,15},
-    /*|44|*/{1,      FINALSTAGE,     SALAMENCE,  NULLEVO,     NULLEVO,15},
+    /*|43|*/{1,      EARLYMID,     SHELGON,  NULLEVO,     NULLEVO,15},
+    /*|44|*/{1,      LATEFINAL,     SALAMENCE,  NULLEVO,     NULLEVO,15},
     /*|45|*/{0,      0,     NULLEVO,  NULLEVO,     NULLEVO,15},
 
-    /*|46|*/{2,      FINALSTAGE2,     SLOWBRO,  SLOWKING,     NULLEVO,16},
+    /*|46|*/{2,      EARLYFINAL2,     SLOWBRO,  SLOWKING,     NULLEVO,16},
     /*|47|*/{0,      0,     NULLEVO,  NULLEVO,     NULLEVO,16},
     /*|48|*/{0,      0,     NULLEVO,  NULLEVO,     NULLEVO,16},
 
-    /*|49|*/{1,      FINALSTAGE2,     STARMIE,  NULLEVO,     NULLEVO,17},
+    /*|49|*/{1,      NORMFINAL2,     STARMIE,  NULLEVO,     NULLEVO,17},
     /*|50|*/{0,      0,     NULLEVO,  NULLEVO,     NULLEVO,17},
 
-    /*|51|*/{1,      FINALSTAGE2,     CLOYSTER,  NULLEVO,     NULLEVO,17},
+    /*|51|*/{1,      EARLYFINAL2,     CLOYSTER,  NULLEVO,     NULLEVO,17},
     /*|52|*/{0,      0,     NULLEVO,  NULLEVO,     NULLEVO,17},
 
-    /*|53|*/{1,      FINALSTAGE2,     NINETALES,  NULLEVO,     NULLEVO,18},
+    /*|53|*/{1,      EARLYFINAL2,     NINETALES,  NULLEVO,     NULLEVO,18},
     /*|54|*/{0,      0,     NULLEVO,  NULLEVO,     NULLEVO,18},
 
-    /*|55|*/{1,      FINALSTAGE2,     NINETALES_A,  NULLEVO,     NULLEVO,19},
+    /*|55|*/{1,      EARLYFINAL2,     NINETALES_A,  NULLEVO,     NULLEVO,19},
     /*|56|*/{0,      0,     NULLEVO,  NULLEVO,     NULLEVO,19},
 
-    /*|57|*/{1,      FINALSTAGE2,     ABOMASNOW,  NULLEVO,     NULLEVO,20},
+    /*|57|*/{1,      LATEFINAL2,     ABOMASNOW,  NULLEVO,     NULLEVO,20},
     /*|58|*/{0,      0,     NULLEVO,  NULLEVO,     NULLEVO,20},
 
-    /*|59|*/{1,      MIDSTAGE,     PILOSWINE,  NULLEVO,     NULLEVO,21},
-    /*|60|*/{1,      FINALSTAGE,     MAMOSWINE,  NULLEVO,     NULLEVO,21},
+    /*|59|*/{1,      NORMMID,     PILOSWINE,  NULLEVO,     NULLEVO,21},
+    /*|60|*/{1,      NORMFINAL,     MAMOSWINE,  NULLEVO,     NULLEVO,21},
     /*|61|*/{0,      0,     NULLEVO,  NULLEVO,     NULLEVO,21},
 
-    /*|62|*/{1,      MIDSTAGE,     KADABRA,  NULLEVO,     NULLEVO,22},
-    /*|63|*/{1,      FINALSTAGE,     ALAKAZAM,  NULLEVO,     NULLEVO,22},
+    /*|62|*/{1,      EARLYMID,     KADABRA,  NULLEVO,     NULLEVO,22},
+    /*|63|*/{1,      NORMFINAL,     ALAKAZAM,  NULLEVO,     NULLEVO,22},
     /*|64|*/{0,      0,     NULLEVO,  NULLEVO,     NULLEVO,22},
 
-    /*|65|*/{1,      FINALSTAGE2,     HYPNO,  NULLEVO,     NULLEVO,23},
+    /*|65|*/{1,      NORMFINAL2,     HYPNO,  NULLEVO,     NULLEVO,23},
     /*|66|*/{0,      0,     NULLEVO,  NULLEVO,     NULLEVO,23},
 
-    /*|67|*/{1,      MIDSTAGE,     KIRLIA,  NULLEVO,     NULLEVO,24},
-    /*|68|*/{2,      FINALSTAGE,     GARDEVOIR,  GALLADE,     NULLEVO,24},
+    /*|67|*/{1,      NORMMID,     KIRLIA,  NULLEVO,     NULLEVO,24},
+    /*|68|*/{2,      NORMFINAL,     GARDEVOIR,  GALLADE,     NULLEVO,24},
     /*|69|*/{0,      0,     NULLEVO,  NULLEVO,     NULLEVO,24},
     /*|70|*/{0,      0,     NULLEVO,  NULLEVO,     NULLEVO,24},
 
-    /*|71|*/{1,      FINALSTAGE2,     EXEGGUTOR,  NULLEVO,     NULLEVO,25},
+    /*|71|*/{1,      NORMFINAL2,     EXEGGUTOR,  NULLEVO,     NULLEVO,25},
     /*|72|*/{0,      0,     NULLEVO,  NULLEVO,     NULLEVO,25},
 
     /*|73|*/{0,      0,     NULLEVO,  NULLEVO,     NULLEVO,26},
 
-    /*|74|*/{1,      FINALSTAGE2,     MAGCARGO,  NULLEVO,     NULLEVO,27},
+    /*|74|*/{1,      NORMFINAL2,     MAGCARGO,  NULLEVO,     NULLEVO,27},
     /*|75|*/{0,      0,     NULLEVO,  NULLEVO,     NULLEVO,27},
   
-    /*|76|*/{1,      MIDSTAGE,      PIKACHU,  PIKACHU,     NULLEVO,28},
-    /*|77|*/{1,      FINALSTAGE,     RAICHU,  NULLEVO,     NULLEVO,28},
+    /*|76|*/{1,      EARLYMID,      PIKACHU,  PIKACHU,     NULLEVO,28},
+    /*|77|*/{1,      NORMFINAL,     RAICHU,  NULLEVO,     NULLEVO,28},
     /*|78|*/{0,      0,             NULLEVO,  NULLEVO,     NULLEVO,28},
 
     
-    /*|79|*/{ 1,      FINALSTAGE2,             FERROTHORN,  NULLEVO,     NULLEVO,29 },
+    /*|79|*/{ 1,      NORMFINAL2,             FERROTHORN,  NULLEVO,     NULLEVO,29 },
     /*|80|*/{ 0,      0,             NULLEVO,  NULLEVO,     NULLEVO,29 },
     
-    /*|81|*/{ 1,      MIDSTAGE,             SEADRA,  NULLEVO,     NULLEVO,30 },
-    /*|82|*/{ 1,      FINALSTAGE,             KINGDRA,  NULLEVO,     NULLEVO,30 },
+    /*|81|*/{ 1,      NORMMID,             SEADRA,  NULLEVO,     NULLEVO,30 },
+    /*|82|*/{ 1,      NORMFINAL,             KINGDRA,  NULLEVO,     NULLEVO,30 },
     /*|83|*/{ 0,      0,             NULLEVO,  NULLEVO,     NULLEVO,30 },
     
-    /*|84|*/{ 2,      FINALSTAGE2,             CHERRIM_O,  CHERRIM_S,     NULLEVO,31 },
+    /*|84|*/{ 2,      NORMFINAL2,             CHERRIM_O,  CHERRIM_S,     NULLEVO,31 },
     /*|85|*/{ 0,      0,             NULLEVO,  NULLEVO,     NULLEVO,31 },
     /*|86|*/{ 0,      0,             NULLEVO,  NULLEVO,     NULLEVO,31 },
     
-    /*|87|*/{ 1,      FINALSTAGE2,             ARCANINE,  NULLEVO,     NULLEVO,32 },
+    /*|87|*/{ 1,      NORMFINAL2,             ARCANINE,  NULLEVO,     NULLEVO,32 },
     /*|88|*/{ 0,      0,             NULLEVO,  NULLEVO,     NULLEVO,32 },
     
-    /*|89|*/{ 1,      MIDSTAGE,             ZWEILOUS,  NULLEVO,     NULLEVO,33 },
-    /*|90|*/{ 1,      FINALSTAGE,             HYDREIGON,  NULLEVO,     NULLEVO,33 },
+    /*|89|*/{ 1,      NORMMID,             ZWEILOUS,  NULLEVO,     NULLEVO,33 },
+    /*|90|*/{ 1,      NORMFINAL,             HYDREIGON,  NULLEVO,     NULLEVO,33 },
     /*|91|*/{ 0,      0,             NULLEVO,  NULLEVO,     NULLEVO,33 },
     
-    /*|92|*/{ 1,      MIDSTAGE,             DUOSION,  NULLEVO,     NULLEVO,34 },
-    /*|93|*/{ 1,      FINALSTAGE,             REUNICLUS,  NULLEVO,     NULLEVO,34 },
+    /*|92|*/{ 1,      NORMMID,             DUOSION,  NULLEVO,     NULLEVO,34 },
+    /*|93|*/{ 1,      NORMFINAL,             REUNICLUS,  NULLEVO,     NULLEVO,34 },
     /*|94|*/{ 0,      0,             NULLEVO,  NULLEVO,     NULLEVO,34 },
 
-    /*|95|*/{ 1,      MIDSTAGE,             CHANSEY,  NULLEVO,     NULLEVO,35 },
-    /*|96|*/{ 1,      FINALSTAGE,             BLISSEY,  NULLEVO,     NULLEVO,35 },
+    /*|95|*/{ 1,      NORMMID,             CHANSEY,  NULLEVO,     NULLEVO,35 },
+    /*|96|*/{ 1,      NORMFINAL,             BLISSEY,  NULLEVO,     NULLEVO,35 },
     /*|97|*/{ 0,      0,             NULLEVO,  NULLEVO,     NULLEVO,35 },
     
-    /*|98|*/{ 1,      MIDSTAGE,             GRAVELER,  NULLEVO,     NULLEVO,36 },
-    /*|99|*/{ 1,      FINALSTAGE,             GOLEM,  NULLEVO,     NULLEVO,36 },
+    /*|98|*/{ 1,      NORMMID,             GRAVELER,  NULLEVO,     NULLEVO,36 },
+    /*|99|*/{ 1,      NORMFINAL,             GOLEM,  NULLEVO,     NULLEVO,36 },
     /*|100|*/{ 0,      0,             NULLEVO,  NULLEVO,     NULLEVO,36 },
     
-    /*|101|*/{ 1,      MIDSTAGE,             GRAVELER_A,  NULLEVO,     NULLEVO,37 },
-    /*|102|*/{ 1,      FINALSTAGE,             GOLEM_A,  NULLEVO,     NULLEVO,37 },
+    /*|101|*/{ 1,      NORMMID,             GRAVELER_A,  NULLEVO,     NULLEVO,37 },
+    /*|102|*/{ 1,      NORMFINAL,             GOLEM_A,  NULLEVO,     NULLEVO,37 },
     /*|103|*/{ 0,      0,             NULLEVO,  NULLEVO,     NULLEVO,37 },
 
-    /*|104|*/{ 1,      FINALSTAGE2,             STEELIX,  NULLEVO,     NULLEVO,38 },
+    /*|104|*/{ 1,      NORMFINAL2,             STEELIX,  NULLEVO,     NULLEVO,38 },
     /*|105|*/{ 0,      0,             NULLEVO,  NULLEVO,     NULLEVO,38 },
 
-    /*|106|*/{ 1,      FINALSTAGE2,             SCIZOR,  NULLEVO,     NULLEVO,39 },
+    /*|106|*/{ 1,      NORMFINAL2,             SCIZOR,  NULLEVO,     NULLEVO,39 },
     /*|107|*/{ 0,      0,             NULLEVO,  NULLEVO,     NULLEVO,39 },
 
     /*|108|*/{ 0,      0,             NULLEVO,  NULLEVO,     NULLEVO,40 },
 
     /*|109|*/{ 0,      0,             NULLEVO,  NULLEVO,     NULLEVO,41 },
     
-    /*|110|*/{ 1,      MIDSTAGE,             METANG,  NULLEVO,     NULLEVO,42 },
-    /*|111|*/{ 1,      FINALSTAGE,             METAGROSS,  NULLEVO,     NULLEVO,42 },
+    /*|110|*/{ 1,      NORMMID,             METANG,  NULLEVO,     NULLEVO,42 },
+    /*|111|*/{ 1,      NORMFINAL,             METAGROSS,  NULLEVO,     NULLEVO,42 },
     /*|112|*/{ 0,      0,             NULLEVO,  NULLEVO,     NULLEVO,42 },
 
-    /*|113|*/{ 1,      MIDSTAGE,             CLEFAIRY,  NULLEVO,     NULLEVO,43 },
-    /*|114|*/{ 1,      FINALSTAGE,             CLEFABLE,  NULLEVO,     NULLEVO,43 },
+    /*|113|*/{ 1,      NORMMID,             CLEFAIRY,  NULLEVO,     NULLEVO,43 },
+    /*|114|*/{ 1,      NORMFINAL,             CLEFABLE,  NULLEVO,     NULLEVO,43 },
     /*|115|*/{ 0,      0,             NULLEVO,  NULLEVO,     NULLEVO,43 },
     
-    /*|116|*/{ 1,      MIDSTAGE,             JIGGLYPUFF,  NULLEVO,     NULLEVO,44 },
-    /*|117|*/{ 1,      FINALSTAGE,             WIGGLYTUFF,  NULLEVO,     NULLEVO,44 },
+    /*|116|*/{ 1,      NORMMID,             JIGGLYPUFF,  NULLEVO,     NULLEVO,44 },
+    /*|117|*/{ 1,      NORMFINAL,             WIGGLYTUFF,  NULLEVO,     NULLEVO,44 },
     /*|118|*/{ 0,      0,             NULLEVO,  NULLEVO,     NULLEVO,44 },
 
     /*|119|*/{ 0,      0,             NULLEVO,  NULLEVO,     NULLEVO,45 },
     
     /*|120|*/{ 0,      0,             NULLEVO,  NULLEVO,     NULLEVO,46 },
 
-    /*|121|*/{ 1,      FINALSTAGE2,             AVALUGG,  NULLEVO,     NULLEVO,47 },
+    /*|121|*/{ 1,      NORMFINAL2,             AVALUGG,  NULLEVO,     NULLEVO,47 },
     /*|122|*/{ 0,      0,             NULLEVO,  NULLEVO,     NULLEVO,47 },
 
-    /*|123|*/{ 1,      FINALSTAGE2,             TOXICROAK,  NULLEVO,     NULLEVO,48 },
+    /*|123|*/{ 1,      NORMFINAL2,             TOXICROAK,  NULLEVO,     NULLEVO,48 },
     /*|124|*/{ 0,      0,             NULLEVO,  NULLEVO,     NULLEVO,48 },
 
-    /*|125|*/{ 1,      FINALSTAGE2,             ARBOK,  NULLEVO,     NULLEVO,49 },
+    /*|125|*/{ 1,      NORMFINAL2,             ARBOK,  NULLEVO,     NULLEVO,49 },
     /*|126|*/{ 0,      0,             NULLEVO,  NULLEVO,     NULLEVO,49 },
     
-    /*|127|*/{ 1,      FINALSTAGE2,             SKUNTANK,  NULLEVO,     NULLEVO,50 },
+    /*|127|*/{ 1,      NORMFINAL2,             SKUNTANK,  NULLEVO,     NULLEVO,50 },
     /*|128|*/{ 0,      0,             NULLEVO,  NULLEVO,     NULLEVO,50 },
     
-    /*|129|*/{ 1,      FINALSTAGE2,             SWALOT,  NULLEVO,     NULLEVO,51 },
+    /*|129|*/{ 1,      NORMFINAL2,             SWALOT,  NULLEVO,     NULLEVO,51 },
     /*|130|*/{ 0,      0,             NULLEVO,  NULLEVO,     NULLEVO,51 },
     
-    /*|131|*/{ 1,      MIDSTAGE,             HAUNTER,  NULLEVO,     NULLEVO,52 },
-    /*|132|*/{ 1,      FINALSTAGE,             GENGAR,  NULLEVO,     NULLEVO,52 },
+    /*|131|*/{ 1,      NORMMID,             HAUNTER,  NULLEVO,     NULLEVO,52 },
+    /*|132|*/{ 1,      NORMFINAL,             GENGAR,  NULLEVO,     NULLEVO,52 },
     /*|133|*/{ 0,      0,             NULLEVO,  NULLEVO,     NULLEVO,52 },
 
-    /*|134|*/{ 1,      FINALSTAGE2,             TENTACRUEL,  NULLEVO,     NULLEVO,53 },
+    /*|134|*/{ 1,      NORMFINAL2,             TENTACRUEL,  NULLEVO,     NULLEVO,53 },
     /*|135|*/{ 0,      0,             NULLEVO,  NULLEVO,     NULLEVO,53 },
     
-    /*|136|*/{ 1,      MIDSTAGE,             GYARADOS,  NULLEVO,     NULLEVO,54 },
+    /*|136|*/{ 1,      NORMMID,             GYARADOS,  NULLEVO,     NULLEVO,54 },
     /*|137|*/{ 0,      0,             NULLEVO,  NULLEVO,     NULLEVO,54 },
     
     /*|138|*/{ 0,      0,             NULLEVO,  NULLEVO,     NULLEVO,55 },
     
     /*|139|*/{ 0,      0,             NULLEVO,  NULLEVO,     NULLEVO,56 },
 
-    /*|140|*/{ 1,      FINALSTAGE2,             VOLCARONA,  NULLEVO,     NULLEVO,57 },
+    /*|140|*/{ 1,      NORMFINAL2,             VOLCARONA,  NULLEVO,     NULLEVO,57 },
     /*|141|*/{ 0,      0,             NULLEVO,  NULLEVO,     NULLEVO,57 },
     
-    /*|142|*/{ 1,      FINALSTAGE2,             MANTINE,  NULLEVO,     NULLEVO,58 },
+    /*|142|*/{ 1,      NORMFINAL2,             MANTINE,  NULLEVO,     NULLEVO,58 },
     /*|143|*/{ 0,      0,             NULLEVO,  NULLEVO,     NULLEVO,58 },
     
-    /*|144|*/{ 1,      MIDSTAGE,             VIBRAVA,  NULLEVO,     NULLEVO,59 },
-    /*|145|*/{ 1,      FINALSTAGE,             FLYGON,  NULLEVO,     NULLEVO,59 },
+    /*|144|*/{ 1,      NORMMID,             VIBRAVA,  NULLEVO,     NULLEVO,59 },
+    /*|145|*/{ 1,      NORMFINAL,             FLYGON,  NULLEVO,     NULLEVO,59 },
     /*|146|*/{ 0,      0,             NULLEVO,  NULLEVO,     NULLEVO,59 },
     
-    /*|147|*/{ 1,      FINALSTAGE2,             CACTURNE,  NULLEVO,     NULLEVO,60 },
+    /*|147|*/{ 1,      NORMFINAL2,             CACTURNE,  NULLEVO,     NULLEVO,60 },
     /*|148|*/{ 0,      0,             NULLEVO,  NULLEVO,     NULLEVO,60 },
     
-    /*|149|*/{ 1,      FINALSTAGE2,             SNORLAX,  NULLEVO,     NULLEVO,61 },
+    /*|149|*/{ 1,      NORMFINAL2,             SNORLAX,  NULLEVO,     NULLEVO,61 },
     /*|150|*/{ 0,      0,             NULLEVO,  NULLEVO,     NULLEVO,61 },
     
-    /*|151|*/{ 1,      MIDSTAGE,             NUZLEAF,  NULLEVO,     NULLEVO,64 },
-    /*|152|*/{ 1,      FINALSTAGE,             SHIFTRY,  NULLEVO,     NULLEVO,64 },
+    /*|151|*/{ 1,      NORMMID,             NUZLEAF,  NULLEVO,     NULLEVO,64 },
+    /*|152|*/{ 1,      NORMFINAL,             SHIFTRY,  NULLEVO,     NULLEVO,64 },
     /*|153|*/{ 0,      0,             NULLEVO,  NULLEVO,     NULLEVO,64 },
     
-    /*|154|*/{ 1,      MIDSTAGE,             MAGNETON,  NULLEVO,     NULLEVO,65 },
-    /*|155|*/{ 1,      FINALSTAGE,             MAGNEZONE,  NULLEVO,     NULLEVO,65 },
+    /*|154|*/{ 1,      NORMMID,             MAGNETON,  NULLEVO,     NULLEVO,65 },
+    /*|155|*/{ 1,      NORMFINAL,             MAGNEZONE,  NULLEVO,     NULLEVO,65 },
     /*|156|*/{ 0,      0,             NULLEVO,  NULLEVO,     NULLEVO,65 },
     
-    /*|157|*/{ 1,      FINALSTAGE2,             HONCHKROW,  NULLEVO,     NULLEVO,66 },
+    /*|157|*/{ 1,      NORMFINAL2,             HONCHKROW,  NULLEVO,     NULLEVO,66 },
     /*|158|*/{ 0,      0,             NULLEVO,  NULLEVO,     NULLEVO,66 },
     
-    /*|159|*/{ 1,      FINALSTAGE2,             TANGROWTH,  NULLEVO,     NULLEVO,67 },
+    /*|159|*/{ 1,      NORMFINAL2,             TANGROWTH,  NULLEVO,     NULLEVO,67 },
     /*|160|*/{ 0,      0,             NULLEVO,  NULLEVO,     NULLEVO,67 },
     
-    /*|161|*/{ 1,      FINALSTAGE2,             GALVANTULA,  NULLEVO,     NULLEVO,68 },
-    /*|162|*/{ 0,      FINALSTAGE2,             NULLEVO,  NULLEVO,     NULLEVO,68 },
+    /*|161|*/{ 1,      NORMFINAL2,             GALVANTULA,  NULLEVO,     NULLEVO,68 },
+    /*|162|*/{ 0,      NORMFINAL2,             NULLEVO,  NULLEVO,     NULLEVO,68 },
     
-    /*|163|*/{ 1,      MIDSTAGE,             FLAAFFY,  NULLEVO,     NULLEVO,69 },
-    /*|164|*/{ 1,      FINALSTAGE,             AMPHAROS,  NULLEVO,     NULLEVO,69 },
+    /*|163|*/{ 1,      NORMMID,             FLAAFFY,  NULLEVO,     NULLEVO,69 },
+    /*|164|*/{ 1,      NORMFINAL,             AMPHAROS,  NULLEVO,     NULLEVO,69 },
     /*|165|*/{ 0,      0,             NULLEVO,  NULLEVO,     NULLEVO,69 },
 
     /*|166|*/{ 0,      0,             NULLEVO,  NULLEVO,     NULLEVO,70 },
 
     /*|167|*/{ 0,      0,             NULLEVO,  NULLEVO,     NULLEVO,71 },
 
-    /*|168|*/{ 1,      FINALSTAGE2,             YANMEGA,  NULLEVO,     NULLEVO,72 },
+    /*|168|*/{ 1,      NORMFINAL2,             YANMEGA,  NULLEVO,     NULLEVO,72 },
     /*|169|*/{ 0,      0,             NULLEVO,  NULLEVO,     NULLEVO,72 },
 
     /*|170|*/{ 0,      0,             NULLEVO,  NULLEVO,     NULLEVO,73 },
 
     /*|171|*/{ 0,      0,             NULLEVO,  NULLEVO,     NULLEVO,74 },
 
-    /*|172|*/{ 1,      FINALSTAGE2,             VENOMOTH,  NULLEVO,     NULLEVO,75 },
+    /*|172|*/{ 1,      NORMFINAL2,             VENOMOTH,  NULLEVO,     NULLEVO,75 },
     /*|173|*/{ 0,      0,             NULLEVO,  NULLEVO,     NULLEVO,75 },
     
-    /*|174|*/{ 1,      FINALSTAGE2,             GOLISOPOD,  NULLEVO,     NULLEVO,76 },
+    /*|174|*/{ 1,      NORMFINAL2,             GOLISOPOD,  NULLEVO,     NULLEVO,76 },
     /*|175|*/{ 0,      0,             NULLEVO,  NULLEVO,     NULLEVO,76 },
 
-    /*|176|*/{ 1,      MIDSTAGE,             MACHOKE,  NULLEVO,     NULLEVO,77 },
-    /*|177|*/{ 1,      FINALSTAGE,             MACHAMP,  NULLEVO,     NULLEVO,77 },
+    /*|176|*/{ 1,      NORMMID,             MACHOKE,  NULLEVO,     NULLEVO,77 },
+    /*|177|*/{ 1,      NORMFINAL,             MACHAMP,  NULLEVO,     NULLEVO,77 },
     /*|178|*/{ 0,      0,             NULLEVO,  NULLEVO,     NULLEVO,77 },
 
-    /*|179|*/{ 1,      FINALSTAGE2,             HARIYAMA,  NULLEVO,     NULLEVO,78 },
+    /*|179|*/{ 1,      NORMFINAL2,             HARIYAMA,  NULLEVO,     NULLEVO,78 },
     /*|180|*/{ 0,      0,             NULLEVO,  NULLEVO,     NULLEVO,78 },
 
-    /*|181|*/{ 3,      FINALSTAGE2,             HITMONLEE,  HITMONCHAN,     HITMONTOP,79 },
+    /*|181|*/{ 3,      NORMFINAL2,             HITMONLEE,  HITMONCHAN,     HITMONTOP,79 },
     /*|182|*/{ 0,      0,             NULLEVO,  NULLEVO,     NULLEVO,79 },
     /*|183|*/{ 0,      0,             NULLEVO,  NULLEVO,     NULLEVO,79 },
     /*|184|*/{ 0,      0,             NULLEVO,  NULLEVO,     NULLEVO,79 },
     
-    /*|185|*/{ 1,      FINALSTAGE2,             LUCARIO,  NULLEVO,     NULLEVO,80 },
+    /*|185|*/{ 1,      NORMFINAL2,             LUCARIO,  NULLEVO,     NULLEVO,80 },
     /*|186|*/{ 0,      0,             NULLEVO,  NULLEVO,     NULLEVO,80 },
     //--[NewPokemon]--
 };
