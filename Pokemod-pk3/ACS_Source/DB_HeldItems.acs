@@ -1,0 +1,147 @@
+/* -=- Held item Database -=-
+ * Variables and functions for A_HeldItems
+ *
+ * 
+
+*/
+#library "DB_HeldItems"
+#include "zcommon.acs"
+
+#LIBDEFINE MAX_HELDITEMS 13
+
+
+#LIBDEFINE HI_NULL -1
+#LIBDEFINE HI_PATK 0
+#LIBDEFINE HI_SATK 1
+#LIBDEFINE HI_PDEF 2
+#LIBDEFINE HI_SDEF 3
+// Speed would be 4 but held items don't give speed
+#LIBDEFINE HI_HP 5
+
+str HeldItemList[MAX_HELDITEMS][4] = {
+    {"RedScarf", "Red Scarf", 3.0 ,""},
+    {"BlueScarf", "Blue Scarf", 5.0,""},
+    {"GreenScarf", "Green Scarf", 3.0,""},
+    {"YellowScarf", "Yellow Scarf", 5.0,""},
+    {"PinkScarf", "Pink Scarf", 1.0,""},
+    {"Leftovers", "Leftovers", 1.0,""},
+    {"ShellBell", "Shell Bell", 1.0,""},
+    {"Lifeorb", "Life Orb", 1.0,""},
+    {"AssaultVest", "Assault Vest", 1.0,""},
+    {"ChoiceScarf", "Choice Scarf", 1.0,""},
+    {"ChoiceBand", "Choice Band", 1.0,""},
+    {"WeaknessPolicy", "Weakness Policy", 1.0,""},
+    {"FocusBand", "Focus Band", 1.0,""},
+};
+
+/*
+
+*/
+Int HeldItemStats[MAX_HELDITEMS][8] = {
+    //                  | Stat 1 ID|Base|Growth|| Stat 2 ID|Base|Growth|| Cost || CostGrowth
+    /*|RedScarf|*/      {HI_PATK,   20,  5,      HI_NULL,   0,   0,      10,     5},
+    /*|BlueScarf|*/     {HI_SATK,   20,  5,      HI_NULL,   0,   0,      10,     5},
+    /*|GreenScarf|*/    {HI_PDEF,   20,  5,      HI_NULL,   0,   0,      10,     5},
+    /*|YellowScarf|*/   {HI_SDEF,   20,  5,      HI_NULL,   0,   0,      10,     5},
+    /*|PinkScarf|*/     {HI_HP  ,   20,  5,      HI_NULL,   0,   0,      10,     5},
+    /*|Leftovers|*/     {HI_HP  ,   50,  5,      HI_NULL,   0,   0,      45,     10},
+    /*|ShellBell|*/     {HI_HP  ,   10,  5,      HI_SATK,   10,   10,      45,     15},
+    /*|Lifeorb|*/       {HI_PATK  ,   10,  5,      HI_SATK,   10,   5,      45,     15},
+    /*|AssaultVest|*/   {HI_SDEF  ,   30,  10,      HI_NULL,   0,   0,      30,     15},
+    /*|ChoiceScarf|*/   {HI_PATK  ,   15,  15,      HI_NULL,   0,   0,      25,     15},
+    /*|ChoiceBand|*/   {HI_PATK  ,   15,  15,      HI_NULL,   0,   0,      25,     15},
+    /*|WeaknessPolicy|*/{HI_PDEF  ,   15,  5,      HI_SDEF,   15,   5,      15,     5},
+    /*|FocusBand|*/     {HI_PDEF  ,   15,  5,      HI_NULL,   0,   0,      15,     10},
+};
+
+
+function int CountHeldItems (int Mode)
+{
+int Output;
+
+Int Count1;
+Int Count2;
+str HeldItemName;
+For(int i = 0; i < MAX_HELDITEMS; i++)
+	{
+        HeldItemName = HeldItemList[i][0];
+        if(CheckInventory(HeldItemName))
+            {
+                Count1++;
+                Count2 += CheckInventory(HeldItemName);
+            } 
+
+    }
+
+    Switch(Mode)
+    {
+        case 1: Output = Count2; break;
+        default: Output = Count1; break;
+    }
+
+return Output;
+}
+
+function int HeldStats (int StatID)
+{
+//this checks each held item down the list to see if you have it, and if boosts the stats you are seeking, and returns the total additional stats
+int Output;
+Str HeldItemName;
+For(int i = 0; i < MAX_HELDITEMS; i++)
+	{
+        HeldItemName = HeldItemList[i][0];
+        if(CheckInventory(HeldItemName))
+            {
+                if(HeldItemStats[i][0] == StatID){Output += HeldItemStats[i][1]+(HeldItemStats[i][2]*CheckInventory(HeldItemName));}
+                if(HeldItemStats[i][3] == StatID){Output += HeldItemStats[i][4]+(HeldItemStats[i][5]*CheckInventory(HeldItemName));}
+            } 
+
+    }
+
+return Output;
+}
+
+function str GrabHeldItemStats(int ID, int Quantity)
+{ //For menues
+
+str S1,S2,S3;
+str Stat1,Stat2;
+int StatVal1,StatVal2;
+
+Str Output;
+
+if (ID >= MAX_HELDITEMS || ID < 0) {return " ";}
+Switch(HeldItemStats[ID][0])
+    {
+        case HI_PATK: Stat1 = "ATK"; break;
+        case HI_SATK: Stat1 = "SP.ATK"; break;
+        case HI_PDEF: Stat1 = "DEF"; break;
+        case HI_SDEF: Stat1 = "SP.DEF"; break;
+        case 4: Stat1 = "SPEED"; break;
+        case HI_HP: Stat1 = "HP"; break;
+    }
+
+    StatVal1 = HeldItemStats[ID][1]+(HeldItemStats[ID][2]*(Quantity-1));
+    S1 = StrParam(s:Stat1,s:" ",i:StatVal1);
+
+    S2 = "     ";
+
+    if(HeldItemStats[ID][3] != HI_NULL)
+        {
+        Switch(HeldItemStats[ID][3])
+            {
+                case HI_PATK: Stat2 = "ATK"; break;
+                case HI_SATK: Stat2 = "SP.ATK"; break;
+                case HI_PDEF: Stat2 = "DEF"; break;
+                case HI_SDEF: Stat2 = "SP.DEF"; break;
+                case 5: Stat2 = "SPEED"; break;
+                case HI_HP: Stat2 = "HP"; break;
+            }
+        StatVal2 = HeldItemStats[ID][4]+(HeldItemStats[ID][5]*(Quantity-1));
+        S3 = StrParam(s:Stat2,s:" ",i:StatVal2);
+        }
+    else{S3 = " ";}
+    
+Output = StrParam(s:S1,s:S2,s:S3);
+return Output;
+}

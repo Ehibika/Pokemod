@@ -12,7 +12,7 @@
 #LIBDEFINE SHOP_MAX_PLAYERS 64
 #LIBDEFINE SHOP_MAX_SLOTS 10
 #LIBDEFINE MAX_TEAMS 4
-#LIBDEFINE MAX_SHOP 25
+#LIBDEFINE MAX_SHOP 24
 
 bool thePlayerPlayed[SHOP_MAX_PLAYERS];
 int thePlayerTeam[SHOP_MAX_PLAYERS];
@@ -28,7 +28,7 @@ str ShopItemList[MAX_SHOP][4] = {
     {"GuardSeed", "Guard Seed", 10.0,""},
     {"HasteSeed", "Haste Seed", 10.0,""},    
     {"EvasionSeed", "Evasion Seed", 25.0,""},    
-    {"EscapeOrb", "Escape Orb", 1.0,""},
+    //{"EscapeOrb", "Escape Orb", 1.0,""},
     {"BarrierOrb", "Barrier Orb", 15.0,""},
     {"QuickOrb", "Quick Orb", 15.0,""},
     {"EraserOrb", "Eraser Orb", 10.0,""},

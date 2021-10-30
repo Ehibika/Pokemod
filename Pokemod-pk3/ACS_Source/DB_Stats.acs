@@ -67,7 +67,7 @@ Int SpeedTable[15][2] = {
 
 
 
-#LIBDEFINE STATITEMNUM 84
+#LIBDEFINE STATITEMNUM 86
 
 Str StatEffectName[STATITEMNUM][2] = {
     {"Growth","GOOD"},
@@ -154,6 +154,8 @@ Str StatEffectName[STATITEMNUM][2] = {
     {"IronTail","BAD"},
     {"MysticalFire","BAD"},
     {"Hypnosis","BAD"},
+    {"ChoiceScarf","GOOD"},
+    {"WeaknessPolicy","GOOD"},
 
 };
 
@@ -253,6 +255,8 @@ Int StatEffectValue[STATITEMNUM][5] = {
 {   0,      0,      -1,      0,      0}, //IronTail
 {   0,      -1,      0,      0,      0}, //MysticalFire
 {   0,      -2,      0,      0,      0}, //Hypnosis
+{   0,      0,      0,      0,      2}, //ChoiceScarf
+{   2,      2,      0,      0,      0}, //WeaknessPolicy
 
 };
 

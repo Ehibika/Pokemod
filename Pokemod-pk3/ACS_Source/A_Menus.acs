@@ -15,6 +15,8 @@
 #Import "Dex_TM.acs."
 #Import "DB_Data.acs"
 #Import "DB_Shop.acs"
+#Import "DB_HeldItems.acs"
+#Import "A_HeldItems.acs"
 #Import "DB_Leveling.acs"
 #import "DB_Action.acs"
 
@@ -423,6 +425,366 @@ GiveInventory("NetCheck_A",1);
 }
 #endregion
 //#endregion
+
+
+//#region -=- HeldItem Shop
+#region -=- HeldItem Shop
+
+Script "PromptHeldItemShop" (void)
+{
+//==================[+]
+// - Pre Start Up -
+//==================[+]
+if(ShopTime() == 0){print(s:"Cannot open the HeldItem shop here"); Terminate;}
+if(GetCvar("sv_RentalsMode") == 1 &&
+	GetCvar("sv_EnableShop") == 0){print(s:"HeldItem Shop is unavailable"); Terminate;}
+
+//GiveInventory("SpawnSafeZone",1);
+ACS_NamedExecuteAlways("Menu_HeldItemShop",0);
+}
+
+Script "Menu_HeldItemShop" (void) CLIENTSIDE
+{
+	if(Playernumber() != ConsolePlayerNumber()) {Terminate;}
+	while(!CheckInventory("NetCheck_Freeze")){NamedRequestScriptPuke("NET_FreezePlayer",1);Delay(1);}
+	//=======================[+]
+	// - Define Variables -
+	//=======================[+]
+	int PlayerLVL = GetCvar(StrParam(s:"PlayerLevel_",i:PlayerNumber()));
+	int PlayerDEXNum = GetCvar(StrParam(s:"PlayerDEXNum_",i:PlayerNumber()));
+
+	
+	
+	Int MoveFrameCap =6;
+	Int StartMoves = 4;
+	Int ChoiceID = 0;
+	Int ChoiceCap = PlayerLVL;
+	int MenuX = MenuXOrigin;
+	int Menuy = MenuYOrigin+19.0;
+
+	str ItemName;
+	str itemSpace;
+	int ItemCost;
+
+	str ChoiceItemName;
+	int ChoiceItemCost;
+	int ChoiceItemStats;
+	int CursorY;
+	// - Menu -
+	int InputButtons, InputOldButtons, UpInput, DownInput, SideInput;
+	Int ConfirmInput, CancelInput, ChoiceInput;
+	Int MenuStates = 0;
+	Int ShopState = 0;
+	Int MenuNextState; 
+	int i, j, h;
+	Bool MenuUp = true;
+	Bool BGUp;
+
+	str ItemGameName;
+	str ItemLang;
+	str ItemStats;
+	str ChoiceItemMaxName;
+	str itemColor;
+	int ItemQuantity;
+
+	int UpDownRepeat = 0;
+	//=======================[+]
+	// - Menu Loop Begin -
+	//=======================[+]
+	while (MenuUp && GetActorProperty(0,APROP_HEALTH) > 0) {
+		SetHudSize(320, 200, 0);
+		SetFont("STCFN");
+		MenuStates = MenuNextState;
+	
+		// #------------------
+		// # Begin Menustate 0
+		// #------------------
+		if (MenuStates == 0) {
+	
+			j = 0;
+			// - Print the list of items -
+			For(i = 0; i < MAX_HELDITEMS; i++)
+			{
+				if(ChoiceID >= 3 && ChoiceID < MAX_HELDITEMS-3)
+				{
+					if(i < ChoiceID-3){continue;}
+					if(i > ChoiceID+3){break;}
+				}
+				if(ChoiceID < 3)
+				{
+					if(i > 6){break;}
+				}
+				if(ChoiceID > MAX_HELDITEMS-4)
+				{
+					if(i < MAX_HELDITEMS-6){continue;}
+				}
+				ItemName = HeldItemList[i][1];
+				itemSpace = StrLeft("                \cJ",16-StrLen(ItemName));
+				ItemCost = HeldItemStats[i][6]+(HeldItemStats[i][7]*CheckInventory(HeldItemList[i][0]));
+				if(CheckInventory(HeldItemList[i][0])){itemColor = "\cG";}
+				else{itemColor = "\cJ";}
+					HudMessage(s:itemColor,s:ItemName,s:itemSpace,i:ItemCost,s:" \cfBP"; HUDMSG_FADEOUT, 500 + j, CR_WHITE, MenuX, Menuy + (MNL * j), 0.2, 0);
+					j++;
+			}
+	
+				if(!BGUp)
+					{DrawMenuFrame(MenuX-(8.0*3),MenuY-(8.0*0),21,6+MoveFrameCap,0); 
+					//DrawMenuFrame(MenuX-(8.0*3),MenuY-(8.0*3),21,2,PastMenuSize);
+					DrawMenuFrame(MenuX-(8.0*12),MenuY-(8.0*8),38,7,PastMenuSize);
+					BGup = True;}
+
+				ChoiceCap = MAX_HELDITEMS;
+				if(MAX_HELDITEMS>6)
+				{
+				if (ChoiceID > 3 && ChoiceID < MAX_HELDITEMS-3){ CursorY = 3;}
+				else if(ChoiceID >= MAX_HELDITEMS-3){CursorY = 3 + (ChoiceID-(MAX_HELDITEMS-3));}	
+				else{CursorY = ChoiceID;}
+				}
+				else{CursorY = ChoiceID;}
+				
+				if(ChoiceID >= MAX_HELDITEMS-3 && MAX_HELDITEMS>6){HudMessage(s: "Exit"; HUDMSG_FADEOUT, 500 + (6), CR_ORANGE, MenuX, Menuy + (MNL * 6), 0.2, 0);}
+				else if(MAX_HELDITEMS<=6){HudMessage(s: "Exit"; HUDMSG_FADEOUT, 500 + (MAX_HELDITEMS), CR_ORANGE, MenuX, Menuy + (MNL * MAX_HELDITEMS), 0.2, 0);}
+				HudMessage(s: ">>"; HUDMSG_FADEOUT, 515, 0, MenuX - 16.0, Menuy + (MNL * CursorY), 0.2, 0);
+	
+				//Draw Description
+				ItemGameName = HeldItemList[ChoiceID][0];
+				ItemLang = strParam(s:"DESC_",s:ItemGameName);
+				if(ChoiceID < MAX_HELDITEMS)HudMessage(l:ItemLang; HUDMSG_FADEOUT, 517, CR_White, MenuX- (MNL * 10) , Menuy - (MNL * 8), 0.2, 0);
+
+				ItemQuantity = CheckInventory(ItemGameName);
+				if(ItemQuantity>0){itemStats = GrabHeldItemStats(ChoiceID,ItemQuantity);}
+					else{itemStats = StrParam(s:"\cC",s:GrabHeldItemStats(ChoiceID,1));}
+				//HudMessage(s:itemStats; HUDMSG_FADEOUT, 518, CR_White, MenuX- (MNL * 4) , Menuy - (MNL * 3 + 3.0), 0.2, 0);
+				HudMessage(s:"\cG<< Buy >>    Level: ",i:ItemQuantity,s:"   ",s:itemStats; HUDMSG_FADEOUT, 518, CR_White, MenuX- (MNL * 4) , Menuy - (MNL * 3 + 6.0), 0.2, 0);
+			
+	
+			// - Grab Inputs -
+			InputButtons = GetPlayerInput(-1, INPUT_BUTTONS);
+			//#region *Depreciated*
+			//UpInput = ButtonCheck(InputButtons, InputOldButtons, BT_FORWARD);
+			//DownInput = ButtonCheck(InputButtons, InputOldButtons, BT_BACK);
+			//SideInput = ButtonCheck(InputButtons, InputOldButtons, BT_MOVELEFT) + ButtonCheck(InputButtons, InputOldButtons, BT_MOVERIGHT);
+			//ConfirmInput = ButtonCheck(InputButtons, InputOldButtons, BT_ATTACK);
+			//CancelInput = ButtonCheck(InputButtons, InputOldButtons, BT_AltATTACK);
+			//#endregion
+			
+			ChoiceInput = GetChoiceInputs(InputButtons,InputOldButtons,4);
+			SideInput = GetLeftRightInputs(InputButtons,InputOldButtons,1);
+			if(GetUpDownInputs(InputButtons,InputOldButtons,3) != 0)
+				{
+					if(UpDownRepeat==0){ChoiceID += GetUpDownInputs(InputButtons,InputOldButtons,3);}
+					if(UpDownRepeat>10){ChoiceID += GetUpDownInputs(InputButtons,InputOldButtons,3); UpDownRepeat=8;}
+					UpDownRepeat++;
+				}
+				else{UpDownRepeat = 0;}
+			
+				//#region **deprpeciate **
+				//if(ChoiceID != 0)
+/*
+			if(!(InputButtons & BT_FORWARD && InputButtons & BT_BACK))
+				{	
+					if(ButtonCheck(InputButtons, InputOldButtons, BT_FORWARD))
+						{
+							if(UpDownRepeat==0){ChoiceID--;}
+							if(UpDownRepeat>10){ChoiceID--; UpDownRepeat=8;}
+							UpDownRepeat++;
+						}
+
+					else if(ButtonCheck(InputButtons, InputOldButtons, BT_BACK))
+						{
+							if(UpDownRepeat==0){ChoiceID++;}
+							if(UpDownRepeat>10){ChoiceID++; UpDownRepeat=8;}
+							UpDownRepeat++;
+						}
+					else{UpDownRepeat = 0;}
+				}
+				*/
+
+			/*
+			if (UpInput != DownInput) {
+				if (UpInput == 1) {
+					ChoiceID--;
+				}
+				if (DownInput == 1) {
+					ChoiceID++;
+				}
+			}
+			*/
+			//#endregion
+
+			if (ChoiceID > ChoiceCap) { ChoiceID = 0; }
+			if (ChoiceID < 0) { ChoiceID = ChoiceCap; }
+			if (SideInput != 0) {MenuNextState = 1;} //Swap to sell menu 
+			if (ChoiceInput == -1 || ChoiceInput == 1 && ChoiceID == MAX_HELDITEMS) {break;} //MenuUp = false;
+			if (ChoiceInput == 1 && ChoiceID < MAX_HELDITEMS) 
+					{ //Item Purchase
+						ChoiceItemName = HeldItemList[ChoiceID][0];
+						ChoiceItemMaxName = strParam(s:"Max",s:ChoiceItemName);
+						ChoiceItemCost = HeldItemStats[ChoiceID][6]+(HeldItemStats[ChoiceID][7]*CheckInventory(ChoiceItemName));
+						if(ACS_NamedExecuteWithResult("BPCheck",ChoiceItemCost)
+							&& CheckInventory(ChoiceItemName) < GetAmmoCapacity(ChoiceItemMaxName)
+							&& HeldItemList[ChoiceID][3] != "NOSELL"
+							&& (CountHeldItems(0) < GetCvar("PKMN_HeldItemLimit") || CheckInventory(ChoiceItemName)))
+						{
+							while(!CheckInventory("NetCheck_A")){NamedRequestScriptPuke("NET_HeldItemShop_Buy",ChoiceItemName,ChoiceItemCost);Delay(3);}
+						}
+						else
+						{
+							ACS_NamedExecuteAlways("ShopFailSound",0);
+							if(!ACS_NamedExecuteWithResult("BPCheck",ChoiceItemCost)){ACS_NamedExecuteAlways("ShopBuyFailMoneyMsg",0);}
+							else if(CheckInventory(ChoiceItemName) >= GetAmmoCapacity(ChoiceItemMaxName)){ACS_NamedExecuteAlways("ShopBuyFailSpaceMsg",0);}
+							//else if(HeldItemList[ChoiceID][3] != "NOSELL"){ACS_NamedExecuteAlways("ShopBuyFailMoneyMsg",0);}
+							else if (CountHeldItems(0) >= GetCvar("PKMN_HeldItemLimit")){ACS_NamedExecuteAlways("ShopBuyFailHeldLimitMsg",0);}
+							//print(s:ChoiceItemName);
+						}
+
+					} 
+		}
+			// #------------------
+			// # End Menustate 0
+			// #------------------
+
+			// #------------------
+			// # Begin Menustate 1
+			// #------------------
+			if (MenuStates == 1) {
+		
+				j = 0;
+				// - Print the list of items -
+				For(i = 0; i < MAX_HELDITEMS; i++)
+				{
+					if(ChoiceID >= 3 && ChoiceID < MAX_HELDITEMS-3)
+					{
+						if(i < ChoiceID-3){continue;}
+						if(i > ChoiceID+3){break;}
+					}
+					if(ChoiceID < 3)
+					{
+						if(i > 6){break;}
+					}
+					if(ChoiceID > MAX_HELDITEMS-4)
+					{
+						if(i < MAX_HELDITEMS-6){continue;}
+					}
+					ItemName = HeldItemList[i][1];
+					itemSpace = StrLeft("                \cJ",16-StrLen(ItemName));
+					ItemCost = HeldItemStats[i][6]*CheckInventory(HeldItemList[i][0])+(HeldItemStats[i][7]*CheckInventory(HeldItemList[i][0]));
+					if(CheckInventory(HeldItemList[i][0])){itemColor = "\cG";}
+					else{itemColor = "\cJ";}
+					if(!CheckInventory(HeldItemList[i][0])){ItemCost = 0;}
+					if(ItemCost>1){ItemCost = ItemCost/2;}
+						HudMessage(s:itemColor,s:ItemName,s:itemSpace,i:ItemCost,s:" \cfBP"; HUDMSG_FADEOUT, 500 + j, CR_WHITE, MenuX, Menuy + (MNL * j), 0.2, 0);
+						j++;
+				}
+		
+					if(!BGUp)
+						{DrawMenuFrame(MenuX-(8.0*3),MenuY-(8.0*0),21,6+MoveFrameCap,0); 
+						//DrawMenuFrame(MenuX-(8.0*3),MenuY-(8.0*3),21,2,PastMenuSize);
+						DrawMenuFrame(MenuX-(8.0*12),MenuY-(8.0*8),38,7,PastMenuSize);
+						BGup = True;}
+
+					ChoiceCap = MAX_HELDITEMS;
+					if(MAX_HELDITEMS>6)
+					{
+					if (ChoiceID > 3 && ChoiceID < MAX_HELDITEMS-3){ CursorY = 3;}
+					else if(ChoiceID >= MAX_HELDITEMS-3){CursorY = 3 + (ChoiceID-(MAX_HELDITEMS-3));}	
+					else{CursorY = ChoiceID;}
+					}
+					else{CursorY = ChoiceID;}
+					
+					if(ChoiceID >= MAX_HELDITEMS-3 && MAX_HELDITEMS>6){HudMessage(s: "Exit"; HUDMSG_FADEOUT, 500 + (6), CR_ORANGE, MenuX, Menuy + (MNL * 6), 0.2, 0);}
+					else if(MAX_HELDITEMS<=6){HudMessage(s: "Exit"; HUDMSG_FADEOUT, 500 + (MAX_HELDITEMS), CR_ORANGE, MenuX, Menuy + (MNL * MAX_HELDITEMS), 0.2, 0);}
+					HudMessage(s: ">>"; HUDMSG_FADEOUT, 515, 0, MenuX - 16.0, Menuy + (MNL * CursorY), 0.2, 0);
+		
+					//Draw Description
+					ItemGameName = HeldItemList[ChoiceID][0];
+					ItemLang = strParam(s:"DESC_",s:ItemGameName);
+					if(ChoiceID < MAX_HELDITEMS)HudMessage(l:ItemLang; HUDMSG_FADEOUT, 517, CR_White, MenuX- (MNL * 10) , Menuy - (MNL * 8), 0.2, 0);
+				
+					ItemQuantity = CheckInventory(ItemGameName);
+					HudMessage(s:"\cd<< Sell >>    Quantity: ",i:ItemQuantity; HUDMSG_FADEOUT, 518, CR_White, MenuX- (MNL * 4) , Menuy - (MNL * 3 + 6.0), 0.2, 0);
+
+		
+				// - Grab Inputs -
+				InputButtons = GetPlayerInput(-1, INPUT_BUTTONS);
+				ChoiceInput = GetChoiceInputs(InputButtons,InputOldButtons,4);
+				SideInput = GetLeftRightInputs(InputButtons,InputOldButtons,1);
+				if(GetUpDownInputs(InputButtons,InputOldButtons,3) != 0)
+					{
+						if(UpDownRepeat==0){ChoiceID += GetUpDownInputs(InputButtons,InputOldButtons,3);}
+						if(UpDownRepeat>10){ChoiceID += GetUpDownInputs(InputButtons,InputOldButtons,3); UpDownRepeat=8;}
+						UpDownRepeat++;
+					}
+					else{UpDownRepeat = 0;}
+					
+				if (ChoiceID > ChoiceCap) { ChoiceID = 0; }
+				if (ChoiceID < 0) { ChoiceID = ChoiceCap; }
+				if (SideInput != 0) {MenuNextState = 0;} //Swap to Buy menu 
+				if (ChoiceInput == -1 || ChoiceInput == 1 && ChoiceID == MAX_HELDITEMS) {break;} //MenuUp = false;
+				if (ChoiceInput == 1 && ChoiceID < MAX_HELDITEMS) 
+						{ //Item Sell
+							ChoiceItemName = HeldItemList[ChoiceID][0];
+							ChoiceItemMaxName = strParam(s:"Max",s:ChoiceItemName);
+							ChoiceItemCost = HeldItemStats[ChoiceID][6]+(HeldItemStats[ChoiceID][7]*CheckInventory(ChoiceItemName));
+							if(ChoiceItemCost>1){ChoiceItemCost = ChoiceItemCost/2;}
+							if(CheckInventory(ChoiceItemName))
+							{
+								while(!CheckInventory("NetCheck_A")){NamedRequestScriptPuke("NET_HeldItemShop_Sell",ChoiceItemName,ChoiceItemCost);Delay(3);}
+							}
+							else
+							{
+								ACS_NamedExecuteAlways("ShopFailSound",0);
+								ACS_NamedExecuteAlways("ShopSellFailQuantityMsg",0);
+							}
+
+						} 
+				// #------------------
+				// # End Menustate 1
+				// #------------------
+			}
+			Delay(1);
+			InputOldButtons = InputButtons;
+		
+	} 
+	
+	//=======================[+]
+	// - Menu Loop End -
+	//=======================[+]
+	ClearMenuFrame();
+	while(!CheckInventory("NetCheck_Freeze")){NamedRequestScriptPuke("NET_FreezePlayer",0);Delay(1);}
+}
+
+
+Script "NET_HeldItemShop_Buy" (int ChoiceItemName, int ChoiceItemCost) NET
+{
+	if(!CheckInventory("InMenu")){Print(s:"Illegal netscript call!!");GiveInventory("NetCheck_A",1);Terminate;}
+	if(CheckInventory("NetCheck_A")) Terminate;
+
+	GiveInventory(ChoiceItemName,1);
+	GiveInventory("HeldCheck_Passive",1);
+	ACS_NamedExecuteAlways("ActiveStatUpdate",0);
+	ACS_NamedExecuteAlways("Write_HI_Inventory",0);
+	ACS_NamedExecuteAlways("BPPay",0,ChoiceItemCost);
+	ACS_NamedExecuteAlways("ShopSuccessSound",0);
+GiveInventory("NetCheck_A",1);
+}
+
+Script "NET_HeldItemShop_Sell" (int ChoiceItemName, int ChoiceItemCost) NET
+{
+	if(!CheckInventory("InMenu")){Print(s:"Illegal netscript call!!");GiveInventory("NetCheck_A",1);Terminate;}
+	if(CheckInventory("NetCheck_A")) Terminate;
+
+	TakeInventory(ChoiceItemName,99);
+	GiveInventory("HeldCheck_Passive",1);
+	ACS_NamedExecuteAlways("ActiveStatUpdate",0);
+	ACS_NamedExecuteAlways("Write_HI_Inventory",0);
+	ACS_NamedExecuteAlways("GivePlayerBP",0,PlayerNumber(),ChoiceItemCost);
+	ACS_NamedExecuteAlways("ShopSuccessSound",0);
+GiveInventory("NetCheck_A",1);
+}
+#endregion
+//#endregion
+
 
 //#region -=- TM Shop
 #region -=- TM Shop
@@ -1545,10 +1907,10 @@ int MenuX2 = (MenuX+90.0);
 int PlayerLVL = GetCvar(StrParam(s:"PlayerLevel_",i:PlayerNumber()));
 int PlayerDEXNum = GetCvar(StrParam(s:"PlayerDEXNum_",i:PlayerNumber()));
 int Player_HP = GetActorProperty(0,APROP_SPAWNHEALTH);
-int Player_PATK = CheckInventory("Active_PAttack");
-int Player_SATK = CheckInventory("Active_SAttack");
-int Player_PDEF = CheckInventory("Active_PDefense");
-int Player_SDEF = CheckInventory("Active_SDefense");
+int Player_PATK = CheckInventory("Active_PAttack")+HeldStats(0);
+int Player_SATK = CheckInventory("Active_SAttack")+HeldStats(1);
+int Player_PDEF = CheckInventory("Active_PDefense")+HeldStats(2);
+int Player_SDEF = CheckInventory("Active_SDefense")+HeldStats(3);
 //int Player_SPD = CheckInventory("Active_Speed");
 
 // - Menu -

@@ -57,3 +57,5 @@ ACTOR MaxItemValue : Ammo // For GetAmmoCapacity()
 #include "Actors/inventory/Shop/ShopInventory/Orbs.txt"
 #include "Actors/inventory/Shop/ShopInventory/Wands.txt"
 #include "Actors/inventory/Shop/ShopInventory/Incense.txt"
+
+#include "Actors/inventory/Shop/HeldItems.txt"

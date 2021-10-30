@@ -123,6 +123,7 @@ alias FortniteCam "sv_CameraAng 0.5; sv_CameraHeight -0.9; sv_CameraZoom 120; SV
 
 //Use ShopGuardItem;
 alias OpenItemShop "CloseMenu; Use ItemShopStartItem"
+alias OpenHeldItemShop "CloseMenu; Use HeldItemShopStartItem"
 alias OpenTMShop "CloseMenu; Use TMShopStartItem"
 
 alias UseEscapeorb "Use Escapeorb"

@@ -88,6 +88,8 @@ server noarchive int PKMN_BPAward = 10;
 server noarchive int PKMN_BPWinAward = 10;
 server noarchive int PKMN_BPLoseAward = 5;
 
+server noarchive int PKMN_HeldItemLimit = 3;
+
 
 user noarchive bool auto_false = false;
 server noarchive bool BP_INIT = false;
@@ -279,6 +281,73 @@ server noarchive string PLAYER60_INV = "0000";
 server noarchive string PLAYER61_INV = "0000";
 server noarchive string PLAYER62_INV = "0000";
 server noarchive string PLAYER63_INV = "0000";
+
+//====|Held Item Inventory
+
+server noarchive string PLAYER0_HI = "0000";
+server noarchive string PLAYER1_HI = "0000";
+server noarchive string PLAYER2_HI = "0000";
+server noarchive string PLAYER3_HI = "0000";
+server noarchive string PLAYER4_HI = "0000";
+server noarchive string PLAYER5_HI = "0000";
+server noarchive string PLAYER6_HI = "0000";
+server noarchive string PLAYER7_HI = "0000";
+server noarchive string PLAYER8_HI = "0000";
+server noarchive string PLAYER9_HI = "0000";
+server noarchive string PLAYER10_HI = "0000";
+server noarchive string PLAYER11_HI = "0000";
+server noarchive string PLAYER12_HI = "0000";
+server noarchive string PLAYER13_HI = "0000";
+server noarchive string PLAYER14_HI = "0000";
+server noarchive string PLAYER15_HI = "0000";
+server noarchive string PLAYER16_HI = "0000";
+server noarchive string PLAYER17_HI = "0000";
+server noarchive string PLAYER18_HI = "0000";
+server noarchive string PLAYER19_HI = "0000";
+server noarchive string PLAYER20_HI = "0000";
+server noarchive string PLAYER21_HI = "0000";
+server noarchive string PLAYER22_HI = "0000";
+server noarchive string PLAYER23_HI = "0000";
+server noarchive string PLAYER24_HI = "0000";
+server noarchive string PLAYER25_HI = "0000";
+server noarchive string PLAYER26_HI = "0000";
+server noarchive string PLAYER27_HI = "0000";
+server noarchive string PLAYER28_HI = "0000";
+server noarchive string PLAYER29_HI = "0000";
+server noarchive string PLAYER30_HI = "0000";
+server noarchive string PLAYER31_HI = "0000";
+server noarchive string PLAYER32_HI = "0000";
+server noarchive string PLAYER33_HI = "0000";
+server noarchive string PLAYER34_HI = "0000";
+server noarchive string PLAYER35_HI = "0000";
+server noarchive string PLAYER36_HI = "0000";
+server noarchive string PLAYER37_HI = "0000";
+server noarchive string PLAYER38_HI = "0000";
+server noarchive string PLAYER39_HI = "0000";
+server noarchive string PLAYER40_HI = "0000";
+server noarchive string PLAYER41_HI = "0000";
+server noarchive string PLAYER42_HI = "0000";
+server noarchive string PLAYER43_HI = "0000";
+server noarchive string PLAYER44_HI = "0000";
+server noarchive string PLAYER45_HI = "0000";
+server noarchive string PLAYER46_HI = "0000";
+server noarchive string PLAYER47_HI = "0000";
+server noarchive string PLAYER48_HI = "0000";
+server noarchive string PLAYER49_HI = "0000";
+server noarchive string PLAYER50_HI = "0000";
+server noarchive string PLAYER51_HI = "0000";
+server noarchive string PLAYER52_HI = "0000";
+server noarchive string PLAYER53_HI = "0000";
+server noarchive string PLAYER54_HI = "0000";
+server noarchive string PLAYER55_HI = "0000";
+server noarchive string PLAYER56_HI = "0000";
+server noarchive string PLAYER57_HI = "0000";
+server noarchive string PLAYER58_HI = "0000";
+server noarchive string PLAYER59_HI = "0000";
+server noarchive string PLAYER60_HI = "0000";
+server noarchive string PLAYER61_HI = "0000";
+server noarchive string PLAYER62_HI = "0000";
+server noarchive string PLAYER63_HI = "0000";
 
 //=====|Pokemon Stats
 

@@ -189,11 +189,13 @@ Script "PKMNACS_StartupScript" (int BaseDex)
 		{
 			Case 0: //Base
 			//Log(s:"Base");
+			GiveInventory("ReloadHeldInventory",1);
 			ACS_NamedExecuteAlways("StatInitializer",0,BaseDex);
 			ACS_NamedExecuteAlways("SetPlayerType",0);
 			ACS_NamedExecuteAlways("GetGenericAttack",0,BaseDex);
 			GiveInventory("PersistentLoadout",1);
 			GiveInventory("ReloadShopInventory",1);
+			//GiveInventory("HeldCheck_Passive",1);
 			UpdateSbarEXP();
 				//For TLMS's map reset
 			if( (GetCvar("lastmanstanding")==1||GetCvar("teamlms")==1)
@@ -221,12 +223,14 @@ Script "PKMNACS_StartupScript" (int BaseDex)
 			break;
 			Case 2: //Evolved
 			//Log(s:"Evolved: Match Passed");  
+			GiveInventory("ReloadHeldInventory",1);
 			ACS_NamedExecuteAlways("PlayerFormChange",0,PlayerDEXNum);
 			ACS_NamedExecuteAlways("StatInitializer",0,PlayerDEXNum);
 			ACS_NamedExecuteAlways("SetPlayerType",0);
 			ACS_NamedExecuteAlways("GetGenericAttack",0,PlayerDEXNum);
 			GiveInventory("PersistentLoadout",1);
 			GiveInventory("ReloadShopInventory",1);
+			//GiveInventory("HeldCheck_Passive",1);
 			UpdateSbarEXP();
 			break;
 			Case 3: //Changed
@@ -253,7 +257,8 @@ Script "PKMNACS_StartupScript" (int BaseDex)
 
 
 	if(GetCvar("lastmanstanding")==1||GetCvar("teamlms")==1) {LMSAttendance(PlayerNumber(),1);}
-	//delay(1);
+	delay(1);
+	GiveInventory("HeldCheck_Passive",1);
 	//int ThisWeapon = WhichWeapon();
 	//PlayerClassWepMem[PlayerNumber()] = ThisWeapon;
 }

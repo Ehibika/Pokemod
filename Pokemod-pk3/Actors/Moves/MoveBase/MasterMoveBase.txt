@@ -399,6 +399,11 @@ Jumps:
 TNT1 A 0 A_JumpIfInTargetInventory("CutterFlag",999,"Death")
 TNT1 A 0 A_JumpIfInTargetInventory("isDead",1,"Death")
 
+TNT1 A 0 A_JumpIfInTargetInventory("ChoiceBandPower",1,"RecoverStall")
+TNT1 A 0 A_JumpIfInTargetInventory("STF_ChoiceScarf",1,"RecoverStall")
+TNT1 A 0 A_JumpIfInTargetInventory("FocusBandProtectFlag",1,"RecoverStall")
+
+
 TNT1 A 0 A_JumpIfInTargetInventory("PPBurnStall",1,"RecoverStall")
 TNT1 A 0 A_JumpIfInTargetInventory("PPRecoveryMeter",100,"RecoverStall")
 TNT1 A 1 A_JumpIF(CallACS("GetMoveRecoveryLVL",AAPTR_TARGET) > 0,"SlowRecoverPP")
@@ -470,6 +475,7 @@ EBAL E 0 A_PlaySoundEx("item/refill","Voice")
 EBAL E 0 ACS_Execute(992, 0, 100)
 TNT1 A 0 A_SpawnitemEX("ConsumeFX",0,0,0,0,0,0,0,1)
 TNT1 A 0 A_TakeInventory("PPRecoveryMeter",100)
+TNT1 A 0 A_GiveInventory("HeldCheck_Recovery",1)
 stop
 }
 }
