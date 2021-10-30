@@ -11,36 +11,87 @@ states
     stop
     */
 Pickup:
+/*
 TNT1 A 0 A_JumpIF(CheckClass("TimeStopperWep"),"RareSpawn")
 TNT1 A 0 A_JumpIF(CheckClass("LightningBoltWep"),"RareSpawn")
 TNT1 A 0 A_JumpIF(CheckClass("AstroCrushWep"),"RareSpawn")
 TNT1 A 0 A_JumpIF(CheckClass("GravityHoldWep"),"RareSpawn")
 TNT1 A 0 A_JumpIF(CheckClass("BlackHoleBombWep"),"RareSpawn")
 TNT1 A 0 A_JumpIF(CheckClass("BlackHoleWep"),"RareSpawn")
+*/
+TNT1 A 0 A_JumpIF(CheckClass("HyperBombwep"),"PowerBerry")
+TNT1 A 0 A_JumpIF(CheckClass("FlashBombWep"),"PowerBerry")
+TNT1 A 0 A_JumpIF(CheckClass("BalladeCrackerWep"),"PowerBerry")
+TNT1 A 0 A_JumpIF(CheckClass("PharaohShotWep"),"PowerBerry")
+TNT1 A 0 A_JumpIF(CheckClass("CrystalEyeWep"),"PowerBerry")
+TNT1 A 0 A_JumpIF(CheckClass("DrillBombWep"),"PowerBerry")
+TNT1 A 0 A_JumpIF(CheckClass("CrashBombWep"),"PowerBerry")
+TNT1 A 0 A_JumpIF(CheckClass("RemoteMineWep"),"PowerBerry")
+TNT1 A 0 A_JumpIF(CheckClass("FireStormWep"),"PowerBerry")
+TNT1 A 0 A_JumpIF(CheckClass("RollingCutterWep"),"PowerBerry")
+TNT1 A 0 A_JumpIF(CheckClass("MetalBladeWep"),"PowerBerry")
+TNT1 A 0 A_JumpIF(CheckClass("AtomicFireWep"),"PowerBerry")
+TNT1 A 0 A_JumpIF(CheckClass("HardKnuckleWep"),"PowerBerry")
+TNT1 A 0 A_JumpIF(CheckClass("DrillBomb"),"PowerBerry")
+TNT1 A 0 A_JumpIF(CheckClass("DustCrusher"),"PowerBerry")
+TNT1 A 0 A_JumpIF(CheckClass("CrashBombWep"),"PowerBerry")
+TNT1 A 0 A_JumpIF(CheckClass("NapalmBombWep"),"PowerBerry")
+TNT1 A 0 A_JumpIF(CheckClass("PharaohShotWep"),"PowerBerry")
+TNT1 A 0 A_JumpIF(CheckClass("DangerWrapWep"),"PowerBerry")
+TNT1 A 0 A_JumpIF(CheckClass("FlashBombWep"),"PowerBerry")
+TNT1 A 0 A_JumpIF(CheckClass("SolarBlazeWep"),"PowerBerry")
+TNT1 A 0 A_JumpIF(CheckClass("CommandoBombWep"),"PowerBerry")
+TNT1 A 0 A_JumpIF(CheckClass("BubbleBombWep"),"PowerBerry")
+TNT1 A 0 A_JumpIF(CheckClass("PhotonMissileWep"),"PowerBerry")
+TNT1 A 0 A_JumpIF(CheckClass("BalladeCrackerWep"),"PowerBerry")
 
-TNT1 A 0 A_JumpIF(CheckClass("HyperBombwep"),"OrbSpawn")
-TNT1 A 0 A_JumpIF(CheckClass("FlashBombWep"),"OrbSpawn")
-TNT1 A 0 A_JumpIF(CheckClass("BalladeCrackerWep"),"OrbSpawn")
-TNT1 A 0 A_JumpIF(CheckClass("PharaohShotWep"),"OrbSpawn")
-TNT1 A 0 A_JumpIF(CheckClass("CrystalEyeWep"),"OrbSpawn")
-TNT1 A 0 A_JumpIF(CheckClass("DrillBombWep"),"OrbSpawn")
-TNT1 A 0 A_JumpIF(CheckClass("CrashBombWep"),"OrbSpawn")
-TNT1 A 0 A_JumpIF(CheckClass("RemoteMineWep"),"OrbSpawn")
+
+TNT1 A 0 A_JumpIF(CheckClass("GrabBusterWep"),"GuardBerry")
+TNT1 A 0 A_JumpIF(CheckClass("PlantBarrierWep"),"GuardBerry")
+TNT1 A 0 A_JumpIF(CheckClass("LeafShieldWep"),"GuardBerry")
+TNT1 A 0 A_JumpIF(CheckClass("SkullBarrierWep"),"GuardBerry")
+TNT1 A 0 A_JumpIF(CheckClass("StarCrashWep"),"GuardBerry")
+TNT1 A 0 A_JumpIF(CheckClass("IceWallWep"),"GuardBerry")
+TNT1 A 0 A_JumpIF(CheckClass("JunkShieldWep"),"GuardBerry")
+TNT1 A 0 A_JumpIF(CheckClass("BlackHoleWep"),"GuardBerry")
+TNT1 A 0 A_JumpIF(CheckClass("BubbleLeadWep"),"GuardBerry")
+TNT1 A 0 A_JumpIF(CheckClass("PowerStoneWep"),"GuardBerry")
+TNT1 A 0 A_JumpIF(CheckClass("BlizzardAttackWep"),"GuardBerry")
+TNT1 A 0 A_JumpIF(CheckClass("FlameBlastWep"),"GuardBerry")
+TNT1 A 0 A_JumpIF(CheckClass("KnightCrushWep"),"GuardBerry")
+TNT1 A 0 A_JumpIF(CheckClass("JewelSatelliteWep"),"GuardBerry")
+TNT1 A 0 A_JumpIF(CheckClass("WaterShieldWep"),"GuardBerry")
+TNT1 A 0 A_JumpIF(CheckClass("MirrorBusterWep"),"GuardBerry")
+TNT1 A 0 A_JumpIF(CheckClass("ProtoUpgrade"),"GuardBerry")
+
+TNT1 A 0 A_JumpIF(CheckClass("NeedleCannonWep"),"SpeedBerry")
+TNT1 A 0 A_JumpIF(CheckClass("YamatoSpearWep"),"SpeedBerry")
+TNT1 A 0 A_JumpIF(CheckClass("WaveBurnerWep"),"SpeedBerry")
+TNT1 A 0 A_JumpIF(CheckClass("TornadoHoldWep"),"SpeedBerry")
+TNT1 A 0 A_JumpIF(CheckClass("ScorchWheelWep"),"SpeedBerry")
+TNT1 A 0 A_JumpIF(CheckClass("MetalBladeWep"),"SpeedBerry")
+TNT1 A 0 A_JumpIF(CheckClass("ShadowBladeWep"),"SpeedBerry")
+TNT1 A 0 A_JumpIF(CheckClass("OilSliderWep"),"SpeedBerry")
+TNT1 A 0 A_JumpIF(CheckClass("TimeSlowWep"),"SpeedBerry")
+TNT1 A 0 A_JumpIF(CheckClass("ChargeKickWep"),"SpeedBerry")
+TNT1 A 0 A_JumpIF(CheckClass("BassUpgrade"),"SpeedBerry")
+TNT1 A 0 A_JumpIF(CheckClass("IceSlasherWep"),"SpeedBerry")
+TNT1 A 0 A_JumpIF(CheckClass("QuickBoomerangWep"),"SpeedBerry")
+TNT1 A 0 A_JumpIF(CheckClass("WaterWaveWep"),"SpeedBerry")
+TNT1 A 0 A_JumpIF(CheckClass("WaterBalloonWep"),"SpeedBerry")
+TNT1 A 0 A_JumpIF(CheckClass("PlugBallWep"),"SpeedBerry")
+TNT1 A 0 A_JumpIF(CheckClass("TripleBladeWep"),"SpeedBerry")
+TNT1 A 0 A_JumpIF(CheckClass("ScrewCrusherWep"),"SpeedBerry")
 
 
-TNT1 A 0 A_JumpIF(CheckClass("GrabBusterWep"),"BerrySpawn")
-TNT1 A 0 A_JumpIF(CheckClass("PlantBarrierWep"),"BerrySpawn")
-TNT1 A 0 A_JumpIF(CheckClass("LeafShieldWep"),"BerrySpawn")
-TNT1 A 0 A_JumpIF(CheckClass("SkullBarrierWep"),"WandSpawn")
-TNT1 A 0 A_JumpIF(CheckClass("StarCrashWep"),"WandSpawn")
-
-Goto ChanceSpawn
+Goto GummieSpawn
 
 ChanceSpawn:
 TNT1 A 0 //A_Jump(127,"RareSpawn")
-TNT1 A 0 A_Jump(256,"BerrySpawn","SeedSpawn","WandSpawn","OrbSpawn","IncenseSpawn")
+TNT1 A 0 A_Jump(256,"PowerBerry","GuardBerry","SpeedBerry","GummieSpawn")
 stop
 
+/*
 CommonSpawn:
 TNT1 A 0 A_SpawnItemEx("CommonItemSpawner")
 TNT1 A 0 Thing_Remove(0)
@@ -76,6 +127,27 @@ RareSpawn:
 TNT1 A 0 A_SpawnItemEx("RareItemSpawner")
 TNT1 A 0 Thing_Remove(0)
 stop
+*/
+
+PowerBerry:
+TNT1 A 0 ACS_NamedExecuteWithResult("Spawn_PowerBerry")
+TNT1 A 0 Thing_Remove(0)
+stop
+
+GuardBerry:
+TNT1 A 0 ACS_NamedExecuteWithResult("Spawn_GuardBerry")
+TNT1 A 0 Thing_Remove(0)
+stop
+
+SpeedBerry:
+TNT1 A 0 ACS_NamedExecuteWithResult("Spawn_SpeedBerry")
+TNT1 A 0 Thing_Remove(0)
+stop
+
+GummieSpawn:
+TNT1 A 0 A_SpawnItemEx("GummieSpawner")
+TNT1 A 0 Thing_Remove(0)
+stop
 
 }
 }
@@ -105,6 +177,21 @@ stop
 
 NewBigWep:
 TNT1 A 0 ACS_NamedExecuteWithResult("Spawn_BigWeaponEnergyPKMN")
+TNT1 A 0 Thing_Remove(0)
+stop
+
+PowerBerry:
+TNT1 A 0 ACS_NamedExecuteWithResult("Spawn_PowerBerry")
+TNT1 A 0 Thing_Remove(0)
+stop
+
+GuardBerry:
+TNT1 A 0 ACS_NamedExecuteWithResult("Spawn_GuardBerry")
+TNT1 A 0 Thing_Remove(0)
+stop
+
+SpeedBerry:
+TNT1 A 0 ACS_NamedExecuteWithResult("Spawn_SpeedBerry")
 TNT1 A 0 Thing_Remove(0)
 stop
 

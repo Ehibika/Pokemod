@@ -33,7 +33,7 @@ Fire.Charge1:
 "####" B 0 A_Jumpif(CallACS("CheckWeaponFire",RC_A)!=1,"NoAmmo")
 "####" B 0 A_JumpIfInventory("WeaponCharge",10,"Fire.Charge2")
 "####" B 0 A_GiveInventory("WeaponCharge",1)
-"####" B 0 A_GiveInventory("ChannelingSpeed")
+"####" B 0 A_GiveInventory("ChannelingSpeed")  //Firing Slow
 "####" B 0 A_PlaySoundEx("Weapon/Heat1","Soundslot6")
 "####" B 1
 "####" C 0 A_REfire("Fire.Charge1")
@@ -41,7 +41,7 @@ Fire.Charge1:
 Goto Fire.After2
 
 Fire.Charge2:
-"####" B 0 A_GiveInventory("ChannelingSpeed")
+"####" B 0 A_GiveInventory("ChannelingSpeed")  //Firing Slow
 "####" B 1
 "####" C 0 A_REfire("Fire.Charge1")
 "####" B 0 A_Jump(256,"Fire.Bullet")

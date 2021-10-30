@@ -225,7 +225,7 @@ TNT1 A 0 A_GiveToTarget("BuffSoundCue")
 TNT1 A 0 A_GiveToTarget("STF_Tailwind",1)
 TNT1 A 0 A_GiveToTarget("StatUpdator",1)
 Spawn2:
-TNT1 A 5 A_GiveToTarget("SPDUpFXSpawn")
+TNT1 A 5 A_GiveToTarget("SpawnStatusParticles")
 TNT1 A 0 A_JumpIfInTargetInventory("STF_Tailwind",1,"Spawn2")
 Goto Death
 

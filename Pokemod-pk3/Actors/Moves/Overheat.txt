@@ -3,7 +3,7 @@ actor OverheatMove : WepMasterBase
 Tag "Overheat"
 obituary "$OB_OVERHEAT"
 Weapon.AmmoUse 1
-Weapon.AmmoGive 1
+Weapon.AmmoGive 5
 weapon.ammotype "OverheatPP"
 scale 2.0
 Inventory.Pickupmessage "$PU_MEGABUSTER"
@@ -15,7 +15,7 @@ stop
 
 
 Fire:
-"####" BBB 1 A_Jumpif(CallACS("CheckWeaponFire",RC_B)==1,"Fire.Begin")
+"####" BBB 1 A_Jumpif(CallACS("CheckWeaponFire",RC_D)==1,"Fire.Begin")
 "####" B 0 A_Jump(256,"NoAmmo")
 Goto NoAmmo
 
@@ -66,7 +66,8 @@ Fire.Quake:
 Goto Fire.After
 
 Fire.After:
-"####" B 1 A_GiveInventory("FullRecovery_B")
+"####" B 1 A_GiveInventory("FullRecovery_D")
+"####" A 0 A_GiveInventory("MoveCooldown_10")
 "####" A 0 A_GiveInventory("OverheatNerfInitiate")
 "####" A 0 A_GiveInventory("DashSetOff")
 "####" C 0 A_REfire("Fire")
@@ -110,7 +111,7 @@ powerup.type "HazeFlag"
 //[+]========================================================================[+]
 //-----------------------------|Ammo & Inventory|------------------------------
 //[+]========================================================================[+]
-actor OverheatPP : Ammo {inventory.amount 1 inventory.Maxamount 1}
+actor OverheatPP : Ammo {inventory.amount 1 inventory.Maxamount 5}
 
 Actor OverheatProtect : powerprotection
 {
@@ -292,7 +293,7 @@ States
 Spawn:
 TNT1 A 0
 TNT1 A 0 A_GiveToTarget("Overheated")
-TNT1 A 5 A_GiveToTarget("SATKDownFXSpawn")
+TNT1 A 5 A_GiveToTarget("SpawnStatusParticles")
 TNT1 A 0 A_JumpIfInTargetInventory("STF_Overheat",1,"Spawn")
 TNT1 A 1 A_GiveToTarget("StatUpdator")
 TNT1 A 5

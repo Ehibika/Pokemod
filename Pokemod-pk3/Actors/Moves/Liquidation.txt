@@ -50,7 +50,8 @@ Fire.BodyCheckLoop:
 Goto Fire.After
 
 Fire.After:
-"####" B 1 A_GiveInventory("FullRecovery_C")
+"####" B 1 A_GiveInventory("PartRecovery_C")
+"####" A 0 A_GiveInventory("MoveCooldown_5")
 "####" B 0 A_SpawnItemEx("ReSolidifier")
 "####" B 0 A_ChangeFlag("NOGRAVITY",0)
 "####" C 0// A_REfire("Fire")
@@ -253,7 +254,7 @@ States
 {
 Spawn:
 TNT1 A 0
-TNT1 A 5 A_GiveToTarget("PDefDownFXSpawn")
+TNT1 A 5 A_GiveToTarget("SpawnStatusParticles")
 TNT1 A 0 A_JumpIfInTargetInventory("STF_Liquidation",1,"Spawn")
 TNT1 A 1 A_GiveToTarget("StatUpdator")
 TNT1 A 5

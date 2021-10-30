@@ -86,7 +86,7 @@ actor EmberFireball : PKMN_EarlyGameProjectile
 Damage (MBP_Ember)
 DamageType "Ember"
 obituary "$OB_EMBER"
-Reactiontime 80
+Reactiontime 8
 scale 3.5
 States
 {

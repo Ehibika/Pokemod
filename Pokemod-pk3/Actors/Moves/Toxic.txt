@@ -55,6 +55,7 @@ Goto Fire.After
 
 Fire.After:
 "####" B 1 A_GiveInventory("FullRecovery_D")
+"####" A 0 A_GiveInventory("MoveCooldown_5")
 "####" C 0 A_REfire("Fire")
 "####" B 0 A_Jump(256,"Fire.End")
 Goto Fire.End
@@ -105,7 +106,7 @@ actor ToxicStack8 : ToxicStack{}
 actor ToxicStack9 : ToxicStack{}
 actor ToxicStack10 : ToxicStack{}
 
-Const Int ToxArea = 100;
+Const Int ToxArea = 200;
 Const Int ToxEntiTID = 2;
 
 actor ToxicStacker : CustomInventory

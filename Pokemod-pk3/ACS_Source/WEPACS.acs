@@ -134,7 +134,7 @@ str weapons_ammo[MAX_WEAPONS_GLOBAL][9] =
 {"FlameWheelMove", "FlameWheelPP", "FlameWheel", F_RECOV, "NO", "NO", "SLOT_NONE", "PHYSICAL", "FIRE"},
 {"MudslapMove", "MudslapPP", "Mudslap", S_RECOV, "NO", "NO", "SLOT_NONE", "SPECIAL", "GROUND"},
 {"RolloutMove", "RolloutPP", "Rollout", H_RECOV, "NO", "NO", "SLOT_NONE", "PHYSICAL", "ROCK"},
-{"ExtrasensoryMove", "ExtrasensoryPP", "Extrasensory", H_RECOV, "YES", "NO", "SLOT_NONE", "SPECIAL", "PSYCHIC"},
+{"ExtrasensoryMove", "ExtrasensoryPP", "Extrasensory", H_RECOV, "NO", "NO", "SLOT_NONE", "SPECIAL", "PSYCHIC"},
 {"GyroBallMove", "GyroBallPP", "GyroBall", H_RECOV, "NO", "NO", "SLOT_NONE", "PHYSICAL", "STEEL"},
 {"EruptionMove", "EruptionPP", "Eruption", H_RECOV, "NO", "NO", "SLOT_NONE", "SPECIAL", "FIRE"},
 {"PeckMove", "PeckPP", "Peck", H_RECOV, "NO", "NO", "SLOT_NONE", "PHYSICAL", "FLYING"},
@@ -282,7 +282,7 @@ str weapons_ammo[MAX_WEAPONS_GLOBAL][9] =
 {"ShadowSneakMove", "ShadowSneakPP", "ShadowSneak", S_RECOV, "NO", "NO", "SLOT_NONE", "PHYSICAL", "GHOST"},
 {"DestinyBondMove", "DestinyBondPP", "DestinyBond", S_RECOV, "NO", "NO", "SLOT_NONE", "STATUS", "GHOST"},
 {"TailwindMove", "TailwindPP", "Tailwind", H_RECOV, "NO", "NO", "SLOT_NONE", "STATUS", "FLYING"},
-{"DrainingKissMove", "DrainingKissPP", "DrainingKiss", H_RECOV, "NO", "NO", "SLOT_NONE", "SPECIAL", "FAIRY"},
+{"DrainingKissMove", "DrainingKissPP", "DrainingKiss", H_RECOV, "YES", "NO", "SLOT_NONE", "SPECIAL", "FAIRY"},
 {"ImprisonMove", "ImprisonPP", "Imprison", S_RECOV, "NO", "NO", "SLOT_NONE", "STATUS", "NORMAL"},
 {"WishMove", "WishPP", "Wish", H_RECOV, "NO", "YES", "SLOT_NONE", "STATUS", "NORMAL"},
 {"StoredPowerMove", "StoredPowerPP", "StoredPower", S_RECOV, "NO", "NO", "SLOT_NONE", "SPECIAL", "PSYCHIC"},
@@ -946,7 +946,7 @@ Script "MoveSetup" (void)
 				Case DREAMEATER: ACS_NamedExecuteAlways("TracerTargeter",0,TG_ENEMY,550); break;
 				Case CURSE: if(CheckInventory("GhostSTAB")){ACS_NamedExecuteAlways("TracerTargeter",0,TG_ENEMY,800);} break;
 				Case THUNDERWAVE: ACS_NamedExecuteAlways("TracerTargeter",0,TG_ENEMY,800); break;
-				Case DrainingKiss: ACS_NamedExecuteAlways("TracerTargeter",0,TG_ENEMY,350); break;
+				Case DrainingKiss: ACS_NamedExecuteAlways("TracerTargeter",0,TG_ENEMY,800); break;
 				Case FaintAttack: ACS_NamedExecuteAlways("TracerTargeter",0,TG_ENEMY,350); break;
 				Case Swagger: ACS_NamedExecuteAlways("TracerTargeter",0,TG_ENEMY,350); break;
 				Case Flatter: ACS_NamedExecuteAlways("TracerTargeter",0,TG_ENEMY,350); break;
@@ -970,6 +970,12 @@ Script "MoveSetup" (void)
 		if(weapons_ammo[ThisWeapon][2] == "HydroPump"
 		&& ACS_NamedExecuteWithResult("GetPokeValue",0) == 9)
 		{GiveInventory("DoubleHydroPump",1);}
+
+		if(weapons_ammo[ThisWeapon][2] == "DragonRage")
+		{	TakeInventory("DragonPowerFlag",99);
+			GiveInventory("DragonPowerFlag",DragonRagePower());
+		}
+		
 
 		if(CheckAltMove(ThisWeapon)){giveInventory("AltAttackMove",1);giveInventory("AltAttackMove2",1);}
 		else{TakeInventory("AltAttackMove",99); TakeInventory("AltAttackMove2",99);}
@@ -1015,8 +1021,9 @@ Function int CheckAltMove (int Wep)
 		Case FUTURESIGHT: return 1; break;
 		Case BARRIER: return 1; break;
 		//Case HEALPULSE: return 1; break;
+		Case THUNDERBOLT: return 1; break;
 		Case THUNDER: return 1; break;
-		Case DRACOMETEOR: return 1; break;
+		//Case DRACOMETEOR: return 1; break;
 	}
 	return 0;
 }
@@ -1066,7 +1073,7 @@ SetResultValue(ImbueOn);
 #DEFINE RC_B 2
 #DEFINE RC_C 4
 #DEFINE RC_D 8
-
+#DEFINE RC_NOCOOL 16
 Script "CheckWeaponFire" (int RecoveryType)
 {
 /*
@@ -1090,9 +1097,17 @@ if(((RecoveryType&RC_C)>0) && (CheckInventory("Recovery_C")>0)) return false;
 if(((RecoveryType&RC_D)>0) && (CheckInventory("Recovery_D")>0)) return false;
 
 int ThisWeapon = WhichWeapon();
+int ThisSlot = GetWepSlot(ThisWeapon);
 str WepAmmoName = weapons_ammo[ThisWeapon][1];
 
 if(CheckInventory(WepAmmoName)<1) return false;
+
+if((RecoveryType&RC_NOCOOL)==0)
+	{
+		str WepCooldown = StrParam(s:"CooldownSlot",i:ThisSlot);
+		if(CheckInventory(WepCooldown)) {return false;}
+	}
+
 
 if(CheckInventory("DisableMark"))
 	{if(CheckInventory("DisableFlag") == ThisWeapon){return false;}}
@@ -1141,7 +1156,7 @@ if(CheckInventory("SleepMark"))
     }
 }
 
-if(CheckInventory("ParalysisMark"))
+if(CheckInventory("ParalysisMark") || CheckInventory("InBoat"))
     {switch(ThisWeapon) {
 		Case QuickAttack: ACS_Execute(979,0); return false;
 		Case DoubleEdge: acs_execute(979,0); return false;
@@ -1316,6 +1331,23 @@ TakeInventory("GATK_Lash",999);
 
 }
 
+Function int GetWepSlot (int Wep)
+{ int output = 0;
+
+	for(int i=1;i<=4;i++)
+    {
+    if(CheckInventory(StrParam(s:weapons_ammo[Wep][0],i:i))){output = i; break;}
+    }
+return output;
+}
+
+Script "GetCurrentWepSlot" (void)
+{
+	int ThisWeapon = WhichWeapon();
+	int ThisSlot = GetWepSlot(ThisWeapon);
+	SetResultValue(ThisSlot);
+}
+
 //#region -=- depreciated -=-
 /*
 Script "CheckWeaponFire" (int RecoveryType)
@@ -1366,3 +1398,47 @@ Script "MoveRecoveryHandler" (void)
 */
 //#endregion
 
+Function int DragonRagePower (Void)
+{
+
+    //First, check for empty slots
+int WepSlot1,WepSlot2,WepSlot3,WepSlot4,DragonTotal,SlotChoice;
+Str WN1,WN2,WN3,WN4;
+    For(int i = 0; i < MAX_WEAPONS_GLOBAL; i++)
+    {
+        if(!CheckDragonMove(i)){continue;}
+        WN1 = StrParam(s:weapons_ammo[i][0],i:1);
+        WN2 = StrParam(s:weapons_ammo[i][0],i:2);
+        WN3 = StrParam(s:weapons_ammo[i][0],i:3);
+        WN4 = StrParam(s:weapons_ammo[i][0],i:4);
+
+        if(CheckInventory(WN1)){WepSlot1 = 1; DragonTotal++;} 
+        if(CheckInventory(WN2)){WepSlot2 = 1; DragonTotal++;}
+        if(CheckInventory(WN3)){WepSlot3 = 1; DragonTotal++;}
+        if(CheckInventory(WN4)){WepSlot4 = 1; DragonTotal++;}
+
+        if(DragonTotal >=4){break;}
+     }
+return DragonTotal;
+
+}
+
+
+Function int CheckDragonMove (int Wep)
+{
+
+	switch(Wep)
+	{
+		Case DragonRage: return 1; break; 
+		Case TWISTER: return 1; break;
+		Case DRAGONCLAW: return 1; break;
+		Case DRAGONPULSE: return 1; break;
+		Case DRAGONDANCE: return 1; break;
+		Case OUTRAGE: return 1; break;
+		Case DRACOMETEOR: return 1; break;
+		Case DRAGONBREATH: return 1; break;
+		Case DragonRush: return 1; break;
+		Case DragonDarts: return 1; break;
+	}
+	return 0;
+}

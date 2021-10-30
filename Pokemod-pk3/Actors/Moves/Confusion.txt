@@ -14,10 +14,28 @@ stop
 
 
 Fire:
-"####" BBB 1 A_Jumpif(CallACS("CheckWeaponFire",RC_D)==1,"Fire.Begin")
+"####" BBB 1 A_Jumpif(CallACS("CheckWeaponFire",RC_D|RC_NOCOOL)==1,"Fire.Begin")
 "####" B 0 A_Jump(256,"NoAmmo")
 Goto NoAmmo
 
+Fire.Begin:
+"####" B 0
+"####" B 0 A_Jump(256,"Fire.Bullet")
+Goto Fire.Bullet
+
+Fire.Bullet:
+"####" B 0 A_PlaySoundEx("Move/Extrasensory1","Weapon")
+"####" B 0 A_FireCustomMissile("ConfusionShot",0,1,0,0)
+"####" B 0 A_GiveInventory("ChannelingSpeed")  //Firing Slow
+"####" B 0 A_Jump(256,"Fire.After")
+Goto Fire.After
+
+Fire.After:
+"####" B 1 A_GiveInventory("Confusion_Recovery_D")
+"####" B 0 A_Jump(256,"Fire.End")
+Goto Fire.End
+
+/*
 Fire.Begin:
 "####" B 0
 "####" B 1
@@ -42,6 +60,7 @@ Fire.After:
 "####" C 0 A_REfire("Fire")
 "####" B 0 A_Jump(256,"Fire.End")
 Goto Fire.End
+*/
 
 AltFire:
 "####" BBB 1 A_Jumpif(CallACS("CheckWeaponFire",RC_D)==1,"Altfire.Begin")
@@ -103,10 +122,13 @@ Goto Ready
 actor ConfusionPP : Ammo {inventory.amount 1 inventory.Maxamount 15}
 
 actor ConfusionRCFlag : Powerup {inventory.amount 1 powerup.duration 35 }
+actor Confusion_RemoteCooldown : Powerup {inventory.amount 1 powerup.duration -5}
 
 Const int ConfusionRad = 150;
 Const int Confusion_Forward = 150;
-Const int Confusion_Range = 2000;
+Const int Confusion_Range = 600;
+
+Const int ConfusionRad2 = 100;
 
 actor ConfusionPPTaker : CustomInventory
 {
@@ -151,6 +173,70 @@ stop
 //[+]========================================================================[+]
 //--------------------------------|Projectiles |--------------------------------
 //[+]========================================================================[+]
+actor ConfusionShot : PKMN_Missile
+{
+Damage (MBP_Confusion2)
+DamageType "Confusion"
+obituary "$OB_Confusion"
+scale 3.5
+States
+{
+Spawn:
+TNT1 A 0 
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+TBOL MMNNO 1 A_Spawnitemex("ConfusionTrail",0,0,0,0,0,0,0,SXF_TRANSFERTRANSLATION|SXF_ABSOLUTEVELOCITY)
+Goto Explode
+
+Death:
+TNT1 A 0 A_GiveInventory("ProjectileDCode",1)
+TNT1 A 0 A_SpawnItemEx("PsyBeamBounce",0,-1,4,0,0,0,0,1)
+TNT1 A 0 A_Stop
+stop
+
+Crash:
+XDeath:
+TNT1 A 0 A_Stop
+TNT1 A 0 A_GiveInventory("ProjectileDCode",1)
+TNT1 A 0 A_SpawnItemEx("PowerStrikeFX",0,0,0,0,0,0,0,33)
+Explode:
+TNT1 A 0 A_Spawnitemex("ConfusionPuff1",0,0,0,0,0,0,0,SXF_TRANSFERTRANSLATION)
+stop
+}
+}
+
+actor ConfusionPuff1 : BasicExplosion2
+{
+scale 4.5
+DamageType "Confusion"
+obituary "$OB_Confusion"
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+TNT1 A 0 A_Explode(MBP_Confusion1,ConfusionRad2,0,0,ConfusionRad2)
+NAPC A 0 A_PlaySoundEx("Move/Extrasensory2", "Weapon")
+TNT1 AAA 3 A_SpawnItemEx("ExtrasensoryImpactFX",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION)
+TNT1 A 2
+stop
+}
+}
+
+actor ConfusionTrail : BasicClientside
+{
+scale 3.0
+Alpha 0.9
+Renderstyle "add"
+States
+{
+Spawn:
+CRBM A 0
+DWRA CBA 2 
+//BSTG AAAAA 1 A_Fadeout
+stop
+}
+}
+
 actor Confusion_Remote 
 {
 Speed 5
@@ -199,14 +285,17 @@ goto Spawn2
 Trigger: //Check PP
 TNT1 A 0 A_JumpifInTargetInventory("ConfusionPP",1,"Trigger2")
 goto Decline
-Trigger2: // Check Recovery Frame
+Trigger2: // Check Recovery Frame / cooldown
 TNT1 A 0 A_JumpifInTargetInventory("Recovery_D",1,"Decline")
+TNT1 A 0 A_JumpifInTargetInventory("Confusion_RemoteCooldown",1,"Decline")
 goto Detonate
 
 Detonate: // Cast the attack!
 TNT1 A 0 A_GiveToTarget("ConfusionPPTaker",1)
 TNT1 A 0 A_SpawnItemEx("ConfusionHitbox",Confusion_Forward,0,-(z-floorz)+60,0,0,0,0,1)
 TNT1 A 0 A_GiveToTarget("Confusion_Recovery_D",1)
+TNT1 A 0 A_GiveToTarget("Confusion_RemoteCooldown",1)
+TNT1 A 0 A_GiveToTarget("MoveCooldown_5")
 goto PostTrigger
 
 Decline: //Cannot cast the attack
@@ -238,7 +327,7 @@ TNT1 A 0 A_GiveInventory("ProjectileCode",1)
 NAPC A 0 A_PlaySoundEx("Move/Confusion", "Weapon")
 TNT1 A 2 A_SpawnItemEx("ConfusionFX_A1",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION)
 TNT1 A 0 A_SpawnItemEx("ConfusionFX_A2",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION)
-TNT1 A 8
+TNT1 A 18
 
 TNT1 A 0 A_SpawnItemEx("ConfusionFX_B",250,0,0,-50,0,0,45+(90*0),SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION)
 TNT1 A 0 A_SpawnItemEx("ConfusionFX_B",250,0,0,-50,0,0,45+(90*1),SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION)
@@ -246,7 +335,7 @@ TNT1 A 0 A_SpawnItemEx("ConfusionFX_B",250,0,0,-50,0,0,45+(90*2),SXF_NOCHECKPOSI
 TNT1 A 0 A_SpawnItemEx("ConfusionFX_B",250,0,0,-50,0,0,45+(90*3),SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION)
 TNT1 A 5
 NAPC A 0 A_PlaySoundEx("Move/Extrasensory", "Weapon")
-TNT1 A 0 A_Explode(MBP_Confusion,ConfusionRad,0,0,ConfusionRad)
+TNT1 A 0 A_Explode(MBP_Confusion1+MBP_Confusion2,ConfusionRad,0,0,ConfusionRad)
 //NAPC A 0 A_PlaySoundEx("weapon/Napalm", "Weapon")
 TNT1 A 0 A_Quake(4,12,0,350)
 TNT1 AAA 3 A_SpawnItemEx("ConfusionFX_C",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION)
@@ -296,13 +385,13 @@ stop
 actor ConfusionFX_A2 : BasicClientside
 {
 scale 0.05
-reactiontime 3
+reactiontime 5
 Renderstyle "Add"
 States
 {
 Spawn:
 TNT1 A 0 
-PSIK BCDE 1 A_SetScale(ScaleX+0.15)
+PSIK BCDE 1 A_SetScale(ScaleX+0.10)
 TNT1 A 0 A_CountDown
 loop
 }

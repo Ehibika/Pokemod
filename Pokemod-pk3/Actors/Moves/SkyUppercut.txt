@@ -42,7 +42,8 @@ TNT1 A 0 A_JumpifInventory("SkyUppercutBuffer2",1,"Fire.Melee3")
 Goto Fire.After
 
 Fire.After:
-"####" B 1 A_GiveInventory("HalfRecovery_D") //Sky Uppercut uses C recovery so it can combo with other moves
+"####" B 1 A_GiveInventory("HalfRecovery_D") //Sky Uppercut uses D recovery so it can combo with other moves
+"####" A 0 A_GiveInventory("MoveCooldown_3")
 "####" B 0 A_Jump(256,"Fire.End")
 Goto Fire.End
 }

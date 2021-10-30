@@ -3,7 +3,7 @@ actor HydroPumpMove : WepMasterBase
 Tag "HydroPump"
 obituary "$OB_HYDROPUMP"
 Weapon.AmmoUse 1
-Weapon.AmmoGive 20
+Weapon.AmmoGive 10
 weapon.ammotype "HydroPumpPP"
 scale 2.0
 Inventory.Pickupmessage "$PU_MEGABUSTER"
@@ -15,16 +15,16 @@ stop
 
 
 Fire:
-"####" BBB 1 A_Jumpif(CallACS("CheckWeaponFire",RC_A)==1,"Fire.Begin")
+"####" BBB 1 A_Jumpif(CallACS("CheckWeaponFire",RC_C)==1,"Fire.Begin")
 "####" B 0 A_Jump(256,"NoAmmo")
 Goto NoAmmo
 
 Fire.Begin:
 "####" B 0
-TNT1 A 0 A_GiveInventory("ChannelingSpeed")
 //TNT1 A 0 A_Jumpifinventory("WeaponCharge",25,"Fire.Bullet")
-//"####" B 0 A_PlaySoundEx("weapon/PChargeLong","Weapon")
-"####" B 0 A_GunFlash("Flash.Sound")
+"####" B 0 A_PlaySoundEx("weapon/PChargeLong","Weapon")
+"####" BBBBB 2 A_GiveInventory("ChannelingSpeed")  //Firing Slow
+//"####" B 0 A_GunFlash("Flash.Sound")
 "####" B 0 A_Jump(256,"Fire.Bullet")
 Goto Fire.Bullet
 
@@ -39,8 +39,34 @@ Fire.Start:
 "####" B 0 A_GunFlash("Flash.Sound")
 Goto Fire.Bullet
 */
-
 Fire.Bullet: //Take Ammo
+"####" B 0 A_PlaySoundEx("weapon/watershieldburst","SoundSlot7")
+"####" B 0 A_GiveInventory("HydroPumpShotTimer",1)
+"####" A 0 ACS_NamedExecuteAlways("TakePP",0,Move_HydroPump,1)
+"####" B 1 A_Jumpifinventory("DoubleHydroPump",1,"Fire.DBLBullet2")//Check if playerCharacter is Blastoise
+"####" B 0 A_Jump(256,"Fire.Bullet2")
+Goto Fire.Bullet2
+
+Fire.Bullet2:
+"####" B 0 A_PlaySoundEx("weapon/WaterWave","Weapon")
+"####" B 0 A_GiveInventory("ChannelingSpeed")  //Firing Slow
+"####" B 0 A_FireCustomMissile("HydroPumpDamager",0,0,0,0,0,0)
+"####" B 3 A_FireCustomMissile("HydroPumpStart",0,0,0,0,0,0)
+"####" B 0 A_Jumpifinventory("HydroPumpShotTimer",1,"Fire.Bullet2")
+"####" B 0 A_Jump(256,"Fire.After")
+Goto Fire.After
+
+Fire.DBLBullet2: //Blastoise Only
+"####" B 0 A_PlaySoundEx("weapon/WaterWave","Weapon")
+"####" B 0 A_GiveInventory("ChannelingSpeed")  //Firing Slow
+"####" B 0 A_FireCustomMissile("HydroPumpDamager",0,0,0,0,0,0)
+"####" B 0 A_FireCustomMissile("HydroPumpStart_1",0,0,24,0,0,0)
+"####" B 3 A_FireCustomMissile("HydroPumpStart_2",0,0,-24,0,0,0)
+"####" B 0 A_Jumpifinventory("HydroPumpShotTimer",1,"Fire.DBLBullet2")
+"####" B 0 A_Jump(256,"Fire.After")
+Goto Fire.After
+/*
+Fire.Bullet0: //Take Ammo
 "####" A 0 A_Jumpifinventory("ConShotTimer",1,"Fire.Bullet1")
 "####" B 0 A_JumpIfNoAmmo("Fire.After2")
 "####" B 0 A_FireCustomMissile("HydroPumpDamager",0,1,0,0,0,0)
@@ -60,58 +86,25 @@ Goto Fire.Bullet2
 Fire.Bullet2:
 "####" B 3 A_FireCustomMissile("HydroPumpStart",0,0,0,0,0,0)
 
-/*
-"####" B 1 A_FireCustomMissile("HydroPumpRayS",0,0,0,0,0,0)
-"####" B 0 A_FireCustomMissile("HydroPumpRayS_T",0,0,0,0,0,0)
-
-"####" B 1 A_FireCustomMissile("HydroPumpRay2S",0,0,0,0,0,0)
-"####" B 0 A_FireCustomMissile("HydroPumpRay2S_T",0,0,0,0,0,0)
-
-"####" B 1 A_FireCustomMissile("HydroPumpRayS",0,0,0,0,0,0)
-"####" B 0 A_FireCustomMissile("HydroPumpRayS_T",0,0,0,0,0,0)
-
-"####" B 1 A_FireCustomMissile("HydroPumpRay2S",0,0,0,0,0,0)
-"####" B 0 A_FireCustomMissile("HydroPumpRay2S_T",0,0,0,0,0,0)
-*/
 "####" B 0 A_Jump(256,"Fire.After")
 Goto Fire.After
 
 Fire.DBLBullet2: //Blastoise Only
 "####" B 0 A_FireCustomMissile("HydroPumpStart_1",0,0,24,0,0,0)
 "####" B 3 A_FireCustomMissile("HydroPumpStart_2",0,0,-24,0,0,0)
-/*
-"####" B 1 A_FireCustomMissile("HydroPumpRayS",0,0,24,0,0,0)
-"####" B 0 A_FireCustomMissile("HydroPumpRayS",0,0,-24,0,0,0)
-"####" B 0 A_FireCustomMissile("HydroPumpRayS_T",0,0,24,0,0,0)
-"####" B 0 A_FireCustomMissile("HydroPumpRayS_T",0,0,-24,0,0,0)
-
-"####" B 1 A_FireCustomMissile("HydroPumpRay2S",0,0,24,0,0,0)
-"####" B 0 A_FireCustomMissile("HydroPumpRay2S",0,0,-24,0,0,0)
-"####" B 0 A_FireCustomMissile("HydroPumpRay2S_T",0,0,24,0,0,0)
-"####" B 0 A_FireCustomMissile("HydroPumpRay2S_T",0,0,-24,0,0,0)
-
-"####" B 1 A_FireCustomMissile("HydroPumpRayS",0,0,24,0,0,0)
-"####" B 0 A_FireCustomMissile("HydroPumpRayS",0,0,-24,0,0,0)
-"####" B 0 A_FireCustomMissile("HydroPumpRayS_T",0,0,24,0,0,0)
-"####" B 0 A_FireCustomMissile("HydroPumpRayS_T",0,0,-24,0,0,0)
-
-"####" B 1 A_FireCustomMissile("HydroPumpRay2S",0,0,24,0,0,0)
-"####" B 0 A_FireCustomMissile("HydroPumpRay2S",0,0,-24,0,0,0)
-"####" B 0 A_FireCustomMissile("HydroPumpRay2S_T",0,0,24,0,0,0)
-"####" B 0 A_FireCustomMissile("HydroPumpRay2S_T",0,0,-24,0,0,0)
-*/
 
 "####" B 0 A_Jump(256,"Fire.After")
 Goto Fire.After
-
+*/
 
 Fire.After:
-"####" C 0 A_REfire("Fire")
-"####" C 0 A_StopSoundEX("Weapon")
+"####" C 0 //A_REfire("Fire")
+"####" C 0 //A_StopSoundEX("Weapon")
 Fire.After2:
 "####" B 0 A_TakeInventory("ConShotTimer",99)
 "####" B 0 A_TakeInventory("WeaponCharge",999)
-"####" B 1 A_GiveInventory("5Recovery_A")
+"####" B 1 A_GiveInventory("HalfRecovery_C")
+"####" A 0 A_GiveInventory("MoveCooldown_1Half")
 "####" B 0 A_Jump(256,"Fire.End")
 Goto Fire.End
 
@@ -148,15 +141,18 @@ Goto Ready
 //[+]========================================================================[+]
 //-----------------------------|Ammo & Inventory|------------------------------
 //[+]========================================================================[+]
-actor HydroPumpPP : Ammo {inventory.amount 1 inventory.Maxamount 20}
+actor HydroPumpPP : Ammo {inventory.amount 1 inventory.Maxamount 10}
 Actor HydroPumpBuffer : Powerup {inventory.amount 1 Powerup.duration 3}
 
 Actor DoubleHydroPump : Powerup{inventory.amount 1 powerup.duration 0x7FFFFFFF}
 
 
+Actor HydroPumpShotTimer : Powerup{inventory.amount 1 powerup.duration 17}
+
+
 Actor HydroPumpProtect : powerprotection
 {
-Powerup.duration 8
+Powerup.duration 3
 Damagefactor "HydroPump", 0
 }
 
@@ -166,11 +162,17 @@ actor HydroPumpCST : PowerupGiver
 Powerup.Duration 35
 powerup.type "ConShotTimer"
 }
+
+Actor HydroPumpDamageBuffer : powerprotection
+{
+Powerup.duration 17
+Damagefactor "HydroPump", 0.1
+}
 //[+]========================================================================[+]
 //--------------------------------|Projectiles |--------------------------------
 //[+]========================================================================[+]
 
-Const Int HydroPumpRange = 80;
+Const Int HydroPumpRange = 40;
 actor HydroPumpDamager : BasicFastProjectile
 {
     PROJECTILE
@@ -182,7 +184,7 @@ actor HydroPumpDamager : BasicFastProjectile
     Damage (MBP_HydroPump) 
     Radius 10
     Height 10
-    speed 1200 //15 * HydroPumpRange(80)
+    speed 600 //15 * HydroPumpRange(40)
     scale 2.5
     states
     {

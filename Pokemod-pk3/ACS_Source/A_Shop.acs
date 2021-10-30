@@ -14,12 +14,13 @@
 script "ShopEvents" (int type, int arg1, int arg2) EVENT
 {
 
-Switch(type)
-    {
-    Case 5: Delay(2); LoadAllPlayerInventory(); break;
-    Case 6: SaveAllPlayerInventory(); break;
+    if(GetCvar("lastmanstanding")==1||GetCvar("teamlms")==1){
+    Switch(type)
+        {
+        Case 5: Delay(2); LoadAllPlayerInventory(); break;
+        Case 6: SaveAllPlayerInventory(); break;
+        }
     }
-
 }
 
 script "ItemSpawnTID" (void)

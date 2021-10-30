@@ -37,6 +37,11 @@ statusbar fullscreen, forcescaled, FullScreenOffsets
 			InInventory FullPPFlag, 1{Drawbar "PKMNHPB3", "PKMNHPE", PPRecoveryMeter, horizontal, 32, -40;}
 			InInventory PPRecoveryMeter, 100{ DrawImage "PKMNRELO", 40, -40;}
 
+			InInventory CooldownSlot1, 1 {DrawImage "PKMNCD1", -74, -10; Drawbar "PKMNHPB3", "PKMNHPE", CooldownSlot1, horizontal, -58, -10;}
+			InInventory CooldownSlot2, 1 {DrawImage "PKMNCD2", -74, -20; Drawbar "PKMNHPB3", "PKMNHPE", CooldownSlot2, horizontal, -58, -20;}
+			InInventory CooldownSlot3, 1 {DrawImage "PKMNCD3", -74, -30; Drawbar "PKMNHPB3", "PKMNHPE", CooldownSlot3, horizontal, -58, -30;}
+			InInventory CooldownSlot4, 1 {DrawImage "PKMNCD4", -74, -40; Drawbar "PKMNHPB3", "PKMNHPE", CooldownSlot4, horizontal, -58, -40;}
+
 			DrawImage "PKMNXP", 16, 136;
 			Drawbar "PKMNHPB3", "PKMNHPE", Sbar_EXP, horizontal, 32, 136;
 	

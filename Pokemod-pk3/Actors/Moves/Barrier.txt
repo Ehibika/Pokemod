@@ -38,13 +38,14 @@ Goto Fire.After
 
 Fire.After:
 "####" B 1 A_GiveInventory("FullRecovery_C")
+"####" A 0 A_GiveInventory("MoveCooldown_3")
 "####" C 0 A_REfire("Fire")
 "####" B 0 A_Jump(256,"Fire.End")
 Goto Fire.End
 
 
 AltFire:
-"####" BBB 1 A_Jumpif(CallACS("CheckWeaponFire",RC_A)==1,"Altfire.Begin")
+"####" BBB 1 A_Jumpif(CallACS("CheckWeaponFire",RC_A|RC_NOCOOL)==1,"Altfire.Begin")
 "####" B 0 A_Jump(256,"NoAmmo")
 Goto NoAmmo
 
@@ -109,7 +110,7 @@ actor BarrierRCFlag : Powerup {inventory.amount 1 powerup.duration 35 }
 Const int BarrierRad = 75;
 Const int Barrier_Item = 16;
 Const int Barrier_Forward = 150;
-Const int Barrier_Range = 3000;
+Const int Barrier_Range = 800;
 
 actor BarrierPPTaker : CustomInventory
 {
@@ -127,7 +128,9 @@ stop
 }
 }
 
-actor Barrier_Recovery_D : FullRecovery_D{Powerup.Duration 52} 
+actor Barrier_Recovery_D : FullRecovery_D{Powerup.Duration 17} 
+actor Barrier_RemoteCooldown : Powerup {inventory.amount 1 powerup.duration -3}
+
 //[+]========================================================================[+]
 //--------------------------------|Projectiles |--------------------------------
 //[+]========================================================================[+]
@@ -175,14 +178,17 @@ goto Spawn2
 Trigger: //Check PP
 TNT1 A 0 A_JumpifInTargetInventory("BarrierPP",1,"Trigger2")
 goto Decline
-Trigger2: // Check Recovery Frame
+Trigger2: // Check Recovery Frame / Cooldown
 TNT1 A 0 A_JumpifInTargetInventory("Recovery_D",1,"Decline")
+TNT1 A 0 A_JumpifInTargetInventory("Barrier_RemoteCooldown",1,"Decline")
 goto Detonate
 
 Detonate: // Cast the attack!
 TNT1 A 0 A_GiveToTarget("BarrierPPTaker",1)
 TNT1 A 0 A_GiveInventory("BarrierWallRemoteShooter")
 TNT1 A 0 A_GiveToTarget("Barrier_Recovery_D",1)
+TNT1 A 0 A_GiveToTarget("Barrier_RemoteCooldown",1)
+TNT1 A 0 A_GiveToTarget("MoveCooldown_3",1)
 goto PostTrigger
 
 Decline: //Cannot cast the attack

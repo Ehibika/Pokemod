@@ -14,6 +14,7 @@
 #include "zcommon.acs"
 
 #DEFINE THE_COOLDOWN 180
+int EvoGlowTimer;
 //#region -=- depreciated -=-
 int YourTrueForm;
 /*
@@ -180,7 +181,7 @@ bool playerDisguised[S_MAX_PLAYERS];
 int playerDisguise[S_MAX_PLAYERS];
 int playerCurrentSkin[S_MAX_PLAYERS];
 
-//#DEFINE KEYCONF_CLASSCOUNT 80 
+#DEFINE KEYCONF_CLASSCOUNT 30//80 
 #DEFINE SKIN_OFFSET 133 // + KEYCONF_CLASSCOUNT;  
 
 #DEFINE SKIN_START 213
@@ -216,13 +217,15 @@ script "SetUnDisguise" (int p)
 
 Function int CountBaseClass(void)
 {
-int output;
+int output = KEYCONF_CLASSCOUNT; //temporary
+/*
 for(int i = 0; i<MAXDEX; i++)
     { 
         if(Strcmp("Base",SkinDEX[i][1])==0) output++;
         //if(StrIcmp("",SkinDEX[i][1])==0) Break;
     }
     //log(s:"Number of Base Pokemon",i:output);
+    */
 return output;
 }
 
@@ -344,7 +347,7 @@ function void DisguiseFunc3(int i)
 int InDisguise = playerDisguised[i];
 int disguise = playerDisguise[i];
 if(InDisguise && disguise!=playerCurrentSkin[i] && playerCooldown[i]%5) {
-    GiveActorInventory(i+1000,"EvoMaskFX_Spawn",1);
+    //GiveActorInventory(i+1000,"EvoMaskFX_Spawn",1);
 }
 }
 

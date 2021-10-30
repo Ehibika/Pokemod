@@ -77,7 +77,7 @@
 
 
 
-#LIBDEFINE MAXTMLIST 131
+#LIBDEFINE MAXTMLIST 135
 //#endregion
 
 //#region -=- TM Reference -=-
@@ -114,8 +114,8 @@ int TMList [MAXTMLIST][5] = {
 {HelpingHand    ,TMF_UNIVERSAL      ,TMT_NORMAL                                 ,TMP_1  ,TML_ALL},
 {Swagger        ,TMF_UNIVERSAL      ,TMT_NORMAL                                 ,TMP_1  ,TML_ALL},
 {Flatter        ,TMF_UNIVERSAL      ,TMT_DARK                                   ,TMP_1  ,TML_ALL},
-//{Magicalleaf    ,TMF_NULL           ,TMT_GRASS|TMT_FAIRY|TMT_PSYCHIC            ,TMP_2  ,TML_ALL},
-//{Swift          ,TMF_NULL           ,TMT_NORMAL|TMT_PSYCHIC|TMT_FAIRY           ,TMP_2  ,TML_ALL},
+{Magicalleaf    ,TMF_NULL           ,TMT_GRASS|TMT_FAIRY|TMT_PSYCHIC            ,TMP_2  ,TML_ALL},
+{Swift          ,TMF_NULL           ,TMT_NORMAL|TMT_PSYCHIC|TMT_FAIRY           ,TMP_2  ,TML_ALL},
 {HeadButt       ,TMF_UNIVERSAL      ,TMT_NORMAL                                 ,TMP_2  ,TML_ALL},
 //{DragonRage     ,TMF_NULL           ,TMT_DRAGON                                 ,TMP_2  ,TML_LOW},
 {FuryCutter     ,TMF_NULL           ,TMT_BUG                                    ,TMP_2  ,TML_LOW},
@@ -127,10 +127,10 @@ int TMList [MAXTMLIST][5] = {
 {BulkUp         ,TMF_NULL           ,TMT_FIGHTING                               ,TMP_3  ,TML_ALL},
 {CosmicPower    ,TMF_UNIVERSAL      ,TMT_PSYCHIC|TMT_FAIRY                      ,TMP_3  ,TML_ALL},
 {Rage           ,TMF_UNIVERSAL      ,TMT_NORMAL                                 ,TMP_3  ,TML_ALL},
-//{Meditate       ,TMF_UNIVERSAL      ,TMT_PSYCHIC                                ,TMP_3  ,TML_ALL},
+{Meditate       ,TMF_UNIVERSAL      ,TMT_PSYCHIC                                ,TMP_3  ,TML_ALL},
 {HoneClaws      ,TMF_NULL           ,TMT_DARK                                   ,TMP_3  ,TML_ALL},
-//{DragonDance    ,TMF_NULL           ,TMT_DRAGON                                 ,TMP_3  ,TML_ALL},
-//{RockPolish     ,TMF_NULL           ,TMT_ROCK|TMT_GROUND|TMT_Steel              ,TMP_3  ,TML_ALL},
+{DragonDance    ,TMF_NULL           ,TMT_DRAGON                                 ,TMP_3  ,TML_ALL},
+{RockPolish     ,TMF_NULL           ,TMT_ROCK|TMT_GROUND|TMT_Steel              ,TMP_3  ,TML_ALL},
 {IronDefense    ,TMF_UNIVERSAL      ,TMT_STEEL                                  ,TMP_4  ,TML_MID},
 {Amnesia        ,TMF_UNIVERSAL      ,TMT_PSYCHIC                                ,TMP_4  ,TML_MID},
 {SwordDance     ,TMF_UNIVERSAL      ,TMT_NORMAL                                 ,TMP_5  ,TML_MID},
@@ -138,8 +138,8 @@ int TMList [MAXTMLIST][5] = {
 {Agility        ,TMF_UNIVERSAL      ,TMT_PSYCHIC                                ,TMP_5  ,TML_MID},
 {TailWind       ,TMF_NULL           ,TMT_FLYING                                 ,TMP_3  ,TML_ALL},
     //======|Stat dropping TMs|=====
-{Screech        ,TMF_UNIVERSAL      ,TMT_NORMAL                                 ,TMP_1  ,TML_MID},
-{FakeTears      ,TMF_UNIVERSAL      ,TMT_DARK                                   ,TMP_1  ,TML_MID},
+//{Screech        ,TMF_UNIVERSAL      ,TMT_NORMAL                                 ,TMP_1  ,TML_MID},
+//{FakeTears      ,TMF_UNIVERSAL      ,TMT_DARK                                   ,TMP_1  ,TML_MID},
 {Charm          ,TMF_UNIVERSAL      ,TMT_FAIRY                                  ,TMP_1  ,TML_MID},
 {Captivate      ,TMF_UNIVERSAL      ,TMT_NORMAL                                 ,TMP_1  ,TML_MID},
 {ScaryFace      ,TMF_UNIVERSAL      ,TMT_NORMAL                                 ,TMP_1  ,TML_MID},
@@ -159,7 +159,7 @@ int TMList [MAXTMLIST][5] = {
 {SmokeScreen    ,TMF_NULL           ,TMT_FIRE|TMT_POISON                        ,TMP_2  ,TML_ALL},
 {Roost          ,TMF_NULL           ,TMT_FLYING                                 ,TMP_2  ,TML_ALL},
     //======|Tactical/Control TMs|=====
-{Toxic          ,TMF_UNIVERSAL      ,TMT_POISON                                 ,TMP_4  ,TML_ALL},
+{Toxic          ,TMF_UNIVERSAL      ,TMT_POISON                                 ,TMP_5  ,TML_ALL},
 {Spikes         ,TMF_NULL           ,TMT_GROUND                                 ,TMP_2  ,TML_ALL},
 {ToxicSpikes    ,TMF_NULL           ,TMT_POISON                                 ,TMP_2  ,TML_ALL},
 {StealthRock    ,TMF_NULL           ,TMT_ROCK                                   ,TMP_2  ,TML_ALL},
@@ -193,7 +193,7 @@ int TMList [MAXTMLIST][5] = {
 {Brine          ,TMF_NULL           ,TMT_WATER|TMT_POISON                       ,TMP_3  ,TML_MID},
 {Scald          ,TMF_NULL           ,TMT_WATER|TMT_FIRE                         ,TMP_3  ,TML_MID},
 {AuroraBeam     ,TMF_NULL           ,TMT_ICE|TMT_WATER                          ,TMP_3  ,TML_MID},
-//{DrainingKiss   ,TMF_NULL           ,TMT_FAIRY                                  ,TMP_3  ,TML_MID},
+{DrainingKiss   ,TMF_NULL           ,TMT_FAIRY                                  ,TMP_3  ,TML_MID},
 {FirePunch      ,TMF_NULL           ,TMT_FIGHTING|TMT_FIRE|TMT_DRAGON           ,TMP_3  ,TML_MID},
 {IcePunch       ,TMF_NULL           ,TMT_FIGHTING|TMT_ICE|TMT_WATER             ,TMP_3  ,TML_MID},
 {ThunderPunch   ,TMF_NULL           ,TMT_FIGHTING|TMT_ELECTRIC                  ,TMP_3  ,TML_MID},

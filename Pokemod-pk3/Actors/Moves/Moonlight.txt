@@ -38,6 +38,7 @@ Goto Fire.After
 
 Fire.After:
 "####" B 1 A_GiveInventory("Moonlight_Recovery_C")
+"####" A 0 A_GiveInventory("MoveCooldown_10")
 "####" C 0 A_REfire("Fire")
 "####" B 0 A_Jump(256,"Fire.End")
 Goto Fire.End

@@ -113,7 +113,7 @@ stop
 
 
 Fire:
-"####" BBB 1 A_Jumpif(CallACS("CheckWeaponFire",RC_B)==1,"Fire.Begin")
+"####" BBB 1 A_Jumpif(CallACS("CheckWeaponFire",RC_C)==1,"Fire.Begin")
 "####" B 0 A_Jump(256,"NoAmmo")
 Goto NoAmmo
 
@@ -169,7 +169,8 @@ TNT1 A 2 A_JumpIf(z-floorz==0,"Fire.DashEnd2")
 Goto Fire.DashEnd2
 
 Fire.DashEnd2:
-"####" B 1 A_GiveInventory("HalfRecovery_B")
+"####" B 1 A_GiveInventory("PartRecovery_C")
+"####" A 0 A_GiveInventory("MoveCooldown_1Half")
 "####" B 0 A_Jump(256,"Fire.End")
 Goto Fire.End
 

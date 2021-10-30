@@ -271,7 +271,7 @@ Goto Death2
 }
 
 
-actor STF_Shrink : BaseSTatusFlag { Powerup.Duration -6}
+actor STF_Shrink : BaseSTatusFlag { Powerup.Duration -30}
 
 actor ShrinkNerfInitiate : CustomInventory
 {
@@ -309,11 +309,11 @@ States
 {
 Spawn:
 TNT1 A 0
-TNT1 A 0 A_GiveToTarget("PATKDownFXSpawn")
-TNT1 A 0 A_GiveToTarget("PdefDownFXSpawn")
-TNT1 A 0 A_GiveToTarget("SATKDownFXSpawn")
-TNT1 A 0 A_GiveToTarget("SdefDownFXSpawn")
-TNT1 A 5 A_GiveToTarget("SPDDownFXSpawn")
+TNT1 A 5 A_GiveToTarget("SpawnStatusParticles")
+//TNT1 A 0 A_GiveToTarget("PdefDownFXSpawn")
+//TNT1 A 0 A_GiveToTarget("SATKDownFXSpawn")
+//TNT1 A 0 A_GiveToTarget("SdefDownFXSpawn")
+//TNT1 A 5 A_GiveToTarget("SPDDownFXSpawn")
 TNT1 A 0 A_JumpIfInTargetInventory("STF_Shrink",1,"Spawn")
 TNT1 A 1 A_GiveToTarget("StatUpdator")
 TNT1 A 5

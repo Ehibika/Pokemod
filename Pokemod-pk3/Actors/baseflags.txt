@@ -455,6 +455,32 @@ Powerup.Duration -60
 }
 
 
+
+actor IsReflective : OnceC{}
+
+
+actor ReflectiveOn_Pickup : CustomInventory
+{
+States
+{
+Pickup:
+TNT1 A 0 A_GiveInventory("IsReflective",1)
+TNT1 A 0 A_ChangeFlag("REFLECTIVE",1)
+TNT1 A 0 A_ChangeFlag("DEFLECT",1)
+stop
+}
+}
+actor ReflectiveOff_Pickup : CustomInventory
+{
+States
+{
+Pickup:
+TNT1 A 0 A_TakeInventory("IsReflective",9)
+TNT1 A 0 A_ChangeFlag("REFLECTIVE",0)
+TNT1 A 0 A_ChangeFlag("DEFLECT",0)
+stop
+}
+}
 //[+]========================================================================[+]
 //-------------------------|Projectile TRanslation Script|---------------------
 //[+]========================================================================[+]

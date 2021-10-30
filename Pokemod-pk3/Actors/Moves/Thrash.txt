@@ -32,7 +32,7 @@ Goto Fire.Rampage
 
 Fire.Rampage:
 "####" B 1 A_PlaySoundEx("weapon/SlashClaw","Weapon")
-"####" B 0 A_GiveInventory("ChannelingSpeed")
+"####" B 0 A_GiveInventory("ChannelingSpeed")  //Firing Slow
 "####" BBBBB 0 A_FireCustomMissile("ThrashMelee",Frandom(0,360),0,0,0,0,pitch+Frandom(-THRASH_SPD2,THRASH_SPD2))
 "####" B 3
 "####" B 0 A_Jumpifinventory("ThrashTimer",1,"Fire.RampageCheck")

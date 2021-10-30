@@ -3,7 +3,7 @@ actor FlameBurstMove : WepMasterBase
 Tag "FlameBurst"
 obituary "$OB_FLAMEBURST"
 Weapon.AmmoUse 1
-Weapon.AmmoGive 20
+Weapon.AmmoGive 35
 weapon.ammotype "FlameBurstPP"
 scale 2.0
 Inventory.Pickupmessage "$PU_MEGABUSTER"
@@ -63,7 +63,7 @@ Goto Ready
 //[+]========================================================================[+]
 //-----------------------------|Ammo & Inventory|------------------------------
 //[+]========================================================================[+]
-actor FlameBurstPP : Ammo {inventory.amount 1 inventory.Maxamount 20}
+actor FlameBurstPP : Ammo {inventory.amount 1 inventory.Maxamount 35}
 
 //[+]========================================================================[+]
 //--------------------------------|Projectiles |--------------------------------
@@ -121,7 +121,7 @@ States
 Spawn:
 TNT1 A 0
 FWVE W 0 A_SpawnItemEx("OilPitIgnite",0,0,8)
-TNT1 A 0 A_Explode (MBP_FlameBurst2,64,0,0,64)
+TNT1 A 0 A_Explode (MBP_FlameBurst2,128,0,0,64)
 NAPC A 0 A_PlaySoundEx("weapon/napalm", "Weapon")
 TNT1 A 0 A_SpawnItemEx("FlameBurstImpactFX",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION)
 TNT1 A 2

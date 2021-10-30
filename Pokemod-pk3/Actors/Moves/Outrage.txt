@@ -32,7 +32,7 @@ Goto Fire.Rampage
 
 Fire.Rampage:
 "####" B 1 A_PlaySoundEx("weapon/SlashClaw","Weapon")
-"####" B 0 A_GiveInventory("ChannelingSpeed")
+"####" B 0 A_GiveInventory("ChannelingSpeed")  //Firing Slow
 "####" BBBBB 0 A_FireCustomMissile("OutrageMelee",Frandom(0,360),0,0,0,0,Pitch+Frandom(-OUTRAGE_SPD2,OUTRAGE_SPD2))
 "####" B 3
 "####" B 0 A_Jumpifinventory("OutrageTimer",1,"Fire.RampageCheck")
@@ -50,6 +50,7 @@ Goto Fire.Rampage
 Fire.After:
 "####" B 1 A_GiveInventory("FullRecovery_A")
 "####" B 0 A_GiveInventory("ConfusionStatusProc")
+"####" A 0 A_GiveInventory("MoveCooldown_3")
 "####" B 0 A_TakeInventory("OutrageTimer",99)
 "####" B 0 A_Jump(256,"Fire.End")
 Goto Fire.End
@@ -78,7 +79,7 @@ Goto Ready
 //-----------------------------|Ammo & Inventory|------------------------------
 //[+]========================================================================[+]
 actor OutragePP : Ammo {inventory.amount 1 inventory.Maxamount 5}
-actor OutrageTimer : Powerup {inventory.amount 1 powerup.duration -1 }
+actor OutrageTimer : Powerup {inventory.amount 1 powerup.duration -3 }
 
 Actor OutrageProtect : powerprotection
 {

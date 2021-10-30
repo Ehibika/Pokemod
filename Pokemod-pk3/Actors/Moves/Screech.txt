@@ -108,6 +108,31 @@ stop
 Const int Screech_Item = 20;
 Const int Screech_RAD = 250;
 
+
+actor ScreechAOECast : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_Jumpifinventory("ScreechAOECastBuffer",1,"Nope")
+TNT1 A 0 ACS_NamedExecuteAlways("PKMNACS_RadiusGive",0,Screech_Item,Screech_RAD,RG_ENEMY)
+TNT1 A 0 A_GiveInventory("ScreechAOECastBuffer",1)
+stop
+
+Nope:
+TNT1 A 0
+stop
+}
+}
+
+actor ScreechAOECastBuffer : Powerup {inventory.amount 1 Powerup.Duration 4}
+
 //[+]========================================================================[+]
 //--------------------------------|Projectiles |--------------------------------
 //[+]========================================================================[+]
@@ -146,7 +171,8 @@ actor ScreechAura //: BasicHelper
         TNT1 A 1 A_Warp(2,0,0,0,0,WARPF_INTERPOLATE|WARPF_NOCHECKPOSITION)
         TNT1 A 0 A_SpawnItemEx("ScreechAuraFX",0,0,-(z-floorz)+24,0,0,0,0,8)
         TNT1 A 0 A_GiveToTarget("ScreechFXSpawn")
-        TNT1 A 0 ACS_NamedExecuteAlways("PKMNACS_RadiusGive",0,Screech_Item,Screech_RAD,RG_ENEMY)
+        TNT1 A 0 A_GiveToTarget("ScreechAOECast")
+        //TNT1 A 0 ACS_NamedExecuteAlways("PKMNACS_RadiusGive",0,Screech_Item,Screech_RAD,RG_ENEMY)
         loop
     Death:
     TNT1 A 0 A_GiveToTarget("DebuffOffSoundCue")
@@ -359,7 +385,7 @@ States
 {
 Spawn:
 TNT1 A 0
-TNT1 A 5 A_GiveToTarget("PdefDownFXSpawn")
+TNT1 A 5 A_GiveToTarget("SpawnStatusParticles")
 TNT1 A 0 A_JumpIfInTargetInventory("STF_Screech",1,"Spawn")
 TNT1 A 1 A_GiveToTarget("StatUpdator")
 TNT1 A 5

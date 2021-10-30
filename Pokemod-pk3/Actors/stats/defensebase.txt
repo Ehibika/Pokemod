@@ -79,7 +79,6 @@ damagefactor "ThunderShock", 1.0
 damagefactor "WaterGun", 1.0
 damagefactor "EnergyBall", 1.0
 damagefactor "SolarBeam", 1.0
-damagefactor "PetalBlizzard", 1.0
 
 damagefactor "FireSpin", 1.0
 damagefactor "FlameThrower", 1.0
@@ -129,7 +128,6 @@ damagefactor "LavaPlume", 1.0
 damagefactor "Overheat", 1.0
 damagefactor "Inferno", 1.0
 damagefactor "Incinerate", 1.0
-damagefactor "WillOWisp", 1.0
 damagefactor "MysticalFire", 1.0
 damagefactor "AirSlash", 1.0
 
@@ -192,6 +190,7 @@ damagefactor "VineWhip", 1.0
 damagefactor "RazorLeaf", 1.0
 damagefactor "SeedBomb", 1.0
 damagefactor "DoubleEdge", 1.0
+damagefactor "PetalBlizzard", 1.0
 
 damagefactor "Slash1", 1.0
 damagefactor "Slash2", 1.0
@@ -200,7 +199,8 @@ damagefactor "DragonRush", 1.0
 damagefactor "FlareBlitz", 1.0
 
 damagefactor "MetalClaw", 1.0
-damagefactor "DragonClaw", 1.0
+damagefactor "DragonClaw1", 1.0
+damagefactor "DragonClaw2", 1.0
 damagefactor "SkullBash", 1.0
 damagefactor "RapidSpin", 1.0
 

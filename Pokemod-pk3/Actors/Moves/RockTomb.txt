@@ -385,7 +385,7 @@ States
 {
 Spawn:
 TNT1 A 0
-TNT1 A 5 A_GiveToTarget("SpdDownFXSpawn")
+TNT1 A 5 A_GiveToTarget("SpawnStatusParticles")
 TNT1 A 0 A_JumpIfInTargetInventory("STF_RockTomb",1,"Spawn")
 TNT1 A 1 A_GiveToTarget("StatUpdator")
 TNT1 A 5
