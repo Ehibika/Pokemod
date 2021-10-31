@@ -116,7 +116,7 @@ Actor SludgeHazard : BasicProjectile
 +NOEXPLODEFLOOR
 +NOTARGETSWITCH
 Damage (MBP_Sludge/2)
-DamageType "Sludge"
+DamageType "Sludge2"
 obituary "$OB_Sludge"
 Height 10
 Radius 8

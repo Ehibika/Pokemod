@@ -13,6 +13,7 @@ SHOP_BUYFAIL_LVL = "\c[MenuRed]Purchase Fail! You are at max level!";
 SHOP_BUYFAIL_TM = "\c[MenuRed]Purchase Fail! TM Incompatible!";
 SHOP_BUYFAIL_STATUS = "\c[MenuRed]Purchase Fail! unsafe to shop!";
 
+SHOP_BUYFAIL_LIMIT = "\c[MenuRed]Purchase Fail! Reached the Held item limit!";
 
 SHOP_EMPTY= "\c[MenuWhite]Coming Soon";
 
@@ -294,8 +295,8 @@ DESC_SEAINCENSE = "Place an incense that generates \n"
 
 PU_FULLINCENSE = "Picked up a Full Incense!";
 TAG_FULLINCENSE = "Full Incense: Place an incense that slows down enemies!";
-DESC_FULLINCENSE = "Place a Hostile incense that generates \n" 
-"a slowing aroma";
+//DESC_FULLINCENSE = "Place a Hostile incense that generates \n" 
+//"a slowing aroma";
 
 PU_G_NORMAL = "Found a White Gummi!";
 TAG_G_NORMAL = "White Gummi";
@@ -351,6 +352,42 @@ TAG_G_DARK = "black Gummi";
 PU_G_FAIRY = "Found a pink Gummi!";
 TAG_G_FAIRY = "pink Gummi";
 
+//#endregion
+
+//#region -=- Held Items -=-
+DESC_REDSCARF = "Increases Physical Attack";
+DESC_BLUESCARF = "Increases Special Attack";
+DESC_GREENSCARF = "Increases Physical Defense";
+DESC_YELLOWSCARF = "Increases Special Defense";
+DESC_PINKSCARF = "Increases HP";
+DESC_LEFTOVERS = "On Recovery, Restore 10% of your Health";
+DESC_SHELLBELL = "Gain back some of the damage you \n"
+"deal as Health";
+DESC_LIFEORB = "Increases your damage by 30%, but  \n"
+"you'll take Some of the damage \n"
+"you do as recoil.";
+DESC_ASSAULTVEST = "Cuts special damage in half but disables \n"
+"the use of non damaging moves";
+DESC_CHOICESCARF = "Boosts speed on recovery, the buff  \n"
+"dissipates once you swap moves";
+DESC_CHOICEBAND = "Boosts Physical Attack on recovery,  \n"
+"the buff dissipates once you swap moves";
+DESC_WEAKNESSPOLICY = "Increase ATK and SP.ATK upon taking \n"
+"Weakness Damage";
+DESC_FOCUSBAND = "On recovery, enter a hyperdefensive \n"
+"Stance that blocks all damage,\n"
+"you cannot move Durint this.";
+DESC_LAGGINGTAIL = "An encumbering item that slows you down";
+DESC_TOXICORB = "Poisons the wielder on recovery";
+DESC_FLAMEORB = "Burns the wielder on recovery";
+DESC_EVIOLITE = "Reduces damage by half on pokemon \n"
+"\cGdue to evolve.";
+DESC_FULLINCENSE = "On Recovery, unleash a slowing aroma \n" 
+"That lingers for a while.";
+DESC_EXPSHARE = "Distribute most of the EXP you get \n" 
+"To your allies.";
+DESC_CLEANSETAG = "Dispells Hostile Status Changes \n";
+DESC_HEAVYDUTYBOOTS = "Let's you safely walk over hazards.";
 //#endregion
 
 //#region  -=- Move Obits -=-

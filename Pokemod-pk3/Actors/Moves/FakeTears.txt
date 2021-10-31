@@ -150,6 +150,7 @@ TNT1 A 0 A_GiveInventory("STF_FakeTears",1)
 stop
 Nope:
 TNT1 A 0
+TNT1 A 0 A_GiveInventory("EffectGuardShow")
 stop
 }
 }
@@ -184,6 +185,7 @@ TNT1 A 5
 Goto Death
 
 Death:
+TNT1 A 0 A_GiveInventory("EffectGuardShow",1,AAPTR_TRACER)
 TNT1 A 0 
 stop
 }

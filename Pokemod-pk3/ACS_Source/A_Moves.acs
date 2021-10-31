@@ -508,6 +508,25 @@ Script "GeneralWarper2" (void) //CLIENTSIDE  //for nonclientsided actors
 }
 
 
+Script "EscapeOrbHitCheck" (void) //CLIENTSIDE  //for nonclientsided actors
+{
+    int Player = ACS_NamedExecuteWithResult("core_gettarget",0);
+    str FlagName = "PainPower";
+
+	
+	// Loop if shield is active
+	while(GetActorProperty(Player, APROP_HEALTH)>0
+	&& !CheckActorInventory(Player, FlagName) 
+	){
+		Delay(1);
+	}
+	
+    // Remove
+    SetActorState(0,"Failure");
+    Delay(17);
+	Thing_Remove(0);
+}
+
 Script "CheckStatusGuard" (int Pointer, int Input)
 {
 Int Output;
@@ -549,6 +568,8 @@ if(CheckInventory("ProtectGuard")
     if(CheckInventory("MistFlag"))
     {Output = Output | STATUS_STATS  | STATUS_MINOR | STATUS_TAUNT;}
 
+    if(CheckInventory("CleanseTag"))
+    {Output = Output | STATUS_STATS;}
 SetResultValue(Output & Input);
 }
 
@@ -992,6 +1013,7 @@ Script "GetMoveRecoveryLVL" (int Pointer)
     if(CheckInventory("Recovery_D")) output++;
     if(CheckInventory("ChannelingSpeed")) output++;
     if(CheckInventory("ConShotTimer")) output++;
+    if(CheckInventory("HeldItemCooldown")) output+=2;
     SetResultValue(Output);
 }
 

@@ -15,6 +15,7 @@
 #import "Dex_Leveling.acs"
 #Import "Dex_Basestats.acs"
 #Import "WEPACS.acs"
+#Import "DB_HeldItems.acs"
 #include "zcommon.acs"
 #include "8bdmlib.acs"
 
@@ -252,14 +253,14 @@ Int PlayeLVL = GetPokeValue(POKELEVEL);
 */
 
 
-ModStat = StatModifier(CheckInventory("Active_PAttack"),PATK_ID);
+ModStat = StatModifier(CheckInventory("Active_PAttack")+HeldStats(PATK_ID),PATK_ID);
 StatValue = PieceWiseStatCalc(ModStat,STATMIN,ATKSTATBASELINE1,ATKSTATBASELINE2,STATMAX,ATKVAL1,ATKVAL2,ATKVAL3,ATKVAL4);
 
 if(StatValue < 10){StatValue = 10;}
 if(StatValue>1000){StatValue=1000;}
 GiveInventory(StrParam(s:"PATK",i:StatValue),1);
 
-ModStat = StatModifier(CheckInventory("Active_SAttack"),SATK_ID);
+ModStat = StatModifier(CheckInventory("Active_SAttack")+HeldStats(PATK_ID),SATK_ID);
 StatValue = PieceWiseStatCalc(ModStat,STATMIN,ATKSTATBASELINE1,ATKSTATBASELINE2,STATMAX,ATKVAL1,ATKVAL2,ATKVAL3,ATKVAL4);
 
 if(StatValue < 10){StatValue = 10;}
@@ -279,14 +280,14 @@ ranges of 80 and 1.
 
 */
 
-ModStat = StatModifier(CheckInventory("Active_PDefense"),PDEF_ID);
+ModStat = StatModifier(CheckInventory("Active_PDefense")+HeldStats(PDEF_ID),PDEF_ID);
 StatValue = PieceWiseStatCalc(ModStat,STATMIN,DEFSTATBASELINE1,DEFSTATBASELINE2,STATMAX,DEFVAL4,DEFVAL3,DEFVAL2,DEFVAL1);
 
 if(StatValue < 10){StatValue = 10;}
 if(StatValue>1000){StatValue=1000;}
 GiveInventory(StrParam(s:"PDEF",i:StatValue),1);
 
-ModStat = StatModifier(CheckInventory("Active_SDefense"),SDEF_ID);
+ModStat = StatModifier(CheckInventory("Active_SDefense")+HeldStats(SDEF_ID),SDEF_ID);
 StatValue = PieceWiseStatCalc(ModStat,STATMIN,DEFSTATBASELINE1,DEFSTATBASELINE2,STATMAX,DEFVAL4,DEFVAL3,DEFVAL2,DEFVAL1);
 
 if(StatValue < 10){StatValue = 10;}
@@ -300,7 +301,7 @@ HP is also piecewise
 */
 If (Mode == 0)
     {
-        StatValue = PieceWiseStatCalc(CheckInventory("Active_HP"),STATMIN,HPSTATBASELINE1,HPSTATBASELINE2,STATMAX,HPVAL1,HPVAL2,HPVAL3,HPVAL4);
+        StatValue = PieceWiseStatCalc(CheckInventory("Active_HP")+HeldStats(5),STATMIN,HPSTATBASELINE1,HPSTATBASELINE2,STATMAX,HPVAL1,HPVAL2,HPVAL3,HPVAL4);
         StatValue = HPRound(StatValue);
         /*
     if(CheckInventory("Active_HP") >= HPSTATBASELINE2)

@@ -13,7 +13,7 @@ PITM A 6
 loop
 Pickup:
 TNT1 A 0 A_JumpIf(CallACS("PKMNACS_HealthPercent")>=100,"No")
-TNT1 A 0 ACS_NamedExecuteAlways("PKMNACS_HealthPickup",0,100)
+TNT1 A 0 ACS_NamedExecuteAlways("PKMNACS_HealthPickup",0,50,1)
 //TNT1 A 0 ACS_NamedExecuteAlways("GiveEXP",0,20,1)
 TNT1 A 0 A_PlaySound("item/energyup/large")
 stop
@@ -39,7 +39,7 @@ TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(984,0),"Success")
 fail
 Success:
 //TNT1 A 0 ACS_NamedExecuteAlways("GiveEXP",0,20,1)
-TNT1 A 0 ACS_ExecuteAlways(992,0,72)
+TNT1 A 0 ACS_ExecuteAlways(992,0,0,1)
 stop
 }
 }
@@ -110,7 +110,7 @@ fail
 
 Pickup1:
 TNT1 A 0 ACS_NamedExecuteAlways("BPPickup",0,1)
-TNT1 A 0 ACS_NamedExecuteAlways("GiveEXP",0,15,1)
+TNT1 A 0 ACS_NamedExecuteAlways("GiveEXP",0,2,1)
 stop
 }
 }
@@ -199,7 +199,7 @@ loop
 Pickup:
 TNT1 A 0 A_JumpIfInventory("STF_PowerSeed",1,"No")
 TNT1 A 0 A_GiveInventory("PowerSeedBuffInitiate")
-TNT1 A 0 ACS_NamedExecuteAlways("GiveEXP",0,15,1)
+TNT1 A 0 ACS_NamedExecuteAlways("GiveEXP",0,5,1)
 TNT1 A 0 A_PlaySound("item/energyup/large")
 stop
 No:
@@ -225,7 +225,7 @@ loop
 Pickup:
 TNT1 A 0 A_JumpIfInventory("STF_GuardSeed",1,"No")
 TNT1 A 0 A_GiveInventory("GuardSeedBuffInitiate")
-TNT1 A 0 ACS_NamedExecuteAlways("GiveEXP",0,15,1)
+TNT1 A 0 ACS_NamedExecuteAlways("GiveEXP",0,5,1)
 TNT1 A 0 A_PlaySound("item/energyup/large")
 stop
 No:
@@ -251,7 +251,7 @@ loop
 Pickup:
 TNT1 A 0 A_JumpIfInventory("STF_HasteSeed",1,"No")
 TNT1 A 0 A_GiveInventory("HasteSeedBuffInitiate")
-TNT1 A 0 ACS_NamedExecuteAlways("GiveEXP",0,15,1)
+TNT1 A 0 ACS_NamedExecuteAlways("GiveEXP",0,5,1)
 TNT1 A 0 A_PlaySound("item/energyup/large")
 stop
 No:

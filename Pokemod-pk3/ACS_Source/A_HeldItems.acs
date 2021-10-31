@@ -1,0 +1,161 @@
+/* -=- Held items -=-
+ * Scripts that handle the functions of Held items.
+ *
+ * 
+
+*/
+
+#library "A_HeldItems"
+#include "zcommon.acs"
+#Import "DB_Helditems.acs"
+#Import "DB_Shop.acs"
+#Import "A_Shop.acs"
+#import "DB_Player.acs"
+#import "Dex_Pokemon.acs"
+#import "Dex_Evo.acs"
+#import "DB_3PCam.acs"
+
+script "HeldItemEvents" (int type, int arg1, int arg2) EVENT
+{
+
+    if(GetCvar("lastmanstanding")==1||GetCvar("teamlms")==1){
+    Switch(type)
+        {
+        Case 5: Delay(2); LoadAllPlayerHeldInventory(); break;
+        Case 6: SaveAllPlayerHeldInventory(); break;
+        }
+    }
+}
+
+//#region -=- Inventory Data scripts
+#region -=- Inventory Data scripts
+
+    /* -=-=-=-=-=-=-=-=-=-= 
+    * Copypasting ahoy!
+    * ====
+    * Okay, time for some advance stuff again. so my plan is to save player inventories withing a single string.
+    * 
+    * The idea is this: each item is represented by a 4 character hex value, like A105. the first two characters
+    * are the item ID, and the second two characters are the quantity
+    * 
+    * -=-=-=-=-=-=-=-=-=-=-=
+    */
+
+Script "Write_HI_Inventory" (int WriteDelay)
+{
+Delay(WriteDelay);
+Str PlayerInv = StrParam(s:"Player",i:PlayerNumber(),s:"_HI");
+str InvStr = "";
+str InvStrCache = "";
+
+Int InvCount;
+str ItemID; //hex value of item ID
+str ItemQ; //hex value of item quantity
+
+int ItemCount; //number of different items found
+    /* -=-=-=-=-=-=-=-=-=-= 
+    * So what we are going to do here is go down the HeldItemList and see
+    * if you have that item, if you do. then we count the quantity, and create
+    * the inventory block. and then append it to the end of INVSTR
+    * -=-=-=-=-=-=-=-=-=-=-=
+    */
+
+   for (int i=0; i<MAX_HELDITEMS; i++) 
+   {
+    InvCount = CheckInventory(HeldItemList[i][0]);
+    if(InvCount)
+        {
+            if(i<16){ItemID = StrParam(s:"0",x:i);}
+            else{ItemID = StrParam(x:i);}
+
+            if(InvCount<16){ItemQ = StrParam(s:"0",x:InvCount);}
+            else{ItemQ = StrParam(x:InvCount);}  
+            //log(s:ItemID,s:ItemQ);
+
+            if(ItemCount>0){InvStrCache = StrParam(s:InvStr,s:ItemID,s:ItemQ);}
+            else{InvStrCache = StrParam(s:ItemID,s:ItemQ);}
+            InvStr = InvStrCache;
+            ItemCount++;
+        }
+   }
+
+   if(ItemCount){SetCvarString(PlayerInv,InvStr);}
+    else{SetCvarString(PlayerInv,"0000");}
+}
+
+Script "Read_HI_Inventory" (void)
+{
+    //log(s:"Begin Inventory read");
+
+     /* -=-=-=-=-=-=-=-=-=-= 
+    * now we're going to take the inventory string, read it block by block,
+    * and hand out the inventory items.
+    * 
+    * Each block is a 4 character long hex value. so we will read the string that way.
+    * -=-=-=-=-=-=-=-=-=-=-=
+    */
+
+Str PlayerInv = StrParam(s:"Player",i:PlayerNumber(),s:"_HI");
+Str PlayerInvStr = GetCvarString(PlayerInv);
+int BStart = 0; //Brefresh.
+int BLen = 4;
+int BlockCount = strLen(PlayerInvStr)/4;
+str HexBlock;
+int ItemID;
+int ItemQ;
+
+//log(s:"Total inventory blocks : ",i:BlockCount);
+
+    for (int i=0; i<BlockCount; i++) 
+    {
+        HexBlock = StrMid(PlayerInvStr,BStart,BLen);
+        ItemID = HextoInt(StrLeft(HexBlock,2));
+        ItemQ = HextoInt(StrRight(HexBlock,2));
+        if(ItemQ>0)
+            {
+            //log(s:"get ",i:ItemQ,s:" ",s:HeldItemList[ItemID]);
+            GiveInventory(HeldItemList[ItemID][0],ItemQ);
+            }
+        
+
+        BStart += 4;
+    }
+
+}
+
+
+function void LoadAllPlayerHeldInventory(void)
+{
+for(int i = 0; i < SHOP_MAX_PLAYERS; i++) GiveActorInventory(i+1000,"LoadHeldInventory",1);
+}
+
+function void SaveAllPlayerHeldInventory(void)
+{
+for(int i = 0; i < SHOP_MAX_PLAYERS; i++) GiveActorInventory(i+1000,"SaveHeldInventory",1);
+}
+
+
+Script "ShopBuyFailHeldLimitMsg" (void) CLIENTSIDE
+{
+if(ActivatorTID()==CheckPlayerCamera(ConsolePlayerNumber())
+    || (ActivatorTID()-1000+C_TID)==CheckPlayerCamera(ConsolePlayerNumber()) ) {Log(l:"SHOP_BUYFAIL_LIMIT");}
+}
+
+Script "EvioliteCheck" (void)
+{
+    int PlayerLVL = GetPokeValue(POKELEVEL);
+    int PlayerDex = GetPokeValue(POKEDEXNUM);
+    Bool Output = false;
+
+    //log(i:EvoDEX[PlayerDex][0],s:"   ",i:EvoDEX[PlayerDex][1]);
+    //if(EvoDEX[PlayerDex][0] < 0 && PlayerLVL >= EvoDEX[PlayerDex][1]){Output = true;}
+    
+    SetResultValue(EvoDEX[PlayerDex][0] > 0 && PlayerLVL >= EvoDEX[PlayerDex][1]);
+}
+
+Script "EvioliteQuickCheck" (void)
+{
+    Delay(1);
+    TakeInventory("EviolitePower",99);
+    GiveInventory("Eviolite_Effect",1);
+}

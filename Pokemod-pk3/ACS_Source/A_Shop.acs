@@ -183,7 +183,7 @@ GiveActorInventory(Player+1000,"Sbar_BP",Current);
 script "GivePlayerBP" (int p, int wage)
 {
 AdjustCvar(StrParam(s:"PLAYER",i:p,s:"_BP"),wage);
-UpdateSbar(PlayerNumber());
+UpdateSbar(p);
 }
 
 script "BPGameOver" UNLOADING

@@ -980,6 +980,9 @@ Script "MoveSetup" (void)
 		if(CheckAltMove(ThisWeapon)){giveInventory("AltAttackMove",1);giveInventory("AltAttackMove2",1);}
 		else{TakeInventory("AltAttackMove",99); TakeInventory("AltAttackMove2",99);}
 
+		TakeInventory("ChoiceBandPower",99);
+		TakeInventory("STF_ChoiceScarf",99);
+
 }
 
 Script "MoveSwap" (void)
@@ -1204,7 +1207,7 @@ if(CheckInventory("GrappledFlag"))
     }
 }
 
-if(CheckInventory("TauntFlag"))
+if(CheckInventory("TauntFlag") || CheckInventory("AssaultVestGuard"))
     {switch(ThisWeapon) {
 	Case HELPINGHAND: return false; break; 
 	Case GROWTH: return false; break; 

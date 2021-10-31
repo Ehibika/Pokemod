@@ -95,6 +95,7 @@ TNT1 A 0 A_GiveInventory("STF_Tailwhip",1)
 stop
 Nope:
 TNT1 A 0
+TNT1 A 0 A_GiveInventory("EffectGuardShow")
 stop
 }
 }

@@ -136,22 +136,22 @@ TNT1 A 0 A_Giveinventory("DisableCaster")
 Goto Pickup.After
 
 Screech:
-TNT1 A 0 A_Jumpif(CallACS("CheckStatusGuard",0,STATUS_STATS),"Pickup.After") //Blocked by protect|Detect|Substitute|Safeguard|Haze
+TNT1 A 0 A_Jumpif(CallACS("CheckStatusGuard",0,STATUS_STATS),"Pickup.StatBlock") //Blocked by protect|Detect|Substitute|Safeguard|Haze
 TNT1 A 0 A_Giveinventory("ScreechNerfInitiate")
 Goto Pickup.After
 
 Captivate:
-TNT1 A 0 A_Jumpif(CallACS("CheckStatusGuard",0,STATUS_STATS),"Pickup.After") //Blocked by protect|Detect|Substitute|Safeguard|Haze
+TNT1 A 0 A_Jumpif(CallACS("CheckStatusGuard",0,STATUS_STATS),"Pickup.StatBlock") //Blocked by protect|Detect|Substitute|Safeguard|Haze
 TNT1 A 0 A_Giveinventory("CaptivateNerfInitiate")
 Goto Pickup.After
 
 Charm:
-TNT1 A 0 A_Jumpif(CallACS("CheckStatusGuard",0,STATUS_STATS),"Pickup.After") //Blocked by protect|Detect|Substitute|Safeguard|Haze
+TNT1 A 0 A_Jumpif(CallACS("CheckStatusGuard",0,STATUS_STATS),"Pickup.StatBlock") //Blocked by protect|Detect|Substitute|Safeguard|Haze
 TNT1 A 0 A_Giveinventory("CharmNerfInitiate")
 Goto Pickup.After
 
 Yawn:
-TNT1 A 0 A_Jumpif(CallACS("CheckStatusGuard",0,STATUS_STATS),"Pickup.After") //Blocked by protect|Detect|Substitute|Safeguard|Haze
+TNT1 A 0 A_Jumpif(CallACS("CheckStatusGuard",0,STATUS_STATS),"Pickup.StatBlock") //Blocked by protect|Detect|Substitute|Safeguard|Haze
 TNT1 A 0 A_Giveinventory("Yawnifier")
 TNT1 A 0 A_Giveinventory("YawnEffectInitiate")
 Goto Pickup.After
@@ -161,7 +161,7 @@ TNT1 A 0 A_Giveinventory("RefreshClense")
 Goto Pickup.After
 
 FakeTears:
-TNT1 A 0 A_Jumpif(CallACS("CheckStatusGuard",0,STATUS_STATS),"Pickup.After") //Blocked by protect|Detect|Substitute|Safeguard|Haze
+TNT1 A 0 A_Jumpif(CallACS("CheckStatusGuard",0,STATUS_STATS),"Pickup.StatBlock") //Blocked by protect|Detect|Substitute|Safeguard|Haze
 TNT1 A 0 A_Giveinventory("FakeTearsNerfInitiate")
 Goto Pickup.After
 
@@ -197,7 +197,7 @@ TNT1 A 0 A_Giveinventory("AquaRingHeal")
 Goto Pickup.After
 
 ScaryFace:
-TNT1 A 0 A_Jumpif(CallACS("CheckStatusGuard",0,STATUS_STATS),"Pickup.After") //Blocked by protect|Detect|Substitute|Safeguard|Haze
+TNT1 A 0 A_Jumpif(CallACS("CheckStatusGuard",0,STATUS_STATS),"Pickup.StatBlock") //Blocked by protect|Detect|Substitute|Safeguard|Haze
 TNT1 A 0 A_Giveinventory("ScaryFaceNerfInitiate")
 Goto Pickup.After
 
@@ -218,15 +218,17 @@ TNT1 A 0 A_Giveinventory("SweetScentNerfInitiate")
 Goto Pickup.After
 
 Tailwhip:
-TNT1 A 0 A_Jumpif(CallACS("CheckStatusGuard",0,STATUS_STATS),"Pickup.After") //Blocked by protect|Detect|Substitute|Safeguard|Haze
+TNT1 A 0 A_Jumpif(CallACS("CheckStatusGuard",0,STATUS_STATS),"Pickup.StatBlock") //Blocked by protect|Detect|Substitute|Safeguard|Haze
 TNT1 A 0 A_Giveinventory("TailwhipNerfInitiate")
 Goto Pickup.After
 
 Growl:
-TNT1 A 0 A_Jumpif(CallACS("CheckStatusGuard",0,STATUS_STATS),"Pickup.After") //Blocked by protect|Detect|Substitute|Safeguard|Haze
+TNT1 A 0 A_Jumpif(CallACS("CheckStatusGuard",0,STATUS_STATS),"Pickup.StatBlock") //Blocked by protect|Detect|Substitute|Safeguard|Haze
 TNT1 A 0 A_Giveinventory("GrowlNerfInitiate")
 Goto Pickup.After
 
+Pickup.StatBlock:
+TNT1 A 0 A_Giveinventory("EffectGuardShow")
 Pickup.After:
 TNT1 A 0 A_TakeInventory("PackageID",999)
 stop
