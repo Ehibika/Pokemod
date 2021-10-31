@@ -568,6 +568,8 @@ if(CheckInventory("ProtectGuard")
     if(CheckInventory("MistFlag"))
     {Output = Output | STATUS_STATS  | STATUS_MINOR | STATUS_TAUNT;}
 
+    if(CheckInventory("CleanseTag"))
+    {Output = Output | STATUS_STATS;}
 SetResultValue(Output & Input);
 }
 

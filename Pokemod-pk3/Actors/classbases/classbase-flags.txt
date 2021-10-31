@@ -1,5 +1,6 @@
 actor ClassDeathPickup : CustomInventory
 {
+var int user_HitMemory;
 States
 {
 Pickup:
@@ -16,6 +17,8 @@ TNT1 A 0 A_GiveInventory("IsDead",1)
 TNT1 A 0 A_Stop
 TNT1 A 0 A_GiveToTarget("KilledMeStock",1)
 TNT1 A 0 A_GiveToTarget("KilledMe",1)
+TNT1 A 0 //ACS_NamedExecuteAlways("PKMN_LastHitEXP",0,User_HitMemory,3) 
+TNT1 A 0 ACS_NamedExecuteAlways("BPBounty",0) 
 stop
 }
 }

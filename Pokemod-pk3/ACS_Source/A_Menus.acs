@@ -555,7 +555,7 @@ Script "Menu_HeldItemShop" (void) CLIENTSIDE
 				if(ItemQuantity>0){itemStats = GrabHeldItemStats(ChoiceID,ItemQuantity);}
 					else{itemStats = StrParam(s:"\cC",s:GrabHeldItemStats(ChoiceID,1));}
 				//HudMessage(s:itemStats; HUDMSG_FADEOUT, 518, CR_White, MenuX- (MNL * 4) , Menuy - (MNL * 3 + 3.0), 0.2, 0);
-				HudMessage(s:"\cG<< Buy >>    Level: ",i:ItemQuantity,s:"   ",s:itemStats; HUDMSG_FADEOUT, 518, CR_White, MenuX- (MNL * 4) , Menuy - (MNL * 3 + 6.0), 0.2, 0);
+				HudMessage(s:"\cG<< Buy >>    Level: ",i:ItemQuantity,s:"   ",s:itemStats; HUDMSG_FADEOUT, 518, CR_White, MenuX- (MNL * 7 - 3.0) , Menuy - (MNL * 3 + 6.0), 0.2, 0);
 			
 	
 			// - Grab Inputs -
@@ -702,7 +702,7 @@ Script "Menu_HeldItemShop" (void) CLIENTSIDE
 					if(ChoiceID < MAX_HELDITEMS)HudMessage(l:ItemLang; HUDMSG_FADEOUT, 517, CR_White, MenuX- (MNL * 10) , Menuy - (MNL * 8), 0.2, 0);
 				
 					ItemQuantity = CheckInventory(ItemGameName);
-					HudMessage(s:"\cd<< Sell >>    Quantity: ",i:ItemQuantity; HUDMSG_FADEOUT, 518, CR_White, MenuX- (MNL * 4) , Menuy - (MNL * 3 + 6.0), 0.2, 0);
+					HudMessage(s:"\cd<< Sell >>    Quantity: ",i:ItemQuantity; HUDMSG_FADEOUT, 518, CR_White, MenuX- (MNL * 7 - 3.0) , Menuy - (MNL * 3 + 6.0), 0.2, 0);
 
 		
 				// - Grab Inputs -

@@ -46,6 +46,7 @@ TNT1 A 5 A_SpawnitemEX("OrbFlashFX",0,0,0,0,0,0,0,0)
 RFLC A 0 A_GiveToTarget("OrbEscape")
 stop
 Failure:
+NAPC A 0 A_PlaySoundEx("Support/Failure", "Weapon")
 CRYE AAZZAAZZAAZZAA 1 A_Warp(AAPTR_TARGET,0,0,80,0,WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE)
 TNT1 A 0
 }

@@ -393,7 +393,9 @@ stop
 
 //#endregion
 
+/*
 //#region -=- Full Incense -=-
+
 actor FullIncense : ConsumableBase 
 {
 inventory.amount 1
@@ -587,3 +589,4 @@ stop
 }
 
 //#endregion
+*/

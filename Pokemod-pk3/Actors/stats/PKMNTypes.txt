@@ -566,7 +566,9 @@ damagefactor "Toxic", 1.0 //Static
 damagefactor "ToxicSpikes", 1.0 //Static
 
 damagefactor "Sludge", 1.3 //W
+damagefactor "Sludge2", 1.3 //W
 damagefactor "SludgeBomb", 1.3 //W
+damagefactor "SludgeBomb2", 1.3 //W
 damagefactor "Venoshock", 1.3 //W
 damagefactor "ClearSmog", 1.3 //W
 damagefactor "PoisonTail1", 1.3 //W
@@ -586,7 +588,9 @@ damagefactor "Toxic", 1.0 //Static
 damagefactor "ToxicSpikes", 1.0 //Static
 
 damagefactor "Sludge", 1.6 //2W
+damagefactor "Sludge2", 1.6 //2W
 damagefactor "SludgeBomb", 1.6 //2W
+damagefactor "SludgeBomb2", 1.6 //2W
 damagefactor "Venoshock", 1.6 //2W
 damagefactor "ClearSmog", 1.6 //2W
 damagefactor "PoisonTail1", 1.6 //2W
@@ -606,7 +610,9 @@ damagefactor "Toxic", 1.0 //Static
 damagefactor "ToxicSpikes", 1.0 //Static
 
 damagefactor "Sludge", 0.8 //R
+damagefactor "Sludge2", 0.8 //R
 damagefactor "SludgeBomb", 0.8 //R
+damagefactor "SludgeBomb2", 0.8 //R
 damagefactor "Venoshock", 0.8 //R
 damagefactor "ClearSmog", 0.8 //R
 damagefactor "PoisonTail1", 0.8 //R
@@ -627,7 +633,9 @@ damagefactor "Toxic", 1.0 //Static
 damagefactor "ToxicSpikes", 1.0 //Static
 
 damagefactor "Sludge", 0.6 //2R
+damagefactor "Sludge2", 0.6 //2R
 damagefactor "SludgeBomb", 0.6 //2R
+damagefactor "SludgeBomb2", 0.6 //2R
 damagefactor "Venoshock", 0.6 //2R
 damagefactor "ClearSmog", 0.6 //2R
 damagefactor "PoisonTail1", 0.6 //2R
@@ -647,7 +655,9 @@ damagefactor "Toxic", 0.0 //I
 damagefactor "ToxicSpikes", 0.0 //I
 
 damagefactor "Sludge", 0.1 //I
+damagefactor "Sludge2", 0.1 //I
 damagefactor "SludgeBomb", 0.1 //I
+damagefactor "SludgeBomb2", 0.1 //I
 damagefactor "Venoshock", 0.1 //I
 damagefactor "ClearSmog", 0.1 //I
 damagefactor "PoisonTail1", 0.1 //I
@@ -662,7 +672,9 @@ damagefactor "PoisonJab", 0.1 //I
 actor PoisonSTAB : STABBase
 {
 damagefactor "Sludge", 1.2 //S
+damagefactor "Sludge2", 1.2 //S
 damagefactor "SludgeBomb", 1.2 //S
+damagefactor "SludgeBomb2", 1.2 //S
 damagefactor "Venoshock", 1.2 //S
 damagefactor "ClearSmog", 1.2 //S
 damagefactor "PoisonTail1", 1.2 //S
