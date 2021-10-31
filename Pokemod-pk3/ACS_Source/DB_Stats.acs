@@ -67,7 +67,7 @@ Int SpeedTable[15][2] = {
 
 
 
-#LIBDEFINE STATITEMNUM 86
+#LIBDEFINE STATITEMNUM 87
 
 Str StatEffectName[STATITEMNUM][2] = {
     {"Growth","GOOD"},
@@ -156,6 +156,7 @@ Str StatEffectName[STATITEMNUM][2] = {
     {"Hypnosis","BAD"},
     {"ChoiceScarf","GOOD"},
     {"WeaknessPolicy","GOOD"},
+    {"LaggingTail","NULL"}, //so it cannot be hazed or Clensed
 
 };
 
@@ -257,6 +258,7 @@ Int StatEffectValue[STATITEMNUM][5] = {
 {   0,      -2,      0,      0,      0}, //Hypnosis
 {   0,      0,      0,      0,      2}, //ChoiceScarf
 {   2,      2,      0,      0,      0}, //WeaknessPolicy
+{   0,      0,      0,      0,     -1}, //LaggingTail
 
 };
 
@@ -375,6 +377,7 @@ Function Void ClearPlayerCVars(int PlayerNum, int NewLevel)
     SetCvar(StrParam(s:"PlayerDEXNum_",i:PlayerNum),-1);
     //SetCvar(StrParam(s:"Player",i:PlayerNum,s:"_BP"),0);
     SetCvarString(StrParam(s:"Player",i:PlayerNum,s:"_INV"),"0000");
+    SetCvarString(StrParam(s:"Player",i:PlayerNum,s:"_HI"),"0000");
 
     //ACS_NamedExecuteAlways("StatusMenuClear",0);
 }

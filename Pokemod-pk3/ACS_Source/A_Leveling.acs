@@ -215,23 +215,45 @@ Script "GiveEXP" (int EXPAward, Int Override)
 if(!(ClassifyActor(ActivatorTID()) & ACTOR_PLAYER)){Terminate;}
 if(EXPTime(0) == 0 && Override == 0){Terminate;}
 
+Bool GotEXPShare; 
 int p = Playernumber();
+int CacheEXPAward, ShareEXP, SharePlusRange;
+
+if(CheckInventory("EXPShare"))
+    {
+        GotEXPShare = true;
+        CacheEXPAward = (EXPAward*0.3)>>16;
+        ShareEXP = (EXPAward*0.7)>>16;
+        SharePlusRange = EXPSHARERANGE;
+    }
+else {ShareEXP = (EXPAward*0.5)>>16;}
 While(PlayerIsSpectator(p) == 2){Delay(1);}
 if(PlayerIsSpectator(p) == 1){Terminate;}
 
 //TeamEXPBank[GetPlayerInfo(p, PLAYERINFO_TEAM)] += EXPAward/2;
-SetEXPBank(GetPlayerInfo(p, PLAYERINFO_TEAM),EXPAward/2);
-EXP_Increment(P,EXPAward);
+if(GotEXPShare)
+    {
+    SetEXPBank(GetPlayerInfo(p, PLAYERINFO_TEAM),ShareEXP);
+    EXP_Increment(P,CacheEXPAward);  
+    }
+    else
+    {
+    SetEXPBank(GetPlayerInfo(p, PLAYERINFO_TEAM),ShareEXP);
+    EXP_Increment(P,EXPAward); 
+    }
 
 
-//EXP Share
+
+//Team EXP
 for(int i = 0; i < 64; i++)
 {
     if(i != P
         && ClassifyActor(i+1000) & ACTOR_ALIVE
         && GetPlayerInfo(p, PLAYERINFO_TEAM) == GetPlayerInfo(i, PLAYERINFO_TEAM)
-        && xyzDistance(P+1000,i+1000) <= EXPSHARERANGE) {
-        ACS_NamedExecuteAlways("GetShareEXP",0,i,EXPAward/2);
+        && xyzDistance(P+1000,i+1000) <= EXPSHARERANGE+SharePlusRange) {
+            if(CheckActorInventory(i+1000,"EXPShare")){ACS_NamedExecuteAlways("GetShareEXP",0,P,ShareEXP);} 
+            //That individual has an EXP share, so you get to keep their cut of EXP.
+            else{ACS_NamedExecuteAlways("GetShareEXP",0,i,ShareEXP);}
     }
 }   
 
@@ -319,6 +341,7 @@ Function void EXP_Increment (Int Pnum, int EXPAward)
             Log(n:0,s:"\cf Grew to LVL ",i:levelGoal);//,s:"  ",i:PKMN_MaxLVL
             ACS_NamedExecuteAlways("SetPKMNLevel",0,levelGoal);  
             LevelUpMoveHandler(PlayerDexNum,PlayerLVL,levelGoal);
+            ACS_NamedExecuteAlways("EvioliteQuickCheck",0); 
             //ReportNewMoves(PlayerDexNum,PlayerLVL,levelGoal);
             }
         }
@@ -473,6 +496,30 @@ TeamBPAward[PlayerTeam()] += BPAward/2;
 //log(s:GetTeamProperty(PlayerTeam(),TPROP_Name), s:" Team EXP Award ", i:TeamEXPAward[PlayerTeam()]);
 }
 
+Script "BPBounty" (void)
+{
+if(EXPTime(HITEXP) == 0){Terminate;}
+if(!(ClassifyActor(ActivatorTID()) & ACTOR_PLAYER)){Terminate;}
+
+int EnemyPlayer = ACS_NamedExecuteWithResult("core_gettarget", 0);
+int EnemyPlN = EnemyPlayer - 1000;
+
+    int VictimTID = ActivatorTID();
+    int PlayerLVL = GetCvar(StrParam(s:"PlayerLevel_",i:PlayerNumber()));
+    int PlayerDexNum = GetCvar(StrParam(s:"PlayerDEXNum_",i:PlayerNumber()));
+    int VictimFrags = ACS_NamedExecuteWithResult("GetPlayerFrags",PlayerNumber());
+    int VictimBounty = StatDEX[PlayerDexNum][6];
+int BPAward = PlayerLVL+VictimBounty+(VictimFrags*3);
+
+// -=- Clamp BP
+if(BPAward < 1){BPAward = 1;}
+if(BPAward > 50){BPAward = 50;}
+
+if(VictimTID == EnemyPlayer){/*log(s:"no BP award");*/ Terminate;}
+/*log(s:"yes BP award");*/
+ACS_NamedExecuteWithResult("GivePlayerBP",EnemyPlN,BPAward);
+}
+
 script "ResetRoundLevel1" OPEN
 {
     SetCVar("PKMN_RoundLevel",0);
@@ -536,6 +583,7 @@ if(PlayerLVL >=  EvoDEX[PlayerDex][1])
             //No paths to choose from, just evolve straight away.
             ACS_NamedExecuteAlways("PlayerFormChange",0,EvoDEX[PlayerDex][2]);
             GiveInventory("EvolutionFX",1);
+            ACS_NamedExecuteAlways("EvioliteQuickCheck",0); 
             print(s:"Evolved!");
             }
     }

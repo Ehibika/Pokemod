@@ -408,7 +408,9 @@ Goto PoisonPain
 
 Pain.PoisonSting:
 Pain.Sludge:
+Pain.Sludge2:
 Pain.SludgeBomb:
+Pain.SludgeBomb2:
 "----" H 0
 "----" H 0 A_Jump(83,2)
 "----" H 0 A_GiveInventory("PoisonStatusBuild")
@@ -1563,7 +1565,9 @@ Goto Death
 //#region -=- Poison -=-
 Death.Venoshock:
 Death.Sludge:
+Death.SludgeBomb2:
 Death.SludgeBomb:
+Death.SludgeBomb2:
 Death.ClearSmog:
 Death.PoisonTail1:
 Death.Acid:

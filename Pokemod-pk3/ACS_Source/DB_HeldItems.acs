@@ -7,7 +7,7 @@
 #library "DB_HeldItems"
 #include "zcommon.acs"
 
-#LIBDEFINE MAX_HELDITEMS 13
+#LIBDEFINE MAX_HELDITEMS 16
 
 
 #LIBDEFINE HI_NULL -1
@@ -19,11 +19,11 @@
 #LIBDEFINE HI_HP 5
 
 str HeldItemList[MAX_HELDITEMS][4] = {
-    {"RedScarf", "Red Scarf", 3.0 ,""},
-    {"BlueScarf", "Blue Scarf", 5.0,""},
-    {"GreenScarf", "Green Scarf", 3.0,""},
-    {"YellowScarf", "Yellow Scarf", 5.0,""},
-    {"PinkScarf", "Pink Scarf", 1.0,""},
+    //{"RedScarf", "Red Scarf", 3.0 ,""},
+    //{"BlueScarf", "Blue Scarf", 5.0,""},
+    //{"GreenScarf", "Green Scarf", 3.0,""},
+    //{"YellowScarf", "Yellow Scarf", 5.0,""},
+    //{"PinkScarf", "Pink Scarf", 1.0,""},
     {"Leftovers", "Leftovers", 1.0,""},
     {"ShellBell", "Shell Bell", 1.0,""},
     {"Lifeorb", "Life Orb", 1.0,""},
@@ -32,6 +32,15 @@ str HeldItemList[MAX_HELDITEMS][4] = {
     {"ChoiceBand", "Choice Band", 1.0,""},
     {"WeaknessPolicy", "Weakness Policy", 1.0,""},
     {"FocusBand", "Focus Band", 1.0,""},
+    {"LaggingTail", "Lagging Tail", 1.0,""},
+    {"ToxicOrb", "Toxic Orb", 1.0,""},
+    {"FlameOrb", "Flame Orb", 1.0,""},
+    {"Eviolite", "Eviolite", 1.0,""},
+    {"FullIncense", "Full Incense", 1.0,""},
+    {"EXPShare", "EXP Share", 1.0,""},
+    {"CleanseTag", "Cleanse Tag", 1.0,""},
+    {"HeavyDutyBoots", "H.Duty Boots", 1.0,""},
+
 };
 
 /*
@@ -39,11 +48,11 @@ str HeldItemList[MAX_HELDITEMS][4] = {
 */
 Int HeldItemStats[MAX_HELDITEMS][8] = {
     //                  | Stat 1 ID|Base|Growth|| Stat 2 ID|Base|Growth|| Cost || CostGrowth
-    /*|RedScarf|*/      {HI_PATK,   20,  5,      HI_NULL,   0,   0,      10,     5},
-    /*|BlueScarf|*/     {HI_SATK,   20,  5,      HI_NULL,   0,   0,      10,     5},
-    /*|GreenScarf|*/    {HI_PDEF,   20,  5,      HI_NULL,   0,   0,      10,     5},
-    /*|YellowScarf|*/   {HI_SDEF,   20,  5,      HI_NULL,   0,   0,      10,     5},
-    /*|PinkScarf|*/     {HI_HP  ,   20,  5,      HI_NULL,   0,   0,      10,     5},
+   // /*|RedScarf|*/      {HI_PATK,   20,  5,      HI_NULL,   0,   0,      10,     5},
+   // /*|BlueScarf|*/     {HI_SATK,   20,  5,      HI_NULL,   0,   0,      10,     5},
+   // /*|GreenScarf|*/    {HI_PDEF,   20,  5,      HI_NULL,   0,   0,      10,     5},
+   // /*|YellowScarf|*/   {HI_SDEF,   20,  5,      HI_NULL,   0,   0,      10,     5},
+   // /*|PinkScarf|*/     {HI_HP  ,   20,  5,      HI_NULL,   0,   0,      10,     5},
     /*|Leftovers|*/     {HI_HP  ,   50,  5,      HI_NULL,   0,   0,      45,     10},
     /*|ShellBell|*/     {HI_HP  ,   10,  5,      HI_SATK,   10,   10,      45,     15},
     /*|Lifeorb|*/       {HI_PATK  ,   10,  5,      HI_SATK,   10,   5,      45,     15},
@@ -52,6 +61,14 @@ Int HeldItemStats[MAX_HELDITEMS][8] = {
     /*|ChoiceBand|*/   {HI_PATK  ,   15,  15,      HI_NULL,   0,   0,      25,     15},
     /*|WeaknessPolicy|*/{HI_PDEF  ,   15,  5,      HI_SDEF,   15,   5,      15,     5},
     /*|FocusBand|*/     {HI_PDEF  ,   15,  5,      HI_NULL,   0,   0,      15,     10},
+    /*|LaggingTail|*/   {HI_PDEF  ,   45,  15,      HI_SDEF,   45,   15,      20,     5},
+    /*|ToxicOrb|*/     {HI_HP  ,   35,  10,      HI_NULL,   0,   0,      20,     5},
+    /*|FlameOrb|*/     {HI_PATK  ,   35,  10,      HI_NULL,   0,   0,      20,     5},
+    /*|Eviolite|*/     {HI_HP  ,   10,  5,      HI_NULL,   0,   0,      45,     5},
+    /*|FullIncense|*/     {HI_SATK  ,   5,  5,      HI_SDEF,   5,   5,      10,     5},
+    /*|EXPShare|*/     {HI_HP  ,   50,  25,      HI_SDEF,   40,   15,      10,     5},
+    /*|CleanseTag|*/     {HI_SDEF  ,   20,  5,      HI_NULL,   0,   0,      25,     5},
+    /*|HeavyDutyBoots|*/ {HI_PDEF  ,   20,  5,      HI_PATK,   5,   5,      35,     5},
 };
 
 
@@ -124,7 +141,7 @@ Switch(HeldItemStats[ID][0])
     StatVal1 = HeldItemStats[ID][1]+(HeldItemStats[ID][2]*(Quantity-1));
     S1 = StrParam(s:Stat1,s:" ",i:StatVal1);
 
-    S2 = "     ";
+    S2 = " :: ";
 
     if(HeldItemStats[ID][3] != HI_NULL)
         {
@@ -140,7 +157,7 @@ Switch(HeldItemStats[ID][0])
         StatVal2 = HeldItemStats[ID][4]+(HeldItemStats[ID][5]*(Quantity-1));
         S3 = StrParam(s:Stat2,s:" ",i:StatVal2);
         }
-    else{S3 = " ";}
+    else{S2 = " "; S3 = " ";}
     
 Output = StrParam(s:S1,s:S2,s:S3);
 return Output;

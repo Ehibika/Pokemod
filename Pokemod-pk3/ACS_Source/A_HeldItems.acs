@@ -10,6 +10,9 @@
 #Import "DB_Helditems.acs"
 #Import "DB_Shop.acs"
 #Import "A_Shop.acs"
+#import "DB_Player.acs"
+#import "Dex_Pokemon.acs"
+#import "Dex_Evo.acs"
 #import "DB_3PCam.acs"
 
 script "HeldItemEvents" (int type, int arg1, int arg2) EVENT
@@ -136,4 +139,23 @@ Script "ShopBuyFailHeldLimitMsg" (void) CLIENTSIDE
 {
 if(ActivatorTID()==CheckPlayerCamera(ConsolePlayerNumber())
     || (ActivatorTID()-1000+C_TID)==CheckPlayerCamera(ConsolePlayerNumber()) ) {Log(l:"SHOP_BUYFAIL_LIMIT");}
+}
+
+Script "EvioliteCheck" (void)
+{
+    int PlayerLVL = GetPokeValue(POKELEVEL);
+    int PlayerDex = GetPokeValue(POKEDEXNUM);
+    Bool Output = false;
+
+    //log(i:EvoDEX[PlayerDex][0],s:"   ",i:EvoDEX[PlayerDex][1]);
+    //if(EvoDEX[PlayerDex][0] < 0 && PlayerLVL >= EvoDEX[PlayerDex][1]){Output = true;}
+    
+    SetResultValue(EvoDEX[PlayerDex][0] > 0 && PlayerLVL >= EvoDEX[PlayerDex][1]);
+}
+
+Script "EvioliteQuickCheck" (void)
+{
+    Delay(1);
+    TakeInventory("EviolitePower",99);
+    GiveInventory("Eviolite_Effect",1);
 }
