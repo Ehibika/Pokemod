@@ -43,9 +43,9 @@ Fire.DashStart:
 "####" A 0 A_GiveInventory("DashSet_B")
 "####" A 0 A_ChangeFlag("NOGRAVITY",0)
 "####" A 0 A_GiveInventory("FlareBlitzTimer")
-"####" A 0 A_GiveInventory("FlareBlitzInitiate")
+"####" A 0 //A_GiveInventory("FlareBlitzInitiate")
 Fire.Dash:
-"####" A 1
+"####" A 1 A_GiveInventory("FlareBlitzThrust")
 "####" A 0 A_SpawnItemEX("GroundDustFX",-25,0,-(z-floorz),0)
 "####" A 0 A_Jumpifinventory("DashBreaker",1,"Fire.DashEnd")
 "####" A 0 A_Jumpifinventory("FlareBlitzTimer",1,"Fire.Dash")
@@ -56,7 +56,7 @@ Fire.DashEnd:
 "####" B 0 A_GiveInventory("DashSetOff")
 "####" A 0 A_GiveInventory("DashSetOff")
 "####" B 1 A_GiveInventory("FullRecovery_C")
-"####" A 0 A_GiveInventory("MoveCooldown_3")
+"####" A 0 A_GiveInventory("MoveCooldown_1Half")
 "####" B 0 A_Jump(256,"Fire.End")
 Goto Fire.End
 

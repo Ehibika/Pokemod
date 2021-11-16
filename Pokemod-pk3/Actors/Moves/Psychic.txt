@@ -151,8 +151,10 @@ actor Psychic_Recovery_D : FullRecovery_D{Powerup.Duration 52} //87
 //[+]========================================================================[+]
 actor PsychicShot : PKMN_Missile
 {
++HEXENBOUNCE
+BounceFactor 1.0
 Damage (MBP_Psychic2)
-Speed 80
+Speed 96
 DamageType "Psychic"
 obituary "$OB_Psychic"
 scale 3.5

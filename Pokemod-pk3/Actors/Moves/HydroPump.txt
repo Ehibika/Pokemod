@@ -147,7 +147,7 @@ Actor HydroPumpBuffer : Powerup {inventory.amount 1 Powerup.duration 3}
 Actor DoubleHydroPump : Powerup{inventory.amount 1 powerup.duration 0x7FFFFFFF}
 
 
-Actor HydroPumpShotTimer : Powerup{inventory.amount 1 powerup.duration 17}
+Actor HydroPumpShotTimer : Powerup{inventory.amount 1 powerup.duration 35}
 
 
 Actor HydroPumpProtect : powerprotection
@@ -172,7 +172,7 @@ Damagefactor "HydroPump", 0.1
 //--------------------------------|Projectiles |--------------------------------
 //[+]========================================================================[+]
 
-Const Int HydroPumpRange = 40;
+Const Int HydroPumpRange = 60;
 actor HydroPumpDamager : BasicFastProjectile
 {
     PROJECTILE
@@ -184,7 +184,7 @@ actor HydroPumpDamager : BasicFastProjectile
     Damage (MBP_HydroPump) 
     Radius 10
     Height 10
-    speed 600 //15 * HydroPumpRange(40)
+    speed 900 //15 * HydroPumpRange(40)
     scale 2.5
     states
     {

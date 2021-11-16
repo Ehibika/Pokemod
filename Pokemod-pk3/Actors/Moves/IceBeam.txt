@@ -123,7 +123,7 @@ Fire.Bullet:
 Goto Fire.After
 
 Fire.After:
-"####" B 1 A_GiveInventory("HalfRecovery_A")
+"####" B 1 A_GiveInventory("FullRecovery_A")
 "####" C 0 A_REfire("Fire")
 "####" B 0 A_Jump(256,"Fire.End")
 Goto Fire.End

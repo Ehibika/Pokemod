@@ -67,6 +67,9 @@ Damagefactor "WillOWisp", 1.0
 damagefactor "Sing", 1.0
 damagefactor "ShoreUp", 1.0
 damagefactor "Roost", 1.0
+
+damagefactor "MirrorCoat", 1.0
+damagefactor "Counter", 1.0
 //--[NewStatusMove]--
 }
 
@@ -174,6 +177,7 @@ damagefactor "Infestation", 1.0
 damagefactor "AuraSphere", 1.0
 damagefactor "FairyWind", 1.0
 
+//damagefactor "MirrorCoat", 1.0
 //--[NewSpecialMove]--
 }
 
@@ -327,5 +331,6 @@ damagefactor "UTurn", 1.0
 damagefactor "FlipTurn", 1.0
 damagefactor "SelfDestruct", 1.0 
 damagefactor "Explosion", 1.0 
+//damagefactor "Counter", 1.0
 //--[NewPhysicalMove]--
 }

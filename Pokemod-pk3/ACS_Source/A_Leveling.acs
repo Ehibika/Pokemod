@@ -103,7 +103,7 @@ Script "PKMN_HitEXP" (Int Damage, int Divisor)
 {
 if(EXPTime(HITEXP) == 0){Terminate;}
 
-Damage = getLastHit(0);
+Damage = GetUserVariable(0,"user_HitMemory");//getLastHit(0);
 
 switch(Damage)
     {
@@ -249,11 +249,18 @@ for(int i = 0; i < 64; i++)
 {
     if(i != P
         && ClassifyActor(i+1000) & ACTOR_ALIVE
-        && GetPlayerInfo(p, PLAYERINFO_TEAM) == GetPlayerInfo(i, PLAYERINFO_TEAM)
-        && xyzDistance(P+1000,i+1000) <= EXPSHARERANGE+SharePlusRange) {
-            if(CheckActorInventory(i+1000,"EXPShare")){ACS_NamedExecuteAlways("GetShareEXP",0,P,ShareEXP);} 
+        && GetPlayerInfo(p, PLAYERINFO_TEAM) == GetPlayerInfo(i, PLAYERINFO_TEAM))
+        {
+            if(xyzDistance(P+1000,i+1000) <= EXPSHARERANGE+SharePlusRange
+            ||CheckActorInventory(i+1000,"EXPShare"))
+
+            {
+                ACS_NamedExecuteAlways("GetShareEXP",0,i,ShareEXP);
+                //if(CheckActorInventory(i+1000,"EXPShare")){ACS_NamedExecuteAlways("GetShareEXP",0,P,ShareEXP);} 
             //That individual has an EXP share, so you get to keep their cut of EXP.
-            else{ACS_NamedExecuteAlways("GetShareEXP",0,i,ShareEXP);}
+            //else{ACS_NamedExecuteAlways("GetShareEXP",0,i,ShareEXP);}
+            }
+            
     }
 }   
 
@@ -318,6 +325,8 @@ Function void EXP_Increment (Int Pnum, int EXPAward)
     int PlayerLVL = GetPlayerPokeValue(Pnum,POKELEVEL);
     Int LvlRate = StatDEX[PlayerDexNum][9];
 
+    str M1,M2,M3;
+
     if(EXPAward>=0)
         {
         PlayerEXP = PlayerEXP+EXPAward;
@@ -338,7 +347,11 @@ Function void EXP_Increment (Int Pnum, int EXPAward)
             if(!CheckInventory("LevelupBuffer"))
             {
             GiveInventory("LevelupCue",1);
-            Log(n:0,s:"\cf Grew to LVL ",i:levelGoal);//,s:"  ",i:PKMN_MaxLVL
+            M1 = StrParam(n:0,s:"\cf Grew to LVL ",i:levelGoal);
+            M2 = " ";
+            if(EvoDEX[PlayerDexNum][1] > 0){M3 = strParam(s:", Next Evolution at LVL ",i:EvoDEX[PlayerDexNum][1]);}
+            else{M3 = " ";}
+            Log(s:M1,s:M2,s:M3);//,s:"  ",i:PKMN_MaxLVL
             ACS_NamedExecuteAlways("SetPKMNLevel",0,levelGoal);  
             LevelUpMoveHandler(PlayerDexNum,PlayerLVL,levelGoal);
             ACS_NamedExecuteAlways("EvioliteQuickCheck",0); 

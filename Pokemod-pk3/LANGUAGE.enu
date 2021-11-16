@@ -358,9 +358,9 @@ TAG_G_FAIRY = "pink Gummi";
 DESC_REDSCARF = "Increases Physical Attack";
 DESC_BLUESCARF = "Increases Special Attack";
 DESC_GREENSCARF = "Increases Physical Defense";
-DESC_YELLOWSCARF = "Increases Special Defense";
-DESC_PINKSCARF = "Increases HP";
-DESC_LEFTOVERS = "On Recovery, Restore 10% of your Health";
+DESC_MUSCLEBAND = "Increase physical damage by 10%";
+DESC_WISEGLASSES = "Increase Special damage by 10%";
+DESC_LEFTOVERS = "On Recovery, Restore 25% of your Health";
 DESC_SHELLBELL = "Gain back some of the damage you \n"
 "deal as Health";
 DESC_LIFEORB = "Increases your damage by 30%, but  \n"
@@ -371,6 +371,8 @@ DESC_ASSAULTVEST = "Cuts special damage in half but disables \n"
 DESC_CHOICESCARF = "Boosts speed on recovery, the buff  \n"
 "dissipates once you swap moves";
 DESC_CHOICEBAND = "Boosts Physical Attack on recovery,  \n"
+"the buff dissipates once you swap moves";
+DESC_CHOICESPECS = "Boosts Special Attack on recovery,  \n"
 "the buff dissipates once you swap moves";
 DESC_WEAKNESSPOLICY = "Increase ATK and SP.ATK upon taking \n"
 "Weakness Damage";
@@ -384,10 +386,14 @@ DESC_EVIOLITE = "Reduces damage by half on pokemon \n"
 "\cGdue to evolve.";
 DESC_FULLINCENSE = "On Recovery, unleash a slowing aroma \n" 
 "That lingers for a while.";
-DESC_EXPSHARE = "Distribute most of the EXP you get \n" 
-"To your allies.";
+DESC_EXPSHARE = "Gain more EXP from allies at the expense \n" 
+"of less direct EXP.";
+DESC_AMULETCOIN = "Passively gain BP overtime \n";
 DESC_CLEANSETAG = "Dispells Hostile Status Changes \n";
 DESC_HEAVYDUTYBOOTS = "Let's you safely walk over hazards.";
+DESC_EJECTBUTTON = "on recovery, warp a good distance forward.";
+DESC_POWERHERB = "On Recovery, Completes all ongoing cooldowns.";
+DESC_RAZORFANG = "Causes Generic attacks to Cringe periodically.";
 //#endregion
 
 //#region  -=- Move Obits -=-
@@ -719,6 +725,8 @@ OB_SHOREUP = "%k Defeated %o using SHOREUP!";
 OB_ROOST = "%k Defeated %o using ROOST!";
 OB_SELFDESTRUCT = "%k Defeated %o using SELFDESTRUCT!";
 OB_EXPLOSION = "%k Defeated %o using EXPLOSION!";
+OB_MIRRORCOAT = "%k Defeated %o using MIRRORCOAT!";
+OB_COUNTER = "%k Defeated %o using COUNTER!";
 //--[NewMove]--
 
 //#endregion
@@ -3197,7 +3205,9 @@ M062_NAME = "\cj Reflect";
 M062_TYPE = "\cj Psychic";
 M062_CATEGORY = "\cf Status";
 M062_POWER = "\cfPower:\cj --";
-M062_DESC = "\cfTarget the ground\cj and cast a protective \nbarrier onto oneself and all teammates in \nthe area that cuts physical damage in \nhalf";
+M062_DESC = "\cjCast a barrier on oneself and allies that\n"
+"blocks a certain amount of Physical\n"
+"Damage.";
 //#endregion
 
 //#region -=- 063: MagicalLeaf -=-
@@ -3214,7 +3224,9 @@ M064_NAME = "\cj LightScreen";
 M064_TYPE = "\cj Psychic";
 M064_CATEGORY = "\cf Status";
 M064_POWER = "\cfPower:\cj --";
-M064_DESC = "\cfTarget the ground\cj and cast a protective \nbarrier onto oneself and all teammates in \nthe area that cuts Special damage in \nhalf";
+M064_DESC = "\cjCast a barrier on oneself and allies that\n"
+"blocks a certain amount of Special\n"
+"Damage.";
 //#endregion
 
 //#region -=- 065: GrassWhistle -=-
@@ -4743,7 +4755,7 @@ M238_NAME = "\cj EggBomb";
 M238_TYPE = "\cj Normal";
 M238_CATEGORY = "\cf Physical";
 M238_POWER = "\cfPower:\cj --";
-M238_DESC = "\cjToss a volatile egg grenade.\n"
+M238_DESC = "\cjToss a volatile egg grenade.\n";
 //#endregion
 
 //#region -=- 239: Moonlight -=-
@@ -5621,6 +5633,26 @@ M326_POWER = "\cfPower:\cj --";
 M326_DESC = "\cjPrime yourself to detonate on defeat,\n"
 "dealing Incredible damage across a\n"
 "massive area.";
+//#endregion
+
+
+//#region -=- 327: MirrorCoat -=-
+M327_NAME = "\cj MirrorCoat";
+M327_TYPE = "\cj Psychic";
+M327_CATEGORY = "\cf Special";
+M327_POWER = "\cfPower:\cj --";
+M327_DESC = "\cjGuard yourself under a mysterious\n"
+"reflective barrier that sends back\n"
+"SPECIAL damage at double power.";
+//#endregion
+
+
+//#region -=- 328: Counter -=-
+M328_NAME = "\cj Counter";
+M328_TYPE = "\cj Fighting";
+M328_CATEGORY = "\cf Physical";
+M328_POWER = "\cfPower:\cj --";
+M328_DESC = "\cf<Desc>";
 //#endregion
 
 

@@ -272,6 +272,7 @@ damagefactor "AuraSphere", 1.3 //W
 damagefactor "RollingKick", 1.3 //W
 damagefactor "TripleKick", 1.3 //W
 damagefactor "JumpKick", 1.3 //W
+damagefactor "Counter", 1.0 //Static
     //--[Move|Fighting]--
 }
 
@@ -305,6 +306,7 @@ damagefactor "AuraSphere", 1.6 //2W
 damagefactor "RollingKick", 1.6 //2W
 damagefactor "TripleKick", 1.6 //2W
 damagefactor "JumpKick", 1.6 //2W
+damagefactor "Counter", 1.0 //Static
     //--[Move|Fighting]--
 }
 
@@ -338,6 +340,7 @@ damagefactor "AuraSphere", 0.8 //R
 damagefactor "RollingKick", 0.8 //R
 damagefactor "TripleKick", 0.8 //R
 damagefactor "JumpKick", 0.8 //R
+damagefactor "Counter", 1.0 //Static
     //--[Move|Fighting]--
 }
 
@@ -371,6 +374,7 @@ damagefactor "AuraSphere", 0.6 //2R
 damagefactor "RollingKick", 0.6 //2R
 damagefactor "TripleKick", 0.6 //2R
 damagefactor "JumpKick", 0.6 //2R
+damagefactor "Counter", 1.0 //Static
     //--[Move|Fighting]--
 }
 
@@ -404,6 +408,7 @@ damagefactor "AuraSphere", 0.1 //I
 damagefactor "RollingKick", 0.1 //I
 damagefactor "TripleKick", 0.1 //I
 damagefactor "JumpKick", 0.1 //I
+damagefactor "Counter", 0.0 //I
     //--[Move|Fighting]--
 }
 
@@ -437,6 +442,7 @@ damagefactor "AuraSphere", 1.2 //S
 damagefactor "RollingKick", 1.2 //S
 damagefactor "TripleKick", 1.2 //S
 damagefactor "JumpKick", 1.2 //S
+damagefactor "Counter", 1.0 //Static
     //--[Move|Fighting]--
 }
 //[+]========================================================================[+]
@@ -1677,6 +1683,7 @@ actor PsychicWeakness : TypeBase
     damagefactor "FutureSight", 1.3 //W
     damagefactor "ZenHeadbutt", 1.3 //W
     damagefactor "DreamEater", 1.3 //W
+damagefactor "MirrorCoat", 1.0 //Static
 //--[Move|Psychic]--
 
 }
@@ -1693,6 +1700,7 @@ actor Psychic2xWeakness : TypeBase
     damagefactor "FutureSight", 1.6 //2W
     damagefactor "ZenHeadbutt", 1.6 //2W
     damagefactor "DreamEater", 1.6 //2W
+damagefactor "MirrorCoat", 1.0 //Static
 //--[Move|Psychic]--
 
 }
@@ -1709,6 +1717,7 @@ actor PsychicResistance : TypeBase
     damagefactor "FutureSight", 0.8 //R
     damagefactor "ZenHeadbutt", 0.8 //R
     damagefactor "DreamEater", 0.8 //R
+damagefactor "MirrorCoat", 1.0 //Static
 //--[Move|Psychic]--
 
 }
@@ -1725,6 +1734,7 @@ actor Psychic2xResistance : TypeBase
     damagefactor "FutureSight", 0.6 //2R
     damagefactor "ZenHeadbutt", 0.6 //2R
     damagefactor "DreamEater", 0.6 //2R
+damagefactor "MirrorCoat", 1.0 //Static
 //--[Move|Psychic]--
 
 }
@@ -1741,6 +1751,7 @@ actor PsychicImmunity : TypeBase
     damagefactor "FutureSight", 0.1 //I
     damagefactor "ZenHeadbutt", 0.1 //I
     damagefactor "DreamEater", 0.1 //I
+damagefactor "MirrorCoat", 0.0 //I
 //--[Move|Psychic]--
 
 }
@@ -1757,6 +1768,7 @@ actor PsychicSTAB : STABBase
     damagefactor "FutureSight", 1.2 //S
     damagefactor "ZenHeadbutt", 1.2 //S
     damagefactor "DreamEater", 1.2 //S
+damagefactor "MirrorCoat", 1.0 //Static
 //--[Move|Psychic]--
 
 }

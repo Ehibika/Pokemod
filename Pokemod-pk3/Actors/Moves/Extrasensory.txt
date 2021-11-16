@@ -128,7 +128,7 @@ Obituary "$OB_Extrasensory"
 Radius 16
 Height 16
 scale 2.5
-damage (MBP_Extrasensory2)
+damage (MBP_Extrasensory1)
 speed 0
 States
 {

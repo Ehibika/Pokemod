@@ -15,12 +15,13 @@ stop
 
 
 Fire:
-"####" BBB 1 A_Jumpif(CallACS("CheckWeaponFire",RC_B)==1,"Fire.Begin")
+"####" BBB 1 A_Jumpif(CallACS("CheckWeaponFire",RC_D)==1,"Fire.Begin")
 "####" B 0 A_Jump(256,"NoAmmo")
 Goto NoAmmo
 
 Fire.Begin:
 "####" B 0
+"####" B 1 A_JumpIfInventory("OnPursuit",1,"NoAmmo2")
 "####" B 0 A_Jump(256,"Fire.Bullet")
 Goto Fire.Bullet
 
@@ -31,13 +32,10 @@ Fire.Bullet:
 Goto Fire.After
 
 Fire.After:
-"####" B 1 A_GiveInventory("FullRecovery_B")
+"####" B 1 A_GiveInventory("PartRecovery_D")
 "####" C 0 A_REfire("Fire")
 "####" B 0 A_Jump(256,"Fire.End")
 Goto Fire.End
-
-
-
 
 
 }
@@ -66,6 +64,7 @@ Goto Ready
 //[+]========================================================================[+]
 actor PursuitPP : Ammo {inventory.amount 1 inventory.Maxamount 20}
 
+actor OnPursuit : Powerup {inventory.amount 1 Powerup.Duration 8}
 //[+]========================================================================[+]
 //--------------------------------|Projectiles |--------------------------------
 //[+]========================================================================[+]
@@ -82,7 +81,7 @@ damage (MBP_Pursuit + Args[0])
 DamageType "Pursuit"
 Obituary "$OB_PURSUIT"
 Args 0 , 18
-speed 30
+speed 60
 Reactiontime 25
 Var Int User_Rot;
 States
@@ -91,6 +90,7 @@ Spawn:
 TNT1 A 0 
 TNT1 A 0 A_GiveInventory("ProjectileDCode",1)
 Spawn2:
+/*
 TNT1 A 0 A_SpawnItemEx("PursuitTrail",0,cos(pitch+(User_Rot))*Args[1],(sin(pitch+(User_Rot))*Args[1]),momX/4,MomY/4,MomZ/4,0,SXF_TRANSFERPITCH|SXF_ABSOLUTEMOMENTUM|SXF_TRANSFERTRANSLATION)
 TNT1 A 0 A_SpawnItemEx("PursuitTrail",0,cos(pitch+(User_Rot-120))*Args[1],(sin(pitch+(User_Rot-120))*Args[1]),momX/4,MomY/4,MomZ/4,0,SXF_TRANSFERPITCH|SXF_ABSOLUTEMOMENTUM|SXF_TRANSFERTRANSLATION)
 TNT1 A 0 A_SpawnItemEx("PursuitTrail",0,cos(pitch+(User_Rot+120))*Args[1],(sin(pitch+(User_Rot+120))*Args[1]),momX/4,MomY/4,MomZ/4,0,SXF_TRANSFERPITCH|SXF_ABSOLUTEMOMENTUM|SXF_TRANSFERTRANSLATION)
@@ -100,8 +100,9 @@ TNT1 A 0 A_SpawnItemEx("PursuitTrail",0,cos(pitch+(User_Rot))*Args[1],(sin(pitch
 TNT1 A 0 A_SpawnItemEx("PursuitTrail",0,cos(pitch+(User_Rot-120))*Args[1],(sin(pitch+(User_Rot-120))*Args[1]),momX/4,MomY/4,MomZ/4,0,SXF_TRANSFERPITCH|SXF_ABSOLUTEMOMENTUM|SXF_TRANSFERTRANSLATION)
 TNT1 A 0 A_SpawnItemEx("PursuitTrail",0,cos(pitch+(User_Rot+120))*Args[1],(sin(pitch+(User_Rot+120))*Args[1]),momX/4,MomY/4,MomZ/4,0,SXF_TRANSFERPITCH|SXF_ABSOLUTEMOMENTUM|SXF_TRANSFERTRANSLATION)
 BASB W 1 A_SetUserVar("User_Rot",User_Rot+24)
-
-BASB W 0 A_SeekerMissile (5, 15, SMF_LOOK|SMF_PRECISE, 256, 3)
+*/
+BASB W 0 A_SeekerMissile (35, 35, SMF_LOOK|SMF_PRECISE, 256, 3)
+TNT1 A 0 A_GiveToTarget("OnPursuit",1)
 TNT1 A 0 A_SpawnItemEx("PursuitTrail",0,cos(pitch+(User_Rot))*Args[1],(sin(pitch+(User_Rot))*Args[1]),momX/4,MomY/4,MomZ/4,0,SXF_TRANSFERPITCH|SXF_ABSOLUTEMOMENTUM|SXF_TRANSFERTRANSLATION)
 TNT1 A 0 A_SpawnItemEx("PursuitTrail",0,cos(pitch+(User_Rot-120))*Args[1],(sin(pitch+(User_Rot-120))*Args[1]),momX/4,MomY/4,MomZ/4,0,SXF_TRANSFERPITCH|SXF_ABSOLUTEMOMENTUM|SXF_TRANSFERTRANSLATION)
 TNT1 A 0 A_SpawnItemEx("PursuitTrail",0,cos(pitch+(User_Rot+120))*Args[1],(sin(pitch+(User_Rot+120))*Args[1]),momX/4,MomY/4,MomZ/4,0,SXF_TRANSFERPITCH|SXF_ABSOLUTEMOMENTUM|SXF_TRANSFERTRANSLATION)

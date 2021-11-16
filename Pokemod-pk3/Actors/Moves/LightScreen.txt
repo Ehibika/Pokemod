@@ -38,7 +38,7 @@ Goto Fire.After
 
 Fire.After:
 "####" B 1 A_GiveInventory("FullRecovery_C")
-"####" A 0 A_GiveInventory("MoveCooldown_10")
+"####" A 0 A_GiveInventory("MoveCooldown_5")
 "####" C 0 A_REfire("Fire")
 "####" B 0 A_Jump(256,"Fire.End")
 Goto Fire.End
@@ -73,7 +73,17 @@ Goto Ready
 //[+]========================================================================[+]
 actor LightScreenPP : Ammo {inventory.amount 1 inventory.Maxamount 5}
 
-actor LightScreenPower : SDef { damagefactor "Normal", 0.5 powerup.Duration -30}
+actor LightScreenBlockem : Inventory {inventory.amount 1 inventory.Maxamount 9999}
+actor LightScreenPower : Powerup { inventory.amount 1 powerup.Duration -30}
+
+actor PainGuard : BasePowerPro 
+{
+    +NOPAIN
+    inventory.amount 1 
+    Powerup.Duration 1
+}
+
+//actor LightScreenPower : SDef { damagefactor "Normal", 0.5 powerup.Duration -30}
 
 Const int LightScreenRad = 1000;
 Const int LightScreen_Item = 11;
@@ -91,11 +101,14 @@ stop
 Pickup:
 TNT1 A 1 A_Jumpifinventory("LightScreenPower",1,"Sustain")
 TNT1 A 0 A_GiveInventory("LightScreenPower",1)
+TNT1 A 0 A_GiveInventory("LightScreenBlockem",CallACS("GetBarrierQuantity",50,1))
+
 TNT1 A 0 A_SpawnItemEX("LightScreenWatcher")
 stop
 
 Sustain:
 TNT1 A 0 A_GiveInventory("LightScreenPower",1)
+TNT1 A 0 A_GiveInventory("LightScreenBlockem",CallACS("GetBarrierQuantity",50,1))
 TNT1 A 0 A_SpawnItemEX("LightScreenWatcher2")
 stop
 
@@ -221,11 +234,17 @@ TNT1 A 0 A_GiveToTarget("LightScreenSoundCue_B")
 Spawn2:
 TNT1 A 17
 TNT1 A 0 A_GiveToTarget("LightScreenB_Spawn")
-TNT1 A 0 A_JumpIfInTargetInventory("LightScreenPower",1,"Spawn2")
+TNT1 A 0 A_JumpIfInTargetInventory("LightScreenPower",1,"Spawn.Check1")
+Goto Death
+
+Spawn.Check1:
+TNT1 A 0 A_JumpIfInTargetInventory("LightScreenBlockem",1,"Spawn2")
 Goto Death
 
 Death:
 TNT1 A 0 
+TNT1 A 0 A_TakeFromTarget("LightScreenBlockem",9999)
+TNT1 A 0 A_TakeFromTarget("LightScreenPower",99)
 TNT1 A 0 A_GiveToTarget("LightScreenSoundCue_C")
 TNT1 AAAAAAA 2 A_GiveToTarget("LightScreenC_Spawn")
 TNT1 A 0

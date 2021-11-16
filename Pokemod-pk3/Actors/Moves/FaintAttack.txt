@@ -46,7 +46,7 @@ Goto Fire.After
 
 Fire.After:
 "####" B 1 A_GiveInventory("partRecovery_B")
-"####" A 0 A_GiveInventory("MoveCooldown_3")
+"####" A 0 A_GiveInventory("MoveCooldown_1Half")
 "####" B 0 A_Jump(256,"Fire.End")
 Goto Fire.End
 }

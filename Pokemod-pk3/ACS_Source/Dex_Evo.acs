@@ -17,33 +17,33 @@
 #LIBDEFINE NORMMID 5
 #LIBDEFINE LATEMID 7
 
-#LIBDEFINE EARLYFINAL 8
+#LIBDEFINE EARLYFINAL 6
 #LIBDEFINE NORMFINAL 10
 #LIBDEFINE LATEFINAL 13
 
 #LIBDEFINE EARLYFINAL2 4
-#LIBDEFINE NORMFINAL2 6
-#LIBDEFINE LATEFINAL2 8
+#LIBDEFINE NORMFINAL2 7
+#LIBDEFINE LATEFINAL2 10
 
 Int EvoDEX [MAXDEX][6] = {
     //      Paths  |Level |1st      |2nd      |3rd 	    |FamilyID   |Form Number
-    /*|0|*/{NULLEVO, NORMMID,    NULLEVO,  NULLEVO, NULLEVO	,0},
+    /*|0|*/{NULLEVO, 0,    NULLEVO,  NULLEVO, NULLEVO	,0},
     //Eevee is a special case, he has his own array
 
     /*|1|*/{1,      NORMMID,     IVYSAUR,  NULLEVO,     NULLEVO,1},
     /*|2|*/{1,      NORMFINAL,     VENUSAUR,  NULLEVO,     NULLEVO,1},
     /*|3|*/{0,      0,     NULLEVO,  NULLEVO,     NULLEVO,1},
 
-    /*|4|*/{1,      NORMMID,     CHARMELEON,  NULLEVO,     NULLEVO,2},
+    /*|4|*/{1,      LATEMID,     CHARMELEON,  NULLEVO,     NULLEVO,2},
     /*|5|*/{1,      NORMFINAL,     CHARIZARD,  NULLEVO,     NULLEVO,2},
     /*|6|*/{0,      0,     NULLEVO,  NULLEVO,     NULLEVO,2},
 
-    /*|7|*/{1,      NORMMID,     WARTORTLE,  NULLEVO,     NULLEVO,3},
+    /*|7|*/{1,      EARLYMID,     WARTORTLE,  NULLEVO,     NULLEVO,3},
     /*|8|*/{1,      NORMFINAL,     BLASTOISE,  NULLEVO,     NULLEVO,3},
     /*|9|*/{0,      0,     NULLEVO,  NULLEVO,     NULLEVO,3},
 
-    /*|10|*/{1,      NORMMID,     BAYLEEF,  NULLEVO,     NULLEVO,4},
-    /*|11|*/{1,      NORMFINAL,     MEGANIUM,  NULLEVO,     NULLEVO,4},
+    /*|10|*/{1,      EARLYMID,     BAYLEEF,  NULLEVO,     NULLEVO,4},
+    /*|11|*/{1,      EARLYFINAL,     MEGANIUM,  NULLEVO,     NULLEVO,4},
     /*|12|*/{0,      0,     NULLEVO,  NULLEVO,     NULLEVO,4},
 
     /*|13|*/{1,      NORMMID,     QUILAVA,  NULLEVO,     NULLEVO,5},
@@ -54,23 +54,23 @@ Int EvoDEX [MAXDEX][6] = {
     /*|17|*/{1,      NORMFINAL,     FERALIGATR,  NULLEVO,     NULLEVO,6},
     /*|18|*/{0,      0,     NULLEVO,  NULLEVO,     NULLEVO,6},
 
-    /*|19|*/{1,      NORMMID,     GROVYLE,  NULLEVO,     NULLEVO,7},
+    /*|19|*/{1,      EARLYMID,     GROVYLE,  NULLEVO,     NULLEVO,7},
     /*|20|*/{1,      NORMFINAL,     SCEPTILE,  NULLEVO,     NULLEVO,7},
     /*|21|*/{0,      0,     NULLEVO,  NULLEVO,     NULLEVO,7},
 
-    /*|22|*/{1,      NORMMID,     COMBUSKEN,  NULLEVO,     NULLEVO,8},
+    /*|22|*/{1,      EARLYMID,     COMBUSKEN,  NULLEVO,     NULLEVO,8},
     /*|23|*/{1,      NORMFINAL,     BLAZIKEN,  NULLEVO,     NULLEVO,8},
     /*|24|*/{0,      0,     NULLEVO,  NULLEVO,     NULLEVO,8},
 
-    /*|25|*/{1,      NORMMID,     MARSHTOMP,  NULLEVO,     NULLEVO,9},
+    /*|25|*/{1,      EARLYMID,     MARSHTOMP,  NULLEVO,     NULLEVO,9},
     /*|26|*/{1,      NORMFINAL,     SWAMPERT,  NULLEVO,     NULLEVO,9},
     /*|27|*/{0,      0,     NULLEVO,  NULLEVO,     NULLEVO,9},
 
-    /*|28|*/{1,      NORMMID,     GROTLE,  NULLEVO,     NULLEVO,10},
+    /*|28|*/{1,      EARLYMID,     GROTLE,  NULLEVO,     NULLEVO,10},
     /*|29|*/{1,      NORMFINAL,     TORTERRA,  NULLEVO,     NULLEVO,10},
     /*|30|*/{0,      0,     NULLEVO,  NULLEVO,     NULLEVO,10},
 
-    /*|31|*/{1,      NORMMID,     MONFERNO,  NULLEVO,     NULLEVO,11},
+    /*|31|*/{1,      EARLYMID,     MONFERNO,  NULLEVO,     NULLEVO,11},
     /*|32|*/{1,      NORMFINAL,     INFERNAPE,  NULLEVO,     NULLEVO,11},
     /*|33|*/{0,      0,     NULLEVO,  NULLEVO,     NULLEVO,11},
 
@@ -78,8 +78,8 @@ Int EvoDEX [MAXDEX][6] = {
     /*|35|*/{1,      NORMFINAL,     EMPOLEON,  NULLEVO,     NULLEVO,12},
     /*|36|*/{0,      0,     NULLEVO,  NULLEVO,     NULLEVO,12},
 
-    /*|37|*/{1,      LATEMID,     DRAKLOAK,  NULLEVO,     NULLEVO,13},
-    /*|38|*/{1,      NORMFINAL,     DRAGAPULT,  NULLEVO,     NULLEVO,13},
+    /*|37|*/{1,      EARLYMID,     DRAKLOAK,  NULLEVO,     NULLEVO,13},
+    /*|38|*/{1,      LATEFINAL,     DRAGAPULT,  NULLEVO,     NULLEVO,13},
     /*|39|*/{0,      0,     NULLEVO,  NULLEVO,     NULLEVO,13},
 
     /*|40|*/{1,      EARLYMID,     DRAGONAIR,  NULLEVO,     NULLEVO,14},
@@ -117,7 +117,7 @@ Int EvoDEX [MAXDEX][6] = {
     /*|63|*/{1,      NORMFINAL,     ALAKAZAM,  NULLEVO,     NULLEVO,22},
     /*|64|*/{0,      0,     NULLEVO,  NULLEVO,     NULLEVO,22},
 
-    /*|65|*/{1,      NORMFINAL2,     HYPNO,  NULLEVO,     NULLEVO,23},
+    /*|65|*/{1,      EARLYFINAL2,     HYPNO,  NULLEVO,     NULLEVO,23},
     /*|66|*/{0,      0,     NULLEVO,  NULLEVO,     NULLEVO,23},
 
     /*|67|*/{1,      NORMMID,     KIRLIA,  NULLEVO,     NULLEVO,24},
@@ -130,7 +130,7 @@ Int EvoDEX [MAXDEX][6] = {
 
     /*|73|*/{0,      0,     NULLEVO,  NULLEVO,     NULLEVO,26},
 
-    /*|74|*/{1,      NORMFINAL2,     MAGCARGO,  NULLEVO,     NULLEVO,27},
+    /*|74|*/{1,      EARLYFINAL2,     MAGCARGO,  NULLEVO,     NULLEVO,27},
     /*|75|*/{0,      0,     NULLEVO,  NULLEVO,     NULLEVO,27},
   
     /*|76|*/{1,      EARLYMID,      PIKACHU,  PIKACHU,     NULLEVO,28},
@@ -138,30 +138,30 @@ Int EvoDEX [MAXDEX][6] = {
     /*|78|*/{0,      0,             NULLEVO,  NULLEVO,     NULLEVO,28},
 
     
-    /*|79|*/{ 1,      NORMFINAL2,             FERROTHORN,  NULLEVO,     NULLEVO,29 },
+    /*|79|*/{ 1,      EARLYFINAL2,             FERROTHORN,  NULLEVO,     NULLEVO,29 },
     /*|80|*/{ 0,      0,             NULLEVO,  NULLEVO,     NULLEVO,29 },
     
-    /*|81|*/{ 1,      NORMMID,             SEADRA,  NULLEVO,     NULLEVO,30 },
+    /*|81|*/{ 1,      EARLYMID,             SEADRA,  NULLEVO,     NULLEVO,30 },
     /*|82|*/{ 1,      NORMFINAL,             KINGDRA,  NULLEVO,     NULLEVO,30 },
     /*|83|*/{ 0,      0,             NULLEVO,  NULLEVO,     NULLEVO,30 },
     
-    /*|84|*/{ 2,      NORMFINAL2,             CHERRIM_O,  CHERRIM_S,     NULLEVO,31 },
-    /*|85|*/{ 0,      0,             NULLEVO,  NULLEVO,     NULLEVO,31 },
-    /*|86|*/{ 0,      0,             NULLEVO,  NULLEVO,     NULLEVO,31 },
+    /*|84|*/{ 2,      EARLYFINAL2,             CHERRIM_O,  CHERRIM_S,     NULLEVO,31 },
+    /*|85|*/{ 1,      EARLYFINAL2,             CHERRIM_S,  NULLEVO,     NULLEVO,31 },
+    /*|86|*/{ 1,      EARLYFINAL2,             CHERRIM_O,  NULLEVO,     NULLEVO,31 },
     
     /*|87|*/{ 1,      NORMFINAL2,             ARCANINE,  NULLEVO,     NULLEVO,32 },
     /*|88|*/{ 0,      0,             NULLEVO,  NULLEVO,     NULLEVO,32 },
     
-    /*|89|*/{ 1,      NORMMID,             ZWEILOUS,  NULLEVO,     NULLEVO,33 },
-    /*|90|*/{ 1,      NORMFINAL,             HYDREIGON,  NULLEVO,     NULLEVO,33 },
+    /*|89|*/{ 1,      EARLYMID,             ZWEILOUS,  NULLEVO,     NULLEVO,33 },
+    /*|90|*/{ 1,      LATEFINAL,             HYDREIGON,  NULLEVO,     NULLEVO,33 },
     /*|91|*/{ 0,      0,             NULLEVO,  NULLEVO,     NULLEVO,33 },
     
-    /*|92|*/{ 1,      NORMMID,             DUOSION,  NULLEVO,     NULLEVO,34 },
+    /*|92|*/{ 1,      EARLYMID,             DUOSION,  NULLEVO,     NULLEVO,34 },
     /*|93|*/{ 1,      NORMFINAL,             REUNICLUS,  NULLEVO,     NULLEVO,34 },
     /*|94|*/{ 0,      0,             NULLEVO,  NULLEVO,     NULLEVO,34 },
 
-    /*|95|*/{ 1,      NORMMID,             CHANSEY,  NULLEVO,     NULLEVO,35 },
-    /*|96|*/{ 1,      NORMFINAL,             BLISSEY,  NULLEVO,     NULLEVO,35 },
+    /*|95|*/{ 1,      EARLYMID,             CHANSEY,  NULLEVO,     NULLEVO,35 },
+    /*|96|*/{ 1,      EARLYFINAL,             BLISSEY,  NULLEVO,     NULLEVO,35 },
     /*|97|*/{ 0,      0,             NULLEVO,  NULLEVO,     NULLEVO,35 },
     
     /*|98|*/{ 1,      NORMMID,             GRAVELER,  NULLEVO,     NULLEVO,36 },

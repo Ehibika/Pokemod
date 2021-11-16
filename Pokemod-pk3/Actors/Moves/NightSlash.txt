@@ -85,12 +85,15 @@ actor NightSlash1Protect : PowerProtection
 Powerup.Duration 10
 damagefactor "Normal", 1.0
 damagefactor "NightSlash1", 0.0
+damagefactor "NightSlash2", 0.0
+
 }
 
 actor NightSlash2Protect : PowerProtection
 {
 Powerup.Duration 10
 damagefactor "Normal", 1.0
+damagefactor "NightSlash1", 0.0
 damagefactor "NightSlash2", 0.0
 }
 

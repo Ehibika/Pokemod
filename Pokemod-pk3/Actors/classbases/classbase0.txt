@@ -23,6 +23,7 @@ gravity 0.6
 +QUICKTORETALIATE
 +NOSKIN
 +THRUSPECIES
++USEDAMAGEEVENTSCRIPT 
 damagefactor "Dummy", 0.0
 damagefactor "BlockExplosion", 0.0
 Player.MaxSkinSizeFactor 0, 0
@@ -36,7 +37,9 @@ var int User_STargRange;
 var int user_wepangle;
 var int user_weppitch;
 var int user_wepangle2;
+
 var int user_HitMemory;
+var int User_HitTypeMemory;
 var int user_HitFrame;
 
 var int user_FlyStartZ;

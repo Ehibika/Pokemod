@@ -15,12 +15,12 @@ SpawnNewWepFunc("Pokemoney");
 
 script "Spawn_Pokemoney5" (void)
 {
-SpawnNewWepFunc("Pokemoney5");
+SpawnNewWepFunc("Pokemoney_5");
 }
 
 script "Spawn_Pokemoney10" (void)
 {
-SpawnNewWepFunc("Pokemoney10");
+SpawnNewWepFunc("Pokemoney_10");
 }
 
 script "Spawn_BigHealthPKMN" (void)

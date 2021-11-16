@@ -59,6 +59,9 @@ InInventory AltAttackMove2, 1{DrawImage "MOICONR", 4, 140;}
 	//DrawNumber 3, "8BDMAFONT", Untranslated, Health, alignment(left), 152, 177;
 	DrawNumber 4, "CBMF", Green, Health, alignment(right), 62, 164;
 	DrawNumber 4, "CBMF", white, "SBAR_HP", alignment(left)|prefix("", "/"), 62, 164;
+
+	InInventory LightScreenBlockem, 1 {	DrawNumber 4, "CBMF", red, LightScreenBlockem, alignment(left), 92, 160;}
+	InInventory ReflectBlockem, 1 {	DrawNumber 4, "CBMF", blue, ReflectBlockem, alignment(left), 92, 168;}
 //}
 }
 

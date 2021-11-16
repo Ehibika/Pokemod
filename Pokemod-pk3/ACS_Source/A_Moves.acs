@@ -85,6 +85,23 @@ Script "ProtectBarrierWarper" (void) CLIENTSIDE
 	Thing_Remove(0);
 }
 
+Script "MirrorCoatBarrierWarper" (void) CLIENTSIDE
+{
+	int Player = ACS_NamedExecuteWithResult("core_gettarget",0);
+	
+	// Loop if shield is active
+	while(GetActorProperty(Player, APROP_HEALTH)>0
+	&& CheckActorInventory(Player, "MirrorCoatGuard") > 0
+	){
+		Delay(1);
+	}
+	
+    // Remove
+    SetActorState(0,"Death");
+    Delay(17);
+	Thing_Remove(0);
+}
+
 Script "AlertFXWarper" (void) CLIENTSIDE
 {
 	int Player = ACS_NamedExecuteWithResult("core_gettarget",0);
@@ -181,7 +198,7 @@ script "TeamSmoke2"  (int Player) CLIENTSIDE
 
 Script "AbsorbEffect" (int Per)
 {
-int Amount = getLastHit(0);
+int Amount = GetUserVariable(0,"user_HitMemory");//getLastHit(0);
 switch(Amount)
     {
         case -3: terminate; break;
@@ -204,7 +221,7 @@ ACS_NamedExecuteAlways("PKMNACS_Basic(Over)Heal",0,0,Amount);
 Script "LifeDrainEffect" (int Per)
 {
 
-    int Amount = getLastHit(0);
+    int Amount = GetUserVariable(0,"user_HitMemory");//getLastHit(0);
     switch(Amount)
         {
             case -3: terminate; break;
@@ -601,6 +618,17 @@ if(CheckInventory("DisableFlag") == ThisWeapon){Output = 1;}
 SetResultValue(Output);
 }
 
+Script "HasAssaultVest" (Void)
+{
+
+//used so that you get an error sound when attempting to use a status move while wearing the assault vest
+
+int ThisWeapon = WhichWeapon();
+int Output;
+
+if(CheckInventory("AssaultVest")){Output = 1;}
+SetResultValue(Output);
+}
 
 
 script "BarrierBlockTID" (void)
@@ -859,7 +887,8 @@ Script "ElectroBallSpeedDamage" (int Base)
 
     int Damage = Base*SPDTDiff;
 
-    Thing_Damage2(TracTID,Damage,"ElectroBall");
+    //Thing_Damage2(TracTID,Damage,"ElectroBall");
+    SetResultValue(Damage);
 }
 
 Script "BerrySteal" (void)
@@ -1014,6 +1043,10 @@ Script "GetMoveRecoveryLVL" (int Pointer)
     if(CheckInventory("ChannelingSpeed")) output++;
     if(CheckInventory("ConShotTimer")) output++;
     if(CheckInventory("HeldItemCooldown")) output+=2;
+    if(CheckInventory("ChoiceBandPower")) output++;
+    if(CheckInventory("ChoiceSpecsPower")) output++;
+    if(CheckInventory("STF_ChoiceScarf")) output++;
+    if(CheckInventory("FocusBandProtectFlag")) output++;
     SetResultValue(Output);
 }
 
@@ -1067,4 +1100,33 @@ if(oldTID!=exploderOwner) {
 	Thing_ChangeTID(0,0);
 	Thing_ChangeTID(u,oldTID);
 }
+}
+
+Script "GetBarrierQuantity" (int Percentage, int Type)
+{
+int Output;
+str BarrierFlag;
+Switch(Type)
+    {
+        case 1: BarrierFlag = "LightScreenBlockem"; break;
+        case 2: BarrierFlag = "ReflectBlockem"; break;
+
+        default: BarrierFlag = "LightScreenBlockem"; break;
+    }
+
+Int Quantity1 = ACS_NamedExecuteWithResult("PKMNACS_HealthPercent",0,1,Percentage);
+int Quantity2 = CheckInventory(BarrierFlag);
+Output = Quantity1 - Quantity2;
+
+//log(s:"Get ",i:Output,s:" ",s:BarrierFlag);
+SetResultValue(Output);
+
+}
+
+Script "RevengePower" (int BaseDamage)
+{
+    int Player = ACS_NamedExecuteWithResult("core_gettarget",0);
+    int Mod = CheckActorInventory(Player,"RevengePowerCount");
+    int Output = BaseDamage+Mod;
+    SetResultValue(Output);
 }

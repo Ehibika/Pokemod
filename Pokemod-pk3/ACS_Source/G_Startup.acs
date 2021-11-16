@@ -54,8 +54,27 @@ if(PlayerIsBot(PlayerNumber())){GiveInventory("InSafeZone",1); ACS_NamedExecuteA
 
 }   
  
+Function Void TakeAllMoves (void)
+{
+Str WN,WN1,WN2,WN3,WN4;
+    For(int i = 0; i < MAX_WEAPONS_GLOBAL; i++)
+    {
+		WN = weapons_ammo[i][0];
+        WN1 = StrParam(s:WN,i:1);
+        WN2 = StrParam(s:WN,i:2);
+        WN3 = StrParam(s:WN,i:3);
+        WN4 = StrParam(s:WN,i:4);
+
+        if(CheckInventory(WN1)){TakeInventory(WN1,99);} 
+        if(CheckInventory(WN2)){TakeInventory(WN2,99);}
+        if(CheckInventory(WN3)){TakeInventory(WN3,99);}
+        if(CheckInventory(WN4)){TakeInventory(WN4,99);}
+     }
+}
+
 Function Void GiveStartingMoves (int Dexnum)
 {
+	TakeAllMoves();
 
 	int M1,M2,M3,M4;
 

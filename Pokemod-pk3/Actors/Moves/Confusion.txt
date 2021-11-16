@@ -2,7 +2,7 @@ actor ConfusionMove : WepMasterBase
 {
 Tag "Confusion"
 Weapon.AmmoUse 1
-Weapon.AmmoGive 15
+Weapon.AmmoGive 20
 weapon.ammotype "ConfusionPP"
 scale 2.0
 Inventory.Pickupmessage "$PU_MEGABUSTER"
@@ -119,14 +119,14 @@ Goto Ready
 //[+]========================================================================[+]
 //-----------------------------|Ammo & Inventory|------------------------------
 //[+]========================================================================[+]
-actor ConfusionPP : Ammo {inventory.amount 1 inventory.Maxamount 15}
+actor ConfusionPP : Ammo {inventory.amount 1 inventory.Maxamount 20}
 
 actor ConfusionRCFlag : Powerup {inventory.amount 1 powerup.duration 35 }
 actor Confusion_RemoteCooldown : Powerup {inventory.amount 1 powerup.duration -5}
 
 Const int ConfusionRad = 150;
 Const int Confusion_Forward = 150;
-Const int Confusion_Range = 600;
+Const int Confusion_Range = 1000;
 
 Const int ConfusionRad2 = 100;
 
@@ -175,6 +175,9 @@ stop
 //[+]========================================================================[+]
 actor ConfusionShot : PKMN_Missile
 {
++HEXENBOUNCE
+BounceFactor 1.0
+Speed 64
 Damage (MBP_Confusion2)
 DamageType "Confusion"
 obituary "$OB_Confusion"

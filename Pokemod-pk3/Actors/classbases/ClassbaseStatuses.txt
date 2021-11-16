@@ -530,6 +530,7 @@ TNT1 A 0 A_Jumpifinventory("ParalyzeProof",1,"Nope")
 //==
 TNT1 A 0 A_GiveInventory("LongPara",1)
 TNT1 A 0 A_SpawnItemEX("ParalysisWatcher")
+TNT1 A 0 A_Stop
 TNT1 A 0 ACS_NamedExecuteAlways("PKMN_JumpToggle",0,0)
 TNT1 A 0 A_Playsoundex("status/paralyze","Soundslot8")
 stop
@@ -563,6 +564,7 @@ TNT1 A 0 A_Jumpifinventory("ParalyzeProof",1,"Nope")
 //==
 TNT1 A 0 A_GiveInventory("ShortPara",1)
 TNT1 A 0 A_SpawnItemEX("ParalysisWatcher")
+TNT1 A 0 A_Stop
 TNT1 A 0 ACS_NamedExecuteAlways("PKMN_JumpToggle",0,0)
 TNT1 A 0 A_Playsoundex("status/paralyze","Soundslot8")
 stop
@@ -596,6 +598,7 @@ TNT1 A 0 A_Jumpifinventory("ParalyzeProof",1,"Nope")
 //==
 TNT1 A 0 A_GiveInventory("LongPara",1)
 TNT1 A 0 A_SpawnItemEX("ParalysisWatcher")
+TNT1 A 0 A_Stop
 TNT1 A 0 ACS_NamedExecuteAlways("PKMN_JumpToggle",0,0)
 TNT1 A 0 A_Playsoundex("status/paralyze","Soundslot8")
 stop
@@ -630,6 +633,7 @@ TNT1 A 0 A_Jumpifinventory("ParalyzeProof",1,"Nope")
 TNT1 A 0 A_GiveInventory("ShortPara",1)
 TNT1 A 0 A_SpawnItemEX("ParalysisWatcher")
 TNT1 A 0 ACS_NamedExecuteAlways("PKMN_JumpToggle",0,0)
+TNT1 A 0 A_Stop
 TNT1 A 0 A_Playsoundex("status/paralyze","Soundslot8")
 stop
 
@@ -769,6 +773,29 @@ stop
 }
 }
 
+
+actor Paralyze_Hitstun : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_Jumpifinventory("ParalysisMark",1,"Sustain")
+stop
+
+Sustain:
+TNT1 A 0 A_ScaleVelocity(0.5)
+stop
+Nope:
+TNT1 A 0
+stop
+}
+}
 //[+]=========================[+]
 //----------|Freeze|-------------
 //[+]=========================[+]

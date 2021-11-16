@@ -14,7 +14,7 @@ WEAP X 1
 stop
 
 Fire:
-"####" BBB 1 A_Jumpif(CallACS("CheckWeaponFire",RC_B)==1,"Fire.Begin")
+"####" BBB 1 A_Jumpif(CallACS("CheckWeaponFire",RC_C)==1,"Fire.Begin")
 "####" B 0 A_Jump(256,"NoAmmo")
 Goto NoAmmo
 
@@ -26,11 +26,12 @@ Goto Fire.Melee
 Fire.Melee:
 TNT1 A 0 A_PlaySoundEx("misc/Clap","Weapon")
 TNT1 A 0 A_PlaySoundEx("weapon/napalm","SoundSlot6")
-TNT1 A 0 A_FireCustomMissile("ForcePalmMelee",0,1,0,0)
+"####" B 0 A_FireCustomMissile("ForcePalmDamager",0,1,0,0,0,0)
+"####" B 3 A_FireCustomMissile("ForcePalmStart",0,0,0,0,0,0)
 Goto Fire.After
 
 Fire.After:
-"####" B 1 A_GiveInventory("HalfRecovery_B")
+"####" B 1 A_GiveInventory("ForcePalm_Recovery_C")
 "####" B 0 A_Jump(256,"Fire.End")
 Goto Fire.End
 }
@@ -92,9 +93,104 @@ Actor ForcePalmProtect : powerprotection
 Powerup.duration 17
 Damagefactor "ForcePalm", 0
 }
+
+actor ForcePalm_Recovery_C : FullRecovery_C{Powerup.Duration 52} //87
+
 //[+]========================================================================[+]
 //--------------------------------|Projectiles |--------------------------------
 //[+]========================================================================[+]
+Const Int ForcePalmRange = 80;
+actor ForcePalmDamager : BasicFastProjectile
+{
+    PROJECTILE
+    damagetype "ForcePalm"
+    Obituary "$OB_ForcePalm"
+    +SKYEXPLODE
+    +EXPLODEONWATER
+    RenderStyle None
+    Damage (0) 
+    Radius 10
+    Height 10
+    speed 1200 //15 * ForcePalmRange(80)
+    scale 2.5
+    states
+    {
+    Spawn:
+        TNT1 A 0
+        TNT1 A 1 A_Stop
+        TNT1 A 0
+        stop
+		Death:
+		TNT1 A 1 A_Explode(MBP_ForcePalm,32,0,0,32)
+		Stop
+    }
+}
+
+
+actor ForcePalmStart //: BasicHelper
+{
+    +MISSILE
+    -SOLID
+    +NOCLIP
+    +NOINTERACTION
+    +NOGRAVITY
+    +DONTBLAST
+    +DONTREFLECT
+    +THRUACTORS
+    RenderStyle none
+    Radius 2
+    Height 2
+
+    Speed 15
+    States
+    {
+    Spawn:
+        TNT1 A 0
+        TNT1 A 0 A_Warp(2,15,0,32,0,16+8)//But which interpolation? Does it matter?
+        TNT1 A 1 A_SpawnItemEx("ForcePalmBeam",0,0,0,momx,momy,momz,0,8)
+		TNT1 A 0 A_SpawnItemEx("ForcePalmFX",0,0,0,0,0,0,0,1061) //1061
+        stop
+    }
+}
+
+actor ForcePalmBeam : BasicFastProjectile//FastProj to match damager hitbox
+{
+    +MISSILE
+    +NOGRAVITY
+    +SKYEXPLODE
+    +EXPLODEONWATER
+    +DONTSPLASH
+    +PAINLESS
+    +CLIENTSIDEONLY
+    RenderStyle None
+    Damage (0)
+    Radius 10
+    Height 10
+    Speed 15
+    Scale 2.5
+    States
+    {
+    Spawn:
+        TNT1 A 0
+        TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+        TNT1 A 0 A_JumpIf(Pitch > ForcePalmRange,"Death2")
+        TNT1 A 0 A_SetPitch(Pitch+1)
+        TNT1 A 0 A_SpawnItemEx("ForcePalmBeam",0,0,0,momx,momy,momz,0,552+1)//512+32+8
+        TNT1 A 0 A_Stop
+        TNT1 A 0 A_SpawnItemEx("ForcePalmRayFX",0,0,0,0,0,0,0,1)
+        TNT1 A 0 A_SpawnItemEx("ForcePalmRayFX2",0,0,0,random2(2),random2(2),random2(2),0,1)
+        TNT1 A 1
+        stop
+    Death:
+        TNT1 A 0 A_SpawnItemEx("ForcePalmFX",0,0,0,0,0,0,0,1)
+        stop
+    Death2:
+        TNT1 A 0 A_Stop
+        TNT1 A 0 A_SpawnItemEx("ForcePalmFX",0,0,0,0,0,0,0,1)
+        stop
+    }
+}
+
 
 actor ForcePalmMelee : BasicMeleeAttack
 {
@@ -143,12 +239,13 @@ stop
 
 actor ForcePalmFX : BasicClientside
 {
-scale 4.5
+scale 3.5
 renderstyle "add"
 States
 {
 Spawn:
 TNT1 A 0 
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
 BGHF ABC 1
 BGHF C 1 A_SetScale(ScaleX+0.5)
 BGHF C 0 A_Fadeout(0.3)
@@ -160,3 +257,36 @@ stop
 }
 }
 
+actor ForcePalmRayFX : BasicClientside
+{
+scale 2.0
+renderstyle "Add"
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+HARD BCD 1
+stop
+}
+}
+
+actor ForcePalmRayFX2 : BasicClientside
+{
+scale 2.0
+renderstyle "Add"
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+BGHF CBA 1
+BGHF A 1 A_SetScale(ScaleX-0.5)
+BGHF A 0 A_Fadeout(0.3)
+BGHF A 1 A_SetScale(ScaleX-0.5)
+BGHF A 0 A_Fadeout(0.3)
+BGHF A 1 A_SetScale(ScaleX-0.5)
+BGHF A 0 A_Fadeout(0.3)
+stop
+}
+}

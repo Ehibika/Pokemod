@@ -25,6 +25,7 @@ Fire.Begin:
 Goto Fire.PreCharge
 
 Fire.PreCharge:
+"####" B 0 A_TakeInventory("RevengePowerCount",999)
 "####" B 0 A_GiveInventory("WeaponCharge",1)
 "####" B 0 A_FireCustomMissile("RevengeWatcher",0,0)
 "####" B 0 A_Jump(256,"Fire.Charge1")
@@ -32,21 +33,20 @@ Goto Fire.Charge1
 
 Fire.Charge1:
 "####" B 0 A_Jumpif(CallACS("CheckWeaponFire",RC_A)!=1,"NoAmmo")
-"####" B 0 A_JumpIfInventory("RevengeFlag",1,"Fire.Charge3")
-"####" B 0 A_JumpIfInventory("RevengeSensor",1,"Fire.Charge2")
+"####" B 0 A_JumpIfInventory("RevengePowerCount",50,"Fire.Charge2")
 //"####" B 0 A_GiveInventory("WeaponCharge",1)
-"####" B 0 A_GiveInventory("ChannelingSpeed")  //Firing Slow
+"####" B 0 //A_GiveInventory("ChannelingSpeed")  //Firing Slow
 "####" B 0 A_PlaySoundEx("Weapon/Heat1","Soundslot6")
+"####" B 0 A_GiveInventory("RevengeFlag")
 "####" B 1
 "####" C 0 A_REfire("Fire.Charge1")
 "####" B 0 A_Jump(256,"Fire.Bullet")
 Goto Fire.After2
 
 Fire.Charge2:
-"####" B 0 A_GiveInventory("RevengeFlag")
-Fire.Charge3:
-"####" B 0 A_GiveInventory("ChannelingSpeed")  //Firing Slow
+"####" B 0 //A_GiveInventory("ChannelingSpeed")  //Firing Slow
 "####" B 0 A_PlaySoundEx("Weapon/Heat3","Soundslot6")
+"####" B 0 A_GiveInventory("RevengeFlag")
 "####" B 1
 "####" C 0 A_REfire("Fire.Charge1")
 "####" B 0 A_Jump(256,"Fire.Bullet2")
@@ -100,6 +100,9 @@ actor RevengePP : Ammo {inventory.amount 1 inventory.Maxamount 15}
 actor RevengeSensor : Powerup {inventory.amount 1 Powerup.Duration 35}
 actor RevengeFlag : Powerup {inventory.amount 1 Powerup.Duration 35}
 
+actor RevengePowerCount : Inventory {inventory.amount 1 inventory.MAxamount 999}
+
+
 Const int RevengeRad = 64;
 //[+]========================================================================[+]
 //--------------------------------|Projectiles |--------------------------------
@@ -123,7 +126,7 @@ actor RevengeWatcher
     Spawn2:
         TNT1 A 1 A_Warp(AAPTR_TARGET, 0,0,32, 0, 0)
         TNT1 A 5 A_SpawnItemEx("AcidVaporFX", random2(32), random2(32), 0, random(2,4), 0, random(1,4), random(0, 359),1)
-        TCLA A 0 A_JumpIfInTargetInventory("RevengeFlag",1,"Spawn3")
+        TCLA A 0 A_JumpIfInTargetInventory("RevengePowerCount",50,"Spawn3")
         TCLA A 0 A_JumpIfInTargetInventory("WeaponCharge",1,"Spawn2")
         stop
     Spawn3:
@@ -140,68 +143,48 @@ actor RevengeWatcher
 //[+]========================================================================[+]
 //--------------------------------|Projectiles |--------------------------------
 //[+]========================================================================[+]
-
-actor RevengeMelee : BasicProjectile
+actor RevengeMelee : BasicMeleeAttack
 {
-Speed 64
-Damage (0)
+Speed 80
+Scale 4.0
 DamageType "Revenge"
-height 16
-radius 12
-scale 2.5
+Obituary "$OB_Revenge"
+Damage(0)
 States
 {
 Spawn:
 TNT1 A 0 
 TNT1 A 0 A_GiveInventory("ProjectileCode",1)
-TNT1 A 0 A_TransferPointer(AAPTR_TARGET,AAPTR_DEFAULT,AAPTR_TRACER,AAPTR_TRACER)
-//==
-TNT1 A 1 
-TNT1 A 0 A_Stop
-TNT1 A 1 A_JumpIf(IsPointerEqual(AAPTR_TRACER,AAPTR_NULL) == False, "Leap")
-Goto Death
-
-Leap:
-TNT1 A 1 A_Warp(AAPTR_TRACER,0,0,28,0,WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE)
-Goto Death
+Spawn2:
+TNT1 A 0 
+HITG KKKKK 1 A_SpawnItemEx("DynamicPunchFXTrail", 0, 0, 0, 0, 0, 0, 0,1)
+stop
 
 Death:
+TNT1 A 0 A_Stop
 TNT1 A 0 A_GiveInventory("ProjectileDCode",1)
-TNT1 A 0 A_Explode(MBP_Revenge1,RevengeRad,0,0,RevengeRad)
+TNT1 A 0 A_Explode(CallACS("RevengePower",MBP_Revenge1),RevengeRad,0,0,RevengeRad)
+//TNT1 A 0 A_SpawnItemEx("DynamicPunchFX1", 0, 0, 0, 0, 0, 0, 0,1)
+//TNT1 A 0 A_SpawnItemEx("DynamicPunchFX2", 0, 0, 0, 0, 0, 0, 0,1)
+TNT1 A 0 A_PlaySoundEx("Misc/HardDrop", "SoundSlot6",0)
+NAPC A 0 A_PlaySoundEx("weapon/napalm", "Weapon")
 TNT1 A 0 A_SpawnItemEx("RevengeMeleeFX", 0, 0, 0, 0, 0, 0, 0,1)
 TNT1 A 5
 stop
 }
 }
 
-actor RevengeMelee2 : BasicProjectile
+
+actor RevengeMelee2 : RevengeMelee
 {
-Speed 64
-Damage (0)
-DamageType "Revenge"
-height 16
-radius 12
-scale 2.5
 States
 {
-Spawn:
-TNT1 A 0 
-TNT1 A 0 A_GiveInventory("ProjectileCode",1)
-TNT1 A 0 A_TransferPointer(AAPTR_TARGET,AAPTR_DEFAULT,AAPTR_TRACER,AAPTR_TRACER)
-//==
-TNT1 A 1 
-TNT1 A 0 A_Stop
-TNT1 A 1 A_JumpIf(IsPointerEqual(AAPTR_TRACER,AAPTR_NULL) == False, "Leap")
-Goto Death
-
-Leap:
-TNT1 A 1 A_Warp(AAPTR_TRACER,0,0,28,0,WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE)
-Goto Death
-
 Death:
 TNT1 A 0 A_GiveInventory("ProjectileDCode",1)
-TNT1 A 0 A_Explode(MBP_Revenge2,RevengeRad,0,0,RevengeRad)
+TNT1 A 0 A_Explode(CallACS("RevengePower",MBP_Revenge2),RevengeRad,0,0,RevengeRad)
 TNT1 A 0 A_SpawnItemEx("RevengeMeleeFX", 0, 0, 0, 0, 0, 0, 0,1)
+TNT1 A 0 A_PlaySoundEx("Misc/HardDrop", "SoundSlot6",0)
+NAPC A 0 A_PlaySoundEx("weapon/napalm", "Weapon")
 TNT1 AAAAA 3 A_SpawnItemEx("RevengeMeleeFX", random2(64), random2(64), random2(64), 0, 0, 0, 0,1)
 TNT1 A 5
 stop

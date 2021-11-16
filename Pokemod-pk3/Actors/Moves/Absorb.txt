@@ -177,13 +177,16 @@ actor AbsorbCheck : CustomInventory
 inventory.amount 1
 Inventory.MaxAmount 100
 +AUTOACTIVATE
+var int User_HitTypeMemory;
 States
 {
 Spawn:
 TNT1 A 0
 stop
 Pickup:
-TNT1 A 0
+TNT1 A 0 A_JumpIf(User_HitTypeMemory == Type_Grass,"Pickup2")
+
+Pickup2:
 TNT1 A 0 ACS_NamedExecuteAlways("AbsorbEffect",0,90)
 stop
 Nope:

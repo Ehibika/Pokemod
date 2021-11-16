@@ -51,7 +51,7 @@ Goto Fire.Rampage
 
 Fire.After:
 "####" B 1 A_GiveInventory("SemiRecovery_B")
-"####" B 0 A_GiveInventory("MoveCooldown_3")
+"####" B 0 A_GiveInventory("MoveCooldown_1Half")
 "####" B 0 A_TakeInventory("CloseCombatTimer",99)
 "####" B 0 A_Jump(256,"Fire.End")
 Goto Fire.End

@@ -1,3 +1,6 @@
+const int SURF_Thrust = 20;
+const int SURF_TurnSpd = 4;
+
 actor SurfMove : WepMasterBase
 {
 Tag "Surf"
@@ -41,7 +44,7 @@ Goto Fire.After
 
 Fire.After:
 "####" B 1 A_GiveInventory("Surf_Recovery_A")
-"####" A 0 A_GiveInventory("MoveCooldown_5")
+"####" A 0 //A_GiveInventory("MoveCooldown_5")
 "####" C 0 A_REfire("Fire")
 "####" B 0 A_Jump(256,"Fire.End")
 Goto Fire.End
@@ -54,6 +57,7 @@ Goto NoAmmo
 
 AltFire.Begin:
 "####" B 0
+"####" B 1 A_JumpIfInventory("ParalysisMark",1,"NoAmmo2")
 "####" B 1 A_JumpIfInventory("InBoat",1,"SurfLaunch")
 "####" B 1 A_JumpIf(z-floorz < 200, "AltFire.HeightCheck")
 "####" B 0 A_Jump(256,"NoAmmo2")
@@ -67,19 +71,22 @@ Goto AltFire.Cast
 
 AltFire.Cast:
 "####" A 0 ACS_NamedExecuteAlways("TakePP",0,Move_Surf,1)
+"####" A 0 A_GiveInventory("DashSet_A")
+"####" A 1 A_SetUserVar("user_wepangle",angle)
 "####" B 0 A_PlaySoundEx("Misc/UseMove","Weapon")
 "####" B 5 A_GiveInventory("SurfRideInitiate")
 "####" B 0 A_Jump(256,"AltFire.After")
 Goto AltFire.After
 
 AltFire.After:
-"####" B 1 A_GiveInventory("SemiRecovery_A")
+"####" B 1 A_GiveInventory("Surf_Recovery_A")
 "####" C 0 A_REfire("Fire")
 "####" B 0 A_Jump(256,"Fire.End")
 Goto Fire.End
 
 SurfLaunch:
 "####" A 0 A_GiveInventory("SurfRideEnder",1)
+"####" A 0 A_GiveInventory("MoveCooldown_5")
 "####" B 5 A_SpawnItemEx("SurfWave",64,0,-(z-floorz),0,momy,momz,0,SXF_AbsoluteMomentum)
 "####" B 0 A_Jump(256,"Fire.After")
 Goto Fire.After
@@ -115,7 +122,7 @@ Powerup.duration 25
 Damagefactor "Surf", 0
 }
 
-actor Surf_Recovery_A : FullRecovery_A{Powerup.Duration 55}
+actor Surf_Recovery_A : FullRecovery_A{Powerup.Duration 8}
 
 actor SurfPPTimer : Powerup {inventory.amount 1 Powerup.Duration 35}
 
@@ -243,6 +250,7 @@ SURF E 1 A_GiveInventory("SurfFunctionA")
 SURF G 1 A_GiveInventory("SurfFunctionB")
 SURF G 1 A_GiveInventory("SurfFunctionC")
 SURF B 0 A_ChangeFlag("NOGRAVITY",0)
+TNT1 A 0 A_GiveToTarget("MoveCooldown_3")
 SURF B 0 A_SpawnItemEx("SurfWave",0,0,0,0,0,0,0,1)
 stop
 Death:
@@ -496,7 +504,7 @@ States
 {
 Spawn:
 TNT1 A 0 
-TNT1 A 2 A_Explode(MBP_Surf,64,0,0,64)
+TNT1 A 2 A_Explode(MBP_Surf2,64,0,0,64)
 stop
 }
 }
@@ -528,7 +536,7 @@ Radius 0
 States
 {
 Spawn:
-TNT1 A 1 A_GiveToTarget("BoatFX",1)
+TNT1 A 1 A_GiveToTarget("SurfFX",1)
 TNT1 A 0 A_GiveToTarget("SurfDamageSpawn",1)
 TNT1 A 0 A_JumpIfInTargetInventory("IsDead",1,"Death")
 TNT1 A 0 A_JumpIfInTargetInventory("DashBreaker",1,"Death")
@@ -569,6 +577,7 @@ TNT1 A 0 ThrustThingZ(0,10,0,1)
 TNT1 A 0 A_TakeInventory("JumpCancler",1)
 TNT1 A 0 A_TakeInventory("InBoat",1)
 TNT1 A 0 A_GiveInventory("DashBreaker",1)
+TNT1 B 0 A_GiveInventory("DashSetOff")
 stop
 }
 }
@@ -633,4 +642,36 @@ actor SurfBack2 : SurfFront
         TNT1 A 0
         stop
     }
+}
+
+
+
+actor SurfFX : CustomInventory
+{
+states
+{
+Pickup:
+TNT1 A 0 A_JumpIfInventory("CutterFlag",999,"Nope")
+TNT1 A 0 A_JumpIfInventory("DashBreaker",1,"Nope")
+TNT1 A 0 A_CheckFloor("Pickup2")
+goto Pickup3
+
+Pickup2:
+"####" A 0 A_ChangeVelocity(cos(CallACS("GRAB_MEMANGLE",0))*SURF_Thrust,sin(CallACS("GRAB_MEMANGLE",0))*SURF_Thrust,Momz,CVF_REPLACE)
+"####" A 1 A_SetUserVar("user_wepangle", CallACS("SHIFT_MEMANGLE",CallACS("GRAB_MEMANGLE",0),angle,SURF_TurnSpd))
+goto Pickup.end
+
+Pickup3:
+"####" A 0 A_ChangeVelocity(cos(CallACS("GRAB_MEMANGLE",0))*SURF_Thrust,sin(CallACS("GRAB_MEMANGLE",0))*SURF_Thrust,Momz,CVF_REPLACE)
+TNT1 A 0 A_ChangeVelocity(cos(CallACS("GRAB_MEMANGLE",0))*SURF_Thrust,sin(CallACS("GRAB_MEMANGLE",0))*SURF_Thrust,-55,CVF_REPLACE)
+//TNT1 A 0 A_ChangeVelocity(cos(-pitch)*40,0,-55,CVF_RELATIVE|CVF_REPLACE)
+goto Pickup.end
+
+Pickup.end:
+//TNT1 A 0 A_FireCustomMissile("AquaJetBumper",15,0,0,0)
+stop
+Nope:
+TNT1 A 0
+stop
+}
 }
