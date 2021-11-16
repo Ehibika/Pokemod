@@ -5,7 +5,7 @@ States
 
 AltFire:
 TNT1 A 0 
-TNT1 A 0 A_JumpifInventory("Recovery_B",1,"NoAmmo")
+TNT1 A 0 A_JumpifInventory("Recovery_D",1,"NoAmmo")
 TNT1 A 0 A_JumpifInventory("FatigueMark",1,"NoAmmo")
 
 
@@ -23,9 +23,9 @@ AltFire.Tackle:
 "####" AAA 0 A_SpawnItemEx("GroundDustFX", random(0,50), 0, -(z-floorz), 0, 0, 0, random(0, 359))
 "####" A 0 A_PlaySoundEx("misc/KingSwing","Weapon")
 "####" A 0 A_GiveInventory("TackleTimer")
-"####" A 0 A_GiveInventory("TackleInitiate")
+"####" A 0 //A_GiveInventory("TackleInitiate")
 AltFire.Dash:
-"####" A 1
+"####" A 1 A_GiveInventory("TackleThrust")
 "####" A 0 A_SpawnItemEX("GroundDustFX",-25,0,-(z-floorz),0)
 "####" A 0 A_Jumpifinventory("DashBreaker",1,"AltFire.DashEnd")
 "####" A 0 A_Jumpifinventory("TackleTimer",1,"AltFire.Dash")
@@ -34,12 +34,12 @@ goto AltFire.DashEnd
 AltFire.DashEnd:
 "####" B 0 A_ScaleVelocity(0.2)
 TNT1 A 0 A_JumpifInventory("PKMNRageFlag",1,"AltFire.TackleRage")
-TNT1 A 0 A_GiveInventory("FullRecovery_B") 
+TNT1 A 0 A_GiveInventory("FullRecovery_D") 
 "####" B 0 A_Jump(256,"AltFire.After")
 Goto AltFire.After
 
 AltFire.TackleRage:
-TNT1 A 0 A_GiveInventory("HalfRecovery_B") 
+TNT1 A 0 A_GiveInventory("HalfRecovery_D") 
 TNT1 A 0 A_Jump(256,"AltFire.RageAfter")
 Goto AltFire.RageAfter
 
@@ -47,27 +47,37 @@ AltFire.Pound:
 TNT1 A 0 A_PlaySoundEx("weapon/ChargeKick","Weapon")
 TNT1 A 0 A_FireCustomMissile("PoundMelee",0,0,0,0)
 TNT1 A 0 A_JumpifInventory("PKMNRageFlag",1,"AltFire.PoundRage")
-TNT1 A 0 A_GiveInventory("HalfRecovery_B") 
+TNT1 A 0 A_GiveInventory("HalfRecovery_D") 
 TNT1 A 0 A_Jump(256,"AltFire.After")
 Goto AltFire.After
 
 AltFire.PoundRage:
-TNT1 A 0 A_GiveInventory("PartRecovery_B") 
+TNT1 A 0 A_GiveInventory("PartRecovery_D") 
 TNT1 A 0 A_Jump(256,"AltFire.RageAfter")
 Goto AltFire.RageAfter
 
 AltFire.Scratch:
+"####" A 0 A_GiveInventory("ScratchTimer")
+"####" A 0 A_SpawnItemEX("GroundDustFX",-25,0,-(z-floorz),0)
+AltFire.Scratch1:
+"####" A 1 A_GiveInventory("ScratchThrust")
+"####" A 0 A_Jumpifinventory("DashBreaker",1,"AltFire.Scratch2")
+"####" A 0 A_Jumpifinventory("ScratchTimer",1,"AltFire.Scratch1")
+goto AltFire.Scratch2
+AltFire.Scratch2:
+//TNT1 AAA 1 A_ChangeVelocity(cos(-pitch)*85,0,sin(-pitch)*85,CVF_RELATIVE|CVF_REPLACE)
+TNT1 A 0 A_Stop
 TNT1 A 0 A_PlaySoundEx("weapon/SlashClaw","Weapon")
 TNT1 A 0 A_FireCustomMissile("ScratchMelee",0,0,25,0,0,CallACS("PitchClamp",Pitch,55))
 TNT1 A 0 A_FireCustomMissile("ScratchMelee",0,0,0,0,0,CallACS("PitchClamp",Pitch,55))
 TNT1 A 0 A_FireCustomMissile("ScratchMelee",0,0,-25,0,0,CallACS("PitchClamp",Pitch,55))
 TNT1 A 0 A_JumpifInventory("PKMNRageFlag",1,"AltFire.ScratchRage")
-TNT1 A 0 A_GiveInventory("HalfRecovery_B") 
+TNT1 A 0 A_GiveInventory("HalfRecovery_D") 
 TNT1 A 0 A_Jump(256,"AltFire.After")
 Goto AltFire.After
 
 AltFire.ScratchRage:
-TNT1 A 0 A_GiveInventory("PartRecovery_B") 
+TNT1 A 0 A_GiveInventory("PartRecovery_D") 
 TNT1 A 0 A_Jump(256,"AltFire.RageAfter")
 Goto AltFire.RageAfter
 
@@ -75,12 +85,12 @@ AltFire.Jab:
 TNT1 A 0 A_PlaySoundEx("weapon/SlashClaw","Weapon")
 TNT1 A 0 A_FireCustomMissile("JabMelee",0,0,0,0)
 TNT1 A 0 A_JumpifInventory("PKMNRageFlag",1,"AltFire.JabRage")
-TNT1 A 0 A_GiveInventory("HalfRecovery_B") 
+TNT1 A 0 A_GiveInventory("Jab_Recovery_A") 
 TNT1 A 0 A_Jump(256,"AltFire.After")
 Goto AltFire.After
 
 AltFire.JabRage:
-TNT1 A 0 A_GiveInventory("PartRecovery_B") 
+TNT1 A 0 A_GiveInventory("PartRecovery_D") 
 TNT1 A 0 A_Jump(256,"AltFire.RageAfter")
 Goto AltFire.RageAfter
 
@@ -88,23 +98,24 @@ AltFire.Lash:
 TNT1 A 0 A_PlaySoundEx("misc/KingSwing","Weapon")
 TNT1 A 17 A_FireCustomMissile("LashWatcher",0,0,0,0,0,0)
 TNT1 A 0 A_JumpifInventory("PKMNRageFlag",1,"AltFire.LashRage")
-TNT1 A 0 A_GiveInventory("FullRecovery_B") 
+TNT1 A 0 A_GiveInventory("FullRecovery_D") 
 TNT1 A 0 A_Jump(256,"AltFire.After")
 Goto AltFire.After
 
 AltFire.LashRage:
-TNT1 A 0 A_GiveInventory("HalfRecovery_B") 
+TNT1 A 0 A_GiveInventory("HalfRecovery_D") 
 TNT1 A 0 A_Jump(256,"AltFire.RageAfter")
 Goto AltFire.RageAfter
 }
 }
 
 //G.Attack Base Powers
-const int GBP_Tackle = MBP_HighPower3;
-const int GBP_Pound = MBP_HighPower1;
+const int GBP_Tackle = MBP_MidPower1;
+const int GBP_Dash = MBP_MidPower1;
+const int GBP_Pound = MBP_MidPower1;
 const int GBP_Scratch = MBP_RapidHigh;
-const int GBP_Jab = MBP_HighPower1;
-const int GBP_Lash = MBP_HighPower2;
+const int GBP_Jab = MBP_MidPower1;
+const int GBP_Lash = MBP_MidPower2;
 
 //[+]========================================================================[+]
 //--------------------------------|Tackle|--------------------------------
@@ -137,15 +148,15 @@ Spawn:
 TNT1 A 0 
 TNT1 A 0 A_JumpIfInTargetInventory("DashBreaker",1,"Terminate")
 TNT1 A 1 
-TNT1 A 1 A_Explode(GBP_Tackle,RAMHITBOX,0,0,RAMHITBOX)
+TNT1 A 1 A_Explode(GBP_Tackle+CallACS("GenericAttackPower",5),RAMHITBOX,0,0,RAMHITBOX)
 stop
 Death:
-TNT1 A 0 A_Explode(GBP_Tackle,RAMHITBOX,0,0,RAMHITBOX)
+TNT1 A 0 A_Explode(GBP_Tackle+CallACS("GenericAttackPower",5),RAMHITBOX,0,0,RAMHITBOX)
 TNT1 A 1 A_GiveInventory("ProjectileDCode",1)
 TNT1 A 0 A_GiveToTarget("TackleCollision2",1)
 TNT1 A 0 A_SpawnItemEx("BasicMeleeFX", 0, 0, 0, 0, 0, 0, 0,1)
 Crash:
-TNT1 A 0 A_Explode(GBP_Tackle,RAMHITBOX,0,0,RAMHITBOX)
+TNT1 A 0 A_Explode(GBP_Tackle+CallACS("GenericAttackPower",5),RAMHITBOX,0,0,RAMHITBOX)
 Terminate:
 TNT1 A 1
 stop
@@ -283,7 +294,7 @@ actor PoundMelee : BasicFastProjectile
 Speed 48
 Scale 5.0
 DamageType "Melee"
-Damage(GBP_Pound)
+Damage(GBP_Pound+CallACS("GenericAttackPower",5))
 States
 {
 Spawn:
@@ -428,7 +439,7 @@ stop
 
 Death:
 TNT1 A 0 A_GiveInventory("ProjectileCode",1)
-NDFX A 1 A_Explode(GBP_Scratch,80,0,0,80) //CallACS("GenericAttackPower",5)
+NDFX A 1 A_Explode(GBP_Scratch+CallACS("GenericAttackPower",1),80,0,0,80) //CallACS("GenericAttackPower",5)
 NDFX A 1 A_SpawnItemEx("ScratchImpactFX",0,0,0,0,0,0,0,1)
 stop
 }
@@ -509,6 +520,51 @@ stop
 }
 }
 
+actor ScratchTimer : Powerup {inventory.amount 1 powerup.duration 3 }
+
+
+actor ScratchThrust : CustomInventory
+{
+states
+{
+Pickup:
+TNT1 A 0 A_JumpIfInventory("CutterFlag",999,"Nope")
+TNT1 A 0 A_JumpIfInventory("DashBreaker",1,"Nope")
+//TNT1 A 1 A_ChangeVelocity(cos(-pitch)*TCLK_Thrust,0,sin(-pitch)*TCLK_Thrust,CVF_RELATIVE|CVF_REPLACE)
+TNT1 A 0 A_ChangeVelocity(TCLK_Thrust,0,Momz,CVF_RELATIVE|CVF_REPLACE)//cos(-pitch)* , sin(-pitch)*TCLK_Thrust
+TNT1 A 1 A_FireCustomMissile("ScratchBumper",0,0,0,15,0,Pitch)
+//BASB A 1 A_SpawnitemEx("TackleWave",cos(-pitch)*30,0,(25),0,0,0,0,SXF_TRANSFERTRANSLATION) //+(sin(pitch)*30)
+BASB A 1 A_SpawnItemEx("GroundDustFX", random(0,50), 0, 0, 0, 0, 0, random(0, 359))
+stop
+Nope:
+TNT1 A 0
+stop
+}
+}
+
+actor ScratchBumper : BasicProjectile
+{
+Speed 55 
+Damage (0)
+radius 6
+height 6
+DamageType "Tackle"
+scale 1.5
+//+NOINTERACTION
+States
+{
+Spawn:
+TNT1 A 0 
+TNT1 A 1 A_JumpIfInTargetInventory("DashBreaker",1,"Terminate")
+stop
+Death:
+TNT1 A 1 A_GiveToTarget("TackleCollision",1)
+TNT1 A 0 
+Terminate:
+TNT1 A 1
+stop
+}
+}
 //#endregion
 
 //[+]========================================================================[+]
@@ -516,12 +572,15 @@ stop
 //[+]========================================================================[+]
 
 //#region 
+
+actor Jab_Recovery_A : FullRecovery_D{Powerup.Duration 11}
+
 actor JabMelee : BasicFastProjectile
 {
 Speed 80
 Scale 5.0
 DamageType "Melee"
-Damage(GBP_Jab)
+Damage(GBP_Jab+CallACS("GenericAttackPower",3))
 States
 {
 Spawn:
@@ -690,7 +749,7 @@ States
 {
 Spawn:
 TNT1 A 0 
-TNT1 A 1 A_Explode(GBP_Lash,64,0,0,64) //CallACS("GenericAttackPower",5)
+TNT1 A 1 A_Explode(GBP_Lash+CallACS("GenericAttackPower",5),64,0,0,64) //CallACS("GenericAttackPower",5)
 stop
 }
 }

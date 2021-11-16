@@ -11,6 +11,7 @@
 #import "DB_Data.acs"
 #import "Dex_Pokemon.acs"
 #import "Dex_Types.acs"
+#import "Dex_Moves.acs"
 #import "WEPACS.acs"
 #import "DB_Stats.acs"
 #import "DB_3PCam.acs"
@@ -1407,7 +1408,7 @@ script "PKMN_RecoilDamager" (int PerVal)
 
 Int VictimHP = GetActorProperty(0,APROP_SPAWNHEALTH);
 Int Damage;
-Damage = getLastHit(0);
+Damage = GetUserVariable(0,"user_HitMemory");//getLastHit(0);
 switch(Damage)
 	{
 		case -3: Damage = VictimHP; break;
@@ -1623,6 +1624,7 @@ Script "PKMN_PainSound" (Int PainType)
 	if(!IsValidPKMNActor(ActivatorTID())){Terminate;}
 //Detects the appropriate pain sound by weakness
 int PlayerDexNum;
+int Hurter = ACS_NamedExecuteWithResult("core_gettarget");
 Switch(IsValidPKMNActor(ActivatorTID()))
     {
     Case 0: terminate; Break;
@@ -1651,11 +1653,264 @@ Int OutPut;
 	Case T_IMU: PainVal = -2; break;
 	}
 
-	If(PainVal > 0){PlaySound(0,"PokePain/Strong",CHAN_VOICE); OutPut = 2;}
-	If(PainVal == 0){PlaySound(0,"PokePain/Normal",CHAN_VOICE); OutPut = 1;}
-	If(PainVal < 0){PlaySound(0,"PokePain/Weak",CHAN_VOICE); OutPut = 0;}
+	
+	If(PainVal > 0){/*ACS_NamedExecuteAlways("PKMN_ClientPainSound",0,0,Hurter);*/ OutPut = 2;}
+	If(PainVal == 0){/*ACS_NamedExecuteAlways("PKMN_ClientPainSound",0,1,Hurter);*/ OutPut = 1;}
+	If(PainVal < 0){/*ACS_NamedExecuteAlways("PKMN_ClientPainSound",0,2,Hurter);*/ OutPut = 0;}
+	
 
 	SetResultValue(OutPut);
+}
+
+Script "PKMN_ClientPainSound" (Int HitType, int HurterTID) CLIENTSIDE
+{
+
+//log(i:ActivatorTID(),s:" hurter ",i:HurterTID);
+if(PlayerNumber() == ConsolePlayerNumber())
+	{
+		Switch(HitType)
+			{
+			case 0: LocalAmbientSound("PokePain/Strong",128); Break;
+			case 1: LocalAmbientSound("PokePain/Normal",128);Break;
+			case 2: LocalAmbientSound("PokePain/Weak",128); Break;
+			case 3: LocalAmbientSound("item/protoreflect",128); Break;
+			}
+	}
+if(ConsolePlayerNumber() == HurterTID-1000)
+	{
+		Switch(HitType)
+			{
+			case 0: AmbientSound("PokePain/Strong",128); Break;
+			case 1: AmbientSound("PokePain/Normal",128);Break;
+			case 2: AmbientSound("PokePain/Weak",128); Break;
+			case 3: AmbientSound("item/protoreflect",128); Break;
+			}
+	}
+	else
+	{
+		Switch(HitType)
+			{
+			case 0: PlaySound(0,"PokePain/Strong",CHAN_VOICE); Break;
+			case 1: PlaySound(0,"PokePain/Normal",CHAN_VOICE);Break;
+			case 2: PlaySound(0,"PokePain/Weak",CHAN_VOICE); Break;
+			case 3: PlaySound("item/protoreflect",128); Break;
+			}
+	}	
+
+
+}
+
+script "PKMN_HitEvents" (int type, int arg1, int arg2) EVENT
+{
+if(type == 11) //GAMEEVENT_ACTOR_DAMAGED 
+{
+
+	if(CheckIgnorePains(arg2)){Terminate;}
+
+	//log(s:"Ouch! took ",i:arg1,s:" points of ",s:arg2,s:" Damage!");
+	int PainMove = ReturnPainType(arg2,1);
+	int PainType = ReturnTypeNum(PainMove);
+	int PainBlock;
+
+	//log(s:"set User_HitTypeMemory to ",i:PainType);
+	SetUserVariable(0,"User_HitTypeMemory",PainType);
+	SetUserVariable(0,"User_HitMemory",arg1);
+	SetUserVariable(0,"user_HitFrame",1);
+
+	int HurterTID;
+	if(IsPointerEqual(AAPTR_TARGET,AAPTR_DAMAGE_SOURCE) == False){SetPointer(AAPTR_TARGET,0,AAPTR_DAMAGE_SOURCE);}
+	if (SetActivator(0, AAPTR_DAMAGE_SOURCE));{HurterTID = ActivatorTID();}
+	SetActivator(0, AAPTR_DAMAGE_TARGET);
+	/*
+	if(PainMove == HEX)
+		{
+			GiveInventory("OverHealHealth",arg1);
+		}
+	
+	if(weapons_ammo[PainMove][7]  == "PHYSICAL"
+	||arg2 == "Melee")
+		{
+			//GiveInventory("OverHealHealth",arg1);
+			//log(s:"Good thing I block physical attacks!");
+		}
+	*/
+		int BlockAmmount;
+		if(weapons_ammo[PainMove][7]  == "SPECIAL" && CheckInventory("LightScreenBlockem"))
+			{
+				
+				if(arg1 <= CheckInventory("LightScreenBlockem"))
+					{BlockAmmount = arg1;
+						//log(s:"Good thing I blocked it with LightScreen!");
+					}
+				else{BlockAmmount = CheckInventory("LightScreenBlockem");
+				//log(s:"My Lightscreen Couldn't block it all, ",i:(arg1)-BlockAmmount,s:" damage got past!");
+				}
+				GiveInventory("OverHealHealth",BlockAmmount);
+				TakeInventory("LightScreenBlockem",BlockAmmount);
+				PainBlock = 1;
+				//
+			}
+		if(weapons_ammo[PainMove][7]  == "PHYSICAL" && CheckInventory("ReflectBlockem"))
+			{
+				if(arg1 <= CheckInventory("ReflectBlockem"))
+					{BlockAmmount = arg1;
+						//log(s:"Good thing I blocked it with Reflect!");
+					}
+				else{BlockAmmount = CheckInventory("ReflectBlockem");
+				//log(s:"My Reflect Couldn't block it all, ",i:(arg1)-BlockAmmount,s:" damage got past!");
+				}
+				GiveInventory("OverHealHealth",BlockAmmount);
+				TakeInventory("ReflectBlockem",BlockAmmount);
+				PainBlock = 1;
+				//
+			}
+		if(weapons_ammo[PainMove][7]  == "SPECIAL" && CheckInventory("MirrorCoatGuard")
+		&& PainMove != MIRRORCOAT)
+			{
+				Thing_Damage2(HurterTID,arg1*2,"MirrorCoat");
+				GiveInventory("MirrorCoatReflectFXSpawn",1);
+				//GiveActorInventory(HurterTID,"MirrorCoatReflectFXSpawn",BlockAmmount);
+			}
+		if(CheckInventory("RevengeFlag")) 
+			{
+				BlockAmmount = arg1*0.5 >> 16;
+				GiveInventory("RevengePowerCount",BlockAmmount);
+				GiveInventory("OverHealHealth",BlockAmmount);
+				log(s:"Gained ",i:BlockAmmount,s:" Points of revenge!");
+			}
+			
+
+		
+	//Taking over the function for painsounds
+	int PlayerDexNum;
+	Switch(IsValidPKMNActor(ActivatorTID()))
+    {
+    Case 0: terminate; Break;
+    Case 1: PlayerDexNum = GetPokeValue(POKEDEXNUM); Break;
+    Case 2: PlayerDexNum = CheckInventory("MobDexNum"); Break;
+    }
+	int TypeA = StatDEX[PlayerDEXNum][7];
+	int TypeB = StatDEX[PlayerDEXNum][8];
+	str Typename;
+
+	Int PainVal;
+	Int OutPut;
+	if(PainType >= 0 && !PainBlock)
+		{
+			switch(PKMNTypeList2[TypeA][PainType])
+			{
+			Case T_NEU: break;
+			Case T_WEA: PainVal++; break;
+			Case T_RES: PainVal--; break;
+			Case T_IMU: PainVal = -2; break;
+			}
+
+			switch(PKMNTypeList2[TypeB][PainType])
+			{
+			Case T_NEU: break;
+			Case T_WEA: PainVal++; break;
+			Case T_RES: PainVal--; break;
+			Case T_IMU: PainVal = -2; break;
+			}	
+		}
+	else{PainVal = 0;}
+		
+
+		if(PainBlock){ACS_NamedExecuteAlways("PKMN_ClientPainSound",0,3,HurterTID);}
+		else
+		{
+		If(PainVal > 0){ACS_NamedExecuteAlways("PKMN_ClientPainSound",0,0,HurterTID);}
+		If(PainVal == 0){ACS_NamedExecuteAlways("PKMN_ClientPainSound",0,1,HurterTID);}
+		If(PainVal < 0){ACS_NamedExecuteAlways("PKMN_ClientPainSound",0,2,HurterTID);}	
+		}
+		
+
+		delay(1);
+		SetUserVariable(0,"user_HitFrame",0);
+}
+}
+
+Function int ReturnPainType (str PainState, Str ReturnWhat)
+{
+str MoveName;
+int Output;
+	For(int i = 0; i < MAX_WEAPONS_GLOBAL; i++)
+	{
+		MoveName = weapons_ammo[i][2];
+		If(StrICmp(MoveName,PainState) == 0
+		||StrICmp(StrParam(s:MoveName,i:1),PainState) == 0
+		||StrICmp(StrParam(s:MoveName,i:2),PainState) == 0
+		||StrICmp(StrParam(s:MoveName,i:3),PainState) == 0)
+		{
+			//log(s:"a ",s:weapons_ammo[i][7],s:" ", s:weapons_ammo[i][8],s:" Type Move!");
+			break;
+		}
+	}
+
+Switch(ReturnWhat)
+	{
+		case 1: Output = i; break;
+		default: Output = i; break;
+	}
+
+return Output;
+
+}
+
+
+Function int ReturnTypeNum (str MoveID)
+{
+	str TypeName1 = weapons_ammo[MoveID][8];
+	str TypeName2;
+
+	For(int i = 0; i < TYPECOUNT; i++)
+	{
+		TypeName2 = PKMNTypeList[i];
+		If(StrICmp(TypeName1,TypeName2) == 0)
+		{
+			return i;
+		}
+	}
+
+	return -1;
+}
+
+#LIBDEFINE PAINIGNORECOUNT 7
+str PainIgnore [PAINIGNORECOUNT] = {
+"PoisonDamage",
+"RecoilDamage",
+"Suicide",
+"LeechSeed",
+"Toxic",
+"PoisonPowder",
+"WilloWisp",
+
+};
+
+Function int CheckIgnorePains (str PainName)
+{
+	str IgnoreCheck;
+
+	For(int i = 0; i < PAINIGNORECOUNT; i++)
+	{
+		IgnoreCheck = PainIgnore[i];
+		If(StrICmp(PainName,IgnoreCheck) == 0)
+		{
+			return 1;
+		}
+	}
+
+	return 0;
+}
+
+
+
+// Return the actor's Damage_Source
+Script "Pkmn_getDamage_Source" (int l)
+{
+	SetActivator(0, AAPTR_DAMAGE_SOURCE);
+	if(l){Log(s:"Shooter id: ", i:ActivatorTID(), s:" - ", n:0);}
+	SetResultValue(ActivatorTID());
 }
 
 

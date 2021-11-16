@@ -91,10 +91,13 @@ TNT1 A 0 ACS_NamedExecuteAlways("PKMN_ToggleVisible",0,0,1)
 //TNT1 A 0 A_GiveInventory("DashSetOff")
 TNT1 A 0 A_SpawnItemEx("ReSolidifier") // here it is
 //TOPH A 0 A_ChangeFlag("SOLID",1) //More elegant solution later
-"####" B 0 A_Jump(256,"Fire.After")
-Goto Fire.After
+"####" A 0 A_GiveInventory("MoveCooldown_3")
+"####" B 0 A_Jump(256,"Fire.After2")
+Goto Fire.After2
 
 Fire.After:
+"####" A 0 A_GiveInventory("MoveCooldown_1Half")
+Fire.After2:
 "####" B 1 A_GiveInventory("FullRecovery_D")
 //"####" A 0 A_GiveInventory("DashSetOff")
 "####" A 0 A_TakeInventory("SubmissionFXTimer",99)

@@ -49,11 +49,12 @@ Fire.DashStart:
 "####" A 0 A_SetUserVar("user_weppitch",Pitch)
 "####" A 0 A_ChangeFlag("NOGRAVITY",1)
 "####" A 0 A_GiveInventory("BraveBirdTimer")
-"####" A 0 A_GiveInventory("BraveBirdInitiate")
+"####" A 0 //A_GiveInventory("BraveBirdInitiate")
 "####" A 0 A_GunFlash("Flash.DashSound")
 Fire.Dash:
 "####" A 1 A_SetUserVar("user_wepangle", CallACS("SHIFT_MEMANGLE",CallACS("GRAB_MEMANGLE",0),angle,BRVBRD_TurnSpd))
 "####" A 0 A_SetUserVar("user_weppitch", CallACS("SHIFT_MEMANGLE",CallACS("GRAB_MEMANGLE",1),Pitch,BRVBRD_TurnSpd))
+"####" A 0 A_GiveInventory("BraveBirdThrust")
 "####" A 0 A_Jumpifinventory("DashBreaker",1,"Fire.DashEnd")
 "####" A 0 A_Jumpifinventory("BraveBirdTimer",1,"Fire.Dash")
 "####" A 0 A_GiveInventory("BraveBirdDashFX")

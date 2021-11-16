@@ -7,7 +7,7 @@
 #library "DB_HeldItems"
 #include "zcommon.acs"
 
-#LIBDEFINE MAX_HELDITEMS 16
+#LIBDEFINE MAX_HELDITEMS 22
 
 
 #LIBDEFINE HI_NULL -1
@@ -22,14 +22,15 @@ str HeldItemList[MAX_HELDITEMS][4] = {
     //{"RedScarf", "Red Scarf", 3.0 ,""},
     //{"BlueScarf", "Blue Scarf", 5.0,""},
     //{"GreenScarf", "Green Scarf", 3.0,""},
-    //{"YellowScarf", "Yellow Scarf", 5.0,""},
-    //{"PinkScarf", "Pink Scarf", 1.0,""},
+    {"MuscleBand", "Muscle Band", 5.0,""},
+    {"WiseGlasses", "Wise Glasses", 1.0,""},
     {"Leftovers", "Leftovers", 1.0,""},
     {"ShellBell", "Shell Bell", 1.0,""},
     {"Lifeorb", "Life Orb", 1.0,""},
     {"AssaultVest", "Assault Vest", 1.0,""},
     {"ChoiceScarf", "Choice Scarf", 1.0,""},
     {"ChoiceBand", "Choice Band", 1.0,""},
+    {"ChoiceSpecs", "Choice Specs", 1.0,""},
     {"WeaknessPolicy", "Weakness Policy", 1.0,""},
     {"FocusBand", "Focus Band", 1.0,""},
     {"LaggingTail", "Lagging Tail", 1.0,""},
@@ -38,8 +39,12 @@ str HeldItemList[MAX_HELDITEMS][4] = {
     {"Eviolite", "Eviolite", 1.0,""},
     {"FullIncense", "Full Incense", 1.0,""},
     {"EXPShare", "EXP Share", 1.0,""},
+    {"AmuletCoin", "Amulet Coin", 1.0,""},
     {"CleanseTag", "Cleanse Tag", 1.0,""},
     {"HeavyDutyBoots", "H.Duty Boots", 1.0,""},
+    {"PowerHerb", "Power Herb", 1.0,""},
+    //{"EjectButton", "Eject Button", 1.0,""},
+    {"RazorFang", "Razor Fang", 1.0,""},
 
 };
 
@@ -51,24 +56,29 @@ Int HeldItemStats[MAX_HELDITEMS][8] = {
    // /*|RedScarf|*/      {HI_PATK,   20,  5,      HI_NULL,   0,   0,      10,     5},
    // /*|BlueScarf|*/     {HI_SATK,   20,  5,      HI_NULL,   0,   0,      10,     5},
    // /*|GreenScarf|*/    {HI_PDEF,   20,  5,      HI_NULL,   0,   0,      10,     5},
-   // /*|YellowScarf|*/   {HI_SDEF,   20,  5,      HI_NULL,   0,   0,      10,     5},
-   // /*|PinkScarf|*/     {HI_HP  ,   20,  5,      HI_NULL,   0,   0,      10,     5},
-    /*|Leftovers|*/     {HI_HP  ,   50,  5,      HI_NULL,   0,   0,      45,     10},
-    /*|ShellBell|*/     {HI_HP  ,   10,  5,      HI_SATK,   10,   10,      45,     15},
-    /*|Lifeorb|*/       {HI_PATK  ,   10,  5,      HI_SATK,   10,   5,      45,     15},
-    /*|AssaultVest|*/   {HI_SDEF  ,   30,  10,      HI_NULL,   0,   0,      30,     15},
-    /*|ChoiceScarf|*/   {HI_PATK  ,   15,  15,      HI_NULL,   0,   0,      25,     15},
-    /*|ChoiceBand|*/   {HI_PATK  ,   15,  15,      HI_NULL,   0,   0,      25,     15},
-    /*|WeaknessPolicy|*/{HI_PDEF  ,   15,  5,      HI_SDEF,   15,   5,      15,     5},
-    /*|FocusBand|*/     {HI_PDEF  ,   15,  5,      HI_NULL,   0,   0,      15,     10},
-    /*|LaggingTail|*/   {HI_PDEF  ,   45,  15,      HI_SDEF,   45,   15,      20,     5},
-    /*|ToxicOrb|*/     {HI_HP  ,   35,  10,      HI_NULL,   0,   0,      20,     5},
-    /*|FlameOrb|*/     {HI_PATK  ,   35,  10,      HI_NULL,   0,   0,      20,     5},
-    /*|Eviolite|*/     {HI_HP  ,   10,  5,      HI_NULL,   0,   0,      45,     5},
-    /*|FullIncense|*/     {HI_SATK  ,   5,  5,      HI_SDEF,   5,   5,      10,     5},
-    /*|EXPShare|*/     {HI_HP  ,   50,  25,      HI_SDEF,   40,   15,      10,     5},
-    /*|CleanseTag|*/     {HI_SDEF  ,   20,  5,      HI_NULL,   0,   0,      25,     5},
-    /*|HeavyDutyBoots|*/ {HI_PDEF  ,   20,  5,      HI_PATK,   5,   5,      35,     5},
+    /*|MuscleBand|*/   {HI_PATK,   5,  5,      HI_NULL,   0,   0,      10,     5},
+    /*|WiseGlasses|*/     {HI_SATK  ,   5,  5,      HI_NULL,   0,   0,      10,     5},
+    /*|Leftovers|*/     {HI_HP  ,   22,  2,      HI_NULL,   0,   0,      20,     5},
+    /*|ShellBell|*/     {HI_HP  ,   5,  5,      HI_SATK,   5,   5,      45,     1},
+    /*|Lifeorb|*/       {HI_PATK  ,   5,  5,      HI_SATK,   5,   5,      45,     1},
+    /*|AssaultVest|*/   {HI_SDEF  ,   52,  2,      HI_NULL,   0,   0,      30,     2},
+    /*|ChoiceScarf|*/   {HI_PATK  ,   5,  5,      HI_NULL,   0,   0,      30,     2},
+    /*|ChoiceBand|*/   {HI_PATK  ,   5,  5,      HI_NULL,   0,   0,      30,     2},
+    /*|ChoiceSpecs|*/   {HI_SATK  ,   5,  5,      HI_NULL,   0,   0,      30,     2},
+    /*|WeaknessPolicy|*/{HI_PDEF  ,   35,  5,      HI_SDEF,   35,   5,      15,     5},
+    /*|FocusBand|*/     {HI_HP  ,   22,  2,      HI_NULL,   0,   0,      30,     2},
+    /*|LaggingTail|*/   {HI_PDEF  ,   45,  15,      HI_SDEF,   45,   15,      5,     15},
+    /*|ToxicOrb|*/     {HI_HP  ,   56,  6,      HI_NULL,   0,   0,      5,     10},
+    /*|FlameOrb|*/     {HI_PATK  ,   56,  6,      HI_NULL,   0,   0,      5,     10},
+    /*|Eviolite|*/     {HI_HP  ,   52,  2,      HI_NULL,   0,   0,      45,     1},
+    /*|FullIncense|*/     {HI_SATK  ,   5,  5,      HI_SDEF,   5,   5,      5,     5},
+    /*|EXPShare|*/     {HI_HP  ,   22,  2,      HI_SDEF,   52,   2,      5,     5},
+    /*|AmuletCoin|*/     {HI_HP  ,   5,  5,      HI_NULL,   0,   0,      10,     1},
+    /*|CleanseTag|*/     {HI_SDEF  ,   52,  2,      HI_NULL,   0,   0,      25,     5},
+    /*|HeavyDutyBoots|*/ {HI_PDEF  ,   52,  2,      HI_PATK,   5,   5,      35,     5},
+    /*|PowerHerb|*/ {HI_SATK  ,   5,  5,      HI_NULL,   0,   0,      45,     1},
+    ///*|EjectButton|*/ {HI_SDEF  ,   5,  5,      HI_SATK,   5,   5,      35,     5},
+    /*|RazorFang|*/   {HI_PATK  ,   5,  5,      HI_NULL,   0,   0,      45,     2},
 };
 
 

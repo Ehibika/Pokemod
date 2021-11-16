@@ -88,7 +88,7 @@ Goto NormalPain
 
 Pain.HeadButt:
 "----" H 0 A_GiveInventory("HeadButtDelay",1)
-"----" H 0 A_GiveInventory("CringeStatusBuild",1)
+"----" H 0 A_GiveInventory("ImpactCringe",1)
 "----" H 1
 "----" H 0 A_GiveToTarget("HeadButtCollision",1)
 "----" H 0 A_PlaySoundEx("weapon/Rebound","SoundSlot5")
@@ -116,7 +116,7 @@ Goto NormalPain
 */
 
 PainFalse:
-PLY1 H 0
+//PLY1 H 0
 "----" A 0 ACS_NamedExecuteAlways("PKMN_HitEXP",0,User_HitMemory,1) 
 /*
 "####" H 0
@@ -128,7 +128,7 @@ PLY1 H 0
 goto SuperSpawn
 
 PainFalse2:
-PLY1 H 0
+//PLY1 H 0
 "####" H 0
 "----" A 0 ACS_NamedExecuteAlways("PKMN_PainSound",0,Type_Normal) 
 "----" HHHHHHHHH 2 A_SpawnItemEx("PainFX",-5,0,3,0,0,0)
@@ -153,6 +153,7 @@ Pain.VitalThrow:
 Pain.LowKick:
 Pain.Revenge:
 Pain.AuraSphere:
+Pain.Counter:
 //--[Move|Fighting]--
 "----" H 0 
 Goto FightingPain
@@ -178,8 +179,8 @@ Pain.DynamicPunch:
 Goto FightingPain
 
 Pain.ForcePalm:
-"----" H 0 A_GiveInventory("ParalysisStatusFastBuild",1)
-"----" H 0 A_GiveInventory("ForcePalmProtect",1)
+"----" H 0 A_GiveInventory("ParalysisStatus_50Per",1)
+"----" H 0 //A_GiveInventory("ForcePalmProtect",1)
 Goto FightingPain
 
 Pain.KarateChop:
@@ -330,6 +331,7 @@ Goto FlyingPain
 Pain.AirSlash:
 "----" H 0
 "----" H 0 A_GiveInventory("AirSlashProtect",1)
+"----" H 0 A_GiveInventory("ImpactCringe",1)
 Goto FlyingPain
 
 Pain.DrillPeck:
@@ -424,14 +426,15 @@ Pain.Ground:
 Pain.SandTomb:
 Pain.Dig:
 
-Pain.EarthPower:
 Pain.ShoreUp:
 //--[Move|Ground]--
 "----" H 0 
 Goto GroundPain
 
 Pain.EarthPower:
-"----" H 0 A_GiveInventory("SDefDown_Build",1)
+"----" H 0 A_GiveInventory("EarthPowerProtect")
+"----" H 0 A_GiveInventory("EarthPowerBuffer")
+"----" H 0 A_GiveInventory("SDefDown_FastBuild",1)
 Goto GroundPain
 
 pain.Earthquake:
@@ -492,7 +495,7 @@ Goto RockPain
 Pain.RockSlide:
 "----" H 0 A_GiveInventory("RockSlideProtect")
 "----" H 0 A_GiveInventory("RockSlideBuffer")
-"----" H 0 A_GiveInventory("CringeStatusslowBuild")
+"----" H 0 A_GiveInventory("CringeStatus_50Per")
 "----" H 0 
 Goto RockPain
 
@@ -587,12 +590,12 @@ Goto GhostPain
 
 Pain.Astonish:
 "----" H 0 A_GiveInventory("AstonishBackstabItem",1)
-"----" H 0 A_GiveInventory("CringeStatusBuild")
+"----" H 0 A_GiveInventory("ImpactCringe",1)
 Goto GhostPain
 Pain.Astonish2:
 "----" H 0
 "----" H 0 //A_SpawnItemEX("PowerStrikeFX2",0,0,28)
-"----" H 0 A_GiveInventory("CringeStatusFastBuild")
+"----" H 0 A_GiveInventory("ImpactCringe",1)
 "----" H 0 
 Goto GhostPain
 
@@ -806,8 +809,8 @@ Goto WaterPain
 Pain.HydroPump:
 "----" H 0
 "----" H 0 A_GiveInventory("HydroPumpProtect",1)
-"----" H 0 A_GiveInventory("HydroPumpDamageBuffer",1)
-"----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,25,Type_Water)
+"----" H 0 //A_GiveInventory("HydroPumpDamageBuffer",1)
+"----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,15,Type_Water)
 "----" H 0
 Goto WaterPain
 
@@ -984,7 +987,7 @@ Goto ElectricPain
 
 Pain.Thunderbolt:
 "----" H 0 A_GiveInventory("ThunderboltProtect",1)
-"----" H 0 A_GiveInventory("ZapParalysisStatusSlowBuild",1)
+"----" H 0 A_GiveInventory("ZapParalysisStatusFastBuild",1)
 Goto ElectricPain
 
 Pain.Discharge:
@@ -993,7 +996,7 @@ Pain.Discharge:
 Goto ElectricPain
 
 Pain.Thunder:
-"----" H 0 A_GiveInventory("ZapParalysisStatusFastBuild",1)
+"----" H 0 A_GiveInventory("Zap_ParalysisStatusProc2",1)
 Goto ElectricPain
 //#endregion
 
@@ -1004,8 +1007,14 @@ Pain.PsychicT:
 "----" H 0
 Goto PsychicPain
 
+Pain.MirrorCoat:
+"----" H 0 A_PlaySoundEx("Support/MirrorCoat","SoundSlot8")
+"----" H 0 A_GiveInventory("MirrorCoatReflectFXSpawn2",1)
+Goto PsychicPain
+
 Pain.Extrasensory:
-"----" H 0 A_GiveInventory("CringeStatusBuild",1)
+//"----" H 0 A_GiveInventory("CringeStatusBuild",1)
+"----" H 0 A_GiveInventory("SDefDown_Build",1)
 "----" H 0 A_GiveInventory("ExtrasensoryProtect",1)
 Goto PsychicPain
 
@@ -1025,13 +1034,13 @@ Goto PsychicPain
 
 Pain.Psyshock:
 "----" H 0
-"----" H 0 A_GiveInventory("PsyshockBuffer",1)
-"----" H 0 A_GiveInventory("PsyshockProtect",1)
+"----" H 0 //A_GiveInventory("PsyshockBuffer",1)
+"----" H 0 //A_GiveInventory("PsyshockProtect",1)
 Goto PsychicPain
 
 Pain.PsyBeam:
 "----" H 0
-"----" H 0 A_GiveInventory("ConfusionStatusFastBuild",1)
+"----" H 0 A_GiveInventory("ConfusionStatusSlowBuild",1)
 "----" H 0 A_GiveInventory("PsyBeamProtect",1)
 Goto PsychicPain
 
@@ -1042,7 +1051,7 @@ Goto PsychicPain
 
 Pain.ZenHeadButt:
 "----" H 0 A_GiveInventory("ZenHeadbuttDelay",1)
-"----" H 0 A_GiveInventory("CringeStatusBuild",1)
+"----" H 0 A_GiveInventory("ImpactCringe",1)
 "----" H 1
 "----" H 0 A_GiveToTarget("ZenHeadButtCollision",1)
 "----" H 0 A_PlaySoundEx("weapon/Rebound","SoundSlot5")
@@ -1171,7 +1180,7 @@ Goto DragonPain
 
 
 Pain.DragonRush:
-"----" H 0 A_GiveInventory("CringeStatus_50Per",1)
+"----" H 0 A_GiveInventory("ImpactCringe",1)
 "----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,15,Type_Null)
 Goto DragonPain
 
@@ -1204,8 +1213,8 @@ Pain.FaintAttack:
     Pain.DarkPulse:
     "----" H 0
     "----" H 0 A_GiveInventory("DarkPulseProtect",1)
-    "----" H 0 A_GiveInventory("CringeStatusBuild",1)
-    "----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,25,Type_Dark)
+    "----" H 0 //A_GiveInventory("CringeStatusBuild",1)
+    "----" H 0 //ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,25,Type_Dark)
     Goto DarkPain
 
     Pain.NightSlash1:
@@ -1223,12 +1232,13 @@ Pain.FaintAttack:
 
     Pain.Crunch:
     "----" H 0 A_GiveInventory("CrunchNerfInitiate",1)
+    "----" H 0 A_GiveInventory("ImpactCringe",1)
     "----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,-10,Type_Dark,1)
     Goto DarkPain
 
     Pain.Bite:
     "----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,-10,Type_Dark,1)
-    "----" H 0 A_GiveInventory("CringeStatusBuild",1)
+    "----" H 0 A_GiveInventory("ImpactCringe",1)
     "----" H 0 
     Goto DarkPain
 //#endregion
@@ -1270,6 +1280,7 @@ Pain.Tackle:
 "----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockUp",0,15,0)
 Pain.Melee:
 "----" H 0
+"----" H 0 A_GiveInventory("RazorFang_Effect",1)
 "----" H 0 A_Jump(256,"NormalPain")
 "----" H 0 A_Jump(256,"PainNormal")
 Goto PainNormal
@@ -1279,6 +1290,7 @@ Pain.Lash:
 "----" H 0 A_GiveInventory("LashProtect",1)
 "----" H 0 A_SpawnItemEX("LashImpactPuff")
 "----" H 0 ACS_NamedExecuteAlways("PKMNACS_HitKnockBack",0,25,Type_Null)
+"----" H 0 A_GiveInventory("RazorFang_Effect",1)
 "----" H 0 A_Jump(256,"NormalPain")
 "----" H 0 A_Jump(256,"PainNormal")
 Goto PainNormal
@@ -1402,6 +1414,7 @@ Death.DynamicPunch:
 Death.AuraSphere:
 Death.RollingKick:
 Death.TripleKick:
+Death.Counter:
 //--[Move|Fighting]--
 "----" H 0 
 Goto FightingDeath
@@ -1914,6 +1927,7 @@ Death.Psyshock:
 Death.Psybeam:
 Death.PsychoCut:
 Death.FutureSight:
+Death.MirrorCoat:
 //--[Move|Psychic]--
 "----" H 0
 Goto PsychicDeath

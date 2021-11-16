@@ -7347,6 +7347,40 @@ OptionMenu "MoveMenu_Explosion"
     StaticText ""
     StaticText"===============================================================",1
 } 
+OptionMenu "MoveMenu_MirrorCoat"
+{
+    
+    Title "$M327_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M327_TYPE"
+    StaticText "$M327_CATEGORY"
+    StaticText "$M3274_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M327_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+} 
+OptionMenu "MoveMenu_Counter"
+{
+    
+    Title "$M328_NAME"
+    StaticText "===============================================================",1
+    StaticText "$M328_TYPE"
+    StaticText "$M328_CATEGORY"
+    StaticText "$M3284_POWER"
+    StaticText"===============================================================",1
+    StaticText "$M328_DESC"
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText ""
+    StaticText"===============================================================",1
+} 
 //--[NewMove]--
 
 OptionMenu "MoveMenu_Sketch"

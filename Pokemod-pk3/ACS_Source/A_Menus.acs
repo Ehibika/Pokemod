@@ -568,7 +568,7 @@ Script "Menu_HeldItemShop" (void) CLIENTSIDE
 			//CancelInput = ButtonCheck(InputButtons, InputOldButtons, BT_AltATTACK);
 			//#endregion
 			
-			ChoiceInput = GetChoiceInputs(InputButtons,InputOldButtons,4);
+			ChoiceInput = GetChoiceInputs(InputButtons,InputOldButtons,5);
 			SideInput = GetLeftRightInputs(InputButtons,InputOldButtons,1);
 			if(GetUpDownInputs(InputButtons,InputOldButtons,3) != 0)
 				{
@@ -707,7 +707,7 @@ Script "Menu_HeldItemShop" (void) CLIENTSIDE
 		
 				// - Grab Inputs -
 				InputButtons = GetPlayerInput(-1, INPUT_BUTTONS);
-				ChoiceInput = GetChoiceInputs(InputButtons,InputOldButtons,4);
+				ChoiceInput = GetChoiceInputs(InputButtons,InputOldButtons,5);
 				SideInput = GetLeftRightInputs(InputButtons,InputOldButtons,1);
 				if(GetUpDownInputs(InputButtons,InputOldButtons,3) != 0)
 					{
@@ -837,12 +837,8 @@ bool ShopSet;
 int CursorY;
 int LearnMove = -1;
 // - Menu -
-int InputButtons;
-int InputOldButtons; 
-int UpInput;
-int DownInput;
-Int ConfirmInput;
-Int CancelInput;
+int InputButtons,InputOldButtons,UpInput, DownInput, SideInput;
+Int ConfirmInput, CancelInput, ChoiceInput;
 Int MenuStates = 0;
 Int MenuNextState; 
 int i;
@@ -850,6 +846,7 @@ int j;
 int h;
 Bool MenuUp = true;
 Bool BGUp;
+int UpDownRepeat = 0;
 //=======================[+]
 // - Menu Loop Begin -
 //=======================[+]
@@ -961,6 +958,16 @@ while (MenuUp && GetActorProperty(0,APROP_HEALTH) > 0) {
 
 		// - Grab Inputs -
 		InputButtons = GetPlayerInput(-1, INPUT_BUTTONS);
+		ChoiceInput = GetChoiceInputs(InputButtons,InputOldButtons,5);
+		SideInput = GetLeftRightInputs(InputButtons,InputOldButtons,1);
+		if(GetUpDownInputs(InputButtons,InputOldButtons,3) != 0)
+			{
+				if(UpDownRepeat==0){ChoiceID += GetUpDownInputs(InputButtons,InputOldButtons,3);}
+				if(UpDownRepeat>10){ChoiceID += GetUpDownInputs(InputButtons,InputOldButtons,3); UpDownRepeat=8;}
+				UpDownRepeat++;
+			}
+			else{UpDownRepeat = 0;}
+		/*
 		UpInput = ButtonCheck(InputButtons, InputOldButtons, BT_FORWARD);
 		DownInput = ButtonCheck(InputButtons, InputOldButtons, BT_BACK);
 		ConfirmInput = ButtonCheck(InputButtons, InputOldButtons, BT_ATTACK);
@@ -977,10 +984,11 @@ while (MenuUp && GetActorProperty(0,APROP_HEALTH) > 0) {
 				{ ChoiceID++; }
 			}
 		}
+		*/
 		if (ChoiceID > ChoiceCap) { ChoiceID = 0; }
 		if (ChoiceID < 0) { ChoiceID = ChoiceCap; }
-		if (CancelInput == 1 || ConfirmInput == 1 && ChoiceID == MoveListCount) {break;} //MenuUp = false;
-		if (ConfirmInput == 1 && ChoiceID < MoveListCount) { LearnMove = TMMoveCache[PlayerNumber()][ChoiceID]; MoveCost = TMCostCache[PlayerNumber()][ChoiceID]; break;} //MenuUp = false;
+		if (ChoiceInput == -1 || ChoiceInput == 1 && ChoiceID == MoveListCount) {break;} //MenuUp = false;
+		if (ChoiceInput == 1 && ChoiceID < MoveListCount) { LearnMove = TMMoveCache[PlayerNumber()][ChoiceID]; MoveCost = TMCostCache[PlayerNumber()][ChoiceID]; break;} //MenuUp = false;
 		// #------------------
 		// # End Menustate 0
 		// #------------------
@@ -1602,12 +1610,8 @@ int MoveListCount;
 int CursorY;
 int LearnMove = -1;
 // - Menu -
-int InputButtons;
-int InputOldButtons; 
-int UpInput;
-int DownInput;
-Int ConfirmInput;
-Int CancelInput;
+int InputButtons,InputOldButtons,UpInput, DownInput, SideInput;
+Int ConfirmInput, CancelInput, ChoiceInput;
 Int MenuStates = 0;
 Int MenuNextState; 
 int i;
@@ -1615,6 +1619,7 @@ int j;
 int h;
 Bool MenuUp = true;
 Bool BGUp;
+int UpDownRepeat;
 //=======================[+]
 // - Menu Loop Begin -
 //=======================[+]
@@ -1704,6 +1709,17 @@ while (MenuUp && GetActorProperty(0,APROP_HEALTH) > 0) {
 
 		// - Grab Inputs -
 		InputButtons = GetPlayerInput(-1, INPUT_BUTTONS);
+		InputButtons = GetPlayerInput(-1, INPUT_BUTTONS);
+		ChoiceInput = GetChoiceInputs(InputButtons,InputOldButtons,5);
+		SideInput = GetLeftRightInputs(InputButtons,InputOldButtons,1);
+		if(GetUpDownInputs(InputButtons,InputOldButtons,3) != 0)
+			{
+				if(UpDownRepeat==0){ChoiceID += GetUpDownInputs(InputButtons,InputOldButtons,3);}
+				if(UpDownRepeat>10){ChoiceID += GetUpDownInputs(InputButtons,InputOldButtons,3); UpDownRepeat=8;}
+				UpDownRepeat++;
+			}
+			else{UpDownRepeat = 0;}
+		/*
 		UpInput = ButtonCheck(InputButtons, InputOldButtons, BT_FORWARD);
 		DownInput = ButtonCheck(InputButtons, InputOldButtons, BT_BACK);
 		ConfirmInput = ButtonCheck(InputButtons, InputOldButtons, BT_ATTACK);
@@ -1720,10 +1736,11 @@ while (MenuUp && GetActorProperty(0,APROP_HEALTH) > 0) {
 				{ ChoiceID++; }
 			}
 		}
+		*/
 		if (ChoiceID > ChoiceCap) { ChoiceID = 0; }
 		if (ChoiceID < 0) { ChoiceID = ChoiceCap; }
-		if (CancelInput == 1 || ConfirmInput == 1 && ChoiceID == MoveListCount) {break;} //MenuUp = false;
-		if (ConfirmInput == 1 && ChoiceID < MoveListCount) { LearnMove = LevelUpMoveCache[PlayerNumber()][ChoiceID];/*MoveDex[PlayerDEXNum][ChoiceID];*/ break;} //MenuUp = false;
+		if (ChoiceInput == -1 || ChoiceInput == 1 && ChoiceID == MoveListCount) {break;} //MenuUp = false;
+		if (ChoiceInput == 1 && ChoiceID < MoveListCount) { LearnMove = LevelUpMoveCache[PlayerNumber()][ChoiceID];/*MoveDex[PlayerDEXNum][ChoiceID];*/ break;} //MenuUp = false;
 		// #------------------
 		// # End Menustate 0
 		// #------------------

@@ -100,7 +100,7 @@ str weapons_ammo[MAX_WEAPONS_GLOBAL][9] =
 {"SketchMove", "SketchPP", "Sketch", F_RECOV, "YES", "NO", "SLOT_NONE", "STATUS", "NORMAL"},
 
 {"PowderSnowMove", "PowderSnowPP", "PowderSnow", H_RECOV, "NO", "NO", "SLOT_NONE", "SPECIAL", "ICE"},
-{"IcyWindMove", "IcyWindPP", "IcyWind", H_RECOV, "NO", "NO", "SLOT_NONE", "SPECIAL", "ICE"},
+{"IcyWindMove", "IcyWindPP", "IcyWind", S_RECOV, "NO", "NO", "SLOT_NONE", "SPECIAL", "ICE"},
 {"AuroraBeamMove", "AuroraBeamPP", "AuroraBeam", H_RECOV, "NO", "NO", "SLOT_NONE", "SPECIAL", "ICE"},
 {"IcePunchMove", "IcePunchPP", "IcePunch", H_RECOV, "NO", "NO", "SLOT_NONE", "PHYSICAL", "ICE"},
 {"IceFangMove", "IceFangPP", "IceFang", H_RECOV, "NO", "NO", "SLOT_NONE", "PHYSICAL", "ICE"},
@@ -140,7 +140,7 @@ str weapons_ammo[MAX_WEAPONS_GLOBAL][9] =
 {"PeckMove", "PeckPP", "Peck", H_RECOV, "NO", "NO", "SLOT_NONE", "PHYSICAL", "FLYING"},
 {"DoubleKickMove", "DoubleKickPP", "DoubleKick", H_RECOV, "NO", "NO", "SLOT_NONE", "PHYSICAL", "FIGHTING"},
 {"ThunderPunchMove", "ThunderPunchPP", "ThunderPunch", H_RECOV, "NO", "NO", "SLOT_NONE", "PHYSICAL", "ELECTRIC"},
-{"HeatWaveMove", "HeatWavePP", "HeatWave", H_RECOV, "NO", "NO", "SLOT_NONE", "SPECIAL", "FIRE"},
+{"HeatWaveMove", "HeatWavePP", "HeatWave", S_RECOV, "NO", "NO", "SLOT_NONE", "SPECIAL", "FIRE"},
 {"BlazeKickMove", "BlazeKickPP", "BlazeKick", H_RECOV, "NO", "NO", "SLOT_NONE", "PHYSICAL", "FIRE"},
 {"SkyUppercutMove", "SkyUppercutPP", "SkyUppercut", H_RECOV, "NO", "NO", "SLOT_NONE", "PHYSICAL", "FIGHTING"},
 {"BraveBirdMove", "BraveBirdPP", "BraveBird", H_RECOV, "NO", "NO", "SLOT_NONE", "PHYSICAL", "FLYING"},
@@ -234,7 +234,7 @@ str weapons_ammo[MAX_WEAPONS_GLOBAL][9] =
 {"TeleportMove", "TeleportPP", "Teleport", S_RECOV, "NO", "NO", "SLOT_NONE", "STATUS", "PSYCHIC"},
 {"AllyswitchMove", "AllyswitchPP", "Allyswitch", S_RECOV, "NO", "NO", "SLOT_NONE", "STATUS", "PSYCHIC"},
 {"ConfusionMove", "ConfusionPP", "Confusion", H_RECOV, "NO", "NO", "SLOT_NONE", "SPECIAL", "PSYCHIC"},
-{"PsychicMove", "PsychicPP", "Psychic", S_RECOV, "NO", "NO", "SLOT_NONE", "SPECIAL", "PSYCHIC"},
+{"PsychicMove", "PsychicPP", "Psychic", H_RECOV, "NO", "NO", "SLOT_NONE", "SPECIAL", "PSYCHIC"},
 {"PsycheupMove", "PsycheupPP", "Psycheup", S_RECOV, "NO", "NO", "SLOT_NONE", "STATUS", "NORMAL"},
 {"PowerGemMove", "PowerGemPP", "PowerGem", H_RECOV, "NO", "NO", "SLOT_NONE", "SPECIAL", "ROCK"},
 {"MagiccoatMove", "MagiccoatPP", "Magiccoat", S_RECOV, "NO", "NO", "SLOT_NONE", "STATUS", "PSYCHIC"},
@@ -359,7 +359,7 @@ str weapons_ammo[MAX_WEAPONS_GLOBAL][9] =
 {"LeechLifeMove", "LeechLifePP", "LeechLife", H_RECOV, "NO", "NO", "SLOT_NONE", "PHYSICAL", "BUG"},
 {"LowKickMove", "LowKickPP", "LowKick", H_RECOV, "NO", "NO", "SLOT_NONE", "PHYSICAL", "FIGHTING"},
 {"KarateChopMove", "KarateChopPP", "KarateChop", H_RECOV, "NO", "NO", "SLOT_NONE", "PHYSICAL", "FIGHTING"},
-{"RevengeMove", "RevengePP", "Revenge", H_RECOV, "YES", "NO", "SLOT_NONE", "PHYSICAL", "FIGHTING"},
+{"RevengeMove", "RevengePP", "Revenge", H_RECOV, "NO", "NO", "SLOT_NONE", "PHYSICAL", "FIGHTING"},
 {"ArmThrustMove", "ArmThrustPP", "ArmThrust", H_RECOV, "NO", "NO", "SLOT_NONE", "PHYSICAL", "FIGHTING"},
 {"ForcePalmMove", "ForcePalmPP", "ForcePalm", H_RECOV, "NO", "NO", "SLOT_NONE", "PHYSICAL", "FIGHTING"},
 {"DynamicPunchMove", "DynamicPunchPP", "DynamicPunch", H_RECOV, "NO", "NO", "SLOT_NONE", "PHYSICAL", "FIGHTING"},
@@ -377,6 +377,8 @@ str weapons_ammo[MAX_WEAPONS_GLOBAL][9] =
 {"RoostMove", "RoostPP", "Roost", S_RECOV, "NO", "NO", "SLOT_NONE", "STATUS", "FLYING"},
 {"SelfDestructMove", "SelfDestructPP", "SelfDestruct", H_RECOV, "NO", "NO", "SLOT_NONE", "PHYSICAL", "NORMAL"},
 {"ExplosionMove", "ExplosionPP", "Explosion", H_RECOV, "NO", "NO", "SLOT_NONE", "PHYSICAL", "NORMAL"},
+{"MirrorCoatMove", "MirrorCoatPP", "MirrorCoat",H_RECOV, "NO", "NO", "SLOT_NONE", "SPECIAL", "FIGHTING"},
+{"CounterMove", "CounterPP", "Counter", H_RECOV, "NO", "NO", "SLOT_NONE", "PHYSICAL", "FIGHTING"},
 //--[NewMove]--
 };
 #endregion
@@ -971,6 +973,11 @@ Script "MoveSetup" (void)
 		&& ACS_NamedExecuteWithResult("GetPokeValue",0) == 9)
 		{GiveInventory("DoubleHydroPump",1);}
 
+		if(weapons_ammo[ThisWeapon][2] == "Fly"
+		&& ACS_NamedExecuteWithResult("GetPokeValue",0) >= 76
+		&& ACS_NamedExecuteWithResult("GetPokeValue",0) <= 78)
+		{GiveInventory("FlyWithBalloons",1);}
+
 		if(weapons_ammo[ThisWeapon][2] == "DragonRage")
 		{	TakeInventory("DragonPowerFlag",99);
 			GiveInventory("DragonPowerFlag",DragonRagePower());
@@ -981,6 +988,7 @@ Script "MoveSetup" (void)
 		else{TakeInventory("AltAttackMove",99); TakeInventory("AltAttackMove2",99);}
 
 		TakeInventory("ChoiceBandPower",99);
+		TakeInventory("ChoiceSpecsPower",99);
 		TakeInventory("STF_ChoiceScarf",99);
 
 }
@@ -1026,6 +1034,8 @@ Function int CheckAltMove (int Wep)
 		//Case HEALPULSE: return 1; break;
 		Case THUNDERBOLT: return 1; break;
 		Case THUNDER: return 1; break;
+		Case STONEEDGE: return 1; break;
+		Case EARTHPOWER: return 1; break;
 		//Case DRACOMETEOR: return 1; break;
 	}
 	return 0;
@@ -1159,7 +1169,7 @@ if(CheckInventory("SleepMark"))
     }
 }
 
-if(CheckInventory("ParalysisMark") || CheckInventory("InBoat"))
+if(CheckInventory("ParalysisMark"))
     {switch(ThisWeapon) {
 		Case QuickAttack: ACS_Execute(979,0); return false;
 		Case DoubleEdge: acs_execute(979,0); return false;
@@ -1191,6 +1201,52 @@ if(CheckInventory("ParalysisMark") || CheckInventory("InBoat"))
 		Case MEGAHORN: acs_execute(979,0); return false;
 		Case TRIPLEKICK: acs_execute(979,0); return false;
     }
+}
+
+if(ThisWeapon == SURF && CheckInventory("Fly_Active")){ acs_execute(979,0); return false;}
+if(ThisWeapon == FLY && CheckInventory("InBoat")){ acs_execute(979,0); return false;}
+
+if(CheckInventory("Fly_Active") || CheckInventory("InBoat")) //Disabled while flying or surfing
+{
+	switch(ThisWeapon) {
+	//No Self Recovery
+	Case RECOVER: acs_execute(979,0); return false;
+	Case SLACKOFF: acs_execute(979,0); return false;
+	Case SYNTHESIS: acs_execute(979,0); return false;
+	Case ROOST: acs_execute(979,0); return false;
+	Case REST: acs_execute(979,0); return false;
+
+	//No Dashing/Ramming
+	Case QuickAttack: ACS_Execute(979,0); return false;
+	Case DoubleEdge: acs_execute(979,0); return false;
+	Case HeadButt: acs_execute(979,0); return false;
+	Case ZenHeadbutt: acs_execute(979,0); return false;
+	Case FlareBlitz: acs_execute(979,0); return false;
+	Case DragonRush: acs_execute(979,0); return false;
+	Case Rollout: acs_execute(979,0); return false;
+	Case GyroBall: acs_execute(979,0); return false;
+	Case FlameWheel: acs_execute(979,0); return false;
+	Case MachPunch: acs_execute(979,0); return false;
+	Case AquaJet: acs_execute(979,0); return false;
+	Case Waterfall: acs_execute(979,0); return false;
+	Case Liquidation: acs_execute(979,0); return false;
+	Case Dive: acs_execute(979,0); return false;
+	Case PhantomForce: acs_execute(979,0); return false;
+	Case SkyUppercut: acs_execute(979,0); return false;
+	Case HiJumpKick: acs_execute(979,0); return false;
+	Case Pursuit: acs_execute(979,0); return false;
+	Case Acrobatics: acs_execute(979,0); return false;
+	Case BraveBird: acs_execute(979,0); return false;
+	Case Spark: acs_execute(979,0); return false;
+	Case WildCharge: acs_execute(979,0); return false;
+	Case TakeDown: acs_execute(979,0); return false;
+	Case DIG: acs_execute(979,0); return false;
+	Case SEISMICTOSS: acs_execute(979,0); return false;
+	Case STORMTHROW: acs_execute(979,0); return false;
+	Case SUPERPOWER: acs_execute(979,0); return false;
+	Case MEGAHORN: acs_execute(979,0); return false;
+	Case TRIPLEKICK: acs_execute(979,0); return false;
+	}
 }
 
 if(CheckInventory("FreezeMark"))

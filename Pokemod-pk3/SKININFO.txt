@@ -1033,7 +1033,7 @@ dsplpain = MEGAPAIN
 dstaunt = Cry078
 gender = male
 }
-/*       
+      
 {
 name = "Ferroseed"
 sprite = P079
@@ -2547,5 +2547,5 @@ dstaunt = Cry186
 gender = male
 }
 
-*/
+
 //--[NewPokemon]--

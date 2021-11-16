@@ -69,15 +69,15 @@
 #LIBDEFINE TML_MAX 15
 
 //TM Price
-#LIBDEFINE TMP_1 3
-#LIBDEFINE TMP_2 5
-#LIBDEFINE TMP_3 10
-#LIBDEFINE TMP_4 15
-#LIBDEFINE TMP_5 30
+#LIBDEFINE TMP_1 10
+#LIBDEFINE TMP_2 25
+#LIBDEFINE TMP_3 50
+#LIBDEFINE TMP_4 100
+#LIBDEFINE TMP_5 300
 
 
 
-#LIBDEFINE MAXTMLIST 135
+#LIBDEFINE MAXTMLIST 162
 //#endregion
 
 //#region -=- TM Reference -=-
@@ -102,27 +102,11 @@ int TMMem_Player [64][MAXTMLIST] = {};
 //#region -=- TM MasterList -=-
 int TMList [MAXTMLIST][5] = {
     //======|Early Game TMs|=====
-{Substitute     ,TMF_UNIVERSAL      ,TMT_NORMAL                                 ,TMP_1  ,TML_ALL},
-{Block          ,TMF_NULL           ,TMT_NORMAL|TMT_GROUND|TMT_ROCK|TMT_STEEL   ,TMP_1  ,TML_ALL},
-{Protect        ,TMF_UNIVERSAL      ,TMT_NORMAL                                 ,TMP_1  ,TML_ALL},
-{Disable        ,TMF_NULL           ,TMT_NORMAL|TMT_GHOST|TMT_PSYCHIC|TMT_FAIRY ,TMP_2  ,TML_ALL},
-{Taunt          ,TMF_UNIVERSAL      ,TMT_NORMAL                                 ,TMP_1  ,TML_ALL},
-{Fakeout        ,TMF_UNIVERSAL      ,TMT_NORMAL                                 ,TMP_1  ,TML_ALL},
-{FalseSwipe     ,TMF_UNIVERSAL      ,TMT_NORMAL                                 ,TMP_1  ,TML_ALL},
-{Rest           ,TMF_UNIVERSAL      ,TMT_PSYCHIC                                ,TMP_1  ,TML_ALL},
-{Refresh        ,TMF_UNIVERSAL      ,TMT_NORMAL                                 ,TMP_1  ,TML_ALL},
-{HelpingHand    ,TMF_UNIVERSAL      ,TMT_NORMAL                                 ,TMP_1  ,TML_ALL},
-{Swagger        ,TMF_UNIVERSAL      ,TMT_NORMAL                                 ,TMP_1  ,TML_ALL},
-{Flatter        ,TMF_UNIVERSAL      ,TMT_DARK                                   ,TMP_1  ,TML_ALL},
-{Magicalleaf    ,TMF_NULL           ,TMT_GRASS|TMT_FAIRY|TMT_PSYCHIC            ,TMP_2  ,TML_ALL},
-{Swift          ,TMF_NULL           ,TMT_NORMAL|TMT_PSYCHIC|TMT_FAIRY           ,TMP_2  ,TML_ALL},
-{HeadButt       ,TMF_UNIVERSAL      ,TMT_NORMAL                                 ,TMP_2  ,TML_ALL},
-//{DragonRage     ,TMF_NULL           ,TMT_DRAGON                                 ,TMP_2  ,TML_LOW},
-{FuryCutter     ,TMF_NULL           ,TMT_BUG                                    ,TMP_2  ,TML_LOW},
-{MetalClaw     ,TMF_NULL            ,TMT_STEEL                                  ,TMP_2  ,TML_LOW},
-{CrushClaw     ,TMF_NULL            ,TMT_NORMAL                                 ,TMP_2  ,TML_LOW},
 
-    //======|Stat Boosting TMs|=====
+
+    //======|Stat Altering TMs|=====
+// Boosting
+{HelpingHand    ,TMF_UNIVERSAL      ,TMT_NORMAL                                 ,TMP_1  ,TML_ALL},
 {CalmMind       ,TMF_UNIVERSAL      ,TMT_PSYCHIC                                ,TMP_3  ,TML_ALL},
 {BulkUp         ,TMF_NULL           ,TMT_FIGHTING                               ,TMP_3  ,TML_ALL},
 {CosmicPower    ,TMF_UNIVERSAL      ,TMT_PSYCHIC|TMT_FAIRY                      ,TMP_3  ,TML_ALL},
@@ -131,127 +115,206 @@ int TMList [MAXTMLIST][5] = {
 {HoneClaws      ,TMF_NULL           ,TMT_DARK                                   ,TMP_3  ,TML_ALL},
 {DragonDance    ,TMF_NULL           ,TMT_DRAGON                                 ,TMP_3  ,TML_ALL},
 {RockPolish     ,TMF_NULL           ,TMT_ROCK|TMT_GROUND|TMT_Steel              ,TMP_3  ,TML_ALL},
-{IronDefense    ,TMF_UNIVERSAL      ,TMT_STEEL                                  ,TMP_4  ,TML_MID},
-{Amnesia        ,TMF_UNIVERSAL      ,TMT_PSYCHIC                                ,TMP_4  ,TML_MID},
-{SwordDance     ,TMF_UNIVERSAL      ,TMT_NORMAL                                 ,TMP_5  ,TML_MID},
-{NastyPlot      ,TMF_UNIVERSAL      ,TMT_DARK                                   ,TMP_5  ,TML_MID},
-{Agility        ,TMF_UNIVERSAL      ,TMT_PSYCHIC                                ,TMP_5  ,TML_MID},
+{IronDefense    ,TMF_UNIVERSAL      ,TMT_STEEL                                  ,TMP_4  ,TML_ALL},
+{Amnesia        ,TMF_UNIVERSAL      ,TMT_PSYCHIC                                ,TMP_4  ,TML_ALL},
+{SwordDance     ,TMF_UNIVERSAL      ,TMT_NORMAL                                 ,TMP_5  ,TML_ALL},
+{NastyPlot      ,TMF_UNIVERSAL      ,TMT_DARK                                   ,TMP_5  ,TML_ALL},
+{Agility        ,TMF_UNIVERSAL      ,TMT_PSYCHIC                                ,TMP_5  ,TML_ALL},
 {TailWind       ,TMF_NULL           ,TMT_FLYING                                 ,TMP_3  ,TML_ALL},
-    //======|Stat dropping TMs|=====
-//{Screech        ,TMF_UNIVERSAL      ,TMT_NORMAL                                 ,TMP_1  ,TML_MID},
-//{FakeTears      ,TMF_UNIVERSAL      ,TMT_DARK                                   ,TMP_1  ,TML_MID},
-{Charm          ,TMF_UNIVERSAL      ,TMT_FAIRY                                  ,TMP_1  ,TML_MID},
-{Captivate      ,TMF_UNIVERSAL      ,TMT_NORMAL                                 ,TMP_1  ,TML_MID},
-{ScaryFace      ,TMF_UNIVERSAL      ,TMT_NORMAL                                 ,TMP_1  ,TML_MID},
+//Lowering
+{Screech        ,TMF_UNIVERSAL      ,TMT_NORMAL                                 ,TMP_1  ,TML_ALL},
+{FakeTears      ,TMF_UNIVERSAL      ,TMT_DARK                                   ,TMP_1  ,TML_ALL},
+{Charm          ,TMF_UNIVERSAL      ,TMT_FAIRY                                  ,TMP_1  ,TML_ALL},
+{Captivate      ,TMF_UNIVERSAL      ,TMT_NORMAL                                 ,TMP_1  ,TML_ALL},
+{ScaryFace      ,TMF_UNIVERSAL      ,TMT_NORMAL                                 ,TMP_1  ,TML_ALL},
     //======|Utility and Support TMs|=====
-{Haze           ,TMF_NULL           ,TMT_WATER|TMT_ICE|TMT_FAIRY|TMT_GHOST      ,TMP_1  ,TML_ALL},
-{Mist           ,TMF_NULL           ,TMT_WATER|TMT_ICE|TMT_FAIRY|TMT_GHOST      ,TMP_1  ,TML_ALL},
-{Teleport_M     ,TMF_NULL           ,TMT_PSYCHIC                                ,TMP_1  ,TML_ALL},
-{WideGuard      ,TMF_NULL           ,TMT_GROUND|TMT_ROCK|TMT_STEEL              ,TMP_3  ,TML_ALL},
-{SafeGuard      ,TMF_NULL           ,TMT_NORMAL|TMT_PSYCHIC|TMT_FAIRY           ,TMP_5  ,TML_ALL},
+
+//Healing
+{LifeDew        ,TMF_NULL           ,TMT_WATER|TMT_PSYCHIC|TMT_FAIRY            ,TMP_2  ,TML_ALL},
+{HealPulse      ,TMF_NULL           ,TMT_PSYCHIC|TMT_FAIRY                      ,TMP_2  ,TML_ALL},
+{AquaRing       ,TMF_NULL           ,TMT_WATER                                  ,TMP_2  ,TML_ALL},
+{Roost          ,TMF_NULL           ,TMT_FLYING                                 ,TMP_2  ,TML_ALL},
+{Rest           ,TMF_UNIVERSAL      ,TMT_PSYCHIC                                ,TMP_1  ,TML_ALL},
+{Refresh        ,TMF_UNIVERSAL      ,TMT_NORMAL                                 ,TMP_1  ,TML_ALL},
+
+//Defense & Protection
+{Substitute     ,TMF_UNIVERSAL      ,TMT_NORMAL                                 ,TMP_1  ,TML_ALL},
+{Block          ,TMF_NULL           ,TMT_NORMAL|TMT_GROUND|TMT_ROCK|TMT_STEEL   ,TMP_1  ,TML_ALL},
+{Protect        ,TMF_UNIVERSAL      ,TMT_NORMAL                                 ,TMP_1  ,TML_ALL},
 {Reflect        ,TMF_NULL           ,TMT_PSYCHIC|TMT_FAIRY                      ,TMP_3  ,TML_ALL},
 {LightScreen    ,TMF_NULL           ,TMT_PSYCHIC|TMT_FAIRY                      ,TMP_3  ,TML_ALL},
 {CraftyShield   ,TMF_NULL           ,TMT_PSYCHIC|TMT_FAIRY                      ,TMP_5  ,TML_ALL},
-{HealPulse      ,TMF_NULL           ,TMT_PSYCHIC|TMT_FAIRY                      ,TMP_2  ,TML_ALL},
-{LifeDew        ,TMF_NULL           ,TMT_WATER|TMT_PSYCHIC|TMT_FAIRY            ,TMP_2  ,TML_ALL},
+{SafeGuard      ,TMF_NULL           ,TMT_NORMAL|TMT_PSYCHIC|TMT_FAIRY           ,TMP_5  ,TML_ALL},
+{Mist           ,TMF_NULL           ,TMT_WATER|TMT_ICE|TMT_FAIRY|TMT_GHOST      ,TMP_1  ,TML_ALL},
 {Barrier        ,TMF_NULL           ,TMT_PSYCHIC                                ,TMP_2  ,TML_ALL},
-{AquaRing       ,TMF_NULL           ,TMT_WATER                                  ,TMP_2  ,TML_ALL},
+{WideGuard      ,TMF_NULL           ,TMT_GROUND|TMT_ROCK|TMT_STEEL              ,TMP_3  ,TML_ALL},
 {SmokeScreen    ,TMF_NULL           ,TMT_FIRE|TMT_POISON                        ,TMP_2  ,TML_ALL},
-{Roost          ,TMF_NULL           ,TMT_FLYING                                 ,TMP_2  ,TML_ALL},
+{AromaTherapy     ,TMF_NULL         ,TMT_GRASS|TMT_FAIRY             ,TMP_3  ,TML_ALL},
+
+//Dispell & Debilitate
+{Haze           ,TMF_NULL           ,TMT_WATER|TMT_ICE|TMT_FAIRY|TMT_GHOST      ,TMP_1  ,TML_ALL},
+{Defog          ,TMF_NULL           ,TMT_FLYING                                 ,TMP_2  ,TML_ALL},
+{Disable        ,TMF_NULL           ,TMT_NORMAL|TMT_GHOST|TMT_PSYCHIC|TMT_FAIRY ,TMP_2  ,TML_ALL},
+{Taunt          ,TMF_UNIVERSAL      ,TMT_NORMAL                                 ,TMP_1  ,TML_ALL},
+{Fakeout        ,TMF_UNIVERSAL      ,TMT_NORMAL                                 ,TMP_1  ,TML_ALL},
+{ThunderWave    ,TMF_NULL           ,TMT_ELECTRIC|TMT_PSYCHIC                   ,TMP_3  ,TML_ALL},
+{WillOWisp      ,TMF_NULL           ,TMT_FIRE|TMT_PSYCHIC|TMT_GHOST             ,TMP_3  ,TML_ALL},
+{Hypnosis       ,TMF_NULL           ,TMT_PSYCHIC|TMT_FAIRY|TMT_GHOST             ,TMP_3  ,TML_ALL},
+{Sing           ,TMF_NULL           ,TMT_NORMAL|TMT_FAIRY             ,TMP_3  ,TML_ALL},
+{Yawn           ,TMF_NULL           ,TMT_NORMAL|TMT_GROUND             ,TMP_3  ,TML_ALL},
+{SweetScent     ,TMF_NULL           ,TMT_GRASS|TMT_POISON|TMT_FAIRY             ,TMP_3  ,TML_ALL},
+
+
     //======|Tactical/Control TMs|=====
+
+//Zoning
 {Toxic          ,TMF_UNIVERSAL      ,TMT_POISON                                 ,TMP_5  ,TML_ALL},
 {Spikes         ,TMF_NULL           ,TMT_GROUND                                 ,TMP_2  ,TML_ALL},
 {ToxicSpikes    ,TMF_NULL           ,TMT_POISON                                 ,TMP_2  ,TML_ALL},
 {StealthRock    ,TMF_NULL           ,TMT_ROCK                                   ,TMP_2  ,TML_ALL},
-{FlameCharge    ,TMF_NULL           ,TMT_FIRE                                   ,TMP_2  ,TML_LOW},
-{IcyWind        ,TMF_NULL           ,TMT_WATER|TMT_ICE|TMT_FLYING               ,TMP_2  ,TML_LOW},
-{Heatwave       ,TMF_NULL           ,TMT_FIRE|TMT_FLYING                        ,TMP_2  ,TML_LOW},
-{Rollout        ,TMF_NULL           ,TMT_ROCK                                   ,TMP_2  ,TML_LOW},
-{GyroBall       ,TMF_NULL           ,TMT_STEEL                                  ,TMP_2  ,TML_LOW},
-{BugBite        ,TMF_NULL           ,TMT_BUG                                    ,TMP_2  ,TML_LOW},
-{Pluck          ,TMF_NULL           ,TMT_FLYING                                 ,TMP_2  ,TML_LOW},
-{AcidSpray      ,TMF_NULL           ,TMT_POISON                                 ,TMP_2  ,TML_LOW},
-{FutureSight    ,TMF_NULL           ,TMT_PSYCHIC|TMT_FAIRY                      ,TMP_2  ,TML_MID2},
-{PowerGem       ,TMF_NULL           ,TMT_ROCK|TMT_PSYCHIC|TMT_FAIRY             ,TMP_4  ,TML_MID2},
-{Defog          ,TMF_NULL           ,TMT_FLYING                                 ,TMP_2  ,TML_MID2},
-{Incinerate     ,TMF_NULL           ,TMT_FIRE|TMT_DRAGON                        ,TMP_3  ,TML_MID},
-{ThunderWave    ,TMF_NULL           ,TMT_ELECTRIC|TMT_PSYCHIC                   ,TMP_3  ,TML_MID},
-{WillOWisp      ,TMF_NULL           ,TMT_FIRE|TMT_PSYCHIC|TMT_GHOST             ,TMP_3  ,TML_MID},
-{DreamEater     ,TMF_NULL           ,TMT_PSYCHIC|TMT_FAIRY|TMT_GHOST|TMT_DARK   ,TMP_2  ,TML_MID},
-{Dig            ,TMF_NULL           ,TMT_ROCK|TMT_GROUND                        ,TMP_2  ,TML_MID},
-{SandTomb       ,TMF_NULL           ,TMT_ROCK|TMT_GROUND                        ,TMP_5  ,TML_MID2},
-{Dive           ,TMF_NULL           ,TMT_WATER                                  ,TMP_4  ,TML_MID},
-{Whirlpool      ,TMF_NULL           ,TMT_WATER                                  ,TMP_5  ,TML_MID2},
-{Infestation    ,TMF_NULL           ,TMT_BUG                                    ,TMP_4  ,TML_MID2},
-    //======|Mid Game Coverage TMs|=====
-{EnergyBall     ,TMF_NULL           ,TMT_GRASS|TMT_FAIRY|TMT_PSYCHIC            ,TMP_3  ,TML_MID},
-{BulletSeed     ,TMF_NULL           ,TMT_GRASS|TMT_BUG                          ,TMP_3  ,TML_MID},
-{MegaDrain      ,TMF_NULL           ,TMT_GRASS|TMT_BUG                          ,TMP_3  ,TML_MID},
-//{FlameBurst     ,TMF_NULL           ,TMT_FIRE|TMT_DRAGON                        ,TMP_3  ,TML_MID},
-{LavaPlume      ,TMF_NULL           ,TMT_FIRE|TMT_DRAGON                        ,TMP_3  ,TML_MID},
-//{WaterPulse     ,TMF_NULL           ,TMT_WATER                                  ,TMP_3  ,TML_MID},
-{Brine          ,TMF_NULL           ,TMT_WATER|TMT_POISON                       ,TMP_3  ,TML_MID},
-{Scald          ,TMF_NULL           ,TMT_WATER|TMT_FIRE                         ,TMP_3  ,TML_MID},
-{AuroraBeam     ,TMF_NULL           ,TMT_ICE|TMT_WATER                          ,TMP_3  ,TML_MID},
-{DrainingKiss   ,TMF_NULL           ,TMT_FAIRY                                  ,TMP_3  ,TML_MID},
-{FirePunch      ,TMF_NULL           ,TMT_FIGHTING|TMT_FIRE|TMT_DRAGON           ,TMP_3  ,TML_MID},
-{IcePunch       ,TMF_NULL           ,TMT_FIGHTING|TMT_ICE|TMT_WATER             ,TMP_3  ,TML_MID},
-{ThunderPunch   ,TMF_NULL           ,TMT_FIGHTING|TMT_ELECTRIC                  ,TMP_3  ,TML_MID},
-{DrainPunch     ,TMF_NULL           ,TMT_FIGHTING                               ,TMP_3  ,TML_MID},
-{BrickBreak     ,TMF_NULL           ,TMT_FIGHTING                               ,TMP_3  ,TML_MID},
-{MeteorMash     ,TMF_NULL           ,TMT_STEEL                                  ,TMP_3  ,TML_MID},
-{FireFang       ,TMF_NULL           ,TMT_FIRE|TMT_DRAGON                        ,TMP_3  ,TML_MID},
-{IceFang        ,TMF_NULL           ,TMT_ICE|TMT_WATER                          ,TMP_3  ,TML_MID},
-{ThunderFang    ,TMF_NULL           ,TMT_ELECTRIC                               ,TMP_3  ,TML_MID},
-{ClearSmog      ,TMF_NULL           ,TMT_POISON|TMT_FIRE                        ,TMP_3  ,TML_MID},
-{RockTomb       ,TMF_NULL           ,TMT_ROCK|TMT_GROUND|TMT_Steel              ,TMP_3  ,TML_MID},
-{Dazzlinggleam  ,TMF_NULL           ,TMT_FAIRY|TMT_PSYCHIC                      ,TMP_4  ,TML_MID},
-{SignalBeam     ,TMF_NULL           ,TMT_BUG|TMT_ELECTRIC|TMT_PSYCHIC|TMT_FAIRY ,TMP_4  ,TML_MID},
-{PoisonJab      ,TMF_NULL           ,TMT_POISON                                 ,TMP_4  ,TML_MID},
-{SeismicToss    ,TMF_UNIVERSAL      ,TMT_FIGHTING                               ,TMP_4  ,TML_MID},
-{ElectroBall    ,TMF_NULL           ,TMT_ELECTRIC                               ,TMP_4  ,TML_MID},
-{PsychoCut      ,TMF_NULL           ,TMT_PSYCHIC                                ,TMP_4  ,TML_MID},
-{AirSlash       ,TMF_NULL           ,TMT_Flying                                 ,TMP_4  ,TML_MID},
-{DarkPulse      ,TMF_NULL           ,TMT_DARK|TMT_GHOST                         ,TMP_4  ,TML_MID2},
-{Bulldoze       ,TMF_NULL           ,TMT_ROCK|TMT_GROUND|TMT_Steel              ,TMP_4  ,TML_MID2},
-{EarthPower     ,TMF_NULL           ,TMT_ROCK|TMT_GROUND|TMT_Steel|TMT_GRASS    ,TMP_4  ,TML_MID2},
-{IronHead       ,TMF_NULL           ,TMT_ROCK|TMT_GROUND|TMT_Steel              ,TMP_4  ,TML_MID2},
-{AuraSphere     ,TMF_NULL           ,TMT_FIGHTING|TMT_PSYCHIC                   ,TMP_4  ,TML_MID2},
-{ZenHeadbutt    ,TMF_NULL           ,TMT_PSYCHIC|TMT_FIGHTING                   ,TMP_4  ,TML_MID2},
-{MysticalFire   ,TMF_NULL           ,TMT_FIRE|TMT_PSYCHIC|TMT_FAIRY             ,TMP_4  ,TML_MID2},
-    //======|High Power Coverage TMs|=====
-{IceBeam        ,TMF_NULL           ,TMT_WATER|TMT_ICE                          ,TMP_4  ,TML_MID2},
-{Flamethrower   ,TMF_NULL           ,TMT_FIRE|TMT_DRAGON                        ,TMP_4  ,TML_MID2},
-{ThunderBolt    ,TMF_NULL           ,TMT_ELECTRIC                               ,TMP_4  ,TML_MID2},
-{ShadowBall     ,TMF_NULL           ,TMT_GHOST|TMT_PSYCHIC                      ,TMP_4  ,TML_MID2},
-{MoonBlast      ,TMF_NULL           ,TMT_FAIRY|TMT_PSYCHIC                      ,TMP_4  ,TML_MID2},
-{SludgeBomb     ,TMF_NULL           ,TMT_POISON|TMT_GRASS                       ,TMP_4  ,TML_MID2},
-{Waterfall      ,TMF_NULL           ,TMT_WATER                                  ,TMP_4  ,TML_MID2},
-{DragonPulse    ,TMF_NULL           ,TMT_DRAGON                                 ,TMP_4  ,TML_MID2},
-{DragonClaw     ,TMF_NULL           ,TMT_DRAGON                                 ,TMP_4  ,TML_MID2},
-{HammerArm      ,TMF_NULL           ,TMT_FIGHTING                               ,TMP_4  ,TML_MID2},
-{BodySlam       ,TMF_UNIVERSAL      ,TMT_NORMAL                                 ,TMP_4  ,TML_MID2},
-{RockSlide      ,TMF_NULL           ,TMT_ROCK|TMT_GROUND|TMT_Steel              ,TMP_4  ,TML_MID2},
-{Acrobatics     ,TMF_NULL           ,TMT_FLYING                                 ,TMP_4  ,TML_MID2},
-    //======|EndGame Power TMs|=====
-{Fly            ,TMF_NULL           ,TMT_FLYING                                 ,TMP_5  ,TML_HIGH},
-{SkyDrop        ,TMF_NULL           ,TMT_FLYING                                 ,TMP_5  ,TML_HIGH},
-{Surf           ,TMF_NULL           ,TMT_WATER                                  ,TMP_5  ,TML_HIGH},
-{EarthQuake     ,TMF_UNIVERSAL      ,TMT_GROUND|TMT_ROCK|TMT_STEEL              ,TMP_5  ,TML_HIGH},
-{Blizzard       ,TMF_NULL           ,TMT_WATER|TMT_ICE                          ,TMP_5  ,TML_HIGH},
-{Thunder        ,TMF_NULL           ,TMT_ELECTRIC                               ,TMP_5  ,TML_HIGH},
-{FireBlast      ,TMF_NULL           ,TMT_FIRE|TMT_DRAGON                        ,TMP_5  ,TML_HIGH},
-{SolarBeam      ,TMF_NULL           ,TMT_GRASS|TMT_FIRE                         ,TMP_5  ,TML_HIGH},
-{GigaDrain      ,TMF_NULL           ,TMT_GRASS|TMT_BUG                          ,TMP_5  ,TML_HIGH},
-{Psychic        ,TMF_NULL           ,TMT_PSYCHIC|TMT_GHOST                      ,TMP_5  ,TML_HIGH},
-{Psyshock       ,TMF_NULL           ,TMT_PSYCHIC|TMT_FAIRY                      ,TMP_5  ,TML_HIGH},
-{Overheat       ,TMF_NULL           ,TMT_FIRE                                   ,TMP_5  ,TML_HIGH},
-//{FlareBlitz     ,TMF_NULL           ,TMT_FIRE                                   ,TMP_5  ,TML_HIGH},
-//{WildCharge     ,TMF_NULL           ,TMT_ELECTRIC|TMT_FIRE                      ,TMP_5  ,TML_HIGH},
-{CloseCombat    ,TMF_NULL           ,TMT_FIGHTING                               ,TMP_5  ,TML_HIGH},
-{StoneEdge      ,TMF_NULL           ,TMT_ROCK|TMT_GROUND|TMT_Steel|TMT_FIGHTING ,TMP_5  ,TML_HIGH},
-{FocusBlast     ,TMF_NULL           ,TMT_FIGHTING|TMT_PSYCHIC                   ,TMP_5  ,TML_HIGH},
-{SuperPower     ,TMF_NULL           ,TMT_FIGHTING|TMT_GROUND                    ,TMP_5  ,TML_HIGH},
+{FutureSight    ,TMF_NULL           ,TMT_PSYCHIC|TMT_FAIRY                      ,TMP_2  ,TML_ALL},
+{PowerGem       ,TMF_NULL           ,TMT_ROCK|TMT_PSYCHIC|TMT_FAIRY             ,TMP_4  ,TML_ALL},
+{Incinerate     ,TMF_NULL           ,TMT_FIRE|TMT_DRAGON                        ,TMP_3  ,TML_ALL},
+
+//Status Condition
+{Swagger        ,TMF_UNIVERSAL      ,TMT_NORMAL                                 ,TMP_1  ,TML_ALL},
+{Flatter        ,TMF_UNIVERSAL      ,TMT_DARK                                   ,TMP_1  ,TML_ALL},
+
+//Displace
+{IcyWind        ,TMF_NULL           ,TMT_WATER|TMT_ICE|TMT_FLYING               ,TMP_2  ,TML_ALL},
+{Heatwave       ,TMF_NULL           ,TMT_FIRE|TMT_FLYING                        ,TMP_2  ,TML_ALL},
+{SandTomb       ,TMF_NULL           ,TMT_ROCK|TMT_GROUND                        ,TMP_5  ,TML_ALL},
+{Whirlpool      ,TMF_NULL           ,TMT_WATER                                  ,TMP_5  ,TML_ALL},
+{Infestation    ,TMF_NULL           ,TMT_BUG                                    ,TMP_4  ,TML_ALL},
+
+//Repositioning
+{Teleport_M     ,TMF_NULL           ,TMT_PSYCHIC                                ,TMP_1  ,TML_ALL},
+{Dig            ,TMF_NULL           ,TMT_ROCK|TMT_GROUND                        ,TMP_2  ,TML_ALL},
+{Dive           ,TMF_NULL           ,TMT_WATER                                  ,TMP_4  ,TML_ALL},
+
+
+
+    //======|Ranged Coverage TMs|=====
+// Rocket Launcher/Explosive
+{FlameBurst     ,TMF_NULL           ,TMT_FIRE|TMT_DRAGON                        ,TMP_3  ,TML_ALL},
+{LavaPlume      ,TMF_NULL           ,TMT_FIRE|TMT_DRAGON                        ,TMP_3  ,TML_ALL},
+{WaterPulse     ,TMF_NULL           ,TMT_WATER                                  ,TMP_3  ,TML_ALL},
+{SludgeBomb     ,TMF_NULL           ,TMT_POISON|TMT_GRASS                       ,TMP_3  ,TML_ALL},
+{AcidSpray      ,TMF_NULL           ,TMT_POISON                                 ,TMP_2  ,TML_ALL},
+{RockTomb       ,TMF_NULL           ,TMT_ROCK|TMT_GROUND|TMT_Steel              ,TMP_3  ,TML_ALL},
+{Psychic        ,TMF_NULL           ,TMT_PSYCHIC|TMT_GHOST                      ,TMP_4  ,TML_ALL},
+{SignalBeam     ,TMF_NULL           ,TMT_BUG|TMT_ELECTRIC|TMT_PSYCHIC|TMT_FAIRY ,TMP_3  ,TML_ALL},
+
+//Lightning gun
+{MegaDrain      ,TMF_NULL           ,TMT_GRASS|TMT_BUG                          ,TMP_3  ,TML_ALL},
+{Flamethrower   ,TMF_NULL           ,TMT_FIRE|TMT_DRAGON                        ,TMP_3  ,TML_ALL},
+{ThunderBolt    ,TMF_NULL           ,TMT_ELECTRIC                               ,TMP_3  ,TML_ALL},
+
+//Automatic
+{Brine          ,TMF_NULL           ,TMT_WATER|TMT_POISON                       ,TMP_3  ,TML_ALL},
+{Scald          ,TMF_NULL           ,TMT_WATER|TMT_FIRE                         ,TMP_3  ,TML_ALL},
+{DragonPulse    ,TMF_NULL           ,TMT_DRAGON                                 ,TMP_3  ,TML_ALL},
+
+//Machine Gun
+{BulletSeed     ,TMF_NULL           ,TMT_GRASS|TMT_BUG                          ,TMP_3  ,TML_ALL},
+{RockBlast     ,TMF_NULL           ,TMT_ROCK|TMT_GROUND                          ,TMP_3  ,TML_ALL},
+{IcicleSpear     ,TMF_NULL           ,TMT_ICE|TMT_WATER                          ,TMP_3  ,TML_ALL},
+
+//SkillShot
+{EnergyBall     ,TMF_NULL           ,TMT_GRASS|TMT_FAIRY|TMT_PSYCHIC            ,TMP_3  ,TML_ALL},
+{ClearSmog      ,TMF_NULL           ,TMT_POISON|TMT_FIRE                        ,TMP_3  ,TML_ALL},
+{ElectroBall    ,TMF_NULL           ,TMT_ELECTRIC                               ,TMP_3  ,TML_ALL},
+{AirSlash       ,TMF_NULL           ,TMT_Flying                                 ,TMP_3  ,TML_ALL},
+{PsychoCut      ,TMF_NULL           ,TMT_PSYCHIC                                ,TMP_3  ,TML_ALL},
+{AuraSphere     ,TMF_NULL           ,TMT_FIGHTING|TMT_PSYCHIC                   ,TMP_3  ,TML_ALL},
+{AuroraBeam     ,TMF_NULL           ,TMT_ICE|TMT_WATER                          ,TMP_3  ,TML_ALL},
+{IceBeam        ,TMF_NULL           ,TMT_WATER|TMT_ICE                          ,TMP_3  ,TML_ALL},
+{ShadowBall     ,TMF_NULL           ,TMT_GHOST|TMT_PSYCHIC                      ,TMP_3  ,TML_ALL},
+{MoonBlast      ,TMF_NULL           ,TMT_FAIRY|TMT_PSYCHIC                      ,TMP_4  ,TML_ALL},
+{StoneEdge      ,TMF_NULL           ,TMT_ROCK|TMT_GROUND|TMT_Steel|TMT_FIGHTING ,TMP_3  ,TML_ALL},
+
+//Wide & Area
+{Dazzlinggleam  ,TMF_NULL           ,TMT_FAIRY|TMT_PSYCHIC                      ,TMP_3  ,TML_ALL},
+{DarkPulse      ,TMF_NULL           ,TMT_DARK|TMT_GHOST                         ,TMP_3  ,TML_ALL},
+{EarthPower     ,TMF_NULL           ,TMT_ROCK|TMT_GROUND|TMT_Steel|TMT_GRASS    ,TMP_3  ,TML_ALL},
+{Bulldoze       ,TMF_NULL           ,TMT_ROCK|TMT_GROUND|TMT_Steel              ,TMP_3  ,TML_ALL},
+{RockSlide      ,TMF_NULL           ,TMT_ROCK|TMT_GROUND|TMT_Steel              ,TMP_3  ,TML_ALL},
+{Surf           ,TMF_NULL           ,TMT_WATER                                  ,TMP_4  ,TML_ALL},
+{EarthQuake     ,TMF_NULL      ,TMT_GROUND|TMT_ROCK|TMT_STEEL              ,TMP_5  ,TML_ALL},
+{Blizzard       ,TMF_NULL           ,TMT_WATER|TMT_ICE                          ,TMP_5  ,TML_ALL},
+{Thunder        ,TMF_NULL           ,TMT_ELECTRIC                               ,TMP_4  ,TML_ALL},
+{GigaDrain      ,TMF_NULL           ,TMT_GRASS|TMT_BUG                          ,TMP_4  ,TML_ALL},
+{Overheat       ,TMF_NULL           ,TMT_FIRE                                   ,TMP_5  ,TML_ALL},
+{IcicleCrash     ,TMF_NULL           ,TMT_ICE|TMT_WATER                          ,TMP_3  ,TML_ALL},
+
+//Railgun
+{Hex            ,TMF_NULL           ,TMT_PSYCHIC|TMT_FAIRY|TMT_GHOST|TMT_DARK   ,TMP_3  ,TML_ALL},
+{Venoshock      ,TMF_NULL           ,TMT_POISON|TMT_BUG                        ,TMP_3  ,TML_ALL},
+{FireBlast      ,TMF_NULL           ,TMT_FIRE|TMT_DRAGON                        ,TMP_5  ,TML_ALL},
+{SolarBeam      ,TMF_NULL           ,TMT_GRASS|TMT_FIRE                         ,TMP_5  ,TML_ALL},
+{FocusBlast     ,TMF_NULL           ,TMT_FIGHTING|TMT_PSYCHIC                   ,TMP_5  ,TML_ALL},
+
+//Specialty
+{DrainingKiss   ,TMF_NULL           ,TMT_FAIRY                                  ,TMP_3  ,TML_ALL},
+{SeismicToss    ,TMF_UNIVERSAL      ,TMT_FIGHTING                               ,TMP_3  ,TML_ALL},
+{MysticalFire   ,TMF_NULL           ,TMT_FIRE|TMT_PSYCHIC|TMT_FAIRY             ,TMP_3  ,TML_ALL},
+{FalseSwipe     ,TMF_UNIVERSAL      ,TMT_NORMAL                                 ,TMP_1  ,TML_ALL},
+{Magicalleaf    ,TMF_NULL           ,TMT_GRASS|TMT_FAIRY|TMT_PSYCHIC            ,TMP_2  ,TML_ALL},
+{Swift          ,TMF_NULL           ,TMT_NORMAL|TMT_PSYCHIC|TMT_FAIRY           ,TMP_2  ,TML_ALL},
+{DreamEater     ,TMF_NULL           ,TMT_PSYCHIC|TMT_FAIRY|TMT_GHOST|TMT_DARK   ,TMP_2  ,TML_ALL},
+{Psyshock       ,TMF_NULL           ,TMT_PSYCHIC|TMT_FAIRY                      ,TMP_3  ,TML_ALL},
+
+    //======|Melee Coverage TMs|=====
+//Melee
+{FirePunch      ,TMF_NULL           ,TMT_FIGHTING|TMT_FIRE|TMT_DRAGON           ,TMP_2  ,TML_ALL},
+{IcePunch       ,TMF_NULL           ,TMT_FIGHTING|TMT_ICE|TMT_WATER             ,TMP_2  ,TML_ALL},
+{ThunderPunch   ,TMF_NULL           ,TMT_FIGHTING|TMT_ELECTRIC                  ,TMP_2  ,TML_ALL},
+{DrainPunch     ,TMF_NULL           ,TMT_FIGHTING                               ,TMP_2  ,TML_ALL},
+{FireFang       ,TMF_NULL           ,TMT_FIRE|TMT_DRAGON                        ,TMP_2  ,TML_ALL},
+{IceFang        ,TMF_NULL           ,TMT_ICE|TMT_WATER                          ,TMP_2  ,TML_ALL},
+{ThunderFang    ,TMF_NULL           ,TMT_ELECTRIC                               ,TMP_2  ,TML_ALL},
+{PoisonJab      ,TMF_NULL           ,TMT_POISON                                 ,TMP_3  ,TML_ALL},
+{CloseCombat    ,TMF_NULL           ,TMT_FIGHTING                               ,TMP_4  ,TML_ALL},
+{NightSlash     ,TMF_NULL           ,TMT_DARK                                 ,TMP_3  ,TML_ALL},
+{DragonClaw     ,TMF_NULL           ,TMT_DRAGON                                 ,TMP_4  ,TML_ALL},
+{HammerArm      ,TMF_NULL           ,TMT_FIGHTING                               ,TMP_3  ,TML_ALL},
+{FuryCutter     ,TMF_NULL           ,TMT_BUG                                    ,TMP_2  ,TML_ALL},
+{MetalClaw     ,TMF_NULL            ,TMT_STEEL                                  ,TMP_2  ,TML_ALL},
+{CrushClaw     ,TMF_NULL            ,TMT_NORMAL                                 ,TMP_2  ,TML_ALL},
+{XScissor        ,TMF_NULL           ,TMT_BUG                                    ,TMP_2  ,TML_ALL},
+{Thrash        ,TMF_UNIVERSAL       ,TMT_NORMAL                                    ,TMP_2  ,TML_ALL},
+
+//MidRange
+{BrickBreak     ,TMF_NULL           ,TMT_FIGHTING                               ,TMP_3  ,TML_ALL},
+{MeteorMash     ,TMF_NULL           ,TMT_STEEL                                  ,TMP_3  ,TML_ALL},
+{FaintAttack     ,TMF_NULL           ,TMT_NORMAL|TMT_DARK                                 ,TMP_3  ,TML_ALL},
+{Pursuit     ,TMF_NULL           ,TMT_NORMAL|TMT_DARK                                 ,TMP_2  ,TML_ALL},
+
+//Dash & Ram
+{HeadButt       ,TMF_UNIVERSAL      ,TMT_NORMAL                                 ,TMP_2  ,TML_ALL},
+{TakeDown       ,TMF_UNIVERSAL      ,TMT_NORMAL                                 ,TMP_2  ,TML_ALL},
+{ZenHeadbutt    ,TMF_NULL           ,TMT_PSYCHIC|TMT_FIGHTING                   ,TMP_3  ,TML_ALL},
+{IronHead       ,TMF_NULL           ,TMT_ROCK|TMT_GROUND|TMT_Steel              ,TMP_3  ,TML_ALL},
+{FlameCharge    ,TMF_NULL           ,TMT_FIRE                                   ,TMP_3  ,TML_ALL},
+{Spark          ,TMF_NULL           ,TMT_ELECTRIC                               ,TMP_3  ,TML_ALL},
+{Waterfall      ,TMF_NULL           ,TMT_WATER                                  ,TMP_3  ,TML_ALL},
+{BodySlam       ,TMF_NULL      ,TMT_NORMAL                                 ,TMP_3  ,TML_ALL},
+{Liquidation       ,TMF_NULL      ,TMT_WATER                                 ,TMP_3  ,TML_ALL},
+{Acrobatics     ,TMF_NULL           ,TMT_FLYING                                 ,TMP_3  ,TML_ALL},
+{Rollout        ,TMF_NULL           ,TMT_ROCK                                   ,TMP_2  ,TML_ALL},
+{GyroBall       ,TMF_NULL           ,TMT_STEEL                                  ,TMP_2  ,TML_ALL},
+{UTurn       ,TMF_NULL           ,TMT_BUG|TMT_FLYING                               ,TMP_2  ,TML_ALL},
+{Pluck          ,TMF_NULL           ,TMT_FLYING                                 ,TMP_2  ,TML_ALL},
+{Fly            ,TMF_NULL           ,TMT_FLYING                                 ,TMP_5  ,TML_ALL},
+{FlareBlitz     ,TMF_NULL           ,TMT_FIRE                                   ,TMP_5  ,TML_ALL},
+{WildCharge     ,TMF_NULL           ,TMT_ELECTRIC|TMT_FIRE                      ,TMP_5  ,TML_ALL},
+{DoubleEdge     ,TMF_UNIVERSAL           ,TMT_NORMAL                      ,TMP_4  ,TML_ALL},
+
+//Grapple
+{SkyDrop        ,TMF_NULL           ,TMT_FLYING                                 ,TMP_3  ,TML_ALL},
+{SuperPower     ,TMF_NULL           ,TMT_FIGHTING|TMT_GROUND                    ,TMP_3  ,TML_ALL},
+{StormThrow     ,TMF_NULL           ,TMT_FIGHTING|TMT_GROUND                    ,TMP_3  ,TML_ALL},
+{VitalThrow     ,TMF_NULL           ,TMT_FIGHTING|TMT_GROUND                    ,TMP_3  ,TML_ALL},
 
 };
 
@@ -506,6 +569,9 @@ int output = 0;
         case DragonClaw: output = TMR_HoneClaws(Dexnum); break;    
         case FlareBlitz: output = TMR_SuperPower(Dexnum); break; 
         case WildCharge: output = TMR_SuperPower(Dexnum); break; 
+        case Sing: output = TMR_HealPulse(Dexnum); break;    
+        case Yawn: output = TMR_WideGuard(Dexnum); break;    
+        case AromaTherapy: output = TMR_HealPulse(Dexnum); break;    
 
         //case sworddance: output = TMR_sworddance(Dexnum); break; 
         //case NastyPlot: output = TMR_NastyPlot(Dexnum); break; 
@@ -1276,7 +1342,9 @@ Function int TMR_Fly (int Dexnum)
     int output = 0;
     Switch (Dexnum)
     {
-
+    case PICHU: output = 1; break;
+    case PIKACHU: output = 1; break;
+    case RAICHU: output = 1; break;
     }
     if(TMArch_Flyer(Dexnum)){output = 1;}
 return output;

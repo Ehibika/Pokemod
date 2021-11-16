@@ -57,6 +57,9 @@ statusbar fullscreen, forcescaled, FullScreenOffsets
 		//DrawNumber 3, "8BDMAFONT", Untranslated, Health, alignment(left), 152, 177;
 		DrawNumber 4, "CBMF", Green, Health, alignment(right), 62, -33;
 		DrawNumber 4, "CBMF", white, "SBAR_HP", alignment(left)|prefix("", "/"), 62, -33;
+
+		InInventory LightScreenBlockem, 1 {	DrawNumber 4, "CBMF", red, LightScreenBlockem, alignment(left), 92, -29;}
+		InInventory ReflectBlockem, 1 {	DrawNumber 4, "CBMF", blue, ReflectBlockem, alignment(left), 92, -37;}
 	//}
 	}
 	

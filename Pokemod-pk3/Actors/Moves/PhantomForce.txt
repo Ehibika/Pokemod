@@ -99,7 +99,7 @@ Goto Fire.PhantomForceRelease2
 
 Fire.After:
 "####" B 1 A_GiveInventory("FullRecovery_A")
-"####" A 0 A_GiveInventory("MoveCooldown_5")
+"####" A 0 A_GiveInventory("MoveCooldown_3")
 "####" C 0 A_REfire("Fire")
 "####" B 0 A_Jump(256,"Fire.End")
 Goto Fire.End

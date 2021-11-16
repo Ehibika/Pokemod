@@ -325,4 +325,6 @@ ShoreUp
 Roost
 SelfDestruct
 Explosion
+MirrorCoat
+Counter
 //--[NewMove]--

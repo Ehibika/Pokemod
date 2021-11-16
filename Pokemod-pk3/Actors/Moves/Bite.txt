@@ -62,6 +62,29 @@ Goto Ready
 //[+]========================================================================[+]
 actor BitePP : Ammo {inventory.amount 1 inventory.Maxamount 35}
 
+actor ImpactCringeCooldown : Powerup {inventory.amount 1 powerup.duration -10 }
+
+actor ImpactCringe : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_JumpifInventory("ImpactCringeCooldown",1,"Nope")
+TNT1 A 0 A_GiveInventory("ImpactCringeCooldown")
+TNT1 A 0 A_GiveInventory("CringeStatusProc")
+stop
+
+Nope:
+TNT1 A 0
+stop
+}
+}
 //[+]========================================================================[+]
 //--------------------------------|Projectiles |--------------------------------
 //[+]========================================================================[+]

@@ -139,7 +139,7 @@ Powerup.duration 10
 Damagefactor "Psyshock", 0.1
 }
 
-actor Psyshock_Recovery_D : FullRecovery_D{Powerup.Duration 70}
+actor Psyshock_Recovery_D : FullRecovery_D{Powerup.Duration 52}
 
 
 //[+]========================================================================[+]

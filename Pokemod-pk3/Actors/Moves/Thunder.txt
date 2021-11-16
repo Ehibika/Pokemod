@@ -2,7 +2,7 @@ actor ThunderMove : WepMasterBase
 {
 Tag "Thunder"
 Weapon.AmmoUse 1
-Weapon.AmmoGive 10
+Weapon.AmmoGive 5
 weapon.ammotype "ThunderPP"
 scale 2.0
 Inventory.Pickupmessage "$PU_MEGABUSTER"
@@ -39,7 +39,7 @@ Goto Fire.After
 
 Fire.After:
 "####" B 1 A_GiveInventory("Thunder_Recovery_D")
-"####" A 0 A_GiveInventory("MoveCooldown_5")
+"####" A 0 //A_GiveInventory("MoveCooldown_1HALF")
 "####" C 0 A_REfire("Fire")
 "####" B 0 A_Jump(256,"Fire.End")
 Goto Fire.End
@@ -102,14 +102,14 @@ Goto Ready
 //[+]========================================================================[+]
 //-----------------------------|Ammo & Inventory|------------------------------
 //[+]========================================================================[+]
-actor ThunderPP : Ammo {inventory.amount 1 inventory.Maxamount 10}
+actor ThunderPP : Ammo {inventory.amount 1 inventory.Maxamount 5}
 
 actor ThunderRCFlag : Powerup {inventory.amount 1 powerup.duration 35 }
 
 Const int ThunderRad = 150;
 Const int ThunderRad2 = 70;
 Const int Thunder_Forward = 150;
-Const int Thunder_Range = 800;
+Const int Thunder_Range = 1000;
 
 actor ThunderPPTaker : CustomInventory
 {
@@ -127,8 +127,8 @@ stop
 }
 }
 
-actor Thunder_Recovery_D : FullRecovery_D{Powerup.Duration 52} //87
-actor Thunder_RemoteCooldown : Powerup {inventory.amount 1 powerup.duration -5}
+actor Thunder_Recovery_D : FullRecovery_D{Powerup.Duration 17} //87
+actor Thunder_RemoteCooldown : Powerup {inventory.amount 1 powerup.duration 17}
 
 actor Thunder_SweetSpot : Powerup {inventory.amount 1 powerup.duration 17}
 
@@ -143,12 +143,14 @@ Spawn:
 TNT1 A 0
 stop
 Pickup:
+/*
 TNT1 A 0 A_JumpifInventory("Thunder_SweetSpot",1,"Pickup2")
 stop
 Pickup2:
 TNT1 A 0 A_Jump(203,"Paralyse")
 stop
 Paralyse:
+*/
 TNT1 A 0 A_GiveInventory("Zap_ParalysisStatusProc2")
 stop
 
@@ -214,7 +216,7 @@ TNT1 A 0 A_GiveToTarget("ThunderPPTaker",1)
 TNT1 A 0 A_SpawnItemEx("ThunderHitbox",Thunder_Forward,0,-(z-floorz)+60,0,0,0,0,1)
 TNT1 A 0 A_GiveToTarget("Thunder_Recovery_D",1)
 TNT1 A 0 A_GiveToTarget("Thunder_RemoteCooldown",1)
-TNT1 A 0 A_GiveToTarget("MoveCooldown_3")
+TNT1 A 0 //A_GiveToTarget("MoveCooldown_1HALF")
 goto PostTrigger
 
 Decline: //Cannot cast the attack
@@ -245,8 +247,8 @@ states
 Spawn:
 Y_BC N 0
 TNT1 A 0 A_GiveInventory("ProjectileDCode",1)
-TNT1 AAAAAAA 3 A_SpawnItemEx("Thunder_SparksFXSpawn",0,0,16,0,0,0,0,1)
-TNT1 A 2 A_RadiusGive("Thunder_SweetSpot",ThunderRad2,RGF_PLAYERS)
+TNT1 AAAAAAAAAAA 3 A_SpawnItemEx("Thunder_SparksFXSpawn",0,0,16,0,0,0,0,1)
+//TNT1 A 2 A_RadiusGive("Thunder_SweetSpot",ThunderRad2,RGF_PLAYERS)
 Y_BC A 1 A_SpawnItemEx("TThunder_Extend",0,0,256,0,0,0,0,1)
 Y_BC A 0 A_SpawnItemEx("Thunder_GroundWaveRing",0,0,16,0,0,0,0,1)
 Y_BC N 0 A_PlaySoundEx("weapon/lightningbolt","Weapon")
@@ -361,8 +363,8 @@ States
 {
 Spawn:
 TNT1 A 0
-TNT1 AA 0 A_SpawnItemEx("Thunder_SparksFX", ThunderRad, 0, -(z-floorz)+16, 0, 0, 2, random(0,360), 1061)
-TNT1 AAAA 0 A_SpawnItemEx("Thunder_SparksFX", ThunderRad2, 0, -(z-floorz)+16, 0, 0, 2, random(0,360), 1061)
+TNT1 AAA 0 A_SpawnItemEx("Thunder_SparksFX", ThunderRad, 0, -(z-floorz)+16, 0, 0, 2, random(0,360), 1061)
+//TNT1 AAAA 0 A_SpawnItemEx("Thunder_SparksFX", ThunderRad2, 0, -(z-floorz)+16, 0, 0, 2, random(0,360), 1061)
 TNT1 A 2 
 stop
 }
@@ -383,8 +385,8 @@ translation "198:198=220:220", "192:192=229:229"
 		TNT1 A 0 A_SpawnItemEx("ThunderGuideDotA", ThunderRad, 0, -(z-floorz)+24, 0, 0, 0, angle+user_angle, 1061)
         TNT1 A 0 A_SpawnItemEx("ThunderGuideDotA", -ThunderRad, 0, -(z-floorz)+24, 0, 0, 0, angle+user_angle, 1061)
         
-        TNT1 A 0 A_SpawnItemEx("ThunderGuideDotA2", ThunderRad2, 0, -(z-floorz)+24, 0, 0, 0, angle+user_angle, 1061)
-        TNT1 A 0 A_SpawnItemEx("ThunderGuideDotA2", -ThunderRad2, 0, -(z-floorz)+24, 0, 0, 0, angle+user_angle, 1061)
+        //TNT1 A 0 A_SpawnItemEx("ThunderGuideDotA2", ThunderRad2, 0, -(z-floorz)+24, 0, 0, 0, angle+user_angle, 1061)
+        //TNT1 A 0 A_SpawnItemEx("ThunderGuideDotA2", -ThunderRad2, 0, -(z-floorz)+24, 0, 0, 0, angle+user_angle, 1061)
         
 		TNT1 A 0 A_SetUserVar("user_angle", user_angle + 12)
 		TNT1 A 0 A_Countdown
@@ -409,8 +411,8 @@ actor ThunderRingGuide2 : BasicHelper
 		TNT1 A 0 A_SpawnItemEx("ThunderGuideDotB", ThunderRad, 0, -(z-floorz)+24, 0, 0, 0, angle+user_angle, 1061)
         TNT1 A 0 A_SpawnItemEx("ThunderGuideDotB", -ThunderRad, 0, -(z-floorz)+24, 0, 0, 0, angle+user_angle, 1061)		
         
-        TNT1 A 0 A_SpawnItemEx("ThunderGuideDotB2", ThunderRad2, 0, -(z-floorz)+24, 0, 0, 0, angle+user_angle, 1061)
-		TNT1 A 0 A_SpawnItemEx("ThunderGuideDotB2", -ThunderRad2, 0, -(z-floorz)+24, 0, 0, 0, angle+user_angle, 1061)
+        //TNT1 A 0 A_SpawnItemEx("ThunderGuideDotB2", ThunderRad2, 0, -(z-floorz)+24, 0, 0, 0, angle+user_angle, 1061)
+		//TNT1 A 0 A_SpawnItemEx("ThunderGuideDotB2", -ThunderRad2, 0, -(z-floorz)+24, 0, 0, 0, angle+user_angle, 1061)
 		TNT1 A 0 A_SetUserVar("user_angle", user_angle + 12)
 		TNT1 A 0 A_Countdown
 		loop

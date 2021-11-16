@@ -28,11 +28,11 @@ Fire.DashStart:
 "####" A 0 A_GiveInventory("DashSet_B")
 "####" A 0 ACS_NamedExecuteAlways("TakePP",0,Move_Zenheadbutt,1)
 "####" A 0 A_GiveInventory("ZenheadbuttTimer")
-"####" A 0 A_GiveInventory("ZenheadbuttInitiate")
+"####" A 0 //A_GiveInventory("ZenheadbuttInitiate")
 "####" B 0 A_PlaySoundEx("misc/kingswing","SoundSlot6")
 "####" B 0 A_PlaySoundEx("Weapon/TenguShot","SoundSlot7")
 Fire.Dash:
-"####" A 1
+"####" A 1 A_GiveInventory("ZenheadbuttThrust")
 "####" A 0 A_SpawnItemEX("GroundDustFX",-25,0,-(z-floorz),0)
 "####" A 0 A_Jumpifinventory("DashBreaker",1,"Fire.DashEnd")
 "####" A 0 A_Jumpifinventory("ZenheadbuttTimer",1,"Fire.Dash")

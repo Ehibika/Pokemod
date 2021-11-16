@@ -346,6 +346,8 @@
 #include "actors/Moves/Roost.txt"
 #include "actors/Moves/SelfDestruct.txt"
 #include "actors/Moves/Explosion.txt"
+#include "actors/Moves/MirrorCoat.txt"
+// #include "actors/Moves/Counter.txt"
 //--[NewMove]--
 
 #include "Actors/inventory/Shop/ShopActors/shopact.txt"

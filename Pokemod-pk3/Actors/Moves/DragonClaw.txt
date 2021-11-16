@@ -120,6 +120,7 @@ actor DragonClaw1Protect : PowerProtection
 Powerup.Duration 10
 damagefactor "Normal", 1.0
 damagefactor "DragonClaw1", 0.0
+damagefactor "DragonClaw2", 0.0
 }
 
 actor DragonClaw2Protect : PowerProtection

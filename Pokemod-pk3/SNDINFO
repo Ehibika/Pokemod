@@ -92,6 +92,7 @@ support/Reflect SHLDRFCT
 support/LightScreen SHLDLTSC
 support/ShieldDown SHLDDOWN
 support/Hypnosis HYPNO
+support/MirrorCoat MIRCOAT
 
 weapon/Turretup FMR
 Body/ArmorPain ROCKHURT

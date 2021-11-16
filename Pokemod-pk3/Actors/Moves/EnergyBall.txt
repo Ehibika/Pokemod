@@ -15,7 +15,7 @@ stop
 
 
 Fire:
-"####" BBB 1 A_Jumpif(CallACS("CheckWeaponFire",RC_C)==1,"Fire.Begin")
+"####" BBB 1 A_Jumpif(CallACS("CheckWeaponFire",RC_A)==1,"Fire.Begin")
 "####" B 0 A_Jump(256,"NoAmmo")
 Goto NoAmmo
 
@@ -31,7 +31,7 @@ Fire.Bullet:
 Goto Fire.After
 
 Fire.After:
-"####" B 1 A_GiveInventory("SemiRecovery_C")
+"####" B 1 A_GiveInventory("EnergyBall_Recovery_A")
 //Fire.After2:
 //"####" B 0 A_GiveInventory("5Recovery_A")
 "####" B 0 A_TakeInventory("WeaponCharge",999)
@@ -70,6 +70,8 @@ Goto Ready
 actor EnergyBallPP : Ammo {inventory.amount 1 inventory.Maxamount 20}
 
 actor STF_SDEFDown : BaseSTatusFlag {}
+
+actor EnergyBall_Recovery_A : FullRecovery_A{Powerup.Duration 12}
 
 actor SDEFDownNerfInitiate : CustomInventory
 {

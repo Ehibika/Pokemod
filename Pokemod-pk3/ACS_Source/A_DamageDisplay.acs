@@ -46,7 +46,7 @@ script "PKMN_CV_DamageDisplay" ENTER NET
 				delay(1); 
 				HPF = GetActorProperty(0, APROP_Health); 
 			}
-			SetUserVariable(0,"user_HitFrame",0);
+			//SetUserVariable(0,"user_HitFrame",0);
 			HPC = HPP-HPF;
 			 
 				if(HPC != 0)
@@ -91,8 +91,8 @@ script "PKMN_CV_DamageDisplay" ENTER NET
 							if(HPCC > 999){HPCC = 999;}
 							//while(!CheckInventory("NetCheck_DD")){NamedRequestScriptPuke("NET_DD_ShowNum",HPCC,Damagedigits,1);Delay(1);}
 							
-							SetUserVariable(0,"User_HitMemory",HPCC);
-							SetUserVariable(0,"user_HitFrame",1);
+							//SetUserVariable(0,"User_HitMemory",HPCC);
+							//SetUserVariable(0,"user_HitFrame",1);
 							//log(s:"Got hurt,", i:getNthDigit(HPCC,10,3),i:getNthDigit(HPCC,10,2),i:getNthDigit(HPCC,10,1));
 							
 							x = GetActorX(0) + random(-DDNUMDIST, DDNUMDIST);
@@ -156,6 +156,33 @@ Script "NET_DD_ShowNum" (int HPCC, int Damagedigits, int Neg) NET
 GiveInventory("NetCheck_DD",1);
 }
 */
+
+Script "NET_DD_ShowNum" (int HPCC) NET
+{
+	if(CheckInventory("NetCheck_DD")) Terminate;
+
+	int ColorVal;
+	int x = GetActorX(0) + random(-DDNUMDIST, DDNUMDIST);
+	int y = GetActorY(0) + random(-DDNUMDIST, DDNUMDIST);
+	int z = GetActorZ(0) + random(30.0, 64.0);
+	int Damagedigits = GetTotalDigits(HPCC);
+	 if(HPCC<0){ColorVal = 25; SpawnForced("DNUM_Neg",x,y,z,DDNUMTID+ColorVal,0);}
+	 else{ColorVal = 206; SpawnForced("DNUM_POS",x,y,z,DDNUMTID+ColorVal,0); }
+	Switch(Damagedigits)
+	{
+		Case 1: SpawnForced(StrParam(s:"DNUM1_",i:getNthDigit(HPCC,10,1)),x,y,z,DDNUMTID+ColorVal,0);
+				break;
+		Case 2: SpawnForced(StrParam(s:"DNUM1_",i:getNthDigit(HPCC,10,2)),x,y,z,DDNUMTID+ColorVal,0);
+				SpawnForced(StrParam(s:"DNUM2_",i:getNthDigit(HPCC,10,1)),x,y,z,DDNUMTID+ColorVal,0);
+				break;
+		Case 3: SpawnForced(StrParam(s:"DNUM1_",i:getNthDigit(HPCC,10,3)),x,y,z,DDNUMTID+ColorVal,0);
+				SpawnForced(StrParam(s:"DNUM2_",i:getNthDigit(HPCC,10,2)),x,y,z,DDNUMTID+ColorVal,0);
+				SpawnForced(StrParam(s:"DNUM3_",i:getNthDigit(HPCC,10,1)),x,y,z,DDNUMTID+ColorVal,0);
+				break;
+	}
+
+GiveInventory("NetCheck_DD",1);
+}
 
 script "PKMNACS_DDTEXTCOL" (void) CLIENTSIDE
 {

@@ -351,6 +351,8 @@ const int Move_ShoreUp = 323;
 const int Move_Roost = 324;
 const int Move_SelfDestruct = 325;
 const int Move_Explosion = 326;
+const int Move_MirrorCoat = 327;
+const int Move_Counter = 328;
 //--[NewMove]--
 //=======|Pokedex Constants|==========
 const int Dex_SMEARGLE = 0;

@@ -84,12 +84,14 @@ actor PoisonTail1Protect : PowerProtection
 Powerup.Duration 10
 damagefactor "Normal", 1.0
 damagefactor "PoisonTail1", 0.0
+damagefactor "PoisonTail2", 0.0
 }
 
 actor PoisonTail2Protect : PowerProtection
 {
 Powerup.Duration 10
 damagefactor "Normal", 1.0
+damagefactor "PoisonTail1", 0.0
 damagefactor "PoisonTail2", 0.0
 }
 

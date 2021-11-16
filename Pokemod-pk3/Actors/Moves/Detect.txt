@@ -85,6 +85,13 @@ Powerup.Duration 35
 powerup.type "DetectGuard"
 }
 
+actor QuickDashGuard : PowerupGiver
+{ //For moves like quick attack and Mach Punch
++INVENTORY.AUTOACTIVATE
+Powerup.Duration 17
+powerup.type "DetectGuard"
+}
+
 actor AfterImageFX : PowerSpeed {inventory.amount 1 Powerup.Duration 17}
 actor DetectDashTimer : Powerup {inventory.amount 1 Powerup.Duration 5}
 
